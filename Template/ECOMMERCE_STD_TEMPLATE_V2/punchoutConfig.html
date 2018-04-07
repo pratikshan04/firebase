@@ -1,0 +1,331 @@
+  <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/punchoutStyle.css"/>
+  <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/XMLDisplay.css"/>
+  <script src="$webThemes/$siteName/js/XMLDisplay.js"></script>
+  <div class="main">
+    <div class="punchoutTabHeader"> 
+      <div class="selectBlock">
+          <label>Select</label>
+      </div>
+      <div class="configurBlock">
+          <label>Configure</label>
+      </div>
+      <div class="completeBlock">
+          <label>Complete</label>
+      </div>
+    </div>
+    <div class="punchoutMainBlock">    
+<input type="hidden" id="configId" value="$punchoutConfig.id" />
+        <div id="newSelect" class="punchoutContent">
+          <h1>Select your purchasing system.</h1>
+          <p class="purchasingDetail">My procurement system uses following standard</p>       
+             <ul id="customSelect">
+             <li> <input type="radio" value="CXML" #if($!punchoutConfig.punchoutType=="CXML") checked #end name="customSelect">CXML</li>
+         <li><input type="radio" value="OCI" #if($!punchoutConfig.punchoutType=="OCI") checked #end name="customSelect">OCI</li>
+        <li> <input type="radio" value="general" #if($!punchoutConfig.punchoutType=="general") checked #end name="customSelect">I dont know</li>
+            </ul>
+            <div class="clear"></div>        
+         
+          <div class="introButtonBlock">
+              <button class="button selectBtn" onclick="punchoutLink('Configure')">Continue</button>
+     
+          </div>
+        </div>
+
+        <div id="Configure" class="punchoutContent">
+      
+          <h1 class="configureHeading">Configure system login and password.</h1>
+          <p class="configureDetail">Use the setting below to configure intro connect to system</p>
+          <div class="configureLogin">
+
+            <div class="loginBlock">
+              <label id="userLableBlk"></label>
+              <div class="customBlock">       
+              <input type="hidden" name="punchoutUsername"   />  
+              <input type="text" name="punchoutUsername" id="punchoutUsername" value="$!punchoutConfig.username" autocomplete="off" class="customInput" />
+              <label id="userLabel">The system login can contain only letters and numbers must be from 4 to 64 charecters.</label>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="passwordBlock">
+              <label id="passwordLableBlk"></label>
+              <div class="customBlock">
+              <input type="password" style="display:none;" name="punchoutPassword"/>
+                <input type="password" name="punchoutPassword" autocomplete="off" value="$!punchoutConfig.password" class="customPassword" id="punchoutPassword"/>
+                <label id="passwordLabel">The Password can contain only letters and numbers, must be between 6 and 30 charecter, and contain at least one letter and one number.</label>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="networkBlock"><label>Network id <span>Optional</span></label><div class="customBlock"><input type="text" class="customInput" value="$!punchoutConfig.networkId" id="networkId"/></div>
+             <div class="clear"></div>
+            </div>
+           
+          </div>
+          <div class="introButtonBlock">
+         <button class="button configBack" onclick="punchoutLink('newSelect')"  id="defaultOpen">Back</button>
+              <button class="button configBtn" onclick="punchoutLink('newComplete')">Save & View Settings</button>
+             
+          </div>
+        </div>
+		
+		
+        <div id="newComplete" class="punchoutContent">
+        <input type="hidden" value="punchoutType" id="selectedType" />
+         <input type="hidden" value="punchOutValue" id="selectedValue" />
+         <input type="hidden" value="networkId" id="finalnetworkId"/>
+          <h1 class="configureHeading">Summary of connection settings.</h1>
+          <p class="configureDetail">Use the setting below to configure intro connect to system. <span></span></p>
+          <div class="configureLogin">
+            <div class="completeBodyBlk">
+              <label>System Login<span>"From identity" in cXML</span></label>
+              <div class="customBlock">
+              <span id="finalUserName">$!punchoutConfig.username</span>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="completeBodyBlk">
+              <label>Password<span>"Shared Secret" in cXML</span></label>
+              <div class="customBlock">
+                <span id="finalPassword">$!punchoutConfig.password</span>
+              </div>
+              <div class="clear"></div>
+            </div>
+			<div class="completeBodyBlk">
+              <label class="punchoutUrlLabel">Punchout URL</label>
+              <div class="customBlock">
+                <span>${hostName}PunchoutRequest.slt</span>
+              </div>
+              <div class="clear"></div>
+            </div>
+			
+            <div class="clear"></div>
+            
+            <p class="configureDetail">Configure intro with these settings to test connectivity and punchout.</p>
+				
+			<div class="summaryDetails">
+				
+			#if($!punchoutConfig.punchoutType=="CXML" || $!punchoutConfig.punchoutType=="general")	
+				<div id="previewBlock">
+				<p  style="font-weight: bold;">Cxml request example</p>
+				<div id="cxmlPreview"></div>
+				<textarea style="display:none" id="cxmlTemplate">
+				<cXML payloadID="1412762865033.818615" timestamp="2014-10-08T06:07:45" version="1.2.020" xml:lang="en">
+	<Header>
+		<From>
+			<Credential domain="NetworkId">
+				<Identity>123456</Identity>
+			</Credential>
+		</From>
+       		 <To>
+                          <Credential domain="Duns">
+                                 <Identity>159148746</Identity>
+   		           </Credential>
+       		 </To>
+		<Sender>
+			<Credential domain="NetworkId">
+				<Identity>$!punchoutConfig.username</Identity>
+				<SharedSecret>$!punchoutConfig.password</SharedSecret>			</Credential>
+			<UserAgent>Useragent</UserAgent>
+		</Sender>
+	</Header>
+</cXML>
+				</textarea>
+				</div>
+				#end
+				
+				#if($!punchoutConfig.punchoutType=="OCI" || $!punchoutConfig.punchoutType=="general")
+				<div id="previewBlock">
+				<p style="font-weight: bold;">OCI setup example</p>
+				<img style="width:100%" src="$webThemes/$siteName/images/oci.png" alt='OCI'/>
+				</div>
+				#end
+			</div>
+          </div>
+          <div class="introButtonBlock">
+     
+              <button id="continueViewBtn" class="button" onclick="punchoutLink('newSelect')" >Edit settings</button>
+           
+			  <div class="clear"></div>
+			  
+          </div>
+        </div>
+    </div>
+   <!-- </form> -->
+  </div>
+
+ 
+
+<script>
+function edit(){
+	$("#Complete").hide();
+	$("#Select").slideToggle();
+	$(".configureDetail span").remove();
+	$("<span />").appendTo(".configureDetail");
+}
+function addConfigValues(){
+	var isSave = true;
+	$("#userLabel").css("color","");
+	$("#passwordLabel").css("color","");
+	$(".configBtn").attr("disabled","disabled");
+	$(".configBtn").html("Please wait....");
+	var uname=$("#punchoutUsername").val();
+	console.log(uname);
+	var pwd=$("#punchoutPassword").val();
+	var selectedType=$('input[name=customSelect]:checked').val();
+	var procurement= document.getElementById("selectedValue").innerText;
+	var networkId=$("#networkId").val();	
+	var pconfigId = $("#configId").val();
+	console.log(selectedValue);
+	var actionUrl="saveConfigurePunchout.action";
+
+	if(!alphanumeric(uname) || uname.length < 4 || uname.length > 64){
+	$("#userLabel").css("color","red");
+	isSave = false;
+	}
+	if(!alphanumeric(pwd) || pwd.length < 6 || pwd.length > 30){
+	$("#passwordLabel").css("color","red");
+	isSave = false;
+	}
+	if(!isSave){
+		$(".configBtn").removeProp("disabled");
+		$(".configBtn").html("Save & View Settings");
+		return;
+		}
+	var formData={username:uname,
+			password:pwd,
+			punchoutType:selectedType,
+			procurementSystem:procurement,
+			networkId:networkId,
+			configId:pconfigId};
+
+	 jQuery.ajax({
+		method: 'POST',
+		url: actionUrl,
+		data: formData,
+		success:function(result){
+			bootAlert("small","success","Success","Updated Successfully");
+			//console.log("Success");
+			//console.log(result);
+			window.location.reload();
+		},
+		error: function(){
+			$(".configBtn").removeAttr("disabled");
+			$(".configBtn").html("Save & View Settings");
+			bootAlert("small","error","Error","Something went wrong");
+			
+		}
+	}); 
+};
+function punchoutLink(punchOut) {
+	var configId = $("#configId").val();
+	var isSave = true;
+	if(typeof punchOut == 'undefined'){
+		if(configId=="0"){
+			$(".selectBlock").addClass("active");   
+			punchOut = "newSelect";
+		}
+		else{
+			 $(".completeBlock").addClass("active");
+			punchOut = "newComplete";
+			isSave= false;
+			var xmlString = $('#cxmlTemplate').val();
+			LoadXMLString('cxmlPreview',xmlString);
+		}
+	}
+  
+
+    if(isSave && punchOut=="newComplete"){
+    	addConfigValues();
+        }else{
+        	 $(".punchoutContent").hide();
+        	 $("#"+punchOut).show();
+            }
+}
+
+
+
+
+$(document).ready(function() {
+	punchoutLink();
+
+$(".selectBtn").click(function () {
+    $(".selectBlock").removeClass("active");
+    $(".configurBlock").addClass("active");        
+});
+$(".configBack").click(function () {
+    $(".configurBlock").removeClass("active");
+    $(".selectBlock").addClass("active");        
+});
+$(".configBtn").click(function () {
+	$("#finalUserName").text($("#punchoutUsername").val());
+ 	$("#finalPassword").text($("#punchoutPassword").val());	  	
+  	$("#finalnetworkId").text($("#networkId").val());
+});
+$(".selectBtn").click(function () {
+	var uname=$("#punchoutUsername").val();
+	var pwd=$("#punchoutPassword").val();
+	var nwId=$("#networkId").val();
+
+
+	var selectValue=$('input[name=customSelect]:checked').val();
+	console.log(selectValue);
+	
+	if(selectValue!="OCI"){
+		$(".networkBlock").show();
+		
+		}else{
+			$(".networkBlock").hide();
+			}
+	if(selectValue=="CXML"){
+		$("#userLableBlk").html("Username<span>This is system generated, you can override with your own username</span>");
+		$("#passwordLableBlk").html("Shared secret<span>This is system generated, you can override with your own Shared secret</span>");
+		}
+	else if(selectValue=="OCI"){
+		$("#userLableBlk").html("Username<span>This is system generated, you can override with your own username</span>");
+		$("#passwordLableBlk").html("Password<span>This is system generated, you can override with your own password</span>");
+		}else{
+			$("#userLableBlk").html("Username<span>This is system generated, you can override with your own username</span>");
+			$("#passwordLableBlk").html("Password/Shared secret<span>This is system generated, you can override with your own Password/Shared secret</span>");
+		}
+	if(uname && uname!="" && pwd && pwd!=""){
+		
+	}else{
+		$("#punchoutUsername").val(autoGenerate());
+		$("#punchoutPassword").val(autoGenerate());
+	}
+
+});
+$("#continueViewBtn").click(function () {
+    $(".configurBlock").removeClass("active");
+	$(".completeBlock").removeClass("active");
+    $(".selectBlock").addClass("active");  
+	});
+$("#Select").hide();
+$("#Complete").show();
+
+
+
+});
+
+function alphanumeric(inputtxt)
+{ 
+var letters = /^[0-9a-zA-Z]+$/;
+if(inputtxt.match(letters))
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+
+function autoGenerate() {
+	  var text = "";
+	  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	  for (var i = 0; i < 10; i++)
+	    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	  return text;
+	}
+</script>

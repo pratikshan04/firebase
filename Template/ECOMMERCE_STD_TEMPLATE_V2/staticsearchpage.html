@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		#if($srchTyp=="Event")
+			<h3 class="cimm_pageTitle">$!locale.get("product.heading.events")</h3>
+		#else
+			<h3 class="cimm_pageTitle">$!locale.get("product.label.siteResults")</h3>
+		#end	
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="CategoryEventBlk">
+			#if($staticListData.size() > 0)
+				#foreach($staticData in $staticListData)
+				#if(!$staticData.staticPageTitle.contains('Home') && $!staticData.staticPageTitle)
+					<p>
+						<span><strong>$!staticData.staticPageTitle</strong> </span>- $!staticData.staticContent 
+					</p> 
+					<br />
+					#if($srchTyp=="Event")
+						<a href="eventDetailsUnit.action?eventID=$staticData.staticPageId" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")..</a>
+					#else
+						<a href="/Page/$staticData.pageName" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")..</a>
+					#end
+					<br /><br />
+					<div class="CategoryEventBlkBar"></div>
+				#end
+				#end
+			#end
+		</div>
+</div>
+</div>

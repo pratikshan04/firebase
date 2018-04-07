@@ -1,0 +1,151 @@
+<style type="text/css">
+.contentPart{
+	padding:0 5px;
+	background-color: #FFF;
+	}
+.descBody ul li{
+	font-size: 12px;
+	line-height: 25px;
+	}
+.itemMainImage{
+	padding-left:5px;
+	}
+#mailContent h3{
+	font-size: 16px;
+	padding: 0 0 5px 0;
+	color: #0CB1DA;
+	}
+#mailContent img{
+	border:none !important;
+	}
+.addToCartFloat,.detailPageBtnsAlign{
+	display:none;
+	}
+table.detail{
+	width: 98%;
+	}
+.zoomPreload,.hideForPrint{
+	display:none;
+	}
+.cimm_itemDetailWrap .cimm_itemMainImage {
+    float: left;
+    width: 300px;
+    margin-right: 30px;
+    text-align: center;
+}
+.cimm_itemDetailWrap .cimm_itemMainImage img{
+	position:relative !important;
+}
+#mailContentDisplay .cimm_itemDescription {
+    float: left;
+    width: inherit;
+}
+.cimm_itemDescription ul li b{
+	color:#000;
+}
+.cimm_itemDescription ul li span{
+	color: #bf1e2e;
+}
+@media (max-width: 767px) {
+	#mailContent{
+		width:100%;
+	}
+	.descBody ul li img{
+		width:auto !important;
+	}
+}
+</style>
+<h3 class="cimm_pageTitle">$!locale.get("product.heading.sendProduct")</h3>
+<div id="notificationDiv"></div>
+<div id="SendItem">
+	<div class="row marginY-3">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("form.label.FriendName")  <span class="required"> * </span> </label>
+					<input name="toName_temp" class="form-control" type="text" maxlength="50" size="50" id="toNames" onchange="setFieldValues(this);"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("form.label.FriendEmailAddress") <span class="required"> * </span> </label>
+					<input name="toEmail_temp" class="form-control" type="text" maxlength="100" size="50" id="toEmails" onchange="setFieldValues(this);" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("form.label.FromName") <span class="required"> * </span></label>
+					<input name="fromName_temp" class="form-control" type="text" maxlength="50" size="50" id="fromNames" onchange="setFieldValues(this);" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("form.label.FromEmailAddress") <span class="required"> * </span></label>
+					<input name="fromEmail_temp" class="form-control" type="text" maxlength="100" size="50" id="fromEmails" onchange="setFieldValues(this);" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("form.label.Subject") <span class="required"> * </span> </label>
+					<input name="mailSubject_temp" class="form-control" type="text" maxlength="50" size="50" id="mailSubjects" onchange="setFieldValues(this);"/>
+				</div>
+			</div>
+		</div>
+		#if(!$userLogin)
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("event.label.entertheTextInTheBox")<span class="required">*</span> : </label>
+					<img id="captchaImg" src="CaptchaServlet.slt" alt="" width="220px" height="60px" alt='captcha'/> <br />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="cimm_regCapthaWrap clearAfter">
+					<input id="jcaptchas" name="jcaptcha_temp" type="TEXT" onchange="setFieldValues(this);"/>
+					<input type="button" value="$locale.get('eventRegister.captcha.changeImage')" name="jcaptchaRefresh" id="refreshbtn" onclick="refreshjcaptcha();" class="cimm_inlineButton" />
+				</div>
+			</div>
+		</div>
+		#end
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<input type="submit" name="save" id="sendBtn" value="$locale.get('form.button.send')" class="button" onclick="return validateSendMail();" />
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+	<div class="text-center eMailLogo">
+		<img src="$!webThemes/$!siteName/images/mailTemplateLogo.png" alt="$!siteDisplayName" alt="mailTemplateLogo">
+	</div>
+	<div id="mailContentDisplay"></div>
+	<div id="mailContent" style="display:none;"></div>
+	<form method="post" id="contactEmailUs" style="display:none;">
+	<input type="hidden" value="" id="jcaptcha" name="jcaptcha"/>
+	<input type="hidden" value="$!session.getAttribute('last_sent_time')" id="last_sent" />
+	<input type="hidden" value="$!session.getAttribute('captcha_required')" id="captcha_req" />
+	<input name="toName" type="text" maxlength="50" size="50" id="toName" />
+	<input name="toEmail" type="text" maxlength="100" size="50" id="toEmail"  />
+	<input name="fromName" type="text" maxlength="50" size="50" id="fromName" />
+	<input name="fromEmail" type="text" maxlength="100" size="50" id="fromEmail" />
+	<input name="mailSubject" type="text" maxlength="50" size="50" id="mailSubject" />
+	<input type="hidden" value="" id="mailLink" name="mailLink"/>
+	<input type="hidden" value="" id="mailBody" name="mailBody"/>
+	<input type="hidden" value="" id="imgPart" name="imgPart"/>
+	<input type="hidden" value="" id="contentPart" name="contentPart"/>
+	<input type="hidden" value="" id="pricePart" name="pricePart"/>
+	<input type="hidden" value="" id="descPart" name="descPart"/>
+	</form>
+</div>

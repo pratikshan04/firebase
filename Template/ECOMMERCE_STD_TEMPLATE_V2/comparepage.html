@@ -1,0 +1,423 @@
+#parse("Macros/comparePageMacro.vm")
+<input type="hidden" value="" id="hidden_id"/>
+<input type="hidden" value="" id="group_id"/>
+#compareScript()
+	#set($diffrenceCount = 2)
+	#set($compareCount = $compareItemData.size())
+	#if($compareCount>0)
+		#if($compareCount>2)
+			#set($diffrenceCount = 2)
+		#end
+		#if($compareCount>3)
+			#set($diffrenceCount = 3)
+		#end
+		#if($compareCount>4)
+			#set($diffrenceCount = 4)
+		#end
+	#end
+    <div class="cimm_siteTableEnclosure compareTableWrap">
+	    <div class="pushbtnGroup clearAfter">
+			<a id="showSimilar" class="cimm_inlineButton compareSimDiffBtns">$locale.get("product.button.showSimilar")</a>
+			<a id="showDifferent" class="cimm_inlineButton compareSimDiffBtns">$locale.get("product.button.showDifferent")</a>
+			<a class="cimm_inlineButton active">$locale.get("product.button.off")</a>
+			<a href="javascript:void(0);" onclick="removeItems();" class="cimm_inlineButton">$locale.get("product.label.removeItem")</a>
+		</div>            
+    <table class="table table-bordered">
+	<thead>
+		<tr>
+    		<th><b>$locale.get("product.label.selectItemToRemove")</b></th>
+			#foreach($compareItem in $compareItemData)
+				<th>
+					<label class="customCheckBox2">
+						<input type="checkbox" name="rptRemove" value="$compareItem.itemPriceId"/>
+						<span></span>
+					</label>
+					#set($customVal = "")
+					#set($customVal = $customFieldVal.get($compareItem.itemId))
+					<input type="hidden" id="CATEGORY1_$compareItem.itemId" value='$!customVal.get("custom_PRODUCT_CATEGORY1")' />
+					<input type="hidden" id="CATEGORY2_$compareItem.itemId"	value='$!customVal.get("custom_PRODUCT_CATEGORY2")' />
+					<input type="hidden" id="CATEGORY3_$compareItem.itemId" value='$!customVal.get("custom_PRODUCT_CATEGORY3")' />
+					<input type="hidden" id="CATEGORY4_$compareItem.itemId"	value='$!customVal.get("custom_PRODUCT_CATEGORY4")' />
+               	</th>
+			#end
+		</tr>
+	</thead>
+        <tbody>                       
+            <tr>
+                <td><b class="">$locale.get("product.label.details")</b></td>
+				#foreach($compareItem in $compareItemData)
+					#set($itemTitle=$compareItem.brandName+" "+$!compareItem.manufacturerPartNumber)
+					<td>
+						#if($compareItem.imageName.contains("http"))
+						<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
+							<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+						</a>
+						#else
+						<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
+							<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+						</a>
+						#end
+						<b>
+							<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')" id="itemTitle$compareItem.itemId">
+								<span  id="itemTitle$compareItem.itemId">$compareItem.brandName $!compareItem.manufacturerPartNumber</span>
+							</a>
+						</b>
+					</td>
+				#end
+			</tr> 
+            <tr>
+                <td><b class="">$locale.get("product.label.mpn") </b> </td>
+                #foreach($mainMPartNo in $compareItemData)
+                    #set( $showSimilar = 0 )
+                    #foreach($subMPartNo in $compareItemData)
+                        #if($!mainMPartNo.manufacturerPartNumber==$!subMPartNo.manufacturerPartNumber)
+                            #set( $showSimilar = $showSimilar+1 )
+                        #end
+                    #end
+                    <input type="hidden" value="$!mainMPartNo.manufacturerPartNumber" id="MPNValue_$mainMPartNo.partNumber" />
+                    #if($showSimilar >= $diffrenceCount)
+                        <td class="similar">
+                            <span>$!mainMPartNo.manufacturerPartNumber</span>
+                        </td>
+                    #else
+                        <td class="different">
+                            <span>$!mainMPartNo.manufacturerPartNumber</span>
+                        </td>
+                    #end
+                
+                #end
+           </tr>                        
+            <tr>
+                <td><b class="">$locale.get("product.label.partNumber") </b> </td>
+                    #foreach($mainPartNo in $compareItemData)
+                        #set( $showSimilar = 0 )
+                        #foreach($subPartNo in $compareItemData)
+                            #if($mainPartNo.partNumber==$subPartNo.partNumber)
+                                #set( $showSimilar = $showSimilar+1 )
+                            #end
+                        #end
+                        #if($showSimilar >= $diffrenceCount)
+                            <td class="similar">
+                                <span id="partNumber$mainPartNo.itemId">$!mainPartNo.partNumber</span>
+                            </td>
+                        #else
+                            <td class="different">
+                                <span id="partNumber$mainPartNo.itemId">$!mainPartNo.partNumber</span>
+                            </td>
+                        #end
+                        <input type="hidden" id="itmId_$!mainPartNo.itemId" value="$!mainPartNo.partNumber"/>
+                        <input type="hidden" value="$!mainPartNo.partNumber" name="idList" />
+                        <input type="hidden" id='priceValue_$!mainPartNo.partNumber' value='$!mainPartNo.price' />
+                        <input type="hidden" id='salesQtyVal_$!mainPartNo.partNumber' value='$!mainPartNo.saleQty' />
+                        <input type="hidden" id='itmId_$!mainPartNo.partNumber' value='$!mainPartNo.partNumber' />
+                        <input type="hidden" id='packageQty_$!mainPartNo.partNumber' value="$!mainPartNo.packageQty" />
+						<input type="hidden" value="$!mainPartNo.partNumber" name="idListPrice" />
+						<input type="hidden" value="$!mainPartNo.uom" id="uomValue_$mainPartNo.partNumber" />
+						
+                    #end
+                </tr>                   
+            #if($userLogin)
+            <tr>
+                <td>
+                <b class="">$locale.get("product.label.price") </b> </td>
+                #foreach($mainPrice in $compareItemData)
+                        #set( $showSimilar = 0 )
+                        #foreach($subPrice in $compareItemData)
+                            #if($mainPrice.price==$subPrice.price)
+                                #set( $showSimilar = $showSimilar+1 )
+                            #end
+                        #end
+                        </td>
+                        #if($showSimilar >= $diffrenceCount)
+                            <td class="similar">
+                               <b>
+                                    #if($mainPrice.price>0)
+                                    <span class="priceSpan" data-select='priceData' id='span_$mainPrice.partNumber'>
+                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
+                                     </span>
+                                    #else
+                                         <span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price </span>
+                                    #end	
+                                    <!-- <img src="$webThemes/$siteName/images/loading.gif" /> -->
+                                
+                               </b>
+                               <input type="hidden" value="$mainPrice.minOrderQty" id="itemTxtQty$mainPrice.itemId" name="itemTxtQty$mainPrice.itemId"/>
+                       </td>
+                        #else
+                            <td class="different">
+                                    #if($mainPrice.price>0)
+                                    <span class="priceSpan" data-select='priceData' id='span_$mainPrice.partNumber'>
+                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
+                                    #else
+                                        <span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price </span>
+                                    #end
+                                    <!-- <img src="$webThemes/$siteName/images/loading.gif" /> -->
+                                </span>
+                                <input type="hidden" value="$mainPrice.minOrderQty" id="itemTxtQty$mainPrice.itemId" name="itemTxtQty$mainPrice.itemId"/>
+                            </td>
+                        #end
+                #end
+            </tr>
+            #end
+            
+            <tr>
+                <td>
+                    <b class="">$locale.get("product.label.description") </b>
+                </td>
+                #foreach($mainDesc in $compareItemData)
+                    #set( $showSimilar = 0 )
+                    #foreach($subDesc in $compareItemData)
+                        #if($!mainDesc.shortDesc==$!subDesc.shortDesc)
+                            #set( $showSimilar = $showSimilar+1 )
+                        #end
+                    #end
+                    
+                    #if($showSimilar >= $diffrenceCount)
+                        <td class="similar">
+                            <span id="itemShortDesc$mainDesc.itemId">$!mainDesc.shortDesc</span>
+                        </td>
+                    #else
+                        <td class="different">
+                            <span id="itemShortDesc$mainDesc.itemId">$!mainDesc.shortDesc</span>
+                        </td>
+                    #end
+                #end
+           </tr>
+            <!-- <tr>
+                <td><b class="">$locale.get("product.label.availability") / $locale.get("product.label.leadTime")</b>  </td>
+                #foreach($mainAvailability in $compareItemData)
+                     #set( $showSimilar = 0 )
+                    #foreach($subAvailability in $compareItemData)
+                        #if($mainAvailability.homeBranchavailablity==$subAvailability.homeBranchavailablity)
+                            #set( $showSimilar = $showSimilar+1 )
+                        #end
+                    #end
+                    
+                    #if($showSimilar >= $diffrenceCount)
+                        <td class="similar">
+                            <span>
+                            #if($mainAvailability.homeBranchavailablity=='')
+                                    <b>N/A</b>
+                                #else
+                                    #if($mainAvailability.homeBranchavailablity>0)
+                                        <b class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</b>
+                                        <b class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes" style="display:none;"></b>
+                                    #else
+                                        <b style="color:red;">$locale.get("product.label.callforavailability")</b>
+                                        <span class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes">
+                                        #foreach($branch in $mainAvailability.branchAvail)
+                                        	#if($branch.branchID == $session.getAttribute("shipBranchId"))
+                                        	<b class="leadTime_$mainAvailability.partNumber">
+                                        		#if($branch.earliestMoreDays > 0)
+                                        			$!branch.earliestMoreDays Days
+                                        		#elseif($branch.plentyDays > 0)
+                                        			$branch.plentyDays Days
+                                        		#end
+                                        	</b>
+                                        	#end
+                                        #end
+                                        </span>
+                                    #end
+                                #end                                			
+                            </span>										
+                        </td>
+                    #else
+                        <td class="different">
+                            <span>
+                            #if($mainAvailability.homeBranchavailablity=='')
+                                    <b>N/A</b>
+                                #else
+                                    #if($mainAvailability.homeBranchavailablity>0)
+                                       <b class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</b>
+                                        <b class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes" style="display:none;"></b>
+                                    #else
+                                        <b style="color:red;">$locale.get("product.label.callforavailability")</b>
+                                        <span class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes">
+                                        #foreach($branch in $mainAvailability.branchAvail)
+                                        	#if($branch.branchID == $session.getAttribute("shipBranchId"))
+                                        	<b class="leadTime_$mainAvailability.partNumber">
+                                        		#if($branch.earliestMoreDays > 0)
+                                        			$!branch.earliestMoreDays Days
+                                        		#elseif($branch.plentyDays > 0)
+                                        			$branch.plentyDays Days
+                                        		#end
+                                        	</b>
+                                        	#end
+                                        #end
+                                        </span>
+                                    #end
+                                #end
+                            </span>										
+                        </td>
+                    #end 
+
+<td>
+                    <span id="Avail_$mainAvailability.partNumber" data-select='availability'>
+                    	<img src="$webThemes/$siteName/images/loading.gif" />
+                    </span>
+                    <input id="HomePlentyDate_$mainAvailability.partNumber" type="hidden" >
+    </td>                
+                #end
+            </tr> -->
+            <tr>
+                <td> <b class="">$locale.get("product.label.minorderqty")</b> </td>
+                    #foreach($mainMinorderqty in $compareItemData)
+                        #set( $showSimilar = 0 )
+                        #foreach($subMinorderqty in $compareItemData)
+                            #if($mainMinorderqty.minOrderQty==$subMinorderqty.minOrderQty)
+                                #set( $showSimilar = $showSimilar+1 )
+                            #end
+                        #end								
+                    #if($showSimilar >= $diffrenceCount)
+                        <td class="similar">
+                            <span>
+                                #if($mainMinorderqty.minOrderQty)
+                                    #if($mainMinorderqty.minOrderQty>0)
+                                        $mainMinorderqty.minOrderQty
+                                    #else
+                                        1
+                                    #end
+                                #else
+                                    N/A
+                                #end
+                            </span>
+                        </td>
+                    #else
+                        <td class="different">
+                            <span>
+                                #if($mainMinorderqty.minOrderQty)
+                                    #if($mainMinorderqty.minOrderQty>0)
+                                        $mainMinorderqty.minOrderQty
+                                    #else
+                                        1
+                                    #end
+                                #else
+                                    N/A
+                                #end
+                            </span>
+                        </td>
+                    #end
+                    <input type="hidden" id="priceSaleQty_$mainMinorderqty.partNumber" value = "$mainMinorderqty.minOrderQty"/>
+                    <input type="hidden" value="$mainMinorderqty.minOrderQty" id="MinOrderQty_$mainMinorderqty.partNumber" name="MinOrderQty_$itemData.partNumber"/>
+                #end
+            </tr>
+            
+            
+            <tr>
+                <td><b class="">$locale.get("product.label.orderqtyinterval")</b></td>
+                #foreach($mainOrderQtyInterval in $compareItemData)
+                    #set( $showSimilar = 0 )
+                    #foreach($subOrderQtyInterval in $compareItemData)
+                        #if($mainOrderQtyInterval.orderInterval==$subOrderQtyInterval.orderInterval)
+                            #set( $showSimilar = $showSimilar+1 )
+                        #end
+                    #end
+                    
+                    #if($showSimilar >= $diffrenceCount)
+                        <td class="similar">
+                            <span>
+                            #if($mainOrderQtyInterval.orderInterval)
+                                #if($mainOrderQtyInterval.orderInterval>0)
+                                    $mainOrderQtyInterval.orderInterval
+                                #else
+                                    1
+                                 #end
+                            #else
+                                N/A
+                            #end
+                            </span>
+                        </td>
+                    #else
+                        <td class="different">
+                            <span>
+                            #if($mainOrderQtyInterval.orderInterval)
+                                #if($mainOrderQtyInterval.orderInterval>0)
+                                    $mainOrderQtyInterval.orderInterval
+                                #else
+                                    1
+                                 #end
+                            #else
+                                N/A
+                            #end
+                            </span>
+                        </td>
+                    #end
+                    <input type="hidden" value="$mainOrderQtyInterval.orderInterval" id="OrderQtyInterval_$mainOrderQtyInterval.partNumber" name="OrderQtyInterval_$mainOrderQtyInterval.partNumber"/>
+                #end
+            </tr>
+            
+            #if($userLogin)
+             <tr>
+                <td>&nbsp;
+                    
+                </td>              
+				 #foreach($compareItem in $compareItemData)
+                <td>                           	
+                    <span data-select='addtoCartbtn_$compareItem.partNumber'>
+                    #if($compareItem.price>0)
+                    	<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$compareItem.partNumber" data-itemId="$compareItem.itemId" data-itemPriceId="$compareItem.itemPriceId">$locale.get("product.button.addtocart")</a>
+                    #else
+                    	<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$compareItem.partNumber" data-itemId="$compareItem.itemId" data-itemPriceId="$compareItem.itemPriceId">$locale.get("product.button.addtocart")</a>
+                    #end
+                    </span>                   
+                </td>
+                <!-- <td>
+                	<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" onclick="loginPop(); return false;">$locale.get("product.button.addtocart")</a>
+                </td> -->
+                #end  
+                
+            </tr>
+            #end
+            
+            #foreach( $key in $compareList.keySet() )
+                #if($key!='Detail')
+                <tr>
+                    <td><b class="">$key </b> </td>
+                    #foreach($mainIndex in $compareList.get($key))
+                                    #set($attrVal = $mainIndex.attrValue)
+                                    #set($indexVal = 1)
+                                    #set($showSimilar = 0)
+                                    
+                                    #foreach($iIndex in $compareList.get($key))
+                                        #set($cattrVal = $iIndex.attrValue)
+                                        #if($attrVal==$cattrVal)
+                                            #if($cattrVal!="-")
+                                                #set( $showSimilar = $showSimilar+1 )
+                                            #end
+                                        #end
+                                    #end
+                                    
+                                    #if($showSimilar >= $diffrenceCount)
+                                        <td class="similar">
+                                            $mainIndex.attrValue
+                                        </td>
+                                    #else
+                                        #if($attrVal!="-")
+                                            <td  class="different">
+                                                $mainIndex.attrValue
+                                            </td>
+                                        #else
+                                            <td>
+                                                $mainIndex.attrValue
+                                            </td>
+                                        #end
+                                    #end
+                    #end
+                </tr>
+                #end
+            #end                        
+        </tbody>
+    </table>
+    </div>
+    <form name="removeProduct" action="itemComparePage.action">
+        <input type="hidden" name="compareId" id="CompareProducts" />
+    </form>
+<div class="clear"></div>    
+	 <!--
+			=====================================
+			#foreach( $key in $compareList.keySet() )
+			<tr><td>$key</td><td>$compareList.get($key)</td></tr>
+			#end
+			=====================================
+	-->
+	

@@ -1,0 +1,103 @@
+<h2 class="cimm_subheading">$!locale.get("product.heading.billingAddress")</h2>
+<form action="editBillAddress.action" method="get">
+	<div class="cimm_siteTableEnclosure rwd-tableWrap">
+		<table class="table table-striped table-bordered display rwd-table">
+			<thead>
+				<tr>
+					<th class="left">$!locale.get("form.label.address")</th>
+					<th>$!locale.get("form.label.city")</th>
+					<th>$!locale.get("form.label.state")</th>
+					<th>$!locale.get("form.label.zipCode")</th>
+					<th>$!locale.get("form.label.phone")</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="odd">
+					<td style="text-align: left;" data-th='$locale.get("form.label.address")'>
+						<span>$!billAddress.customerName</span><br />
+						<span>$!billAddress.address1</span><br />
+						#if($billAddress.address2)<span>$!billAddress.address2</span><br />#end
+						<span>$!billAddress.city, $!billAddress.state</span><br />
+						<span>$!billAddress.country, $!billAddress.zipCodeStringFormat</span><br />
+						<span>$!billAddress.phoneNo&nbsp;<br />
+						$!billAddress.emailAddress</span>
+					</td>
+					<td data-th='$locale.get("form.label.city")'><span class="rightAlign">$billAddress.city</span></td>
+					<td data-th='$locale.get("form.label.state")'><span class="rightAlign">$billAddress.state</span></td>
+					<td data-th='$locale.get("form.label.zipCode")'><span class="rightAlign">$billAddress.zipCodeStringFormat</span></td>
+					#if($session.isRetailUser && $session.isRetailUser=="Y")
+					<td data-th='$locale.get("form.label.phone")'><span class="rightAlign">$!billAddress.phoneNo</span></td>
+					<td><a class="log-edit-option" href="#"></a></td>
+					#else
+					<td data-th='$locale.get("form.label.phone")'><span class="rightAlign">$!billAddress.phoneNo</span></td>
+					#end
+					<td class="center orderBtn">
+					<a class="button" onclick="editAddress($billAddress.addressBookId,$billAddress.buyingCompanyId,'bill')" href="javascript:void(0);">$!locale.get("product.button.edit")</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</form>
+<p><b>$!locale.get("form.label.email") : </b> $!billAddress.emailAddress (<span>$!locale.get("product.label.ordrConfEmail")</span>)</p>
+<br />
+<h2 class="cimm_subheading">$locale.get("product.heading.shippingAddress")</h2>
+#if($shipAddressList.size()>0)
+<div class="cimm_siteTableEnclosure rwd-tableWrap">
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered display rwd-table">
+		<thead>
+			<tr>
+				<th class="left">$locale.get("form.label.address")</th>
+				<th>$!locale.get("form.label.city")</th>
+				<th>$!locale.get("form.label.state")</th>
+				<th>$!locale.get("form.label.zipCode")</th>
+				<th>$!locale.get("form.label.phone")</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			#foreach($shaipData in $shipAddressList)
+			<tr class="odd">
+				<td style="text-align: left;"  data-th='$locale.get("form.label.address")'>
+					<span>$!shaipData.customerName</span><br />
+					<span>$!shaipData.address1</span><br />
+					#if($shaipData.address2)<span>$!shaipData.address2</span><br />#end
+					<span>$!shaipData.city, $!shaipData.state</span><br />
+					<span>$!shaipData.country, $!shaipData.zipCodeStringFormat</span><br />
+					<span>$!shaipData.phoneNo&nbsp;<br />
+					$!shaipData.emailAddress</span>
+				</td>
+				<td data-th='$locale.get("form.label.city")'><span class="rightAlign">$!shaipData.city</span></td>
+				<td data-th='$locale.get("form.label.state")'><span class="rightAlign">$!shaipData.state</span></td>
+				<td data-th='$locale.get("form.label.zipCode")'><span class="rightAlign">$!shaipData.zipCodeStringFormat</span></td>
+				#if($session.isRetailUser && $session.isRetailUser=="Y")
+				<td data-th='$locale.get("form.label.phone")'><span class="rightAlign">$!shaipData.phoneNo</span></td>
+				<td>                       
+					<input type="submit" value="$locale.get('product.button.edit')" onclick="editAddress($shaipData.addressBookId,$shaipData.buyingCompanyId,'ship')" />
+					#if($parentId && $parentId<1)
+					<input type="hidden" id="parentId" value="$buyingCompanyId" />
+					#end
+				</td>
+				#else
+				<td data-th='$locale.get("form.label.phone")'><span class="rightAlign">$!shaipData.phoneNo</span></td>
+				#end
+				<td class="center orderBtn">
+					<a class="button" onclick="editAddress($shaipData.addressBookId,$shaipData.buyingCompanyId,'ship')" href="javascript:void(0);">$!locale.get("product.button.edit")</a>
+				</td>
+			</tr>
+			#end
+		</tbody>
+	</table>
+</div>
+<br />
+<div class="clearAfter">
+	<a class="pullLeft button" href='$locale.get("website.url.ProductCategory")'>$!locale.get("product.button.startShopping")</a>
+	<a class="pullRight button" href="NewShiptoLink.action">$!locale.get("product.button.addShippingAddress")</a>
+</div>
+<form action="UserAdressUnit.action" id="editShipAddress">
+	<input type="hidden" value="" id="type" name="type"/>
+	<input type="hidden" value="" id="bcId" name="buyingCompanyId" />
+	<input type="hidden" value="" id="abId" name="addressBookId" />
+</form>
+#end

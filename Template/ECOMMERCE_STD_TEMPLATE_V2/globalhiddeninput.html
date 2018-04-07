@@ -1,0 +1,48 @@
+#set($shipViaListTemp = $!session.getAttribute("customerShipViaList") ) ## variable reference
+<input type="hidden" id="isInternationalUser" name="isInternationalUser" value='$!session.getAttribute("isInternationalUser")'/>
+<input type="hidden" id="pricePrecision" name="pricePrecision" value='#if($!session.getAttribute("pricePrecision"))$!session.getAttribute("pricePrecision")#else 2#end'/>
+<input type="hidden" id="combinCart" name="combinCart" value='$!session.getAttribute("combinCart")'/>
+<input type="hidden" id="qtyIntervalFromErp" name="qtyIntervalFromErp" value='$!session.getAttribute("qtyIntervalFromErp")'/>
+<input type="hidden" id="newsSection" name="newsSection" value='$!session.getAttribute("newsSection")'/>
+<input type="hidden" id="disappearCartPop" name="disappearCartPop" value='$!session.getAttribute("disappearCartPop")'/>
+<input type="hidden" id="leadTime" name="leadTime" value='$!session.getAttribute("leadTime")'/>
+<input type="hidden" id="layoutName" name="layoutName" value='$!LayoutName'/>
+<input type="hidden" id="pageTitle" name="pageTitle" value="$!pageTitle" />
+<input type="hidden" id="beforeLoginAvaiabilityProductList" value="#if($!beforeLoginAvaiabilityProductList)$!beforeLoginAvaiabilityProductList#end" />
+<input type="hidden" id="afterLoginAvaiabilityProductList" value="$!afterLoginAvaiabilityProductList" />
+<input type="hidden" id="erpType" name="erpType" value='$!session.getAttribute("erpType")'/>
+<input type="hidden" id="isRetailUser" name="isRetailUser" value='$!session.getAttribute("isRetailUser")'/>
+<input type="hidden" id="userLogin" name="userLogin" value='$!session.getAttribute("userLogin")'/>
+<input type="hidden" id="siteName" name="siteName" value="$!siteName">
+<input type="hidden" id="webThemes" name="webThemes" value="$!webThemes">
+<input type="hidden" id="punchoutUser" name="punchoutUser" value='$!checkOciUser'/>
+<input type="hidden" id="loggedInUserName" name="loggedInUserName" value='$!session.getAttribute("com.common.username")'/>
+<input type="hidden" id="siteDisplayName" name="siteDisplayName" value='$!siteDisplayName'/>
+<input type="hidden" id="enableAnonymousCheckout" name="enableAnonymousCheckout" value='$!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")'/>
+<input type="hidden" id="enableAddToCartBeforeLogin" name="enableAddToCartBeforeLogin" value='$!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")'/>
+<input type="hidden" id="quickOrderRecordLimit" name="quickOrderRecordLimit" value='$!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")'/>
+<input type="hidden" id="enableAvailabilityBeforeLogin" name="enableAvailabilityBeforeLogin" value='$!CommonDBQuerySystemParameter.get("EnableAvailabilityBeforeLogin")'/>
+<input type="hidden" id="enablePriceBeforeLogin" name="enablePriceBeforeLogin" value='$!CommonDBQuerySystemParameter.get("EnablePriceBeforeLogin")'/>
+<input type="hidden" id="enableMultipleUomDisplay" name="enableMultipleUomDisplay" value='$!CommonDBQuerySystemParameter.get("EnableMultipleUomDisplay")'/>
+<input type="hidden" id="enableNotificationOnCallForPrice" name="enableNotificationOnCallForPrice" value='$!CommonDBQuerySystemParameter.get("EnableNotificationOnCallForPrice")'/>
+<input type="hidden" id="enableHeaderQuickOderLink" name="enableHeaderQuickOderLink" value='$!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK")'/>
+<input type="hidden" id="enableStickyHeader" name="enableStickyHeader" value='$!CommonDBQuerySystemParameter.get("ENABLE_STICKY_HEADER")'/>
+<input type="hidden" id="enablePiwik" name="enableStickyHeader" value='$!CommonDBQuerySystemParameter.get("EnablePiwik")'/>
+<input type="hidden" id="enableAnonymousCheckout" name="enableAnonymousCheckout" value='$!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")'/>
+<input type="hidden" id="autoCompleteDesignVersion" name="autoCompleteDesignVersion" value='$!CommonDBQuerySystemParameter.get("AUTO_COMPLETE_DESIGN_VERSION")'/>
+<input type="hidden" id="webThemePath" value='$webThemes/$siteName/'/>
+<input type="hidden" id="wareHouseCode" name="wareHouseCode" value='$!session.getAttribute("wareHouseCode")'/>
+<input type="hidden" id="shipAddressForPunchoutUser" name="shipAddressForPunchoutUser" value='$!CommonDBQuerySystemParameter.get("SHIPADDRESS_FOR_PUNCHOUT_USER")'/>
+<input type="hidden" id="isPunchoutUser" value="$session.getAttribute('isPunchoutUser')" />
+#if($!userLogin)
+<input type="hidden" id="HomeTer" name="HomeTer" value='$!session.getAttribute("homeBranchId")'/>
+#else
+<input type="hidden" id="HomeTer" name="HomeTer" value='$!CommonDBQuerySystemParameter.get("DEFAULT_INVENTORY_BRANCH")'/>
+#end
+#if($!session.getAttribute("pricePrecision")=="4")
+#set($numberToolFormat = "#0.0000")
+#elseif($!session.getAttribute("pricePrecision")=="3")
+#set($numberToolFormat = "#0.000")
+#else
+#set($numberToolFormat = "#0.00")
+#end

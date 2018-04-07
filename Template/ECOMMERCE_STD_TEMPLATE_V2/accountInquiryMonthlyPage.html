@@ -1,0 +1,224 @@
+<div class="cimm_orderHistSearchByWrap">           
+<h4> $locale.get("orderhistorypage.label.monthlystatment")</h4>
+<div class="accountInquiryWrap">
+<form action="AccountInquiryUnit.action" method="get" name="stateDate" id="accountInquiryForm">
+<input type="hidden" name="reqType" value="MStat"/>
+	 #if($!shipAddressList)
+	<div class="selectShipto clearAfter">
+		<b>Ship-To: </b>
+		<select name=entityId id="entityId" class="inputFieldBody appendChosen">
+			#foreach($shipToEntry in $shipToList.entrySet())
+				#if($shipToEntry.getKey() == $entityId)
+					<option selected="" value=$shipToEntry.getKey()>$shipToEntry.getValue().getCustomerName()</option>
+				#else
+					<option value=$shipToEntry.getKey()>$shipToEntry.getValue().getCustomerName()</option>
+				#end
+			#end
+		</select>
+		<input type="submit" class="button" name="submitButton1" id="submitButton1" value="Go" onclick="disableAndSubmit(this);"/>
+	</div>
+	#end
+
+<div class="cimm_siteTableEnclosure">
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable">
+        <tbody><tr>
+            <td colspan="3" align="left">
+                <div id="printready" style="position:relative; width:100%; left:0px;">
+                    <div class="date_monthWrap">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                          <tbody><tr valign="middle">
+                                <td width="180" valign="middle" align="left" height="22"><b>As of&nbsp;$!userAccountDetail.asOfDate</b></td>
+                                <td width="*">&nbsp;</td> 
+                                <td width="25" align="right" valign="middle"><span class="formLabel"><strong>Month:&nbsp;</strong></span></td>
+                                <td width="100" align="left" valign="middle">
+                                    <select name="statementMonth" id="statemonth" class="inputFieldBody appendChosen">
+                                      	#foreach($month in $statementMonthMap.entrySet())
+                                      		#if($month.getKey() == $statementMonth)
+                                      		 	<option value=$month.getKey() selected>$month.getValue()</option>
+                                      		 #else
+                                      		 	<option value=$month.getKey()>$month.getValue()</option>
+                                      		 #end
+                                      	#end
+                                      </select>
+                                </td>
+                                <td width="5">&nbsp;</td>
+                                <td width="25" valign="middle" align="right"><span class="formLabel"><strong>Year:&nbsp;</strong></span></td>
+                                <td width="65" align="right"><input name="statementYear" type="text" class="inputFieldBody quantity" value="$!statementYear" size="5" maxlength="4"></td>
+                                <td width="37" align="left">
+                                    <input type="submit" class="button" name="submitButton1" id="submitButton3" value="Go" onclick="disableAndSubmit(this);"/>
+                                </td>
+                          </tr>
+                        </tbody></table>	
+                    </div>
+
+                    <div id="accountSummary" class="accountSummary" style="margin-bottom:8px;">
+                        <table width="100%" class="border_dark" cellpadding="0" cellspacing="0">
+							<tbody>
+							<tr>
+								<th style="border-right: 1px solid #666666;">$entityName</th>
+								<th style="border-right: 1px solid #666666;">&nbsp;&nbsp;Open Balances</th>
+								<th>Statement Summary</th>
+							</tr>
+							<tr>
+                                <td width="38%" style="border-right: 1px solid #666666;" background="images/site/tablerow0.gif">
+	                                <div class="halfBlokWrap left pullLeft">
+										Terms<br>
+										Credit Limit<br>
+										Available Credit<br>
+										Last Purchase<br>
+										Last Payment<br>
+										MTD Purchases<br>
+										YTD Purchases<br>
+										Payment Days
+									</div>
+									<div class="halfBlokWrap right pullRight">
+	                                  	$!userAccountDetail.arTerms<br>
+	                                  	$!userAccountDetail.arCreditLimitString<br>
+	                                  	$!userAccountDetail.arCreditAvailString<br>
+	                                  	#if($!userAccountDetail.lastSaleDate)($!userAccountDetail.lastSaleDate *)#end
+	                                  	 $!userAccountDetail.lastSaleAmount<br>
+	                                  	#if($!userAccountDetail.lastPaymentDate)($!userAccountDetail.lastPaymentDate *)#end 
+	                                  	$!userAccountDetail.lastPaymentAmount<br>
+	                                  	$!userAccountDetail.mTDSales<br>
+	                                  	$!userAccountDetail.yTDSales<br>
+	                                  	$!userAccountDetail.paymentDays
+									</div>
+                                </td>
+								<td width="26%" style="border-right: 1px solid #666666;" background="images/site/tablerow0.gif">
+									<div class="halfBlokWrap left pullLeft">
+										Future<br>
+										Current<br>
+										31-60<br>
+										61-90<br>
+										91-120<br>
+										Over120<br>
+										<strong>Total</strong>
+									</div>
+									<div class="halfBlokWrap right pullRight">
+										$!userAccountDetail.future<br>
+										$!userAccountDetail.current<br>
+										$!userAccountDetail.thirty<br>
+										$!userAccountDetail.sixty<br>
+										$!userAccountDetail.ninety<br>
+										$!userAccountDetail.oneTwenty<br>
+										<strong>$!userAccountDetail.aRTotal</strong>
+									</div>
+								</td>
+								<td width="36%" background="images/site/tablerow0.gif">		
+									<div class="halfBlokWrap left pullLeft">
+										&nbsp;<br>
+										<strong>Prev Balance</strong><br>
+										Payments/Credits<br>
+										Purchases/Charges<br>
+										<strong>New Balance</strong><br>
+										&nbsp;<br>
+									</div>
+									<div class="halfBlokWrap right pullRight">
+										&nbsp;<br>
+										$numberTool.format("#0.00",$!userAccountDetail.previousBalance)<br>
+										$!userAccountDetail.aRDeposits<br>
+										$!userAccountDetail.aROrders<br>
+										$numberTool.format("#0.00",$!userAccountDetail.currentBalance)<br>
+										&nbsp;<br>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+                    </div>
+                    <div class="searchInvoiceHead">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                          <tbody>
+                          <tr>
+                                <td width="150" valign="middle" align="left" height="22"><h3>Account Activity</h3></td>
+                                <td width="*">&nbsp;</td> 	  
+                                 <td width="200" align="right" valign="middle"><span class="formLabel"><strong>Search by Invoice # or P.O #:</strong></span></td>
+                                 <td width="110" align="right" valign="middle"><input type="text" name="searchBy" class="inputFieldBody" value="$!searchBy" size="22"></td>
+                                 <td width="37" align="left"><input type="submit" class="button" name="submitButton1" id="submitButton2" value="Go" onclick="disableAndSubmit(this);"/></td>
+                          </tr>
+                        </tbody></table>	
+                    </div>
+                    
+                    <div id="accountTable" class="accountTable cimm_siteTableEnclosure">
+                            <table width="100%" border="0" cellpadding="3" cellspacing="0" id="orderHistoryTable" class="display">
+                            <thead>
+                              <tr align="left">	
+                                <th width="10%" align="center">Date</th>
+                                <th width="18%" align="center">Ref/Invoice #</th>
+                                <th width="18%" align="center">P.O. Number</th>
+                                <!--  <th width="14%" align="right">Description</th> -->
+                                 <!-- <th width="14%" align="right">Debit</th> -->
+                               <!--  <th width="14%" align="right">Credit</th>  -->
+                                <th width="14%" align="right">Balance</th>
+                              </tr>
+                         </thead>     
+                              
+                        <tbody>
+                        <!-- LOOP: Print Account Inquiry Items -->
+                        #foreach($accountInquiryItem in $userAccountDetail.accountInquiryItemList)
+                        <tr bgcolor="#ffffff" align="left">	 
+                                          <td background="images/site/tablerow0.gif">$!accountInquiryItem.orderDate</td>
+                                          <td background="images/site/tablerow0.gif">
+										  #if($!accountInquiryItem.erpOrderNumber.contains('.'))
+                                          	#set ($invoicNumberERP = $!accountInquiryItem.erpOrderNumber)
+											#set ($index = $invoicNumberERP.indexOf('.'))
+											#set ($invoicNumberERP = $invoicNumberERP.substring(0,$index))
+                                          	<a class="orangeClr" href="OrderDetailSale.action?orderId=$invoicNumberERP">$!accountInquiryItem.erpOrderNumber</a>
+                                          #else
+                                          	$!accountInquiryItem.erpOrderNumber
+                                          #end
+										  </td>
+                                          <td background="images/site/tablerow0.gif">$!accountInquiryItem.poNumber</td>
+                                          <!-- <td background="images/site/tablerow0.gif"> Description </td> -->
+                                          <!-- <td background="images/site/tablerow0.gif" align="right">  </td> -->##$$!accountInquiryItem.orderPriceStr
+                                          <!-- <td background="images/site/tablerow0.gif" align="right">  </td> -->##$$!accountInquiryItem.sPaymentAmount 
+                                          <td background="images/site/tablerow0.gif" align="right">$$numberTool.format("#0.00",$!accountInquiryItem.balanceAmount)</td>
+                                    </tr> 
+                         #end           
+                            </tbody></table>
+                    </div><br>
+                </div> <!-- end print ready -->
+            </td>
+                    </tr>
+    </tbody></table>
+          </form>
+</div>
+    </div>
+	
+   <div class="clear"></div>       
+<div class="dummyHeight"></div>
+<script type="text/javascript">
+$(document).ready( function () {
+	$('#orderHistoryTable').dataTable( {
+		"sPaginationType":"simple_numbers",
+		"sDom": '<"tabHeader">t<"tabFooter"p>',
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"bSort": false,
+		"order" : [[1, 'desc']],
+		"columnDefs": [{ orderable: false, targets: -1 }],
+		"language": {
+			"search":"_INPUT_",
+	        "sLengthMenu" :"Show _MENU_",
+	        "oPaginate" : {
+	        	"sPrevious" :"Prev",
+                "sNext" :"Next"
+			}
+		}
+	});
+});
+
+	function disableAndSubmit(submitButton) {
+		$(submitButton).val("Please wait.");
+		$('.goButton').attr('disabled','disabled');
+		$('#accountInquiryForm').submit();
+
+	}
+	
+</script> 
+<div class="clear"></div>
+<style type="text/css">
+.hideMe .DataTables_sort_wrapper{
+	display:none;
+}
+</style>

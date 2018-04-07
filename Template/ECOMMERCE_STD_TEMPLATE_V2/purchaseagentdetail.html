@@ -1,0 +1,108 @@
+<div class="marginY-2 clearAfter">
+	<a class="cimm_inlineButton pullRight" onclick="window.location.reload();">$!locale.get('product.heading.backToUsersList')</a>
+</div>
+<form method="post" id="manageForm">
+	<div id="notificationDiv"></div>
+	<div class="row mBottom-4">
+		<div class="col-md-7 col-sm-6 col-xs-12">
+			<h4>$locale.get("product.heading.userInformation")</h4>
+			<ul class="cimm_agentInfo">
+				<li><b>$locale.get("form.label.name") : </b> <span>$!addressList.firstName $!addressList.lastName</span></li>
+				<li><b>$locale.get("form.label.email") : </b> <span>$!addressList.emailAddress</span></li>
+				<li><b>$locale.get("form.label.address") : </b> <span>$!addressList.address1, #if($addressList.address2) $!addressList.address2,#end $!addressList.city, $!addressList.state, $!addressList.country $!addressList.ZipCode</span></li>
+			</ul>
+		</div>
+		<div class="col-md-5 col-sm-6 col-xs-12 form-inline">
+			<h4>$locale.get("product.heading.userPrivileges")</h4>
+			<div class="form-group">
+				<label for="userRole">$locale.get("form.label.role")</label>
+				<select name="userRole" id="userRole" onchange="testCompare(this.id);" class="selectpicker form-control col-">
+					<option value="generalUser" #if($isGeneralUser=="Y") selected #end>$locale.get("form.label.generalUser")</option>
+					<option value="superUser" #if($isSuperUser=="Y") selected #end>$locale.get("form.label.superUser")</option>
+					<option value="purchaseAgent" #if($isAuthPurchaseAgent=="Y") selected #end>$locale.get("form.label.authorizedPurchasingAgent")</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row mBottom-4">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div id="radioGroup" class="NotChanged #if($isGeneralUser!="Y") hideMe #end">
+				<h4>$locale.get("product.label.purchaseagentListforGeneralUsercartAproval")</h4>
+				#if($agentUserList.size()>0)
+				<ul class="cimm_purchaseagentList">
+					#foreach($agentList in $agentUserList)
+					#set($ManagePageAssignStatus = $agentList.approverAgentAssignStatus)
+					#set($SU = $isAuthPurchaseAgent)
+					#if($agentList.isSuperUser == "Y" || $agentList.isAuthPurchaseAgent == "Y")
+					<li>
+						<label for="$agentList.userId"  class="customRadioBtn">
+							<input name="userToAssign" id="$agentList.userId" type="radio" onChange="testCompare(this.id);" #if($agentList.approverAgentAssignStatus=="Y") checked #end/>
+							<span>$!agentList.firstName $!agentList.lastName</span>
+						</label>
+					</li>
+					#end
+					#end
+				</ul>
+				#end
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h4>$locale.get("product.label.assignPurchasingAgentShiptoJobList")</h4> 
+			<table class="table table-striped table-bordered display rwd-table">
+				<thead>
+					<tr>
+					<th>$locale.get("form.label.name")</th>
+					<th>$locale.get("form.label.address")</th>
+					<th>$locale.get("form.label.city")</th>
+					<th>$locale.get("form.label.state")</th>
+					<th>$locale.get("form.label.zipCode")</th>
+					<th class="text-center">$locale.get("form.label.assign")</th>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($shipList in $shipAddressList)
+					<tr>
+						<td>$shipList.customerName</td>
+						<td class="alignLeft">$shipList.address1 #if($shipList.address2), $shipList.address2 #end</td>		
+						<td>$shipList.city</td>
+						<td>$shipList.state</td>
+						<td>$shipList.zipCodeStringFormat</td>
+						<td>
+							#set($shipId=$shipList.addressBookId)
+							#set($checkStatus="N")
+							#if($assignedShipIdList)
+							#foreach($valueFromList in $assignedShipIdList)
+							#if($shipId == $valueFromList)
+							#set($checkStatus="Y")
+							#end
+							#end
+							#end
+							<label class="customCheckBox2">
+								<input type="checkbox" name="shipIdList" value="$shipList.addressBookId" id="shipIdList1_$shipList.addressBookId" #if($checkStatus=='Y') checked="checked" #end onChange="testCompare(this.id);"/>
+								<span></span>
+								<input type="hidden" name="enId" value="$shipList.entityId" autocomplete="off">
+								<input type="hidden" name="addressBId" value="$shipList.addressBookId" autocomplete="off">
+								<input type="hidden" id="checkBoxGroup" class="NotChanged">
+							</label>
+						</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="text-center">
+		<input class="button" type="button" id="updateBtn" name="updateBtn" value="Update" onclick="updateUser();"/>
+	</div>
+	<input type="hidden" name="userId" value="$!thisUserId" id="userID" autocomplete="off">
+	<input type="hidden" name="isGeneralUser" id="isGeneralUser"  value="$!isGeneralUser" autocomplete="off">
+	<input type="hidden" name="isAuthPurchaseAgent"  value="$!isAuthPurchaseAgent" autocomplete="off">
+	<input type="hidden" name="isSuperUser"  value="$!isSuperUser" id="isSuperUser" autocomplete="off">
+	<input type="hidden" name="isSuperUserCurrent" id="isSuper" autocomplete="off">
+	<input type="hidden" name="isAuthPurchaseAgentCurrent" id="isAuthPurchaseAgent" autocomplete="off">
+	<input type="hidden" name="assignedShipIdListParam" value="$!assignedShipIdList" autocomplete="off">
+	<input type="hidden" name="apaSet" value="$!authSet" id="apaSet" autocomplete="off">
+	<input type="hidden" name="authoListAssigned" value="$!authoListAssigned" id="isBusyUser">
+</form>

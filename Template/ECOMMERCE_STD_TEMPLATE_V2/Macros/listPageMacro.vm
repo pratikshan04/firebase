@@ -1,0 +1,89 @@
+#macro(listHiddenSearchWithIn $codeIdSkip,$levelNoSkip,$gallery,$resultPage,$pageNo,$sortBy,$attrFilterList,$brandId,$keyWord)
+<input type="hidden" name="codeId" value="$codeIdSkip" /> 
+<input type="hidden" name="levelNo" value="$levelNoSkip" /> 
+<input type="hidden" name="gallery" value="$gallery" />
+<input type="hidden" name="resultPage" value="$resultPage" /> 
+<input type="hidden" name="keyWord" value="$!keyWord" />
+<input type="hidden" name="pageNo" value="$pageNo" />
+#if($manfId)<input type="hidden" name="manfId" value="$manfId"/>#end
+#if($brandId)<input type="hidden" name="brandId" value="$brandId"/>#end
+#if($sortBy)<input type="hidden" name="sortBy" value="$sortBy" />#end
+#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$attrFilterList'/>#end
+#end
+
+#macro(itemListHiddenFields $partNumber, $itemPriceId, $qty, $!uom, $price, $saleQty, $itemId, $displayFrieghtAlert, $packageQty, $itemAvailability, $srchTyp, $navigationType)
+<input type="hidden" value="$partNumber" name="idListPrice"/> 
+<input type="hidden" value="" name="test"/> 
+<!--<input type="hidden" id="priceSaleQty_$partNumber" value="$qty"/>--> 
+<input type="hidden" id="uomValue_$partNumber" value="$!uom"/> 
+<input type="hidden" id="displayFrieghtAlert_$itemId" name="displayFrieghtAlert_$itemId" value="#if($displayFrieghtAlert)$displayFrieghtAlert#end" />
+<input type="hidden" id="priceValue_$partNumber" value="$price"/>
+<input type="hidden" id="unitPriceValue_$partNumber" value="$price" /> 
+<input type="hidden" id="salesQtyVal_$partNumber" value="$saleQty"/> 
+<input type="hidden" id="tempItemId_$partNumber" value="$itemId"/>
+<input type="hidden" id="itmId_$itemId" value="$partNumber"/> 
+<input type="hidden" id="packageQty_$partNumber" value="$packageQty"/>
+<input type="hidden" id="itemPriceID_$partNumber" name="itemPriceID_$partNumber" value="$itemPriceId"/>
+<input type="hidden" id="itemTxtSXAvail$partNumber" name="itemTxtSXAvail$partNumber" value="$!itemAvailability"/>
+<input type="hidden" id="itemTxtAvail$itemId" name="itemTxtAvail$itemId" value="$!itemAvailability"/>
+<input type="hidden" id="priceSaleQty_$partNumber" name="priceSaleQty_$partNumber" value="$qty" />
+<input type="hidden" id="navigationType" name="navigationType" value="$!navigationType" />
+<input type="hidden" value="$!srchTyp" id="searchType" name="searchType"/>
+#end
+
+#macro(listAndGridSwap $navigationType,$hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
+#if($navigationType=="NAVIGATION")
+#set($gridURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=0&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($listURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=1&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($paginationURL="itemLevelFilterPage.action?pageClick=Y&codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=$gallery#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
+#end
+#if($navigationType=="SEARCH")
+#set($gridURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")
+#set($listURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=1#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")
+#set($paginationURL="searchPage.action?pageClick=Y&keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#end
+#if($navigationType=="BRAND")
+#set($gridURL="shopByBrandPage.action?brandId=$brandId&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($listURL="shopByBrandPage.action?brandId=$brandId&gallery=1#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($paginationURL="shopByBrandPage.action?pageClick=Y&brandId=$brandId#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#end
+#if($navigationType=="MANF")
+#set($gridURL="shopByManufacturerPage.action?manfId=$manfId&gallery=0&srchTyp=$srchTyp#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($listURL="shopByManufacturerPage.action?manfId=$manfId&gallery=1&srchTyp=$srchTyp#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($paginationURL="shopByManufacturerPage.action?pageClick=Y&manfId=$manfId&srchTyp=$srchTyp#if($keyWord)&keyWord=$keyWord#end&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#end
+#end
+
+#macro(listPageHeading $navigationType,$keyWord,$heading)
+#if($navigationType=="NAVIGATION")
+#set($listPageHeading="$heading")
+#end
+#if($navigationType=="SEARCH")
+#set($listPageHeading="$keyWord")
+#end
+#if($navigationType=="BRAND")
+#set($listPageHeading="$heading")
+#end
+#if($navigationType=="MANF")
+#set($listPageHeading="$heading")
+#end
+#end
+
+#macro(listPageFormUrls $navigationType)
+#if($navigationType=="NAVIGATION")
+#set($itemsPerPageURL="itemLevelFilterPage.action")
+#set($searchWithInFormURL="itemLevelFilterPage.action")
+#end
+#if($navigationType=="SEARCH")
+#set($itemsPerPageURL="searchPage.action")
+#set($searchWithInFormURL="")
+#end
+#if($navigationType=="BRAND")
+#set($itemsPerPageURL="shopByBrandPage.action")
+#set($searchWithInFormURL="shopByBrandPage.action")
+#end
+#if($navigationType=="MANF")
+#set($itemsPerPageURL="shopByManufacturerPage.action")
+#set($searchWithInFormURL="shopByManufacturerPage.action")
+#end
+#end

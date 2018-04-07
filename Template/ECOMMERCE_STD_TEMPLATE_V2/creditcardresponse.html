@@ -1,0 +1,69 @@
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/jquery-migrate-1.2.1.js"></script>
+<input type="hidden" id="creditCartApprovedStatus" value="$!creditCartApprovedStatus"/>
+<input type="hidden" id="ccTransactionId" value="$!paymentGateWayTransactionID"/>
+<input type="hidden" id="ccTransTimeStamp" value="$!paymentGateWayTransTimeStamp"/>
+<input type="hidden" id="ccResponseCode" value="$!paymentGateWayResponseCode"/>
+<input type="hidden" id="ccStatus" value="$!paymentGateWayStatus"/>
+<input type="hidden" id="ccCardType" value="$!paymentGateWayCardType"/>
+<input type="hidden" id="ccApprovedAmount" value="$!paymentGateWayapprovedAmount"/>
+<input type="hidden" id="ccHolderName" value="$!cardHolder"/>
+<input type="hidden" id="ccOrderNumber" value="$!orderNumber"/>
+
+<input type="hidden" id="ccHostRefNumber" value="$!paymentGateWayHostRefNumber"/>
+<input type="hidden" id="ccTaskID" value="$!paymentGateWayTaskID"/>
+<input type="hidden" id="ccAmount" value="$!paymentGateWayAmount"/>
+<input type="hidden" id="ccDeclineResponseReason" value="$!paymentGateWayDeclineResponseReason"/>
+<input type="hidden" id="ccCvv2VrfyCode" value="$!paymentGateWayCvv2VrfyCode"/>
+<input type="hidden" id="ccTip" value="$!paymentGateWayTip"/>
+<input type="hidden" id="ccToken" value="$!paymentGateWayToken"/>
+<input type="hidden" id="ccRequestedAmount" value="$!paymentGateWayRequestedAmount"/>
+<input type="hidden" id="cchostResponseCode" value="$!paymentGateWayhostResponseCode"/>
+<input type="hidden" id="ccInvoice" value="$!paymentGateWayInvoice"/>
+<input type="hidden" id="ccApprovalCode" value="$!paymentGateWayApprovalCode"/>
+<input type="hidden" id="ccServerTimestamp" value="$!paymentGateWayServerTimestamp"/>
+<input type="hidden" id="ccFee" value="$!paymentGateWayFee"/>
+<input type="hidden" id="ccExternalSessionID" value="$!paymentGateWayExternalSessionID"/>
+<input type="hidden" id="ccAddVrfyCode" value="$!paymentGateWayAddVrfyCode"/>
+<input type="hidden" id="ccTax" value="$!paymentGateWayTax"/>
+<input type="hidden" id="ccNewDomainKey" value="$!paymentGateWayNewDomainKey"/>
+<input type="hidden" id="ccNumber" value="$!paymentGateWayCardNumber"/>
+<input type="hidden" id="ccListExists" value=""/>
+<div style="width:90%;padding:10px;margin-top:40px;" id="cardStatus">
+<center><img src="$webThemes/$siteName/images/creditCardloading.gif" /><br/>
+<p><b>$locale.get("label.message.pleaseWaitWeAreProcesingYourRequest")...</b></p>
+<p>$locale.get("label.message.doNotPressRefreshOrBackButton")</p>
+</center>
+</div>
+<script type="text/javascript">if(jQuery("#ccStatus").val()==jQuery("#creditCartApprovedStatus").val()){
+window.parent.jQuery("#ccTransactionId").val(jQuery("#ccTransactionId").val());
+window.parent.jQuery("#ccTransTimeStamp").val(jQuery("#ccTransTimeStamp").val());
+window.parent.jQuery("#ccResponseCode").val(jQuery("#ccResponseCode").val());
+window.parent.jQuery("#ccStatus").val(jQuery("#ccStatus").val());
+window.parent.jQuery("#ccCardType").val(jQuery("#ccCardType").val());
+window.parent.jQuery("#ccApprovedAmount").val(jQuery("#ccApprovedAmount").val());
+window.parent.jQuery("#ccHolderName").val(jQuery("#ccHolderName").val());
+window.parent.jQuery("#ccOrderNumber").val(jQuery("#ccOrderNumber").val());
+
+window.parent.jQuery("#ccHostRefNumber").val(jQuery("#ccHostRefNumber").val());
+window.parent.jQuery("#ccTaskID").val(jQuery("#ccTaskID").val());
+window.parent.jQuery("#ccAmount").val(jQuery("#ccAmount").val());
+window.parent.jQuery("#ccDeclineResponseReason").val(jQuery("#ccDeclineResponseReason").val());
+window.parent.jQuery("#ccCvv2VrfyCode").val(jQuery("#ccCvv2VrfyCode").val());
+window.parent.jQuery("#ccTip").val(jQuery("#ccTip").val());
+window.parent.jQuery("#ccToken").val(jQuery("#ccToken").val());
+window.parent.jQuery("#ccRequestedAmount").val(jQuery("#ccRequestedAmount").val());
+window.parent.jQuery("#cchostResponseCode").val(jQuery("#cchostResponseCode").val());
+window.parent.jQuery("#ccInvoice").val(jQuery("#ccInvoice").val());
+window.parent.jQuery("#ccApprovalCode").val(jQuery("#ccApprovalCode").val());
+window.parent.jQuery("#ccServerTimestamp").val(jQuery("#ccServerTimestamp").val());
+window.parent.jQuery("#ccFee").val(jQuery("#ccFee").val());
+window.parent.jQuery("#ccExternalSessionID").val(jQuery("#ccExternalSessionID").val());
+window.parent.jQuery("#ccAddVrfyCode").val(jQuery("#ccAddVrfyCode").val());
+window.parent.jQuery("#ccTax").val(jQuery("#ccTax").val());
+window.parent.jQuery("#ccNewDomainKey").val(jQuery("#ccNewDomainKey").val());
+window.parent.jQuery("#ccNumber").val("XXXX-XXXX-XXXX-"+jQuery("#ccNumber").val());
+window.parent.jQuery("#ccListExists").val(jQuery("#ccListExists").val());
+window.parent.jQuery("#creditCardForm").submit();
+}else{jQuery("#cardStatus").html(jQuery("#paymentGateWayDeclineResponseReason").val());}
+</script>

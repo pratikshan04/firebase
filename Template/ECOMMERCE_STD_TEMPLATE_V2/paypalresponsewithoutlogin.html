@@ -1,0 +1,54 @@
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<!-- <script type="text/javascript" src="../js/FullScript.js"></script> -->
+<script type="text/javascript" src="$webThemes/$siteName/js/siteScript.js"></script>
+<!-- <script type="text/javascript" src="..$webThemes/$siteName/js/SiteSpecific.js"></script> -->
+<div class="log-right-contents">
+<div align="center" style="width:100%; padding-top:25px; ">
+<div id="loadingMsg" style="width:100%;padding-top:100px;">
+<center><img src="$webThemes/$siteName/images/creditCardloading.gif" alt='loading'/><br/><br/>
+<p><b>Please wait while we process your request...</b></p><br/><p style="color: #ff0000;">DO NOT PRESS REFRESH OR THE BACK BUTTON - AND DO NOT RESUBMIT THIS FORM!</p>
+</center>
+</div>
+</div>
+</div>
+<form method="post" id="payPalForm" name="payPalForm" action="processCheckoutAU.action">
+<input type="hidden" name="payPalToken" value="$!token"/> 
+<input type="hidden" name="payPalPayerId" value="$!payerId"/>
+<input type="hidden" name="savedGroupId" value="$!savedGroupId"/> 
+<input type="hidden" name="defaultBillToId" value="$defaultBillToId"/> 
+<input type="hidden" name="defaultShipToId" value="$!shipAddress.addressBookId"/>
+<input type="hidden" name="address1" value="$!shipAddress.address1"/> 
+<input type="hidden" name="address2" value="$!shipAddress.address2"/> 
+<input type="hidden" name="city" value="$!shipAddress.city"/> 
+<input type="hidden" name="state" value="$!shipAddress.state"/> 
+<input type="hidden" name="phoneNumber" value="$!shipAddress.phoneNo"/> 
+<input type="hidden" name="email" value="$!shipAddress.emailAddress"/> 
+<input type="hidden" name="orderStatus" value="$!orderStatus"/> 
+<input type="hidden" name="country" value="$!shipAddress.country"/> 
+<input type="hidden" name="shipVia" value="$!shipVia"/>
+<input type="hidden" name="selectedShipCodeOption" value="$!selectedShipCodeOption"/> 
+<input type="hidden" name="zipCode" value="$!shipAddress.ZipCodeStringFormat"/> 
+<input type="hidden" name="newsLetterSubscription" value="$!newsLetterSubscription" />
+<input type="hidden" name="shippingInstruction" value="$!shippingInstruction"/> 
+<input type="hidden" name="orderNotes" value="$!orderNotes"/> 
+<input type="hidden" name="poNumber"id="poNumber" value="$!poNumber" /> 
+<input type="hidden" name="isReOrder" value="$!isReOrder"/> 
+<input type="hidden" name="reqDate"id="reqDate" value="$!reqDate"/>
+<input type="hidden" name="orderedBy"id="orderedBy" value="$!orderedBy"/>
+<input type="hidden" name="orderSubTotal"id="orderSubTotal" value="$!quoteResponse.subtotal" />
+<input type="hidden" name="orderTax"id="orderTax" value="$!quoteResponse.tax"/>
+<input type="hidden" name="orderFreight"id="orderFreight" value="$!quoteResponse.freight" />
+<input type="hidden" name="orderHanling"id="orderHanling" value="$!quoteResponse.handling" />
+<input type="hidden" name="orderGrandTotal"id="orderGrandTotal" value="$!quoteResponse.total"/>
+<input type="hidden" id="paymentId" name ="paymentId" value="$!quoteResponse.paymentRefrenceId">
+<input type="hidden" name="upsFrieghtCharges" value="$!quoteResponse.freight"/> 
+<input type="hidden" name="totalCartFrieghtCharges" value="$!quoteResponse.freight"/>
+<input type="hidden" name="orderTax" value="$!quoteResponse.tax"/> 
+</form>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery("#payPalForm").submit();
+});
+</script>

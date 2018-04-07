@@ -1,0 +1,60 @@
+<div class="hiddenDiv"></div>
+<div class="row cimm_brandAtoZletters">
+	<div class="col-md-3 col-xs-12 pTop-2">
+		<input id="searchGrid" class="form-control" type="text" name="filterContent"  maxlength="100" placeholder="Search By Brand"/>
+	</div>
+	<div class="col-md-9 col-sm-6 col-xs-12">
+		<ul>
+			#set($!idxCnt = 1)
+			#foreach($manufactureIdx in $manufacturerIndex)
+			#if($idxCnt == $manufacturerIndex.size())
+			<li>
+				<a href="javascript:void(0);" class="ln-last" onclick="brandListScroll('$manufactureIdx');">$!manufactureIdx</a>
+			</li>
+			#else
+			<li>
+				<a href="javascript:void(0);" onclick="brandListScroll('$manufactureIdx');">$!manufactureIdx</a>
+			</li>
+			#end
+			#set($!idxCnt = $idxCnt+1)
+			#end
+		</ul>
+	</div>
+</div>
+#set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
+#if($!featuredBrands && $featuredBrands.size()>0)	 	
+<div class="cimm_sliderWrap clearAfter">
+	<h2 class="reg sBlack center">$locale.get("product.label.featuredBrands")</h2>
+	<ul id="featuredBrands" class="fBrandsPage fL">
+		#set($bCount = 0)
+		#foreach($brandset in $featuredBrands.entrySet())
+			#set($keyValue = $brandset.getKey())
+			#set($brandModel = $brandset.getValue())
+			<li>				
+				<div itemscope itemtype="http://schema.org/Brand" class="cimm_linkItemImg">
+					<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">                    
+						<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
+					</a>
+				</div>
+			</li>
+			#set($bCount=$bCount+1)
+			#if($bCount == 6)
+				#break;
+			#end
+		#end
+	</ul>
+</div>
+#end
+<div class="grid">
+	#foreach($key in $brandListAsMap.keySet())
+	#set($branListByIndex = $brandListAsMap.get($key))
+	<div class="grid-item brandsListRow" id="displayBrand_$key">
+		<h2>$key</h2>
+		<ul>
+		#foreach($brand in $branListByIndex)
+			<li><a href="/$!brand.brandId/brand/$!brand.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="sBlack">$!brand.brandName</a></li>
+		#end
+		</ul>
+	</div>
+	#end
+</div>

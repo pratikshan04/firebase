@@ -1,0 +1,597 @@
+<script type="text/javascript" src="$webThemes/$siteName/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/bootbox.min.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="../js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript" src="../js/Encoder.js"></script>
+<script type="text/javascript" src="../js/cookies.js"></script>
+<script type="text/javascript" src="../js/hashtable.js"></script>
+<script type="text/javascript" src="../js/respond.min.js"></script>
+<script type="text/javascript" src="../js/jqueryNumber.js"></script>
+<script type="text/javascript" src="../js/jquery.i18n.properties-1.0.9.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/slick.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/nprogress.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/jsaes.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/addToCarts.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/PriceLoading.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/datatables.min.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/countryState.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/formValidation.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/jquery.form.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/siteScript.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/recentlyViewed.js"></script>
+#if($userAgent == "WEBVIEW")<script type="text/javascript" src="$webThemes/$siteName/js/mobileApp.js"></script>#end
+#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")<script type="text/javascript" src="$webThemes/$siteName/js/quickOrderPadHead.js"></script>#end
+#if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$webThemes/$siteName/js/handsontable.full.js"></script>#end
+#if($LayoutName=="ProductList")
+	<script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
+	#if($paginate>1)
+	<script type="text/javascript">
+		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+		$(".pgnation").html(pagination);
+	</script>
+	#end
+#if($!CommonDBQuerySystemParameter.get("CLICK_STREAM_BOOST") == "Y" && $navigationType=="SEARCH")
+<script>
+jQuery(".clickStream").click(function() {
+    var pageNum = parseInt(jQuery("#clickStreamPageNum").val())+1;
+    //console.log(jQuery(this).data("itemid"));
+    var str="";
+    str = str+"SearchQuery="+jQuery("#txtSearch").val().toLowerCase();
+    str = str+"&searchResultID="+jQuery(this).data("itemid");
+    str = str+"&eventType="+jQuery(this).data("clicktype");
+    str = str+"&pageNumber="+pageNum;
+    str = str+"&clientName=unilog";
+	str = str+"&actionType=search";
+    jQuery.ajax({
+		type: "POST",
+		url: "/ClickStream/saveClickStream",
+		data: str,
+		success: function(msg){
+		}
+	});
+});
+</script>
+#end
+#elseif($LayoutName=='SavedCartPage' || $LayoutName=='ProductGroupPage')
+	#if($paginate>1)
+	<script type="text/javascript">
+		#set($paginationURL="myProductGroupPage.action?savedGroupId=$savedGroupId#if($sortBy)&sortBy=$sortBy#end&shared=$!isShared&resultPage=$resultPage#if($reqType)&reqType=$reqType#end#if($searchkeyWord)&searchkeyWord=$escapeTool.url($!searchkeyWord)#end&pageNo=")
+		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+		$(".pgnation").html(pagination);
+	</script>
+	#end
+#elseif($LayoutName=="ApproveCart")
+<script type="text/javascript">
+	#set($paginationURL="myProductGroupPage.action?savedGroupId=$savedGroupId#if($sortBy)&sortBy=$sortBy#end&shared=$!isShared&resultPage=$resultPage#if($reqType)&reqType=$reqType#end#if($searchkeyWord)&searchkeyWord=$escapeTool.url($!searchkeyWord)#end&pageNo=")
+	var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+	$(".pgnation").html(pagination);
+</script>
+#elseif($LayoutName=="CheckOutPage")
+	<script type="text/javascript">
+		#if($!shipAddressListJson && $!shipAddressListJson!="")
+			var shippingListjson =  $!shipAddressListJson;
+		#else
+			var shippingListjson =  [];
+		#end
+	</script>
+#elseif($LayoutName=="OrderDetailPage")
+<script>
+function checkSelectAll(chk){
+	if($(".deviceSelectAllChkBox").is(':checked')){
+		$(".deviceSelectAllChkBox").attr("checked",false);
+	}
+	else{
+		$(".deviceSelectAllChkBox").attr("checked",true);
+	}
+	var checked_status = chk.checked;
+	$("input:checkbox[name='quotePartNumberSelected']").each(function(){
+		this.checked = checked_status; 
+	});
+}
+function deviceSelectAll(){
+	if($("#chkSelectall").is(':checked')){
+		$("#chkSelectall").attr("checked",false);
+	}
+	else{
+		$("#chkSelectall").attr("checked",true);
+	}
+	var checked_status = $("#chkSelectall").is(':checked');
+	$("input:checkbox[name='quotePartNumberSelected']").each(function(){
+		this.checked = checked_status;
+	});
+}
+</script>
+#end
+#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit")
+<!-- **** Site Script ********* -->
+#set($jsPath = $webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js')
+<script type="text/javascript" src="$jsPath"></script>
+#end
+<script type="text/javascript" src="$webThemes/$siteName/js/bootstrap-select.min.js"></script>
+<!--[if (gte IE 6)&(lte IE 8)]>
+  <script type="text/javascript" src="../js/selectivizr-min.js"></script>
+<![endif]-->
+#if($LayoutName != "CMSStaticPage")
+<script type="text/javascript">
+$("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
+		if (e.keyCode === 13){
+			$("#query-form").trigger('submit');
+		}
+	});
+	// http://localhost:8983/solr/collection1/terms?terms.fl=name&terms.prefix=i&terms.sort=count&wt=velocity&v.template=suggest
+</script>
+#end
+
+<script type="text/javascript">
+/*********************Header Script***********************/
+if (!window.console) window.console = {};
+if (!window.console.log) window.console.log = function () { };
+function noenter() {
+	return !(window.event && window.event.keyCode == 13); }
+/************************accounDrop************************/
+$(function() {
+	var isMobileWeb = /webview/i.test(navigator.userAgent.toLowerCase());
+	if(isMobileWeb){
+		$("#normalHead").addClass('fixOnApp');
+	}
+	$('.tog_myAccount span').addClass('fa-plus');
+	$('.tog_myAccount').click(function(){
+		$(".myAccountList").slideToggle();
+		if  ($('.tog_myAccount span').hasClass('fa-plus')){
+			$('.tog_myAccount span').removeClass('fa-plus'); 
+			$('.tog_myAccount span').addClass('fa-minus');
+		}else{$('.tog_myAccount span').removeClass('fa-minus'); 
+			$('.tog_myAccount span').addClass('fa-plus');									
+		}
+	});
+	
+	$('.sleekNavigationLinks ul h4').click(function(e) {
+		e.stopPropagation();
+	});
+	
+	$(".myaccount").click(function(e) {
+		$("#popUserName").val(""); 
+		$("#pLoginErr").html(""); 
+		e.preventDefault();
+		$("fieldset#signin_menu").toggle();
+		$(".myaccount").toggleClass("menu-open");
+	});
+
+	$("fieldset#signin_menu").mouseup(function() {
+		return false;
+	});
+	if (!console) console = {log: function() {}};
+	/************************format Number************************/
+	var viewport = $("meta[name='viewport']");
+	if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) {
+		viewport.attr("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
+	} else if ( navigator.userAgent.match(/iPad/i) ) {
+		viewport.attr("content", "width=device-width, initial-scale=1.0");
+	}
+	/*******************FileUpload******************/
+	$( "#cimm_headerFileUpload > input" ).change(function() {
+		var fileName = $(this)[0].files[0];
+		if (fileName) {
+			fileName = fileName.name
+			$('#cimm_headerFileUpload > span').text(fileName);
+		}
+	});
+	$('.cimm_headerNavBar li ul li.locationLink a').on('click', function() {
+		var locationLink = $(this).parent().parent().parent().find('a').first().html();
+		if(locationLink == "Locations"){
+			var Location = $(this).html();
+			setCookie("Location",Location,1);
+			window.location.href = "/Locations";
+		}
+	});
+	#if($LayoutName=="QuickOrderStdPage")
+		$(".cimm_mainContentEnclosure").find('input,textarea,select,a,button').filter(':not([tabindex=-1])').attr('tabindex',-2);
+	#end
+});
+/***************************stylesheet media change****************************/
+$("link[rel='stylesheet']").each(function(){
+	var media = $(this).attr('media');
+	if(media == 'none')
+		$(this).attr('media','all');
+	else if(media == 'deviseOnly')
+		$(this).attr('media','(max-width: 1200px)');
+});
+</script>
+#if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout")
+<script src="../js/jssor.js"></script>
+<script src="../js/jssor.slider.js"></script>
+<script src="$webThemes/$siteName/js/jsor.customJs.js"></script>
+<script src="$webThemes/$siteName/js/staticPage.js"></script>
+<script>
+$(function(){
+	jssorSliderFunction();
+	initInitalBanner();
+	loadStaticForms();
+	loadWidgets();
+});
+</script>
+#end
+
+#if($requestType && $requestType=="openQuote")
+	<title>$siteDisplayName - Order Number</title>
+#else
+	<script type="text/javascript">
+		var myStr = '$LayoutName';
+		myStr = myStr.replace(/Page/g, "");
+		myStr = myStr.replace(/([a-z])([A-Z])/g, '$1 $2');
+	</script>
+#end
+#if($LayoutName=="HomePage" || $!isStaticHomePage =="Y")
+<script type="text/javascript">
+/**********************homepage********************/
+	$(document).ready(function(){
+		if($('.bxslider')){
+			$('.bxslider').slick({
+			 infinite: true,
+			 slidesToShow: 1,
+			 slidesToScroll: 1,
+			 dots: true,
+			 autoplay: true
+			});
+		}
+	   if($('#featuredProductList').length>0){
+		  $('#featuredProductList').slick({
+			  infinite: true,
+			  slidesToShow: 5,
+			  slidesToScroll: 1,
+			  pauseOnHover:true,
+			  responsive: [
+			               {
+			                 breakpoint: 1024,
+			                 settings: {
+			                   slidesToShow: 4,
+			                 }
+			               },
+			               {
+			                 breakpoint: 600,
+			                 settings: {
+			                   slidesToShow: 3,
+			                 }
+			               },
+			               {
+			                 breakpoint: 480,
+			                 settings: {
+			                   slidesToShow: 2,
+			                 }
+			               }
+			             ]
+		  });
+		}
+
+		if($('#featuredBrands').length>0){
+			$('#featuredBrands').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+		if($('#featuredManufacturers').length>0){
+			$('#featuredManufacturers').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+		if($('#shopByCategory').length>0){
+			$('#shopByCategory').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+
+	});
+
+	getNewSectionForHomePage();
+	jQuery(function(){
+		priceLoadMainFunction();
+	});
+</script>
+#end
+
+#if($LayoutName=="ProductDetailPage")
+<script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
+#if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)#else
+#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS" )
+<!-- <script>
+	jQuery(document).ready(function(){
+		priceLoadMainFunction();
+	});
+	jQuery(function(){
+	   //getCpnFromErp();
+	});
+</script> -->
+#end
+#end
+#elseif($LayoutName=="BranchLocationPage")	
+<script src='//maps.googleapis.com/maps/api/js?key=$!CommonDBQuerySystemParameter.get("GEO_API_KEY")&sensor=false&libraries=places'></script><!-- key need to change based on project -->
+<script type="text/javascript" src="$webThemes/$siteName/js/map.js"></script>
+<script type="text/javascript">
+var data = '$locationResponseList';
+var dataFrom = '$locationDataFrom';
+var sheetUrl = '$googleSpreadSheetUrl';
+var mapCenterCord = '$mapCenterCord';
+var zoomValue = '$zoomVal';
+var currLatLong;
+test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
+</script>
+#elseif($LayoutName=="LoginPage")	
+	<script type="text/javascript" src="$webThemes/$siteName/js/GuestCheckoutPage.js"></script>
+	<script type="text/javascript">
+	var userLogin = $("#userLogin").val();
+	var path = window.location.hostname;
+	if(userLogin!=null && userLogin == "true"){
+		window.location.href="/$locale.get('website.url.ProductCategory')";
+	}
+	</script>
+#elseif($LayoutName=="ProductPage" || $LayoutName=="SubCategoryPage")
+<script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/ProductList.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.cimm_topBanners').slick({
+				infinite: true,
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				dots: false,
+				autoplay: true,
+				prevArrow: false,
+				nextArrow: false
+			});
+		});
+		var value = getCookie("afterLoginUrl");
+		if(value!="" && value!=null && typeof  value != 'undefined'){
+			window.location.href=value;
+			setCookie('afterLoginUrl',"",-1);
+		}
+	</script>
+#elseif($LayoutName=="SendThisPage")
+	<script type="text/javascript">
+		$(document).ready(function (){
+			sendProduct();
+			$(".cimm_itemDescription ul li span").css({"color":"#000"});
+			$(".descBody a").css({"display":"none"})
+		});
+	</script>
+#elseif($LayoutName=="SendThisPageForAll")
+	<script type="text/javascript">
+		jQuery(function(){
+			sendThisPageScript();
+		});
+	</script>
+#elseif($LayoutName=="OrderConfirmation")
+<!--------------------------------------------Order Confirmation dependent sources---------------------------------------->
+	<script type="text/javascript">
+		/*Send Order Confirmation*/
+		function sendOrderConfirmation() {
+			var content="";
+			    	var siteName=$("#siteName").val();
+			    	var sendSavedProducts = $("#SendOrderConfirmationPage").html();
+			    	
+			    	var html ='<style type="text/css">.hideForPrint {display:none !important;}table.cimm_siteTable{font-family:Verdana;font-size:12px;}table.cimm_siteTable td,table.cimm_siteTable th{border:1px solid #CCC;}table.cimm_siteTable th{color:#FFF;background:#000;}</style><div style="padding: 10px 0;"><h4 style="color: #D03C0F;;font-size: 16px;font-family: Roboto-Regular; font-weight:bold;margin: 5px 0;text-align: center;">Order Confirmation</h4></div><div>'+sendSavedProducts+'</div>';
+			    localStorage.setItem("emailFriendItem", html);
+			    localStorage.setItem("emailFriendlink", location.href);
+				localStorage.setItem("mailTemplateName", "OrderConfirmationMail");
+			    //localStorage.setItem("itemID",a);
+			    //localStorage.setItem("itemName",'<a href="/itemDetailPage.action?codeId='+a+'">'+'</a>');
+			    location.href="/SendPageLink.action";
+		}
+		ga('require', 'ecommerce');
+		ga('ecommerce:addTransaction', {
+		'id': '$orderDetail.erpOrderNumber', // Transaction ID. Required.
+		'affiliation': '$orderDetail.shipState', // Affiliation or store name.
+		'revenue': '$orderDetail.total', // Grand Total. No currency signs or commas.
+		'shipping': '$orderDetail.freight', // Shipping. No currency signs or commas.
+		'tax': '$orderDetail.tax' // Tax. No currency signs or commas.
+		});
+		#foreach($itemList in $orderItemList)
+		ga('ecommerce:addItem', {
+		'id': '$orderDetail.erpOrderNumber', // Transaction ID. Required. Must match ID from addTransaction.
+		'name': '$itemList.shortDesc', // Product name. Required. Escape quotation marks as needed.
+		'sku': '$itemList.partNumber', // SKU/code.
+		'category': '$itemList.categoryName', // Category or variation.
+		'price': '$itemList.unitPrice', // Unit price. No currency signs or commas.
+		'quantity': '$itemList.orderQty' // Quantity.
+		});
+		#end
+		ga('ecommerce:send'); //submits transaction to the Analytics servers
+	</script>
+#elseif($LayoutName=="PunchoutListDisplay")
+	<script type="text/javascript">		
+		#if($session.getAttribute("customerShipViaListJson"))
+			var jsonShipVia = {"bindings":$session.getAttribute("customerShipViaListJson")};
+			var disOldVal = jQuery("#disableShip").val();
+			jQuery("#disableShip").val(jQuery("#disableShipCheck").val());
+			buildShipviaForGroup(jsonShipVia);
+			jQuery("#disableShip").val(disOldVal);
+		#end
+		
+		$(document).ready(function(){
+			$(".dropdown dt a").click(function() {
+			// Change the behaviour of onclick states for links within the menu.
+			var toggleId = "#" + this.id.replace(/^link/,"ul");
+			var itemId = this.id.replace(/^linkg/,"");
+			$(toggleId+"item").html('$locale.get("cart.label.savecart")');
+			$("#group_id").val(toggleId);
+			// Hides all other menus depending on JQuery id assigned to them
+			$(".dropdown dt a span").not(toggleId+"item").html('$locale.get("cart.label.savecart")');
+			$(".dropdown dd ul").not(toggleId).hide();
+			$("#popSelector div").not(toggleId+"pop").fadeOut();
+						
+			//Only toggles the menu we want since the menu could be showing and we want to hide it.
+			$(toggleId).toggle();
+					
+			 //Change the css class on the menu header to show the selected class.
+			if($(toggleId).css("display") == "none"){
+				$(this).removeClass("selected");
+			}else{
+				$(this).addClass("selected");
+			}
+			if($(toggleId).is(":visible")){
+				saveCart();
+			}
+			});
+			
+			$(document).bind('click', function(e) {
+			// Lets hide the menu when the page is clicked anywhere but the menu.
+			var $clicked = $(e.target);
+			if (! $clicked.parents().hasClass("dropdown")){
+				$("#popSelector div").fadeOut();
+				$(".dropdown dd ul").hide();
+				$(".dropdown dt a").removeClass("selected");
+			}
+			});
+		});
+		disableShipCheck();
+	</script>
+#elseif($LayoutName=="CreditCardDetail")
+<script>
+	displayCreditCardDetails();
+</script>
+#elseif($LayoutName=="NewCardAuthentication")
+	<script type="text/javascript">
+		$("#frameCont").load(function() { $("#loading").hide();$("#frameCont").attr("height","600");});
+	</script>
+#elseif($LayoutName=="NewCardResponse")
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var fromPage = $("#fromPage").val();
+			console.log("fromPage : "+fromPage);
+			var content = "";
+			if (fromPage == "payWithNewCC") {
+				content = "<center>New Credit Card Added Successfully. Please wait..</center>";
+				setTimeout(function() {
+					window.top.location.href = "displayCreditCardSale.action";
+				}, 1000);
+			} else {
+				content = "<center>New Credit Card Added Successfully.</center>";
+			}
+	
+			if ($("#cardResponse").val() == "Success") {
+				$("#cardStatus").html(content);
+			} else {
+				$("#cardStatus").html($("#cardResponse").val());
+			}
+		});
+	</script>
+#end
+<!-- Update email id popup -->
+<script>
+ $(function(){
+	var userLogin = $("#userLogin").val();
+	if (userLogin=="true"){
+		var validEmailFlag = getCookie("validEmailAddress");
+		if($("#validEmailAddress").length>0 || (validEmailFlag != "undefined" && validEmailFlag!=null)){
+			var validEmail = $("#validEmailAddress").val();
+			if(validEmailFlag!="" && validEmailFlag=="false"){
+				validEmail = "false"
+			}
+			if(validEmail == "false"){
+				$("#emailAddressPrompt").modal({backdrop: 'static', keyboard: false});
+			}
+		}
+	}
+ });
+ $(".loadAfter").fadeOut(800);
+</script>	
+<div id="emailAddressPrompt" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+	<div class="modal-content">
+		<!-- <div class="modal-header noBorder">
+	      	<h4 class="modal-title"><button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+	    </div> -->
+	    <div class="modal-body">
+	    <h6 class="text-center">Contact email address is missing from your account.<br/>Please enter your email address and click update.</h6>
+			<div id="popErr" class="red" style="display: none;"></div>
+			<form id="emailAddessUpdate">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<!-- <label for="emailAddressPromptId">$locale.get("form.label.email")<span class="text-danger"> * </span></label> -->
+							<input type="text" name="email" id="emailAddressPromptId" class="form-control" placeholder='$locale.get("form.label.emailAddress")'/>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<input type="submit" value="Update" id="popOrderHistoryBtn" class="button" onclick="updateEmailAddress($('#emailAddressPromptId').val());return false; "> 
+					<!-- <input type="button" value="Cancel"  class="button" onclick="$('#emailAddressPrompt').modal('hide');"> -->
+				</div>
+			</form>
+	    </div>
+	</div>
+</div>
+</div>
+<!-- End of Update email id popup -->

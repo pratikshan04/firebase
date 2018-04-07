@@ -1,0 +1,165 @@
+#parse("Macros/listPageMacro.vm")
+<input id="trigerPoint" type="hidden" value="approveCart"/>
+#if($productListData.size()>0)
+<div id="notificationDiv"></div>
+#if($message)
+<div class="alert alert-danger">$message</div>
+#end
+<form id="productGroupForm">
+	<input type="hidden" id="rejectReason" name="rejectReason"/>
+	<!-- <div id="selectedShipInfo"> </div> -->
+	<div class="hidden-lg hidden-md mBottom-3">
+		<label class="customCheckBox2">
+			<input type="checkbox" class="deviceSelectAllChkBox" onclick="deviceSelectAll();" data-selectall="CheckBox" />
+			<span>$!locale.get("product.label.selectAll")</span>
+		</label>
+	</div>
+	<div class="row mBottom-4">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<table class="table table-striped table-bordered display rwd-table">
+				<thead>
+					<tr>
+						<th>$locale.get("product.label.Image")</th>
+						<th>$locale.get("product.label.productDescription")</th>
+						<th>$locale.get("product.label.qty")</th>
+						<th>$locale.get("product.label.yourprice")</th>
+						<th><div class="pgCheckboxWrap"><label for="chkSelectall" class="customCheckBox"><input type="checkbox" id="chkSelectall" name="chkSelectall" onclick="checkSelectAll(this)" data-selectall="CheckBox"/><span>$locale.get("product.label.selectAll")</span></label></div></th>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($itemData in $productListData)
+					<input id="HomePlentyDate_$itemData.partNumber" type="hidden">
+					#itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+					<tr>
+						<td>    
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+								<span id="imageName$itemData.itemId">
+								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									#else
+									<img src="$detailImage$itemData.imageName"  width="75" height="75" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									#end
+								</span>
+							</a>
+						</td>
+						<td class="alignLeft">
+							<ul>
+								<li>
+								<b><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></b>
+								</li>
+								#if($itemData.manufacturerPartNumber)
+								<li>
+								<b>$locale.get("product.label.mpn"): </b> $itemData.manufacturerPartNumber
+								</li>
+								#end
+								<li>
+								<b>$locale.get("product.label.partNumber"): </b> $itemData.partNumber
+								</li>
+								#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
+								<li>
+								<b>$locale.get("product.label.cpn"): </b>
+								#set($seperator = "")
+								#set($partList = "")
+								#foreach($customerPart in $itemData.customerPartNumberList)
+								#set($partList = "#if($partList)$partList#end#if($seperator)$seperator#end$customerPart.partNumber")
+								#set($seperator = " ,")
+								#end
+								$partList
+								</li>
+								#end
+								#if($itemData.minOrderQty>0 && $itemData.orderInterval>0)
+								<li>
+								<b>$locale.get("product.label.minorderqty"): $itemData.minOrderQty</b>
+								</li>
+								<li>
+								<b>$locale.get("product.label.qtyinterval"): $itemData.orderInterval</b>
+								</li>
+								#end
+								<li>
+								$!itemData.shortDesc
+								<div id="minErr_$itemData.itemPriceId"></div>
+								#if($itemData.branchTotalQty>0)
+								<span class='availSpanFa'>In Stock</span>
+								#else
+								<span class='priceSpanFa'><i class='fa fa-phone fa-lg '></i> for Availability</span>
+								#end
+								<!-- <span id="Avail_$itemData.partNumber" data-select='availability'>
+								<b>$locale.get("product.label.availableQuantity")</b> : 
+								<img src="$webThemes/$siteName/images/loading.gif" />
+								</span> -->
+								</li>
+							</ul>
+						</td>
+						<td>
+							<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="4" class="quantity" />
+							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
+							<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
+							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>
+							<input type="hidden" id="itemPriceTxtAvail$itemData.itemPriceId" value="$itemData.itemAvailability"/>
+							<input type="hidden" name="shoppingCartId" value="$itemData.productListId"/>
+							<input type="hidden" name="lineItemIdList" value="$itemData.itemId"/>
+							<input type="hidden" name="idListItem" value="$itemData.partNumber"/>
+							<input type="hidden" id='priceValueID_$itemData.itemPriceId' value='$itemData.price' />
+							<input type="hidden" name="itemPriceIdList" value="$itemData.itemPriceId" />                            
+						</td>
+						<td class="tabelPrice">
+							<span>
+								#if($itemData.price>0)
+								$$numberTool.format($numberToolFormat,$itemData.price)#if($itemData.saleQty>0) per $itemData.saleQty #end #if($itemData.uom)/ $itemData.uom #end
+								#else
+								<b class="required">$locale.get("product.label.callforprice")</b>
+								#end
+							</span>
+						</td>
+						<td data-th="Select">
+							<label class="customCheckBox2">
+								<input type="checkbox" name="idList" value="$itemData.productListId" id="chkSelect_$itemData.itemPriceId" onclick="checkEach(this)" />
+								<span></span>
+							</label>
+						</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-sm-8 col-xs-12 hideOverflow">
+			<button type="button" class="button slideBtns" data-toggle="modal" data-target="#ReasonPopDiv" id="rejectCart">
+				$locale.get("product.label.rejectCart")
+			</button>
+			<button type="button" class="button slideBtns" onclick="return changeAction(6);" id="approveCart">$locale.get('product.button.approveCart') </button>
+			<button type="button" class="button slideBtns slideBtns-hide" onclick="return updateMyProductGroup();" id="updateSelectedItems">$locale.get('product.button.updateSelected')</button>
+		</div>
+	</div>
+	<input type="hidden" value="$assignedShipTo" name="assignedShipTo"/>
+	<input type="hidden" value="$savedGroupId" name="savedGroupId"/>
+	<input type="hidden" value="$reqType" name="reqType" id="reqType"/>
+</form>
+#if($paginate>1)
+<div class="pgnation hideForPrint"></div>
+#end
+<div id="ReasonPopDiv" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+     		<div class="modal-header">
+				<h4>$locale.get('approveCart.label.enterReason')<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+			</div>
+			<div class="modal-body form-horizontal">
+				<div class="form-group row no-gutters">
+					<label class="control-label col-md-2 col-sm-4 col-xs-12" for="reasonid">$locale.get('approveCart.label.reason'):&nbsp;</label>
+					<div class="col-md-10 col-sm-8 col-xs-12">
+						<input type="text" name="reason" id="reasonid" class="form-control" placeholder="$locale.get('approveCart.label.enterReason')"/>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer text-center">
+				<input class="button" type="button" id="popLoginBtn" value="$locale.get('product.button.submit')" onclick="return changeAction(7);"/>
+			</div>
+		</div>
+	</div>
+</div>
+#else
+	$locale.get("product.label.noDataAvailable")
+#end

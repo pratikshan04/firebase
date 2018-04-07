@@ -1,0 +1,336 @@
+<div class="cmsForm" style="display:none">
+	<div id="pageTab" class="TabSwitch">
+		<a href="javascript:void(0);" onclick="switchPage();" id="PageTabs" class="cms_pageTabBtn selected">Page</a>
+		<a href="javascript:void(0);" onclick="switchSEO();" id="SeoTabs" class="cms_pageTabBtn">SEO</a> 
+		<div class="clear-both"></div>
+	</div>
+	<div class="cms_staticFormHide">
+		<i class="fa fa-lg fa-chevron-left">
+		</i>
+	</div> 
+	<div class="clear-both"></div>
+	<div class="pageTab">
+		<form id="cmsForm">
+			<label class="cms_StaticLabel">Page Name</label> <input type="text" name="pageData.pageName" id="pageName" value="$!staticPageData.pageName" /> <br />
+			<label class="cms_StaticLabel">Page Type</label>  
+			<select id="selectStaticPageType" name="pageData.pageType" >
+				<option value="BODY">BODY</option>
+				<option value="TEMPLATE">TEMPLATE</option>
+				<option value="BLOG">BLOG</option>
+				<option value="CATEGORY">CATEGORY</option>
+			</select><br />
+			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" /> <br />
+			<label class="cms_StaticLabel">List Locale</label>  
+			<select name="pageData.listLocale" >
+				<option value="">- Select Language -</option>
+				<option selected value="$!staticPageData.listLocale">English</option>
+			</select><br />
+			<label class="cms_StaticLabel">Meta Data</label>  <input type="text" name="pageData.metaDescription" value="$!staticPageData.metaDescription" /> <br />
+			<label class="cms_StaticLabel">Custom Url</label>  <input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" /> <br />
+			<label class="cms_StaticLabel">Canonical Url</label>  <input type="text" name="pageData.canonicalUrl" value="$!staticPageData.canonicalUrl" /> <br />
+			<label class="cms_StaticLabel">Full Page Layout</label><input type="checkbox" name="fullPageLayout" #if($staticPageData.fullPageLayout) checked #end  /><br>
+			<label class="cms_StaticLabel">Active</label><input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end /><br>
+			<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
+			<input type="hidden" name="pageData.pageContent" id="pageContent" value="" />
+			<input type="hidden" name="pageData.id" id="cmsPageId" value="$!staticPageData.id" />
+			<input type="hidden" name="pageData.siteId" value="$!staticPageData.siteId" />
+		</form>
+		<a href="javascript:void(0);" onclick="saveStaticPage()" class="cmsSaveBtn">Save</a><div class="clear-both"></div>
+		<input type="hidden" value="$!staticPageData.pageType" id="staticPageType" />
+	</div><script>	
+
+
+	if(document.getElementById('cmsPageId').value=='0'){
+
+		document.getElementById('pagestatus').checked = true;
+		}
+			var title = "";
+			if(jQuery.trim(jQuery("#staticPageType").val())!=""){
+					jQuery("#selectStaticPageType").val(jQuery.trim(jQuery("#staticPageType").val()));
+				}else{
+					jQuery("#selectStaticPageType").val("BODY");
+					}
+			function enableSEOValidator(){
+			    jQuery('#seoValidatorButton').bind('click', function(ev) {
+			    	 resetTag('#errDiv');
+			         SEOAnalyzer();
+			    });
+			    
+			    jQuery('#keywordChecker').bind('click', function(ev) {
+			    	checkKeywordExist();
+			   }); 
+			}
+
+			function SEOAnalyzer(){
+				  checkPageTitleLength();
+				  checkMetaDescriptionLength();
+			      checkElementsExist();//in artcile heading,page title,page url,content
+			      checkImages();
+			}
+
+			function checkLength(tag,maxlength){
+				//alert("length" + jQuery(tag).val().length);
+			    return (jQuery(tag).val().length > maxlength) ? true : false;
+			}
+			
+			function resetTag(tag){
+			    jQuery(tag).html('');
+			}
+
+			function checkPageTitleLength(){
+				 if(checkLength('#in_title',70) > 70)
+			     log("title page character count has gone over the recommended value");
+			}
+
+			function checkMetaDescriptionLength(){
+				 if (checkLength('#in_snippet',156) > 156)
+				 log("Meta data character count has gone over the recommended value!");
+			}
+
+			function checkElementsExist(){ 
+				var text= "";
+			    var titleTag= jQuery("#in_title").val();
+			    var headerTag ="H1";
+			    jQuery("meta[name='description']").attr("content",jQuery("#in_snippet").val());
+			    var metadescriptionTag=jQuery("meta[name='description']").attr("content");
+			    var url=jQuery(location).attr('href');
+			   
+			    alert("Title Tag: " + titleTag + "\n Size: " + titleTag.length);
+			    if(titleTag.length == 0){
+			        text = text + "Title Tag does not exist";
+					log(text);
+			    }
+			    if ( jQuery(headerTag).length == 0){
+			    	 text = text + "Header Tag does not exist";
+			    	log(text);
+			    }
+			    
+			    if ( typeof (metadescriptionTag) === 'undefined'){
+			      	 text = text + "Meta Data Tag does not exist";
+			   	  log(text);
+			   } 
+			   log(text);
+			}
+
+			function checkImages(){
+			    var imageTag   = jQuery("#gm-canvas").find('img');
+			    var imageCount = jQuery("img").length;
+		
+			    var imgAltTag		= "";
+			    var imgTitle		= "";
+			    var imageSrc        = "";
+			    var SEOSuggestions  = "";
+		
+			    var imageAttributeTag = ["alt","title"];
+		
+			    if(imageCount){// implies *not* zero
+			        imageTag.each(function() {
+			            // check whether alt_text/title are present
+			            imageSrc  = jQuery(this).attr("src");
+			            imgAltTag = jQuery(this).attr("alt");
+			            imgTitle  = jQuery(this).attr("title");
+			           
+			            var imageElements = [imgAltTag,imgTitle];
+			          
+			            for (index = 0; index < imageElements.length; index++) {
+			        	    //alert("imageElements[index]"+ imageElements[index]);
+			                if(typeof (imageElements[index]) === 'undefined'){
+			                    SEOSuggestions = SEOSuggestions +  imageSrc + ' does not have the [' + imageAttributeTag[index]  + '] attribute defined ' ;
+			                    log(SEOSuggestions);
+			                }
+			        	}
+	      			 });
+	   		 }else {
+	        log('No img elements found');
+	   		 }
+			}
+
+			function checkKeywordExist(){		
+				var metadescriptionTag=jQuery("meta[name='description']").attr("content");
+			       //unhighlight
+			       jQuery("#SEOPreview").find("H1").unhighlight();
+			       jQuery("#gm-canvas").unhighlight();
+			   	   //check title
+			   	   jQuery("out_title").unhighlight();
+			   	   jQuery("out_url").unhighlight();
+			   	   jQuery("out_snippet").unhighlight();
+			   	 
+			   	   //check in body
+			   	   jQuery("body").unhighlight();
+			
+					var keywordList = jQuery('textarea#in_keyword').val().split(/(\s|\n|\t)+/g);
+			   		//alert("keywords:"+keywordList.length);
+			   		var keyword="";
+			   	    for (index = 0; index < keywordList.length; index++) {
+			   	      	if(keywordList[index].length != 0){
+			   	      		keyword = keywordList[index].trim();
+			   	      		//check header
+			   	      		jQuery("#SEOPreview").find("H1").highlight(keyword);
+			   	      		
+			   	      		//check title
+			   	      		jQuery("title").highlight(keyword);
+			   	      	
+			   	      		//check description
+			   	      		//metadescriptionTag.highlight(keyword);
+			   	      				   	      		
+			   	      		//check in body
+			   	      		jQuery("#gm-canvas").highlight(keyword);
+			   	        } 
+			   	    }
+			   	    
+			}
+	   
+			function isEmpty(tag,src,identifier){
+			    if(typeof (tag) === 'undefined') {
+			        log( src + ' does not have the ['+ identifier + '] attribute defined') ;   
+			    }
+			}
+	
+			function log(text){
+			     jQuery('#errDiv').html(text);
+			} 
+			
+			function charactersRemainings(){
+			    var maxCharactersTitleLimit = 70;
+			    var maxCharactersDescLimit = 156;
+			    jQuery('#titleCharsLeft').html(maxCharactersTitleLimit + ' characters');
+			    jQuery('#snippetCharsLeft').html(maxCharactersDescLimit + ' characters');
+		
+			    jQuery('#in_title').keyup(function() {
+			    	 var myTxtArea2 = document.getElementById('in_title'); 
+			    	   // myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
+			        var text_length = jQuery('#in_title').val().length;
+			        var text_remaining = maxCharactersTitleLimit - text_length;
+					
+					if(text_length < 35)
+					jQuery(this).attr("style","color: #585858; border: 1px solid red !important");
+					else if(text_length >= 35 && text_length < 70)
+					jQuery(this).attr("style","color: #585858; border: 1px solid orange !important");
+					else if(text_length >= 70)
+					jQuery(this).attr("style","color: #585858; border: 1px solid green !important");
+		
+			        jQuery('#titleCharsLeft').html(text_remaining + ' characters');
+			        if(text_length < 71)
+			        jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
+			        document.getElementById("addNewStaticFormId:pageTitleId").value = jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,"");
+			    });  
+	
+			    jQuery('#in_url').keyup(function() {
+			        var text_length = jQuery('#in_url').val().length;
+			        jQuery('#out_url').html(jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,""));
+			        document.getElementById("addNewStaticFormId:customURLId").value = jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,"");
+			    });
+		   
+			    jQuery('#in_snippet').keyup(function() {
+			    	 var myTxtArea2 = document.getElementById('in_snippet'); 
+			    	    myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
+			        var text_length = jQuery('#in_snippet').val().length;
+			        var text_remaining = maxCharactersDescLimit - text_length;
+			        jQuery('#snippetCharsLeft').html(text_remaining + ' characters');
+			        jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
+			        document.getElementById("addNewStaticFormId:metaDescId").value = jQuery('#in_snippet').val().replace(/^\s+|\s+jQuery/g,"");
+			    });
+			    jQuery('#in_keyword').keyup(function() {
+			        var text_length = jQuery('#in_keyword').val().length;
+			        document.getElementById("addNewStaticFormId:metaKeywordsId").value = jQuery('#in_keyword').val().replace(/^\s+|\s+jQuery/g,"");
+			    });
+			}	
+			
+
+			function populatePreview(inelement,outelement){
+			       $('#'+inelement).keyup(function(){
+			           $('#'+outelement).html($('#'+inelement).val());
+			       });
+			}
+			function rebuildPreview(){
+				jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
+				jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
+			}
+		</script>
+		
+	<div id="seoTab" class="seoTab" style="display:none;">
+		<meta name="description" content="This is an example of a meta data. This will often show up in search results."></meta>	
+		<div id="SEOPreview" style="background:white;padding-bottom:12px;">
+				Preview
+				<ul style="list-style-type: none;border:1px solid #bbb !important;">
+				    <li>
+				        <div id="previewTitle">
+				              <h3 style="font-size: 18px;"><a href="#" style="font-size: 18px;" onclick="return false;"><span id="out_title" style="color:#1a0dab"></span></a></h3>
+				       </div>
+				    </li>
+				    <li>
+				        <div id="previewURL">
+				          <cite style="color:#006621;font-size: 14px;">
+				              <span id="out_url">http://touch.cimm2.com</span><span id="out_dash1" style="display: inline;"></span>
+				            <span id="out_dash1" style="display: inline;"></span>         
+				          </cite>
+				       </div> 
+				    </li>   
+				    <li>
+				        <div id="previewSnippet">
+				         <span id="out_snippet"></span>
+				         <span id="out_dash1" style="display: inline;"></span>   
+				       </div>
+				    </li>
+				</ul>    
+			</div>
+			<div id="errDiv"></div> <br />
+		<div id="SEOPageTitle" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_title">SEO Title</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="titleCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			   <textarea id="in_title" name="in_title" rows="2" cols="35" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			</div>
+
+			<div id="SEOdescription" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_snippet">Meta Data</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="snippetCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			     <textarea id="in_snippet" name="in_snippet" rows="3" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			</div>
+
+			<div id="SEOURL" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_snippet">URL</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="snippetCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			   <textarea id="in_url" name="in_url" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;" placeholder="touch.cimm2.com"></textarea>
+			</div>
+
+			<div id="SEOKeywords" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_keyword">Keywords</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="snippetCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			   <textarea id="in_keyword" name="in_keyword" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			   <div style="margin:10px 3px 10px 0;">
+			  	 	<a href="javascript:void(0);" onclick="javascript: SEOAnalyzer();" id="seoValidatorButton" class="cmsSaveBtn float-left" style="margin-left:0;">SEO Validator</a>		
+		<a href="javascript:void(0);" onclick="javascript: checkKeywordExist();" id="keywordChecker" class="cmsSaveBtn float-right">Keyword Validator</a>
+		<div class="clear-both"></div>
+			  </div>
+			</div>
+		<script>
+
+		charactersRemainings();		
+		
+		jQuery("#seoTab").hide();
+		
+         
+		</script>
+	</div>
+</div>
+

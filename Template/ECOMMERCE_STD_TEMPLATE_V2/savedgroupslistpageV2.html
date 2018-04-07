@@ -1,0 +1,47 @@
+#if($responseType=="ProductGroupList")
+<div class="row">
+	#if($groupListData.size()>0)
+	#foreach($groupData in $groupListData)
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<a href="$groupData.productListId$locale.get('website.url.ProductGroup')?savedGroupName=$groupData.productListName"><i class="fa fa-lg fa-eercast" aria-hidden="true"></i> $groupData.productListName</a>
+	</div>
+	#end
+	#else
+	<div class="col-md-12 col-sm-12 col-xs-12">$locale.get("product.label.noProductGroupAvailable")</div>
+	#end
+</div>
+#end
+#if($responseType=="CartGroupList")
+<div class="row">
+	#if($savedCartData.size()>0)
+	#foreach($groupData in $savedCartData)
+		<div class="col-md-4 col-sm-6 col-xs-12">
+		#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
+		<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
+			<i class="fa fa-lg fa-eercast" aria-hidden="true"></i> $groupData.productListName <i class="fa fa-share" title="Shared Cart"></i>
+		</a>
+		#else
+		<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">
+			<i class="fa fa-lg fa-eercast" aria-hidden="true"></i> $groupData.productListName
+		</a>   
+		#end                    
+		</div>
+	#end
+	#else
+	<div class="col-md-12 col-sm-12 col-xs-12">$locale.get("product.label.noSavedCartAvailable")</div>
+	#end
+</div>
+#end
+#if($responseType=="ApprovedCart")
+<div class="row">
+	#if($approveCartData.size()>0)
+	#foreach($groupData in $approveCartData)
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<i class="fa fa-lg fa-eercast" aria-hidden="true"></i> <a href="myProductGroupPage.action?reqType=$reqType&savedGroupId=$groupData.productListId&updatedDate=$groupData.date&assignedShipTo=$groupData.assignedShipTo">$groupData.productListName</a>
+	</div>
+	#end
+	#else
+	<div class="col-md-12 col-sm-12 col-xs-12">$locale.get("product.label.noApprovedCartAvailable")</div>
+	#end
+</div>
+#end

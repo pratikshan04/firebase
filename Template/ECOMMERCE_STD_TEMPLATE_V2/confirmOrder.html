@@ -1,0 +1,265 @@
+#if($cartListData && $!cartListData.size()>0)
+		#if($session.getAttribute("pricePrecision")=="4")
+			#set($numberToolFormat = "#0.0000")
+		#elseif($!session.getAttribute("pricePrecision")=="3")
+			#set($numberToolFormat = "#0.000")
+		#else
+			#set($numberToolFormat = "#0.00")
+		#end
+		<div class="reviewOrderWrap">
+		<form method="post" id="quickCartHiddenInfo" action="processCheckout.action">
+		<div class="">
+		    <table class="table table-bordered table-striped rwd-table">
+		  <thead>
+		    <tr>
+		        <th>$!locale.get("product.label.Image")</th>
+		        <th>$!locale.get("product.label.description")</th>
+		        <th>$!locale.get("product.heading.PerUnitPrice")</th>
+		        <th>$!locale.get("product.label.uom")</th>
+				<th>$!locale.get("form.label.tableQty")</th>
+		        <th>$!locale.get("product.label.extPrice")</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    #foreach($itemData in $cartListData)
+		    #set($itemTitle= $!itemData.manufacturerName+" "+ $!itemData.manufacturerPartNumber)
+		    #set($savedCartItemId = $!itemData.itemId) <!--CartlistData Iterator -->
+		    <tr itemscope itemtype="http://schema.org/Product">
+		    <td data-th="$!locale.get('product.label.Image')">
+		    	<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">
+					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+						<img src="$!itemData.imageName" itemprop="image" width="100" height="100" alt='$!itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+					#else
+						<img src="$!thumbNail$!itemData.imageName" itemprop="image" width="100" alt='$!itemData.imageName' height="100" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+					#end
+				</a>
+				<input type="hidden" name="idList" value="$!itemData.partNumber" /> 
+				<input type="hidden" id="partNumber" value='$!itemData.price' /> 
+				<input type="hidden" name="itemPriceIdList" value="$!itemData.itemPriceId" />
+		    </td>
+		    <td class="alignLeft" data-th="$!locale.get('product.label.description')">
+				<div class="cimm_tableDescSection left">
+					<ul>
+						<li itemprop="name">
+							<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
+						</li>
+						<li>
+		                 	<p itemprop="description">$!itemData.shortDesc</p>
+		                	<div id="minErr_$!itemData.itemPriceId"></div>
+						</li>
+						<li>
+							<p itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b>$!itemData.partNumber</p>
+							#if($itemData.manufacturerPartNumber)
+							<p itemprop="mpn"><b>$!locale.get("product.label.mpn"): </b>$!itemData.manufacturerPartNumber</p>
+							#end
+						</li>
+						#if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
+	                    <li>
+	                        <b>$!locale.get("product.label.cpn"): </b>
+	                        #set($seperator = "")
+	                        #set($partList = "")
+                            #foreach($!customerPart in $!itemData.customerPartNumberList)
+                                #set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end
+                                #if($customerPart.partNumber)$!customerPart.partNumber#end")
+                                	#set($seperator = ",")
+                           		#end
+                        	$!partList
+                    	</li>
+		                #end
+						 #set($leadTime = "N")
+						#set($available = "N")
+						#set($allBranch = $!itemData.branchAvail)
+						#foreach($!eachBranch in $!allBranch)
+						#if($eachBranch.branchID==$!session.getAttribute("shipBranchId"))
+							#if($eachBranch.branchAvailability=="0")
+								#if($eachBranch.earliestMoreDays>0)
+									#set($leadTime = $!eachBranch.earliestMoreDays)
+								#else
+									#set($leadTime = $!eachBranch.plentyDays)
+								#end
+							#else
+								#set($available = $!eachBranch.branchAvailability)
+							#end
+							#break
+						#end
+						#end
+						<li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
+						#if($leadTime!="N")
+							<b>$!locale.get("product.label.leadTime"): </b><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
+						#elseif($!available!="N")
+							<b>$!locale.get("product.label.availableQuantity"): </b><span>$!available</span>
+						#end
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td data-th="$!locale.get('product.heading.PerUnitPrice')">
+				<p><span class="formatPrice">#if($itemData.unitPrice>0) $$numberTool.format($numberToolFormat,$itemData.unitPrice) / $!itemData.qtyUOM ($!itemData.packageQty) #end</span></p>
+			</td>
+			<td>
+            	<strong>$!itemData.uom #if($itemData.uomQty && $!itemData.uomQty>1) ($!itemData.uomQty) #end</strong>
+            </td>
+			<td data-th="$!locale.get('form.label.tableQty')">
+		       <p id="textQty_$!itemData.partNumber" name="shoppingCartQty">$!itemData.qty</p>
+			</td>
+			<td data-th="$!locale.get('product.label.extPrice')">
+				<p><span class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</span></p>
+			</td>
+		        
+				</tr>
+		        #end <!--End of CartListFata Iterator-->
+		        </tbody>
+		        </table>
+		        </div>
+		   <div class="clear"></div>
+		   <!-- <div class="orderDetailTotalPriceWrap cimm_salesBottomStrip ">
+			<ul>
+			 	<li class="clearAfter">
+	             	<span class="priceLabel">$!locale.get("product.label.subTotal"):</span>
+	         		<span class="priceValue formatPrice">#if($subTotal>0)$$numberTool.format("#0.00",$subTotal) #end</span>
+	             </li>
+	             #if($orderTax>0)
+	             <li class="clearAfter">
+	             	<span class="priceLabel">$!locale.get("product.label.tax"): </span>
+	         		<span class="priceValue formatPrice">#if($orderTax)$$numberTool.format("#0.00",$orderTax) #end</span>
+	             </li>
+	             #end
+	             #if($orderDiscount>0)
+	             <li class="clearAfter">
+	             	<span class="priceLabel">$!locale.get("product.label.discount"): </span>
+	         		<span class="priceValue formatPrice">#if($orderDiscount)$$numberTool.format("#0.00",$orderDiscount) #end</span>
+	             </li>
+	             #end 
+	             #if($totalCartFrieghtCharges>0)
+	             <li class="clearAfter">
+	             	<span class="priceLabel">$!locale.get("product.label.shipping"): </span>
+	         		<span class="priceValue formatPrice">#if($totalCartFrieghtCharges)$$numberTool.format("#0.00",$totalCartFrieghtCharges) #end</span>
+	             </li>
+	             #end 
+		         <li class="clearAfter">
+	             	<span class="priceLabel">$!locale.get("product.label.total"): </span>
+	         		<span class="priceValue formatPrice">#if($orderTotal)$$numberTool.format("#0.00",$orderTotal) #end</span>
+	             </li>                 
+	       </ul>
+	    <div class="clear"></div>
+		</div> -->
+		<input type="hidden" value="$!savedGroupId" name="savedGroupId" /> 
+		<!-- Billing Address -->                
+		<input type="hidden" name="defaultBillToId" value="$!defaultBillToId"/> 
+		<input type="hidden" name="billAddress1" value="$!billAddress.address1"/> 
+		<input type="hidden" name="billAddress2" value="$!billAddress.address2"/> 
+		<input type="hidden" name="billCity" value="$!billAddress.city"/> 
+		<input type="hidden" name="billState" value="$!billAddress.state"/> 
+		<input type="hidden" name="billPhoneNo" value="$!billAddress.phoneNo"/> 
+		<input type="hidden" name="billEmail" value="$!billAddress.emailAddress"/> 
+		<input type="hidden" name="billCountry" value="$!billAddress.country"/> 
+		<input type="hidden" name="billZipcode" value="$!billAddress.ZipCodeStringFormat"/> 
+		<!-- Billing Address -->  
+		
+		<!-- Shipping Address -->  
+		<input type="hidden" name="overrideShip" value='$!session.getAttribute("overrideShipAddress")'/>
+		<input type="hidden" name="defaultShipToId" value="$!shipAddress.addressBookId"/>
+		<input type="hidden" name="address1" value="$!shipAddress.address1"/> 
+		<input type="hidden" name="address2" value="$!shipAddress.address2"/> 
+		<input type="hidden" name="city" value="$!shipAddress.city"/> 
+		<input type="hidden" name="state" value="$!shipAddress.state"/> 
+		<input type="hidden" name="phoneNumber" value="$!shipAddress.phoneNo"/> 
+		<input type="hidden" name="email" value="$!shipAddress.emailAddress"/> 
+		<input type="hidden" name="country" value="$!shipAddress.country"/> 
+		<input type="hidden" name="zipCode" value="$!shipAddress.ZipCodeStringFormat"/> 
+		<!-- Shipping Address -->
+		
+		<!-- Order Details -->
+		<input type="hidden" name="orderType" value="$!orderType"/>
+		<input type="hidden" name="reqDate" value="$!reqDate"/>
+		<input type="hidden" name="orderedBy" value="$!orderedBy"/>
+		<input type="hidden" name="poNumber"id="poNumber" value="$!poNumber" /> 
+		<input type="hidden" name="shipVia" value="$!shipVia"/> 
+		<input type="hidden" name="shipViaDescription" value="$!shipViaDisplay"/>
+		<input type="hidden" name="orderStatus" value="$!orderStatus"/> 
+		<input type="hidden" name="shippingInstruction" value="$!shippingInstruction"/> 
+		<input type="hidden" name="orderNotes" value="$!orderNotes"/> 
+		<input type="hidden" name="newsLetterSubscription" value="$!newsLetterSubscription"/>
+		<input type="hidden" name="customerReleaseNumber" value="$!customerReleaseNumber" /> 
+		<input type="hidden" name="isReOrder" value="$!isReOrder"/> 
+		<input type="hidden" name="upsFrieghtCharges" value="$!totalCartFrieghtCharges"/> 
+		<!-- Order Details -->
+		
+		<!-- Payment Details -->
+		<input type="hidden" value="$!creditCardPayment"name="creditCardPayment" id="creditCardPayment"/>
+		<input type="hidden" value="$!ccTransactionId" name="ccTransactionId" id="ccTransactionId"/>
+		<input type="hidden" value="$!cardHolder" name="cardHolder" id="cardHolder"/>
+		<input type="hidden" value="$!ccExp" name="ccExp" id="ccExp"/>
+		<input type="hidden" value="$!streetAddress" name="streetAddress" id="streetAddress"/>
+		<input type="hidden" value="$!postalCode" name="postalCode" id="postalCode"/>
+		<input type="hidden" value="" name="ccResponseCode" id="ccResponseCode"/>
+		<input type="hidden" value="" name="ccStatus" id="ccStatus"/>
+		 
+		<input type="hidden" value="" name="ccHostRefNumber" id="ccHostRefNumber"/>
+		<input type="hidden" value="" name="ccTaskID" id="ccTaskID"/>
+		<input type="hidden" value="" name="ccAmount" id="ccAmount"/>
+		<input type="hidden" value="" name="ccDeclineResponseReason" id="ccDeclineResponseReason"/>
+		<input type="hidden" value="" name="ccCvv2VrfyCode" id="ccCvv2VrfyCode"/>
+		<input type="hidden" value="" name="ccTip" id="ccTip"/>
+		
+		<input type="hidden" value="" name="ccTransTimeStamp" id="ccTransccTransTimeStampactionId"/>
+		<input type="hidden" value="" name="ccApprovedAmount" id="ccApprovedAmount"/>
+		<input type="hidden" value="" name="ccRequestedAmount" id="ccRequestedAmount"/>
+		<input type="hidden" value="" name="ccHostResponseCode" id="ccHostResponseCode"/>
+		<input type="hidden" value="" name="ccInvoice" id="ccInvoice"/>
+		<input type="hidden" value="" name="ccApprovalCode" id="ccApprovalCode"/>
+		<input type="hidden" value="" name="ccServerTimestamp" id="ccServerTimestamp"/>
+		
+		<input type="hidden" value="$!ccType" name="ccType" id="ccType"/>
+		<input type="hidden" value="" name="ccFee" id="ccFee"/>
+		<input type="hidden" value="" name="ccExternalSessionID" id="ccExternalSessionID"/>
+		<input type="hidden" value="" name="ccAddVrfyCode" id="ccAddVrfyCode"/>
+		<input type="hidden" value="" name="ccTax" id="ccTax"/>
+		<input type="hidden" value="" name="ccNewDomainKey" id="ccNewDomainKey"/>
+		<input type="hidden" value="$!ccNumber" name="ccNumber" id="ccNumber"/>
+		<input type="hidden" value="PROCESS" name="isFromQC" id="isFromQC"/>
+		
+		<!-- Payment Details -->
+		
+		<div class="cimm_cartCheckout pull-right " id="lastbtn" style="display:none;">
+			<a class="button lastbtn" href="javascript:void(0);" onclick="CheckoutValidate(1);">$!locale.get("product.button.placeOrder") &raquo;</a>
+		</div>
+		<!-- <div align="center"><input type="submit" class="button" value='$!locale.get("product.button.placeOrder")' onclick="blockUiLoadElements('processOrderWait');" /></div> -->          
+		<div class="clear"></div>
+		</form>
+		
+		<div id="processOrderWait" style="display: none;"><h1><img src="$!webThemes/$!siteName/images/pleasewait.gif" alt='pleasewait' style="vertical-align:middle;"/>&nbsp; $!locale.get("label.message.processignOrderPleaseWait")</h1></div>
+		</div>
+		
+<div id="orderDetailTotalPriceWrap" class="orderDetailTotalPriceWrap cimm_salesBottomStrip ">
+<ul>
+ 	<li class="clearAfter">
+    	<span class="priceLabel">$!locale.get("product.label.subTotal"):</span>
+		<span class="priceValue formatPrice">#if($subTotal>0)$$numberTool.format("#0.00",$subTotal) #end</span>
+    </li>
+    #if($orderTax>0)
+    <li class="clearAfter">
+    	<span class="priceLabel">$!locale.get("product.label.tax"): </span>
+		<span class="priceValue formatPrice">#if($orderTax)$$numberTool.format("#0.00",$orderTax) #end</span>
+    </li>
+    #end
+    #if($orderDiscount>0)
+    <li class="clearAfter">
+    	<span class="priceLabel">$!locale.get("product.label.discount"): </span>
+		<span class="priceValue formatPrice">#if($orderDiscount)$$numberTool.format("#0.00",$orderDiscount) #end</span>
+    </li>
+    #end 
+    #if($totalCartFrieghtCharges>0)
+    <li class="clearAfter">
+    	<span class="priceLabel">$!locale.get("product.label.shipping"): </span>
+		<span class="priceValue formatPrice">#if($totalCartFrieghtCharges)$$numberTool.format("#0.00",$totalCartFrieghtCharges) #end</span>
+    </li>
+    #end 
+ 	<li class="clearAfter">
+    	<span class="priceLabel">$!locale.get("product.label.total"): </span>
+		<span class="priceValue formatPrice">#if($orderTotal)$$numberTool.format("#0.00",$orderTotal) #end</span>
+    </li>                 
+</ul>
+<div class="clear"></div>
+</div>
+#end

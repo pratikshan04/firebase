@@ -1,0 +1,128 @@
+#if($session.getAttribute('isGeneralUser')!="Y")
+#if($ajaxCall=="Y")
+#if($!session.getAttribute("pricePrecision")=="4")
+#set($numberToolFormat = "#0.0000")
+#elseif($!session.getAttribute("pricePrecision")=="3")
+#set($numberToolFormat = "#0.000")
+#else
+#set($numberToolFormat = "#0.00")
+#end
+<h3 class="cimm_blockHeading">$!locale.get("product.heading.openOrders")</h3>
+<table class="table table-bordered table-striped display rwd-table">
+	<thead>
+		<tr>
+			<th class="left">$!locale.get("form.label.OrderNo")</th>
+			<th>$!locale.get("form.label.customerPOnumber")</th>
+			<!-- <th>$!locale.get("form.label.CustomerRelease")</th> -->
+			<th>$!locale.get("form.label.orderDate")</th>
+			<th>$!locale.get("product.label.amount")</th>
+			<th>$!locale.get("form.label.requiredByDate")</th>
+			<!-- <th>$!locale.get("form.label.shipTo")</th> -->
+			<th>$!locale.get("product.label.ordrStatus")</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		#set($countOrderList = 0)
+		#if($orderList && $!orderList.size()>0)
+		#foreach($orderDetail in $orderList)
+		#set($countOrderList =	$!countOrderList + 1)
+		<tr class="odd">
+			<td data-th="$!locale.get('form.label.OrderNo')">
+			#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS") 
+			<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderId">$!orderDetail.orderNum</a></b>
+			#else
+			<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></b>
+			#end
+			</td>
+			<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
+			<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
+			<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate.substring(0,10) </td>
+			#if($session.getAttribute("erpType") == "eclipse")
+			<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.openOrderAmount)</td>
+			#else
+			<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
+			#end
+			<td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
+			<!-- <td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
+			<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
+			<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
+			<td data-th="">
+			#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+			<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+			#else
+			<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+			#end
+			</td>
+		</tr>
+		#if($countOrderList == 5)
+		#break
+		#end
+		#end
+		#end
+	</tbody>
+</table>
+#if($countOrderList > 5)
+<a class="button" href="/OpenOrderSale.action?reqType=webOrder&orderStatus=New">$!locale.get("event.label.viewAll")</a>
+#end
+#else
+<div class="cimm_siteTableEnclosure rwd-TableWrap">
+	<table class="table table-striped table-bordered display rwd-table" id="openOrderTable">
+		<thead>
+			<tr>
+			<th class="left">$!locale.get("form.label.OrderNo")</th>
+			<th>$!locale.get("form.label.customerPOnumber")</th>
+			<!-- <th>$!locale.get("form.label.CustomerRelease")</th> -->
+			<th>$!locale.get("form.label.orderDate")</th>
+			<th>$!locale.get("product.label.amount")</th>
+			<th>$!locale.get("form.label.requiredByDate")</th>
+			<!-- <th>$!locale.get("form.label.shipTo")</th> -->
+			<th>$!locale.get("product.label.ordrStatus")</th>
+			<!-- <th>$!locale.get("form.label.orderedBy")</th> -->
+			<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			#if($orderList && $!orderList.size()>0)
+			#foreach($orderDetail in $orderList)
+			##if($orderDetail.orderStatus && $!orderDetail.orderStatus=="Call When Complete")
+			<tr>
+				<td data-th="$!locale.get('form.label.OrderNo')">
+				#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS") 
+				<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderId">$!orderDetail.orderNum</a></b>
+				#else
+				<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></b>
+				#end
+				</td>
+				<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
+				<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
+				<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate.substring(0,10) </td>
+				#if($session.getAttribute("erpType") == "eclipse")
+				<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.openOrderAmount)</td>
+				#else
+				<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
+				#end
+				<td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
+				<!-- <td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
+				<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
+				<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
+				<td data-th="">
+				#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS") 
+				<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				#else
+				<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				#end
+				</td>
+			</tr>
+			##end
+			#end
+			#end
+		</tbody>
+	</table>
+</div>
+#end
+#else
+<div class="alert alert-danger">
+  <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
+</div>
+#end

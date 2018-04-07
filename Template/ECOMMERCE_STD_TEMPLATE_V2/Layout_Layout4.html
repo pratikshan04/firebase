@@ -1,0 +1,50 @@
+#if($ajaxCall=="Y") #parse($bodyContent) #else
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("head.html") #parse("stylesheets.html") #parse("javascripts.html")
+</head>
+<body>
+	<div class="cimm_stickyPageWrap">	
+		<div class="cimm_header"> 
+			#parse("header.html")	
+		</div>
+		<div class="cimm_navigationBar">
+			<div class="cimm_siteWidth">
+			#parse("navigation.html")
+			</div>
+		</div>
+		<div class="cimm_BreadCrumbs">
+			<div class="cimm_siteWidth">
+				#parse("fullBreadcrumbs.html")
+			</div>
+		</div>
+		<div class="cimm_siteWidth">
+			<div class="cimm_bodyContentWrap">       
+				#if($leftContent)
+				<div class="cimm_leftMenuEnclosure">
+					#parse($leftContent)
+				</div>
+				#end
+				<div class="cimm_mainContentEnclosure">
+					#parse($bodyContent)
+				</div>
+				#if($rightContent)
+				<div class="cimm_rightMenuEnclosure">
+					#parse($rightContent)
+				</div>
+				#end
+			</div>
+		</div>       
+	</div>
+	<div class="cimm_footerEnclosure">   		
+		#parse("footer.html")    	
+	</div>
+	#if($!userAgent != "WEBVIEW")
+	<p id="backToTop">
+		<a href="#top"><span><i class="fa fa-2x fa-arrow-up"></i></span></a>
+	</p>
+	#end
+</body>
+</html>
+#end

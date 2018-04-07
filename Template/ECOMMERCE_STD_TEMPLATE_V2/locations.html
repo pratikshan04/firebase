@@ -1,0 +1,91 @@
+<input type="hidden" id="siteDisplayName" value="$siteDisplayName" />
+<div class="row locationDetails">
+	<div class="col-md-3 col-sm-12 col-xs-12">
+		<h4 class="searchHeading">$!locale.get('location.heading.searchYourNearestLocation')</h4>
+		#if($!CommonDBQuerySystemParameter.get("EnableZipCodeSearchInLocations")=="Y")
+			<div class="locationZipcode clearAfter">
+				<div class='labelWrap'>$!locale.get('product.label.enterZipCode')</div>
+				<div class='inputWrap'><input type="text" id="selectedZipCode" placeholder="$!locale.get('product.label.enterZipCode')" name="selectedZipCode" value="$!selectedZipCode" ></div>
+			</div>
+			<div class="locationSearch clearAfter">
+				<div class='labelWrap'>$!locale.get('product.label.within')</div>
+				<div class='inputWrap'>
+					<select class="selectpicker" id="selectedMiles" name="selectedMiles">
+						<option value="50" #if($selectedMiles && $selectedMiles=="50") selected #end>50 miles</option>
+						<option value="10" #if($selectedMiles && $selectedMiles=="10") selected #end>10 miles</option>
+						<option value="20" #if($selectedMiles && $selectedMiles=="20") selected #end>20 miles</option>
+						<option value="30" #if($selectedMiles && $selectedMiles=="30") selected #end>30 miles</option>
+						<option value="40" #if($selectedMiles && $selectedMiles=="40") selected #end>40 miles</option>
+						<option value="100" #if($selectedMiles && $selectedMiles=="100") selected #end>100 miles</option>
+					</select>
+				</div>
+			</div>
+			<a id="findNowButton">$!locale.get('product.label.findNow')</a>
+		#end
+		<div id="googleMapPanel" class="locationDetailWrap">
+			<div class="feature-filter"></div>
+			<div class="locationDataWrap">
+				<ul id='list' class='store-list'></ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9 col-sm-8 col-xs-12">
+	<h3 class='locationHeading'>$!locale.get("location.heading.locationAndHours")</h3>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="storelocator-panel hideForDevices" id="panel" >
+					<div id="googleMap"></div>
+					<div id="map_canvas"></div>
+					<div id='hiddenLocationData' style="display: none">
+						$!locationResponseList
+					</div>
+					<div id='hiddenLocationDataFrom' style="display: none">
+						$!locationDataFrom
+					</div>
+					<div id='hiddenGoogleSpreadSheetUrl' style="display: none">
+						$!googleSpreadSheetUrl
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="storeDetailview hideForDevices">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div id="currentStore"></div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div id="storeImage"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div id="currentStoreNote"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="directions-panel clearAfter hideForDevices hideMe" id="directions-panel">
+					<div class="location-search marginY-3 clearAfter">
+						<h3 class="cimm_pageTitle">$!locale.get('product.label.whereAreYou')</h3>
+						<input placeholder="Enter a location"  id="searchTextField" type="text" autocomplete="off" >
+						<input class="directions-to" readonly="readonly" id="directions-to" /> 
+						<input type="button" class="cimm_inlineButton" value="Get directions" onclick="GetDirections();" id="getDiections"/> 
+						<a class="close-directions cimm_inlineButton" id="close-directions" onclick="closeDirections();">$!locale.get('product.label.x')</a>
+					</div>
+					<div class="rendered-directions" id="ren"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="totalLocations" value=""/>
+<div class="hideMe cimm_locateHead">
+	<h3>
+	No location found  
+	#if($selectedZipCode && $selectedZipCode!="" && $selectedMiles && $!selectedMiles!="")
+		for Zip Code $!selectedZipCode within $!selectedMiles Miles
+	#end
+	</h3>
+	<a class="linkText" href="/Locations">Reset location filter</a>
+</div>

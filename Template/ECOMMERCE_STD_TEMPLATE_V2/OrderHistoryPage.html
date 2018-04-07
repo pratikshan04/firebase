@@ -1,0 +1,141 @@
+#if($session.getAttribute('isGeneralUser')!="Y")
+#if($ajaxCall=="Y")
+	<h3 class="cimm_blockHeading">$!locale.get("product.heading.completedOrders")</h3>
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered display rwd-table">
+		<thead>
+			<tr>
+				<th class="left">$!locale.get("form.label.OrderNo")</th>
+				#if($searchBy=="partNumber")
+				<th class="left">Ship Date</th>
+				#else
+				<th class="left">$!locale.get("product.heading.PostDate")</th>
+				#end
+				<th class="left">$!locale.get("product.label.description")</th>
+				<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
+				<th>$!locale.get("product.label.processingStatus")</th>
+				<th>$!locale.get("product.label.debit")</th>
+				<th>$!locale.get("product.label.balance")</th>
+				<th width="90px">&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+		#set($countOrderList = 0) #if($orderList.size()>0) #foreach($orderList in $orderList) #set($countOrderList = $!countOrderList + 1)
+			<tr>
+				<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History">$!orderList.accountRegId</a></td>
+				#if($searchBy=="partNumber")
+				<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
+				#else
+				<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($orderList.postDate)$!orderList.postDate #else &nbsp; #end</td>
+				#end
+				<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
+				<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
+				<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
+				<td data-th="$!locale.get('product.label.debit')">$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
+				<td data-th="$!locale.get('product.label.balance')">$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
+				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+			</tr>
+			#if($countOrderList == 5) #break #end #end #end
+		</tbody>
+	</table>
+	#if($countOrderList > 5)
+		<a class="button" href="/OrderHistory">$!locale.get("event.label.viewAll")</a>
+	#end
+#else
+	<div class="row">
+		<div class="col-md-12 cd-sm-12 cd-xs-12">
+			<input type="hidden" id="startDateVal" value="$!startDate"/>
+			<input type="hidden" id="endDateVal" value="$!endDate"/>
+			<!-- <h4>$!locale.get("product.label.searchBy")</h4> -->
+			<form id="OrdersHistoryDetails" action="$!locale.get('website.url.OrderHistory')" method="GET">
+				<input type="hidden" name="searchBy" id="searchBy"/>
+				<input type="hidden" name="entityIDType" id="entityIDType"/>
+				<input type="hidden" name="customerPoNumber" id="customerPoNumber"/>
+				<input type="hidden" name="partNumberToERP" id="partNumberToERP"/>
+				<input type="hidden" name="orderNumber" id="orderNumber"/>
+				<div class="row">
+					<div class="col-md-5 form-inline">
+						<div class='input-group date'>
+							<input type="text" name="startDate" id="startDate" class="form-control" readonly data-date-end-date="0d">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+						<label>$!locale.get("product.label.to")</label>
+						<div class='input-group date'>
+							<input type="text" name="endDate" id="endDate" class="form-control" readonly data-date-end-date="0d"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<!-- <label>$!locale.get("product.label.orderNumber") </label>
+						<input type="text" id="orderNumber" name="orderNumber" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop ="return false;" value="$!orderNumber" /> -->
+						<select id="orderCategory" class="form-control selectpicker" onchange="updateSearchBtn(this)">
+							<option value="">- Select Category -</option>
+							<option value="customerPoNumber">$!locale.get('event.label.PONumber')</option>
+							<option value="orderNumber">$!locale.get('product.heading.Order')</option>
+						</select>
+					</div>
+					<div class="col-md-3 form-inline">
+						<input type="text" id="orderHistorySearchBox" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('product.label.EnterOrderPOOrPartNo')" >
+						<a class="btn btn-danger" id="searchBtn" href="javascript:void(0);" data-hasPassCode="N" data-id="searchbutton" data-value="#if($entityIDType) $!entityIDType.replace('','')To #else ShipTo #end" onclick="processForm(this)">$!locale.get('product.label.search')</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 cd-sm-12 cd-xs-12 pTop-3">
+			#if($displayAccountOrderInformation == "Y")
+			<div class="cimm_tableWrap ">
+				<table cellpadding="0 " cellspacing="0 " border="0 " width="100% " class="table table-striped table-bordered display rwd-table" id="orderHistoryShipTable">
+					<thead>
+						<tr>
+							<th class="left">$!locale.get("form.label.OrderNo")</th>
+							#if($searchBy=="partNumber")
+							<th class="left">Ship Date</th>
+							#else
+							<th class="left">$!locale.get("product.heading.PostDate")</th>
+							#end
+							<th class="left">$!locale.get("product.label.description")</th>
+							<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
+							<th>$!locale.get("product.label.processingStatus")</th>
+							<th>$!locale.get("product.label.debit")</th>
+							<th>$!locale.get("product.label.balance")</th>
+							<th width="90px">&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						#if($orderList.size()>0)
+						#foreach($orderList in $orderList)
+						#if(!$!orderList.accountRegId.contains("C"))
+						<tr>
+							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History">$!orderList.accountRegId</a></td>
+							#if($searchBy=="partNumber")
+							<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
+							#else
+							<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($orderList.postDate)$!orderList.postDate #else &nbsp; #end</td>
+							#end
+							<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
+							<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
+							<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
+							<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
+							<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
+							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+						</tr>
+						#end
+						#end
+						#end
+					</tbody>
+				</table>
+			</div>
+			#end
+		</div>
+	</div>
+#end
+#else
+<div class="alert alert-danger">
+  <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
+</div>
+#end

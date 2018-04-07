@@ -1,0 +1,237 @@
+.punchoutContent{display: none;}
+.main{
+    width: 1000px;
+    background: #fff;
+    margin: auto;
+    min-height: 500px;
+    padding: 30px;
+}
+/***** Punchout Header *****/
+.punchoutTabHeader {
+	width: 65%;
+	margin: auto;
+	font-size: 20px;
+}
+.introBlock, .selectBlock, .configurBlock, .completeBlock{
+	width: 42%;
+	position: relative;
+	display: inline-block;
+}
+.completeBlock {width: 5%;}
+.introBlock label, .selectBlock label, .configurBlock label, .completeBlock label {
+	margin-top: 30px;
+    display: block;
+    color: #cdcdcd;
+}
+.selectBlock label{
+    position: relative;
+    left: -5px;
+}
+.configurBlock label{
+	position: relative;
+    left: -13px;
+}
+.completeBlock label {
+	position: relative;
+    left: -15px;
+}
+.introBlock:before, .selectBlock:before, .configurBlock:before, .completeBlock:before {
+   
+    position: absolute;
+    font-size: 60px;
+    color: #cdcdcd;
+    height: 20px;
+    top: -20px;
+    left: 5px;
+}
+.introBlock:after, .selectBlock:after {
+    content: "";
+    position: absolute;
+    width: 72%;
+    height: 1px;
+    background-color: #cdcdcd;
+    top: 45px;
+    left: 54px;
+}
+
+.configurBlock:after{
+    content: "";
+    position: absolute;
+    width: 59%;
+    height: 1px;
+    background-color: #cdcdcd;
+    top: 45px;
+    left: 80px;
+}
+.active:before {
+	color: #FF9800;
+}
+.active label {color: #0c860c;
+    font-weight: bold;}
+
+/***** Punchout Main Content *****/
+.punchoutMainBlock {
+	width: 70%;
+	margin: auto;
+}
+.punchoutMainBlock h1{
+	margin-bottom: 40px;
+	font-size: 28px;
+}
+.punchoutMainBlock .introDetail{font-size: 16px;margin-bottom: 30px;}
+.introButtonBlock{width: 100%;}
+.continueBtn{
+	width: 30%;
+    padding: 10px 30px;
+    background-color: #FFC107;
+    border: 1px solid #000;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+.editBtn{
+	width: 30%;
+	padding: 10px 30px;
+	background-color: #FFC107;
+	border: 1px solid #000;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius: 3px;
+}
+.cancelBtn{
+	width: 25%;
+	padding: 10px 30px;
+	background: #f2f2f2;
+	border: 1px solid #000;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius: 3px;
+	margin-left: 10px;
+}
+.punchoutContent {
+	display: none;
+}
+.purchasingDropDown{
+	width: 50%;
+    margin-bottom: 25px;
+    position: relative;
+}
+.purchasingDetail {font-size: 16px;margin-bottom: 30px;}
+.purchasingDropDown select{
+    border: 1px solid #919191;
+    padding: 2px 8px;
+    font-size: 15px;
+    border-radius: 5px;
+    position: relative;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    float: right;
+    word-break: normal;
+}
+.purchasingDropDown:after{
+	content: '<>';
+    font: 14px "Consolas", monospace;
+    color: #fff;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 0px;
+    top: 0px;
+    padding: 3px 4px;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    pointer-events: none;
+    background: #4453ff;
+    border-radius: 5px 5px 0 0;
+}
+.purchasingDropDown select:focus{outline: none;}
+.purchasingDropDown select::-ms-expand {
+display: none;
+}
+.clear{clear: both;}
+.configureDetail {font-size: 16px;margin-bottom: 30px;}
+h1.configureHeading{margin-bottom: 15px;}
+.configureLogin{width: 100%;}
+.configureLogin label{
+	width: 32%;
+	float: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+.configureLogin label span{
+	 display: block;
+    font-size: 12px;
+    color: #4f4f4f;
+    font-weight: 500;
+}
+.configureLogin .customBlock{width: 65%;float: left;}
+.configureLogin .customBlock .customInput, .configureLogin .customBlock .customPassword{
+    font-size: 18px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #000;
+    display: block;
+}
+.loginBlock{
+	margin-bottom: 15px;
+}
+.networkBlock{
+	margin-bottom: 15px;
+}
+.passwordBlock{margin-bottom: 30px;}
+.configureLogin .customBlock label{
+    font-size: 14px;
+    font-weight: 500;
+    color: #4f4f4f;
+    width: 100%;
+   }
+.configureLogin .completeBodyBlk{
+	padding: 10px 0;
+	border-top: 1px solid #cdcdcd;
+}
+.configureLogin .completeBodyBlk:nth-child(4){border-bottom:1px solid #cdcdcd;margin-bottom: 40px;}
+.completeBodyBlk .customBlock span{
+	line-height: 25px;
+	font-size: 14px;
+}
+label.punchoutUrlLabel {padding: 5px 0;}
+.summaryDetails{margin-bottom: 30px;}
+.summaryDetails p {font-size:14px; margin-bottom:15px;}
+.continueViewBtn {
+	width: 33%;
+    padding: 10px 30px;
+    background-color: #FFC107;
+    border: 1px solid #000;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+	float:left;
+}
+.emailBtnBlock{width: 50%;float:left;}
+.emailBtn{
+	width: 70%;
+    padding: 10px 30px;
+    background: #f2f2f2;
+    border: 1px solid #000;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+.emailBtnBlock span{
+    width: 100%;
+    display: block;
+    padding-left: 10px;
+	font-size: 12px;
+}
+.purchasingDetail span, .configureDetail span{color: #0043ff}
+
+#previewBlock{margin-bottom: 20px;
+
+    padding-bottom: 5px;}
+
+#customSelect{margin-bottom:10px;}
+#customSelect li{padding:5px 0px;}

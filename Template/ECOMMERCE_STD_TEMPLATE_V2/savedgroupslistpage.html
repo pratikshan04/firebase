@@ -1,0 +1,94 @@
+#if($session.getAttribute('isGeneralUser')!="Y")
+#if($responseType=="ProductGroupList")
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+	#if($groupListData.size()>0)
+		<table class="table table-striped table-bordered display rwd-table" id="groupCart">
+			<thead>
+				<tr>
+					<th class="text-center">$!locale.get('group.button.groupName')</th>
+					<th class="text-center">$!locale.get('product.group.heading.dateCreated')</th>
+					<th class="text-center">$!locale.get('product.group.heading.itemsInGroup')</th>
+					<th class="text-center">$!locale.get('product.heading.Action')</th>
+              	</tr>
+            </thead>
+            <tbody class="text-center">
+			#foreach($groupData in $groupListData)
+			#set($linkUrl = $groupData.productListId+$locale.get('website.url.ProductGroup')+"?savedGroupName="+$groupData.productListName)
+			<tr>
+				<td data-th="$!locale.get('group.button.groupName')"><b><a href="$linkUrl">$groupData.productListName</a></b></td>
+				<td data-th="$!locale.get('product.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
+				<td data-th="$!locale.get('product.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
+				<td data-th="$!locale.get('product.group.heading.AddGroupToCart')">
+					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
+				</td>
+			</tr>
+			#end
+			</tbody>
+		</table>
+		#else
+		<div class="text-center">$locale.get("product.label.noProductGroupAvailable")</div>
+		#end
+	</div>
+</div>
+#end
+#if($responseType=="CartGroupList")
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		#if($savedCartData.size()>0)
+		<table class="table table-striped table-bordered display rwd-table" id="groupCart">
+			<thead>
+				<tr>
+					<th class="text-center">$!locale.get('savedCart.button.cartName')</th>
+					<th class="text-center">$!locale.get('product.group.heading.dateCreated')</th>
+					<th class="text-center">$!locale.get('saved.group.heading.itemsInGroup')</th>
+					<th class="text-center">$!locale.get('product.heading.Action')</th>
+              	</tr>
+            </thead>
+            <tbody class="text-center">
+				#foreach($groupData in $savedCartData)
+				#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
+				#set($linkUrl = $groupData.productListId+$locale.get('website.url.SharedCart')+"?savedGroupName="+$groupData.productListName)
+				#else
+				#set($linkUrl = $groupData.productListId+$locale.get('website.url.SavedCart')+"?savedGroupName="+$groupData.productListName)
+				#end
+				<tr>
+					<td data-th="$!locale.get('savedCart.button.cartName')">
+						<b><a href="$linkUrl">$groupData.productListName #if($groupData.isSharedCart && $groupData.isSharedCart=='Y')<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>#end</a></b>
+					</td>
+					<td data-th="$!locale.get('saved.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
+					<td data-th="$!locale.get('saved.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
+					<td data-th="$!locale.get('product.heading.Action')">
+						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.dateCreated')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		#else
+		<div class="text-center">$locale.get("product.label.noSavedCartAvailable")</div>
+		#end
+	</div>
+</div>
+#end
+#if($responseType=="ApprovedCart")
+<div class="row">
+	#if($approveCartData.size()>0)
+	#foreach($groupData in $approveCartData)
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<i class="fa fa-lg fa-eercast" aria-hidden="true"></i> <a href="myProductGroupPage.action?reqType=$reqType&savedGroupId=$groupData.productListId&updatedDate=$groupData.date&assignedShipTo=$groupData.assignedShipTo">$groupData.productListName</a>
+	</div>
+	#end
+	#else
+	<div class="col-md-12 col-sm-12 col-xs-12">$locale.get("product.label.noApprovedCartAvailable")</div>
+	#end
+</div>
+#end
+<div id="allGroupItems" style="display: none;"></div>
+#else
+<div class="alert alert-danger">
+  <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
+</div>
+#end

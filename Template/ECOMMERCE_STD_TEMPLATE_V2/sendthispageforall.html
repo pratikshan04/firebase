@@ -1,0 +1,84 @@
+<div id="notificationDiv"></div>
+<div id="SendItem">           
+<form method="post" id="sendPageForm">
+	<div class="row marginY-3">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FriendName")  <span class="required"> * </span> </label>
+						<input name="toName" type="text" maxlength="50" size="50" id="toName" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FriendEmailAddress") <span class="required"> * </span> </label>
+						<input name="toEmail" type="text" maxlength="100" size="50" id="toEmail" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FromName") <span class="required"> * </span></label>
+						<input name="fromName" type="text" maxlength="50" size="50" id="fromName" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FromEmailAddress") <span class="required"> * </span></label>
+						<input name="fromEmail" type="text" maxlength="100" size="50" id="fromEmail" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.Subject") <span class="required"> * </span> </label>
+						<input name="mailSubject" type="text" maxlength="50" size="50" id="mailSubject" class="form-control" />
+					</div>
+				</div>
+			</div>
+			#if(!$userLogin)
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("event.label.entertheTextInTheBox")<span class="required">*</span> : </label>
+						<img id="captchaImg" src="CaptchaServlet.slt" alt="" width="220px" height="60px" alt='captcha'/> <br />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cimm_regCapthaWrap clearAfter">
+						<input id="jcaptcha" name="jcaptcha" type="text" />
+						<input type="button" value="$locale.get('eventRegister.captcha.changeImage')" name="jcaptchaRefresh" id="refreshbtn" onclick="refreshjcaptcha();" class="cimm_inlineButton" />
+					</div>
+				</div>
+			</div>
+			#end
+		</div>
+		<div class="col-md-4"></div>
+		<input type="hidden" value="" id="mailLink" name="mailLink"/>
+		<input type="hidden" value="" id="mailBody" name="mailBody"/>
+		<input type="hidden" value="" id="contentPart" name="contentPart"/>
+		<input type="hidden" value="sharePageForAll" id="mailTemplateName" name="mailTemplateName" />
+		<input type="hidden" value="$!session.getAttribute('last_sent_time')" id="last_sent" />
+		<input type="hidden" value="$!session.getAttribute('captcha_required')" id="captcha_req" />
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<button type="submit" name="save" id="sendBtn" class="button" onclick="return validateSendMailForAll();">$locale.get('form.button.send')</button>
+			</div>
+		</div>
+	</div>
+	<div class="text-center eMailLogo">
+		<img src="$!webThemes/$!siteName/images/mailTemplateLogo.png" alt="$!siteDisplayName" alt="mailTemplateLogo">
+	</div>
+	<div id="mailContent" class="prodInformation"></div>
+</form>
+</div>

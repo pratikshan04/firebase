@@ -1,0 +1,417 @@
+#macro (itemDetailsPlugin $mpnList)
+#set($itemDetailsPlugin = $getItemDetails.arrayOfPartNumbers("$mpnList"))
+#if($itemDetailsPlugin.size()>0)
+<table>
+#foreach($list in $itemDetailsPlugin)<tr><td>$list.itemId - $list.partNumber - $list.shortDesc</td></tr>
+#end</table>
+#end
+#end
+#macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId)
+#if($navigationType=="NAVIGATION")
+#set($navURL = "itemLevelFilterPage.action?codeId=$codeIdSkip&gallery=$gallery&levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#end
+#if($navigationType=="SEARCH")
+#set($navURL = "searchPage.action?keyWord=$keyWord&srchTyp=$srchTyp&gallery=$gallery&#if($narrowKeyword)&narrowKeyword=$narrowKeyword#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#end
+#if($navigationType=="BRAND")
+#set($navURL = "shopByBrandPage.action?brandId=$brandId&gallery=$gallery#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#end
+#end
+
+#macro(generateFileter $attrName,$attrValueEncoded,$attrNameEncoded,$filterList)
+#set($testVal = $attrName)
+#if($attrName=="brand")
+#set($rString = "attr_$attrName%3A$attrValueEncoded")
+#elseif($attrName=="category")
+#set($rString = "attr_$attrName%3A$attrValueEncoded")
+#else
+#set($attrReplace = $attrName.replaceAll(" ","+"))
+#set($rString = "${attrReplace}%3A$attrValueEncoded")
+#end
+
+#if($filterList.replace("~$rString","").replace("$rString","").length()>0)
+#set($filterUrl = $filterList.replace("%7E$rString","").replace("$rString",""))
+#set($rUrl="=$filterUrl")
+#set($rUrl=$rUrl.replace("=%7E","").replace("=",""))
+#end
+
+#end
+#macro(ajaxPriceLoadingScript)
+<script type="text/javascript">
+jQuery(document).ready(function(){
+ var erpType = jQuery("#erpType").val();
+ var partNumber="";
+ var quantity = "";
+ var pricePrecision = jQuery("#pricePrecision").val();
+ var totalAvail=0; 
+ var itemId = "";
+ var branch = "";
+ var i=0;
+ var chks = jQuery("input:hidden[name='idList']");
+ var beforeAvaiability = jQuery("#beforeLoginAvaiabilityProductList").val();
+ var userId = jQuery("#userId").val();
+ 
+ if (chks.length>0){
+ var s = '';
+ var c = '';
+ for (i = 0; i <= chks.length - 1; i++) {
+ s = s + c + chks[i].value;
+ c=',';
+ }
+ var start = new Date().getTime();
+ jQuery("#getPriceLoadStart").val(start);
+ jQuery.getJSON("getPriceDetailPage.action?productIdList="+s,function(data){
+ var end = new Date().getTime();
+ jQuery("#getPriceLoadSEnd").val(end);
+ jQuery.each(data, function(Quantity,val){
+ partNumber = val.partNumber.replace(/[#;&,.+*~':"!^$[\]()=>|\/]/g, "\\$&");
+ quantity = val.qty;
+ var packageQty = jQuery("#packageQty_"+partNumber).val();
+ val.extendedPrice
+ if(val.extendedPrice==0){
+ jQuery("#span_"+partNumber).html("<img src='"+jQuery("base").attr("href")+"images/AddToCart_D.png'/>");
+ jQuery("#priceValue_"+partNumber).val(val.extendedPrice);
+ }else{
+ if(pricePrecision=="2"){
+ jQuery("[id=span_"+partNumber+"]").each(function(i){
+ jQuery(this).html("$"+Number(val.extendedPrice*quantity).toFixed(2)+"<em> Per "+quantity+" /</em>");
+ jQuery("#priceValue_"+partNumber).val(Number(val.extendedPrice*quantity).toFixed(2));
+ });
+ jQuery("[id=priceValue_"+partNumber+"]").each(function(i){
+ jQuery(this).val(Number(val.extendedPrice*quantity).toFixed(2));
+ jQuery("#priceValue_"+partNumber).val(Number(val.extendedPrice*quantity).toFixed(2));
+ });
+ }else{
+ jQuery("[id=span_"+partNumber+"]").each(function(i){
+ jQuery(this).html("$"+Number(val.extendedPrice*quantity).toFixed(4)+"<em> Per "+quantity+" /</em>");
+ });
+ jQuery("[id=priceValue_"+partNumber+"]").each(function(i){
+ jQuery(this).val(Number(val.extendedPrice*quantity).toFixed(4));
+ });
+ }
+ }
+ jQuery("#qtySpan_"+partNumber).append(" "+val.qtyUOM);
+ var branchText = '<table class="branchAvailabilityTable" id="branchAvailabilityTableId"><thead><tr>';
+ branchText = branchText+'<th class="branchAvailabilityTh1">Branch Name</th>';
+ branchText = branchText+'<th class="branchAvailabilityTh2">Availability</th>';
+ branchText = branchText+'<th class="branchAvailabilityTh3">Earliest Available</th>';
+ branchText = branchText+'</tr></thead><tbody>';
+ typesHash1 = new Hashtable();
+ branch = val.branchAvail;
+ if(branch.length>0){
+ totalAvail = 0;
+ for(i=0;i<branch.length;i++){
+ branchText = branchText+'<tr><td class="branchAvailabilityTd1">'+branch[i].branchName+'</td>';
+ branchText = branchText+'<td class="branchAvailabilityTd2">'+branch[i].branchAvailability+'</td>';
+ branchText = branchText+'<td class="branchAvailabilityTd3">'+branch[i].branchEarliestAvailableInfo+'</td></tr>';
+ HomeId=jQuery("#HomeTer").val();
+ typesHash1.put("branch_"+branch[i].branchId, branch[i].availQty);
+ if(HomeId!=null || HomeId!=""){
+ if(HomeId==branch[i].branchId){
+ totalAvail = branch[i].availQty;
+ jQuery("#HomeBranchName").html(branch[i].branchName);
+ jQuery("#HomeBranchQty").html(branch[i].availQty);
+ if(branch[i].availQty==0){
+ itemId = jQuery("#tempItemId_"+partNumber).val();
+ jQuery("#displayFrieghtAlert_"+itemId).val("Y");
+ }
+ }
+ }
+ }
+ branchText  = branchText +"</tbody></table>";
+ jQuery("#allBranch").html(branchText);
+ if(typesHash1!=null)
+ {
+  typesHash.put(partNumber, typesHash1);
+ }
+ 
+ if(totalAvail>0){
+ jQuery("[id=Avail_"+partNumber+"]").each(function(i){
+ if(beforeAvaiability=='Y' && userId<2){
+ jQuery(this).html("In Stock");
+ }else{
+ jQuery(this).html(totalAvail);
+ }
+ });
+ }
+ 
+ }else if(branch.length==0){
+ 
+ }
+  
+ jQuery("[id=span_"+partNumber+"]").each(function(i){
+ jQuery(this).append(" <em>"+val.uom+"</em>");
+ });
+ if(packageQty>0)
+ jQuery("#uomPk_"+partNumber).html(val.uom);
+ else
+ jQuery("#uomPk_"+partNumber).html("");
+ jQuery("#uom_"+partNumber).html(quantity +" "+val.uom);
+ jQuery("#uomValue_"+partNumber).val(val.uom);
+ jQuery("#priceSaleQty_"+partNumber).val(val.pricingQtyMultiple); 
+  if(val.homeBranchavailablity>0)
+ {
+ jQuery("#Avail_"+partNumber).html("Availability: "+val.homeBranchavailablity);
+ }
+ if(val.minOrderQty>0){
+ jQuery("#MinOrder_"+partNumber).html("Min.Order: "+val.minOrderQty);
+ jQuery("#MinOrderQty_"+partNumber).val(val.minOrderQty);
+ var itemId = jQuery("#tempItemId_"+partNumber).val();
+ jQuery("#itemTxtQty"+itemId).val(val.minOrderQty);
+ }
+ if(val.orderInterval>0){
+ jQuery("#QtyInterval_"+partNumber).html("Qty Interval: "+val.orderInterval);
+ jQuery("#OrderQtyInterval_"+partNumber).val(val.orderInterval);
+ }
+ });
+ cleanLoading();
+ }); 
+ }
+ });
+</script>
+#end
+#macro(myProductGroupScript)
+<script type="text/javascript">
+$(document).ready(function(){
+//------- My Product Group Start
+	// sticky header productGroupLable
+	$(".dropdownClone dt a").click(function() {
+		var toggleIdClone = "#" + this.id.replace(/cloneLink/,"cloneUl");
+		var itemIdClone = this.id.replace(/^cloneLinkg/,"");
+		var productGroupLableClone = '$locale.get("product.heading.myProductGroups")';
+		$(toggleIdClone+"item").html(productGroupLableClone);
+		$("#group_idClone").val(toggleIdClone);
+		$("#hidden_idClone").val(itemIdClone);
+		$(".dropdownClone dt a span").not(toggleIdClone+"item").html(productGroupLableClone);
+		$(".dropdownClone dd ul").not(toggleIdClone).hide();
+		$("#popSelectorClone div").not(toggleIdClone+"pop").fadeOut();
+		$(toggleIdClone).toggle();
+		
+		if($(toggleIdClone).css("display") == "none"){
+			$(this).removeClass("selected");
+		}else{
+			$(this).addClass("selected");
+		}
+		if($(toggleIdClone).is(":visible")){
+			getProductListClone(itemIdClone);
+		}
+	});
+	$(".dropdown dd ul li a").click(function() {
+		// This is the default behaviour for all links within the menus
+		$("#group_name").val($(this).html());
+		addToProductList("",this.id);
+	});
+	
+	$(document).bind('click', function(e) {
+	// Lets hide the menu when the page is clicked anywhere but the menu.
+	var $clicked = $(e.target);
+		if (! $clicked.parents().hasClass("dropdown")){
+			$("#popSelector div").fadeOut();
+		    $(".dropdown dd ul").hide();
+			$(".dropdown dt a").removeClass("selected");
+		}
+	});
+//------- My Product Group End
+});
+</script>
+	
+#end
+##------------------------- Featured Products
+#macro(featuredProductListBlock $generalSubset,$subsetId)
+#set($featuredProducts = $CIMMUtility.featureProductsListCimmVelocity($generalSubset,$subsetId))
+#if($featuredProducts.size()>0)	 	
+	<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredProducts")</label></h3>
+	<ul id="featuredProductList" class="cimm_caroWrap">
+		#foreach($itemData in $featuredProducts)
+		#set($itemTitle= $itemData.shortDesc)
+		<li>				
+			<div class="cimm_linkItemImg">
+				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">                    
+					#if($itemData.imageName.contains("http"))
+					<img id="imageName$itemData.itemId" src="$itemData.imageName" width="100" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					#else
+					<img id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					#end
+				</a>
+			</div>
+			<div class="cimm_linkItemDesp">
+				<ul>
+					<li>
+						<h4>
+							<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">
+								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+						 		#if($linkItemTitle.length()>18)
+						 			$linkItemTitle.substring(0, 18)...
+						 		#else
+						 			$linkItemTitle
+						 		#end
+							</a>
+						</h4>
+					</li>
+					<li><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
+					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
+					<p id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
+					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>
+					#else
+					<p> $!itemData.shortDesc</p>
+					#end
+					</li>
+				</ul>
+				</div>
+			<div class="clear"></div>
+		</li>
+		#end
+	</ul>
+</div>
+#end
+#end
+##------------------------- Featured Products
+
+##-------------------------  Recently Viewed
+#macro(recentlyViewedItems)
+<div class="cimm_sliderWrap" >
+	<h3 class="cimm_CaroBlockTitle"><label>$!locale.get("product.heading.recentlyviewedproducts")</label></h3>
+	<ul id="recentlyViewedContent" class="cimm_caroWrap "></ul>
+</div>	
+<script type="text/javascript">
+	$(document).ready(function(){
+		jQuery("#recentlyViewedContent").recentlyViewed({"show" : true});
+	});
+</script>	
+#end
+##-------------------------  Recently Viewed
+
+##-------------------------  Upcoming Events
+#macro(eventsSection)
+#set($eventsList = $CIMMUtility.eventListCimmVelocity())
+	<div class="upcomingEvent">
+		<h3 class="cimm_CaroBlockTitle"><label>Upcoming Events</label></h3>
+		<!-- <h2>UPCOMING EVENTS <a href="/eventsUnit.action"><i class="fa fa-calendar"></i></a></h2> -->
+		<ul id="upcomingEvents" class="customScroll">
+		#foreach($eventsDetails in $eventsList)
+		#if($!eventsDetails.startDate!="")
+			#set($dateTimeArray = $eventsDetails.startDate.split("T"))
+			#set($dateArray = $dateTimeArray.get(0).split("-"))
+			#set($date = $dateArray.get(1) + "/" + $dateArray.get(2) + "/" + $dateArray.get(0))
+		#else
+			#set($date = "");
+		#end
+		<li>
+			<p class="eventsHeading"><a href="/eventDetailsUnit.action?eventID=$eventsDetails.staticPageId">$eventsDetails.staticPageTitle</a> <span class="dateStamp">Date: $date</span></p>
+				<p class="eventsContent">
+					 #if($eventsDetails.staticContent.length() > 120)
+	                     $eventsDetails.staticContent.substring(0, 120)
+					 #else
+						   $eventsDetails.staticContent
+					 #end
+					 <a href="/eventDetailsUnit.action?eventID=$eventsDetails.staticPageId"><span class="readevents">more...</span></a>
+				</p>
+		</li>
+		#end
+		</ul>
+	</div>
+#end
+##-------------------------  Upcoming Events
+
+
+##-------------------------  News Section
+#macro(recentNewsSection $pageName)
+<div class="recentNews">
+	<h3 class="cimm_CaroBlockTitle"><label>Recent News</label></h3>
+	<div id="news-scroller" class="newsList customScroll">
+		<div class="center"><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+	</div>
+</div>
+<script type="text/javascript">
+$('#newsSection').val("$pageName");
+//getNewSectionForHomePage();
+</script>
+#end
+##-------------------------  News Section
+
+
+##-------------------------  Featured Brands
+#macro(featuredBrandsSection)
+#set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
+#if($!featuredBrands && $featuredBrands.size()>0)	 	
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredBrands")</label></h3>
+	<ul id="featuredBrands" class="cimm_caroWrap">
+		#foreach($brandset in $featuredBrands.entrySet())
+		#set($keyValue = $brandset.getKey())
+		#set($brandModel = $brandset.getValue())
+		<li>				
+			<div class="cimm_linkItemImg">
+				<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName">                    
+					<img src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
+				</a>
+			</div>
+		</li>
+		#end
+	</ul>
+</div>
+#end
+#end
+##-------------------------  Featured Brands
+
+##-------------------------  Featured Manufacturers
+#macro(featuredManufacturerSection)
+#set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
+#if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
+	<ul id="featuredManufacturers" class="cimm_caroWrap">
+		#foreach($manufacturerset in $featuredManufacturers.entrySet())
+		#set($keyValue = $manufacturerset.getKey())
+		#set($manufacturerModel = $manufacturerset.getValue())
+		<li>				
+			<div class="cimm_linkItemImg">
+				<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
+					<img src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
+				</a>
+			</div>
+		</li>
+		#end
+	</ul>
+</div>
+#end
+#end
+##-------------------------  Featured Manufacturers
+
+
+##-------------------------  shop By category
+#macro(shopBycategorySection)
+#if($categMenu.size()>0)
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.heading.shopByCategory")</label></h3>
+	<ul id="shopByCategory" class="cimm_caroWrap">
+	#foreach($categoryMenu in $categMenu)
+		<li>
+			<div class="cimm_linkItemImg">
+				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
+					<img src="$taxonomyImage/$categoryMenu.imageName" alt='$categoryMenu.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+				</a>
+			</div>
+			<div class="cimm_linkItemDesp">
+				<ul>
+					<li>
+						<h4>
+							<a class="productTitle" href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
+						 		#if($categoryMenu.categoryName.length()>18)
+						 			$linkItemTitle.substring(0, 18)...
+						 		#else
+						 			$categoryMenu.categoryName
+						 		#end
+							</a>
+						</h4>
+					</li>
+				</ul>
+			</div>
+		</li>
+	#end
+	</ul>
+</div>
+#end
+#end
+##-------------------------  shop By category

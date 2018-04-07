@@ -1,0 +1,569 @@
+#if($!responseType && $responseType=="ProductMode")
+<!--Product Mode Code Start -->
+#parse("Macros/defaultMacro.vm")
+#parse("Macros/listPageMacro.vm")
+#parse("Macros/itemDetailPageMacro.vm")
+<div id="attrContent">
+	<div id="attrFilterList" style="display:none;">$!attrFilterList</div>
+	#if($productAttrFilterData && $productAttrFilterData.size()>0)
+	<div class="cimm_selectList hideForPrint">
+		<div class="select_attributeBody">
+		<ul class="product_mode hideForPrint clearAfter">
+		#set($iVal = 0)
+		#foreach($attrList in $productAttrFilterData)
+		#foreach($attrListVal in $attrList.attrFilterList.keySet())
+			#set($attrValueForSearch = $attrListVal)
+			##if($attrList.attrFilterList.get($attrListVal).size()>1)
+			<li class="selectOptions dropdown">
+				<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
+				<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
+				<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
+					#set($k = 0)
+					#foreach($filterVal in $attrList.attrFilterList.get($!attrListVal))
+					<li class="cimm_listselect">
+						<i style="display:none">$!filterVal.attrValue</i>
+						<label class="customCheckBox" >
+							<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" onclick="ProductMode.appendSearchByCheckBox('multiFilter_$!iVal');" />
+							<span>$!filterVal.attrValue</span>
+							<div style="display:none;" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</div>
+							<span style="display:none" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
+							##($!filterVal.resultCount)
+						</label>
+					</li>
+					#set($k = $k+1)
+					#end
+				 </ul>
+				</div>
+			</li>
+			#set($iVal = $!iVal+1)
+			##end
+			#end
+			#end
+		</ul>
+		</div>
+	</div>
+	#end
+</div>
+<div class="clear"></div>
+
+<!-- Table Section -->
+#if($selectableItemList)
+<div id="pModeItemContent">
+#set($productCount = $selectableItemList.size())
+##if($layoutName =="ProductDetailPage")
+<div class="productdetail_list">
+	<div class="cimm_ProductFilterWrap clearAfter avoid-this">
+		<div class="cimm_ProductFilterWrap clearAfter">
+			<div class="compareWrap"><b>$productCount</b> Product Choices
+				<div class="compare_head pullRight hideForDevice">
+					<b><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</b>
+					<b>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></b>
+				</div>
+			</div>
+			<div class="right_attribute">
+				<div class="refine_head" style="cursor: pointer;" onclick='ProductMode.removeAllMultiAttr();'><span class="colorcode1"> Clear All</span> <i class="fa fa-times"></i></div>
+				<span class=" selected_refine_values" id="mulitFilterTrailDetailPage"></span>
+			</div>
+		</div>
+	</div>
+</div>
+##end
+<div class="cimm_siteTableEnclosure tabWrap">
+<table class="table table-bordered table-striped display" id="childItemTable">
+<thead>
+	<tr>
+		<th class="text-center">Item #</th>
+		<th class="text-left">Properties</th>
+		<th class="text-center removeForSend">Quantity</th>
+		<th class="text-center">UOM</th>
+		<th class="text-center">Price</th>
+		<th class="text-center">Availability</th>
+		<th class="text-center removeForSend" title="Add to Cart / Add to Group"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i></th>
+		<!-- <th title="Add to Group"><i class="fa fa-lg fa-shopping-bag" aria-hidden="true"></i></th> -->
+		<th class="text-center removeForSend hideForDevice" title="Compare"><i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i></th>
+		<th class="text-center removeForSend" title="Item Information"><i class="fa fa-info-circle fa-lg"></i></th>
+	</tr>
+</thead>
+<tbody class="text-center">
+ #foreach($productModeitemData in $selectableItemList)
+ #set($productModeItemtitle = $productModeitemData.brandName+"-"+$productModeitemData.manufacturerPartNumber)
+	<tr id="selectableItem_$productModeitemData.itemId" data-priceloading="N" data-partnumber="$productModeitemData.partNumber.replaceAll('\s+','_')"  data-rowid="identification" data-detailsload="N" itemscope itemtype="http://schema.org/Product">
+		 <td class="tabelImage" id="$productModeitemData.itemPriceId" style="cursor: pointer;">
+		 	#detailPageHiddenFields($productModeitemData.partNumber.replaceAll('\s+','_'),$productModeitemData.qty,$productModeitemData.price,$productModeitemData.salesUom,$productModeitemData.saleQty,$productModeitemData.ItemId,$productModeitemData.brandName,$productModeitemData.manufacturerPartNumber,$itemAvailability)
+			<input type="hidden" value="$productModeitemData.minOrderQty" id="MinOrderQty_$productModeitemData.partNumber" name="MinOrderQty_$productModeitemData.partNumber"/>
+			<input type="hidden" value="$productModeitemData.minOrderQty" id="minOrderQty_$productModeitemData.itemId"/>
+			<input type="hidden" value="$productModeitemData.orderInterval" id="OrderQtyInterval_$productModeitemData.partNumber" name="OrderQtyInterval_$productModeitemData.partNumber"/>
+			<input type="hidden" value="$productModeitemData.displayPricing" id="displayPrice_$productModeitemData.partNumber" />
+		 	<span id="quantityBreakPricingDetails_$productModeitemData.partNumber" style="display: none;"></span>
+		 	<a href="$productModeitemData.itemPriceId$locale.get('website.url.ProductDetail')n/$productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
+			 	<span itemprop="name">$productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
+				<span class="imgForSend" style="display:none !important;">
+				 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
+				<img id="imageName$productModeitemData.itemId" itemprop="image" height="250" width="250" src="$hostName$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
+				#else
+				<img id="imageName$productModeitemData.itemId"  height="250" width="250" src="$hostName$detailImage$escapeTool.url($productModeitemData.imageName)" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
+				#end
+				</span>
+				#if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
+				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+				#else
+				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$detailImage$escapeTool.url($productModeitemData.imageName)" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+				#end
+				#if($!productModeitemData.clearance=="Y")
+				<span class="clearenceTag clearenceTagSmall">Clearence</span>
+				#end
+			</a>
+		 </td>
+		 <td class="text-left">
+			 #foreach($attributes in $productModeitemData.attributeDataList)
+			 	#if($attributes.attrValue)
+					 #set($attr = $attributes.attrValue.replace('',""))
+					 		#set($attr = $attr.split("`"))
+					 #if($attr.get(0))
+					 	<p style="display: block;"><b>$attributes.attrName.replace(' ',"")</b>: $!attr.get(0)</p>
+					 #end
+				#end
+			 #end
+		 </td>
+		 <td class="removeForSend">
+			#set($minQty = 1)
+			#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
+		 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+		 </td>
+	     <td itemprop="sku">
+	     	$!productModeitemData.salesUom
+	     	<!-- <select id='productMultipleUOMSelect_$productModeitemData.partNumber.replaceAll(" ","_")'  data-partnumber = '$productModeitemData.partNumber.replaceAll(" ","_")' style="display:none;" class="appendChosen"></select> -->
+	     </td>
+		  <td class="tabelPrice" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+			 	<span id="priceSpan_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan">
+				 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+						#if($productModeitemData.price>0)
+				    		$$!numberTool.format($!pricePrecisionFormate,$!productModeitemData.price)
+				    	#else
+				    		<span class='text-danger'>$!locale.get("product.label.callforprice")</span>
+				    	#end
+				    #else
+				    	<img src="$!hostName$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+				    #end
+			    </span>
+			 </td>
+			 <td class="tableAvail">
+			 	<span id="productModeAvail_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+				 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+						#if($productModeitemData.availQty>0)
+				    		$!productModeitemData.availQty
+				    	#else
+				    		<span class='text-danger'>Call for Availability</span>
+				    	#end
+				    #else
+				    	<img src="$!hostName$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+					#end
+				</span>
+			</td>
+		 <td title="Add to Cart / Product group" class="removeForSend">
+		 	#set($addToCartCheckFlag = "N")
+			#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+				#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+			   		#if($productModeitemData.price>0)
+			   			#set($addToCartCheckFlag = "Y")
+			   		#end
+			   	#end
+			#else
+			 	#set($addToCartCheckFlag = "N")
+			#end
+		 	<label class="customCheckBox2">
+			 	<input type="checkbox" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems" id="selectItemCheckbox_$productModeitemData.itemId" data-itemid="$productModeitemData.itemId" data-partnumber="$productModeitemData.partNumber.replaceAll('\s+','_')"  data-itemPriceId="$productModeitemData.itemPriceId"/>
+				<span></span>
+			</label>
+		 </td>
+		 <td title="Compare" class="hideForDevice removeForSend">
+			<label class="customCheckBox2">
+				<input type="checkbox" value="$productModeitemData.itemPriceId" name="compareId" id="check_$productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
+				<span></span>
+			</label>
+		 </td>
+		 <td class="details-control removeForSend" id="$productModeitemData.itemPriceId" title="Item Information"><i class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></i></td>
+	</tr>
+ #end
+ </tbody>
+ </table>
+</div>
+</div>
+#end
+<!-- Table Section -->
+<!--Product Mode Code End -->
+#end          ##Product Mode Code End
+#if($!responseType && $responseType == "ItemDetail")
+#if($itemLevelFilterData)
+	#parse("Macros/defaultMacro.vm")
+	#parse("Macros/listPageMacro.vm")
+	#parse("Macros/itemDetailPageMacro.vm")
+#foreach($itemData in $itemLevelFilterData)
+#set( $itemMarketingText = $itemData.marketingText)
+#set( $itemLongDesc = $itemData.longDesc)
+<!-- Dom Tab Start -->
+<div id="productAccordionWrapDetailPageContent" itemscope itemtype="http://schema.org/Product">
+<div id="focusItemTabs_$itemPriceId" class="focusItemTabs text-left">
+	<!-- Single Item details -->
+	<div class="cimm_productModeDetailWrap clearAfter">
+		<div class="cimm_productModeDetail">
+			<h2 class="productTitle" id="itemTitle$itemData.ItemId" itemprop="name">$itemData.brandName $!itemData.manufacturerPartNumber
+				<input type="hidden" id="titleText" name="titleText" value="$itemData.brandName $!itemData.manufacturerPartNumber"/>
+			</h2>
+			<p class="cimm_itemShortDesc" id="itemShortDesc$itemData.itemId" itemprop="description">$!itemData.shortDesc</p> 
+			<ul>
+				<li id="sitePartNo" itemprop="sku">
+					<b>$locale.get("product.label.partNumber"): </b><span id="partNumber$itemData.ItemId">$!itemData.partNumber</span>
+				</li>
+				#if($!itemData.manufacturerPartNumber)
+				<li id="mPartNo" itemprop="mpn">
+					<b>$locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+					<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$itemData.partNumber" />
+				</li>
+				#end
+				
+				#if($itemData.upc != "")
+				<li id="upcNo" itemprop="sku">
+					<b>$locale.get("product.label.upc"): </b><span>$!itemData.upc</span> 
+				</li>
+				#end
+			</ul>
+			<ul>
+				#if(($itemData.customerPartNumber && $itemData.customerPartNumber != "") || ($itemData.customerPartNumberList.size() && $itemData.customerPartNumberList.size()>0))
+				<li id="custMainBlock">        
+					<b>$locale.get("product.label.cpn"): </b>
+					<span id="custPartBlock">
+					#if($itemData.customerPartNumber)$itemData.customerPartNumber#end
+					#set($seperator = "")
+					#set($partList = "")
+					#foreach($customerPart in $itemData.customerPartNumberList)
+					#set($partList = "#if($partList)$partList#end#if($seperator)$seperator#end#if($customerPart.partNumber)$customerPart.partNumber#end")
+					#set($seperator = ", ")
+					#end
+					$partList
+					</span>  
+				</li> 
+				#else
+				<li id="custMainBlock" style="display: none;">
+					<b>$locale.get("product.label.cpn"): </b><span id="custPartBlock"></span>
+				</li>
+				#end
+				#if($itemData.packDesc)
+					<li id="packDescs" class="packageDesc"><span>$itemData.packDesc</span></li>
+				#end
+			</ul>
+		</div>
+	<!-- Customer PartNumber Add 
+		<div class="detailPageBtnsAlign clearAfter"> 
+			<div class="custparNoBtn">
+			<input type="hidden" value='$locale.get("product.label.customerpartnumber")' id="addRemoveLabel" />
+			#if($userLogin)
+			<dl class="dropdownAddCustom">                 
+				<dd>
+				<form id="customerPartNumSubmit">
+					 <input type="hidden" id="hidden_ItemID" value="$itemData.itemId" />
+					 <input type="hidden" id="hidden_PartNum" value="$itemData.partNumber" />
+					 <ul id="CustomerPartNoListDropDown">
+					</ul>
+				</form>
+				</dd>
+			<dt>
+				<a id='linkgcustom$itemData.itemId' class="button">
+				<i class="fa fa-lg fa-plus"></i><i class="fa fa-lg fa-minus"></i>
+				<span id="ulg${itemData.itemId}item">
+					$locale.get("product.label.customerpartnumber")
+				</span>
+				</a>
+				<div class="clear"></div>
+			</dt>
+			#else
+				<dt>
+					<a href="javascript:void(0)" id='linkgcustom$itemData.itemId' class="button" onclick="loginPop(); return false;">
+					<i class="fa fa-lg fa-plus"></i><i class="fa fa-lg fa-minus"></i>
+					<span id="ulg${itemData.itemId}item">
+						$locale.get("product.label.customerpartnumber")
+					</span>
+					 </a>
+					 <div class="clear"></div>
+				 </dt>            
+			 </dl>
+			 #end
+			</div>
+		</div>
+		<!-- Customer Part Number ADD -->
+	</div><!-- Single Item details -->
+	
+	<div class="multiTab mTop-3" id="multiTab">
+		<ul class="multiTabHeading clearAfter">
+			#if($itemMarketingText || $itemLongDesc)
+				<li><a href="#descriptionSection" class="active"><span id="description">$locale.get("product.detail.descriptions")</span></a></li>
+			#end 
+			#if($itemAttributesList && $itemAttributesList.size()>0)
+				<li><a href="#specificationSection"><span id="specification">$locale.get("product.detail.specifications")</span></a></li>
+			#end
+			#if($itemData.itemFeature)
+				<li><a href="#featureSection"><span id="features">$locale.get("product.detail.features")</span></a></li>
+			#end
+			#if($itemDocumentsList && $itemDocumentsList.size()>0)
+				<li><a href="#documentsSection"><span id="documents">$locale.get("product.detail.documents")</span></a></li>
+			#end
+			#if($videoLinkList && $videoLinkList.size()>0)
+				<li><a href="#videoSection"><span id="videos">$locale.get("product.detail.videos")</span></a></li>
+			#end
+		</ul>
+	#if($itemMarketingText || $itemLongDesc || $itemData.itemFeature || $itemAttributesList && $itemAttributesList.size()>0)
+	<div class="multiTabContent">
+		#if($itemMarketingText || $itemLongDesc)
+			<div id="descriptionSection">
+			#if($itemMarketingText)
+				<p itemprop="description">$itemMarketingText</p>
+			#end 
+			#if($itemLongDesc)
+				<p itemprop="description">$itemLongDesc</p>
+			#end
+			</div>
+		#end 
+		#if($itemAttributesList && $itemAttributesList.size()>0)
+		<div id="specificationSection">
+			<table cellspacing="0" cellpadding="0" border="0">
+				#foreach($attribute in $itemAttributesList)
+				<tr>
+					<td valign="top" nowrap><b>$attribute.attrName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					<td valign="top"><span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+					<td valign="top"><span>$attribute.attrValue</span></td>
+				</tr>
+			#end
+			</table>
+		</div>
+		#end
+		#if($itemDocumentsList && $itemDocumentsList.size()>0) 
+		<div id="documentsSection">
+				<ul class="alternates clearAfter">
+				#foreach($itemDocument in $itemDocumentsList)
+					#if($itemDocument.docName.contains('.pdf'))
+					<li>
+						<a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.doc'))
+					<li>
+						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.docx'))
+					<li>
+						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="docx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.xlsx'))
+					<li>
+						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="xlsx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.pptx'))
+					<li>
+						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.ppt'))
+					<li>
+						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.xls'))
+					<li>
+						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#elseif($itemDocument.docName.contains('.cad'))
+					<li>
+						<a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+					</li>
+					#else
+					<li>
+						<!-- <a href='$documentPath$itemDocument.docName' target="_blank"><img src="$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a> -->
+						<a href='$itemDocument.docName' target="_blank" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a>
+						<span class="cimm_pdfLink"><a href='$itemDocument.docName' target="_blank" class="removeForSend">$hostName$itemDocument.docName</a></span>
+					</li>
+					#end
+				#end
+				</ul>
+			</div>
+		#end 
+		#if($itemData.itemFeature)
+		<div id="featureSection">
+			$itemData.itemFeature
+		</div>
+		#end
+		#if($videoLinkList && $videoLinkList.size()>0)
+			<div id="videoSection">
+				#foreach($videoLink in $videoLinkList)
+					<span>
+						<a href='$videoLink.videoName' target="_blank"><img src="$webThemes/$siteName/images/video.png" /><span>$!videoLink.videoCaption</span></a>
+					</span>
+				#end
+			</div>
+			#end
+	</div>
+	#end
+	</div>
+	<div id="linkedItemAvailable_$itemPriceId" style="display:none;" onclick="ProductMode.showlinkedItemSection($itemPriceId);"><h3 class="animateArrow">Items Available</h3></div>
+</div>
+</div>
+<!-- Dom Tab End -->
+
+#if($linkedItemGroup && $linkedItemGroup.size()>0)
+	<!-- Linked ItemsBlock Start -->
+	<div id="linkedItemSectionContent">
+		<div id="linkedItemContentDiv_$itemPriceId" class="focusLinkedItemTabs">
+			<dl>
+			#set($idloop=1)
+			#foreach($linkedItem in $linkedItemGroup)
+			#foreach($linkItem in $linkedItem) #set($linkedItemGroupName = $linkItem.linkTypeName)  #set($linkedItemCount = 1+$linkedItemCount) #end
+			<dt class="linkedGrpName"><h3 class="cimm_productHead"><label>$linkedItemGroupName</label></h3></dt>
+			<dd>
+				<div class="cimm_sliderWrap">
+					<ul id="logLinkItems_$idloop" class="cimm_caroWrap clearAfter"> 
+						 #foreach($linkItem in $linkedItem)
+						        <li itemscope itemtype="http://schema.org.Product">
+						        #itemListHiddenFields($linkItem.partNumber, $linkItem.itemPriceId, $linkItem.qty, $linkItem.uom, $linkItem.price, $linkItem.saleQty, $linkItem.itemId, $linkItem.displayFrieghtAlert, $linkItem.packageQty, $linkItem.itemAvailability, $linkItem.srchTyp, $navigationType,$linkItem.brandId,$linkItem.manfId, $linkItem.altPartNumber1)
+						 			<input type="hidden" id='packageQty_$linkItem.partNumber' value="1" />
+									<div class="cimm_linkItemImg">
+						 				<a href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+						 					<span> 
+											 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
+											 <img id="imageName$linkItem.itemId" itemprop="image" src="$linkItem.imageName"  onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+											 #else
+											 <img id="imageName$linkItem.itemId" itemprop="image" src="$thumbNail$linkItem.imageName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+											 #end
+						 					</span>
+						 				</a>
+						  			</div>
+									 <div class="cimm_linkItemDesp">
+										<ul>
+										 	<li>
+										 		<h4 itemprop="name">
+											 		<a class="cimm_linkProdTitle" id="itemTitle$linkItem.ItemId" href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+												 		#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
+												 		#if($linkItemTitle.length()>18)
+												 			$linkItemTitle.substring(0, 18)...
+												 		#else
+												 			$linkItemTitle
+												 		#end
+											 		</a>
+										 		</h4>
+										 	</li>
+										 	
+										    <!-- <li class="linkItemDescrip">
+										    #if($!linkItem.shortDesc.length()>40)
+										       <p id="itemShortDesc$linkItem.itemId"> $!linkItem.shortDesc.substring(0, 40)</p>
+										    #else
+												<p> $!linkItem.shortDesc</p>
+											#end
+											</li> -->
+										   
+										   <li itemprop="sku">
+										      <b>$locale.get("product.label.partNumber"): </b>
+										      <span id="partNumber$linkItem.itemId">$!linkItem.partNumber</span>
+										   </li>
+										   
+											#if($linkItem.manufacturerPartNumber)
+											<li itemprop="mpn"><b>$locale.get("product.label.mpn"):</b> <span>$!linkItem.manufacturerPartNumber</span></li>
+											#end
+											
+										<!-- 	<li class="gridLeadWrap productLeadTime_$linkItem.partNumber" style="display:none;" id="leadTimeLI">
+												 <b>$locale.get("product.label.leadTime"): </b>
+												 <span class="leadTime_$linkItem.partNumber"><img src="$webThemes/$siteName/images/loading.gif" /></span>
+											</li>
+											
+											<li class="gridLeadWrap productAvail_$linkItem.partNumber" style="display:none;">
+												 <b>$locale.get("product.label.itemAvailable") : </b>
+												 <span class="orangeClr Avail_$linkItem.partNumber"><img src="$webThemes/$siteName/images/loading.gif" /></span>
+											</li>
+											
+											#if($!linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
+										    <li><b>$locale.get("product.label.minorderqty"):</b><span> $!linkItem.minOrderQty</spaN></li>
+										    <li><b>$locale.get("product.label.qtyinterval"):</b><span> $!linkItem.orderInterval</span></li>
+										  	#end -->
+										  	
+										  	#set($customValue = $linkItem.manufacturerId+"_SHOW_LIST_PRICE")
+										 	#if($manfCustomField.get($customValue)=="Y" && $!session.getAttribute("customerCustomFieldValue").get("SHOW_LIST_PRICE_CUSTOMER_LEVEL")=="Y")
+										 	<!-- <li>
+										 		<h4>$locale.get('product.label.listPrice'): </h4>
+												 <span id="listPriceSpan_$linkItem.partNumber" class="priceSpan" data-select='priceData'>
+													<img src="$webThemes/$siteName/images/loading.gif" />
+												 </span>
+											</li> -->
+											#end
+											#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$itemData.packDesc</span></li> -->#end
+											#if($userLogin)
+										 	<li>  
+											 	<b>$locale.get('product.label.yourprice'): </b>            
+												<span id="span_$linkItem.partNumber" class="priceSpan" data-select='priceData'>
+													<img src="$webThemes/$siteName/images/loading.gif" />
+												</span>
+											</li>
+											#end
+											<li class="cimm_itemDespQty">
+												<b>$locale.get("product.label.qty"): </b>  
+												<span><input type="text" name="itemTxtQty$linkItem.itemId"  maxlength="6" value="$linkItem.minOrderQty" id="itemTxtQty$linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
+											</li>
+											<li data-select='addtoCartbtn_$linkItem.partNumber'>
+								                <a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" style="display:block;" id="enableCart_$linkItem.partNumber" data-itemId="$linkItem.itemId" data-itemPriceId="$linkItem.itemPriceId">
+								                	$locale.get("product.button.addtocart")
+								                </a>
+											</li>
+											<input type="hidden" value="$linkItem.minOrderQty" id="MinOrderQty_$linkItem.partNumber" name="MinOrderQty_$linkItem.partNumber"/>
+											<input type="hidden" value="$linkItem.minOrderQty" id="minOrderQty_$linkItem.itemId"/>
+											<input type="hidden" value="$linkItem.orderInterval" id="OrderQtyInterval_$linkItem.partNumber" name="OrderQtyInterval_$linkItem.partNumber"/>
+											<input type="hidden" value="$!linkItem.manufacturerPartNumber" id="MPNValue_$linkItem.partNumber" />
+										</ul>
+									</div>
+							</li>
+						 #end
+						
+					 </ul>
+				 </div>
+			</dd>
+			 <script type="text/javascript">
+				$(document).ready(function(){
+					  $('#logLinkItems_$idloop').slick({
+						  infinite: true,
+						  slidesToShow: 4,
+						  slidesToScroll: 1,
+						  pauseOnHover:true,
+						 responsive: [
+										{
+											breakpoint: 1024,
+											settings: {
+												slidesToShow: 4,
+											}
+										},
+										{
+											breakpoint: 600,
+											settings: {
+												slidesToShow: 3,
+											}
+										},
+										{
+											breakpoint: 480,
+											settings: {
+												slidesToShow: 2,
+											}
+										}
+									]
+					  });
+				});
+			</script>
+			 #set($idloop=$idloop+1)
+			 #end
+			</dl>
+		</div>
+	</div>
+	<!-- Linked ItemsBlock End -->
+	#end
+	
+#end ## For loop
+#end ## If statment
+#end ##Product Mode Code Item Spec and Doc End here

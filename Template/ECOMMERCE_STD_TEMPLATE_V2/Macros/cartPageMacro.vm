@@ -1,0 +1,18 @@
+#macro (cartHiddenFields $partNumber, $itemAvailability, $productListId, $qty, $price, $itemPriceId)
+<input type="hidden" id="itemTxtAvail_$partNumber" value="$itemAvailability"/> 
+<input type="hidden" value="$productListId" name="shoppingCartId" /> 
+<input type="hidden" value="$qty" id="textQtyCur_$partNumber"/> 
+<input type="hidden" value="$qty" id="qty_$productListId" name="singleCartQty" /> 
+<input type="hidden" value="$productListId" name="singleCartId" />
+<input type="hidden" name="idList1" value="$partNumber"/>
+<input type="hidden" id=priceSaleQty_$partNumber" value="$qty" />
+<input type="hidden" id="priceValue_$partNumber" value="$price" />
+<input type="hidden" name="itemPriceIdList" value="$itemPriceId" />
+#end
+#macro (refreshCartForm)
+<form id="refreshForm">
+<input type="hidden" id="refreshCartId" name="updateId" value="" />
+<input type="hidden" id="refreshQty" name="itemQty" value="" />
+<input type="hidden" id="lineItemCommentRef" name="lineItemCommentRef" value="" />
+</form>
+#end

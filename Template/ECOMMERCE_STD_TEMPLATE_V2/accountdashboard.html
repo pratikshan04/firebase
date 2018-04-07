@@ -1,0 +1,243 @@
+<div class="row">
+	<div class="col-md-9 col-sm-12 col-xs-12">
+		<div class="multiTab" id="cimm_tabBlock">
+			<ul class="multiTabHeading clearAfter">
+				<li><a href="#profile">1&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.profile')</a></li>
+				<li><a href="#Address">2&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.address')</a></li>
+				<li><a href="#groups">3&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.myProductGroups')</a></li>
+				<li><a href="#order">4&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li>
+			</ul>
+			<div class="multiTabContent">
+				<div id="profile">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h3 class="cimm_blockHeading">$locale.get("product.label.userContact")
+								<a href="$!locale.get('website.url.EditContact')"><i class="glyphicon glyphicon-edit"></i></a>
+							</h3>
+							<div class="row">
+								<div class="col-md-3 col-sm-6 col-xs-12">
+									<div class="profileImage">
+										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" width="180" id="profilePicture" onerror="this.src='$webThemes/$siteName/images/default-profile.png'"/>##$userProfileImagePath
+										<input type="hidden" value="$userProfileImagePath" id="userProfileImagePath"/>
+									</div>
+								</div>
+								<div class="col-md-9 col-sm-6 col-xs-12">
+									<div class="userInfoWrap clearAfter">
+											<b>$!locale.get('form.label.userName'): </b><span>$!addressList.firstName $!addressList.lastName</span><br />
+											<b>$!locale.get('form.label.address'): </b><span>$!addressList.address1	<br/>
+											#if($addressList.address2)$!addressList.address2 <br/>#end
+											$!addressList.city, $!addressList.state<br/>
+											$!addressList.country, $!addressList.zipCode<br/></span>
+											<b>$!locale.get('form.label.phone'): </b><span>$!addressList.phoneNo</span><br />
+											<b>$!locale.get('form.label.email'): </b><span>$!addressList.emailAddress</span>
+											<div class="clearfix"></div>
+											<h4>Last Login: 
+											#if($!lastLogin && $!lastLogin.size()>0)
+											#foreach($loginDetails in $lastLogin.entrySet())
+											#if($!loginDetails.getKey() && $loginDetails.getKey().trim().toUpperCase()=="LASTLOGIN")
+											<span id="divLocal"></span>
+											<input type="hidden" id="divUTC" value="$loginDetails.getValue()" />
+											#end
+											#end
+											#else
+											N/A
+											#end
+										</h4>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="uploadImage_wrap clearAfter mTop-3">
+										<form id="profileImageForm" action="UploadProfileImage.slt" method="post" enctype="multipart/form-data">
+											<div id="cimm_customImageUpload" class="uploadImage">
+												<span>$!locale.get('product.heading.chooseProfilePicture')</span>
+												<input type="file" name="profileImage" id="profileImage"/>
+											</div>
+											<input type="submit" class="button pullLeft imgBtn" onclick="return validateImageUpload();" value="$locale.get('button.label.Upload')">
+											<input type="button" class="button imgBtn" value="Clear"  onclick="clearImage()"/>
+										</form>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="Address">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.billingAddress")
+							<a href="$locale.get('website.url.Address')"><i class="glyphicon glyphicon-edit"></i></a>
+							</h3>
+							<p>
+								<span>$!billAddress.customerName</span><br />
+								<span>$!billAddress.address1</span><br />
+								#if($billAddress.address2)<span>$!billAddress.address2</span><br />#end
+								<span>$!billAddress.city, $!billAddress.state</span><br />
+								<span>$!billAddress.country, $!billAddress.zipCodeStringFormat</span><br />
+								<span>$!billAddress.phoneNo&nbsp;<br />
+								$!billAddress.emailAddress</span>
+							</p>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.shippingAddress")
+							<a href="$locale.get('website.url.Address')"><i class="glyphicon glyphicon-edit"></i></a>
+							</h3>
+							<p>
+								<span>$!shipAddress.customerName</span><br />
+								<span>$!shipAddress.address1</span><br />
+								#if($shipAddress.address2)<span>$!shipAddress.address2</span><br />#end
+								<span>$!shipAddress.city, $!shipAddress.state</span><br />
+								<span>$!shipAddress.country, $!shipAddress.zipCodeStringFormat</span><br />
+								<span>$!shipAddress.phoneNo&nbsp;<br />$!shipAddress.emailAddress</span>
+							</p>
+						</div>
+					</div>
+					
+					#if($shipAddressList)
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="cimm_moduleHeadEnclosure mTop-3">
+								<h3 class="cimm_blockHeading mBottom-3">$locale.get("product.heading.shipAddressList")
+									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><i class="fa fa-lg fa-refresh"></i></a>
+									<span class="pullRight" id="progressBar">
+										#if($session.getAttribute("scynEntityStatus")!="Completed" && $session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
+										$!session.getAttribute("scynEntityStatus")
+										#end
+									</span>
+								</h3>
+								<table class="table table-bordered table-striped display rwd-table">
+									<thead>
+										<tr>
+											<th class="left">$locale.get("form.label.name")</th>
+											<th class="left">$locale.get("form.label.address")</th>
+											<th>$locale.get("form.label.city")</th>
+											<th>$locale.get("form.label.state")</th>
+											<th>$locale.get("form.label.zipCodes")</th>
+										</tr>
+									</thead>
+									<tbody>
+										#foreach($shipAddress in $shipAddressList)
+										<tr>
+											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.customerName</td>
+											<td class="alignLeft" data-th="$locale.get('form.label.address')">$shipAddress.address1<br />$!shipAddress.address2</td>		
+											<td data-th="$locale.get('form.label.city')">$shipAddress.city</td>
+											<td data-th="$locale.get('form.label.state')">$shipAddress.state</td>
+											<td data-th="$locale.get('form.label.zipCodes')">$shipAddress.zipCodeStringFormat</td>
+										</tr>
+									#end
+									</tbody>
+								</table>
+							</div>
+						</div>
+						</div>
+					#end
+				</div>
+				<div id="groups">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
+							#if($groupListData.size()>0)
+								#set($countProductGroup = 0)
+								<ul class="clearAfter">
+									#foreach($groupData in $groupListData)
+									#set($countProductGroup = $countProductGroup + 1)
+									<li>
+									#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
+									<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
+									$groupData.productListName
+									<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/></a>
+									#else
+									<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">$groupData.productListName </a>
+									#if($countProductGroup == 8)
+									#break
+									#end
+									#end
+									</li>
+									#end
+								</ul>
+								#if($countProductGroup > 8)
+								<a href='$locale.get("website.url.SavedGroup.Product")' class="button">$locale.get("product.label.viewMore")</a>
+								#end
+							#else
+								<p>$locale.get("product.label.noProductGroupAvailable")</p>
+							#end
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
+							#if($savedCartData.size()>0)
+								#set($countSavedGroup = 0)
+								<ul class="clearAfter">
+									#foreach($groupData in $savedCartData)
+									#set($countSavedGroup =$countSavedGroup + 1)
+									<li>
+									#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
+									<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
+									$groupData.productListName
+									<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/></a>
+									#else
+									#if($countSavedGroup == 8)
+									<!-- <p>
+									<a href='$locale.get("website.url.SavedGroup.Cart")' class="pullRight"><i class="fa fa-lg fa-plus"></i> &nbsp;$locale.get("product.label.more")</a>
+									</p> -->
+									#break
+									#end 
+									<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">
+									$groupData.productListName </a>                                       
+									#end
+									</li>
+									#end
+								</ul>
+								#if($countProductGroup > 8)
+								<a href='$locale.get("website.url.SavedGroup.Cart")' class="button"> $locale.get("product.label.viewMore")</a>
+								#end
+							#else
+								<p>$locale.get("product.label.noSavedCartAvailable")</p>
+							#end
+						</div>
+					</div>
+				</div>
+				<div id="order">
+					<div class="cimm_myorderModuls">
+						<div id="openOrderTable"> Loading please wait...</div>
+						<div id="orderHistory"> Loading please wait...</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-12 col-xs-12">
+		#if($recentlyOrderedItems.size()>0)	
+		<div class="cimm_sliderWrap">
+			<h3 class="cimm_blockTitle text-center"><label>$locale.get("product.label.recentlyOrderedItems")</label></h3>
+			<ul id="recentorders" class="cimm_caroWrap">
+			#foreach($recentOrders in  $recentlyOrderedItems)
+				<li>
+					<div class="cimm_slideItemImg">
+					#set($resentItemTitle = $!recentOrders.brandName+" "+$!recentOrders.manufacturerPartNumber)
+						<a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")$!resentItemTitle.replace(" ","-")'>
+							#if($recentOrders.imageType=="URL")
+							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$recentOrders.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+							#else
+							<img id="imageName$recentOrders.itemId" src="$detailImage$recentOrders.imageName" alt='$recentOrders.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+							#end
+						</a>
+					</div>
+					<div class="cimm_slideItemDesp text-center">
+						<ul>
+							<li><h5><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")$!resentItemTitle.replace(" ","-")' class="cimm_slideProdTitle">$resentItemTitle</a></h5>
+							</li>
+							<li>
+								<b>$locale.get("product.label.partNumber"): </b> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				#end
+			</ul>
+		</div>
+		#end
+	</div>
+</div>

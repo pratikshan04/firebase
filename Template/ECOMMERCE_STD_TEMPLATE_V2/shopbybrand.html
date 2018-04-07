@@ -1,0 +1,40 @@
+<div class="hiddenDiv"></div>
+<div class="row cimm_brandAtoZletters">
+	<div class="col-md-3 col-xs-12 pTop-2">
+		<input id="inputSearch" class="form-control" type="text" name="filterContent"  maxlength="100" placeholder="Search By Brand"/>
+	</div>
+	<div class="col-md-9 col-sm-6 col-xs-12">
+		<ul>
+			#set($!idxCnt = 1)
+			#foreach($manufactureIdx in $manufacturerIndex)
+			#if($idxCnt == $manufacturerIndex.size())
+			<li>
+				<a href="javascript:void(0);" class="ln-last" onclick="brandListScroll('$manufactureIdx');">$!manufactureIdx</a>
+			</li>
+			#else
+			<li>
+				<a href="javascript:void(0);" onclick="brandListScroll('$manufactureIdx');">$!manufactureIdx</a>
+			</li>
+			#end
+			#set($!idxCnt = $idxCnt+1)
+			#end
+		</ul>
+	</div>
+</div>
+
+<div class="row brandListCont">
+	<div class="col-md-12 col-xs-12">
+		#foreach($key in $brandListAsMap.keySet())
+		#set($branListByIndex = $brandListAsMap.get($key))
+		<div class="pBottom-2 brandsListRow" id="displayBrand_$key">
+			<h2>$key</h2>
+			<div class="row">
+				#foreach($brand in $branListByIndex)
+					<div class="col-md-3 col-sm-6 col-xs-12"><a href="/$!brand.brandId/brand/$!brand.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="sBlack">$!brand.brandName</a></div>
+				#end
+			</div>
+			
+		</div>
+		#end
+	</div>
+</div>

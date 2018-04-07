@@ -1,0 +1,7 @@
+.cimm_listGridTopControls .cimm_listGridTopRightCtrls form select, .cimm_listGridTopControls .cimm_listGridTopLeftCtrls form select {
+	padding: 12px 10px;
+}
+
+.cimm_filterAttributes dl dt i, .cimm_categoryDescription h3 span i, .checkOutAccordion dt h3 span i {
+	font-size: 22px;
+}

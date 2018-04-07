@@ -1,0 +1,11 @@
+#if($pageContent)
+<div id="cimm_static_block" class="cimm_staticPageWrap">
+	$!pageContent
+	<div class="clear"></div>
+</div>
+#else
+<div id="cimm_static_block" class="cimm_staticPageWrap">
+	$locale.get("staticpage.text.noContentAvailable")
+	<div class="clear"></div>             
+</div>
+#end

@@ -1,0 +1,48 @@
+<span class="cimm_searchForm">
+	<div class="cimm_searchWrapper">			
+		<input type="text" id="mobSearchStaticText" name="keyWord" value="#if($keyWord)$keyWord#else $locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  />
+		<a class="cimm_searchIcon mobRevealSearchOptions" title="$locale.get('product.label.search')">GO &raquo;</a>
+		<div class="clear"></div>
+		<div class="cimm_mobSearchOption" style="display: none;">
+            	<button type="button" class="button pullLeft" data-search="site" onclick="mobCustomSearch(this);" >Search Site</button>
+            	<button type="button" class="button pullRight" data-search="store" onclick="mobCustomSearch(this);" >Search Store</button>
+            </div>
+	</div>
+</span>
+
+<hr class="dividerLine" />
+
+<ul class="mobNavList">
+#foreach($topMenu in $topStaticMenu)
+<li><a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /Page/$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu <i class="fa fa-caret-down"></i></a>
+#if($topMenu.menuList && $topMenu.menuList.size()>0)
+<ul>
+#foreach($subStaticMenu in $topMenu.menuList)
+<li>
+<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /Page/$subStaticMenu.itemUrl #end #else javascript:void(0); #end">
+$subStaticMenu.level2Menu
+</a>
+</li>
+#end
+</ul>
+#end            
+</li>
+#end
+<li class="ShopAll">
+<a href="javascript:void(0);">Shop <i class="fa fa-caret-down"></i></a>
+
+	<ul>
+	#foreach($categoryMenu in $categMenu)
+	<li><a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">$categoryMenu.categoryName</a></li>
+	#end
+	</ul>
+
+</li>
+</ul>
+<hr class="dividerLine" />
+
+<ul class="mobNavList">
+<li><a href="http://vanmeterinc.devface.com/about/">About</a></li>
+<li><a href="http://vanmeterinc.devface.com/careers/">Careers</a></li>
+<li><a href="http://vanmeterinc.devface.com/contact/">Contact</a></li>
+<ul>

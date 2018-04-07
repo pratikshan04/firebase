@@ -1,0 +1,251 @@
+<div class="row">
+	<div class="col-md-8">
+	<div class="registerLeftBox">
+		<h5>
+			$!locale.get("register.lable.registerMesage1") $!siteDisplayName $!locale.get("register.lable.registerMesage2")
+		</h5>
+		<ul>
+			<li><i class="fa fa-check" aria-hidden="true"></i> $!locale.get("register.lable.orderQuickly")</li>
+			<li><i class="fa fa-check" aria-hidden="true"></i> $!locale.get("register.lable.saveYourFavoriteProducts")</li>
+			<li><i class="fa fa-check" aria-hidden="true"></i> $!locale.get("register.lable.ViewAndManageYourOrders")</li>
+		</ul>
+		<span class="accountSelectionWrap">
+			$!locale.get("register.lable.doYouHaveAccountNumber") $!siteDisplayName?
+			<label class="customRadioBtn">
+				<input type='radio' name='selectForm' value='#form1B' onclick="changeForm(this)" checked/>
+				<span>$!locale.get("product.label.yes")</span>
+			</label>
+			<label class="customRadioBtn">
+				<input type='radio' name='selectForm' value='#form2A' onclick="changeForm(this)"/>
+				<span>$!locale.get("product.label.no")</span>
+			</label>
+		</span>
+		
+		<div id="formWraper">
+			<form id="form1B" action="OnAccountReg.action" onsubmit="submitThisForm(this); return false;">
+				$!locale.get("register.text.newOnAccountWebStoreAccessRequest")
+				<br />
+				<div class="cimm_caption"><span class="required">*</span> $!locale.get("form.label.required")</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="accountNo1B">$!locale.get("form.label.accountNumber")<span class="text-danger"> * </span></label>
+							<input type="text" name="accountNo1B" id="accountNo1B" placeholder="$!locale.get('form.label.accountNumber')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.accountNumber')" maxlength="20" class="form-control"/>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="firstName1B">$!locale.get("form.label.firstName")<span class="text-danger"> * </span></label>
+							<input type="text" name="firstName1B" id="firstName1B" placeholder="$!locale.get('form.label.firstName')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.firstName')" maxlength="20" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="lastName1B">$!locale.get("form.label.lastName")<span class="text-danger"> * </span></label>
+							<input type="text" name="lastName1B" id="lastName1B" placeholder="$!locale.get('form.label.lastName')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.lastName')" maxlength="20" class="form-control"/>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="emailAddress1B">$!locale.get("form.label.email")<span class="text-danger"> * </span></label>
+							<input type="text" name="emailAddress1B" id="emailAddress1B" placeholder="$!locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$!locale.get('register1B.error.emailAddress')" data-invalid="$!locale.get('register.error.emailaddressinvalid')" class="form-control"/>
+							<small>$!locale.get("register.text.yourEmailAddressWillServeAsYourUserIDWhenLogin")</small>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="newPassword1B">$!locale.get("form.label.password")<span class="text-danger"> * </span></label>
+							<input type="password" name="newPassword1B" id="newPassword1B" autocomplete="off" placeholder="$!locale.get('form.label.password')" data-type="password" data-required="Y" data-error="$!locale.get('register1B.error.enterPassword')" data-invalid="$!locale.get('form.user.password.invalid')" class="form-control"/>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="newPasswordConfirm1B">$!locale.get("product.label.passwordConfirmation")<span class="text-danger"> * </span></label>
+							<input type="password" name="newPasswordConfirm1B" id="newPasswordConfirm1B" autocomplete="off" placeholder="$!locale.get('product.label.passwordConfirmation')" data-password="newPassword1B" data-type="password" data-required="Y" data-error="$!locale.get('register1B.error.passwordConfirmation')" data-invalid="$!locale.get('form.user.password.mismatch')" class="form-control"/>
+						</div>
+					</div>
+				</div>				
+		        <div>
+		        	<label class="customCheckBox">
+		        	<input type="checkbox" checked="checked" name="newsLetterSub1B" id="newsLetterSub1B" />
+					<span>$!locale.get("sentmailconfig.newslettersubscriptionform.subject").</span>
+					</label>
+		        </div>
+		        <div class="center">	
+					<label>$!locale.get("product.heading.byRegistering") $!siteDisplayName <a href="/Terms-and-Conditions" target="_blank"> $!locale.get("product.heading.termsOfUse")</a></label> 
+				</div>
+				<div class="cimm_formBtn clearAfter"><input type="submit" class="pullLeft button" id="RegisterWSA" value="$!locale.get('product.button.createAccount')" /></div>
+			</form>
+			<form id="form2A" method="post" action="CommercialReg.action" onsubmit="submitThisForm(this); return false;" class="hideMe">
+				<div class="cimm_caption"><span class="required">*</span> $!locale.get("form.label.required") </div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="firstName2A">$!locale.get("form.label.firstName")<span class="required"> * </span></label>
+							<input type="text" name="user.firstName" id="firstName2A" placeholder="$!locale.get('form.label.firstName')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.firstName')" maxlength="20" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="lastName2A">$!locale.get("form.label.lastName")<span class="required"> * </span></label>
+							<input type="text" name="user.lastName" id="lastName2A" placeholder="$!locale.get('form.label.lastName')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.lastName')" maxlength="20" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="companyName2A">$!locale.get("form.label.companyName")<span class="required"> * </span></label>
+							<input type="text" name="user.accountName" id="companyName2A" placeholder="$!locale.get('form.label.companyName')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.companyName')" maxlength="50" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="emailAddress2A">$!locale.get("form.label.email")<span class="required"> * </span></label>
+								<input type="text" name="user.address.emailId" id="emailAddress2A" placeholder="$!locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$!locale.get('register1B.error.emailAddress')" data-invalid="$!locale.get('register.error.emailaddressinvalid')" class="form-control" />
+							<small>$!locale.get("register.text.yourEmailAddressWillServeAsYourUserIDWhenLogin")</small>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="password2A">$!locale.get("form.label.password")<span class="required"> * </span></label>
+							<input type="password" name="user.password" id="password2A" autocomplete="off" placeholder="$!locale.get('form.label.password')" data-type="password" data-required="Y" data-error="$!locale.get('register1B.error.enterPassword')" data-invalid="$!locale.get('form.user.password.invalid')" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="confirmPassword2A">$!locale.get("form.label.confirmPassword")<span class="required"> * </span></label>
+							<input type="password" name="user.confirmPassword" id="confirmPassword2A" autocomplete="off" placeholder="$!locale.get('form.label.confirmPassword')" data-password="password2A" data-type="password" data-required="Y" data-error="$!locale.get('register1B.error.passwordConfirmation')" data-invalid="$!locale.get('form.user.password.mismatch')" class="form-control" />
+						</div>
+					</div>
+				</div>
+				#if($!internationalUser)
+				#if($!internationalUser=='Y')
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="chkInternationalUser2A" class="customCheckBox2">
+							<input id="chkInternationalUser2A" type="checkbox" name="chkInternationalUser2AB" onclick="RefreshPageForInternationalUser2AB();" /> <span>$!locale.get("register.text.checkIfYouAreInternationalCustomer")</span>
+						</label>
+					</div>
+				</div>
+				#end
+				#end
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="billingAddress2A">$!locale.get("form.label.address1")<span class="required"> * </span></label>
+							<input type="text" name="user.address.address1" id="billingAddress2A" placeholder="$!locale.get('form.label.address1')" data-type="text" data-required="Y" data-error="$!locale.get('register2A.error.enterAddress1')" maxlength="60" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="suiteNo2A">$!locale.get("form.label.address2")</label>
+							<input type="text" name="user.address.address2" id="suiteNo2A" placeholder="$!locale.get('form.label.address2')" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="cityName2A">$!locale.get("form.label.city")<span class="required"> * </span></label>
+							<input type="text" name="user.address.city" id="cityName2A" placeholder="$!locale.get('form.label.city')" data-type="text" data-required="Y" data-error="$!locale.get('register1B.error.enterCity')" maxlength="250" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="countryName2A">$!locale.get("form.label.country")<span class="required"> * </span></label>
+							<select name="user.address.country" id='countryName2A' data-type="select" data-state="stateName2A" data-required="Y" data-error="$!locale.get('register1B.error.selectCountry')" class="form-control"></select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="stateName2A">$!locale.get("form.label.state")<span class="required"> * </span></label>
+							<select name="user.address.state" id='stateName2A' data-type="select" data-required="Y" data-error="$!locale.get('register1B.error.selectState')" class="form-control"></select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="zipCode2A">$!locale.get("form.label.zipCode")<span class="required"> * </span></label>
+							<input type="text" name="user.address.zipCode" id="zipCode2A" class="formatZipCode form-control" placeholder="$!locale.get('form.label.zipCode')" data-type="text" data-required="Y" data-error="$!locale.get('register.label.zip')" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="phoneNo2A">$!locale.get("form.label.phone")<span class="required"> * </span></label>
+							<input type="text" name="user.address.phoneNumber" id="phoneNo2A" class="formatPhoneNumber form-control" placeholder="$!locale.get('form.label.phone')" data-type="number" data-required="Y" data-error="$!locale.get('register.label.phonenumber')" data-invalid="$!locale.get('checkoutwiz.error.phoneinvalid')" />
+						</div>
+					</div>
+				</div>		
+				
+				 <div>
+		        	<label class="customCheckBox">
+		        	<input type="checkbox" checked="checked" name="newsLetterSub2AB" id="newsLetterSub2AB" />
+					<span>$!locale.get("sentmailconfig.newslettersubscriptionform.subject") $!siteDisplayName $!locale.get("sentmailconfig.newsletter").</span>
+					</label>
+		        </div>
+		        
+		        <div>
+		        	<label class="customCheckBox">
+		        	<input type="checkbox" checked="checked"  />
+					<span>$!locale.get("sentmailconfig.iAmInterestedInOpening").</span>
+					</label>
+		        </div>
+		        
+				<div class="cimm_formBtn clearAfter">
+					<input type="submit"  class="pullLeft button" value="$!locale.get('product.button.submit')" />
+				</div>
+				<input type="hidden" name="countryFulNm2ABB" id="countryFulNm2A" />
+				<input type="hidden" name="sourceFormId" value="b2bNewAccount" />
+				<input type="hidden" name="locUser2AB" id="locUser2A" value="N" />
+				<input type="hidden" name="contactClassification2AB" id="contactClassification2A" value="" />
+			</form>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="registerRightBox">
+			<h6>$!locale.get("product.heading.alreadyHaveAnAccount") $!siteDisplayName ?</h6>
+			<ul>
+				<li><a href="$!locale.get('website.url.Login')">Login here</a></li>
+				<li><a href="ForgotLink.action">Forgot your password?</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="hideMe" id="b2bOnAccount">
+	<div class="afterRegInstructions">
+		<p><i class="fa fa-lg fa-info"></i> &nbsp;$!locale.get("register.label.WelcomeTo") $!siteDisplayName, $!locale.get("register.message.registerSuccessMessage")</p> 
+		<br />
+		<div class="clear"></div>
+		<a href='$!locale.get("website.url.Welcome")' class="button">$!locale.get("product.heading.home")</a>
+		<span id="RegCompleteLoginConti">
+		<a href="javascript:void(0);" onclick="showLogin();" class="button">$!locale.get("product.button.login")</a>
+		</span>
+		<div class="clear"></div>
+		<br />
+	</div>
+</div>
+
+<div class="hideMe" id="b2bNewAccount">
+	<div class="afterRegInstructions">
+		<p><i class="fa fa-lg fa-info"></i> &nbsp;$!locale.get("register.label.WelcomeTo") $!siteDisplayName, $!locale.get("register.message.retailRegisterSuccessMessage")</p> 
+		<br />
+		<div class="clear"></div>
+		<a href='$!locale.get("website.url.Welcome")' class="button">$!locale.get("product.heading.home")</a>
+		<span id="RegCompleteLoginConti">
+		<a href="javascript:void(0);" onclick="showLogin();" class="button">$!locale.get("product.button.login")</a>
+		</span>
+		<div class="clear"></div>
+		<br />
+	</div>
+</div>

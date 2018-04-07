@@ -1,0 +1,254 @@
+#set($home = $!locale.get('product.heading.home'))
+#if($!LayoutName=="NewShippingAddressPage" || $!LayoutName=="EditAddressPage")
+<h1 class="cimm_pageTitle"> #if($!type && $!type=='bill') $!locale.get("product.heading.billingAddress") #elseif($!type && $!type=='ship') $!locale.get("product.heading.shippingAddress") #else $!locale.get("breadcrumbs.label.$!LayoutName") #end</h1>
+<ul class="breadcrumb">
+	<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	<li><a href="$!locale.get('website.url.EditContactInfo')">$!locale.get("product.heading.editContactInfo")</a></li>
+	#if($!type && $!type=='bill')
+	<li>$!locale.get("product.heading.billingAddress")</li>
+	#elseif($!type && $!type=='ship')
+	<li>$!locale.get("product.heading.shippingAddress")</li>
+	#else
+	<li>$!locale.get("breadcrumbs.label.$!LayoutName")</li>
+	#end
+</ul>	
+#elseif($!LayoutName=="EventDetailPage" || $!LayoutName=="EventRegisterPage")
+<ul class="breadcrumb">
+	<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	<li><a href='/EventCalendar'>$!locale.get("product.heading.eventsAndClasses") </a></li><!-- /eventsUnit.action -->
+	#if($!eventsList.title)
+	<li>$!eventsList.title</li>
+	#else
+	<li>$!locale.get("breadcrumbs.label.$!LayoutName")</li>
+	#end
+</ul>
+#elseif($!LayoutName=="ProductGroupPage")
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+    <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+    <li><a href="/SavedGroups/Products"> $!locale.get("product.heading.myProductGroups")</a></li>
+    <li><span>$!savedGroupName</span></li>
+</ul>
+#elseif($!LayoutName=="ApproveCart")
+<h1 class="cimm_pageTitle">#if($!savedGroupName)$!savedGroupName #end</h1>
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+    <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+    <li><a href="/SavedGroups/ApproveCart"> $!locale.get("breadcrumbs.label.responseType.ApprovedCart")</a></li>
+    <li><span>$!savedGroupName</span></li>
+</ul>
+#elseif($!LayoutName=="SavedCartPage")
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+    <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+    #if($!isShared!="Y")
+    <li><a href="/SavedGroups/Cart"> $!locale.get("product.heading.mySavedCart")</a></li>
+    #else
+    <li><a href="/SavedGroups/Cart">$!locale.get("product.heading.sharedCart")</a></li>
+    #end
+    <li><span>$!savedGroupName</span></li>
+</ul>
+#elseif($!LayoutName=="SavedGroupsPage")
+	<h1 class="cimm_pageTitle">$!locale.get("breadcrumbs.label.responseType.$!responseType")</h1>
+	<ul class="breadcrumb">
+		<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+		<li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+		#if($!isShared=="Y")
+			<li>$!locale.get("product.heading.sharedCart")</li>
+		#else
+			<li>$!locale.get("breadcrumbs.label.responseType.$!responseType")</li>
+		#end
+	</ul>
+#elseif($!LayoutName=='SendThisPage')
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+    <li id="prodName"></li>
+    <li>$!locale.get("product.heading.share")</li>				
+</ul>
+#elseif($!LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
+	#if($!isStaticHomePage!="Y")
+	<h1 class="cimm_pageTitle">$!pageTitle</h1>
+	<ul class="breadcrumb">
+	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	    <li>$!pageTitle</li>
+	</ul>
+	#end
+#elseif($!LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
+	#set($listPageHeading = "")
+	#set($pageTitleBreadCrumbFirst = "" )
+	#set($pageTitleBreadCrumbLast = "" )
+	#set($finalPageTitle = "" )
+		#if($!breadCrumbList)
+			<ul class="breadcrumb">
+				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+				<li><a href="$!locale.get('website.url.ProductCategory')">$!locale.get("product.heading.productCategory")</a></li> 
+				#set($breadCrumbSize = $!breadCrumbList.size() )
+				#set($breadCrumbIdx = 1 )
+				#foreach($!breadCrumb in $!breadCrumbList)
+					#if($!breadCrumbIdx == $!breadCrumbSize)
+						#set($listPageHeading = $!breadCrumb.categoryName)
+						<li>$!breadCrumb.categoryName</li>
+					#else
+						<li><a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!breadCrumb.categoryName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!breadCrumb.categoryName</a></li>
+						#set($pageTitleBreadCrumbFirst = $!pageTitleBreadCrumbFirst+" "+ $!breadCrumb.categoryName)
+					#end
+					#set($pageTitleBreadCrumbLast = $!listPageHeading )
+					#set($breadCrumbIdx = $!breadCrumbIdx+1)
+					#if($!pageTitleBreadCrumbFirst && $!pageTitleBreadCrumbFirst!='')
+						#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + " - " + $!pageTitleBreadCrumbLast)
+					#else
+						#set ( $!finalPageTitle =$!pageTitleBreadCrumbLast)
+					#end
+				#end
+			</ul>
+		#else
+			<ul class="breadcrumb">
+				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+				<li>$!locale.get("product.heading.productCategory")</li>              
+			</ul>
+		#end
+		<!-- <h3 class="cimm_pageTitle">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h3> -->
+#elseif($!LayoutName=="ProductList")
+	#if($!breadCrumbList)
+	<ul class="breadcrumb">
+		<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+		<li><a href="$!locale.get('website.url.ProductCategory')">$!locale.get("product.heading.products")</a></li>
+		#if($!navigationType=='BRAND')
+			<li><a href="$!locale.get('website.url.Brands')">$!locale.get("product.heading.shopByBrands")</a></li>
+		#end
+        #if($!navigationType=='MANF')
+        <li><a href="ManufacturerLink.action">$!locale.get("navigation.label.shopBymanufacturer")</a></li>
+        #end
+		#set($breadCrumbSize = $!breadCrumbList.size() )
+		#set($breadCrumbIdx = 1 )
+		#set($LastSet = "" )
+		#set($FirstSet = "" )
+		#set($FirstSetCode = "" )
+		#set($pageTitleBreadCrumbLast = "" )
+		#set($pageTitleBreadCrumbFirst = "" )
+		#set($finalPageTitle = "" )
+		#set($shopByBrand = "" )
+		#foreach($!breadCrumb in $!breadCrumbList)
+			#if($!navigationType=='BRAND')
+	    		#if($!breadCrumbIdx == $!breadCrumbSize)
+					<li> $!breadCrumb.categoryName</li>
+					#set($LastSet = $!breadCrumb.categoryName )
+				#end
+			#elseif($!navigationType=='MANF')
+	    		#if($!breadCrumbIdx == $!breadCrumbSize)
+					<li> $!breadCrumb.categoryName</li>
+					#set($LastSet = $!breadCrumb.categoryName )
+				#end
+			#else
+				#if($!breadCrumbIdx == $!breadCrumbSize)
+					<li>$!breadCrumb.categoryName</li>
+					#set($LastSet = $!breadCrumb.categoryName )
+				#else
+					<li><a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!breadCrumb.categoryName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!breadCrumb.categoryName</a></li>
+					#set($FirstSet = $!breadCrumb.categoryName)
+					#set($FirstSetCode = $!breadCrumb.categoryCode )
+					#set($pageTitleBreadCrumbFirst = $!pageTitleBreadCrumbFirst+" "+ $!breadCrumb.categoryName)
+				#end
+			#end
+			#set($pageTitleBreadCrumbLast = $!LastSet )
+			#set($breadCrumbIdx = $!breadCrumbIdx+1)
+			#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + " - " + $!pageTitleBreadCrumbLast)
+		#end
+	</ul>
+	#end
+#elseif($!LayoutName=='ProductDetailPage')
+	<ul class="breadcrumb">
+		<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+		<li><a href="$!locale.get('website.url.ProductCategory')">$!locale.get("product.heading.products")</a></li>
+		#if($!breadCrumbList && $!breadCrumbList.size()>0)
+			#set($breadCrumbSize = $!breadCrumbList.size() )
+			#set($breadCrumbIdx = 1 )
+				#foreach($!breadCrumb in $!breadCrumbList)
+					#if($!breadCrumbIdx == $!breadCrumbSize)
+						<li>
+						#if($!breadCrumb.categoryName)
+							$!breadCrumb.categoryName
+						#else
+							$!itemData.manufacturerPartNumber
+						#end                                                           
+						</li>
+					#else
+						<li>
+							<a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!breadCrumb.categoryName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"> 
+								$!breadCrumb.categoryName
+							</a>
+						</li>
+					#end
+				#set($breadCrumbIdx = $!breadCrumbIdx+1)
+				#end
+		#else
+			<li>
+				<a href='$!locale.get("website.url.ProductCategory")'>$!locale.get("product.heading.products")</a>
+			</li>
+		#end
+	</ul>
+#elseif($!LayoutName=="PrintInvoicesPage")
+	#if($!orderHistoryDetailList.size() > 0)
+		<div class="cimm_pageTitle">
+			<div class="cimm_groupTitle">
+				<h1 class="cimm_pageTitle">$!locale.get("product.heading.InvoiceList")</h1>
+			</div>
+			<div class="cimm_groupManipulate">
+				<a href="javascript:void(0);" onclick="printInvoices();"><i class="fa fa-lg fa-print"></i> &nbsp; $!locale.get('product.button.printInvoices')</a>
+			</div>
+	    	<div class="clear"></div>
+		</div>
+	#else
+		<h1 class="cimm_pageTitle">$!locale.get("print.heading.Noinvoices")</h1>
+	#end
+	<ul class="breadcrumb">
+	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	    <li><a href='$!locale.get("website.url.OrderHistory")'>$!locale.get("product.header.CompletedOrders")</a></li>
+	    <li>$!locale.get("product.button.printInvoices")</li>
+	</ul>
+#elseif($!LayoutName=="OrderDetailPage")
+	<h1 class="cimm_pageTitle">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum) $!locale.get("product.label.orderNumber") $!orderDetail.orderNum #end #end</h1>
+	#if($orderDetail.orderStatus.contains("Bid"))
+    <h2 class="cimm_pageTitle">$!locale.get("product.heading.bidDetail")</h2>   
+    #elseif($!requestType != "openQuote")
+    <h2 class="cimm_pageTitle">$!locale.get("product.heading.orderDetail")</h2>     
+    #else
+    <h2 class="cimm_pageTitle">$!locale.get("product.heading.orderDetail")</h2>   
+    #end  
+	<ul class="breadcrumb">
+	 #if($!orderDetail && !$!orderDetail.orderStatus.toUpperCase().contains("INVOICE"))
+	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	    #if($!requestType && $!requestType=="openQuote")
+	    <li><span class="landingLink">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum) $!locale.get("product.label.orderNumber") $!orderDetail.orderNum #end #end</span></li>
+	    #else
+		    <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+		    #if($!orderDetail && $!orderDetail.orderStatus.contains("Bid"))
+		    	<li><a href="OpenOrderSale.action?reqType=BID&orderStatus=New">$!locale.get("product.heading.openBids")</a></li>
+		    #elseif($!orderStatus && $!orderStatus=="New")
+				<li><a href="OpenOrderSale.action?reqType=webOrder&orderStatus=New">$!locale.get("product.heading.openOrders")</a></li>
+		    #end
+		    #if($!orderStatus && $!orderStatus=="History")
+				<li><a href="$!locale.get('website.url.OrderHistory')">$!locale.get("product.header.CompletedOrders")</a></li>
+		    #end
+		    <li><span class="landingLink">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum)  #if($!orderDetail && $!orderDetail.orderStatus.contains("Bid")) $!locale.get("product.label.eclipsebidNumber") #else $!locale.get("product.label.orderNumber") #end $!orderDetail.orderNum #end #end</span></li>
+	    #end
+	 #end
+	</ul>
+#elseif($!LayoutName=="PunchoutConfig")
+<h1 class="cimm_pageTitle">$!locale.get("product.heading.configureProcurementSystem")</h1>
+	<ul class="breadcrumb">
+	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	    <li>$!locale.get("product.heading.configureProcurementSystem")</li>
+	</ul>
+#elseif($LayoutName!="ShipEntityPage")
+<h1 class="cimm_pageTitle">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
+	<ul class="breadcrumb">
+	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	    #if($!LayoutName=="OrderHistoryPage" || $!LayoutName=="AddresssesPage" || $!LayoutName=="EditContactPage")
+	    <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+	    #end
+	    #if($!locale.get("breadcrumbs.label.$!LayoutName"))
+	    	<li>$!locale.get("breadcrumbs.label.$!LayoutName")</li>
+	    #end
+	</ul>
+#end

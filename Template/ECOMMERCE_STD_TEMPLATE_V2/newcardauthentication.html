@@ -1,0 +1,40 @@
+#if($userLogin)
+	<h4 class="cimm_pageTitle">$locale.get("product.heading.addNewCreditCard")</h4>
+#else
+	<h1 class="cimm_pageTitle">$locale.get("product.heading.creditCardDetails")</h1>
+#end
+<form id="ccSubmitForm" action="processCheckout.action" method="post">
+	<input type="hidden" name="billEntityId" value="$billEntityId"/>
+ 	<input type="hidden" name="shipEntityId" value="$shipEntityId"/>
+	 <input type="hidden" name="defaultShipToId" value="$defaultShipToId"/>
+	 <input type="hidden" name="defaultBillToId" value="$defaultBillToId"/>
+	 <input type="hidden" name="savedGroupId" value="$savedGroupId"/>
+	 <input type="hidden" name="address1" value="$address1"/>
+	 <input type="hidden" name="address2" value="$address2"/>
+	 <input type="hidden" name="city" value="$city"/>
+	 <input type="hidden" name="state" value="$state"/>
+	 <input type="hidden" name="phone" value="$phoneNumber"/>
+	 <input type="hidden" name="email" value="$email"/>
+	 <input type="hidden" name="orderedBy" value="$orderedBy"/>
+	 <input type="hidden" name="orderStatus" value="$orderStatus"/>
+	 <input type="hidden" name="shipVia" value="$shipVia"/>
+	 <input type="hidden" name="reqDate" value="$reqDate"/>
+	 <input type="hidden" name="country" value="$country"/>
+	 <input type="hidden" name="shippingInstruction" value="$shippingInstruction"/>
+	 <input type="hidden" name="ccNumber" id="ccNumber" value=""/>
+	 <input type="hidden" name="cardHolder" id="cardHolder" value=""/>
+	 <input type="hidden" name="ccExp" id="ccExp" value=""/>
+	 <input type="hidden" name="ccTransactionId" id="ccTransactionId" value=""/>
+	 <input type="hidden" name="postalCode" id="postalCode" value=""/>
+	 <input type="hidden" name="streetAddress" id="streetAddress" value=""/>
+	 <input type="hidden" name="zipCode" id="zipCode" value="$zipCode"/>
+	 <input type="hidden" name="nickName" id="nickName" value="$nickName"/>
+	 <input type="hidden" name="ccType" id="ccType" value="" />
+</form> 		
+<iframe id="frameCont" src="$transactionUrl" width="100%" height="150" frameBorder="0">
+  <p>$locale.get("label.message.yourBrowserDoNotSupportIframes")</p>
+</iframe>
+<div id="loading" class="center">
+<img src="$webThemes/$siteName/images/brandloading.gif" alt='Brand Loading'/>
+<p>$locale.get("label.message.pleaseWaitWeAreProcesingYourRequest") </p><p>$locale.get("label.message.doNotPressRefreshOrBackButton")</p>
+</div>

@@ -1,0 +1,26 @@
+<div id="notificationDiv"> </div>
+<div class="cimm_siteTableEnclosure">
+	<table class="table table-striped table-bordered display rwd-table" id="DisablePurchaseAgent">
+	    <thead>
+	        <tr>
+	            <th>$locale.get("form.label.name")</th>
+	            <th>$locale.get("form.label.userName")</th>
+	            <th>$locale.get("form.label.email")</th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        #foreach($agentsList in $agentUserList)
+	            <tr class="odd">
+	                <td>$agentsList.firstName $agentsList.lastName</td>
+	                <td>$agentsList.userName</td>
+	                <td>$agentsList.emailAddress</td>
+	                <td class="center">
+	                    <a class="button" href="javascript:void(0);" onclick="disableAuthorization($agentsList.userId);"><i class="fa fa-lg fa-ban"></i> &nbsp;$locale.get("product.button.disable")</a>
+	                </td>
+	            </tr>
+	        #end
+	    </tbody>
+	</table>
+</div>
+<!---------------------------------Disable Purchasing Agent page ends---------------------------------->                               

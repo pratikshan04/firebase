@@ -1,0 +1,265 @@
+<div id="printOrderInvoices">
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		#if($requestType != "openQuote")
+		#if($orderDetail.orderStatus.contains("Bid"))
+		<h3 class="cimm_subheading">$!locale.get("product.label.bidStatus") - <span>#if($session.getAttribute("erpType") == "eclipse") #if($orderDetail.orderStatus)$!orderDetail.orderStatus #end #else #if($orderInformation.stage) $!orderInformation.stage #end #end</span></h3>
+		##elseif($!orderDetail.orderStatus.toUpperCase().contains("INVOICE"))
+		#else
+		<h3 class="cimm_subheading">$!locale.get("product.label.ordrStatus") - <span>#if($session.getAttribute("erpType") == "eclipse") #if($orderDetail.orderStatus)$!orderDetail.orderStatus #end #else #if($orderInformation.stage) $!orderInformation.stage #end #end</span></h3>
+		#end
+		#end
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<h4>$!locale.get('product.heading.orderDetail')</h4>
+		<p>
+            #if($orderDetail.orderNum)
+            	#if($orderDetail.orderStatus.contains("Bid"))
+            		<b>$!locale.get("product.label.eclipsebidNumber"): </b> $!orderDetail.orderNum<br />
+            	#else
+            		<b>$!locale.get("product.label.eclipseOrderNumber"): </b> $!orderDetail.orderNum<br />
+            	#end
+            #end
+            #if($orderDetail.orderDate)
+            <b>$!locale.get("form.label.orderDate"): </b> $!orderDetail.orderDate<br />
+            #end
+            #if($orderDetail.orderedBy )
+            <b>$!locale.get("form.label.orderedBy"): </b> $!orderDetail.orderedBy<br />
+            #end 
+            #if($orderDetail.poNumber)
+            <b>$!locale.get("product.label.poNumber"): </b> $!orderDetail.poNumber<br />
+            #end
+            #if($orderDetail.shipViaID)
+            <b>$!locale.get("form.label.shipVia"): </b> $!orderDetail.shipViaID<br />
+            #end  
+            #if($orderDetail.shipDate)
+            <b>$!locale.get("product.label.shipDate"): </b> $!orderDetail.shipDate
+            #end   
+        </p>
+	</div>
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<h4>$!locale.get("product.heading.billingAddress")</h4>
+		<p> 
+            #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
+            #if($requestType == "openQuote")<strong><span> $!orderDetail.billToName </span></strong><br />#end
+            <span>$!orderDetail.billAddress1 </span><br />
+            #if($orderDetail.billAddress2)<span>$!orderDetail.billAddress2 </span><br />#end
+            <span> $!orderDetail.billCity, $!orderDetail.billState</span>
+            <br />
+            <span> #if($orderDetail.billCountry)$!orderDetail.billCountry,#end $!orderDetail.billZipCode</span>
+            <br />
+            #if($orderDetail.billPhone)
+            <span>$!orderDetail.billPhone</span>
+            #end
+        </p>
+	</div>
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<h4>$!locale.get("product.heading.shippingAddress")</h4>
+		   <p>
+	            #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
+	            #if($requestType == "openQuote")<strong><span> $!orderDetail.shipToName </span></strong><br />#end
+	            <span>$!orderDetail.shipAddress1</span><br />
+	            #if($orderDetail.shipAddress2)<span>$!orderDetail.shipAddress2 </span><br />#end
+	            <span>$!orderDetail.shipCity, $!orderDetail.shipState</span>
+	            <br />
+	            <span>
+	            #if($orderDetail.Country)$!orderDetail.Country,#end $!orderDetail.shipZipCode</span>
+	            <br />
+	            #if($orderDetail.shipPhone)
+	            <span>$!orderDetail.shipPhone</span>
+	            #end
+	        </p>
+	</div>
+</div>
+#if($requestType != "openQuote")
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12">
+			#if($orderDetail.shippingInstruction)
+			<div>
+				<h4>$!locale.get("form.label.shippingInstructions")</h4>
+				<p>$!orderDetail.shippingInstruction </p>
+			</div>
+			#end
+	</div>
+	<div class="col-md-6 col-sm-6 col-xs-12">
+			#if($orderDetail.trackingInfo)
+			<div>
+				<h4>Shipping Links:</h4>
+				<!-- <p><a class="orangeClr" href='http://www.mapquest.com/maps?address=$!orderDetail.shippedAddress.Address1&country=$!orderDetail.shippedAddress.Country&city=$!orderDetail.shippedAddress.City&state=$!orderDetail.shippedAddress.State&zipcode=$!orderDetail.shippedAddress.ZipCode&redirect=true' target="_blank">Mapquest</a></p> -->
+				<p><a href='http://wwwapps.ups.com/etracking/tracking.cgi?InquiryNumber=$!orderDetail.trackingInfo&TypeOfInquiryNumber' target="_blank">UPS Tracking</a> </p>
+			</div>
+			#end
+	</div>
+</div>
+#end
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="hidden-lg hidden-md mBottom-3">
+			<label class="customCheckBox2">
+				<input type="checkbox" class="deviceSelectAllChkBox" onclick="deviceSelectAll();" data-selectall="CheckBox" />
+				<span class="selectLabel">$!locale.get("product.label.selectAll")</span>
+			</label>
+		</div>
+	</div>
+</div>
+<form name="reOrderForm" id="reOrderForm" method="post" onsubmit="return changeAction(9);">
+<div class="row marginY-3">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+            <table class="table table-striped table-bordered display rwd-table">
+                <thead>
+                    <tr>
+                        <th>$!locale.get("product.label.productDescription")</th>
+                        <th class="text-center">$!locale.get("product.label.quantityOrdered")</th>
+                        <th class="text-center">$!locale.get("product.label.quantityShipped")</th>
+                        <th class="text-center">$!locale.get("product.label.unitPrice")</th>
+                        <th class="text-center">$!locale.get("product.label.extPrice")</th>
+                       	##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
+                       	<th class="hideForPrint text-center"><div class="pgCheckboxWrap"><label for="chkSelectall" class="customCheckBox"><input type="checkbox" id="chkSelectall" name="chkSelectall" onclick="checkSelectAll(this)" data-selectall="CheckBox" /><span>$!locale.get("product.label.selectAll")</span></label></div></th>
+                       	##end
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    #foreach($orderItem in $orderItemList)
+                    <tr>
+                        <td class="text-left" data-th="$!locale.get('product.label.productDescription')">
+                        #if($requestType == "openQuote")
+						 <input type="checkbox" name="quotePartNumberSelected" value="$!orderItem.partNumber" id="chkSelect1$!orderItem.partNumber" checked style="display:none"/>
+						 #end
+                        <div>
+                            <ul>
+                            <li>
+                            <b>$!locale.get("product.label.partNumber"): </b> $!orderItem.partNumber</li>
+                            <li><a href="/searchPage.action?keyWord=$!orderItem.partNumber">$!orderItem.description</a></li>
+                            #set($eachLineItemComment = "")
+                            #if($orderItem.lineItemCommentsList.size() > 0)
+	                            <li><b>Line Item Comment: </b>
+									#foreach($!lineItemComment in $!orderItem.lineItemCommentsList)
+										$!lineItemComment <br>
+										 #set($eachLineItemComment = $!eachLineItemComment + $!lineItemComment)
+									#end
+	
+								</li>
+							#end
+							#if($orderItem.customerPartNumberList.size() > 0)
+	                            <li><b>Customer Part Number: </b>
+									#foreach($!customerPartNumberList in $!orderItem.customerPartNumberList)
+										$!customerPartNumberList.partNumber <br>
+									#end
+								</li>
+							#end
+                        </ul>
+                        </div>									  
+                        <input type="hidden" name="shortDesc_$!orderItem.partNumber" value="$!orderItem.description" />
+                        <input type="hidden" name="partNumber_$!orderItem.partNumber" value="$!orderItem.partNumber" />
+                        <input type="hidden" name="quotePartNumber" value="$!orderItem.partNumber" />
+                        <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.orderUom" />
+                        <input type="hidden" name="qty_$!orderItem.partNumber" value="$!orderItem.qtyordered" />
+                        <input type="hidden" name="price_$!orderItem.partNumber" value="$!orderItem.unitPrice" />
+                        <input type="hidden" name="total_$!orderItem.partNumber" value="$!orderItem.extPrice"/>
+                        <input type="hidden" name="lineitemcomment_$!orderItem.partNumber" value="$!eachLineItemComment"/>
+                        
+                        </td>
+                        <td data-th="$!locale.get('product.label.quantityOrdered')"><span>$!orderItem.qtyordered #if($requestType == "openQuote") $!orderItem.orderUom #end</span></td>
+                        <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyShipped</span></td>
+                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.unitPrice)</span></td>                        
+                        <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td> 
+                        ##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
+                        <td data-th="select">
+	                    	<label class="customCheckBox2">
+								<input type="checkbox" name="quotePartNumberSelected" value="$!orderItem.partNumber" id="chkSelect1$!orderItem.partNumber" onclick="eachCheckBox(this)" />
+								<span></span>
+							</label>
+						</td>
+						##end
+						 
+                    </tr>
+                    #end                    
+                <input type="hidden" name="defaultBillToId" value="$!defaultBillToId" />
+                <input type="hidden" name="defaultShipToId" value="$!defaultShipToId" />
+                <input type="hidden" name="erpQuoteNumber" value="$!orderId"/>
+                </tbody>        
+            </table>
+            </div>
+            </div>
+            <div class="row marginY-3">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="cimm_salesBottomStrip clearAfter">
+			  <ul>
+                    #if($orderDetail.subtotal>0)
+                     <li>
+                         <span class="priceLabel">$!locale.get("product.label.subTotal"): </span>
+                         <span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
+                     </li>  
+                    #end
+                    #if($orderDetail.tax > 0)
+                    <li>
+                         <span class="priceLabel">$!locale.get("product.label.tax"): </span>
+                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.tax) </span>
+                    </li>
+                    #end
+                    #if($orderDetail.freight>0)
+                    <li>
+                         <span class="priceLabel">$!locale.get("product.label.shipping"): </span>
+                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.freight) </span>
+                    </li>
+                    #end
+                    #if($orderDetail.handling>0)
+                    <li>
+                         <span class="priceLabel">$!locale.get("product.label.handlng"): </span>
+                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.handling)</span>
+                    </li>
+                    #end
+                    #if($orderDetail.discount>0)
+                    <li>
+                         <span class="priceLabel">$!locale.get("product.label.discount"): </span>
+                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
+                    </li>
+                    #end
+                    #if($orderDetail.total>0)
+                     <li>
+                         <span class="priceLabel">$!locale.get("product.label.total"): </span>
+                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</span>
+                    </li>
+                    #end
+               </ul>
+            </div>
+            </div>
+            </div>
+            <div class="row marginY-3">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="hideForPrint text-center">
+			##if(!$!orderDetail.orderStatus.contains("Bid")  && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
+				#if($requestType != "openQuote")
+					<input type="submit" id="reorderBtn" name="submit" class="button" value="$!locale.get('product.button.reOrder')" />
+					<input type="hidden" name="getPriceFrom" value="ERP"/>
+				#else
+					<input type="hidden" name="getPriceFrom" value="CART"/>
+					<input type="submit" id="reorderBtn" name="submit" class="button" value="$!locale.get('product.button.placeOrder')" />
+				#end
+			##end
+            </div>
+            <div class="clear"></div>
+            <br />
+	</div>
+</div>
+</form>
+</div>
+
+<script type="text/javascript">
+function checkSelectAll(chk){
+	if($(".deviceSelectAllChkBox").is(':checked')){
+		$(".deviceSelectAllChkBox").attr("checked",false);
+	}
+	else{
+		$(".deviceSelectAllChkBox").attr("checked",true);
+	}
+	var checked_status = chk.checked;
+	$("input:checkbox[name='quotePartNumberSelected']").each(function(){
+		this.checked = checked_status;
+	});
+}
+</script>
+     
+ 

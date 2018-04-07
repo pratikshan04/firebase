@@ -1,0 +1,22 @@
+#macro (detailPageHiddenFields $partNumber,$qty,$price,$uom,$saleQty,$ItemId,$brandName,$manufacturerPartNumber,$itemAvailability)
+<input type="hidden" id='priceSaleQty_$!partNumber' value='$!qty' /> 
+<input type="hidden" id='priceValue_$!partNumber' value='$!price' />
+<input type="hidden" id='unitPriceValue_$!partNumber' value='$!price' />  
+<input type="hidden" id='uomValue_$!partNumber' value='$!uom' /> 
+<input type="hidden" id='salesQtyVal_$!partNumber' value='$!saleQty' /> 
+<input type="hidden" id='itmId_$!ItemId' value='$!partNumber' /> 
+<input type="hidden" value="" id="hidden_id"/>
+<input type="hidden" value="" id="group_id"/>
+<input type="hidden" value="" id="hidden_idClone"/>
+<input type="hidden" value="" id="group_idClone"/>
+<input type="hidden" value="" id="group_name"/>
+<input type="hidden" id='packageQty_$!partNumber' value="$!packageQty" /> 
+<input type="hidden" id="itemName" value='$!brandName $!manufacturerPartNumber' />
+<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
+<input type="hidden" id="itemTxtAvail$!ItemId" value="$!itemAvailability"/>
+<input type="hidden" id="userId" value="$!userId" />
+<input type="hidden" value="$!partNumber" name="idListPrice" /> 
+<input type="hidden" id='branch_' value="" />
+<input type="hidden" id="tempItemId_$!partNumber" value="$!ItemId"/>
+<input type="hidden" id="MPNValue_$partNumber" value='$!manufacturerPartNumber' />
+#end

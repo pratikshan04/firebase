@@ -1,0 +1,446 @@
+#if($!eventsList && $!eventsList.title && $!eventsList!="")
+<div class="eventsSidebarWrap">	
+	<div class="eventRightContent">
+		<h3 class="cimm_pageTitle">$!eventsList.title</h3>
+		<ul class="eventInfoBlock pullLeft">
+			<li>
+				<b>$!locale.get("eventDetail.label.date"): </b>
+				#if($eventsList.date.substring(9,11).replaceAll('-','/') == $eventsList.end.substring(9,11).replaceAll('-','/'))
+					$!eventsList.date.substring(0,16).replaceAll('-','/')
+				#else
+					$!eventsList.date.substring(0,16).replaceAll('-','/') - $!eventsList.end.substring(0,16).replaceAll('-','/')
+				#end
+			</li>
+			<li><b>$!locale.get("eventDetail.label.time"): </b>$!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/')</li>
+			<li><b>$!locale.get("event.label.location"): </b>$!eventsList.location</li>
+			#if($eventsList.isCostRequired ==  "Y")
+			<li>
+				<b>$!locale.get("event.label.eventFee"): </b>$! $!eventCost
+			</li>
+			#end
+			<li class="event_desc">
+				$!eventsList.description
+			</li>
+			<li>
+				#if($eventsList.phoneNumber!= "")
+					<p><b>$!locale.get("event.label.moreInfoPleaseContact") <a href="mailto:$!eventsList.notification" class="mailtoLink">$!eventsList.contact</a> at <a href="tel:$!eventsList.phoneNumber">$!eventsList.phoneNumber</a></b></p>
+				#end
+			</li>
+		</ul>
+		<ul class="pullRight">
+			<li>
+				<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';"/>
+			</li>
+		</ul>
+		<div class="clear"></div>
+		<p><a href='/EventCalendar'>$!locale.get("event.label.backToEventsCalendar")</a><br/></p>
+		#if($eventsList.fileLocation)
+			#if($eventsList.fileLocation != "No Attachment")
+				<p class="mTop-3"><img src="$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>
+			#end
+		#end
+	</div>
+	<div class="eventsSidebar">        		
+		<p> $!locale.get("event.note.attendTheEvent") </p>
+		<br />
+		#if($eventsList.showSeats == "Y")
+		<input type="hidden" id="total" value="$!eventsList.totalSeats"/>
+		<table cellspacing="5" cellpadding="0">
+		#if($eventsList.totalSeats==-1)
+			 <tr>            		
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+				<td>$!locale.get("event.seats.unlimited")</td>
+			</tr>
+			#else
+			<tr>
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+	 			<td>$!eventsList.totalSeats</td>
+	 		</tr>
+			#end
+			#set($diff = $!eventsList.totalSeats - $!eventsList.availableSeats)
+			#if($eventsList.totalSeats == -1)
+			#elseif($diff < 0)
+			<tr>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span></b></td>
+				<td>0</td>
+			</tr>
+			#else
+			<tr>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span> </b></td>
+				<td>$!diff</td>
+			</tr>
+			#end
+		</table>
+		<br />
+		#end 
+		<div align="center" id="chkDate">
+			#if($eventsList.blockOnlineReg == "N")
+				#if($eventsList.totalSeats == "-1")
+					<a href="javascript:void(0)" class="button eventRegForm">$!locale.get("event.label.registerNow")</a>
+				#elseif($eventsList.availableSeats >= $!eventsList.totalSeats)
+					<a href="javascript:void(0)" class="button eventRegForm">$!locale.get("event.label.registerrForWaitingList")</a>
+				#else
+					<a href="javascript:void(0)" class="button eventRegForm">$!locale.get("event.label.registerNow")</a>
+				#end
+			#else
+				<a href="javascript:void(0);" class="button">$!locale.get("event.label.registerClosed")</a>
+			#end
+		</div>
+		<br />
+	</div>
+</div>
+	#if($eventsList.blockOnlineReg == "N")
+	<div class="row mTop-4 hideMe" id="eventRegForm">
+		<div class="col-md-4-sm-12 col-xs-12">
+				<form id="eventForm">    
+					<input TYPE="hidden" NAME="NotificationName" VALUE='EventsMail'/>
+					<input TYPE="hidden" NAME="SaveToDb" VALUE='Y'/>
+					<input TYPE="hidden" NAME="SendMail" VALUE='N'/>
+					<input TYPE="hidden" NAME="Subject" VALUE=''/>    
+					<input type="hidden" name="eventID" id="eventID" value="$!eventsList.id">
+					<input type="hidden" name="totalSeats" value="$!eventsList.totalSeats">
+					<input type="hidden" name="bookedSeats" value="$!eventsList.bookedSeats">
+					<input type="hidden" name="eventTitle" value="$!eventsList.title">
+					<div id="notificationDiv"></div>
+					<!-- <div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<p>$!siteDisplayName $!locale.get("event.label.siteNameSeminarRegisterationForm")</p> 
+							<p>$!locale.get("event.label.completeTheFormInstruction")<span class="text-danger"> * </span> $!locale.get("event.label.aretext-danger")</p>
+						</div>
+					</div> -->
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="event_rigistration_box">
+								<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.label.coursePrSeminarRegestration")</h3>
+								<ul class="cimm_eventDetail">
+									<li><b>$!locale.get("event.label.eventName"): </b><span>$!eventsList.title</span></li>
+									<li><b>$!locale.get("event.label.dateAndTime"): </b>
+									<span>
+										#if($eventsList.date.substring(9,11).replaceAll('-','/') == $!eventsList.end.substring(9,11).replaceAll('-','/'))
+										$!eventsList.date.substring(0,16).replaceAll('-','/')
+										#else
+										$!eventsList.date.substring(0,16).replaceAll('-','/') - $!eventsList.end.substring(0,16).replaceAll('-','/')
+										#end
+										<!-- <div id="tm">  -->
+										 / ;$!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/') 
+										<!-- </div> -->
+									</span></li>
+									<li><b>$!locale.get("event.label.location"): </b><span>$!eventsList.location</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.heading.registrantInformation")</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.firstName")<span class="text-danger"> * </span></label>
+								<input name="contactFirstName" class="form-control" type="text" maxlength="50" id="contactFirstName" size="30" value='$!addressList.firstName'/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.lastName")<span class="text-danger"> * </span></label>
+								<input name="contactLastName" class="form-control" type="text" maxlength="50" id="contactLastName" size="30" value='$!addressList.lastName'/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.title") <!-- <span class="text-danger"> * </span> --></label>
+								<input name="jobTitle" class="form-control" type="text" maxlength="100" id="jobTitle" size="30"/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.company")<span class="text-danger"> * </span></label>
+								<input name="companyName" class="form-control" type="text" maxlength="60" id="companyName" size="30"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.streetAddress") <span class="text-danger"> * </span></label>
+								<input name="contactAddress1" class="form-control" type="text" maxlength="200" id="contactAddress1" size="30" value='$!addressList.address1'/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.addressContd") </label>
+								<input name="contactAddress2" class="form-control" type="text" maxlength="200" id="contactAddress2" size="30" value='$!addressList.address2'/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.city") <span class="text-danger"> * </span></label>
+								<input name="contactCity" class="form-control" type="text" maxlength="50" id="contactCity" size="30" value='$!addressList.city'/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.country")<span class="text-danger"> * </span> : </label>
+								<select id="countrySelect" name="contactCountry" data-state="stateSelect" class="selectpicker"></select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.stateOrprovince")<span class="text-danger"> * </span></label>
+								<select id="stateSelect" name="contactState" class="selectpicker" data-live-search="true"></select>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.zipPostalCode")<span class="text-danger"> * </span></label>
+								<input name="contactPoBox" class="form-control formatZipCode" type="text" maxlength="20" size="10" id="contactPoBox" value='$!addressList.zipCode'/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label> $!locale.get("event.label.companymainphone") <span class="text-danger"> * </span></label>
+								<input name="contactPhone" class="form-control formatPhoneNumber" type="text" id="contactPhone" value='$!addressList.phoneNo'/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label> $!locale.get("event.label.contactPhone") <span class="text-danger"> * </span></label>
+								<input name="contactMobilePhone" class="form-control formatPhoneNumber" type="text" maxlength="20" size="20" id="contactMobilePhone"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.fax")</label>
+								<input name="faxNumber" class="form-control" type="text" maxlength="30" size="20" id="faxNumber"/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group">
+								<label>$!locale.get("event.label.email")<span class="text-danger"> * </span></label>
+								<input name="contactemailAddress" class="form-control" type="text" maxlength="50" size="30" id="contactemailAddress" value='$!addressList.emailAddress' />
+							</div>
+						</div>
+					</div>
+					<div class="row">	
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							$!locale.get("event.label.ifContactInfoDifferentFromRegistrantInfo") <span><b><a data-toggle="collapse" data-target="#test">$!locale.get('product.label.clickHere')</a></b> $!locale.get('product.label.toAddContactInfo')</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="collapse marginY-4" id="test">
+								<h3 class="cimm_pageTitle">$!locale.get("event.label.additionalInformation")</h3>  
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.firstName")<span class="text-danger"> * </span></label>
+											<input type="text" class="form-control" maxlength="50" size="30" value="" name="addFirstName" id="addFirstName" />
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.lastName")<span class="text-danger"> * </span></label>
+											<input type="text" class="form-control" maxlength="50" size="30" value="" name="addLastName" id="addLastName" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.title")</label>
+											<input type="text" class="form-control" maxlength="100" size="30" value="" name="title1" id="title1" />
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.company") <span class="text-danger"> * </span></label>
+											<input type="text" class="form-control"size="30"  maxlength="60" value="" name="addCompany" id="addCompany" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.streetAddress") <span class="text-danger"> * </span></label>
+											<input type="text" class="form-control" size="30" value="" maxlength="200" name="addStreetAddr" id="addStreetAddr" />
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.addressContd") <span class="text-danger"> * </span></label>
+											<input type="text" class="form-control"  size="30" value="" maxlength="200" name="addStreetAddr1" id="addStreetAddr1" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.city") <span class="text-danger"> * </span> : </label>
+											<input type="text" class="form-control" size="30" value="" maxlength="50" name="addCity" id="addCity" />
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.country") <span class="text-danger"> * </span></label>
+											<select id="countrySelectShip" name="addCountry" data-state="stateSelectShip" class="selectpicker"></select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.stateOrprovince") <span class="text-danger"> * </span></label>
+											<select id="stateSelectShip" name="addState" class="selectpicker"  data-live-search="true"></select>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.zipPostalCode") <span class="text-danger"> * </span></label>
+											<input type="text" class="form-control formatZipCode" value="" name="addPostal" id="addPostal"/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.companymainphone")<span class="text-danger"> * </span></label>
+											<input type="text" class="form-control formatPhoneNumber" value="" name="addWorkPhone" id="addWorkPhone"/>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.contactPhone")<span class="text-danger"> * </span></label>
+											<input type="text" class="form-control formatPhoneNumber" size="20" maxlength="20" value="" name="addContactMobilePhone" id="addContactMobilePhone"/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.fax")</label>
+											<input type="text" class="form-control" maxlength="30"  size="20" value="" name="addFax" id="addFax" />
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>$!locale.get("event.label.email") <span class="text-danger"> * </span></label>
+											<input type="text" class="form-control" size="30"  maxlength="50" value="" name="addEmail" id="addEmail" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Hidden form -->
+					#if($eventCost!=0)       
+					<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.label.billingInformation")</h3>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<label>$!locale.get("event.label.methodOfPayment")<span class="text-danger">*</span></label>
+							<select name="paymentOption" id="paymentOption" onchange="return showPOText();" class="selectpicker">
+								<option> $!locale.get("event.select.selectPaymentMode") </option>
+								<option value="Credit Card" >$!locale.get("event.select.creditCard")</option>
+								<option value="Purchase Order">$!locale.get("event.select.purchaseOrder")</option>
+							</select>
+							 <b class="blockElement mTop-2">$!locale.get("event.label.cost"): $!$!eventCost</b>
+						</div>		
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<label>$!locale.get("event.label.PONumber") <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" maxlength="20" size="20" value="" name="purchaseOrderNumber" id="purchaseOrderNumber" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group mTop-3">
+								<p class="text-center">$!locale.get("event.label.morePaymentoptionContact")<a> $!locale.get("user.label.customerSupport") </a> or call 1(234)566-7897</p>	
+							</div>
+						</div>
+					</div>
+					#end
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group mTop-4">
+								<b class="blockWrap">$!locale.get("event.label.howCanWeContactYou") </b>
+								<label class="customCheckBox2" for="contactMail">
+									<input type="checkbox" id="contactMail" name="howToContact" value="E"/>
+									<span>$!locale.get("event.label.email")</span>
+								</label>
+								<label class="customCheckBox2" for="contactPhoneCheck">
+									<input type="checkbox" id="contactPhoneCheck" value="P"/>
+									<span>$!locale.get("form.label.phone")</span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="form-group mTop-4">
+								<label>$!locale.get("event.label.commentsOrSpecialInstructions")</label>
+								<textarea cols="40" rows="7" class="form-control" maxlength="100" id="registrantNote" name="registrantNote"> </textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group text-center">
+								<label class="customCheckBox2" for="newsLetterContactUs">
+									<input type="checkbox" checked="checked" name="newsLetterContactUs" id="newsLetterContactUs">
+									<span>$!locale.get("register.label.signMeUp") $!siteDisplayName $!locale.get("register.label.newsLetter")</span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							#if(!$!userLogin)
+							<div class="form-group text-center">
+								<label>$!locale.get("event.label.entertheTextInTheBox")<span class="text-danger">*</span> : </label>
+								<img id="captchaImg" src="CaptchaServlet.slt" alt="captchaImg" width="220px" height="60px" /> <br />
+							</div>
+							<div class="form-inline text-center">
+								<div class="form-group">
+									<input id="jcaptcha" class="form-control" name="jcaptcha" type="TEXT" />
+									<button type="button" class="cimm_inlineButton" name="jcaptchaRefresh" id="refreshbtn" onclick="refreshjcaptcha();">$!locale.get('eventRegister.captcha.changeImage')</button>
+								</div>
+							</div>
+							#end		
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group text-center mTop-4">
+								<input type="submit" value="$!locale.get('eventRegister.label.submitForm')" id="buttonGrad" class="button" name="eventRegbtn" onclick="return validateEventReg($!userLogin);" />
+								<input class="button" type="reset" value="$!locale.get('eventRegister.label.resetForm')" />
+								<input name="hasCaptcha" value="Y" type="hidden" >
+							    <input type="hidden" value="" id="add_info" name="add_info"/>
+							    <!-- <input type="hidden" value="" id="howToCntct" name="howToCntct"/> -->
+							    <input type="hidden" name="countryFulNmShip" id="countryFulNmShip"/>
+								<input TYPE="hidden" NAME="formName" VALUE='events'/>
+								<input type="hidden" name="eventStateId" id="eventStateId" value="$!addressList.state"/>
+							</div>		
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>
+	#end
+#else
+	$!locale.get('product.label.noDataAvailable')
+#end
+<script>
+	var D1 = "$!eventsList.date";
+	var D2 = new Date();
+	if ((new Date(D1).getTime()) <= (new Date(D2).getTime())) {
+		$("#chkDate").html('<a href="javascript:void(0);" class="button">$!locale.get("event.label.registerClosed")</a>');
+	}
+</script>

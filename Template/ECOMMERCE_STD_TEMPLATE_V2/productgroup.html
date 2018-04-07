@@ -1,0 +1,303 @@
+#parse("Macros/listPageMacro.vm")
+<input type="hidden" value="" id="hidden_id"/>
+<input type="hidden" value="" id="group_id"/>
+<input type="hidden" value="" id="group_name"/>
+<input type="hidden" value="#if($homeTeritory)$homeTeritory#end" id="HomeTer" />
+<input type="hidden" id="userId" value="$userId" />
+<input type="hidden" id="displayPriceLabel" name="displayPriceLabel" value="N"/>
+#if($!savedGroupName && $!savedGroupName!="" && $!savedGroupId)
+	<div id="notificationDiv"></div>
+	<div class="row mBottom-3">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<h1 class="cimm_pageTitle mBottom-0" id="groupName">$savedGroupName</h1>					
+			<div class="form-inline" id="editBox" style="display: none;">
+				<input type="hidden" value="$savedGroupName" id="oldGroupName" />
+				<input type="hidden" value="$savedGroupId" id="GroupId" />
+				<input type="hidden" value="P" id="GroupType" />
+				<input type="text" id="editedName" value="$savedGroupName" maxlength="25" class="form-control">
+				<button class="cimm_inlineButton" onclick="editGroupName();" id="groupNameSaveBtn">$!locale.get('savedCart.button.save')</button>
+				<button class="cimm_inlineButton" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12 text-right">
+			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('group.button.groupName')</button>
+			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('product.listOrgroup.name')</button>
+			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint cimm_inlineButton" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><i class="fa fa-lg fa-print"></i> <b>$locale.get("product.button.print")</b> </a> -->
+		</div>
+	</div>
+	<div class="row mBottom-3">
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			<select class="form-control selectpicker" onchange="bulkActions(this);" id="bulkActionSelect">
+				<option value="">$!locale.get("product.option.select")</option>
+				<option value="deleteOption">$!locale.get("product.button.deleteSelected")</option>
+				<option value="updateOption">$!locale.get("product.button.updateSelected")</option>
+				<option value="addSelectedOption">$!locale.get("product.button.addSelectedItemsToCart")</option>
+			</select>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
+			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="form-inline">
+				<label>$!locale.get('product.label.itemsperpage'): </label>
+				<div class="form-group">
+				<input type="hidden" name="savedGroupId" value="$savedGroupId" />
+				<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
+				<input type="hidden" name="sortBy" value="$!sortBy"/>
+				<input type="hidden" name="pageNo" value="$pageNo" />
+				<select name="resultPage" id="resultPage" class="form-control selectpicker quantity" onchange="PageItemsChange();">
+					<!-- <option value="-1">Select</option> -->
+					<option value="12" #if($resultPage=='12') selected #end >12</option>
+					<option value="24" #if($resultPage=='24') selected #end >24</option>
+					<option value="48" #if($resultPage=='48') selected #end >48</option>
+				</select>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
+			<form action="myProductGroupPage.action" id="sortByForm" class="form-inline">
+				<label>$!locale.get('product.label.sortBy'): </label>
+				<div class="form-group">
+					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
+					<input type="hidden" value="$savedGroupName" name="savedGroupName" />
+					<input type="hidden" name="resultPage" value="$resultPage" />
+					<input type="hidden" value="$reqType" name="reqType"/>
+					#if($searchkeyWord)
+					<input type="hidden" name="searchkeyWord" value="$searchkeyWord" />
+					#end
+					<input type="hidden" name="pageNo" value="$pageNo" />
+					<select name="sortBy" id="sortByBrand" onchange="sortByManuPartNo();" class="form-control selectpicker">
+						<option value="">-- Select --</option>
+						<!--  <option value="ProdNameA" #if($sortBy=='ProdNameA') selected #end >Brand (A-Z)</option>
+						<option value="ProdNameB" #if($sortBy=='ProdNameB') selected #end >Brand (Z-A)</option> -->
+						<option value="PartA" #if($sortBy=='PartA') selected #end >Part Number (Asc)</option>
+						<option value="PartD" #if($sortBy=='PartD') selected #end >Part Number (Desc)</option>
+						<option value="MPNA" #if($sortBy=='MPNA') selected #end >Manf Part# (Asc)</option>
+						<option value="MPND" #if($sortBy=='MPND') selected #end >Manf Part# (Desc)</option>
+						<!--  <option value="CPNDesc" #if($sortBy=='CPNDesc') selected #end >CPN (Desc)</option>
+						<option value="CPNAsc" #if($sortBy=='CPNAsc') selected #end >CPN (Asc)</option>
+						<option value="UpcA" #if($sortBy=='UpcA') selected #end >UPC (Asc)</option>
+						<option value="UpcD" #if($sortBy=='UpcD') selected #end >UPC (Desc)</option>
+						<option value="DescA" #if($sortBy=='DescA') selected #end >Description (Asc)</option>
+						<option value="DescD" #if($sortBy=='DescD') selected #end >Description (Desc)</option> -->
+					</select>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row mBottom-3">
+		<div class="col-md-9 col-sm-6 col-xs-12">
+			<div class="form-inline">
+				<form action="myProductGroupPage.action" id="productSearchForm" class="form-group">
+					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
+					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
+					<input type="hidden" name="resultPage" value="$resultPage" />
+					<input type="hidden" name="sortBy" value="$!sortBy"/>   
+					<input type="hidden" name="pageNo" value="$pageNo" />
+					<input type="hidden" value="$reqType" name="reqType"/>
+					<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" id="searchkeyWord"/>
+					<input type="text" class="form-control" placeholder="Search" id="searchKey" value="$!searchkeyWord" onkeypress="return runScript(event);"  maxlength="25" />
+					<button class="cimm_inlineButton" id="searchBtn" onclick="return validateProductSearch();">$locale.get('search.label.go')</button>
+					<button class="cimm_inlineButton" id="clearsearchBtn" onclick="return clearProductSearch();">$locale.get('search.label.clearSearch')</button>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<select onchange="hideAndShowViews();" name="views" id="views" class="form-control selectpicker">
+				<option id="expandView" value="collapse">$!locale.get("content.view.collapseView")</option>
+				<option id="collapseView" class="active" value="expand">$!locale.get("content.view.expandView")</option>
+			</select>
+		</div>
+	</div>
+	#if($paginate>1)
+	<div class="pgnation hideForPrint groupPgnation"></div>
+	#end
+	<div class="hidden-lg hidden-md mBottom-3">
+		<label class="customCheckBox2">
+			<input type="checkbox" class="deviceSelectAllChkBox" onclick="deviceSelectAll();" data-selectall="CheckBox" />
+			<span>$!locale.get("product.label.selectAll")</span>
+		</label>
+	</div>
+		<form action="updateGroupItemsPage.action" method="post" id="productGroupForm">       
+			<table class="table rwd-table table-striped table-bordered display">
+				<thead>
+					<tr>
+						<th class="text-center">$!locale.get("product.label.Image")</th>
+						<th class="text-left">$!locale.get("product.label.productDescription")</th>
+						<!-- <th>$locale.get("product.heading.substituteItem")</th> -->
+						<th class="text-center">$!locale.get("form.label.tableQty")</th>
+						<th class="text-center">$!locale.get("product.label.yourprice")</th>
+						<th class="text-center">$!locale.get("product.label.extPrice")</th>
+						<th class="text-center"><div class="pgCheckboxWrap"><label for="chkSelectall" class="customCheckBox"><input type="checkbox" id="chkSelectall" name="chkSelectall" onclick="checkSelectAll(this)" data-selectall="CheckBox" /><span>$!locale.get("product.label.selectAll")</span></label></div></th>
+					</tr>
+				</thead>
+				<tbody class="text-center">
+					#if($productListData && $productListData.size()>0)
+					#foreach($itemData in $productListData)
+					#set($itemTitle= $itemData.brandName+" "+ $itemData.manufacturerPartNumber)
+					<tr itemscope itemtype="http://schema.org/Product">
+						<td data-th="$locale.get('product.label.Image')">							
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+								<span id="imageName$itemData.itemId">
+								#if($itemData.imageType=="URL")
+								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								#else
+								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								#end
+								</span>
+							</a>
+						</td>
+						<td data-th="$locale.get('product.label.productDescription')">
+							<ul class="text-left">
+								<li itemprop="name">
+									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a>
+								</li>
+								<li class="hideForCollapse hideMe">
+									<p itemprop="description">$!itemData.shortDesc </p>
+								</li>
+								<li>
+									#if($itemData.manufacturerPartNumber)
+									<p itemprop="mpn"><b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span></p>
+									#end
+									<p itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span>$!itemData.partNumber</span></p>
+									#if($itemData.upc)
+									<p itemprop="sku"><b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span></p>
+									#end
+								</li>
+								#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
+									<li itemprop="sku" class="hideToHover">
+										<b>$!locale.get("product.label.cpn"): </b>
+										<span>
+										#if($itemData.customerPartNumber)$!itemData.customerPartNumber, #end
+										#if($itemData.customerPartNumberList.size()>0)
+										#set($seperator = "")
+										#set($partList = "")
+										#foreach($!customerPart in $!itemData.customerPartNumberList)
+										#set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end#if($customerPart.partNumber)$!customerPart.partNumber#end")
+										#set($seperator = ", ")
+										#end
+										#if( $!partList.length() > 85)
+										$!partList.substring(0, 85)...
+										#else
+										$!partList
+										#end
+										#end
+										</span>
+									</li>
+								#end
+								#if($itemData.availQty>0)
+					    			<b>$!locale.get("product.label.available"): </b>
+									<span>$!itemData.availQty</span>
+					    		#else
+					    			<span class='text-danger'>Call for Availability</span>
+					    		#end
+								<!-- ##if($itemData.itemAvailability && $!itemData.itemAvailability>0)
+								<li>
+									<b>$!locale.get("product.label.available"): </b>
+									<span>$!itemData.itemAvailability</span>
+								</li>
+								  	##end -->
+								#if($itemData.availQty>0)
+					    		<b>$!locale.get("product.label.available"): </b>
+								<span>$!itemData.availQty</span>
+					    		#else
+					    		<span class='text-danger'>Call for Availability</span>
+					    		#end
+								#set($leadTime = "N")
+								#set($available = "N")
+								#set($allBranch = $itemData.branchAvail)
+								#foreach($eachBranch in $allBranch)
+								#if($eachBranch.branchID==$session.getAttribute("shipBranchId"))
+								#if($eachBranch.branchAvailability=="0")
+								#if($eachBranch.earliestMoreDays>0)
+								#set($leadTime = $eachBranch.earliestMoreDays)
+								#else
+								#set($leadTime = $eachBranch.plentyDays)
+								#end
+								#else
+								#set($available = $eachBranch.branchAvailability)
+								#end
+								#break
+								#end
+								#end
+								#if($leadTime!="N")
+								<li class="productLeadTime_$itemData.partNumber" id="leadTimes" >
+									<b>$!locale.get("product.label.leadTime"): </b><span class="orangeClr leadTime_$itemData.partNumber">$!leadTime Days</span>
+								</li>
+								#elseif($available!="N")
+								<li class="productAvail_$itemData.partNumber" id="leadTimes" >
+									<b>$!locale.get("product.label.availableQuantity"): </b><span class="Avail_$itemData.partNumber">$!available</span>
+								</li>
+								#end
+							</ul>
+						</td>
+						<!-- <td data-th="$locale.get('product.heading.substituteItem')">
+							<ul class="group_substitutes">
+							#set($linkedItems = $itemData.linkedItemsList)
+							#foreach($LinkedItemData in $linkedItems.get("Substitute"))
+							#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
+							<li>
+							<a href="$hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+							</li>
+							#end
+							</ul>
+						</td> -->
+						<td data-th="$locale.get('form.label.tableQty')">
+							#if($itemData.qty<$itemData.minOrderQty)
+							<input type="text" id="itemTxtQty$itemData.itemId" class="quantity" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.minOrderQty" maxlength="6" />
+							#else
+							<input type="text" id="itemTxtQty$itemData.itemId" class="quantity" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="6" />
+							#end
+						</td>
+						<td data-th="$locale.get('product.label.yourprice')" class="tabelPrice">
+							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$webThemes/$siteName/images/loading.gif" /></span> -->
+							#if($itemData.price > 0)
+							<span data-select='extPriceData' class='priceSpan'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
+							#else
+							<span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price </span>
+							#end
+							<em>#if($!itemData.qtyUOM && $itemData.qtyUOM.length() > 0 && $itemData.price > 0) / $!itemData.qtyUOM #end</em>
+							##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
+							<input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber"/>
+							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>
+							<input type="hidden" name="shoppingCartId" value="$itemData.productListId"/>
+							<input type="hidden" name="lineItemIdList" id="tempItemId_$itemData.partNumber" value="$itemData.itemId"/>
+							<input type="hidden" name="idListItem" value="$itemData.partNumber"/>
+							<input type="hidden" name = "price" id='priceValue_$itemData.partNumber' value='$itemData.price' />
+							<input type="hidden" name="itemPriceIdList" value="$itemData.itemPriceId" />	
+							<input type="hidden" name="shopqty" id="shopqty$itemData.productListId" value="$itemData.qty" />
+							<input type="hidden" name="itempriceid" id="itempriceid$itemData.productListId" value="$itemData.itemPriceId" />
+							<input type="hidden" name="partnumberStr" id="PartNumber$itemData.productListId" value="$itemData.partNumber" />
+							<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty$itemData.productListId"/>
+							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval$itemData.productListId" name="orderQuantityInt"/>
+						</td>
+						<td data-th="$locale.get('product.label.extPrice')">
+							<span class='priceSpan'>#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #else N/A #end</span>
+						</td>
+						<td data-th="$locale.get('form.label.select')">
+							<label class="customCheckBox2">
+								#set($addToCartCheckFlag = "N")
+								#if($itemData.price>0)
+									#set($addToCartCheckFlag = "Y")
+								#end
+								<!-- <input type="checkbox" name="idList" value="$itemData.productListId" id="chkSelect1$itemData.partNumber" data-addtocartflag="$addToCartCheckFlag" onclick="eachCheckBox(this)"/> -->
+								<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId"/>
+								<span></span>
+							</label>
+						</td>
+					</tr>
+					#end
+					#else
+					<tr>
+						<td colspan="6">No results found</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			<input type="hidden" value="$savedGroupId" name="savedGroupId"/>
+			<input type="hidden" value="$reqType" name="reqType" id="reqType"/>
+		</form>
+	#if($paginate>1)
+		<div class="pgnation hideForPrint groupPgnation"></div>
+	#end
+#else
+	<p>$locale.get("productGroup.label.NoSavedProductGroupsAvailable")</p>
+#end

@@ -1,0 +1,881 @@
+#if($!responseType)
+	#if($responseType=="ProductGroupList")
+		#if($allItemData)
+			<div class="productGroupPopWrap">
+				<div class="addToCartHeaderContent">
+		            <h3 class="cimm_pageTitle" id="addToCartHeaderContent">$!locale.get('marketBasket.button.addToProductGroup')</h3>
+		        </div>
+		        <div id="multipleProductGroupContent">
+			        <div class="addNewPgWrap">
+			        		<input type="text" id="newProductGroupName"/>
+			        		<input type="button" class="button" onclick="BulkAction.addNewProductGroup()" value="Add New Group" />
+			        	<div class="clear"></div>
+			        </div>
+			        <div class="existingPgListWrap">
+			        	<h4>Existing Product Group</h4>
+			        	<ul>
+			        		#foreach($!pListDate in $!productListData)
+				        		<li>
+			        				<label for="Pgroup_$!pListDate.productListId" class="customCheckBox"><input type="checkbox" id="Pgroup_$!pListDate.productListId" class="multipleProuctGroupCheckbox" data-listid="$!pListDate.productListId" data-listname="$!pListDate.productListName"/><span>$!pListDate.productListName</span></label>
+				        		</li>
+			        		#end
+			        	</ul>
+			        </div>
+			        <div class="selectedItemsWrap">
+			        	<h4>Selected Items</h4>
+			        	<div class="itemsList">
+			        		#set($itemIndex = 0)
+			        		#foreach($!itemData in $!userItemData)
+			        			#set($eachItemData = $!allItemData.get($!itemData.itemId))
+			        			#set($idText = $!itemIndex+"_"+$!itemData.itemId)
+				        		<div class="row" id="multipleItemCart_$!idText">
+				        			<div class="col-md-2 col-sm-12 col-xs-12">
+				        				<div class="selectedItemImg alignCenter">
+					        			#if($!eachItemData.imageType=="URL")
+					                        <img src="$!eachItemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+										#else 
+											<img src="$!detailImage$!escapeTool.url($!eachItemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+					                    #end
+				        				</div>
+				        			</div>
+				        			<div class="col-md-8 col-sm-12 col-xs-12">
+				        				<div class="selectedItemDesc">
+						        			#if($!eachItemData.partNumber && $!eachItemData.partNumber!="")
+							        			<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachItemData.partNumber</p>
+							        		#end
+							        		#if($!eachItemData.manufacturerPartNumber && $!eachItemData.manufacturerPartNumber!="")
+							        			<p><strong>$!locale.get("product.label.mpn"): </strong>$!eachItemData.manufacturerPartNumber</p>
+							        		#end
+						        			<div class="clear"></div>
+					        			</div>
+				        			</div>
+				        			<div class="col-md-2 col-sm-12 col-xs-12">
+				        				<a href="javascript: void(0);" data-toggle="tooltip" title="Remove Item From List"  class="delBtn alignCenter" onclick="BulkAction.cancelAddToCart($!itemData.itemId, $itemIndex)"><i class="fa fa-lg fa-times-circle"></i></a>
+				        			</div>
+				        		</div>
+				        		#set($itemIndex = $itemIndex+1)
+				        	#end
+			        	</div>
+			        </div>
+			        <div class="alignCenter submitProductGroup">
+			        	<a href="javascript:void(0);" onClick="BulkAction.processMyProductGroup();" class="button">Add</a>
+			        	<a href="javascript:void(0);" onClick='jQuery("#productGroupPopup").hide();'class="button" >Cancel</a>
+			        </div>
+		        </div>
+			</div>
+		#else
+			#if($!fromPage == "fileUpload")
+				<li><input type="text" maxlength="25" onkeypress="return noenter()" onkeyup="if(event.keyCode == 13){addItemList(this.value,0);}"/></li>
+			#else
+				<li><input type="text" maxlength="25" onkeypress="return noenter()" placeholder="$!locale.get('product.label.enterNewGroupName')" onkeyup="if(event.keyCode == 13){addToProductList(this.value,0);}"/></li>
+			#end
+			#foreach($!pListDate in $!productListData)
+				<li><a id="$!pListDate.productListId" onclick="addToProductList('',this.id);" data-groupName="$!pListDate.productListName">$!pListDate.productListName</a></li>
+			#end
+		#end
+	#end
+	#if($responseType=="CartGroupList")
+		<li><input type="text" maxlength="25" onkeyup="if(event.keyCode == 13){submitSaveCart(this.value,0,this);return false;}" placeholder="Enter New Saved cart Name"/></li>
+		#foreach($!pListDate in $!productListData)
+			<li><a id="$!pListDate.productListId" onclick="submitSaveCart('',this.id,this);" data-groupName="$!pListDate.productListName">$!pListDate.productListName</a></li>
+		#end
+	#end
+	#if($!responseType=="CustomerPartNumberList")
+		<li><input type="text" maxlength="25" id="newCustomerPartNumber" name="newCustomerPartNumber" value="$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')" onkeyup="if(event.keyCode == 13){manageCustomerPartNumber(this);}" onfocus="if(this.value=='$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')'){this.value='';}" onblur="if(this.value==''){this.value='';this.value='$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')';}" onkeypress="return runScriptAddCustPnum(event);"/></li>
+		#foreach($!customerpartNumber in $!customerPartNumberList)
+		<li>
+			<label class="customCheckBoxRight"> 
+				<input type="checkbox" id="$!customerpartNumber.idList" name="customPartNumList" value="$!customerpartNumber.partNumber"/>
+				<span class="CPN_Sel">$!customerpartNumber.partNumber</span>
+			</label>
+		</li>
+		#end
+		<li class="clearAfter">
+			<button type="button" id="add" class="button" onclick="manageCustomerPartNumber(this)">ADD</button>
+			#if($!customerPartNumberList.size()>0)
+				<button type="button" id="update" class="button" onclick="manageCustomerPartNumber(this)">Update</button>
+				<button type="button" id="remove" class="button" onclick="manageCustomerPartNumber(this)">Remove</button>
+			#end
+		</li>
+	#end
+	#if($!responseType=="quickOrder" || $!responseType=="STD")
+		#foreach($!resData in $!resultData)
+			$!resData.itemId|$!resData.PartNumber|$!resData.shortDesc|$!shoppingCartCount|$!responseType --
+		#end
+	#end
+	#if($!responseType=="MultipleAddToCart")
+	<script>
+		if(jQuery(".cartCountDisplayLi > a > .cartCountrefresh").length>0){
+			jQuery(".cartCountrefresh").html("($!cartCount) $!locale.get('product.label.items')");
+		}else{
+			jQuery(".cartCountDisplayLi").addClass("ItemsInCart");
+			jQuery(".cartCountDisplayLi").html('<a href="$!locale.get("website.url.ShoppingCart")"><i class="fa fa-shopping-cart"></i><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount $!locale.get("header.label.items")</span></a>')
+		}
+	</script>
+	#if($!productListData.get(0).requestType=="SEPERATE" || $!productListData.get(0).requestType=="UPDATE")
+		#set($singleItem=$!productListData.get(0))
+		#set($eachData = $!itemDetailData.get($!singleItem.itemId))
+		#if($!eachData.manufacturerPartNumber != "" && $!eachData.manufacturerPartNumber)
+			#set($itemTitle = $!eachData.brandName+" "+$!eachData.manufacturerPartNumber)
+		#else
+			#set($itemTitle = $!eachData.brandName)
+		#end
+		#if($singleItem.status=="Y")
+			<div class="row">
+				<div class="col-md-2 col-sm-6 col-xs-12">
+					#if($eachData.imageType=="URL")
+						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+					#else
+						<img src="$!detailImage$!escapeTool.url($!eachData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+					#end										
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="mulAddtoCartDesp">
+						<p class="mulBrandTitle">$!itemTitle</p>
+						#if($!eachData.partNumber && $!eachData.partNumber!="")
+							<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachData.partNumber</p>
+						#end
+						#if($!eachData.manufacturerPartNumber && $!eachData.manufacturerPartNumber!="")
+							<p><strong>$!locale.get("product.label.mpn"): </strong>$!eachData.manufacturerPartNumber</p>
+						#end
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="mulAddtoCartStatus alignCenter">
+						<p class="text-success"><i class="fa fa-check-circle"></i> Added Successfully.</p>
+					</div>
+				</div>
+			</div>
+		#else
+			<div class="row">
+				<div class="col-md-2 col-sm-6 col-xs-12">
+					#if($!eachData.imageType=="URL")
+						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+					#else
+						<img src="$!detailImage$!escapeTool.url($!eachData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+					#end										
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="mulAddtoCartDesp">
+						<p class="mulBrandTitle">$!itemTitle</p>
+						#if($!eachData.partNumber && $!eachData.partNumber!="")
+							<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachData.partNumber</p>
+						#end
+						#if($!eachData.manufacturerPartNumber && $!eachData.manufacturerPartNumber!="")
+							<p><strong>$!locale.get("product.label.mpn"): </strong>$!eachData.manufacturerPartNumber</p>
+						#end
+						<p><strong>$!locale.get("product.label.minorderqty"): </strong>$!eachData.minOrderQty</p>
+						<p><strong>$!locale.get("product.label.qtyinterval"): </strong>$!eachData.orderInterval</p>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="mulAddtoCartStatus alignCenter">
+						<p class="error"><i class="fa fa-exclamation-triangle"></i> Min Order / Qty Interval Error</p>
+						<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
+						<!-- <form> -->
+						<span>Qty</span>
+						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.unitPrice" data-uom="$!eachData.uom" />
+						<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
+						<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update"/>
+						<input type="button" class="button" value="cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" />
+						<!-- </form> -->
+					</div>
+				</div>
+			</div>
+		#end
+	#else
+		<div class="mulAddTocartWrap">
+			<div class="addToCartHeaderContent clearAfter">
+				<h3 class="cimm_pageTitle pullLeft">$!locale.get('product.heading.myCart')</h3>
+				<div class="cartTotalCount pullRight">
+					<p><i class="fa fa-lg fa-shopping-cart"></i>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">$!cartCount Items</span>#else 0 Items #end</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="muladdtoCartItemsWrap">
+				#if($!productListData.size()>0)
+					#set($itemIndex = 0)
+					#foreach($!eachCartData in $!productListData) 
+						#set($eachData = $!itemDetailData.get($!eachCartData.itemId))
+						#if($!eachData.manufacturerPartNumber != "" && $!eachData.manufacturerPartNumber)
+							#set($itemTitle = $!eachData.brandName+" "+$!eachData.manufacturerPartNumber)
+						#else
+							#set($itemTitle = $!eachData.brandName)
+						#end
+						#if($!eachCartData.status=="Y")
+							<div class="row">
+								<div class="col-md-12">
+									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
+									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
+										<div class="row">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												#if($!eachData.imageType=="URL")
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+												#else
+													<img src="$!detailImage$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+												#end											
+											</div>
+											<div class="col-md-4 col-sm-6 col-xs-12">
+												<div class="mulAddtoCartDesp">
+													<p class="mulBrandTitle">$!itemTitle</p>
+													#if($!eachData.partNumber && $!eachData.partNumber!="")
+													<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachData.partNumber</p>
+													#end
+													#if($!eachData.manufacturerPartNumber && $!eachData.manufacturerPartNumber!="")
+													<p><strong>$!locale.get("product.label.mpn"): </strong>$!eachData.manufacturerPartNumber</p>
+													#end
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12">
+												<div class="mulAddtoCartStatus alignCenter">
+													<p class="text-success"><i class="fa fa-check-circle"></i> Added Successfully.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						#elseif($!eachCartData.status=="EXIST")
+							<div class="row">
+								<div class="col-md-12">
+									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
+									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
+										<div class="row">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												#if($!eachData.imageType=="URL")
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+												#else
+													<img src="$!detailImage$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+												#end											
+											</div>
+											<div class="col-md-4 col-sm-6 col-xs-12">
+												<div class="mulAddtoCartDesp">
+													<p class="mulBrandTitle">$!itemTitle</p>
+													#if($!eachData.partNumber && $!eachData.partNumber!="")
+														<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachData.partNumber</p>
+													#end
+													#if($!eachData.manufacturerPartNumber && $!eachData.manufacturerPartNumber!="")
+														<p><strong>$!locale.get("product.label.mpn"): </strong>$!eachData.manufacturerPartNumber</p>
+													#end
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12">
+												<div class="mulAddtoCartStatus alignCenter">
+													<p class="alreadyExist"><i class="fa fa-question-circle"></i> Item already in the cart</p>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachCartData.orderInterval" data-minorderqty="$!eachCartData.minOrderQty" data-price="$!eachCartData.unitPrice" data-uom="$!eachCartData.uom" data-itemindex="$!itemIndex"/>
+													<input type="button" class="button" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="Combine" />
+													<input type="button" class="button" data-requestype="SEPERATE"  data-itemid="$!eachData.itemId"  onclick="BulkAction.processSeperateOrCombine(this)" value="Seperate" />
+													<input type="button" class="button" value="Cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)"/>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						#else
+							<div class="row">
+								<div class="col-md-12">
+									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
+									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
+										<div class="row">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												#if($!eachData.imageType=="URL")
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+												#else
+													<img src="$!detailImage$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+												#end											
+											</div>
+											<div class="col-md-4 col-sm-6 col-xs-12">
+												<div class="mulAddtoCartDesp">
+													<p class="mulBrandTitle">$!itemTitle</p>
+													#if($!eachData.partNumber && $!eachData.partNumber!="")
+														<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachData.partNumber</p>
+													#end
+													#if($!eachData.manufacturerPartNumber && $!eachData.manufacturerPartNumber!="")
+														<p><strong>$!locale.get("product.label.mpn"): </strong>$!eachData.manufacturerPartNumber</p>
+													#end
+													<p><strong>$!locale.get("product.label.minorderqty"): </strong>$!eachData.minOrderQty</p>
+													<p><strong>$!locale.get("product.label.qtyinterval"): </strong>$!eachData.orderInterval</p>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12">
+												<div class="mulAddtoCartStatus alignCenter">
+													<p class="error"><i class="fa fa-exclamation-triangle"></i> Min Order / Qty Interval Error</p>
+													<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
+													<!-- <form> -->
+													<span>Qty</span>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.unitPrice" data-uom="$!eachData.uom"  data-itemindex="$!itemIndex"/>
+													<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
+													<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update" disabled="disabled"/>
+													<input type="button" class="button" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" value="cancel" />
+													<!-- </form> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>				
+						#end 
+						#set($itemIndex = $!itemIndex+1)
+					#end
+				#else 
+					No Items to Display 
+				#end
+			</div>
+			<div class="popCheckout clearAfter"> 
+				<a href="javascript:void(0);" onclick='BulkAction.removeSliderAfterAddToCart();' class="pullLeft button">$!locale.get("product.button.continueShopping")</a>
+				<a href='$!locale.get("website.url.ShoppingCart")' class="pullRight button">$!locale.get("product.heading.viewCart")</a> 
+			</div>
+			#if($!productListData.size()>0)
+				<span class='text-danger'>Note: Cannot add <i class="fa fa-phone fa-lg"></i> for Price items to cart</span>
+			#end
+		</div>
+	#end
+	#end
+#end
+	#if($!responseType=="recentlyViewed")
+		#if($!itemDataList.size()>0)
+			#set($count = 0)
+			#set($c = $!itemDataList.size())
+			#foreach($!item in $!itemDataList)
+				#set($c = $!c - 1)
+				#set($item = $!itemDataList.get($!c))
+				#set($itemProductTitle = $!item.brandName+" "+$!item.manufacturerPartNumber)
+				#if($!item.altPartNumber2.length() > 0)
+					#set($itemProductTitle = $!item.altPartNumber2)
+				#elseif($!item.productName.length() > 0)
+					#if($!item.productName.length() > 30)
+						#set($itemProductTitle = $!item.productName.substring(0, 30)+"...")
+					#else
+						#set($itemProductTitle = $!item.productName)
+					#end
+				#elseif($!itemProductTitle.length() > 30)
+					#set($itemProductTitle = $!itemProductTitle.substring(0, 30)+"...")
+				#end
+	<!-- 			#set($itemTitle=$!item.productName+" "+$!item.manufacturerPartNumber) -->
+				<li itemscope itemtype="http://schema.org/Product">
+					<div class="cimm_caroImgDespWrap">
+						<div class="cimm_slideItemImg">
+							<a data-select="itemAnchor" href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+								<span data-select="imageSpanToSetID">
+									#set($itemImg = $!item.imageName.replace('%26','&amp;') )
+									#if($itemData.imageName.toUpperCase().contains("HTTP"))
+										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
+									#else
+										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!detailImage$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
+									#end
+								</span>
+							</a>
+						</div>
+						<div class="cimm_slideItemDesp">
+							<ul>
+								<li>
+									<h4 itemprop="name">
+										<a class="productTitle" data-select="itemAnchor" data-selectName="setItemName"  title="$!item.productName : $!item.partNumber"  href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+											$!itemProductTitle
+										</a>
+									</h4>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			#end
+		#end
+	#end
+	#if($responseType && $responseType=="itemSuggest")
+	#parse("Macros/itemDetailPageMacro.vm")
+		#if($queryString!="CATNAV")
+		<div class="autocomplete-header clearAfter">
+			<div class="parent-title">
+				Recommended Products for <b>$!queryString</b>
+				<a href="/$!BrandIDSelected/brand/$!queryString" class="button">$!locale.get('product.label.shopAll')</a>
+			</div>
+		</div>
+		#end
+		#foreach($productListData in $itemLevelFilterData)
+		#set($itemTitle = $!productListData.brandName+" "+$!productListData.manufacturerPartNumber)
+		<div class="cat-product clearAfter">
+			<div class="cat_img">
+				#if($productListData.imageType=="URL")
+				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!productListData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
+				#else
+				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!detailImage$!escapeTool.url($!productListData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
+				#end
+			</div>
+			<div class="info">
+				<div class="ac_titleWrap">
+					<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!productListData.itemId"> $!itemTitle</a>
+					#if($!productListData.shortDesc.length()>55)
+					<p id="itemShortDesc$!productListData.itemId">$!productListData.shortDesc.substring(0, 55) ...</p>
+					#else
+					<p id="itemShortDesc$!productListData.itemId">$!productListData.shortDesc</p>
+					#end
+				</div>
+				<div class="ac_priceWrap">
+					<div>
+						#if($!userLogin)
+							<b>$!locale.get('product.label.yourprice'): </b>
+						#else
+							<b>$!locale.get('product.label.price'): </b>
+						#end
+						<span id="span_$!itemData.partNumber" data-select='priceData'>
+							#if($!productListData.price>0)
+								$$!numberTool.format($!pricePrecisionFormate,$!productListData.price)
+							#else
+								<span class="text-danger">$!locale.get('product.label.callforprice')</span>
+							#end
+						</span>
+					</div>
+					<span>
+						<b>$!locale.get('product.label.qty'): </b>$!productListData.minOrderQty
+						<input type="hidden" name="itemTxtQty$!productListData.itemId"  maxlength="6" value="$!productListData.minOrderQty" id="itemTxtQty$!productListData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
+					</span>
+					#if($productListData.price > 0)
+					<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!productListData.partNumber" data-itemId="$!productListData.itemId" data-itemPriceId="$!productListData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+					#detailPageHiddenFields($!productListData.partNumber.replaceAll('\s+','_'),$!productListData.qty,$!productListData.price,$!productListData.salesUom,$!productListData.saleQty,$!productListData.ItemId,$!productListData.brandName,$!productListData.manufacturerPartNumber,$!itemAvailability)
+					#end
+				</div>
+			</div>
+		</div>
+		#end
+	#end
+	#if($responseType && $responseType=="customerAlsoViewed")
+	 #if($customerAlsoViewedItemList.size()>0) 
+	 	#set($customerViewItemCount = 0)
+	   <div id="customerAlsoViwedDiv">
+	   #foreach($customerViewed in $customerAlsoViewedItemList)
+	   #set($customerViewedItemTitle = $!customerViewed.brandName+" "+$!customerViewed.manufacturerPartNumber) 
+		<li itemscope itemtype="http://schema.org/Product">
+			<div class="cimm_linkItemImg">
+			<a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!customerViewedItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+				<img itemprop="image" id="imageName$!customerViewed.itemId" src="$!customerViewed.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+			</a>
+			</div>
+			<div class="cimm_linkItemDesp">
+				<ul>
+					<li>
+						<h4 itemprop="name">
+					 	 <a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!customerViewedItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!customerViewedItemTitle</a>
+						</h4>
+					</li>
+				</ul>
+			</div>  
+		</li>
+			#set($customerViewItemCount = $!customerViewItemCount+1)
+			#if($customerViewItemCount==5)
+		   		#break
+		    #end      
+	   #end
+	   </div>
+	 #end
+	#end
+	
+	#if($responseType=="loadPage")
+	#parse("Macros/defaultMacro.vm")
+	#parse("Macros/listPageMacro.vm")
+	#listAndGridSwap($!navigationType,$!hostName,$!keyWord,$!srchTyp,$!narrowKeyword,$!varPsid,$!escapeTool.url($!attrFilterList),$!filterList,$!sortBy,$!resultPage,$!pageNo,$!codeIdSkip,$!levelNoSkip,$!brandId,$!keyWordTxt,$!pageViewMode)
+	#listPageHeading($!navigationType,$!keyWord,$!heading)
+	#listPageFormUrls($!navigationType)
+	#foreach($!itemData in $!itemListData) 
+	#set($itemTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+	<li class="listView newPageScrolled" data-getchangemode='getchangemode' itemscope itemtype="http://schema.org/Product">
+		<ul class="gridFixHeight #if($itemData.productItemCount<1)test#end clearAfter">
+			<li class="sessionImg">
+				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					<div class="prodImage">
+						#if($itemData.imageType=="URL")
+							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+						#else
+							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!detailImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+						#end
+						#if($itemData.clearance=="Y")
+							<span class="clearenceTag">Clearence</span>
+						#end
+					</div>
+				</a>
+				<div class="checkToCompare hideForDevice">
+					<label class="customCheckBox">
+						<input type="checkbox" value="$!itemData.itemPriceId" name="compareId" id="check_$!itemData.itemPriceId" onclick="compareItemList(this);"/>
+						<span><a href="javascript:void(0);" onclick="compareItems();">$!locale.get("product.heading.compare")</a></span>
+						<input type="hidden" value="imageName$!itemData.itemId" id="imgId_$!itemData.itemPriceId" />
+						<input type="hidden" value="itemTitle$!itemData.itemId" id="titleId_$!itemData.itemPriceId" /> 
+						<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
+					</label>
+				</div>
+			</li>
+			#if($itemData.productItemCount>1)
+				<!-- Product Mode -->
+				<li class="sessionDesp">
+					<h3 class="productTitle" itemprop="name">
+						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
+						#if($itemData.productName && $!itemData.productName.length() > 1) #if($itemData.productName.length() > 22) title="$!itemData.productName" #end #else #if($itemTitle.length() > 22) title="$!itemTitle" #end #end>
+							#if($itemData.productName && $!itemData.productName.length() > 1)
+								#if($itemData.productName.length() > 22)
+									$!itemData.productName.substring(0, 22)... 
+								#else
+									$!itemData.productName
+								#end
+							#else
+								#if($itemTitle.length() > 22)
+									$!itemTitle.substring(0, 22)... 
+								#else
+									$!itemTitle
+								#end
+							#end
+						</a>
+					</h3>
+					<div class="listGridItemDesc clearAfter">
+						#if($itemData.productDescription && $!itemData.productDescription.length() > 1)
+							<p itemprop="description" id="itemShortDesc$!itemData.itemId">$!itemData.productDescription</p>
+						#else
+							<p itemprop="description" id="itemShortDesc$!itemData.itemId">$!itemData.shortDesc</p>
+						#end
+					</div>
+					<div class="itemCountList">
+						<button class="button" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"> $!itemData.productItemCount More Choices </button>
+						<form class="multiSelectForm"  id="multiFilterAttributeForm$!itemData.itemPriceId">
+							<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
+							<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
+							<input type="hidden" name="attrFilterList" id="multiFilterAttrList_$!itemData.itemPriceId"  value='' />
+							<input type="hidden" name="resultPage" id="resultPage_$!itemData.itemPriceId" value='0' />
+						</form> 
+				 	</div>
+				 	<div class="itemCountGrid">
+				 		<a class="button" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId">$!itemData.productItemCount More Choices</a>
+				 	</div>
+				</li>
+				<li id="productModeItemsDiv_$!itemData.itemPriceId" class="productModeItemsDiv" style="display: none;">
+					<div id="productModeItemContent_$!itemData.itemPriceId" class="productModeItemContent"></div>
+				</li>
+				<li id="productModeAllBranchAvailabilityDiv_$!itemData.itemPriceId" class="productModeBranchDiv"></li>
+				<!-- Product Mode -->
+			#else
+				<li class="sessionDesp">
+					<h3 class="productTitle" itemprop="name">
+						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
+							#if($itemTitle.length() > 22)
+								$!itemTitle.substring(0, 22)... 
+							#else
+								$!itemTitle
+							#end
+						</a>
+					</h3>
+					#if($itemData.shortDesc.length()>65)
+						<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
+					#else
+						<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc</p>
+					#end
+					<ul class="skuStyle">
+						<li itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.itemId">$!itemData.partNumber</span></li>
+						#if($itemData.manufacturerName.trim() != "")
+							<li itemprop="sku"><b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName.trim()</span></li>
+						#end
+						#if($itemData.brandName.trim() != "")
+							<li itemprop="sku"><b>$!locale.get("product.label.brand"): </b><span>$!itemData.brandName.trim()</span></li>
+						#end
+						#if($itemData.manufacturerPartNumber.trim() != "")
+						<li itemprop="mpn">
+							<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+							<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$!itemData.partNumber" />
+						</li>
+						#end
+						#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
+						<li itemprop="sku" class="hideToHover">
+							<b>$!locale.get("product.label.cpn"): </b>
+							<span>
+							#if($itemData.customerPartNumber)$!itemData.customerPartNumber, #end
+							#if($itemData.customerPartNumberList.size()>0)
+							#set($seperator = "")
+							#set($partList = "")
+							#foreach($!customerPart in $!itemData.customerPartNumberList)
+							#set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end#if($customerPart.partNumber)$!customerPart.partNumber#end")
+							#set($seperator = ", ")
+							#end
+							#if( $!partList.length() > 85)
+							$!partList.substring(0, 85)...
+							#else
+							$!partList
+							#end
+							#end
+							</span>
+						</li>
+						#end
+						#if($itemData.upc != "" && $!itemData.upc)<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span></li>#end
+						
+						#if($itemData.uom != "" && $!itemData.uom)<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.uom"): </b><span>$!itemData.uom</span></li>#end
+						
+						<!-- <li class="productLeadTime productLeadTime_$!itemData.partNumber" style="display:none;">
+							<b>$!locale.get("product.label.leadTime"): </b>
+							<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+						</li> --> 
+						<li class="productAvail_$!itemData.partNumber">
+							<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
+							<b class="availLabel">$!locale.get("product.label.availability"): </b>
+							<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+						</li>
+						<!-- <li class="hideToHover" id="allBranchAvail_$!itemData.partNumber">
+							<span class="priceSpanFa"><a href="javascript:void(0);" onClick="openAllBranchPop($!itemData.partNumber)">Branch Availability</a></span>
+						</li> -->
+							
+						#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
+						<li class="hideToHover"><b>$!locale.get("product.label.minorderqty"): </b><span> $!itemData.minOrderQty</span></li>
+						<li class="hideToHover"><b>$!locale.get("product.label.qtyinterval"): </b><span> $!itemData.orderInterval</span>
+							<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
+							<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
+							<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
+						</li>
+						#end
+					</ul>
+					<ul>
+						#if($itemData.packDesc)<li itemprop="sku" class="hideToHover packDesc"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
+						<li class="cimm_priceWrap">
+						#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+							<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
+								#if($itemData.price>0)
+					    			$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
+					    		#else
+					    			<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
+					    		#end
+							</span>
+						#else
+							#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
+								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
+							#else
+								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
+									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+								</span>
+							#end
+					    #end
+						</li>
+						<li class="cimm_qtyWrap">
+							<b>$!locale.get("form.label.tableQty") </b>  
+							<span class='mRight-1'>
+								<input type="text" name="itemTxtQty$!itemData.itemId"  maxlength="6" value="$!itemData.minOrderQty" id="itemTxtQty$!itemData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
+							</span>
+							#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+								#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+									#if($!itemData.price>0)
+										<span data-select='addtoCartbtn_$!itemData.partNumber'>
+											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+										</span>
+									#else
+										<span data-select='addtoCartbtn_$!itemData.partNumber'>
+											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+										</span>
+									#end
+								#else
+									<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+								#end
+							#else
+								#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+									<span data-select='addtoCartbtn_$!itemData.partNumber'>
+										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+									</span>
+								#else
+									<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+								#end
+							#end
+							<span id="uomPk_$!itemData.partNumber"></span>
+						</li>
+						<!--Branch Availabiltiy List Section
+						<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
+							<div class="cimm_customPopContent">
+							<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><i class="fa fa-lg fa-times-circle"></i></a>
+								<div class="cimm_popupLogin">
+									<h3 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h3>
+									<div class="cimm_siteTableEnclosure" id="allBranch$!itemData.partNumber">
+										<table id="allBranch_$!itemData.partNumber" class="cimm_siteTable"> 
+											<thead>
+												<tr>
+													<th>$!locale.get("product.label.branchName")</th>
+													<th class="center">$!locale.get("product.label.available")</th>
+												</tr>
+											</thead>
+											<tbody id="allBranchHTML_$!itemData.partNumber"></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</li>
+						<!--Branch Availabiltiy List Section-->
+						<li class='pTop-2'>
+							<!-- My Product Group-->
+							<div class="productGroupBtn dropdown">
+								#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
+								<a id="$!groupPop" class="popMsg hideMe"></a>
+								#if($userLogin)
+									<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">
+										<i class="fa fa-plus"></i>$!locale.get("marketBasket.button.addToProductGroup")
+									</a>
+								#else
+									<a data-toggle="modal" data-target="#loginModal"><i class="fa fa-lg fa-plus"></i><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
+								#end
+								<ul id="ulg$!itemData.itemId" class="dropdown-menu">
+									<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
+								</ul>
+							</div>
+							<!--My Product Group-->
+						</li>
+						<li class="selectItemBlock pTop-2">
+							<label class="customCheckBox">
+								#set($addToCartCheckFlag = "N")
+								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+							    	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+							    		#if($itemData.price>0)
+							    			#set($addToCartCheckFlag = "Y")
+								   		#end
+							    	#end
+							    #else
+								   	#set($addToCartCheckFlag = "Y")
+							    #end
+				
+								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+									#if($itemData.price>0)
+									<input type="checkbox" class="selectedItems" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' id="selectItemCheckbox_$!itemData.itemId" data-itemid="$!itemData.itemId" data-partnumber="$!itemData.partNumber"  data-itemPriceId="$!itemData.itemPriceId"/>
+						    		#else
+						    		<input type="checkbox" class="selectedItems" id="selectItemCheckbox_$!itemData.itemId" disabled="disabled"/>
+						    		#end
+							    #else
+							    	<input type="checkbox" class="selectedItems" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' id="selectItemCheckbox_$!itemData.itemId" data-itemid="$!itemData.itemId" data-partnumber="$!itemData.partNumber"  data-itemPriceId="$!itemData.itemPriceId" disabled="disabled"/>
+							    #end
+				
+							  <span>$!locale.get("product.label.selectItem")</span>
+							</label>
+						</li>
+					</ul>
+				</li>
+			#end
+			<li style="display: none;">
+				#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.itemAvailability, $!itemData.srchTyp, $!navigationType)
+				<span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span>
+				<!-- <input type="hidden" id="displayPrice_$!itemData.partNumber" value="$!itemData.displayPricing"/> -->
+			</li>
+		</ul>
+	</li>
+	#end 
+	#if($responseType=="AuthorizeDotNet")
+<input type="hidden" name="customerProfileId" id="customerProfileId" value="$customerProfileId" />
+#end
+#end
+
+
+
+#if($responseType=="cardDetails")
+<div id="">
+<input type="hidden" name="creditCardCount" id="creditCardCount" value="$!cardDetails.size()"/>
+<div class="cimm_siteTableEnclosureNew">
+    <table width="100%" class="cimm_siteTableNew" id="creditCardList">
+	#if($!cardDetails.size()>0)
+      <thead>
+          <tr style="text-align: center;">
+              <th>$locale.get("product.label.cardType")</th>
+              <!--<th>$locale.get("product.label.cardNumber")</th>-->
+              <th>EXPIRATION MONTH</th>
+              <th>EXPIRATION YEAR</th>
+              <th></th>
+              <!--<th>&nbsp;</th>
+          --></tr>
+      </thead>
+	  #end
+      <tbody>
+      #set($count = 0)	
+      #foreach($cardDetail in $cardDetails)
+      #set( $count = $count + 1 )
+       <tr style="text-align: center;">
+          <td><input type="radio" id="r_$count" class="addedCardDetails" onclick="paymentProcessor.selectCardOnRadio(this);" value="$cardDetail.customerPaymentId" name="radioBtn" />
+    <span id="cTyper_$count">
+   
+    <img src="$webThemes/$siteName/images/credit-card-generic.png" class="CCLogo">
+    <span class="CCText">$!cardDetail.creditCardType.trim()</span> card ending with number <span id="cNumr_$count" class="ccNum">$!cardDetail.creditCardNumber</span>
+   
+    </span><br>
+   #if($fromPage=="AccountPage" && $fromPage!="")
+   
+   #else
+    <span id="cvvWrap_$count" class="hideMe" style="display:none">CVC:<input type="text" class="hideMe" id="cvv_$count" maxlength="4" name="cvv" style="margin-left: 5px;"></span>
+   #end
+    </td>
+          <!--<td id="cNumr_$count">$!cardDetail.creditCardNumber</td>-->
+          <td id="cExpr_$count">$!cardDetail.creditCardExpiryMonth</td>
+          <td id="cExpr_$count">$!cardDetail.creditCardExpiryYear</td>
+    <td><a class="submitBtn" href="javascript:void(0);" id="deletePayment" data-cardnumber="$!cardDetail.creditCardNumber" data-index="$cardDetail.customerPaymentId" name="deletePayment" onclick="paymentProcessor.deleteCard(this);" value="$cardDetail.customerPaymentId">Delete</a></td> 
+          </tr>
+      #end
+	   <tr id="creditCardForm" style="display:none;">
+		<td colspan="5"  style="padding: 10px;">
+
+    <div class="checkout-header">
+      <h1 class="checkout-title">
+      #if($fromPage=="AccountPage" && $fromPage!="")#else
+		<input type="radio" id="r_$count" class="addNewCardRadioBtn" name="radioBtn" data-card ="radio"  #if($!cardDetails.size()==0) checked #end /> NEW CREDIT CARD 
+     #end
+     <br>
+      <img src="$webThemes/$siteName/images/credit-cards.png" class="CCLogo">
+     
+      </h1>
+    </div>
+    <ul class="cimm_formContent fullWidthForm">
+      <li>
+     <span>Name on card</span><br>
+     <input type="text" class="checkout-input checkout-name" autofocus id="FULL_NAME" value="" maxlength="64" autocomplete="off" data-errorMsg="Please Enter Name on Card.">
+      </li>
+      <li>
+     <span>Credit card number</span>
+     <input type="text" class="checkout-input checkout-card"  id="CARDNUMBER_ID" value="" maxlength="16" autocomplete="off" data-errorMsg="Please Enter Credit Card Number.">
+      </li>
+      <li>
+     <span>MM</span>
+     <input type="text" class="checkout-input checkout-exp"  id="EXPIRY_MONTH_ID" value="" maxlength="2" autocomplete="off" data-errorMsg="Please Enter Card Expire Month.">
+      </li>
+      <li>
+     <span>YY</span>
+     <input type="text" class="checkout-input checkout-exp" id="EXPIRY_YEAR_ID" value="" maxlength="4" autocomplete="off" data-errorMsg="Please Enter Card Expire Year.">
+     </li>
+      <li>
+     <span>CVC</span>
+     <input type="text" class="checkout-input checkout-cvc" id="CARD_CODE_ID" value="" maxlength="4" autocomplete="off" data-errorMsg="Please Enter CVC code.">
+      </li>
+      <li>
+       <span>Zip Code</span>
+       <input type="text" class="checkout-input checkout-cvc"  id="ZIP_CODE" value="" maxlength="20" autocomplete="off" data-errorMsg="Please Enter Zip Code.">
+      </li>
+     </ul>
+     #if($fromPage=="AccountPage" && $fromPage!="")
+    <p>
+      
+    </p>
+    #else
+    <p>
+    <input type="checkbox" id="saveCard"/> Save new credit card for future use
+    </p>
+    #end
+
+		</td>
+		</tr>
+      </tbody>
+  </table>
+  </div>
+
+
+ <div class="center clearAfter">
+	  <input type="hidden" value="$orderGrandTotal" name="TotalAmount"  />
+	 <input type="hidden" class="fromPage" name="fromPageResult" value="$fromPage"/>
+	 
+	  #if($!cardDetails.size()>0)
+		  #if($fromPage=="AccountPage" && $fromPage!="")
+		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=true; paymentProcessor.unHighLight();$('.addNewCardBtn').show();"  id="addNewCreditCardButton" class="button pullRight">Add new credit card</button>
+		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=false;$('.addNewCardBtn').hide();" style="display:none;" id="cancelCreditCardButton" class="button">Cancel</button>
+		  #else
+		  <button type="button" onclick="paymentProcessor.userNewCreditCardUI();" id="addNewCreditCardButton" class="button pullRight">Use new credit card</button>
+		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=false;" style="display:none;" id="cancelCreditCardButton" class="button">Cancel</button>
+		  #end
+	  #end
+	  #if($fromPage=="AccountPage" && $fromPage!="")
+		<input type="button" id="saveBtn" value="Save" class="buttonGrad addNewCardBtn" style="display:none;" onclick="paymentProcessor.startProcessingCard();" />
+	  #else
+		<input type="button" value="$locale.get('product.button.placeOrder')" class="buttonGrad" onclick="paymentProcessor.addNewRequest=true;paymentProcessor.startProcessingCard();" />
+	  #end
+  </div>
+  </div>
+#end

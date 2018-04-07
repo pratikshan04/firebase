@@ -1,0 +1,64 @@
+<div class="row">
+	<div class="col-md-1 col-sm-12 col-xs-12"></div>
+	<div class="col-md-5 col-sm-6 col-xs-12">
+		 #if($!message)
+		<div class="errMsg">
+			<span>$!message</span>
+		</div>
+		#else
+		<div id="notificationDiv"></div>
+		#end
+		<form id="mainLoginForm" class="mainLoginForm" data-form="login">
+			<input type="hidden" name="fromPageValue" value='$hostName.replace("","")Welcome'/>
+			<input type="hidden" name="formPageValue" value='$!LayoutName' id="formPageValue"/>  
+			<div class="form-group">
+				<p>$!locale.get("login.label.pleaseEnterYourUserNameAndPassword")</p>
+			</div>
+			<div class="form-group">
+				<label for="mainUserName">$!locale.get("form.label.userName")</label>
+				<input type="text" name="loginId" value="$!userNameTmp" id="mainUserName" class="form-control" placeholder="$!locale.get('form.label.userName')"/>
+			</div>
+			<div class="form-group">
+				<label>$!locale.get("form.label.password")</label>
+				<input type="password" name="loginPassword" id="mainPassword"  class="form-control" placeholder="$!locale.get('form.label.password')"/>
+			</div>
+			<div class="form-group">
+				<label class="customCheckBox" >
+					<input type="checkbox" tabindex="3" name="rememberMe" id="rememberMe" onchange="checkRemember(this);"/>
+					<span>$!locale.get("form.label.rememberMyLogin") | </span>
+				</label>
+				<a href="ForgotLink.action">$!locale.get("product.label.forgotPassword")</a>
+			</div>
+			<div class="form-group">
+				<button class="center button" type="submit">$!locale.get('product.heading.signIn')</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-5 col-sm-6 col-xs-12">
+		#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y") && $!type=="au")
+		<form id="guestCheckoutInitiate" class="guestCheckout" method="get">
+			<div class="form-group">
+				<p align="center">$!locale.get("login.label.guestcheckoutmessage")</p>				
+			</div>
+			<div class="form-group">
+				<label> $!locale.get("form.guestcheckout.emailaddress")</label>
+				<input type="text" name="auEmail" id="auEmail" value="" onkeypress="return guestCheckoutWizard.runScript(event);" class="form-control" placeholder="$!locale.get('form.guestcheckout.emailaddress')"/>
+			</div>
+			<div class="form-group">
+				<input class="center button" type="button" id="guestCheckoutContinue" value='Continue' onclick="return guestCheckoutWizard.checkUserNameExist();"/>
+			</div>
+			<div class="form-group">
+				<p align="center">OR</p>
+			</div>
+			<div class="form-group">
+				<a href="$!locale.get('website.url.Register')" class="center button">$!locale.get('event.label.registerNow')</a>
+			</div>			
+			<input type="hidden" value="normal" name="loginType" />
+		</form>
+		#end 
+	</div>
+	<div class="col-md-1 col-sm-12 col-xs-12"></div>
+</div>
+<script>
+
+</script>

@@ -1,0 +1,196 @@
+#parse("Macros/defaultMacro.vm")
+#parse("Macros/itemDetailPageMacro.vm")
+<!--Home Page Banner-->
+#set($homeBannerList = $CIMMUtility.getCusomTableData("Website","HOME_PAGE_BANNERS"))
+<ul class="bxslider">
+#foreach($homeBannerData in $homeBannerList)
+#foreach($homeBanners in $homeBannerData.TableDetails)
+<li>
+#if($!homeBanners.get("LANDING_PAGE_URL") && $!homeBanners.get("LANDING_PAGE_URL")!="")
+<a href="$homeBanners.get('LANDING_PAGE_URL')"><img src="$homeBanners.get('BANNER_IMAGE')" alt='$homeBanners.get("BANNER_IMAGE")'/></a>
+#else
+	<img src="$homeBanners.get('BANNER_IMAGE')" alt='$homeBanners.get("BANNER_IMAGE")'/>
+#end
+</li>
+#end
+#end
+<li>
+<a href="javascript:void(0);"><img src="$webThemes/$siteName/images/slide1.png" alt="No image" /></a>
+</li>
+<li>
+<a href="javascript:void(0);"><img src="$webThemes/$siteName/images/slide2.png" alt="No image" /></a>
+</li>
+<li>
+<a href="javascript:void(0);"><img src="$webThemes/$siteName/images/slide3.png" alt="No image" /></a>
+</li>
+</ul>
+#if($categMenu.size()>0)
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_blockTitle"><label>$locale.get("product.heading.shopByCategory")</label></h3>
+	<ul id="shopByCategory" class="cimm_caroWrap">
+	#foreach($categoryMenu in $categMenu)
+		<li>
+			<div class="cimm_linkItemImg">
+				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
+					<img src="$taxonomyImage/$categoryMenu.imageName" width="150" height="150" border="0" alt='$!categoryMenu.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+				</a>
+			</div>
+			<div class="cimm_linkItemDesp">
+				<ul>
+					<li itemscope itemtype="http://schema.org/Product">
+						<a class="productTitle" itemprop="category name" href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')" class="productTitle">
+					 		#if($categoryMenu.categoryName.length()>17)
+					 			$categoryMenu.categoryName.substring(0, 17)...
+					 		#else
+					 			$categoryMenu.categoryName
+					 		#end
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	#end
+	</ul>
+</div>
+#end
+
+#set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
+#if($!featuredBrands && $featuredBrands.size()>0)	 	
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredBrands")</label></h3>
+	<ul id="featuredBrands" class="cimm_caroWrap">
+		#foreach($brandset in $featuredBrands.entrySet())
+		#set($keyValue = $brandset.getKey())
+		#set($brandModel = $brandset.getValue())
+		<li>				
+			<div itemscope itemtype="http://schema.org/Brand" class="cimm_linkItemImg">
+				<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName">                    
+					<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" width="100" height="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
+				</a>
+			</div>
+		</li>
+		#end
+	</ul>
+</div>
+#end
+
+<!-- <div class="cimm_eventNews">
+	<div class="cimm_halfBlockColumns">
+		<div class="upcomingEvent">
+			<h3 class="cimm_blockTitle"><label>Upcoming Events</label></h3>
+			<h2>UPCOMING EVENTS <a href="/eventsUnit.action"><i class="fa fa-calendar"></i></a></h2>
+			<ul id="upcomingEvents" class="customScroll">
+			#foreach($eventsDetails in $eventsList)
+			#if($!eventsDetails.featuredEvent!="N")
+				#if($!eventsDetails.startDate!="")
+					#set($dateTimeArray = $eventsDetails.startDate.split("T"))
+					#set($dateArray = $dateTimeArray.get(0).split("-"))
+					#set($date = $dateArray.get(1) + "/" + $dateArray.get(2) + "/" + $dateArray.get(0))
+				#else
+					#set($date = "");
+				#end
+				<li itemscope itemtype="http://schema.org/Event">
+				<p class="eventsHeading" itemprop="name"><a href="/eventDetailsUnit.action?eventID=$eventsDetails.staticPageId">$eventsDetails.staticPageTitle</a> <span class="dateStamp" itemprop="startDate">Date: $date</span></p>
+					<p class="eventsContent" itemprop="description">
+						 #if($eventsDetails.staticContent.length() > 120)
+		                     $eventsDetails.staticContent.substring(0, 120)
+						 #else
+							   $eventsDetails.staticContent
+						 #end
+						 <a href="/eventDetailsUnit.action?eventID=$eventsDetails.staticPageId"><span class="readevents">more...</span></a>
+					</p>
+					<p>Address: $!eventsDetails.addressOne</p>
+					<p>Location: $!eventsDetails.location</p>
+					<p>Contact Number: $!eventsDetails.notificationContactNumber</p>
+				</li>
+			#end
+			#end
+			</ul>
+		</div>
+	</div>
+	
+	<div class="cimm_halfBlockColumns">
+		<div class="recentNews">
+			<h3 class="cimm_blockTitle"><label>Recent News</label></h3>
+			<div id="news-scroller" class="newsList customScroll">
+				<div class="center"><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div> -->
+
+#set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
+#if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
+	<ul id="featuredManufacturers" class="cimm_caroWrap">
+		#foreach($manufacturerset in $featuredManufacturers.entrySet())
+		#set($keyValue = $manufacturerset.getKey())
+		#set($manufacturerModel = $manufacturerset.getValue())
+		<li>				
+			<div class="cimm_linkItemImg" itemscope itemtype="http://schema.org/Brand">
+				<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
+					<img itemprop="logo" src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" width="100" height="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
+				</a>
+			</div>
+		</li>
+		#end
+	</ul>
+</div>
+#end
+
+#if($featuredProducts.size()>0)	 	
+<div class="cimm_sliderWrap clearAfter">
+	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredProducts")</label></h3>
+	<ul id="featuredProductList" class="cimm_caroWrap">
+		#foreach($itemData in $featuredProducts)
+		#set($itemTitle= $itemData.shortDesc)
+		<li itemscope itemtype="http://schema.org/Product">				
+			<div class="cimm_linkItemImg">
+				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">                    
+					#if($itemData.imageName.contains("http"))
+					<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					#else
+					<img itemprop="image" id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					#end
+				</a>
+			</div>
+			<div class="cimm_linkItemDesp">
+				<ul>
+					<li>
+						<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" itemprop="name">
+							#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+					 		#if($linkItemTitle.length()>17)
+					 			$linkItemTitle.substring(0, 17)...
+					 		#else
+					 			$linkItemTitle
+					 		#end
+						</a>
+					</li>
+					<li itemprop="sku"><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
+					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
+					<p itemprop="description" id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
+					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>
+					#else
+					<p itemprop="description"> $!itemData.shortDesc</p>
+					#end
+					</li>
+				</ul>
+				</div>
+			<div class="clear"></div>
+		</li>
+		#end
+	</ul>
+</div>
+#end
+<input type="hidden" value="Y" id="enableRecentlyViewed"/>
+<input type="hidden" id="startRecent" value="Y"/>
+
+<div class="recentlyhide" id="recentitembox">
+	<h3 class="cimm_blockTitle"><label>$locale.get("product.heading.recentlyviewedproducts")</label></h3>
+	#set($itemTitle=$itemData.brandName+" "+$itemData.partNumber)
+	<div class="cimm_sliderWrap" >
+		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></ul>
+	</div>
+</div>

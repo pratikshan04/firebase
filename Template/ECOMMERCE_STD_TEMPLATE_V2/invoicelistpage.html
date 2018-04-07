@@ -1,0 +1,437 @@
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/site_jui.css" /> 
+<!-- <div class="dummyHeight"></div> -->
+<ul class="cimm_breadcrumbs">
+		 <li><a href="$locale.get("website.url.Welcome")">$locale.get("product.heading.home")</a></li>
+		 <li><span class="breadcrumbArrows"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>$locale.get("product.heading.InvoiceList")</li>         
+	 </ul>
+	<div class="clear"></div>	 
+		<h2 class="cimm_pageTitle">$locale.get("product.heading.InvoiceList")</h2>
+		<div class="clear"></div>
+    
+     <div class="clear"></div>
+      <div class="cimm_siteTableEnclosure rwd-tableWrap">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable display rwd-table rwd-Tab" id="invoiceListTable">
+            <thead>
+              <tr>
+              <!-- 	<th></th> -->
+                <th align="center">$locale.get("product.label.invoicNumber")</th>
+                 <th align="center">$locale.get("product.label.orderNumber")</th>
+                 <!-- <th>$locale.get("form.label.orderDate")</th> -->
+                 <th align="center">$locale.get("form.label.invoicedate")</th>
+                 <th align="center">Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              #if($customerArInvoiceList && $customerArInvoiceList.size()>0)
+                  #foreach($customerArInvoiceObj in $customerArInvoiceList)
+                  	   #set($orderNumAndSuffix = "")
+                      <tr class="odd">
+                      	<td data-th="$locale.get("product.label.invoicNumber")" class="center"><b>$!customerArInvoiceObj.invoiceNumber</b></td> 
+                        <!-- <td class="center"><b>$!customerArInvoiceObj.invoiceNumber</b></td> -->
+                        <td data-th="$locale.get("product.label.orderNumber")" class="center"><b>$!customerArInvoiceObj.orderNum</b></td>
+                        <!-- <td class="center">$!customerArInvoiceObj.orderDate</td> -->
+                        <td data-th="$locale.get("form.label.invoicedate")" class="center">$!customerArInvoiceObj.invoiceDate</td> 
+                        
+                        
+                        #if($!customerArInvoiceObj.total<0)
+	              		#set($negVal = $!customerArInvoiceObj.total * -1)
+	              		<td data-th="Total Amount" class="center">($$numberTool.format("#0.00",$negVal))</td>
+	              	#else
+	              		<td data-th="Total Amount" class="center">$$numberTool.format("#0.00",$!customerArInvoiceObj.total)</td>
+	              	#end
+                       </tr>
+                  #end
+              #end
+            </tbody>
+        </table>
+        <div class="clear"></div>
+        <br/>
+<!--         <form id="invoiceListForm" name="invoiceListForm" method="get" action="OutStandingPaymentSale.action">
+        	<input type="hidden" class="selectedInvoiceNumbersForDetail" name="selectedInvoiceNumber" id="selectedInvoiceNumber" value=""/>
+        	<div align="center">
+           	<input type="submit" id="invoicePayBtn" class="buttonGrad" value="$locale.get('product.button.submitforpayment')"  /> onclick="validateInvoiceForm();"
+         	</div>
+        </form> -->
+        <div id="invoiceListDiv"></div>
+        
+        
+		<div class="clear"></div>
+   </div>
+   
+<!------------------------------------------Invoice dependent sources------------------------------------------->
+<script type="text/javascript">
+function getInvoiceNumber(obj){
+	 if($(obj).is(":checked")){
+		 $('#invoiceListDiv').append('<input type="hidden" class="selectedInvoiceNumberClass" name="selectedInvoiceNumberDiv" id="inv_'+$(obj).val()+'" value="'+$(obj).val()+'"/>');
+	 }else{
+		 $("#inv_"+$(obj).val()).remove();
+		 
+	 }
+}
+$("#invoicePayBtn").click(function(){
+	if ($('.selectedInvoiceNumberClass').length > 0) {
+		var invList = $("input:hidden[name='selectedInvoiceNumberDiv']");
+		if (invList.length > 0) {
+			var invVal = "";
+			var c = "";
+			for (i = 0; i <= invList.length - 1; i++) {
+				invVal = invVal + c + invList[i].value;
+				c = ',';
+			}
+			$("#selectedInvoiceNumber").val(invVal)
+			$("#invoiceListForm").attr("action","OutStandingPaymentSale.action");
+			$("#invoiceListForm").submit();
+			return true;
+		}else{
+			bootAlert("small","error","Error","Please select an Invoice to submit");
+			return false;
+		}
+	}else{
+		bootAlert("small","error","Error","Please select an Invoice to submit");
+		return false;
+	}
+});
+$(document).ready( function () {
+	$('#invoiceListTable').dataTable( {
+	"sPaginationType": "simple_numbers",
+	//"sDom": 'T<"clear"><"H"lf>t<"F"ip>',
+	"sDom": '<"tabHeader"lf>t<"tabFooter"ip>',
+	"bJQueryUI": false,
+	"bAutoWidth": false,
+	aaSorting : [[1, 'desc']],
+	"columnDefs": [{ orderable: false, targets: -1 }],
+	language: {
+		search: "_INPUT_",
+        searchPlaceholder: "Search invoice numbers",
+        sLengthMenu : "Show _MENU_ ",
+        oPaginate : {
+        	sPrevious : "Prev",
+            sNext : "Next"
+        }
+    },
+    "fnInitComplete": function (oSettings, json) {
+        $('.dataTables_filter input').attr('type', 'text');
+    }
+	});
+	$('#invoiceListTable_filter input').addClass('SearchRecords');
+} );
+</script>
+<style>
+#SendPage{
+visibility:hidden;
+}
+</style>
+
+<!-- <a title="Print this page" onclick="printSiteDetailPagePart();">
+ <i class="fa fa-lg fa-print fa-lg"></i> Print this Page
+ </a> -->
+ <table id="SendPage" style="width:1200px;border:2px solid #000;height:1310px;" align="center">
+<tbody>
+<tr>
+<td>
+#foreach($customerArInvoiceObj in $customerArInvoiceList)	
+	
+ <table id="SendPage_$!customerArInvoiceObj.invoiceNumber" style="width:1200px;border:2px solid #000;height:1310px; display:none;" align="center" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td>
+<table style="width:90%;margin:0 5%;" cellpadding="0" cellspacing="0">
+
+<tr>
+<td>
+<table style="width:45%;height:100px;float:left;">
+<tr>
+<td>
+<img src="$webThemes/$siteName/images/logo.png" alt=""/>
+</td>
+</tr>
+</table>
+<table style="width:30%;height:100px;float:right;" cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="2" style="text-align:right;font-size:15px;font-weight:bold;">
+<!-- <span">CREDIT MEMO</span> -->
+</td>
+</tr>
+<tr>
+<td> 
+<table style="width:100%;height:80px;border:1px solid #000;text-align:center;" cellpadding="0" cellspacing="0">
+<tr style="text-align:center;">
+<td colspan="2" style="border-bottom:1px solid #000;"><strong>Invoice Number</strong></td>
+</tr>
+<tr>
+<td style="border-bottom:1px solid #000;">$!customerArInvoiceObj.invoiceNumber</td>
+</tr>
+<tr>
+<td style="border-bottom:2px solid #000;border-bottom:1px solid #000;" colspan="2"><strong>Invoice Date</strong> </td>
+</tr>
+<tr><td style="border-bottom:1px solid #000;">$!customerArInvoiceObj.invoicedDate</tr></tr>
+<tr style="text-align:center;">
+<td colspan="2" style="border-bottom:1px solid #000;"><strong>Order Number</strong></td>
+</tr>
+<tr>
+<td>$!customerArInvoiceObj.orderNum</td>
+</tr>
+<!-- <tr>
+<td colspan="2">$!customerArInvoiceObj.orderNum</td>
+</tr> -->
+
+
+</table> 
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<!-- <tr>
+<td>
+<table style="width:45%;height:120px;float:left;" cellpadding="0" cellspacing="0">
+<tr style="border-bottom:1px solid #ccc;text-align:left;">
+<td><strong>Sales Location:</strong></td>
+</tr>
+</table>
+<table style="width:45%;height: 120px;float:right;" cellpadding="0" cellspacing="0">
+<tr>
+<td> 
+<table style="width:100%;text-align:left;" cellpadding="0" cellspacing="0">
+<tr>
+<td><strong>Remit To:</strong></td>
+</tr>
+<tr>
+<td>text1<br/>
+text1<br/>
+text1</td>
+</tr>
+</table> 
+</td>
+</tr>
+</table>
+</td>
+</tr> -->
+
+<tr>
+<td>
+<table style="width:100%;" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<table style="width:100%;" cellpadding="0" cellspacing="0">
+<tr>
+<td><strong>Bill To:</strong></td>
+</tr>
+
+</table>
+</td>
+<td>
+<table style="width:100%;" cellpadding="0" cellspacing="0">
+<tr>
+<td><strong>Ship To:</strong></td>
+<td>$!customerArInvoiceObj.shipAddress<br/>
+</td>
+</tr>
+<tr>
+<tr>
+
+</tr>
+<!-- <td>WEB CUSTOMER</td> -->
+</tr>
+</table>
+</td>
+</tr>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table style="width:100%;height:40px;text-align:left;" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+
+</td>
+</tr>
+</table>
+<table style="width:100%;text-align:center;" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<table style="border:2px solid #000;height:5px;width:70%;text-align:center;" cellpadding="0" cellspacing="0">
+<thead>
+<tr style="width:60%;text-align:center;">
+<th style="border-bottom:2px solid #000;border-right:2px solid #000;font-style:italic;">PO Number</th> 
+<th style="border-bottom:2px solid #000;font-style:italic;">Due Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-right:2px solid #000;">$!customerArInvoiceObj.poNumber</td>
+<td>$!customerArInvoiceObj.dueDate</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+<tr>
+<td>
+<table style="width:100%;" cellpadding="0" cellspacing="0">
+<tr>
+<td style="padding:0 5px;">
+<table style="border:2px solid #000;height:auto;width:100%;text-align:center;" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+<th style="border-bottom:2px solid #000;border-right:2px solid #000;">Order Date</th> 
+<th style="border-bottom:2px solid #000;border-right:2px solid #000;">Customer Id</th>
+<th style="width:50%;border-bottom:2px solid #000;border-right:2px solid #000;">Primary Sales Representative Name</th>
+<th style="border-bottom:2px solid #000;">Taker</th>
+</tr>
+<thead>
+<tbody>
+<tr>
+<td style="border-right:2px solid #000;">$!customerArInvoiceObj.orderDate</td> 
+<td style="border-right:2px solid #000;">$!customerArInvoiceObj.customerNumber</td>
+<td style="width:50%;border-right:2px solid #000;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+<tr>
+<td>
+<table style="width:100%;height:80px;" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<table style="border:2px solid #000;height:100px;width:100%;text-align:center;border-bottom: none;" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+<th style="border-bottom:2px solid #000;border-right:1px solid #000;">Quantity Ordered</th> 
+<th style="border-bottom:2px solid #000;border-right:1px solid #000;">Quantity Shipped</th> 
+<th style="border-bottom:2px solid #000;border-right:1px solid #000;">Quantity Remaining</th> 
+<th style="width:15%;border-bottom:2px solid #000;border-right:1px solid #000;">Item Id</th> 
+<th style="width:25%;border-bottom:2px solid #000;border-right:1px solid #000;">Item Description</th>
+<th style="border-bottom:2px solid #000;border-right:1px solid #000;">UOM</th>
+<th style="border-bottom:2px solid #000;border-right:1px solid #000;">Extended Price</th>
+<th style="border-bottom:2px solid #000;">Unit Price</th>
+</tr>
+</thead>
+<tbody>
+#foreach($invoiceObj in $customerArInvoiceObj.orderList)
+<tr>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.qtyordered</td>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.quantityShipped</td>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.quantityRemaining</td>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.itemId</td>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.shortDesc</td>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.uom</td>
+<td style="border-bottom:2px solid #000;border-right:1px solid #000;">$!invoiceObj.extPrice</td>
+<td style="border-bottom:2px solid #000;">$!invoiceObj.unitPrice</td>
+
+</tr>
+#end
+</tbody>
+<!-- <tr>
+<td style="border-right:1px solid #ccc;"></td>
+<td style="border-right:1px solid #ccc;"></td>
+<td style="border-right:1px solid #ccc;"></td>
+<td style="border-right:1px solid #ccc;"></td>
+<td style="border-right:1px solid #ccc;"></td>
+<td style="border-right:1px solid #ccc;"></td>
+<td style="border-right:1px solid #ccc;"></td>
+</tr> -->
+</table>
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+<tr>
+<td>
+<table style="width:100%;height:80px;" cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="2" style="border-bottom:2px solid #000;"></td>
+</tr>
+<!-- <tr>
+<td colspan="2"><strong>Shipment Accepted By:</strong></td> 
+</tr> -->
+<!-- <tr>
+<td colspan="2" style="border-bottom:2px solid #000;"></td>
+</tr>
+<tr>
+<td>
+<table style="height:100px;width:30%;text-align:right;" cellpadding="0" cellspacing="0">
+<tr>
+<td><strong>Total lines:</strong></td> 
+</tr>
+</table>
+</td> -->
+<td>
+<table style="height:100px;width:100%;margin:10px auto;text-align:right;font-style: italic;" cellpadding="0" cellspacing="0">
+<tr><td style="width:70%;"><strong>SUB TOTAL:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.total</td></tr>
+<!-- <tr><td style="width:70%;"><strong>COUNTRY TAX:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">0.00</td></tr> -->
+<tr><td style="width:70%;"><strong>STATE TAX:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.tax</td></tr>
+<tr><td style="width:70%;"><strong>AMOUNT DUE:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.total</td></tr>
+
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom:2px solid #000;"></td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+</td>
+</tbody>
+</table>
+#end
+
+</td>
+</tr>
+</tbody>
+</table>
+<script>
+function printSiteDetailPagePart(invoiceNumber){
+	  jQuery.ajax({
+		   type: "POST",
+		   url: "OutStandingPaymentSale.action",
+		   data: "selectedInvoiceNumber="+invoiceNumber,
+		 	success: function(msg){
+	var SendPage =msg;
+	var html = '<html><head><style>@media 	print{.printButton,.print_send{display:none;}.hideForDevice{display:none;}}.zoomPreload,.hideForPrint{display:none;}.hideMe{display:none;} table th,table td{padding: 	5px;}.descBody p,.descBody ul li{font-size:12px;line-height:20px;margin:0;word-break:break-all;}.descBody ul li 	a{color:#000;text-decoration:underline;list-style-type:disc;}.cimm_pageTitle{font-weight:bold;font-size:15px;}.price{font-weight:normal 	!important;font-size:12px;line-height:20px;}.printButton1{display:none;}.printButton{margin:15px;padding:5px 15px;border:1px solid 	#000;background:#eee;float:right;}.printButton a{color:#000;font-size:14px;}.mailingContainer{font-family:Arial, Helvetica, 	sans-serif;font-size:12px;width:1000px;background:#FFF;margin:auto;padding-bottom:10px;}.mailingContent{padding: 10px;border:#DDD solid 2px;margin: 0px 0px 10px 	0px;}.mailingContent table tr th, .mailingContent table tr td{font-size: 12px;font-family: 	Arial;vertical-align:top;}h4{display:inline;}	#productDetailList{list-style-type:none;padding:5px 0 0 	0;margin:0;font-size:12px;}.hideForPrint{display:none;}.print_send{display:none;}</style></head><body style="font-family:Arial, Geneva, sans-serif; font-size:12px; 	padding:0px; margin:0px;"><div class="printButton"><a href="javascript:void(0);" onclick="window.print();" >Print This Page</a></div><div class="mailingContainer"><div 	align="left" style="background:#FFF; padding: 10px;">';
+               
+	html = html+'<br></div><div class="mailingContent"><table class="detail" width="100%" cellpadding="0" cellspacing="0"><tbody><tr><td style=""><td 	style="padding-left:0px">'+'<div>'+SendPage+'</div>'+'</td></tr></tbody></table></div>'+'<div class="clear"></div>'+
+        '</div>'
+        "</body></html>";
+               //open new window
+                        var printWP = window.open("","printSiteDetailPagePart");
+                printWP.document.open();
+                //insert content
+                printWP.document.write(html);
+                         
+                printWP.document.close();
+}
+	  });
+                //open print dialog  
+}                   
+/*Site Print Script ends here*/
+</script>
+<style>
+.cimm_payText {
+	margin-bottom: 10px;
+}
+</style>
+
+<!----------------------------------------------End of Invoice page------------------------------------------->

@@ -1,0 +1,391 @@
+<h1 class="cimm_pageTitle">
+#if($fromPage=="AccountPage")
+  Manage Credit Cards
+#else
+	Payment Info
+#end
+</h1>
+<style>
+
+input[type="text"][name="cvv"] {
+    width: 80px;
+ margin-top:5px;
+}
+img.CCLogo {
+    vertical-align: top;
+}
+
+table#creditCardList form.checkout ul li span {
+    font-weight: bold;
+    / margin-bottom: 11px; /
+}
+
+table#creditCardList form.checkout ul li input {
+    margin-top: 5px;
+}
+
+span.CCText {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+ul.cimm_formContent > li, .mTab .divsWrap ul.cimm_formContent > li {
+    position: inherit;
+}
+
+#creditCardForm ul.fullWidthForm li:first-child {
+    width: 28%;
+}
+
+#creditCardForm ul.fullWidthForm li:first-child, #creditCardForm ul.fullWidthForm li:nth-child(2), #creditCardForm ul.fullWidthForm li:nth-child(3), #creditCardForm ul.fullWidthForm li:nth-child(4), #creditCardForm ul.fullWidthForm li:nth-child(5) {
+    float: left;
+}
+
+#creditCardForm ul.fullWidthForm li:nth-child(3), #creditCardForm ul.fullWidthForm li:nth-child(4), #creditCardForm ul.fullWidthForm li:nth-child(5) {
+    width: 7%;
+    margin-left: 2%;
+    text-align: center;
+}
+
+#creditCardForm ul.fullWidthForm li:nth-child(2){
+ width:22%;
+ margin-left: 2%;
+}
+#creditCardForm ul.fullWidthForm li:nth-child(6) {
+    width: 19%;
+    margin-left: 2%;
+	float:left;
+}
+
+table#creditCardList {
+    margin-bottom: 10px;
+}
+
+.checkout {
+  /*width: 270px;
+  margin: 50px auto;*/
+  width: 100%;
+  padding: 15px;
+  /*background: #f3f6fa;*/
+  border: 0;
+  border-right1px solid
+  border-color: #c2cadb #bbc5d6 #b7c0cd;
+  border-radius: 7px;
+  /*-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);*/
+}
+.fullWidthForm > li > input{
+	margin-left: 0px;
+}
+.checkout > p {
+  zoom: 1;
+}
+.checkout > p:before, .checkout > p:after {
+  content: '';
+  display: table;
+}
+.checkout > p:after {
+  clear: both;
+}
+.checkout > p + p {
+  margin-top: 15px;
+}
+
+.checkout-header {
+  position: relative;
+  margin: 0 0 15px 0;
+}
+
+.checkout-title {
+  padding: 0 15px;
+  line-height: 38px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #7f889e;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.7);
+  /* background: #eceff5;
+  border-bottom: 1px solid #c5ccdb;
+  border-radius: 7px 7px 0 0;
+ background-image: -webkit-linear-gradient(top, #f5f8fb, #e9edf3);
+  background-image: -moz-linear-gradient(top, #f5f8fb, #e9edf3);
+  background-image: -o-linear-gradient(top, #f5f8fb, #e9edf3);
+  background-image: linear-gradient(to bottom, #f5f8fb, #e9edf3);
+  -webkit-box-shadow: inset 0 1px white;
+  box-shadow: inset 0 1px white;*/
+}
+.checkout-title:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-price {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 40px;
+  font: 14px/40px Helvetica, Arial, sans-serif;
+  color: white;
+  text-align: center;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+  text-indent: -1px;
+  letter-spacing: -1px;
+  background: #e54930;
+  border: 1px solid;
+  border-color: #b33323 #ab3123 #982b1f;
+  border-radius: 21px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: -webkit-linear-gradient(top, #f75a3b, #d63b29);
+  background-image: -moz-linear-gradient(top, #f75a3b, #d63b29);
+  background-image: -o-linear-gradient(top, #f75a3b, #d63b29);
+  background-image: linear-gradient(to bottom, #f75a3b, #d63b29);
+  -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.checkout-price:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  right: 3px;
+  border: 2px solid #f5f8fb;
+  border-radius: 18px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+input {
+  margin: 0;
+  line-height: normal;
+  font-family: inherit;
+  font-size: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.checkout-input {
+  display: block;
+  padding: 0 7px;
+  height: 32px;
+  color: #525864;
+  background: white;
+  border: 1px solid;
+  border-color: #b3c0e2 #bcc5e2 #c0ccea;
+  border-radius: 4px;
+  background-image: -webkit-linear-gradient(top, #f6f8fa, white);
+  background-image: -moz-linear-gradient(top, #f6f8fa, white);
+  background-image: -o-linear-gradient(top, #f6f8fa, white);
+  background-image: linear-gradient(to bottom, #f6f8fa, white);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.5);
+}
+.checkout-input:focus {
+  border-color: #46aefe;
+  outline: none;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px #46aefe;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px #46aefe;
+}
+.lt-ie9 .checkout-input {
+  line-height: 30px;
+}
+
+.checkout-name {
+  width: 150px;
+}
+
+.checkout-card {
+  width: 210px;
+}
+
+.checkout-exp,
+.checkout-cvc {
+  margin-left: 15px;
+  width: 45px;
+}
+
+.checkout-btn {
+  width: 100%;
+  height: 34px;
+  padding: 0;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid;
+  border-color: #1486f9 #0f7de9 #0d6acf;
+  background: #1993fb;
+  border-radius: 4px;
+  background-image: -webkit-linear-gradient(top, #4cb1fe, #229afc 40%, #138df6);
+  background-image: -moz-linear-gradient(top, #4cb1fe, #229afc 40%, #138df6);
+  background-image: -o-linear-gradient(top, #4cb1fe, #229afc 40%, #138df6);
+  background-image: linear-gradient(to bottom, #4cb1fe, #229afc 40%, #138df6);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.checkout-btn:active {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-color: #075bba #0c69d2 #0f7de9;
+  background-image: -webkit-linear-gradient(top, #1281dc, #1593fc);
+  background-image: -moz-linear-gradient(top, #1281dc, #1593fc);
+  background-image: -o-linear-gradient(top, #1281dc, #1593fc);
+  background-image: linear-gradient(to bottom, #1281dc, #1593fc);
+  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.5);
+}
+
+:-moz-placeholder {
+  color: #acb6c8 !important;
+}
+
+::-moz-placeholder {
+  color: #acb6c8 !important;
+  opacity: 1;
+}
+
+::-webkit-input-placeholder {
+  color: #acb6c8;
+}
+
+:-ms-input-placeholder {
+  color: #acb6c8;
+}
+
+::-moz-focus-inner {
+  padding: 0 !important;
+  border: 0 !important;
+}
+</style>
+<!-- For PRODUCTION use -->
+<script type="text/javascript" src="https://js.authorize.net/v1/Accept.js" charset="utf-8"></script>
+<!-- For Test/Sandbox use 
+<script type="text/javascript" src="https://jstest.authorize.net/v1/Accept.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="$webThemes/$siteName/js/ProcessPayment.js"></script>
+<div id="cardDetailsNew"></div>
+<input type="hidden" value="$hostKey" id="hostKey"/>
+<input type="hidden" value="$paymentGateWayHostID" id="paymentGateWayHostID"/>
+<br>
+<input type="hidden" id="transAmount" name="transAmount" value="$orderGrandTotal"/>
+<input type="hidden" id="customerProfileId" name="customerProfileId" value="$customerProfileId"/>
+<input type="hidden" class="fromPage" name="fromPage" value="$!fromPage"/>
+<input type="hidden" id="customerPaymentId" name="customerPaymentId" value="$custPaymentId"/>
+<input type="hidden" id="errorMsg" name="errorMsg" value="$errorMsg"/>
+<form action="processCheckout.action" method="post" id="submitCheckOutForm">
+  <input type="hidden" name="fromPage" value="payWithNewCC"/>
+  <input type="hidden" name="userPcard" id="pCardId" value="0"/>
+  <input type="hidden" name="savedGroupId" value="$!savedGroupId"/>
+  <!-- Billing Address --> 
+  <input type="hidden" name="billEntityId" value="$!billEntityId"/>
+  <input type="hidden" name="defaultBillToId" value="$!defaultBillToId"/>
+  <input type="hidden" name="billAddress1" value="$!billAddress1"/>
+  <input type="hidden" name="billAddress2" value="$!billAddress2"/>
+  <input type="hidden" name="billCity" value="$!billCity"/>
+  <input type="hidden" name="billState" value="$!billState"/>
+  <input type="hidden" name="billPhoneNo" value="$!billPhoneNo"/>
+  <input type="hidden" name="billEmail" value="$!billEmail"/>
+  <input type="hidden" name="billCountry" value="$!billCountry"/>
+  <input type="hidden" name="billZipcode" value="$!billZipcode"/>
+  <!-- Billing Address --> 
+  <!-- Shipping Address --> 
+  <input type="hidden" name="shipEntityId" value="$!shipEntityId"/>
+  <input type="hidden" name="overrideShip" value='$!overrideShip'/>
+  <input type="hidden" name="defaultShipToId" id="defaultShipToId" value="$!defaultShipToId"/>
+  <input type="hidden" name="address1" value="$!address1"/>
+  <input type="hidden" name="address2" value="$!address2"/>
+  <input type="hidden" name="city" value="$!city"/>
+  <input type="hidden" name="state" value="$!state"/>
+  <input type="hidden" name="phoneNumber" value="$!phoneNumber"/>
+  <input type="hidden" name="email" value="$!email"/>
+  <input type="hidden" name="country" value="$!country"/>
+  <input type="hidden" name="zipCode" value="$!zipCode"/>
+  <input type="hidden" name="shipToId" value="$!shipToId"/>
+  <input type="hidden" name="shipCompanyName" value="$!shipCompanyName"/>
+  <input type="hidden" name="shipToCustomerName" value="$!shipToCustomerName"/>
+  <input type="hidden" name="shippingAttention" value="$!shippingAttention"/>
+  <!-- Shipping Address -->
+  <!-- Order Details -->
+  <input type="hidden" name="orderType" value="$!orderType"/>
+  <input type="hidden" name="reqDate" id="reqDate" value="$!reqDate"/>
+  <input type="hidden" name="orderedBy" id="orderedBy" value="$!orderedBy"/>
+  <input type="hidden" name="erpQuoteNumber" value="$!erpQuoteNumber"/>
+  <input type="hidden" name="poNumber" id="poNumber" value="$!poNumber"/>
+  <input type="hidden" name="shipVia" id="shipVia" value="$!shipVia"/>
+  <input type="hidden" name="shipViaDescription" value="$!shipViaDisplay"/>
+  <input type="hidden" name="orderStatus" value="$!orderStatus"/>
+  <input type="hidden" name="shippingInstruction" value="$!shippingInstruction"/>
+  <input type="hidden" name="orderNotes" value="$!orderNotes"/>
+  <input type="hidden" name="newsLetterSubscription" value="$!newsLetterSubscription"/>
+  <input type="hidden" name="customerReleaseNumber" value="$!customerReleaseNumber" />
+  <input type="hidden" name="isReOrder" value="$!isReOrder"/>
+  <input type="hidden" name="upsFrieghtCharges" value="$!upsFrieghtCharges"/>
+  <input type="hidden" name="upsFedexAccountType" value="$!upsFedexAccountType"/>
+  <input type="hidden" name="upsOrFedexAccount" value="$!upsOrFedexAccount"/>
+  <!-- Order Details -->
+  <!-- Payment Details -->
+  <input type="hidden" name="rdCard" id="rdCard" value="No"/>
+  <input type="hidden" value="Y"name="creditCardPayment" id="creditCardPayment"/>
+  <input type="hidden" value="$!ccTransactionId" name="ccTransactionId" id="ccTransactionId"/>
+  <input type="hidden" value="$!cardDetails.cardHolder" name="cardHolder"/>
+  <input type="hidden" value="$!ccExp" name="ccExp" id="ccExp"/>
+  <input type="hidden" value="$!cardDetails.address1" name="streetAddress"/>
+  <input type="hidden" value="$!cardDetails.zipCode" name="postalCode"/>
+  <input type="hidden" value="" name="ccResponseCode" id="ccResponseCode"/>
+  <input type="hidden" value="" name="ccStatus" id="ccStatus"/>
+  <input type="hidden" value="" name="ccHostRefNumber" id="ccHostRefNumber"/>
+  <input type="hidden" value="" name="ccTaskID" id="ccTaskID"/>
+  <input type="hidden" value="" name="ccAmount" id="ccAmount"/>
+  <input type="hidden" value="" name="ccDeclineResponseReason" id="ccDeclineResponseReason"/>
+  <input type="hidden" value="" name="ccCvv2VrfyCode" id="ccCvv2VrfyCode"/>
+  <input type="hidden" value="" name="ccTip" id="ccTip"/>
+  <input type="hidden" value="" name="ccTransTimeStamp" id="ccTransccTransTimeStampactionId"/>
+  <input type="hidden" value="" name="ccApprovedAmount" id="ccApprovedAmount"/>
+  <input type="hidden" value="" name="ccRequestedAmount" id="ccRequestedAmount"/>
+  <input type="hidden" value="" name="ccHostResponseCode" id="ccHostResponseCode"/>
+  <input type="hidden" value="" name="ccInvoice" id="ccInvoice"/>
+  <input type="hidden" value="" name="ccApprovalCode" id="ccApprovalCode"/>
+  <input type="hidden" value="" name="ccServerTimestamp" id="ccServerTimestamp"/>
+  <input type="hidden" value="CC" name="ccType" id="ccType"/>
+  <input type="hidden" value="" name="ccLength" id="ccLength"/>
+  <input type="hidden" value="" name="ccFee" id="ccFee"/>
+  <input type="hidden" value="" name="ccExternalSessionID" id="ccExternalSessionID"/>
+  <input type="hidden" value="" name="ccAddVrfyCode" id="ccAddVrfyCode"/>
+  <input type="hidden" value="" name="ccAuthType" id="ccAuthType"/>
+  <input type="hidden" value="" name="ccAuthMemo" id="ccAuthMemo"/>
+  <input type="hidden" value="" name="ccTax" id="ccTax"/>
+  <input type="hidden" value="" name="ccNewDomainKey" id="ccNewDomainKey"/>
+  <input type="hidden" value="$!ccNumber" name="ccNumber" id="ccNumber"/>
+  <input type="hidden" value="" name="isFromQC" id="isFromQC"/>
+  <input type="hidden" value="" name="ccpaymentStatus" id="ccpaymentStatus"/>
+  <input type="hidden" value="" name="ccdescription" id="ccdescription"/>
+  <input type="hidden" value="$!ccCvvCode" name="ccCvvCode" id="ccCvvCode"/>
+  <!-- Payment Details -->
+</form>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	paymentProcessor.loadCardOrContinueCheckout();
+	$("[id^=r_]").on('click', function(){
+   $('#creditCardList tr').each(function(){
+    $(this).css('background', 'none');
+   });
+   $(this).parent().parent().css('background','#e8ecef');
+  });
+  
+  $('#creditCardList tr td span.ccNum').each(function(){
+  var x= $(this).text();
+  var lIndex=x.lastIndexOf('X');
+  var y= x.slice(0, lIndex+1)+'-'+x.slice(lIndex+1);
+  $(this).text(y);
+});
+});
+
+
+</script>

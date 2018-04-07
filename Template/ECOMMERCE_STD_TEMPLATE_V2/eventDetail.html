@@ -1,0 +1,101 @@
+#if($!eventsList && $!eventsList.title && $!eventsList!="")
+<div class="eventsSidebarWrap">	
+	<div class="eventRightContent">
+		<h3 class="cimm_pageTitle">$!eventsList.title</h3>
+		<ul class="eventInfoBlock pullLeft">
+			<li>
+				<b>$!locale.get("eventDetail.label.date"): </b>
+				#if($eventsList.date.substring(9,11).replaceAll('-','/') == $eventsList.end.substring(9,11).replaceAll('-','/'))
+					$!eventsList.date.substring(0,16).replaceAll('-','/')
+				#else
+					$!eventsList.date.substring(0,16).replaceAll('-','/') - $!eventsList.end.substring(0,16).replaceAll('-','/')
+				#end
+			</li>
+			<li><b>$!locale.get("eventDetail.label.time"): </b>$!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/')</li>
+			<li><b>$!locale.get("event.label.location"): </b>$!eventsList.location</li>
+			#if($eventsList.isCostRequired ==  "Y")
+			<li>
+				<b>$!locale.get("event.label.eventFee"): </b>$! $!eventCost
+			</li>
+			#end
+			<li class="event_desc">
+				$!eventsList.description
+			</li>
+			<li>
+				#if($eventsList.phoneNumber!= "")
+					<p><b>$!locale.get("event.label.moreInfoPleaseContact") <a href="mailto:$!eventsList.notification" class="mailtoLink">$!eventsList.contact</a> at <a href="tel:$!eventsList.phoneNumber">$!eventsList.phoneNumber</a></b></p>
+				#end
+			</li>
+		</ul>
+		<ul class="pullRight">
+			<li>
+				<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';"/>
+			</li>
+		</ul>
+		<div class="clear"></div>
+		<p><a href='/EventCalendar'>$!locale.get("event.label.backToEventsCalendar")</a><br/></p>
+		#if($eventsList.fileLocation)
+			#if($eventsList.fileLocation != "No Attachment")
+				<p class="mTop-3"><img src="$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>
+			#end
+		#end
+	</div>
+	<div class="eventsSidebar">        		
+		<p> $!locale.get("event.note.attendTheEvent") </p>
+		<br />
+		#if($eventsList.showSeats == "Y")
+		<input type="hidden" id="total" value="$!eventsList.totalSeats"/>
+		<table cellspacing="5" cellpadding="0">
+		#if($eventsList.totalSeats==-1)
+			 <tr>            		
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+				<td>$!locale.get("event.seats.unlimited")</td>
+			</tr>
+			#else
+			<tr>
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+	 			<td>$!eventsList.totalSeats</td>
+	 		</tr>
+			#end
+			#set($diff = $!eventsList.totalSeats - $!eventsList.availableSeats)
+			#if($eventsList.totalSeats == -1)
+			#elseif($diff < 0)
+			<tr>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span></b></td>
+				<td>0</td>
+			</tr>
+			#else
+			<tr>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span> </b></td>
+				<td>$!diff</td>
+			</tr>
+			#end
+		</table>
+		<br />
+		#end 
+		<div align="center" id="chkDate">
+			#if($eventsList.blockOnlineReg == "N")
+				#if($eventsList.totalSeats == "-1")
+					<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="button">$!locale.get("event.label.registerNow")</a>
+				#elseif($eventsList.availableSeats >= $!eventsList.totalSeats)
+					<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="button">$!locale.get("event.label.registerrForWaitingList")</a>
+				#else
+					<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="button">$!locale.get("event.label.registerNow")</a>
+				#end
+			#else
+				<a href="javascript:void(0);" class="button">$!locale.get("event.label.registerClosed")</a>
+			#end
+		</div>
+		<br />
+	</div>
+</div>
+#else
+	$!locale.get('product.label.noDataAvailable')
+#end
+<script>
+	var D1 = "$!eventsList.date";
+	var D2 = new Date();
+	if ((new Date(D1).getTime()) <= (new Date(D2).getTime())) {
+		$("#chkDate").html('<a href="javascript:void(0);" class="button">$!locale.get("event.label.registerClosed")</a>');
+	}
+</script>

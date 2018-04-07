@@ -1,0 +1,125 @@
+<link rel="shortcut icon" href="$webThemes/$siteName/images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap-select.min.css" media="none" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogAutoComplete.css" media="none">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/datatables.min.css" media="none">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/dataTables.bootstrap.min.css" media="none">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap-datepicker.standalone.min.css" media="none">
+#if($LayoutName=="ProductDetailPage")
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/prettyPhoto.css" media="none"/>
+#elseif($LayoutName=="CalendarEventsPage" || $LayoutName=="EventDetailPage")
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogEventCss.css" media="none" />
+#elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout")
+<link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css" media="none" />
+#end
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/multiTab.css" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogWebLayouts.css" media="all" />
+#if($LayoutName=="QuickOrderStdPage")
+<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/handsontable.full.css">
+#end
+#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/mobileApp.css">#end
+<!--[if IE 9]>
+	<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/IE9.css">
+<![endif]-->
+<!--[if IE 8]>
+<style type='text/css' rel="stylesheet">
+	label.customRadioBtn input[type="radio"] {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	label.customRadioBtn input[type="radio"] + span:before,
+	label.customRadioBtn input[type="radio"] + span:after,
+	.cimm_searchForm .cimm_searchWrapper .recIcon{
+		display:none;
+	}
+	label.customRadioBtn{
+		padding:0;
+	}
+</style>
+<![endif]-->
+#if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout")
+<style type="text/css">
+.jssorb01 {float: right;}
+.jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
+ filter: alpha(opacity=70);
+ opacity: .7;
+ overflow:hidden;
+ cursor: pointer;
+}
+.jssora05ldn, .jssora05rdn{
+	position: absolute;
+	cursor: pointer;
+	display: block;
+	background: url(../images/a17.png) no-repeat;
+	overflow:hidden;
+}
+.jssora05l {
+	display: block;
+	background: #FFF;
+	top: 48% !important;
+	position: absolute;
+	left: 0 !important;
+	width: 30px !important;
+	cursor: pointer;
+	box-shadow: 1px 2px 10px -1px #ABABAB;
+}
+.jssora05r {
+	display: block;
+	background: #FFF;
+	top: 48% !important;
+	position: absolute;
+	right: 0 !important;
+	width: 30px !important;
+	cursor: pointer;
+	box-shadow: 1px 2px 10px -1px #ABABAB;
+}
+.jssora05l:before, .jssora05r:before {
+    font-family: FontAwesome;
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #46acee;
+    position: absolute;
+    top: 10px;
+    left: 12px;
+}
+.jssora05l::before {
+    content: "\f0d9";
+}
+.jssora05r:before {
+	content: "\f0da";
+}
+.jssora05l:hover,.jssora05r:hover {background: #FFF;}
+.jssora05l:hover:before,.jssora05r:hover:before{color: #797d82;}
+.jssora05ldn { background-position: -250px -40px; }
+.jssora05rdn { background-position: -310px -40px; }
+</style>
+<input type="hidden" id="pageTitle" name="pageTitle" value="$!pageTitle" />
+#elseif($LayoutName=="ProductDetailPage")
+<style type="text/css">
+.popProduct {
+	position: absolute;
+	padding: 10px;
+	margin: 5px 0px;
+	display:none;
+	background: #3468d6;
+	opacity: 0.8;
+	border-radius: 5px;
+	background: linear-gradient(top, #f9d835, #f3961c);
+	top: -35px;
+}
+.popProductClone{
+	position: absolute;
+	padding: 10px;
+	margin: 5px 0px;
+	display:none;
+	background: #3468d6;
+	opacity: 0.8;
+	border-radius: 5px;
+	top: 40px;
+	width: 320px;
+	right: 0;
+}
+ </style>
+#end

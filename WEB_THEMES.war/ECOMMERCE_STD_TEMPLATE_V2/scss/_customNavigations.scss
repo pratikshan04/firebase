@@ -1,0 +1,136 @@
+nav.navbar {
+    background: $mainNavBackground;
+    border-radius: 0;
+    min-height: 50px;
+    margin: 0;
+    border: 0;
+    box-shadow: 0px 5px 10px 0px #c4c4c4;
+    .cimm_navigationBar {
+        position: relative;
+        ul {
+            li {
+                display: inline-block;
+                text-align: left;
+                position: relative;
+                &.active {
+                    &>a {
+                        background: $primaryColor;
+                    }
+                }
+				&:hover{
+					background: $primaryColor;
+					a{
+						i{
+							&:before {
+								content: "\f0d7";
+							}
+						}
+					}
+				}
+				&:last-child{
+					.dropdown-menu{
+						left: -143px;
+					}
+					a {
+						padding: 15px 30px 15px 26px;
+					}
+				}
+                a {
+                    color: $white;
+                    font-size: $mainNavLinkFontSize;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    padding: 15px 27px 15px 25px;
+                    white-space: normal;
+					position: relative;
+					&:focus{
+						background: none;
+					}
+                    &:hover {
+                        background: $primaryColor;
+						i{
+							&:before {
+								content: "\f0d7";
+							}
+						}
+                    }
+					i{
+						position: absolute;
+						right: 12px;
+						top: 16px;
+						font-size: 18px;
+						&:before {
+							content: "\f0da";
+						}
+					}
+					&.cimm_inlineButton {
+						padding: 7px 15px;
+					}
+                }
+				div.dropdown-menu {
+					width: 855px;
+					background: $navDropdownBg;
+					padding: 30px 0;
+					ul{
+						width:284px;
+						float: left;
+						li{
+							border: none;
+							
+						}
+					}
+				}
+                .dropdown-menu {
+                    display: none;
+                    position: absolute;
+                    top: 50px;
+                    left: 0;
+                    width: 275px;
+                    height: auto;
+                    z-index: 100;
+                    margin: 0;
+                    border-radius: 0;
+                    background: $navDropdownBg;
+                    padding: 0;
+                    li {
+                        width: 100%;
+                       // border-bottom: 1px solid $lightGrayColorOne;
+                        &:last-child {
+                            border: none;
+                        }
+                        a {
+                            color: $bodyFontColor;
+                            padding: 5px 10px;
+                            display: block;
+                            margin: 0;
+							text-transform: capitalize;
+                            &:hover {
+                                color: $white;
+                            }
+                        }
+                    }
+                    &.cimm_shopByBrand {
+                        width: 100%;
+                        padding: 20px;
+                        ul {
+                            li {
+                                float: left;
+                                width: 23%;
+                                margin-right: 2%;
+                                a {
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
+                &#brandLink {
+                    position: static;
+                }
+                &:hover>.dropdown-menu {
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<input type="hidden" id="cCardHolder" value="$creditCardValue.cardHolder" />
+<input type="hidden" id="cCardType" value="$creditCardValue.creditCardType" />
+<input type="hidden" id="cCardExpDate" value="$creditCardValue.date" />
+<input type="hidden" id="cCardEid" value="$creditCardValue.elementPaymentAccountId" />
+<input type="hidden" id="cCardNum" value="$creditCardValue.creditCardNumber"/>
+<input type="hidden" id="cAddress" value="$creditCardValue.address1" />
+<input type="hidden" id="cpCode" value="$creditCardValue.zipCode" />
+<input type="hidden" id="cardResponse" value="$creditCardValue.statusDescription" />
+<input type="hidden" id="fromPage" value='$!session.getAttribute("fromPage")' />
+<div id="cardStatus" class="center">
+<center><img src="$webThemes/$siteName/images/brandloading.gif" alt='Loading'/></center>
+<div class="cimm_instructions">
+<p>$locale.get("label.message.pleaseWaitWeAreProcesingYourRequest") </p>
+<p>$locale.get("label.message.doNotPressRefreshOrBackButton")</p>
+</div>
+</div>
+<script type="text/javascript">
+		$(document).ready(function() {
+			var fromPage = $("#fromPage").val();
+			console.log("fromPage : "+fromPage);
+			var content = "";
+			if (fromPage == "payWithNewCC") {
+				//content = "<center>New Credit Card Added Successfully. Please wait..</center>";
+				content = "<center>";
+				content = content + "<img src='$webThemes/$siteName/images/brandloading.gif' alt='Loading'/>";
+				content = content + "<p><b>New Credit Card Added Successfully.</b></p>";
+				content = content + "<p>$locale.get('label.message.doNotPressRefreshOrBackButton')</p>";
+				content = content + "</center>";
+				setTimeout(function() {
+					window.top.location.href = "displayCreditCardSale.action";
+				}, 1000);
+			}else if (fromPage == "AU") {
+				setTimeout(function() {
+					window.top.location.href = "processCheckoutAU.action";
+				}, 1000);
+			} else {
+				content = "<center>";
+				content = content + "<img src='$webThemes/$siteName/images/brandloading.gif' alt='Loading'/>";
+				content = content + "<p><b>New Credit Card Added Successfully.</b></p>";
+				content = content + "<p>$locale.get('label.message.doNotPressRefreshOrBackButton')</p>";
+				content = content + "</center>";
+			}
+	
+			if ($("#cardResponse").val() == "Success") {
+				$("#cardStatus").html(content);
+			} else {
+				$("#cardStatus").html("<center><b>"+$("#cardResponse").val()+"</b></center>");
+			}
+		});
+</script>

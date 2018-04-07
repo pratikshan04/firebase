@@ -1,0 +1,215 @@
+<input type="hidden" value='$!session.getAttribute("topStaticSeletedMenu")' id="topStaticSeletedMenu" />
+#if($eventsByCategory)
+#foreach($key in $eventsByCategory.keySet())
+	<!-- <h1 class="cimm_pageTitle">Training & $key</h1> -->
+	<p class="mBottom-3">We offer a wide breadth of training on our products and technologies. You'll find a full list of our training events below, or you can use the filters on the left to find specific events that interest you</p>
+	<div class="cimm_trainingListControl clearAfter" style="display:none;">
+		<div class="eventsNavigationControls">
+			<div class="cimm_trainingListSendPrint">
+				<a href="javascript:void(0);" onclick="sendEventListPage();"><i class="fa fa-envelope-o fa-3x"></i></a>
+				<a href="javascript:void(0);" data-toggle="tooltip" class="hideForDevice" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><i class="fa fa-print fa-3x"></i></a>
+				</div>
+			<div class="cimm_trainingCustomShowList customShowItems">
+				<label>Show:</label>
+				<a href="javascript:void(0);" id="12" class="changeIlength selected perPage_12">12</a>
+				<a href="javascript:void(0);" id="24" class="changeIlength perPage_24">24</a>
+				<a href="javascript:void(0);" id="48" class="changeIlength perPage_48">48</a>
+			</div>
+		</div>
+		<div class="cimm_trainingListRightControl">
+			#if($paginate>1)
+			<div class="pgnation">
+				<script type="text/javascript">
+				CustomPaginationScript($paginate, "$paginationURL", $pageNo, $resultPage);
+				</script>
+			</div>
+			#end
+		</div>
+	</div>
+	<table id="example" class="eventListTable display" cellspacing="0" width="100%">
+		<thead>
+			<tr style="display:none;">
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			#set($eventTypeName = $key)
+			#foreach($key2 in $eventsByCategory.get($key).keySet())
+			#set($categoryList = $eventsByCategory.get($key).get($key2))
+			#foreach($category in $categoryList)
+			<tr>
+				<td>
+					<div class="cimm_eventsListContainer clearAfter">
+						<h6><a href="eventDetailsUnit.action?eventID=$category.id">$category.title</a></h6>
+						<div class="eventShortDesp">
+						#if($category.description.length() > 0)
+							#if($category.description.length() > 200)
+							#set($description = $category.description.substring(0, 199))
+							$description.substring(0, $math.min($description.length(),$description.lastIndexOf(" ")))... <a class="red" href="eventDetailsUnit.action?eventID=$category.id">Read More</a>
+							#else
+							$category.description
+							#end
+						#end
+						<span class='mRight-3'><b>Category: </b>$category.eventCategory</span>
+						#if($category.location)<span class='mRight-3'><b>Location: </b>$category.location</span>#end
+						<span class='mRight-3'><b>Date:</b>
+						#if($category.dateV2.substring(9,11).replaceAll('-','/') == $category.endV2.substring(9,11).replaceAll('-','/'))
+						$category.dateV2.substring(4,11).replaceAll('-','/'),$category.dateV2.substring(11,16).replaceAll('-','/')
+						#else
+						$category.dateV2.substring(4,11).replaceAll('-','/'),$category.dateV2.substring(11,16).replaceAll('-','/') - $category.endV2.substring(4,11).replaceAll('-','/'),$category.endV2.substring(11,16).replaceAll('-','/')
+						#end
+						</span>
+						<!-- <strong>Start Time:</strong> $category.dateV2.substring(16,25).replaceAll('-','/') -->
+						</div>
+						<ul>
+							<li class="mBottom-3">
+								#if($!category.DurationDays!="")
+								#set($numberOfDays = 0)
+								#if($!category.DurationDays == $numberOfDays)
+								<strong>Duration:</strong> 1 Day(s)  <br /> 
+								#else
+								<strong>Duration:</strong> $!category.DurationDays Day(s)  <br /> 
+								#end
+								#end
+								#if($!category.cost!="")
+								<strong>Cost:</strong> <span class="currencyText">$$!category.cost</span><br />
+								#end
+							</li>
+							<li class='hideForPrint'>
+								<a href='eventDetailsUnit.action?eventID=$category.id' class="cimm_inlineButton">View Sessions</a>
+							</li>
+						</ul>
+					</div>
+				</td>
+				</tr>
+			#end
+			#end
+		</tbody>
+	</table>
+	<div id="printSendEvents" style="display:none;">
+		<table width="800px" cellpadding="0" cellspacing="0" style="border: 1px solid #ccc;border-top: none; margin: 5px;">
+			<tbody>
+			#set($eventTypeName = $key)
+			#foreach($key2 in $eventsByCategory.get($key).keySet())
+			#set($categoryList = $eventsByCategory.get($key).get($key2))
+			#foreach($category in $categoryList)
+			<tr>
+			<td colspan="2" style="padding: 12px 5px;font-size: 16px;text-align: left;font-weight: bold;font-family:Arial, Helvetica, sans-serif;color: #9f1c34;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">$category.title</td>
+			</tr>
+			<tr>
+			#if($category.description.length() > 0)
+			<td valign="top" width="650px" style="padding: 5px;font-size: 14px;text-align: left;font-family:Arial, Helvetica, sans-serif;color: #666; font-weight: normal;">
+			#if($category.description.length() > 200)
+			#set($description = $category.description.substring(0, 199))
+			$description.substring(0, $math.min($description.length(),$description.lastIndexOf(" ")))... <a class="red hideForPrintt" href="eventDetailsUnit.action?eventID=$category.id">Read More</a>
+			#else
+			$category.description
+			#end
+			</td>
+			#end
+			<td valign="top" width="250px" style="padding: 5px;">
+			<p style="font-size: 14px;text-align: left;font-family:Arial, Helvetica, sans-serif;color: #666;line-height: 22px; margin: 0; padding: 0;">
+			#if($!category.DurationDays!="")
+			#set($numberOfDays = 0)
+			#if($!category.DurationDays == $numberOfDays)
+			<strong>Duration:</strong> 1 Days  <br /> 
+			#else
+			<strong>Duration:</strong> $!category.DurationDays days  <br /> 
+			#end
+			#end
+			#if($!category.cost!="")
+			<strong>Cost:</strong> $$!category.cost	<br />
+			#end
+			</p>
+			</td>
+			</tr>
+			<tr>
+			<td colspan="2">
+			<table width="800px" cellpadding="0" cellspacing="0" style="margin-top: 20px; font-family:Arial, Helvetica, sans-serif; font-size: 14px; border-top:1px solid #ccc;">
+			<td width="40%" style="font-family:Arial, Helvetica, sans-serif; font-size: 14px;color: #666;padding: 5px;">$category.location</td>
+			<td width="30%" style="font-family:Arial, Helvetica, sans-serif; font-size: 14px;color: #666;padding: 5px;">$category.date.substring(0,10).replaceAll('-','/') - $category.end.substring(0,10).replaceAll('-','/')</td>
+			<td width="30%" style="font-family:Arial, Helvetica, sans-serif; font-size: 14px;color: #666;padding: 5px;"><strong>Start Time:</strong> $category.dateV2.substring(16,25).replaceAll('-','/')</td>
+			</table>
+			</td>
+			</tr>
+			#end
+			#end
+			</tbody>
+		</table>
+	</div>
+#end
+#else
+	$locale.get("event.label.noEventsOrClasses")
+#end
+<script type="text/javascript">
+document.title = "Training & Events | $!siteDisplayName";
+</script>
+
+<style>
+.eventSortTop {
+	border-top: 1px solid #ccc;
+	padding: 8px 0 2px 0;
+	border-bottom: 1px solid #ccc;
+	margin: 40px 0;
+}
+.cimm_trainingCustomShowList {
+	width: auto;
+	float: left;
+	padding: 4px 0;
+	font-size: 16px;
+	margin-left: 20px;
+}
+.customShowItems a.selected {
+	color: #666 !important;
+	text-decoration: none;
+}
+.customShowItems a {
+	padding: 0 10px;
+	color: #46acee;
+	margin-right: 0;
+	text-decoration: underline;
+	font-weight: bold;
+	border-right: 1px solid #666;
+}
+.paginate_button.previous.disabled, .paginate_button.next.disabled {
+	display: none;
+}
+.cimm_trainingListSendPrint {
+	font-size: 9px;
+	float: left;
+}
+.cimm_trainingListSendPrint a {
+	color: #999;
+	margin-right: 5px;
+}
+table.dataTable tr.group td {
+	background: none;
+	font-weight: normal;
+	border-bottom: 1px solid #000;
+}
+.eventShortDesp {
+	float: left;
+	width: calc(100% - 150px);
+	padding: 10 10px 10px 0;
+}
+.eventShortDesp p{
+	margin-bottom: 20px;
+}
+.eventShortDesp +ul {
+	float: left;
+	width: 150px;
+	padding: 0 0 10px 10px;
+	border-left: 1px solid #000;
+}
+.pagination>li>a, .pagination>li>span{
+	padding: 2px 4px;
+	background: none;
+	color: #000;
+}
+.cimm_eventsListContainer h6{
+	margin: 10px 0 5px 0;
+}
+.eventShortDesp > span{
+	color: #46acee;
+}
+</style>

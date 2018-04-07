@@ -1,0 +1,8 @@
+#foreach($banner in $CMSBannerList.resultSet)
+<dd><a href="javascript:void(0);" >$!banner.name
+									<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
+								</a>
+								<div class="hiddenContent">
+									<div data-type="widget" data-widget="$banner.id">Banner Block</div>
+								</div></dd>
+#end

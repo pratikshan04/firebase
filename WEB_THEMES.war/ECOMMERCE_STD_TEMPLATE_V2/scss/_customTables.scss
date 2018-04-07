@@ -1,0 +1,42 @@
+@media only screen and (max-width: 992px) {    
+   /* Force table to not be like tables anymore */
+  table.rwd-table, 
+	.rwd-table thead, 
+	.rwd-table tbody, 
+	.rwd-table th, 
+	.rwd-table td, 
+	.rwd-table tr { 
+		display: block; 
+	}
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.rwd-table thead tr { 	
+	display: none;
+	}
+ 
+	.rwd-table tr { border: 1px solid #ccc; }
+ 
+	.table.rwd-table td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+        padding: 8px 8px 8px 50%;
+		white-space: normal;
+        text-align:left;
+        word-wrap: break-word;
+	}
+ 
+	.rwd-table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		max-width: 48%; 
+		padding-right: 10px; 		
+		text-align:left;
+		font-weight: bold;
+	}
+	.rwd-table td:before { content: attr( data-th); }
+}

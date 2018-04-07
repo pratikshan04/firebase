@@ -1,0 +1,256 @@
+#set( $shipViaListTemp = $session.getAttribute("customerShipViaList"))
+##set( $shipViaListTemp = $session.getAttribute("shipViaList")) ## Load from entity inquiry for Eclipse Direct ERP 
+	<div id="wizardGuestCheckout" class="checkOutWrap">
+		<ul class="multiTabHeading clearAfter">
+			<li><a href="#step-1"><span class="stepDesc">$!locale.get("product.heading.billingAddress")</span></a></li>
+			<li><a href="#step-2"><span class="stepDesc">$!locale.get("product.heading.shippingAddress")</span></a></li>
+			<li><a href="#step-3"><span class="stepDesc">$!locale.get("product.heading.orderDetail")</span></a></li>
+			<li><a href="#step-4"><span class="stepDesc">$!locale.get("product.heading.orderReview")</span></a></li>
+			<!-- <li><a href="#step-5"><span class="stepDesc">$locale.get("register.label.terms")</span></a></li> -->
+		</ul>
+			<!-- <form> -->
+			<div class="multiTabContent">
+					<div id="notificationDiv">
+					        <span class="successMsg" id="message"></span>
+					        <span class="errMsg" id="errorMsg"></span>
+					    </div>
+					<div id="step-1">
+						<!-- Billing Address -->
+						<div id="guestBillAddress">
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.emailaddress") <span class="text-danger">*</span></label>
+										<input type="text" name="auEmail" id="auEmail" value="$!auEmail" maxlength="100" onblur="guestCheckoutWizard.checkUserNameExistOnBlur(this);" class="form-control"/>									
+										<input type="hidden" name="userAccountExist" id="userAccountExist" value="N" />
+										<input type="hidden" name="auEmailPrevious" id="auEmailPrevious" value="$!auEmail" />
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.phone") <span class="text-danger">*</span></label>
+										<input type="text" name="auBillPhoneNo" id="auBillPhoneNo" value="" maxlength="15" class="formatPhoneNumber form-control"/>	
+									</div>								
+								</div> 
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.firstname") <span class="text-danger">*</span></label>
+									<input type="text" name="auBillFirstName" type="text" id="auBillFirstName" value="" maxlength="15" class="form-control"/> 
+									</div>									
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.lastname") <span class="text-danger">*</span></label>
+									<input type="text" name="auBillLastName" type="text" id="auBillLastName" value="" maxlength="15" class="form-control"/> 	
+									</div>							
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.address1") <span class="text-danger">*</span></label>
+									<input type="text" name="auBillAddress1" id="auBillAddress1" value="" maxlength="150" class="form-control"/> 
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.address2")  </label>
+									<input type="text" name="auBillAddress2" id="auBillAddress2" value="" maxlength="150" class="form-control"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.city") <span class="text-danger">*</span></label>
+									<input type="text" name="auBillCity" id="auBillCity" value="" maxlength="50" class="form-control"/>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.state") <span class="text-danger">*</span></label>
+									<select name="auBillState" id="stateSelect" class="form-control"></select>
+									</div>
+								</div>
+							</div>
+							<div class="row">							
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$locale.get("form.guestcheckout.zipCode") <span class="text-danger">*</span></label>
+									<input type="text" name="auBillZipCode" id="auBillZipCode" value="" maxlength="15" class="form-control"/>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$locale.get("form.guestcheckout.country") <span class="text-danger">*</span></label>
+									<select name="auBillCountry" id="countrySelect" data-state="stateSelect" class="form-control"></select>
+									<input type="hidden" name="locUser" id="locUser" value="N" />
+			                       	<input type="hidden" name="countryFulNm" id="countryFulNm"/>
+			                       	<input type="hidden" id="billAddressState" value="$!billAddress.state" />
+									<input type="hidden" id="billAddressCountry" value="$!billAddress.country" />
+			                       	</div>
+								</div>
+							</div>
+						</div>
+						<!-- Billing Address -->
+						
+						
+					</div>
+					<div id="step-2">
+						<!-- Shipping Address -->
+						<div id="guestShipAddress">
+							<div class="row">	
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label for="auChkSameAsBilling" class="customCheckBox2">
+											<input type="checkbox" name="auChkSameAsBilling" id="auChkSameAsBilling" checked="checked" onclick="guestCheckoutWizard.sameAsBillingAddress();" class="form-control">
+											<span>$!locale.get("form.guestcheckout.sameasbillingaddress")</span>
+										</label>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.firstname") <span class="text-danger">*</span></label>
+										<input type="text" name="auShipFirstName" type="text" id="auShipFirstName" value="" maxlength="15" class="form-control"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">	
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.lastname") <span class="text-danger">*</span></label>
+										<input type="text" name="auShipLastName" type="text" id="auShipLastName" value="" maxlength="15" class="form-control"/> 
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.address1") <span class="text-danger">*</span></label>
+										<input type="text" name="auShipAddress1" id="auShipAddress1" value="" maxlength="150" class="form-control"/> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.address2")  </label>
+										<input type="text" name="auShipAddress2" id="auShipAddress2" value="" maxlength="150" class="form-control"/>
+									</div> 
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.city") <span class="text-danger">*</span></label>
+										<input type="text" name="auShipCity" id="auShipCity" value="" maxlength="50" class="form-control"/>
+									</div>
+								</div>
+							</div> 
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.state") <span class="text-danger">*</span></label> 
+										<select name="auShipState" id="stateSelectShip" class="form-control"></select>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.zipCode") <span class="text-danger">*</span></label>
+										<input type="text" name="auShipZipCode" id="auShipZipCode" value="" maxlength="15" class="form-control"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.guestcheckout.country") <span class="text-danger">*</span></label>
+										<select name="auShipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control"></select>
+									</div>
+								</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label>$!locale.get("form.guestcheckout.phone") <span class="text-danger">*</span></label>
+									<input type="text" name="auShipPhoneNo" id="auShipPhoneNo" value="" maxlength="15" class="formatPhoneNumber form-control"/>
+									<input type="hidden" name="locState" id="lState" value="Y" />
+			                       	<input type="hidden" name="countryFulNmShip" id="countryFulNmShip"/>
+		                       	</div>
+							</div>
+							</div>
+						</div>
+						<!-- Shipping Address -->
+					</div>
+					<div id="step-3">
+						<div class="cimm_formContent" id="guestOrderDetails">
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
+										<input type="hidden"  id="shipToCountry" name="shipToCountry"  value=""/>
+										<input type="text" name="orderedBy" id="orderedBy" value="" class="form-control"/> 
+									</div>									
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
+										<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control"/>
+									</div> 
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
+										<input type="text" id="reqDate" name="reqDate" class="datePicIcon"  readonly class="form-control"/>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
+									<select id="selectedShipViaWL" name="selectedShipViaWL" class="form-control">
+										<option value=" " >-Select-</option>
+										##foreach($shipVia in $shipViaListTemp)
+										 <!--  <option value="$shipVia.shipViaID">$shipVia.description</option> -->
+								     	##end
+								     	#foreach($shipVia in $shipViaListTemp)
+										 	<option value="$shipVia.shipViaID">$!shipVia.shipViaID</option>
+								     	#end
+									</select> 
+									</div> 
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+										<label>$!locale.get("form.label.shippingInstructions") </label>
+										<textarea id="shippingInstruction" name="shippingInstruction" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group">
+									<label>$!locale.get("form.label.orderNote") </label>
+									<textarea name="orderNotes" id="orderNotes" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
+									<input type="hidden" id="taxInfoId" value='$taxId'/>
+									<input type="hidden" name="guestRegistrationFlag" id="guestRegistrationFlag" value='N'/>
+									<input type="hidden" name="guestRegistrationErrorMessage" id="guestRegistrationErrorMessage" value=""/>
+									</div>
+								</div>
+							</div>					
+						</div>
+					    <!-- Order Info  End -->
+					    
+					</div>
+					<div id="step-4" id="orderItemDetails">
+						<!-- Confirm Order Section -->	
+							<div id="confirmOrderPageDiv" style="width: 100%;">
+								<div class="row">
+									<center>
+										<span>
+											<img src="$webThemes/$siteName/images/loading.gif" alt="loading" />
+										</span>
+									</center>
+								</div>
+							</div>
+							<!-- Confirm Order Section -->	
+					</div>
+			</div>
+			<!-- </form> -->
+	</div>

@@ -1,0 +1,101 @@
+<!-- <div class="cimm_instructions"><i class="fa fa-2x fa-file-text"></i> &nbsp;$locale.get("reqestforQuote.text.UseTheFormToRequestMore")</div> -->
+<div id="notificationDiv"></div>
+<div id="iFrameContent" style="display:none;"></div>
+<input type="hidden" id="addNewRowCount" value="3" />
+<form id="rfqForm" method="post">
+	<input type="hidden" id="checkValidState" value="$session.getAttribute('isPunchoutUser')" />
+	<input type="hidden" id="poNumber" value="Request For Quote" name="poNumber" />	
+	<input type="hidden" id="orderedBy" value="" name="orderedBy" />	  
+	<div class="row">
+		<div class="col-md-2"></div>	
+			<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+					 <label >$!locale.get("form.label.firstName") <span class="text-danger">*</span> </label>
+					 <input type="text" value="$!firstName" name="firstName" id="rfnpName" class="form-control"/>	
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+					 <label >$!locale.get("form.label.lastName") <span class="text-danger">*</span> </label>
+					<input type="text" value="$!lastName" name="lastName" id="rfnpName2" class="form-control"/>
+					</div>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+						<label for="rfnpPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span> </label>
+						<input type="text" value="$!phoneNo" name="phoneNumber" id="rfnpPhone" maxlength="12" class="formatPhoneNumber form-control"/>
+					</div>				
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+						<div class="form-group">
+							<label for="rfnpEmail">$!locale.get("form.label.email") <span class="text-danger">*</span> </label>
+							<input type="text" value="$!email" name="email" id="rfnpEmail" class="form-control"/>
+						</div>
+					</div>
+			</div>
+		</div>	
+		<div class="col-md-2"></div>
+	</div>
+	<div class="row"> 
+	<div class="col-md-12">
+		<table  class="table rwd-table table-striped table-bordered display" id="reqForQuoteTableId">
+			<thead>
+				<tr>
+					<th>$!locale.get("product.label.partNumber")</th>
+					<th>$!locale.get("product.label.manufacturerPartNumber")</th>				
+					<th>$!locale.get("product.label.brandMnfrName")</th>
+					<th class="center">$!locale.get("product.label.qty")</th>
+					<th>$!locale.get("product.label.shortDescription")</th>
+				</tr>
+			</thead>
+			<tbody>
+				#set($start = 1)
+				#set($end = 3)
+				#set($range = [$start..$end])
+				#set($count = 0)
+				#foreach($end in $range)
+				<tr>
+					<td data-th="$!locale.get('product.label.partNumber')"><input type='text' class='requestGC form-control' id='PN$count' name='PARTNUMARR' /></td>
+					<td data-th="$!locale.get('product.label.manufacturerPartNumber')"> <input type="text" id="MPN$count" value="" name="MPN" class="form-control"/></td>			
+					<td data-th="$!locale.get('product.label.brandMnfrName')"><input type="text" id="BN$count" value="" name="BRANDNAMEARR" class="form-control"/> </td>
+					<td class="center" data-th="$!locale.get('product.label.qty')"> <input type="text" id="QTY$count" size="5" maxlength="6" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"  value="" name="ITEMQTYARR" class="quantity form-control" /></td>
+					<td data-th="$!locale.get('product.label.shortDescription')"> <input type="text" id="DESC$count" value="" name="DESCARR" class="form-control"/></td>
+					<!-- 
+					<td><input type='text' class='requestCPN'  id='CPN$count' name='CPN' /></td>  -->
+				</tr>
+				#set($count = $count + 1)
+				#end	
+				<tr class='more' id="idOfRowToInsertBefore">
+					<td colspan='5'>
+						<button type="submit" class="btn btn-success" value="$locale.get('product.button.addRowQuoteRequest')" onclick="return addRow();"><i class="fa fa-plus-square"></i> $!locale.get('product.button.addRowQuoteRequest')</button>
+						<button type="submit" class="btn btn-danger" id="removeRowBtn" style="display: none;" value="$!locale.get('product.button.removeRowQuoteRequest')" onclick="return removeRow();"><i class="fa fa-minus-square"></i> $!locale.get('product.button.removeRowQuoteRequest')</button>	
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+	<div class="row">
+			<div class="col-md-6 col-sm-6 col-sx-12">
+				<div class="form-group">
+					<label class="label-select">$!locale.get("form.label.requiredByDate")</label>
+					<input type="text" name="reqDate" id="reqDate" class="datePicIcon datepicker form-control" readonly/>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6 col-sx-12">
+				<div class="form-group">
+					<label for='comments'>$!locale.get("form.label.comments")</label>
+					<textarea name='comments' id='comments' rows="5" cols="40" class="form-control"></textarea>
+				</div>
+			</div>		
+	</div>
+	<div class="row" align="center">
+		<div class="col-md-12 col-sm-12 col-sx-12">
+			<input type="submit" class="button" id="submitBtn" value="$!locale.get('product.button.submitQuoteRequest')" onclick="return validateRFQ();">
+		</div> 
+	</div>
+</form>

@@ -1,0 +1,146 @@
+<script type="text/javascript" src="$webThemes/$siteName/js/guestCheckoutWizard.js"></script>
+<div class="cimm_logInEnclosure">
+	 #if($!message)
+	<div class="errMsg">
+		<span>$!message</span>
+	</div>
+	#else
+	<div id="notificationDiv">
+		<span class="successMsg" id="message"></span>
+		<span class="errMsg" id="errorMsg">$!message</span>
+	</div>
+	#end
+	<h4 align="center" class="main">$locale.get("login.label.pleaseEnterYourUserNameAndPassword")<span class="pullRight"><i class="fa fa-minus-circle"></i></span></h4>
+	<form id="mainLoginForm" class="mainLoginForm" method="post" action="doLogin.action">
+		<input type="hidden" name="fromPageValue" value='$hostName.replace("","")Welcome'/>    
+		<div class="cimm_loginContent">
+			<ul class="cimm_formContent">
+				<li>
+					<input type="text" name="loginId" value="$!userNameTmp" id="mainUserName" />
+					<label>$locale.get("form.label.userName")</label>
+				</li>
+				<li>
+					<input type="password" name="loginPassword" id="mainPassword" />
+					<label>$locale.get("form.label.password")</label>
+				</li>
+			</ul>
+			<div class="formBottom">
+				<div class="pullLeft">					
+					<label class="customCheckBox" >
+						<input type="checkbox" tabindex="3" name="rememberMe" id="rememberMe" onchange="checkRemember(this);"/>
+						<span>$locale.get("form.label.rememberMyLogin")</span>
+					</label>
+				</div>
+				<div class="pullRight">
+					<a href="ForgotPassword">$locale.get("product.label.forgotPassword")</a>
+				</div>  
+				<div class="clear"></div>
+				<input class="center button" type="submit" value='$locale.get("product.heading.signIn")' onclick="return validateUserLoginForRememberMe();" />
+			</div>
+		</div>
+	</form>
+	<div class="clear"></div>
+	<h4 align="center" class="main">$locale.get("login.label.guestcheckoutmessage")<span class="pullRight"><i class="fa fa-plus-circle"></i></span></h4>
+	<form id="guestCheckoutInitiate" class="guestCheckout" method="post">
+		<div class="cimm_loginContent">
+			<ul class="cimm_formContent">
+				<li>
+					<input type="text" name="auEmail" id="auEmail" value=""/>
+					<label> $locale.get("form.guestcheckout.emailaddress")</label>
+				</li>
+				<li>
+					<input class="center button" type="button" value='Continue' onclick="return guestCheckoutWizard.checkUserNameExist();"/>	
+				</li>
+			</ul>
+			<p align="center">OR</p>
+			<a href="$locale.get('website.url.Register')" class="center button">$locale.get('event.label.registerNow')</a>
+			<input type="hidden" value="normal" name="loginType" />
+		</div>
+	</form>
+	<div class="clear"></div>
+</div>
+<script>
+$(document).ready(function(){
+	$('.guestCheckout').addClass('hideMe');
+	$('.cimm_logInEnclosure h4').click(function()
+	{
+		if($(this).next().is(":visible"))
+		{
+			$(this).next('form').slideUp();
+			$(this).find("span > i").addClass('fa-plus-circle').removeClass("fa-minus-circle");
+		}
+		else
+		{
+	    	var prevForm = $(this).parent().find('form');
+	 		$(prevForm).slideUp();
+	 		$(this).parent().find('.main > span > i').addClass('fa-plus-circle').removeClass("fa-minus-circle");
+			$(this).next('form').slideDown();
+			$(this).find("span > i").addClass('fa-minus-circle').removeClass("fa-plus-circle");
+		}	
+	});
+});
+</script>
+<style>
+.cimm_logInEnclosure{
+	width: 80%;
+	margin: 10px auto;
+	background: #EFEFEF;
+	padding:10px;
+}
+.cimm_logInEnclosure h4{
+	cursor:pointer;
+	padding:10px 0;
+	border-bottom:1px solid #919191;
+}
+.cimm_logInEnclosure form.mainLoginForm{
+	width: 100%;
+	border-bottom:1px solid #919191;
+}
+.cimm_logInEnclosure form.guestCheckout{
+	width: 100%;
+}
+.cimm_logInEnclosure .cimm_loginContent {
+	padding: 10px;
+	text-align:center;
+}
+.cimm_logInEnclosure .cimm_loginContent .formBottom{
+	width:60%;
+	margin:0 auto;
+	text-align:center;
+}
+.cimm_logInEnclosure .cimm_loginContent .formBottom .button{
+	width:50%;
+	margin-top: 10px;
+}
+.cimm_loginContent .button{
+	width: 100%;
+	margin:0px;
+}
+.cimm_loginContent a.button{
+	width:30%;
+}
+.cimm_logInEnclosure p {
+	margin: 8px 0;
+	font-size: 15px;
+}
+.cimm_loginContent .pullLeft label,
+.cimm_popLoginContent .pullLeft label {
+	font-size: 16px;
+	width: 100%;
+	padding: 0px 0px 0 25px;
+	display: block;
+	color: #28343C;
+	position: relative;
+}
+.cimm_loginContent .pullRight a{
+	color: #3468d6;
+	font-size: 14px;
+	padding-right: 10px;
+}
+.cimm_loginContent .pullRight a:hover {
+	color:#797d82;
+}
+.cimm_loginContent .pullRight{
+	margin-top: 0px;
+}
+</style>

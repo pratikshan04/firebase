@@ -1,0 +1,24 @@
+<div class="log-right-contents">
+<div align="center" style="width:100%; padding-top:25px; ">
+<div id="loadingMsg" style="width:100%;padding-top:100px;">
+<center><img src="$webThemes/$siteName/images/creditCardloading.gif" alt='Loading'/><br/><br/>
+<p><b>Please wait while we process your request...</b></p><br/><p style="color: #ff0000;">DO NOT PRESS REFRESH OR THE BACK BUTTON - AND DO NOT RESUBMIT THIS FORM!</p>
+</center>
+</div>
+</div>
+</div>
+<input type="hidden" id="redirecturl" name ="redirecturl" value="$!quoteResponse.returnUrl">
+<input type="hidden" id="paymentId" name ="paymentId" value="$!quoteResponse.paymentId">
+<input type="hidden" name="orderTax" value="$!orderTax"/> 
+<input type="hidden" name="totalCartFrieghtCharges" value="$!orderFreight"/> 
+<script>
+$(document).ready(function(){
+    var redirectUrl = $("#redirecturl").val();
+	try{
+		window.location.href =redirectUrl;
+	}catch(e){
+		console.log(e);
+	}
+});
+</script>
+

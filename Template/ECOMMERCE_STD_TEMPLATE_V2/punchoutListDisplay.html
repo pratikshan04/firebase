@@ -1,0 +1,197 @@
+#parse("Macros/cartPageMacro.vm")
+		<div id="notificationDiv">
+			<span class="successMsg" id="message"></span>
+			<span class="errMsg" id="errorMsg"></span>
+		</div>
+			#set($disableShipCheck = "N")
+			#set($savedCartItemId = 0)
+			#if($productListData.size()>0)
+			<form id="submitCxml" name="submitCxml" method="post" action="PunchoutResponse.slt">	
+				<input type="hidden" name="cxmlParamitemCount" value = "$productListData.size()"/>
+				<input type="hidden" id="cartTotal" name="cxmlParamcartTotalAmt" value = '$numberTool.format($numberToolFormat,$cartTotal)' />
+				<input type="hidden" name="cxmlParamHOOK_URL" value = '$session.getAttribute("hookUrl")'/>
+				<input type="hidden" name="cxmlParambCookie" value = '$session.getAttribute("buyCookie")' />
+				<input type="hidden" name="cxmlParamoperType" value = "create"/>
+				<input type="hidden" name="fromId" value = '$session.getAttribute("fromId")' />
+				<input type="hidden" name="fromDomain" value = '$session.getAttribute("fromDomain")' />
+				<input type="hidden" name="toId" value = '$session.getAttribute("toId")' />
+				<input type="hidden" name="toDomain" value = '$session.getAttribute("toDomain")' />
+					
+					<div class="cimm_siteTableEnclosure rwd-TableWrap">
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table display rwd-table customBorderTable" id="cimm_ShoppingCartTable">
+	<thead>
+                <tr>
+                    #if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
+                    <th align="left" valign="top">$locale.get("product.label.Image")</th>
+                    #end
+                    <th align="left" valign="top">$locale.get("product.label.description")</th>
+                    <!-- <th align="left" valign="top">$locale.get("product.label.lineItemComment")</th> -->
+                    <th align="left" valign="top">$locale.get("product.heading.perUnitPrice")</th>
+                    <th align="left" valign="top">$locale.get("form.label.tableQty")</th>
+                    <th align="left" valign="top">$locale.get("product.label.extPrice")</th>
+                </tr>
+            </thead>
+            <tbody>
+						 
+				#set($idx = 0)
+				#foreach($itemData in $productListData)
+				#set($itemTitle=$itemData.manufacturerName+" "+$!itemData.manufacturerPartNumber)
+					#set($savedCartItemId = $itemData.itemId)
+
+					#set($customVal = "")
+					#set($customVal = $customFieldVal.get($itemData.itemId))
+					#if($customVal.get("custom_Hazmat")=="Y")
+						#set($disableShipCheck = "Y")
+					#end
+					#if($customVal.get("custom_OverSize")=="Y")
+						#set($disableShipCheck = "Y")
+					#end
+	
+            <tr>
+            #if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
+            <td valign="top" data-th="$locale.get('product.label.Image')">                        
+            	<div class="cimm_cartProdImg">
+	            	<a href="$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle.replace(" ","_")">
+	                    <span id="imageName$itemData.itemId">
+	                        #if($itemData.imageType=="URL")
+	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+	                        #else
+	                            <img src="$detailImage$itemData.imageName"  width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+	                        #end
+	                    </span>
+	                </a>
+	                <div class="clear"></div>                
+					#cartHiddenFields($itemData.partNumber, $itemData.itemAvailability, $itemData.productListId, $itemData.qty, $itemData.price, $itemData.itemPriceId)
+            	</div>
+            </td>
+            #end
+            <td valign="top" data-th="$locale.get('product.label.description')">
+            	<div class="cimm_cartProdDescription">
+                    <ul>
+                        <li>
+                        	<a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle.replace(" ","_")'><strong>$itemData.brandName $!itemData.manufacturerPartNumber</strong></a>
+                        </li>
+                        <li>
+                            #if($!itemData.shortDesc.length()>100)
+                            <p> $!itemData.shortDesc.substring(0, 100)
+                                <a href="$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle"> $locale.get("product.label.more")</a>
+                            </p>
+                            #else
+                            <p> $!itemData.shortDesc </p>
+                            #end
+                            <div id="minErr_$itemData.itemPriceId"></div>
+                        </li>
+						#if($itemData.manufacturerPartNumber)
+                        <li><b>$locale.get("product.label.mpn"): </b><span>$itemData.manufacturerPartNumber</span></li>
+                        #end
+                        <li><b>$locale.get("product.label.partNumber"): </b><span>$itemData.partNumber</span></li>
+                        #if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
+						<li>
+							<b>$locale.get("product.label.cpn"): </b>
+							#set($seperator = "")
+							#set($partList = "")
+							#foreach($customerPart in $itemData.customerPartNumberList)
+							#set($partList = "#if($partList)$partList#end#if($seperator)$seperator#end
+							#if($customerPart.partNumber)$customerPart.partNumber#end")
+							#set($seperator = ",")
+							#end
+							$partList
+						</li>
+						#end
+                    </ul>
+                </div>
+            </td>
+	        <!-- <td valign="top" data-th="$locale.get('product.label.lineItemComment')">
+	            <input type="text" class="lineItemComments" name="lineItemComment_$itemData.productListId" id="lineItemComment_$itemData.productListId" value="#if($itemData.lineItemComment)$itemData.lineItemComment#end" />
+	        </td> -->
+       		<td valign="top" data-th="$locale.get('product.heading.perUnitPrice')">
+            	<strong>$$numberTool.format($numberToolFormat,$itemData.unitPrice) Per / $!itemData.packageQty $!itemData.qtyUOM </strong>
+			</td>
+        
+			<td valign="top" data-th="$locale.get('form.label.tableQty')">
+                <span id="textQty_$itemData.partNumber">$itemData.qty</span>
+                <input type="hidden" id="cartQtyForAvail$itemData.partNumber$itemData.productListId" name="cartQtyForAvail" value="$itemData.qty">
+                <input type="hidden" value="$!itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray" />
+                <input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" />
+                <input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval" />
+            </td>
+            
+            <td valign="top" data-th="$locale.get('product.label.extPrice')">
+            	<strong>$ $numberTool.format($numberToolFormat,$itemData.total)</strong>
+            
+            <input type="hidden" name="cxmlParamitemMatGroup[$idx]" value = "$!itemData.materialGroup"/>
+			<input type="hidden" name="cxmlParamshortDesc[$idx]" value="$!itemData.ShortDesc"/>
+			<input type="hidden" name="cxmlParamitemQty[$idx]" value = "$!itemData.qty"/>
+			<input type="hidden" id='spanCxml_$itemData.partNumber' name="cxmlParamitemPrice[$idx]" value="$!itemData.unitPrice"/>
+			<input type="hidden" name="cxmlParamitemPriceUnit[$idx]" value="$!itemData.uom"/>
+			<input type="hidden" name="cxmlParamsfPartNum[$idx]" value = "$!itemData.partNumber"/>
+			<input type="hidden" name="cxmlParamitemLongDesc[$idx]" value="$!itemData.longDesc"/>
+			<input type="hidden" name="cxmlParamUnspc[$idx]" value="$!itemData.unspc"/>
+			
+			<input type="hidden" name="cxmlParamitemManufName[$idx]" value="$!itemData.manufacturerName"/>
+			<input type="hidden" name="cxmlParamitemManPrtNo[$idx]" value="$!itemData.manufacturerPartNumber"/>
+			<input type="hidden" name="idList" value='$!itemData.partNumber' />
+			
+			
+				<input type="hidden" id='priceValue_$itemData.partNumber' value='$!itemData.unitPrice' />  
+				<input type="hidden" value="$!itemData.productListId" name="shoppingCartId" />
+				#set($idx = $idx+1)
+            </td>
+			</tr>
+		#end
+						</tbody>
+			</table>
+		</div>
+		<div class="clear"></div>
+		
+		<div class="cimm_salesBottomStrip">
+			  <ul>
+                     <li>
+                         <span class="priceLabel">$locale.get("product.label.total"): </span>
+                         <span class="orangeClr priceValue">$$numberTool.format($numberToolFormat,$cartTotal)</span>
+                    </li>
+               </ul>
+
+			   <div class="clear"></div>
+            </div>
+		</form>
+			#if($!approveSenderid=="N" && $session.getAttribute("isGeneralUser")=="Y")
+				$!messageForGereralUser
+			#end
+		
+			<div class="cimm_btnGroupEnclosure">			 
+			<ul>
+				<li><input type="submit" class="button" value="Submit" onclick="submitCxmlDoc();return false;"/></li>
+				<li><input type="submit" class="button" value="Cancel" onclick="cancelCxmlDoc();return false;"/></li>
+			</ul>
+			<div class="clear"></div>	 
+			</div>
+			<div class="clear"></div>
+				
+#refreshCartForm()			
+			<input type="hidden" value="" id="group_id" />
+			<input type="hidden" value="" id="group_name" />
+			<input type="hidden" value="" name="deg" />
+		#else
+		 <div class="elseCondition">
+        	<h4 align="center">$locale.get("product.label.noCrtItms")</h4>
+            <div></div>
+            <p align="center"><a class="button" href="$locale.get("website.url.ProductCategory")">$locale.get("product.button.continueShopping")</a></p>
+        </div>
+		#end				
+<input type="hidden" value="$!disableShipCheck" id="disableShipCheck" />
+	<form name="cancelOrder" id="cancelOrder" action="/PunchoutResponse.slt" method="post">
+		<input type="hidden" name="cxmlParamitemCount" value = "0"/>
+		<input type="hidden" name="cxmlParamHOOK_URL" value = "$session.getAttribute("hookUrl") />
+		<input type="hidden" name="cxmlParamitemMatGroup[1]" value = ""/>
+		<input type="hidden" name="cxmlParamshortDesc[1]" value=""/>
+		<input type="hidden" name="cxmlParamitemQty[1]" value = ""/>
+		<input type="hidden" name="cxmlParamitemPrice[1]" value=""/>
+		<input type="hidden" name="cxmlParamitemPriceUnit[1]" value=""/>
+		<input type="hidden" name="cxmlParamsfPartNum[1]" value = ""/>
+		<input type="hidden" name="cxmlParamitemLongDesc[1]" value=""/>
+		<input type="hidden" name="cxmlParamUnspc[1]" value=""/>
+		<input type="hidden" name="cxmlParamCustPartNum[1]" value=""/>
+		<input type="hidden" name="cxmlParamitemManufName[1]" value=""/>
+	    <input type="hidden" name="cxmlParamitemManPrtNo[1]" value=""/>		
+</form>

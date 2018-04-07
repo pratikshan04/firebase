@@ -1,0 +1,219 @@
+<input id="reqApprType" value="$reqApprType" type="hidden"/>
+#if($cardDetails.size()>0)
+
+<form action="processCheckout.action" method="post" id="pCardForm" >
+	<div class="cimm_siteTableEnclosure">
+    <table width="100%" class="cimm_siteTable">
+      <thead>
+          <tr>
+              <th>$locale.get("product.label.cardType")</th>
+              <th>$locale.get("product.label.cardNumber")</th>
+              <th>$locale.get("product.label.nameOnCard")</th>
+              <th>$locale.get("product.label.expirationDate")</th>
+              <th>$locale.get("product.label.nickName")</th>
+              <th>&nbsp;</th>
+          </tr>
+      </thead>
+      <tbody>
+      #set($count = 0)
+      #foreach($cardDetail in $cardDetails)
+      #set( $count = $count + 1 )
+       <tr>
+          <td><input type="radio" id="r_$count" onclick="setValue(this);" value="$cardDetail.elementPaymentAccountId" name="radio" /><span id="cTyper_$count">$cardDetail.creditCardType</span></td>
+          <td id="cNumr_$count">$cardDetail.creditCardNumber</td>
+          <td id="cHldr_$count">$cardDetail.cardHolder</td>
+          <td id="cExpr_$count">$cardDetail.date</td>
+          <td>$cardDetail.nickName</td>
+          <td><a class="button" href="javascript:void(0);" onclick="checkPCard($count);">Delete</a></td>
+          <td id="cZipr_$count" style="display:none;">$cardDetail.zipCode</td>
+          <td id="cAddr_$count" style="display:none;">$cardDetail.address1</td>
+          <td id="pCardId_$count" style="display:none;">$cardDetail.pcardId</td>
+          </tr>
+      #end
+      <tr>
+      <td colspan="6"><div align="center">
+      <input type="submit" value="$locale.get('product.button.placeOrder')" class="button" onclick="return validateRadio();" /></div></td>
+      </tr>
+      </tbody>
+  </table>
+  </div>
+  		<input type="hidden" name="userPcard" id="pCardId" value="0"/>
+  		<input type="hidden" name="savedGroupId" value="$!savedGroupId"/>
+  		<!-- Billing Address -->                
+  		<input type="hidden" name="billEntityId" value="$!billEntityId"/>
+		<input type="hidden" name="defaultBillToId" value="$!defaultBillToId"/>
+		<input type="hidden" name="billAddress1" value="$!billAddress1"/> 
+		<input type="hidden" name="billAddress2" value="$!billAddress2"/> 
+		<input type="hidden" name="billCity" value="$!billCity"/> 
+		<input type="hidden" name="billState" value="$!billState"/> 
+		<input type="hidden" name="billPhoneNo" value="$!billPhoneNo"/> 
+		<input type="hidden" name="billEmail" value="$!billEmail"/> 
+		<input type="hidden" name="billCountry" value="$!billCountry"/> 
+		<input type="hidden" name="billZipcode" value="$!billZipcode"/> 
+		<!-- Billing Address --> 
+		
+		<!-- Shipping Address -->  
+		<input type="hidden" name="shipEntityId" value="$!shipEntityId"/>
+		<input type="hidden" name="overrideShip" value='$!session.getAttribute("overrideShipAddress")'/>
+		<input type="hidden" name="defaultShipToId" id="defaultShipToId" value="$!defaultShipToId"/>
+		<input type="hidden" name="address1" value="$!address1"/> 
+		<input type="hidden" name="address2" value="$!address2"/> 
+		<input type="hidden" name="city" value="$!city"/> 
+		<input type="hidden" name="state" value="$!state"/> 
+		<input type="hidden" name="phoneNumber" value="$!phoneNumber"/> 
+		<input type="hidden" name="email" value="$!email"/> 
+		<input type="hidden" name="country" value="$!country"/> 
+		<input type="hidden" name="zipCode" value="$!zipCode"/> 
+		<!-- Shipping Address -->
+		
+		<!-- Order Details -->
+		<input type="hidden" name="orderType" value="$!orderType"/>
+		<input type="hidden" name="reqDate" id="reqDate" value="$!reqDate"/>
+		<input type="hidden" name="orderedBy" id="orderedBy" value="$!orderedBy"/>
+		<input type="hidden" name="erpQuoteNumber" value="$!erpQuoteNumber"/>
+    	<input type="hidden" name="poNumber" id="poNumber" value="$!poNumber"/>
+		<input type="hidden" name="shipVia" id="shipVia" value="$!shipVia"/> 
+		<input type="hidden" name="shipViaDescription" value="$!shipViaDisplay"/>
+		<input type="hidden" name="orderStatus" value="$!orderStatus"/>
+		<input type="hidden" name="shippingInstruction" value="$!shippingInstruction"/> 
+		<input type="hidden" name="orderNotes" value="$!orderNotes"/> 
+		<input type="hidden" name="newsLetterSubscription" value="$!newsLetterSubscription"/>
+		<input type="hidden" name="customerReleaseNumber" value="$!customerReleaseNumber" /> 
+		<input type="hidden" name="isReOrder" value="$!isReOrder"/> 
+		<input type="hidden" name="upsFrieghtCharges" value="$!upsFrieghtCharges"/> 
+		<!-- Order Details -->
+  
+  		<!-- Payment Details -->
+  		<input type="hidden" name="rdCard" id="rdCard" value="No"/>
+		<input type="hidden" value="Y"name="creditCardPayment" id="creditCardPayment"/>
+		<input type="hidden" value="$!ccTransactionId" name="ccTransactionId"/>
+		<input type="hidden" value="$!cardDetails.cardHolder" name="cardHolder"/>
+		<input type="hidden" value="$!ccExp" name="ccExp" id="ccExp"/>
+		<input type="hidden" value="$!cardDetails.address1" name="streetAddress"/>
+		<input type="hidden" value="$!cardDetails.zipCode" name="postalCode"/>
+		<input type="hidden" value="" name="ccResponseCode" id="ccResponseCode"/>
+		<input type="hidden" value="" name="ccStatus" id="ccStatus"/>
+		 
+		<input type="hidden" value="" name="ccHostRefNumber" id="ccHostRefNumber"/>
+		<input type="hidden" value="" name="ccTaskID" id="ccTaskID"/>
+		<input type="hidden" value="" name="ccAmount" id="ccAmount"/>
+		<input type="hidden" value="" name="ccDeclineResponseReason" id="ccDeclineResponseReason"/>
+		<input type="hidden" value="" name="ccCvv2VrfyCode" id="ccCvv2VrfyCode"/>
+		<input type="hidden" value="" name="ccTip" id="ccTip"/>
+		
+		<input type="hidden" value="" name="ccTransTimeStamp" id="ccTransccTransTimeStampactionId"/>
+		<input type="hidden" value="" name="ccApprovedAmount" id="ccApprovedAmount"/>
+		<input type="hidden" value="" name="ccRequestedAmount" id="ccRequestedAmount"/>
+		<input type="hidden" value="" name="ccHostResponseCode" id="ccHostResponseCode"/>
+		<input type="hidden" value="" name="ccInvoice" id="ccInvoice"/>
+		<input type="hidden" value="" name="ccApprovalCode" id="ccApprovalCode"/>
+		<input type="hidden" value="" name="ccServerTimestamp" id="ccServerTimestamp"/>
+		
+		<input type="hidden" value="$!ccType" name="ccType" id="ccType"/>
+		<input type="hidden" value="" name="ccFee" id="ccFee"/>
+		<input type="hidden" value="" name="ccExternalSessionID" id="ccExternalSessionID"/>
+		<input type="hidden" value="" name="ccAddVrfyCode" id="ccAddVrfyCode"/>
+		<input type="hidden" value="" name="ccTax" id="ccTax"/>
+		<input type="hidden" value="" name="ccNewDomainKey" id="ccNewDomainKey"/>
+		<input type="hidden" value="$!ccNumber" name="ccNumber" id="ccNumber"/>
+		<input type="hidden" value="" name="isFromQC" id="isFromQC"/>
+		<!-- Payment Details -->
+</form>
+#end
+<div class="clear"></div> 
+<form action="submitNewCreditCardSale.action?fromPage=payWithNewCC" method="post" id="addNewCardForm">  
+<h4>$locale.get("product.label.enterNewCreditCardDetails")</h4>
+<br />
+<div class="cimm_formEnclosure">
+<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required")</div>
+	<ul class="cimm_formContent">
+		<li>
+			<input type="text" id="nickNameNewID" name="nickName" value="" />
+			<label>$locale.get("product.label.nickName")<span class="required"> * </span></label>
+			<br /><em class="required" id="nickNameSpan"></em>
+		</li>
+		<li>
+			<input type="text" id="cardHolderNewID" name="cardHolder" value="" />
+			<label>$locale.get("product.label.cardHolder")<span class="required"> * </span> </label>
+			<br /> <em class="required" id="cardHolderSpan"></em>
+		</li>
+		<li>
+			<input type="text" id="cardAddressNewID" name="streetAddress" value="" />
+			<label>$locale.get("product.label.streetAddress")<span class="required"> * </span></label>
+			<br />	<em class="required" id="cardAddressSpan"></em>
+		</li>
+		<li>
+			<input type="text" id="postalCodeNewID" name="postalCode" value="" />
+			<label>$locale.get("product.label.postalCode")<span class="required"> * </span> </label>
+			<br /><em class="required" id="postalCodeSpan"></em>
+		</li>
+		<!--<div class="cimm_formLabel"><label>State<span class="required"> * </span> </label></div>
+		<div class="cimm_formTbx"><select class="appendChosen"><option>South Carolina</option></select></div>
+		<div class="cimm_formLabel"><label>Zip/Postal Code<span class="required"> * </span> </label></div>
+		<div class="cimm_formTbx"><input type="text" value="" /></div>
+		<div class="cimm_formLabel"><label>Phone<span class="required"> * </span> </label></div>
+		<div class="cimm_formTbx"><input type="text" value="" /></div>
+		<div class="cimm_formLabel"><label>Email<span class="required"> * </span> </label></div>
+		<div class="cimm_formTbx"><input type="password" value="" /></div>-->
+    </ul><!--end of formContent-->
+
+    <div class="cimm_formBtn">
+    	<button type="submit" id="addPcard" class="log-addTocart-btn btn-sm" onclick="return validatePcardFormWithNewIds();"><!-- onclick="return validatePcardForm();" -->
+    	<span class="iconFont"><i class="fa fa-lg fa-plus"></i> $locale.get("product.label.addNewCreditCard")</span></button>
+    </div>
+</div>
+<input type="hidden" name="savedGroupId" value="$!savedGroupId"/>
+  		<!-- Billing Address -->                
+  		<input type="hidden" name="billEntityId" value="$!billEntityId"/>
+		<input type="hidden" name="defaultBillToId" value="$!defaultBillToId"/>
+		<input type="hidden" name="billAddress1" value="$!billAddress.address1"/> 
+		<input type="hidden" name="billAddress2" value="$!billAddress.address2"/> 
+		<input type="hidden" name="billCity" value="$!billAddress.city"/> 
+		<input type="hidden" name="billState" value="$!billAddress.state"/> 
+		<input type="hidden" name="billPhoneNo" value="$!billAddress.phoneNo"/> 
+		<input type="hidden" name="billEmail" value="$!billAddress.emailAddress"/> 
+		<input type="hidden" name="billCountry" value="$!billAddress.country"/> 
+		<input type="hidden" name="billZipcode" value="$!billAddress.ZipCodeStringFormat"/> 
+		<!-- Billing Address --> 
+		
+		<!-- Shipping Address -->  
+		<input type="hidden" name="shipEntityId" value="$!shipEntityId"/>
+		<input type="hidden" name="overrideShip" value='$session.getAttribute("overrideShipAddress")'/>
+		<input type="hidden" name="defaultShipToId" id="defaultShipToId" value="$!defaultShipToId"/>
+		<input type="hidden" name="address1" value="$!shipAddress.address1"/> 
+		<input type="hidden" name="address2" value="$!shipAddress.address2"/> 
+		<input type="hidden" name="city" value="$!shipAddress.city"/> 
+		<input type="hidden" name="state" value="$!shipAddress.state"/> 
+		<input type="hidden" name="phoneNumber" value="$!shipAddress.phoneNo"/> 
+		<input type="hidden" name="email" value="$!shipAddress.emailAddress"/> 
+		<input type="hidden" name="country" value="$!shipAddress.country"/> 
+		<input type="hidden" name="zipCode" value="$!shipAddress.ZipCodeStringFormat"/> 
+		<!-- Shipping Address -->
+		
+		<!-- Order Details -->
+		<input type="hidden" name="orderType" value="$!orderType"/>
+		<input type="hidden" name="reqDate" id="reqDate" value="$!reqDate"/>
+		<input type="hidden" name="orderedBy" id="orderedBy" value="$!orderedBy"/>
+		<input type="hidden" name="erpQuoteNumber" value="$!erpQuoteNumber"/>
+    	<input type="hidden" name="poNumber" id="poNumber" value="$!poNumber"/>
+		<input type="hidden" name="shipVia" id="shipVia" value="$!shipVia"/> 
+		<input type="hidden" name="shipViaDescription" value="$!shipViaDisplay"/>
+		<input type="hidden" name="orderStatus" value="$!orderStatus"/>
+		<input type="hidden" name="shippingInstruction" value="$!shippingInstruction"/> 
+		<input type="hidden" name="orderNotes" value="$!orderNotes"/> 
+		<input type="hidden" name="newsLetterSubscription" value="$!newsLetterSubscription"/>
+		<input type="hidden" name="customerReleaseNumber" value="$!customerReleaseNumber" /> 
+		<input type="hidden" name="isReOrder" value="$!isReOrder"/> 
+		<input type="hidden" name="upsFrieghtCharges" value="$!totalCartFrieghtCharges"/> 
+		<!-- Order Details -->
+</form>
+<!--  function approveCartCheckout(){
+	var reqApprType = $("#reqApprType").val();
+		
+	if(reqApprType=="A"){
+		$("#pCardForm").attr("action", "confirmOrderSale.action?reqType=A");
+		
+	}
+	return true;
+	
+}-->

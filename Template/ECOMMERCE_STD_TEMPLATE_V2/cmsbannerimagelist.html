@@ -1,0 +1,111 @@
+<script>
+function paginationScriptBannerCms(n_pages,page_link,iindex,pgno){
+	var buildPagination = "";
+	var n_links=5;
+	//page_link = page_link.replace(/[%]/g,"%25");
+	var s_fileName=page_link;
+	pageno=pgno;
+	n_index=(iindex/pageno)+1;
+	var jump=n_pages/5;
+	var mod=n_pages%5;
+	var skipstep=parseInt(jump);
+	if(mod>0){
+		skipstep=skipstep+1;
+	}
+	var start=1;
+	var ss=n_index/n_links;
+	var change=parseInt(ss);
+	if((n_index%n_links)>0){
+		change=change+1;}
+	n_links=n_links*change;
+	start=(n_links-5)+1;
+	var prevpage=pageno*5*(change-2);
+	var pagenumber=0;
+	buildPagination = buildPagination + '<div class="pagebarUTH">';
+	if((n_index)>=6)
+		buildPagination = buildPagination + '<a href="javascript:loadBannerImage('+prevpage+')">Previous</a>\n';
+
+	if(n_links){
+		var n_sideLinks=1,n_firstLink,n_lastLink;
+		if(n_index>=n_pages){
+			n_firstLink=start;
+			n_lastLink=n_pages;
+		}
+		else if(n_index<=0)
+		{
+			n_firstLink=start;
+			n_lastLink=5;
+		}
+		else
+		{
+			n_firstLink=start;
+			if(n_links>n_pages)
+				n_lastLink=n_pages;
+			else
+				n_lastLink=n_firstLink+5-1;
+		}
+		for(var i=n_firstLink;i<=n_lastLink;i++)
+		{
+			pagenumber=(i*pageno)-pageno;
+			if(i==(n_index))
+			{
+				var nexpage=pagenumber+pageno;nexpage=pageno*n_lastLink;
+			}
+			buildPagination = buildPagination + (i==(n_index)?'<span class="this-page">'+i+'</span>\n':'<a href="javascript:loadBannerImage('+pagenumber+')" title="Go to page '+i+'">'+i+'</a>\n');
+		}
+	}
+
+	if((n_lastLink)!=n_pages)
+		buildPagination = buildPagination + '<a href="javascript:loadBannerImage('+nexpage+')">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>';
+
+	buildPagination = buildPagination + '  </div>';
+	document.getElementById("pagination").innerHTML = buildPagination;
+}
+</script>
+<ul class="grid cs-style-2 list-view0">
+#foreach($banner in $bannerImageList.resultSet)
+<li data-name="$banner.imageName" class="ff-item-type-2 file ui-draggable">
+ 						<figure data-name="$banner.imageName" data-bannerid="$banner.id" data-type="img">
+ 						<a href="javascript:void(0)" class="link" data-file="$banner.name"  data-field_id="" data-function="apply_none">
+ 							<div class="img-precontainer">
+ 								<div class="img-container">
+ 									<span></span>
+ 									<img  src="$bannerLogoPath$banner.imageName"  style="display: inline;" />
+ 								</div>
+ 							</div>
+ 							<div class="img-precontainer-mini original-thumb">
+ 								<div class="filetype jpg  hide">jpg</div>
+ 								<div class="img-container-mini">
+ 									<span></span>
+ 									<img src="$bannerLogoPath$banner.imageName" />
+ 								</div>
+ 							</div>
+ 						</a>
+ 						<div class="box">
+ 							<h4 class	="ellipsis">
+ 								<a href="javascript:void(0)"  class="link" data-file="$banner.name" data-field_id="" data-function="apply_none">$banner.name</a>
+ 							</h4>
+ 						</div>
+ 						</figure>
+ 					</li>
+#end
+</ul>
+ <div class="cms_pgnation" id="pagination">
+ 
+  </div> 
+  #set($pageNo = ($bannerImageList.pageNo - 1))
+ <script type="text/javascript">
+ paginationScriptBannerCms($bannerImageList.totalPages,"bannerImageCms.action?pageSize=12&dt="+new Date()+"&page=",$pageNo,1);
+ </script>
+
+<script>
+$(document).ready(function() {
+	try{
+		jQuery(".lazyLoad").lazyload({
+			event: 'scrollstop'
+		});
+	}catch(e){
+		console.log(e);
+	}
+});
+</script>

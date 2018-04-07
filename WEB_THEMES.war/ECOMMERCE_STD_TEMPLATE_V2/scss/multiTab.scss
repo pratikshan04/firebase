@@ -1,0 +1,85 @@
+@import "customVariables";
+@import "customButtons";
+.multiTab {
+    width: 100%;
+    ul.multiTabHeading {
+        position: relative;
+        li {
+            float: left;
+            a {
+                padding: 10px 15px;
+                display: block;
+                &.active {
+                    color: $bodyFontColor;
+                }
+            }
+        }
+        slide {
+            content: "";
+            position: absolute;
+            height: 2px;
+            left: 0;
+            background: $primaryColor;
+            bottom: 0;
+            transition: left .25s cubic-bezier(.5, 0, .25, 1);
+            -webkit-transition: left .25s cubic-bezier(.5, 0, .25, 1);
+        }
+    }
+    .multiTabContent {
+        position: relative;
+        width: 100%;
+        z-index: 9;
+        overflow: hidden;
+        >h3 {
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: bold;
+            background: $tabHeadingBackgroundColor;
+            color: $tabHeadingFontColor;
+            padding: 10px 15px;
+            position: relative;
+            font-size: $tabHeadingFontSize;
+            cursor: pointer;
+            height: 36px;
+            border-bottom: 1px solid $darkGrayColorTwo;
+            &:after {
+                position: absolute;
+                top: 12px;
+                right: 10px;
+                font-size: 12px;
+            }
+            &.active {
+                background: $tabHeadingActiveBackgroundColor;
+                color: $tabHeadingActiveFontColor;
+                &:after {
+                    content: $tabHeadingActiveIconContent;
+                    font-family: $tabHeadingIconFontFamily;
+                }
+            }
+            &:after {
+                content: $tabHeadingIconContent;
+                font-family: $tabHeadingIconFontFamily;
+            }
+        }
+        >div {
+            padding: 20px;
+            background: $white;
+            border: 2px solid $lightGrayColorOne;
+        }
+        .buttonWrap {
+            text-align: right;
+            margin-top: 15px;
+            .btnPrevious,
+            .btnNext {
+                @extend .button;
+                margin-right: 10px;
+                display: inline;
+            }
+        }
+    }
+}
+.btnFinish {
+	@extend .button;
+	margin-right: 0;
+	display: inline-block;
+}

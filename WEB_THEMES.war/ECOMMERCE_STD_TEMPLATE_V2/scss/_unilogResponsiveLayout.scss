@@ -1,0 +1,471 @@
+$breakpoint-tablet: 1024px;
+$breakpoint-largeDevice: 980px;
+$breakpoint-tabletPortrait:768px;
+$breakpoint-mobileView:480px;
+@media all and (max-width: 1200px){
+	.container{
+        width:100%;
+        max-width: 100%;
+	}
+	.cimm_headerMidContent .row.no-gutters>[class*=" col-"],.cimm_headerMidContent  .row.no-gutters>[class^=col-]{
+		padding:0 15px;
+	}
+	.cimm_headerMidContent {
+		.container{
+			padding: 0 15px;
+		}
+	}
+	.cimm_bodyContentWrap {
+		>.container{
+			padding-bottom: 20px;
+		}
+	}
+	nav.navbar {
+		.container{
+			padding:0 15px;
+		}
+	}
+	.cimm_headerMidContent {
+		.container{
+			padding: 0 15px;
+		}
+	}
+	.cimm_btnGroupEnclosure,.cimm_instructions{
+		float: none;
+		width:100%;
+		text-align: left;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
+		width:57%;
+	}
+}
+@media all and (max-width: $breakpoint-tablet){
+	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
+		width: 100%;
+		margin: 0 0 18px 0;
+	}
+	.cartTotal_Top a.hideForIpad{
+		display: none;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch input[type=text],
+	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .cimm_searchIcon	{
+		border: 0;
+		background: transparent;
+	}
+	.webViewSearch {
+		border-radius: 4px;
+		background: $lightGrayColorTwo;
+		box-shadow: inset 1px 1px 1px $lightShadowColor;
+		i{
+			color: #BABABA;
+		}
+	}
+	.multiTab {
+		.multiTabContent{
+			.buttonWrap {
+				.btnPrevious,
+				.btnNext {
+					&:hover{
+						background: $primaryColor;
+					}
+				}
+			}
+		}
+	}
+	.btnFinish {
+		&:hover{
+			background: $primaryColor;
+		}
+	}
+	
+	.cimm_bodyContentWrap .container{
+		box-shadow: none;
+	}
+	nav.navbar{
+		display: none;
+	}
+	.cimm_inlineButton{
+		letter-spacing: 0.5px;
+	}
+	#ManagePurchaseAgent_wrapper .dataTables_filter{
+		float: none;
+		width: 100%;
+	}
+	.navbar-toggle {
+		display: block;
+		margin: 0;
+	}
+	.hideForIpad{
+		display: none;
+	}
+	.icon-bar {
+		background-color: $bodyFontColor;
+		width: 100%;
+		height: 4px !important;
+		width: 28px !important;
+	}
+	.navbar-toggle .icon-bar+.icon-bar{
+		margin-top: 5px;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo{
+		width: 100%;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo img{
+		margin: auto;
+	}
+	#generalModel .modal-dialog{
+		min-width:auto;
+	}
+	.showFromTab,.footerCol h4 i{
+		display: block;
+	}
+	.listGridContainer .gridView ul li.sessionDespTwo ul li p input{
+		width:45px;
+	}
+	.listGridContainer .gridView ul li.sessionDespTwo ul li p{
+		margin-right: 10px;
+	}
+	ul.breadcrumb li{
+		display: none;
+	}
+	.breadcrumb li a{
+		text-decoration: underline;
+	}
+	.breadcrumb li+li:before{
+		content:"\f104";
+		font-family: FontAwesome;
+		font-size: 18px;
+		color: $bodyFontColor;
+	}
+	ul.breadcrumb li:nth-last-child(2){
+		display: block;
+	}
+	.cimm_productCategory .cimm_categoryItemBlock a p{
+		height: 60px;
+		padding: 5px;
+	}
+	.priceSpan{
+		font-size: 18px;
+	}
+}
+@media all and (max-width: $breakpoint-largeDevice) {
+	.fixOnApp {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		background: #FFF;
+		padding-top: 10px;
+		z-index: 111;
+		+div{
+			padding: 100px 0 40px 0;
+			margin: 0;
+		}
+		.cimm_headerLeft{
+			margin: 0 !important;
+		}
+		#slideLeft, .cimm_slide{
+			height: 100%;
+			ul{
+				height: calc(100% - 100px);
+				overflow-x: auto;
+			}
+		}
+	}
+	header {
+		.cimm_header {
+			.cimm_headerMidContent {
+				.cimm_searchWrapper {
+					width: calc(100% - 38px);
+					input[type=text] {
+						height: 32px;
+					}
+					.cimm_searchIcon{
+						height: 32px;
+					}
+				}
+				button {
+					margin: 0;
+				}
+			}
+		}
+	}
+	.cimm_mobileNavIconWrap{
+		position: relative;
+		float: left;
+		margin-right: 8px;
+		right: 0;
+		top: 4px;
+		button{
+			position: relative;
+			float: right;
+			padding: 0;
+			margin: 2px 0;
+			background-color: transparent;
+			background-image: none;
+			border: 1px solid transparent;
+			border-radius: 4px;
+		}
+	}
+	.ac_results ul{
+		top: 80px;
+		width: 100%;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage,.cimm_itemDetailWrap .cimm_itemDescription{
+		float: none;
+		width: 100%;
+	}
+	.cimm_itemDetailWrap .cimm_itemDescription ul.text-right {
+		text-align: left;
+	}
+	.cimm_stickyPageWrap,footer,.cimm_stickyPageWrap:after, .cimm_footerEnclosure,footer .footerMiddelContent{
+		height: auto;
+		margin:0;
+	}
+	.detailPage{
+		width: 100%;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .itemDetailImage{
+		float: none;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist,.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist{
+		width: 320px;
+		margin: 0 auto;
+		float: none;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .cimm_slideItemImg{
+		height: 82px;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .cimm_slideItemImg a img{
+		max-height: 80px;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist li{
+		margin: 0 0 0 15px;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist .slick-list,
+	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .slick-list	{
+		padding: 0;
+		margin: 0 0 0 -15px;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper {
+		margin:0;
+	}
+	.showInDevice{
+		display: block;
+    }
+    .hideForDevices{
+		display: none !important;
+	}
+	.cimm_listGridTopControls .cimm_listGridTopRightCtrls{
+		width: 100%;
+		float: none;
+	}
+	.cimm_blockHeading + ul {
+		margin-bottom: 15px;
+	}
+	#recentorders{
+		.slick-prev{
+			top:48%;
+			left:10px;
+			&:before{
+				content:"\f104";
+			}
+		}
+		.slick-next{
+			bottom:inherit;
+			top:48%;
+			right:10px;
+			&:before{
+				content:"\f105";
+			}
+		}
+	}
+}
+@media all and (max-width: $breakpoint-tabletPortrait){
+	.calendarFilter ul li{
+		border:none;
+	}
+	.cimm_salesBottomStrip {
+		ul {
+			width: 100%;
+		}
+	}
+	.tableScroll{
+		overflow-x: scroll;
+	}
+	.tableScroll .table{
+		width: 800px;
+	}
+	#events_Table_wrapper #events_Table td{
+		border:none;
+	}
+	#events_Table_wrapper #events_Table td:last-child{
+		border-bottom:1px solid #ccc;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_headerLeft{
+		padding:0;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
+		padding: 0;
+		margin: 0 0 20px 0;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo{
+		height: 60px;
+	}
+	.listGridContainer .gridView {
+		width: 48%;
+	}
+	.listGridContainer .gridView:nth-child(3n+2){
+		margin: 25px 0.5% 0 0;
+	}
+	.listGridContainer .gridView:nth-child(2n+2) {
+		margin: 25px 0.5% 0 2.5%;
+	}
+	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock {
+		width: 47%;
+	}
+	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(3n+2){
+		margin: 25px 0.5% 0;
+	}
+	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(2n+2) {
+		margin: 25px .5% 0 4.5%;
+	}
+	header .cimm_header .cimm_headerMidContent .cimm_storeLocator h6{
+		margin:10px 0 !important;
+	}
+	#events_Table_wrapper #events_Table td,.storeListTable td{
+		display: block;
+		width:100% !important;
+	}
+	.storeListTable td,.storeListTable td a.button{
+		text-align: center;
+		margin: 0 auto;
+	}
+	#events_Table_wrapper #events_Table td.calendarDetail a:not(.link),.storeListTable td a.button{
+		width: 220px;
+		display: block;
+		text-align: center;
+	}
+	.table.customBorderTable tbody td .cimm_cartProdDescription{
+		width: 100%;
+	}
+	.cimm_btnGroupEnclosure ul li{
+		padding:0;
+		display: block;
+		text-align: center;
+		margin:15px 0;
+	}
+	.userInfoWrap{
+		height: 200px;
+		margin-top: 10px;
+	}
+	.userInfoWrap b,.userInfoWrap span{
+		width: 100%;
+		float: none;
+	}
+	.uploadImage_wrap .uploadFile span, .uploadImage_wrap .uploadImage span{
+		font-size: 12px;
+		padding: 5px;
+	}
+	#ManagePurchaseAgent_wrapper table tbody tr td a.cimm_inlineButton,#ManagePurchaseAgent_wrapper table tbody tr td label.switch{
+		float: none;
+		margin:10px 0;
+		width: 120px;
+		display: block;
+	}
+	.listGridContainer .gridView ul li.sessionDespTwo ul li p{
+		width:48%;
+	}
+	#updateCartForm .cimm_salesBottomStrip{
+		width:100%;
+		margin:0;
+	}
+	.cimm_itemMainImage{
+		margin-bottom: 30px;
+	}
+	#productSearchForm input[type=text] {
+		width: calc(100% - 205px);
+		display: inline-block;
+	}
+}
+@media all and (max-width: $breakpoint-mobileView){
+	.calendarFilterWrap .tableHeader h2{
+		float: none !important;
+		width: 100%;
+		text-align: center;
+	}
+	.cartTotal_Top span{
+		margin-bottom: 10px;
+	}
+	.cartTotal_Top{
+		text-align: left;
+	}
+	.cartTotal_Top a{
+		margin: 0 !important;
+	}
+	.select_attributeBody>ul>li.selectOptions{
+		width: 100%;
+		margin-right: 0; 
+	}
+	.calendarFilterWrap .tableHeader .calendarFilterHead{
+		float: none !important;
+		width: 270px;
+		margin:0 auto;
+	}
+	.calendarFilterWrap .tableHeader ul.calendarFilterHead li{
+		width: 90px;
+	}
+	.listGridContainer .gridView,.listGridContainer .gridView:nth-child(3n+3),
+	.listGridContainer .gridView:nth-child(2n+2),.listGridContainer .gridView:nth-child(3n+1) {
+		width: 100%;
+		float: none;
+		height: auto;
+		min-height: 450px;
+	}
+	.cimm_listGridTopControls .cimm_listGridTopRightCtrls,.cimm_listGridTopControls .cimm_listGridTopRightCtrls form{
+		width: 100%;
+		float: none;
+		text-align: center;
+		display: block;
+		margin: 10px 0;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage .itemDetailImage{
+		width: 100%;
+		height: 300px;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage .itemDetailImage img{
+		max-height:300px !important;
+	}
+	.uploadImage_wrap .uploadFile span, .uploadImage_wrap .uploadImage span{
+		font-size: 10px;
+		padding: 8px 2px;
+	}
+	.marketingMaterial label {
+		margin-top: 8px;
+	}
+	#productSearchForm .cimm_inlineButton {
+		margin-top: 10px;
+	}
+	#productSearchForm input[type=text]{
+		width:100%;
+	}
+	.multiTab.detailPage .multiTabContent div{
+		padding:10px;
+	}
+	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock,
+	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(3n+2),
+	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(2n+2) {
+		margin: 25px 1% 0 1%;
+		width: 98%;
+	}
+}
+@media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {
+	#generalModel .modal-body {
+		max-height: 320px;
+	}
+}
+@media all and (max-width: $breakpoint-tabletPortrait - 1){
+	.actionBtnWrap{
+		text-align: left !important;
+		margin-top: 10px;
+	}
+}

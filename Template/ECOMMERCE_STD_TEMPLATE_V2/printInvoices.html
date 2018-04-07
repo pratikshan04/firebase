@@ -1,0 +1,156 @@
+#set($count=0)
+<div id="orderConfirmationPrint">
+#foreach($orderDetail in $orderHistoryDetailList)
+<div class="cimm_invociesWrap">
+	<div class="PrintLogo">
+		<img src="$webThemes/$siteName/images/logo.png" />
+	</div>
+	<h3 class="invoiceStatus">Order Status: <span class="orangeClr">#if($session.getAttribute("erpType") == "eclipse") #if($orderDetail.orderStatus)$orderDetail.orderStatus #end #else #if($orderInformation.stage) $orderInformation.stage #end #end</span></h3>
+	<hr class="dividerLine" />
+	<div class="cimm_oneThirdColumns">
+	<h4>$locale.get('product.label.GeneralOrderInformation')</h4>
+			<p><strong>$locale.get('product.label.eclipseOrderNumber'):</strong> <span>$!orderDetail.orderNum</span></p>
+			<p><strong>$locale.get('form.label.orderDate'):</strong> <span>$!orderDetail.orderDate</span></p>
+			<p><strong>$locale.get('product.label.orderBy'):</strong> <span>$!orderDetail.orderedBy</span></p>
+			<p><strong>$locale.get('product.label.poNumber'):</strong> <span>$!orderDetail.poNumber</span></p>
+			<p><strong>$locale.get('form.label.shipVia'):</strong> <span>$!orderDetail.ShipViaID</span></p>
+			<p><strong>$locale.get('product.label.shipDate'):</strong> <span>$!orderDetail.shipDate</span></p>
+	</div>
+	<div class="cimm_oneThirdColumns">
+		<h4>$locale.get('product.heading.billingAddress')</h4>
+		<!-- #if($orderDetail.billPhone || $orderDetail.emailAddress)
+			<p>
+			#if($orderDetail.orderedBy)<span> $orderDetail.orderedBy </span><br>#end
+	            #if($orderDetail.billPhone)<span>$!orderDetail.billPhone</span><br>#end
+	            #if($orderDetail.emailAddress)<span>$!orderDetail.emailAddress</span><br>#end
+	        </p>
+        #end -->
+        <p>
+        	<span>$!orderDetail.billAddress1 #if($orderDetail.billAddress2), $!orderDetail.billAddress2 #end</span><br>
+            <span>$!orderDetail.billCity, $!orderDetail.billState $!orderDetail.billZipCode</span><br>
+            <span>$!orderDetail.billCountry</span><br>
+        </p>
+	</div>
+	<div class="cimm_oneThirdColumns">
+		<h4>$locale.get('product.heading.shippingAddress')</h4>
+		<!-- <p>
+        	#if($orderDetail.orderedBy)<span> $orderDetail.orderedBy </span><br>#end
+        	#if($billAddress.phoneNo)<span>$billAddress.phoneNo</span><br>#end
+        	<span>$!billAddress.emailAddress</span><br>
+        </p> -->
+        <p>
+			<span>$!orderDetail.shipAddress1 #if($orderDetail.shipAddress2), $!orderDetail.shipAddress2 #end</span><br>
+            <span>$!orderDetail.shipCity, $!orderDetail.shipState $!orderDetail.shipZipCode</span><br>
+            <span>$!orderDetail.shipCountry</span><br>
+           
+        </p>
+	</div>
+	<div class=" clear"></div>
+	<hr class="dividerLine" />
+	
+	<div class="cimm_siteTableEnclosure">
+                <table class="cimm_siteTable" width="100%" cellspacing="0" cellpadding="5">
+                     <thead>
+                      <tr>
+                     
+                        <th align="left">$locale.get("product.label.productDescription")</th>
+                        <th>$locale.get("product.label.quantityOrdered")</th>
+                        <th>$locale.get("product.label.quantityShipped")</th>
+                        <th>$locale.get("product.label.unitPrice")</th>
+                        <th>$locale.get("product.label.extPrice")</th>
+                        <th>$locale.get("product.label.lineItemComment")</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+						#foreach($orderItems in $orderDetail.orderItem)
+                      <tr>
+                        <td align="left" valign="top">
+                        <div class="orderConfDesc">
+	                        <p class="orderConfTitle"><strong>$!orderItems.Description</strong></p>
+	                        <p><strong>$locale.get("product.label.partNumber"): </strong>$!orderItems.partNumber</p>
+							<!-- $!itemList.productKeywords -->
+						</div>
+						<input type="hidden" name="shortDesc_$orderItem.partNumber" value="$orderItem.description" />
+                        <input type="hidden" name="partNumber_$orderItem.partNumber" value="$orderItem.partNumber" />
+                        <input type="hidden" name="quotePartNumber" value="$orderItem.partNumber" />
+                        <input type="hidden" name="uom_$orderItem.partNumber" value="$!orderItem.orderUom" />
+                        <input type="hidden" name="qty_$orderItem.partNumber" value="$!orderItem.qtyordered" />
+                        <input type="hidden" name="price_$orderItem.partNumber" value="$orderItem.unitPrice" />
+                        <input type="hidden" name="total_$orderItem.partNumber" value="$orderItem.extPrice"/>
+                        </td>
+                        <td valign="top" class="center"><span>$!orderItems.qtyordered</span></td>
+                        <td valign="top" class="center"><span>$!orderItems.qtyShipped</span></td>
+                        <td valign="top" class="center"><span>$$numberTool.format($numberToolFormat,$orderItems.unitPrice)</span></td>                        
+                        <td valign="top" class="center"><span>$$numberTool.format($numberToolFormat,$orderItems.extPrice)</span></td>
+                        <td valign="top" class="center"><span>$!orderItems.lineItemComment</span></td>
+                      </tr>
+                      #end
+                      <input type="hidden" name="defaultBillToId" value="$defaultBillToId" />
+                <input type="hidden" name="defaultShipToId" value="$defaultShipToId" />
+                <input type="hidden" name="erpQuoteNumber" value="$orderId"/>
+                     </tbody>
+                </table>
+            </div>
+
+<div class="cimm_salesBottomStrip orderConfBottomStrip">
+			  <ul>
+                 <li>
+                     <span class="priceLabel"><b>$locale.get("product.label.subTotal") </b></span>
+                     <span class="priceValue">$$numberTool.format($numberToolFormat,$orderDetail.subtotal) </span>
+                 </li>
+                 #if($orderDetail.tax>0)
+                  <li>
+                     <span class="priceLabel"><b>$locale.get("product.label.tax") </b></span>
+                     <span class="priceValue"> $$numberTool.format($numberToolFormat,$orderDetail.tax) </span>
+                 </li>
+                 #end
+                 
+                 #if($orderDetail.freight>0)
+                 <li>
+                    <span class="priceLabel">$locale.get("product.label.shipping") </span>
+                    <span class="priceValue">$$numberTool.format($numberToolFormat,$orderDetail.freight)</span>
+                </li>
+                 #end
+                 
+                  #if($orderDetail.handling>0)
+                    <li>
+                         <span class="priceLabel">$locale.get("product.label.handlng") : </span>
+                         <span class="priceValue">$$numberTool.format($numberToolFormat,$orderDetail.handling)</span>
+                    </li>
+                    #end
+                  
+                 #if($orderDetail.discount>0)
+                  <li>
+                     <span class="priceLabel"><b>$locale.get("product.label.discount")</b></span>
+                     <span class="priceValue"> $$numberTool.format($numberToolFormat,$orderDetail.discount)</span>
+                 </li>
+                  #end
+                
+                  <li>
+                     <span class="priceLabel"><b>$locale.get("product.label.orderTotal") </b></span>
+                     <span class="priceValue orangeClr">$$numberTool.format($numberToolFormat,$orderDetail.total) </span>
+                 </li>
+            </ul>
+			   <div class="clear"></div>
+            </div>
+<div class="clear"></div>            
+</div>
+	#if($orderList.size()>0 && $count < $orderList.size())
+		<div class="pageBreak"> </div>
+	#set($count=$count+1)
+	#end
+#end
+</div>
+<script>
+	function printInvoices() {
+		siteName = $('#siteName').val();
+		w = window.open();
+
+		w.document
+				.write('<link rel="stylesheet" href="'+$("base").attr("href")+'/ASSETS/WEB_THEMES/'+siteName+'/css/unilogWebLayouts.css" type="text/css" /><link rel="stylesheet" href="'+$("base").attr("href")+'/ASSETS/WEB_THEMES/'+siteName+'/css/MyFontsWebfontsKit.css" type="text/css" /><style>body{background:#fff;padding:12px;}#orderConfirmationPrint{width:900px; margin: auto; padding: 10px;} .cimm_siteTableEnclosure,.cimm_siteTableEnclosure .cimm_siteTable {background: none;}.btn{display:none;}@media print{.printButton{display:none;} .orderDetails{float: left;margin-top: 20px;} .pageBreak{page-break-after:always;} table .test{page-break-inside:avoid;} .noPageBreak {page-break-inside:avoid;} }.printButton{margin:15px;padding:15px;float:right;} @page { size:8.27in 11.69in; margin:.5in .5in .5in .5in;mso-header-margin:.5in;mso-footer-margin:.5in;mso-paper-source:0;} body  {  margin: 0px;  } </style><div><div class="printButton"><a href="javascript:void(0);" onclick="window.print();" class="button" >Print This Page</a></div><div id="orderConfirmationPrint">'
+						+ $('#orderConfirmationPrint').html() + "</div>");
+
+		w.document.close();
+		//w.print();
+	}
+</script>

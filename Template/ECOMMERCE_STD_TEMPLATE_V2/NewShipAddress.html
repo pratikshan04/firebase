@@ -1,0 +1,100 @@
+<form id="newShippingAddressForm" action="addNewShippingAddressUnit.action" onsubmit="submitThisForm(this); return false;">
+	<div class="row">
+		<div class="col-md-12 ">
+			<div class="form-group">
+				<span class="text-danger"> * </span> $!locale.get("form.label.required")
+			</div>
+		</div>
+	</div> 
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="shipFirstName">$!locale.get("form.label.firstName") <span class="text-danger">*</span></label>
+				<input type="text" name="shipFirstName" id="shipFirstName" maxlength="20" class="form-control" placeholder="$!locale.get('form.label.firstName')" data-type="text" data-required="Y" data-error="$!locale.get('form.user.firstName.notEmpty')"/>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="shipLastName">$!locale.get("form.label.lastName") <span class="text-danger">*</span></label>
+				<input type="text" name="shipLastName" id="shipLastName" maxlength="20" class="form-control" placeholder="$!locale.get('form.label.lastName')" data-type="text" data-required="Y" data-error="$!locale.get('form.user.lastName.notEmpty')"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="address1">$!locale.get("form.label.address1") <span class="text-danger">*</span></label>
+				<input type="text" name="address1" id="address1" maxlength="100" class="form-control" placeholder="$!locale.get('form.label.address1')" data-type="text" data-required="Y" data-error="$!locale.get('form.user.address.address1.notEmpty')"/>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="address2">$!locale.get("form.label.address2")</label>
+				<input type="text" name="address2" id="address2" maxlength="100" class="form-control" placeholder="$!locale.get('form.label.address2')"/>
+			</div>
+		</div>
+	</div>	     
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="city">$!locale.get("form.label.city") <span class="text-danger">*</span></label>
+				<input type="text" name="city" id="city" class="form-control" placeholder="$!locale.get('form.label.city')" data-type="text" data-required="Y" data-error="$!locale.get('form.user.address.city.notEmpty')" maxlength='50'/>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="countrySelectShip">$!locale.get("form.label.country") <span class="text-danger">*</span></label>
+				<select name="country" id="countrySelectShip" class="form-control selectpicker" data-type="select" data-state="stateSelectShip" data-required="Y" data-error="$!locale.get('form.user.address.country.notEmpty')"></select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="stateSelectShip">$!locale.get("form.label.state") <span class="text-danger">*</span></label>
+				<select name="state" id="stateSelectShip" class="form-control selectpicker" data-type="select" data-required="Y" data-error="$!locale.get('form.user.address.state.notEmpty')"></select>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="Zipcode">$!locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
+				<input type="text" name="zip" id="Zipcode" class="formatZipCode form-control" placeholder="$!locale.get('form.label.zipCode')" data-type="text" data-required="Y" data-error="$!locale.get('form.user.address.zipCode.notEmpty')"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="shipPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span></label>
+				<input type="text" name="shipPhone" id="shipPhone" class="formatPhoneNumber form-control" placeholder="$!locale.get('form.label.phone')" data-type="number" data-required="Y" data-error="$!locale.get('form.user.address.phoneNumber.notEmpty')"/>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="EmailAddress">$!locale.get("form.label.email") <span class="text-danger">*</span></label>
+				<input type="text" name="EmailAddress" id="EmailAddress" class="form-control" placeholder="$!locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$!locale.get('form.user.address.emailId.notEmpty')" data-invalid="$!locale.get('form.user.address.emailId.invalid')"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">	
+				<label for="makeDefault" class="customCheckBox2">
+					<input type="checkbox" id="makeDefault" onclick="makeDefaultAddress();" />
+					<span>$!locale.get("form.label.makeasDefault")</span>
+					<input type="hidden" id="makeAsDefault" name="makeAsDefault" value="No" />
+				</label>
+			</div>
+		</div>
+	</div>        
+	<div class="row" align="center">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<button type="submit" class="button" id="updateBtn">$!locale.get('product.button.addAddress') </button>
+		</div>
+	</div>
+	<input type="hidden" name="countryFulNmShip" id="countryFulNmShip" />
+	<input type="hidden" name="checkShipToId" id="checkShipToId" value="N"/>
+</form> 
+<div id="successBlock" class="hideMe">
+	<a href="$!locale.get('website.url.AccountDashboard')" class="button">$!locale.get('product.label.backToDashboard')</a>
+</div>

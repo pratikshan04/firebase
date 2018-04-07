@@ -1,0 +1,18 @@
+#macro (compareScript)
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".cimm_inlineButton").on("click",function(){
+		var sim=$(".similar");
+		var dif=$(".different");
+		$(".cimm_inlineButton").removeClass("active");
+		$(this).addClass("active");
+		if($(this).is("#showSimilar")){
+		dif.removeClass("active");
+		sim.addClass("active");
+		}
+		else if($(this).is("#showDifferent"))
+		{dif.addClass("active");sim.removeClass("active");}
+		else{dif.removeClass("active");sim.removeClass("active");};});
+});
+</script>
+#end

@@ -1,0 +1,283 @@
+<input type="hidden" id="cartCountQuickorder" name="cartCountQuickorder" value="$!cartCount"/>
+#if(($itemsAddedToCart && $itemsAddedToCart.size()>0) || ($itemsWithRestriction && $itemsWithRestriction.size()>0) || ($itemsWithMultipleResultMap && $itemsWithMultipleResultMap.size()>0) || ($itemsWithZeroResult && $itemsWithZeroResult.size()>0))
+<div id="orderResults" class="multiTab mTop-4">
+	<ul class="multiTabHeading clearAfter">
+	#if($itemsAddedToCart && $itemsAddedToCart.size()>0)
+		<li><a href="#itemsInCart">Added to Cart ($itemsAddedToCart.size())</a></li>
+	#end
+	#if($itemsWithRestriction && $itemsWithRestriction.size()>0)
+		<li><a href="#restrictedItems">Items With Exceptions ($itemsWithRestriction.size())</a></li>
+	#end
+	#if($!itemsWithMultipleResultMap && $itemsWithMultipleResultMap.size()>0)
+		<li><a href="#multipleResult">Multiple result ($itemsWithMultipleResultMap.size())</a></li>
+	#end
+	#if($itemsWithZeroResult && $itemsWithZeroResult.size()>0)
+		<li><a href="#zeroResut">No Matches ($itemsWithZeroResult.size())</a></li>
+	#end
+	</ul>
+	<div class="multiTabContent">
+	#if($itemsAddedToCart && $itemsAddedToCart.size()>0)
+		<div id="itemsInCart">
+			<div class="cimm_sliderWrap">
+			<ul id="itemsInCartSlider" class="cimm_caroWrap clearAfter">
+			#set($itemCount = 1)
+			#foreach($itemData in $itemsAddedToCart)
+				#set($itemTitle= $itemData.shortDesc)
+				<li>				
+					<div class="cimm_slideItemImg clearAfter">
+						<!-- <b>$itemCount)</b> -->
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">                    
+							#if($itemData.imageName.contains("http"))
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+							#else
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+							#end
+						</a>
+					</div>
+					<div class="cimm_slideItemDesp clearAfter">
+						<ul>
+							<li>
+								<h5>
+									#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+									#if($linkItemTitle.length()>22)
+										$linkItemTitle.substring(0, 22)...
+									#else
+										$linkItemTitle
+									#end
+									</a>
+								</h5>
+							</li>
+							<li><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
+						   	<li class="price">
+							<b>$locale.get('product.label.yourprice'): </b>
+								<span id="span_$itemData.partNumber" class="priceSpan" data-select='priceData'>
+								#if($itemData.price>0)
+									$$numberTool.format($!pricePrecisionFormate,$itemData.price)
+								#else
+									<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
+							   	#end
+								</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				#set($itemCount = $itemCount+1)
+				#end
+			</ul>
+		</div>
+	</div>
+	#end
+	#if($itemsWithRestriction && $itemsWithRestriction.size()>0)
+		<div id="restrictedItems">
+			<div class="cimm_sliderWrap clearAfter">
+			<ul id="restrictedItemsSlider" class="cimm_caroWrap">
+				#set($itemCount = 1)
+				#foreach($itemData in $itemsWithRestriction)
+				#set($itemTitle= $itemData.shortDesc)
+				<li>				
+					<div class="cimm_linkItemImg clearAfter">
+					<!-- <b>$itemCount)</b> -->
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">
+							#if($itemData.imageName.contains("http"))
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+							#else
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+							#end
+						</a>
+					</div>
+					<div class="cimm_slideItemDesp clearAfter">
+						<ul>
+							<li>
+								<h5>
+								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+								<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+								#if($linkItemTitle.length()>22)
+									$linkItemTitle.substring(0, 22)...
+								#else
+									$linkItemTitle
+								#end
+								</a>
+								</h5>
+							</li>
+							<li><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
+						   	<li class="price">
+							<span id="span_$itemData.partNumber" class="priceSpan" data-select='priceData'>
+							#if($itemData.price>0)
+								$$numberTool.format($!pricePrecisionFormate,$itemData.price)
+							#else
+								<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
+							#end
+							</span>
+							</li>
+							<li>
+								<span>$itemData.resultDescription</span>
+							</li>
+						</ul>
+						</div>
+					<div class="clear"></div>
+				</li>
+				#set($itemCount = $itemCount+1)
+				#end
+			</ul>
+		</div>
+		</div>	
+	#end
+	#if($!itemsWithMultipleResultMap && $itemsWithMultipleResultMap.size()>0)
+		#parse("Macros/defaultMacro.vm")
+		#parse("Macros/listPageMacro.vm")
+		#set($rowCount = 0)
+		<div id="multipleResult">
+			#set($keyCountSelectAll = 0)
+			#foreach($multiResultObj in $itemsWithMultipleResultMap.entrySet())
+			#set($keyValue = "")
+			#set($itemDataListArray = "")
+			#set($keyValue = $multiResultObj.getKey())
+			#set($itemDataListArray = $multiResultObj.getValue())
+			#set($resultCount = 0)
+			#if($itemDataListArray.get(0).getItemResultCount()>0)
+				#set($resultCount = $itemDataListArray.get(0).getItemResultCount())
+			#else
+				#set($resultCount = $itemDataListArray.get(0).getResultCount())
+			#end	
+				<div class="selectItemBlock">
+					<div class="bulkActionBtn">
+						<select class="selectpicker" id="bulkAction" onchange="performBulkAction(this);">
+							<option>$!locale.get("product.label.bulkOptions")</option>
+							#if($userLogin)
+								<option data-perform="multipleProductGroup">$!locale.get("product.label.addItemsToGroup")</option>
+							#end
+							<option data-perform="multipleAddToCart">$!locale.get("product.label.addItemsToCart")</option>
+						</select>
+					</div>
+				</div>
+				#if($resultCount>15)
+					<div class="cimm_genericSearch">Keyword <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a> is too generic, resulting in numerous matches. Please <a href="searchPage.action?keyWord=$keyValue" target="_blank">click here</a> to refine the matches.</div>
+				#else
+				<div class="cimm_resultSelect clearAfter mBottom-3">
+					<div class="pullLeft">
+						$resultCount results for <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a>
+					</div>
+					<label class="customCheckBox pullRight" for="SALL_$keyValue$keyCountSelectAll">
+						<input type="checkbox" id="SALL_$keyValue$keyCountSelectAll" name="SALL_$keyValue$keyCountSelectAll" data-selectAll="CheckBox"/>
+						<span>$locale.get("product.label.selectAll")</span>
+					</label>
+				</div>
+					<div class="cimm_sliderWrap clearAfter">
+						<ul id="multipleResultSlider_$rowCount" class="cimm_caroWrap">
+							#set($itemCount = 1)
+							#foreach($itemData in $itemDataListArray)
+							#set($itemTitle= $itemData.shortDesc)
+							<li>
+								<div class="multipleResult">
+									<label class="customCheckBox" for="selectItemCheckbox_$itemData.itemId">
+									#set($addToCartCheckFlag = "N")
+									#if($itemData.price>0)
+										#set($addToCartCheckFlag = "Y")
+									#end
+									<input type="checkbox" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems" id="selectItemCheckbox_$itemData.itemId" data-check="CHK_SALL_$keyValue$keyCountSelectAll" data-itemid="$itemData.itemId" data-partnumber="$itemData.partNumber"  data-itemPriceId="$itemData.itemPriceId"/>
+									<span>$!locale.get('product.label.selectItemToAddToCartGroup')</span>
+									</label>
+									 #itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+								    <input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" name="MinOrderQty_$itemData.partNumber"/>
+									<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
+									<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="OrderQtyInterval_$itemData.partNumber"/>
+								</div>
+								<div class="cimm_slideItemImg clearAfter">
+								<!-- <b>$itemCount)</b> -->
+									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')">                    
+										#if($itemData.imageName.contains("http"))
+										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+										#else
+										<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+										#end
+									</a>
+								</div>
+								<div class="cimm_slideItemDesp clearAfter">
+									<ul>
+										<li>
+											<h5>
+											#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+												<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+												#if($linkItemTitle.length()>22)
+													$linkItemTitle.substring(0, 22)...
+												#else
+													$linkItemTitle
+												#end
+												</a>
+											</h5>
+										</li>
+										#if($itemData.minOrderQty>0 && $itemData.orderInterval>0)
+											<li class="hideToHover"><b>$locale.get("product.label.minorderqty"):</b><span> $itemData.minOrderQty</spaN></li>
+											<li class="hideToHover"><b>$locale.get("product.label.qtyinterval"):</b><span> $itemData.orderInterval</span></li>
+										#end
+										<li><b>$locale.get("product.label.partNumber"): </b>$itemData.partNumber</li>
+										<li>
+											<b>$locale.get("form.label.tableQty"): </b><input type="text" name="itemTxtQty$itemData.itemId"  maxlength="6" value="$itemData.minOrderQty" id="itemTxtQty$itemData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
+										</li>
+								    	<li class="price">
+											<b>$locale.get('product.label.yourprice'): </b>
+											<span id="span_$itemData.partNumber" class="priceSpan" data-select='priceData'>
+											#if($itemData.price>0)
+								    			$$numberTool.format($!pricePrecisionFormate,$itemData.price)
+								    		#else
+								    			<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
+								    		#end
+											</span>
+										</li>
+									</ul>
+									</div>
+							</li>
+							#set($itemCount = $itemCount+1)
+							#end
+						</ul>
+					</div>
+					#set($rowCount = $rowCount+1)
+				#end
+			<script>
+				jQuery(function(){
+					jQuery("#SALL_$keyValue$keyCountSelectAll").change(function(){
+						if(this.checked) { // check select status
+							jQuery("[data-check='CHK_SALL_$keyValue$keyCountSelectAll']").each(function(i){//loop through each checkbox
+								jQuery("#"+this.id).click();
+				                this.checked = true;  //select all checkboxes with class "checkbox1"               
+				            });
+				        }else{
+				        	jQuery("[data-check='CHK_SALL_$keyValue$keyCountSelectAll']").each(function(i){ //loop through each checkbox
+				        		jQuery("#"+this.id).click();
+				                this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+				            });         
+				        }
+					});
+				});
+			</script>
+			#set($keyCountSelectAll = $keyCountSelectAll+1)
+			#end
+			
+		</div>
+		<input type="hidden" id="multiResultSliderCount" name="multiResultSliderCount" value="$!rowCount"/>
+	#end
+	#if($itemsWithZeroResult && $itemsWithZeroResult.size()>0)
+		<div id="zeroResut">
+			<ul class="cimm_noResultList clearAfter">
+				#foreach($itemData in $itemsWithZeroResult)
+					<li>$itemData.keyword</li>
+					<!-- <li><a href="searchPage.action?keyWord=$itemData.keyword" target="_blank">$itemData.keyword</a></li> -->
+				#end
+			</ul>
+		</div>
+	#end
+	</div>
+</div>
+<script>
+var webThemes = $("#webThemePath").val();
+jQuery.getScript(webThemes+'js/multiTab.min.js', function(){
+	$('#orderResults').multiTab({
+		transitionEffect:"fade"
+	});
+});
+jQuery.getScript(webThemes+'js/BulkAction.js', function(){});
+</script>
+#else
+	No results found
+#end

@@ -1,0 +1,209 @@
+
+
+<style>
+.fa-wpforms:before {
+    content: "\f298";
+}
+.dropelement{
+width:49%;
+float:left;
+min-height:300px;
+border: 1px dashed #b1b1b1;
+}
+.cimm_formContent{
+width:100% !important;
+}
+
+ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
+width:30% !important;
+}
+.editing{
+background-color : #fffdca;
+}
+.editelement{
+width:49%;
+float:left;
+min-height:300px;
+border: 1px solid #b1b1b1;
+padding:20px;
+}
+
+.dropelement form{
+min-height:200px;
+}
+.dropelement form ul{
+min-height:200px;
+}
+
+.dropelement form ul li{
+padding:10px;
+}
+ul.cimm_formContent a.tool-edit, ul.cimm_formContent a.tool-delete {
+	padding: 3px 10px;
+    background: #1B63AB;
+    color: #fff;
+}
+.editelement ul li, .formTitle ul li {margin-bottom: 10px;}
+.editelement ul li label, .formTitle ul li label {
+	color: #003b4d;
+}
+.editelement ul li input[type="text"], .editelement ul li input[type="password"], .editelement ul li select, .formTitle ul li input[type="text"], .formTitle ul li select {
+	padding: 5px;
+    height: 34px;
+	border: none;
+    background: #e1e1e1;
+    width: 100%;
+}
+.editelement ul li textarea {
+	padding: 5px;
+    min-height: 34px;
+	border: none;
+    background: #e1e1e1;
+    width: 100%;
+}
+.dropelement input[type="submit"] {
+	padding: 5px 10px;
+    background: #2ba5a5;
+    color: #fff;
+	margin: 0 0 10px 10px;
+}
+a.apply-changes {
+    padding: 4px 10px;
+    background: #007655;
+    color: #fff;
+	float: right;
+    margin-right: 23px;
+}
+a.save-form {
+	text-align: center;
+    padding: 5px 25px;
+    background: #007580;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+.save-btnBlock {clear: both;}
+ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
+	margin-bottom: 10px;
+}
+ ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li textarea {
+ margin-top: 20px;
+ }
+.dragelementWrap {padding: 10px;margin-bottom: 20px;}
+.dragelementWrap .dragelement {
+	width: auto;
+    display: inline-block;
+    background: #00696C;
+    padding: 5px 20px;
+    color: #FDF3E7;
+    text-transform: uppercase;
+    cursor:move;
+}
+.formTitle {
+	width: 30%;
+	float: right;
+	padding: 20px;
+	margin-top: 45px;
+}
+.formBuilderWrap {
+	width: 68%;
+	float: right;
+}
+.cimm_formContent .customRadioBtn input[type="radio"] {
+    display: block;
+    opacity: 1;
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-left:-20px;
+    margin-top:-1px;
+    background: #fff;
+    -webkit-appearance: none;
+}
+.cimm_formContent .customCheckBox input[type="checkbox"] {
+    display: block;
+    opacity: 1;
+    width: 18px;
+    float: left;
+    height: 18px;
+    margin-left: -22px;
+    margin-top: -1px;
+    background: #fff;
+    -webkit-appearance: none;
+}
+:focus {
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+</style>
+</head>
+<body>
+
+
+<div class="formTitle">
+<form id="mainFormBuilder">
+<ul>
+<li>
+<label>Form Name :</label> <input type="text" value="$!formData.formName" name="formData.formName" id="formNameMain" />
+</li>
+<li>
+<label>Notification :</label> <select id="formNotification" name="formData.formNotification">
+<option value=""></option>
+#foreach($notification in $notificationList)
+<option  vlaue="$notification" #if($!formData.formNotification == $notification) selected #end>$notification</option>
+#end
+</select>
+</li>
+<li>
+<label>Save User Entered Form Data to DB :</label> <input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox'  checked/>
+</li>
+<li>
+<label>Email Subject :</label> <input type="text" value="$!formData.emailSubject" name="formData.emailSubject" id="emailSubject" />
+</li>
+<li>
+<label>Send Email after User Submits Form :</label> <input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"  checked/>
+</li>
+</ul>
+<input type="hidden" name="formData.htmlCode" id="htmlCode" />
+#if($formData.id)
+<input type="hidden" name="formData.id" value="$formData.id" /> 
+#end
+</form>
+<div class="save-btnBlock">
+<a href="javascript:void(0)" class="save-form">Save</a>
+</div>
+</div>
+
+<div class="formBuilderWrap">
+<div class="dragelementWrap">
+<div class="dragelement" data-type="input">Input Text</div>
+<div class="dragelement" data-type="textarea">Text Area</div>
+<div class="dragelement" data-type="select">Select</div>
+<div class="dragelement" data-type="radio">Radio</div>
+<div class="dragelement" data-type="checkbox">Check Box</div>
+</div>
+
+
+<div class="dropelement">
+#if($formData.htmlCode)
+$formData.htmlCode
+#else
+<form id="CustomForm">
+<ul class="cimm_formContent fullWidthForm">
+</ul>
+<input type="submit" value="Submit" class="banner_addNewBtn" />
+<input type="hidden" name="NotificationName" id="notificationName" value=''/>
+<input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
+<input type="hidden" name="SendMail" id="sendMail" value=''/>
+<input type="hidden" name="Subject" id="subject" value=''/>
+<input type="hidden" name="formName" id="formName" value=''/>
+</form>
+#end
+</div>
+<div class="editelement">
+
+</div>
+<a href="javascript:void(0)" class="apply-changes">Apply <i class="fa fa-wpforms"></i></a>
+</div>
+
+<script>
+$(".dropelement ul li").append('<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>');
+</script>

@@ -1,0 +1,226 @@
+button,
+input[type='submit'] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -appearance: none;
+    font-family: $buttonFont;
+    text-transform: uppercase;
+    outline: none;
+    &:active {
+        outline: none;
+        color: $white;
+    }
+}
+
+.form-group .bootstrap-select .btn.dropdown-toggle {
+    text-transform: capitalize;
+    font-weight: normal;
+    font-family: $defaultFont;
+}
+
+.button {
+    @extend button;
+    background: $primaryColor;
+    padding: 12px;
+    color: $white;
+    font-family: $buttonFont;
+    font-size: 14px;
+    border-radius: 0;
+    letter-spacing: normal;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+	border-radius: 2px;
+    &:hover {
+        background: $secandaryColor;
+    }
+}
+
+.cimm_button {
+    @extend .button;
+    color: $white;
+    background: $bodyFontColor;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    &:hover {
+        background: $darkGrayColorTwo;
+    }
+}
+
+.cimm_inlineButton {
+    @extend .button;
+    padding: 7px 12px;
+    vertical-align: bottom;
+    height: auto;
+    display: inline-block;
+    &:hover {
+        color: $white;
+    }
+}
+
+//Add to Cart Button`
+.log-addTocart-btn {
+    background: $primaryColor;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+	color: $white;
+	text-align: center;
+	padding: 6px 12px 6px 35px;
+    font-size: 14px;
+	background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
+    &:hover {
+        color: $white;
+    }
+    &.btns-disable {
+        opacity: .3;
+    }
+}
+
+.btns-disable {
+    cursor: not-allowed !important;
+    opacity: 0.8;
+    &:before {}
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.refreshBtn {
+    color: $primaryColor;
+    font-size: 24px;
+}
+
+// My Product Group Button
+.myProductGroupbutton {
+    position: relative;
+    padding: 0px 0px 0px 10px !important;
+    text-decoration: underline !important;
+    display: inline-block;
+    font-size: 14px;
+    color: $primaryColor !important;
+    &:before {
+        content: "+";
+        position: absolute;
+        left: 0px;
+    }
+}
+
+
+/* The switch - the box around the slider */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+}
+
+
+/* Hide default HTML checkbox */
+
+.switch input {
+    display: none;
+}
+
+
+/* The slider */
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $lightGrayColorOne;
+    -webkit-transition: .4s;
+    transition: .4s;
+    z-index: 1;
+    padding: 5px 10px 5px 7px;
+    color: $white;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    z-index: -1;
+    height: 30px;
+    width: 60px;
+    left: 0;
+    bottom: 0;
+    background-color: $darkGrayColorTwo;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider:before {
+    background-color: #005c39;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #005c39;
+}
+
+input:checked+.slider.active:before {
+    -webkit-transform: translateX(60px);
+    -ms-transform: translateX(60px);
+    transform: translateX(60px);
+}
+
+.light-ripple {
+    overflow: hidden;
+    transition: 0.1s ease-in;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.dark-ripple {
+    @extend .light-ripple;
+}
+
+.lRipple {
+    background-color: rgba(265, 265, 265, 0.45);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+    position: relative;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    position: absolute;
+}
+
+.dRipple {
+    @extend .lRipple;
+    background-color: rgba(88, 88, 88, 0.28);
+}
+
+.animate {
+    -webkit-animation: ripple 0.4s linear;
+    animation: ripple 0.4s linear;
+}
+
+@-webkit-keyframes ripple {
+    100% {
+        -webkit-transform: scale(12);
+        transform: scale(12);
+        background-color: transparent;
+    }
+}
+
+@keyframes ripple {
+    100% {
+        -webkit-transform: scale(12);
+        transform: scale(12);
+        background-color: transparent;
+    }
+}

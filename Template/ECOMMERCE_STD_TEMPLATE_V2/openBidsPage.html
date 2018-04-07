@@ -1,0 +1,91 @@
+#if($session.getAttribute("pricePrecision")=="4")
+	#set($numberToolFormat = "#0.0000")
+#elseif($session.getAttribute("pricePrecision")=="3")
+	#set($numberToolFormat = "#0.000")
+#else
+	#set($numberToolFormat = "#0.00")
+#end
+#if($ajaxCall=="Y")
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable display rwd-table rwd-Tab">
+            <thead>
+				<tr>
+					<th class="left">$locale.get("form.label.OrderNo")</th>
+					<!-- <th>$locale.get("form.label.customerPOnumber")</th> -->
+					<!-- <th>$locale.get("form.label.CustomerRelease")</th> -->
+					<th>$locale.get("form.label.orderDate")</th>
+					<th>$locale.get("product.label.amount")</th>
+					<th>$locale.get("product.label.shipDate")</th>
+					<!-- <th>$locale.get("form.label.shipTo")</th> -->
+					<th>$locale.get("product.label.ordrStatus")</th>
+					<th>&nbsp;</th>
+              	</tr>
+            </thead>
+            <tbody>
+#if($orderList && $orderList.size()>0)#set($countOrderList = 0)
+			#foreach($orderDetail in $orderList)
+			#set($countOrderList =	$countOrderList + 1)
+				<tr class="odd">
+					<td style="text-align:left;" data-th="$locale.get('form.label.OrderNo')"><b><a class="orangeClr" href="OrderDetailSale.action?orderId=$orderDetail.orderNum">$orderDetail.orderNum</a></b></td>
+					<!-- <td data-th="$locale.get('form.label.customerPOnumber')">#if($!orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td> -->
+					<!-- <td data-th="$locale.get('form.label.CustomerRelease')">#if($!orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
+					<td data-th="$locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
+					<td data-th="$locale.get('product.label.amount')">$$!numberTool.format($numberToolFormat,$!orderDetail.openOrderAmount)</td>
+					<td data-th="$locale.get('product.label.shipDate')">$!orderDetail.shipDate</td>
+					<!-- <td data-th="$locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
+					<td data-th="$locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>  
+					<td><a href="OrderDetailSale.action?orderId=$orderDetail.orderNum" class="button wrapBtn">$locale.get("product.label.viewOrder")</a></td>
+				</tr>
+				#if($countOrderList == 4)
+				#break
+				#end
+			#end
+		#end
+			</tbody>
+        </table>
+#else
+      <div class="clear"></div>
+      <div class="cimm_siteTableEnclosure rwd-TableWrap">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable display rwd-table rwd-Tab" id="openOrderTable">
+            <thead>
+				<tr>
+					<th class="left">$locale.get("form.label.OrderNo")</th>
+					<th>$locale.get("form.label.customerPOnumber")</th>
+					<!-- <th>$locale.get("form.label.CustomerRelease")</th> -->
+					<th>$locale.get("form.label.orderDate")</th>
+					<th>$locale.get("product.label.amount")</th>
+					<th>$locale.get("product.label.shipDate")</th>
+					<!-- <th>$locale.get("form.label.shipTo")</th> -->
+					<th>$locale.get("product.label.ordrStatus")</th>
+					<!-- <th>$locale.get("form.label.orderedBy")</th> -->
+					<th></th>
+              	</tr>
+            </thead>
+            <tbody>
+		#if($orderList && $orderList.size()>0)
+			#foreach($orderDetail in $orderList)
+			#if($!orderDetail.orderStatus && $!orderDetail.orderStatus.contains("Bid"))
+				<tr class="odd">
+					<td style="text-align: left;" data-th="$locale.get('form.label.OrderNo')"><b><a href="OrderDetailSale.action?orderId=$orderDetail.orderNum">$orderDetail.orderNum</a></b></td>
+					<td data-th="$locale.get('form.label.customerPOnumber')">#if($!orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
+					<!-- <td data-th="$locale.get('form.label.CustomerRelease')">#if($!orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
+					<td data-th="$locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
+					#if($session.getAttribute("erpType") == "eclipse")
+					<td data-th="$locale.get('product.label.amount')">$$!numberTool.format($numberToolFormat,$!orderDetail.openOrderAmount)</td>
+					#else
+					<td data-th="$locale.get('product.label.amount')">$$!numberTool.format($numberToolFormat,$!orderDetail.total)</td>
+					#end
+					<td data-th="$locale.get('product.label.shipDate')">$!orderDetail.shipDate</td>
+					<!-- <td data-th="$locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
+					<td data-th="$locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
+					<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
+					<td data-th=""><a href="OrderDetailSale.action?orderId=$orderDetail.orderNum&" class="button">$locale.get("product.label.viewBid")</a></td>
+				</tr>
+			#end
+			#end
+		#end
+			</tbody>
+        </table>
+		<div class="clear"></div>
+   </div>
+<!----------------------------------------------End of Open Orders page------------------------------------------->
+#end

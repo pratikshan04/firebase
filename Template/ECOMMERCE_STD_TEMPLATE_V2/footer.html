@@ -1,0 +1,177 @@
+#parse("sleekNavigationMenu.html")
+#if($!userAgent == "WEBVIEW")
+<!-- <div id="navbar" class="footerBgColor">
+	<a id='navbar_home' href="#homePage"><img src="$!webThemes/$!siteName/images/App/FooterHome.png" alt=""/><p class="footerTextColor">Home</p></a>
+	<a href="javascript:search();" id='navbar_search'><img src="$!webThemes/$!siteName/images/App/FooterSearch.png" alt=""/><p class="footerTextColor">Search</p></a>
+	<a id='navbar_feedback'><img src="$!webThemes/$!siteName/images/App/FooterFeedback.png" alt=""/><p class="footerTextColor">Feedback</p></a>
+	<a id="navbar_cart" href="$!locale.get('website.url.ShoppingCart')"><span id="cartCountrefresh" class="cart_badge cartCountrefresh">$!cartCount</span><img src="$!webThemes/$!siteName/images/App/FooterCart.png" alt=""/><p class="footerTextColor">Cart</p></a>
+	<a id="navbar_help" ><img src="$!webThemes/$!siteName/images/App/FooterHelp.png" alt=""/><p class="footerTextColor">Help</p></a>
+</div> -->
+#else
+<div class="row no-gutters">
+	<div class="col-md-12">
+		<div class="footerTopContent">
+			<div class="container"></div>
+		</div>
+	</div>
+</div>
+<div class="row no-gutters">
+	<div class="col-md-12">
+		<div class="footerMiddelContent">
+			<div class="container paddingY-4">
+				<div class="row">
+				#set($count = 1)
+				#foreach($!footMenu in $!footerStaticMenu) 
+					<div class="col-md-2">
+						<div class="footerCol">
+							<h5><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><i class="fa fa-plus" data-toggle="collapse" data-target="#hi$!count"></i></h5>
+							<ul id="hi$!count" class="collapse in">
+							#if($!footMenu.menuList && $!footMenu.menuList.size()>0)
+								#foreach($!subStaticMenu in $!footMenu.menuList)
+									#if($!subStaticMenu.level2Menu && $!subStaticMenu.level2Menu =="Quick Order Pad")
+										#if($!userLogin)
+											<li><a href="#if($!subStaticMenu.itemUrl) #if($!subStaticMenu.staticPageUrl) $!subStaticMenu.staticPageUrl #else $!subStaticMenu.itemUrl #end #else Javascript:void(0); #end"#if($!subStaticMenu.openPageIn && $!subStaticMenu.openPageIn=='ST') #end #if($!subStaticMenu.openPageIn && $!subStaticMenu.openPageIn=='NT')target="_blank"#end #if($!subStaticMenu.openPageIn && $!subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$!subStaticMenu.level2Menu</a></li>
+										#else
+											<li><a href="javascript:void(0);" onclick="loginPop(); return false;" data-staticLink="#if($!subStaticMenu.itemUrl) #if($!subStaticMenu.staticPageUrl) $!subStaticMenu.staticPageUrl #else $!subStaticMenu.itemUrl #end #else Javascript:void(0); #end">$!subStaticMenu.level2Menu</a></li>
+										#end
+									#else
+										<li><a href="#if($!subStaticMenu.itemUrl) #if($!subStaticMenu.staticPageUrl) $!subStaticMenu.staticPageUrl #else $!subStaticMenu.itemUrl #end #else Javascript:void(0); #end"#if($!subStaticMenu.openPageIn && $!subStaticMenu.openPageIn=='ST') #end #if($!subStaticMenu.openPageIn && $!subStaticMenu.openPageIn=='NT')target="_blank"#end #if($!subStaticMenu.openPageIn && $!subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$!subStaticMenu.level2Menu</a></li>
+									#end
+								#end
+							#end
+							</ul>
+						</div>
+					</div>
+					#set($count = $!count + 1)
+				#end
+					<div class="col-md-3">
+						<div class="footerCol">
+							<h5><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#hi$!count"></i></h5>
+							<ul id="hi$!count" class="collapse in">
+								<li><a>Your Company Address</a></li>
+								<li><a>#000, Lorem </a></li>
+								<li><a>Lorem, IL 0000</a></li>
+								<li><a>Phone: (000)000-0000</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="footerCol">
+							<h5><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#hi$!count"></i></h5>
+							<ul id="hi$!count" class="collapse in">
+								<li><p>$!locale.get('footer.label.signupFor')</p></li>
+								<li><a class="cimm_button">$!locale.get('footer.label.signMeUp')</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</div>
+<div class="row no-gutters">
+	<div class="col-md-12">
+		<div class="cimm_footerDownContent">
+			<div class="container alignCenter">
+				<p class="foot_copy">$!locale.get('website.label.copyRight') <span class="year"></span> $siteDisplayName. $!locale.get('website.label.allRightsReserved')</p>
+			</div>
+		</div>
+	</div>
+</div>
+#end
+<div id="loginModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<form id="modalLoginForm" method="post" data-form="login">
+				<div class="modal-header">
+					<h4 class="modal-title">$!locale.get("product.button.signIn")<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+					<div id="pLoginErr" class="text-danger text-center mBottom-1"></div>
+			    </div>
+			    <div class="modal-body">
+					<input type="hidden" value="popup" name="loginType">
+					<div class="form-group">
+						<label>$!locale.get("form.label.userName")</label>
+						<input type="text" name="loginId" id="modalUserName" tabindex="2" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label>$!locale.get("form.label.password")</label>
+						<input type="password" name="loginPassword" id="modalPassword" tabindex="3" class="form-control"/>
+					</div>
+					<div class="form-group clearAfter">
+						<label class="customCheckBox pullLeft" tabindex="4" >
+							<input type="checkbox" name="rememberMe" id="modalRememberMe" />
+							<span>$!locale.get("form.label.rememberMyLogin")</span>
+						</label>
+						<a href="$!locale.get('website.url.forgotPassword')" class="pullRight forgotPass" tabindex="5">$!locale.get("product.label.forgotPassword")</a>
+					</div>
+					<div class="clearAfter">
+						<a href="$!locale.get('website.url.Register')" class="pullLeft cimm_button" tabindex="7">$!locale.get("product.heading.signUp")</a>
+						<button class="button pullRight" type="submit" tabindex="6">$!locale.get('product.heading.signIn')</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="generalModel" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header noBorder">
+		      	<h4 class="modal-title"><button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+		    </div>
+		    <div class="modal-body">
+		    </div>
+		</div>
+	</div>
+</div>
+<div id="cartPopModel" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header noBorder">
+		      	<button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title pull-left">$!locale.get('product.heading.myCart')</h4><a href="$!locale.get('website.url.ShoppingCart')" class="mRight-3 pull-right"><i class="fa fa-lg fa-shopping-cart"></i> <span class="ATCCartCount"></span> $!locale.get("header.label.items")</a>
+		    </div>
+		    <div class="modal-body row">
+			    <div class="col-md-3 col-sm-3 col-xs-3">
+					<img class="addedItemImg ATCimageName" src="$!webThemes/$!siteName/images/NoImage.png" alt="NoImage">
+				</div>
+				<div class="col-md-9 col-sm-9 col-xs-9">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h3 class="productTitle ATCProductHeading"></h3>
+							<p class="ATCShortDesc"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<p><b>$!locale.get('product.label.partNumber'): </b><span class="ATCPartNumber"></span></p>
+							<p><b>$!locale.get('product.label.mpn'): </b><span class="ATCMPartNumber"></span></p>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<p class="addedItemPrice priceSpan"><span class="ATCprice"></span></p>
+							<p><b>$!locale.get('product.label.qty'): </b><span class="ATCQuantity"></span></p>
+							<p style="display: none;"><b class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </b><span class="ATCLeadTime"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></p>
+						</div>
+					</div>
+				</div>
+		    </div>
+		    <div class="modal-footer">
+				<a href='$!locale.get("website.url.ShoppingCart")' class="pullRight button">$!locale.get("product.heading.viewCart")</a>
+		    </div>
+		</div>
+	</div>
+</div>
+<!-- multiple add to cart -->
+<div class="customPopUp" id="multipleAddToCartResult" style="display:none;"></div>
+<!-- quickorder Pad Head -->
+<div id="orderPadCopyHead" style="display:none;"></div>
+<div class="cimm_customPopWrap" id="searchResultsWrap" style="display:none;">
+	<div class="quickOrder_customPopContent">
+		<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();"><i class="fa fa-lg fa-times-circle"></i></a>
+		<div id="searchResultsHeader">
+			<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+		</div>
+	</div>
+</div>
