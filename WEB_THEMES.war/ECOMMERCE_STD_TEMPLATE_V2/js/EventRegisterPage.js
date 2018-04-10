@@ -1,17 +1,16 @@
-if($("#countrySelect").length>0){
-	var countrySelect = new initCountry({
-		country: "US",
-		selectorID: "countrySelect",
-		defaultSelect: true
-	});
-}
-if($("#countrySelectShip").length>0){
-	var countrySelectShip = new initCountry({
-		country: "US",
-		selectorID: "countrySelectShip",
-		defaultSelect: true
-	});
-}
+var webThemes = $("#webThemePath").val();
+
+		var countrySelect = new initCountry({
+			country: "US",
+			selectorID: "countrySelect",
+			defaultSelect: true
+		});
+		var countrySelectShip = new initCountry({
+			country: "US",
+			selectorID: "countrySelectShip",
+			defaultSelect: true
+		});
+
 function eventFormClear(){
 	$('#eventForm').clearForm();
 }

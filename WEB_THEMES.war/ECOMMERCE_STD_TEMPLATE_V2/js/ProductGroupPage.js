@@ -1,5 +1,5 @@
-var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/BulkAction.js', function(){
+var $webThemes = $("#webThemePath").val();
+$.getScript($webThemes+'/js/BulkAction.js', function(){
 	BulkAction.enableCheckBoxOnLoad();
 	var allChecked = $("input:checkbox[name='idList']:checked").length === $("input:checkbox[name='idList']").length;
 	$('#chkSelectall').prop('checked', allChecked);

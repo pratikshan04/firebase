@@ -28,7 +28,6 @@ $(document).ready(function(){
 		}
 	});
 	$("#searchGrid").keyup(function(){
-		$(".grid").css({'opacity':'0'});
 		var valThis = $(this).val().toLowerCase();
 		var len = valThis.length;
 		if(len==1){
@@ -41,12 +40,6 @@ $(document).ready(function(){
 				(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
 			});
 		}else if(len>1){
-			var thatVal = valThis.substr(0,1);
-			$(".mfgListRow h2").each(function(){
-				var text = jQuery(this).text().substr(0,len).toLowerCase();
-				(text.toLowerCase().indexOf(thatVal.toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
-			});
-			
 			$(".sBlack").each(function(){
 				var text = jQuery(this).text().substr(0,len).toLowerCase();
 				(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
@@ -61,13 +54,10 @@ $(document).ready(function(){
 				(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
 			});
 		}
-		setTimeout(function() {
-			var msnry = new Masonry( '.grid', {
-				columnWidth: 272,
-				itemSelector: '.grid-item'
-			});
-			$(".grid").css({'opacity':'1'});
-		}, 500);
+		var msnry = new Masonry( '.grid', {
+			columnWidth: 272,
+			itemSelector: '.grid-item'
+		});
 	});
 	if($('#featuredmfg').length>0){
 		$('#featuredmfg').slick({
@@ -99,12 +89,10 @@ $(document).ready(function(){
 	}
 });
 $(window).load(function(){
-	if($(".grid").length > 0){
-		var msnry = new Masonry( '.grid', {
-			columnWidth: 272,
-			itemSelector: '.grid-item'
-		});
-	}
+	var msnry = new Masonry( '.grid', {
+		columnWidth: 272,
+		itemSelector: '.grid-item'
+	});
 });
 
 function manufacturerListScroll(val){

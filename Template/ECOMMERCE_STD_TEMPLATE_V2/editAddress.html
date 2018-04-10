@@ -68,8 +68,8 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">	
-				<label for="email">$!locale.get("form.label.email") <span class="text-danger">*</span></label>
-				<input type="text" name="email" id="email" class="form-control" value="$!billAddress.emailAddress" title="Read Only" placeholder="$!locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$!locale.get('form.user.address.emailId.notEmpty')" data-invalid="$!locale.get('form.user.address.emailId.invalid')" />
+				<label for="email">$!locale.get("form.label.eMail") <span class="text-danger">*</span></label>
+				<input type="text" name="email" id="email" class="form-control" value="$!billAddress.emailAddress" title="Read Only" placeholder="$!locale.get('form.label.eMail')" data-type="email" data-required="Y" data-error="$!locale.get('form.user.address.emailId.notEmpty')" data-invalid="$!locale.get('form.user.address.emailId.invalid')" />
 			</div>
 		</div>				
 	</div>
@@ -84,7 +84,8 @@
 	<input type="hidden" name="shippingStateId" id="shippingStateId" value="$!billAddress.state"/>
 	<input type="hidden" name="buyingCompanyId" id="buyingCompanyId" value="$!buyingCompanyId"/>
 	<input type="hidden" name="addressBookId" id="addressBookId"value="$!addressBookId"/>
-	<input type="hidden" name="countryFulNmShip" id="countryFulNmShip"/>        
+	<input type="hidden" name="countryFulNmShip" id="countryFulNmShip"/>  
+	<input type="hidden" name="erpOverrideFlag" id="erpOverrideFlag" value="N"/>       
 </form>
 <!----------------------------------------Billing Address Section Ends----------------------------------------------> 
 #end
@@ -160,8 +161,8 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">	
-				<label for="email">$!locale.get("form.label.email") <span class="text-danger">*</span></label>
-				<input type="text" name="email" id="email" class="form-control" value="$!shaipData.emailAddress" title="Read Only" placeholder="$!locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$!locale.get('form.user.address.emailId.notEmpty')" data-invalid="$!locale.get('form.user.address.emailId.invalid')" />
+				<label for="email">$!locale.get("form.label.eMail") <span class="text-danger">*</span></label>
+				<input type="text" name="email" id="email" class="form-control" value="$!shaipData.emailAddress" title="Read Only" placeholder="$!locale.get('form.label.eMail')" data-type="email" data-required="Y" data-error="$!locale.get('form.user.address.emailId.notEmpty')" data-invalid="$!locale.get('form.user.address.emailId.invalid')" />
 			</div>
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-12">
@@ -192,6 +193,7 @@
 	<input type="hidden" name="updateType" id="updateType" value="updateDB"/>
 	<input type="hidden" name="countryCode" id="countryCode" value="$!shaipData.country"/>
 	<input type="hidden" name="countryFulNmShip" id="countryFulNmShip"/> 
+	<input type="hidden" name="erpOverrideFlag" id="erpOverrideFlag" value="N"/> 
 </form>
 #end
 #end

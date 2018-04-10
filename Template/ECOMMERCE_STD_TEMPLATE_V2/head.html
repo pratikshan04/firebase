@@ -4,23 +4,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:image" content="$!hostName$!webThemes/$!siteName/images/logo.png" />
 #if($LayoutName!="ProductDetailPage")
-	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
-		#set($ststicMetaDesc = $!metaDesc.trim())
-		#set($ststicMetaKey = $!metaTagString.trim())
-		#if($!ststicMetaDesc && $!ststicMetaDesc != "")
-			<meta name="description" content="$!ststicMetaDesc">
-		#else
-			<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
-		#end
-		#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
-			<meta name="metaKeywords" content="$!ststicMetaKey">
-		#end
-	#elseif($LayoutName=="SubCategoryPage" && $!categoryDescription.shortDesc != "")	
-		<meta name="description" content="$!categoryDescription.shortDesc.trim()">
-		<meta name="metaKeywords" content="$!categoryDescription.shortDesc.trim()">
-	#else
-		<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
-	#end
+#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
+#set($ststicMetaDesc = $!metaDesc.trim())
+#set($ststicMetaKey = $!metaTagString.trim())
+#if($!ststicMetaDesc && $!ststicMetaDesc != "")
+<meta name="description" content="$!ststicMetaDesc">
+#else
+<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
+#end
+#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
+<meta name="metaKeywords" content="$!ststicMetaKey">
+#end
+#else
+<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
+#end
 #end
 #set($pageTitleVelo = $!siteDisplayName.trim())
 #set($pageTitleseparator = " | ")
@@ -51,108 +48,107 @@
 	<link rel="canonical" href="$!hostName" />
 #elseif($LayoutName=='ProductDetailPage')
 	#if($breadCrumbList && $!breadCrumbList.size()>0)
-		#set($breadCrumbSize = $!breadCrumbList.size() )
-		#set($breadCrumbIdx = 1)
-		#set($categoryNameIndex = $!breadCrumbSize - 1)
-		#foreach($!breadCrumb in $!breadCrumbList)
-			#if($breadCrumbIdx == $!categoryNameIndex)
-				#set($pageTitleVelo = $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
-			#end
-			#set($breadCrumbIdx = $!breadCrumbIdx+1)
-		#end
-		#set($breadCrumbIdx = 2 )
-		#foreach($!breadCrumb in $!breadCrumbList)
-			#if($breadCrumbIdx == $!breadCrumbSize)
-				#set($BCTCat = $!breadCrumb.categoryName.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase())
-			#end
-			#set($breadCrumbIdx = $!breadCrumbIdx+1)
-		#end
+	#set($breadCrumbSize = $!breadCrumbList.size() )
+	#set($breadCrumbIdx = 1)
+	#set($categoryNameIndex = $!breadCrumbSize - 1)
+	#foreach($!breadCrumb in $!breadCrumbList)
+	#if($breadCrumbIdx == $!categoryNameIndex)
+	#set($pageTitleVelo = $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
+	#end
+	#set($breadCrumbIdx = $!breadCrumbIdx+1)
+	#end
+	#set($breadCrumbIdx = 2 )
+	#foreach($!breadCrumb in $!breadCrumbList)
+	#if($breadCrumbIdx == $!breadCrumbSize)
+	#set($BCTCat = $!breadCrumb.categoryName.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase())
+	#end
+	#set($breadCrumbIdx = $!breadCrumbIdx+1)
+	#end
 	#else
-		#set($pageTitleVelo =  $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
+	#set($pageTitleVelo =  $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
 	#end
 	#if($itemLevelFilterData)
-		#foreach($!itemData in $!itemLevelFilterData)
-			#set($imgSrc = '')
-			#if($productDataList && $!productDataList.size() > 0)
-				#foreach($!productData in $!productDataList)
-					#if($productData.imageType=="URL")
-						#set($imgSrc = $!productModeImage+$!productData.imageName)
-					#else
-						#if($productData.imageName != "" && $!hostURI.contains("/Y/"))
-							#set($imgSrc = $!hostName+$!productModeImage+$!productData.imageName)
-						#else
-							#set($imgSrc = $!hostName+$!detailImage+$!itemData.imageName)
-						#end
-						
-					#end
-				#end
-			#else
-				#if($itemData.imageType=="URL")
-					#set($imgSrc = $!itemData.imageName)
-				#else
-					#set($imgSrc = $!hostName+$!detailImage+$!itemData.imageName)
-				#end
-			#end
-			#set($itmPriceId = $!itemData.itemPriceId)
-			#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
-			#set($BCTCat1 = $!itemProductTitle.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$!hostName$!itmPriceId/p/n/$!BCTCat1" />
-			<meta property="og:image" content="$!imgSrc" />
-			<meta property="og:image:width" content="500" /> 
-			<meta property="og:image:height" content="500" />
-			#if($itemData.metaDesc)
-				<meta name="description" content="$!itemData.metaDesc">
-			#elseif($itemData.shortDesc)
-				<meta name="description" content="$!itemData.shortDesc">
-			#else
-				<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
-			#end
-		#end
+	#foreach($!itemData in $!itemLevelFilterData)
+	#set($imgSrc = '')
+	#if($productDataList && $!productDataList.size() > 0)
+	#foreach($!productData in $!productDataList)
+	#if($productData.imageType=="URL")
+	#set($imgSrc = $!productModeImage+$!productData.imageName)
+	#else
+	#if($productData.imageName != "" && $!hostURI.contains("/Y/"))
+	#set($imgSrc = $!hostName+$!productModeImage+$!productData.imageName)
+	#else
+	#set($imgSrc = $!hostName+$!detailImage+$!itemData.imageName)
+	#end
+	#end
+	#end
+	#else
+	#if($itemData.imageType=="URL")
+	#set($imgSrc = $!itemData.imageName)
+	#else
+	#set($imgSrc = $!hostName+$!detailImage+$!itemData.imageName)
+	#end
+	#end
+	#set($itmPriceId = $!itemData.itemPriceId)
+	#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+	#set($BCTCat1 = $!itemProductTitle.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+	<link rel="canonical" href="$!hostName$!itmPriceId/p/n/$!BCTCat1" />
+	<meta property="og:image" content="$!imgSrc" />
+	<meta property="og:image:width" content="500" /> 
+	<meta property="og:image:height" content="500" />
+	#if($itemData.metaDesc)
+	<meta name="description" content="$!itemData.metaDesc">
+	#elseif($itemData.shortDesc)
+	<meta name="description" content="$!itemData.shortDesc">
+	#else
+	<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
+	#end
+	#end
 	#end
 #elseif($LayoutName=="ProductList")
 #set($finalPageTitle = "" )
 	#if($breadCrumbList)
-		#set($breadCrumbSize = $!breadCrumbList.size() )
-		#set($breadCrumbIdx = 1 )
-		#set($LastSet = "" )
-		#set($FirstSet = "" ) 
-		#set($FirstSetCode = "" )
-		#set($pageTitleBreadCrumbLast = "" )
-		#set($pageTitleBreadCrumbFirst = "" )
-		#set($shopByBrand = "" )
-		#foreach($breadCrumb in $breadCrumbList)
-			#if($navigationType=='BRAND')
-	    		#if($breadCrumbIdx == $!breadCrumbSize)
-					#set($LastSet = $!breadCrumb.categoryName )
-				#end
-			#elseif($navigationType=='MANF')
-	    		#if($breadCrumbIdx == $!breadCrumbSize)
-					#set($LastSet = $!breadCrumb.categoryName )
-				#end
-			#else
-				#if($breadCrumbIdx == $!breadCrumbSize)
-					#set($LastSet = $!breadCrumb.categoryName )
-				#else
-					#set($FirstSet = $!breadCrumb.categoryName)
-					#set($FirstSetCode = $!breadCrumb.categoryCode )
-					#if($pageTitleBreadCrumbFirst=="")
-						#set($pageTitleBreadCrumbFirst =  $!breadCrumb.categoryName)
-					#end
-				#end
-			#end
-			#set($pageTitleBreadCrumbLast = $!LastSet )			
-			#set($breadCrumbIdx = $!breadCrumbIdx+1)
-			#set ($finalPageTitle = $!pageTitleBreadCrumbLast)
-		#end           
+	#set($breadCrumbSize = $!breadCrumbList.size() )
+	#set($breadCrumbIdx = 1 )
+	#set($LastSet = "" )
+	#set($FirstSet = "" )
+	#set($FirstSetCode = "" )
+	#set($pageTitleBreadCrumbLast = "" )
+	#set($pageTitleBreadCrumbFirst = "" )
+	#set($shopByBrand = "" )
+	#foreach($breadCrumb in $breadCrumbList)
+	#if($navigationType=='BRAND')
+ 	#if($breadCrumbIdx == $!breadCrumbSize)
+	#set($LastSet = $!breadCrumb.categoryName )
+	#end
+	#elseif($navigationType=='MANF')
+  	#if($breadCrumbIdx == $!breadCrumbSize)
+	#set($LastSet = $!breadCrumb.categoryName )
+	#end
+	#else
+	#if($breadCrumbIdx == $!breadCrumbSize)
+	#set($LastSet = $!breadCrumb.categoryName )
+	#else
+	#set($FirstSet = $!breadCrumb.categoryName)
+	#set($FirstSetCode = $!breadCrumb.categoryCode )
+	#if($pageTitleBreadCrumbFirst=="")
+	#set($pageTitleBreadCrumbFirst =  $!breadCrumb.categoryName)
+	#end
+	#end
+	#end
+	#set($pageTitleBreadCrumbLast = $!LastSet )
+	#set($breadCrumbIdx = $!breadCrumbIdx+1)
+	#set ($finalPageTitle = $!pageTitleBreadCrumbLast)
+	#end           
 	#end
 	#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
 	#set($BCTCat1 = $finalPageTitle.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
 	#if($navigationType=='MANF')
-		<meta name="description" content="$metaDescriptions"/>
-		<link rel="canonical" href="$hostName$manfId/manufacturer/$BCTCat1" />
+	<meta name="description" content="$metaDescriptions"/>
+	<link rel="canonical" href="$hostName$manfId/manufacturer/$BCTCat1" />
 	#else
-		<meta name="description" content="$siteName"/>
-		<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
+	<meta name="description" content="$siteName"/>
+	<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
 	#end
 #elseif($LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
 #set($listPageHeading = "")
@@ -160,39 +156,39 @@
 	#set($pageTitleBreadCrumbLast = "" )
 	#set($finalPageTitle = "" )
 	#if($breadCrumbList)
-		#set($breadCrumbSize = $!breadCrumbList.size() )
-		#set($breadCrumbIdx = 1 )
-		#foreach($!breadCrumb in $!breadCrumbList)
-			#if($breadCrumbIdx == $!breadCrumbSize)
-				#set($listPageHeading = $!breadCrumb.categoryName)
-			#else
-				#if($pageTitleBreadCrumbFirst=="")
-					#set($pageTitleBreadCrumbFirst =  $!breadCrumb.categoryName)
-				#end
-			#end
-			#set($pageTitleBreadCrumbLast = $!listPageHeading )		
-			#set($breadCrumbIdx = $!breadCrumbIdx+1)
-			#if($pageTitleBreadCrumbFirst && $!pageTitleBreadCrumbFirst!='')
-				#set ($finalPageTitle =  $!pageTitleBreadCrumbFirst + $!pageTitleseparator + $!pageTitleBreadCrumbLast)
-			#else
-				#set ($finalPageTitle =$!pageTitleBreadCrumbLast)
-			#end				
-		#end
-		#if($finalPageTitle)
-			#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
-			#set($BCTCat1 = $pageTitleBreadCrumbLast.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
-		#else
-			#set($pageTitleVelo = $!listPageHeading + $!pageTitleseparator + $!pageTitleVelo)
-			#set($BCTCat1 = $listPageHeading.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
-		#end
+	#set($breadCrumbSize = $!breadCrumbList.size() )
+	#set($breadCrumbIdx = 1 )
+	#foreach($!breadCrumb in $!breadCrumbList)
+	#if($breadCrumbIdx == $!breadCrumbSize)
+	#set($listPageHeading = $!breadCrumb.categoryName)
 	#else
-		#set($pageTitleVelo = "Products"+ $!pageTitleseparator + $!pageTitleVelo)
-		<link rel="canonical" href="$hostName/products" />
+	#if($pageTitleBreadCrumbFirst=="")
+	#set($pageTitleBreadCrumbFirst =  $!breadCrumb.categoryName)
+	#end
+	#end
+	#set($pageTitleBreadCrumbLast = $!listPageHeading )
+	#set($breadCrumbIdx = $!breadCrumbIdx+1)
+	#if($pageTitleBreadCrumbFirst && $!pageTitleBreadCrumbFirst!='')
+	#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + $!pageTitleseparator + $!pageTitleBreadCrumbLast)
+	#else
+	#set ( $!finalPageTitle =$!pageTitleBreadCrumbLast)
+	#end
+	#end
+	#if($finalPageTitle)
+	#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
+	#set($BCTCat1 = $pageTitleBreadCrumbLast.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+	<link rel="canonical" href="$hostName$codeId/$BCTCat1" />
+	#else
+	#set($pageTitleVelo = $!listPageHeading + $!pageTitleseparator + $!pageTitleVelo)
+	#set($BCTCat1 = $listPageHeading.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+	<link rel="canonical" href="$hostName$codeId/$BCTCat1" />
+	#end
+	#else
+	#set($pageTitleVelo = "Products"+ $!pageTitleseparator + $!pageTitleVelo)
+	<link rel="canonical" href="$hostName/Products" />
 	#end
 	#if($!categoryDescription && $!categoryDescription.marketingText)
-		<meta name="description" content="$!categoryDescription.marketingText">
+	<meta name="description" content="$!categoryDescription.marketingText">
 	#end
 #elseif($LayoutName=="AddNewPurchaseAgentPage")
 	#set($pageTitleVelo = $!siteDisplayName.trim())
@@ -223,40 +219,41 @@
 	#set($breadCrumbSize = $!breadCrumbList.size() )
 	#set($breadCrumbIdx = 1 )
 	#foreach($!breadCrumb in $!breadCrumbList)
-		#if($breadCrumbIdx == $!breadCrumbSize)
-			#set($BCTCat = $!breadCrumb.categoryName)
-		#end
-		#set($breadCrumbIdx = $!breadCrumbIdx+1)
+	#if($breadCrumbIdx == $!breadCrumbSize)
+	#set($BCTCat = $!breadCrumb.categoryName)
 	#end
-	 #if($attrFilteredList && $!attrFilteredList.size()>0)
-		#foreach($!attributeFiltered in $!attrFilteredList)
-		 #if($attributeFiltered.attrName=="brand")
-			#set($BCTBrand = $!attributeFiltered.attrValue.replaceAll('\"',''))
-		 #end
-		 #if($attributeFiltered.attrName.replaceAll("attr_","")=="Type")
-			#set($BCTType = $!attributeFiltered.attrValue.replaceAll('\"',''))
-		 #end
-		#end
+	#set($breadCrumbIdx = $!breadCrumbIdx+1)
+	#end
+	#if($attrFilteredList && $!attrFilteredList.size()>0)
+	#foreach($!attributeFiltered in $!attrFilteredList)
+	#if($attributeFiltered.attrName=="brand")
+	#set($BCTBrand = $!attributeFiltered.attrValue.replaceAll('\"',''))
+	#end
+	#if($attributeFiltered.attrName.replaceAll("attr_","")=="Type")
+	#set($BCTType = $!attributeFiltered.attrValue.replaceAll('\"',''))
+	#end
+	#end
 	#end
 	#if($BCTCat=="")
-		#set($BCTCat =$!listPageHeading)
+	#set($BCTCat =$!listPageHeading)
 	#end
 	#if($seoUrl!="Y")
-		#set($canonicalUrl = $!hostName+"C/"+$!codeId+"/"+$!BCTCat.replaceAll(" ","-"))
+	#set($canonicalUrl = $!hostName+"C/"+$!codeId+"/"+$!BCTCat.replaceAll(" ","-"))
 	#end
 	#if($seoUrl!="Y")
-		#set($canonicalUrl = $!hostName+"BCT/"+$!BCTBrand.replaceAll(" ","+")+"-"+$!BCTCat.replaceAll(" ","-")+"-"+$!BCTType.replaceAll(" ","+"))
+	#set($canonicalUrl = $!hostName+"BCT/"+$!BCTBrand.replaceAll(" ","+")+"-"+$!BCTCat.replaceAll(" ","-")+"-"+$!BCTType.replaceAll(" ","+"))
 	#end
 #end
 #if($LayoutName!='ProductDetailPage' && $LayoutName!="ProductList" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage")
 	#if($!canonicalUrl && $canonicalUrl.trim()!="")
-		<link rel="canonical" href="$!canonicalUrl" />
+	<link rel="canonical" href="$!canonicalUrl" />
 	#else
-		<link rel="canonical" href="$!hostName" />
+	<link rel="canonical" href="$!hostName" />
 	#end
 #end
 <title>$!pageTitleVelo.replace("Page","").trim()</title>
 <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/fontawesome-all.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <!-- Piwik -->
 <script type="text/javascript">

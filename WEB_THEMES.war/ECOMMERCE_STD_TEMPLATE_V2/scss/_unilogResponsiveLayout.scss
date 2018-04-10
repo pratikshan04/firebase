@@ -40,44 +40,20 @@ $breakpoint-mobileView:480px;
 	}
 }
 @media all and (max-width: $breakpoint-tablet){
-	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
+	.fixOnApp {
+		position: fixed;
 		width: 100%;
-		margin: 0 0 18px 0;
-	}
-	.cartTotal_Top a.hideForIpad{
-		display: none;
-	}
-	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch input[type=text],
-	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .cimm_searchIcon	{
-		border: 0;
-		background: transparent;
-	}
-	.webViewSearch {
-		border-radius: 4px;
-		background: $lightGrayColorTwo;
-		box-shadow: inset 1px 1px 1px $lightShadowColor;
-		i{
-			color: #BABABA;
+		top: 0;
+		background: #FFF;
+		padding-top: 10px;
+		z-index: 999;
+		+div{
+			padding: 200px 0 60px 0;
+		}
+		.cimm_headerLeft{
+			margin: 0 !important;
 		}
 	}
-	.multiTab {
-		.multiTabContent{
-			.buttonWrap {
-				.btnPrevious,
-				.btnNext {
-					&:hover{
-						background: $primaryColor;
-					}
-				}
-			}
-		}
-	}
-	.btnFinish {
-		&:hover{
-			background: $primaryColor;
-		}
-	}
-	
 	.cimm_bodyContentWrap .container{
 		box-shadow: none;
 	}
@@ -93,21 +69,47 @@ $breakpoint-mobileView:480px;
 	}
 	.navbar-toggle {
 		display: block;
+	}
+	.webViewSearch .cimm_mobileNavIconWrap {
+		position: relative;
+		float: left;
+		margin-right: 8px;
+		right: 0;
+	}
+	header .cimm_header .cimm_headerMidContent .webViewSearch .cimm_searchWrapper {
+		width: calc(100% - 52px);
+	}
+	.webViewSearch .cimm_mobileNavIconWrap button {
 		margin: 0;
+	}
+	.webViewSearch {
+		margin-top: 10px;
 	}
 	.hideForIpad{
 		display: none;
 	}
+	.cimm_mobileNavIconWrap{
+		position: absolute;
+		right: 15px;
+		top: 5px;
+		z-index: 1;
+		background: $primaryColor;
+		button{
+			position: relative;
+			float: right;
+			padding: 9px 10px;
+			margin: 2px 0;
+			background-color: transparent;
+			background-image: none;
+			border: 1px solid transparent;
+			border-radius: 4px;
+		}
+	}
 	.icon-bar {
-		background-color: $bodyFontColor;
+		background-color: $white;
 		width: 100%;
-		height: 4px !important;
-		width: 28px !important;
 	}
-	.navbar-toggle .icon-bar+.icon-bar{
-		margin-top: 5px;
-	}
-	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo{
+	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo,header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
 		width: 100%;
 	}
 	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo img{
@@ -149,63 +151,6 @@ $breakpoint-mobileView:480px;
 	}
 }
 @media all and (max-width: $breakpoint-largeDevice) {
-	.fixOnApp {
-		position: fixed;
-		width: 100%;
-		top: 0;
-		background: #FFF;
-		padding-top: 10px;
-		z-index: 111;
-		+div{
-			padding: 100px 0 40px 0;
-			margin: 0;
-		}
-		.cimm_headerLeft{
-			margin: 0 !important;
-		}
-		#slideLeft, .cimm_slide{
-			height: 100%;
-			ul{
-				height: calc(100% - 100px);
-				overflow-x: auto;
-			}
-		}
-	}
-	header {
-		.cimm_header {
-			.cimm_headerMidContent {
-				.cimm_searchWrapper {
-					width: calc(100% - 38px);
-					input[type=text] {
-						height: 32px;
-					}
-					.cimm_searchIcon{
-						height: 32px;
-					}
-				}
-				button {
-					margin: 0;
-				}
-			}
-		}
-	}
-	.cimm_mobileNavIconWrap{
-		position: relative;
-		float: left;
-		margin-right: 8px;
-		right: 0;
-		top: 4px;
-		button{
-			position: relative;
-			float: right;
-			padding: 0;
-			margin: 2px 0;
-			background-color: transparent;
-			background-image: none;
-			border: 1px solid transparent;
-			border-radius: 4px;
-		}
-	}
 	.ac_results ul{
 		top: 80px;
 		width: 100%;
@@ -284,11 +229,6 @@ $breakpoint-mobileView:480px;
 	.calendarFilter ul li{
 		border:none;
 	}
-	.cimm_salesBottomStrip {
-		ul {
-			width: 100%;
-		}
-	}
 	.tableScroll{
 		overflow-x: scroll;
 	}
@@ -303,6 +243,7 @@ $breakpoint-mobileView:480px;
 	}
 	header .cimm_header .cimm_headerMidContent .cimm_headerLeft{
 		padding:0;
+		margin-top: 50px;
 	}
 	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
 		padding: 0;
@@ -311,7 +252,7 @@ $breakpoint-mobileView:480px;
 	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo{
 		height: 60px;
 	}
-	.listGridContainer .gridView {
+	.listGridContainer .gridView{
 		width: 48%;
 	}
 	.listGridContainer .gridView:nth-child(3n+2){
@@ -319,15 +260,6 @@ $breakpoint-mobileView:480px;
 	}
 	.listGridContainer .gridView:nth-child(2n+2) {
 		margin: 25px 0.5% 0 2.5%;
-	}
-	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock {
-		width: 47%;
-	}
-	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(3n+2){
-		margin: 25px 0.5% 0;
-	}
-	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(2n+2) {
-		margin: 25px .5% 0 4.5%;
 	}
 	header .cimm_header .cimm_headerMidContent .cimm_storeLocator h6{
 		margin:10px 0 !important;
@@ -393,15 +325,6 @@ $breakpoint-mobileView:480px;
 		width: 100%;
 		text-align: center;
 	}
-	.cartTotal_Top span{
-		margin-bottom: 10px;
-	}
-	.cartTotal_Top{
-		text-align: left;
-	}
-	.cartTotal_Top a{
-		margin: 0 !important;
-	}
 	.select_attributeBody>ul>li.selectOptions{
 		width: 100%;
 		margin-right: 0; 
@@ -414,8 +337,7 @@ $breakpoint-mobileView:480px;
 	.calendarFilterWrap .tableHeader ul.calendarFilterHead li{
 		width: 90px;
 	}
-	.listGridContainer .gridView,.listGridContainer .gridView:nth-child(3n+3),
-	.listGridContainer .gridView:nth-child(2n+2),.listGridContainer .gridView:nth-child(3n+1) {
+	.listGridContainer .gridView,.listGridContainer .gridView:nth-child(3n+3),.listGridContainer .gridView:nth-child(2n+2),.listGridContainer .gridView:nth-child(3n+1) {
 		width: 100%;
 		float: none;
 		height: auto;
@@ -450,12 +372,6 @@ $breakpoint-mobileView:480px;
 	}
 	.multiTab.detailPage .multiTabContent div{
 		padding:10px;
-	}
-	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock,
-	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(3n+2),
-	.cimm_productCategory .cimm_categoryItemBlockWrap .cimm_categoryItemBlock:nth-child(2n+2) {
-		margin: 25px 1% 0 1%;
-		width: 98%;
 	}
 }
 @media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {

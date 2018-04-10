@@ -1,18 +1,21 @@
 /***********************Form Design***********************/
 input{
 	font-family: $defaultFont;
+	
 }
 textarea { resize: vertical; }
-
+.form-control{
+	box-shadow: none;
+}
 .cimm_searchWithin{
 	input[type='text']{
-		width: calc(100% - 50px);
+		width: 100%;
 		padding: 8px 10px;
 		float: left;
 		height: 36px;
 	}
 	button{
-		float: left;
+		float: left; 
 		padding: 8px 10px;
 		width:50px;
 	}
@@ -139,7 +142,7 @@ ul.cimm_formContent li label.customCheckBox2{
 	height: 0px;
 	width: 3px;
 	top: 5px;
-	left: 5px;
+	left: 6px;
 	-ms-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);
@@ -156,10 +159,10 @@ ul.cimm_formContent li label.customCheckBox2{
 .customCheckBox2 input[type="checkbox"] + span:after {
 	content: "";
 	position: absolute;
-	width: 12px;
+	width: 14px;
 	display: block;
-	height: 12px;
-	border: 1px solid $borderColor;
+	height: 14px;
+	border: 1px solid $btn_Bg;
 	top: 0;
 	left: 0;
 	background: #FFF;
@@ -173,8 +176,8 @@ ul.cimm_formContent li label.customCheckBox2{
 }
 .customCheckBox input[type="checkbox"]:checked + span:after,
 .customCheckBox2 input[type="checkbox"]:checked + span:after{
-	border: 1px solid $primaryColor;
-	background: $primaryColor;
+	border: 1px solid $btn_Bg;
+	background: $white;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
@@ -185,14 +188,14 @@ ul.cimm_formContent li label.customCheckBox2{
 }
 .customCheckBox input[type="checkbox"]:checked + span:before,
 .customCheckBox2 input[type="checkbox"]:checked + span:before {
-	background: $primaryColor;
+	background: $white;
 	-ms-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);
 	height: 9px;
-	top: 1px;
-	border-bottom: 2px solid #fff;
-    border-right: 2px solid #FFF;
+	top: 2px;
+	border-bottom: 2px solid $btn_Bg;
+    border-right: 2px solid $btn_Bg;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;

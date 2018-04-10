@@ -1,5 +1,5 @@
-var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+var $webThemes = $("#webThemePath").val();
+$.getScript($webThemes+'/js/multiTab.min.js', function(){
 	$('#cimm_regBlock').multiTab();
 });
 
@@ -21,7 +21,7 @@ if(document.getElementById("countryName2B")){
 var userLogin = $("#userLogin").val();
 var path = window.location.hostname;
 if(userLogin!=null && userLogin == "true"){
-	window.location.href="/products";
+	window.location.href="/Products";
 }
 function changeForm(id){
 	$('.alert').remove();

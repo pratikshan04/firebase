@@ -7,64 +7,100 @@
 <div class="clear"></div> -->
 <div id="printOrderConfirm">
 	<div id="SendOrderConfirmationPage">
-		<div class="orderStatus">
-			#if($orderDetail.erpOrderNumber)				
-				<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
-			#else
-				#if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
-					<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
-				#else
-					<h3>
-					$!locale.get('product.label.yourOrderCanceled') - <span class="text-danger">$!locale.get('product.label.orderFailed')</span>
-					</h3>
-					<p class="customerServiceNo">$!locale.get('product.label.contactCustomerService'): <a class="orangeClr" href="tel:18002471400">1-800-247-1410</a></p>
-				#end
-	        #end
+		<div class="row">
+			<div class="col-md-12">
+				<div class="orderStatus">
+					#if($orderDetail.erpOrderNumber)				
+						<h3>$!locale.get('product.label.yourOrderSuccess')</h3>
+					#else
+						#if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
+							<h3>$!locale.get('product.label.yourOrderSuccess')</h3>
+						#else
+							<h3>
+							$!locale.get('product.label.yourOrderCanceled') - <span class="text-danger">$!locale.get('product.label.orderFailed')</span>
+							</h3>
+						#end
+			        #end
+				</div>
+			</div>
 		</div>
+		<div class="row marginY-4">
+			<div class="col-md-6">
+				#if($orderDetail.erpOrderNumber)
+					<p class="orderMsg">You will receive an order confirmation email with details of your order and a link to track its progress.</p>
+				#else
+				#if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
+					<p class="orderMsg">You will receive an order confirmation email with details of your order and a link to track its progress.</p>
+			    #else
+			    	<p class="orderMsg">$!locale.get('product.label.contactCustomerService'): <a class="orangeClr" href="tel:7325743600"> 732.574.3600</a></p>
+			    #end
+			    #end
+			</div>
+			<div class="col-md-4">
+				<ul class="orderConf_Items">
+					<li>Total Item: $orderItemList.size()</li>
+					<li><span class="priceLabel">Order Total:</span><span class="priceValue">&nbsp;&nbsp;&nbsp;$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</span></li>
+				</ul>
+			</div>
+			<div class="col-md-2">
+				<div class="OrderConfBtnGroup cimm_groupManipulate">
+					<a href="javascript:void(0);" onclick="window.print();" class="hideForDevice" title="$!locale.get('product.button.printOrder')"><i class="fal fa-cart-arrow-down"></i> &nbsp; $!locale.get('product.button.printOrder')</a>
+				</div>
+			</div>
+		</div>
+		<div class="row stepIndicators hideForPrint pullRight">
+	    	<div class="col-md-12">
+		    		<ul>
+		    			<li><a class="previousClass">01:Step One Goes Here</a></li>
+		    			<li><a class="previousClass">02:Step Two Goes Here</a></li>
+		    			<li><a class="currentClass">03:Step Three Goes Here</a></li>
+		    		</ul>
+		    	</div>
+	    </div>
 		<div class="clear"></div>
 		<div class="row marginY-3">
 			<div class="col-md-4 col-sm-4 col-xs-12">
-			<h4>$!locale.get("product.heading.orderDetail")</h4>
+			<h4>$!locale.get("breadcrumbs.label.OrderConfirmation")</h4>
 				<ul class="cimm_orderInfo">
 				#if($orderDetail.orderStatusDesc)
 				<li>
-					<b>$!locale.get("product.heading.Status"): </b><span>$!orderDetail.orderStatusDesc</span>
+					$!locale.get("product.heading.Status"):<span>$!orderDetail.orderStatusDesc</span>
 				</li>
 				#end
 				#if($orderDetail.invoiceNumber)
 				<li>
-					<b> $!locale.get("product.label.invoicNumber"): </b><span>$!orderDetail.invoiceNumber</span>
+					$!locale.get("product.label.invoicNumber"):<span>$!orderDetail.invoiceNumber</span>
 				</li>
 				#end
 				#if($orderDetail.erpOrderNumber)
 				<li>
 					#if($orderDetail.erpOrderNumber)
-					<b>$!locale.get("product.label.eclipseOrderNumber"): </b><span>$!orderDetail.erpOrderNumber</span>
+					$!locale.get("product.label.eclipseOrderNumber"): <span>$!orderDetail.erpOrderNumber</span>
 					#end
 				</li>
 				#elseif($orderDetail.orderNum)
 				<li>
-					<b>$!locale.get("product.label.orderNumber"): </b><span>$!orderDetail.orderNum</span>
+					$!locale.get("product.label.orderNumber"):<span>$!orderDetail.orderNum</span>
 				</li>
 				#end
 				#if($orderDetail.orderDate)
 				<li>
-					<b>$!locale.get("product.label.orderedDate"): </b><span>$!orderDetail.orderDate</span>
+					$!locale.get("product.label.orderedDate"):<span>$!orderDetail.orderDate</span>
 				</li>
 				#end
 				#if($orderDetail.orderedBy)
 				<li>
-					<b>$!locale.get("form.label.orderedBy"): </b><span>$!orderDetail.orderedBy</span>        
+					$!locale.get("form.label.orderedBy"):<span>$!orderDetail.orderedBy</span>        
 				</li>
 				#end
 				#if($orderDetail.poNumber)
 				<li>
-					<b>$!locale.get("product.label.poNumber"): </b><span>$!orderDetail.poNumber</span>
+					$!locale.get("product.label.poNumber"):<span>$!orderDetail.poNumber</span>
 				</li>
 				#end
 				#if($orderDetail.ShipViaMethod)
 				<li>
-					<b>$!locale.get("form.label.shipVia"): </b><span>$!orderDetail.ShipViaMethod</span>
+					$!locale.get("form.label.shipVia"):<span>#if($!orderDetail.ShipViaMethod=='PU') Will Call #else $!orderDetail.ShipViaMethod #end</span>
 				</li>
 				#end
 				#if($orderDetail.shipDate)
@@ -84,48 +120,48 @@
 		
 		<div class="col-md-4 col-sm-4 col-xs-12">
 	       <h4>$!locale.get("product.heading.billingAddress")</h4>
-			<p>
+			<p class="border-Class">
 				<span> 
 					#if($billEntityName)$!billEntityName <br/> #end
-					#if($orderDetail.billAddress1)$!orderDetail.billAddress1<br /> #end
-					#if($orderDetail.billAddress2)$!orderDetail.billAddress2<br />#end  
-					#if($orderDetail.billCity)$!orderDetail.billCity#end
-					#if($orderDetail.billState), $!orderDetail.billState<br />#end 
-					#if($orderDetail.billZipCode)$!orderDetail.billZipCode#end
-					#if($orderDetail.billCountry), $!orderDetail.billCountry<br />#end
-					#if($orderDetail.billPhone) $!orderDetail.billPhone, #end
-					#if($orderDetail.billEmailAddress)$!orderDetail.billEmailAddress<br />#end
+					#if($orderDetail.billAddress.address1)$!orderDetail.billAddress.address1<br /> #end
+					#if($orderDetail.billAddress.address2)$!orderDetail.billAddress.address2<br />#end  
+					#if($orderDetail.billAddress.city)$!orderDetail.billAddress.city #end
+					#if($orderDetail.billAddress.state), $!orderDetail.billAddress.state<br />#end 
+					#if($orderDetail.billAddress.zipCode)$!orderDetail.billAddress.zipCode #end
+					#if($orderDetail.billAddress.country), $!orderDetail.billAddress.country<br />#end
+					#if($orderDetail.billAddress.phone) $!orderDetail.billAddress.phone, #end
+					#if($orderDetail.billAddress.emailAddress)$!orderDetail.billAddress.emailAddress<br />#end
 				</span>
 			</p>
         </div>
 		<div class="col-md-4 col-sm-4 col-xs-12">
-			<h4>$!locale.get("product.heading.shippingAddress")</h4>
-			<p>
+			<h4>$!locale.get("product.label.ShippingInformation")</h4>
+			<p class="border-Class">
 				<span>
 					#if($shipEntityName)$!shipEntityName#end <br/>
-					#if($orderDetail.shipAddress1)$!orderDetail.shipAddress1<br />#end 
-					#if($orderDetail.shipAddress2)$!orderDetail.shipAddress2<br />#end
-					#if($orderDetail.shipCity)$!orderDetail.shipCity#end
-					#if($orderDetail.shipState), $!orderDetail.shipState<br /> #end 
-					#if($orderDetail.shipZipCode)$!orderDetail.shipZipCode#end
-					#if($orderDetail.shipCountry ), $!orderDetail.shipCountry<br />#end
-					#if($orderDetail.shipPhone) $!orderDetail.shipPhone, #end
-					#if($orderDetail.shipEmailAddress)$!orderDetail.shipEmailAddress<br />#end
+					#if($orderDetail.shipAddress.address1)$!orderDetail.shipAddress.address1<br />#end 
+					#if($orderDetail.shipAddress.address2)$!orderDetail.shipAddress.address2<br />#end
+					#if($orderDetail.shipAddress.city)$!orderDetail.shipAddress.city#end
+					#if($orderDetail.shipAddress.state), $!orderDetail.shipAddress.state<br /> #end 
+					#if($orderDetail.shipAddress.zipCode)$!orderDetail.shipAddress.zipCode#end
+					#if($orderDetail.shipAddress.country), $!orderDetail.shipAddress.country<br />#end
+					#if($orderDetail.shipAddress.phone) $!orderDetail.shippAddress.phone, #else $!orderDetail.shipPhone <br />#end
+					#if($orderDetail.shipAddress.emailAddress)$!orderDetail.shipAddress.emailAddress #else $!orderDetail.shipEmailAddress<br />#end
 				</span>
 			</p>
 		 </div>
         </div>
-		<div class="row marginY-3">
+		<div class="row marginY-4">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<table class="table table-bordered table-striped rwd-table">
+			<table class="table table table-bordered">
 				<thead>
 					<tr>
-						<th>$!locale.get("product.label.Image")</th>
+						<th>$!locale.get("product.label.productImage")</th>
 						<th>$!locale.get("product.label.description")</th>
-						<th>$!locale.get("product.label.qty")</th>
 						<th>$!locale.get("product.label.uom")</th>
-						<th>$!locale.get("product.label.yourprice")</th>
-						<th>Ext Price</th>
+						<th class="alignCenter">$!locale.get("product.label.yourprice")</th>
+						<th class="alignCenter">$!locale.get("product.label.qty")</th>
+						<th class="alignCenter">Ext Price</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -136,7 +172,8 @@
 					#set($eachItem = $!fullItemDetails.get($!itemList.itemId))
 					<tr itemscope itemtype="http://schema.org/Product">
 						<td data-th="$!locale.get('product.label.Image')">
-							#if($itemData.imageName.contains("http") || $itemList.imageType=="URL")
+						
+							#if($itemList.imageName.contains("http") || $itemList.imageType=="URL")
 							<img class="OrderConfImg" itemprop="image" src="$!itemList.imageName" alt='$!itemList.imageName' onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
 							#else
 							<img class="OrderConfImg" itemprop="image" src="$!hostName$!thumbNail$!itemList.imageName" alt='$!itemList.imageName' onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
@@ -144,8 +181,8 @@
 						</td>
 						<td class="alignLeft" data-th="$!locale.get('product.label.description')">
 							<p class="orderConfTitle" itemprop="name"><strong>$!eachItem.brandName $!itemList.manufacturerPartNumber</strong></p>
-							<p itemprop="description">$!itemList.shortDesc</p>
-							<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong>$!itemList.partNumber</p>
+							<p itemprop="description" class="description">$!itemList.shortDesc</p>
+							<p itemprop="sku">$!locale.get("product.label.partNumber"):<span>$!itemList.partNumber</span></p>
 							<!-- $!itemList.productKeywords -->
 							#if($itemList.customerPartNumberList.size()>0)
 							<ul>
@@ -160,18 +197,18 @@
 								<ul><li><b>Line Item Comment: </b>$!itemList.lineItemComment </li></ul>
 							#end
 						</td>
-						<td data-th="$!locale.get('product.label.qty')">$!itemList.orderQty</td>
 						<td data-th="$!locale.get('product.label.uom')">$!itemList.orderUom</td>
 						#if($itemList.unitPrice>0)
-						<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.unitPrice>0)$$numberTool.format($numberToolFormat,$itemList.unitPrice) #end</td>
+						<td data-th="$!locale.get('product.heading.PerUnitPrice')" class="formatPrice alignCenter">#if($itemList.unitPrice>0)<b>$$numberTool.format($numberToolFormat,$itemList.unitPrice)</b>#end</td>
 						#else
-						<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.listPrice>0) $$numberTool.format($numberToolFormat,$itemList.listPrice) #end</td>
+						<td data-th="$!locale.get('product.heading.PerUnitPrice')" class="formatPrice alignCenter">#if($itemList.listPrice>0)<b>$$numberTool.format($numberToolFormat,$itemList.listPrice) </b>#end</td>
 						#end
+						<td data-th="$!locale.get('product.label.qty')" class="alignCenter"><b>$!itemList.qtyordered</b></td>
 						#if($itemList.statusDescription=="Y")
 							#set($!displayCallForPriceMessage = $!displayCallForPriceMessage+$!delimiterOrderDetail+$!itemList.partNumber)
 							#set($!delimiterOrderDetail = ",")
 						#end
-						<td align="left" valign="top" data-th="Ext Price" class="formatPrice">#if($itemList.extPrice>0)$$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
+						<td align="left" valign="top" data-th="$!locale.get('product.label.price')" class="formatPrice alignCenter">#if($itemList.extPrice>0)<b>$$numberTool.format($numberToolFormat,$itemList.extPrice)</b>#end</td>
 					</tr>
 					#end
 				</tbody>
@@ -181,49 +218,49 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="cimm_salesBottomStrip orderConfBottomStrip">
-					<div class="pullLeft orderConfInst">
-						<p class="cimm_instructions">$!locale.get("orderconfirmation.note.freightChargeMessage") $!siteDisplayName</p>
-						#if($displayCallForPriceMessage != "")
-						<p class="orangeClr">Note: The following item (s)  $!displayCallForPriceMessage, are call for price item(s). <br /> Displayed pricing is a default price. Please call customer service for accurate pricing. 
-						<br /> Upon processing the order, adjusted order total will be changed by customer service.</p>
-						#end
-					</div>
+				<div class="pullLeft orderConfInst"><p class="cimm_instructions">There will be additional freight charge applied to the  order.</p></div>
 					<ul>
-						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.subTotal") : </b></span>
+						<!-- <li class="clearAfter">
+			                <span class="priceLabel">$!locale.get("product.label.items") ($orderItemList.size())</span>
+			                <span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
+			            </li>  -->
+						<li class="clearAfter">
+							<span class="priceLabel">$!locale.get("product.label.subTotal") :</span>
 							<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
 						</li>
 						#if($orderDetail.tax>0)
-						<li>
-						     <span class="priceLabel"><b>$!locale.get("product.label.tax") : </b></span>
+						<li class="clearAfter">
+						     <span class="priceLabel">$!locale.get("product.label.tax") :</span>
 						     <span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.tax) </span>
 						</li>
 						#end
 						#if($orderDetail.discount>0)
-						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.discount") :</b></span>
+						<li class="clearAfter">
+							<span class="priceLabel">$!locale.get("product.label.discount") :</span>
 							<span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
 						</li>
 						#end
 						#if($orderDetail.freight>0)
-						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.shipping") : </b></span>
+						<li class="clearAfter">
+							<span class="priceLabel">$!locale.get("product.label.shipping") :</span>
 							<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</span>
 						</li>
 						#end
-						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.orderTotal") : </b></span>
-							<span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
-						</li>
 					</ul>   
 					<div class="clear"></div>         
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row marginY-3">
-		<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="row marginY-3 orderConfirmLast">
+		<div class="col-md-6 col-sm-12 col-xs-12">
 			<a href="$!locale.get('website.url.ProductCategory')" class="button">$!locale.get("product.button.continueShopping")</a>	
+		</div>
+		<div class="col-md-6">
+			<p class="pullRight">
+				<span class="priceLabel">$!locale.get("product.label.orderTotal") :</span>
+				<span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
+			</p>
 		</div>
 	</div>
 </div>

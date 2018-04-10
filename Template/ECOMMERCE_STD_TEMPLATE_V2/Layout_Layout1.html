@@ -7,26 +7,23 @@
 <body>
 	<div class="site-overlay" id="site-overlay" ></div>
 	<div class="modalPopOverlay" id="overlay"></div>
-	<div class="loadAfter">#if($userAgent != "WEBVIEW")<i class="fa fa-4x fa-spin fa-spinner"></i>#end</div>
+	<div class="loadAfter"><img itemprop="loading" src="$webThemes/$siteName/images/turtle.gif" width="100px" height="100px" alt="Loading" /></div>
 	<div id="fixedHead"></div>
 	<div class="cimm_stickyPageWrap">
-		<div id="normalHead">
-			<header>
-				<div class="cimm_header">
-					#parse("header.html")
-				</div>
-			</header>
-			<nav class="navbar hideForIpad">
-				<div class="container">
-					<div class="cimm_navigationBar">
-						#parse("navigation.html")
+		<div class="inner_banner">
+			<div id="normalHead">
+				<header class="site_header">
+					<div class="cimm_header">
+						#parse("header.html")
 					</div>
-				</div>
-			</nav>
+				</header>
+				
+			</div>
 		</div>
+		
 		<div class="cimm_bodyContentWrap">
 		    <div class="container #if($LayoutName == "ProductList" && $resultCount > 0 && $!navigationType=="SEARCH")mTop-3 #end">
-		    #if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $userAgent != "WEBVIEW")
+		    #if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y")
 		    	<div class="row">
 			    	<div class="col-md-12">
 						<div class="cimm_BreadCrumbs">
@@ -66,16 +63,16 @@
 		</div>
 	</div>
 	<footer>
-	    <div class="cimm_footerEnclosure">
+	    <div class="cimm_footerEnclosure mTop-4">
 	     	#parse("footer.html")
 	    </div>
     </footer>
     <div id="slideLeft"></div>
-    #if($!userAgent != "WEBVIEW")
+    <!-- #if($!userAgent != "WEBVIEW")
 	<p id="backToTop">
 		<a href="#top"></a>
 	</p>
-	#end
+	#end -->
 	#parse("javascripts.html")
 </body>
 </html>

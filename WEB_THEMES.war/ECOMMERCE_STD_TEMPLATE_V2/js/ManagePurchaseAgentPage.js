@@ -56,9 +56,6 @@ function editUserDetails(userID){
 function toggleDisplayBlocks(hideDiv,ShowDiv){
 	$('#'+hideDiv).fadeOut();
 	$('#'+ShowDiv).fadeIn();
-	if(ShowDiv == "usersListBlock"){
-		location.reload();
-	}
 }
 var countrySelect = new initCountry({
 	country: "US",
@@ -235,7 +232,7 @@ $(document).ready(function(){
 		dom: 'Bfrtip',
 		buttons: [
             {
-                text: 'Add New User',"className": 'cimm_inlineButton',
+                text: 'Add New User',"className": 'cimm_inlineButton siteBtn',
                 action: function ( e, dt, node, config ) {
                 	toggleDisplayBlocks('usersListBlock','addNewUserBlock');
                 }
@@ -275,6 +272,10 @@ function updateUser(){
 		$("input[type='radio']:checked").each(function(){
 			assigned=$(this).attr("id");
 		});
+		if($("#userRole").val() == 'superUser')
+		{
+			assigned="";
+		}
 	}
 	if($("#checkBoxGroup").attr("class")=="changed"){
 		status=status+0;

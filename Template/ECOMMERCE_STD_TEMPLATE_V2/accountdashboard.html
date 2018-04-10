@@ -1,11 +1,12 @@
+<h3 class="cimm_pageTitle">$!locale.get('product.heading.accountDashBoard')</h3> 
 <div class="row">
 	<div class="col-md-9 col-sm-12 col-xs-12">
 		<div class="multiTab" id="cimm_tabBlock">
 			<ul class="multiTabHeading clearAfter">
-				<li><a href="#profile">1&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.profile')</a></li>
-				<li><a href="#Address">2&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.address')</a></li>
-				<li><a href="#groups">3&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.myProductGroups')</a></li>
-				<li><a href="#order">4&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li>
+				<li><a href="#profile">$!locale.get('dashboard.label.profile')</a></li>
+				<li><a href="#Address">$!locale.get('dashboard.label.address')</a></li>
+				<li><a href="#groups">$!locale.get('dashboard.label.shoppingLists')</a></li>
+				<li><a href="#order">$!locale.get('dashboad.label.orders')</a></li>
 			</ul>
 			<div class="multiTabContent">
 				<div id="profile">
@@ -55,11 +56,25 @@
 												<input type="file" name="profileImage" id="profileImage"/>
 											</div>
 											<input type="submit" class="button pullLeft imgBtn" onclick="return validateImageUpload();" value="$locale.get('button.label.Upload')">
-											<input type="button" class="button imgBtn" value="Clear"  onclick="clearImage()"/>
+											<input type="button" class="button imgBtn site_Btn" value="Clear"  onclick="clearImage()"/>
 										</form>
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-12">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="marketingMaterial marginY-2">
+										<h6>$!locale.get('product.label.marketingMaterialSubscription') :
+				       		 				<label class="customCheckBox2" for="marketingMaterial">
+				        						<input type="checkbox" name="marketingMaterial" id="marketingMaterial" onclick="getMarketingSubscription()" #if($!session.getAttribute('newsLetterSub')=="Y") checked #end>
+				        						<span>(Click Here)</span>
+				        						<b></b>
+				        					</label>
+			        					</h6>
+		        						<input type="hidden" name="newsLetterSub" id="newsLetterSub" value="$!session.getAttribute('newsLetterSub')">
+				    				</div>
 								</div>
 							</div>
 						</div>
@@ -101,7 +116,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="cimm_moduleHeadEnclosure mTop-3">
 								<h3 class="cimm_blockHeading mBottom-3">$locale.get("product.heading.shipAddressList")
-									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><i class="fa fa-lg fa-refresh"></i></a>
+									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><i class="far fa-sync-alt"></i></a>
 									<span class="pullRight" id="progressBar">
 										#if($session.getAttribute("scynEntityStatus")!="Completed" && $session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 										$!session.getAttribute("scynEntityStatus")

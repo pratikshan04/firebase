@@ -1,5 +1,5 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/BulkAction.js', function(){});
+$.getScript(webThemes+'/js/BulkAction.js', function(){});
 $(document).ready(function(){
 	$('#groupCart').DataTable({
 		"sPaginationType":"simple_numbers",

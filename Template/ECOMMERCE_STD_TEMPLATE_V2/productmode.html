@@ -94,7 +94,7 @@
 			<input type="hidden" value="$productModeitemData.displayPricing" id="displayPrice_$productModeitemData.partNumber" />
 		 	<span id="quantityBreakPricingDetails_$productModeitemData.partNumber" style="display: none;"></span>
 		 	<span itemprop="name">$productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
-			<a href="$productModeitemData.itemPriceId$locale.get('website.url.ProductDetail')n/$productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$productModeitemData.itemPriceId$locale.get('website.url.ProductDetail')N/$productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span class="imgForSend" style="display:none !important;">
 			 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 			<img id="imageName$productModeitemData.itemId" itemprop="image" height="250" width="250" src="$hostName$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
@@ -108,7 +108,7 @@
 			<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$detailImage$escapeTool.url($productModeitemData.imageName)" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 			#end
 			#if($!productModeitemData.clearance=="Y")
-			<span class="clearenceTag clearenceTagSmall">Clearence</span>
+			<span class="clearenceTag clearenceTagSmall">C</span>
 			#end
 			</a>
 		 </td>
@@ -124,9 +124,7 @@
 			 #end
 		 </td>
 		 <td class="removeForSend">
-		 	#set($minQty = 1)
-			#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
-		 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+		 	<input type="text" id="itemTxtQty$productModeitemData.itemId" value='#if($productModeitemData.minOrderQty) $!productModeitemData.minOrderQty #else 1 #end' maxlength="4" class="quantity" data-itemid="$productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 		 </td>
 	     <td itemprop="sku">
 	     	$!productModeitemData.salesUom
@@ -229,7 +227,7 @@
 			<ul>
 				#if(($itemData.customerPartNumber && $itemData.customerPartNumber != "") || ($itemData.customerPartNumberList.size() && $itemData.customerPartNumberList.size()>0))
 				<li id="custMainBlock">        
-					<b>$locale.get("product.label.cpn"): </b>
+					<b>$locale.get("product.label.customerpartnumber"): </b>
 					<span id="custPartBlock">
 					#if($itemData.customerPartNumber)$itemData.customerPartNumber#end
 					#set($seperator = "")
@@ -243,7 +241,7 @@
 				</li> 
 				#else
 				<li id="custMainBlock" style="display: none;">
-					<b>$locale.get("product.label.cpn"): </b><span id="custPartBlock"></span>
+					<b>$locale.get("product.label.customerpartnumber"): </b><span id="custPartBlock"></span>
 				</li>
 				#end
 				#if($itemData.packDesc)
@@ -428,7 +426,7 @@
 						        #itemListHiddenFields($linkItem.partNumber, $linkItem.itemPriceId, $linkItem.qty, $linkItem.uom, $linkItem.price, $linkItem.saleQty, $linkItem.itemId, $linkItem.displayFrieghtAlert, $linkItem.packageQty, $linkItem.itemAvailability, $linkItem.srchTyp, $navigationType,$linkItem.brandId,$linkItem.manfId, $linkItem.altPartNumber1)
 						 			<input type="hidden" id='packageQty_$linkItem.partNumber' value="1" />
 									<div class="cimm_linkItemImg">
-						 				<a href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+						 				<a href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 						 					<span> 
 											 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
 											 <img id="imageName$linkItem.itemId" itemprop="image" src="$linkItem.imageName"  onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
@@ -442,7 +440,7 @@
 										<ul>
 										 	<li>
 										 		<h4 itemprop="name">
-											 		<a class="cimm_linkProdTitle" id="itemTitle$linkItem.ItemId" href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+											 		<a class="cimm_linkProdTitle" id="itemTitle$linkItem.ItemId" href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 												 		#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
 												 		#if($linkItemTitle.length()>18)
 												 			$linkItemTitle.substring(0, 18)...
@@ -497,7 +495,7 @@
 											#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$itemData.packDesc</span></li> -->#end
 											#if($userLogin)
 										 	<li>  
-											 	<b>$locale.get('product.label.yourprice'): </b>            
+											 	<h4>$locale.get('product.label.yourprice'): </h4>            
 												<span id="span_$linkItem.partNumber" class="priceSpan" data-select='priceData'>
 													<img src="$webThemes/$siteName/images/loading.gif" />
 												</span>

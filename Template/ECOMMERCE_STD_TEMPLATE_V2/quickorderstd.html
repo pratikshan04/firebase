@@ -28,8 +28,8 @@
 					</div>
 					
 					<div id="orderPadCopy" style="display:none;"></div>
-					<div class="quickOrdeAddtoCart mTop-3">
-						<input class="button" type="submit" value="$locale.get('quickorder.button.submit')" id="submitBtnPad" onclick="QuickOrder.validateOrderPad();"/>
+					<div class="quickOrdeAddtoCart">
+						<input class="button siteBtn" type="submit" value="$locale.get('quickorder.button.submit')" id="submitBtnPad" onclick="QuickOrder.validateOrderPad();"/>
 					</div>
 				</div>
 				<div class="col-lg-8 col-md-7 col-ms-6 col-xs-12">
@@ -67,8 +67,8 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-5 col-ms-6 col-xs-12">
 					<textarea id="copyPasteText" name="copyPasteText" class="copyPaste" title="" class="" rows='#if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT"))$!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")#else 100 #end' cols="60"></textarea>
-					<div class="quickOrdeAddtoCart mTop-3" >
-						<input class="button" type="submit" value="$locale.get('quickorder.button.submit')" id="submitBtnQOCP" onclick="return QuickOrder.quickOrderCopyPaste();">
+					<div class="quickOrdeAddtoCart" >
+						<input class="button siteBtn" type="submit" value="$locale.get('quickorder.button.submit')" id="submitBtnQOCP" onclick="return QuickOrder.quickOrderCopyPaste();">
 					</div>
 					<h4>If Duplicates in input:</h4>
 					<div class="cimm_radioBtnWrap">

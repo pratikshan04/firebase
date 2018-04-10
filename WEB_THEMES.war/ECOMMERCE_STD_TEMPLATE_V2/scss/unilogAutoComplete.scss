@@ -18,22 +18,22 @@
             line-height: 16px;
             overflow: hidden;
 			width: 100%;
-            &.catheader, &.catheader.ac_over {
+            &.catheader {
                 font-size: 14px;
-                background-color: $primaryColor;
+                background-color: $skylStyle;
                 color: #fff;
                 cursor: default;
                 text-align: left;
             }
             strong {
-                color: $primaryColor;
+                color: $skylStyle;
             }
             &.suggest {
                 position: absolute;
-                left: 100%;
+                right: 100%;
                 top: -1px;
                 background: $white;
-                width: 450px;
+                width: 420px;
                 border: 1px solid $darkGrayColorTwo;
                 padding: 0;
                 min-height: 424px;
@@ -92,7 +92,7 @@
                         display: inline-block;
 						float: left;
 						.ac_titleWrap{
-							width: calc(100% - 135px);
+							width: calc(100% - 115px);
 							float: left;
 							a {
 								color: $bodyFontColor;
@@ -107,13 +107,17 @@
 							}
 						}
 						.ac_priceWrap{
-							width: 125px;
+							width: 105px;
 							float: left;
 							margin-left: 10px;
 							.log-addTocart-btn {
+								padding: 5px 8px;
 								font-size: 12px;
 								margin-top: 5px;
 								height: auto;
+								&:hover{
+									background: $skylStyle;
+								}
 							}
 						}
                        
@@ -124,11 +128,18 @@
 					width: auto;
 					padding: 6px 10px;
 					height: auto;
+					&:hover{
+						background: $skylStyle;
+					}
                 }
 				.autocomplete-cat a.button {
 					float: left;
 				}
-            }
+			}
+			&:hover{
+				color: $skylStyle;
+				background: #f5f5f5;
+			}
         }
     }
 }
@@ -144,7 +155,7 @@
 		}
 	}
 	li:first-child {
-		background: $autocomleteBg;
+		background: #e6e6e6;
 	}
 }
 .ac_results {
@@ -152,7 +163,7 @@
 		padding-top: 22px;
 		width: 65%;
 		float: left;
-		background: $autocomleteBg;
+		background: #e6e6e6;
 		.prodWrap{
 			li {
 				display: inline-block;
@@ -160,14 +171,10 @@
 				span{
 					display: block;
 					margin-top: 5px;
-					height: 50px;
 				}
 				img {
 					width: 100%;
 					display: block;
-				}
-				.ac_over{
-					background: $autocomleteBg;
 				}
 			}
 		}

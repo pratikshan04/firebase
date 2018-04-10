@@ -1,5 +1,5 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+$.getScript(webThemes+'/js/multiTab.min.js', function(){
 	$('#cimm_tabBlock').multiTab({
 		   tabHeading: '.multiTabHeading',
 		   contentWrap: '.multiTabContent',
@@ -7,7 +7,7 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 		   accordion:true
 	});
 });
-enqueue('/OrderHistory?AjaxRequest=Y&dt='+new Date(),function(data){
+enqueue('/OrderHistory?AjaxRequest=Y&erpOverrideFlag=N&dt='+new Date(),function(data){
 	$("#orderHistory").html(data);
 });
 enqueue('/OpenOrderSale.action?reqType=webOrder&orderStatus=New&AjaxRequest=Y&dt='+new Date(),function(data){

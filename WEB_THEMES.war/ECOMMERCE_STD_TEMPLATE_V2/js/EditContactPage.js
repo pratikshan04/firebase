@@ -1,3 +1,4 @@
+var $webThemes = $("#webThemePath").val();
 var billAddressState = $("#billAddressState").val();
 var billAddressCountry = $("#billAddressCountry").val();
 if(!billAddressCountry){

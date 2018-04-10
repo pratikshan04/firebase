@@ -1,4 +1,5 @@
 <!-- <div class="cimm_instructions"><i class="fa fa-2x fa-file-text"></i> &nbsp;$locale.get("reqestforQuote.text.UseTheFormToRequestMore")</div> -->
+<h3 class="cimm_pageTitle">$!locale.get("product.heading.requestForQuote")</h3>
 <div id="notificationDiv"></div>
 <div id="iFrameContent" style="display:none;"></div>
 <input type="hidden" id="addNewRowCount" value="3" />
@@ -32,7 +33,7 @@
 				</div>
 				<div class="col-md-6 col-sm-6 col-sx-12">
 						<div class="form-group">
-							<label for="rfnpEmail">$!locale.get("form.label.email") <span class="text-danger">*</span> </label>
+							<label for="rfnpEmail">$!locale.get("form.label.eMail") <span class="text-danger">*</span> </label>
 							<input type="text" value="$!email" name="email" id="rfnpEmail" class="form-control"/>
 						</div>
 					</div>
@@ -95,7 +96,7 @@
 	</div>
 	<div class="row" align="center">
 		<div class="col-md-12 col-sm-12 col-sx-12">
-			<input type="submit" class="button" id="submitBtn" value="$!locale.get('product.button.submitQuoteRequest')" onclick="return validateRFQ();">
+			<input type="submit" class="button siteBtn" id="submitBtn" value="$!locale.get('product.button.submitQuoteRequest')" onclick="return validateRFQ();">
 		</div> 
 	</div>
 </form>
