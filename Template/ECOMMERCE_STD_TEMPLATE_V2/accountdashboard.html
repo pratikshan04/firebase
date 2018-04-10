@@ -143,7 +143,6 @@
 								#set($countProductGroup = 0)
 								<ul class="clearAfter">
 									#foreach($groupData in $groupListData)
-									#set($countProductGroup = $countProductGroup + 1)
 									<li>
 									#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 									<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
@@ -154,12 +153,13 @@
 									#if($countProductGroup == 8)
 									#break
 									#end
+									#set($countProductGroup = $countProductGroup + 1)
 									#end
 									</li>
 									#end
 								</ul>
-								#if($countProductGroup > 8)
-								<a href='$locale.get("website.url.SavedGroup.Product")' class="button">$locale.get("product.label.viewMore")</a>
+								#if($groupListData.size() > 8)
+								<a href='$locale.get("website.url.SavedGroup.Product")' class="cimm_inlineButton">$locale.get("product.label.viewMore")</a>
 								#end
 							#else
 								<p>$locale.get("product.label.noProductGroupAvailable")</p>
@@ -171,7 +171,6 @@
 								#set($countSavedGroup = 0)
 								<ul class="clearAfter">
 									#foreach($groupData in $savedCartData)
-									#set($countSavedGroup =$countSavedGroup + 1)
 									<li>
 									#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 									<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
@@ -183,15 +182,16 @@
 									<a href='$locale.get("website.url.SavedGroup.Cart")' class="pullRight"><i class="fa fa-lg fa-plus"></i> &nbsp;$locale.get("product.label.more")</a>
 									</p> -->
 									#break
-									#end 
+									#end
+									#set($countSavedGroup =$countSavedGroup + 1)
 									<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">
 									$groupData.productListName </a>                                       
 									#end
 									</li>
 									#end
 								</ul>
-								#if($countProductGroup > 8)
-								<a href='$locale.get("website.url.SavedGroup.Cart")' class="button"> $locale.get("product.label.viewMore")</a>
+								#if($savedCartData.size() > 8)
+								<a href='$locale.get("website.url.SavedGroup.Cart")' class="cimm_inlineButton"> $locale.get("product.label.viewMore")</a>
 								#end
 							#else
 								<p>$locale.get("product.label.noSavedCartAvailable")</p>
