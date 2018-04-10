@@ -29,7 +29,7 @@
 		<h2>$key</h2>	
 		<ul>
 		#foreach($manf in $manfListByIndex)
-			<li><a href="/$!manf.manufacturerId/manufacturer/$!manf.manufacturerName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="sBlack">$!manf.manufacturerName</a></li>
+			<li><a href="/$!manf.manufacturerId/Manufacturer/$!manf.manufacturerName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="sBlack">$!manf.manufacturerName</a></li>
 		#end
 		</ul>
 	</div>

@@ -25,32 +25,35 @@
             -webkit-transition: left .25s cubic-bezier(.5, 0, .25, 1);
         }
     }
+    
     .multiTabContent {
         position: relative;
         width: 100%;
         z-index: 9;
         overflow: hidden;
         >h3 {
-            margin: 0;
+            margin: 0 0 20px 0;
             text-transform: uppercase;
             font-weight: bold;
-            background: $tabHeadingBackgroundColor;
-            color: $tabHeadingFontColor;
-            padding: 10px 15px;
+            background: $descColor;
+            color: $white;
+            padding: 10px 15px 10px 40px;
             position: relative;
             font-size: $tabHeadingFontSize;
             cursor: pointer;
-            height: 36px;
+            height: 40px;
             border-bottom: 1px solid $darkGrayColorTwo;
             &:after {
                 position: absolute;
                 top: 12px;
-                right: 10px;
+                left: 15px;
                 font-size: 12px;
+                font-weight: normal;
             }
             &.active {
-                background: $tabHeadingActiveBackgroundColor;
+                background: $skylStyle;
                 color: $tabHeadingActiveFontColor;
+                margin: 0;
                 &:after {
                     content: $tabHeadingActiveIconContent;
                     font-family: $tabHeadingIconFontFamily;
@@ -60,7 +63,15 @@
                 content: $tabHeadingIconContent;
                 font-family: $tabHeadingIconFontFamily;
             }
+            span{
+                position: absolute;
+                left: 0;
+                background: $bodyFontColor;
+                padding: 12px 15px;
+                top: 0;
+            }
         }
+
         >div {
             padding: 20px;
             background: $white;
@@ -72,8 +83,38 @@
             .btnPrevious,
             .btnNext {
                 @extend .button;
-                margin-right: 10px;
+                background: $skylStyle;
                 display: inline;
+                padding: 10px 25px;
+            }
+            .btnPrevious{
+                margin-right: 10px;
+            }
+        }
+        .form-group{
+            input, .dropdown-toggle{
+                border: 1px solid #7e848a;
+                background: $white;
+                border-radius: 0;
+                height: 40px;
+            }
+            .caret{
+                &:after{
+                    content: "\f107";
+                    font-family: FontAwesome5ProRegular;
+                    color: #7e848a;
+                    font-size: 18px;
+                    right: 0;
+                    top: 0;
+                    position: absolute;
+                }
+            }
+            label{
+                font-size: 14px;
+                text-transform: uppercase;
+                span{
+                    color: $btn_Bg;
+                }
             }
         }
     }
@@ -82,4 +123,48 @@
 	@extend .button;
 	margin-right: 0;
 	display: inline-block;
+}
+#wizardCheckout{
+        .multiTabContent {
+            > div{
+                padding: 20px 0;
+                border: 0;
+            }
+        }
+}
+
+ul.multiTabHeading2{
+    position: relative;
+    li{
+        float: left;
+        a{
+            padding: 10px 15px;
+            color: $primaryColor;
+            font-size: 14px;
+        }
+    }
+    slide{
+        content: "";
+        position: absolute;
+        height: 2px;
+        left: 0;
+        background: $skylStyle;
+        bottom: 0;
+        transition: left .25s cubic-bezier(0.5,0,.25,1);
+        -webkit-transition: left .25s cubic-bezier(0.5,0,.25,1);
+    }
+}
+.multiTabContent2{
+    > div{
+        padding: 20px;
+    }
+}
+#wizardCheckout.multiTab{
+        .multiTabContent{
+            .form-group{
+                label{
+                    font-size: 12px;
+                }
+            }
+        }
 }

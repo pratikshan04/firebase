@@ -1,3 +1,5 @@
+var $webThemes = $("#webThemePath").val();
+
 var countrySelect = new initCountry({
 	country: "US",
 	selectorID: "countrySelect",

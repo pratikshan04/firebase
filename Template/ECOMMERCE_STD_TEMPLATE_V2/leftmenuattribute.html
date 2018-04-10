@@ -29,15 +29,16 @@
 	<div class="filterTitle clearAfter">$!locale.get("product.label.search")</div>
 	#if($navigationType=="SEARCH")
 		<div class="cimm_searchWithin clearAfter marginY-2">
-			<input type="text" class='productSearch' placeholder="Search Within $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onkeypress="return runScript(event);" />
-			<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="button"><i class="fa fa-lg fa-search"></i></button>
+			<input type="text" class='productSearch' placeholder="Search Within $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Within $!keyWord'" onkeypress="return runScript(event);" />
+			<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="button"><i class="far fa-search"></i></button>
 		</div>
 	 #else
 		<div class="cimm_searchWithin clearAfter marginY-2">
 			<form id="searchForm" action="$!searchWithInFormURL" method="get" class="clearAfter">
 				<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" />
 				#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
-				<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="button"><i class="fa fa-lg fa-search"></i></button>
+				<input type="hidden" name="srchTyp" value="#if($srchTyp)$!srchTyp#end">
+				<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="button"><i class="far fa-search"></i></button>
 			</form>
 		</div>
 	#end
@@ -83,7 +84,7 @@
 					#elseif($attrListVal=="manufacturerName")
 						#set($attrValueForSearch = "Manufacturer")
 					#elseif($attrListVal=="category")
-						#set($attrValueForSearch = "Category")
+						#set($attrValueForSearch = "category")
 					#else 
 						#set($attrValueForSearch = $!attrListVal)
 					#end
@@ -97,15 +98,15 @@
 					#if($displayAttribute=="Y")
 						<div class="filterColumn"><!-- #if($filterCount > 4)hideMe #end -->
 						#set($count = 0)
-							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replaceAll(' ','-')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><i class="fa fa-minus-circle"></i></span>#else<span class="plusToggle"><i class="fa fa-plus-circle"></i></span>#end</div>
+							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replaceAll(' ','-')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'category')<span class="plusToggle"></span>#else<span class="plusToggle"></span>#end</div>
 								#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 									#set($count = $!count+1)
 								#end
-								<div class="collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replaceAll(' ','-')">
+								<div class="collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'category')in#end" id="col_$!attrValueForSearch.replaceAll(' ','-')">
 								#if($count>6)
 								<div class="testDiv">
-									<input type="text" id="box_$!attrValueForSearch" class="filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');"value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
-									<div class="leftFilterScroll">
+									<!-- <input type="text" id="box_$!attrValueForSearch" class="filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');"value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}"> -->
+									<div class="filterScroll">
 								#end
 								<ul class="#if($attrValueForSearch=='Amp Range' || $attrValueForSearch=='Size')sortByNumbers#end navList_$!attrValueForSearch.replaceAll(' ','-')">
 									#set($k = 0)
@@ -142,6 +143,16 @@
 						</div>
 					#end                     
 				#end
+			#end
+			#if($userLogin)
+				<div class="filterColumn noBorder">
+					<div class="filterTitle clearAfter">
+						$!locale.get('product.heading.YourAccount')
+					</div>
+					<ul class="myAccountLeftMenu">
+						#parse("accountMenu.html")
+					</ul>
+				</div>
 			#end
 			</div>
 		#if($filterCount > 5)

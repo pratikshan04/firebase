@@ -1,196 +1,482 @@
 #parse("Macros/defaultMacro.vm")
 #parse("Macros/itemDetailPageMacro.vm")
 <!--Home Page Banner-->
-#set($homeBannerList = $CIMMUtility.getCusomTableData("Website","HOME_PAGE_BANNERS"))
-<ul class="bxslider">
-#foreach($homeBannerData in $homeBannerList)
-#foreach($homeBanners in $homeBannerData.TableDetails)
-<li>
-#if($!homeBanners.get("LANDING_PAGE_URL") && $!homeBanners.get("LANDING_PAGE_URL")!="")
-<a href="$homeBanners.get('LANDING_PAGE_URL')"><img src="$homeBanners.get('BANNER_IMAGE')" alt='$homeBanners.get("BANNER_IMAGE")'/></a>
-#else
-	<img src="$homeBanners.get('BANNER_IMAGE')" alt='$homeBanners.get("BANNER_IMAGE")'/>
-#end
-</li>
-#end
-#end
-<li>
-<a href="javascript:void(0);"><img src="$webThemes/$siteName/images/slide1.png" alt="No image" /></a>
-</li>
-<li>
-<a href="javascript:void(0);"><img src="$webThemes/$siteName/images/slide2.png" alt="No image" /></a>
-</li>
-<li>
-<a href="javascript:void(0);"><img src="$webThemes/$siteName/images/slide3.png" alt="No image" /></a>
-</li>
-</ul>
-#if($categMenu.size()>0)
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.heading.shopByCategory")</label></h3>
-	<ul id="shopByCategory" class="cimm_caroWrap">
-	#foreach($categoryMenu in $categMenu)
-		<li>
-			<div class="cimm_linkItemImg">
-				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
-					<img src="$taxonomyImage/$categoryMenu.imageName" width="150" height="150" border="0" alt='$!categoryMenu.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
-				</a>
-			</div>
-			<div class="cimm_linkItemDesp">
-				<ul>
-					<li itemscope itemtype="http://schema.org/Product">
-						<a class="productTitle" itemprop="category name" href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')" class="productTitle">
-					 		#if($categoryMenu.categoryName.length()>17)
-					 			$categoryMenu.categoryName.substring(0, 17)...
-					 		#else
-					 			$categoryMenu.categoryName
-					 		#end
-						</a>
-					</li>
-				</ul>
-			</div>
-		</li>
-	#end
-	</ul>
-</div>
-#end
-
-#set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
-#if($!featuredBrands && $featuredBrands.size()>0)	 	
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredBrands")</label></h3>
-	<ul id="featuredBrands" class="cimm_caroWrap">
-		#foreach($brandset in $featuredBrands.entrySet())
-		#set($keyValue = $brandset.getKey())
-		#set($brandModel = $brandset.getValue())
-		<li>				
-			<div itemscope itemtype="http://schema.org/Brand" class="cimm_linkItemImg">
-				<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName">                    
-					<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" width="100" height="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
-				</a>
-			</div>
-		</li>
-		#end
-	</ul>
-</div>
-#end
-
-<!-- <div class="cimm_eventNews">
-	<div class="cimm_halfBlockColumns">
-		<div class="upcomingEvent">
-			<h3 class="cimm_blockTitle"><label>Upcoming Events</label></h3>
-			<h2>UPCOMING EVENTS <a href="/eventsUnit.action"><i class="fa fa-calendar"></i></a></h2>
-			<ul id="upcomingEvents" class="customScroll">
-			#foreach($eventsDetails in $eventsList)
-			#if($!eventsDetails.featuredEvent!="N")
-				#if($!eventsDetails.startDate!="")
-					#set($dateTimeArray = $eventsDetails.startDate.split("T"))
-					#set($dateArray = $dateTimeArray.get(0).split("-"))
-					#set($date = $dateArray.get(1) + "/" + $dateArray.get(2) + "/" + $dateArray.get(0))
-				#else
-					#set($date = "");
-				#end
-				<li itemscope itemtype="http://schema.org/Event">
-				<p class="eventsHeading" itemprop="name"><a href="/eventDetailsUnit.action?eventID=$eventsDetails.staticPageId">$eventsDetails.staticPageTitle</a> <span class="dateStamp" itemprop="startDate">Date: $date</span></p>
-					<p class="eventsContent" itemprop="description">
-						 #if($eventsDetails.staticContent.length() > 120)
-		                     $eventsDetails.staticContent.substring(0, 120)
-						 #else
-							   $eventsDetails.staticContent
-						 #end
-						 <a href="/eventDetailsUnit.action?eventID=$eventsDetails.staticPageId"><span class="readevents">more...</span></a>
-					</p>
-					<p>Address: $!eventsDetails.addressOne</p>
-					<p>Location: $!eventsDetails.location</p>
-					<p>Contact Number: $!eventsDetails.notificationContactNumber</p>
+<div class="bannerWrap">
+	<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1800px;height:620px;overflow:hidden;visibility:hidden;">
+	   <!-- Loading Screen -->
+	   <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+	       <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
+	   </div>
+	   <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1800px;height:620px;overflow:hidden;">
+	       <div data-p="170.00">
+	           <img data-u="image" src="$webThemes/$siteName/images/slide1.png" />
+	           <div class="container">
+	           		<div class="bannerCaption">
+		           		<h6>Introducing Turtle E-Commerce</h6>
+		           		<h1>PUTTING YOU ON THE FAST TRACK</h1>
+		           </div>
+	           </div>
+	       </div>
+	       <!-- <div data-p="170.00">
+	           <img data-u="image" src="$webThemes/$siteName/images/slide2.png" />
+	           <div class="container">
+	           		<div class="bannerCaption">
+	           			<h6>Introducing Turtle E-Commerce</h6>
+	           			<h1>PUTTING YOU ON THE FAST TRACK</h1>
+	           		</div>
+	           	</div>
+	       </div> -->
+	   </div>
+	   <!-- Bullet Navigator -->
+	   <div data-u="navigator" class="jssorb031" style="position:absolute;bottom:12px;left:100px;" data-autocenter="2" data-scale="0.5" data-scale-right="0.75">
+	       <div data-u="prototype" class="i" style="width:12px;height:12px;">
+	           <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+	                <circle class="b" cx="8000" cy="8000" r="5800"></circle>
+	            </svg>
+	        </div>
+	    </div>
+	</div>
+	<div class="staticButton">
+    	<ul class="list-inline">
+    		<li class="dropdown"><a href="/Products">Shop Now</a></li>
+    		#if($userLogin)
+				#if($LayoutName != "QuickOrderStdPage")
+				<li class="dropdown hideForDevices pullRight">
+					<a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDropBanner">$locale.get("product.heading.quickOrderPad") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<div class="dropdown-menu" id="quickOrderPadDropBanner">
+						<div class="cartBody clearAfter">
+							<div id="speedEntry" class="text-center">
+								<table class="table noBorder display rwd-table">
+									<thead>
+										<tr><th class="">TYPE ITEMS HERE</th><th class="">QTY</th></tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="text" placeholder="Item #"></td>
+											<td><input type="text" class="quantity"></td>
+										</tr>
+										<tr>
+											<td><input type="text" placeholder="Item #"></td>
+											<td><input type="text" class="quantity"></td>
+										</tr>
+										<tr>
+											<td><input type="text" placeholder="Item #"></td>
+											<td><input type="text" class="quantity"></td>
+										</tr>
+										<tr>
+											<td><input type="text" placeholder="Item #"></td>
+											<td><input type="text" class="quantity"></td>
+										</tr>
+										<tr>
+											<td><input type="text" placeholder="Item #"></td>
+											<td><input type="text" class="quantity"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="mBottom-2 hideMe">
+									<label for="CombineHead1"  class="customRadioBtn">
+										<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked />
+										<span>Combine</span>
+									</label>
+									<label for="SeparateHead1" class="customRadioBtn">
+										<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1" />
+										<span>Separate</span>
+									</label>
+									<label for="RemoveHead1" class="customRadioBtn">
+										<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1" />
+										<span>Remove</span>
+									</label>
+								</div> 
+								<div class="quickOrdeAddtoCart center clearAfter">
+									<button class="cimm_inlineButton pullLeft" id="submitBtnPad" onclick="QuickOrder.headValidateOrderPad();">$locale.get('quickorder.button.submit')</button>
+									<a href='javascript:void(0);' class="showMoreEntryFieldsLink button pullRight" onclick="QuickOrder.showMoreOrderPad();">Add More Items</a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</li>
+			#else
+				<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrderPad") <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
 			#end
+			#else
+				<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrderPad") <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
 			#end
-			</ul>
-		</div>
-	</div>
-	
-	<div class="cimm_halfBlockColumns">
-		<div class="recentNews">
-			<h3 class="cimm_blockTitle"><label>Recent News</label></h3>
-			<div id="news-scroller" class="newsList customScroll">
-				<div class="center"><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
-			</div>
-		</div>
-	</div>
-	<div class="clear"></div>
-</div> -->
-
-#set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
-#if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
-	<ul id="featuredManufacturers" class="cimm_caroWrap">
-		#foreach($manufacturerset in $featuredManufacturers.entrySet())
-		#set($keyValue = $manufacturerset.getKey())
-		#set($manufacturerModel = $manufacturerset.getValue())
-		<li>				
-			<div class="cimm_linkItemImg" itemscope itemtype="http://schema.org/Brand">
-				<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
-					<img itemprop="logo" src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" width="100" height="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
-				</a>
-			</div>
-		</li>
-		#end
-	</ul>
+    	</ul>
+    </div>
 </div>
-#end
-
-#if($featuredProducts.size()>0)	 	
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredProducts")</label></h3>
-	<ul id="featuredProductList" class="cimm_caroWrap">
-		#foreach($itemData in $featuredProducts)
-		#set($itemTitle= $itemData.shortDesc)
-		<li itemscope itemtype="http://schema.org/Product">				
-			<div class="cimm_linkItemImg">
-				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">                    
-					#if($itemData.imageName.contains("http"))
-					<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
-					#else
-					<img itemprop="image" id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
-					#end
-				</a>
-			</div>
-			<div class="cimm_linkItemDesp">
-				<ul>
-					<li>
-						<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" itemprop="name">
-							#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
-					 		#if($linkItemTitle.length()>17)
-					 			$linkItemTitle.substring(0, 17)...
-					 		#else
-					 			$linkItemTitle
-					 		#end
-						</a>
-					</li>
-					<li itemprop="sku"><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
-					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
-					<p itemprop="description" id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
-					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>
-					#else
-					<p itemprop="description"> $!itemData.shortDesc</p>
-					#end
-					</li>
-				</ul>
+<div class="container">
+	<div class="row no-gutters">
+		<div class="col-md-4 col-sm-12 col-xs-12">
+			<div class="topHeadingBlock">
+				<h1>Electrical &amp; Industrial Distributors</h1>
+				<p>Founded in 1923, Turtle &amp; Hughes is one of the nation's largest independent electrical and industrial distributors, providing electrical services and solutions backed by a commitment to technical and product expertise.</p>
+				<div>
+					<a href="/Problems-We-Solve" class="button siteBtn mTop-4">LEARN MORE</a>
 				</div>
-			<div class="clear"></div>
-		</li>
-		#end
-	</ul>
-</div>
-#end
-<input type="hidden" value="Y" id="enableRecentlyViewed"/>
-<input type="hidden" id="startRecent" value="Y"/>
-
-<div class="recentlyhide" id="recentitembox">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.heading.recentlyviewedproducts")</label></h3>
-	#set($itemTitle=$itemData.brandName+" "+$itemData.partNumber)
-	<div class="cimm_sliderWrap" >
-		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></ul>
+			</div>
+		</div>
+		<div class="col-md-8 col-sm-12 col-xs-12">
+			<div class="topHeadingMenuBlock">
+				<div class="imageBlockPrimary">
+					<img src="$webThemes/$siteName/images/bg_bucket_problemswesolve_cropped.png" alt="PROBLEMS WE SOLVE" />
+					#foreach($topMenu in $topStaticMenu)
+						#if($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu == "Problems We Solve")
+							<ul class="menuList">
+							#foreach($subStaticMenu in $topMenu.menuList)
+								<li>
+									<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
+								</li>
+							#end
+								<li>
+									<a>View All</a>
+								</li>
+							</ul>
+						#end
+					#end
+					<h4>PROBLEMS WE SOLVE</h4>
+				</div>
+				<div class="imageBlockSecondary">
+					<img src="$webThemes/$siteName/images/bg_bucket_whoweserve_cropped.png" alt="WHO WE SERVE" />
+					#foreach($topMenu in $topStaticMenu)
+						#if($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu != "Problems We Solve")
+							<ul class="menuList">
+							#foreach($subStaticMenu in $topMenu.menuList)
+								<li>
+									<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
+								</li>
+							#end
+								<li>
+									<a>View All</a>
+								</li>
+							</ul>
+						#end
+					#end
+					<h4>WHO WE SERVE</h4>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+
+<div class="row featuredProductList">
+	#if($featuredProducts.size()>0)	 	
+	<div class="cimm_sliderWrap clearAfter">
+		<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredProducts")</label></h3>
+		<p class="text-center">Our large inventory guarantees in stock quotations and prompt delivery.</p>
+		<ul id="featuredProductList" class="cimm_caroWrap">
+			#foreach($itemData in $featuredProducts)
+			#set($itemTitle= $itemData.shortDesc)
+			<li itemscope itemtype="http://schema.org/Product">				
+				<div class="cimm_linkItemImg">
+					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')">                    
+						#if($itemData.imageName.contains("http"))
+						<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+						#else
+						<img itemprop="image" id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+						#end
+					</a>
+					<div class="disponhover">
+						<div class="disponhoverbg"><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(" ","_")"> $locale.get("product.label.viewProduct")</a></div>
+					</div>
+				</div>
+				
+				<div class="cimm_linkItemDesp">
+					<ul>
+						<li>
+							<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')" itemprop="name">
+								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+						 		#if($linkItemTitle.length()>17)
+						 			$linkItemTitle.substring(0, 17)...
+						 		#else
+						 			$linkItemTitle
+						 		#end
+							</a>
+						</li>
+						<!-- <li itemprop="sku"><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
+						<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
+						<p itemprop="description" id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>
+						#else
+						<p itemprop="description"> $!itemData.shortDesc</p>
+						#end
+						</li> -->
+					</ul>
+					</div>
+				<div class="clear"></div>
+			</li>
+			#end
+		</ul>
+	</div>
+	#end
+</div>
+<!-- PROBLEMS WE SOLVE -->
+<div class = "row row-full home_probwesolve">
+	<div class="container paddingY-4">
+	    <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+        	<img src="$webThemes/$siteName/images/icon_turtle_1x.png" />
+            <h3>PROBLEMS WE SOLVE</h3>
+            <p>Problem solving is an opportunity for us to do our best by finding better ways to approach your unique project. We work as a team to build momentum, we tackle every challenge along the way, and we share a clear vision of our mutual success at the end of the road.</p>
+            <div class ="probwesolve_slider"> 
+                <div class="probwesolve_slider_wrap">
+                	<ul id="probwesolve">
+                		<li><a href="/Automation-Solutions"><span>AUTOMATED SOLUTIONS</span><img src="$webThemes/$siteName/images/problemswesolve_slide_01.jpg"/></a></li>
+                		<li><a href="/Mro-Integrated-Supply"><span>MRO INTEGRATED SUPPLY</span><img src="$webThemes/$siteName/images/problemswesolve_slide_02.jpg"/></a></li>
+                		<li><a href="/Field-Service-Solutions"><span>FIELD SERVICE SOLUTIONS</span><img src="$webThemes/$siteName/images/problemswesolve_slide_03.jpg"/></a></li>
+                	</ul>
+                	
+                	<ul id="probwesolve_cont" class="cimm_caroWrap">
+                		<li>
+                			<h3>AUTOMATED SOLUTIONS</h3>
+	            <p>If you're not taking advantage of the latest automation solutions, you're falling behind. We help owners and integrators with assessments, expertise and components for upgrades, expansions, or new process automation installations.</p>
+	            <a href="/Automation-Solutions" class="btn button siteBtn">Learn More</a>
+                		</li>
+                		<li>
+                			<h3>MRO INTEGRATED SUPPLY</h3>
+	            <p>Our solutions optimize the acquisition and delivery of materials and services for production and engineering teams, facility maintenance groups, manufacturing services, and R&D service organizations.</p>
+	            <a href="/Mro-Integrated-Supply" class="btn button siteBtn">Learn More</a>
+                		</li>
+                		<li>
+                			<h3>FIELD SERVICE SOLUTIONS</h3>
+	            <p>Field service solutions from Turtle & Hughes make maintenance simple. With us, you only have to make one call when something goes wrong or equipment needs service.</p>
+	            <a href="/Field-Service-Solutions" class="btn button siteBtn">Learn More</a>
+                		</li>
+                	</ul>
+                </div>
+                
+                
+            </div>
+        </div>
+	</div>
+</div>
+<!-- End PROBLEMS WE SOLVE -->
+
+
+<!-- CAPABILITIES SECTION HEADLINE -->
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="capabilities">
+			<h4>Project Expertise</h4>
+			<h3>Backed by 95 Years of Experience</h3>
+			<div class="capabilities_image">
+				<img alt="" src="$webThemes/$siteName/images/hover_lightingapplications.png">
+				
+				<div class="capabilities_blue" data-action="capabilities">
+					<h3>ELECTRICAL CONSTRUCTION</h3>
+					<p>We deliver high performance, reliable and efficient power systems that control costs and are engineered with an eye towards the future.</p>
+					<a href="javascript:void(0);" class="btn btn-default">Learn More</a>
+				</div>
+				<div class="capabilities_orange" data-action="capabilities">
+					<h3>LIGHTING APPLICATIONS</h3>
+					<p>Detailed analysis of your space lets us determine the number, type and spacing of lighting fixtures for office buildings, warehouses, parking lots and more.</p>
+					<a href="javascript:void(0);" class="btn btn-default">Learn More</a>
+				</div>
+				<div class="capabilities_green" data-action="capabilities">
+					<h3>INFRASTRUCTURE</h3>
+					<p>Whether it's a busy airport, railway, port, road, bridge, tunnel or the ever-evolving industrial technology infrastructure, we ensure that the outcome is resilient and fail safe.</p>
+					<a href="javascript:void(0);" class="btn btn-default">Learn More</a>
+				</div>
+			</div>
+			<div class="text-center marginY-4"><a href="/Project-Expertise" class="btn button siteBtn">Learn More</a></div>
+		</div>
+	</div>
+</div>
+
+<!-- END CAPABILITIES SECTION HEADLINE -->
+
+
+<div class="row row-full home_worldtradhub">
+    <div class = "container">
+    	<div class="imagebottomtext">
+    		<h3 class="page-title">World Trade Center Transportation Hub</h3>
+    		<p>New York, NY</p>
+    	</div>
+	</div>
+</div>
+
+<!-- RENEWABLE ENERGY PRODUCT DISTRIBUTOR -->
+<div class="row paddingY-4 distributor">
+	<div class="col-md-12">
+		<h3>Trends &amp; Technology</h3>
+		<p>Our industry is constantly changing and advancements in technology have created a new era of innovation. With our unique perspective on new products and services, news and events, and industry trends, our blog can help you to keep pace</p>
+		<a href="javascript:void(0);" class="btn button siteBtn mTop-4">Subscribe to Trends &amp; Technology</a>
+	</div>
+</div>
+<!-- RENEWABLE ENERGY PRODUCT DISTRIBUTOR -->
+
+<!-- SUCCESS STORY -->
+
+<div class="row row-full home_successstory">
+	<div class="container">
+		<div class="success_story">
+	        <ul id="success_story-slider">
+	        	<li>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home_successstory-storyimages">
+							<div class="success_story-image">
+								<img src="$webThemes/$siteName/images/angle_success_story_left.svg" class="left_cover">
+								<div class="story_image">
+									<img src="$webThemes/$siteName/images/successStory1.png" alt="" width="255" height="320" />
+									<div class="titleonimage">
+										<h4>PROJECT TITLE</h4>
+										<p>CLIENT NAME</p>
+									</div>
+								</div>
+								<img src="$webThemes/$siteName/images/angle_success_story_right.svg" class="right_cover">
+							</div>
+						</div>
+					
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 story">
+							<h4>SUCCESS STORY</h4>
+							<h3>Electrical Construction Powering the Future</h3>
+							<p>Hudson Yards is the largest development in New York City in almost 100 years; a self-contained neighborhood with residential, office and commercial buildings, shops, restaurants, a creative hub, parks, playgrounds and a school. Two cogeneration plants - with switchgear from Turtle &amp; Hughes - form a smart microgrid, which is designed to keep the complex running, even in the event a power outage.</p>
+							<div class="row mTop-4">
+								<div class="col-md-6">
+									<!-- <h5>NAME, TITLE</h5> -->
+								</div>
+								<div class="col-md-6 text-right">
+									<a href="/Powering-the-Future" class="btn button siteBtn">Read More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+		        </li>
+		        <li>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home_successstory-storyimages">
+							<div class="success_story-image">
+								<img src="$webThemes/$siteName/images/angle_success_story_left.svg" class="left_cover">
+								<div class="story_image">
+									<img src="$webThemes/$siteName/images/successStory3.png" alt="" width="255" height="320" />
+									<div class="titleonimage">
+										<h4>PROJECT TITLE</h4>
+										<p>CLIENT NAME</p>
+									</div>
+								</div>
+								<img src="$webThemes/$siteName/images/angle_success_story_right.svg" class="right_cover">
+							</div>
+						</div>
+					
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 story">
+							<h4>SUCCESS STORY</h4>
+							<h3>Materials Management &amp; Logistics LaGuardia Airport Redevelopment</h3>
+							<p>LaGuardia Airport needed support in its +$4 billion modernization project. Turtle & Hughes is supplying cable management services and furnishing cable to the airport and its power distribution in the West, Center and East sections. When complete, electrical capacity to the airport will be greatly improved and this vital national infrastructure facility will be modernized to handle passenger and aircraft capacity for the next 20 years.</p>
+							<div class="row mTop-4">
+								<div class="col-md-6">
+									<!-- <h5>NAME, TITLE</h5> -->
+								</div>
+								<div class="col-md-6 text-right">
+									<a href="/LaGuardia-Airport-Redevelopment" class="btn button siteBtn">Read More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+		        </li>
+		        <li>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home_successstory-storyimages">
+							<div class="success_story-image">
+								<img src="$webThemes/$siteName/images/angle_success_story_left.svg" class="left_cover">
+								<div class="story_image">
+									<img src="$webThemes/$siteName/images/successStory2.png" alt="" width="255" height="320" />
+									<div class="titleonimage">
+										<h4>PROJECT TITLE</h4>
+										<p>CLIENT NAME</p>
+									</div>
+								</div>
+								<img src="$webThemes/$siteName/images/angle_success_story_right.svg" class="right_cover">
+							</div>
+						</div>
+					
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 story">
+							<h4>SUCCESS STORY</h4>
+							<h3>Transportation A Safer Ride</h3>
+							<p>The Metropolitan Transportation Authority was looking to improve safety, security and communication between the public and New York City Transit Authority at station booths and the Rail Control Center (RCC). Turtle & Hughes furnished and placed in operation new life safety communications and security devises in a fully integrated solution.</p>
+							<div class="row mTop-4">
+								<div class="col-md-6">
+									<!-- <h5>NAME, TITLE</h5> -->
+								</div>
+								<div class="col-md-6 text-right">
+									<a href="/A-Safer-Ride" class="btn button siteBtn">Read More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+		        </li>
+			</ul>
+	    </div>
+	</div>
+</div>
+<!-- End SUCCESS STORY -->
+
+<!-- Featured Manufactures -->
+<div class="row featuredManufacturers">
+	#set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
+	#if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
+	<div class="cimm_sliderWrap clearAfter">
+		<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
+		<ul id="featuredManufacturers" class="cimm_caroWrap">
+			#foreach($manufacturerset in $featuredManufacturers.entrySet())
+			#set($keyValue = $manufacturerset.getKey())
+			#set($manufacturerModel = $manufacturerset.getValue())
+			<li>				
+				<div class="cimm_linkItemImg">
+					<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
+						<img src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
+					</a>
+				</div>
+			</li>
+			#end
+		</ul>
+	</div>
+	#end
+	<div class="text-center mTop-5">
+		<a href="javascript:void(0);" class="btn btn-primary">Download A Complete List</a>
+	</div>
+</div>
+<!-- End Featured Manufactures -->
+ 
+<!-- Our history -->
+<div class="row row-full home_ourhistory">
+	<div class="container">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 headline">
+        	<h4>Making History</h4>
+            <ul class="list-unstyled" id="historyheadline_slide">
+            	<li>
+                	<ul class="historycontent list-inline">
+                    	<li>1923: </li>
+                    	<li>
+                    		<h3>Breaking Ground</h3>
+                    		<p>Colleagues Marion Berry (M.B.) Turtle and Bill Hughes, join forces to open Turtle & Hughes at 446 Canal Street in New York City, an electrical equipment distributor to local businesses.</p>
+                    	</li>
+                   	</ul>
+				</li>
+                <li>
+                    <ul class="list-inline historycontent">
+                      <li>1942: </li>
+                      <li>
+                        <h3>Trailblazing</h3>
+                        <p>Following the death of Bill Hughes in 1935, M.B. Turtle leads the company until 1942. His widow, Ethel Macnamara Turtle, manages our growth for 22 years; the first of three generations of women leaders.</p>
+                      </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline historycontent">
+                      <li>2018: </li>
+                      <li>
+                        <h3>95th Anniversary</h3>
+                        <p>Growing to 900 employee-owners in locations across the U.S. and in Canada, Mexico and Puerto Rico, we continuously look to the future by expanding our electrical supply chain offerings to the customers we value.</p>
+                      </li>
+                    </ul>
+                </li>
+        	</ul>
+        	<div class="historyvideo">
+        		<img src="$webThemes/$siteName/images/placeholder_video.jpg" />
+        		<div class="historyvideo_title">
+        			<h4><a href="javascript:void(0);">The video is still under production....</a></h4>
+        		</div>
+        	</div>
+    	</div>
+    </div>          
+</div>
+<!-- Our history -->

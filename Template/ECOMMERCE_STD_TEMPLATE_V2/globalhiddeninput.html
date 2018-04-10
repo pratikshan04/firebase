@@ -30,10 +30,8 @@
 <input type="hidden" id="enablePiwik" name="enableStickyHeader" value='$!CommonDBQuerySystemParameter.get("EnablePiwik")'/>
 <input type="hidden" id="enableAnonymousCheckout" name="enableAnonymousCheckout" value='$!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")'/>
 <input type="hidden" id="autoCompleteDesignVersion" name="autoCompleteDesignVersion" value='$!CommonDBQuerySystemParameter.get("AUTO_COMPLETE_DESIGN_VERSION")'/>
-<input type="hidden" id="webThemePath" value='$webThemes/$siteName/'/>
+<input type="hidden" id="webThemePath" value='$webThemes$siteName/'/>
 <input type="hidden" id="wareHouseCode" name="wareHouseCode" value='$!session.getAttribute("wareHouseCode")'/>
-<input type="hidden" id="shipAddressForPunchoutUser" name="shipAddressForPunchoutUser" value='$!CommonDBQuerySystemParameter.get("SHIPADDRESS_FOR_PUNCHOUT_USER")'/>
-<input type="hidden" id="isPunchoutUser" value="$session.getAttribute('isPunchoutUser')" />
 #if($!userLogin)
 <input type="hidden" id="HomeTer" name="HomeTer" value='$!session.getAttribute("homeBranchId")'/>
 #else

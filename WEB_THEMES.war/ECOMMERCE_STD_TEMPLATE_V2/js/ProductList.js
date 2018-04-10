@@ -315,17 +315,21 @@ function changemode(){
 	if(checkmode == "listView"){
 		$("[data-getchangemode='getchangemode']").each(function(){
 			$(this).removeClass('listView').addClass('gridView');
-		});
-		$("#listView").show();
-		$("#gridView").hide();
+			$(".listViewIcon").attr("onclick","changemode()");
+			$(".gridViewIcon").removeAttr("onclick");
+			$(".gridViewIcon").addClass('active');
+			$(".listViewIcon").removeClass('active');	
+		});		
 		setCookie('pagemode', 'gridView');
 	}
 	if(checkmode == "gridView"){
 		$("[data-getchangemode='getchangemode']").each(function(){
 			$(this).removeClass('gridView').addClass('listView');
-		});
-		$("#listView").hide();
-		$("#gridView").show();
+			$(".listViewIcon").removeAttr("onclick");
+			$(".gridViewIcon").attr("onclick","changemode()");				
+			$(".listViewIcon").addClass('active');
+			$(".gridViewIcon").removeClass('active');
+		});		
 		setCookie('pagemode', 'listView');
 	}
 	$('.productModeItemsDiv').hide();
@@ -449,15 +453,27 @@ $(document).ready(function(){
 	});
 	var viewMode = getCookie("pagemode");
 	if(viewMode == "listView"){
-		$("#listView").hide();
-		$("#gridView").show();
+		/*$("#listView").hide();
+		$("#gridView").show();*/
+		$(".listViewIcon").removeAttr("onclick");
+		$(".gridViewIcon").attr("onclick","changemode()");
+		$(".listViewIcon").addClass('active');
+		$(".gridViewIcon").removeClass('active');
 	}else{
-		$("#listView").show();
-		$("#gridView").hide();
+		/*$("#listView").show();
+		$("#gridView").hide();*/
+		$(".gridViewIcon").removeAttr("onclick");
+		$(".listViewIcon").attr("onclick","changemode()");
+		$(".gridViewIcon").addClass('active');
+		$(".listViewIcon").removeClass('active');
 	}
 	if(viewMode == null){
-		$("#listView").show();
-		$("#gridView").hide();
+		/*$("#listView").show();
+		$("#gridView").hide();*/
+		$(".listViewIcon").removeAttr("onclick");
+		$(".gridViewIcon").attr("onclick","changemode()");	
+		$(".listViewIcon").addClass('active');
+		$(".gridViewIcon").removeClass('active');
 	}else{
 		var checkmode1 = $("[data-getchangemode='getchangemode']").attr('class');
 		$("[data-getchangemode='getchangemode']").each(function(){
@@ -465,7 +481,7 @@ $(document).ready(function(){
 		});
 	}
 	ProductMode.loadPriceInDataTable();
-	disableCustomCheckbox();
+	//disableCustomCheckbox();
 	priceLoadMainFunction();
 	changeListtoGrid();
 	chkLeftMenu();
@@ -506,9 +522,9 @@ function chkLeftMenu(){
 }
 function closeLeftSlide(){
 	$("#slideLeft").removeClass("active");
-	$("html, body").removeClass("poppupEnabled");
+	$("html").removeClass("poppupEnabled");
 }
 $('[data-function="slideLeft"]').click(function(){
 	$("#slideLeft").addClass("active");
-	$("html, body").addClass("poppupEnabled");
+	$("html").addClass("poppupEnabled");
 });

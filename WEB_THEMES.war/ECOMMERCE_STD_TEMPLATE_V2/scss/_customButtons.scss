@@ -26,11 +26,10 @@ input[type='submit'] {
     font-family: $buttonFont;
     font-size: 14px;
     border-radius: 0;
-    letter-spacing: normal;
-    cursor: pointer;
+    letter-spacing: 1px;
+    cursor: pointer; 
     text-align: center;
     border: none;
-	border-radius: 2px;
     &:hover {
         background: $secandaryColor;
     }
@@ -50,9 +49,9 @@ input[type='submit'] {
 
 .cimm_inlineButton {
     @extend .button;
-    padding: 7px 12px;
-    vertical-align: bottom;
-    height: auto;
+    padding: 6px 12px;
+    vertical-align: middle;
+    height: 33px;
     display: inline-block;
     &:hover {
         color: $white;
@@ -61,20 +60,27 @@ input[type='submit'] {
 
 //Add to Cart Button`
 .log-addTocart-btn {
-    background: $primaryColor;
+    background: $skylStyle;
     text-transform: uppercase;
     position: relative;
     display: inline-block;
 	color: $white;
-	text-align: center;
-	padding: 6px 12px 6px 35px;
-    font-size: 14px;
-	background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
+    text-align: center;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 0;
+
     &:hover {
         color: $white;
     }
     &.btns-disable {
         opacity: .3;
+    }
+    &:before{
+        content: "\f07a";
+        font-family: FontAwesome5ProRegular;
+        margin-right: 10px;
+        font-weight: normal;
     }
 }
 
@@ -91,7 +97,12 @@ input[type='submit'] {
     color: $primaryColor;
     font-size: 24px;
 }
-
+.siteBtn{
+    background: $skylStyle;
+}
+.site_Btn{
+    background: $btn_Bg;
+}
 // My Product Group Button
 .myProductGroupbutton {
     position: relative;

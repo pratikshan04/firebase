@@ -27,7 +27,7 @@ function showMoreAdvOpt(){
 	<div class="col-md-3 col-ms-6 col-xs-12">
 		<label for='searchCustomerPartNumber' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='searchCustomerPartNumber' value='1' checked onclick="changeAdvSearch()"/>
-			<span>$locale.get("product.label.cpn")</span>
+			<span>$locale.get("product.label.customerpartnumber")</span>
 		</label>
 	</div>
 	<div class="col-md-2 col-ms-6 col-xs-12">
@@ -49,7 +49,7 @@ function showMoreAdvOpt(){
 		</label>
 	</div>
 </div>
-<div id="keyWordMatch" class="row mTop-2 hideMe">
+<div id="keyWordMatch" class="row hideMe">
 	<div class="col-md-3 col-ms-6 col-xs-12">
 		<label for='allWords' class="customRadioBtn">
 			<input type='radio' name='searchThrough' id='allWords' value='4' checked onclick="changeAdvSearch()"/>
@@ -69,7 +69,7 @@ function showMoreAdvOpt(){
 		</label>
 	</div>
 </div>
-<div class='row mTop-2'>
+<div class='row'>
 	<div class="col-md-12 col-ms-12 col-xs-12 form-inline">
 		<div class="form-group">
 			<input type='text' name='keywords' placeholder="search" id="txtAdvSearch" value="#if($keyWord)$keyWord #end" class="form-control"/>

@@ -25,7 +25,7 @@
 		    #set($savedCartItemId = $itemData.itemId) <!--CartlistData Iterator -->
 		    <tr>
 		    <td data-th="$locale.get('product.label.Image')">
-		    	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">
+		    	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(" ","_")">
 					#if($itemData.imageType=="URL")
 						<img src="$itemData.imageName" width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
 					#else
@@ -40,7 +40,7 @@
 				<div class="cimm_tableDescSection left">
 					<ul>
 						<li>
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(" ","_")">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
 						</li>
 						<li>
 		                 	<p>$!itemData.shortDesc</p>
@@ -54,7 +54,7 @@
 						</li>
 						#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 	                    <li>
-                        <b>$locale.get("product.label.cpn"): </b>
+                        <b>$locale.get("product.label.customerpartnumber"): </b>
                         #set($seperator = "")
                         #set($partList = "")
                             #foreach($customerPart in $itemData.customerPartNumberList)

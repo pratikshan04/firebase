@@ -1,14 +1,14 @@
 var webThemes = $("#webThemePath").val();
 jQuery.getScript(webThemes+'js/jquery.raty.min.js', function(){
 	$('#ProdRating').raty({
-		path:webThemes+'images/',	
+		path:webThemes+'/images/',	
 		readOnly:true,
 		half:true,
 		score: $('#overAllRate').val(),
 		hints:["Poor","Fair","Average","Good","Excellent"],
 		});
 	$('#rateit').raty({
-		path: webThemes+'images/', 
+		path: webThemes+'/images/', 
 		cancel    : true,
 		cancelOn  : 'cancel-on.png',
 		cancelOff : 'cancel-off.png',
@@ -30,7 +30,7 @@ jQuery.getScript(webThemes+'js/jquery.raty.min.js', function(){
 		var val = parseFloat($(this).val());
 		$('.voteit'+input).raty({
 			readOnly:true,
-			path:webThemes+'images/',
+			path:webThemes+'/images/',
 			half:true,
 			hints:[null,null,null,null,null],
 			score: val
@@ -62,7 +62,7 @@ jQuery.getScript(webThemes+'js/jquery.prettyPhoto.js', function(){
 jQuery.getScript(webThemes+'js/jquery.timeago.js', function(){
 	$("abbr.timeago").timeago();
 });
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+$.getScript(webThemes+'/js/multiTab.min.js', function(){
 	$('#multiTabOne').multiTab({
 		   tabHeading: '.multiTabHeading',
 		   contentWrap: '.multiTabContent',
@@ -90,8 +90,8 @@ $('.thumblist li img').on('click' , function(){
 });
 
 $(document).ready(function(){
-	filterScroll();
 	priceLoadMainFunction();
+	filterScroll();
 	ProductMode.buildSearchTrail();
 	disableCustomCheckbox();
 	ProductMode.checkCookieToCheck();
@@ -114,7 +114,7 @@ $(document).ready(function(){
 	}else{
 		$('.thumblist').slick({
 			infinite: true,
-			slidesToShow: 3,
+			slidesToShow: 6,
 			slidesToScroll: 1,
 		});
 	}
@@ -212,17 +212,25 @@ $(document).bind('click', function(e) {
 		$('.selectOptions').find(".cimm_drop > i").addClass("fa-angle-down");
       }
 });
+
 var custflag = 0;
-$(document).delegate('[data-function="customerPartNumber"]', 'click',function(){
+$('[data-function="customerPartNumber"]').click(function() {
 	var toggleListID = "#"+$(this).attr('data-listTarget');
 	var itemId = $(this).attr('data-itemId');
 	var partNum = $("#itmId_"+itemId).val();
-	$(toggleListID).html('<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>');
-	jQuery.get('customerPartNumbersPage.action?itemPriceId='+itemId+'&partNumber='+partNum,function(data,status){
-		$(toggleListID).find("li").remove();
-		$(toggleListID).html(data);
-	});
+	if($(toggleListID).find('li').length<=1){
+		if($(toggleListID).find('li').length<=0){
+			$("#customerPartNumSubmit").find("ul").append("<ul id=ulgCust_"+itemId+"><li class='alignCenter'><i class='fa fa-spin fa-spinner'></i></li></ul>");
+		}
+		jQuery.get('customerPartNumbersPage.action?itemPriceId='+itemId+'&partNumber='+partNum,function(data,status){
+			$("#customerPartNumSubmit").find('li').remove();
+			$(toggleListID).html(data);
+			$("#customerPartNumSubmit").show();
+			custflag = 1;
+		});
+	}
 });
+
 function manageCustomerPartNumber(performAction){
 	var cPartList = "";
 	var cPartNums = "";
@@ -250,21 +258,20 @@ function manageCustomerPartNumber(performAction){
 				});
 				if(performAction.id == "add"){
 					if(request) {
-						block("Please wait");
 						jQuery.get('addCustomerPartNumberPage.action?keyWord='+newCustPartNum+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val(),function(e,status){
-							unblock();
 							var msg = e.substring(0,e.indexOf("|"));
 							var cpn = e.substring(e.indexOf("|")+1);
 							if(cpn != "" && cpn !="Error occured while process your request"){
 								$("#custMainBlock").show();
 								$("#custPartBlock").html("");
 								$("#custPartBlock").html(cpn);
-								$("#customerPartNumSubmit ul").html('<li class="text-success">'+msg+'</li>');
 							}else {
 								$("#custMainBlock").hide();
-								$("#customerPartNumSubmit ul").html('<li class="text-danger">'+cpn+'</li>');
 							}
-							setTimeout(function(){$("#customerPartNumSubmit").hide();$(".dropdown-backdrop").remove();$("#customerPartNumSubmit").parent().removeClass('open');}, 3000);
+							$("#newCustomerPartNumber").val(locale('customerPartNumber.label.enterNewCustomerpartNumber'));
+							$(toggleListID).find('li').remove();
+							$("#customerPartNumSubmit").find('li').remove();
+							$("#customerPartNumSubmit").hide();
 						});
 					}else{
 						return false;
@@ -276,24 +283,29 @@ function manageCustomerPartNumber(performAction){
 							checkedCPN = checkedCPN + 1;
 						});
 						if(checkedCPN!=0){
-							block("Please wait");
-							var cpnVal = $(performAction).parent().parent().find('input:checkbox:checked').val();
-							var cpnId = $(performAction).parent().parent().find('input:checkbox:checked').attr('id');
-							jQuery.get('updateCustomerPartNumberPage.action?newCpn='+newCustPartNum+"&oldCpn="+cpnVal+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val()+"&vpsid="+cpnId,function(e,status){
-								unblock();
-								var msg = e.substring(0,e.indexOf("|"));
-								var cpn = e.substring(e.indexOf("|")+1);
-								if(cpn != "" && cpn !="Error occured while process your request"){
-									$("#custMainBlock").show();
-									$("#custPartBlock").html("");
-									$("#custPartBlock").html(cpn);
-									$("#customerPartNumSubmit ul").html('<li class="text-success">Customer Part Number Updated Successfully</li>');
-								}else {
-									$("#custMainBlock").hide();
-									$("#customerPartNumSubmit ul").html('<li class="text-danger">'+cpn+'</li>');
+							var cpnCheck = $("input:checkbox[name='customPartNumList']:checked").length;
+							if(cpnCheck < 0){
+								bootAlert("medium","error","Error","Please update the selected customer part number.");
+								request = false;
+							}else{
+									var cpnVal = $(performAction).parent().parent().find('input:checkbox:checked').val();
+									var cpnId = $(performAction).parent().parent().find('input:checkbox:checked').attr('id');
+									jQuery.get('updateCustomerPartNumberPage.action?newCpn='+newCustPartNum+"&oldCpn="+cpnVal+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val()+"&vpsid="+cpnId,function(e,status){
+										var msg = e.substring(0,e.indexOf("|"));
+										var cpn = e.substring(e.indexOf("|")+1);
+										if(cpn != "" && cpn !="Error occured while process your request"){
+											$("#custMainBlock").show();
+											$("#custPartBlock").html("");
+											$("#custPartBlock").html(cpn);
+										}else {
+											$("#custMainBlock").hide();
+										}
+										$("#newCustomerPartNumber").val(locale('customerPartNumber.label.enterNewCustomerpartNumber'));
+										$(toggleListID).find('li').remove();
+										$("#customerPartNumSubmit").find('li').remove();
+										$("#customerPartNumSubmit").hide();
+									});
 								}
-								setTimeout(function(){$("#customerPartNumSubmit").hide();$(".dropdown-backdrop").remove();$("#customerPartNumSubmit").parent().removeClass('open');}, 3000);
-							});
 						}else{
 							bootAlert("medium","error","Error","Please select atleast one customer part# to update.");
 							request = false;
@@ -320,24 +332,20 @@ function manageCustomerPartNumber(performAction){
 		if(cPartList == ""){
 			bootAlert("small","error","Error","Please Select Customer Part Number.");
 		}else {
-			block("Please wait");
 			jQuery.get('removeCustomerPartNumberPage.action?vpsid='+cPartList+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val()+"&custPnum="+cPartNums,function(e,status){
-				unblock();
 				var msg = e.substring(0,e.indexOf("|"));
 				var cpn = e.substring(e.indexOf("|")+1);
 				if(cpn != "" && cpn !="Error occured while process your request"){
 					$("#custMainBlock").show();
 					$("#custPartBlock").html("");
 					$("#custPartBlock").html(cpn);
-					$("#customerPartNumSubmit ul").html('<li class="text-success">'+msg+'</li>');
-				}else if(cpn == "" && msg == "Customer Part Number Removed Successfully"){
-					$("#custMainBlock").hide();
-					$("#customerPartNumSubmit ul").html('<li class="text-success">'+msg+'</li>');
 				}else {
 					$("#custMainBlock").hide();
-					$("#customerPartNumSubmit ul").html('<li class="text-danger">'+cpn+'</li>');
 				}
-				setTimeout(function(){$("#customerPartNumSubmit").hide();$(".dropdown-backdrop").remove();$("#customerPartNumSubmit").parent().removeClass('open');}, 3000);
+				$("#newCustomerPartNumber").val(locale('customerPartNumber.label.enterNewCustomerpartNumber'));
+				$(toggleListID).find('li').remove();
+				$("#customerPartNumSubmit").find('li').remove();
+				$("#customerPartNumSubmit").hide();
 			});
 		}
 	}
@@ -446,4 +454,75 @@ function submitReview(){
 		//jAlert(result, 'Required Field.');
 	}
 	return false;
+}
+
+function populateBarnchavailabilities(products){
+	for (var i = 0; i < products.length; i++) {
+		product = products[i];	
+		wareHouseList = product.branchAvail;
+		if(wareHouseList.length>0){
+		for (var j = 0; j < wareHouseList.length; j++) {
+			wareHouseDetails = wareHouseList[j];
+			populateAllBranchAvailability(wareHouseDetails);
+			}
+		}
+	}
+}
+
+function getAllBranchAvailability(obj){
+	var partNumbers = [];
+	var partNumber = $(obj).attr('data-partnumbver') + "::"+$(obj).attr('data-qty');
+	if(partNumber != undefined){
+		block("Please wait...");
+		$.ajax({
+			url : 'getPriceDetailPage.action',
+			type : "POST",
+			data : {
+				"productIdList" : partNumber,
+				"LABAvailability" : "Y"
+			},
+			success : function(responseData) {
+				if (responseData && responseData !=  '$renderContent') {
+					var productDataList = JSON.parse(responseData);
+					populateBarnchavailabilities(productDataList);
+				} else {
+				}
+			},
+			error : function(xhr, status, error) {
+				
+			}
+		});
+	}
+}
+
+function populateAllBranchAvailability(product) {
+	var branchName, branchAvailability, newBranch;
+	branchName = createTableCell(product.branchName);
+	branchAvailability = createTableCell(product.branchAvailability);
+	newBranch = createTableRow(branchName, branchAvailability);
+	appendToAllBranchAvailability(newBranch, product.partNumber);
+	unblock();
+	$("#modalBodyContent").modal('show');
+}
+
+function appendNewBranch(product, branch) {
+	//$(markUpPrefixes.ALL_BRANCH_AVAILABILITY + product.partNumber).append(branch);
+	$(
+			document.getElementById(markUpPrefixes.ALL_BRANCH_AVAILABILITY
+					+ product.partNumber)).append(branch);
+}
+
+function createTableRow(branchName, branchAvailability) {
+	return "<tr>" + branchName + branchAvailability + "</tr>";
+}
+
+function createTableCell(branchData) {
+	return "<td class = 'center'> " + branchData + "</td>";
+}
+
+function appendToAllBranchAvailability(newBranch, partNumber) {
+	if (document.getElementById("allBranchHTML")) {
+		var currentTable = document.getElementById("allBranchHTML");
+		$(currentTable).append(newBranch);
+	}
 }

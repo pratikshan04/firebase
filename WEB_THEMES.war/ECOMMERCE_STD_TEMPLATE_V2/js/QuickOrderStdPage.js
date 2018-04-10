@@ -1,5 +1,5 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+$.getScript(webThemes+'/js/multiTab.min.js', function(){
 	$('#quickOrderTab').multiTab({
 		transitionEffect:"fade"
 	});
@@ -423,7 +423,7 @@ var QuickOrder = {};
 							}
 						}else{
 							unblock();
-							bootAlert("small","error","Error","Entered text is not in expected format. \nPlease copy the text with below pattern. \nQuantity [TAB or COMMA] Part#");
+							bootAlert("small","error","Error","Entered text is not in expected format. \nPlease copy the text with below pattern. \nQuantity [COMMA] Part#");
 							submitFlag = false;
 							break;
 						}
@@ -489,13 +489,13 @@ var QuickOrder = {};
 			if(fileExt != null && $.trim(fileExt)!=''){
 				fileExt = fileExt.substring($('#datafile').val().lastIndexOf(".")+1);
 				if(fileExt != "xlsx"){
-					bootAlert("small","error","Error","Please upload .xlsx file.");
+					bootAlert("small","warning","Warning","Please upload .xlsx file.");
 					return false;
 				}else{
 					return true;
 				}
 			}else{
-				bootAlert("small","error","Error","Please choose a .xlsx file to upload.");
+				bootAlert("small","warning","Warning","Please upload .xlsx file.");
 				$("[data-bb-handler='ok']").click(function(){
 					$('#datafile').click();
 				});

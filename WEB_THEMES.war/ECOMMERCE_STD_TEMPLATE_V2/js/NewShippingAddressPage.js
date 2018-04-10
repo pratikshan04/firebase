@@ -1,8 +1,10 @@
-var countrySelectShip = new initCountry({
-	country: "US",
-	selectorID: "countrySelectShip",
-	defaultSelect: true
-});
+var $webThemes = $("#webThemePath").val();
+
+	var countrySelectShip = new initCountry({
+		country: "US",
+		selectorID: "countrySelectShip",
+		defaultSelect: true
+	});
 
 function makeDefaultAddress(){
 	if($('#makeDefault').is(':checked')){

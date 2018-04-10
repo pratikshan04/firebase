@@ -7,18 +7,18 @@
 			#set($savedCartItemId = 0)
 			#if($productListData.size()>0)
 			<form id="submitCxml" name="submitCxml" method="post" action="PunchoutResponse.slt">	
-				<input type="hidden" name="cxmlParamitemCount" value = "$productListData.size()"/>
+				<input type="hidden" name="cxmlParamitemCount" value = "$!productListData.size()"/>
 				<input type="hidden" id="cartTotal" name="cxmlParamcartTotalAmt" value = '$numberTool.format($numberToolFormat,$cartTotal)' />
-				<input type="hidden" name="cxmlParamHOOK_URL" value = '$session.getAttribute("hookUrl")'/>
-				<input type="hidden" name="cxmlParambCookie" value = '$session.getAttribute("buyCookie")' />
+				<input type="hidden" name="cxmlParamHOOK_URL" value = '$!session.getAttribute("hookUrl")'/>
+				<input type="hidden" name="cxmlParambCookie" value = '$!session.getAttribute("buyCookie")' />
 				<input type="hidden" name="cxmlParamoperType" value = "create"/>
-				<input type="hidden" name="fromId" value = '$session.getAttribute("fromId")' />
-				<input type="hidden" name="fromDomain" value = '$session.getAttribute("fromDomain")' />
-				<input type="hidden" name="toId" value = '$session.getAttribute("toId")' />
-				<input type="hidden" name="toDomain" value = '$session.getAttribute("toDomain")' />
+				<input type="hidden" name="fromId" value = '$!session.getAttribute("fromId")' />
+				<input type="hidden" name="fromDomain" value = '$!session.getAttribute("fromDomain")' />
+				<input type="hidden" name="toId" value = '$!session.getAttribute("toId")' />
+				<input type="hidden" name="toDomain" value = '$!session.getAttribute("toDomain")' />
 					
 					<div class="cimm_siteTableEnclosure rwd-TableWrap">
-	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table display rwd-table customBorderTable" id="cimm_ShoppingCartTable">
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable rwd-table cimm_ShoppingCartTable" id="">
 	<thead>
                 <tr>
                     #if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
@@ -51,12 +51,12 @@
             #if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
             <td valign="top" data-th="$locale.get('product.label.Image')">                        
             	<div class="cimm_cartProdImg">
-	            	<a href="$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle.replace(" ","_")">
+	            	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')">
 	                    <span id="imageName$itemData.itemId">
 	                        #if($itemData.imageType=="URL")
-	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 	                        #else
-	                            <img src="$detailImage$itemData.imageName"  width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+	                            <img src="$detailImage$itemData.imageName"  width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 	                        #end
 	                    </span>
 	                </a>
@@ -74,7 +74,7 @@
                         <li>
                             #if($!itemData.shortDesc.length()>100)
                             <p> $!itemData.shortDesc.substring(0, 100)
-                                <a href="$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle"> $locale.get("product.label.more")</a>
+                                <a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle"> $locale.get("product.label.more")</a>
                             </p>
                             #else
                             <p> $!itemData.shortDesc </p>
@@ -87,7 +87,7 @@
                         <li><b>$locale.get("product.label.partNumber"): </b><span>$itemData.partNumber</span></li>
                         #if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 						<li>
-							<b>$locale.get("product.label.cpn"): </b>
+							<b>$locale.get("product.label.customerpartnumber"): </b>
 							#set($seperator = "")
 							#set($partList = "")
 							#foreach($customerPart in $itemData.customerPartNumberList)
@@ -110,10 +110,10 @@
         
 			<td valign="top" data-th="$locale.get('form.label.tableQty')">
                 <span id="textQty_$itemData.partNumber">$itemData.qty</span>
-                <input type="hidden" id="cartQtyForAvail$itemData.partNumber$itemData.productListId" name="cartQtyForAvail" value="$itemData.qty">
-                <input type="hidden" value="$!itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray" />
-                <input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" />
-                <input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval" />
+                <input type="hidden" id="cartQtyForAvail$itemData.partNumber$itemData.productListId" name="cartQtyForAvail" value="$!itemData.qty">
+                <input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray" />
+                <input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" />
+                <input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval" />
             </td>
             
             <td valign="top" data-th="$locale.get('product.label.extPrice')">
@@ -159,10 +159,10 @@
 				$!messageForGereralUser
 			#end
 		
-			<div class="cimm_btnGroupEnclosure">			 
+			<div class="cimm_btnGroupEnclosure punchOutBtn">			 
 			<ul>
-				<li><input type="submit" class="button" value="Submit" onclick="submitCxmlDoc();return false;"/></li>
-				<li><input type="submit" class="button" value="Cancel" onclick="cancelCxmlDoc();return false;"/></li>
+				<li><input type="submit" class="button siteBtn" value="Submit" onclick="submitCxmlDoc();return false;"/></li>
+				<li><input type="submit" class="button siteBtn" value="Cancel" onclick="cancelCxmlDoc();return false;"/></li>
 			</ul>
 			<div class="clear"></div>	 
 			</div>
@@ -180,7 +180,7 @@
         </div>
 		#end				
 <input type="hidden" value="$!disableShipCheck" id="disableShipCheck" />
-	<form name="cancelOrder" id="cancelOrder" action="/PunchoutResponse.slt" method="post">
+	<form name="cancelOrder" id="cancelOrder" action="PunchoutResponse" method="post">
 		<input type="hidden" name="cxmlParamitemCount" value = "0"/>
 		<input type="hidden" name="cxmlParamHOOK_URL" value = "$session.getAttribute("hookUrl") />
 		<input type="hidden" name="cxmlParamitemMatGroup[1]" value = ""/>
