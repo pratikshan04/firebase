@@ -6,6 +6,9 @@
     body {
         height: auto;
     }
+	a[href]:after {
+		content: none !important;
+	}
     .container {
         -webkit-print-color-adjust: exact;
     }
@@ -16,6 +19,9 @@
     .cimm_stickyPageWrap {
         margin: 0;
     }
+	#leftMenu +.col-md-9{
+		width: 100%;
+	}
     header,
     nav,
     footer,

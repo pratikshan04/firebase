@@ -1,0 +1,35 @@
+$(window).trigger("homefeaturepage");
+function diplayJavaMsg(msg){
+	alert(msg);
+}
+function callTojavaFn(){
+	var msg = "scan";
+	try {
+		Android.startscaning();
+	}
+	catch(err) {
+		webkit.messageHandlers.callbackHandler.postMessage(msg);
+		console.log('The native context does not exist yet');
+	}
+}
+function callToDb(){
+	var msg = "gotooffline";
+	try {
+		Android.gotoofflineActivity();
+	}
+	catch(err) {
+		webkit.messageHandlers.callbackHandler.postMessage(msg);
+		console.log('The native context does not exist yet');
+	}
+}
+function btnTakepicClick(){
+	JsHandler.Takepic();
+}
+function callToVisionapi(){
+	var msg="goToVisionapi";
+	try{Android.goToVisionapi();}
+	catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(msg);
+		console.log('The native context does not exist yet');
+	}
+}

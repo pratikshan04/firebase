@@ -36,7 +36,7 @@
 		#if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
             <td valign="top" data-th="$locale.get('product.label.Image')">                        
             	<div class="cimm_cartProdImg">
-	            	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ',"_")">
+	            	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ',"_")">
 	                    <span id="imageName$itemData.itemId">
 	                        #if($itemData.imageType=="URL")
 	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
@@ -72,7 +72,7 @@
                         <li><b>$locale.get("product.label.partNumber"): </b><span>$itemData.partNumber</span></li>
                         #if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 						<li>
-							<b>$locale.get("product.label.customerpartnumber"): </b>
+							<b>$locale.get("product.label.cpn"): </b>
 							#set($seperator = "")
 							#set($partList = "")
 							#foreach($customerPart in $itemData.customerPartNumberList)
@@ -97,26 +97,26 @@
 			
 			<td valign="top" data-th="$locale.get('form.label.tableQty')">
                 <span id="textQty_$itemData.partNumber">$itemData.qty</span>
-                <input type="hidden" id="cartQtyForAvail$itemData.partNumber$itemData.productListId" name="cartQtyForAvail" value="$itemData.qty">
-                <input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray" />
-                <input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" />
-                <input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval" />
+                <input type="hidden" id="cartQtyForAvail$itemData.partNumber$itemData.productListId" name="cartQtyForAvail" value="$!itemData.qty">
+                <input type="hidden" value="$!itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray" />
+                <input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" />
+                <input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval" />
             </td>
             
             <td valign="top" data-th="$locale.get('product.label.extPrice')">
             	<strong>$ $numberTool.format($numberToolFormat,$itemData.total)</strong>
             
-            <input type="hidden" name="NEW_ITEM-MATGROUP[$idx]" value = "$itemData.materialGroup"/>
-		<input type="hidden" name="NEW_ITEM-DESCRIPTION[$idx]" value="$itemData.ShortDesc""/>
+            <input type="hidden" name="NEW_ITEM-MATGROUP[$idx]" value = "$!itemData.materialGroup"/>
+		<input type="hidden" name="NEW_ITEM-DESCRIPTION[$idx]" value="$!itemData.ShortDesc""/>
 		<input type="hidden" name="NEW_ITEM-LONGTEXT_$idx:132[]" value="$!itemData.longDesc"  />
 		<input type="hidden" name="NEW_ITEM-QUANTITY[$idx]" value = "$!itemData.qty"/>
-		<input type="hidden" id='spanCxml_$itemData.partNumber' name="NEW_ITEM-PRICE[$idx]" value="$itemData.unitPrice"/>
-		<input type="hidden" name="NEW_ITEM-UNIT[$idx]" value="$itemData.uom"/>
-		<input type="hidden" name="NEW_ITEM-VENDORMAT[$idx]" value = "$itemData.partNumber"/>
+		<input type="hidden" id='spanCxml_$itemData.partNumber' name="NEW_ITEM-PRICE[$idx]" value="$!itemData.unitPrice"/>
+		<input type="hidden" name="NEW_ITEM-UNIT[$idx]" value="$!itemData.uom"/>
+		<input type="hidden" name="NEW_ITEM-VENDORMAT[$idx]" value = "$!itemData.partNumber"/>
 		<input type="hidden" name="NEW_ITEM-CURRENCY[$idx]" value = "USD"/>
-		<input type="hidden" name="idList" value='$itemData.partNumber' />
-		<input type="hidden" id='priceValue_$itemData.partNumber" />' value='$itemData.unitPrice' />
-		<input type="hidden" value="$itemData.productListId" name="shoppingCartId" />	
+		<input type="hidden" name="idList" value='$!itemData.partNumber' />
+		<input type="hidden" id='priceValue_$itemData.partNumber" />' value='$!itemData.unitPrice' />
+		<input type="hidden" value="$!itemData.productListId" name="shoppingCartId" />	
 				#set($idx = $idx+1)
 			</td>
 			</tr>

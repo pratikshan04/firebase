@@ -285,7 +285,7 @@
 							#end
 							#if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
 							<li id="custMainBlock">        
-								<b>$!locale.get("product.label.customerpartnumber"):</b>
+								<b>$!locale.get("product.label.cpn"):</b>
 								<span id="custPartBlock">
 								#if($itemData.customerPartNumber)$!itemData.customerPartNumber#end
 								#set($seperator = "")
@@ -299,7 +299,7 @@
 							</li> 
 							#else
 							<li id="custMainBlock" style="display: none;">
-								<b>$!locale.get("product.label.customerpartnumber"): </b><span id="custPartBlock"></span>
+								<b>$!locale.get("product.label.cpn"): </b><span id="custPartBlock"></span>
 							</li>
 							#end
 							#if($itemData.uom != "" && $!itemData.uom)
@@ -324,7 +324,7 @@
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
 								#if($itemData.itemAvailability && $!itemData.itemAvailability>0)
 								<li id="itemAvailable">
-									<b>$!locale.get("product.label.itemAvailable"): </b>
+									<b>$!locale.get("product.label.available"): </b>
 									<span>$!itemData.itemAvailability</span>
 								</li>
 								#else
@@ -341,6 +341,13 @@
 								#if($userLogin)
 									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink" data-popup-target="#modalBodyContent">$!locale.get("label.text.viewAllBranchAvailability")</a></span></li>
 								#end
+							#else
+								#if($itemData.availQty>0)
+						    		<b>$!locale.get("product.label.available"): </b>
+									<span>$!itemData.availQty</span>
+						    	#else
+						    		<span class='text-danger'>Call for Availability</span>
+						    	#end
 							#end
 						</ul>
 					</div>
@@ -438,9 +445,9 @@
 											#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
 											<a id="$!groupPop" class="popMsg hideMe"></a>
 											#if($userLogin)
-												<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown"><i class="fa fa-plus"></i>$!locale.get("product.label.addToShoppingList")</a>
+												<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown"><i class="fa fa-plus"></i>$!locale.get("marketBasket.button.addToProductGroup")</a>
 											#else
-												<a data-toggle="modal" data-target="#loginModal"><i class="fa fa-plus"></i>$!locale.get("product.label.addToShoppingList")</a>
+												<a data-toggle="modal" data-target="#loginModal"><i class="fa fa-plus"></i>$!locale.get("marketBasket.button.addToProductGroup")</a>
 											#end
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 												<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
@@ -536,7 +543,7 @@
 										<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
 										<span></span>
 									</label>
-									<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')N/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
+									<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
 										<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 										<span class="imgForSend" style="display:none !important;">
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
@@ -567,7 +574,9 @@
 									 #end
 								 </td>
 								 <td class="removeForSend">
-								 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='#if($productModeitemData.minOrderQty) $!productModeitemData.minOrderQty #else 1 #end' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+								 	#set($minQty = 1)
+								 	#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
+								 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 								 </td>
 							     <td itemprop="sku">
 								<span id="uomSpan_$!productModeitemData.partNumber.replaceAll('\s+','_')">
@@ -606,7 +615,7 @@
 								<td class="removeForSend">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 								    	#if($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $userLogin)
-								    		#if($itemData.price>0)
+								    		#if($productModeitemData.price>0)
 								    			<span data-select='addtoCartbtn_$!productModeitemData.partNumber'>
 													<a href="javascript:void(0)" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
@@ -628,15 +637,15 @@
 							    		#end
 									#end
 									<!-- My Product Group-->
-									<div class="productGroupBtn dropdown mTop-2">
+									<div class="dropdown groupList mTop-2">
 										#set($groupPop = "ulg"+$!productModeitemData.itemId+"_pop")
 										<a id="$!groupPop" class="popMsg hideMe"></a>
 										#if($userLogin)
-											<a id='linkg$!itemData.itemId' class="dropdown-toggle log-addTocart-btn btn-sm" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
-												$!locale.get("product.label.addToShoppingList")
+											<a id='linkg$!itemData.itemId' class="dropdown-toggle cimm_inlineButton" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
+												$!locale.get("marketBasket.button.addToProductGroup")
 											</a>
 										#else
-											<a data-toggle="modal" data-target="#loginModal" class="log-addTocart-btn btn-sm"><span>$!locale.get("product.label.addToShoppingList")</span></a>
+											<a data-toggle="modal" data-target="#loginModal" class="cimm_inlineButton"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
 										#end
 										<ul id="ulg$!productModeitemData.itemId" class="dropdown-menu">
 											<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
@@ -658,7 +667,8 @@
 	</div>
 	</div>
 #end
-	#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0)
+	#if(($productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0)
+	<!-- <div class="productAccordionWrap"></div> -->
 	#else
 	<div class="row">
 		<div class="col-md-12">
@@ -796,7 +806,7 @@
 	  <li itemscope itemtype="http://schema.org/Product">
 		#itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
 		<div class="cimm_linkItemImg">
-			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span> 
 			 #if($customerbought.imageName.contains("http") || $linkItem.imageType=="URL")
 				 <img id="imageName$!customerbought.itemId" image="image" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
@@ -814,7 +824,7 @@
 			   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
 			   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
 			   			#end
-			   			<a class="cimm_linkProdTitle" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			   			<a class="cimm_linkProdTitle" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			   				
 					 		#if($linkItemTitle.length()>18)
 					 			$!itemTitle.substring(0, 18)...
@@ -896,7 +906,7 @@
 					        #itemListHiddenFields($!linkItem.partNumber, $!linkItem.itemPriceId, $!linkItem.qty, $!linkItem.uom, $!linkItem.price, $!linkItem.saleQty, $!linkItem.itemId, $!linkItem.displayFrieghtAlert, $!linkItem.packageQty, $!linkItem.itemAvailability, $!linkItem.srchTyp, $!navigationType,$!linkItem.brandId,$!linkItem.manfId, $!linkItem.altPartNumber1)
 					 			<input type="hidden" id='packageQty_$!linkItem.partNumber' value="1" />
 								<div class="cimm_slideItemImg">
-					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')N/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 										 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #else
@@ -909,7 +919,7 @@
 								 	<li>
 								 		<h4 itemprop="name">
 								 			#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
-									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')N/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 										 		#if($linkItemTitle.length()>30)
 										 			#$!linkItemTitle.substring(0, 30)...
 										 		#else
@@ -933,7 +943,7 @@
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
-										 <b>$!locale.get("product.label.itemAvailable") : </b>
+										 <b>$!locale.get("product.label.available") : </b>
 										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
@@ -1213,7 +1223,7 @@ function LoadRecentViewedItem(){
 			<ul id="customerAlsoViewedContent" class="cimm_caroWrap">
 				<li>
 					<div class="cimm_linkItemImg">
-						<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')$!itemcustomerAlsoViewed.replace(" ","_")">
+						<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">
 							<img id="imageName$!customerAlsoViewed.itemId" src="$!customerAlsoViewed.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 						</a>
 					</div>
@@ -1221,7 +1231,7 @@ function LoadRecentViewedItem(){
 						<ul>
 							<li>
 								<h4>
-									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
+									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
 							cimm_slideItemImg	</h4>
 							</li>
 						</ul>

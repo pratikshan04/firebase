@@ -89,12 +89,14 @@ $(window).load(function(){
 	initMasonry();
 });
 function initMasonry(){
-	$('.grid').masonry({
-		  itemSelector: '.grid-item',
-		  columnWidth: 220,
-		  gutter: 16,
-		  fitWidth: true
-	});
+	if($(".grid").length > 0){
+		$('.grid').masonry({
+			  itemSelector: '.grid-item',
+			  columnWidth: 220,
+			  gutter: 16,
+			  fitWidth: true
+		});
+	}
 }
 function brandListScroll(val){
 	var fixHeight = $('.cimm_brandAtoZletters').height();

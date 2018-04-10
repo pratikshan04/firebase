@@ -1,85 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+$defaultFont: 'RobotoRegular';
+$headingFont: 'RobotoBlack';
+$buttonFont: 'RobotoRegular';
 
-@font-face {
-    font-family: 'HelveticaNeue';
-    src: url('./fonts/HelveticaNeue.eot?#iefix') format('embedded-opentype'), url('./fonts/HelveticaNeue.woff') format('woff'), url('./fonts/HelveticaNeue.ttf') format('truetype'), url('./fonts/HelveticaNeue.svg#HelveticaNeue') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face { 
-    font-family: 'HelveticaNeue-Bold';
-    src: url('./fonts/HelveticaNeue-Bold.eot?#iefix') format('embedded-opentype'), url('./fonts/HelveticaNeue-Bold.woff') format('woff'), url('./fonts/HelveticaNeue-Bold.ttf') format('truetype'), url('./fonts/HelveticaNeue-Bold.svg#HelveticaNeue-Bold') format('svg');
-    font-weight: normal; 
-    font-style: normal;
-}    
-
-@font-face { 
-    font-family: 'HelveticaNeue-Medium';
-    src: url('./fonts/HelveticaNeue-Medium.eot?#iefix') format('embedded-opentype'), url('./fonts/HelveticaNeue-Medium.woff') format('woff'), url('./fonts/HelveticaNeue-Medium.ttf') format('truetype'), url('./fonts/HelveticaNeue-Medium.svg#HelveticaNeue-Medium') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'HelveticaNeue-CondensedBold';
-    src: url('./fonts/HelveticaNeue-CondensedBold.eot?#iefix') format('embedded-opentype'), url('./fonts/HelveticaNeue-CondensedBold.woff') format('woff'), url('./fonts/HelveticaNeue-CondensedBold.ttf') format('truetype'), url('./fonts/HelveticaNeue-CondensedBold.svg#HelveticaNeue-CondensedBold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'HelveticaNeueRegular';
-    src: url('./fonts/HelveticaNeueRegular.eot?#iefix') format('embedded-opentype'), url('./fonts/HelveticaNeueRegular.woff') format('woff'), url('./fonts/HelveticaNeueRegular.ttf') format('truetype'), url('./fonts/HelveticaNeueRegular.svg#HelveticaNeueRegular') format('svg');
-    font-weight: 700;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Glyphicons Halflings';
-    src: url('./fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('./fonts/glyphicons-halflings-regular.woff') format('woff'), url('./fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('./fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'FontAwesome5ProRegular';
-    src: url('./fonts/fa-regular-400.eot?#iefix') format('embedded-opentype'), url('./fonts/fa-regular-400.woff') format('woff'), url('./fonts/fa-regular-400.ttf') format('truetype'), url('./fonts/fa-regular-400.svg#fa-regular-400') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
- 
- 
-$defaultFont: 'Roboto', 'HelveticaNeue', sans-serif ;
-$headingFont: 'HelveticaNeue-Medium';
-$buttonFont: 'HelveticaNeue';
-
-$primaryColor: #54575a;
+$primaryColor: #46acee;
 $secandaryColor: #949ca0;
-$bodyFontColor: #54575a;
-$skylStyle: #00a8e3;
-$descColor: #7e848a;
+$bodyFontColor: #404040;
 $darkGrayColorTwo:#585858;
 $lightGrayColorOne:#E5E5E5;
 $lightGrayColorTwo:#F5F5F5;
 $lightShadowColor: #ABABAB;
-$inputBackground : #ecf3f9;
-$borderColor: #c4c7ca;
+$borderColor: #A1A1A1;
 $white: #FFF;
 $black:#000;
-$btn_Bg: #ffa400; 
 
 $headerNavLinkColor: #FFF;
 $headerNavLinkFontSize: 12px;
 
-$mainNavBackground: #696969;
+$mainNavBackground: #404040;
 $mainNavLinkColor: #FFF;
 $mainNavLinkFontSize: 14px;
 $navDropdownBg: #EBEBEB;
 
 $leftNavTitleBackgroud: #FFF;
 $leftNavTitleFontSize: 14px;
-$leftNavTitleFontColor: $primaryColor;
+$leftNavTitleFontColor: #404040;
 $leftNavLabelFontSize: 12px;
-$leftNavLabelFontColor: $primaryColor;
+$leftNavLabelFontColor: #404040;
 $leftNavTitleFontFamily: $headingFont;
-$quickOrderBtnBgColor: #7e848a;
 
 $footerLinkFontSize: 12px;
 $footerHeadingColor: $white;
@@ -89,8 +36,12 @@ $tabHeadingBackgroundColor: #ebebeb;
 $tabHeadingFontColor: #404040;
 $tabHeadingActiveBackgroundColor: #404040;
 $tabHeadingActiveFontColor : $white;
-$tabHeadingIconContent: "\f0fe";
-$tabHeadingActiveIconContent: "\f146";
-$tabHeadingIconFontFamily: FontAwesome5ProRegular;
+$tabHeadingIconContent: "\e113";
+$tabHeadingActiveIconContent: "\e114";
+$tabHeadingIconFontFamily: 'Glyphicons Halflings';
 $tabHeadingFontSize: 14px;
+
 $packDescColor: #ed7118;
+$eventTabBg: #A1A1A1;
+
+$autocomleteBg: #e6e6e6

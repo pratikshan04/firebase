@@ -1,199 +1,252 @@
 <ul class="nav navbar-nav clearAfter">
-	<li class="dropdown"><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a>
-	<div class="dropdown-menu clearAfter">
-	#set($count=0)
-	#foreach($categoryMenu in $categMenu)
-	#if($count == 0)
-	<ul>
-	#end
-	#set($count=$count+1)
-	<li>
-	<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="$categoryMenu.categoryName">
-	$categoryMenu.categoryName
-	</a>
-	</li>
-	#if($count==9 && $count<=9)
-	#set($count=0)
-	</ul>
-	#end
-	#end
-	#if($count>0)
-	</ul>
-	#end
-	</div>
-	</li>
+    <li class="dropdown"><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") #if($categMenu.size()>0)<i class="fa"></i>#end</a>
+        <div class="dropdown-menu clearAfter">
+		#set($count=0)
+		#set($categoryListSize = 0)
+		#foreach($categoryMenu in $categMenu)
+			#if($categoryListSize < 26)
+			#if($count == 0)
+			<ul>
+			#end
+			#set($count=$count+1)
+			<li>
+				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="$categoryMenu.categoryName">
+					$categoryMenu.categoryName
+				</a>
+			</li>
+			#if($count==9 && $count<=9)
+			#set($count=0)
+			</ul>
+			#end
+			#end
+			#set($categoryListSize = $categoryListSize+1)
+		#end
+		#if($count>0)
+		</ul>
+		#end
+		#if($categoryListSize > 26)
+		<p class="text-right pTop-2 clearBoth mRight-3"><a href="$locale.get('website.url.ProductCategory')" class="cimm_inlineButton">$locale.get('event.label.viewAll') $locale.get('navigation.label.shopProducts')</a></p>
+		#end
+		</div>
+    </li>
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
-	<li id="brandLink" class="dropdown"><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa"></i>#end</a>
-	<div class="cimm_shopByBrand dropdown-menu">
-	#set($brandListSize = 0)
-	#if($brandList.size()>0)
-	<ul class="clearAfter">
-	#foreach($brands in $brandList)
-	#if($brandListSize < 40)
-	<li><a href="$brands.brandId$locale.get('website.url.ShopByBrand')$brands.itemUrl.toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+','')">$brands.brandName</a></li>
-	#set($brandListSize = $brandListSize+1)
-	#end
-	#end
-	</ul>
-	#end
-	#if($brandListSize > 39)
-	<p class="text-right"><a href='$locale.get("website.url.Brands")' class="cimm_inlineButton"><i class="fa fa-lg fa-eye"></i> $locale.get('product.label.viewAllBrands') <i class="fa fa-lg fa-angle-double-right"></i></a></p>
-	#end
-	</div>    
+	<li class="dropdown"><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa"></i>#end</a>
+		<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
+		#set($brandListSize = 0)
+		#set($brandIndex = 0)
+		#foreach($brands in $brandList)
+			#if($brandIndex < 27)
+			#if($brandListSize == 0)
+			<ul>
+			#end
+			#set($brandListSize = $brandListSize+1)
+			<li>
+				<a href="$brands.brandId$locale.get('website.url.ShopByBrand')$brands.brandName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">
+					$brands.brandName
+				</a>
+			</li>
+			#if($brandListSize==9 && $brandListSize<=9)
+			#set($brandListSize=0)
+			</ul>
+			#end
+			#end
+			#set($brandIndex = $brandIndex+1)
+		#end
+		#if($brandListSize>0)
+		</ul>
+		#end
+		#if($brandList.size() > 27)
+		<p class="text-right pTop-2 clearBoth mRight-3"><a href='$locale.get("website.url.Brands")' class="cimm_inlineButton">$locale.get('product.label.viewAllBrands')</a></p>
+		#end
+		</div>
 	</li>
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
-	<li class="dropdown"><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers") #if($manufacturerList.size() > 0)<i class="fa"></i>#end</a>
-	<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
-	#set($manufacturerListSize = 0) #set($mfgIndex = 0)
-	#if($manufacturerList.size()>0)
-	#foreach($manufacturers in $manufacturerList)
-	#if($mfgIndex < 3)
-	#if($manufacturerListSize == 0)
-	<ul>
-	#end
-	#set($manufacturerListSize = $manufacturerListSize+1)
-	<li><a href="$manufacturers.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturers.itemUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','')">$manufacturers.manufacturerName</a></li>
-	#if($manufacturerListSize==9 && $manufacturerListSize<=9)
-	#set($manufacturerListSize=0) #set($mfgIndex = $mfgIndex+1)
-	</ul>
-	#end
-	#end
-	#end
-	#if($manufacturerListSize>0)
-	</ul>
-	#end
-	#end
-	#if($manufacturerList.size() > 26)
-	<p class="text-right pTop-2 clearBoth mRight-3"><a href='$locale.get("website.url.Manufacturers")' class="cimm_inlineButton">$locale.get('product.label.viewAllManufacturers')</a></p>
-	#end
-	</div>    
+    <li class="dropdown"><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers") #if($manufacturerList.size() > 0)<i class="fa"></i>#end</a>
+		<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
+		#set($manufacturerListSize = 0)
+		#set($mfgIndex = 0)
+		#if($manufacturerList.size()>0)
+			#foreach($manufacturers in $manufacturerList)
+				#if($mfgIndex < 3)
+					#if($manufacturerListSize == 0)
+					<ul>
+					#end
+					#set($manufacturerListSize = $manufacturerListSize+1)
+					<li><a href="$manufacturers.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturers.manufacturerName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">$manufacturers.manufacturerName</a></li>
+					#if($manufacturerListSize==9 && $manufacturerListSize<=9)
+						#set($manufacturerListSize=0)
+						#set($mfgIndex = $mfgIndex+1)
+						</ul>
+					#end
+				#end
+			#end
+			#if($manufacturerListSize>0)
+			</ul>
+			#end
+		#end
+		#if($manufacturerList.size() > 26)
+		<p class="text-right pTop-2 clearBoth mRight-3"><a href='$locale.get("website.url.Manufacturers")' class="cimm_inlineButton">$locale.get('product.label.viewAllManufacturers')</a></p>
+		#end
+		</div>    
 	</li>
 	#end
-	#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
-	#if($userLogin)
-	#if($LayoutName != "QuickOrderStdPage")
-	<li class="dropdown hideForDevices"><a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-	<div class="dropdown-menu" id="quickOrderPadDrop">
-	<div class="cartHead clearAfter">
-	<h5><a href="#speedEntry">Speed Entry</a></h5>
-	<h5><a href="#copyPaste">Copy Paste</a></h5>
-	<h5><a href="#fileUopload">File Upload</a></h5>
-	</div>
-	<div class="cartBody clearAfter">
-	<div id="speedEntry" class="text-center">
-	<table class="table table-striped table-bordered display rwd-table">
-	<thead>
-	<tr><th class="heading">KEYWORD</th><th class="heading">QUANTITY</th></tr>
-	</thead>
-	<tbody>
-	<tr>
-	<td><input type="text"></td>
-	<td><input type="text" class="quantity"></td>
-	</tr>
-	<tr>
-	<td><input type="text"></td>
-	<td><input type="text" class="quantity"></td>
-	</tr>
-	<tr>
-	<td><input type="text"></td>
-	<td><input type="text" class="quantity"></td>
-	</tr>
-	<tr>
-	<td><input type="text"></td>
-	<td><input type="text" class="quantity"></td>
-	</tr>
-	<tr>
-	<td><input type="text"></td>
-	<td><input type="text" class="quantity"></td>
-	</tr>
-	</tbody>
-	</table>
-	<a href='javascript:void(0);' class="showMoreEntryFieldsLink button" onclick="QuickOrder.showMoreOrderPad();">Show More Entry Fields</a>
-	<h4>If Duplicates in input:</h4>
-	<div class="mBottom-2">
-	<label for="CombineHead1"  class="customRadioBtn">
-	<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked>
-	<span>Combine</span>
-	</label>
-	<label for="SeparateHead1" class="customRadioBtn">
-	<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1">
-	<span>Separate</span>
-	</label>
-	<label for="RemoveHead1" class="customRadioBtn">
-	<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1">
-	<span>Remove</span>
-	</label>
-	</div> 
-	<div class="quickOrdeAddtoCart center">
-	<button class="cimm_inlineButton" id="submitBtnPad" onclick="QuickOrder.headValidateOrderPad();">$locale.get('quickorder.button.submit')</button>
-	</div>
-	</div>
-	<div id="copyPaste" class="text-center hideMe">
-	<h6>WANT TO SAVE TIME AND ORDER FASTER?</h6>
-	<p>Simply copy & paste Items from your file into the field below using the following format:</p>
-	<h5>$!locale.get("product.heading.enterOrCopyPaste")</h5>
-	<textarea id="headerCopyPasteText" name="copyPasteText" rows='#if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT"))$!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")#else 50 #end' cols="60"></textarea>
-	<h4>If Duplicates in input:</h4>
-	<div class="mBottom-2">
-	<label for="CombineHead2" class="customRadioBtn">
-	<input type="radio" name="QuickOrderHeaderCopyPaste" value="Combine" id="CombineHead2" checked>
-	<span>Combine</span>
-	</label>
-	<label for="SeparateHead2" class="customRadioBtn">
-	<input type="radio" name="QuickOrderHeaderCopyPaste" value="Separate" id="SeparateHead2">
-	<span>Separate</span>
-	</label>
-	<label for="RemoveHead2" class="customRadioBtn">
-	<input type="radio" name="QuickOrderHeaderCopyPaste" value="Remove" id="RemoveHead2">
-	<span>Remove</span>
-	</label>
-	</div>
-<div class="quickOrdeAddtoCart center">
-<button class="cimm_inlineButton" id="submitBtnQOCP" onclick="return QuickOrder.quickOrderHeaderCopyPaste();">$locale.get('quickorder.button.submit')</button>
-</div>
-</div>
-<div id="fileUopload" class="hideMe">
-<div class="fileUploadDescription">				
-<p class="mBottom-3">File Upload is supported by .xlsx <a href="$webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</p>
-<p class="mBottom-3">Use Speed Entry to manually enter keyword to upload it to quickly create a cart.</p>
-<p class="mBottom-3">File upload feature supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 400 #end records</p>
-</div>
-<div class="clearAfter uploadImage_wrap">
-<form id="uploadForm" method="post" enctype="multipart/form-data" action="QuickOrderFileUpload.slt">
-<input type="hidden" id="trigerPoint" value="quickorder"/>
-<div id="cimm_headerFileUpload" class="uploadFile">
-<span>Choose File</span>
-<input type="file" name="datafile" id="headerDataFile">
-</div>
-<button type="submit" class="cimm_inlineButton pullLeft" onclick="return QuickOrder.validateHeadFileUpload();">$locale.get('button.label.Upload')</button>
-<div class="clear"></div>
-</form>
-</div>
-<h4 class="text-center">If Duplicates in input:</h4>
-<div class="mBottom-2 text-center">
-<label for="CombineHead3" class="customRadioBtn">
-<input type="radio" name="QuickOrderHeaderFileUpload" value="Combine" id="CombineHead3" checked>
-<span>Combine</span>
-</label>
-<label for="SeparateHead3" class="customRadioBtn">
-<input type="radio" name="QuickOrderHeaderFileUpload" value="Separate" id="SeparateHead3">
-<span>Separate</span>
-</label>
-<label for="RemoveHead3" class="customRadioBtn">
-<input type="radio" name="QuickOrderHeaderFileUpload" value="Remove" id="RemoveHead3">
-<span>Remove</span>
-</label>
-</div>
-</div>
-</div>
-</div>
-</li>
-#else
-<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-#end
-#else
-<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-#end
-#end
+   #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
+    #if($userLogin)
+		#if($LayoutName != "QuickOrderStdPage")
+		<li class="dropdown hideForDevices"><a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+			<div class="dropdown-menu" id="quickOrderPadDrop">
+				<div class="cartHead clearAfter">
+					<h5><a href="#speedEntry">Speed Entry</a></h5>
+					<h5><a href="#copyPaste">Copy Paste</a></h5>
+					<h5><a href="#fileUopload">File Upload</a></h5>
+				</div>
+				<div class="cartBody clearAfter">
+					<div id="speedEntry" class="text-center">
+						<table class="table table-striped table-bordered display rwd-table">
+							<thead>
+								<tr><th class="heading">KEYWORD</th><th class="heading">QUANTITY</th></tr>
+							</thead>
+							<tbody>
+								<tr>
+								    <td><input type="text"></td>
+								    <td><input type="text" class="quantity"></td>
+							    </tr>
+							    <tr>
+								    <td><input type="text"></td>
+								    <td><input type="text" class="quantity"></td>
+							    </tr>
+							    <tr>
+								    <td><input type="text"></td>
+								    <td><input type="text" class="quantity"></td>
+							    </tr>
+							    <tr>
+								    <td><input type="text"></td>
+								    <td><input type="text" class="quantity"></td>
+							    </tr>
+							     <tr>
+								    <td><input type="text"></td>
+								    <td><input type="text" class="quantity"></td>
+							    </tr>
+						    </tbody>
+						</table>
+						<a href='javascript:void(0);' class="showMoreEntryFieldsLink button" onclick="QuickOrder.showMoreOrderPad();">Show More Entry Fields</a>
+						<h4>If Duplicates in input:</h4>
+						<div class="mBottom-2">
+							<label for="CombineHead1"  class="customRadioBtn">
+								<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked>
+								<span>Combine</span>
+							</label>
+							<label for="SeparateHead1" class="customRadioBtn">
+								<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1">
+								<span>Separate</span>
+							</label>
+							<label for="RemoveHead1" class="customRadioBtn">
+								<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1">
+								<span>Remove</span>
+							</label>
+						</div> 
+						<div class="quickOrdeAddtoCart center">
+							<button class="cimm_inlineButton" id="submitBtnPad" onclick="QuickOrder.headValidateOrderPad();">$locale.get('quickorder.button.submit')</button>
+						</div>
+					</div>
+					<div id="copyPaste" class="text-center hideMe">
+						<h6>WANT TO SAVE TIME AND ORDER FASTER?</h6>
+						<p>Simply copy & paste Items from your file into the field below using the following format:</p>
+						<h5>$!locale.get("product.heading.enterOrCopyPaste")</h5>
+						<textarea id="headerCopyPasteText" name="copyPasteText" rows='#if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT"))$!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")#else 50 #end' cols="60"></textarea>
+						<h4>If Duplicates in input:</h4>
+						<div class="mBottom-2">
+							<label for="CombineHead2" class="customRadioBtn">
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Combine" id="CombineHead2" checked>
+								<span>Combine</span>
+							</label>
+							<label for="SeparateHead2" class="customRadioBtn">
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Separate" id="SeparateHead2">
+								<span>Separate</span>
+							</label>
+							<label for="RemoveHead2" class="customRadioBtn">
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Remove" id="RemoveHead2">
+								<span>Remove</span>
+							</label>
+						</div>
+						<div class="quickOrdeAddtoCart center">
+							<button class="cimm_inlineButton" id="submitBtnQOCP" onclick="return QuickOrder.quickOrderHeaderCopyPaste();">$locale.get('quickorder.button.submit')</button>
+						</div>
+					</div>
+					<div id="fileUopload" class="hideMe">
+						<div class="fileUploadDescription">				
+							<p class="mBottom-3">File Upload is supported by .xlsx <a href="$webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</p>
+							<p class="mBottom-3">Use Speed Entry to manually enter keyword to upload it to quickly create a cart.</p>
+							<p class="mBottom-3">File upload feature supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 400 #end records</p>
+						</div>
+						<div class="clearAfter uploadImage_wrap">
+							<form id="uploadForm" method="post" enctype="multipart/form-data" action="QuickOrderFileUpload.slt">
+								<input type="hidden" id="trigerPoint" value="quickorder"/>
+								<div id="cimm_headerFileUpload" class="uploadFile">
+								<span>Choose File</span>
+								<input type="file" name="datafile" id="headerDataFile">
+								</div>
+								<button type="submit" class="cimm_inlineButton pullLeft" onclick="return QuickOrder.validateHeadFileUpload();">$locale.get('button.label.Upload')</button>
+								<div class="clear"></div>
+							</form>
+						</div>
+						<h4 class="text-center">If Duplicates in input:</h4>
+						<div class="mBottom-2 text-center">
+							<label for="CombineHead3" class="customRadioBtn">
+								<input type="radio" name="QuickOrderHeaderFileUpload" value="Combine" id="CombineHead3" checked>
+								<span>Combine</span>
+							</label>
+							<label for="SeparateHead3" class="customRadioBtn">
+								<input type="radio" name="QuickOrderHeaderFileUpload" value="Separate" id="SeparateHead3">
+								<span>Separate</span>
+							</label>
+							<label for="RemoveHead3" class="customRadioBtn">
+								<input type="radio" name="QuickOrderHeaderFileUpload" value="Remove" id="RemoveHead3">
+								<span>Remove</span>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+		#else
+		<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		#end
+	#else
+	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+	#end
+	#end
+	#foreach($topMenu in $topStaticMenu)
+		<li class="dropdown">
+			#if($topMenu.level1Menu && $topMenu.level1Menu =="Quick Order Pad")
+				#if($userLogin)
+					<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
+				#else
+					<a href="javascript:void(0);" onclick="loginPop(); return false;" data-staticLink="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end">$topMenu.level1Menu</a>
+				#end
+			#elseif($topMenu.level1Menu && $$topMenu.level1Menu =="Locations")
+				<a href="$topMenu.level1Menu">$topMenu.level1Menu  #if($!CommonDBQueryWareHouseList.size()>0)<i class="fa"></i>#end</a>
+				#if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
+				<ul class="dropdown-menu">
+					#foreach($wareHouseModel in $CommonDBQueryWareHouseList.entrySet())
+						<li class="locationLink"><a href="javascript:void(0);">$!wareHouseModel.getValue()</a></li>
+					#end
+				</ul>
+				#end
+			#else
+				<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<i class="fa"></i>#end</a></a>
+			#end
+		
+			#if($topMenu.menuList && $topMenu.menuList.size()>0)
+			<ul class="dropdown-menu">
+				#foreach($subStaticMenu in $topMenu.menuList)
+					<li>
+						<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
+					</li>
+				#end
+			</ul>
+			#end
+		</li>
+	#end
 </ul>

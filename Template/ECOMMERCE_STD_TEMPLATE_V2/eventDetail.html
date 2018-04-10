@@ -33,7 +33,7 @@
 			</li>
 		</ul>
 		<div class="clear"></div>
-		<p><a href='$!locale.get("website.url.eventCalaender")'>$!locale.get("event.label.backToEventsCalendar")</a></p>
+		<p><a href='/EventCalendar'>$!locale.get("event.label.backToEventsCalendar")</a><br/></p>
 		#if($eventsList.fileLocation)
 			#if($eventsList.fileLocation != "No Attachment")
 				<p class="mTop-3"><img src="$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>

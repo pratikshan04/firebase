@@ -296,7 +296,7 @@ var QuickOrder = {};
 							}
 						}else{
 							unblock();
-							bootAlert("small","error","Error","Entered text is not in expected format. \nPlease copy the text with below pattern. \nQuantity [COMMA] Part#");
+							bootAlert("small","error","Error","Entered text is not in expected format. \nPlease copy the text with below pattern. \nQuantity [TAB or COMMA] Part#");
 							submitFlag = false;
 							break;
 						}

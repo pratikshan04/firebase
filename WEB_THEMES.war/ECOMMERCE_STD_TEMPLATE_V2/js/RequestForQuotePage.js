@@ -1,5 +1,5 @@
-var $webThemes = $("#webThemePath").val();
-$.getScript($webThemes+'js/bootstrap-datepicker.min.js', function(){
+var webThemes = $("#webThemePath").val();
+$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
 	var currentMonth = date.getMonth();
 	var currentDate = date.getDate();

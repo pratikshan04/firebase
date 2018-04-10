@@ -26,7 +26,7 @@
 				<li>				
 					<div class="cimm_slideItemImg clearAfter">
 						<!-- <b>$itemCount)</b> -->
-						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')">                    
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">                    
 							#if($itemData.imageName.contains("http"))
 							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
 							#else
@@ -39,7 +39,7 @@
 							<li>
 								<h5>
 									#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
-									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 									#if($linkItemTitle.length()>22)
 										$linkItemTitle.substring(0, 22)...
 									#else
@@ -78,7 +78,7 @@
 				<li>				
 					<div class="cimm_linkItemImg clearAfter">
 					<!-- <b>$itemCount)</b> -->
-						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')">
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">
 							#if($itemData.imageName.contains("http"))
 							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
 							#else
@@ -91,7 +91,7 @@
 							<li>
 								<h5>
 								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
-								<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+								<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 								#if($linkItemTitle.length()>22)
 									$linkItemTitle.substring(0, 22)...
 								#else
@@ -109,6 +109,9 @@
 								<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
 							#end
 							</span>
+							</li>
+							<li>
+								<span>$itemData.resultDescription</span>
 							</li>
 						</ul>
 						</div>
@@ -133,7 +136,7 @@
 			#set($itemDataListArray = $multiResultObj.getValue())
 			#set($resultCount = 0)
 			#if($itemDataListArray.get(0).getItemResultCount()>0)
-				#set($resultCount = $itemDataListArray.size())
+				#set($resultCount = $itemDataListArray.get(0).getItemResultCount())
 			#else
 				#set($resultCount = $itemDataListArray.get(0).getResultCount())
 			#end	
@@ -268,7 +271,7 @@
 </div>
 <script>
 var webThemes = $("#webThemePath").val();
-jQuery.getScript(webThemes+'/js/multiTab.min.js', function(){
+jQuery.getScript(webThemes+'js/multiTab.min.js', function(){
 	$('#orderResults').multiTab({
 		transitionEffect:"fade"
 	});

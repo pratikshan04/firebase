@@ -49,16 +49,16 @@
 					#set($itemTitle=$compareItem.brandName+" "+$!compareItem.manufacturerPartNumber)
 					<td>
 						#if($compareItem.imageName.contains("http"))
-						<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-')">
+						<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
 							<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 						</a>
 						#else
-						<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-')">
+						<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
 							<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 						</a>
 						#end
 						<b>
-							<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-')" id="itemTitle$compareItem.itemId">
+							<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')" id="itemTitle$compareItem.itemId">
 								<span  id="itemTitle$compareItem.itemId">$compareItem.brandName $!compareItem.manufacturerPartNumber</span>
 							</a>
 						</b>
@@ -98,21 +98,21 @@
                         #end
                         #if($showSimilar >= $diffrenceCount)
                             <td class="similar">
-                                <span id="partNumber$mainPartNo.itemId">$mainPartNo.partNumber</span>
+                                <span id="partNumber$mainPartNo.itemId">$!mainPartNo.partNumber</span>
                             </td>
                         #else
                             <td class="different">
-                                <span id="partNumber$mainPartNo.itemId">$mainPartNo.partNumber</span>
+                                <span id="partNumber$mainPartNo.itemId">$!mainPartNo.partNumber</span>
                             </td>
                         #end
-                        <input type="hidden" id="itmId_$mainPartNo.itemId" value="$mainPartNo.partNumber"/>
-                        <input type="hidden" value="$mainPartNo.partNumber" name="idList" />
-                        <input type="hidden" id='priceValue_$mainPartNo.partNumber' value='$mainPartNo.price' />
-                        <input type="hidden" id='salesQtyVal_$mainPartNo.partNumber' value='$mainPartNo.saleQty' />
-                        <input type="hidden" id='itmId_$mainPartNo.partNumber' value='$mainPartNo.partNumber' />
-                        <input type="hidden" id='packageQty_$mainPartNo.partNumber' value="$mainPartNo.packageQty" />
-						<input type="hidden" value="$mainPartNo.partNumber" name="idListPrice" />
-						<input type="hidden" value="$mainPartNo.uom" id="uomValue_$mainPartNo.partNumber" />
+                        <input type="hidden" id="itmId_$!mainPartNo.itemId" value="$!mainPartNo.partNumber"/>
+                        <input type="hidden" value="$!mainPartNo.partNumber" name="idList" />
+                        <input type="hidden" id='priceValue_$!mainPartNo.partNumber' value='$!mainPartNo.price' />
+                        <input type="hidden" id='salesQtyVal_$!mainPartNo.partNumber' value='$!mainPartNo.saleQty' />
+                        <input type="hidden" id='itmId_$!mainPartNo.partNumber' value='$!mainPartNo.partNumber' />
+                        <input type="hidden" id='packageQty_$!mainPartNo.partNumber' value="$!mainPartNo.packageQty" />
+						<input type="hidden" value="$!mainPartNo.partNumber" name="idListPrice" />
+						<input type="hidden" value="$!mainPartNo.uom" id="uomValue_$mainPartNo.partNumber" />
 						
                     #end
                 </tr>                   

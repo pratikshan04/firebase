@@ -17,8 +17,8 @@ $(function() {
 		}
 	});
 });
-var $webThemes = $("#webThemePath").val();
-$.getScript($webThemes+'js/bootstrap-datepicker.min.js', function(){
+var webThemes = $("#webThemePath").val();
+$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	var today = new Date();
 	var month = today.getMonth() - 1,
 		year = today.getFullYear(),

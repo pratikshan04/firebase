@@ -1,5 +1,5 @@
 <div class="shippingAddres" id="ShipDiv">
-#set($jsPath = $hostName+$webThemes+$siteName+"/js/"+$LayoutName+".js")
+#set($jsPath = $hostName+$webThemes+"/"+$siteName+"/js/"+$LayoutName+".js")
 <script type="text/javascript" src="$jsPath"></script>
 <h3 class="cimm_pageTitle">$!locale.get("breadcrumbs.label.$!LayoutName")</h3>
 #if($shipEntity.size()>0)
@@ -7,21 +7,15 @@
 	<div class="shipping">
 		<div class="row mBottom-3">
 			<div class="col-md-6 col-sm-6 col-xs-6 text-left">
-				<a href="javascript:void(0);" onclick="scynInitiate();" class="cimm_refreshList"><i class="far fa-sync-alt"></i> &nbsp;$!locale.get("product.label.refreshShippingInformation")</a>
+				<a href="javascript:void(0);" onclick="scynInitiate();" class="cimm_refreshList"><i class="fa fa-lg fa-refresh"></i> &nbsp;$!locale.get("product.label.refreshShippingInformation")</a>
 				<div id="progressBar" class="text-success mTop-1">
 					#if($!session.getAttribute("scynEntityStatus")!="Completed" && $!session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 					$!session.getAttribute("scynEntityStatus")
 					#end
 				</div>
-				<div class="pullLeft">					
-					<label class="customCheckBox" >
-						<input type="checkbox" name="setAsDefault" id="setAsDefault" onchange="checkAsDefault(this);"/>
-						<span>$locale.get("form.label.setAsDefault")</span>
-					</label>
-				</div>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6 text-right">
-				<a class="cimm_inlineButton siteBtn" id="selectButton" onclick="submitShippingAddress();"><span>$!locale.get("button.label.useSelectedAddress")</span></a>
+				<a class="cimm_inlineButton" id="selectButton" onclick="submitShippingAddress();"><span>$!locale.get("button.label.useSelectedAddress")</span></a>
 			</div>
 		</div>
 		<div id="fw_container" class="">
@@ -40,7 +34,7 @@
 					<tr>
 						<td class="alignLeft" data-th="$!locale.get('form.label.shipToName')">
 						<label class="customRadioBtn">
-								<input type="radio" name="useThisAddress" data-addressBookId="$!shippAddressList.addressBookId" data-buyingCompanyId="$!shippAddressList.buyingCompanyId" data-entityId="$!shippAddressList.entityId" data-customerName="$!shippAddressList.customerName" data-zipCode="$!shippAddressList.zipCodeStringFormat" data-warehosueCode="$!shippAddressList.wareHouseCodeStr" onclick="useThisAddress(this);" #if($!shippAddressList.addressBookId == $!defaultShipToId) checked #end>
+								<input type="radio" name="useThisAddress" data-addressBookId="$!shippAddressList.addressBookId" data-buyingCompanyId="$!shippAddressList.buyingCompanyId" data-entityId="$!shippAddressList.entityId" data-customerName="$!shippAddressList.customerName" data-zipCode="$!shippAddressList.zipCodeStringFormat" onclick="useThisAddress(this);">
 								<span>$!shippAddressList.customerName</span>
 							</label>
 						</td>
@@ -67,8 +61,6 @@
 		<input type="hidden" value="" id="entityId" name="entityId" >
 		<input type="hidden" value="" id="custName" name="custName" >
 		<input type="hidden" value="" id="homeBranchZipCode" name="homeBranchZipCode" >
-		<input type="hidden" value="" id="setDefaultShipTo" name="setDefaultShipTo" >
-		<input type="hidden" value="" id="shipToWarehouseCode" name="shipToWarehouseCode" >
 		</form>
 	</div>
 	#end

@@ -1,23 +1,11 @@
-<input type="hidden" id="cenposAttrubutes" value='$!cenposAttrubutes' />
-<input type="hidden" id="billAddressAsJson" value='$!billAddressAsJson' />
-<input type="hidden" id="userEmailAddress" value="$!session.getAttribute('userEmailAddress')" />
-<div class="row"><div class="col-md-12"><h1 class="cimm_pageTitle">$locale.get("product.heading.checkout")</h1></div></div>
-<div class="row stepIndicators mBottom-3">
-    	<div class="col-md-12">
-    		<ul>
-    			<li><a href="/Cart" class="previousClass">01:Step One Goes Here</a></li>
-    			<li><a class="currentClass">02:Step Two Goes Here</a></li>
-    			<li><a class="previousClass">03:Step Three Goes Here</a></li>
-    		</ul>
-    	</div>
-</div>
-<div class="row checkoutAfter">
+<div class="row">
 	<div class="col-md-8 col-sm-8 col-xs-12">
 		<div id="wizardCheckout" class="multiTab">
 			<ul class="multiTabHeading clearAfter">
 				<li><a href="#step-1"><span class="stepDesc">$locale.get("product.heading.billingAddress")</span></a></li>
 				<li><a href="#step-2"><span class="stepDesc">$locale.get("product.heading.shippingAddress")</span></a></li>
-				<li><a href="#step-3"><span class="stepDesc">$locale.get("checkout.label.paymentMethod")</span></a></li>
+				<li><a href="#step-3"><span class="stepDesc">$locale.get("product.heading.orderDetail")</span></a></li>
+				<li><a href="#step-4"><span class="stepDesc">$locale.get("product.heading.orderReview")</span></a></li>
 				<!-- <li><a href="#step-5"><span class="stepDesc">$locale.get("register.label.terms")</span></a></li> -->
 			</ul>
 				<!-- <form> -->
@@ -26,34 +14,11 @@
 							<!-- Billing Address -->
 							<input type="hidden" id="defaultBillToId" value="$!defaultBillToId"/>
 							<div id="billAddress">
-							<p class="reqFieldText"><span class="text-danger">*</span>Indicates Fields Required</p>
-							<div class="row">
-								<div class="col-md-12">
-										<div class="form-group">
-											<label>$locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
-											<input type="text" name="orderedBy" id="orderedBy" value="#if($orderedBy)$!orderedBy #else $!billAddress.firstName $!billAddress.lastName #end" class="form-control"/> 
-										</div>
-								</div>
-							</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.firstName") <span class="text-danger">*</span></label>
-											<input type="text" name="billFirstName" id="fname" value="$!billAddress.firstName" readonly class="btns-disable form-control"/> 
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>$locale.get("form.label.lastName") <span class="text-danger">*</span></label>
-											<input type="text" name="billLastName" id="lname" value="$!billAddress.lastName" readonly class="btns-disable form-control"/> 
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>$locale.get("form.label.companyName") <span class="text-danger">*</span></label>
-											<input type="text" name="billCompanyName" id="cname" value="$!billAddress.customerName" readonly class="btns-disable form-control"/> 
+											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
+											<input type="text" name="billCompanyName" id="fname" value="$!billAddress.customerName" readonly class="btns-disable form-control"/> 
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -62,11 +27,11 @@
 											<input type="text" name="billAddress1" id="billAddress1" value="$!billAddress.address1" readonly class="btns-disable form-control"/> 
 										</div>
 									</div>
-								</div>	
+								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.address2")</label>
+											<label>$locale.get("form.label.address2")  </label>
 											<input type="text" name="billAddress2" id="billAddress2" value="$!billAddress.address2" readonly class="btns-disable form-control"/> 
 										</div>
 									</div>
@@ -106,9 +71,9 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<div class="form-group">
-											 <label>$locale.get("form.label.eMail") <span class="text-danger">*</span></label>
+											 <label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
 											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control"/>
 										</div>
 									</div>
@@ -129,14 +94,10 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.shipToName") </label>
-											<select id="defaultShipToId" name="defaultShipToId" onchange="checkoutWizard.changeShippingAddress(this);" class="form-control selectpicker" data-size="5">
+											<select id="defaultShipToId" name="defaultShipToId" onchange="checkoutWizard.changeShippingAddress(this);" class="form-control selectpicker">
 						                       #if($!shipAddressList)
-						                            #foreach($shipList in $sortTool.sort($shipAddressList,"address1"))
-						                            #if($shipList.addressBookId==$defaultShipToId)
-						                            <option value="$shipList.addressBookId" selected>$!shipList.address1</option>## $!shipList.customerName 
-						                            #else
-						                            <option value="$shipList.addressBookId">$!shipList.address1</option>## $!shipList.customerName 
-						                            #end
+						                            #foreach($shipList in $shipAddressList)
+						                            <option value="$shipList.addressBookId">$!shipList.address1</option>## $!shipList.customerName #if($shipList.addressBookId==$defaultShipToId)selected#end
 						                           #end
 						                        #end
 						                    </select>
@@ -200,22 +161,79 @@
 											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" />
 										</div>
 									</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
-										<select name="shipVia" id="shipVia" class="form-control selectpicker" onchange="willCallShipVia(this);">
-											#if($shipViaList.size()>0)
-												#foreach($shipVia in $shipViaList)
-												<option value="$!shipVia.ShipViaID">$!shipVia.description</option> 
-												#end
-											#end 
-										</select>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
+											<input type="text" name="shipEmail" id="shipEmail" value="$!shipAddress.emailAddress" class="form-control"/>
+										</div>
 									</div>
-										<div class="pic_location_option"></div>
-										<div class="pic_loc_table">$!willCallText</div>
-										<input type="hidden" id="selectedBranch" name="selectedBranch" value=""/> 
+								</div>
+							</div>
+							<!-- Shipping Address -->
+							<input type="hidden" name="overrideShip" id="overrideShip" value="Y"/>
+						</div>
+						<div id="step-3">
+							<div class="cimm_formContent" id="orderDetails">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Order Type <span class="text-danger">*</span></label>
+											<select name="orderType" id="orderType" class="form-control selectpicker" onchange="checkoutWizard.orderTypeOnchange(this);">
+												 #if($session.getAttribute("isRetailUser")=="Y")
+												 	<option value="checkoutWithCreditCard" selected="selected"> Credit card Payment </option> 
+												 #else
+												 	<option value=" ">- Select -</option> 
+													<option value="checkoutWithCreditCard"> Credit card Payment </option>
+													#if($!session.getAttribute("canSubmitPO")=="Y")
+													<option value="checkoutWithPo"> Purchase Order </option> 
+													#end 
+													<!-- <option value="checkoutWithQuote"> Quote </option>  -->
+												 #end
+											</select>
+										</div>
 									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
+											<select name="shipVia" id="shipVia" class="form-control selectpicker">
+												<option value=" ">-Select-</option>
+												#if($shipViaList.size()>0)
+													#foreach($shipVia in $shipViaList)
+													<option value="$!shipVia.ShipViaID">$!shipVia.description</option> 
+													#end
+												#end 
+											</select>
+										</div>
 									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
+											<input type="text" name="orderedBy" id="orderedBy" value="$!orderedBy" class="form-control"/> 
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
+											<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control"/> 
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly/>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.coupon")</label>
+											<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
+										</div>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -225,63 +243,41 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.eMail") <span class="text-danger">*</span></label>
-											<input type="text" name="shipEmail" id="shipEmail" value="#if($shipAddress.emailAddress.trim().length > 0)$!shipAddress.emailAddress #else $!billAddress.emailAddress #end" class="form-control"/>
+											<label>$locale.get("form.label.orderNote") </label>
+											<textarea name="orderNotes" id="orderNotes" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
 										</div>
 									</div>
 								</div>
-								</div>
-							<!-- Shipping Address -->
-							<input type="hidden" name="overrideShip" id="overrideShip" value="Y"/>
-							<input type="hidden" name="orderStatus" id="orderStatus" value="$!orderStatus.orderStatus"/>
-						   <input type="hidden" name="orderingType" value="qu"/>
-						   <input type="hidden" id="orderType" name="orderType" value="checkoutWithPo"/>
-						   <input type="hidden" id="shipToWareshouseCode" name="shipToWareshouseCode" value=""/>
-						   <input type="hidden" id="orderDespo" name="orderDespo" value=""/>
-						</div>
-						<div id="step-3">
-							<div class="cimm_formContent" id="orderDetails">
-							<div class="row">
-								<div class="col-md-12">
-									<div id="paymentOptBlock" class="multiTab">
-										<ul class="multiTabHeading2 clearAfter">
-											#if($!session.getAttribute("canSubmitPO")=="Y")
-												<li><a href="#checkoutPO" data-loadInfo="checkoutWithPo"><span class="stepDesc">Purchase Order</span></a></li>
-											#end
-											<li><a href="#cenposPaymentFormDiv" data-loadInfo="checkoutWithCreditCard" onclick="checkoutWizard.initiateCenposGatewayForm();"><span class="stepDesc">Credit card Payment</span></a></li>
-										</ul>
-										<div class="multiTabContent2">
-										#if($!session.getAttribute("canSubmitPO")=="Y")
-											<div id="checkoutPO">
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>$locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
-															<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control"/> 
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>$locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
-															<input type="text" class="form-control" name="reqDate" id="reqDate" readonly/>
-														</div>
-													</div>
-												</div>
-											</div>
-										#end
-											<div id="cenposPaymentFormDiv"></div>
-										</div>
+								<div class="row">
+									<div class="col-md-6">
+										<!-- <div class="form-group">
+											<label>$locale.get("product.label.ordrStatus") </label>
+											<select name="orderStatus" id="orderStatus" class="form-control selectpicker">
+												<option value=" "> - Select - </option> 
+								             	#foreach($orderStatus in $orderStatusList)
+													<option value="$!orderStatus.orderStatusCode"> $!orderStatus.orderStatus </option> 
+												#end
+											</select>
+										</div> -->
 									</div>
-								</div>	
+									<div class="col-md-6">
+										<input type="hidden" name="orderStatus" id="orderStatus" value="$!orderStatus.orderStatus"/>
+										<input type="hidden" name="orderingType" value="SO"/>
+									</div>
+								</div>			
 							</div>
+						    <!-- Order Info  End -->
+						    
 						</div>
-							<div id="confirmOrderPageDiv" class="hideMe" style="width: 100%;">
+						<div id="step-4" id="orderItemDetails">
+							<div id="confirmOrderPageDiv" style="width: 100%;">
 								<center>
 									<span>
 										<img src="$webThemes/$siteName/images/loading.gif" alt='loading'/>
 									</span>
 								</center>
 							</div>
+						</div>
 					</div>
 		</div>
 		<input type="hidden" name="countryFulNm" id="countryFulNm"/>
@@ -293,73 +289,57 @@
 		<input type="hidden" id="savedGroupId" name="savedGroupId" value="$savedGroupId"/>
 		<input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!session.getAttribute('emailAddressExits')">			
 	</div>
-	</div>
 	<div class="col-md-4 col-sm-4 col-xs-12">
-		#if($productListData.size()>0)
-		<div class="orderSummaryWrap">
-			<div class="orderSummary">
+			<div class="orderSummaryWrap">
 				<h3 class="pullLeft">$!locale.get("product.label.orderSummary")</h3>
 				<a class="pullRight" href="$!locale.get('website.url.ShoppingCart')">$!locale.get("product.button.editCart")</a>
 				<div class="clear"></div>
+		        <div class="cimm_salesBottomStrip cimm_cartSalesBottomStrip clearAfter">
+			        <ul>
+			            <li class="clearAfter">
+			                <span class="priceLabel">$!locale.get("product.label.total")</span>
+			                <span class="priceValue">#if($cartTotal>0)$$!numberTool.format("$numberToolFormat",$cartTotal) #end</span>
+			            </li>
+			        </ul>
+			    </div>
 			</div>
-			<table class="table cimm_siteTable display rwd-table" id="cartWrap">
+			
+	</div>
+	<div id="triggerOrderButtonDiv" class="col-md-4 col-sm-4 col-xs-12"></div>
+	<!-- <div class="col-md-4 col-sm-4 col-xs-12">
+		#if($productListData.size()>0)
+			<div class="orderSummaryWrap">
+				<h3 class="pullLeft">$!locale.get("product.label.orderSummary")</h3>
+				<a class="pullRight" href="$!locale.get('website.url.ShoppingCart')">$!locale.get("product.button.editCart")</a>
+				<div class="clear"></div>
+				<table class="table cimm_siteTable display rwd-table" id="cartWrap">
 		            <thead>
 		                <tr>
-		                    <th>$!locale.get("product.label.item")</th>
-		                    <th class="alignCenter">$!locale.get("product.label.partNumber")</th>
-		                    <th class="alignCenter">$!locale.get("product.label.qty")</th>
-		                    <th class="alignCenter">$!locale.get("product.label.price")</th>
+		                    <th>$!locale.get("header.label.items")</th>
+		                    <th>$!locale.get("product.label.quantity")</th>
+		                    <th>$!locale.get("product.label.price")</th>
 		                </tr>
 		            </thead>
 		            <tbody>
 		                #foreach($itemData in $productListData)
 		                #set($itemTitle= $!itemData.shortDesc) #set($savedCartItemId = $!itemData.itemId)
 		                <tr itemscope itemtype="http://schema.org/Product">
-		                    <td class="alignLeft" data-th="$!locale.get('product.label.description')"><p itemprop="description">$!itemData.brandName $!itemData.manufacturerPartNumber</p></td>
-		                    <td class="alignCenter">$!itemData.partNumber</td>
+		                    <td class="alignLeft" data-th="$!locale.get('product.label.description')"><p itemprop="description">$!itemData.shortDesc</p><p> $!locale.get("product.label.partNumber"): $!itemData.partNumber </p></td>
 		                    <td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">$!itemData.qty</td>
-		                    <td data-th="$!locale.get('product.label.extPrice')"><p class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</p></td>
+		                    <td data-th="$!locale.get('product.label.extPrice')"><strong class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</strong></td>
 		                </tr>
 		                #end
 		            </tbody>
-		        </table> 
+		        </table>
 		        <div class="cimm_salesBottomStrip cimm_cartSalesBottomStrip clearAfter">
 			        <ul>
-			            <li class="clearAfter" id="liCartTotal" style="display:block;">
-			                <span class="priceLabel">$!locale.get("product.label.items") ($!cartCount)</span>
-			                <span class="priceValue">$$!numberTool.format("$!numberToolFormat",$!cartTotal)</span>
-			            </li> 
-			            <li class="clearAfter" id="liSubTotal" style="display:none;">
-			             	<span class="priceLabel">$!locale.get("product.label.subTotal"):</span>
-			         		<span class="priceValue formatPrice subTotal"></span>
-			             </li>
-			             <li class="clearAfter" id="liOrderTax" style="display:none;">
-			             	<span class="priceLabel">$!locale.get("product.label.tax"): </span>
-			         		<span class="priceValue formatPrice orderTax"></span>
-			             </li>
-			             <li class="clearAfter"  id="liOrderDiscount" style="display:none;">
-			             	<span class="priceLabel">$!locale.get("product.label.discount"): </span>
-			         		<span class="priceValue formatPrice orderDiscount"></span>
-			             </li>
-			             <li class="clearAfter" id="liTotalCartFrieghtCharges" style="display:none;">
-			             	<span class="priceLabel">$!locale.get("product.label.shipping"): </span>
-			         		<span class="priceValue formatPrice totalCartFrieghtCharges"></span>
-			             </li>
-			             
-				         <li class="clearAfter" id="liOrderTotal" style="display:none;">
-			             	<span class="priceLabel">$!locale.get("product.label.total"): </span>
-			         		<span class="priceValue formatPrice orderTotal"></span>
-			             </li>
+			            <li class="clearAfter">
+			                <span class="priceLabel">$!locale.get("product.label.total")</span>
+			                <span class="priceValue">#if($cartTotal>0)$$!numberTool.format("$numberToolFormat",$cartTotal) #end</span>
+			            </li>
 			        </ul>
 			    </div>
-		</div>
+			</div>
 		#end
-	</div>
-	<div id="triggerOrderButtonDiv" class="col-md-4 col-sm-4 col-xs-12"></div>
-	</div>
-<div class="row checkout_Terms">
-	<div class="col-md-12">
-		<h4>Terms And Conditions</h4>
-		<p>Availability, shipping, tax & promotions</p>
-	</div>
+	</div> -->
 </div>

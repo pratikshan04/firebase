@@ -17,25 +17,25 @@
 		<p>
             #if($orderDetail.orderNum)
             	#if($orderDetail.orderStatus.contains("Bid"))
-            		$!locale.get("product.label.eclipsebidNumber"):  $!orderDetail.orderNum<br />
+            		<b>$!locale.get("product.label.eclipsebidNumber"): </b> $!orderDetail.orderNum<br />
             	#else
-            		$!locale.get("product.label.eclipseOrderNumber"):  $!orderDetail.orderNum<br />
+            		<b>$!locale.get("product.label.eclipseOrderNumber"): </b> $!orderDetail.orderNum<br />
             	#end
             #end
             #if($orderDetail.orderDate)
-            $!locale.get("form.label.orderDate"):  $!orderDetail.orderDate<br />
+            <b>$!locale.get("form.label.orderDate"): </b> $!orderDetail.orderDate<br />
             #end
             #if($orderDetail.orderedBy )
-            $!locale.get("form.label.orderedBy"):  $!orderDetail.orderedBy<br />
+            <b>$!locale.get("form.label.orderedBy"): </b> $!orderDetail.orderedBy<br />
             #end 
             #if($orderDetail.poNumber)
-            $!locale.get("product.label.poNumber"):  $!orderDetail.poNumber<br />
+            <b>$!locale.get("product.label.poNumber"): </b> $!orderDetail.poNumber<br />
             #end
             #if($orderDetail.shipViaID)
-            $!locale.get("form.label.shipVia"):  $!orderDetail.shipViaID<br />
+            <b>$!locale.get("form.label.shipVia"): </b> $!orderDetail.shipViaID<br />
             #end  
             #if($orderDetail.shipDate)
-            $!locale.get("product.label.shipDate"):  $!orderDetail.shipDate
+            <b>$!locale.get("product.label.shipDate"): </b> $!orderDetail.shipDate
             #end   
         </p>
 	</div>
@@ -44,11 +44,11 @@
 		<p> 
             #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
             #if($requestType == "openQuote")<strong><span> $!orderDetail.billToName </span></strong><br />#end
-            <span>$!orderDetail.billAddress.address1 </span><br />
-            #if($orderDetail.billAddress.address2)<span>$!orderDetail.billAddress.address2 </span><br />#end
-            <span> $!orderDetail.billAddress.city, $!orderDetail.billAddress.State</span>
+            <span>$!orderDetail.billAddress1 </span><br />
+            #if($orderDetail.billAddress2)<span>$!orderDetail.billAddress2 </span><br />#end
+            <span> $!orderDetail.billCity, $!orderDetail.billState</span>
             <br />
-            <span> #if($orderDetail.billAddress.country)$!orderDetail.billAddress.country,#end $!orderDetail.billAddress.zipCode</span>
+            <span> #if($orderDetail.billCountry)$!orderDetail.billCountry,#end $!orderDetail.billZipCode</span>
             <br />
             #if($orderDetail.billPhone)
             <span>$!orderDetail.billPhone</span>
@@ -60,12 +60,12 @@
 		   <p>
 	            #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
 	            #if($requestType == "openQuote")<strong><span> $!orderDetail.shipToName </span></strong><br />#end
-	            <span>$!orderDetail.shipAddress.address1</span><br />
-	            #if($orderDetail.shipAddress.address2)<span>$!orderDetail.shipAddress.address2 </span><br />#end
-	            <span>$!orderDetail.shipAddress.city, $!orderDetail.shipAddress.state</span>
+	            <span>$!orderDetail.shipAddress1</span><br />
+	            #if($orderDetail.shipAddress2)<span>$!orderDetail.shipAddress2 </span><br />#end
+	            <span>$!orderDetail.shipCity, $!orderDetail.shipState</span>
 	            <br />
 	            <span>
-	            #if($orderDetail.shipAddress.country)$!orderDetail.shipAddress.country,#end $!orderDetail.shipAddress.zipCode</span>
+	            #if($orderDetail.Country)$!orderDetail.Country,#end $!orderDetail.shipZipCode</span>
 	            <br />
 	            #if($orderDetail.shipPhone)
 	            <span>$!orderDetail.shipPhone</span>
@@ -107,13 +107,6 @@
 <form name="reOrderForm" id="reOrderForm" method="post" onsubmit="return changeAction(9);">
 <div class="row marginY-3">
 	<div class="col-md-12 col-sm-12 col-xs-12">
-    #if($orderDetail.orderStatus.contains("Bid"))
-    	<h2 class="cimm_pageTitle">$!locale.get("product.heading.bidDetail")</h2>   
-    #elseif($!requestType != "openQuote")
-    	<h2 class="cimm_pageTitle">$!locale.get("product.heading.orderDetail")</h2>     
-    #else
-    	<h2 class="cimm_pageTitle">$!locale.get("product.heading.orderDetail")</h2>   
-    #end    
             <table class="table table-striped table-bordered display rwd-table">
                 <thead>
                     <tr>
@@ -195,37 +188,37 @@
             <div class="cimm_salesBottomStrip clearAfter">
 			  <ul>
                     #if($orderDetail.subtotal>0)
-                     <li class="clearAfter">
+                     <li>
                          <span class="priceLabel">$!locale.get("product.label.subTotal"): </span>
                          <span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
                      </li>  
                     #end
                     #if($orderDetail.tax > 0)
-                    <li class="clearAfter">
+                    <li>
                          <span class="priceLabel">$!locale.get("product.label.tax"): </span>
                          <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.tax) </span>
                     </li>
                     #end
                     #if($orderDetail.freight>0)
-                    <li class="clearAfter">
+                    <li>
                          <span class="priceLabel">$!locale.get("product.label.shipping"): </span>
                          <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.freight) </span>
                     </li>
                     #end
                     #if($orderDetail.handling>0)
-                    <li class="clearAfter">
+                    <li>
                          <span class="priceLabel">$!locale.get("product.label.handlng"): </span>
                          <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.handling)</span>
                     </li>
                     #end
                     #if($orderDetail.discount>0)
-                    <li class="clearAfter">
+                    <li>
                          <span class="priceLabel">$!locale.get("product.label.discount"): </span>
                          <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
                     </li>
                     #end
                     #if($orderDetail.total>0)
-                     <li class="clearAfter">
+                     <li>
                          <span class="priceLabel">$!locale.get("product.label.total"): </span>
                          <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</span>
                     </li>
@@ -239,11 +232,11 @@
 			<div class="hideForPrint text-center">
 			##if(!$!orderDetail.orderStatus.contains("Bid")  && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
 				#if($requestType != "openQuote")
-					<input type="submit" id="reorderBtn" name="submit" class="button siteBtn" value="$!locale.get('product.button.reOrder')" />
+					<input type="submit" id="reorderBtn" name="submit" class="button" value="$!locale.get('product.button.reOrder')" />
 					<input type="hidden" name="getPriceFrom" value="ERP"/>
 				#else
 					<input type="hidden" name="getPriceFrom" value="CART"/>
-					<input type="submit" id="reorderBtn" name="submit" class="button siteBtn" value="$!locale.get('product.button.placeOrder')" />
+					<input type="submit" id="reorderBtn" name="submit" class="button" value="$!locale.get('product.button.placeOrder')" />
 				#end
 			##end
             </div>

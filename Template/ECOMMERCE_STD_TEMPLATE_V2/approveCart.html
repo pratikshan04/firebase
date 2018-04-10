@@ -33,7 +33,7 @@
 					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					<tr>
 						<td>    
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
@@ -46,7 +46,7 @@
 						<td class="alignLeft">
 							<ul>
 								<li>
-								<b><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></b>
+								<b><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></b>
 								</li>
 								#if($itemData.manufacturerPartNumber)
 								<li>
@@ -58,7 +58,7 @@
 								</li>
 								#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 								<li>
-								<b>$locale.get("product.label.customerpartnumber"): </b>
+								<b>$locale.get("product.label.cpn"): </b>
 								#set($seperator = "")
 								#set($partList = "")
 								#foreach($customerPart in $itemData.customerPartNumberList)

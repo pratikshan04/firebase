@@ -23,7 +23,8 @@
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery.form.js"></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/siteScript.js"></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/recentlyViewed.js"></script>
-<script type="text/javascript" src="$webThemes/$siteName/js/quickOrderPadHead.js"></script>
+#if($userAgent == "WEBVIEW")<script type="text/javascript" src="$webThemes/$siteName/js/mobileApp.js"></script>#end
+#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")<script type="text/javascript" src="$webThemes/$siteName/js/quickOrderPadHead.js"></script>#end
 #if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$webThemes/$siteName/js/handsontable.full.js"></script>#end
 #if($LayoutName=="ProductList")
 	<script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
@@ -71,14 +72,12 @@ jQuery(".clickStream").click(function() {
 </script>
 #elseif($LayoutName=="CheckOutPage")
 	<script type="text/javascript">
-		#if($!shipAddressListAsJson && $!shipAddressListAsJson!="")
-			var shippingListjson =  $!shipAddressListAsJson;
+		#if($!shipAddressListJson && $!shipAddressListJson!="")
+			var shippingListjson =  $!shipAddressListJson;
 		#else
 			var shippingListjson =  [];
 		#end
 	</script>
-	<script type="text/javascript" src="https://www.cenpos.com/Plugins/porthole.min.js"></script> 
-	<script src="https://cenpos.com/Plugins/jquery.cenpos.2.3.js"></script>
 #elseif($LayoutName=="OrderDetailPage")
 <script>
 function checkSelectAll(chk){
@@ -107,12 +106,11 @@ function deviceSelectAll(){
 }
 </script>
 #end
-#if($LayoutName != "ComparePage" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName != "EventDetailPage" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit")
+#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit")
 <!-- **** Site Script ********* -->
-#set($jsPath = $webThemes+$siteName+'/'+'js/'+$LayoutName+'.js')
+#set($jsPath = $webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js')
 <script type="text/javascript" src="$jsPath"></script>
 #end
-<script src="$webThemes/$siteName/js/jssor.slider-27.1.0.min.js"></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/bootstrap-select.min.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
   <script type="text/javascript" src="../js/selectivizr-min.js"></script>
@@ -227,6 +225,142 @@ $(function(){
 		myStr = myStr.replace(/([a-z])([A-Z])/g, '$1 $2');
 	</script>
 #end
+#if($LayoutName=="HomePage" || $!isStaticHomePage =="Y")
+<script type="text/javascript">
+/**********************homepage********************/
+	$(document).ready(function(){
+		if($('.bxslider')){
+			$('.bxslider').slick({
+			 infinite: true,
+			 slidesToShow: 1,
+			 slidesToScroll: 1,
+			 dots: true,
+			 autoplay: true
+			});
+		}
+	   if($('#featuredProductList').length>0){
+		  $('#featuredProductList').slick({
+			  infinite: true,
+			  slidesToShow: 5,
+			  slidesToScroll: 1,
+			  pauseOnHover:true,
+			  responsive: [
+			               {
+			                 breakpoint: 1024,
+			                 settings: {
+			                   slidesToShow: 4,
+			                 }
+			               },
+			               {
+			                 breakpoint: 600,
+			                 settings: {
+			                   slidesToShow: 3,
+			                 }
+			               },
+			               {
+			                 breakpoint: 480,
+			                 settings: {
+			                   slidesToShow: 2,
+			                 }
+			               }
+			             ]
+		  });
+		}
+
+		if($('#featuredBrands').length>0){
+			$('#featuredBrands').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+		if($('#featuredManufacturers').length>0){
+			$('#featuredManufacturers').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+		if($('#shopByCategory').length>0){
+			$('#shopByCategory').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+
+	});
+
+	getNewSectionForHomePage();
+	jQuery(function(){
+		priceLoadMainFunction();
+	});
+</script>
+#end
+
 #if($LayoutName=="ProductDetailPage")
 <script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
 #if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)#else
@@ -271,8 +405,10 @@ test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
 				infinite: true,
 				slidesToShow: 1,
 				slidesToScroll: 1,
-				dots: true,
-				autoplay: true
+				dots: false,
+				autoplay: true,
+				prevArrow: false,
+				nextArrow: false
 			});
 		});
 		var value = getCookie("afterLoginUrl");
@@ -287,6 +423,12 @@ test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
 			sendProduct();
 			$(".cimm_itemDescription ul li span").css({"color":"#000"});
 			$(".descBody a").css({"display":"none"})
+		});
+	</script>
+#elseif($LayoutName=="SendThisPageForAll")
+	<script type="text/javascript">
+		jQuery(function(){
+			sendThisPageScript();
 		});
 	</script>
 #elseif($LayoutName=="OrderConfirmation")
@@ -408,44 +550,48 @@ test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
 <!-- Update email id popup -->
 <script>
  $(function(){
-	if($("#validEmailAddress").length>0){
-		var validEmail = $("#validEmailAddress").val();
-		if(validEmail == "false"){
-		 updateEmailAddressPopUp();
+	var userLogin = $("#userLogin").val();
+	if (userLogin=="true"){
+		var validEmailFlag = getCookie("validEmailAddress");
+		if($("#validEmailAddress").length>0 || (validEmailFlag != "undefined" && validEmailFlag!=null)){
+			var validEmail = $("#validEmailAddress").val();
+			if(validEmailFlag!="" && validEmailFlag=="false"){
+				validEmail = "false"
+			}
+			if(validEmail == "false"){
+				$("#emailAddressPrompt").modal({backdrop: 'static', keyboard: false});
+			}
 		}
 	}
  });
  $(".loadAfter").fadeOut(800);
 </script>	
-<script>
-	$("#homesideToggle , #closehomeRightbar").click(function(){
-	    $(".homeRightbar").toggle(500);
-	});
-	$(document).ready(function(){
-		 $("a.collapsed").click(function(){
-		      $(this).find(".btn:contains('answer')").toggleClass("collapsed");
-	});
-	});
-</script>
-<div id="emailAddressPrompt" class="cimm_customPopWrap" style="display:none;">
-<div class="cimm_customPopContent">
-		<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();"><i class="fa fa-lg fa-times-circle"></i></a>
-		<div class="cimm_popupLogin cimm_formEnclosure">
-			<h4>An Email Id is required to process your orders. Please enter your email id and click update.</h4>
+<div id="emailAddressPrompt" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+	<div class="modal-content">
+		<!-- <div class="modal-header noBorder">
+	      	<h4 class="modal-title"><button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+	    </div> -->
+	    <div class="modal-body">
+	    <h6 class="text-center">Contact email address is missing from your account.<br/>Please enter your email address and click update.</h6>
 			<div id="popErr" class="red" style="display: none;"></div>
 			<form id="emailAddessUpdate">
-				<ul class="cimm_formContent fullWidthForm">
-					<li>
-						<input type="text" name="email" id="updateEmailAddressPrompt" />
-						<label>Email</label>
-					</li>
-				</ul>
-				<div class="center">
-					<input type="submit" value="Update" id="popOrderHistoryBtn" class="button" onclick="updateEmailAddress($('#email').val());return false; "> 
-					<input type="button" value="Cancel"  class="button" onclick="closeBlockPop();">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<!-- <label for="emailAddressPromptId">$locale.get("form.label.email")<span class="text-danger"> * </span></label> -->
+							<input type="text" name="email" id="emailAddressPromptId" class="form-control" placeholder='$locale.get("form.label.emailAddress")'/>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<input type="submit" value="Update" id="popOrderHistoryBtn" class="button" onclick="updateEmailAddress($('#emailAddressPromptId').val());return false; "> 
+					<!-- <input type="button" value="Cancel"  class="button" onclick="$('#emailAddressPrompt').modal('hide');"> -->
 				</div>
 			</form>
-		</div>
+	    </div>
 	</div>
+</div>
 </div>
 <!-- End of Update email id popup -->

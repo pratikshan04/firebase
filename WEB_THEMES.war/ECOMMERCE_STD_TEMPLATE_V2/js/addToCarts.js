@@ -66,20 +66,13 @@
 			var qty = $.trim(parseInt($("#"+settings.functionalBlock.qtyPrefix+id).val()));
 			var regex = new RegExp('/', 'g');
 			var partNumber = $("#"+settings.functionalBlock.partNumberPrefix+id).val();
-//			partNumber = partNumber.replace(regex, '\\/');
+			partNumber = partNumber.replace(regex, '\\/');
 			var minOrderQty = 1;
 			var quantityInterval = 1;
-			var uom = '';
-			if(document.getElementById(settings.functionalBlock.uomValuePrefix+partNumber) != null){
-				uom = document.getElementById(settings.functionalBlock.uomValuePrefix+partNumber).value;
-			}
-			if(uom == undefined || uom == "$!itemData.uom")
-			    uom = ''; 
+			var uom = $("#"+settings.functionalBlock.uomValuePrefix+partNumber).val();
 			if(settings.qtyIntervalRefrence=="Y"){
-				if(document.getElementById(settings.functionalBlock.minOrderQtyPrefix+partNumber) != null)
-				minOrderQty = parseInt(document.getElementById(settings.functionalBlock.minOrderQtyPrefix+partNumber).value);
-				if(document.getElementById(settings.functionalBlock.qtyIntervalPrefix+partNumber) != null)
-				quantityInterval = parseInt(document.getElementById(settings.functionalBlock.qtyIntervalPrefix+partNumber).value);
+				minOrderQty = parseInt($("#"+settings.functionalBlock.minOrderQtyPrefix+partNumber).val());
+				quantityInterval = parseInt($("#"+settings.functionalBlock.qtyIntervalPrefix+partNumber).val());
 			}
 			if(qty=="NaN")
 			{
@@ -254,27 +247,18 @@
 				var shortDesc = $.trim($("#"+settings.functionalBlock.itemShortDescPrefix+id).text());
 				var iChars = "/!@#$%^&*()+=-[]\\\';,./{}|\":<>?~_ /g";
 				partNumber= partNumber.replace(iChars,"\\$1");
-				partNumber = partNumber.replace('\\','');
 				var price = document.getElementById(settings.functionalBlock.priceValuePrefix+partNumber).value;
-				var salesPriceQty = document.getElementById(settings.functionalBlock.salesPriceQtyPrefix+partNumber).value;
-				var uom = document.getElementById(settings.functionalBlock.uomValuePrefix+partNumber).value;
-				if(uom == undefined || uom == "$!itemData.uom"){
-				    uom = ''; 
-				}
-				var priceperqty = ""
-				if(document.getElementById("priceperqty_"+partNumber)!= null)
-				{	
-					priceperqty = document.getElementById("priceperqty_"+partNumber).textContent;
-				}
+				var salesPriceQty = $("#"+settings.functionalBlock.salesPriceQtyPrefix+partNumber).val();
 				var quantityBreakFlag = "N";
 				//var salesQty = $("#"+settings.functionalBlock.salesQtyPrefix+id).val();
-				if(document.getElementById("quantityBreakFlag_"+partNumber) != null){
-					quantityBreakFlag = document.getElementById("quantityBreakFlag_"+partNumber).val();
+				
+				if($("#quantityBreakFlag_"+partNumber).length>0){
+					quantityBreakFlag = $("#quantityBreakFlag_"+partNumber).val();
 				}
 				
 				price = price.replace(",","");
-				if(quantityBreakFlag=="Y" && document.getElementById("quantityBreakPricingDetails_"+partNumber).length>0){
-					var quantityBreak = document.getElementById("quantityBreakPricingDetails_"+partNumber).html();
+				if(quantityBreakFlag=="Y" && $("#quantityBreakPricingDetails_"+partNumber).length>0){
+					var quantityBreak = $("#quantityBreakPricingDetails_"+partNumber).html();
 					var qBreakArray = quantityBreak.split("~");
 					if(qBreakArray!=null && qBreakArray.length>0){
 						for(var q=0; q<qBreakArray.length; q++){
@@ -320,37 +304,27 @@
 				$("."+settings.designsBlock.partNumberClass).html(partNumber);
 				$("."+settings.designsBlock.quantityClass).html(qty);
 				$("."+settings.designsBlock.itemShortDescClass).html(shortDesc);
-				$("."+settings.designsBlock.priceClass).html(displayPrice + "/" + uom + priceperqty);
+				$("."+settings.designsBlock.priceClass).html(displayPrice);
 				$("."+settings.designsBlock.cartCountClass).html(cartCount);
-				if(document.getElementById("MPNValue_"+partNumber))
-				$(".ATCMPartNumber").html(document.getElementById("MPNValue_"+partNumber).value);
-				if(document.getElementById("productLeadTime_"+partNumber) != null){
-						var ele = document.getElementById("productLeadTime_"+partNumber);
-						var jele = $(ele);
-						if(jele.is(":visible")){
-						$(".ATCavailableorLeadTime").html("Lead Time: ");
-						var leadTime = "";
-						var lele = document.getElementById("leadTime_"+partNumber);
-						jlele = $(lele);
-						jlele.each(function(){
-							leadTime = $(this).text();
-						});
-						$(".ATCLeadTime").html(leadTime);
-						$(".ATCLeadTime").parent().show();
-					}
+				$(".ATCMPartNumber").html($("#MPNValue_"+partNumber).val());
+				
+				if($(".productLeadTime_"+partNumber).is(":visible")){
+					$(".ATCavailableorLeadTime").html("Lead Time: ");
+					var leadTime = "";
+					$(".leadTime_"+partNumber).each(function(){
+						leadTime = $(this).text();
+					});
+					$(".ATCLeadTime").html(leadTime);
+					$(".ATCLeadTime").parent().show();
 				}
-				if(document.getElementById("Avail_"+partNumber) != null){
-					var ele = document.getElementById("Avail_"+partNumber);
-					var jele = $(ele);
-					if(jele.is(":visible")){
-						$(".ATCavailableorLeadTime").html("Availability: ");
-						var avail = "";
-						jele.each(function(){
-							avail = $(this).text();
-						});
-						$(".ATCLeadTime").html(avail);
-						$(".ATCLeadTime").parent().show();
-					}
+				if($(".Avail_"+partNumber).is(":visible")){
+					$(".ATCavailableorLeadTime").html("Availability: ");
+					var avail = "";
+					$(".Avail_"+partNumber).each(function(){
+						avail = $(this).text();
+					});
+					$(".ATCLeadTime").html(avail);
+					$(".ATCLeadTime").parent().show();
 				}
 				var cartHtml = $("#"+settings.CartBox).html();
 				return cartHtml;

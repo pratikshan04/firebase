@@ -46,7 +46,7 @@
 				 var year = flags.wrap.attr('data-current-year'),
 					 month = flags.wrap.attr('data-current-month');
 				 getEvents(eventsOpts.eventsLimit, year, month, false, "month");
-				 $("#monthNameDisplay").html("Month Of "+ eventsOpts.monthNames[month] + " " + year);
+				 $("#monthNameDisplay").html("Month Of "+ eventsOpts.monthNames[month] + " - " + year);
 			});
 			flags.wrap.find('.monthTitle').live('click', function(e) {
 				e.preventDefault();
@@ -76,7 +76,7 @@
 				/*var year = flags.wrap.attr('data-current-year'),
 				month = flags.wrap.attr('data-current-month');*/
 				getEvents(false, false, false, false, "week");
-				$("#monthNameDisplay").html("Current Week Of "+ eventsOpts.monthNames[month] + " " + year);
+				$("#monthNameDisplay").html("Current Week Of "+ eventsOpts.monthNames[month] + " - " + year);
 			});
 		});
 		var desc = $(this).parent().find('.eventDesc');
@@ -171,13 +171,8 @@
 				getEvents(eventsOpts.eventsLimit, year, month, false, show);
 			}
 			flags.wrap.attr('data-current-month', month).attr('data-current-year', year);
-			monthName = eventsOpts.monthNames[month];
-			winWidth = $(window).width();
-			if(winWidth <= 1040 && winWidth > 768){
-				monthName = eventsOpts.monthNames[month].substring(0, 3);
-			}
-			$eventsCalendarTitle.find('.monthTitle').html(monthName + " " + year);
-			$("#monthNameDisplay").html("Month Of "+ eventsOpts.monthNames[month] + " " + year);
+			$eventsCalendarTitle.find('.monthTitle').html(eventsOpts.monthNames[month] + " " + year);
+			$("#monthNameDisplay").html("Month Of "+ eventsOpts.monthNames[month] + " - " + year);
 			
 			var daysOnTheMonth = 32 - new Date(year, month, 32).getDate();
 			var daysList = [];
@@ -409,7 +404,7 @@
 								  var eventOffset = 300;
 								}
 								var timeDifference = timeZone * 60 + (eventOffset);
-								var changedDate = new Date(eventDate.getTime() + timeDifference * 60 * 1000);//var changedDate = new Date(eventDate.getTime());
+								var changedDate = new Date(eventDate.getTime() + Math.abs(timeDifference) * 60 * 1000);//var changedDate = new Date(eventDate.getTime());
 								eventDate = changedDate;
 								eventYear = eventDate.getFullYear(), eventMonth = eventDate.getMonth(), eventFullMonth = eventDate.getMonthName(), eventDay = eventDate.getDate(), eventFullDay = eventDate.getDayName();
 								var currentDate = new Date();
@@ -1270,9 +1265,7 @@
 			        				    });
 					        	   }
 					        	   var noImagePath = "this.src='"+$('#webThemePath').val()+"/images/NoImage.png'";
-					        	   jQuery('td:eq(0)', nRow).html('<img src="'+aData.EVENT_IMAGE_URL+'" onerror="'+noImagePath+'" width="225" alt="event Image"/>');
-					        	   //jQuery('td:eq(1)', nRow).html('<h3><a href="/eventDetailsUnit.action?eventID='+aData.id+'" class="productTitle">'+aData.title+'</h4></a><p>'+aData.description+'</p>');
-					        	   jQuery('td:eq(1)', nRow).html('<h3><a href="/'+aData.id+'/EventDetail/'+aData.title+'" class="productTitle">'+aData.title+'</h4></a><p>'+aData.description+'</p>');
+					        	   // jQuery('td:eq(0)', nRow).html('<img src="'+aData.EVENT_IMAGE_URL+'" onerror="'+noImagePath+'" width="225" alt="event Image"/>');
 					        	   var timeZone = "",timeZoneOffset = "";
 				        		   var eventDateForTime = new Date(parseInt(aData.date));
 				        		   //var eventDateForTime = new Date();				        				
@@ -1285,25 +1278,16 @@
 			                	   var endTime = formatAMPM(endTimeChanged);
 			                	   var todayDate = new Date().getTime();
 					        	   if(aData.isAllDayEvent==1){
-					        		   jQuery('td:eq(2)', nRow).html("<p><b>Date:</b> "+eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());
-					        		   jQuery('td:eq(2)', nRow).html("<p class='allEvent'>All Day</p>");
+					        		   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());
+					        		   jQuery('td:eq(1)', nRow).html("<p class='allEvent'>All Day</p>");
 					        	   }else{
-				                	   jQuery('td:eq(2)', nRow).html("<p><b>Date:</b> "+eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());
-					        		   jQuery('td:eq(2)', nRow).append('<p><b>Time:</b> '+startTime+" - "+endTime+"</p>");
+				                	   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());
+					        		   jQuery('td:eq(1)', nRow).html('<p>'+startTime+" to "+endTime+"</p>");
 					        		   
 					        	   }
-					        	   jQuery('td:eq(2)', nRow).append('<p><b>Location:</b> '+aData.location+'</p>');
-					        	   //jQuery('td:eq(2)', nRow).addClass('calendarDetail').append('<a href="/eventRegisterUnit.action?eventID='+aData.id+'" class="button mTop-4">Register</a>');
-					        	   if(aData.blockOnlineReg=="N" && parseInt(aData.date) > todayDate){
-					        		   if(aData.totalSeats == "-1")
-					        			   jQuery('td:eq(2)', nRow).addClass('calendarDetail').append('<a href="/'+aData.id+'/EventRegister/'+aData.title+'" class="button site_Btn mTop-4">Register</a>');
-					        		   else if(aData.availableSeats >= aData.totalSeats)
-					   						jQuery('td:eq(2)', nRow).addClass('calendarDetail').append('<a href="/'+aData.id+'/EventRegister/'+aData.title+'" class="button site_Btn mTop-4">Register For WaitingList</a>');
-					        		   else
-					        			   jQuery('td:eq(2)', nRow).addClass('calendarDetail').append('<a href="/'+aData.id+'/EventRegister/'+aData.title+'" class="button site_Btn mTop-4">Register</a>');
-					        	   }else{
-					        		   jQuery('td:eq(2)', nRow).addClass('calendarDetail').append('<a class="button siteBtn mTop-4">Registration Closed</a>');
-					        	   }
+					        	   jQuery('td:eq(0)', nRow).append('<p>'+aData.title+'</p>');//<a href="/'+aData.id+'/EventDetail/'+aData.title+'"></a>
+					        	   jQuery('td:eq(0)', nRow).append('<p><b>Location:</b> '+aData.location+'</p>');
+					        	   jQuery('td:eq(2)', nRow).addClass('calendarDetail').html('<a href="/eventDetailsUnit.action?eventID='+aData.id+'"><i class="fa fa-2x fa-calendar"></i></a>');
 					           }
                 } );
                 flags.wrap.find('.eventsCalendar-loading').hide();
@@ -1375,7 +1359,7 @@ $.fn.eventCalendar.defaults = {
     eventsLimit: 4,
     monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     dayNames: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-   /* dayNamesShort: ['Su', 'M', 'T', 'W', 'Th', 'F', 'S'],*/
+    dayFullNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     txt_noEvents: "There are no events in this period",
     txt_SpecificEvents_prev: "",
     txt_SpecificEvents_after: "events:",

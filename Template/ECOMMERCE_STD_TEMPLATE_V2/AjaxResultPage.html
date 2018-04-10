@@ -5,25 +5,41 @@
 	</div>
 <div class="list">			
 	<div class="pic_location_option"> 
-		<div class="pic_loc_table">
+		<div class="pic_loc_table" style="height: 160px; overflow: auto;">
 
 #if ($resultListData.size()>0)
 		<table class="siteTable" width="100%" cellpadding="0" cellspacing="0">
 		<tbody>
 			<tr>
+				<th></th>
 				<th>$locale.get("event.thead.location")</th>
+				<!-- <th>*Distance</th> -->
+				#if($trigerPoint!="cart" && $trigerPoint!="approveCart")<th>$locale.get("label.qtyAvailable")</th>#end
+				<th>$locale.get("label.pickUpHours")</th>
 			</tr>
-					
+					#foreach($resultData in $resultListData)
 							<tr>
 								<td>
-								<select id="branchNameSelect" name="branchNameSelect" class="willCallRadio bootstrap-select dropdown-toggle btn-default"  onchange="selectedNearestLocation(this);">
-									#foreach($resultData in $sortTool.sort($resultListData,"branchName"))
-									<option value="$!resultData.branchID">$resultData.branchName</option>
-									#end
-								</select>
+                              	<input type="radio" id="branchNameSelect_$resultData.branchID" name="branchNameSelect" class="willCallRadio" value="$resultData.branchName" onclick="selectedNearestLocation(this,$resultData.branchID,'$resultData.branchName');" #if($resultData.suggestedValue=='Y') checked #end/>
 								<input type="hidden" id="brandSelectIdWillCall" name="brandSelectId" value="$resultData.branchID" />
 								</td>
+								<td>
+								$resultData.branchName
+								</td>
+								<!-- <td>	
+								<label id="">$resultData.branchDistance</label>
+								</td> -->
+								#if($trigerPoint!="cart" && $trigerPoint!="approveCart")
+								<td>	
+								<label id="willCallBranchAvail_$resultData.branchID" data-select="willCallEachBranch">$resultData.branchAvailQty</label>
+								<label id="willCallUom_$resultData.branchID"/></label>
+								</td>
+								#end
+								<td>
+								<label>$resultData.branchWorkingHours</label>
+								</td>
 							</tr>
+					 #end
 				
 				
 			</tbody>

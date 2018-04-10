@@ -48,7 +48,11 @@ function checkEach(chk){
 	var chkName = chk.name;
 	var allChecked = $("input:checkbox[name='"+chkName+"']:checked").length === $("input:checkbox[name='"+chkName+"']").length;
 	$('#chkSelectall, .deviceSelectAllChkBox').prop('checked', allChecked);
-	checkBtns(allChecked);
+	if($("input:checkbox[name='"+chkName+"']:checked").length > 0){
+		checkBtns(true);
+	}else{
+		checkBtns(false);
+	}
 }
 function checkBtns(status){
 	if(status){

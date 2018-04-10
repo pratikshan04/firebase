@@ -32,8 +32,8 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="emailAddress1B">$locale.get("form.label.eMail")<span class="text-danger"> * </span></label>
-							<input type="text" name="emailAddress1B" id="emailAddress1B" placeholder="$locale.get('form.label.eMail')" data-type="email" data-required="Y" data-error="$locale.get('form.user.address.emailId.notEmpty')" data-invalid="$locale.get('form.user.address.emailId.invalid')" class="form-control"/>
+							<label for="emailAddress1B">$locale.get("form.label.email")<span class="text-danger"> * </span></label>
+							<input type="text" name="emailAddress1B" id="emailAddress1B" placeholder="$locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$locale.get('form.user.address.emailId.notEmpty')" data-invalid="$locale.get('form.user.address.emailId.invalid')" class="form-control"/>
 							<small>$locale.get("register.text.yourEmailAddressWillServeAsYourUserIDWhenLogin")</small>
 						</div>
 					</div>
@@ -49,21 +49,6 @@
 						<div class="form-group">
 							<label for="newPasswordConfirm1B">$locale.get("product.label.passwordConfirmation")<span class="text-danger"> * </span></label>
 							<input type="password" name="newPasswordConfirm1B" id="newPasswordConfirm1B" autocomplete="off" placeholder="$locale.get('product.label.passwordConfirmation')" data-password="newPassword1B" data-type="password" data-required="Y" data-error="$locale.get('form.user.password.confirmPassword')" data-invalid="$locale.get('form.user.password.mismatch')" class="form-control"/>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="invoice1b">$locale.get("form.label.InvoiceNumber")<span class="text-danger"> * </span></label>
-							<input type="text" name="invoice1b" id="invoice1b" placeholder="$locale.get('form.label.InvoiceNumber')" data-type="text" data-required="Y" data-error="$locale.get('form.user.InvoiceNumber.notEmpty')"  class="form-control"/>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="zipCode1B">$locale.get("form.label.zipCodes")</label>
-							<input type="text" name="zipCode1B" id="zipCode1B" placeholder="$locale.get('form.label.zipCodes')" data-type="text" data-required="Y" data-error="$locale.get('form.user.zipCode.notEmpty')" data-invalid="$locale.get('form.user.zipCode.invalid')" class="formatZipCode  form-control" maxlength="10"/>
-							<small>$locale.get("register.text.yourEmailAddressWillServeAsYourUserIDWhenLogin")</small>
 						</div>
 					</div>
 				</div>
@@ -204,7 +189,6 @@
 				<input type="hidden" name="countryFulNm2ABB" id="countryFulNm2A" />
 				<input type="hidden" name="locUser2AB" id="locUser2A" value="N" />
 				<input type="hidden" name="contactClassification2AB" id="contactClassification2A" value="" />
-				<input type="hidden" name="erpOverrideFlag" id="erpOverrideFlag" value="N" />
 			</form>
 		</div>
 		<div id="newRetailCustomer">

@@ -15,8 +15,8 @@
 			#set($attrValueForSearch = $attrListVal)
 			##if($attrList.attrFilterList.get($attrListVal).size()>1)
 			<li class="selectOptions dropdown">
-			<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
-			<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch">
+				<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
+				<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
 				<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
 					#set($k = 0)
 					#foreach($filterVal in $attrList.attrFilterList.get($!attrListVal))
@@ -50,7 +50,6 @@
 #if($selectableItemList)
 <div id="pModeItemContent">
 #set($productCount = $selectableItemList.size())
-##if($layoutName =="ProductDetailPage")
 <div class="productdetail_list">
 	<div class="cimm_ProductFilterWrap clearAfter avoid-this">
 		<div class="cimm_ProductFilterWrap clearAfter">
@@ -67,7 +66,6 @@
 		</div>
 	</div>
 </div>
-##end
 <div class="cimm_siteTableEnclosure tabWrap">
 <table class="table table-bordered table-striped display" id="childItemTable">
 	<thead>
@@ -97,7 +95,7 @@
 					<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
 					<span></span>
 				</label>
-				<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')N/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
+				<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
 					<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 					<span class="imgForSend" style="display:none !important;">
 					 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
@@ -128,7 +126,9 @@
 				 #end
 			 </td>
 			 <td class="removeForSend">
-			 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='#if($productModeitemData.minOrderQty) $!productModeitemData.minOrderQty #else 1 #end' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+			 	#set($minQty = 1)
+				#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
+			 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 			 </td>
 		     <td itemprop="sku">
 			<span id="uomSpan_$!productModeitemData.partNumber.replaceAll('\s+','_')">
@@ -189,15 +189,15 @@
 		    		#end
 				#end
 				<!-- My Product Group-->
-				<div class="productGroupBtn dropdown mTop-2">
+				<div class="dropdown groupList mTop-2">
 					#set($groupPop = "ulg"+$!productModeitemData.itemId+"_pop")
 					<a id="$!groupPop" class="popMsg hideMe"></a>
 					#if($userLogin)
-						<a id='linkg$!itemData.itemId' class="dropdown-toggle log-addTocart-btn btn-sm" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
-							$!locale.get("product.label.addToShoppingList")
+						<a id='linkg$!itemData.itemId' class="dropdown-toggle cimm_inlineButton" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
+							$!locale.get("marketBasket.button.addToProductGroup")
 						</a>
 					#else
-						<a data-toggle="modal" data-target="#loginModal" class="log-addTocart-btn btn-sm"><span>$!locale.get("product.label.addToShoppingList")</span></a>
+						<a data-toggle="modal" data-target="#loginModal" class="cimm_inlineButton"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
 					#end
 					<ul id="ulg$!productModeitemData.itemId" class="dropdown-menu">
 						<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
@@ -469,7 +469,7 @@
 						        #itemListHiddenFields($linkItem.partNumber, $linkItem.itemPriceId, $linkItem.qty, $linkItem.uom, $linkItem.price, $linkItem.saleQty, $linkItem.itemId, $linkItem.displayFrieghtAlert, $linkItem.packageQty, $linkItem.itemAvailability, $linkItem.srchTyp, $navigationType,$linkItem.brandId,$linkItem.manfId, $linkItem.altPartNumber1)
 						 			<input type="hidden" id='packageQty_$linkItem.partNumber' value="1" />
 									<div class="cimm_linkItemImg">
-						 				<a href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+						 				<a href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 						 					<span> 
 											 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
 											 <img id="imageName$linkItem.itemId" itemprop="image" src="$linkItem.imageName"  onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
@@ -483,7 +483,7 @@
 										<ul>
 										 	<li>
 										 		<h4 itemprop="name">
-											 		<a class="cimm_linkProdTitle" id="itemTitle$linkItem.ItemId" href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')$itemTitle.replace(' ','_').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+											 		<a class="cimm_linkProdTitle" id="itemTitle$linkItem.ItemId" href="$linkItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 												 		#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
 												 		#if($linkItemTitle.length()>18)
 												 			$linkItemTitle.substring(0, 18)...
@@ -538,7 +538,7 @@
 											#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$itemData.packDesc</span></li> -->#end
 											#if($userLogin)
 										 	<li>  
-											 	<h4>$locale.get('product.label.yourprice'): </h4>            
+											 	<b>$locale.get('product.label.yourprice'): </b>            
 												<span id="span_$linkItem.partNumber" class="priceSpan" data-select='priceData'>
 													<img src="$webThemes/$siteName/images/loading.gif" />
 												</span>

@@ -71,7 +71,7 @@
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
-				<label for="email">$!locale.get("form.label.eMail") <span class="text-danger">*</span></label>
+				<label for="email">$!locale.get("form.label.email") <span class="text-danger">*</span></label>
 				<input type="text" name="email" id="email" value="$!billAddress.emailAddress" title="Read Only" class="form-control"  data-type="email" data-required="Y" data-error="$!locale.get('form.user.address.emailId.notEmpty')" data-invalid="$!locale.get('form.user.address.emailId.invalid')" />
 			</div>
 		</div>
@@ -88,7 +88,7 @@
 	</div>		
 		<div class="row" align="center">
 			<div class="col-md-12 col-sm-12 col-xs-12">
-			<button type="submit" id="updateBtn" name="submit" class="button siteBtn">$!locale.get('product.button.update')</button>
+			<button type="submit" id="updateBtn" name="submit" class="button">$!locale.get('product.button.update')</button>
 			</div>
 		</div>
 		<input type="hidden" id="useEntityAddress" name="useEntityAddress" value="No">
@@ -102,7 +102,6 @@
 		<input type="hidden" name="isInternationalUser" id="isInternationalUser" value="$!internationalUser"/>
 		<input type="hidden" id="billAddressState" value="$!billAddress.state"/>
 		<input type="hidden" id="billAddressCountry" value="$!billAddress.country"/>
-		<input type="hidden" name="erpOverrideFlag" id="erpOverrideFlag" value="Y"/>
 </form>
 <div id="successBlock" class="hideMe">
 	<a href="$!locale.get('website.url.AccountDashboard')" class="button">$!locale.get('product.label.backToDashboard')</a>

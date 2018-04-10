@@ -1,4 +1,3 @@
-var $webThemes = $("#webThemePath").val();
 var addressType = $("#addressType").val();
 if(addressType=='bill'){
 	$(document).ready(function(){

@@ -26,7 +26,7 @@
 		    #set($savedCartItemId = $!itemData.itemId) <!--CartlistData Iterator -->
 		    <tr itemscope itemtype="http://schema.org/Product">
 		    <td data-th="$!locale.get('product.label.Image')">
-		    	<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-')">
+		    	<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">
 					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 						<img src="$!itemData.imageName" itemprop="image" width="100" height="100" alt='$!itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 					#else
@@ -41,7 +41,7 @@
 				<div class="cimm_tableDescSection left">
 					<ul>
 						<li itemprop="name">
-							<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-')">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
+							<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
 						</li>
 						<li>
 		                 	<p itemprop="description">$!itemData.shortDesc</p>
@@ -55,7 +55,7 @@
 						</li>
 						#if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 	                    <li>
-	                        <b>$!locale.get("product.label.customerpartnumber"): </b>
+	                        <b>$!locale.get("product.label.cpn"): </b>
 	                        #set($seperator = "")
 	                        #set($partList = "")
                             #foreach($!customerPart in $!itemData.customerPartNumberList)
@@ -183,12 +183,6 @@
 		<input type="hidden" name="customerReleaseNumber" value="$!customerReleaseNumber" /> 
 		<input type="hidden" name="isReOrder" value="$!isReOrder"/> 
 		<input type="hidden" name="upsFrieghtCharges" value="$!totalCartFrieghtCharges"/> 
-		<input type="hidden" id="orderTotalHidden" value="$!orderTotal"/>
-		<input type="hidden" id="selectedBranch" name="selectedBranch" value="$!selectedBranch"/>
-		<input type="hidden" id="orderingType" name="orderingType" value="$!orderingType"/>
-		<input type="hidden" id="selectedLocation" name="selectedLocation" value=""/>orderDisposition
-		<input type="hidden" id="orderDisposition" name="orderDisposition" value=""/>
-		<input type="hidden" id="orderTaxid" name="orderTax" value="$!orderTax"/>
 		<!-- Order Details -->
 		
 		<!-- Payment Details -->
@@ -232,7 +226,7 @@
 		</div>
 		<!-- <div align="center"><input type="submit" class="button" value='$!locale.get("product.button.placeOrder")' onclick="blockUiLoadElements('processOrderWait');" /></div> -->          
 		<div class="clear"></div>
-		</form> 
+		</form>
 		
 		<div id="processOrderWait" style="display: none;"><h1><img src="$!webThemes/$!siteName/images/pleasewait.gif" alt='pleasewait' style="vertical-align:middle;"/>&nbsp; $!locale.get("label.message.processignOrderPleaseWait")</h1></div>
 		</div>
@@ -241,31 +235,29 @@
 <ul>
  	<li class="clearAfter">
     	<span class="priceLabel">$!locale.get("product.label.subTotal"):</span>
-		<span class="priceValue formatPrice" style="display: none;" id="subTotal">#if($subTotal>0)$$numberTool.format("#0.00",$subTotal) #end</span>
+		<span class="priceValue formatPrice">#if($subTotal>0)$$numberTool.format("#0.00",$subTotal) #end</span>
     </li>
     #if($orderTax>0)
     <li class="clearAfter">
     	<span class="priceLabel">$!locale.get("product.label.tax"): </span>
-		<span class="priceValue formatPrice"  style="display: none;" id="orderTax">#if($orderTax)$$numberTool.format("#0.00",$orderTax) #end</span>
+		<span class="priceValue formatPrice">#if($orderTax)$$numberTool.format("#0.00",$orderTax) #end</span>
     </li>
     #end
     #if($orderDiscount>0)
     <li class="clearAfter">
     	<span class="priceLabel">$!locale.get("product.label.discount"): </span>
-		<span class="priceValue formatPrice" style="display: none;" id="orderDiscount">#if($orderDiscount)$$numberTool.format("#0.00",$orderDiscount) #end</span>
+		<span class="priceValue formatPrice">#if($orderDiscount)$$numberTool.format("#0.00",$orderDiscount) #end</span>
     </li>
     #end 
     #if($totalCartFrieghtCharges>0)
     <li class="clearAfter">
     	<span class="priceLabel">$!locale.get("product.label.shipping"): </span>
-		<span class="priceValue formatPrice" style="display: none;" id="totalCartFrieghtCharges">#if($totalCartFrieghtCharges)$$numberTool.format("#0.00",$totalCartFrieghtCharges) #end</span>
+		<span class="priceValue formatPrice">#if($totalCartFrieghtCharges)$$numberTool.format("#0.00",$totalCartFrieghtCharges) #end</span>
     </li>
     #end 
  	<li class="clearAfter">
     	<span class="priceLabel">$!locale.get("product.label.total"): </span>
 		<span class="priceValue formatPrice">#if($orderTotal)$$numberTool.format("#0.00",$orderTotal) #end</span>
-		<span style="display: none;" id="amount">$!orderTotal</span>
-		<span style="display: none;" id="orderTotal">$!orderTotal</span>
     </li>                 
 </ul>
 <div class="clear"></div>

@@ -216,7 +216,7 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         $(ZoomHere).click(ZoomHereCallBack);
 
         var Directions = document.createElement("a");
-        Directions.innerHTML = 'Get Directions';
+        Directions.innerHTML = 'Map and Driving Directions';
         Directions.setAttribute("id", BranchName[i]);
         Directions.setAttribute("name", i);
         Directions.setAttribute("class", "crdirections");
@@ -266,7 +266,7 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         addressLI.appendChild(listBlock);
 
         var iconBlock = document.createElement("span");
-        iconBlock.setAttribute("class", "plusToggle");
+        iconBlock.setAttribute("class", "iconToggle");
         iconBlock.innerHTML = '<i class="fa fa-caret-right"></i>';
         outerDiv.appendChild(iconBlock);
         
@@ -275,10 +275,10 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         titleBold.innerHTML = BranchName[i];
         outerDiv.appendChild(titleBold);
 
-        var distanceBlock = document.createElement("span");
+       /* var distanceBlock = document.createElement("span");
         distanceBlock.setAttribute("class", "locDistance pullRight");
         distanceBlock.innerHTML = distance[i];
-        outerDiv.appendChild(distanceBlock);
+        outerDiv.appendChild(distanceBlock);*/
 
         var streetDiv = document.createElement("li");
         streetDiv.setAttribute("class", 'Street');
@@ -292,7 +292,7 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
 
         var phoneDiv = document.createElement("li");
         phoneDiv.setAttribute("class", 'Phone'); //phoneDiv.setAttribute("class", 'Phone');
-        phoneDiv.innerHTML = '<b>Phone:</b> <a class="primaryColor" href="tel:' + Phone[i] + '">' + Phone[i] + '</a>'; //'P: ' ;
+        phoneDiv.innerHTML = '<a class="primaryColor" href="tel:' + Phone[i] + '">' + Phone[i] + '</a>'; //'P: ' ;
         listBlock.appendChild(phoneDiv);
 
         if(FaxNum[i]!= null && FaxNum[i]!="") {
@@ -319,7 +319,7 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         if(WorkHour[i]!= null && WorkHour[i]!="") {
             var workhourDiv = document.createElement("li");
             workhourDiv.setAttribute("class", 'Workhours');
-            workhourDiv.innerHTML = '<b>Store Hours: </b>'+WorkHour[i];
+            workhourDiv.innerHTML = 'Office Hours: '+WorkHour[i];
             listBlock.appendChild(workhourDiv);
         }
 
@@ -339,10 +339,10 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         var directionBlock = document.createElement("li");
         directionBlock.setAttribute("class", "directionBtn marginY-2");
         var Directions = document.createElement("a");
-        Directions.innerHTML = 'Get Directions';
+        Directions.innerHTML = 'Map and Driving Directions';
         Directions.setAttribute("id", BranchName[i]);
         Directions.setAttribute("name", i);
-        Directions.setAttribute("class", "crdirections cimm_button blockElement");
+        Directions.setAttribute("class", "crdirections blockElement");
         Directions.setAttribute("street", Street[i]);
         Directions.setAttribute("state", Locality[i]);
         Directions.setAttribute('Lat',Latitude[i]);
@@ -352,7 +352,7 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         listBlock.appendChild(directionBlock);
         
         var wimageDiv = document.createElement("li");
-        wimageDiv.setAttribute("class", 'Wimage');
+        wimageDiv.setAttribute("class", 'Wimage hideMe');
         if (WarehouseImage[i] != null && WarehouseImage[i] != undefined) {
             wimageDiv.innerHTML = WarehouseImage[i];
         }
@@ -482,6 +482,11 @@ var Lon = "";
 var latlng2 = "";
 
 function newmap(obj) {
+	if($(obj).find('.iconToggle i').hasClass('fa-caret-right')){
+		jQuery(obj).find('.iconToggle i').removeClass('fa-caret-right').addClass('fa-caret-down');
+	}else{
+		jQuery(obj).find('.iconToggle i').removeClass('fa-caret-down').addClass('fa-caret-right');
+	}
     var inFoBlockId = $(obj).attr('data-target');
     Lat = $(inFoBlockId).find('.Lat').text();
     Lon = $(inFoBlockId).find('.Lon').text();
@@ -494,7 +499,7 @@ var street = '';
 
 function initialize2(latlng2, obj) {
     var myOptions = {
-        zoom: 11,
+        zoom: 17,
         center: latlng2,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -620,8 +625,9 @@ function loadLocationDetails(obj){
 		$(obj).find(".Title").addClass("active");
 		var currentStore = "<div class='locDetailWrap marginY-4'><div><b class='productTitle'>"+title+"</b><span class='pullRight'>"+locDistance+"</span></div><ul><li>"+street+"</li><li>"+locality+"</li><li class='primaryColor'>"+phone+"</li><li class='lineHeight1'>"+fax+"</li><li class='lineHeight1'>"+email+"</li></ul><ul><li>"+workhours+"</li><li class='marginY-2'>"+btn2+"</li></ul></div>"; 
 		$("#currentStore").html(currentStore);
+		$("#currentStoreNote").html(note);
 		var noImagePath = $('#webThemePath').val()+"/images/NoImage.png'";
-		var wImage = $(".Wimage",obj).text();
+		var wImage = $(obj).parent().find(".Wimage").text();
 		if(wImage != "undefined" && wImage !="")
 			$("#storeImage").html("<div class='cimm_slideItemImg'><a><img src='"+wImage+"' alt='"+title+"'></a></div>");
 		else

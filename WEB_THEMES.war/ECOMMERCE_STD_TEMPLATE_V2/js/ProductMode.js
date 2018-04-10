@@ -1,5 +1,5 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'/js/multiTab.min.js', function(){});
+$.getScript(webThemes+'js/multiTab.min.js', function(){});
 var ProductMode = {};
 (function() {
 	//------------------------------------------------- Product Mode Filters Start
@@ -25,12 +25,17 @@ var ProductMode = {};
 	};
 	//function removeKeyword(index){}
 
-	ProductMode.buildSearchTrail = function(){
+	ProductMode.buildSearchTrail = function(id){
 		jQuery("#mulitFilterTrailDetailPage").html("");
 		if(jQuery("#mulitFilterTrailDetailPage").length>0){
 			var buildString = "";
 			var keyText = jQuery("#keyWordTxtTrail").text();
-			var attrList = jQuery("#attrFilterList").text();
+			var attrList = "";
+			if(id){
+				attrList = $("#attrFilterContent_"+id).parent().find('#attrFilterList').text();
+			}else{
+				attrList = jQuery("#attrFilterList").text();
+			}
 
 			if(jQuery.trim(attrList)!="")
 			{
@@ -62,13 +67,13 @@ var ProductMode = {};
 							var splitAttrValue = attrValueTxt.split("`");
 							attrValueTxt = splitAttrValue[0];
 						}
-						buildString = buildString + c + '<span class="refine-value">'+attrValueTxt+'<a class="removeFilter" href="javascript:void(0);" onclick="ProductMode.removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> [<i class="fa fa-times"></i>]</a></span>';
+						buildString = buildString + c + '<span class="refine-value">'+attrValueTxt+'<a class="removeFilter" href="javascript:void(0);" data-priceId="'+id+'" onclick="ProductMode.removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> [<i class="fa fa-times"></i>]</a></span>';
 						c = " ";
 					}
 					buildString = buildString + '</li>'; // For Filter results
 				}
 				console.log("build finished + " + buildString);
-			}
+			}	
 
 			if(jQuery.trim(attrList)!="" || jQuery.trim(keyText)!="")
 			{
@@ -82,7 +87,7 @@ var ProductMode = {};
 	//function buildSearchTrail(){}
 	
 	ProductMode.removeMultiAttr = function(id){
-
+		var priceId = $(id).attr('data-priceId');
 		var key = jQuery(id).find("div").html();
 		var val = unescape(jQuery(id).find("span").text());
 
@@ -91,10 +96,18 @@ var ProductMode = {};
 		if(key=="CATEGORY")
 			key = "category";
 
-		var attrList = jQuery("#attrFilterList").text();
+		if(priceId){
+			attrList = $("#attrFilterContent_"+priceId).parent().find('#attrFilterList').text();
+		}else{
+			attrList = jQuery("#attrFilterList").text();
+		}
 
-		if(jQuery.trim(attrList)=="")
-		{
+		if(jQuery.trim(attrList)=="") {
+			if(priceId){
+				$("#attrFilterContent_"+priceId).parent().find('.multiSelectForm [name="attrFilterList"]').val(key+":"+val);
+			}else{
+				jQuery("#multiFilterAttrList").val(key+":"+val);
+			}
 			jQuery("#multiFilterAttrList").val(key+":"+val);
 			console.log("woops empty attr : " + jQuery("#multiFilterAttrList").val());
 		}else{
@@ -138,14 +151,22 @@ var ProductMode = {};
 				c = "~";
 			}
 			// buildAttr = Encoder.htmlEncode(buildAttr).replace(/\&quot;/g,'"');
-			jQuery("#multiFilterAttrList").val(buildAttr);
+			if(priceId){
+				$("#attrFilterContent_"+priceId).parent().find('.multiSelectForm [name="attrFilterList"]').val(buildAttr);
+			}else{
+				jQuery("#multiFilterAttrList").val(buildAttr);
+			}
 			console.log("the Filtered list to append and buid : " + jQuery("#attrFilterList").text());
 		}
 
 		var navigationType = jQuery("#navigationType").val();
 		var srchKeyword = jQuery("#srchKeyword").val();
 		var srchTyp = jQuery("#srchTyp").val();
-		jQuery("#multiFilterAttributeForm").submit();
+		if(priceId){
+			$("#attrFilterContent_"+priceId).parent().find('.multiSelectForm').submit();
+		}else{
+			jQuery("#multiFilterAttributeForm").submit();
+		}
 	};
 	//function removeMultiAttr(id){}
 
@@ -155,6 +176,9 @@ var ProductMode = {};
 			if(jQuery("#multiFilterAttrList").val()!=null && jQuery("#multiFilterAttrList").val()!=""){
 				jQuery("#multiFilterAttrList").val("");
 				jQuery("#multiFilterAttributeForm").submit();
+			}else if(jQuery('.activeFilterForm [name="attrFilterList"]').val()!=null && jQuery('.activeFilterForm [name="attrFilterList"]').val()!=""){
+				jQuery('.activeFilterForm [name="attrFilterList"]').val("");
+				jQuery(".activeFilterForm").submit();
 			}else{
 				bootAlert("small","error","Error","Filter is not applied");
 				return false;
@@ -178,11 +202,11 @@ var ProductMode = {};
 		if(chks.length>0){
 			chks.each(function(){
 				var tId = jQuery(this).attr("id");
-				key = jQuery("#"+tId+"_div").text();
-				val = val+ c + '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+				key = jQuery(this).parent().find("#"+tId+"_div").text();
+				val = val+ c + '"'+unescape(jQuery(this).parent().find("#"+tId+"_span").text())+'"';
 				c = "|";
 			});
-			ProductMode.appendSearch(key,val)
+			ProductMode.appendSearch(key,val,chks)
 
 		}else{
 			bootAlert("small","error","Error","Please select an attribute to filter");
@@ -190,7 +214,7 @@ var ProductMode = {};
 	};
 	//function appendSearchByCheckBox(id){}
 
-	ProductMode.appendSearch = function(key,val){
+	ProductMode.appendSearch = function(key,val,chksEl){
 
 		if(typeof val!='undefined' && val!=null && val!=""){
 			val = val.replace(/\+/g," ");
@@ -204,17 +228,23 @@ var ProductMode = {};
 		if(key=="Category")
 			key = "category";
 		key = "attr_"+key;
-		var attrList = jQuery("#attrFilterList").text();
+		var attrList = "";
+		if($(chksEl).parents('.sessionDesp').find('#attrFilterList').length > 0){
+			attrList = $(chksEl).parents('.sessionDesp').find('#attrFilterList').text();
+		}else{
+			attrList = jQuery("#attrFilterList").text();
+		}
 		var keyText = jQuery("#keyWordTxtTrail").text();
-		if(jQuery.trim(keyText)!="")
-		{
-
+		if(jQuery.trim(keyText)!="") {
 			jQuery("#keyWordTxtMulti").val(keyText);
 		}
-		if(jQuery.trim(attrList)=="")
-		{
-			jQuery("#multiFilterAttrList").val(key+":"+val);
-			console.log("woops empty attr : " + jQuery("#multiFilterAttrList").val());
+		if(jQuery.trim(attrList)=="") {
+			if($(chksEl).parents('.sessionDesp').find('.multiSelectForm').length > 0){
+				$(chksEl).parents('.sessionDesp').find('.multiSelectForm [name="attrFilterList"]').val(key+":"+val);
+			}else{
+				jQuery("#multiFilterAttrList").val(key+":"+val);
+			}
+			//console.log("woops empty attr : " + jQuery("#multiFilterAttrList").val());
 		}else{
 			var attrArr = attrList.split("~");
 			var buildAttr = "";
@@ -238,16 +268,27 @@ var ProductMode = {};
 			if(!isBuild)
 				buildAttr = buildAttr + "~" + key+":"+val;
 			//buildAttr = Encoder.htmlEncode(buildAttr).replace(/\"/g,'"');
-			jQuery("#multiFilterAttrList").val(buildAttr);
+			if($(chksEl).parents('.sessionDesp').find('.multiSelectForm').length > 0){
+				$(chksEl).parents('.sessionDesp').find('.multiSelectForm [name="attrFilterList"]').val(buildAttr);
+			}else{
+				jQuery("#multiFilterAttrList").val(buildAttr);
+			}
 			console.log("the Filtered list to append and buid : " + jQuery("#attrFilterList").text());
 		}
-		jQuery("#multiFilterAttributeForm").submit();
+		if($(chksEl).parents('.sessionDesp').find('.multiSelectForm').length > 0){
+			$(chksEl).parents('.sessionDesp').find('.multiSelectForm').submit();
+		}else{
+			jQuery("#multiFilterAttributeForm").submit();
+		}
 	};
 	 //function appendSearch(key,val){}
 
 	ProductMode.submitProductModeFilterForm = function(itemPriceId){
+		$('.itemDetailInfoList a').removeClass('active');
 		if($("#productModeItemContent_"+itemPriceId).html()==""){
+			$(".multiSelectForm").removeClass('activeFilterForm');
 			$(".productModeItemContent").html("");
+			$('.cimm_attrFilterContent').html('');
 			var formId = "multiFilterAttributeForm";
 			$(".productModeItemContent").html("");
 			$(".productModeItemsDiv").hide();
@@ -255,11 +296,16 @@ var ProductMode = {};
 				formId = formId+$.trim(itemPriceId);
 				$("#"+formId).submit();
 			}
+			$('.itemDetailInfoList_'+itemPriceId).addClass('active');
+			$('#multiFilterAttributeForm'+itemPriceId).addClass('activeFilterForm');
 		}else{
 			if($("#productModeItemsDiv_"+itemPriceId).is(':visible')){
-				$(".productModeItemsDiv").slideToggle();
+				$(".productModeItemsDiv").slideUp();
+				$("#attrFilterContent_"+itemPriceId).hide();
 			}else{
-				$(".productModeItemsDiv").slideToggle();
+				$('.itemDetailInfoList_'+itemPriceId).addClass('active');
+				$(".productModeItemsDiv").slideDown();
+				$("#attrFilterContent_"+itemPriceId).show();
 			}
 		}
 	}
@@ -565,11 +611,14 @@ $(function(){
 					if(itemPriceId!=null && itemPriceId!=""){
 						if($(msg).filter("#pModeItemContent").length>0){
 							$("#productModeItemContent_"+itemPriceId).html($(msg).filter("#pModeItemContent").html());
-							$(".right_attribute").hide();
+							//$(".right_attribute").hide();
 							$("#productModeItemsDiv_"+itemPriceId).show()
 						}
 						if($(msg).filter("#allBranchAvailabilityDIV").length>0){
 							$("#productModeAllBranchAvailabilityDiv_"+itemPriceId).html($(msg).filter("#allBranchAvailabilityDIV").html());
+						}
+						if($(msg).filter("#attrContent").length>0){
+							$("#attrFilterContent_"+itemPriceId).html($(msg).filter("#attrContent").html());
 						}
 					}else{
 						if($(msg).filter("#attrContent").length>0){
@@ -580,7 +629,7 @@ $(function(){
 							$("#productModeItemContent").html($(msg).filter("#pModeItemContent").html());
 						}
 					}
-					ProductMode.buildSearchTrail();
+					ProductMode.buildSearchTrail(itemPriceId);
 					hideBulkAction();
 				}
 				ProductMode.loadPriceInDataTable();

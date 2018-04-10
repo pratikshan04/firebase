@@ -22,16 +22,11 @@
 	<li>$!locale.get("breadcrumbs.label.$!LayoutName")</li>
 	#end
 </ul>
-#elseif($!LayoutName=="ManagePurchaseAgentPage")
-<ul class="breadcrumb">
-	<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
-	<li><a href='javascript:void(0);'>$!locale.get("product.heading.userManagement") </a></li>
-</ul>
 #elseif($!LayoutName=="ProductGroupPage")
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
     <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
-    <li><a href="/SavedGroups/Products"> $!locale.get("dashboard.label.shoppingLists")</a></li>
+    <li><a href="/SavedGroups/Products"> $!locale.get("product.heading.myProductGroups")</a></li>
     <li><span>$!savedGroupName</span></li>
 </ul>
 #elseif($!LayoutName=="ApproveCart")
@@ -112,7 +107,7 @@
 				<li>$!locale.get("product.heading.productCategory")</li>              
 			</ul>
 		#end
-		<!--  <h1 class="cimm_pageTitle">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading  #else $!locale.get("product.heading.products") #end</h1> -->
+		<!-- <h3 class="cimm_pageTitle">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h3> -->
 #elseif($!LayoutName=="ProductList")
 	#if($!breadCrumbList)
 	<ul class="breadcrumb">
@@ -213,6 +208,13 @@
 	</ul>
 #elseif($!LayoutName=="OrderDetailPage")
 	<h1 class="cimm_pageTitle">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum) $!locale.get("product.label.orderNumber") $!orderDetail.orderNum #end #end</h1>
+	#if($orderDetail.orderStatus.contains("Bid"))
+    <h2 class="cimm_pageTitle">$!locale.get("product.heading.bidDetail")</h2>   
+    #elseif($!requestType != "openQuote")
+    <h2 class="cimm_pageTitle">$!locale.get("product.heading.orderDetail")</h2>     
+    #else
+    <h2 class="cimm_pageTitle">$!locale.get("product.heading.orderDetail")</h2>   
+    #end  
 	<ul class="breadcrumb">
 	 #if($!orderDetail && !$!orderDetail.orderStatus.toUpperCase().contains("INVOICE"))
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
@@ -239,7 +241,7 @@
 	    <li>$!locale.get("product.heading.configureProcurementSystem")</li>
 	</ul>
 #elseif($LayoutName!="ShipEntityPage")
-<!-- <h1 class="cimm_pageTitle">$!locale.get("breadcrumbs.label.$!LayoutName")</h1> -->
+<h1 class="cimm_pageTitle">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
 	<ul class="breadcrumb">
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
 	    #if($!LayoutName=="OrderHistoryPage" || $!LayoutName=="AddresssesPage" || $!LayoutName=="EditContactPage")

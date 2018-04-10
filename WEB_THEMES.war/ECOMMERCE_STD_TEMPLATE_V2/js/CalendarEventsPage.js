@@ -1,5 +1,5 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'/js/jquery.eventCalendar.js', function(){
+$.getScript(webThemes+'js/jquery.eventCalendar.js', function(){
 	$("#eventCalendarInline").eventCalendar({
 		eventsjson:'calendarEventUnit.action',
 		cacheJson:false

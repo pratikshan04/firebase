@@ -35,6 +35,7 @@ function forgotPasswordAdvanced(){
 						message: msg,
 						title: "<span class='text-success'>Password change Confirmation &nbsp;&nbsp;<i class='glyphicon glyphicon-ok'></i></span>",
 						callback: function(result){
+							//if if(msg.indexOf("cpol") add in code if required
 							if(result){
 								window.location.href='/Login';
 							}else{

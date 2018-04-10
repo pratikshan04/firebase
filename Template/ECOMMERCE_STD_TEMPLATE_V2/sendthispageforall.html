@@ -1,78 +1,84 @@
-<script type="text/javascript">
-jQuery(function(){
-	sendThisPageScript();
-});
-</script>
-<style type="text/css">
-.hideForPrint{
-	display:none !important;
-}
-</style>
-
-<ul class="cimm_breadcrumbs">
-    <li><a href="$locale.get('website.url.Welcome')">$locale.get('product.heading.home')</a></li>
-    <li><span class="cimm_breadcrumbsIcon">..</span>$locale.get("product.button.sendthispage")</li>
-    <div class="clear"></div>		
-</ul>
-
-<div class="clear"></div>	
-	<!-- <h2 class="pageTitle">$locale.get("product.button.sendthispage")</h2> -->
-        	<div id="notificationDiv" style="display:none;">
-                <span class="successMsg" id="message"></span>
-                <span class="errMsg" id="errorMsg"></span>
-            </div>	
-            <div class="clear"></div>
-			<div id="SendItem">           
-            <form method="post" id="sendPageForm">
-			 <div class="cimm_formEnclosure">
-			<!-- <div class="regForm">                   
-				<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required")</div>                    
-			</div> -->
-			<ul class="cimm_formContent forgotPassWrap">
-				<li>
-					<input name="toName" type="text" maxlength="50" size="50" id="toName" />
-					<label>$locale.get("form.label.FriendName")  <span class="required"> * </span> </label>
-			    <li>
-					<input name="toEmail" type="text" maxlength="100" size="50" id="toEmail"  />
-					<label>$locale.get("form.label.FriendEmailAddress") <span class="required"> * </span> </label>
-			    </li>
-				<li>
-					<input name="fromName" type="text" maxlength="50" size="50" id="fromName" />
-					<label>$locale.get("form.label.FromName") <span class="required"> * </span></label>
-				</li>
-				<li>
-					<input name="fromEmail" type="text" maxlength="100" size="50" id="fromEmail"  />
-					<label>$locale.get("form.label.FromEmailAddress") <span class="required"> * </span></label>
-			    </li>
-			    <li>
-					<input name="mailSubject" type="text" maxlength="50" size="50" id="mailSubject" />
-					<label>$locale.get("form.label.Subject") <span class="required"> * </span> </label>
-			    </li>
-			</ul>
-            <input type="hidden" value="" id="mailLink" name="mailLink"/>
-            <input type="hidden" value="" id="mailBody" name="mailBody"/>
-            <input type="hidden" value="" id="imgPart" name="imgPart"/>
-            <input type="hidden" value="" id="contentPart" name="contentPart"/>
-            <input type="hidden" value="" id="pricePart" name="pricePart"/>
-            <input type="hidden" value="" id="descPart" name="descPart"/>
-            <input type="hidden" value="sharePageForAll" id="mailTemplateName" name="mailTemplateName" />
-            <div class="cimm_formBtn">
-            	<input type="submit" name="save" id="sendBtn" class="button" value="$locale.get('form.button.send')" onclick="return validateSendMailForAll();" />
-            </div> 			
-    </div>
-	<div class="clear"></div>
+<div id="notificationDiv"></div>
+<div id="SendItem">           
+<form method="post" id="sendPageForm">
+	<div class="row marginY-3">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FriendName")  <span class="required"> * </span> </label>
+						<input name="toName" type="text" maxlength="50" size="50" id="toName" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FriendEmailAddress") <span class="required"> * </span> </label>
+						<input name="toEmail" type="text" maxlength="100" size="50" id="toEmail" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FromName") <span class="required"> * </span></label>
+						<input name="fromName" type="text" maxlength="50" size="50" id="fromName" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.FromEmailAddress") <span class="required"> * </span></label>
+						<input name="fromEmail" type="text" maxlength="100" size="50" id="fromEmail" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("form.label.Subject") <span class="required"> * </span> </label>
+						<input name="mailSubject" type="text" maxlength="50" size="50" id="mailSubject" class="form-control" />
+					</div>
+				</div>
+			</div>
+			#if(!$userLogin)
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>$locale.get("event.label.entertheTextInTheBox")<span class="required">*</span> : </label>
+						<img id="captchaImg" src="CaptchaServlet.slt" alt="" width="220px" height="60px" alt='captcha'/> <br />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cimm_regCapthaWrap clearAfter">
+						<input id="jcaptcha" name="jcaptcha" type="text" />
+						<input type="button" value="$locale.get('eventRegister.captcha.changeImage')" name="jcaptchaRefresh" id="refreshbtn" onclick="refreshjcaptcha();" class="cimm_inlineButton" />
+					</div>
+				</div>
+			</div>
+			#end
+		</div>
+		<div class="col-md-4"></div>
+		<input type="hidden" value="" id="mailLink" name="mailLink"/>
+		<input type="hidden" value="" id="mailBody" name="mailBody"/>
+		<input type="hidden" value="" id="contentPart" name="contentPart"/>
+		<input type="hidden" value="sharePageForAll" id="mailTemplateName" name="mailTemplateName" />
+		<input type="hidden" value="$!session.getAttribute('last_sent_time')" id="last_sent" />
+		<input type="hidden" value="$!session.getAttribute('captcha_required')" id="captcha_req" />
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<button type="submit" name="save" id="sendBtn" class="button" onclick="return validateSendMailForAll();">$locale.get('form.button.send')</button>
+			</div>
+		</div>
+	</div>
+	<div class="text-center eMailLogo">
+		<img src="$!webThemes/$!siteName/images/mailTemplateLogo.png" alt="$!siteDisplayName" alt="mailTemplateLogo">
+	</div>
 	<div id="mailContent" class="prodInformation"></div>
 </form>
 </div>
-
-    <script>
-jQuery(function(){
-	document.title = "Send This page";
-});
-</script>
-<style>
-#groupName
-{
-	font-weight:400;
-}
-</style>

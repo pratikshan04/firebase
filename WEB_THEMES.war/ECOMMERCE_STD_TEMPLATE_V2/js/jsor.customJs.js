@@ -13,9 +13,6 @@ function initJssorSlides(sliderId,transistion){
 			$AutoPlay: true,
 			$Idle: 2000,
 			$FillMode:5,
-			$AutoPlay: 1,
-		    $DragOrientation: 2,
-		    $PlayOrientation: 2,
 			$SlideshowOptions: {
 				$Class: $JssorSlideshowRunner$,
 				$Transitions: jssor_1_SlideoTransitions,

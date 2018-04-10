@@ -1,6 +1,14 @@
 <div id="mainPage" style="width: 100%;height: 100%;">
     <div class="appIcons" width="100%" border="0">
         <ul>
+        	<li>
+                <a >
+                    <img src="$hostName/$webThemes/$siteName/images/App/myAccount.png" alt=""/>
+                    <h6>
+                        My Account
+                    </h6>
+                </a>
+            </li>
             <li>
                 <a href="$hostName/Products.action">
                     <img src="$hostName/$webThemes/$siteName/images/App/products.png" alt=""/>
@@ -9,126 +17,65 @@
                     </h6>
                 </a>
             </li>
-            <!--<li>
-             <a title=" " onclick="clickScan();">
-             <img src="img/scan.png" alt="">
-             <h6>
-             Scan
-             </h6>
-             </a>
-             </li>-->
-            <li>
-                <!--<a href="$locale.get('website.url.AccountDashboard')">-->
-                <a >
-                    <img src="$hostName/$webThemes/$siteName/images/App/myAccount.png" alt=""/>
-                    <h6>
-                        My Account
-                    </h6>
-                </a>
-            </li>
-            <!--<li>
-             <a href="$hostName/SavedGroups/MyFavorites" id="" title=" " >
-             <img src="img/favorites.png" alt=""/>
-             <h6>
-             Favorites
-             </h6>
-             </a>
-             </li>-->
             <li>
                 <a title=" " href="$locale.get('website.url.SavedGroup.Product')">
                     <img src="$hostName/$webThemes/$siteName/images/App/savedGroup.png" alt=""/>
                     <h6>
-                        Saved Group
+                        My Lists
                     </h6>
                 </a>
             </li>
             <li>
-                <a href="$locale.get('website.url.SavedGroup.Cart')" title=" " >
-                    <img src="$hostName/$webThemes/$siteName/images/App/savedCart.png" alt=""/>
+                <a href="#" id="" title=" " >
+                    <img src="$hostName/$webThemes/$siteName/images/App/specials.png" alt=""/>
                     <h6>
-                        My Saved Carts
+                        Specials
                     </h6>
                 </a>
             </li>
-            <!--<li>
-             <a title=" " onclick="window.open('https://auersteel.configio.com/ShoppingCart.aspx?com=productlist&vc=1&srt=startdate','_system','');">
-             <img src="$hostName/$webThemes/$siteName/images/training.png" alt=""/>
-             <h6>
-             Training
-             </h6>
-             </a>
-             </li>-->
             <li>
-                <a title=" " onclick="AuerPromoList('$hostName/SavedGroups/AuerPromo');" href="#">
-                    <img src="$hostName/$webThemes/$siteName/images/App/promotions.png" alt=""/>
+                <a href="#" title=" " >
+                    <img src="$hostName/$webThemes/$siteName/images/App/rfq.png" alt=""/>
                     <h6>
-                        Promotions
+                        Request Quote
+                    </h6>
+                </a>
+            </li>
+            <li>
+                <a title=" " href="/Location">
+                    <img src="$hostName/$webThemes/$siteName/images/App/locations.png" alt=""/>
+                    <h6>
+                        Locations
+                    </h6>
+                </a>
+            </li>
+            
+            <li>
+                <a title=" " onClick="callTojavaFn()" href="#">
+                    <img src="$hostName/$webThemes/$siteName/images/App/photoInquiry.png" alt=""/>
+                    <h6>
+                        Photo Inquiry
                     </h6>
                 </a>
             </li>
             <li>
                 <a title=" " onClick="callTojavaFn()" href="#">
-                    <img src="$hostName/$webThemes/$siteName/images/App/scan.png" alt=""/>
+                    <img src="$hostName/$webThemes/$siteName/images/App/contact.png" alt=""/>
                     <h6>
-                        Scan
+                        Contact Us
                     </h6>
                 </a>
-                <li>
-                    <a title=" " onClick="callToDb()" href="#offlineCart">
-                        <img src="$hostName/$webThemes/$siteName/images/App/offlineCart.png" alt=""/>
-                        <h6>
-                            Offline Cart
-                        </h6>
-                    </a>
-                </li>
-                </ul>
+            </li>
+            <li>
+                <a title=" " onClick="callToDb()" >
+                    <img src="$hostName/$webThemes/$siteName/images/App/offlineCart.png" alt=""/>
+                    <h6>
+                        Offline Cart
+                    </h6>
+                </a>
+            </li>
+        </ul>
     </div>
     <!--End of appIcons-->
 </div>
 <!--End of mainPage-->
-<script>
-    $(window).trigger("homefeaturepage");
-    </script>
-<style>
-    .appIcons ul li{
-        float:left;
-        width:33%;
-        list-style:none;
-        text-align:center;
-    }
-.appIcons ul li img{
-    width:60%;
-    height:auto;
-}
-.appIcons li{
-    padding:10% 0;
-}
-.appIcons li h6{
-    font-size:12px;
-    font-weight:normal;
-    color:#565050 !important;
-    /*text-transform:uppercase;*/
-}
-</style>
-<script language="javascript">
-    function diplayJavaMsg(msg){
-        alert(msg);
-    }
-function callTojavaFn(){
-    var msg = "Calling from Java Script";
-    Android.startscaning();
-}
-function callToDb(){
-    var msg = "Calling from Java Script";
-    Android.gotoofflineActivity();
-    try {
-        webkit.messageHandlers.callbackHandler.postMessage("Goto offline");
-    } catch(err) {
-        console.log('The native context does not exist yet');
-    }
-}
-function btnTakepicClick(){
-    JsHandler.Takepic();
-}
-</script>
-

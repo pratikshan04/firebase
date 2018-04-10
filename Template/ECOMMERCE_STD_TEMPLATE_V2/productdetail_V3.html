@@ -105,373 +105,374 @@
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="cimm_itemDetailWrap clearAfter" itemscope itemtype="http://schema.org/Product">
-		<div class="row">
-			<div class="col-md-4 col-sm-12 col-xs-12">
-				<div class="cimm_itemMainImage">
-					<div class="itemDetailImage">
-						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-						<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
-						<span class="imgForSend">
-							<img itemprop="image" src="$!itemData.imageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-						</span>
-						#else
-						<span class="imgForSend">
-							<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
-						</span>
-						#end
-						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><i class="fa fa-search fa-2" aria-hidden="true"></i></a>
-						#else
-							<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><i class="fa fa-search fa-2" aria-hidden="true"></i></a>
-						#end
-						#if($itemData.clearance=="Y" && $!productCount<1)
-							<span class="clearenceTag">$!locale.get('product.label.clearance')</span>
+		<div class="cimm_itemMainImage">
+			<div class="itemDetailImage">
+				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+				<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
+				<span class="imgForSend">
+					<img itemprop="image" src="$!itemData.imageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+				</span>
+				#else
+				<span class="imgForSend">
+					<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+				</span>
+				#end
+				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><i class="fa fa-search fa-2" aria-hidden="true"></i></a>
+				#else
+					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><i class="fa fa-search fa-2" aria-hidden="true"></i></a>
+				#end
+				#if($itemData.clearance=="Y" && $!productCount<1)
+					<span class="clearenceTag">$!locale.get('product.label.clearance')</span>
+				#end
+			</div>
+			#if($itemImagesList && $!itemImagesList.size()>0)
+				<ul id="gallery" class="thumblist">
+					#set($count=0)
+					#foreach($imageList In $itemImagesList)
+						<li>
+							<div class="cimm_slideItemImg">
+							#if($itemData.imageName.contains("http") || $imageList.imageType=="URL")
+								<a href="#" data-image="$!itemData.imageName" data-zoom-image="$!itemData.imageName">
+									<img id="img_$!count" itemprop="image" src="$!itemData.imageName" width="80" height="80" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
+								</a>
+							#else
+								<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
+									<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" width="80" height="80" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
+								</a>
+							#end
+							#set($count = $!count + 1)
+							</div>
+						</li>
+					#end
+				</ul>
+			#end
+		</div>
+		<div class="cimm_itemDescription clearAfter">
+			<div class="itemDetailUtility clearAfter">
+				#if($CommonDBQuerySystemParameter.get("EnableDetailPageRating")=="Y")
+				<div class="detailreview clearAfter hideForPrint">
+					 <div class="detailreviewform clearAfter">
+					 	<input type="hidden" id="overAllRate" value="$!overAllRate"/>
+						<div id="ProdRating" class="ratingIconWrap hideForPrint pullLeft"></div>
+						#if($userLogin)
+							<div class="writereview hideForPrint pullLeft">
+								#if($reviewList && $!reviewList.size()>0) $!reviewListCount.size() Buyer(s) review(s) #end | <a data-toggle="modal" data-target="#ratingModal">$!locale.get("product.label.writReview")</a>
+							</div>
 						#end
 					</div>
-					#if($itemImagesList && $!itemImagesList.size()>0)
-						<ul id="gallery" class="thumblist">
-							#set($count=0)
-							#foreach($imageList In $itemImagesList)
-								<li>
-									<div class="cimm_slideItemImg">
-									#if($itemData.imageName.contains("http") || $imageList.imageType=="URL")
-										<a href="#" data-image="$!itemData.imageName" data-zoom-image="$!itemData.imageName">
-											<img id="img_$!count" itemprop="image" src="$!itemData.imageName" width="80" height="80" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
-										</a>
-									#else
-										<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
-											<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" width="80" height="80" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
-										</a>
-									#end
-									#set($count = $!count + 1)
-									</div>
-								</li>
-							#end
-						</ul>
-					#end
+				</div>
+				#end
+				<div class="prodSharePrintBtnWrap pullRight hideForPrint hideForIpad">
+					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemData.itemPriceId);"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> 
+					<a href="javascript:void(0);" data-toggle="tooltip" class="hideForDevice" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
+					<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><i class="fa fa-lg fa-share"></i></a>
+					<ol class="sharePageWrap">
+					 	<li>
+							<a id="pinInt" class="fb-share-button" data-href="" data-layout="button_count">
+								<img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" alt="pin-int"/>
+							</a>
+						</li>
+						<li>
+							<div id="fbShare" class="fb-share-button" data-href="" data-layout="button_count"></div>
+						</li>
+						<li>
+							<div id="gplusID"></div>
+						</li>
+						<li>
+							<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+							<script type="IN/Share" id="linkedInShare" data-url="" data-counter="right"></script>
+						</li>
+						<li>
+							<a id="TweetShare" href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
+						</li>
+					</ol>
 				</div>
 			</div>
-			<div class="col-md-8 col-sm-12 col-xs-12">
-				<div class="cimm_itemDescription clearAfter">
-					<div class="itemDetailUtility clearAfter">
-						#if($CommonDBQuerySystemParameter.get("EnableDetailPageRating")=="Y")
-						<div class="detailreview clearAfter hideForPrint">
-							 <div class="detailreviewform clearAfter">
-							 	<input type="hidden" id="overAllRate" value="$!overAllRate"/>
-								<div id="ProdRating" class="ratingIconWrap hideForPrint pullLeft"></div>
-								#if($userLogin)
-									<div class="writereview hideForPrint pullLeft">
-										#if($reviewList && $!reviewList.size()>0) $!reviewListCount.size() Buyer(s) review(s) #end | <a data-toggle="modal" data-target="#ratingModal">$!locale.get("product.label.writReview")</a>
-									</div>
-								#end
-							</div>
-						</div>
-						#end
-						<div class="prodSharePrintBtnWrap pullRight hideForPrint hideForIpad">
-							<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemData.itemPriceId);"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> 
-							<a href="javascript:void(0);" data-toggle="tooltip" class="hideForDevice" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
-							<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><i class="fa fa-lg fa-share"></i></a>
-							<ol class="sharePageWrap">
-							 	<li>
-									<a id="pinInt" class="fb-share-button" data-href="" data-layout="button_count">
-										<img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" alt="pin-int"/>
-									</a>
-								</li>
-								<li>
-									<div id="fbShare" class="fb-share-button" data-href="" data-layout="button_count"></div>
-								</li>
-								<li>
-									<div id="gplusID"></div>
-								</li>
-								<li>
-									<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-									<script type="IN/Share" id="linkedInShare" data-url="" data-counter="right"></script>
-								</li>
-								<li>
-									<a id="TweetShare" href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
-								</li>
-							</ol>
-						</div>
-					</div>
-					#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0)
-						<!-- Product Mode -->
-						#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
-						#set($itemProductDescription = $!itemData.shortDesc)
-						
-						#if($productDataList && $productDataList.size()>0)
-							#if($productDataList.get(0) && $!productDataList.get(0).productName.length()>0)
-								#set($itemProductTitle = $!productDataList.get(0).productName)
-							#end
-							#if($productDataList.get(0) && $productDataList.get(0).longDesc.length()>0)
-								#set($itemProductDescription = $!productDataList.get(0).longDesc)
-							#end	
-						#end
-						<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemProductTitle</h1>
-						<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemProductDescription</p>
-						<input type="hidden" id="titleText" name="titleText" value="$!itemProductTitle"/> 
-						<!-- Product Mode Attribute Drop Down Start -->
-						<div id="attrFilterBlock" class="hideForPrint">
-							<div id="attrFilterContent">
-							#if(($productAttrFilterData && $!productAttrFilterData.size()>0) && $productCount>0)
-								 <div class="cimm_selectList hideForPrint">
-								 	 <div class="select_attributeBody">
-										 <ul class="product_mode hideForPrint clearAfter">
-											#set($iVal = 0)
-											#foreach($attrList in $productAttrFilterData)
-											#foreach($attrListVal in $attrList.attrFilterList.keySet())
-												#set($attrValueForSearch = $attrListVal)
-												##if($attrList.attrFilterList.get($!attrListVal).size()>1)
-												<li class="selectOptions dropdown">
-												<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
-												<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
-													<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
-														#set($k = 0)
-														#foreach($filterVal in $attrList.attrFilterList.get($!attrListVal))
-														<li class="cimm_listselect">
-															<i style="display:none">$!filterVal.attrValue</i>
-															<label class="customCheckBox" >
-																<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" onclick="ProductMode.appendSearchByCheckBox('multiFilter_$!iVal');" />
-																<span>$!filterVal.attrValue</span>
-																<div style="display:none;" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</div>
-																<span style="display:none" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
-																##($!filterVal.resultCount)
-															</label>
-														</li>
-														#set($k = $k+1)
-														#end
-													 </ul>
-													</div>
+			#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0)
+				<!-- Product Mode -->
+				#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+				#set($itemProductDescription = $!itemData.shortDesc)
+				
+				#if($productDataList && $productDataList.size()>0)
+					#if($productDataList.get(0) && $!productDataList.get(0).productName.length()>0)
+						#set($itemProductTitle = $!productDataList.get(0).productName)
+					#end
+					#if($productDataList.get(0) && $productDataList.get(0).longDesc.length()>0)
+						#set($itemProductDescription = $!productDataList.get(0).longDesc)
+					#end	
+				#end
+				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemProductTitle</h1>
+				<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemProductDescription</p>
+				<input type="hidden" id="titleText" name="titleText" value="$!itemProductTitle"/> 
+				<!-- Product Mode Attribute Drop Down Start -->
+				<div id="attrFilterBlock" class="hideForPrint">
+					<div id="attrFilterContent">
+					#if(($productAttrFilterData && $!productAttrFilterData.size()>0) && $productCount>0)
+						 <div class="cimm_selectList hideForPrint">
+						 	 <div class="select_attributeBody">
+								 <ul class="product_mode hideForPrint clearAfter">
+									#set($iVal = 0)
+									#foreach($attrList in $productAttrFilterData)
+									#foreach($attrListVal in $attrList.attrFilterList.keySet())
+										#set($attrValueForSearch = $attrListVal)
+										##if($attrList.attrFilterList.get($!attrListVal).size()>1)
+										<li class="selectOptions dropdown">
+											<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
+											<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
+											<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
+												#set($k = 0)
+												#foreach($filterVal in $attrList.attrFilterList.get($!attrListVal))
+												<li class="cimm_listselect">
+													<i style="display:none">$!filterVal.attrValue</i>
+													<label class="customCheckBox" >
+														<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" onclick="ProductMode.appendSearchByCheckBox('multiFilter_$!iVal');" />
+														<span>$!filterVal.attrValue</span>
+														<div style="display:none;" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</div>
+														<span style="display:none" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
+														##($!filterVal.resultCount)
+													</label>
 												</li>
-												#set($iVal = $!iVal+1)
-												##end
-											#end
-											#end
-										</ul>
-									</div>
-								</div>
-							#end
+												#set($k = $k+1)
+												#end
+											 </ul>
+											</div>
+										</li>
+										#set($iVal = $!iVal+1)
+										##end
+									#end
+									#end
+								</ul>
 							</div>
 						</div>
-						<!-- Attribute Drop Down End -->
-						<!-- Product Mode --> 
-					#else	
-						<!-- Single Item Without Product Mode -->
-						<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
-							<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-						</h1>
-						<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p>
-						<ul id="productDetailList" class='skuStyle'>
-							#if($itemData.manufacturerName != "" && $!itemData.manufacturerName)
-							<li id="itemUom" itemprop="sku">
-								<b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName</span>
-							</li>
-							#end
-							#if($itemData.brandName != "" && $!itemData.brandName)
-							<li id="itemUom" itemprop="sku">
-								<b>$!locale.get("product.label.brandName"): </b><span>$!itemData.brandName</span>
-							</li>
-							#end
-							<li id="sitePartNo" itemprop="sku">
-								<b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.ItemId">$!itemData.partNumber</span>
-							</li>
-							#if($itemData.manufacturerPartNumber && $!itemData.manufacturerPartNumber != "")
-							<li id="mPartNo" itemprop="mpn">
-								<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
-								<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$!itemData.partNumber" />
-							</li>
-							#end
-							#if($itemData.upc != "" && $!itemData.upc)
-							<li id="upcNo" itemprop="sku">
-								<b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span>
-							</li>
-							#end
-							#if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
-							<li id="custMainBlock">        
-								<b>$!locale.get("product.label.customerpartnumber"):</b>
-								<span id="custPartBlock">
-								#if($itemData.customerPartNumber)$!itemData.customerPartNumber#end
-								#set($seperator = "")
-								#set($partList = "")
-								#foreach($customerPart in $itemData.customerPartNumberList)
-								#set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end#if($customerPart.partNumber)$!customerPart.partNumber#end")
-								#set($seperator = ", ")
-								#end
-								$!partList
-								</span>  
-							</li> 
-							#else
-							<li id="custMainBlock" style="display: none;">
-								<b>$!locale.get("product.label.customerpartnumber"): </b><span id="custPartBlock"></span>
-							</li>
-							#end
-							#if($itemData.uom != "" && $!itemData.uom)
-							<li id="itemUom" itemprop="sku">
-								<b>$!locale.get("product.label.uom"): </b><span>$!itemData.uom</span>
-							</li>
-							#end
-							#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
-							<li id="minOrdQty">
-							<b>$!locale.get("product.label.minorderqty"): </b>
-							<span>$!itemData.minOrderQty</span> 
-							</li>
-							<li id="qtyInt">
-							<b>$!locale.get("product.label.qtyinterval"): </b>
-							<span>$!itemData.orderInterval</span>
-							<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
-							<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
-							<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
-							<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
-							</li>
-							#end
-						</ul>
-						<ul>
-							#if($itemData.packDesc)<li itemprop="sku"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
-							#if($userLogin)
-								#set($shipID = $!session.getAttribute("shipBranchId"))
-								#if($shipID && $!shipID!="")
-								<li id="shipBranchNames">
-									#set($shipBranchDetail = $!allWarehouseDetail.get("$!shipID"))
-									<b>$!locale.get("product.label.shipBranchName"): </b>$!shipBranchDetail.branchCity</span></b>
-								</li>
-								#end
-							#end
-							<li>
-								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-							    	<div id="yourPrices" class="price">
-										#if($userLogin)
-											<b>$!locale.get('product.label.yourprice'): </b>
-										#else
-											<b>$!locale.get('product.label.price'): </b>
-										#end
-										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
-											#if($itemData.price>0)
-								    			$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
-								    		#else
-								    			<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
-								    		#end
-										</span>
-									</div>
-							    #else
-							    	<!-- <div id="listPrices" class="price">
-										<b>$!locale.get('product.label.listPrice'): </b>
-										<span id="listPriceSpan_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
-										</span>
-									</div> -->
-							    	<div id="yourPrices" class="price">
-										#if($userLogin)
-											<b>$!locale.get('product.label.yourprice'): </b>
-										#else
-											<b>$!locale.get('product.label.price'): </b>
-										#end
-										#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
-											<span id="span_$!itemData.partNumber" class="priceSpan">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
-										#else
-											<span id="span_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
-												<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
-											</span>
-										#end
-									</div>
-							 #end
-							</li>
-							<li class="quantityWrap hideForPrint clearAfter">
-								<b>$!locale.get("product.label.quantity")</b>
-								<span>
-									<a onclick="qtyUpdate('#itemTxtQty$!itemData.itemId','decr');"><i class="fa fa-minus"></i></a>
-									<input type="text" id="itemTxtQty$!itemData.itemId" data-originalQty="originalQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" onblur="if($(this).val().trim()=='')$(this).val($itemData.minOrderQty);"/> <span id="uomPk_$!itemData.partNumber"></span>
-									<a onclick="qtyUpdate('#itemTxtQty$!itemData.itemId','incr');"><i class="fa fa-plus"></i></a>
-								</span>
-							</li>
-							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
-									#if($itemData.itemAvailability && $!itemData.itemAvailability>0)
-									<li id="itemAvailable">
-										<b>$!locale.get("product.label.itemAvailable"): </b>
-										<span>$!itemData.itemAvailability</span>
-									</li>
-									#else
-									<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
-										<b>$!locale.get("product.label.availability"): </b>
-										<b><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
-										<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></b>
-									</li>
-									#end
-									<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
-										<b>$!locale.get("product.label.leadTime"): </b>
-										<span class="leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
-									</li> -->
-									#if($userLogin)
-										<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink" data-popup-target="#modalBodyContent">$!locale.get("label.text.viewAllBranchAvailability")</a></span></li>
-									#end
-								#end
-								<li class="detailButtonWrap hideForPrint clearAfter">
-										<!-- Add to Cart --> 
-										<div class="addToCartFloat pullLeft" data-select='addtoCartbtn_$!itemData.partNumber' data-oAddCartBtn='originalAddtoCartbtn'>
-										#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-											#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-												#if($!itemData.price>0)
-													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
-													</span>
-												#else
-													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
-													</span>
-												#end
-											#else
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-											#end
-										#else
-											#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-												<span data-select='addtoCartbtn_$!itemData.partNumber'>
-													<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
-												</span>
-											#else
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-											#end
-										#end
-										</div>
-										<!-- Add to Cart -->
-										<!-- My Product Group -->
-										<div class="productGroupBtn dropdown pullLeft">
-											#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
-											<a id="$!groupPop" class="popMsg hideMe"></a>
-											#if($userLogin)
-												<a id='linkg$!itemData.itemId' class="dropdown-toggle btn-sm" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">$!locale.get("product.label.addToList")</a>
-											#else
-												<a data-toggle="modal" data-target="#loginModal" class="btn-sm">$!locale.get("product.label.addToList")</a>
-											#end
-											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
-												<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
-											</ul>
-										</div>
-										<!-- My Product Group block ends--> 
-										<!-- Customer PartNumber Add -->
-										<div class="custparNoBtn dropdown">
-											#set($groupPop = "ulg"+$!itemData.itemId+"_custPop")
-											<a id="$!groupPop" class="popMsg hideMe"></a>
-											#if($userLogin)
-												<a id='linkg$!itemData.itemId' class="dropdown-toggle btn-sm" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="dropdown-menu" data-listTarget="ulgCust_$!itemData.itemId" data-function="customerPartNumber">
-													$!locale.get('product.label.customerpartnumber')
-												</a>
-											#else
-												<a data-toggle="modal" data-target="#loginModal" class="btn-sm">$!locale.get('product.label.customerpartnumber')</a>
-											#end
-											<form id="customerPartNumSubmit" class="dropdown-menu alignCenter">
-										       <input type="hidden" id="hidden_ItemID" value="$!itemData.itemId" />
-										       <input type="hidden" id="hidden_PartNum" value="$!itemData.partNumber" />
-										       <ul id="ulgCust_$!itemData.itemId">
-										       		<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
-										       </ul>
-			     							</form>
-										</div>
-										<!-- Customer Part Number ADD --> 
-								</li>
-						</ul>
-						<!-- Single Item Without Product Mode -->
 					#end
 					</div>
+				</div>
+				<!-- Attribute Drop Down End -->
+				<!-- Product Mode --> 
+			#else	
+				<!-- Single Item Without Product Mode -->
+				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
+					<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+				</h1>
+				<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p>
+				<ul id="productDetailList" class='skuStyle'>
+					#if($itemData.manufacturerName != "" && $!itemData.manufacturerName)
+					<li id="itemUom" itemprop="sku">
+						<b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName</span>
+					</li>
+					#end
+					#if($itemData.brandName != "" && $!itemData.brandName)
+					<li id="itemUom" itemprop="sku">
+						<b>$!locale.get("product.label.brandName"): </b><span>$!itemData.brandName</span>
+					</li>
+					#end
+					<li id="sitePartNo" itemprop="sku">
+						<b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.ItemId">$!itemData.partNumber</span>
+					</li>
+					#if($itemData.manufacturerPartNumber && $!itemData.manufacturerPartNumber != "")
+					<li id="mPartNo" itemprop="mpn">
+						<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+						<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$!itemData.partNumber" />
+					</li>
+					#end
+					#if($itemData.upc != "" && $!itemData.upc)
+					<li id="upcNo" itemprop="sku">
+						<b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span>
+					</li>
+					#end
+					#if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
+					<li id="custMainBlock">        
+						<b>$!locale.get("product.label.cpn"):</b>
+						<span id="custPartBlock">
+						#if($itemData.customerPartNumber)$!itemData.customerPartNumber#end
+						#set($seperator = "")
+						#set($partList = "")
+						#foreach($customerPart in $itemData.customerPartNumberList)
+						#set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end#if($customerPart.partNumber)$!customerPart.partNumber#end")
+						#set($seperator = ", ")
+						#end
+						$!partList
+						</span>  
+					</li> 
+					#else
+					<li id="custMainBlock" style="display: none;">
+						<b>$!locale.get("product.label.cpn"): </b><span id="custPartBlock"></span>
+					</li>
+					#end
+					#if($itemData.uom != "" && $!itemData.uom)
+					<li id="itemUom" itemprop="sku">
+						<b>$!locale.get("product.label.uom"): </b><span>$!itemData.uom</span>
+					</li>
+					#end
+					#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
+					<li id="minOrdQty">
+					<b>$!locale.get("product.label.minorderqty"): </b>
+					<span>$!itemData.minOrderQty</span> 
+					</li>
+					<li id="qtyInt">
+					<b>$!locale.get("product.label.qtyinterval"): </b>
+					<span>$!itemData.orderInterval</span>
+					<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
+					<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
+					<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
+					<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
+					</li>
+					#end
+				</ul>
+				<ul>
+					#if($itemData.packDesc)<li itemprop="sku"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
+					#if($userLogin)
+						#set($shipID = $!session.getAttribute("shipBranchId"))
+						#if($shipID && $!shipID!="")
+						<li id="shipBranchNames">
+							#set($shipBranchDetail = $!allWarehouseDetail.get("$!shipID"))
+							<b>$!locale.get("product.label.shipBranchName"): </b>$!shipBranchDetail.branchCity</span></b>
+						</li>
+						#end
+					#end
+					<li>
+						#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+					    	<div id="yourPrices" class="price">
+								#if($userLogin)
+									<b>$!locale.get('product.label.yourprice'): </b>
+								#else
+									<b>$!locale.get('product.label.price'): </b>
+								#end
+								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
+									#if($itemData.price>0)
+						    			$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
+						    		#else
+						    			<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
+						    		#end
+								</span>
+							</div>
+					    #else
+					    	<!-- <div id="listPrices" class="price">
+								<b>$!locale.get('product.label.listPrice'): </b>
+								<span id="listPriceSpan_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
+									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+								</span>
+							</div> -->
+					    	<div id="yourPrices" class="price">
+								#if($userLogin)
+									<b>$!locale.get('product.label.yourprice'): </b>
+								#else
+									<b>$!locale.get('product.label.price'): </b>
+								#end
+								#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
+									<span id="span_$!itemData.partNumber" class="priceSpan">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
+								#else
+									<span id="span_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
+										<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									</span>
+								#end
+							</div>
+					 #end
+					</li>
+					<li class="quantityWrap hideForPrint clearAfter">
+						<b>$!locale.get("product.label.quantity")</b>
+						<span>
+							<a onclick="qtyUpdate('#itemTxtQty$!itemData.itemId','decr');"><i class="fa fa-minus"></i></a>
+							<input type="text" id="itemTxtQty$!itemData.itemId" data-originalQty="originalQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" onblur="if($(this).val().trim()=='')$(this).val($itemData.minOrderQty);"/> <span id="uomPk_$!itemData.partNumber"></span>
+							<a onclick="qtyUpdate('#itemTxtQty$!itemData.itemId','incr');"><i class="fa fa-plus"></i></a>
+						</span>
+					</li>
+					#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
+							#if($itemData.itemAvailability && $!itemData.itemAvailability>0)
+							<li id="itemAvailable">
+								<b>$!locale.get("product.label.available"): </b>
+								<span>$!itemData.itemAvailability</span>
+							</li>
+							#else
+							<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
+								<b>$!locale.get("product.label.availability"): </b>
+								<b><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
+								<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></b>
+							</li>
+							#end
+							<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
+								<b>$!locale.get("product.label.leadTime"): </b>
+								<span class="leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+							</li> -->
+							#if($userLogin)
+								<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink" data-popup-target="#modalBodyContent">$!locale.get("label.text.viewAllBranchAvailability")</a></span></li>
+							#end
+						#else
+							#if($itemData.availQty>0)
+					    		<b>$!locale.get("product.label.available"): </b>
+								<span>$!itemData.availQty</span>
+					    	#else
+					    		<span class='text-danger'>Call for Availability</span>
+					    	#end
+						#end
+						<li class="detailButtonWrap hideForPrint clearAfter">
+								<!-- Add to Cart --> 
+								<div class="addToCartFloat pullLeft" data-select='addtoCartbtn_$!itemData.partNumber' data-oAddCartBtn='originalAddtoCartbtn'>
+								#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+									#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+										#if($!itemData.price>0)
+											<span data-select='addtoCartbtn_$!itemData.partNumber'>
+												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											</span>
+										#else
+											<span data-select='addtoCartbtn_$!itemData.partNumber'>
+												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											</span>
+										#end
+									#else
+										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+									#end
+								#else
+									#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+										<span data-select='addtoCartbtn_$!itemData.partNumber'>
+											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+										</span>
+									#else
+										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+									#end
+								#end
+								</div>
+								<!-- Add to Cart -->
+								<!-- My Product Group -->
+								<div class="productGroupBtn dropdown pullLeft">
+									#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
+									<a id="$!groupPop" class="popMsg hideMe"></a>
+									#if($userLogin)
+										<a id='linkg$!itemData.itemId' class="dropdown-toggle btn-sm" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">$!locale.get("product.label.addToList")</a>
+									#else
+										<a data-toggle="modal" data-target="#loginModal" class="btn-sm">$!locale.get("product.label.addToList")</a>
+									#end
+									<ul id="ulg$!itemData.itemId" class="dropdown-menu">
+										<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
+									</ul>
+								</div>
+								<!-- My Product Group block ends--> 
+								<!-- Customer PartNumber Add -->
+								<div class="custparNoBtn dropdown">
+									#set($groupPop = "ulg"+$!itemData.itemId+"_custPop")
+									<a id="$!groupPop" class="popMsg hideMe"></a>
+									#if($userLogin)
+										<a id='linkg$!itemData.itemId' class="dropdown-toggle btn-sm" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="dropdown-menu" data-listTarget="ulgCust_$!itemData.itemId" data-function="customerPartNumber">
+											$!locale.get('product.label.customerpartnumber')
+										</a>
+									#else
+										<a data-toggle="modal" data-target="#loginModal" class="btn-sm">$!locale.get('product.label.customerpartnumber')</a>
+									#end
+									<form id="customerPartNumSubmit" class="dropdown-menu alignCenter">
+								       <input type="hidden" id="hidden_ItemID" value="$!itemData.itemId" />
+								       <input type="hidden" id="hidden_PartNum" value="$!itemData.partNumber" />
+								       <ul id="ulgCust_$!itemData.itemId">
+								       		<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
+								       </ul>
+	     							</form>
+								</div>
+								<!-- Customer Part Number ADD --> 
+						</li>
+				</ul>
+				<!-- Single Item Without Product Mode -->
+			#end
 			</div>
-		</div>
 	</div>
 	</div>
 </div>
@@ -544,7 +545,7 @@
 										<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
 										<span></span>
 									</label>
-									<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')N/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
+									<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
 										<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 										<span class="imgForSend" style="display:none !important;">
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
@@ -575,7 +576,9 @@
 									 #end
 								 </td>
 								 <td class="removeForSend">
-								 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='#if($productModeitemData.minOrderQty) $!productModeitemData.minOrderQty #else 1 #end' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+								 	#set($minQty = 1)
+								 	#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
+								 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 								 </td>
 							     <td itemprop="sku">
 								<span id="uomSpan_$!productModeitemData.partNumber.replaceAll('\s+','_')">
@@ -614,7 +617,7 @@
 								<td class="removeForSend">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 								    	#if($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $userLogin)
-								    		#if($itemData.price>0)
+								    		#if($productModeitemData.price>0)
 								    			<span data-select='addtoCartbtn_$!productModeitemData.partNumber'>
 													<a href="javascript:void(0)" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
@@ -804,7 +807,7 @@
 	  <li itemscope itemtype="http://schema.org/Product">
 		#itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
 		<div class="cimm_linkItemImg">
-			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span> 
 			 #if($customerbought.imageName.contains("http") || $linkItem.imageType=="URL")
 				 <img id="imageName$!customerbought.itemId" image="image" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
@@ -822,7 +825,7 @@
 			   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
 			   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
 			   			#end
-			   			<a class="cimm_linkProdTitle" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			   			<a class="cimm_linkProdTitle" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			   				
 					 		#if($linkItemTitle.length()>18)
 					 			$!itemTitle.substring(0, 18)...
@@ -904,7 +907,7 @@
 					        #itemListHiddenFields($!linkItem.partNumber, $!linkItem.itemPriceId, $!linkItem.qty, $!linkItem.uom, $!linkItem.price, $!linkItem.saleQty, $!linkItem.itemId, $!linkItem.displayFrieghtAlert, $!linkItem.packageQty, $!linkItem.itemAvailability, $!linkItem.srchTyp, $!navigationType,$!linkItem.brandId,$!linkItem.manfId, $!linkItem.altPartNumber1)
 					 			<input type="hidden" id='packageQty_$!linkItem.partNumber' value="1" />
 								<div class="cimm_slideItemImg">
-					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')N/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 										 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #else
@@ -917,7 +920,7 @@
 								 	<li>
 								 		<h4 itemprop="name">
 								 			#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
-									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')N/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 										 		#if($linkItemTitle.length()>30)
 										 			#$!linkItemTitle.substring(0, 30)...
 										 		#else
@@ -949,7 +952,7 @@
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
-										 <b>$!locale.get("product.label.itemAvailable") : </b>
+										 <b>$!locale.get("product.label.available") : </b>
 										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
@@ -1229,7 +1232,7 @@ function LoadRecentViewedItem(){
 			<ul id="customerAlsoViewedContent" class="cimm_caroWrap">
 				<li>
 					<div class="cimm_linkItemImg">
-						<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')$!itemcustomerAlsoViewed.replace(" ","_")">
+						<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">
 							<img id="imageName$!customerAlsoViewed.itemId" src="$!customerAlsoViewed.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 						</a>
 					</div>
@@ -1237,7 +1240,7 @@ function LoadRecentViewedItem(){
 						<ul>
 							<li>
 								<h4>
-									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
+									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
 							cimm_slideItemImg	</h4>
 							</li>
 						</ul>

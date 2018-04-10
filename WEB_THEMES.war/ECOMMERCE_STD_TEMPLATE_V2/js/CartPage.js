@@ -1,6 +1,13 @@
 var webThemes = $("#webThemePath").val();
 $(document).ready(function(){
-	$('#cartWrap').DataTable({"ordering": false,searching: false,"bLengthChange": false,"info": false,"iDisplayLength": 4});
+	$('#cartWrap').DataTable({
+		"ordering": false,
+		searching: false,
+		"bLengthChange": false,
+		"info": false,
+		"sDom": 't<"row"<"col-md-6 col-ms-6 col-sm-12 cartPagination"p><"col-md-6 col-ms-6 col-sm-12 cartTotalBlock">>'
+	});
+	$('.cartTotalBlock').html($("#copyPrice").html());
 });
 $('[data-function="saveCartFunction"]').click(function() {
 	var toggleListID = "#"+$(this).attr('data-listTarget');
@@ -19,7 +26,13 @@ $('[data-function="saveCartFunction"]').click(function() {
 		$(toggleListID).toggle();
 	}
 });
-function submitSaveCart(title,groupId,isReorder){
+function submitSaveCart(title,groupId,obj,isReorder){
+	var groupName = "";
+	if($(obj).attr("data-groupName")!="" && $(obj).attr("data-groupName")!=undefined){
+		groupName = $(obj).attr("data-groupName");
+	}else{
+		groupName = title;
+	}
 	var toggleListID = $("#group_id").val();
 	title = $.trim(title);
 	if(localStorage!=null && localStorage.getItem(title)!=null && localStorage.getItem(title)=="Y"){
@@ -51,8 +64,8 @@ function submitSaveCart(title,groupId,isReorder){
 		$(toggleListID).toggle();
 		var result = data.split('|');
 		//$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
-		$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ $("#group_name").val()).attr("href","/"+result[1]+"/ProductGroup/Cart?savedGroupName="+$("#group_name").val()).fadeIn();
-		setTimeout(function(){$(toggleListID+"_custPop").removeAttr("href").html("").fadeOut();}, 3000);
+		$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ groupName).attr("href","/"+result[1]+"/ProductGroup/Cart?savedGroupName="+groupName).fadeIn();
+		setTimeout(function(){$(toggleListID+"_custPop").removeAttr("href").html("").fadeOut();}, 5000);
 	});
 }
 function updateShoppingCart(){
@@ -99,7 +112,7 @@ function deleteItem(path,typ,item){
 		bootbox.confirm({ 
 			size: "medium",
 			closeButton:false,
-			message: "You want to delete item "+item+" from cart?", 
+			message: "You want to delete item <b>"+item+"</b> from cart?", 
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}
@@ -107,7 +120,7 @@ function deleteItem(path,typ,item){
 
 	}else if(typ!=null && typ=="1"){
 		bootbox.confirm({ 
-			size: "medium",
+			size: "small",
 			closeButton:false,
 			message: "You want to delete all the items from cart?", 
 			callback: function(result){
@@ -158,7 +171,6 @@ function processAction(r,path,typ,item){
 	}
 }
 function refreshShoppingCart(id,partNum){
-	var dippartNum = partNum;
 	partNum = partNum.replace(/ +/g,"_");
 	partNum = partNum.replace(/[#;&,.+*~':"!^$[\]()=>|\/ ]/g, "\\$&");
 	var curQty = $("#textQtyCur_"+partNum).val();
@@ -216,9 +228,9 @@ function refreshShoppingCart(id,partNum){
 				}
 			}else{
 				if(lessThanMinOrder){
-					valu = "Item# "+dippartNum+" is only available in multiples of "+orderQtyInterval+" and Min. Order Quantity is : "+minimumOrderQty;
+					valu = "Item# "+partNum+" is only available in multiples of "+orderQtyInterval+" and Min. Order Quantity is : "+minimumOrderQty;
 				}else{
-					valu = "Item# "+dippartNum+" is only available in multiples of "+orderQtyInterval;
+					valu = "Item# "+partNum+" is only available in multiples of "+orderQtyInterval;
 				}
 			}
 			showNotificationDiv("error", valu);

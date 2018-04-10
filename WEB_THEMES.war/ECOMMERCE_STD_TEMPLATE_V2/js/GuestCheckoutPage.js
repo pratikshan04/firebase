@@ -2,7 +2,7 @@ var webThemes = $("#webThemePath").val();
 /*jQuery.getScript(webThemes+'js/guestCheckoutWizard.js', function(){});*/
 $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
-	$('#reqDate').datepicker({autoclose: true,'setStartDate', (date.getMonth() + 1) + '/' + (date.getDate() + 2) + '/' +  date.getFullYear()});
+	$('#reqDate').datepicker('setStartDate', (date.getMonth() + 1) + '/' + (date.getDate() + 2) + '/' +  date.getFullYear());
 });
 	var billAddressState = $("#billAddressState").val();
 	var billAddressCountry = $("#billAddressCountry").val();
@@ -654,7 +654,7 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 		});
 	}
 	
-	$.getScript(webThemes+'/js/multiTab.min.js', function(){
+	$.getScript(webThemes+'js/multiTab.min.js', function(){
 		$('#wizardGuestCheckout').multiTab({
 			wizard:true,
 			transitionEffect:'fade',

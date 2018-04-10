@@ -103,7 +103,7 @@ function isValidPassword(formElement){
 	var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 	if(formElement.dataset.password){
 		var mainPasswordID = $("#"+formElement.dataset.password).val();
-		if(mainPasswordID != formElement.value && mainPasswordID != ""){
+		if(mainPasswordID != formElement.value && mainPasswordID!=""){
 			return false;
 		}else{
 			return true;
@@ -156,8 +156,8 @@ function submitFormToServer(formData,action,that){
 					$('html, body').animate({scrollTop: $("#"+alertId).offset().top}, 400);
 				}else{
 					if(responseCont[1]!="" && responseCont[1]){
-						$(that).parent().prepend('<div class="alert alert-success">The user '+responseCont[1]+' was successfully added.<br/> Login credentials have been emailed to '+responseCont[1]+'</div>');
-						setTimeout(function(){window.location.href=$("base").attr("href")+"ManagePurchaseAgent"} , 5000);
+						$(that).parent().prepend('<div class="alert alert-success">The Purchasing Agent was successfully added.<br/> Login credentials have been emailed to '+responseCont[1]+'</div>');
+						setTimeout(function(){window.location.href=$("base").attr("href")+"/ManagePurchaseAgent"} , 5000);
 					}else{
 						$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
 					}

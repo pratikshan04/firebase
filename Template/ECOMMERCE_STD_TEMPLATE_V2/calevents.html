@@ -1,6 +1,5 @@
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
-		<h3 class="cimm_pageTitle">$!locale.get('event.label.eventCalendar')</h3>
 		<input type="hidden" id="eventCat" value=""/>
 		<input type="hidden" id="FirstLoadEvent" name="FirstLoadEvent" value="Y"/>
 		<input type="hidden" id="custFieldEvent" value="$eventsCustomFieldList.fieldName">
@@ -9,7 +8,6 @@
 			<div class="goingEvents"></div>
 			<div class='calendarFilterWrap'>
 				<div class="tableHeader clearAfter">
-					<h2 id="monthNameDisplay" class="pullLeft">Month Name</h2>
 					<ul class='calendarFilterHead pullRight clearAfter'>
 						<li><label id="day">$!locale.get('event.label.day')</label></li>
 						<li><label id="week" class="thiWeekEvents">$!locale.get('event.label.week')</label></li>
@@ -17,6 +15,7 @@
 					</ul>
 				</div>
 				<div class="calendarFilter">
+					<div class="calendarFilterHead"><h2 id="monthNameDisplay"></h2> Displaying events for all audiences</div>
 					<table id="events_Table" class="table display rwd-Table"><thead><tr><th></th></tr></thead></table>
 				</div>
 			</div>

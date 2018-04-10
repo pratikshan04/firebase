@@ -4,7 +4,7 @@
       <div class="cimm_slideMobileNavIcon" id="slideIcon"><a href="javascript:void(0);"><span></span></a></div>
    </div>
    <div class="cimm_slide first">
-      <h2>MENU</h2>
+      <h2>Menu</h2>
       <ul>
          <li><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a><i class="fa fa-lg fa-chevron-right" aria-hidden="true"  id="$locale.get('navigation.label.shopProducts').replace(' ','_')"></i></li>
          #if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
@@ -20,10 +20,18 @@
          #end
          </li>
          #end
-         <li><a>My Account</a><i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="myAccount"></i></li>
+         <li>
+         	<li><a href='javascript:void(0)'>$!locale.get("product.heading.accountDashBoard")</a><i class="fa fa-lg fa-chevron-right" id="myAccount" aria-hidden="true"></i>
+         </li>
       </ul>
    </div>
-   <div class="cimm_slide sec" data-itemID="$locale.get('navigation.label.shopProducts').replace(' ','-')">
+   <div class="cimm_slide sec" data-itemID="myAccount">
+		<h2>$locale.get("product.heading.accountDashBoard")</h2>
+		<ul>
+		#parse("accountMenu.html")
+		</ul>
+   </div>
+   <div class="cimm_slide sec" data-itemID="$locale.get('navigation.label.shopProducts').replace(' ','_')">
       <h2>$locale.get("navigation.label.shopProducts")</h2>
       <ul>
          #foreach($categoryMenu in $categMenu)
@@ -34,33 +42,76 @@
             #set($test = "javascript:void(0);")
             #end
             #end
+            <!-- <a href="">$!categoryMenu.categoryName </a> -->
             <a href="$!test" class="ripple-btn">$!categoryMenu.categoryName</a>
             #foreach($key in $secondLevelMenu.keySet())
             #if($categoryMenu.categoryCode==$!key)
-            <i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!categoryMenu.categoryCode.replace(' ','-')"></i>
+            <i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!categoryMenu.categoryCode.replace(' ','_')"></i>
             #end
             #end
          </li>
          #end
       </ul>
    </div>
-   #foreach($topMenu in $topStaticMenu)
-   <div class="cimm_slide sec moveRight" data-itemID="top_$topMenu.level1Menu.replace(' ','-')">
-   <h2>$topMenu.level1Menu</h2>
-      <ul>#foreach($subStaticMenu in $topMenu.menuList)<li>
-			<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
-		</li>#end</ul>
-   </div>
-   #end
-   <div class="cimm_slide sec" data-itemID="myAccount">
-      <h2>My Account</h2>
+   #foreach($categoryMenu in $categMenu)
+   <div class="cimm_slide third moveRight" data-itemID="item_$!categoryMenu.categoryCode.replace(' ','_')">
+      <h2>$!categoryMenu.categoryName</h2>
       <ul>
-         #if($userLogin)
-         	#parse("accountMenu.html")
-         #else
-         	<li><a href="Login">Sign In</a></li>
-         	<li><a href="Register">Register</a></li>
+         #foreach($key in $secondLevelMenu.keySet())
+         #if($categoryMenu.categoryCode==$!key)
+         #foreach($secondLvlMenu in $secondLevelMenu.get($!key))
+         <li>
+            #set($test = "$!secondLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!secondLvlMenu.categoryName.replaceAll(' ','-')")
+            #foreach($key3 in $secondLevelMenu.keySet())
+            #if($secondLvlMenu.categoryCode==$!key3)
+            #set($test = "javascript:void(0);")
+            #end
+            #end
+            <a href="$!test" class="ripple-btn">$!secondLvlMenu.categoryName</a>
+            #foreach($key3 in $secondLevelMenu.keySet())
+            #if($secondLvlMenu.categoryCode==$!key3)
+            <i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!secondLvlMenu.categoryCode.replace(' ','_')"></i>
+            #end
+            #end
+         </li>
+         #end
+         #end
          #end
       </ul>
    </div>
+   #end
+   #foreach($categoryMenu in $categMenu)
+   #foreach($key in $secondLevelMenu.keySet())
+   #if($categoryMenu.categoryCode==$!key)
+   #foreach($secondLvlMenu in $secondLevelMenu.get($!key))
+   #foreach($key3 in $secondLevelMenu.keySet())
+   #if($secondLvlMenu.categoryCode==$!key3)
+   <div class="cimm_slide last moveRight" data-itemID="item_$!secondLvlMenu.categoryCode">
+      <h2>$!secondLvlMenu.categoryName</h2>
+      <ul>
+         #foreach($thirdLvlMenu in $secondLevelMenu.get($!key3))
+         <li>
+            <a href="$!thirdLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!thirdLvlMenu.categoryName.replaceAll(' ','-')" class="ripple-btn">$!thirdLvlMenu.categoryName</a>
+         </li>
+         #end
+      </ul>
+   </div>
+   #end
+   #end
+   #end
+   #end
+   #end
+   #end
+   #foreach($topMenu in $topStaticMenu)
+   <div class="cimm_slide sec moveRight" data-itemID="top_$topMenu.level1Menu.replace(' ','_')">
+   <h2>$topMenu.level1Menu</h2>
+      <ul>
+	   	#foreach($subStaticMenu in $topMenu.menuList)
+			<li>
+				<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
+			</li>
+		#end
+		</ul>
+   </div>
+   #end
 </div>
