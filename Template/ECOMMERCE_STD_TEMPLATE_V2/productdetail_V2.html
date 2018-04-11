@@ -955,15 +955,21 @@
 									#end
 									#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->#end
 									#if($userLogin)
-								 	<li>  
-									 	#if($userLogin)
-											<b>$!locale.get('product.label.yourprice'): </b>
+								 	<li class="price">  
+										<b>$!locale.get('product.label.price'): </b>
+										#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+											#if($!linkItem.price>0)
+											<span id="span_$!linkItem.partNumber" data-select='priceData'>
+												$$!numberTool.format($!pricePrecisionFormate,$!linkItem.price)
+											</span>
+											#else
+												<span class='reqired'>$!locale.get('product.label.callforprice')</span>
+											#end
 										#else
-											<b>$!locale.get('product.label.price'): </b>
-										#end           
-										<span id="span_$!linkItem.partNumber" class="priceSpan" data-select='priceData'>
+										<span id="span_$!linkItem.partNumber" data-select='priceData'>
 											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										</span>
+										#end
 									</li>
 									#end
 									<li class="cimm_itemDespQty">
@@ -997,7 +1003,6 @@
 							</div>
 						</li>
 					 #end
-					
 				 </ul>
 			 </div>
 			 <script type="text/javascript">

@@ -2,12 +2,21 @@
     <div class="appIcons" width="100%" border="0">
         <ul>
         	<li>
-                <a >
+        		#if($userLogin)
+               <a href="$!locale.get('website.url.AccountDashboard')">
                     <img src="$hostName/$webThemes/$siteName/images/App/myAccount.png" alt=""/>
                     <h6>
                         My Account
                     </h6>
                 </a>
+                #else
+                <a href="/Login">
+                    <img src="$hostName/$webThemes/$siteName/images/App/myAccount.png" alt=""/>
+                    <h6>
+                        My Account
+                    </h6>
+                </a>
+                #end
             </li>
             <li>
                 <a href="$hostName/Products.action">
@@ -18,15 +27,24 @@
                 </a>
             </li>
             <li>
-                <a title=" " href="$locale.get('website.url.SavedGroup.Product')">
+            	#if($userLogin)
+               <a href="$locale.get('website.url.SavedGroup.Product')">
                     <img src="$hostName/$webThemes/$siteName/images/App/savedGroup.png" alt=""/>
                     <h6>
                         My Lists
                     </h6>
                 </a>
+                #else
+                <a href="/Login">
+                    <img src="$hostName/$webThemes/$siteName/images/App/savedGroup.png" alt=""/>
+                    <h6>
+                        My Lists
+                    </h6>
+                </a>
+                #end
             </li>
             <li>
-                <a href="#" id="" title=" " >
+                <a href="#" >
                     <img src="$hostName/$webThemes/$siteName/images/App/specials.png" alt=""/>
                     <h6>
                         Specials
@@ -34,15 +52,24 @@
                 </a>
             </li>
             <li>
-                <a href="#" title=" " >
+            	#if($userLogin)
+                <a href="$!locale.get('website.url.RequestForQuote')">
                     <img src="$hostName/$webThemes/$siteName/images/App/rfq.png" alt=""/>
                     <h6>
                         Request Quote
                     </h6>
                 </a>
+                #else
+                <a href="/Login">
+                    <img src="$hostName/$webThemes/$siteName/images/App/rfq.png" alt=""/>
+                    <h6>
+                        Request Quote
+                    </h6>
+                </a>
+                #end
             </li>
             <li>
-                <a title=" " href="/Location">
+                <a href="/Locations">
                     <img src="$hostName/$webThemes/$siteName/images/App/locations.png" alt=""/>
                     <h6>
                         Locations
@@ -51,7 +78,7 @@
             </li>
             
             <li>
-                <a title=" " onClick="callTojavaFn()" href="#">
+                <a onClick="callTojavaFn()" href="#">
                     <img src="$hostName/$webThemes/$siteName/images/App/photoInquiry.png" alt=""/>
                     <h6>
                         Photo Inquiry
@@ -59,7 +86,7 @@
                 </a>
             </li>
             <li>
-                <a title=" " onClick="callTojavaFn()" href="#">
+                <a href="/ContactUs">
                     <img src="$hostName/$webThemes/$siteName/images/App/contact.png" alt=""/>
                     <h6>
                         Contact Us
@@ -67,7 +94,7 @@
                 </a>
             </li>
             <li>
-                <a title=" " onClick="callToDb()" >
+                <a onClick="callToDb()" >
                     <img src="$hostName/$webThemes/$siteName/images/App/offlineCart.png" alt=""/>
                     <h6>
                         Offline Cart

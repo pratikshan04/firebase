@@ -135,7 +135,7 @@ function submitFormToServer(formData,action,that){
 			if(response=="sessionexpired" || response == "SESSIONEXPIRED"){
 			    window.location.href="doLogOff.action";
 			}
-			$(that).parent().find('.alert').remove();
+			var hideThat = $(that).attr('data-hideBlock');
 			responseCont = "", 
 			notified ="",
 			responseVal="";
@@ -149,7 +149,12 @@ function submitFormToServer(formData,action,that){
 			}
 			if(responseCont.valid || responseVal == 1){
 				that[0].reset();
-				$(that).slideUp(100);
+				if(hideThat){
+					$(that).parents("#"+hideThat).slideUp(100);
+				}else{
+					$(that).slideUp(100);
+				}
+				
 				var alertId = document.getElementById(responseCont.sourceFormId);
 				if(alertId){
 					$("#"+alertId).slideDown();
@@ -159,7 +164,11 @@ function submitFormToServer(formData,action,that){
 						$(that).parent().prepend('<div class="alert alert-success">The Purchasing Agent was successfully added.<br/> Login credentials have been emailed to '+responseCont[1]+'</div>');
 						setTimeout(function(){window.location.href=$("base").attr("href")+"/ManagePurchaseAgent"} , 5000);
 					}else{
-						$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
+						if(hideThat){
+							$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
+						}else{
+							$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
+						}
 					}
 					$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 				}

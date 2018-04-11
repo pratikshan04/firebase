@@ -349,8 +349,8 @@ footer,
     font-family: $headingFont;
     font-size: 20px;
     img {
-        width: auto;
-        display: inline-block;
+        width: auto !important;
+        display: inline-block !important;
     }
 }
 .price {
@@ -952,7 +952,7 @@ footer {
             th {
                 text-transform: uppercase;
                 border: none;
-                border-top: 1px solid $black !important;
+                border-top: 1px solid $borderColor !important;
                 text-align: center;
                 &:first-child {
                     text-align: left;
@@ -964,13 +964,13 @@ footer {
         tr {
             &:last-child {
                 td {
-                    border-bottom: 1px solid $black;
+                    border-bottom: 1px solid $borderColor;
                 }
             }
         }
         td {
             border: none;
-            border-top: 1px solid $black;
+            border-top: 1px solid $borderColor;
             position: relative;
             vertical-align: middle;
             text-align: center;
@@ -978,10 +978,11 @@ footer {
             &:after {
                 content: '';
                 width: 1px;
-                height: 90%;
-                background: #000;
+                min-height: 90%;
+				height: 110px;
+                background: $borderColor;
                 position: absolute;
-                top: 5%;
+                top: 5px;
                 right: 0;
             }
             a.updateLink {
@@ -994,6 +995,7 @@ footer {
             .cimm_cartProdDescription {
                 width: 280px;
                 text-align: left;
+				min-height: 110px;
                 input {
                     padding: 2px 5px;
                 }
@@ -1037,7 +1039,7 @@ footer {
                     font-size: 18px;
                 }
             }
-            ul {
+           /* ul {
                 position: absolute;
                 top: 22px;
                 left: 0;
@@ -1047,6 +1049,8 @@ footer {
                 z-index: 1;
                 border: 1px solid $borderColor;
                 border-radius: 2px;
+				max-height: 200px;
+				overflow-y: auto;
                 li {
                     width: 100%;
                     padding: 2px 0;
@@ -1068,7 +1072,7 @@ footer {
                         padding: 10px 5px;
                     }
                 }
-            }
+            }*/
         }
     }
 }
@@ -1659,9 +1663,11 @@ ul.slick-dots {
         }
     }
     .pushbtnGroup {
-        height: 50px;
         display: block;
         text-align: center;
+		li {
+			display: inline-block;
+		}
     }
     .different.active {
         background: #ff5555;
@@ -2463,6 +2469,40 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	border-top:2px solid $borderColor;
 	border-bottom:2px solid $borderColor;
 	margin-bottom: 20px;
+}
+#sortByForm {
+	.dropdown-menu {
+		left: -60px;
+	}
+}
+.tableWrapper {
+	max-width: 100%;
+	overflow-y: auto;
+}
+.dropdown-menu.customDropDown{
+	padding: 5px;
+	background: $white;
+	border: 1px solid $borderColor;
+	li{
+		width: 100%;
+		border-bottom: 1px solid $borderColor;
+		text-align: left;
+		padding: 3px 0;
+		input{
+			height: 35px;
+			padding: 10px;
+			width: 100%;
+		}
+		a{
+			color: $bodyFontColor !important;
+			text-transform: capitalize;
+			display: block;
+			padding: 5px;
+		}
+		&.text-center{
+			text-align: center;
+		}
+	}
 }
 @import "unilogResponsiveLayout";
 @import "print";
