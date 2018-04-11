@@ -7,7 +7,7 @@
 	</ul>
 	<div class="multiTabContent">
 		<div id="firstTimeOrder">
-			<form id="form1B" action="OnAccountReg.action" onsubmit="submitThisForm(this); return false;">
+			<form id="form1B" action="OnAccountReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock">
 				<h6>$locale.get("register.text.newOnAccountWebStoreAccessRequest")<div class="pullRight"><span class="required">*</span> $locale.get("form.label.required")</div></h6>
 				<div class="row">
 					<div class="col-md-6">
@@ -67,7 +67,7 @@
 			</form>
 		</div>
 		<div id="newCommertialCustomer">
-			<form id="form2A" method="post" action="CommercialReg.action" onsubmit="submitThisForm(this); return false;">
+			<form id="form2A" method="post" action="CommercialReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock">
 				<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required") </div>
 				<div class="row">
 					<div class="col-md-6">
@@ -192,7 +192,7 @@
 			</form>
 		</div>
 		<div id="newRetailCustomer">
-			<form id="form2B" method="post" action="RetailReg.action" onsubmit="submitThisForm(this); return false;">
+			<form id="form2B" method="post" action="RetailReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock">
 				<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required") </div>
 				<div class="row">
 					<div class="col-md-6">
@@ -356,3 +356,6 @@
 	<br />
 </div>
 <!-- Dom Tab end -->
+<div id="successBlock" class="hideMe">
+	<a href="/" class="button">$!locale.get('product.heading.home')</a>
+</div>
