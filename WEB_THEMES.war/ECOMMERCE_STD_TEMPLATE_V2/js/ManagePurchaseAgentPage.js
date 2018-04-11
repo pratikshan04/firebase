@@ -56,9 +56,6 @@ function editUserDetails(userID){
 function toggleDisplayBlocks(hideDiv,ShowDiv){
 	$('#'+hideDiv).fadeOut();
 	$('#'+ShowDiv).fadeIn();
-	if(ShowDiv == "usersListBlock"){
-		location.reload();
-	}
 }
 var countrySelect = new initCountry({
 	country: "US",
