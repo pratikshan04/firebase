@@ -1,4 +1,5 @@
 var webThemes = $("#webThemePath").val();
+jQuery.getScript(webThemes+'js/BulkAction.js', function(){});
 $(document).ready(function(){
 	$('#cartWrap').DataTable({
 		"ordering": false,
@@ -14,17 +15,12 @@ $('[data-function="saveCartFunction"]').click(function() {
 	var itemId = $(this).attr('data-itemId');
 	$("#group_id").val(toggleListID);
 	$("#hidden_id").val(itemId);
-	if($(toggleListID).html()==""){
-		if(!$(toggleListID).is(":Visible")){
-			jQuery.get("productListIdNamePage.action?productIdList=0&groupType=C",function(data,status){
-				$(toggleListID).html(data).toggle();
-			});
-		}else{
-			$(toggleListID).toggle();
-		}
-	}else{
-		$(toggleListID).toggle();
-	}
+	$(toggleListID).html('<li class="text-center"><i class="fa fa-spin fa-spinner"></i></li>');
+	$(toggleListID).show();
+	jQuery.get("productListIdNamePage.action?productIdList=0&groupType=C",function(data,status){
+		$(toggleListID).find("li").remove();
+		$(toggleListID).html(data);
+	});
 });
 function submitSaveCart(title,groupId,obj,isReorder){
 	var groupName = "";
@@ -441,3 +437,396 @@ function sendApproval() {
 		return false;
 	}
 }
+
+(function(){
+	var myCart = {
+			storeName : "selectedItemsToGroup",
+			removeSelectedApi : "removeItemsPage.action",
+			shipAddressesHolder : "shipAddressListAsJson",
+			wareHousesHolder : "wareHousesAsJson",
+			quickAddApi : "quickAddPage.action",
+			wareHousesModelId : "#changeWareHouseModel",
+			shipAddressModelId : "#changeShippingModal",
+			cartPageLocationHolder : "selectedShipDetails",
+			popUpPageShipLocationHolder  : "selectedShipDetailsPopUp",
+			popUpWareHouseLocationHolder : "selectedWareHouseDetailsPopUp",
+			description : []
+	};
+	function processQuickAdd(){
+		var formData = $("#quickAddForm").serialize();
+		$.post(myCart.quickAddApi,formData, function(data,status,xhr){
+			data = JSON.parse(data);
+			if(data.valid){
+				bootAlert("medium","success","success",data.descriptions.join("<br>"));
+				$("[data-bb-handler='ok']").click(function(){
+					window.location.reload();
+				});
+			}else{
+				bootAlert("medium","error","error",data.descriptions.join("<br>"));
+			}
+		});
+	}
+	
+	function validateQuickAdd(){
+		myCart.description = [];
+		var isValid = true;
+		var partNumber = $("#quickAddForm #partNumber").val();
+		var qty = $("#quickAddForm #qty").val();
+		if(!partNumber){
+			myCart.description.push("Part Number is Required");
+			isValid = false;
+		}
+		if(!qty.match(/^[0-9]+$/)){
+			myCart.description.push("Quantity is Required")
+			isValid = false;
+		}
+		return isValid;
+	}
+	
+	function validateCartItem(item){
+		var status = true, description = "";
+		if(item.qty <= 0) {
+			status = false;
+			description = "Quantity cannot be less than or Equal to Zero";
+		}
+		else if(item.qty < item.minOrderQty){
+			status = false;
+			description = "Quantity cannot be less than Minimum Order Quantity(" + item.minOrderQty +")";
+		}
+		else if(item.qty % item.qtyInterval != 0) {
+			description = "Item Can only Ordered in multiples of " + item.qtyInterval;
+			status = false;
+		}
+		return {
+			"valid" : status,
+			"description" : description 
+		};
+	}
+
+	function Item(qty, attributes){
+		this.itemId = attributes.itemid;
+		this.cartItemId = attributes.cartitemid;
+		this.partNumber = attributes.partnumber;
+		this.qty = qty;
+		this.minOrderQty = attributes.minorderqty;
+		this.MinimumOrderQuantity = attributes.minorderqty;
+		this.qtyInterval = attributes.qtyinterval;
+		this.uom = attributes.uom;
+		this.itemPriceId = attributes.itempriceid;
+	}
+	
+	function extractItemDetails(element){
+		var qty = 0;
+		var attributes = element.dataset;
+		if(element.type != "TEXT" || element.type != "text"){
+			qty = $("input[type=text][data-cartitemid="+attributes.cartitemid+"]").val();
+		}else{
+			qty = element.value;
+		}
+		return new Item(qty, attributes);
+	}
+	
+	function clearItemExistence(items, newItem){
+		var i = 0, size = items.length, status = false, currentItem;
+		for(i = 0; i < size; i++){
+			currentItem = items[i];
+			if(currentItem.cartItemId == newItem.cartItemId){
+				status = true;
+				break;
+			}
+		}
+		if(status){
+			items.splice(i, 1);
+			setItemsToLocalStorage(myCart.storeName, items);
+		}
+	}
+	
+	function persistItem(storageName, item){
+		var items;
+		if(Storage){
+			var items = getItemsFromLocalStorage(storageName);
+			if(items == null || items.length <= 0){
+				items = [];
+				items.push(item);
+				setItemsToLocalStorage(storageName, items);
+			}else{
+				clearItemExistence(items, item);
+				items.push(item);
+				setItemsToLocalStorage(storageName, items);
+			}
+		}
+	}
+	function setItemsToLocalStorage(storageName, items){
+		if(Storage){
+			localStorage.setItem(storageName, JSON.stringify(items));
+		}
+	}
+	
+	function getItemsFromLocalStorage(storageName){
+		if(Storage){
+			return JSON.parse(localStorage.getItem(storageName));
+		}
+	}
+	
+	function callRemoveSelctedApi(items){
+		$.post(myCart.removeSelectedApi,{"items" : JSON.stringify(items) },function(data,status,xhr){
+			data = JSON.parse(data);
+			if(data.valid){
+				bootAlert("medium","success","success",data.descriptions.join("<br>"));
+				$("[data-bb-handler='ok']").click(function(){
+					window.location.reload();
+				});
+			}else{
+				bootAlert("medium","error","error",data.descriptions.join("<br>"));
+			}
+		});
+	}
+	
+	function callAddSelectedApi(items){
+		var myObject = new Object();
+		myObject.itemDataList = items;
+		var dataStr = 'groupType=P&jsonData=' + JSON.stringify(myObject);
+		block("Please Wait");
+		$.ajax({
+			type: "POST",
+			url: "productListIdNamePage.action",
+			data: dataStr,
+			success: function(msg){
+				unblock();
+				$('#generalModel .modal-body').html(msg);
+				$('#generalModel').modal();
+				triggerToolTip();
+			}
+		});
+	}
+	function checkBoxEventHander(element){
+		var status, item = extractItemDetails(element);
+		if(element.type == "TEXT" || element.type == "text" || element.checked){
+			status = validateCartItem(item);
+			if(status.valid){
+				persistItem(myCart.storeName, item);
+			}else{
+				if(element.type == "TEXT" || element.type == "text"){
+					element.value = item.minOrderQty;
+				}
+				bootAlert("medium","warning","warning",status.description);
+			}
+		}else{
+			clearItemExistence(getItemsFromLocalStorage(myCart.storeName), item);
+		}
+		if(element.type == "CheckBox" || element.type.toUpperCase() == "CHECKBOX"){
+			updateSelectAllCheckBox(element);
+		}
+	}
+	
+	$(".cartElement").on('change',function(src){
+		checkBoxEventHander(src.target);
+	});
+	
+	$(".removeSelected").on('click', function(){
+		var selectedItems = getItemsFromLocalStorage(myCart.storeName);
+		if(selectedItems && selectedItems.length > 0){
+			callRemoveSelctedApi(selectedItems);
+		}else {
+			bootAlert("medium","warning","warning","No Items were selected");
+		}
+	});
+	$(".addSelected").on('click', function(){
+		var selectedItems = getItemsFromLocalStorage(myCart.storeName);
+		if(selectedItems && selectedItems.length > 0){
+			callAddSelectedApi(selectedItems);
+		}else {
+			bootAlert("medium","warning","warning","No Items were selected");
+		}
+	});
+	
+	$("#quickAdd").on('click', function(){
+		if(validateQuickAdd()){
+			processQuickAdd();
+		}else{
+			bootAlert("medium","warning","warning",quickAdd.description.join("<br/>"));
+			return false;
+		}
+	});
+	
+	$(".selectAllCheckbox").on('change', function(event){
+		var srcObj = event.target;
+		var currentStatus = srcObj.checked;
+		$("input:checkbox[name='idList']").each(function(){
+			this.checked = currentStatus;
+			checkBoxEventHander(this);
+		});
+	});
+	
+	function updateSelectAllCheckBox(element){
+		var fieldName = element.name;
+		var status = $("input:checkbox[name='"+fieldName+"']:checked").length === $("input:checkbox[name='"+fieldName+"']").length;
+		$('#chkSelectall').prop('checked', status);
+	}
+	
+	function chooseChangeType(shipType, identifier, container){
+		switch(shipType.toUpperCase()){
+		case "PICKUP" : 
+			changeLocation(myCart.wareHousesHolder, identifier, "wareHouseCode", container);
+			 $("#pickUpWareHouseCode").val(identifier);
+			 $("#changeLocation").attr("data-target", myCart.wareHousesModelId);
+			break;
+		case "SHIP" : 
+			changeLocation(myCart.shipAddressesHolder, identifier, "addressBookId", container);
+			$("#shipAddressBookId").val(identifier);
+			$("#selectedShipTo").val(identifier);
+			 $("#changeLocation").attr("data-target", myCart.shipAddressModelId);
+			break;
+		}
+	}
+	
+	function changeLocation(srcLocation, curIdentifier, fieldName, container){
+		var i, j, update = false, eachContainer, curLocation, locations = $("#"+ srcLocation).val();
+		locations = JSON.parse(locations);
+		for(i = 0; i < locations.length; i++){
+			curLocation = locations[i];
+			if(curLocation[fieldName] == curIdentifier){
+				for(j = 0; j < container.length; j++){
+					eachContainer = container[j];
+					populateLocationDetails(curLocation, eachContainer);
+					if(!update && $("#layoutName").val() == "CheckOutPage"){
+						updateCheckoutInfo(curLocation);
+						update = true;
+					}
+				}
+				break;
+			}
+		}
+	}
+	function updateCheckoutInfo(curLocation){
+		$("#address1Dest").text(location.address1);
+		$("#address2Dest").text(location.address2);
+		$("#cityDest").text(location.city);
+		$("#stateDest").text(location.state);
+		$("#zipCodeDest").text((location.zipCode) ? location.zipCode : location.zip);
+		$("#countryDest").text(location.country);
+	}
+	function populateLocationDetails(location, container){
+		$("#"+ container + " .address1Holder").text(location.address1);
+		$("#"+ container + " .address2Holder").text(location.address2);
+		$("#"+ container + " .cityHolder").text(location.city);
+		$("#"+ container + " .stateHolder").text(location.state);
+		$("#"+ container + " .zipHolder").text((location.zipCode) ? location.zipCode : location.zip);
+		$("#"+ container + " .countryHolder").text(location.country);
+	}
+	
+	function getRequireDetails(calcTax, calcFreight){
+		var data = {};
+		data.shipAddressBookId = $("#selectedShipTo").val();
+		data.shipViaCode = $("#shipViaSrc").val();
+		data.calculateTax = calcTax;
+		data.calculateFreight = calcFreight;
+		data.savedGroupId = $("#savedGroupId").val();
+		data.orderTax = $("#orderTax").val();
+		return data;
+	}
+	
+	function calculateTaxAndFreight(calcTax, calcFreight){
+		block();
+		var data = getRequireDetails(calcTax, calcFreight);
+		$.get("calculateTaxAndFreightSale.action", data, function(response){
+			unblock();
+			if(response){
+				response = JSON.parse(response);
+				if(calcTax){
+					$("#orderTaxLab").html("&nbsp;&nbsp;&nbsp;$" + response["orderTax"].toFixed(2));
+					$("#orderTax").val(response["orderTax"]);
+				}
+				if(calcFreight){
+					$(".shippingCost").show();
+					$("#shippingCostLab").html("&nbsp;&nbsp;&nbsp;$" + response["totalCartFrieghtCharges"].toFixed(2));
+					$("#totalCartFrieghtCharges").val(response["totalCartFrieghtCharges"]);
+				}
+				$("#orderSubTotalLab").html("&nbsp;&nbsp;&nbsp;$" + response["subTotal"].toFixed(2));
+				$("#grandTotalLab").html("&nbsp;&nbsp;&nbsp;$" + response["grandTotal"].toFixed(2));
+			}
+		}).fail(function(response){
+			unblock();
+		});
+	}
+	
+	function switchOptionsByDeliveryType(deliveryType){
+		if(deliveryType && deliveryType.toUpperCase() !== "SHIP"){
+			$("#shipViaSrc option[value='WC']").attr("selected", true);
+			$("#shipViaSrcWrapper").hide();
+			//$("#collectAccDetails").hide();
+			$("#shipmentTypeWrapper").hide();
+		}else{
+			$("#shipViaSrcWrapper").show();
+			//$("#collectAccDetails").show();
+			$("#shipmentTypeWrapper").show();
+			$("#shipViaSrc option:selected").attr("selected", false);
+			$("#shipViaSrc option[value='WC']").hide();
+		}
+	}
+	
+	$("#shipViaSrc").on('change', function(){
+		var field = $("#shipViaSrc").val();
+		if(field && field.length > 0 && field.toUpperCase() != "WC"){
+			calculateTaxAndFreight(false, true);
+		}
+	});
+	
+	$(".shipType").on('change', function(src) {
+		var shipType = this.value, identifier;
+		changeLocationDesc = "";
+		$("#selectedShipType").val(shipType);
+	    var checked = $(this).is(':checked');
+	    $(".shipType").prop('checked',false);
+	    if(checked) {
+	        $(this).prop('checked',true);
+	    }
+	    var deliveryType = $("[name=shipType]:checked").val();
+		switchOptionsByDeliveryType(deliveryType);
+	    if(shipType == "pickup"){
+	    	changeLocationDesc = "change pick up location";
+	    	identifier = $("#pickUpWareHouseCode").val();
+	    	chooseChangeType(shipType, identifier, [myCart.cartPageLocationHolder]);
+	    }
+	    else if(shipType == "ship"){
+	    	changeLocationDesc = "change shipping location";
+	    	identifier = $("#shipAddressBookId").val();
+	    	chooseChangeType(shipType, identifier, [myCart.cartPageLocationHolder]);
+	    }
+	    $("#changeLocation").text(changeLocationDesc);
+	});
+	
+	$(".selectShipLocation").on('change', function(){
+		if($("#layoutName").val() == "CheckOutPage"){
+			var isShipAddrChanged = $("#isShipAddrChanged").val();
+			if(isShipAddrChanged == "unchanged"){
+				isShipAddrChanged  = "changed";
+			}else if(isShipAddrChanged == "changed"){
+				isShipAddrChanged  = "unchanged";
+			}
+			$("#isShipAddrChanged").val(isShipAddrChanged);
+		}
+	});
+	
+	$(".updateLocataion").on('click', function(){
+		var identifier, deliveryType = $("#selectedShipType").val();
+		if(deliveryType.toUpperCase() === "SHIP"){
+			identifier = $("[name=selectShipLocation]:checked").val();
+			chooseChangeType(deliveryType, identifier, [myCart.cartPageLocationHolder, myCart.popUpPageShipLocationHolder]);
+			
+		}else if(deliveryType.toUpperCase() === "PICKUP"){
+			identifier = $("[name=selectWareHouseLocation]:checked").val();
+			chooseChangeType(deliveryType, identifier, [myCart.cartPageLocationHolder, myCart.popUpWareHouseLocationHolder]);
+		}
+		$("button[type=button][data-dismiss=modal]").click();
+		if($("#layoutName").val() == "CheckOutPage"){
+			var calcFreight = false;
+			if($("#shipViaSrc").val().length > 0){
+				calcFreight = true;
+			}
+			calculateTaxAndFreight(true, calcFreight);
+		}
+	});
+	
+	setItemsToLocalStorage(myCart.storeName, []);
+})();

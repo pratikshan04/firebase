@@ -1,4 +1,5 @@
 $(window).trigger("homefeaturepage");
+getcookiefromdocument()
 function diplayJavaMsg(msg){
 	alert(msg);
 }
@@ -29,6 +30,17 @@ function callToVisionapi(){
 	var msg="goToVisionapi";
 	try{Android.goToVisionapi();}
 	catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(msg);
+		console.log('The native context does not exist yet');
+	}
+}
+function getcookiefromdocument(){
+	var msg="passsessionid:";
+	var cookie = document.cookie;
+	var session = cookie.split(";");
+	try{Android.passSessionid(session);}
+	catch(err){
+		msg = msg+session;
 		webkit.messageHandlers.callbackHandler.postMessage(msg);
 		console.log('The native context does not exist yet');
 	}
