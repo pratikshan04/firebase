@@ -171,6 +171,9 @@ $breakpoint-mobileView:480px;
 			}
 		}
 	}
+	.ac_results{
+		top: 32px;
+	}
 	header {
 		.cimm_header {
 			.cimm_headerMidContent {
@@ -206,9 +209,28 @@ $breakpoint-mobileView:480px;
 			border-radius: 4px;
 		}
 	}
+	.table.customBorderTable {
+		tbody{
+			tr {
+				&:last-child {
+					td {
+						border-bottom: none;
+					}
+				}
+			}
+			td {
+				&:after {
+				   content: none;
+				}
+				.cimm_cartProdDescription {
+					width: 100%;
+				}
+			}
+		}
+	}
 	.ac_results ul{
-		top: 80px;
-		width: 100%;
+		/*top: 80px;
+		width: 100%;*/
 	}
 	.cimm_itemDetailWrap .cimm_itemMainImage,.cimm_itemDetailWrap .cimm_itemDescription{
 		float: none;
@@ -288,6 +310,16 @@ $breakpoint-mobileView:480px;
 		ul {
 			width: 100%;
 		}
+	}
+	.compareTableWrap .pushbtnGroup li{
+		text-align: right;
+		width: 49%;
+	}
+	.ac_results .itemWraper,.ac_results ul{
+		width: 100%;
+	}
+	.compareTableWrap .pushbtnGroup li:nth-child(2n+2){
+		text-align: left;
 	}
 	.tableScroll{
 		overflow-x: scroll;

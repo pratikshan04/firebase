@@ -25,6 +25,9 @@
                 cursor: default;
                 text-align: left;
             }
+			&.ac_over{
+				background: $autocomleteBg;
+			}
             strong {
                 color: $primaryColor;
             }
@@ -165,9 +168,6 @@
 				img {
 					width: 100%;
 					display: block;
-				}
-				.ac_over{
-					background: $autocomleteBg;
 				}
 			}
 		}

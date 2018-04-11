@@ -47,6 +47,9 @@ input[type='submit'] {
         background: $darkGrayColorTwo;
     }
 }
+.compareSimDiffBtns.active {
+    background: $darkGrayColorTwo;
+}
 
 .cimm_inlineButton {
     @extend .button;
