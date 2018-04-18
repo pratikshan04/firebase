@@ -1,4 +1,3 @@
-#if($session.getAttribute('isGeneralUser')!="Y")
 #if($responseType=="ProductGroupList")
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
@@ -87,8 +86,3 @@
 </div>
 #end
 <div id="allGroupItems" style="display: none;"></div>
-#else
-<div class="alert alert-danger">
-  <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
-</div>
-#end
