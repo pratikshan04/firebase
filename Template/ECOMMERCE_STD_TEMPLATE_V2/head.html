@@ -46,6 +46,8 @@
 	#set($pageTitleVelo = "File Upload Result"+ $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="openQuotesPage")
 	#set($pageTitleVelo = "Open Quotes"+ $!pageTitleseparator + $!pageTitleVelo)
+#elseif($!LayoutName=="SavedGroupsPage")
+	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.responseType.$!responseType") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="HomePage")
 	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
 	<link rel="canonical" href="$!hostName" />
