@@ -1,7 +1,7 @@
 var webThemes = $("#webThemePath").val();
 $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
-	$('#reqDate').datepicker('setStartDate', (date.getMonth() + 1) + '/' + (date.getDate() + 2) + '/' +  date.getFullYear());
+	$('#reqDate').datepicker({autoclose: true, startDate : (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear()});
 });
 
 var billAddressState = $("#billAddressState").val();
@@ -277,7 +277,7 @@ var checkoutWizard = {};
 			errorMessage = errorMessage + locale("checkoutwiz.error.orderby") + lineBreak;
 			validation = false;
 		}
-		if($('#poNumberTxt').length>0 && (typeof $('#poNumberTxt').val()=="undefined" || $('#poNumberTxt').val()==null || $('#poNumberTxt').val().trim().length < 1)){
+		if($('#poNumberTxt').length>0 && (typeof $('#poNumberTxt').val()=="undefined" || $('#poNumberTxt').val()==null || $('#poNumberTxt').val().trim().length < 1) && $('#orderType').val() != "checkoutWithCreditCard"){
 			errorMessage = errorMessage + locale("checkoutwiz.error.purchaseordernumber") + lineBreak;
 			validation = false;
 		}
@@ -440,8 +440,11 @@ var checkoutWizard = {};
 			$('#wizFinishButtonId').addClass("buttonDisabled");
 			if($(obj).val().trim() == "checkoutWithPo"){
 				$('#wizFinishButtonId').html("Submit Order");
+				$("#chkMandatory").find("span").remove();
+				$("#chkMandatory").append("<span class='text-danger'>*</span>");
 			}else if($(obj).val().trim() == "checkoutWithCreditCard"){
 				$('#wizFinishButtonId').html("Continue with Credit Card");
+				$("#chkMandatory").find("span").remove();
 			}
 		}
 	};
