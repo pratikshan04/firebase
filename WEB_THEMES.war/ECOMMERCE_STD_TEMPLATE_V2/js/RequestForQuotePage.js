@@ -13,7 +13,8 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	 var mm1 = today.getMonth()+1;
 	 var yyyy1 = today.getFullYear();
 	 $("#reqDate").attr("value",mm+'/'+dd+'/'+yyyy);
-	 $('#reqDate').datepicker('setStartDate', new Date(currentYear, currentMonth, currentDate));
+	 //$('#reqDate').datepicker('setStartDate', new Date(currentYear, currentMonth, currentDate));
+	 $('#reqDate').datepicker({autoclose: true, startDate : (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear()});
 	 $("#startDate").attr("value",mm1+'/'+dd1+'/'+yyyy1);
 });
 
@@ -23,34 +24,6 @@ $(function () {
 		$('input[type=submit]').attr('disabled', 'disabled');
 	});
 });
-
-function addRow(){		
-	var index = parseInt($("#addNewRowCount").val());		
-	var newRow = "<tr>";
-	newRow = newRow + "<td align='left' valign='top' data-th='$!locale.get('product.label.partNumber')'>";
-	newRow = newRow + "<input type='text' id='PN"+index+"' value='' name='PARTNUMARR' class='input-part form-control' />";
-	newRow = newRow + "</td>";
-	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.manufacturerPartNumber')'>";
-	newRow = newRow + "<input type='text' id='MPN"+index+"' value='' name='PARTNUMARR' class='input-part form-control' />";
-	newRow = newRow + "</td>";
-	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.brandMnfrName')'>";
-	newRow = newRow + "<input type='text' id='BN"+index+"' value='' name='BRANDNAMEARR' class='input-brand form-control' />";
-	newRow = newRow + "</td>";
-	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.qty')'>";
-	newRow = newRow + "<input type='text' id='QTY"+index+"' size='5' maxlength='6' onkeypress='return IsNumeric(event)' onpaste='return false' ondrop = 'return false'  value='' name='ITEMQTYARR' class='quantity form-control' />";
-	newRow = newRow + "</td>";
-	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.shortDescription')'>";
-	newRow = newRow + "<input type='text' id='DESC"+index+"' value='' name='DESCARR' class='input-part form-control' />";
-	newRow = newRow + "</td>";
-	newRow = newRow + "</tr>";
-	$("#idOfRowToInsertBefore").before(newRow);
-	index++;
-	if(index>=4 && $('#removeRowBtn').is(":hidden")){
-		$('#removeRowBtn').show();
-	}
-	$("#addNewRowCount").val(index);
-	return false;
-}
 
 function removeRow(){
 	var index = $("#addNewRowCount").val();

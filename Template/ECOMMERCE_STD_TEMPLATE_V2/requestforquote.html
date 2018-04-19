@@ -71,8 +71,8 @@
 				#end	
 				<tr class='more' id="idOfRowToInsertBefore">
 					<td colspan='5'>
-						<button type="submit" class="btn btn-success" value="$locale.get('product.button.addRowQuoteRequest')" onclick="return addRow();"><i class="fa fa-plus-square"></i> $!locale.get('product.button.addRowQuoteRequest')</button>
-						<button type="submit" class="btn btn-danger" id="removeRowBtn" style="display: none;" value="$!locale.get('product.button.removeRowQuoteRequest')" onclick="return removeRow();"><i class="fa fa-minus-square"></i> $!locale.get('product.button.removeRowQuoteRequest')</button>	
+						<button type="submit" class="btn btn-success mBottom-2" value="$locale.get('product.button.addRowQuoteRequest')" onclick="return addRow();"><i class="fa fa-plus-square"></i> $!locale.get('product.button.addRowQuoteRequest')</button>
+						<button type="submit" class="btn btn-danger mBottom-2" id="removeRowBtn" style="display: none;" value="$!locale.get('product.button.removeRowQuoteRequest')" onclick="return removeRow();"><i class="fa fa-minus-square"></i> $!locale.get('product.button.removeRowQuoteRequest')</button>	
 					</td>
 				</tr>
 			</tbody>
@@ -99,3 +99,33 @@
 		</div> 
 	</div>
 </form>
+
+<script>
+function addRow(){
+	var index = parseInt($("#addNewRowCount").val());		
+	var newRow = "<tr>";
+	newRow = newRow + "<td align='left' valign='top' data-th='$!locale.get('product.label.partNumber')'>";
+	newRow = newRow + "<input type='text' id='PN"+index+"' value='' name='PARTNUMARR' class='input-part form-control' />";
+	newRow = newRow + "</td>";
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.manufacturerPartNumber')'>";
+	newRow = newRow + "<input type='text' id='MPN"+index+"' value='' name='PARTNUMARR' class='input-part form-control' />";
+	newRow = newRow + "</td>";
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.brandMnfrName')'>";
+	newRow = newRow + "<input type='text' id='BN"+index+"' value='' name='BRANDNAMEARR' class='input-brand form-control' />";
+	newRow = newRow + "</td>";
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.qty')'>";
+	newRow = newRow + "<input type='text' id='QTY"+index+"' size='5' maxlength='6' onkeypress='return IsNumeric(event)' onpaste='return false' ondrop = 'return false'  value='' name='ITEMQTYARR' class='quantity form-control' />";
+	newRow = newRow + "</td>";
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.shortDescription')'>";
+	newRow = newRow + "<input type='text' id='DESC"+index+"' value='' name='DESCARR' class='input-part form-control' />";
+	newRow = newRow + "</td>";
+	newRow = newRow + "</tr>";
+	$("#idOfRowToInsertBefore").before(newRow);
+	index++;
+	if(index>=4 && $('#removeRowBtn').is(":hidden")){
+		$('#removeRowBtn').show();
+	}
+	$("#addNewRowCount").val(index);
+	return false;
+}
+</script>
