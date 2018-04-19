@@ -370,6 +370,11 @@
 			</table>
 		</div>
 		#end
+		#if($itemData.itemFeature)
+		<div id="featureSection">
+			$itemData.itemFeature
+		</div>
+		#end
 		#if($itemDocumentsList && $itemDocumentsList.size()>0) 
 		<div id="documentsSection">
 				<ul class="alternates clearAfter">
@@ -425,11 +430,6 @@
 				</ul>
 			</div>
 		#end 
-		#if($itemData.itemFeature)
-		<div id="featureSection">
-			$itemData.itemFeature
-		</div>
-		#end
 		#if($videoLinkList && $videoLinkList.size()>0)
 			<div id="videoSection">
 				#foreach($videoLink in $videoLinkList)
