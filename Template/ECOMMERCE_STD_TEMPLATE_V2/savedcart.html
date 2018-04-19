@@ -18,7 +18,7 @@
 				<button class="cimm_inlineButton" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-6 col-xs-12 text-right">
+		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
 			#if($isShared!="Y")
 			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('savedCart.button.editCartName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('savedCart.button.cartName')</button>
 			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('header.label.cart')</button>
