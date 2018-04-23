@@ -201,6 +201,15 @@ $("link[rel='stylesheet']").each(function(){
 		$(this).attr('media','(max-width: 1200px)');
 });
 </script>
+#if($requestType && $requestType=="openQuote")
+	<title>$siteDisplayName - Order Number</title>
+#else
+	<script type="text/javascript">
+		var myStr = '$LayoutName';
+		myStr = myStr.replace(/Page/g, "");
+		myStr = myStr.replace(/([a-z])([A-Z])/g, '$1 $2');
+	</script>
+#end
 #if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout")
 <script src="../js/jssor.js"></script>
 <script src="../js/jssor.slider.js"></script>
@@ -216,15 +225,6 @@ $(function(){
 </script>
 #end
 
-#if($requestType && $requestType=="openQuote")
-	<title>$siteDisplayName - Order Number</title>
-#else
-	<script type="text/javascript">
-		var myStr = '$LayoutName';
-		myStr = myStr.replace(/Page/g, "");
-		myStr = myStr.replace(/([a-z])([A-Z])/g, '$1 $2');
-	</script>
-#end
 #if($LayoutName=="HomePage" || $!isStaticHomePage =="Y")
 <script type="text/javascript">
 /**********************homepage********************/
@@ -238,125 +238,11 @@ $(function(){
 			 autoplay: true
 			});
 		}
-	   if($('#featuredProductList').length>0){
-		  $('#featuredProductList').slick({
-			  infinite: true,
-			  slidesToShow: 5,
-			  slidesToScroll: 1,
-			  pauseOnHover:true,
-			  responsive: [
-			               {
-			                 breakpoint: 1024,
-			                 settings: {
-			                   slidesToShow: 4,
-			                 }
-			               },
-			               {
-			                 breakpoint: 600,
-			                 settings: {
-			                   slidesToShow: 3,
-			                 }
-			               },
-			               {
-			                 breakpoint: 480,
-			                 settings: {
-			                   slidesToShow: 2,
-			                 }
-			               }
-			             ]
-		  });
-		}
-
-		if($('#featuredBrands').length>0){
-			$('#featuredBrands').slick({
-				  infinite: true,
-				  slidesToShow: 5,
-				  slidesToScroll: 1,
-				  pauseOnHover:true,
-				  responsive: [
-				               {
-				                 breakpoint: 1024,
-				                 settings: {
-				                   slidesToShow: 4,
-				                 }
-				               },
-				               {
-				                 breakpoint: 600,
-				                 settings: {
-				                   slidesToShow: 3,
-				                 }
-				               },
-				               {
-				                 breakpoint: 480,
-				                 settings: {
-				                   slidesToShow: 2,
-				                 }
-				               }
-				             ]
-			  });
-		}
-		if($('#featuredManufacturers').length>0){
-			$('#featuredManufacturers').slick({
-				  infinite: true,
-				  slidesToShow: 5,
-				  slidesToScroll: 1,
-				  pauseOnHover:true,
-				  responsive: [
-				               {
-				                 breakpoint: 1024,
-				                 settings: {
-				                   slidesToShow: 4,
-				                 }
-				               },
-				               {
-				                 breakpoint: 600,
-				                 settings: {
-				                   slidesToShow: 3,
-				                 }
-				               },
-				               {
-				                 breakpoint: 480,
-				                 settings: {
-				                   slidesToShow: 2,
-				                 }
-				               }
-				             ]
-			  });
-		}
-		if($('#shopByCategory').length>0){
-			$('#shopByCategory').slick({
-				  infinite: true,
-				  slidesToShow: 5,
-				  slidesToScroll: 1,
-				  pauseOnHover:true,
-				  responsive: [
-				               {
-				                 breakpoint: 1024,
-				                 settings: {
-				                   slidesToShow: 4,
-				                 }
-				               },
-				               {
-				                 breakpoint: 600,
-				                 settings: {
-				                   slidesToShow: 3,
-				                 }
-				               },
-				               {
-				                 breakpoint: 480,
-				                 settings: {
-				                   slidesToShow: 2,
-				                 }
-				               }
-				             ]
-			  });
-		}
-
 	});
 
 	getNewSectionForHomePage();
 	jQuery(function(){
-		priceLoadMainFunction();
+		//priceLoadMainFunction();
 	});
 </script>
 #end
