@@ -2,7 +2,7 @@ var webThemes = $("#webThemePath").val();
 /*jQuery.getScript(webThemes+'js/guestCheckoutWizard.js', function(){});*/
 $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
-	$('#reqDate').datepicker('setStartDate', (date.getMonth() + 1) + '/' + (date.getDate() + 2) + '/' +  date.getFullYear());
+	$('#reqDate').datepicker({autoclose: true, startDate : (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear()});
 });
 	var billAddressState = $("#billAddressState").val();
 	var billAddressCountry = $("#billAddressCountry").val();
