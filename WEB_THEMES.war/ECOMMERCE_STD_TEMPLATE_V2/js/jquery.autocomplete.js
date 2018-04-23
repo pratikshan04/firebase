@@ -881,11 +881,13 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			    }
 	        }	
 		}).click(function(event) {
-			$(target(event)).addClass(CLASSES.ACTIVE);
-			select();
-			// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
-			input.focus();
-			return false;
+			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
+				$(target(event)).addClass(CLASSES.ACTIVE);
+				select();
+				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
+				input.focus();
+				return false;
+			}
 		}).mousedown(function() {
 			config.mouseDownOnSelect = true;
 		}).mouseup(function() {

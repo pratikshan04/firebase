@@ -210,6 +210,9 @@ function submitForm(){
 	$("#manageForm").submit();
 }
 $(document).ready(function(){
+	$("#roleAssign").change(function(){
+		$("#roleDesc").html($(this).find('option:selected').attr('data-title'));
+	});
 	if($("#isGeneralUser").val()=="Y"){
 		$("#radioGroup").show(200);
 	}else{

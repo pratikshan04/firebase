@@ -42,7 +42,7 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 		autoclose: true
 	}).on('changeDate', function(ev){
 		var date = new Date(ev.date);
-		$('#endDate').datepicker('setStartDate', (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
+		$('#endDate').datepicker({autoclose: true, startDate : (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear()});
 	});
 	$('#endDate').datepicker();
 });
