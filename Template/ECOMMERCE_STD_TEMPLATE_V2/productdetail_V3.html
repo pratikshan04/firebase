@@ -526,9 +526,9 @@
 								<th class="text-center">$locale.get('product.label.uom')</th>
 								<th class="text-center">$locale.get('product.label.price')</th>
 								<th class="text-center">$locale.get('product.label.availability')</th>
-								<th class="text-center removeForSend" title="$!locale.get('product.button.addtocart')"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i></th>
-								<th class="text-center removeForSend hideForDevice" title="$!locale.get('product.label.addToGroupOrCart')">$!locale.get('product.label.addToGroupOrCart')</th>
-								<th class="text-center removeForSend" title="Item Information"><i class="fa fa-info-circle fa-lg"></i></th>
+								<th class="text-center removeForSend hideForPrint" title="$!locale.get('product.button.addtocart')"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i></th>
+								<th class="text-center removeForSend hideForDevice hideForPrint" title="$!locale.get('product.label.addToGroupOrCart')">$!locale.get('product.label.addToGroupOrCart')</th>
+								<th class="text-center removeForSend hideForPrint" title="Item Information"><i class="fa fa-info-circle fa-lg"></i></th>
 							</tr>
 						</thead>
 						<tbody class="text-center">
@@ -545,7 +545,7 @@
 										<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
 										<span></span>
 									</label>
-									<a href="$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
+									<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
 										<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 										<span class="imgForSend" style="display:none !important;">
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
@@ -614,7 +614,7 @@
 										#end
 									</span>
 								</td>
-								<td class="removeForSend">
+								<td class="removeForSend hideForPrint">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 								    	#if($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $userLogin)
 								    		#if($productModeitemData.price>0)
@@ -639,7 +639,7 @@
 							    		#end
 									#end
 								</td>
-								<td class="removeForSend">
+								<td class="removeForSend hideForPrint">
 								 	#set($addToCartCheckFlag = "N")
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
@@ -655,7 +655,7 @@
 										<span></span>
 									</label>
 								 </td>
-								<td class="details-control removeForSend" id="$!productModeitemData.itemPriceId" title="Item Information"><i class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></i></td>
+								<td class="details-control removeForSend hideForPrint" id="$!productModeitemData.itemPriceId" title="Item Information"><i class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></i></td>
 							</tr>
 						#end
 						</tbody>
