@@ -76,10 +76,10 @@
 		<th class="text-center">UOM</th>
 		<th class="text-center">Price</th>
 		<th class="text-center">Availability</th>
-		<th class="text-center removeForSend" title="Add to Cart / Add to Group"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i></th>
+		<th class="text-center removeForSend hideForPrint" title="Add to Cart / Add to Group"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i></th>
 		<!-- <th title="Add to Group"><i class="fa fa-lg fa-shopping-bag" aria-hidden="true"></i></th> -->
-		<th class="text-center removeForSend hideForDevice" title="Compare"><i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i></th>
-		<th class="text-center removeForSend" title="Item Information"><i class="fa fa-info-circle fa-lg"></i></th>
+		<th class="text-center removeForSend hideForDevice hideForPrint" title="Compare"><i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i></th>
+		<th class="text-center removeForSend hideForPrint" title="Item Information"><i class="fa fa-info-circle fa-lg"></i></th>
 	</tr>
 </thead>
 <tbody class="text-center">
@@ -94,7 +94,7 @@
 			<input type="hidden" value="$productModeitemData.displayPricing" id="displayPrice_$productModeitemData.partNumber" />
 		 	<span id="quantityBreakPricingDetails_$productModeitemData.partNumber" style="display: none;"></span>
 		 	<span itemprop="name">$productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
-			<a href="$productModeitemData.itemPriceId$locale.get('website.url.ProductDetail')n/$productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!hostName$!productModeitemData.itemPriceId$locale.get('website.url.ProductDetail')n/$productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span class="imgForSend" style="display:none !important;">
 			 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 			<img id="imageName$productModeitemData.itemId" itemprop="image" height="250" width="250" src="$hostName$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
@@ -158,7 +158,7 @@
 					#end
 				</span>
 			</td>
-		 <td title="Add to Cart / Product group" class="removeForSend">
+		 <td title="Add to Cart / Product group" class="removeForSend hideForPrint">
 		 	#set($addToCartCheckFlag = "N")
 			#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 				#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
@@ -174,13 +174,13 @@
 				<span></span>
 			</label>
 		 </td>
-		 <td title="Compare" class="hideForDevice removeForSend">
+		 <td title="Compare" class="hideForDevice removeForSend hideForPrint">
 			<label class="customCheckBox2">
 				<input type="checkbox" value="$productModeitemData.itemPriceId" name="compareId" id="check_$productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
 				<span></span>
 			</label>
 		 </td>
-		 <td class="details-control removeForSend" id="$productModeitemData.itemPriceId" title="Item Information"><i class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></i></td>
+		 <td class="details-control removeForSend hideForPrint" id="$productModeitemData.itemPriceId" title="Item Information"><i class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></i></td>
 	</tr>
  #end
  </tbody>
@@ -293,20 +293,20 @@
 	
 	<div class="multiTab mTop-3" id="multiTab">
 		<ul class="multiTabHeading clearAfter">
-			#if($itemMarketingText || $itemLongDesc)
-				<li><a href="#descriptionSection" class="active"><span id="description">$locale.get("product.detail.descriptions")</span></a></li>
+			#if($itemMarketingText != "" || $!itemLongDesc != "")
+				<li><a href="#descriptionSection" class="dark-ripple" data-type="descriptionSection">$!locale.get("product.detail.descriptions")</a></li>
 			#end 
-			#if($itemAttributesList && $itemAttributesList.size()>0)
-				<li><a href="#specificationSection"><span id="specification">$locale.get("product.detail.specifications")</span></a></li>
+			#if($itemAttributesList && $!itemAttributesList.size()>0)
+				<li><a href="#specificationSection" class="dark-ripple" data-type="specificationSection">$!locale.get("product.detail.specifications")</a></li>
 			#end
-			#if($itemData.itemFeature)
-				<li><a href="#featureSection"><span id="features">$locale.get("product.detail.features")</span></a></li>
+			#if($itemData.itemFeature != "")
+				<li><a href="#featureSection" class="dark-ripple" data-type="featureSection">$!locale.get("product.detail.features")</a></li>
 			#end
-			#if($itemDocumentsList && $itemDocumentsList.size()>0)
-				<li><a href="#documentsSection"><span id="documents">$locale.get("product.detail.documents")</span></a></li>
+			#if($itemDocumentsList && $!itemDocumentsList.size()>0)
+				<li><a href="#documentsSection" class="dark-ripple" data-type="documentsSection">$!locale.get("product.label.documents")</a></li>
 			#end
-			#if($videoLinkList && $videoLinkList.size()>0)
-				<li><a href="#videoSection"><span id="videos">$locale.get("product.detail.videos")</span></a></li>
+			#if($videoLinkList && $!videoLinkList.size()>0)
+				<li><a href="#videoSection" class="dark-ripple" data-type="videoSection">$!locale.get("product.detail.videos")</a></li>
 			#end
 		</ul>
 	#if($itemMarketingText || $itemLongDesc || $itemData.itemFeature || $itemAttributesList && $itemAttributesList.size()>0)
@@ -332,6 +332,11 @@
 				</tr>
 			#end
 			</table>
+		</div>
+		#end
+		#if($itemData.itemFeature)
+		<div id="featureSection">
+			$itemData.itemFeature
 		</div>
 		#end
 		#if($itemDocumentsList && $itemDocumentsList.size()>0) 
@@ -389,11 +394,6 @@
 				</ul>
 			</div>
 		#end 
-		#if($itemData.itemFeature)
-		<div id="featureSection">
-			$itemData.itemFeature
-		</div>
-		#end
 		#if($videoLinkList && $videoLinkList.size()>0)
 			<div id="videoSection">
 				#foreach($videoLink in $videoLinkList)

@@ -73,7 +73,7 @@
                 <tr itemscope itemtype="http://schema.org/Product">
                     <td data-th="$!locale.get('product.label.Image')">
                         <div class="cimm_cartProdImg alignCenter">
-                        	#if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "true")
+                        	#if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "Y")
                         	<label class="customCheckBox2 mBottom-2">								
 								<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-minorderqty="$!itemData.minOrderQty" data-qtyinterval="$!itemData.orderInterval" data-cartitemid="$!itemData.productListId" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId" class="cartElement"/>
 								<span></span>
@@ -168,7 +168,7 @@
                     </td>
                     <td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">
                     	#cartHiddenFields($!itemData.partNumber, $!itemData.itemAvailability, $!itemData.productListId, $!itemData.qty, $!itemData.price, $!itemData.itemPriceId)
-                        <input type="text" id="textQty_$!itemData.partNumber" data-minorderqty="$!itemData.minOrderQty" data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity #if($!CommonDBQuerySystemParameter.get('EnableAddCartToGroup') == 'true') cartElement #end" value="$!itemData.qty" /><!-- onblur="updateCart(this)"  -->
+                        <input type="text" id="textQty_$!itemData.partNumber" data-minorderqty="$!itemData.minOrderQty" data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity #if($!CommonDBQuerySystemParameter.get('EnableAddCartToGroup') == 'Y') cartElement #end" value="$!itemData.qty" /><!-- onblur="updateCart(this)"  -->
                         <!-- <input type="text" id="textQty_$!itemData.partNumber" data-itemId="$!itemData.itemPriceId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity" value="$!itemData.qty" onblur="updateCart(this)" /> -->
                         <input type="hidden" id="cartQtyForAvail$!itemData.partNumber$!itemData.productListId" name="cartQtyForAvail" value="$!itemData.qty">
                         <input type="hidden" value="$!itemData.partNumber" id="PartNumber_$!itemData.partNumber" name="partnumberStrArray" />
@@ -197,7 +197,7 @@
     <div class="cimm_btnGroupEnclosure">
         <ul class="clearAfter">
         	<!-- <li><a class="removeSelected">$!locale.get("product.label.removeSelected")</a></li> -->
-            #if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "true")
+            #if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "Y")
             <li><a class="addSelected">$!locale.get("product.label.addSelectedToProductList")</a></li>
             #end
             <li><a href="$!locale.get('website.url.ProductCategory')"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$!locale.get("product.button.continueShopping")</a></li>

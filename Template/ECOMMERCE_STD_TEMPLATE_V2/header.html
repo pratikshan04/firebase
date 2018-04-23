@@ -58,6 +58,7 @@
 				<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><i class="fa fa-search"></i></button>
 				<a class="cimm_cameraIcon" onclick="callToVisionapi();"><i class="fa fa-camera"></i></a>
 			</form>
+			#if($userLogin) <p class="mTop-2"><span>$!locale.get("product.heading.welcome"): </span> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p>  #end ##$!session.getAttribute("custName")
 			<div class='mobileCartCountWrap'>
 				<a href="$!locale.get('website.url.ShoppingCart')" class="mobileCartCount"><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount</span></a>
 				#if($userLogin)
@@ -73,6 +74,7 @@
 				<input type="text" onkeypress="return runScript(event);" id="txtSearch" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  />
 				<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><i class="fa fa-search"></i></button>
 			</form>
+			#if($userLogin) <p class="mTop-2"><span>$!locale.get("product.heading.welcome"): </span>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p>  #end ##$!session.getAttribute("custName")
 			<a href="$!locale.get('website.url.ShoppingCart')" class="showInDevice mTop-1">$!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span></a>
 		</div>
 		#end

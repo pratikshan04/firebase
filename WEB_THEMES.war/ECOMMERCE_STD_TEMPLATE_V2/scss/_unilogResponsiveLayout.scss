@@ -315,6 +315,15 @@ $breakpoint-mobileView:480px;
 		text-align: right;
 		width: 49%;
 	}
+	#sortByForm {
+		text-align: left;
+		.dropdown-menu {
+			left: 0px;
+		}
+	}
+	#myProductGroup{
+		text-align: left;
+	}
 	.ac_results .itemWraper,.ac_results ul{
 		width: 100%;
 	}
@@ -424,6 +433,10 @@ $breakpoint-mobileView:480px;
 		float: none !important;
 		width: 100%;
 		text-align: center;
+	}
+	.grpNameEditWrap{
+		text-align: left;
+		margin-top:10px;
 	}
 	.cartTotal_Top span{
 		margin-bottom: 10px;

@@ -2483,6 +2483,8 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	padding: 5px;
 	background: $white;
 	border: 1px solid $borderColor;
+	overflow-y: auto;
+    max-height: 180px;
 	li{
 		width: 100%;
 		border-bottom: 1px solid $borderColor;

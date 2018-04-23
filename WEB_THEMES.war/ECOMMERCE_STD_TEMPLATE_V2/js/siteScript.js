@@ -624,7 +624,7 @@ function performAdvSearch() {
 	
 	//s = replaceNonAscii(s);
 	s = $.trim(s);
-	s = s.replace('\u00AE', '&reg;');
+	s = s.replace('\u00AE', '&reg;').replace('\u2122', '&trade;');
 	s = escape(s);
 	s = s.replace(/#/g, "%23");
 	s = s.replace(/&/g, "%26");
@@ -1448,11 +1448,19 @@ function send(){
 	var pathArray = window.location.pathname.split( '/' );
 	host = pathArray[1];
 	var emailitemlink=localStorage.getItem("emailFriendlink");
+	$(".cimm_itemMainImage img").css({"position":"relative","width":"300px"});
+	$("#mailContentDisplay .contentPart .imgForSend").remove();
 	$("#mailContentDisplay .contentPart > table tr td").each(function () {
-		$(this).css({"border":"1px solid #CCC","border-collapse":"collapse"});    
+		$(this).css({"border":"1px solid #CCC","border-collapse":"collapse"});
+		if($(this).hasClass('text-center')){
+			$(this).css({"text-left":"left"});
+		}
 	});
 	$("#mailContentDisplay .contentPart > table tr th").each(function () {
-		$(this).css({"border":"1px solid #CCC","border-collapse":"collapse"});    
+		$(this).css({"border":"1px solid #CCC","border-collapse":"collapse"});
+		if($(this).hasClass('text-left')){
+			$(this).css({"text-align":"left"});
+		}
 	});
 	$("#ProdRating img").each(function () {
 		var originalSrc = $(this).attr('src');
@@ -1467,8 +1475,6 @@ function send(){
 		}
 
 	});
-	//$(".addtbtn").attr('style', 'margin-top:8px');
-	$(".addtbtn a").attr('style', 'background:url(http://'+ path +'/'+host+'/images/AddTBTN.png) no-repeat;height:21px;padding:3px 12px 8px 13px;font-weight:bold;text-decoration:none;	color:#FFF;cursor: default');
 	$("#mailContent a").attr("href", emailitemlink);
 	$('#imgPart').val($('.cimm_itemMainImage').html());
 	$('#contentPart').val($('.cimm_itemDescription').html());
@@ -2356,8 +2362,8 @@ function sendSiteDetailPagePart(a){
 		var test = thisid.split("_");
 		var id = test[1];
 		var itemImg = $('#'+id).find('span.imgForSend').html();
-		var ProductName= $('#'+thisid+' .cimm_prodDetailTitle').html();
-		var PrintShrtDesc= $('#'+thisid+' .cimm_itemShortDesc').html();
+		var ProductName= $('.focusItemTabs .productTitle').html();
+		var PrintShrtDesc= $('.focusItemTabs .cimm_itemShortDesc').html();
 		var custPartBlock=$("#custPartBlock").html();
 	}
 	var sitePartNo=$("#sitePartNo").html();
@@ -2373,10 +2379,10 @@ function sendSiteDetailPagePart(a){
 	var itemAvailable =$("#itemAvailable").html();
 	var leadTimeLI =$("#leadTimeLI").html();
 	
-	var productModeList = $('#childItemTable_wrapper .tablesWrap #childItemTable').clone().find("tr .removeForSend").remove().end().html();
+	var productModeList = $('#childItemTable_wrapper #childItemTable').clone().find("tr .removeForSend").remove().end().html();
 	//var titleDesc = "<div>";
 	var titleDesc = "";
-	var skuList = "<ul style='line-height: 24px;font-size: 14px;'>";
+	var skuList = "<div style='font-size: 14px;'>";
 	
 	if(ProductName != "" && ProductName != undefined){
 		titleDesc = titleDesc+"<h2 style='color:#343333'>"+ProductName+"</h2>";
@@ -2385,51 +2391,51 @@ function sendSiteDetailPagePart(a){
 		titleDesc = titleDesc+ "<p>"+PrintShrtDesc+"</p>";
 	}
 	if(sitePartNo != "" && sitePartNo != undefined){
-		skuList = skuList+"<li>"+sitePartNo+"</li>";
+		skuList = skuList+"<p>"+sitePartNo+"</p>";
 	}
 	if(mPartNo != "" && mPartNo != undefined){
-		skuList = skuList+"<li>"+mPartNo+"</li>";
+		skuList = skuList+"<p>"+mPartNo+"</p>";
 	}
 	if(custPartBlock != "" && custPartBlock != undefined){
 		var cpn = locale("product.label.customerpartnumber");
-		skuList = skuList+"<li>"+cpn+": <span>"+custPartBlock+"</span></li>";
+		skuList = skuList+"<p>"+cpn+": <span>"+custPartBlock+"</span></p>";
 	}
 	if(upcNo != "" && upcNo != undefined){
-		skuList = skuList+"<li>"+upcNo+"</li>";
+		skuList = skuList+"<p>"+upcNo+"</p>";
 	}
 	if(itemUom != "" && itemUom != undefined){
-		skuList = skuList+"<li>"+itemUom+"</li>";
+		skuList = skuList+"<p>"+itemUom+"</p>";
 	}
 	if(shipBranchNames != "" && shipBranchNames != undefined){
-		skuList = skuList+"<li>"+shipBranchNames+"</li>";
+		skuList = skuList+"<p>"+shipBranchNames+"</p>";
 	}
 	if(minOrdQty != "" && minOrdQty != undefined){
-		skuList = skuList+"<li>"+minOrdQty+"</li>";
+		skuList = skuList+"<p>"+minOrdQty+"</p>";
 	}
 	if(qtyInt != "" && qtyInt != undefined){
-		skuList = skuList+"<li>"+qtyInt+"</li>";
+		skuList = skuList+"<p>"+qtyInt+"</p>";
 	}
 	if(listPrices != "" && listPrices != undefined){
-		skuList = skuList+"<li>"+listPrices+"</li>";
+		skuList = skuList+"<p>"+listPrices+"</p>";
 	}
 	if(yourPrices != "" && yourPrices != undefined){
-		skuList = skuList+"<li>"+yourPrices+"</li>";
+		skuList = skuList+"<p>"+yourPrices+"</p>";
 	}
 	if(packDescs != "" && packDescs != undefined){
-		skuList = skuList+"<li>"+packDescs+"</li>";
+		skuList = skuList+"<p>"+packDescs+"</p>";
 	}
 	if(itemAvailable != "" && itemAvailable != undefined){
-		skuList = skuList+"<li>"+itemAvailable+"</li>";
+		skuList = skuList+"<p>"+itemAvailable+"</p>";
 	}
 	if(leadTimeLI != "" && leadTimeLI != undefined){
-		skuList = skuList+"<li>"+leadTimeLI+"</li>";
+		skuList = skuList+"<p>"+leadTimeLI+"</p>";
 	}
 	if(productModeList == "" || productModeList == undefined){
 		productModeList="";
 	}
 	
 	//titleDesc = titleDesc+"</div>";
-	skuList = skuList+"</ul>";
+	skuList = skuList+"</div>";
 
 	var itemDetailList = "<div class='cimm_itemDetailWrap clearAfter'><div class='cimm_itemMainImage'>"+itemImg+"</div><div class='cimm_itemDescription clearAfter'>"+titleDesc+skuList+"</div></div>";
 	var content;
@@ -2457,7 +2463,7 @@ function sendSiteDetailPagePart(a){
 	if(content != "" && content != undefined){
 		content = content;
 	}else if(productModeList != "" && productModeList != undefined){
-		var content = "<table style='width:100%;text-align: center;border: 1px solid #CCC;' cellspacing='0' cellpadding='0' >"+productModeList+"</table>";
+		var content = "<table style='width:100%;text-align: center;' cellspacing='0' cellpadding='0' class='table-bordered'>"+productModeList+"</table>";
 	}else{
 		content = "";
 	}
@@ -3405,6 +3411,37 @@ function sendPageContent(id){
 	localStorage.setItem("emailFriendItem", sendHtml);
 	localStorage.setItem("emailFriendlink", location.href);
 	location.href="/SendPageLink.action";
+}
+function validatePcardFormWithNewIds(){
+	var cardHolder = $.trim($("#cardHolderNewID").val());
+	var cardAddress = $.trim($("#cardAddressNewID").val());
+	var postalCode = $.trim($("#postalCodeNewID").val());
+	var nickName = $.trim($("#nickNameNewID").val());
+	var email = $.trim($("#emailNewID").val());
+	var isValid = 1;
+	var error = "";
+	if(cardHolder==""){
+		error += "Please Enter Card Holder Name.<br/>";
+		isValid = 0;
+	}
+	if(cardAddress==""){
+		error += "Please Enter Street Address.<br/>";
+		isValid = 0;
+	}
+	if(postalCode==""){
+		error += "Please Enter Postal Code.<br/>";
+		isValid = 0;
+	}
+	if(nickName==""){
+		error += "Please Enter Nick Name.";
+		isValid = 0;
+	}
+	if(isValid == 0){
+		showNotificationDiv("error",error);
+		return false;
+	}else{
+		return true;
+	}
 }
 
 /*$('.cimm_fileUpload').ajaxfileupload({
