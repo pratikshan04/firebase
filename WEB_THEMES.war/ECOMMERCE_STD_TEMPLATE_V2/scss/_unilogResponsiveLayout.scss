@@ -219,6 +219,10 @@ $breakpoint-mobileView:480px;
 				}
 			}
 			td {
+				.alignCenter{
+					text-align: left;
+				}
+				text-align: left;
 				&:after {
 				   content: none;
 				}

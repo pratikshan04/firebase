@@ -447,3 +447,117 @@ function submitReview(){
 	}
 	return false;
 }
+/********* V5 **********/
+var collection = $(".filterSelClass");
+collection.each(function() {
+	try{
+		var obj = jQuery(this);
+		var selValData = selData[obj.attr("data-id")];
+		jQuery.each(selValData, function(key, val) {
+			for(i=0;i<val.length;i++){
+				var find = '&nbsp;';
+				var re = new RegExp(find, 'g');
+				var re1 = new RegExp(" ", 'g');
+				if(itemIdFilter == val[i]){
+					var j=0;
+					jQuery(obj).children('option').each( function() {
+						var test = jQuery(this);
+						var val1 = test.val().replace(re,"");
+						var val2 = key.replace(re," ");
+						val1 = val1.replace(/\s/g, "");
+						var val2 = val2.replace(/\s/g,"");
+						if(String(val1.toLowerCase()) === String(val2.toLowerCase())) {
+							obj.prop('selectedIndex', j)
+						}
+						j++;
+					});
+					break;
+				}
+			}
+		});
+	}catch(e){
+		console.log(e);
+	}
+});
+function changeSelection(obj){
+	try{
+		var find = '&nbsp;';
+		var re = new RegExp(find, 'g');
+		var re1 = new RegExp(" ", 'g');
+		var c = "";
+		var selVal = jQuery(obj).attr("data-id");
+		 var count = 1;
+		 var selectedItem = false;
+		 var isError = false;
+		 var selectedItemId = 0;
+		 var selValData = selData[selVal.replace(/\//g,"_")];
+		 var selectedVal = jQuery(obj).attr("id");
+		 var selValId = selValData[Encoder.htmlEncode(jQuery("#"+selectedVal+" option:selected").val())];
+
+		if(selValId.length == 1){
+			block('Please Wait');
+			window.location.href = "/"+itemMapFilter[selValId[0]]+"/product/"+$("#selItem_"+selValId[0]).val();
+		}else{
+			var errorId = "";
+			var collection = $("select.filterSelClass");
+			collection.each(function() {
+				var obj = jQuery(this);
+				var changeItem = true;
+				var selValDataSub = selData[obj.attr("id")];
+				if(selVal!=obj.attr("id")){
+					var selectedOptionVal = obj.val();
+					jQuery.each(selValDataSub, function(key, val) {
+						selectedItem = false;
+						console.log(selectedOptionVal + " - " + key+"-");
+						var val1 = selectedOptionVal.replace(re,"");
+						var val2 = key.replace(re," ");
+						val1 = val1.replace(/\s/g, "");
+						val2 = val2.replace(re1,"");
+						if(String(val1.toLowerCase()) === String(val2.toLowerCase())){
+							selectedItem = true;
+						}
+						for(j=0;j<selValId.length;j++){
+							for(i=0;i<val.length;i++){
+								if(selValId[j] == val[i]){
+								console.log("itemId : " + selValId[j]);
+									if(selectedItem){
+										selectedItemId = selValId[j];
+										changeItem =false;
+									}
+								}
+							}
+						}
+					});
+					console.log(changeItem);
+					if(changeItem ==true){
+						obj.empty().append('<option value="">---Select---</option>');;
+						isError = true;
+						errorId = errorId + c + obj.attr("id");
+						jQuery.each(selValDataSub, function(key, val) {
+							for(j=0;j<selValId.length;j++){
+								for(i=0;i<val.length;i++){
+									if(selValId[j] == val[i]){
+										obj.append($("<option></option>").attr("value",key).text(key)); 
+									}
+								}
+							}
+						});
+						c = ",";
+						$('.filterSelClass').selectpicker('refresh');
+					}
+				}
+			});
+			if(isError)
+				alert("Please select value for "+errorId);
+			else
+				window.location.href = "/"+itemMapFilter[selValId[0]]+"/product/"+$("#selItem_"+selValId[0]).val();
+				console.log("selected : " + selectedItemId);
+		}
+	}catch(e){
+		console.log(e);
+	}
+}
+var currentItemId = '['+$("#currentSelectedItemId").val()+']';
+$('.filterSelClass option[id="'+currentItemId+'"]').attr("selected", "selected");
+
+/********* V5 **********/
