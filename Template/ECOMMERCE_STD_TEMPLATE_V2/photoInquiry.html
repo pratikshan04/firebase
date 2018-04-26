@@ -1,0 +1,50 @@
+<form id="photoInqueryForm" method="post" onsubmit="submitThisForm(this); return false;" action="staticFormHandlerPage.action">
+	<input type="hidden" id="mailSubject" name="mailSubject" value="Product Enquiry">
+	<input type="hidden" id="mailTemplateName" name="mailTemplateName" value="FindProductByImage">
+	<input type="hidden" id="mailMessage" name="mailMessage" value="">
+	<input type="hidden" id="toEmail" name="toEmail" value="">
+	<input type="hidden" id="fromEmail" name="fromEmail" value="">
+	<input type="hidden" id="uploadedFileNames" name="uploadedFileNames" value="">
+
+	<div class="row">
+		<div class="col-md-offset-3 col-md-6 text-center">
+			<img src="" id="enqitem" style="display:none;width:150px;"/>
+		</div>
+		<div class="col-md-offset-3 col-md-6">
+			<div class="form-group formDragElements">
+				<label class="control-label">$locale.get("product.label.chooseFile")<span class="text-danger"> * </span></label>
+				<div class="file-control" id="cimm_customImageUpload">
+					<span>No file chosen</span>
+					<input type="file" data-type="file" name="attachedFile" class="cimm_fileUpload" data-required="Y" data-error="$!locale.get('product.label.attachImage')">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-offset-3 col-md-6">
+			<div class="form-group">
+				<label for="accountNo1B">$locale.get("form.label.name")<span class="text-danger"> * </span></label>
+				<input type="text" name="photoInqName" id="photoInqName" placeholder="$locale.get('form.label.name')" data-type="text" data-required="Y" data-error="$locale.get('form.user.name.notEmpty')"  class="form-control"/>
+			</div>
+		</div>
+		<div class="col-md-offset-3 col-md-6">
+			<div class="form-group">
+				<label for="firstName1B">$locale.get("form.label.email")<span class="text-danger"> * </span></label>
+				<input type="text" name="photoInqEmailAddress" id="photoInqEmailAddress" placeholder="$locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$locale.get('form.user.address.emailId.notEmpty')" data-invalid="$locale.get('form.user.address.emailId.invalid')" class="form-control" />
+			</div>
+		</div>
+		<div class="col-md-offset-3 col-md-6">
+			<div class="form-group">
+				<label for="firstName1B">$locale.get("form.guestcheckout.phone")<span class="text-danger"> * </span></label>
+				<input type="text" name="photoInqPhoneNo" id="photoInqPhoneNo" class="formatPhoneNumber form-control" placeholder="$locale.get('form.guestcheckout.phone')" data-type="number" data-required="Y" data-error="$locale.get('form.user.address.phoneNumber.notEmpty')" data-invalid="$locale.get('form.user.address.phoneNumber.invalid')" />
+			</div>
+		</div>
+		<div class="col-md-offset-3 col-md-6">
+			<div class="form-group">
+				<label for="firstName1B">$locale.get("form.label.comments")</label>
+				<textarea type="text" name="photoInqComments" id="photoInqComments" class="form-control"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="button">$locale.get('product.button.submit')</button>
+	</div>
+</form>
