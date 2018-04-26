@@ -50,7 +50,7 @@ function submitThisForm(formId){
 			return true;
 		}else{
 			localStorage.setItem("btnVal", btnVal);
-			submitFormToServer($(currentForm).serialize(),$(currentForm).attr('action'),currentForm);
+			submitFormToServer(currentForm);
 			return false;
 		}
 	}
@@ -120,15 +120,19 @@ function notifyValidation(form, notifiedErrors){
 	$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 }
 
-function submitFormToServer(formData,action,that){
+function submitFormToServer(that){
+	var action = $(that).attr('action'), formMethod = $(that).attr('method'),formData = $(that).serialize();
+	if(!formMethod){
+		formMethod = "POST"
+	}
 	if(action){
 		actionUrl = action;
 	}else{
-		actionUrl = ""; // for static page action
+		actionUrl = "SaveAndSendMail.action"; // for static page action
 	}
 	block("Please Wait");
 	$.ajax({
-		method: 'POST',
+		method: formMethod,
 		url: actionUrl,
 		data: formData,
 		success:function(response){

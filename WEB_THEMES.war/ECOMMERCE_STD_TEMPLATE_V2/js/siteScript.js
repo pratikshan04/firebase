@@ -3443,34 +3443,3 @@ function validatePcardFormWithNewIds(){
 		return true;
 	}
 }
-
-/*$('.cimm_fileUpload').ajaxfileupload({
-	'action' : 'UploadFile.slt',
-	'onComplete' : function(response) {
-		unblock();
-		var uploadedFileNames = $('#uploadedFileNames').val();
-		if(uploadedFileNames && uploadedFileNames.length > 0){
-			uploadedFileNames = uploadedFileNames + "," + response.message;
-			$('#uploadedFileNames').val(uploadedFileNames);
-			$("#enqitem").attr("src",uploadedFileNames);
-		}
-		else if(response.message.length > 0){
-			$('#uploadedFileNames').val(response.message);
-			$("#enqitem").attr("src",response.message);
-		}
-	},
-	'onStart' : function() {
-		block('Please Wait');
-	}
-});
-
-$( "#cimm_customImageUpload > input").change(function() {
-	var fileName = $(this)[0].files[0];
-	var Filesize= this.files[0].size/1024/1024;
-	if(Filesize >5){
-		bootAlert("small","error","Error","Please upload file which is less than 5MB.");
-		return false;
-	}
-	fileName = fileName.name
-	$('#cimm_customImageUpload > label').text(fileName);
-});*/
