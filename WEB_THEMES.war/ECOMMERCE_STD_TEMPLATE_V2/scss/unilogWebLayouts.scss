@@ -1018,10 +1018,10 @@ footer {
 }
 
 .cimm_btnGroupEnclosure {
-    width: 70%;
+   // width: 70%;
     margin: 25px auto;
     padding-bottom: 30px;
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid $borderColor;
     ul {
         li {
             display: inline-block;

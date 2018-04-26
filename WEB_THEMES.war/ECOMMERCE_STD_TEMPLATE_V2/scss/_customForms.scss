@@ -39,6 +39,34 @@ textarea { resize: vertical; }
 	background-position: 96% 50%;
     background-size: 20px;
 }
+.file-control {
+	width: 100%;
+	height: 34px;
+	cursor: pointer;
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	span {
+		text-align: left;
+		display: block;
+		padding: 6px 12px;
+		color: #636c72;
+		position: absolute;
+		width: 100%;
+		font-size: 14px;
+	}
+	input[type=file] {
+		opacity: 0;
+		height: 35px;
+		width: 100%;
+		cursor: pointer;
+	}
+}
 /**********************custom check box*************************/
 .inline-radiobtn{
 	label{
