@@ -9,7 +9,7 @@
 		this.each(function() {
 			flags.wrap = $(this);
 			var url = window.location.href;
-			if (url.indexOf('Events') != -1) {
+			if (url.indexOf('Event') != -1) {
 				flags.wrap.addClass('eventCalendar-wrap').find('.goingEvents').append("<div class='eventsCalendar-list-wrap'><h2>Ongoing Events</h2><span class='eventsCalendar-loading'>loading...</span><div class='eventsCalendar-list-content'><ul class='eventsCalendar-list eventsDetail_Calendar-list'></ul></div></div>");
 			} else {
 				flags.wrap.addClass('eventCalendar-wrap').find('.goingEvents').append("<div class='eventsCalendar-list-wrap'><h2>Ongoing Events</h2><span class='eventsCalendar-loading'>loading...</span><div class='eventsCalendar-list-content'><ul class='eventsCalendar-list'></ul></div></div>");
@@ -243,11 +243,6 @@
 			return d[this.getDay()];
 		}
 		function getEvents(limit, year, month, day, direction) {
-			/*if(year==false || year=="" || year.length==0)
-				year = flags.wrap.attr('data-current-year');
-			if(month==false || month=="" || month.length==0)
-				month = flags.wrap.attr('data-current-month');*/
-			
 			var limit = limit || 0;
 			var year = year || '';
 			var day = day || '';
@@ -348,7 +343,7 @@
 						var curCheck = todayMonth + todayYear;
 						var selDate = new Date(dYear + "/" + (Number(dMonth) + 1) + "/1");
 						var url = window.location.href;
-						if (url.indexOf('Events') != -1) {} else {
+						if (url.indexOf('Event') != -1) {} else {
 							if (eventDate >= todayD && isFound == 1 && selDate <= todayD) {
 								if (eventYear > todayYear) todayYear = eventYear;
 								if (isFound == 1) {
@@ -403,8 +398,10 @@
 								}else{		
 								  var eventOffset = 300;
 								}
+								
+								//var eventOffset = eventDate.getTimezoneOffset();
 								var timeDifference = timeZone * 60 + (eventOffset);
-								var changedDate = new Date(eventDate.getTime() + Math.abs(timeDifference) * 60 * 1000);//var changedDate = new Date(eventDate.getTime());
+								var changedDate = new Date(eventDate.getTime() + Math.abs(timeDifference) * 60 * 1000);//var changedDate = new Date(eventDate.getTime() + timeDifference * 60 * 1000);//var changedDate = new Date(eventDate.getTime());
 								eventDate = changedDate;
 								eventYear = eventDate.getFullYear(), eventMonth = eventDate.getMonth(), eventFullMonth = eventDate.getMonthName(), eventDay = eventDate.getDate(), eventFullDay = eventDate.getDayName();
 								var currentDate = new Date();
@@ -414,7 +411,7 @@
 									year = yearSkip;
 								}
 								var eventDateEnd = new Date(parseInt(event.end));
-								var changedEndDate = new Date(eventDateEnd.getTime() + timeDifference * 60 * 1000);
+								var changedEndDate = new Date(eventDateEnd.getTime() + Math.abs(timeDifference) * 60 * 1000);//var changedEndDate = new Date(eventDateEnd.getTime() + timeDifference * 60 * 1000);
 								eventDateEnd = changedEndDate;
 								eventYearEnd = eventDateEnd.getFullYear(), eventFullMonthEnd = eventDateEnd.getMonthName(), eventMonthEnd = eventDateEnd.getMonth(), eventFullDayEnd = eventDateEnd.getDayName();
 								eventDayEnd = eventDateEnd.getDate();
@@ -456,40 +453,19 @@
 																if (event.title.length > 27) event.title = event.title.substring(0, 27) + '...';
 															}
 															var url = window.location.href;
-															if (url.indexOf('Events') != -1) {
+															if (url.indexOf('Event') != -1) {
 																if (event.blockOnlineReg == 'N') {
 																	if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;"></div>';
 																	} else if (event.totalSeats == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + ' <br><span id="location">' + event.location + '<span> <br> </em> </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;"> ' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																		if (event.cost > 0) {
-																		 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																		//Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '"class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																		if (event.cost > 0) {
-																		//    Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																		//Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b>Events Registration Closed</b></div></li>';
 																	} else {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																		if (event.cost > 0) {
-																		//    Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																	   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	}
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																	if (event.cost > 0) {
-																	  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 																}
 															} else {
 																var borderStyle = "";
@@ -497,37 +473,16 @@
 																if (event.blockOnlineReg == 'N') {
 																	if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul></div>';
 																	} else if (event.totalSeats == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em> </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;"> ' + event.description + '<ul>';
-																		if (event.cost > 0) {
-																		   // Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																	   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '"class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																		if (event.cost > 0) {
-																		  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																	   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b>Events Registration Closed</b></div></li>';
 																	} else {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px;' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																		if (event.cost > 0) {
-																		 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																		//Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><br /><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	}
 																	borderInc++;
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px;' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																	  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 																}
 															}
 															if (eventFullDay == eventFullDayEnd) {
@@ -595,36 +550,15 @@
 															if (event.blockOnlineReg == 'N') {
 																if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '</div></li>';
 																} else if (event.totalSeats == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<br/>';
-																	if (event.cost > 0) {
-																	   // Strin1 = Strin1 + '<b>Cost: </b> $' + event.cost + '<br/>';
-																	}
-																   // Strin1 = Strin1 + '<b> Location: </b>' + event.location + '<br/> <b>Address: </b>' + event.address + '<br/><b>Contact: </b>' + event.contact + '<br/><b><a href="eventDetailsUnit.action?eventID=' + event.id + '">Click Here</a></b> to Register</div></li>';
 																} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<br/>';
-																	if (event.cost > 0) {
-																		//Strin1 = Strin1 + '<b>Cost: </b> $' + event.cost + '<br/>';
-																	}
-																   // Strin1 = Strin1 + '<b> Location: </b>' + event.location + '<br/><b>Address: </b>' + event.address + '<br/><b>Contact: </b>' + event.contact + '<br/><b>Events Registration Closed</b></div></li>';
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																	  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																  // Strin1 = Strin1 + '<li> <b> Location: </b>' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><br /><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																}
 															} else {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																if (event.cost > 0) {
-																   // Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																   // Strin1 = Strin1 + '<li> <b> Location: </b>' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
-																}
 															}
 															PrevEvent = event.title;
 															if (eventFullDay == eventFullDayEnd) {
@@ -691,40 +625,27 @@
 																if (event.title.length > 27) event.title = event.title.substring(0, 27) + '...';
 															}
 															var url = window.location.href;
-															if (url.indexOf('Events') != -1) {
+															if (url.indexOf('Event') != -1) {
 																if (event.blockOnlineReg == 'N') {
 																	if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;"></div>';
 																	} else if (event.totalSeats == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + ' <br><span id="location">' + event.location + '<span> <br> </em> </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;"> ' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
 																		if (event.cost > 0) {
-																		 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
 																		}
-																		//Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '"class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
 																		if (event.cost > 0) {
-																		 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
 																		}
-																	   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b>Events Registration Closed</b></div></li>';
 																	} else {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
 																		if (event.cost > 0) {
-																		  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
 																		}
-																	   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	}
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
 																	if (event.cost > 0) {
-																	  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
 																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 																}
 															} else {
 																var borderStyle = "";
@@ -732,37 +653,16 @@
 																if (event.blockOnlineReg == 'N') {
 																	if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul></div>';
 																	} else if (event.totalSeats == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '"style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em> </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;"> ' + event.description + '<ul>';
-																		if (event.cost > 0) {
-																		  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																	   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '"class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																		if (event.cost > 0) {
-																		 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																	  // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b>Events Registration Closed</b></div></li>';
 																	} else {
 																		Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																		//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px;' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																		if (event.cost > 0) {
-																		 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																		}
-																		//Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><br /><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																	}
 																	borderInc++;
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px;' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																	  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 																}
 															}
 															if (eventFullDay == eventFullDayEnd) {
@@ -827,36 +727,15 @@
 															if (event.blockOnlineReg == 'N') {
 																if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '</div></li>';
 																} else if (event.totalSeats == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<br/>';
-																	if (event.cost > 0) {
-																	   // Strin1 = Strin1 + '<b>Cost: </b> $' + event.cost + '<br/>';
-																	}
-																   // Strin1 = Strin1 + '<b> Location: </b>' + event.location + '<br/> <b>Address: </b>' + event.address + '<br/><b>Contact: </b>' + event.contact + '<br/><b><a href="eventDetailsUnit.action?eventID=' + event.id + '">Click Here</a></b> to Register</div></li>';
 																} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<br/>';
-																	if (event.cost > 0) {
-																	//    Strin1 = Strin1 + '<b>Cost: </b> $' + event.cost + '<br/>';
-																	}
-																   // Strin1 = Strin1 + '<b> Location: </b>' + event.location + '<br/><b>Address: </b>' + event.address + '<br/><b>Contact: </b>' + event.contact + '<br/><b>Events Registration Closed</b></div></li>';
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																  //      Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																  //  Strin1 = Strin1 + '<li> <b> Location: </b>' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><br /><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																}
 															} else {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-															   //Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																if (event.cost > 0) {
-																 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																}
-															   // Strin1 = Strin1 + '<li> <b> Location: </b>' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 															}
 															PrevEvent = event.title;
 															if (eventFullDay == eventFullDayEnd) {
@@ -924,43 +803,22 @@
 															if (event.title.length > 27) event.title = event.title.substring(0, 27) + '...';
 														}
 														var url = window.location.href;
-														if (url.indexOf('Events') != -1) {
+														if (url.indexOf('Event') != -1) {
 															if (event.blockOnlineReg == 'N') {
 																if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;"></div>';
 																}else if (event.isAllDayEvent == 1) {
 																	 Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">All Day</em></time>';
 																} else if (event.totalSeats == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + ' <br><span id="location">' + event.location + '<span> <br> </em> </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;"> ' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																	if (event.cost > 0) {
-																	//    Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																	// Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '"class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																	if (event.cost > 0) {
-																  //      Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b>Events Registration Closed</b></div></li>';
 																}
 																else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																	if (event.cost > 0) {
-																   //     Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																}
 															} else {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '<br/>' + formatAMPM(eventDate) + '-' + formatAMPM(eventDateEnd) + '<br><span id="location">' + event.location + '<span></em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul class="noBullet" style="padding-top: 10px !important;">';
-																if (event.cost > 0) {
-																  //  Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																}
-															   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 															}
 														} else {
 															var borderStyle = "";
@@ -968,37 +826,16 @@
 															if (event.blockOnlineReg == 'N') {
 																if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul></div>';
 																} else if (event.totalSeats == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '"style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em> </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;"> ' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																	 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																   // Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																	// Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px; ' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '"class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																  //      Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																  //  Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><b>Events Registration Closed</b></div></li>';
 																} else {
 																	Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-																	//Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px;' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																	if (event.cost > 0) {
-																  //      Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																	}
-																  //  Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><br /><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 																}
 																borderInc++;
 															} else {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' '+formatAMPM(eventDateEnd) + '</em></time>';
-															   // Strin1 = '<li id="' + key + '" class="' + event.type + '" style="height: 34px;' + borderStyle + 'width: 210px;margin-left: 3px;"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em>  </time><div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																if (event.cost > 0) {
-																 //   Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																}
-															  //  Strin1 = Strin1 + '<li><b>Location: </b> ' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 															}
 														}
 														if (eventFullDay == eventFullDayEnd) {
@@ -1063,37 +900,16 @@
 														if (event.blockOnlineReg == 'N') {
 															if (eventDate < new Date() && upcomingEventsEnabled == "N") {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '</div></li>';
 															}
 															else if (event.totalSeats == 0) {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<br/>';
-																if (event.cost > 0) {
-																 //   Strin1 = Strin1 + '<b>Cost: </b> $' + event.cost + '<br/>';
-																}
-															  //  Strin1 = Strin1 + '<b> Location: </b>' + event.location + '<br/> <b>Address: </b>' + event.address + '<br/><b>Contact: </b>' + event.contact + '<br/><b><a href="eventDetailsUnit.action?eventID=' + event.id + '">Click Here</a></b> to Register</div></li>';
 															} else if ((event.totalSeats - event.bookedSeats) == 0) {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '" id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212 ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<br/>';
-																if (event.cost > 0) {
-															   //     Strin1 = Strin1 + '<b>Cost: </b> $' + event.cost + '<br/>';
-																}
-															   // Strin1 = Strin1 + '<b> Location: </b>' + event.location + '<br/><b>Address: </b>' + event.address + '<br/><b>Contact: </b>' + event.contact + '<br/><b>Events Registration Closed</b></div></li>';
 															} else {
 																Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-																//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-																if (event.cost > 0) {
-															   //     Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-																}
-															  //  Strin1 = Strin1 + '<li> <b> Location: </b>' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul><br /><b><u><a style="color:#0061aa;" href="eventDetailsUnit.action?eventID=' + event.id + '">REGISTER</a></u></b></div></li>';
 															}
 														} else {
 															Strin1 = '<li id="' + key + '" class="' + event.type + '"><h3 class="eventTitle">' + event.title + '</h3><div class="eventDesc">'+ event.description +'</div><time datetime="' + eventDate + '"><em class="fontProp">Ends ' + eventStringDate + ' &#8212  ' + eventStringDateEnd + ' ' + formatAMPM(eventDate) + '-' +formatAMPM(eventDateEnd) + '</em></time>';
-															//Strin1 = '<li id="' + key + '" class="' + event.type + '"><a href="calEventsUnit.action?month=' + eventMonthEnd + '&year=' + eventYearEnd + '"  id="' + event.id + '" class="eventTitle">' + event.title + '</a><time datetime="' + eventDate + '"><em class="fontProp">' + eventStringDate + ' &#8212  ' + eventStringDateEnd + '</em></time><br/>' + eventDate + '<div class="eventDesc" style="padding: 4px 0px 0px 18px;">' + event.description + '<ul>';
-															if (event.cost > 0) {
-															//    Strin1 = Strin1 + '<li><b>Cost: </b> $' + event.cost + '</li>';
-															}
-														  //  Strin1 = Strin1 + '<li> <b> Location: </b>' + event.location + '</li><li><b>Address: </b>' + event.address + '</li><li><b>Contact: </b>' + event.contact + '</li></ul></div></li>';
 														}
 														PrevEvent = event.title;
 														if (eventFullDay == eventFullDayEnd) {
@@ -1218,16 +1034,16 @@
 					                	   });
 					                	   var eventDateForTime = new Date();
 					                	   var january = new Date(eventDateForTime.getFullYear(), 0, 1);
-				                	      var januaryOffset = january.getTimezoneOffset();
-				                	      var july = new Date(eventDateForTime.getFullYear(), 6, 1);
-				                	      var julyOffset = july.getTimezoneOffset();
-				                	      var dstObserved = januaryOffset == julyOffset;
-				                	      var dstDiff = Math.abs(januaryOffset - julyOffset);
-				                	      if(dstObserved){
-				                	    	  var timezoneOffset = parseInt(eventDateForTime.getTimezoneOffset());
-				                	      }else{
-				                	    	  var timezoneOffset = 300;
-				                	      }
+					                	   var januaryOffset = january.getTimezoneOffset();
+					                	   var july = new Date(eventDateForTime.getFullYear(), 6, 1);
+					                	   var julyOffset = july.getTimezoneOffset();
+					                	   var dstObserved = januaryOffset == julyOffset;
+					                	   var dstDiff = Math.abs(januaryOffset - julyOffset);
+					                	   if(dstObserved){
+					                		   var timezoneOffset = parseInt(eventDateForTime.getTimezoneOffset());
+					                	   }else{
+					                		   var timezoneOffset = 300;
+					                	   }
 					                	   var timeDifference = timeZone * 60 + (timezoneOffset);
 					                	   var startchangedDate = new Date(parseInt(group) + Math.abs(timeDifference) * 60 * 1000);
 					                	   var endchangedDate = new Date(parseInt(end) + Math.abs(timeDifference) * 60 * 1000);
@@ -1267,15 +1083,24 @@
 					        	   var noImagePath = "this.src='"+$('#webThemePath').val()+"/images/NoImage.png'";
 					        	   // jQuery('td:eq(0)', nRow).html('<img src="'+aData.EVENT_IMAGE_URL+'" onerror="'+noImagePath+'" width="225" alt="event Image"/>');
 					        	   var timeZone = "",timeZoneOffset = "";
-				        		   var eventDateForTime = new Date(parseInt(aData.date));
-				        		   //var eventDateForTime = new Date();				        				
-				        		   timeZone = parseInt(aData.timezoneOffset) / 100;
-				        		   timezoneOffset = parseInt(eventDateForTime.getTimezoneOffset());
-			                	   var timeDifference = timeZone * 60 + (timezoneOffset);
-				        		   var startTimeChanged = new Date(parseInt(aData.date) + timeDifference * 60 * 1000);
-			                	   var startTime =formatAMPM(startTimeChanged);
-			                	   var endTimeChanged = new Date(parseInt(aData.end) + timeDifference * 60 * 1000);
-			                	   var endTime = formatAMPM(endTimeChanged);
+					        	   var eventDateForTime = new Date();
+					        	   var january = new Date(eventDateForTime.getFullYear(), 0, 1);
+					        	   var januaryOffset = january.getTimezoneOffset();
+					        	   var july = new Date(eventDateForTime.getFullYear(), 6, 1);
+					        	   var julyOffset = july.getTimezoneOffset();
+					        	   var dstObserved = januaryOffset == julyOffset;
+					        	   var dstDiff = Math.abs(januaryOffset - julyOffset);
+					        	   if(dstObserved){
+					        	   var timezoneOffset = parseInt(eventDateForTime.getTimezoneOffset());
+					        	   }else{
+					        	   var timezoneOffset = 300;
+					        	   }
+					        	   var timeDifference = timeZone * 60 + (timezoneOffset);
+					        	   var startTimeChanged = new Date(parseInt(aData.date) + Math.abs(timeDifference) * 60 * 1000);
+					        	   var endTimeChanged = new Date(parseInt(aData.end) + Math.abs(timeDifference) * 60 * 1000);
+			                	   
+			                	   var startTime = new Date(parseInt(aData.date)).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
+			                       var endTime = new Date(parseInt(aData.end)).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
 			                	   var todayDate = new Date().getTime();
 					        	   if(aData.isAllDayEvent==1){
 					        		   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());

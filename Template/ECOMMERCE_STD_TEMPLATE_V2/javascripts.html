@@ -249,6 +249,14 @@ $(function(){
 
 #if($LayoutName=="ProductDetailPage")
 <script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
+<script>
+/********* V5 **********/
+var selData = $selecatableJson.replaceAll("&#39;","'");
+var itemIdFilter =jQuery("#itemIdTemp").val();
+var itemMapFilter = $itemMap;
+$('.filterSelClass').selectpicker('refresh');
+/********* V5 **********/
+</script>
 #if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)#else
 #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS" )
 <!-- <script>
