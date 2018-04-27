@@ -20,7 +20,7 @@
 				<td data-th="$!locale.get('product.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
 				<td data-th="$!locale.get('product.group.heading.AddGroupToCart')">
 					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</td>
 			</tr>
 			#end
@@ -60,7 +60,7 @@
 					<td data-th="$!locale.get('saved.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
 					<td data-th="$!locale.get('product.heading.Action')">
 						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.dateCreated')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
+						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.dateCreated')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
 					</td>
 				</tr>
 				#end
