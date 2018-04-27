@@ -124,29 +124,52 @@
 <form action="submitNewCreditCardSale.action?fromPage=payWithNewCC" method="post" id="addNewCardForm">  
 <h4>$locale.get("product.label.enterNewCreditCardDetails")</h4>
 <br />
-<div class="cimm_formEnclosure">
-<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required")</div>
-	<ul class="cimm_formContent">
-		<li>
-			<input type="text" id="nickNameNewID" name="nickName" value="" />
-			<label>$locale.get("product.label.nickName")<span class="required"> * </span></label>
-			<br /><em class="required" id="nickNameSpan"></em>
-		</li>
-		<li>
-			<input type="text" id="cardHolderNewID" name="cardHolder" value="" />
-			<label>$locale.get("product.label.cardHolder")<span class="required"> * </span> </label>
-			<br /> <em class="required" id="cardHolderSpan"></em>
-		</li>
-		<li>
-			<input type="text" id="cardAddressNewID" name="streetAddress" value="" />
-			<label>$locale.get("product.label.streetAddress")<span class="required"> * </span></label>
-			<br />	<em class="required" id="cardAddressSpan"></em>
-		</li>
-		<li>
-			<input type="text" id="postalCodeNewID" name="postalCode" value="" />
-			<label>$locale.get("product.label.postalCode")<span class="required"> * </span> </label>
-			<br /><em class="required" id="postalCodeSpan"></em>
-		</li>
+<div id="notificationDiv"></div>
+	<div class="row">
+		<div class="col-md-12 ">
+		<div class="form-group">
+			<span class="text-danger"> * </span> $!locale.get("form.label.required")
+		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group">	
+						<label for="nickNameNewID">$!locale.get("product.label.nickName") <span class="text-danger">*</span></label>
+						<input type="text" id="nickNameNewID" name="nickName" class="form-control" placeholder="$!locale.get('product.label.nickName')"/>
+						<em class="required" id="nickNameSpan"></em>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group">	
+						<label for="cardHolderNewID">$!locale.get("product.label.cardHolderName") <span class="text-danger">*</span></label>
+						<input type="text" id="cardHolderNewID" name="cardHolder" class="form-control" placeholder="$!locale.get('product.label.cardHolderName')"/>
+						<em class="required" id="cardHolderSpan"></em>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group">	
+						<label for="cardAddressNewID">$!locale.get("product.label.streetAddress") <span class="text-danger">*</span></label>
+						<input type="text" id="cardAddressNewID" name="streetAddress" class="form-control" placeholder="$!locale.get('product.label.streetAddress')"/>
+						<em class="required" id="cardAddressSpan"></em>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group">	
+						<label for="postalCodeNewID">$!locale.get("product.label.postalCode") <span class="text-danger">*</span></label>
+						<input type="text" id="postalCodeNewID" name="postalCode" class="form-control" placeholder="$!locale.get('product.label.postalCode')"/>
+						<em class="required" id="postalCodeSpan"></em>
+					</div>
+				</div>
+			</div>
 		<!--<div class="cimm_formLabel"><label>State<span class="required"> * </span> </label></div>
 		<div class="cimm_formTbx"><select class="appendChosen"><option>South Carolina</option></select></div>
 		<div class="cimm_formLabel"><label>Zip/Postal Code<span class="required"> * </span> </label></div>
@@ -155,12 +178,12 @@
 		<div class="cimm_formTbx"><input type="text" value="" /></div>
 		<div class="cimm_formLabel"><label>Email<span class="required"> * </span> </label></div>
 		<div class="cimm_formTbx"><input type="password" value="" /></div>-->
-    </ul><!--end of formContent-->
-
-    <div class="cimm_formBtn">
-    	<button type="submit" id="addPcard" class="log-addTocart-btn btn-sm" onclick="return validatePcardFormWithNewIds();"><!-- onclick="return validatePcardForm();" -->
-    	<span class="iconFont"><i class="fa fa-lg fa-plus"></i> $locale.get("product.label.addNewCreditCard")</span></button>
-    </div>
+	    <div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<button type="submit" id="addPcard" class="button" onclick="return validatePcardFormWithNewIds();">$locale.get("product.heading.addNewCreditCard")</button><!-- onclick="return validatePcardForm();" -->
+			</div>
+		</div>
+	</div>
 </div>
 <input type="hidden" name="savedGroupId" value="$!savedGroupId"/>
   		<!-- Billing Address -->                

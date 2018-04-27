@@ -284,8 +284,11 @@ function cancelEditGroup(){
 	$("#groupName").show();
 	$("#editBox").hide();
 }
-function deleteSavedProductGroup(delProductgroup){
+function deleteSavedProductGroup(delProductgroup,reqType){
 	var type = $("#GroupType").val();
+	if(reqType){
+		type = reqType;
+	}
 	var deleteSta = $("#deleteStatus").val(); 
 	if(typeof deleteSta!='undefined' && deleteSta=="N"){
 		bootAlert("small","error","Error","Cannot Delete the Cart. There are subgourps");
