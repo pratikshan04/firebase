@@ -141,25 +141,30 @@
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
 							#if($groupListData.size()>0)
 								#set($countProductGroup = 0)
-								<ul class="clearAfter">
+								<div class="row">
 									#foreach($groupData in $groupListData)
-									<li>
-									#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
-									<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
-									$groupData.productListName
-									<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/></a>
-									#else
-									<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">$groupData.productListName </a>
-									#if($countProductGroup == 8)
-									#break
+									<div class="col-md-6 col-sm-6 col-xs-12 mBottom-2">
+										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
+										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
+											$groupData.productListName
+											<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+										</a>
+										#else
+										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">$groupData.productListName </a>
+										#end
+									</div>
+										#if($countProductGroup == 8)
+											#break
+										#end
+										#set($countProductGroup = $countProductGroup + 1)
 									#end
-									#set($countProductGroup = $countProductGroup + 1)
-									#end
-									</li>
-									#end
-								</ul>
+								</div>
 								#if($groupListData.size() > 8)
-								<a href='$locale.get("website.url.SavedGroup.Product")' class="cimm_inlineButton">$locale.get("product.label.viewMore")</a>
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 mBottom-2">
+										<a href='$locale.get("website.url.SavedGroup.Product")' class="cimm_inlineButton">$locale.get("product.label.viewMore")</a>
+									</div>
+								</div>
 								#end
 							#else
 								<p>$locale.get("product.label.noProductGroupAvailable")</p>
@@ -169,29 +174,30 @@
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
 							#if($savedCartData.size()>0)
 								#set($countSavedGroup = 0)
-								<ul class="clearAfter">
+								<div class="row">
 									#foreach($groupData in $savedCartData)
-									<li>
-									#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
-									<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
-									$groupData.productListName
-									<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/></a>
-									#else
-									#if($countSavedGroup == 8)
-									<!-- <p>
-									<a href='$locale.get("website.url.SavedGroup.Cart")' class="pullRight"><i class="fa fa-lg fa-plus"></i> &nbsp;$locale.get("product.label.more")</a>
-									</p> -->
-									#break
+									<div class="col-md-6 col-sm-6 col-xs-12 mBottom-2">
+										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
+										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
+											$groupData.productListName
+											<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+										</a>
+										#else
+										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName"> $groupData.productListName </a>                                       
+										#end
+									</div>
+										#if($countSavedGroup == 8)
+											#break
+										#end
+										#set($countSavedGroup =$countSavedGroup + 1)
 									#end
-									#set($countSavedGroup =$countSavedGroup + 1)
-									<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">
-									$groupData.productListName </a>                                       
-									#end
-									</li>
-									#end
-								</ul>
+								</div>
 								#if($savedCartData.size() > 8)
-								<a href='$locale.get("website.url.SavedGroup.Cart")' class="cimm_inlineButton"> $locale.get("product.label.viewMore")</a>
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<a href='$locale.get("website.url.SavedGroup.Cart")' class="cimm_inlineButton"> $locale.get("product.label.viewMore")</a>
+									</div>
+								</div>
 								#end
 							#else
 								<p>$locale.get("product.label.noSavedCartAvailable")</p>
