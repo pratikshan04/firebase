@@ -76,7 +76,7 @@
 <div class="row">
 	#if($approveCartData.size()>0)
 	#foreach($groupData in $approveCartData)
-	<div class="col-md-6 col-sm-6 col-xs-12">
+	<div class="col-md-6 col-sm-6 col-xs-12 mBottom-2">
 		<i class="fa fa-lg fa-eercast" aria-hidden="true"></i> <a href="myProductGroupPage.action?reqType=$reqType&savedGroupId=$groupData.productListId&updatedDate=$groupData.date&assignedShipTo=$groupData.assignedShipTo">$groupData.productListName</a>
 	</div>
 	#end
