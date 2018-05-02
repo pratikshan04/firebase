@@ -393,7 +393,7 @@ $breakpoint-mobileView:480px;
 	.table.customBorderTable tbody td .cimm_cartProdDescription{
 		width: 100%;
 	}
-	.cimm_btnGroupEnclosure ul li{
+	.cimm_btnGroupEnclosure > ul > li{
 		padding:0;
 		display: block;
 		text-align: center;
@@ -437,6 +437,16 @@ $breakpoint-mobileView:480px;
 		float: none !important;
 		width: 100%;
 		text-align: center;
+	}
+	.cimm_categoryItems {
+		.cimm_categoryImg {
+			height: 160px;
+			a {
+				img {
+					height: 150px;
+				}
+			}
+		}
 	}
 	.grpNameEditWrap{
 		text-align: left;
