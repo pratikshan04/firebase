@@ -204,7 +204,8 @@
             <li><a href="javascript:void(0);" onclick="updateShoppingCart(); return false;"><span class="glyphicon glyphicon-history"></span>$!locale.get("product.button.updateCart")</a></li>
 			#if($userLogin)
 				##if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-					<li class="dropdown">
+					<li>
+					<div class="dropdown margin-auto">
 						#set($groupPop = "ulg"+$!savedCartItemId+"_custPop")
 						<a id="$!groupPop" class="popMsg hideMe"></a>
 						<a id='linkg$!savedCartItemId' class="dropdown-toggle" data-toggle="dropdown" data-itemId="$!savedCartItemId" data-listTarget="ulg$!savedCartItemId" data-function="saveCartFunction">
@@ -213,6 +214,7 @@
 						<ul id="ulg$!savedCartItemId" class="dropdown-menu customDropDown">
 							<li class="text-center"><i class="fa fa-spin fa-spinner"></i></li>
 						</ul>
+					</div>
 					</li>
 				##end
 			#end
