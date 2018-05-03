@@ -54,8 +54,12 @@ function editUserDetails(userID){
 	});
 }
 function toggleDisplayBlocks(hideDiv,ShowDiv){
-	$('#'+hideDiv).fadeOut();
-	$('#'+ShowDiv).fadeIn();
+	if($('.alert').length > 0){
+		location.reload();
+	}else{
+		$('#'+hideDiv).fadeOut();
+		$('#'+ShowDiv).fadeIn();
+	}
 }
 var countrySelect = new initCountry({
 	country: "US",

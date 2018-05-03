@@ -88,9 +88,9 @@
 		</form>
 	</div>
 	#end
-	<div class="cimm_categoryItemBlockWrap">
+	<div class="row cimm_categoryItemBlockWrap">
 		#foreach($categoryList in $categoryListData)
-		<div class="cimm_categoryItemBlock" itemscope itemtype="http://schema.org/Product"> 
+		<div class="col-md-4 col-sm-4 col-xs-6 cimm_categoryItems" itemscope itemtype="http://schema.org/Product"> <!-- cimm_categoryItemBlock -->
 			<div class="cimm_categoryImg">
 				<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 				#if($categoryList.imageName.contains("http") || $categoryList.imageType.equalsIgnoreCase("URL"))

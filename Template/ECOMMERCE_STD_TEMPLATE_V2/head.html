@@ -30,6 +30,8 @@
 #set($pageTitleseparator = " | ")
 #if($!LayoutName=="SavedGroupsPage")
 	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.responseType.$!responseType") + $!pageTitleseparator + $!pageTitleVelo)
+#elseif($!LayoutName=="ProductGroupPage" || $!LayoutName=="ApproveCart" || $!LayoutName=="SavedCartPage")
+	#set($pageTitleVelo = $!savedGroupName + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="HomePage")
 	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
 	<link rel="canonical" href="$!hostName" />

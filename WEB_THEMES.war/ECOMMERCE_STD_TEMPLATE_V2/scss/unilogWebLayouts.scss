@@ -538,6 +538,47 @@ footer {
 			width: 255px;
 		}
 	}
+	.cimm_categoryItems {
+		.cimm_categoryImg {
+			padding: 10px;
+			border: 1px solid $borderColor;
+			outline: $lightGrayColorTwo solid 5px;
+			width: 100%;
+			position: relative;
+			height: 200px;
+			a {
+				display: block;
+				img {
+					height: 180px;
+					padding: 2px;
+					max-width: 100%;
+					display: block;
+					vertical-align: middle;
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					margin: auto;
+					width: auto;
+				}
+			}
+		}
+		p {
+			text-align: center;
+			color: $bodyFontColor;
+			font-size: 14px;
+			text-transform: uppercase;
+			font-family: $defaultFont;
+			margin: 0;
+			padding: 10px;
+			height: 60px;
+			&:hover {
+				color: $primaryColor;
+				text-decoration: underline;
+			}
+		}
+	}
 	.cimm_categoryItemBlockWrap{
 		.cimm_categoryItemBlock {
 			width: 30.5%;
@@ -1140,7 +1181,7 @@ footer {
     }
     .uploadFile {
         @extend .uploadImage;
-        width: calc(100% - 75px);
+        width: calc(100% - 78px);
     }
     .button {
         margin-right: 3px;
@@ -1855,6 +1896,38 @@ ul.slick-dots {
     .cimm_caroWrap {
         margin: 0 0 0 -15px;
         padding: 0;
+		&.slick-vertical{
+			margin: -15px 0 0 0;
+			padding: 20px 0 30px 0;
+			.slick-slide {
+				margin: 15px 0 0 0;
+				&[aria-hidden="true"] {
+					box-shadow: 0 0 0 #ABABAB;
+				}
+			}
+			.slick-next{
+				top: 30px;
+				height: 30px;
+				width: 50px;
+				left: 50%;
+				margin-left: -25px;
+				&:before{
+					content:"\f106";
+					line-height: .5;
+				}
+			}
+			.slick-prev{
+				top: calc(100% - 10px);
+				height: 30px;
+				width: 50px;
+				left: 50%;
+				margin-left: -25px;
+				&:before{
+					content:"\f107";
+					line-height: .5;
+				}
+			}
+		}
         .slick-slide {
             margin: 0 0 0 15px;
 			box-shadow: 0 0 6px $lightShadowColor;
@@ -1941,7 +2014,7 @@ ul.slick-dots {
             left: 0;
             right: 0;
             margin: auto;
-            max-height: 200px;
+            max-height: 198px;
         }
     }
 }
@@ -2506,5 +2579,11 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 		}
 	}
 }
+.cimm_btnGroupEnclosure{
+	.dropdown.margin-auto{
+		max-width: 200px;
+	}
+}
+
 @import "unilogResponsiveLayout";
 @import "print";
