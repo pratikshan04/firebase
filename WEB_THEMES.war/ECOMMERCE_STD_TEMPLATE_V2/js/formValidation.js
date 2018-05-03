@@ -46,7 +46,7 @@ function submitThisForm(formId){
 			$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
 		}
 	}else{
-		if($(formId).prop("tagName") != "FORM"){
+		if($(formId).prop("tagName") != "FORM" || $(formId).attr("data-ajaxSubmit") == "N"){
 			return true;
 		}else{
 			localStorage.setItem("btnVal", btnVal);
@@ -139,7 +139,10 @@ function submitFormToServer(that){
 			if(response=="sessionexpired" || response == "SESSIONEXPIRED"){
 			    window.location.href="doLogOff.action";
 			}
-			var hideThat = $(that).attr('data-hideBlock');
+			var hideThat = "Y";
+			if($(that).attr('data-hideBlock')){
+				hideThat = $(that).attr('data-hideBlock').trim();
+			}
 			responseCont = "", 
 			notified ="",
 			responseVal="";
@@ -153,9 +156,9 @@ function submitFormToServer(that){
 			}
 			if(responseCont.valid || responseVal == 1){
 				that[0].reset();
-				if(hideThat){
+				if(hideThat && hideThat != "N"){
 					$(that).parents("#"+hideThat).slideUp(100);
-				}else{
+				}else if(hideThat == "Y"){
 					$(that).slideUp(100);
 				}
 				

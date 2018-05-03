@@ -24,45 +24,45 @@ function showMoreAdvOpt(){
 }
 </script>
 <div class='row'>
-	<div class="col-md-3 col-ms-6 col-xs-12">
+	<div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
 		<label for='searchCustomerPartNumber' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='searchCustomerPartNumber' value='1' checked onclick="changeAdvSearch()"/>
 			<span>$locale.get("product.label.cpn")</span>
 		</label>
 	</div>
-	<div class="col-md-2 col-ms-6 col-xs-12">
+	<div class="col-md-2 col-ms-6 col-xs-12 mBottom-2">
 		<label for='advSearchUpc' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='advSearchUpc' value='2' onclick="changeAdvSearch()"/>
 			<span>$locale.get("label.upc")</span>
 		</label>
 	</div>
-	<div class="col-md-4 col-ms-6 col-xs-12">
+	<div class="col-md-4 col-ms-6 col-xs-12 mBottom-2">
 		<label for='glantzCode' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='glantzCode' value='3' onclick="changeAdvSearch()"/>
 			<span>$locale.get("product.label.manufacturerOrPartNumber")</span>
 		</label>
 	</div>
-	<div class="col-md-3 col-ms-6 col-xs-12">
+	<div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
 		<label for='description' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='description' value='-1' onclick="changeAdvSearch()"/>
 			<span>$locale.get("product.label.description")</span>
 		</label>
 	</div>
 </div>
-<div id="keyWordMatch" class="row mTop-2 hideMe">
-	<div class="col-md-3 col-ms-6 col-xs-12">
+<div id="keyWordMatch" class="row hideMe">
+	<div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
 		<label for='allWords' class="customRadioBtn">
 			<input type='radio' name='searchThrough' id='allWords' value='4' checked onclick="changeAdvSearch()"/>
 			<span>$locale.get('search.label.allOfTheWords')</span>
 		</label>
 	</div>
-	<div class="col-md-3 col-ms-6 col-xs-12">
+	<div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
 		<label for='exactWordingPhrase' class="customRadioBtn">
 			<input type='radio' name='searchThrough' id='exactWordingPhrase' value='5' onclick="changeAdvSearch()"/>
 			<span>$locale.get('search.label.exactWordingOfPhrase')</span>
 		</label>
 	</div>
-	<div class="col-md-3 col-ms-6 col-xs-12">
+	<div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
 		<label for='oneOrMore' class="customRadioBtn">
 			<input type='radio' name='searchThrough' id='oneOrMore'  value='6' onclick="changeAdvSearch()"/>
 			<span>$locale.get("search.label.oneOrMoreOfTheseWords")</span>
