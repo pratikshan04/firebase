@@ -1182,37 +1182,6 @@ function filterScroll(){
 		top: '10px'
 	});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function hideNotificationDiv(){
 	try{
 		$(document).ready(function(){
