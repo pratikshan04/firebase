@@ -21,7 +21,7 @@
 		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
 			#if($isShared!="Y")
 			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('savedCart.button.editCartName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('savedCart.button.cartName')</button>
-			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('header.label.cart')</button>
+			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=C');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('header.label.cart')</button>
 			<button class="cimm_inlineButton" data-toggle="modal" data-target="#sharePop"><i class="glyphicon glyphicon-share"></i> $locale.get('product.heading.share')</button>
 			#end
 		</div>
