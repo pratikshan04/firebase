@@ -2858,6 +2858,7 @@ function performBulkAction(obj){
 	}else if(action == "multipleAddToCart"){
 		BulkAction.addToCartCookie();
 	}
+	$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
 }
 function commaSeparateNumber(val){
     while (/(\d+)(\d{3})/.test(val.toString())){
