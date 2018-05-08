@@ -218,8 +218,8 @@
 										#set($attrValueForSearch = $attrListVal)
 										##if($attrList.attrFilterList.get($!attrListVal).size()>1)
 										<li class="selectOptions dropdown">
-										<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
-										<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch">
+										<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
+										<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
 											<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
 												#set($k = 0)
 												#foreach($filterVal in $attrList.attrFilterList.get($!attrListVal))
