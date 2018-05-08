@@ -151,6 +151,7 @@ var BulkAction = {};
 					}
 					$.each(jsonObj,function(key,value){
 						$("#selectItemCheckbox_"+value.itemId).attr('checked', false);
+						$('#itemTxtQty'+itemID).attr("disabled",false);
 						if($('#multipleUom_'+value.partNumber).length>0){
 							$('#multipleUom_'+value.partNumber).attr('disabled', false);
 						}
@@ -189,7 +190,7 @@ var BulkAction = {};
 			bootAlert("small","error","Error","Please Enter "+locale("product.listOrgroup.name")+" Name");
 			return false;
 		}else{
-			var characterReg = "/^[a-zA-Z0-9_-\s]*$/";
+			var characterReg = /^[a-zA-Z0-9_-\s]*$/;
 			if (characterReg.test(groupName) == false) {
 				bootAlert("medium","error","Error","Special characters are not allowed except underscore or hyphen ( _ , - ).");
 				return false;
@@ -259,6 +260,7 @@ var BulkAction = {};
 					triggerToolTip();
 					$.each(obj,function(i,value){
 						$("#selectItemCheckbox_"+obj[i].itemId).attr('checked', false);
+						$('#itemTxtQty'+itemID).attr("disabled",false);
 						if($('#multipleUom_'+obj[i].partNumber).length>0){
 							$('#multipleUom_'+obj[i].partNumber).attr('disabled', false);
 						}
@@ -314,6 +316,7 @@ var BulkAction = {};
 	};
 	BulkAction.cancelAddToCart = function(itemID, itemIndex) {
 		$("#selectItemCheckbox_"+itemID).attr('checked', false);
+		$('#itemTxtQty'+itemID).attr("disabled",false);
 		$("#multipleItemCart_"+itemIndex+"_"+itemID).remove();
 		var dataFromCookie = "";
 		var jsonObj = [];
