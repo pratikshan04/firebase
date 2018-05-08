@@ -132,7 +132,7 @@
 			}
 			var secondDstDate = FindDstSwitchDate(year, secondSwitch);
 			var firstDstDate = FindDstSwitchDate(year, firstSwitch);
-			var $eventsCalendarSlider = $("<div class='eventsCalendar-slider' style='height:222px;'></div>"),
+			var $eventsCalendarSlider = $("<div class='eventsCalendar-slider col-md-3 col-sm-4 col-xs-12' style='height:222px;'></div>"),
 				$eventsCalendarMonthWrap = $("<div class='eventsCalendar-monthWrap'></div>"),
 				$eventsCalendarTitle = $("<div class='eventsCalendar-currentTitle'><a href='#' class='monthTitle'></a></div>"),
 				$eventsCalendarArrows = $("<a href='#' class='arrow prev'><span>" + eventsOpts.txt_prev + "</span></a><a href='#' class='arrow next'><span>" + eventsOpts.txt_next + "</span></a>");
@@ -1102,13 +1102,17 @@
 			                	   var startTime = new Date(parseInt(aData.date)).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
 			                       var endTime = new Date(parseInt(aData.end)).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
 			                	   var todayDate = new Date().getTime();
+			                	   
+			                	   var statrMonthDate = eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate(), endMonthDate = eventsOpts.monthNames[endTimeChanged.getMonth()] +" "+endTimeChanged.getDate();
+			                	   if(statrMonthDate == endMonthDate){
+					        		   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + statrMonthDate + ", " + startTimeChanged.getFullYear()+"</p>");
+					        	   }else{
+				                	   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + statrMonthDate + ", " + startTimeChanged.getFullYear()+ " to " +eventsOpts.dayFullNames[endTimeChanged.getDay()]+ ", " + endMonthDate + ", " + endTimeChanged.getFullYear()+"</p>");
+					        	   }
 					        	   if(aData.isAllDayEvent==1){
-					        		   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());
 					        		   jQuery('td:eq(1)', nRow).html("<p class='allEvent'>All Day</p>");
 					        	   }else{
-				                	   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate()+ ", " + startTimeChanged.getFullYear());
 					        		   jQuery('td:eq(1)', nRow).html('<p>'+startTime+" to "+endTime+"</p>");
-					        		   
 					        	   }
 					        	   jQuery('td:eq(0)', nRow).append('<p>'+aData.title+'</p>');//<a href="/'+aData.id+'/EventDetail/'+aData.title+'"></a>
 					        	   jQuery('td:eq(0)', nRow).append('<p><b>Location:</b> '+aData.location+'</p>');
