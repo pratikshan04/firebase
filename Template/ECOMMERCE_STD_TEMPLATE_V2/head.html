@@ -35,6 +35,14 @@
 #elseif($LayoutName=="HomePage")
 	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
 	<link rel="canonical" href="$!hostName" />
+#elseif($!LayoutName=="OrderDetailPage")
+	#if($orderDetail.orderStatus.contains("Bid"))
+	#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    #elseif($!requestType != "openQuote")
+    #set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    #else
+    #set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    #end
 #elseif($LayoutName=='ProductDetailPage')
 	#if($breadCrumbList && $!breadCrumbList.size()>0)
 		#set($breadCrumbSize = $!breadCrumbList.size() )
@@ -228,7 +236,6 @@
 		<link rel="canonical" href="$!hostName" />
 	#end
 #end
-<title>$!pageTitleVelo.replace("Page","").trim()</title>
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <!-- Piwik -->
@@ -247,3 +254,5 @@
 <noscript><p><img src="//template.cimm2.com/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 #end
+#parse("stylesheets.html")
+<title>$!pageTitleVelo.replace("Page","").trim()</title>
