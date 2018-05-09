@@ -324,6 +324,11 @@ test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
 			window.location.href=value;
 			setCookie('afterLoginUrl',"",-1);
 		}
+		#if($paginate>1 && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y")
+			#set($paginationURL = $paginationURL.replace("itemLevelFilterPage","taxonomyLevelFilterPage"))
+			var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+			$(".pgnation").html(pagination);
+		#end
 	</script>
 #elseif($LayoutName=="SendThisPage")
 	<script type="text/javascript">
