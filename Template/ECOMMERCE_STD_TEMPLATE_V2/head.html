@@ -195,7 +195,7 @@
 #end
 
 #if($navigationType=='SEARCH')
-	#set($pageTitleVelo = "Search Results " + $!pageTitleVelo)
+	#set($pageTitleVelo = "Search Results" + $!pageTitleseparator + $!pageTitleVelo.trim())
 #end
 #set($BCTCat = "")
 #if($navigationType=="NAVIGATION") 
