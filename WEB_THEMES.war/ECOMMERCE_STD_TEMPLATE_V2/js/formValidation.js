@@ -156,8 +156,10 @@ function submitFormToServer(that){
 			}
 			if(responseCont.valid || responseVal == 1){
 				that[0].reset();
-				if(hideThat && hideThat != "N"){
-					$(that).parents("#"+hideThat).slideUp(100);
+				if(hideThat && hideThat != "Y"){
+					if(hideThat != "N"){
+						$(that).parents("#"+hideThat).slideUp(100);
+					}
 				}else if(hideThat == "Y"){
 					$(that).slideUp(100);
 				}
@@ -171,15 +173,21 @@ function submitFormToServer(that){
 						$(that).parent().prepend('<div class="alert alert-success">The Purchasing Agent was successfully added.<br/> Login credentials have been emailed to '+responseCont[1]+'</div>');
 						setTimeout(function(){window.location.href=$("base").attr("href")+"/ManagePurchaseAgent"} , 5000);
 					}else{
-						if(hideThat){
-							$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
-						}else{
+						if(hideThat && hideThat != "Y"){
+							if(hideThat != "N"){
+								$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
+							}else{
+								$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
+							}
+						}else if(hideThat == "Y"){
 							$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
 						}
 					}
 					$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 				}
-				$("#successBlock").show();
+				if(hideThat != "N"){
+					$("#successBlock").show();
+				}
 			}else{
 				$(that).parent().prepend('<div class="alert alert-danger">'+notified+'</div>');
 				$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);

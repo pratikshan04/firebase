@@ -1,9 +1,23 @@
 @import "customVariables";
 @import "customButtons";
 .hidden { display:none; }
-.eventCalendar-wrap { 
-	position:relative; 
-	overflow:hidden;
+.eventInfoBlock{
+	h3{
+		margin: 0 0 10px 0;
+		color: $primaryColor;
+	}
+	p {
+		a {
+			color: $primaryColor;
+			&.mailtoLink {
+				color: $primaryColor;
+				font-size: 12px;
+			}
+		}
+	}
+	tbody{
+		line-height: 22px;
+	}
 }
 .eventCalendar-wrap .arrow { 
 	position:absolute; 
@@ -11,10 +25,10 @@
 	top:3px;
 }
 .eventCalendar-wrap .prev {
-	left: 0;
+	left: 15px;
 }
 .eventCalendar-wrap .next {
-	right: 0;
+	right: 15px;
 }
 .eventCalendar-wrap .next:after{
     content: "\f0da";
@@ -38,16 +52,6 @@
 	display:block;
 	text-align:center;
 }
-.eventsCalendar-monthWrap {
-	position:absolute;
-	top:0; left:0;
-	z-index:2;
-	width: 100% !important;
-}
-.eventsCalendar-monthWrap.currentMonth { 
-	z-index:1;
-	overflow: hidden;
-}	
 .eventsCalendar-daysList { 
 	display:table;
 	width:100%;
@@ -97,11 +101,6 @@
 	color: #FFF;
 }
 /********************extra CSS************************/
-.calendarFilterWrap {
-	width: 75%;
-	float:left;
-	margin-left: 1%;
-}
 .calendarFilterWrap{
     .tableHeader{
         background: $lightGrayColorOne;
@@ -214,27 +213,10 @@
 	color: #000;
 	padding: 10px;
 }
-.eventRightContent h3{
-	margin: 0 0 10px 0;
-    color: $primaryColor;
-}
-
-ul.eventInfoBlock{
-    li{
-        padding:3px 0;
-    }
-}
-
 form#eventForm h2 {
 	color: $primaryColor;
 }
-.eventRightContent p a.mailtoLink {
-    color: $primaryColor;
-    font-size: 12px;
-}
-.eventRightContent p a {
-    color: $primaryColor;
-}
+
 #events_Table_wrapper #events_Table_filter{display:none;}
 #events_Table_wrapper .dataTables_length{display:none;}
 #events_Table_wrapper #events_Table td:nth-child(2){width: 41%;}
@@ -267,12 +249,6 @@ form#eventForm h2 {
 #events_Table_wrapper #events_Table th{background:#2e3b44;color:#fcda5d;border-right:1px solid #fff;font-size:14px;display: none;}
 
 /* Theme CSS */
-.eventCalendar-wrap {
-	z-index: 0;
-	width: 100%;
-	float: left;
-	font-size: 14px;
-}
 .eventCalendar-wrap .arrow {
     text-decoration: none;
     color: $white;
@@ -299,9 +275,6 @@ form#eventForm h2 {
 }
 .eventsCalendar-slider {
 	height: 235px !important;
-	width: 24%;
-	float: left;
-	position: relative;
 	overflow: hidden;
 	margin-bottom: 20px;
 }
@@ -621,18 +594,9 @@ text-transform:uppercase;
 		float: right;
 		margin-left: 0;
 	}
-	.eventsCalendar-slider {
-	    width: 100%;
-	}
-	.calendarFilterWrap {
-		width: 100%;
-		float: none;
-		margin-left: 0;
-		clear: both;
-	}
 }
 @media (max-width: 480px) {
-	.goingEvents, .eventsCalendar-slider {
+	.goingEvents {
 		width: 100%;
 		float: none;
 	}

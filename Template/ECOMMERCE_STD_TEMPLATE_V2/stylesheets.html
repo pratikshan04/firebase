@@ -1,10 +1,11 @@
 <link rel="shortcut icon" href="$webThemes/$siteName/images/favicon.ico">
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/font-awesome.min.css" />
+#if($LayoutName != "HomePage" && $!isStaticHomePage != "Y")
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap-select.min.css" media="all" />
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogAutoComplete.css" media="all">
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/datatables.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/dataTables.bootstrap.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap-datepicker.standalone.min.css" media="all">
+#end
 #if($LayoutName=="ProductDetailPage")
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/prettyPhoto.css" media="all"/>
 #elseif($LayoutName=="CalendarEventsPage" || $LayoutName=="EventDetailPage")
@@ -12,7 +13,6 @@
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css" media="all" />
 #end
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/multiTab.css" />
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogWebLayouts.css" media="all" />
 #if($LayoutName=="QuickOrderStdPage")
@@ -21,22 +21,6 @@
 #if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/mobileApp.css">#end
 <!--[if IE 9]>
 	<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/IE9.css">
-<![endif]-->
-<!--[if IE 8]>
-<style type='text/css' rel="stylesheet">
-	label.customRadioBtn input[type="radio"] {
-		display: inline-block;
-		vertical-align: middle;
-	}
-	label.customRadioBtn input[type="radio"] + span:before,
-	label.customRadioBtn input[type="radio"] + span:after,
-	.cimm_searchForm .cimm_searchWrapper .recIcon{
-		display:none;
-	}
-	label.customRadioBtn{
-		padding:0;
-	}
-</style>
 <![endif]-->
 #if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout")
 <style type="text/css">
@@ -95,7 +79,6 @@
 .jssora05ldn { background-position: -250px -40px; }
 .jssora05rdn { background-position: -310px -40px; }
 </style>
-<input type="hidden" id="pageTitle" name="pageTitle" value="$!pageTitle" />
 #elseif($LayoutName=="ProductDetailPage")
 <style type="text/css">
 .popProduct {

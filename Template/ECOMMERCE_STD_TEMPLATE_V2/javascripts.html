@@ -32,6 +32,7 @@ jQuery.cookie=function(name,value,options){if(typeof value!='undefined'){options
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery.ajaxfileupload.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/siteScript.js"></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/recentlyViewed.js" defer></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/BulkAction.js" defer></script>
 #if($userAgent == "WEBVIEW")<script type="text/javascript" src="$webThemes/$siteName/js/mobileApp.js"></script>#end
 #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")<script type="text/javascript" src="$webThemes/$siteName/js/quickOrderPadHead.js"></script>#end
 #if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$webThemes/$siteName/js/handsontable.full.js"></script>#end
@@ -81,8 +82,8 @@ jQuery(".clickStream").click(function() {
 </script>
 #elseif($LayoutName=="CheckOutPage")
 	<script type="text/javascript">
-		#if($!shipAddressListJson && $!shipAddressListJson!="")
-			var shippingListjson =  $!shipAddressListJson;
+		#if($!shipAddressListAsJson && $!shipAddressListAsJson!="")
+			var shippingListjson =  $!shipAddressListAsJson;
 		#else
 			var shippingListjson =  [];
 		#end
@@ -260,12 +261,14 @@ $(function(){
 
 #if($LayoutName=="ProductDetailPage")
 <script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
-<script>
+<script defer>
 /********* V5 **********/
 var selData = $selecatableJson.replaceAll("&#39;","'");
 var itemIdFilter =jQuery("#itemIdTemp").val();
 var itemMapFilter = $itemMap;
-$('.filterSelClass').selectpicker('refresh');
+$(document).ready(function () {
+	$('.filterSelClass').selectpicker('refresh');
+});
 /********* V5 **********/
 </script>
 #if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)#else
