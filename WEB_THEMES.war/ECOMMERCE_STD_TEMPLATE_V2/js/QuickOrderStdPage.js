@@ -4,7 +4,7 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 		transitionEffect:"fade"
 	});
 });
-$.getScript('../js/handsontable.full.js', function(){
+$.getScript(webThemes+'js/handsontable.full.js', function(){
 	QuickOrder.initHandsontable();
 });
 $(document).ready(function() {
