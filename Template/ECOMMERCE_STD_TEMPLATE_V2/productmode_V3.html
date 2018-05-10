@@ -245,7 +245,7 @@
 				<input type="hidden" id="titleText" name="titleText" value="$itemData.brandName $!itemData.manufacturerPartNumber"/>
 			</h2>
 			<p class="cimm_itemShortDesc" id="itemShortDesc$itemData.itemId" itemprop="description">$!itemData.shortDesc</p> 
-			<ul>
+			<ul class="skuStyle">
 				<li id="sitePartNo" itemprop="sku">
 					<b>$locale.get("product.label.partNumber"): </b><span id="partNumber$itemData.ItemId">$!itemData.partNumber</span>
 				</li>
@@ -262,7 +262,7 @@
 				</li>
 				#end
 			</ul>
-			<ul>
+			<ul class="skuStyle">
 				#if(($itemData.customerPartNumber && $itemData.customerPartNumber != "") || ($itemData.customerPartNumberList.size() && $itemData.customerPartNumberList.size()>0))
 				<li id="custMainBlock">        
 					<b>$locale.get("product.label.cpn"): </b>
@@ -283,7 +283,7 @@
 				</li>
 				#end
 				#if($itemData.packDesc)
-					<li id="packDescs" class="packageDesc"><span>$itemData.packDesc</span></li>
+					<li id="packDescs" class="packDesc"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$itemData.packDesc</span></li>
 				#end
 			</ul>
 		</div>

@@ -97,11 +97,11 @@
 					#if($displayAttribute=="Y")
 						<div class="filterColumn"><!-- #if($filterCount > 4)hideMe #end -->
 						#set($count = 0)
-							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replaceAll(' ','-')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><i class="fa fa-minus-circle"></i></span>#else<span class="plusToggle"><i class="fa fa-plus-circle"></i></span>#end</div>
+							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><i class="fa fa-minus-circle"></i></span>#else<span class="plusToggle"><i class="fa fa-plus-circle"></i></span>#end</div>
 								#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 									#set($count = $!count+1)
 								#end
-								<div class="collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replaceAll(' ','-')">
+								<div class="collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replace(' ','_').replace('/','_')">
 								#if($count>6)
 								<div class="testDiv">
 									<input type="text" id="box_$!attrValueForSearch" class="filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');"value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
