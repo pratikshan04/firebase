@@ -340,7 +340,11 @@
 			#foreach($!item in $!itemDataList)
 				#set($c = $!c - 1)
 				#set($item = $!itemDataList.get($!c))
-				#set($itemProductTitle = $!item.brandName+" "+$!item.manufacturerPartNumber)
+				#set($mpn = '')
+				#if($!item.manufacturerPartNumber && $!item.manufacturerPartNumber != "")
+				#set($mpn = $!item.manufacturerPartNumber)
+				#end
+				#set($itemProductTitle = $!item.brandName+" "+$mpn)
 				#if($!item.altPartNumber2.length() > 0)
 					#set($itemProductTitle = $!item.altPartNumber2)
 				#elseif($!item.productName.length() > 0)

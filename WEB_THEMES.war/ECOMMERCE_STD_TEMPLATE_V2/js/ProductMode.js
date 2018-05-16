@@ -313,7 +313,7 @@ var ProductMode = {};
 	//------------------------------------------------- Product Mode Filters END
 	
 	//--------------------------------- ProductModer Detail Page datatable price Load Start
-	ProductMode.loadPriceInDataTable = function(){
+	/*ProductMode.loadPriceInDataTable = function(){
 		try{
 			var oTable = $('#childItemTable').DataTable({
 				"pageLength":5,
@@ -552,7 +552,7 @@ var ProductMode = {};
 		}catch(e){
 			e.message;
 		}
-	};
+	};*/
 	//function loadPriceInDataTable() {}
 
 	ProductMode.showlinkedItemSection = function(id){
@@ -632,7 +632,8 @@ $(function(){
 					ProductMode.buildSearchTrail(itemPriceId);
 					hideBulkAction();
 				}
-				ProductMode.loadPriceInDataTable();
+				priceLoading.beginProductModePriceLoading(itemPriceId);
+				//ProductMode.loadPriceInDataTable();
 				//productModeCustomFunc();
 				ProductMode.checkCookieToCheck();
 				hideForDevice();

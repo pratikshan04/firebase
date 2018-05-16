@@ -1,6 +1,8 @@
 <link href="$webThemes/CMS/css/banner.css" rel="stylesheet" type="text/css" />
   	<link href="$webThemes/CMS/css/style.css" rel="stylesheet" type="text/css" />
-  	<link href="$webThemes/CMS/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+  	<link href="$webThemes/CMS/filemanager/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  	<link href="$webThemes/CMS/filemanager/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/site_jui.css" media="none" />
   <script src="$webThemes/CMS/js/cms/bannerpluginv2.js"></script>
 <div id="uploaderContainer" style="height:800px;overflow:auto;">
 		<div class="container-fluid">
@@ -508,7 +510,7 @@
 						<option #if($bannerTemplateName == $templateName) selected #end value="$templateName">$templateName</option>
 						#end
 						</select></td>
-						<td colspan="2">
+						<td colspan="2" style="float:none !important;">
 						#if($bannerListId > 0)
 						<button onclick="return updateBannerList();" class="banners_saveListBtn">Update Banner List</button>
 						#else
@@ -553,5 +555,26 @@
   	font-size:14px;
   	font-family:'Open Sans',sans-serif;
   	}
+  	.ui-datepicker .ui-datepicker-prev span{
+  	margin-left:15px; 	
+  	}
+  	.ui-datepicker .ui-datepicker-next span{
+  	    margin-left: -30px;
+  	}
+  	@media (max-width: 1200px) and (min-width: 1024px){
+.row-fluid .span6 {
+    width: 48.5% !important;
+}
+td input, td select {
+    width: 100px !important;
+}
+
+.banners_saveListBtn, .banners_closeBtn{
+padding: 7px 2px;
+margin: 0px;
+    font-size: 12px;
+        line-height: 12px;
+}
+}
   	</style>
  

@@ -1127,10 +1127,16 @@ footer {
     position: absolute;
     width: 250px;
     top: 25px;
-	right: 0;
+	left: 0;
     font-size: 14px;
     color: #fff !important;
     z-index: 10;
+}
+.cimm_qtyWrap{
+	position: relative;
+	.popMsg{
+		top: 0;
+	}
 }
 
 .cimm_instructions {
@@ -1659,6 +1665,10 @@ ul.slick-dots {
     li {
         list-style-type: decimal;
         margin-left: 15px;
+		a {
+			color: #46acee;
+			font-weight: 600;
+		}
         ul {
             li {
                 display: block;

@@ -1,5 +1,4 @@
-
-
+<link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
 <style>
 .fa-wpforms:before {
     content: "\f298";
@@ -63,7 +62,6 @@ ul.cimm_formContent a.tool-edit, ul.cimm_formContent a.tool-delete {
 }
 .dropelement input[type="submit"] {
 	padding: 5px 10px;
-    background: #2ba5a5;
     color: #fff;
 	margin: 0 0 10px 10px;
 }
@@ -85,9 +83,6 @@ a.save-form {
 ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
 	margin-bottom: 10px;
 }
- ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li textarea {
- margin-top: 20px;
- }
 .dragelementWrap {padding: 10px;margin-bottom: 20px;}
 .dragelementWrap .dragelement {
 	width: auto;
@@ -164,11 +159,12 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 </ul>
 <input type="hidden" name="formData.htmlCode" id="htmlCode" />
 #if($formData.id)
-<input type="hidden" name="formData.id" value="$formData.id" /> 
+<input type="hidden" name="formData.id" value="$formData.id" id="formDataId" /> 
 #end
 </form>
 <div class="save-btnBlock">
 <a href="javascript:void(0)" class="save-form">Save</a>
+<a href="javascript:void(0)" class="export-form"  id="formExportBtn">Export</a>
 </div>
 </div>
 
@@ -179,6 +175,8 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 <div class="dragelement" data-type="select">Select</div>
 <div class="dragelement" data-type="radio">Radio</div>
 <div class="dragelement" data-type="checkbox">Check Box</div>
+<div class="dragelement" data-type="text">Text Field</div>
+<div class="dragelement" data-type="captcha" title="Drag & Drop">Captcha</div>
 </div>
 
 
@@ -186,15 +184,16 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 #if($formData.htmlCode)
 $formData.htmlCode
 #else
-<form id="CustomForm">
+<form class="sp-form" action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
 <ul class="cimm_formContent fullWidthForm">
 </ul>
-<input type="submit" value="Submit" class="banner_addNewBtn" />
+<input type="submit" value="Submit" class="button" />
 <input type="hidden" name="NotificationName" id="notificationName" value=''/>
 <input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
 <input type="hidden" name="SendMail" id="sendMail" value=''/>
 <input type="hidden" name="Subject" id="subject" value=''/>
 <input type="hidden" name="formName" id="formName" value=''/>
+<input  type="hidden"   id="webthemesval" value='$webThemes/'/>
 </form>
 #end
 </div>
@@ -206,4 +205,9 @@ $formData.htmlCode
 
 <script>
 $(".dropelement ul li").append('<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>');
+var frmName=document.getElementById('formName').value;
+//alert(document.getElementById('formName').length);
+if(frmName==='' || frmName==='undefined'){
+	document.getElementById('formExportBtn').style.visibility = "hidden";
+}
 </script>
