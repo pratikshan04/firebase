@@ -1,11 +1,21 @@
-<script src="$webThemes/CMS/js/cmsscript.js"></script>
+<script src="$webThemes/CMS/js/cms/cmsscript.js"></script>
 <div class="HTMLElements" style="display:none;" >
-	<h4>HTML Elements</h4>
-	<div class="HTMLElements_Menuhide">
+	<div style="max-height:600px;overflow:auto;overflow-x:hidden;">
+	<div class="cms_widget" style="background:#fff;height:30px;" >
+		<a class="cms_uploadBannerBtn" href="javascript:componentCreationRedirect();" title="Add Components" >
+			<img src="$webThemes/CMS/images/small/add.png" style="width:15px; height:15px;"><span style="vertical-align:top;display:inline-block;margin-top:5px;margin-left:5px;font-size:15px;font-weight: bold;">Component</span>
+		</a>
+		<div class="HTMLElements_Menuhide">
 	    <i class="fa fa-lg fa-chevron-left">
 	    </i>
-	</div>   					
-	<ul>						
+	</div>  
+	</div>
+	<div class="htmlLabel" onclick="javascript:showHTMLElement();">HTML Elements
+		<div class="togglePlusIcon"></div>
+		<div class="clear"></div>
+	</div>
+	 					
+	<ul class="htmlEle_contents" style="display:none;">						
 		<li>
 			<a href="javascript:void(0);">Heading
 				<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
@@ -144,10 +154,14 @@
 	</ul>
 	<div class="widgetLabel" onclick="javascript:showWidgets();">
 								Widgets
-								<div class="togglePlusIcon"></div>
+							<div class="togglePlusIcon"></div> 
 								<div class="clear"></div>
 							</div>
-							<dl class="widget widgetContainer" id="widgetContainer" style="display: none;max-height: 200px; overflow: auto;">
+							<div class="filterTextBox_widget" style="display:none;">
+									<input type="text" id="box_widget" class="filterTextBox" style="width: 100%;padding: 2px 5px 2px 5px;height: 30px;border-radius: 5px;color: #797d82;" onkeyup="filterContainer(this,'widgetContainer');" value="Search Widgets" onfocus="if(this.value=='Search Widgets'){this.value='';}" onblur="if(this.value==''){this.value='Search Widgets';}">
+								</div>
+							<dl class="widget widgetContainer" id="widgetContainer" style="display:none;">
+								
 								<dd style="list-style-type: none;border-bottom: 1px solid #ccc;margin: 5px 0;padding: 5px;">
 									<a href="" >Feature Product
 										<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
@@ -157,13 +171,35 @@
 									</div>
 								</dd>
 							</dl>
-	#foreach($libraries in $libraryList.resultSet)						
-	<div class="widgetLabel" onclick="javascript:showLibrary($libraries.id);">
-								$libraries.userLibraryGroupName
+															
+	<div class="formLabel" onclick="javascript:showForms();">
+								Forms
 								<div class="togglePlusIcon"></div>
 								<div class="clear"></div>
 							</div>
-							<dl class="widget widgetContainer" id="library_$libraries.id" style="display: none;max-height: 200px; overflow: auto;">
+							<div class="filterTextBox_form" style="display:none;">
+								<input type="text" id="box_form" class="filterTextBox" style="width: 100%;padding: 2px 5px 2px 5px;height: 30px;border-radius: 5px;color: #797d82;" onkeyup="filterContainer(this,'formContainer');" value="Search Forms" onfocus="if(this.value=='Search Forms'){this.value='';}" onblur="if(this.value==''){this.value='Search Forms';}">
+							</div>
+							<dl class="widget widgetContainer" id="formContainer" style="display:none;">
+								
+								<dd style="list-style-type: none;border-bottom: 1px solid #ccc;margin: 5px 0;padding: 5px;">
+									<a href="" >Feature Product
+										<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
+									</a>
+									<div class="hiddenContent">
+										<div class="cmsFeatureProduct">Feature Product Block</div>
+									</div>
+								</dd>
+							</dl>
+						
+	#foreach($libraries in $libraryList.resultSet)						
+	<div class="componentLabel collapseLib" onclick="javascript:showLibrary($libraries.id);">
+								$libraries.userLibraryGroupName
+								<img src="$webThemes/CMS/images/small/add.png"  width="18px" height="18px" style="float:right;"/>
+								<img src="$webThemes/CMS/images/small/minus.png"  width="18px" height="18px" style="display:none;float:right;"/>
+								<div class="clear"></div>
+							</div>
+							<dl class="widget widgetContainer libraryContainer" id="library_$libraries.id" style="display: none;">
 							<dd style="list-style-type: none;border-bottom: 1px solid #ccc;margin: 5px 0;padding: 5px;">
 									<a href="" >Feature Product
 										<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
@@ -173,21 +209,20 @@
 									</div>
 								</dd>
 							</dl>
-#end														
-	<div class="formLabel" onclick="javascript:showForms();">
-								Forms
-								<div class="togglePlusIcon"></div>
-								<div class="clear"></div>
-							</div>
-							<dl class="widget widgetContainer" id="formContainer" style="display: none;max-height: 200px; overflow: auto;">
-								<dd style="list-style-type: none;border-bottom: 1px solid #ccc;margin: 5px 0;padding: 5px;">
-									<a href="" >Feature Product
-										<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
-									</a>
-									<div class="hiddenContent">
-										<div class="cmsFeatureProduct">Feature Product Block</div>
-									</div>
-								</dd>
-							</dl>
+#end
+
 </div>
-			
+</div>
+	<script>
+			function filterContainer(input,id){
+	var valThis = jQuery(input).val().toLowerCase();
+	var len = valThis.length;
+	jQuery("#"+id+'>dd>a').each(function(){
+		var text = jQuery(this).text();//.substr(0,len).toLowerCase();
+		(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().show() : jQuery(this).parent().hide();    
+	});
+}
+			jQuery(document).ready(function() {
+jQuery('.toggle_content li input, .toggle_content li textarea').attr('disabled', true);		
+			});
+			</script>		

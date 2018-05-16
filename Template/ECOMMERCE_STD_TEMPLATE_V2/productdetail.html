@@ -418,7 +418,7 @@
 									<a onclick="qtyUpdate('#itemTxtQty$!itemData.itemId','incr');"><i class="fa fa-plus"></i></a>
 								</span>
 							</li> -->
-							<li class='cimm_qtyWrap'>
+							<li class='cimm_qtyWrap hideForPrint'>
 								<b>$!locale.get("form.label.tableQty")</b>
 								<span>
 									<input type="text" id="itemTxtQty$!itemData.itemId" data-originalQty="originalQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" onblur="if($(this).val().trim()=='')$(this).val($itemData.minOrderQty);"/> <span id="uomPk_$!itemData.partNumber"></span>
@@ -588,7 +588,7 @@
 							     	<!-- <select id='productMultipleUOMSelect_$!productModeitemData.partNumber.replaceAll(" ","_")'  data-partnumber = '$!productModeitemData.partNumber.replaceAll(" ","_")' style="display:none;" class="appendChosen"></select> -->
 							     </td>
 								 <td class="tabelPrice" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
-								 	<span id="priceSpan_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan">
+								 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan">
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.price>0)
 									    		$$!numberTool.format($!pricePrecisionFormate,$!productModeitemData.price)
@@ -601,7 +601,7 @@
 								    </span>
 								 </td>
 								 <td class="tableAvail">
-								 	<span id="productModeAvail_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+								 	<span class="Avail_$!productModeitemData.partNumber">
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.availQty>0)
 									    		$!productModeitemData.availQty

@@ -11,29 +11,40 @@
 	<div class="clear-both"></div>
 	<div class="pageTab">
 		<form id="cmsForm">
-			<label class="cms_StaticLabel">Page Name</label> <input type="text" name="pageData.pageName" id="pageName" value="$!staticPageData.pageName" /> <br />
+		<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
+		#if($staticPageData.id>0)
+		Page Link : /staticPages.action?ID=$!staticPageData.id
+		<div id="clonediv"><label class="cms_StaticLabel">For Cloning the Page</label>  <input type="checkbox" name="pageData.clonePage"   id="clonePage" onchange="getValueForCLone();" /></div>
+		#end
+		<div class="clear-both"></div>
+			<label class="cms_StaticLabel">Page Name</label> <input type="text" name="pageData.pageName" onKeypress="return IsSpecialCharacter(event);" id="pageName" value="$!staticPageData.pageName" /> 
 			<label class="cms_StaticLabel">Page Type</label>  
 			<select id="selectStaticPageType" name="pageData.pageType" >
 				<option value="BODY">BODY</option>
 				<option value="TEMPLATE">TEMPLATE</option>
 				<option value="BLOG">BLOG</option>
 				<option value="CATEGORY">CATEGORY</option>
-			</select><br />
-			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" /> <br />
+			</select>
+			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" onKeypress="return IsSpecialCharacter(event);" id="pageTitleId"   /> 
 			<label class="cms_StaticLabel">List Locale</label>  
-			<select name="pageData.listLocale" >
-				<option value="">- Select Language -</option>
-				<option selected value="$!staticPageData.listLocale">English</option>
-			</select><br />
-			<label class="cms_StaticLabel">Meta Data</label>  <input type="text" name="pageData.metaDescription" value="$!staticPageData.metaDescription" /> <br />
-			<label class="cms_StaticLabel">Custom Url</label>  <input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" /> <br />
-			<label class="cms_StaticLabel">Canonical Url</label>  <input type="text" name="pageData.canonicalUrl" value="$!staticPageData.canonicalUrl" /> <br />
-			<label class="cms_StaticLabel">Full Page Layout</label><input type="checkbox" name="fullPageLayout" #if($staticPageData.fullPageLayout) checked #end  /><br>
-			<label class="cms_StaticLabel">Active</label><input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end /><br>
+			<select name="pageData.localeId" id="lang">
+				<option value>- Select Language -</option>
+				#foreach($localeList in $localeListData)
+				<option  value="$localeList.localeId" #if($staticPageData.localeId==$localeList.localeId) selected #end  >$localeList.languageName</option>
+				#end
+			</select>
+			<label class="cms_StaticLabel">Meta Data</label>  <input type="text" name="pageData.metaDescription" value="$!staticPageData.metaDescription"  id="metaDescId"/> 
+			<label class="cms_StaticLabel">Custom Url</label>  <input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" onKeypress="return IsSpecialCharacter(event);" id="customURLId" /> 
+			<label class="cms_StaticLabel">Canonical Url</label>  <input type="text" name="pageData.canonicalUrl" value="$!staticPageData.canonicalUrl" id="canonicalURLId" /> 
+			<label class="cms_StaticLabel">Full Page Layout</label><input type="checkbox" name="fullPageLayout" #if($staticPageData.fullPageLayout) checked #end  /><div class="clear-both"></div>
+			<label class="cms_StaticLabel">Active</label><input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end /><div class="clear-both"></div>
+			
 			<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
 			<input type="hidden" name="pageData.pageContent" id="pageContent" value="" />
 			<input type="hidden" name="pageData.id" id="cmsPageId" value="$!staticPageData.id" />
 			<input type="hidden" name="pageData.siteId" value="$!staticPageData.siteId" />
+			<input type="hidden" name="pageData.metaKeywords" value="$!staticPageData.metaKeywords" id="metaKeywordsId"/>
+		<div class="clear-both"></div>	
 		</form>
 		<a href="javascript:void(0);" onclick="saveStaticPage()" class="cmsSaveBtn">Save</a><div class="clear-both"></div>
 		<input type="hidden" value="$!staticPageData.pageType" id="staticPageType" />
@@ -212,13 +223,13 @@
 			        jQuery('#titleCharsLeft').html(text_remaining + ' characters');
 			        if(text_length < 71)
 			        jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
-			        document.getElementById("addNewStaticFormId:pageTitleId").value = jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,"");
+			        document.getElementById("pageTitleId").value = jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,"");
 			    });  
 	
 			    jQuery('#in_url').keyup(function() {
 			        var text_length = jQuery('#in_url').val().length;
 			        jQuery('#out_url').html(jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,""));
-			        document.getElementById("addNewStaticFormId:customURLId").value = jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,"");
+			        document.getElementById("customURLId").value = jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,"");
 			    });
 		   
 			    jQuery('#in_snippet').keyup(function() {
@@ -228,11 +239,11 @@
 			        var text_remaining = maxCharactersDescLimit - text_length;
 			        jQuery('#snippetCharsLeft').html(text_remaining + ' characters');
 			        jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
-			        document.getElementById("addNewStaticFormId:metaDescId").value = jQuery('#in_snippet').val().replace(/^\s+|\s+jQuery/g,"");
+			        document.getElementById("metaDescId").value = jQuery('#in_snippet').val().replace(/^\s+|\s+jQuery/g,"");
 			    });
 			    jQuery('#in_keyword').keyup(function() {
 			        var text_length = jQuery('#in_keyword').val().length;
-			        document.getElementById("addNewStaticFormId:metaKeywordsId").value = jQuery('#in_keyword').val().replace(/^\s+|\s+jQuery/g,"");
+			        document.getElementById("metaKeywordsId").value = jQuery('#in_keyword').val().replace(/^\s+|\s+jQuery/g,"");
 			    });
 			}	
 			
@@ -246,6 +257,20 @@
 				jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
 				jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
 			}
+			var temp =document.getElementById('pageName').value;
+			function getValueForCLone(){
+
+document.getElementById('pageName').value="";
+if(jQuery('#clonePage').is(":checked")){
+	alert("Clone Has Been Selected");
+	document.getElementById("clonePage").setAttribute("value","true");
+}else{	
+	document.getElementById('pageName').value=temp;
+	document.getElementById("clonePage").setAttribute("value","false");
+	
+}
+				}
+
 		</script>
 		
 	<div id="seoTab" class="seoTab" style="display:none;">
@@ -261,7 +286,7 @@
 				    <li>
 				        <div id="previewURL">
 				          <cite style="color:#006621;font-size: 14px;">
-				              <span id="out_url">http://touch.cimm2.com</span><span id="out_dash1" style="display: inline;"></span>
+				              <span id="out_url"></span><span id="out_dash1" style="display: inline;"></span>
 				            <span id="out_dash1" style="display: inline;"></span>         
 				          </cite>
 				       </div> 
@@ -305,7 +330,7 @@
 			      <span id="snippetCharsLeft"/>
 			   </div>
 			   <div class="clear-both"></div>
-			   <textarea id="in_url" name="in_url" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;" placeholder="touch.cimm2.com"></textarea>
+			   <textarea id="in_url" name="in_url" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
 			</div>
 
 			<div id="SEOKeywords" style="padding-bottom:10px;">
@@ -329,7 +354,15 @@
 		
 		jQuery("#seoTab").hide();
 		
-         
+		function IsSpecialCharacter(e)
+		{
+			var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+		    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+		    if (!regex.test(key)) {
+		       event.preventDefault();
+		       return false;
+		    }
+		}
 		</script>
 	</div>
 </div>
