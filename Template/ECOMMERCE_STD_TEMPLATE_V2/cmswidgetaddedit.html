@@ -1,6 +1,5 @@
 
-<link rel="stylesheet"  href="$webThemes/CMS/css/codemirror.css" /> 
-			<link rel="stylesheet"  href="$webThemes/CMS/css/docs.css" />	 
+<link rel="stylesheet"  href="$webThemes/CMS/css/codemirror.css" /> 	 
 			<link rel="stylesheet"  href="$webThemes/CMS/js/codemirror/addon/dialog/dialog.css"/>
 			<link rel="stylesheet"  href="$webThemes/CMS/js/codemirror/addon/fold/foldgutter.css" />
 			<link rel="stylesheet"  href="$webThemes/CMS/js/codemirror/addon/display/fullscreen.css"/>
@@ -51,7 +50,6 @@
 <div class="editformBlock">Widget Name<span style="color:red;">*</span> : <input type="text" value="$!widgetData.name" name="widget.name" id="widgetName" /></div>
 <div class="editformBlock">Description <span></span> : <input type="text" value="$!widgetData.description" name="widget.description" id="description" /></div>
 <div class="editformBlock">Type <span></span> : <select name="widgetType" style="font-size: 15px; width: 200px;padding:5px;"><option value="custom" #if($widgetType=="custom")  selected #end>Custom</option>
-
 #foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
 <option value="$widgetKey" #if($widgetType==$widgetKey) selected #end>$widgetKey</option>
 #end
@@ -213,7 +211,11 @@
             					   }else{
             					   window.location.href="widgetListCms.action";
             					   }
-            			  		}else{
+            			  		}else if(msg.indexOf("unique constraint") != -1){
+            			  			alert("Widget With Same Name Already Exists");
+                			  		}
+
+              			  		else{
             			  			alert("Error occured while saving widget");
             				   }
             	   			}	

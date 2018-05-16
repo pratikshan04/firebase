@@ -12,7 +12,7 @@
 
 <div id="bannerWrapper">
 	<div id="bannerLeftColumn">
-	<div id="previewWrapper" style="width:1230px; height:400px">
+	<div id="previewWrapper" style="width:800px; height:400px; padding:10px">
 		<div id="previewContainer" ><div style="margin:40px auto;width:100%;opacity: 0.5;text-align:center;">
 		<h1>Preview Block</h1></div></div>
 		</div>
@@ -20,16 +20,16 @@
 	<div id="bannerRightColumn">
 	<form method="get" action="formListCms.action">
 				<input class="cms_bannerSearch" type="text" id="bannerSearchBox"  value="$!query" name="query" placeholder="Enter Form Name to Search"/>
-				<button class="banner_addNewBtn" type="submit" style="padding: 8px 5px 7px 5px; margin-left: -3px;" ><i class="list-search-icn fa fa-search"></i></button>
+				<button class="banner_addNewBtn" type="submit" style="margin-left: -4px;top:-4px;position:relative;padding: 0px 5px 7px 5px;" ><i class="list-search-icn fa fa-search"></i></button>
 				</form>
 	<div id="bannerSelect">
-			<div style="height:600px;">
+			<div style="height:520px;">
 			
 			<ul id="bannerSelectList">
 			<p style="color:green"></p>
 			
 			#foreach($forms in $formList.resultSet)
-			<li><img src="$webThemes/CMS/images/small/viewItems.png" title="Preview" style="cursor:pointer;margin:-8px 25px 0 0;" onclick="formPreview('$forms.id')"> <a href="editFormDataCms.action?formId=$forms.id"><img src="$webThemes/CMS/images/small/edit.png" title="Edit Form List" style="cursor:pointer;margin:-10px 25px 0 0;"></a><img src="$webThemes/CMS/images/small/delete.png" title="Delete Form List" style="cursor:pointer;margin:-8px 20px 0 0;height:16px;" onclick="deleteForm($forms.id,'$forms.formName')"><span style="vertical-align:super;">$forms.formName</span>
+			<li><img src="$webThemes/CMS/images/small/viewItems.png" title="Preview" style="cursor:pointer;margin:0px 5px 0 0;" onclick="formPreview('$forms.id')"> <a href="editFormDataCms.action?formId=$forms.id"><img src="$webThemes/CMS/images/small/edit.png" title="Edit Form List" style="cursor:pointer;margin:-10px 10px 0 0;"></a><img src="$webThemes/CMS/images/small/delete.png" title="Delete Form List" style="cursor:pointer;margin:-8px 10px 0 0;height:16px;" onclick="deleteForm($forms.id,'$forms.formName')"><span style="vertical-align:super;">$forms.formName</span>
 			</li>
 			#end
 			
@@ -56,5 +56,21 @@ paginationScript($formList.totalPages,"formListCms.action?query=$!query&page=",$
 <style>
 #bannerSelectList > li {
     border-bottom:none;
+}
+ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li textarea {
+    margin-top: 15px !important;
+}
+ul.cimm_formContent{
+	width:100% !important;
+}
+#CustomForm .banner_addNewBtn{
+	margin-left:50px;
+
+}
+.pagebarUTH{
+background: white;
+    box-shadow: 0px 0px 2px #888888;
+    padding: 3px;
+        margin: 0 5px 0 0;
 }
 </style>
