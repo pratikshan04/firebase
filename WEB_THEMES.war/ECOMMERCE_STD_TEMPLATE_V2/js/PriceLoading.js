@@ -390,11 +390,12 @@ function priceLoadMainFunction() {
 		return pricePrecision;
 	}
 	function getErpType() {
-	  var erpType = document.getElementById(markUpPrefixes.ERP_TYPE).value;
-	  if(erpType && erpType.toUpperCase()=="DEFAULTS"){
-	   erpType = false;
-	  }
-	  return erpType;
+		var erpType = document.getElementById(markUpPrefixes.ERP_TYPE).value;
+		if(erpType && erpType.toUpperCase()=="DEFAULTS"){
+			productModeCustomFunc();
+			erpType = false;
+		}
+		return erpType;
 	}
 	
 	function validateErpType() {
