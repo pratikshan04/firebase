@@ -95,7 +95,6 @@ $(document).ready(function(){
 	ProductMode.buildSearchTrail();
 	disableCustomCheckbox();
 	ProductMode.checkCookieToCheck();
-	ProductMode.loadPriceInDataTable();
 	if($('.verticalThumblist .thumblist').length > 0){
 		$('.verticalThumblist .thumblist').slick({
 			infinite: true,

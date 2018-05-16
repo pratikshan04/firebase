@@ -464,7 +464,7 @@ $(document).ready(function(){
 			$(this).removeClass(checkmode1).addClass(viewMode);
 		});
 	}
-	ProductMode.loadPriceInDataTable();
+	//ProductMode.loadPriceInDataTable();
 	disableCustomCheckbox();
 	priceLoadMainFunction();
 	changeListtoGrid();
