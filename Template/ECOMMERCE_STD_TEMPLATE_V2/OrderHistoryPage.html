@@ -37,8 +37,8 @@
 			#if($countOrderList == 5) #break #end #end #end
 		</tbody>
 	</table>
-	#if($countOrderList > 5)
-		<a class="button" href="/OrderHistory">$!locale.get("event.label.viewAll")</a>
+	#if($orderList.size() > 5)
+		<a class="cimm_inlineButton" href="/OrderHistory">$!locale.get("event.label.viewAll")</a>
 	#end
 #else
 	<div class="row">

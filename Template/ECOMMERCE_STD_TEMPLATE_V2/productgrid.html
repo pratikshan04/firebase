@@ -364,7 +364,8 @@
 									</a>
 								</h3>
 								#if($itemData.shortDesc.length()>65)
-									<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
+									<span id="itemShortDesc$!itemData.itemId" class="hideMe">$!itemData.shortDesc</span>
+									<p class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
 								#else
 									<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc</p>
 								#end
@@ -488,6 +489,10 @@
 											#end
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>
+										<!-- popup display on item added to group -->
+										#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
+										<a id="$!groupPop" class="popMsg hideMe"></a>
+										<!-- popup display on item added to group -->
 									</li>
 									<!--Branch Availabiltiy List Section
 									<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
@@ -513,8 +518,6 @@
 									<li class='pTop-2 hideToHover'>
 										<!-- My Product Group-->
 										<div class="productGroupBtn dropdown">
-											#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
-											<a id="$!groupPop" class="popMsg hideMe"></a>
 											#if($userLogin)
 												<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">
 													<i class="fa fa-plus"></i>$!locale.get("marketBasket.button.addToProductGroup")

@@ -150,32 +150,6 @@ $(function() {
 	if(isMobileWeb){
 		$("#normalHead").addClass('fixOnApp');
 	}
-	$('.tog_myAccount span').addClass('fa-plus');
-	$('.tog_myAccount').click(function(){
-		$(".myAccountList").slideToggle();
-		if  ($('.tog_myAccount span').hasClass('fa-plus')){
-			$('.tog_myAccount span').removeClass('fa-plus'); 
-			$('.tog_myAccount span').addClass('fa-minus');
-		}else{$('.tog_myAccount span').removeClass('fa-minus'); 
-			$('.tog_myAccount span').addClass('fa-plus');									
-		}
-	});
-	
-	$('.sleekNavigationLinks ul h4').click(function(e) {
-		e.stopPropagation();
-	});
-	
-	$(".myaccount").click(function(e) {
-		$("#popUserName").val(""); 
-		$("#pLoginErr").html(""); 
-		e.preventDefault();
-		$("fieldset#signin_menu").toggle();
-		$(".myaccount").toggleClass("menu-open");
-	});
-
-	$("fieldset#signin_menu").mouseup(function() {
-		return false;
-	});
 	if (!console) console = {log: function() {}};
 	/************************format Number************************/
 	var viewport = $("meta[name='viewport']");
@@ -286,14 +260,16 @@ $(document).ready(function () {
 #elseif($LayoutName=="BranchLocationPage")	
 <script src='//maps.googleapis.com/maps/api/js?key=$!CommonDBQuerySystemParameter.get("GEO_API_KEY")&sensor=false&libraries=places'></script><!-- key need to change based on project -->
 <script type="text/javascript" src="$webThemes/$siteName/js/map.js"></script>
-<script type="text/javascript">
-var data = '$locationResponseList';
-var dataFrom = '$locationDataFrom';
-var sheetUrl = '$googleSpreadSheetUrl';
-var mapCenterCord = '$mapCenterCord';
-var zoomValue = '$zoomVal';
-var currLatLong;
-test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
+<script type="text/javascript" defer>
+$(document).ready(function () {
+	var data = '$!locationResponseList';
+	var dataFrom = '$!locationDataFrom';
+	var sheetUrl = '$!googleSpreadSheetUrl';
+	var mapCenterCord = '$mapCenterCord';
+	var zoomValue = '$zoomVal';
+	var currLatLong;
+	test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
+});
 </script>
 #elseif($LayoutName=="LoginPage")	
 	<script type="text/javascript" src="$webThemes/$siteName/js/GuestCheckoutPage.js"></script>

@@ -1017,7 +1017,8 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		}
 		catBuilder = catBuilder+'<div class="parent-title">'+catPath+'</div>';
 		//catBuilder = catBuilder+'<a class="title" href="productmodel.unilog?id='+escape(categoryDetail[0])+'">'+obj.data("value")+'</a>';
-		catBuilder = catBuilder+'<a class="title" href="'+escape(categoryDetail[0])+'/category/'+obj.data("value").replace(/ /g,"-").toLowerCase().replace(/&#{0,1}[a-z0-9]+;/ig, "").replace(/[^A-Za-z0-9-]*/g, "").replace(/---/g,"-").replace(/--/g,"-");+'">'+obj.data("value")+'</a>';
+		var finalUrl = escape(categoryDetail[0])+'/category/'+obj.data("value").replace(/ /g,"-").toLowerCase().replace(/&#{0,1}[a-z0-9]+;/ig, "").replace(/[^A-Za-z0-9-]*/g, "").replace(/---/g,"-").replace(/--/g,"-");
+		catBuilder = catBuilder+'<a class="title" href="'+finalUrl+'">'+obj.data("value")+'</a>';
 		catBuilder = catBuilder+'</div>';
 		
 		return catBuilder;
