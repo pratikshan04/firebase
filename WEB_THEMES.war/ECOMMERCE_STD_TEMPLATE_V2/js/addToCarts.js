@@ -292,7 +292,7 @@
 					}
 					displayPrice = "$"+ displayPrice;
 				}
-				if(enablePiwik=='Y'){
+				if($("#enablePiwik").val() == 'Y'){
 					var categoryNameFrPiwik = $("#CategoryName_"+partNumber).val();
 					piwik.addEcommerceItemPiwik(partNumber, shortDesc, "", parseFloat(displayPrice),itemCount);
 				}
