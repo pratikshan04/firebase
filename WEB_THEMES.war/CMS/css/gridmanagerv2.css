@@ -1,0 +1,651 @@
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open>.dropdown-toggle.btn-danger {
+    color: #fff !important;
+    background-color: #8b8c8d !important;
+    border-color: #8b8c8d !important;
+}
+.mce-container-body button{
+	background:none !important;
+	border:0 !important;
+}
+.mce-i-close:before{
+	font-family: FontAwesome;
+	content:"\f00d";
+	font-size:14px;
+}
+.gm-content p{
+	margin:0px;
+	width:100%;		
+	height:auto;
+	display:inherit;
+}
+
+#gm-canvas{
+	margin-top:-5px;
+}
+.readyTemplates_container{
+	float:right;
+	width:600px;
+	margin-top:-75px;
+}
+#gm-addnew a{
+	margin:0 5px 0 0;
+	border:none;
+}
+#gm-addnew{
+	margin:0px auto;
+	display: block;
+}
+#gm-canvas textarea{
+	min-height:640px;
+}
+
+.cmsEditrBtn{
+	padding: 6px !important;
+	height: 26px !important;
+	background: #fff !important;
+    text-transform: capitalize !important;
+    box-shadow: 1px 1px 10px #565f65;
+    font-size: 15px !important;
+    color: #8b8c8d !important;
+}
+.gm-edit-mode,
+.gm-preview,
+.gm-layout-mode,.dropdown-toggle{
+	height:35px;
+}
+#gm-controls {
+  /*margin: 5px 0;*/
+}
+#gm-controls button,#gm-controls a {
+  font-size: 14px;
+  color:#8b8c8d;
+  background: none;
+}
+#gm-canvas {
+	height:auto;
+	width:99%;
+	margin:0 1% 0 0;
+	background-color:transparent;	
+  /*background: #ededed;*/
+}
+#gm-canvas textarea {
+  width: 100%;
+}
+.gm-content{
+	border:1px dotted #438eb9;
+	min-height:50px;
+}
+.gm-content:focus{
+	border:1px dotted #ccc;
+}
+#gm-canvas > .row  > .gm-editing {
+  background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+}
+#gm-canvas .gm-editing-selected {
+  -webkit-box-shadow: 0 0 5px 0 #ccc;
+  -moz-box-shadow: 0 0 5px 0 #ccc;
+  box-shadow: 0 0 5px 0 #ccc;
+}
+#gm-canvas >.gm-editable-region {
+  border-top: solid 1px #c00;
+  border-left: solid 1px #c00;
+  border-right: solid 1px #c00;
+  border-bottom: solid 1px #c00;
+  border-style: dotted;
+  margin-bottom: 2px;
+  min-height: 30px -10;
+  padding: 0 20;
+}
+#gm-canvas .gm-editable-region .gm-controls-element {
+	position: relative;
+	margin-top: -30px;
+	margin-left: 48%;
+	background: #fff;
+}
+.gm-editing{
+	border:none;
+	/*min-height:100px;*/
+}
+.row > .gm-editing{
+	border:1px solid #ccc;
+}
+.gm-controls-element > .gm-delete,.gm-controls-element > .gm-delete:hover{ 
+	position:relative;
+	/*top:-9px;
+	left:-16px;*/
+}
+/*.gm-controls-element > .gm-move{ 
+	position:absolute;
+	top:-16px;
+	left:16px;
+}
+#gm-canvas .gm-editable-region .gm-controls-element a {
+  color: #fff;
+  font-size: 8px;
+}*/
+#gm-canvas .gm-editable-region .gm-controls-element .gm-move {
+  -moz-background-clip: padding-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	float: right;
+	padding: 4px;
+	margin-right: 0;
+}
+#gm-canvas .gm-editable-region .gm-controls-element .gm-delete {
+	-moz-background-clip: padding-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	float: right;
+	padding: 2px;
+	margin-top: 5px;
+	margin-right: 0;
+	height: 20px;
+/* border-radius: 8px 8px 0 0; */
+}
+#gm-canvas .gm-tools {
+  background-color: none;
+  /*min-height: 30px;*/
+  display: block;
+  clear: both;
+   margin: 10px 0 0 0;
+}
+#gm-canvas .gm-tools a {
+  /*color: #1a99e2;*/
+  font-size: 14px;
+  float: left;
+  cursor: pointer;
+  background-color: none;
+}
+#gm-canvas .gm-tools a:hover {
+  background-color: #fff;
+  /*color: #fff;*/
+  text-decoration: none;
+}
+#gm-canvas .gm-tools label,#gm-canvas .gm-tools input {
+  font-size: 10px;
+}
+#gm-canvas .gm-tools .gm-removeRow:hover,#gm-canvas .gm-tools .gm-removeCol:hover {
+  color: #fff;
+}
+#gm-canvas .gm-tools .gm-moveCol,#gm-canvas .gm-tools .gm-moveRow {
+  cursor: move;
+}
+#gm-canvas .row.gm-editing,#gm-canvas .row-fluid.gm-editing {
+  background-color: #F5F5F5;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    margin: 25px 0;
+    position: relative;
+    padding: 25px 14px 20px 30px;
+}
+#gm-canvas .row.gm-editing>.gm-tools,#gm-canvas .row-fluid.gm-editing>.gm-tools {
+  background-color: none;
+  margin:35px 0 0 0 ;
+}
+#gm-canvas .row.gm-editing>.gm-tools a,#gm-canvas .row-fluid.gm-editing>.gm-tools a {
+  color: #666;
+  background-color: none;
+  font-size: 15px;
+}
+#gm-canvas .row.gm-editing>.gm-tools a:hover,#gm-canvas .row-fluid.gm-editing>.gm-tools a:hover {
+  /*color: #fff;*/
+}
+.layout-mode a:hover {
+  cursor: pointer;
+}
+
+.cmsColNarrow{
+	position: absolute;
+	top: 36px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/in-left-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 21px 0px 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsColNarrow:hover{
+	position: absolute;
+	top: 36px;
+	left: -31px;
+	display: block;
+	background: url('../images/roll-over-icons/ro-left-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 21px 0px 0 0;
+	background-color: #dadada;
+	background-position: center;
+}
+
+.cmsColWider{
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/in-right-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+
+.cmsColSettings{
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/settings.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #dadada;
+	background-position: center;
+}
+
+.cmsColWider:hover{	
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/roll-over-icons/ro-right-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+
+.cmsMoveCol{
+	position: absolute;
+	top: -32px;
+    left: 1px;
+    display: block;
+    background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat; 
+    width: 31px;
+    height: 31px; 
+	background-color:#fff;
+}
+.cmsMoveCol:hover{
+	background:url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+}
+
+.cmsAddRow{
+	position: absolute;
+	left: 103px;
+	top: -32px;
+	display: block;
+	background: url('../images/in-active-icons/horizontal-plus1.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-color: #fff;
+	background-position: center
+}
+.cmsAddRow:hover{
+	position: absolute;
+	left: 103px;
+	top: -32px;
+	display: block;
+	background: url('../images/roll-over-icons/oc-horizontal-plus.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-color: #fff;
+	background-position: center
+}
+
+.cmsAddRowActive{
+	position: absolute;
+	left: 103px;
+	top: -32px;
+	display: block;
+	background: url('../images/roll-over-icons/oc-horizontal-plus.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-color: #fff;
+	background-position: center
+}
+
+
+.cmsColRmv{
+	position: absolute;
+	top: -32px;
+	left: 68px;
+	display: block;
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-size: 18px 18px;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsColRmvActive{
+	position: absolute;
+	top: -32px;
+	left: 68px;
+	display: block;
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-size: 18px 18px;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsColRmv:hover{
+	position: absolute;
+	top: -32px;
+	left: 68px;
+	display: block;
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-size: 18px 18px;
+	background-color: #fff;
+	background-position: center;
+}
+
+.cmsRowRmv{
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 40px;
+	background-size: 18px 18px;
+	position: absolute;
+    right: 40px;
+    top: 0;
+	height: 30px;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsRowRmv:hover{
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	width: 40px;
+	background-size: 18px 18px;
+	position: absolute;
+    right: 40px;
+    top: 0;
+	height: 30px;
+	background-color: #fff;
+	background-position: center;
+}
+
+.cmsEditable{
+	background: url('../images/in-active-icons/editIcon.png') no-repeat;
+	display: block;
+	width: 35px;
+    height: 31px;
+    position: absolute;
+    top: -32px;
+    left: 33px;
+    background-size: 18px 18px;
+    background-color: #fff; 
+    background-position: center
+}
+
+.cmsAddCol{
+	position: relative;
+	display: block;
+	background: url('../images/in-active-icons/vertical-plus1.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddCol:hover{
+	position: relative;
+	display: block;
+	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddColActive{
+	position: relative;
+	display: block;
+	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+
+.cmsMoveRow{
+	display: block;
+	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
+	width: 40px;
+	height: 30px;
+	background-color:#fff;
+	position: absolute;
+    right: 0;
+    top: 0;
+}
+.cmsMoveRow:hover{
+	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	cursor:move;
+	width: 40px;
+	height: 30px;
+	background-color:#fff;
+}
+
+.cmsMoveContent{
+	display: block;
+	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
+	width: 33px;
+	height: 30px;
+}
+
+.cmsMoveContent:hover{
+	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	cursor:move;
+}
+.cmsContentRmv{
+	display: inline;
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 33px;
+	background-size:19px 20px;
+	cursor:pointer !important;
+}
+
+.cmsContentRmv:hover{
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	cursor:move;
+	background-size:19px 20px;
+}
+
+.hideButton{
+	display:none;
+}
+
+#unorderListId li {
+	list-style: disc inside !important;
+}
+
+#orderListId li{
+	list-style: decimal inside !important;
+}
+
+.left-arrow1{
+	display:block !important;
+	background:url('../images/cms_images/left-arrow.png') no-repeat;
+}
+
+.gm-content.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+color: #fff;
+border-color: #1b63ab;
+background-color: #1b63ab;
+}
+
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.alignright {
+    float:right;
+    margin: 5px 0 10px 10px;
+}
+.alignleft {
+    float: left;
+    margin: 5px 10px 10px 0;
+}
+
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+/*img.centered, .aligncenter, div.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+	}
+
+img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+	}
+
+.alignright {
+	float: right;
+	}
+
+.alignleft {
+	float: left;
+	}*/
+.cmsFeatureProduct{		
+	width: 100%;		
+	position:relative;		
+}		
+.cmsFeatureBrand{		
+	width: 100%;		
+	position:relative;		
+}		
+.cmsFeatureMfr{		
+	width: 100%;		
+	position:relative;		
+}		
+#gm-canvas p a,#gm-canvas p a:visited,#gm-canvas p a:link {		
+  text-decoration: underline;		
+}
+.prevBtn{
+	    margin-left: 5px;
+	    margin-right: 10px;
+	}
+	.gmControlsCustomClass{
+	/*position:absolute;*/
+	top:-57px;
+}
+#gm-canvas .row.gm-editing:before ,#gm-canvas .row-fluid.gm-editing:before{
+	content:'Row';
+	position:absolute;
+	font-size:13px;
+	top:0px;
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    margin:0;
+    padding: 3px;
+    left:0;
+	font-weight:bold;
+}
+#gm-canvas > .row  > .gm-editing:before {
+	content:'Column';
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    margin:0;
+    padding: 3px;
+    position:absolute;
+    top:0;
+	font-size:13px;
+	font-weight:bold;
+}
+.column{
+	min-height:100px;
+}
+.gm-rowSettingsID{
+	height:30px !important;
+	width:150px !important;
+	/*position: absolute;
+    right: 150px;
+    top: -25px;*/
+	}
+	.gm-rowSettings{
+		position: absolute;
+	    top: 0px;
+	    right: 70px;
+	    width:40px;
+	    height:30px;
+	    background:#fff;
+	}
+	.gm-rowSettings .fa{
+		font-size: large;
+		margin:6px 10px;
+	}
+	.fa-cog:hover{
+		color:#000;
+	}
+/* connexion beta css*/
+.gm-canvas .banner,#mycanvas .banner {
+    width: 100% !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    margin-right:0 !important;
+}
+/* connexion beta css*/
+
+.gm-content span iframe{
+max-width:100%;
+}
+
+.bgColor{
+	position:absolute;
+	top:-1px;
+	right:115px;
+}
+.gmControlsCustomClass{
+	/*position:absolute;*/
+	top:-57px;
+}
+button[disabled]{
+	cursor: not-allowed !important;
+	}
