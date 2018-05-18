@@ -2683,14 +2683,19 @@ function loadNextPageAsync(pageLink, resultPerPage, checkmodevalue){
 			$('input:hidden[name="idListPrice"]').attr('name', 'idListPrice1');
 			$('.availnew').attr('data-select','availabilitynew');                   
 			$.post("/"+pageLink+pageNoTemp+"&reqType=loadPage", 'html=<div class="loadedcontent">new div</div>', function(data){
-
 				$('.listGridContainer').append(data);
 				$('#loadMoreBtn').html('Load More');
 				priceLoadMainFunction();
 				processing = false;
-				$('li.newPageScrolled').each(function(){
-					$(this).removeClass('newPageScrolled').addClass(checkmodevalue);
-				});
+				if(checkmodevalue == "gridView"){
+					$('li.newPageScrolled').each(function(){
+						$(this).removeClass('newPageScrolled listView').addClass(checkmodevalue);
+					});
+				}else{
+					$('li.newPageScrolled').each(function(){
+						$(this).removeClass('newPageScrolled gridView').addClass(checkmodevalue);
+					});
+				}
 			});
 		}else{
 			$("#loadingNextPage").html("That's it! No more items to display.");

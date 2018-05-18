@@ -589,8 +589,7 @@
 			</div>
 			#end
 			<script type="text/javascript">
-			 function loadMoreItems()
-			 {
+			 function loadMoreItems(){
 				 var checkmodevalue = $!("#productListBlock").find('li').attr('class');
 				 $('#loadMoreBtn').html('Loading..');
 				 loadNextPageAsync("$!paginationURL",$!resultPage,checkmodevalue);
