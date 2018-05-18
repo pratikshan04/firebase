@@ -74,6 +74,17 @@ jQuery(".clickStream").click(function() {
 		$(".pgnation").html(pagination);
 	</script>
 	#end
+#elseif($LayoutName=='CartPage')
+<!-- Tracking Add to Cart & Items Added to the Cart -->
+#if($productListData.size()>0 && $!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+<script>
+#foreach($itemData in $productListData)
+	piwik.addEcommerceItemPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemData.categoryName", "$!itemData.unitPrice", "$!itemData.qty");
+#end
+	piwik.trackEcommerceCartUpdatePiwik("$!cartTotal");
+ 	</script>
+ #end
+<!-- Tracking Add to Cart & Items Added to the Cart -->
 #elseif($LayoutName=="ApproveCart")
 <script type="text/javascript">
 	#set($paginationURL="myProductGroupPage.action?savedGroupId=$savedGroupId#if($sortBy)&sortBy=$sortBy#end&shared=$!isShared&resultPage=$resultPage#if($reqType)&reqType=$reqType#end#if($searchkeyWord)&searchkeyWord=$escapeTool.url($!searchkeyWord)#end&pageNo=")
@@ -235,6 +246,15 @@ $(function(){
 
 #if($LayoutName=="ProductDetailPage")
 <script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
+#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+<!-- PIWIK Tracking Product Page Views -->
+<script type="text/javascript">
+#foreach($itemData in $!itemLevelFilterData)
+	piwik.setEcommercePageViewPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')",  "$!itemData.categoryName", "$!itemData.unitPrice");
+#end
+</script>
+<!-- PIWIK Tracking Product Page Views -->
+#end
 #if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)
 <script defer>
 /********* V5 **********/
@@ -306,6 +326,13 @@ $(document).ready(function () {
 			var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
 			$(".pgnation").html(pagination);
 		#end
+		#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+		/*  PIWIK Category Page Views */
+		window.onload = function(){
+			piwik.populateOnCategoryPage();
+		}
+		/*  PIWIK Category Page Views */
+		#end
 	</script>
 #elseif($LayoutName=="SendThisPage")
 	<script type="text/javascript">
@@ -322,6 +349,16 @@ $(document).ready(function () {
 		});
 	</script>
 #elseif($LayoutName=="OrderConfirmation")
+#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+<!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
+<script>
+	#foreach($!itemList in $!orderItemList)
+		piwik.addEcommerceItemPiwik("$!itemList.partNumber", "$!itemList.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemList.categoryName", "$!itemList.unitPrice", "$!itemList.qty");
+	#end
+	piwik.trackEcommerceOrderPiwik("$!orderDetail.erpOrderNumber", "$!orderDetail.total" ,"$!orderDetail.subtotal", "$!orderDetail.tax", "$!orderDetail.freight" ,("#if($orderDetail.discount > 0)true#elsefalse#end"));
+</script>
+<!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
+#end
 <!--------------------------------------------Order Confirmation dependent sources---------------------------------------->
 	<script type="text/javascript">
 		/*Send Order Confirmation*/

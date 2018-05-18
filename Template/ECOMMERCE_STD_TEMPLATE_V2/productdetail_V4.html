@@ -1214,15 +1214,6 @@ function LoadRecentViewedItem(){
 #end
 <!-- Review Form End -->
 <!-- Product Ratings End -->
-#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<!-- PIWIK Tracking Product Page Views -->
-<script type="text/javascript">
-#foreach($itemData in $!itemLevelFilterData)
-	piwik.setEcommercePageViewPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')",  "$!itemData.categoryName", "$!itemData.unitPrice");
-#end
-</script>
-<!-- PIWIK Tracking Product Page Views -->
-#end
 <!-- <div class="cimm_detailBodyRightWrap" id="customerAlsoViewedOuterDiv" style="display:none;" >
 	<div class="customerAlsoViewed">
 		<h3 class="cimm_productHead"><label>$!locale.get("product.heading.customerAlsoViewed")</label></h3>

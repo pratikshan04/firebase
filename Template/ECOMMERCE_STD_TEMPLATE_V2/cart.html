@@ -361,13 +361,3 @@
 #end
 
 <!-----------------------------------------------End of Cart Page------------------------------------------>
-<!-- Tracking Add to Cart & Items Added to the Cart -->
-#if($productListData.size()>0 && $!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<script>
-#foreach($itemData in $productListData)
-	piwik.addEcommerceItemPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemData.categoryName", "$!itemData.unitPrice", "$!itemData.qty");
-#end
-	piwik.trackEcommerceCartUpdatePiwik("$!cartTotal");
- 	</script>
- #end
-<!-- Tracking Add to Cart & Items Added to the Cart -->
