@@ -26,6 +26,15 @@
 				<option value="CATEGORY">CATEGORY</option>
 			</select>
 			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" onKeypress="return IsSpecialCharacter(event);" id="pageTitleId"   /> 
+			<label class="cms_StaticLabel">Website</label>  
+			<select name="selectedSiteId" id="selectedWebsite">
+				<option value>- Select Website -</option>
+				#if($!websiteList && $websiteList.size()>0)
+					#foreach($website in $websiteList)
+						<option  #if($selectedSiteId==$website.siteId) selected #end value="$website.siteId">$website.siteName</option>
+					#end
+				#end
+			</select>
 			<label class="cms_StaticLabel">List Locale</label>  
 			<select name="pageData.localeId" id="lang">
 				<option value>- Select Language -</option>

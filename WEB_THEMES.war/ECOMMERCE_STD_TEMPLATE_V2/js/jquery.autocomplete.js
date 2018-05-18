@@ -12,7 +12,10 @@
  */
 var autoCompleteTable  = new Hashtable();
 var dataListObj =  new Hashtable();
-var autoCompleteVersion = $("#autoCompleteDesignVersion").val().toUpperCase();
+var autoCompleteVersion = "";
+if($("#autoCompleteDesignVersion").length>0){
+	autoCompleteVersion = $("#autoCompleteDesignVersion").val().toUpperCase();
+}
 ;(function($) {
 	
 $.fn.extend({
