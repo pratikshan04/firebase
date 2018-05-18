@@ -235,6 +235,7 @@ $(function(){
 
 #if($LayoutName=="ProductDetailPage")
 <script type="text/javascript" src="$webThemes/$siteName/js/ProductMode.js"></script>
+#if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)
 <script defer>
 /********* V5 **********/
 var selData = $selecatableJson.replaceAll("&#39;","'");
@@ -245,7 +246,7 @@ $(document).ready(function () {
 });
 /********* V5 **********/
 </script>
-#if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)#else
+#else
 #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS" )
 <!-- <script>
 	jQuery(document).ready(function(){

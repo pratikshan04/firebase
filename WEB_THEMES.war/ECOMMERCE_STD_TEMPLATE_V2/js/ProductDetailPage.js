@@ -448,36 +448,38 @@ function submitReview(){
 }
 /********* V5 **********/
 var collection = $(".filterSelClass");
-collection.each(function() {
-	try{
-		var obj = jQuery(this);
-		var selValData = selData[obj.attr("data-id")];
-		jQuery.each(selValData, function(key, val) {
-			for(i=0;i<val.length;i++){
-				var find = '&nbsp;';
-				var re = new RegExp(find, 'g');
-				var re1 = new RegExp(" ", 'g');
-				if(itemIdFilter == val[i]){
-					var j=0;
-					jQuery(obj).children('option').each( function() {
-						var test = jQuery(this);
-						var val1 = test.val().replace(re,"");
-						var val2 = key.replace(re," ");
-						val1 = val1.replace(/\s/g, "");
-						var val2 = val2.replace(/\s/g,"");
-						if(String(val1.toLowerCase()) === String(val2.toLowerCase())) {
-							obj.prop('selectedIndex', j)
-						}
-						j++;
-					});
-					break;
+if(collection){
+	collection.each(function() {
+		try{
+			var obj = jQuery(this);
+			var selValData = selData[obj.attr("data-id")];
+			jQuery.each(selValData, function(key, val) {
+				for(i=0;i<val.length;i++){
+					var find = '&nbsp;';
+					var re = new RegExp(find, 'g');
+					var re1 = new RegExp(" ", 'g');
+					if(itemIdFilter == val[i]){
+						var j=0;
+						jQuery(obj).children('option').each( function() {
+							var test = jQuery(this);
+							var val1 = test.val().replace(re,"");
+							var val2 = key.replace(re," ");
+							val1 = val1.replace(/\s/g, "");
+							var val2 = val2.replace(/\s/g,"");
+							if(String(val1.toLowerCase()) === String(val2.toLowerCase())) {
+								obj.prop('selectedIndex', j)
+							}
+							j++;
+						});
+						break;
+					}
 				}
-			}
-		});
-	}catch(e){
-		console.log(e);
-	}
-});
+			});
+		}catch(e){
+			console.log(e);
+		}
+	});
+}
 function changeSelection(obj){
 	try{
 		var find = '&nbsp;';
