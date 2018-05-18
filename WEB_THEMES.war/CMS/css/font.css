@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(../css/fonts/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(../css/fonts/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+
+@font-face {
+	font-family: 'Trebuchet';
+	src: url('../css/fonts/trebuchet.eot');
+	src: local('Trebuchet'), url('../css/fonts/trebuchet.woff') format('woff'), url('../css/fonts/trebuchet.ttf') format('truetype');
+}
+
+/* Futura webfont (new-bulletproof) */ 
+
+@font-face {
+	font-family: 'FuturaBT-Bold';
+	src: url('../css/fonts/FuturaBT-Bold.eot');
+	src: url('../css/fonts/FuturaBT-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../css/fonts/FuturaBT-Bold.woff2') format('woff2'),
+		url('../css/fonts/FuturaBT-Bold.woff') format('woff'),
+		url('../css/fonts/FuturaBT-Bold.ttf') format('truetype'),
+		url('../css/fonts/FuturaBT-Bold.svg#oxygenregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'FuturaBT-Light';
+	src: url('../css/fonts/FuturaBT-Light.eot');
+	src: url('../css/fonts/FuturaBT-Light.eot?#iefix') format('embedded-opentype'),
+		url('../css/fonts/FuturaBT-Light.woff2') format('woff2'),
+		url('../css/fonts/FuturaBT-Light.woff') format('woff'),
+		url('../css/fonts/FuturaBT-Light.ttf') format('truetype'),
+		url('../css/fonts/FuturaBT-Light.svg#oxygenregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'FuturaBT-Medium';
+	src: url('../css/fonts/FuturaBT-Medium.eot');
+	src: url('../css/fonts/FuturaBT-Medium.eot?#iefix') format('embedded-opentype'),
+		url('../css/fonts/FuturaBT-Mediumwoff2') format('woff2'),
+		url('../css/fonts/FuturaBT-Medium.woff') format('woff'),
+		url('../css/fonts/FuturaBT-Medium.ttf') format('truetype'),
+		url('../css/fonts/FuturaBT-Medium.svg#oxygenregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto-Regular';
+	src: url('../css/fonts/Roboto-Regular.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto-Black';
+	src: url('../css/fonts/Roboto-Black.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'RobotoCondensed-Bold';
+	src: url('../css/fonts/RobotoCondensed-Bold.ttf');
+	font-weight: bold;
+	font-style: normal;
+}
