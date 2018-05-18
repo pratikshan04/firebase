@@ -1,5 +1,6 @@
 
 <link rel="stylesheet" type="text/css" href="$webThemes/CMS/css/bootstrap.min.css" />
+<link href="$webThemes/CMS/css/bootstrap-glyphicons.css" rel="stylesheet" />
 <style>
 body{background:#fff;font-size:14px;}
 .saveListBtn{
@@ -22,7 +23,7 @@ font-size: 20px; padding: 10px;  margin: 50px 20px 25px 20px; box-shadow: 0px 2p
 <h2 class="widgetHeading">Widget Types</h2>
 <div style="padding: 30px 0px 0px 30px;">
 
-Type : <input type="text" id="widgetType" style="padding:5px;"/>  Api Url: <input type="text" id="widgetUrl" style="padding:5px;" /> <a href="javascirpt:void(0);" onclick="addNewWidget();" class="saveListBtn">Add</a>
+Type<span style="color:red;">*</span> : <input type="text" id="widgetType" style="padding:5px;"/>  Api Url<span style="color:red;">*</span> : <input type="text" id="widgetUrl" style="padding:5px;" /> <a href="javascirpt:void(0);" onclick="addNewWidget();" class="saveListBtn">Add</a>
 </div>
 <form style="padding:30px;" id="widgetTypeForm">
   <table class="table table-striped table-bordered" id="widgetTable">
@@ -53,11 +54,8 @@ $('#widgetTable').Tabledit({
 	});
 
 function removeRows(){
-	
 	jQuery(".tabledit-input").prop('disabled', false);
 	jQuery(".tabledit-deleted-row").find(".tabledit-input").prop('disabled', true);
-	var str = jQuery("#widgetTypeForm").serialize();
-	console.log(str);
 	jQuery(".tabledit-input").prop('disabled', true);
 }
 function updateWidget(){
@@ -100,4 +98,6 @@ function updateWidget(){
 			jQuery("#newValue").val(widgetUrl);
 			updateWidget();
 			}
+		jQuery(".tabledit-toolbar")
+         .attr('title', 'Delete Row')
 </script>

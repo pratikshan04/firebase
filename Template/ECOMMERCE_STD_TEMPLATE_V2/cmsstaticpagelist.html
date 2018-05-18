@@ -1,13 +1,16 @@
+<script type="text/javascript" src="$webThemes/CMS/js/cms/cmsscript.js"></script>
+<script type="text/javascript" src="$webThemes/CMS/js/jquery.colorbox.js" ></script>
+<link href="$webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
 <link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
 <style>
 .banner_addNewBtn, .banner_addNewBtn:hover {
     background-color: rgb(27, 99, 171);
     color: rgb(255, 255, 255);
-    padding: 8px 5px 8px 5px;
-    margin-left: -3px;
+    padding: 8px 5px 6px 5px;
+    margin-left: -4px;
 }
 input[type="text"], input[type="password"], select {
-    width: 350px;
+    width: auto;
     cursor: auto;
     outline: none;
     border: 1px solid #797d82;
@@ -21,30 +24,93 @@ input[type="text"], input[type="password"], select {
     font-size: 14px;
     padding:5px;
 }
-
+.btnClass{
+background: #dad9da;
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 5px;
+    cursor:pointer;
+}
+.listStaticSelect{
+float:left;
+margin-right:10px;
+}
+.listStaticSelect select{
+width:200px;
+}
+.cms_leftMenu {
+   width: 195px; 
+}
+.cms_leftMenu ul li {
+	float: left;
+	border-left: 1px solid #8b8c8d;
+	border-bottom: none;
+	padding: 0 2px 0 2px;
+}
+.cms_staticTable {
+    width: 78%;
+}
 </style>
-<div class="cms_staticPage">
 
-   <div class="cms_leftIcons">
-   
-   </div> 
+<div class="cms_staticPage">
+	<div class="cms_leftMenu">
+          <ul>
+            <li>
+              <div class="cms_widget">
+                <a href="listStaticPageCms.action" title="List Static Pages" class="cms_uploadBannerBtn">
+                  <i class="fa fa-file" aria-hidden="true">
+                  </i>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="cms_widget">
+                <a href="javascript:openBannerList();" title="Banner List" class="cms_uploadBannerBtn">
+                  <img src="$webThemes/CMS/images/small/listBrand.png" />
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="cms_bannerUpload">
+                <a class="iframe cms_uploadBannerBtn" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadIframeWindow();">
+                  <img src="$webThemes/CMS/images/small/upload.png" />
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="cms_widget">
+                <a class="iframe cms_uploadBannerBtn" href="widgetListCms.action" title="Widgets" onclick="javascript:showIframeWindow();">
+                  <i class="fa fa-cog" aria-hidden="true">
+                  </i>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="cms_widget" >
+                <a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList();" title="Menubuilder" class="cms_uploadBannerBtn" >
+                  <img src="$webThemes/CMS/images/small/manageTaxonomy.png" />
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="cms_widget">
+                <a class="iframe cms_uploadBannerBtn" href="formListCms.action" title="Form Builder" onclick="javascript:showIframeWindow();">
+                  <img src="$webThemes/CMS/images/small/formBuilder.png" />
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div> 
    <div class="topNav_rightIcons">
       <ul>
+       
        <li>
-       	<a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/save.png" title="Save Static Page" class="actionIcon cimm_disableIconFunc" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+       <a href="/cmsStaticPageCms.action?&selectedSiteId=$!selectedSiteId" class="btnClass" onclick="getDynamicData();">
+       	<img src="$webThemes/CMS/images/small/add.png"  title="New Static Page" >
+      <span style="vertical-align: top;"> New Static Page</span>
+       </a>        
        </li>
-       <li>
-       <a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/download.png" title="Download Static Page" class="actionIcon cimm_disableIconFunc" style="cursor:pointer;margin:-10px 15px 0 0;"></a>      
-       </li>
-       <li>
-       <a href="/cmsStaticPageCms.action"><img src="$webThemes/CMS/images/small/add.png" title="New Static Page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>        
-       </li>
-       <li>
-       <a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/clone.png" title="Clone Static Page" class="actionIcon cimm_disableIconFunc" style="cursor:pointer;margin:-10px 15px 0 0;"></a>       
-       </li>
-       <li>
-       <a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Static Page" class="actionIcon cimm_disableIconFunc" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
-       </li> 
+       
       </ul>
      </div> 
    <div class="clear-both"></div>
@@ -54,13 +120,29 @@ input[type="text"], input[type="password"], select {
 
   <div class="cms_staticTable"> 
   <div class="listPageFilterBox">
-  	<div class="searchBox"> 
-  	<form method="get" action="listStaticPageCms.action">
+  	<div class="searchBox">
+  	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;">
+  	<select name="type" id="type" onchange="submitForm();">
+	  		 <option #if($!type=="BODY") selected #end value="BODY" >Body</option>
+	  		 <option #if($!type=="BLOG") selected #end value="BLOG">Blog</option>
+	  		 <option #if($!type=="TEMPLATE") selected #end value="TEMPLATE" >Template</option>
+	  		 <option #if($!type=="CATEGORY") selected #end value="CATEGORY">Category</option>
+  	</select>
+  	<input type="hidden" id="query" name="query" value="$!query"/>  
+  	<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
+  	<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+  	<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" /> 
+  	</form>
+  	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;">
   		<input class="cms_bannerSearch" type="text" name="query" value="$!query" placeholder="Enter Page Name to Search"/>  
-  		<input  type="hidden" name="pageSize" value="$staticPageList.pageSize" />  
+  		<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
+  		<input type="hidden" id="type" name="type" value="$!type"/> 
+  		<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+  		<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" /> 
 		<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
   	</form>
   	</div>
+  	
   	<div class="displayBox">
   		<form method="get" action="listStaticPageCms.action">
   			<label>Display </label>
@@ -71,15 +153,35 @@ input[type="text"], input[type="password"], select {
 				<option #if($staticPageList.pageSize==100) selected #end  value="100" >100</option>
 			</select>
 			<label>Records</label>
-			<input  type="hidden" name="query" value="$!query" />  
+			<input  type="hidden" name="query" value="$!query" />
+			<input type="hidden" id="type" name="type" value="$!type"/> 
+			<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+			<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" />   
+  		</form>
+  	</div>
+  	
+  	<div class="siteDisplayBox">
+  		<form method="get" action="listStaticPageCms.action">
+  			<label>Website</label>
+  			<select name="selectedSiteId" id="selectedWebsite" onchange="this.form.submit()">
+  				<option value>- Select Website -</option>
+	  			#if($!websiteList && $websiteList.size()>0)
+	  				#foreach($website in $websiteList)
+	  					<option #if($selectedSiteId==$website.siteId) selected #end value="$website.siteId">$website.siteName</option>
+	  				#end 
+	  			#end
+			</select>
+			<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
+			<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" />
   		</form>
   	</div>
   	<div class="clear-both"></div>
+  	
   </div> 
-<table class="cms_staticPageTable">
+<table class="cms_staticPageTable" id="staticpageList">
 <thead>
 <tr>
-<th class="width270">Actions</th>
+<th class="width180">Actions</th>
 <th class="width150">SI No.</th>
 <th>
 <a href="listStaticPageCms.action?sortEnabled=true&query=$!query" title="Ascending">&#8679;</a>
@@ -102,7 +204,7 @@ Static Page Name
 #foreach($pageList in $staticPageList.resultSet)
 <tr>
 <td>
-<a href="cmsStaticPageCms.action?pageId=$pageList.id"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Static Page" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Static Page" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
 #if($pageList.homePageIcon)
 <a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
 <a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Delete Static Page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
@@ -156,6 +258,9 @@ $iindex
 
 
 <script>
+function submitForm(){
+	$('#staticForm').submit();
+}
 function delink(){
 	var r = confirm("Are you sure you want to unlink this page from home page");
 	if (r == true) {
@@ -207,4 +312,26 @@ return false;
 }
 
 
+if($("#staticpageList tr").length==1){
+
+	 $("#empstring").show();
+}
+
+function getDynamicData(){
+	
+	
+	jQuery.ajax({
+		   type: "POST",
+		   url: "loadAllDynamicTemplatesCms.action",
+		   
+		   success: function(msg){
+		  		 //window.location.reload();
+			}	
+	 });
+	
+
+return false;
+}
+
 </script>
+#parse("cmsscript.html")

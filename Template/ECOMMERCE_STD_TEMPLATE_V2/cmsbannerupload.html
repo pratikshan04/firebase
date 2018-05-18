@@ -12,8 +12,6 @@
 		
 		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/common.js"></script>
 		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/dropzone.js"></script>
-		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/bootbox.min.js"></script>
 			<script type="text/javascript" src="$webThemes/CMS/filemanager/js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/jquery.scrollstop.min.js"></script>
 		
@@ -315,7 +313,7 @@ var openFileUrl = fileUrl;
 	
 	
 	 var row = $('#main-item-container');
-	 var dummy1='<div class="box" style="width:92px;"><h4 class="ellipsis"><input style="margin: 10px auto; width: 20px;"type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></div><div style="float:left;width:14%;margin-left:40px;"><a href="javascript:void(0)" id="fsizeId">'+fsize+'KB</a></div><div><a href="javascript:void(0)" id="fTypeId">'+typeSplit[1]+'</a></h4></div>';
+	 var dummy1='<div class="box"><h4 class="ellipsis"><input style="margin: 10px auto; width: 20px;"type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></div><div style="float:left;width:14%;margin-left:40px;"><a href="javascript:void(0)" id="fsizeId">'+fsize+'KB</a></div><div><a href="javascript:void(0)" id="fTypeId">'+typeSplit[1]+'</a></h4></div>';
 	 var dummy = '<div><a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><div class="img-container"><span></span><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" style="display: inline;"/></div></div><div class="img-precontainer-mini original-thumb"><div class="filetype jpg  hide">jpg</div><div class="img-container-mini"><span></span><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'"/></div></div></a></div>';
 	 var figVal = $('<figure/>').attr({"data-name": "imagename","data-type": "img"}).html(dummy+dummy1);
 	 var liVal = $('<li/>').attr({"data-name": "imagename", class: "ff-item-type-2 file ui-draggable "}).html(figVal);
@@ -665,13 +663,13 @@ window.onload = function()
 	  			setTimeout(function(){window.location.reload();},420);
 	    	    });
 	    	  $('.new-folder').on('click',function(){
-	    			bootbox.prompt("Add New Folder *", function(name) {
+	    			bootbox.prompt("Add New Folder<span> *</span>", function(name) {
 		    			if(name!=null && jQuery.trim(name)!=null){
 		    			if(validateFileName(name)){
 		    			console.log("folder name" + name);
 	    				oConnector.SendCommand( 'CreateFolder', 'NewFolderName=' + escape( name) , RefreshCallBack(name) ) ;
 		    			}else{
-		    				bootbox.alert("Error: Input contains invalid characters!, folder name should contain only alphanumeric with '_' allowed.'");
+		    				bootbox.alert("Error: Invalid folder name!, folder name should contain only alphanu meric with '_' allowed.'");
 							return false; // on invalid character entry remain with this step.
 				    	}
 		    			}
@@ -739,6 +737,24 @@ window.onload = function()
 	    	.list-view0 div > #fsizeId,.list-view0  div > #fTypeId,.list-view2  div > #fsizeId,.list-view2  div > #fTypeId{
 	    	display:none;
 	    	}
+	    	.types select.form-control{
+	display:inline-block !important;
+	width:220px !important;
+-webkit-appearance: menulist !important;
+}
+div.box{
+  	border:none;
+  	padding:0;
+  	margin:0;
+  	width:150px !important; 	
+  	}
+  	.box a{
+  	font-size:14px;
+  	font-family:'Open Sans',sans-serif;
+  	}
+  	.modal-title span{
+  	color:red;
+  	}
 @media (max-width:1200px) and (min-width:1024px) {
 	    	.cmsFB_stickBreadcrumbStrip{
 	    		top:75px !important;

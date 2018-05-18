@@ -7,7 +7,7 @@ jQuery(function () {
 		    var currentMonth = date.getMonth();
 		    var currentDate = date.getDate();
 		    var currentYear = date.getFullYear();
-		    jQuery('#startDate').datepicker({
+		    jQuery('#startDate').datepicker({			 
 		       minDate: new Date(currentYear, currentMonth, currentDate)
 		    });
 		    jQuery('#endDate').datepicker({
@@ -109,6 +109,7 @@ jQuery(function () {
 				   success: function(msg){
 		   
 				   if(msg.indexOf("success")!=-1){
+					   alert("Banner created successfully.");
 					   var siteId = jQuery("#siteId").val();
 					   window.location.href="bannerListCms.action?reloadBanner=Y&bannerName="+escape(jQuery.trim(jQuery("#bannerListName").val()))+"&siteId="+siteId;
 			  		}else{
@@ -161,7 +162,7 @@ jQuery(function () {
 					console.log("image list : " + jQuery(this).find('img').attr('src').replace(window.parent.bannerLogoPath,''));
             	});
         	if(insertBanner){	
-        	content = "<div class='bannerContainer'><img src='"+bannerLogoPath+content+"' /></div><div class='banner_leftWrap'><div class='pull-left' style='width:100%;'>URL <input type='text' name='URL_"+bannerId+"'/></div><div class='banner_formLabel'>Caption </div><div> <input type='text' name='bannerCaptionNew_"+bannerId+"'  style='height:75px !important;'/><input type='hidden' name='bannerIdNew' value='"+bannerId+"' /><input type='hidden' name='tempBannerId' value='"+bannerId+"' /><input type='hidden' name='displaySeq_"+bannerId+"' value='' /></div><div style='float:left;width:100%;'><div class='pull-left' style='width:45%;'>Top Pos <input type='text' name='bannerTopPosNew_"+bannerId+"' style='width:50px;margin:0 0 0 5px;'/> (in px)</div><div class='pull-left' style='width:45%';>Left Pos <input type='text' name='bannerLeftPosNew_"+bannerId+"' style='width:50px;margin:0 0 0 5px;'/>(in px)<div class='clear'></div><input type='hidden' name='bannerImageNameNew' value='"+content+"'  /></div><a href='javascript:void(0);' onclick='removeNewBanner(this);' class='banner_delIcon pull-right' title='Remove From List'></a></div></div>";
+        	content = "<div class='bannerContainer'><img src='"+bannerLogoPath+content+"' /></div><div class='banner_leftWrap'><div class='pull-left' style='width:100%;'>URL <input type='text' name='URL_"+bannerId+"'/></div><div class='banner_formLabel'>Caption </div><div> <input type='text' name='bannerCaptionNew_"+bannerId+"'/><input type='hidden' name='bannerIdNew' value='"+bannerId+"' /><input type='hidden' name='tempBannerId' value='"+bannerId+"' /><input type='hidden' name='displaySeq_"+bannerId+"' value='' /></div><div style='float:left;width:100%;'><div class='pull-left' style='width:45%;'>Top Pos <input type='text' name='bannerTopPosNew_"+bannerId+"' style='width:50px;margin:0 0 0 5px;'/> (in px)</div><div class='pull-left' style='width:45%';>Left Pos <input type='text' name='bannerLeftPosNew_"+bannerId+"' style='width:50px;margin:0 0 0 5px;'/>(in px)<div class='clear'></div><input type='hidden' name='bannerImageNameNew' value='"+content+"'  /></div><a href='javascript:void(0);' onclick='removeNewBanner(this);' class='banner_delIcon pull-right' title='Remove From List'></a></div></div>";
         	var liVal = $('<li/>').html(content);
         	console.log(jQuery(this).attr("id"));
          	var target = jQuery('#bannerSelect');

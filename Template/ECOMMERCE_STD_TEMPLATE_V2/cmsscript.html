@@ -1,7 +1,4 @@
-
-				
 <script type="text/javascript"> 
-
 var tinyfck_field = "";
 			//<![CDATA[
 			
@@ -52,9 +49,16 @@ var tinyfck_field = "";
 					   errMsg = "Please enter Page Name to save\n";
 					   isValid = false;
 					 }
+					 if($('#selectedWebsite').length>0 ){
+						 var siteId = $('#selectedWebsite').val();
+						 if(typeof siteId == undefined ||siteId == '' || siteId == null || siteId == -1){
+							 errMsg = errMsg + "Please select a Website\n";
+							 isValid = false;
+						 }
+					 }
 					 if(typeof lang == undefined ||lang == '' || lang == null || lang == -1){
-					 errMsg = errMsg + "Please select a Language\n";
-					 isValid = false;
+						 errMsg = errMsg + "Please select a Language\n";
+						 isValid = false;
 					 }
 					 if(!isValid){
 					 alert(errMsg);
@@ -1097,7 +1101,7 @@ jQuery('#previewFrame').height(jQuery(window).height());
 			var previewType = $(e).attr("title");
 			$(".resPreviewIcon").removeClass("pactive");
 			$(e).addClass('pactive');
-			$( "#previewBtnId" ).prop( "disabled", true );
+			// $( "#previewBtnId" ).prop( "disabled", true );
  
 // Enable #x
 
@@ -1123,7 +1127,7 @@ jQuery('#previewFrame').height(jQuery(window).height());
 			}else{
 			frameHeight = iframeOrgHeight;
 			frameWidth = "100%";
-			$( "#previewBtnId" ).prop( "disabled", false );
+			// $( "#previewBtnId" ).prop( "disabled", false );
 			}
 				  
 					//window.parent.jQuery("#iframeId").height =;
