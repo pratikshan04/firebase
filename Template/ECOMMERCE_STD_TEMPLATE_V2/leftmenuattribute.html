@@ -174,7 +174,11 @@
 #if($gallery)<input type="hidden" name="gallery" value="$!gallery" />#end
 <input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end" />
 <input type="hidden" name="keyWordTxt" id="keyWordTxtMulti" value="#if($keyWordTxt)$!keyWordTxt#end" />
-#if($srchTyp)<input type="hidden" id="srchTyp" name="srchTyp" value="$!srchTyp" />#end
+#if($srchTyp)
+<input type="hidden" id="srchTyp" name="srchTyp" value="$!srchTyp" />
+#else
+<input type="hidden" id="srchTyp" name="srchTyp" value="CATNAV" />
+#end
 #if($navigationType=="SEARCH")
 <input type="hidden" name="keyWord" value="#if($keyWord)$!keyWord#end" /> 
 <input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
