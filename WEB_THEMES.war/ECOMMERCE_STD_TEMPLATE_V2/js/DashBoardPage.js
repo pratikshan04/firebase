@@ -116,21 +116,26 @@ $(document).ready(function() {
 			                   slidesToShow: 3,
 			                   vertical: false
 			                 }
-			               },
-			               {
-			                 breakpoint: 600,
-			                 settings: {
-			                   slidesToShow: 3,
-			                   vertical: false
-			                 }
-			               },
-			               {
-			                 breakpoint: 480,
-			                 settings: {
-			                   slidesToShow: 2,
-			                   vertical: false
-			                 }
-			               }
+			               },{
+								breakpoint: 600,
+								settings: {
+									slidesToShow: 3,
+									 vertical: false
+								}
+							},{
+								breakpoint: 500,
+								settings: {
+									slidesToShow: 2,
+									 vertical: false
+								}
+							},
+							{
+								breakpoint: 400,
+								settings: {
+									slidesToShow: 1,
+									 vertical: false
+								}
+							}
 			             ]
 		});
 	}

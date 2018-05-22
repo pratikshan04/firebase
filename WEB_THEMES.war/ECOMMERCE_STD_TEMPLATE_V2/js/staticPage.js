@@ -91,19 +91,23 @@ function homeCarousels(){
 			                 settings: {
 			                   slidesToShow: 4,
 			                 }
-			               },
-			               {
-			                 breakpoint: 600,
-			                 settings: {
-			                   slidesToShow: 3,
-			                 }
-			               },
-			               {
-			                 breakpoint: 480,
-			                 settings: {
-			                   slidesToShow: 2,
-			                 }
-			               }
+			               },{
+								breakpoint: 600,
+								settings: {
+									slidesToShow: 3,
+								}
+							},{
+								breakpoint: 500,
+								settings: {
+									slidesToShow: 2,
+								}
+							},
+							{
+								breakpoint: 400,
+								settings: {
+									slidesToShow: 1,
+								}
+							}
 			             ]
 		  });
 		}
@@ -120,19 +124,23 @@ function homeCarousels(){
 				                 settings: {
 				                   slidesToShow: 4,
 				                 }
-				               },
-				               {
-				                 breakpoint: 600,
-				                 settings: {
-				                   slidesToShow: 3,
-				                 }
-				               },
-				               {
-				                 breakpoint: 480,
-				                 settings: {
-				                   slidesToShow: 2,
-				                 }
-				               }
+				               },{
+									breakpoint: 600,
+									settings: {
+										slidesToShow: 3,
+									}
+								},{
+									breakpoint: 500,
+									settings: {
+										slidesToShow: 2,
+									}
+								},
+								{
+									breakpoint: 400,
+									settings: {
+										slidesToShow: 1,
+									}
+								}
 				             ]
 			  });
 		}
@@ -148,19 +156,23 @@ function homeCarousels(){
 				                 settings: {
 				                   slidesToShow: 4,
 				                 }
-				               },
-				               {
-				                 breakpoint: 600,
-				                 settings: {
-				                   slidesToShow: 3,
-				                 }
-				               },
-				               {
-				                 breakpoint: 480,
-				                 settings: {
-				                   slidesToShow: 2,
-				                 }
-				               }
+				               },{
+									breakpoint: 600,
+									settings: {
+										slidesToShow: 3,
+									}
+								},{
+									breakpoint: 500,
+									settings: {
+										slidesToShow: 2,
+									}
+								},
+								{
+									breakpoint: 400,
+									settings: {
+										slidesToShow: 1,
+									}
+								}
 				             ]
 			  });
 		}
@@ -176,19 +188,23 @@ function homeCarousels(){
 				                 settings: {
 				                   slidesToShow: 4,
 				                 }
-				               },
-				               {
-				                 breakpoint: 600,
-				                 settings: {
-				                   slidesToShow: 3,
-				                 }
-				               },
-				               {
-				                 breakpoint: 480,
-				                 settings: {
-				                   slidesToShow: 2,
-				                 }
-				               }
+				               },{
+									breakpoint: 600,
+									settings: {
+										slidesToShow: 3,
+									}
+								},{
+									breakpoint: 500,
+									settings: {
+										slidesToShow: 2,
+									}
+								},
+								{
+									breakpoint: 400,
+									settings: {
+										slidesToShow: 1,
+									}
+								}
 				             ]
 			  });
 		}
