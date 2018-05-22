@@ -32,7 +32,7 @@
 					#itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
 					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					<tr>
-						<td>    
+						<td data-th="$locale.get('product.label.Image')">    
 							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
@@ -43,7 +43,7 @@
 								</span>
 							</a>
 						</td>
-						<td class="alignLeft">
+						<td class="alignLeft" data-th="$locale.get('product.label.productDescription')">
 							<ul>
 								<li>
 								<b><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></b>
@@ -91,7 +91,7 @@
 								</li>
 							</ul>
 						</td>
-						<td>
+						<td data-th="$locale.get('product.label.Iqty')">
 							<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="4" class="quantity" />
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 							<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
@@ -103,7 +103,7 @@
 							<input type="hidden" id='priceValueID_$itemData.itemPriceId' value='$itemData.price' />
 							<input type="hidden" name="itemPriceIdList" value="$itemData.itemPriceId" />                            
 						</td>
-						<td class="tabelPrice">
+						<td class="tabelPrice" data-th="$locale.get('product.label.yourprice')">
 							<span>
 								#if($itemData.price>0)
 								$$numberTool.format($numberToolFormat,$itemData.price)#if($itemData.saleQty>0) per $itemData.saleQty #end #if($itemData.uom)/ $itemData.uom #end
@@ -112,7 +112,7 @@
 								#end
 							</span>
 						</td>
-						<td data-th="Select">
+						<td data-th="$locale.get('form.label.select')">
 							<label class="customCheckBox2">
 								<input type="checkbox" name="idList" value="$itemData.productListId" id="chkSelect_$itemData.itemPriceId" onclick="checkEach(this)" />
 								<span></span>

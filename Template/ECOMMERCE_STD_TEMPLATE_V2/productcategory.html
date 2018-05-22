@@ -660,13 +660,3 @@
 .cimm_categoryEnclosure{float:left;}
 </style>
 <!----------------------------------------End of Category Page---------------------------------------->
-
-#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<script>
-/*  PIWIK Category Page Views */
-window.onload = function(){
-	piwik.populateOnCategoryPage();
-}
-/*  PIWIK Category Page Views */
-</script>
-#end

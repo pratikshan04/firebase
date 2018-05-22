@@ -375,7 +375,7 @@
 							<ul>
 								<li>
 									<h4 itemprop="name">
-										<a class="productTitle" data-select="itemAnchor" data-selectName="setItemName"  title="$!item.productName : $!item.partNumber"  href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+										<a class="productTitle" data-select="itemAnchor" data-selectName="setItemName" title="$!itemProductTitle"  href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 											$!itemProductTitle
 										</a>
 									</h4>
@@ -484,11 +484,11 @@
 	#foreach($!itemData in $!itemListData) 
 	#set($itemTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 	<li class="listView newPageScrolled" data-getchangemode='getchangemode' itemscope itemtype="http://schema.org/Product">
-		<ul class="gridFixHeight #if($itemData.productItemCount<1)test#end clearAfter">
+		<ul class="gridFixHeight clearAfter">
 			<li class="sessionImg">
-				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 					<div class="prodImage">
-						#if($itemData.imageType=="URL")
+						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 						#else
 							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!detailImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
@@ -498,6 +498,7 @@
 						#end
 					</div>
 				</a>
+				#if($itemData.productItemCount<1)
 				<div class="checkToCompare hideForDevice">
 					<label class="customCheckBox">
 						<input type="checkbox" value="$!itemData.itemPriceId" name="compareId" id="check_$!itemData.itemPriceId" onclick="compareItemList(this);"/>
@@ -507,12 +508,13 @@
 						<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
 					</label>
 				</div>
+				#end
 			</li>
 			#if($itemData.productItemCount>1)
 				<!-- Product Mode -->
 				<li class="sessionDesp">
 					<h3 class="productTitle" itemprop="name">
-						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
+						<a class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
 						#if($itemData.productName && $!itemData.productName.length() > 1) #if($itemData.productName.length() > 22) title="$!itemData.productName" #end #else #if($itemTitle.length() > 22) title="$!itemTitle" #end #end>
 							#if($itemData.productName && $!itemData.productName.length() > 1)
 								#if($itemData.productName.length() > 22)
@@ -536,18 +538,24 @@
 							<p itemprop="description" id="itemShortDesc$!itemData.itemId">$!itemData.shortDesc</p>
 						#end
 					</div>
+					<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
 					<div class="itemCountList">
-						<button class="button" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"> $!itemData.productItemCount More Choices </button>
-						<form class="multiSelectForm"  id="multiFilterAttributeForm$!itemData.itemPriceId">
+						<button class="button" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
+						<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 							<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
 							<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
 							<input type="hidden" name="attrFilterList" id="multiFilterAttrList_$!itemData.itemPriceId"  value='' />
 							<input type="hidden" name="resultPage" id="resultPage_$!itemData.itemPriceId" value='0' />
-						</form> 
+						</form>
 				 	</div>
 				 	<div class="itemCountGrid">
-				 		<a class="button" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId">$!itemData.productItemCount More Choices</a>
+				 		<a class="button clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 				 	</div>
+				</li>
+				<li class='selectCompareGroupBlock'>
+					<div class="itemDetailInfoList">
+						<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> Expand to Compare / View All Choices / View item Details / Add to My Product Group</a>
+					</div>
 				</li>
 				<li id="productModeItemsDiv_$!itemData.itemPriceId" class="productModeItemsDiv" style="display: none;">
 					<div id="productModeItemContent_$!itemData.itemPriceId" class="productModeItemContent"></div>
@@ -557,7 +565,7 @@
 			#else
 				<li class="sessionDesp">
 					<h3 class="productTitle" itemprop="name">
-						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
+						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
 							#if($itemTitle.length() > 22)
 								$!itemTitle.substring(0, 22)... 
 							#else
@@ -566,18 +574,19 @@
 						</a>
 					</h3>
 					#if($itemData.shortDesc.length()>65)
-						<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
+						<span id="itemShortDesc$!itemData.itemId" class="hideMe">$!itemData.shortDesc</span>
+						<p class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
 					#else
 						<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc</p>
 					#end
 					<ul class="skuStyle">
-						<li itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.itemId">$!itemData.partNumber</span></li>
 						#if($itemData.manufacturerName.trim() != "")
-							<li itemprop="sku"><b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName.trim()</span></li>
+							<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName.trim()</span></li>
 						#end
 						#if($itemData.brandName.trim() != "")
-							<li itemprop="sku"><b>$!locale.get("product.label.brand"): </b><span>$!itemData.brandName.trim()</span></li>
+							<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.brand"): </b><span>$!itemData.brandName.trim()</span></li>
 						#end
+						<li itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.itemId">$!itemData.partNumber</span></li>
 						#if($itemData.manufacturerPartNumber.trim() != "")
 						<li itemprop="mpn">
 							<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
@@ -614,9 +623,18 @@
 							<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 						</li> --> 
 						<li class="productAvail_$!itemData.partNumber">
-							<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 							<b class="availLabel">$!locale.get("product.label.availability"): </b>
-							<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+								#if($itemData.availQty)
+									<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
+								#else
+									<span class='text-danger'>Call for Availability</span>
+								#end
+								<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
+							#else
+								<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+								<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
+							#end
 						</li>
 						<!-- <li class="hideToHover" id="allBranchAvail_$!itemData.partNumber">
 							<span class="priceSpanFa"><a href="javascript:void(0);" onClick="openAllBranchPop($!itemData.partNumber)">Branch Availability</a></span>
@@ -632,8 +650,8 @@
 						#end
 					</ul>
 					<ul>
-						#if($itemData.packDesc)<li itemprop="sku" class="hideToHover packDesc"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
-						<li class="cimm_priceWrap">
+						#if($itemData.packDesc)<li itemprop="sku" class="packDesc hideToHover"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
+						<li class="cimm_priceWrap hideToHover">
 						#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 							<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
 								#if($itemData.price>0)
@@ -661,11 +679,11 @@
 								#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 									#if($!itemData.price>0)
 										<span data-select='addtoCartbtn_$!itemData.partNumber'>
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 										</span>
 									#else
 										<span data-select='addtoCartbtn_$!itemData.partNumber'>
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 										</span>
 									#end
 								#else
@@ -674,13 +692,17 @@
 							#else
 								#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 									<span data-select='addtoCartbtn_$!itemData.partNumber'>
-										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" clickStream" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 									</span>
 								#else
 									<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 								#end
 							#end
 							<span id="uomPk_$!itemData.partNumber"></span>
+							<!-- popup display on item added to group -->
+							#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
+							<a id="$!groupPop" class="popMsg hideMe"></a>
+							<!-- popup display on item added to group -->
 						</li>
 						<!--Branch Availabiltiy List Section
 						<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
@@ -703,11 +725,9 @@
 							</div>
 						</li>
 						<!--Branch Availabiltiy List Section-->
-						<li class='pTop-2'>
+						<li class='pTop-2 hideToHover'>
 							<!-- My Product Group-->
 							<div class="productGroupBtn dropdown">
-								#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
-								<a id="$!groupPop" class="popMsg hideMe"></a>
 								#if($userLogin)
 									<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">
 										<i class="fa fa-plus"></i>$!locale.get("marketBasket.button.addToProductGroup")
@@ -721,7 +741,7 @@
 							</div>
 							<!--My Product Group-->
 						</li>
-						<li class="selectItemBlock pTop-2">
+						<li class="selectItemBlock pTop-2 hideToHover">
 							<label class="customCheckBox">
 								#set($addToCartCheckFlag = "N")
 								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")

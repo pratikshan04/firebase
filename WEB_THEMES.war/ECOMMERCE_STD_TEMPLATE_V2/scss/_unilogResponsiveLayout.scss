@@ -258,7 +258,7 @@ $breakpoint-mobileView:480px;
 		margin: 0 auto;
 		float: none;
 	}
-	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .cimm_slideItemImg{
+	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist li .cimm_slideItemImg{
 		height: 82px;
 	}
 	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .cimm_slideItemImg a img{
@@ -314,6 +314,9 @@ $breakpoint-mobileView:480px;
 		ul {
 			width: 100%;
 		}
+	}
+	orderSummaryWrap{
+		margin-top: 10px;
 	}
 	.compareTableWrap .pushbtnGroup li{
 		text-align: right;
@@ -445,6 +448,13 @@ $breakpoint-mobileView:480px;
 				img {
 					height: 150px;
 				}
+			}
+		}
+	}
+	.searchZero{
+		h4{
+			.cimm_inlineButton{
+				margin: 2px 0;
 			}
 		}
 	}

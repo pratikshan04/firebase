@@ -430,16 +430,3 @@
 <div align="center" id="resultDiv" style="display:none;">
 	<h3>$!locale.get("orderconfirmation.note.thankYouNote") <a href="$!locale.get('website.url.Welcome')">Go Home</a></h3>
 </div>
-
-
-#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
-<script>
-#foreach($!itemList in $!orderItemList)
-	piwik.addEcommerceItemPiwik("$!itemList.partNumber", "$!itemList.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemList.categoryName", "$!itemList.unitPrice", "$!itemList.qty");
-#end
-
-	piwik.trackEcommerceOrderPiwik("$!orderDetail.erpOrderNumber", "$!orderDetail.total" ,"$!orderDetail.subtotal", "$!orderDetail.tax", "$!orderDetail.freight" ,("#if($orderDetail.discount > 0)true#elsefalse#end"));
-</script>
-<!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
-#end
