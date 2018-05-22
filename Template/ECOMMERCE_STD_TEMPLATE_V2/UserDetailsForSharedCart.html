@@ -19,9 +19,9 @@
 					<tbody>
 						#foreach($userList as $userList)
 						<tr>
-							<td class="alignLeft">$!userList.firstName $!userList.lastName</td>
-							<td class="alignLeft">$!userList.emailAddress</td>
-							<td>
+							<td class="alignLeft" data-th="$!locale.get('form.label.userName')">$!userList.firstName $!userList.lastName</td>
+							<td class="alignLeft" data-th="$!locale.get('form.label.emailID)">$!userList.emailAddress</td>
+							<td data-th="$!locale.get('form.label.select)">
 		                    	<label class="customCheckBox2 shareCartCheckbox">
 									<input type="checkbox" value="$!userList.userId" name="sharedUserId" id="sharedUserIdCheck" />
 									<span></span>

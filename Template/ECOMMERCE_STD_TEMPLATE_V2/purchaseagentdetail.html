@@ -64,12 +64,12 @@
 				<tbody>
 					#foreach($shipList in $shipAddressList)
 					<tr>
-						<td>$shipList.customerName</td>
-						<td class="alignLeft">$shipList.address1 #if($shipList.address2), $shipList.address2 #end</td>		
-						<td>$shipList.city</td>
-						<td>$shipList.state</td>
-						<td>$shipList.zipCodeStringFormat</td>
-						<td>
+						<td data-th="$!locale.get('form.label.name')">$shipList.customerName</td>
+						<td class="alignLeft" data-th="$!locale.get('form.label.address')">$shipList.address1 #if($shipList.address2), $shipList.address2 #end</td>		
+						<td data-th="$!locale.get('form.label.city')">$shipList.city</td>
+						<td data-th="$!locale.get('form.label.state')">$shipList.state</td>
+						<td data-th="$!locale.get('form.label.zipCode')">$shipList.zipCodeStringFormat</td>
+						<td data-th="$!locale.get('form.label.assign')">
 							#set($shipId=$shipList.addressBookId)
 							#set($checkStatus="N")
 							#if($assignedShipIdList)
