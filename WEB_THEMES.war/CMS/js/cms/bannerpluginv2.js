@@ -206,8 +206,6 @@ var refreshBanner = function(bannerId){
 	console.log(bannerContainer.attr("id"));
 	
 	jQuery.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId+"&reload=true", function(data) {
-		
-		
 		if(data.hasOwnProperty('bannerTemplate')){
 			var bannerData = "";
 			var bannerTemplate = data.bannerTemplate;
