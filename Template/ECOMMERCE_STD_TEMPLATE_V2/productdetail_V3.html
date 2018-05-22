@@ -163,9 +163,9 @@
 					</div>
 				</div>
 				#end
-				<div class="prodSharePrintBtnWrap pullRight hideForPrint hideForIpad">
+				<div class="prodSharePrintBtnWrap pullRight hideForPrint">
 					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemData.itemPriceId);"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> 
-					<a href="javascript:void(0);" data-toggle="tooltip" class="hideForDevice" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
+					<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
 					<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><i class="fa fa-lg fa-share"></i></a>
 					<ol class="sharePageWrap">
 					 	<li>
@@ -1045,17 +1045,21 @@
 											settings: {
 												slidesToShow: 4,
 											}
-										},
-										{
+										},{
 											breakpoint: 600,
 											settings: {
 												slidesToShow: 3,
 											}
-										},
-										{
-											breakpoint: 480,
+										},{
+											breakpoint: 500,
 											settings: {
 												slidesToShow: 2,
+											}
+										},
+										{
+											breakpoint: 400,
+											settings: {
+												slidesToShow: 1,
 											}
 										}
 									]
