@@ -355,7 +355,13 @@ $(document).ready(function () {
 	#foreach($!itemList in $!orderItemList)
 		piwik.addEcommerceItemPiwik("$!itemList.partNumber", "$!itemList.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemList.categoryName", "$!itemList.unitPrice", "$!itemList.qty");
 	#end
-	piwik.trackEcommerceOrderPiwik("$!orderDetail.erpOrderNumber", "$!orderDetail.total" ,"$!orderDetail.subtotal", "$!orderDetail.tax", "$!orderDetail.freight" ,("#if($orderDetail.discount > 0)true#elsefalse#end"));
+	#set($orderNumber = "")
+	#if($!orderDetail.erpOrderNumber)
+		#set($orderNumber = $!orderDetail.erpOrderNumber)
+	#else
+		#set($orderNumber = $!orderDetail.orderNum)
+	#end
+	piwik.trackEcommerceOrderPiwik("$orderNumber", "$!orderDetail.total" ,"$!orderDetail.subtotal", "$!orderDetail.tax", "$!orderDetail.freight" ,("#if($orderDetail.discount > 0)true#elsefalse#end"));
 </script>
 <!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
 #end
@@ -375,25 +381,29 @@ $(document).ready(function () {
 			    //localStorage.setItem("itemName",'<a href="/itemDetailPage.action?codeId='+a+'">'+'</a>');
 			    location.href="/SendPageLink.action";
 		}
-		ga('require', 'ecommerce');
-		ga('ecommerce:addTransaction', {
-		'id': '$orderDetail.erpOrderNumber', // Transaction ID. Required.
-		'affiliation': '$orderDetail.shipState', // Affiliation or store name.
-		'revenue': '$orderDetail.total', // Grand Total. No currency signs or commas.
-		'shipping': '$orderDetail.freight', // Shipping. No currency signs or commas.
-		'tax': '$orderDetail.tax' // Tax. No currency signs or commas.
-		});
-		#foreach($itemList in $orderItemList)
-		ga('ecommerce:addItem', {
-		'id': '$orderDetail.erpOrderNumber', // Transaction ID. Required. Must match ID from addTransaction.
-		'name': '$itemList.shortDesc', // Product name. Required. Escape quotation marks as needed.
-		'sku': '$itemList.partNumber', // SKU/code.
-		'category': '$itemList.categoryName', // Category or variation.
-		'price': '$itemList.unitPrice', // Unit price. No currency signs or commas.
-		'quantity': '$itemList.orderQty' // Quantity.
-		});
-		#end
-		ga('ecommerce:send'); //submits transaction to the Analytics servers
+		try{
+			ga('require', 'ecommerce');
+			ga('ecommerce:addTransaction', {
+			'id': '$orderDetail.erpOrderNumber', // Transaction ID. Required.
+			'affiliation': '$orderDetail.shipState', // Affiliation or store name.
+			'revenue': '$orderDetail.total', // Grand Total. No currency signs or commas.
+			'shipping': '$orderDetail.freight', // Shipping. No currency signs or commas.
+			'tax': '$orderDetail.tax' // Tax. No currency signs or commas.
+			});
+			#foreach($itemList in $orderItemList)
+			ga('ecommerce:addItem', {
+			'id': '$orderDetail.erpOrderNumber', // Transaction ID. Required. Must match ID from addTransaction.
+			'name': '$itemList.shortDesc', // Product name. Required. Escape quotation marks as needed.
+			'sku': '$itemList.partNumber', // SKU/code.
+			'category': '$itemList.categoryName', // Category or variation.
+			'price': '$itemList.unitPrice', // Unit price. No currency signs or commas.
+			'quantity': '$itemList.orderQty' // Quantity.
+			});
+			#end
+			ga('ecommerce:send'); //submits transaction to the Analytics servers
+		}catch(e){
+			console.log(e);
+		}
 	</script>
 #elseif($LayoutName=="PunchoutListDisplay")
 	<script type="text/javascript">		

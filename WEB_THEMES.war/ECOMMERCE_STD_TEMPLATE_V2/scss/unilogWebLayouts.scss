@@ -513,6 +513,7 @@ footer {
     font-size: 18px;
     text-transform: uppercase;
     font-family: $headingFont;
+	word-break: break-all;
 }
 
 .table {
