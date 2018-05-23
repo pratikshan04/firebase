@@ -1,1182 +1,1159 @@
 <script type="text/javascript"> 
 var tinyfck_field = "";
-			//<![CDATA[
-			
-			function openBannerList(){
-			window.parent.document.getElementById("cmsbannerform:cmsBannerList").click();
-			}
-			function openCSSList(){
-				window.parent.document.getElementById("cmscssEditorform:cssList").click();
-				}
-			function menubuilderList(){
-				window.parent.document.getElementById("cmsMenubuilderform:menubuilderList").click();
-				}
+//<![CDATA[
+function openBannerList(){
+	window.parent.document.getElementById("cmsbannerform:cmsBannerList").click();
+}
 
-			function cmsbannersmenubuilderList(){
-				window.parent.document.getElementById("cssmenuandbanner:cssmenuandbannerList").click();
-				document.cookie="MENUBUILDER_BTN_CLICKED";
-				}
+function openCSSList(){
+	window.parent.document.getElementById("cmscssEditorform:cssList").click();
+}
 
-			function cmsbannersmenubuilderList1(){
-				window.parent.document.getElementById("cssmenuandbanner:cssmenuandbannerList").click();
-				document.cookie="CSS_BTN_CLICKED";
-				}
-			function showPageProperty(){
-					jQuery("#addNewStaticFormId").toggle();
-					jQuery("#pageTab").toggle();
-					if(!jQuery("#addNewStaticFormId").is(":visible")){
-					jQuery("#seoTab").hide();
-					jQuery("#pageSaveForm").show();
-					}else{
-					if(!jQuery("#seoTab").is(":visible"))
-					jQuery("#pageSaveForm").show();
-					showCssTableDiv();
-					}
-				}
+function menubuilderList(){
+	window.parent.document.getElementById("cmsMenubuilderform:menubuilderList").click();
+}
 
-				function saveStaticPage(){
-					jQuery("#gm-canvas").unhighlight();
-					jQuery("#pageTab").show();
-					//switchPage();
-					jQuery("#addNewStaticFormId").show();
-					console.log("save function called");
-					var pageName = $("#pageName").val();
-					
-					var lang = "1";
-					var errMsg = "";
-					var isValid = true;
-					 if(pageName == '' || pageName == null){
-					   errMsg = "Please enter Page Name to save\n";
-					   isValid = false;
-					 }
-					 if($('#selectedWebsite').length>0 ){
-						 var siteId = $('#selectedWebsite').val();
-						 if(typeof siteId == undefined ||siteId == '' || siteId == null || siteId == -1){
-							 errMsg = errMsg + "Please select a Website\n";
-							 isValid = false;
-						 }
-					 }
-					 if(typeof lang == undefined ||lang == '' || lang == null || lang == -1){
-						 errMsg = errMsg + "Please select a Language\n";
-						 isValid = false;
-					 }
-					 if(!isValid){
-					 alert(errMsg);
-					 jQuery(".addStaticPage_innerWrap").show();
-					 return false;
-					 }
-					 generateTemplateImage();
-				}
+function cmsbannersmenubuilderList(){
+	window.parent.document.getElementById("cssmenuandbanner:cssmenuandbannerList").click();
+	document.cookie="MENUBUILDER_BTN_CLICKED";
+}
 
-				jQuery(document).ready(function(){
-					jQuery('.cimm_saveIcon,.cimm_publishIcon').on('click', stopNavigate);
-				});
-				function stopNavigate(){    
-					jQuery(window).off('beforeunload');
-				}
-				function warningPopUp(){
-					jQuery(window).on('beforeunload', function(){
-				         return '';
-				    });
-				}
+function cmsbannersmenubuilderList1(){
+	window.parent.document.getElementById("cssmenuandbanner:cssmenuandbannerList").click();
+	document.cookie="CSS_BTN_CLICKED";
+}
 
-				
-				
-				function generatePluginCode(){
-					jQuery(".cmsFeatureProduct").html("#cmsFeatureProduct($CIMM2VelocityTool.getFeaturedProduct($subsetId,$generalSubset))");
-					jQuery(".cmsFeatureBrand").html('#customTable($CIMM2VelocityTool.getCusomTableData("BRAND","Featured_Brand"))');
-					jQuery(".cmsFeatureManf").html('#customTable($CIMM2VelocityTool.getCusomTableData("BRAND","Featured_Manufacturer"))');
-				}
-				
-				function templateGenerator(name){
-					jQuery.ajax({
-						 type: "POST",
-						  url: name,
-					  success: function(msg){
-								jQuery("#mycanvas").html(msg);
-								initGridManager();
-								console.log(msg);
-							 }	
-						});
-				}
-			
-				 function saveContent(){	
-				 //generatePluginCode();
-				 jQuery("[data-select='bannerBlock']").each(function(i){
-					 jQuery(this).html("");
-				 });
-				 jQuery("[data-select='widget']").each(function(i){
-					 jQuery(this).html("");
-				 });
+function showPageProperty(){
+	jQuery("#addNewStaticFormId").toggle();
+	jQuery("#pageTab").toggle();
+	if(!jQuery("#addNewStaticFormId").is(":visible")){
+		jQuery("#seoTab").hide();
+		jQuery("#pageSaveForm").show();
+	}else{
+		if(!jQuery("#seoTab").is(":visible"))
+		jQuery("#pageSaveForm").show();
+		showCssTableDiv();
+	}
+}
 
-				 jQuery("[data-select='form']").each(function(i){
-					 jQuery(this).html("");
-				 });
-				 var newText = escapeHtmlEntities(jQuery("#gm-canvas").html());
-					$("#pageContent").val(newText);
-					console.log(jQuery("#gm-canvas").text());
-					generateJson();
-					 showAllIcons();
-					jQuery('.gm-preview').trigger("click");
-					
-				}	
-
-				 if(typeof escapeHtmlEntities == 'undefined') {
-				        escapeHtmlEntities = function (text) {
-				            return text.replace(/[\u00A0-\u2666<>\&]/g, function(c) {
-					            var charRep = (escapeHtmlEntities.entityTable[c.charCodeAt(0)] || "")
-					            if(charRep==""){
-					            	charRep = c ;
-						            }else{
-						            	charRep = '&' +  charRep + ';';
-							            }
-				                return charRep;
-				            });
-				        };
-
-				        // all HTML4 entities as defined here: http://www.w3.org/TR/html4/sgml/entities.html
-				        // added: amp, lt, gt, quot and apos
-				        escapeHtmlEntities.entityTable = {
-				            34 : 'quot', 
-				            39 : 'apos', 				             
-				            161 : 'iexcl', 
-				            162 : 'cent', 
-				            163 : 'pound', 
-				            164 : 'curren', 
-				            165 : 'yen', 
-				            166 : 'brvbar', 
-				            167 : 'sect', 
-				            168 : 'uml', 
-				            169 : 'copy', 
-				            170 : 'ordf', 
-				            171 : 'laquo', 
-				            172 : 'not', 
-				            173 : 'shy', 
-				            174 : 'reg', 
-				            175 : 'macr', 
-				            176 : 'deg', 
-				            177 : 'plusmn', 
-				            178 : 'sup2', 
-				            179 : 'sup3', 
-				            180 : 'acute', 
-				            181 : 'micro', 
-				            182 : 'para', 
-				            183 : 'middot', 
-				            184 : 'cedil', 
-				            185 : 'sup1', 
-				            186 : 'ordm', 
-				            187 : 'raquo', 
-				            188 : 'frac14', 
-				            189 : 'frac12', 
-				            190 : 'frac34', 
-				            191 : 'iquest', 
-				            192 : 'Agrave', 
-				            193 : 'Aacute', 
-				            194 : 'Acirc', 
-				            195 : 'Atilde', 
-				            196 : 'Auml', 
-				            197 : 'Aring', 
-				            198 : 'AElig', 
-				            199 : 'Ccedil', 
-				            200 : 'Egrave', 
-				            201 : 'Eacute', 
-				            202 : 'Ecirc', 
-				            203 : 'Euml', 
-				            204 : 'Igrave', 
-				            205 : 'Iacute', 
-				            206 : 'Icirc', 
-				            207 : 'Iuml', 
-				            208 : 'ETH', 
-				            209 : 'Ntilde', 
-				            210 : 'Ograve', 
-				            211 : 'Oacute', 
-				            212 : 'Ocirc', 
-				            213 : 'Otilde', 
-				            214 : 'Ouml', 
-				            215 : 'times', 
-				            216 : 'Oslash', 
-				            217 : 'Ugrave', 
-				            218 : 'Uacute', 
-				            219 : 'Ucirc', 
-				            220 : 'Uuml', 
-				            221 : 'Yacute', 
-				            222 : 'THORN', 
-				            223 : 'szlig', 
-				            224 : 'agrave', 
-				            225 : 'aacute', 
-				            226 : 'acirc', 
-				            227 : 'atilde', 
-				            228 : 'auml', 
-				            229 : 'aring', 
-				            230 : 'aelig', 
-				            231 : 'ccedil', 
-				            232 : 'egrave', 
-				            233 : 'eacute', 
-				            234 : 'ecirc', 
-				            235 : 'euml', 
-				            236 : 'igrave', 
-				            237 : 'iacute', 
-				            238 : 'icirc', 
-				            239 : 'iuml', 
-				            240 : 'eth', 
-				            241 : 'ntilde', 
-				            242 : 'ograve', 
-				            243 : 'oacute', 
-				            244 : 'ocirc', 
-				            245 : 'otilde', 
-				            246 : 'ouml', 
-				            247 : 'divide', 
-				            248 : 'oslash', 
-				            249 : 'ugrave', 
-				            250 : 'uacute', 
-				            251 : 'ucirc', 
-				            252 : 'uuml', 
-				            253 : 'yacute', 
-				            254 : 'thorn', 
-				            255 : 'yuml', 
-				            402 : 'fnof', 
-				            913 : 'Alpha', 
-				            914 : 'Beta', 
-				            915 : 'Gamma', 
-				            916 : 'Delta', 
-				            917 : 'Epsilon', 
-				            918 : 'Zeta', 
-				            919 : 'Eta', 
-				            920 : 'Theta', 
-				            921 : 'Iota', 
-				            922 : 'Kappa', 
-				            923 : 'Lambda', 
-				            924 : 'Mu', 
-				            925 : 'Nu', 
-				            926 : 'Xi', 
-				            927 : 'Omicron', 
-				            928 : 'Pi', 
-				            929 : 'Rho', 
-				            931 : 'Sigma', 
-				            932 : 'Tau', 
-				            933 : 'Upsilon', 
-				            934 : 'Phi', 
-				            935 : 'Chi', 
-				            936 : 'Psi', 
-				            937 : 'Omega', 
-				            945 : 'alpha', 
-				            946 : 'beta', 
-				            947 : 'gamma', 
-				            948 : 'delta', 
-				            949 : 'epsilon', 
-				            950 : 'zeta', 
-				            951 : 'eta', 
-				            952 : 'theta', 
-				            953 : 'iota', 
-				            954 : 'kappa', 
-				            955 : 'lambda', 
-				            956 : 'mu', 
-				            957 : 'nu', 
-				            958 : 'xi', 
-				            959 : 'omicron', 
-				            960 : 'pi', 
-				            961 : 'rho', 
-				            962 : 'sigmaf', 
-				            963 : 'sigma', 
-				            964 : 'tau', 
-				            965 : 'upsilon', 
-				            966 : 'phi', 
-				            967 : 'chi', 
-				            968 : 'psi', 
-				            969 : 'omega', 
-				            977 : 'thetasym', 
-				            978 : 'upsih', 
-				            982 : 'piv', 
-				            8226 : 'bull', 
-				            8230 : 'hellip', 
-				            8242 : 'prime', 
-				            8243 : 'Prime', 
-				            8254 : 'oline', 
-				            8260 : 'frasl', 
-				            8472 : 'weierp', 
-				            8465 : 'image', 
-				            8476 : 'real', 
-				            8482 : 'trade', 
-				            8501 : 'alefsym', 
-				            8592 : 'larr', 
-				            8593 : 'uarr', 
-				            8594 : 'rarr', 
-				            8595 : 'darr', 
-				            8596 : 'harr', 
-				            8629 : 'crarr', 
-				            8656 : 'lArr', 
-				            8657 : 'uArr', 
-				            8658 : 'rArr', 
-				            8659 : 'dArr', 
-				            8660 : 'hArr', 
-				            8704 : 'forall', 
-				            8706 : 'part', 
-				            8707 : 'exist', 
-				            8709 : 'empty', 
-				            8711 : 'nabla', 
-				            8712 : 'isin', 
-				            8713 : 'notin', 
-				            8715 : 'ni', 
-				            8719 : 'prod', 
-				            8721 : 'sum', 
-				            8722 : 'minus', 
-				            8727 : 'lowast', 
-				            8730 : 'radic', 
-				            8733 : 'prop', 
-				            8734 : 'infin', 
-				            8736 : 'ang', 
-				            8743 : 'and', 
-				            8744 : 'or', 
-				            8745 : 'cap', 
-				            8746 : 'cup', 
-				            8747 : 'int', 
-				            8756 : 'there4', 
-				            8764 : 'sim', 
-				            8773 : 'cong', 
-				            8776 : 'asymp', 
-				            8800 : 'ne', 
-				            8801 : 'equiv', 
-				            8804 : 'le', 
-				            8805 : 'ge', 
-				            8834 : 'sub', 
-				            8835 : 'sup', 
-				            8836 : 'nsub', 
-				            8838 : 'sube', 
-				            8839 : 'supe', 
-				            8853 : 'oplus', 
-				            8855 : 'otimes', 
-				            8869 : 'perp', 
-				            8901 : 'sdot', 
-				            8968 : 'lceil', 
-				            8969 : 'rceil', 
-				            8970 : 'lfloor', 
-				            8971 : 'rfloor', 
-				            9001 : 'lang', 
-				            9002 : 'rang', 
-				            9674 : 'loz', 
-				            9824 : 'spades', 
-				            9827 : 'clubs', 
-				            9829 : 'hearts', 
-				            9830 : 'diams', 
-				            338 : 'OElig', 
-				            339 : 'oelig', 
-				            352 : 'Scaron', 
-				            353 : 'scaron', 
-				            376 : 'Yuml', 
-				            710 : 'circ', 
-				            732 : 'tilde', 
-				            8194 : 'ensp', 
-				            8195 : 'emsp', 
-				            8201 : 'thinsp', 
-				            8204 : 'zwnj', 
-				            8205 : 'zwj', 
-				            8206 : 'lrm', 
-				            8207 : 'rlm', 
-				            8211 : 'ndash', 
-				            8212 : 'mdash', 
-				            8216 : 'lsquo', 
-				            8217 : 'rsquo', 
-				            8218 : 'sbquo', 
-				            8220 : 'ldquo', 
-				            8221 : 'rdquo', 
-				            8222 : 'bdquo', 
-				            8224 : 'dagger', 
-				            8225 : 'Dagger', 
-				            8240 : 'permil', 
-				            8249 : 'lsaquo', 
-				            8250 : 'rsaquo', 
-				            8364 : 'euro'
-				        };
-				    }
-					function convertHtmlEntities(){
-						var content = jQuery("#gm-canvas").html();
-						content = content.replace(/™/g, "&trade;");
-						content = content.replace(/¡/,"&iexcl;");
-						content = content.replace(/¢/,"&cent;");
-						content = content.replace(/£/,"&pound;");
-						content = content.replace(/¤/,"&curren;");
-						content = content.replace(/¥/,"&yen;");
-						content = content.replace(/¦/,"&brvbar;");
-						content = content.replace(/§/,"&sect;");
-						content = content.replace(/¨/,"&uml;");
-						content = content.replace(/©/,"&copy;");
-						content = content.replace(/ª/,"&ordf;");
-						content = content.replace(/«/,"&laquo;");
-						content = content.replace(/¬/,"&not;");
-						content = content.replace(/®/,"&reg;");
-						content = content.replace(/¯/,"&macr;");
-						content = content.replace(/°/,"&deg;");
-						content = content.replace(/±/,"&plusmn;");
-						content = content.replace(/²/,"&sup2;");
-						content = content.replace(/³/,"&sup3;");
-						content = content.replace(/´/,"&acute;");
-						content = content.replace(/µ/,"&micro;");
-						content = content.replace(/¶/,"&para;");
-						content = content.replace(/·/,"&middot;");
-						content = content.replace(/¸/,"&cedil;");
-						content = content.replace(/¹/,"&sup1;");
-						content = content.replace(/º/,"&ordm;");
-						content = content.replace(/»/,"&raquo;");
-						content = content.replace(/¼/,"&frac14;");
-						content = content.replace(/½/,"&frac12;");
-						content = content.replace(/¾/,"&frac34;");
-						content = content.replace(/¿/,"&iquest;");
-						content = content.replace(/×/,"&times;");
-						content = content.replace(/÷/,"&divide;");
-						content = content.replace(/À/,"&Agrave;");
-						content = content.replace(/Á/,"&Aacute;");
-						content = content.replace(/Â/,"&Acirc;");
-						content = content.replace(/Ã/,"&Atilde;");
-						content = content.replace(/Ä/,"&Auml;");
-						content = content.replace(/Å/,"&Aring;");
-						content = content.replace(/Æ/,"&AElig;");
-						content = content.replace(/Ç/,"&Ccedil;");
-						content = content.replace(/È/,"&Egrave;");
-						content = content.replace(/É/,"&Eacute;");
-						content = content.replace(/Ê/,"&Ecirc;");
-						content = content.replace(/Ë/,"&Euml;");
-						content = content.replace(/Ì/,"&Igrave;");
-						content = content.replace(/Í/,"&Iacute;");
-						content = content.replace(/Î/,"&Icirc;");
-						content = content.replace(/Ï/,"&Iuml;");
-						content = content.replace(/Ð/,"&ETH;");
-						content = content.replace(/Ñ/,"&Ntilde;");
-						content = content.replace(/Ò/,"&Ograve;");
-						content = content.replace(/Ó/,"&Oacute;");
-						content = content.replace(/Ô/,"&Ocirc;");
-						content = content.replace(/Õ/,"&Otilde;");
-						content = content.replace(/Ö/,"&Ouml;");
-						content = content.replace(/Ø/,"&Oslash;");
-						content = content.replace(/Ù/,"&Ugrave;");
-						content = content.replace(/Ú/,"&Uacute;");
-						content = content.replace(/Û/,"&Ucirc;");
-						content = content.replace(/Ü/,"&Uuml;");
-						content = content.replace(/Ý/,"&Yacute;");
-						content = content.replace(/Þ/,"&THORN;");
-						content = content.replace(/ß/,"&szlig;");
-						content = content.replace(/à/,"&agrave;");
-						content = content.replace(/á/,"&aacute;");
-						content = content.replace(/â/,"&acirc;");
-						content = content.replace(/ã/,"&atilde;");
-						content = content.replace(/ä/,"&auml;");
-						content = content.replace(/å/,"&aring;");
-						content = content.replace(/æ/,"&aelig;");
-						content = content.replace(/ç/,"&ccedil;");
-						content = content.replace(/è/,"&egrave;");
-						content = content.replace(/é/,"&eacute;");
-						content = content.replace(/ê/,"&ecirc;");
-						content = content.replace(/ë/,"&euml;");
-						content = content.replace(/ì/,"&igrave;");
-						content = content.replace(/í/,"&iacute;");
-						content = content.replace(/î/,"&icirc;");
-						content = content.replace(/ï/,"&iuml;");
-						content = content.replace(/ð/,"&eth;");
-						content = content.replace(/ñ/,"&ntilde;");
-						content = content.replace(/ò/,"&ograve;");
-						content = content.replace(/ó/,"&oacute;");
-						content = content.replace(/ô/,"&ocirc;");
-						content = content.replace(/õ/,"&otilde;");
-						content = content.replace(/ö/,"&ouml;");
-						content = content.replace(/ø/,"&oslash;");
-						content = content.replace(/ù/,"&ugrave;");
-						content = content.replace(/ú/,"&uacute;");
-						content = content.replace(/û/,"&ucirc;");
-						content = content.replace(/ü/,"&uuml;");
-						content = content.replace(/ý/,"&yacute;");
-						content = content.replace(/þ/,"&thorn;");
-						content = content.replace(/ÿ/,"&yuml;");
-												
-							return content;
-					}
-
-				 jQuery(document).ready(function(){
-						var autoSaveTime= 12;//document.getElementById('autocntntId').value;	
-						
-				 setInterval(function() { 
-						    //alert("autosave"+autoSaveTime);
-							//alert("autoSaveTime in minutes"+autoSaveTime*60000);
-							document.getElementById("autocntntId").value = document.getElementById("gm-canvas").innerHTML ;
-							var  pageName= document.getElementById("addNewStaticFormId:pageNameID").value;
-							var langName = document.getElementById("addNewStaticFormId:locid2").value;
-					        if(langName != -1 && pageName != ''){
-						    document.getElementById("addNewStaticFormId:autoSaveId").click();
-					        window.onbeforeunload = null;
-						  }
-							},(autoSaveTime*60000));
-						});	
-			//]]>
-			</script>
-			<script type="text/javascript">
-				//<![CDATA[
-				
-				function saveAndPublish(){
-					document.getElementById("status").value='PUBLISH';
-					saveStaticPage();
-				}
-				
-				function resetEditor(){
-					hideAllIcons();
-					jQuery("#pageTab,#addNewStaticFormId").hide();
-					document.getElementById("gm-canvas").innerHTML = "";
-					document.getElementById("templateValuesId").value = "";
-				}
-
-				function generateTemplateImage(){ 
-					generateHtmlCanvasImage();
-			      }
-
-
-				  function generateHtmlCanvasImage(){
-				jQuery('.gm-preview').trigger("click");
-					 html2canvas([document.getElementById('gm-canvas')], {
-				         onrendered: function (canvas) {
-				         var data = canvas.toDataURL('image/png');
-				         jQuery("#templateImage").attr("src",data);
-						 jQuery("#canvasImage").html("<img src='"+data+"' style='width:150px;height:150px;' />");
-				        // document.getElementById("tempImageId").value = data ;	 
-						 console.log("Inside html canvas +: "+ data);
-						saveThumbnail();
-						
-						
-				    }
-				   });
-				}
-				
-				function saveThumbnail(){
-				
-				html2canvas([document.getElementById('canvasImage')], {
-				         onrendered: function (canvas) {
-				         var data = canvas.toDataURL('image/png');
-				         jQuery("#templateImage").attr("src",data);
-						 jQuery("#canvasImage").html("");
-				         document.getElementById("tempImageId").value = data ;	 
-						 console.log("Inside html canvas thumbnail +: "+ data);
-						//saveThumbnail();
-						saveContent();
-						
-				    }
-				   });
-				
-				
-				}
-				
-				function initLayoutButtons()
-				{
-					var options = {
-							$AutoPlay: false,
-				             $AutoPlaySteps: 1,
-				             $SlideDuration: 160,
-				             $SlideWidth: 50,
-				             $SlideSpacing: 10,
-				             $Cols: 8,
-				             $ArrowNavigatorOptions: {
-				               $Class: $JssorArrowNavigator$,
-				               $Steps: 1
-				             },
-				             $BulletNavigatorOptions: {
-				               $Class: $JssorBulletNavigator$,
-				               $SpacingX: 1,
-				               $SpacingY: 1
-				             }
-				};
-
-				var jssor_slider1 = new $JssorSlider$("layoutCarousel", options);
-
-				//responsive code begin
-				//you can remove responsive code if you don't want the slider scales while window resizes
-				function ScaleSlider() {
-					var bodyWidth = document.body.clientWidth;
-					if (bodyWidth)
-						jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 600));
-					else
-						window.setTimeout(ScaleSlider, 30);
-				}
+function saveStaticPage(){
+	jQuery("#gm-canvas").unhighlight();
+	jQuery("#pageTab").show();
+	//switchPage();
+	jQuery("#addNewStaticFormId").show();
+	console.log("save function called");
+	var pageName = $("#pageName").val();
 	
-				ScaleSlider();
-				if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-					$(window).bind('resize', ScaleSlider);
-				}
-			}
+	var lang = "1";
+	var errMsg = "";
+	var isValid = true;
+	 if(pageName == '' || pageName == null){
+	   errMsg = "Please enter Page Name to save\n";
+	   isValid = false;
+	 }
+	 if($('#selectedWebsite').length>0 ){
+		 var siteId = $('#selectedWebsite').val();
+		 if(typeof siteId == undefined ||siteId == '' || siteId == null || siteId == -1){
+			 errMsg = errMsg + "Please select a Website\n";
+			 isValid = false;
+		 }
+	 }
+	 if(typeof lang == undefined ||lang == '' || lang == null || lang == -1){
+		 errMsg = errMsg + "Please select a Language\n";
+		 isValid = false;
+	 }
+	 if(!isValid){
+	 alert(errMsg);
+	 jQuery(".addStaticPage_innerWrap").show();
+	 return false;
+	 }
+	 generateTemplateImage();
+}
+
+jQuery(document).ready(function(){
+	jQuery('.cimm_saveIcon,.cimm_publishIcon').on('click', stopNavigate);
+});
+
+function stopNavigate(){    
+	jQuery(window).off('beforeunload');
+}
+
+function warningPopUp(){
+	jQuery(window).on('beforeunload', function(){
+         return '';
+    });
+}
+	
+function generatePluginCode(){
+	jQuery(".cmsFeatureProduct").html("#cmsFeatureProduct($CIMM2VelocityTool.getFeaturedProduct($subsetId,$generalSubset))");
+	jQuery(".cmsFeatureBrand").html('#customTable($CIMM2VelocityTool.getCusomTableData("BRAND","Featured_Brand"))');
+	jQuery(".cmsFeatureManf").html('#customTable($CIMM2VelocityTool.getCusomTableData("BRAND","Featured_Manufacturer"))');
+}
+
+function templateGenerator(name){
+jQuery.ajax({
+	type: "POST",
+	url: name,
+  	success: function(msg){
+			jQuery("#mycanvas").html(msg);
+			initGridManager();
+			console.log(msg);
+		 }	
+	});
+}
+
+ function saveContent(){	
+ //generatePluginCode();
+	 jQuery("[data-select='bannerBlock']").each(function(i){
+		 jQuery(this).html("");
+	 });
+	 jQuery("[data-select='widget']").each(function(i){
+		 jQuery(this).html("");
+	 });
+	 jQuery("[data-select='form']").each(function(i){
+		 jQuery(this).html("");
+	 });
+ 	var newText = escapeHtmlEntities(jQuery("#gm-canvas").html());
+	$("#pageContent").val(newText);
+	console.log(jQuery("#gm-canvas").text());
+	generateJson();
+	 showAllIcons();
+	jQuery('.gm-preview').trigger("click");
+}	
+
+if(typeof escapeHtmlEntities == 'undefined') {
+    escapeHtmlEntities = function (text) {
+         return text.replace(/[\u00A0-\u2666<>\&]/g, function(c) {
+          var charRep = (escapeHtmlEntities.entityTable[c.charCodeAt(0)] || "")
+          if(charRep==""){
+          	charRep = c ;
+           }else{
+           	charRep = '&' +  charRep + ';';
+            }
+             return charRep;
+         });
+     };
+
+     // all HTML4 entities as defined here: http://www.w3.org/TR/html4/sgml/entities.html
+     // added: amp, lt, gt, quot and apos
+     escapeHtmlEntities.entityTable = {
+         34 : 'quot', 
+         39 : 'apos', 				             
+         161 : 'iexcl', 
+         162 : 'cent', 
+         163 : 'pound', 
+         164 : 'curren', 
+         165 : 'yen', 
+         166 : 'brvbar', 
+         167 : 'sect', 
+         168 : 'uml', 
+         169 : 'copy', 
+         170 : 'ordf', 
+         171 : 'laquo', 
+         172 : 'not', 
+         173 : 'shy', 
+         174 : 'reg', 
+         175 : 'macr', 
+         176 : 'deg', 
+         177 : 'plusmn', 
+         178 : 'sup2', 
+         179 : 'sup3', 
+         180 : 'acute', 
+         181 : 'micro', 
+         182 : 'para', 
+         183 : 'middot', 
+         184 : 'cedil', 
+         185 : 'sup1', 
+         186 : 'ordm', 
+         187 : 'raquo', 
+         188 : 'frac14', 
+         189 : 'frac12', 
+         190 : 'frac34', 
+         191 : 'iquest', 
+         192 : 'Agrave', 
+         193 : 'Aacute', 
+         194 : 'Acirc', 
+         195 : 'Atilde', 
+         196 : 'Auml', 
+         197 : 'Aring', 
+         198 : 'AElig', 
+         199 : 'Ccedil', 
+         200 : 'Egrave', 
+         201 : 'Eacute', 
+         202 : 'Ecirc', 
+         203 : 'Euml', 
+         204 : 'Igrave', 
+         205 : 'Iacute', 
+         206 : 'Icirc', 
+         207 : 'Iuml', 
+         208 : 'ETH', 
+         209 : 'Ntilde', 
+         210 : 'Ograve', 
+         211 : 'Oacute', 
+         212 : 'Ocirc', 
+         213 : 'Otilde', 
+         214 : 'Ouml', 
+         215 : 'times', 
+         216 : 'Oslash', 
+         217 : 'Ugrave', 
+         218 : 'Uacute', 
+         219 : 'Ucirc', 
+         220 : 'Uuml', 
+         221 : 'Yacute', 
+         222 : 'THORN', 
+         223 : 'szlig', 
+         224 : 'agrave', 
+         225 : 'aacute', 
+         226 : 'acirc', 
+         227 : 'atilde', 
+         228 : 'auml', 
+         229 : 'aring', 
+         230 : 'aelig', 
+         231 : 'ccedil', 
+         232 : 'egrave', 
+         233 : 'eacute', 
+         234 : 'ecirc', 
+         235 : 'euml', 
+         236 : 'igrave', 
+         237 : 'iacute', 
+         238 : 'icirc', 
+         239 : 'iuml', 
+         240 : 'eth', 
+         241 : 'ntilde', 
+         242 : 'ograve', 
+         243 : 'oacute', 
+         244 : 'ocirc', 
+         245 : 'otilde', 
+         246 : 'ouml', 
+         247 : 'divide', 
+         248 : 'oslash', 
+         249 : 'ugrave', 
+         250 : 'uacute', 
+         251 : 'ucirc', 
+         252 : 'uuml', 
+         253 : 'yacute', 
+         254 : 'thorn', 
+         255 : 'yuml', 
+         402 : 'fnof', 
+         913 : 'Alpha', 
+         914 : 'Beta', 
+         915 : 'Gamma', 
+         916 : 'Delta', 
+         917 : 'Epsilon', 
+         918 : 'Zeta', 
+         919 : 'Eta', 
+         920 : 'Theta', 
+         921 : 'Iota', 
+         922 : 'Kappa', 
+         923 : 'Lambda', 
+         924 : 'Mu', 
+         925 : 'Nu', 
+         926 : 'Xi', 
+         927 : 'Omicron', 
+         928 : 'Pi', 
+         929 : 'Rho', 
+         931 : 'Sigma', 
+         932 : 'Tau', 
+         933 : 'Upsilon', 
+         934 : 'Phi', 
+         935 : 'Chi', 
+         936 : 'Psi', 
+         937 : 'Omega', 
+         945 : 'alpha', 
+         946 : 'beta', 
+         947 : 'gamma', 
+         948 : 'delta', 
+         949 : 'epsilon', 
+         950 : 'zeta', 
+         951 : 'eta', 
+         952 : 'theta', 
+         953 : 'iota', 
+         954 : 'kappa', 
+         955 : 'lambda', 
+         956 : 'mu', 
+         957 : 'nu', 
+         958 : 'xi', 
+         959 : 'omicron', 
+         960 : 'pi', 
+         961 : 'rho', 
+         962 : 'sigmaf', 
+         963 : 'sigma', 
+         964 : 'tau', 
+         965 : 'upsilon', 
+         966 : 'phi', 
+         967 : 'chi', 
+         968 : 'psi', 
+         969 : 'omega', 
+         977 : 'thetasym', 
+         978 : 'upsih', 
+         982 : 'piv', 
+         8226 : 'bull', 
+         8230 : 'hellip', 
+         8242 : 'prime', 
+         8243 : 'Prime', 
+         8254 : 'oline', 
+         8260 : 'frasl', 
+         8472 : 'weierp', 
+         8465 : 'image', 
+         8476 : 'real', 
+         8482 : 'trade', 
+         8501 : 'alefsym', 
+         8592 : 'larr', 
+         8593 : 'uarr', 
+         8594 : 'rarr', 
+         8595 : 'darr', 
+         8596 : 'harr', 
+         8629 : 'crarr', 
+         8656 : 'lArr', 
+         8657 : 'uArr', 
+         8658 : 'rArr', 
+         8659 : 'dArr', 
+         8660 : 'hArr', 
+         8704 : 'forall', 
+         8706 : 'part', 
+         8707 : 'exist', 
+         8709 : 'empty', 
+         8711 : 'nabla', 
+         8712 : 'isin', 
+         8713 : 'notin', 
+         8715 : 'ni', 
+         8719 : 'prod', 
+         8721 : 'sum', 
+         8722 : 'minus', 
+         8727 : 'lowast', 
+         8730 : 'radic', 
+         8733 : 'prop', 
+         8734 : 'infin', 
+         8736 : 'ang', 
+         8743 : 'and', 
+         8744 : 'or', 
+         8745 : 'cap', 
+         8746 : 'cup', 
+         8747 : 'int', 
+         8756 : 'there4', 
+         8764 : 'sim', 
+         8773 : 'cong', 
+         8776 : 'asymp', 
+         8800 : 'ne', 
+         8801 : 'equiv', 
+         8804 : 'le', 
+         8805 : 'ge', 
+         8834 : 'sub', 
+         8835 : 'sup', 
+         8836 : 'nsub', 
+         8838 : 'sube', 
+         8839 : 'supe', 
+         8853 : 'oplus', 
+         8855 : 'otimes', 
+         8869 : 'perp', 
+         8901 : 'sdot', 
+         8968 : 'lceil', 
+         8969 : 'rceil', 
+         8970 : 'lfloor', 
+         8971 : 'rfloor', 
+         9001 : 'lang', 
+         9002 : 'rang', 
+         9674 : 'loz', 
+         9824 : 'spades', 
+         9827 : 'clubs', 
+         9829 : 'hearts', 
+         9830 : 'diams', 
+         338 : 'OElig', 
+         339 : 'oelig', 
+         352 : 'Scaron', 
+         353 : 'scaron', 
+         376 : 'Yuml', 
+         710 : 'circ', 
+         732 : 'tilde', 
+         8194 : 'ensp', 
+         8195 : 'emsp', 
+         8201 : 'thinsp', 
+         8204 : 'zwnj', 
+         8205 : 'zwj', 
+         8206 : 'lrm', 
+         8207 : 'rlm', 
+         8211 : 'ndash', 
+         8212 : 'mdash', 
+         8216 : 'lsquo', 
+         8217 : 'rsquo', 
+         8218 : 'sbquo', 
+         8220 : 'ldquo', 
+         8221 : 'rdquo', 
+         8222 : 'bdquo', 
+         8224 : 'dagger', 
+         8225 : 'Dagger', 
+         8240 : 'permil', 
+         8249 : 'lsaquo', 
+         8250 : 'rsaquo', 
+         8364 : 'euro'
+     };
+}
+
+function convertHtmlEntities(){
+	var content = jQuery("#gm-canvas").html();
+	content = content.replace(/™/g, "&trade;");
+	content = content.replace(/¡/,"&iexcl;");
+	content = content.replace(/¢/,"&cent;");
+	content = content.replace(/£/,"&pound;");
+	content = content.replace(/¤/,"&curren;");
+	content = content.replace(/¥/,"&yen;");
+	content = content.replace(/¦/,"&brvbar;");
+	content = content.replace(/§/,"&sect;");
+	content = content.replace(/¨/,"&uml;");
+	content = content.replace(/©/,"&copy;");
+	content = content.replace(/ª/,"&ordf;");
+	content = content.replace(/«/,"&laquo;");
+	content = content.replace(/¬/,"&not;");
+	content = content.replace(/®/,"&reg;");
+	content = content.replace(/¯/,"&macr;");
+	content = content.replace(/°/,"&deg;");
+	content = content.replace(/±/,"&plusmn;");
+	content = content.replace(/²/,"&sup2;");
+	content = content.replace(/³/,"&sup3;");
+	content = content.replace(/´/,"&acute;");
+	content = content.replace(/µ/,"&micro;");
+	content = content.replace(/¶/,"&para;");
+	content = content.replace(/·/,"&middot;");
+	content = content.replace(/¸/,"&cedil;");
+	content = content.replace(/¹/,"&sup1;");
+	content = content.replace(/º/,"&ordm;");
+	content = content.replace(/»/,"&raquo;");
+	content = content.replace(/¼/,"&frac14;");
+	content = content.replace(/½/,"&frac12;");
+	content = content.replace(/¾/,"&frac34;");
+	content = content.replace(/¿/,"&iquest;");
+	content = content.replace(/×/,"&times;");
+	content = content.replace(/÷/,"&divide;");
+	content = content.replace(/À/,"&Agrave;");
+	content = content.replace(/Á/,"&Aacute;");
+	content = content.replace(/Â/,"&Acirc;");
+	content = content.replace(/Ã/,"&Atilde;");
+	content = content.replace(/Ä/,"&Auml;");
+	content = content.replace(/Å/,"&Aring;");
+	content = content.replace(/Æ/,"&AElig;");
+	content = content.replace(/Ç/,"&Ccedil;");
+	content = content.replace(/È/,"&Egrave;");
+	content = content.replace(/É/,"&Eacute;");
+	content = content.replace(/Ê/,"&Ecirc;");
+	content = content.replace(/Ë/,"&Euml;");
+	content = content.replace(/Ì/,"&Igrave;");
+	content = content.replace(/Í/,"&Iacute;");
+	content = content.replace(/Î/,"&Icirc;");
+	content = content.replace(/Ï/,"&Iuml;");
+	content = content.replace(/Ð/,"&ETH;");
+	content = content.replace(/Ñ/,"&Ntilde;");
+	content = content.replace(/Ò/,"&Ograve;");
+	content = content.replace(/Ó/,"&Oacute;");
+	content = content.replace(/Ô/,"&Ocirc;");
+	content = content.replace(/Õ/,"&Otilde;");
+	content = content.replace(/Ö/,"&Ouml;");
+	content = content.replace(/Ø/,"&Oslash;");
+	content = content.replace(/Ù/,"&Ugrave;");
+	content = content.replace(/Ú/,"&Uacute;");
+	content = content.replace(/Û/,"&Ucirc;");
+	content = content.replace(/Ü/,"&Uuml;");
+	content = content.replace(/Ý/,"&Yacute;");
+	content = content.replace(/Þ/,"&THORN;");
+	content = content.replace(/ß/,"&szlig;");
+	content = content.replace(/à/,"&agrave;");
+	content = content.replace(/á/,"&aacute;");
+	content = content.replace(/â/,"&acirc;");
+	content = content.replace(/ã/,"&atilde;");
+	content = content.replace(/ä/,"&auml;");
+	content = content.replace(/å/,"&aring;");
+	content = content.replace(/æ/,"&aelig;");
+	content = content.replace(/ç/,"&ccedil;");
+	content = content.replace(/è/,"&egrave;");
+	content = content.replace(/é/,"&eacute;");
+	content = content.replace(/ê/,"&ecirc;");
+	content = content.replace(/ë/,"&euml;");
+	content = content.replace(/ì/,"&igrave;");
+	content = content.replace(/í/,"&iacute;");
+	content = content.replace(/î/,"&icirc;");
+	content = content.replace(/ï/,"&iuml;");
+	content = content.replace(/ð/,"&eth;");
+	content = content.replace(/ñ/,"&ntilde;");
+	content = content.replace(/ò/,"&ograve;");
+	content = content.replace(/ó/,"&oacute;");
+	content = content.replace(/ô/,"&ocirc;");
+	content = content.replace(/õ/,"&otilde;");
+	content = content.replace(/ö/,"&ouml;");
+	content = content.replace(/ø/,"&oslash;");
+	content = content.replace(/ù/,"&ugrave;");
+	content = content.replace(/ú/,"&uacute;");
+	content = content.replace(/û/,"&ucirc;");
+	content = content.replace(/ü/,"&uuml;");
+	content = content.replace(/ý/,"&yacute;");
+	content = content.replace(/þ/,"&thorn;");
+	content = content.replace(/ÿ/,"&yuml;");
+	return content;
+}
+
+jQuery(document).ready(function(){
+	var autoSaveTime= 12;//document.getElementById('autocntntId').value;	
+	setInterval(function() { 
+	    //alert("autosave"+autoSaveTime);
+		//alert("autoSaveTime in minutes"+autoSaveTime*60000);
+		document.getElementById("autocntntId").value = document.getElementById("gm-canvas").innerHTML ;
+		var  pageName= document.getElementById("addNewStaticFormId:pageNameID").value;
+		var langName = document.getElementById("addNewStaticFormId:locid2").value;
+        if(langName != -1 && pageName != ''){
+	    document.getElementById("addNewStaticFormId:autoSaveId").click();
+        window.onbeforeunload = null;
+	  }
+		},(autoSaveTime*60000));
+	});	
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+				
+function saveAndPublish(){
+	document.getElementById("status").value='PUBLISH';
+	saveStaticPage();
+}
+				
+function resetEditor(){
+	hideAllIcons();
+	jQuery("#pageTab,#addNewStaticFormId").hide();
+	document.getElementById("gm-canvas").innerHTML = "";
+	document.getElementById("templateValuesId").value = "";
+}
+
+function generateTemplateImage(){ 
+	generateHtmlCanvasImage();
+}
+
+function generateHtmlCanvasImage(){
+jQuery('.gm-preview').trigger("click");
+	 html2canvas([document.getElementById('gm-canvas')], {
+         onrendered: function (canvas) {
+         var data = canvas.toDataURL('image/png');
+         jQuery("#templateImage").attr("src",data);
+		 jQuery("#canvasImage").html("<img src='"+data+"' style='width:150px;height:150px;' />");
+        // document.getElementById("tempImageId").value = data ;	 
+		 console.log("Inside html canvas +: "+ data);
+		saveThumbnail();
 		
-			/** global gridManager Instance **/
-			var gridManagerCanvasId= "#gm-canvas";
-			var unilogCMSContainerId = "#mycanvas";
-			var errorId;
-			var gm;
-
-			jQuery(document).ready(function() {
-				jQuery("#addNewStaticFormId").hide();
-					try{
-						init3rdpartLibs();
-						/** Custom handle for responsive behavior on desktop top*/
-						preventScreenFromSliding(); 
-						/** Handle  CMS behaior*/
-						handleCMSEvents();							
-						}catch(err) {
-							// jQuery('#errDiv').html( err.stack);
-					}
-					
-					 
-			});
-
-			function initInitalBanner(){
-
-				jQuery("[data-select='bannerBlock']").each(function(i){
-					var bannerListId = jQuery(this).data("bannerid");
-					if(typeof bannerListId!="undefined" && bannerListId!=""){
-						refreshBanner(bannerListId,i);
-					}
-				 });
-			}
-
-			var refreshBanner = function(bannerId,index){
-				console.log("bannerId : " + bannerId + "-" + index);
-
-
-				jQuery.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId+"&reload=false", function(data) {
-					
-					var bannerData = "";
-					if(data.hasOwnProperty('bannerTemplate')){
-						var bannerTemplate = data.bannerTemplate;
-						var dynamicProperties = data.dynamicProperties;
-						var bannerType = dynamicProperties.bannerType;
-						var transistion = "";
-						var carouselSetting = "";
-						
-						if(typeof dynamicProperties.bannerTransistion!='undefined'){
-							transistion = dynamicProperties.bannerTransistion;
-						}
-						
-						if(typeof dynamicProperties.carouselSetting!='undefined'){
-							carouselSetting = dynamicProperties.carouselSetting;
-						}
-						
-						jQuery("[data-bannerid='"+bannerId+"']").each(function(){
-							bannerData = data.bannerTemplate;
-							var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
-							console.log("Wrapper id :"+sliderId);
-							
-							 bannerData = bannerData.replace("slidercontainer",sliderId);
-							 if(typeof bannerType=="undefined"){
-								 bannerType="slider";
-								 }
-							jQuery(this).html(bannerData);
-							initContextMenu("#"+sliderId); 
-							if(bannerType=="slider"){
-								initJssorSlides(sliderId,transistion);
-								}else if(bannerType=="carousel"){
-									initCarousel(sliderId,carouselSetting);
-								}
-							
-							
-						});
-					}
-				});
-				
 		
-	
-
+    }
+   });
+}
 				
-			};
-			
-			function initInitalBannerOld(){
-				 jQuery("div[id$='_container']").each(function() {
-				     var bannerDIvId = jQuery(this).attr("id");
-				     jQuery(this).css("width", bannerWidth+"px");
-				     jQuery(this).css("height", bannerHeight+"px");
-				     if(jQuery("#"+bannerDIvId+"_temp").length){
-				        jQuery("#"+bannerDIvId+"_temp").html(jQuery(this).html());
-				     }else{
-				     	var tempContainer = jQuery("<div/>").attr("id",bannerDIvId+"_temp").html(jQuery(this).html());
-				    	 jQuery("#tempSliderConatiner").append(tempContainer);
-				      }
-					});
-			}
-
-			function init3rdpartLibs(){
-				hideAllIcons();		
-				initGridManager();
-				initDraggable();
-				initDroppable();
-				initLayoutButtons();
-				initInitalBanner();				
-			}
-			//initInitalBanner();
-
-			/*
-				 *This just prevents screen from sliding around when touching it in the desktops 
-			*/
-			function preventScreenFromSliding(){
-				addEventListener('touchmove', function(e) {
-				e.preventDefault();
-				}, true);
-			}
-
-			/*
-				*Initilaize GridManager 
-			*/
-			function initGridManager(){  
-				gm =  jQuery(unilogCMSContainerId).gridmanager({
-					  debug :1
-				}).data('gridmanager');	
-			}
-			
-			/*
-				*Initilaize elements to be sortable 
-			 */
-			function initSortable(){
-				console.log("sortable called");
-				jQuery('#main-menu ul').sortable({
-					helper:"clone",    //makes a copy 
-					revert: "invalid", // if true will dissaosiate the smart menu
-					connectWith: ".gm-content",
-				}).disableSelection();
-			}
-			
-			function initDraggable(){	
-				jQuery('.HTMLElements li').draggable({
-					helper : 'clone',
-					revert : 'invalid',
-					start: function( event, ui ) {
-							 jQuery(this).fadeTo('fast', 0.5);
-						   },
-					stop: function(event, ui) { 
-							 jQuery(this).fadeTo(0, 1); 
-							 warningPopUp();
-						  } 	 
-					});		
-
-
-				jQuery('.widget dd').draggable({
-					helper : 'clone',
-					revert : 'invalid',
-					start: function( event, ui ) {
-							 jQuery(this).fadeTo('fast', 0.5);
-						   },
-					stop: function(event, ui) { 
-							 jQuery(this).fadeTo(0, 1); 
-							 warningPopUp();
-						  } 	 
-					});		
-			} 
-
-			function initTableDrag(){
-				 jQuery("table[id$='userLibComponentTabId1']").find("tr").draggable({
-					helper : 'clone',
-					revert : 'invalid',
-					start: function( event, ui ) {
-							 jQuery(this).fadeTo('fast', 0.5);
-						  },
-					stop: function(event, ui) { 
-							jQuery(this).fadeTo(0, 1); 
-							 warningPopUp();
-						  } 	 
-					});
-			}
-
-			function initComponentDrag(id){
-				jQuery('#library_'+id+' dd').draggable({
-					helper : 'clone',
-					revert : 'invalid',
-					start: function( event, ui ) {
-							 jQuery(this).fadeTo('fast', 0.5);
-						   },
-					stop: function(event, ui) { 
-							 jQuery(this).fadeTo(0, 1); 
-							 warningPopUp();
-						  } 	 
-					});		
-	
-			}
-
-			/*
-				 *Initilaize elements to be droppable from the menu  			 */
-			function initDroppable(){
-				var counter =0;
-				jQuery(".gm-content").droppable({
-					hoverClass : 'ui-state-highlight',
-					accept: ":not(.ui-sortable-helper)", //prevents the drop handler from accepting items that are being sorted
-					drop : function(ev, ui) {
-							counter=counter+ 1;	
-							//check for slider to drop
-							if( jQuery('div.hiddenContent').hasClass('Widget_slideJssor')){
-								initJssorSlides();
-							}
-							}
-					});
-			} 
-			
-			function handleCMSEvents(){
-				 jQuery(".dbClickClass").on("click", function(e){
-						var element =  jQuery(e.target).html();
-				 });
-
-				/** gridmanager CanvasId */
-				var gmCanvas= jQuery("#gm-canvas");
-				jQuery(".gm-content").on("drop", function(event,ui) { 			
-					 // alert("Dropped! from CMS for dyanmic");
-					 var content = jQuery(ui.draggable).clone().find('div.hiddenContent').html();
-					 var target =  jQuery(this).find(".gm-editable-region");
-				});
-			}
-
-			function cancelDragDropEvents(event){
-				 event.preventDefault();  
-				 event.stopPropagation();
-			}
-
-			function toggleView(selector){
-				if( jQuery(selector).is(":visible")){
-					  jQuery(selector).hide();
-				}else{
-					  jQuery(selector).hide();
-				}
-			}
-	
-			function triggerRize(){
-				jQuery(window).trigger("resize");
-			}
-						
-			function sourceCode(){
-				 jQuery('.gm-edit-mode').trigger("click");
-			}
-			
-			 function initContextMenu(id){
-				  jQuery.contextMenu({
-					 selector: id, 
-					 trigger: 'left',
-					 callback: function(key, options) {
-							      bannerBlockId = jQuery(this).attr("id");
-								  var dataId = id;
-								  
-								  if(!dataId.match("_Wrapper$")){
-								  dataId = dataId + "_Wrapper";
-								  }
-								  var bannerListId = jQuery(dataId).data("bannerid");
-								  
-							      var siteId = jQuery("#hiddenSiteId").val();
-							      var connector = "editBannerCms.action?bannerListId="+bannerListId+"&isEdit=Y";
-								  if(typeof bannerListId=="undefined" || bannerListId==null || jQuery.trim(bannerListId)==""){
-									connector = "/bannerListCms.action";
-								  }
-							      jQuery.colorbox({open:true,href:connector,iframe:true, width:"80%", height:"530px"});
-							   },
-					items: {
-							  "edit": {name: "Edit", icon: "edit"},    
-							}
-					});
-			}
-				
-			var bannerLogoPath = '$bannerLogoPath';	
-			
-			
-			jQuery(document).ready(function(){
-			jQuery("div[id$='_container']").each(function() {							
-				 initJssorSlides(jQuery(this).attr("id"))
-				console.log("generated : "+jQuery(this).attr("id"));
-			});
-			});
-	
+function saveThumbnail(){
+html2canvas([document.getElementById('canvasImage')], {
+         onrendered: function (canvas) {
+         var data = canvas.toDataURL('image/png');
+         jQuery("#templateImage").attr("src",data);
+		 jQuery("#canvasImage").html("");
+         document.getElementById("tempImageId").value = data ;	 
+		 console.log("Inside html canvas thumbnail +: "+ data);
+		//saveThumbnail();
+		saveContent();
 		
-			jQuery(document).mouseup(function (e)
-			{
-				var container = jQuery("#mycanvas");
-				if (!container.is(e.target) && container.has(e.target).length === 0) 
-				{
-					jQuery(".gm-controls-element").hide();
-					jQuery("[data-tool1='editorTools']").hide();
-				}
-			});
+    }
+});
+}
+				
+function initLayoutButtons()
+{
+	var options = {
+	 $AutoPlay: false,
+	 $AutoPlaySteps: 1,
+	 $SlideDuration: 160,
+	 $SlideWidth: 50,
+	 $SlideSpacing: 10,
+	 $Cols: 8,
+	 $ArrowNavigatorOptions: {
+	   $Class: $JssorArrowNavigator$,
+	   $Steps: 1
+	 },
+	 $BulletNavigatorOptions: {
+	   $Class: $JssorBulletNavigator$,
+	   $SpacingX: 1,
+	   $SpacingY: 1
+	 }
+	};
+	
+	var jssor_slider1 = new $JssorSlider$("layoutCarousel", options);
+	//responsive code begin
+	//you can remove responsive code if you don't want the slider scales while window resizes
+	function ScaleSlider() {
+		var bodyWidth = document.body.clientWidth;
+		if (bodyWidth)
+			jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 600));
+		else
+			window.setTimeout(ScaleSlider, 30);
+	}
+	ScaleSlider();
+	if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+		$(window).bind('resize', ScaleSlider);
+	}
+}
+		
+/** global gridManager Instance **/
+var gridManagerCanvasId= "#gm-canvas";
+var unilogCMSContainerId = "#mycanvas";
+var errorId;
+var gm;
 
-		    var resTitle = "";
-					resizeFrame = function(e){
-					var height = e.height();
-					jQuery('#previewFrame').height(height);
+jQuery(document).ready(function() {
+	jQuery("#addNewStaticFormId").hide();
+		try{
+			init3rdpartLibs();
+			/** Custom handle for responsive behavior on desktop top*/
+			preventScreenFromSliding(); 
+			/** Handle  CMS behaior*/
+			handleCMSEvents();							
+			}catch(err) {
+				// jQuery('#errDiv').html( err.stack);
+		}
+		
+		 
+});
+
+function initInitalBanner(){
+
+	jQuery("[data-select='bannerBlock']").each(function(i){
+		var bannerListId = jQuery(this).data("bannerid");
+		if(typeof bannerListId!="undefined" && bannerListId!=""){
+			refreshBanner(bannerListId,i);
+		}
+	 });
+}
+
+var refreshBanner = function(bannerId,index){
+	console.log("bannerId : " + bannerId + "-" + index);
+	jQuery.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId+"&reload=false", function(data) {
+		var bannerData = "";
+		if(data.hasOwnProperty('bannerTemplate')){
+			var bannerTemplate = data.bannerTemplate;
+			var dynamicProperties = data.dynamicProperties;
+			var bannerType = dynamicProperties.bannerType;
+			var transistion = "";
+			var carouselSetting = "";
+			
+			if(typeof dynamicProperties.bannerTransistion!='undefined'){
+				transistion = dynamicProperties.bannerTransistion;
+			}
+			
+			if(typeof dynamicProperties.carouselSetting!='undefined'){
+				carouselSetting = dynamicProperties.carouselSetting;
+			}
+			
+			jQuery("[data-bannerid='"+bannerId+"']").each(function(){
+				bannerData = data.bannerTemplate;
+				var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
+				console.log("Wrapper id :"+sliderId);
+				
+				 bannerData = bannerData.replace("slidercontainer",sliderId);
+				 if(typeof bannerType=="undefined"){
+					 bannerType="slider";
+					 }
+				jQuery(this).html(bannerData);
+				initContextMenu("#"+sliderId); 
+				if(bannerType=="slider"){
+					initJssorSlides(sliderId,transistion);
+					}else if(bannerType=="carousel"){
+						initCarousel(sliderId,carouselSetting);
 					}
-					
-					
-						responsivefunct = function(e) {
-				var responsivePreviewBuilder = "";
-				var previewClass = "desktopMode";
-				var containerClass = "desktopContainer";
-				var previewType = jQuery(e).attr("title");
-				resTitle = previewType;
-				jQuery('#previewFrame').removeClass();
-				console.log("Res Type at parent : " + resTitle);				//jQuery('#responsiveModel').html("");
-				jQuery('#responsiveModel').removeClass();
-				//jQuery.trim(previewType)=="iPhone"
-				if(jQuery.trim(previewType)=="iPad Portrait"){
-					containerClass = "ipadP-Container";
-					jQuery('#previewFrame').addClass("iframeIpadP");	
-				}else if(jQuery.trim(previewType)=="iPad Landscape"){
-					containerClass = "ipadL-Container";
-					jQuery('#previewFrame').addClass("iframeIpadL");	
-				}else if(jQuery.trim(previewType)=="iPhone Portrait"){
-					containerClass = "iphoneP-Container";
-					jQuery('#previewFrame').addClass("iframeIphoneP");
-				}else if(jQuery.trim(previewType)=="iPhone Landscape"){
-					containerClass = "iphoneL-Container";
-					jQuery('#previewFrame').addClass("iframeIphoneL");
-				}else{
-					jQuery('#previewFrame').addClass("iframeDesktop");
-				}
-jQuery('#previewFrame').removeClass();
-jQuery('#previewFrame').height(jQuery(window).height());
-//jQuery('#previewFrame').addClass("iframeDesktop");
-				jQuery.blockUI({
-					message: jQuery('#previewFrame'),
-					css: { 
-						border: 'none', 
-						padding: '15px', 
-						cursor: 'auto',
-						backgroundColor: '#000', 
-						'-webkit-border-radius': '10px', 
-						'-moz-border-radius': '10px', 
-						width:jQuery(window).width()+'px',
-						height:jQuery(window).height()-150+'px',
-						opacity:100,
-						textAlign:"inherit",
-						backgroundColor:'transparent',
-						top:  '100px', 
-						left: '5px'
-						}
-				});
-					//jQuery('#responsiveModel').html(jQuery("#gm-canvas").html());
-					//jQuery('.gm-preview').trigger("click");
-				};
-
-			responsivefunctold = function(e) {
-				var responsivePreviewBuilder = "";
-				var previewClass = "desktopMode";
-				var containerClass = "desktopContainer";
-				var previewType = jQuery(e).attr("title");
-				resTitle = previewType;
-				jQuery('#previewFrame').removeClass();
-				console.log("Res Type at parent : " + resTitle);				//jQuery('#responsiveModel').html("");
-				jQuery('#responsiveModel').removeClass();
-				//jQuery.trim(previewType)=="iPhone"
-				if(jQuery.trim(previewType)=="iPad Portrait"){
-					containerClass = "ipadP-Container";
-					jQuery('#previewFrame').addClass("iframeIpadP");	
-				}else if(jQuery.trim(previewType)=="iPad Landscape"){
-					containerClass = "ipadL-Container";
-					jQuery('#previewFrame').addClass("iframeIpadL");	
-				}else if(jQuery.trim(previewType)=="iPhone Portrait"){
-					containerClass = "iphoneP-Container";
-					jQuery('#previewFrame').addClass("iframeIphoneP");
-				}else if(jQuery.trim(previewType)=="iPhone Landscape"){
-					containerClass = "iphoneL-Container";
-					jQuery('#previewFrame').addClass("iframeIphoneL");
-				}else{
-					jQuery('#previewFrame').addClass("iframeDesktop");
-				}
-
-				jQuery.blockUI({
-					message: jQuery('#previewFrame'),
-					css: { 
-						border: 'none', 
-						padding: '15px', 
-						cursor: 'auto',
-						backgroundColor: '#000', 
-						'-webkit-border-radius': '10px', 
-						'-moz-border-radius': '10px', 
-						width:"auto",
-						height: 'auto',
-						opacity:100,
-						textAlign:"inherit",
-						backgroundColor:'white',
-						top:  (jQuery(window).height() - jQuery('#previewFrame').height()) /2 + 'px', 
-						left: (jQuery(window).width() - jQuery('#previewFrame').width()) /2 + 'px'
-						}
-				});
-					//jQuery('#responsiveModel').html(jQuery("#gm-canvas").html());
-					//jQuery('.gm-preview').trigger("click");
-				};
-				function hideAllIcons(){
-					jQuery('.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon,.cimm_srcCodeIcon').css({'pointer-events':'none','opacity':'0.5'});	
-				}
-
-				function showAllIcons(){
-					jQuery('.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon,.cimm_srcCodeIcon').css({'pointer-events':'visible','opacity':'1'});
-				}
-
 				
-				jQuery(document).ready(function() {
-					jQuery('.slickSwipable').slick({
-						  slidesToShow: 8,
-						  slidesToScroll: 4
-					}); 
-				});
 				
-				function closePopup(){
-					jQuery.unblockUI();
-					jQuery('.gm-preview').trigger("click");
-					jQuery('.gm-preview').trigger("click");
-				}			
-			//]]>
-			
-			function generateJson(){
-			var val = $('#cmsForm').serialize();
-			//val = encodeURIComponent(val);
-			console.log(val);
-			  jQuery.ajax({
-				   type: "POST",
-				   url: "addUpdateStaticPageCms.action",
-				   data: val,
-				   success: function(msg){
-					  if(msg.indexOf("error")!=-1){
-						  var errMsgList = msg.split("|");
-						  if(errMsgList[1].indexOf("constraint")!=-1){
-							  var pageName = $("#pageName").val();
-							  alert(pageName + " already exists, please try to save with a different name");
-							  }else{
-									alert("Error occured while saving the file");
-								  }
-						  
-						  }else{
-							  alert("Saved Successfully");
-							  $(window).off('beforeunload');
-							  if(jQuery.trim(jQuery("#cmsPageId").val())=="0"){								 
-									window.location.href="/cmsStaticPageCms.action?pageId="+msg;
-								  }
-							  } 
-				  // window.location.reload();
-				   }	
-				  });
- 			}
-			jQuery(function() {
-				jQuery(".HtmlElementsLabel").click(function() {
-					jQuery(".cmsForm").hide();
-					jQuery(".HTMLElements").toggle('right', function(){						
-						jQuery('.HTMLElements_Menuhide').show();
-					});					
-				});
-				jQuery(".HTMLElements_Menuhide").click(function() {
-					jQuery('.HTMLElements').toggle(function(){
-						jQuery('.HTMLElements_Menuhide').hide();
-					});					
-				});					
 			});
-
-
-			jQuery(function() {
-				jQuery(".cms_staticForm").click(function() {
-					jQuery(".HTMLElements").hide();
-					jQuery(".cmsForm").toggle('right', function(){						
-						jQuery('.cms_staticFormHide').show();
-					});					
-				});
-				jQuery(".cms_staticFormHide").click(function() {
-					jQuery('.cmsForm').toggle(function(){
-						jQuery('.cms_staticFormHide').hide();
-					});					
-				});					
-			});
-
-			function switchPage(){
-				jQuery(".pageTab").show();
-				jQuery("#PageTabs").addClass("selected");
-				jQuery("#SeoTabs").removeClass("selected");
-				jQuery(".seoTab").hide();
-			}
-			function switchSEO(){
-				jQuery(".pageTab").hide();
-				jQuery(".seoTab").show();
-				
-				jQuery("#SeoTabs").addClass("selected");
-				jQuery("#PageTabs").removeClass("selected");				
-			}
-
-			function showIframeWindow(){
-				  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
-		    	   }); 
-				  }
-
-			function showUploadIframeWindow(){
-				  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
-		    	   }); 
-				  }	
-			var iframeOrgHeight = 0;	  
-			function changeresponsivefunct(e){
-			var previewType = $(e).attr("title");
-			$(".resPreviewIcon").removeClass("pactive");
-			$(e).addClass('pactive');
-			// $( "#previewBtnId" ).prop( "disabled", true );
- 
-// Enable #x
-
-
-			var frameHeight = window.parent.jQuery(".Cimm-MainContenthide").height() + 120;
-			if(iframeOrgHeight == 0){
-			iframeOrgHeight = window.parent.document.getElementById("iframeId").style.height;
-			}
-			var frameWidth = "100%";
-			if(jQuery.trim(previewType)=="iPad Landscape"){
-				frameHeight = "768px";
-				frameWidth = "1024px";
-			}else if(jQuery.trim(previewType)=="iPad Portrait"){
-				frameHeight = "1024px";
-				frameWidth = "768px";
-				
-			}else if(jQuery.trim(previewType)=="iPhone Landscape"){
-				frameHeight = "320px";
-				frameWidth = "480px";
-			}else if(jQuery.trim(previewType)=="iPhone Portrait"){
-				frameHeight = "480px";
-				frameWidth = "320px";
-			}else{
-			frameHeight = iframeOrgHeight;
-			frameWidth = "100%";
-			// $( "#previewBtnId" ).prop( "disabled", false );
-			}
-				  
-					//window.parent.jQuery("#iframeId").height =;
-					//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
-					window.parent.document.getElementById("iframeId").style.margin = "0 auto";
-					window.parent.document.getElementById("iframeId").style.display = "block";
-					window.parent.document.getElementById("iframeId").style.height =frameHeight;
-					window.parent.document.getElementById("iframeId").style.width =frameWidth;
-				  }
-
-			function buildWidgetList(){
-				generateWidgetList();
-				}
-
-			function buildFormList(){
-				generateFormList();
-				}
-
-			function refreshWidget(widgetId){
-				generateWidget(widgetId);
-			}
-			buildWidgetList();
-			buildFormList();
-
-			function showWidgets(){
-				jQuery("#widgetContainer").slideToggle(500);
-				jQuery(".widgetLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
-			}  
-
-
-			function showForms(){
-				jQuery("#formContainer").slideToggle(500);
-				jQuery(".formLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
-			}  
-
-			function showLibrary(id){
-				jQuery("#formContainer").slideToggle(500);
-				jQuery.ajax({
-					 url: "/getUserLibraryCms.action?pageSize=300&requestType=ajax&libraryId="+id+"&date="+new Date(),
-					async: false,
-			        success: function (data) {
-			        	console.log("Loading widget");
-			        jQuery("#library_"+id).html(data);
-			        initComponentDrag(id);
-			        }
-			    });
-				jQuery("#library_"+id).slideToggle(500);
-			}  
-
+		}
+	});
+};
 			
-		</script>		
+function initInitalBannerOld(){
+ jQuery("div[id$='_container']").each(function() {
+     var bannerDIvId = jQuery(this).attr("id");
+     jQuery(this).css("width", bannerWidth+"px");
+     jQuery(this).css("height", bannerHeight+"px");
+     if(jQuery("#"+bannerDIvId+"_temp").length){
+        jQuery("#"+bannerDIvId+"_temp").html(jQuery(this).html());
+     }else{
+     	var tempContainer = jQuery("<div/>").attr("id",bannerDIvId+"_temp").html(jQuery(this).html());
+    	 jQuery("#tempSliderConatiner").append(tempContainer);
+      }
+	});
+}
+
+function init3rdpartLibs(){
+	hideAllIcons();		
+	initGridManager();
+	initDraggable();
+	initDroppable();
+	initLayoutButtons();
+	initInitalBanner();				
+}
+			
+/*
+	 *This just prevents screen from sliding around when touching it in the desktops 
+*/
+function preventScreenFromSliding(){
+	addEventListener('touchmove', function(e) {
+	e.preventDefault();
+	}, true);
+}
+
+/*
+	*Initilaize GridManager 
+*/
+function initGridManager(){  
+	gm =  jQuery(unilogCMSContainerId).gridmanager({
+		  debug :1
+	}).data('gridmanager');	
+}
+			
+/*
+	*Initilaize elements to be sortable 
+ */
+function initSortable(){
+	console.log("sortable called");
+	jQuery('#main-menu ul').sortable({
+		helper:"clone",    //makes a copy 
+		revert: "invalid", // if true will dissaosiate the smart menu
+		connectWith: ".gm-content",
+	}).disableSelection();
+}
+			
+function initDraggable(){	
+	jQuery('.HTMLElements li').draggable({
+		helper : 'clone',
+		revert : 'invalid',
+		start: function( event, ui ) {
+				 jQuery(this).fadeTo('fast', 0.5);
+			   },
+		stop: function(event, ui) { 
+				 jQuery(this).fadeTo(0, 1); 
+				 warningPopUp();
+			  } 	 
+		});		
+
+	jQuery('.widget dd').draggable({
+		helper : 'clone',
+		revert : 'invalid',
+		start: function( event, ui ) {
+				 jQuery(this).fadeTo('fast', 0.5);
+			   },
+		stop: function(event, ui) { 
+				 jQuery(this).fadeTo(0, 1); 
+				 warningPopUp();
+			  } 	 
+		});		
+} 
+
+function initTableDrag(){
+	 jQuery("table[id$='userLibComponentTabId1']").find("tr").draggable({
+		helper : 'clone',
+		revert : 'invalid',
+		start: function( event, ui ) {
+				 jQuery(this).fadeTo('fast', 0.5);
+			  },
+		stop: function(event, ui) { 
+				jQuery(this).fadeTo(0, 1); 
+				 warningPopUp();
+			  } 	 
+		});
+}
+
+function initComponentDrag(id){
+	jQuery('#library_'+id+' dd').draggable({
+		helper : 'clone',
+		revert : 'invalid',
+		start: function( event, ui ) {
+				 jQuery(this).fadeTo('fast', 0.5);
+			   },
+		stop: function(event, ui) { 
+				 jQuery(this).fadeTo(0, 1); 
+				 warningPopUp();
+			  } 	 
+		});		
+
+}
+
+/*
+	 *Initilaize elements to be droppable from the menu  			 */
+function initDroppable(){
+	var counter =0;
+	jQuery(".gm-content").droppable({
+		hoverClass : 'ui-state-highlight',
+		accept: ":not(.ui-sortable-helper)", //prevents the drop handler from accepting items that are being sorted
+		drop : function(ev, ui) {
+				counter=counter+ 1;	
+				//check for slider to drop
+				if( jQuery('div.hiddenContent').hasClass('Widget_slideJssor')){
+					initJssorSlides();
+				}
+				}
+		});
+} 
+			
+function handleCMSEvents(){
+	 jQuery(".dbClickClass").on("click", function(e){
+			var element =  jQuery(e.target).html();
+	 });
+
+	/** gridmanager CanvasId */
+	var gmCanvas= jQuery("#gm-canvas");
+	jQuery(".gm-content").on("drop", function(event,ui) { 			
+		 // alert("Dropped! from CMS for dyanmic");
+		 var content = jQuery(ui.draggable).clone().find('div.hiddenContent').html();
+		 var target =  jQuery(this).find(".gm-editable-region");
+	});
+}
+
+function cancelDragDropEvents(event){
+	 event.preventDefault();  
+	 event.stopPropagation();
+}
+
+function toggleView(selector){
+	if( jQuery(selector).is(":visible")){
+		  jQuery(selector).hide();
+	}else{
+		  jQuery(selector).hide();
+	}
+}
+	
+function triggerRize(){
+	jQuery(window).trigger("resize");
+}
+						
+function sourceCode(){
+	 jQuery('.gm-edit-mode').trigger("click");
+}
+			
+function initContextMenu(id){
+	  jQuery.contextMenu({
+		 selector: id, 
+		 trigger: 'left',
+		 callback: function(key, options) {
+				      bannerBlockId = jQuery(this).attr("id");
+					  var dataId = id;
+					  
+					  if(!dataId.match("_Wrapper$")){
+					  dataId = dataId + "_Wrapper";
+					  }
+					  var bannerListId = jQuery(dataId).data("bannerid");
+					  
+				      var siteId = jQuery("#hiddenSiteId").val();
+				      var connector = "editBannerCms.action?bannerListId="+bannerListId+"&isEdit=Y";
+					  if(typeof bannerListId=="undefined" || bannerListId==null || jQuery.trim(bannerListId)==""){
+						connector = "/bannerListCms.action";
+					  }
+				      jQuery.colorbox({open:true,href:connector,iframe:true, width:"80%", height:"530px"});
+				   },
+		items: {
+				  "edit": {name: "Edit", icon: "edit"},    
+				}
+		});
+}
 				
+var bannerLogoPath = '$bannerLogoPath';	
+
+jQuery(document).ready(function(){
+jQuery("div[id$='_container']").each(function() {							
+	 initJssorSlides(jQuery(this).attr("id"))
+	console.log("generated : "+jQuery(this).attr("id"));
+});
+});
+		
+jQuery(document).mouseup(function (e){
+	var container = jQuery("#mycanvas");
+	if (!container.is(e.target) && container.has(e.target).length === 0) 
+	{
+		jQuery(".gm-controls-element").hide();
+		jQuery("[data-tool1='editorTools']").hide();
+	}
+});
+
+var resTitle = "";
+resizeFrame = function(e){
+	var height = e.height();
+	jQuery('#previewFrame').height(height);
+}
+					
+responsivefunct = function(e) {
+	var responsivePreviewBuilder = "";
+	var previewClass = "desktopMode";
+	var containerClass = "desktopContainer";
+	var previewType = jQuery(e).attr("title");
+	resTitle = previewType;
+	jQuery('#previewFrame').removeClass();
+	console.log("Res Type at parent : " + resTitle);
+	//jQuery('#responsiveModel').html("");
+	jQuery('#responsiveModel').removeClass();
+	//jQuery.trim(previewType)=="iPhone"
+	if(jQuery.trim(previewType)=="iPad Portrait"){
+		containerClass = "ipadP-Container";
+		jQuery('#previewFrame').addClass("iframeIpadP");	
+	}else if(jQuery.trim(previewType)=="iPad Landscape"){
+		containerClass = "ipadL-Container";
+		jQuery('#previewFrame').addClass("iframeIpadL");	
+	}else if(jQuery.trim(previewType)=="iPhone Portrait"){
+		containerClass = "iphoneP-Container";
+		jQuery('#previewFrame').addClass("iframeIphoneP");
+	}else if(jQuery.trim(previewType)=="iPhone Landscape"){
+		containerClass = "iphoneL-Container";
+		jQuery('#previewFrame').addClass("iframeIphoneL");
+	}else{
+		jQuery('#previewFrame').addClass("iframeDesktop");
+	}
+	jQuery('#previewFrame').removeClass();
+	jQuery('#previewFrame').height(jQuery(window).height());
+	//jQuery('#previewFrame').addClass("iframeDesktop");
+	jQuery.blockUI({
+		message: jQuery('#previewFrame'),
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			cursor: 'auto',
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			width:jQuery(window).width()+'px',
+			height:jQuery(window).height()-150+'px',
+			opacity:100,
+			textAlign:"inherit",
+			backgroundColor:'transparent',
+			top:  '100px', 
+			left: '5px'
+			}
+	});
+	//jQuery('#responsiveModel').html(jQuery("#gm-canvas").html());
+	//jQuery('.gm-preview').trigger("click");
+};
+
+responsivefunctold = function(e) {
+	var responsivePreviewBuilder = "";
+	var previewClass = "desktopMode";
+	var containerClass = "desktopContainer";
+	var previewType = jQuery(e).attr("title");
+	resTitle = previewType;
+	jQuery('#previewFrame').removeClass();
+	console.log("Res Type at parent : " + resTitle);				//jQuery('#responsiveModel').html("");
+	jQuery('#responsiveModel').removeClass();
+	//jQuery.trim(previewType)=="iPhone"
+	if(jQuery.trim(previewType)=="iPad Portrait"){
+		containerClass = "ipadP-Container";
+		jQuery('#previewFrame').addClass("iframeIpadP");	
+	}else if(jQuery.trim(previewType)=="iPad Landscape"){
+		containerClass = "ipadL-Container";
+		jQuery('#previewFrame').addClass("iframeIpadL");	
+	}else if(jQuery.trim(previewType)=="iPhone Portrait"){
+		containerClass = "iphoneP-Container";
+		jQuery('#previewFrame').addClass("iframeIphoneP");
+	}else if(jQuery.trim(previewType)=="iPhone Landscape"){
+		containerClass = "iphoneL-Container";
+		jQuery('#previewFrame').addClass("iframeIphoneL");
+	}else{
+		jQuery('#previewFrame').addClass("iframeDesktop");
+	}
+
+	jQuery.blockUI({
+		message: jQuery('#previewFrame'),
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			cursor: 'auto',
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			width:"auto",
+			height: 'auto',
+			opacity:100,
+			textAlign:"inherit",
+			backgroundColor:'white',
+			top:  (jQuery(window).height() - jQuery('#previewFrame').height()) /2 + 'px', 
+			left: (jQuery(window).width() - jQuery('#previewFrame').width()) /2 + 'px'
+			}
+	});
+		//jQuery('#responsiveModel').html(jQuery("#gm-canvas").html());
+		//jQuery('.gm-preview').trigger("click");
+};
+
+function hideAllIcons(){
+	jQuery('.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon,.cimm_srcCodeIcon').css({'pointer-events':'none','opacity':'0.5'});	
+}
+
+function showAllIcons(){
+	jQuery('.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon,.cimm_srcCodeIcon').css({'pointer-events':'visible','opacity':'1'});
+}
+
+jQuery(document).ready(function() {
+	jQuery('.slickSwipable').slick({
+		  slidesToShow: 8,
+		  slidesToScroll: 4
+	}); 
+});
+				
+function closePopup(){
+	jQuery.unblockUI();
+	jQuery('.gm-preview').trigger("click");
+	jQuery('.gm-preview').trigger("click");
+}			
+//]]>
+			
+function generateJson(){
+var val = $('#cmsForm').serialize();
+//val = encodeURIComponent(val);
+console.log(val);
+  jQuery.ajax({
+	   type: "POST",
+	   url: "addUpdateStaticPageCms.action",
+	   data: val,
+	   success: function(msg){
+		  if(msg.indexOf("error")!=-1){
+			  var errMsgList = msg.split("|");
+			  if(errMsgList[1].indexOf("constraint")!=-1){
+				  var pageName = $("#pageName").val();
+				  alert(pageName + " already exists, please try to save with a different name");
+				  }else{
+						alert("Error occured while saving the file");
+					  }
+			  
+			  }else{
+				  alert("Saved Successfully");
+				  $(window).off('beforeunload');
+				  if(jQuery.trim(jQuery("#cmsPageId").val())=="0"){								 
+						window.location.href="/cmsStaticPageCms.action?pageId="+msg;
+					  }
+				  } 
+	  // window.location.reload();
+	   }	
+	  });
+}
+
+jQuery(function() {
+	jQuery(".HtmlElementsLabel").click(function() {
+		jQuery(".cmsForm").hide();
+		jQuery(".HTMLElements").toggle('right', function(){						
+			jQuery('.HTMLElements_Menuhide').show();
+		});					
+	});
+	jQuery(".HTMLElements_Menuhide").click(function() {
+		jQuery('.HTMLElements').toggle(function(){
+			jQuery('.HTMLElements_Menuhide').hide();
+		});					
+	});					
+});
+
+jQuery(function() {
+	jQuery(".cms_staticForm").click(function() {
+		jQuery(".HTMLElements").hide();
+		jQuery(".cmsForm").toggle('right', function(){						
+			jQuery('.cms_staticFormHide').show();
+		});					
+	});
+	jQuery(".cms_staticFormHide").click(function() {
+		jQuery('.cmsForm').toggle(function(){
+			jQuery('.cms_staticFormHide').hide();
+		});					
+	});					
+});
+
+function switchPage(){
+	jQuery(".pageTab").show();
+	jQuery("#PageTabs").addClass("selected");
+	jQuery("#SeoTabs").removeClass("selected");
+	jQuery(".seoTab").hide();
+}
+
+function switchSEO(){
+	jQuery(".pageTab").hide();
+	jQuery(".seoTab").show();
+	
+	jQuery("#SeoTabs").addClass("selected");
+	jQuery("#PageTabs").removeClass("selected");				
+}
+
+function showIframeWindow(){
+  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
+  	   }); 
+}
+
+function showUploadIframeWindow(){
+	  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
+   	   }); 
+}	
+
+var iframeOrgHeight = 0;	  
+function changeresponsivefunct(e){
+	var previewType = $(e).attr("title");
+	$(".resPreviewIcon").removeClass("pactive");
+	$(e).addClass('pactive');
+	// $( "#previewBtnId" ).prop( "disabled", true );
+	 
+	// Enable #x
+	var frameHeight = window.parent.jQuery(".Cimm-MainContenthide").height() + 120;
+	if(iframeOrgHeight == 0){
+	iframeOrgHeight = window.parent.document.getElementById("iframeId").style.height;
+	}
+	var frameWidth = "100%";
+	if(jQuery.trim(previewType)=="iPad Landscape"){
+		frameHeight = "768px";
+		frameWidth = "1024px";
+	}else if(jQuery.trim(previewType)=="iPad Portrait"){
+		frameHeight = "1024px";
+		frameWidth = "768px";
+		
+	}else if(jQuery.trim(previewType)=="iPhone Landscape"){
+		frameHeight = "320px";
+		frameWidth = "480px";
+	}else if(jQuery.trim(previewType)=="iPhone Portrait"){
+		frameHeight = "480px";
+		frameWidth = "320px";
+	}else{
+	frameHeight = iframeOrgHeight;
+	frameWidth = "100%";
+	// $( "#previewBtnId" ).prop( "disabled", false );
+	}
+	 
+	//window.parent.jQuery("#iframeId").height =;
+	//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
+	window.parent.document.getElementById("iframeId").style.margin = "0 auto";
+	window.parent.document.getElementById("iframeId").style.display = "block";
+	window.parent.document.getElementById("iframeId").style.height =frameHeight;
+	window.parent.document.getElementById("iframeId").style.width =frameWidth;
+}
+
+function buildWidgetList(){
+	generateWidgetList();
+}
+
+function buildFormList(){
+	generateFormList();
+}
+
+function refreshWidget(widgetId){
+	generateWidget(widgetId);
+}
+
+buildWidgetList();
+buildFormList();
+
+function showWidgets(){
+	jQuery("#widgetContainer").slideToggle(500);
+	jQuery(".widgetLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
+}  
+
+function showForms(){
+	jQuery("#formContainer").slideToggle(500);
+	jQuery(".formLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
+}  
+
+function showLibrary(id){
+	jQuery("#formContainer").slideToggle(500);
+	jQuery.ajax({
+		 url: "/getUserLibraryCms.action?pageSize=300&requestType=ajax&libraryId="+id+"&date="+new Date(),
+		async: false,
+        success: function (data) {
+        	console.log("Loading widget");
+        jQuery("#library_"+id).html(data);
+        initComponentDrag(id);
+        }
+    });
+	jQuery("#library_"+id).slideToggle(500);
+}  
+</script>
