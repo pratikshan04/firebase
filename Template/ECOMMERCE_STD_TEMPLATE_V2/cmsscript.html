@@ -1126,9 +1126,11 @@ function buildFormList(){
 	generateFormList();
 }
 
+
 function refreshWidget(widgetId){
 	generateWidget(widgetId);
 }
+
 
 buildWidgetList();
 buildFormList();
@@ -1155,5 +1157,10 @@ function showLibrary(id){
         }
     });
 	jQuery("#library_"+id).slideToggle(500);
-}  
+}
+
+function showHTMLElement(){
+    jQuery(".htmlEle_contents").slideToggle(500);
+    jQuery(".htmlLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
+}
 </script>
