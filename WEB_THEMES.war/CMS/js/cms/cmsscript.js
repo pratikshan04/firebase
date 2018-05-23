@@ -1,5 +1,4 @@
 function generateWidget(widgetId){
-	
 	jQuery.ajax({
         url: "generateWidgetCms.action?widgetId="+widgetId+"&date="+new Date(),
 		async: false,
