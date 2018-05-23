@@ -3421,3 +3421,118 @@ function validatePcardFormWithNewIds(){
 		return true;
 	}
 }
+function homeCarousels(){
+	if($('#featuredProductList').length>0){
+		  $('#featuredProductList').slick({
+			  infinite: true,
+			  slidesToShow: 5,
+			  slidesToScroll: 1,
+			  pauseOnHover:true,
+			  responsive: [
+			               {
+			                 breakpoint: 1024,
+			                 settings: {
+			                   slidesToShow: 4,
+			                 }
+			               },
+			               {
+			                 breakpoint: 600,
+			                 settings: {
+			                   slidesToShow: 3,
+			                 }
+			               },
+			               {
+			                 breakpoint: 480,
+			                 settings: {
+			                   slidesToShow: 2,
+			                 }
+			               }
+			             ]
+		  });
+		}
+
+		if($('#featuredBrands').length>0){
+			$('#featuredBrands').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+		if($('#featuredManufacturers').length>0){
+			$('#featuredManufacturers').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+		if($('#shopByCategory').length>0){
+			$('#shopByCategory').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1024,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },
+				               {
+				                 breakpoint: 600,
+				                 settings: {
+				                   slidesToShow: 3,
+				                 }
+				               },
+				               {
+				                 breakpoint: 480,
+				                 settings: {
+				                   slidesToShow: 2,
+				                 }
+				               }
+				             ]
+			  });
+		}
+}
