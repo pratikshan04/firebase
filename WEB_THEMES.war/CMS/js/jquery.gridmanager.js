@@ -1546,7 +1546,6 @@ console.log("Custom : "+curr_control.dataToolElement);
         
         gm.reBuildBanner = function(loadBanner){
         	console.log("Banner reinit");
-      	
         	jQuery("[data-select='bannerBlock']").each(function(i){
         		jQuery(this).closest('.gm-content').attr({"data-name": "bannerBlock"});
 				var bannerListId = jQuery(this).data("bannerid");
@@ -1554,17 +1553,18 @@ console.log("Custom : "+curr_control.dataToolElement);
 					refreshBanner(bannerListId,i);
 				}
 			 });
+        	console.log("Widget reinit");
         	jQuery("[data-select='widget']").each(function(i){
         		var widgetId = jQuery(this).data("widget");
+        		console.log("widget count in page: "+i+" :widget ID:"+widgetId);
         		generateWidget(widgetId);
         	});
-        	
+        	console.log("Form reinit");
         	jQuery("[data-select='form']").each(function(i){
         		var formId = jQuery(this).data("widget");
         		jQuery(this).closest(".gm-content").attr({"data-name": "formBlock"});
-        	generateForm(formId);
+        		generateForm(formId);
         	});
-   
         };
 
         /**
