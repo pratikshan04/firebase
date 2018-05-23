@@ -5,9 +5,8 @@ function generateWidget(widgetId){
 		async: false,
         success: function (data) {
         	jQuery("[data-widget='"+widgetId+"']").html(data);
+        	homeCarousels();
         }
-           
-		
     });
 }
 
@@ -17,7 +16,7 @@ function generateWidgetList(){
 		 url: "/widgetListCms.action?pageSize=300&requestType=ajax&date="+new Date(),
 		async: false,
         success: function (data) {
-        	console.log("Loading widget");
+        //console.log("Loading widget");
         jQuery("#widgetContainer").html(data);
         }
     });
@@ -29,11 +28,9 @@ function widgetPreview(widgetId){
 		async: false,
         success: function (data) {
         	jQuery("#previewContainer").html(data);
+        	homeCarousels();
         }
-           
-		
     });
-	
 }
 
 function deleteWidget(widgetId,widgetName){
@@ -47,12 +44,8 @@ function deleteWidget(widgetId,widgetName){
 	        	window.parent.buildWidgetList();
 	        	window.location.href="widgetListCms.action";
 	        }
-	           
-			
 	    });
 	} 
-
-	
 }
 
 
@@ -66,13 +59,10 @@ function generateForm(formId){
         	jQuery("[data-widget='"+formId+"']").html(data);
         	jQuery("[data-widget='"+formId+"']").find('input, textarea, button, select').attr('disabled','disabled');
         }
-           
-		
     });
 }
 
 function generateFormList(){
-
 	jQuery.ajax({
 		 url: "/formListCms.action?pageSize=300&requestType=ajax&date="+new Date(),
 		async: false,
@@ -80,8 +70,6 @@ function generateFormList(){
         	console.log("Loading form");
         jQuery("#formContainer").html(data);
         }
-           
-		
     });
 }
 
@@ -92,10 +80,7 @@ function formPreview(formId){
         success: function (data) {
         	jQuery("#previewContainer").html(data);
         }
-           
-		
     });
-	
 }
 
 function deleteForm(formId,formName){
@@ -109,10 +94,6 @@ function deleteForm(formId,formName){
 	        	window.parent.buildFormList();
 	        	window.location.href="formListCms.action";
 	        }
-	           
-			
 	    });
 	} 
-
-	
 }

@@ -1,8 +1,9 @@
-<!-- <script type="text/javascript" src="$webThemes/CMS/js/cms/cmsscript.js"></script>
-<script type="text/javascript" src="$webThemes/CMS/js/jquery.colorbox.js" ></script>-->
+#if($LayoutName=="CMSStaticPageList")
+<script type="text/javascript" src="$webThemes/CMS/js/cms/cmsscript.js"></script>
+<script type="text/javascript" src="$webThemes/CMS/js/jquery.colorbox.js" ></script>
+#end
 <link href="$webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
 <link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
-##$LayoutName
 <style>
 .banner_addNewBtn, .banner_addNewBtn:hover {
     background-color: rgb(27, 99, 171);
@@ -332,4 +333,6 @@ return false;
 }
 
 </script>
-##parse("cmsscript.html")
+#if($LayoutName=="CMSStaticPageList")
+#parse("cmsscript.html")
+#end
