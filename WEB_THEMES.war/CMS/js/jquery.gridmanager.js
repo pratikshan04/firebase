@@ -1234,7 +1234,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		        			$(this).find('.'+gm.options.gmContentRegion).attr({"data-name": "widgetBlock"});
 		        			jQuery(content).data('select', 'widget');
 		        			jQuery(content).attr('data-select', 'widget');
-		        			
+		        			content = content.replace("data-widget-id","data-widget");
 		        		}
 		        		if(contentDataAttr=="form"){
 		        			$(this).find('.'+gm.options.gmContentRegion).attr({"data-name": "formBlock"});
@@ -1556,7 +1556,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			 });
         	jQuery("[data-select='widget']").each(function(i){
         		var widgetId = jQuery(this).data("widget");
-        	generateWidget(widgetId);
+        		generateWidget(widgetId);
         	});
         	
         	jQuery("[data-select='form']").each(function(i){
