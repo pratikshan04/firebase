@@ -11,7 +11,6 @@
 	<div class="clear-both"></div>
 	<div class="pageTab">
 		<form id="cmsForm">
-		<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
 		#if($staticPageData.id>0)
 		Page Link : /staticPages.action?ID=$!staticPageData.id
 		<div id="clonediv"><label class="cms_StaticLabel">For Cloning the Page</label>  <input type="checkbox" name="pageData.clonePage"   id="clonePage" onchange="getValueForCLone();" /></div>
