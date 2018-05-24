@@ -5,7 +5,6 @@ function generateWidget(widgetId){
 		async: false,
         success: function (data) {
         	jQuery("[data-widget='"+widgetId+"']").html(data);
-        	homeCarousels();
         }
     });
 }
