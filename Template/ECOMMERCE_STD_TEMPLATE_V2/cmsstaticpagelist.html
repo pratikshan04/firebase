@@ -11,6 +11,9 @@
     padding: 8px 5px 6px 5px;
     margin-left: -4px;
 }
+#staticForm div label span{
+	vertical-align: middle;
+}
 input[type="text"], input[type="password"], select {
     width: auto;
     cursor: auto;
@@ -124,23 +127,42 @@ width:200px;
   	<div class="searchBox">
   	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;">
   	<select name="type" id="type" onchange="submitForm();">
-	  		 <option #if($!type=="BODY") selected #end value="BODY" >Body</option>
-	  		 <option #if($!type=="BLOG") selected #end value="BLOG">Blog</option>
-	  		 <option #if($!type=="TEMPLATE") selected #end value="TEMPLATE" >Template</option>
-	  		 <option #if($!type=="CATEGORY") selected #end value="CATEGORY">Category</option>
+ 		<option #if($!type=="ALL") selected #end value="ALL" >All Pages</option>
+ 		<option #if($!type=="BODY") selected #end value="BODY" >Body</option>
+ 		<option #if($!type=="BLOG") selected #end value="BLOG">Blog</option>
+ 		<option #if($!type=="TEMPLATE") selected #end value="TEMPLATE" >Template</option>
+ 		<!-- <option #if($!type=="CATEGORY") selected #end value="CATEGORY">Category</option> -->
   	</select>
   	<input type="hidden" id="query" name="query" value="$!query"/>  
-  	<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
-  	<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-  	<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" /> 
+  	<input type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
+  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+  	<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
+  	<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>   
   	</form>
   	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;">
-  		<input class="cms_bannerSearch" type="text" name="query" value="$!query" placeholder="Enter Page Name to Search"/>  
+  		<input class="cms_bannerSearch" type="text" name="query" value="$!query" placeholder="Enter Page Name to Search"/> 
   		<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
   		<input type="hidden" id="type" name="type" value="$!type"/> 
   		<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
   		<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" /> 
 		<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
+		<div class="text-right pTop-2">
+			<label for='radio_pageName' class="customRadioBtn mRight-2">
+				<input type="radio" name="searchColumnType" value="pageName" id="radio_pageName" #if($!searchColumnType=="pageName") checked #end> <span>Page Name</span>
+			</label>
+			<label for='radio_pageTitle' class="customRadioBtn mRight-2">
+	  			<input type="radio" name="searchColumnType" value="pageTitle" id="radio_pageTitle" #if($!searchColumnType=="pageTitle") checked #end> <span>Page Title</span>
+	  		</label>
+		</div>
+  	</form>
+  	<form class="clearStaticSearch">
+  		<input type="hidden" name="query" value=""/>
+  		<input type="hidden" name="searchColumnType" value=""/>
+  		<input type="hidden" id="type" name="type" value="$!type"/>   
+	  	<input type="hidden" name="pageSize" value="$staticPageList.pageSize" /> 
+	  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+	  	<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
+  		<button type="submit"><i class="fa fa-lg fa-times"></i> Clear Search</button>
   	</form>
   	</div>
   	
@@ -153,17 +175,19 @@ width:200px;
 				<option #if($staticPageList.pageSize==50) selected #end value="50" >50</option> 
 				<option #if($staticPageList.pageSize==100) selected #end  value="100" >100</option>
 			</select>
-			<label>Records</label>
-			<input  type="hidden" name="query" value="$!query" />
+			<label> Records</label>
+			<input type="hidden" name="query" value="$!query" />
 			<input type="hidden" id="type" name="type" value="$!type"/> 
-			<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-			<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" />   
+			<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+			<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />  
+			<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
   		</form>
+  		<div class="text-right mTop-2">#if($!staticPageList.totalRows>0)Showing $staticPageList.rowsOnPage of $!staticPageList.totalRows Records #end</div>
   	</div>
   	
   	<div class="siteDisplayBox">
   		<form method="get" action="listStaticPageCms.action">
-  			<label>Website</label>
+  			<label>Website </label>
   			<select name="selectedSiteId" id="selectedWebsite" onchange="this.form.submit()">
   				<option value>- Select Website -</option>
 	  			#if($!websiteList && $websiteList.size()>0)
@@ -182,12 +206,12 @@ width:200px;
 <table class="cms_staticPageTable" id="staticpageList">
 <thead>
 <tr>
-<th class="width180">Actions</th>
-<th class="width150">SI No.</th>
-<th>
-<a href="listStaticPageCms.action?sortEnabled=true&query=$!query" title="Ascending">&#8679;</a>
+<th class="width160">Actions</th>
+<th class="width80">SI No.</th>
+<th class="width200">
+<a href="listStaticPageCms.action?sortEnabled=true&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
 Static Page Name
-<a href="listStaticPageCms.action?sortEnabled=false&query=$!query" title="Descending">&#x21E9;</a>
+<a href="listStaticPageCms.action?sortEnabled=false&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
 </th>
 
 <th>Url By PageId</th>
@@ -201,57 +225,59 @@ Static Page Name
 
 #set($counter = $pageNo * $staticPageList.pageSize)
 
-#set($iindex = $counter + 1)
-#foreach($pageList in $staticPageList.resultSet)
-<tr>
-<td>
-<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Static Page" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
-#if($pageList.homePageIcon)
-<a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
-<a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Delete Static Page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+#if($staticPageList.resultSet.size()>0)
+		#set($iindex = $counter + 1)
+	#foreach($pageList in $staticPageList.resultSet)
+		<tr>
+		<td>
+		<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Static Page" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+		#if($pageList.homePageIcon)
+		<a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+		<a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Delete Static Page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+		#else
+		<a href="javascript:setHomePage($pageList.id)"><img src="$webThemes/CMS/images/small/links.png" title="Set as Home page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+		<a href="javascript:deletePage($pageList.id)"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Static Page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
+		#end
+		
+		</td>
+		<td>
+		$iindex
+		</td>
+		<td>
+		<a href="cmsStaticPageCms.action?pageId=$pageList.id">$pageList.pageName </a><br />
+		</td>
+		
+		<td>
+		<a href="/staticPages.action?ID=$pageList.id" target="_blank">/staticPages.action?ID=$pageList.id</a>
+		</td>
+		
+		<td>
+		<a href="/$pageList.pageName.replaceAll(" ","-")" target="_blank">/$pageList.pageName.replaceAll(" ","-")</a>
+		</td>
+		
+		<td>
+		#if($pageList.pageTitle)
+		<a href="/$pageList.pageTitle.replaceAll(" ","-")" target="_blank">/$pageList.pageTitle.replaceAll(" ","-")</a>
+		#end
+		</td>
+		
+		<td>
+		#if($pageList.customUrl)
+		<a href="/$pageList.customUrl" target="_blank">/$pageList.customUrl</a>
+		#end
+		</td>
+		
+		</tr>
+		#set($iindex = $iindex + 1)
+	#end
 #else
-<a href="javascript:setHomePage($pageList.id)"><img src="$webThemes/CMS/images/small/links.png" title="Set as Home page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
-<a href="javascript:deletePage($pageList.id)"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Static Page" class="actionIcon" style="cursor:pointer;margin:-10px 15px 0 0;"></a>
-#end
-
-</td>
-<td>
-$iindex
-</td>
-<td>
-<a href="cmsStaticPageCms.action?pageId=$pageList.id">$pageList.pageName </a><br />
-</td>
-
-<td>
-<a href="/staticPages.action?ID=$pageList.id" target="_blank">/staticPages.action?ID=$pageList.id</a>
-</td>
-
-<td>
-<a href="/$pageList.pageName.replaceAll(" ","-")" target="_blank">/$pageList.pageName.replaceAll(" ","-")</a>
-</td>
-
-<td>
-#if($pageList.pageTitle)
-<a href="/$pageList.pageTitle.replaceAll(" ","-")" target="_blank">/$pageList.pageTitle.replaceAll(" ","-")</a>
-#end
-</td>
-
-<td>
-#if($pageList.customUrl)
-<a href="/$pageList.customUrl" target="_blank">/$pageList.customUrl</a>
-#end
-</td>
-
-</tr>
-#set($iindex = $iindex + 1)
+<tr><td colspan="7" align="center"> No data </td></tr>
 #end
 </tbody>
 </table>
-	<script>
 
-
-	paginationScriptCms($staticPageList.totalPages,"listStaticPageCms.action?query=$!query&pageSize=$!staticPageList.pageSize&page=",$pageNo,1);
-
+<script>
+paginationScriptCms($staticPageList.totalPages,"listStaticPageCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!staticPageList.pageSize&page=",$pageNo,1);
 </script>
 
 </div>
