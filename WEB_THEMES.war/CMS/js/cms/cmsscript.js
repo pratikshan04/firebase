@@ -1,10 +1,10 @@
 function generateWidget(widgetId){
+	//console.log("Loading widget ID :"+widgetId);
 	jQuery.ajax({
         url: "generateWidgetCms.action?widgetId="+widgetId+"&date="+new Date(),
 		async: false,
         success: function (data) {
         	jQuery("[data-widget='"+widgetId+"']").html(data);
-        	homeCarousels();
         }
     });
 }

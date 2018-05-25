@@ -1391,20 +1391,40 @@ position: absolute;
     padding: 8px;
     margin: 2px;
 }
-
+.width80 {
+    width: 80px;
+    white-space: nowrap !important;
+}
+.width100 {
+    width: 100px;
+    white-space: nowrap !important;
+}
+.width120 {
+    width: 120px;
+    white-space: nowrap !important;
+}
 .width150 {
     width: 150px;
     white-space: nowrap !important;
 }
-.width270{
- width:270px;
- white-space:nowrap !important;
+.width160 {
+    width: 160px;
+    white-space: nowrap !important;
 }
+
 .width180{
-	 width:180px;
- white-space:nowrap !important;
- display:block;
-	}
+	width:180px;
+	white-space:nowrap !important;
+	display:block;
+}
+.width200 {
+    width: 200px;
+    white-space: nowrap !important;
+}
+.width270{
+	 width:270px;
+	 white-space:nowrap !important;
+}
 .cms_staticPageTable{
 	border-top: solid 0px #fff;
     border-left: solid 0px #fff;
@@ -1459,7 +1479,23 @@ position: absolute;
 	margin-bottom:10px;
 	}
 	.searchBox{
-	float:left;
+		float:left;
+		position: relative;
+	}
+	.clearStaticSearch{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+	.clearStaticSearch button{
+		background: transparent;
+		text-transform: capitalize;
+		font-weight: 600;
+		color: #333;
+		outline: none;
+	}
+	.clearStaticSearch button:active{
+		color: #333;
 	}
 	.searchBox form{
 		float:left;

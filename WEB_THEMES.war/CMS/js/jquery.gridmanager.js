@@ -1234,7 +1234,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		        			$(this).find('.'+gm.options.gmContentRegion).attr({"data-name": "widgetBlock"});
 		        			jQuery(content).data('select', 'widget');
 		        			jQuery(content).attr('data-select', 'widget');
-		        			
+		        			content = content.replace("data-widget-id","data-widget");
 		        		}
 		        		if(contentDataAttr=="form"){
 		        			$(this).find('.'+gm.options.gmContentRegion).attr({"data-name": "formBlock"});
@@ -1248,13 +1248,12 @@ console.log("Custom : "+curr_control.dataToolElement);
     		        		var widgetId = jQuery(content).data("widget");
     		        		jQuery("[data-widget='"+widgetId+"']").attr({'data-select':'widget'});
     		        		generateWidget(widgetId);
-    		        		
+    		        		homeCarousels();
     		        	}
     		        	if(contentDataAttr=="form"){
     		        		var formId = jQuery(content).data("widget");
     		        		jQuery("[data-widget='"+formId+"']").attr({'data-select':'form'});
     		        		generateForm(formId);
-    		        		
     		        	}
 						if(loadSlider)
 		        		{
@@ -1546,7 +1545,6 @@ console.log("Custom : "+curr_control.dataToolElement);
         
         gm.reBuildBanner = function(loadBanner){
         	console.log("Banner reinit");
-      	
         	jQuery("[data-select='bannerBlock']").each(function(i){
         		jQuery(this).closest('.gm-content').attr({"data-name": "bannerBlock"});
 				var bannerListId = jQuery(this).data("bannerid");
@@ -1554,17 +1552,24 @@ console.log("Custom : "+curr_control.dataToolElement);
 					refreshBanner(bannerListId,i);
 				}
 			 });
+        	console.log("Widget Length: "+jQuery("[data-select='widget']").length);
         	jQuery("[data-select='widget']").each(function(i){
         		var widgetId = jQuery(this).data("widget");
-        	generateWidget(widgetId);
+        		console.log("widget find class in page: "+jQuery(this).find('.slick-slider').length);
         	});
-        	
+        	console.log("Widget reinit");
+        	jQuery("[data-select='widget']").each(function(i){
+        		var widgetId = jQuery(this).data("widget");
+        		console.log("widget count in page: "+i+" :widget ID:"+widgetId);
+        		generateWidget(widgetId);
+        	});
+        	console.log("Form reinit");
         	jQuery("[data-select='form']").each(function(i){
         		var formId = jQuery(this).data("widget");
         		jQuery(this).closest(".gm-content").attr({"data-name": "formBlock"});
-        	generateForm(formId);
+        		generateForm(formId);
         	});
-   
+        	homeCarousels();
         };
 
         /**

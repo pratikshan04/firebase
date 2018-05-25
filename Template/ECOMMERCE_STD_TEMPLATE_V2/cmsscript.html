@@ -608,12 +608,9 @@ jQuery(document).ready(function() {
 			}catch(err) {
 				// jQuery('#errDiv').html( err.stack);
 		}
-		
-		 
 });
 
 function initInitalBanner(){
-
 	jQuery("[data-select='bannerBlock']").each(function(i){
 		var bannerListId = jQuery(this).data("bannerid");
 		if(typeof bannerListId!="undefined" && bannerListId!=""){
@@ -1118,6 +1115,17 @@ function changeresponsivefunct(e){
 	window.parent.document.getElementById("iframeId").style.width =frameWidth;
 }
 
+function initInitalWidget(){
+	jQuery("[data-select='widget']").each(function(i){
+		var widgetId = jQuery(this).data("widget");
+		if(typeof widgetId!="undefined" && widgetId!=""){
+			console.log("initInitalWidget count in page: "+i+" :widget ID: "+widgetId);
+			generateWidget(widgetId);
+		}
+	 });
+	homeCarousels();
+}
+
 function buildWidgetList(){
 	generateWidgetList();
 }
@@ -1126,11 +1134,10 @@ function buildFormList(){
 	generateFormList();
 }
 
-
 function refreshWidget(widgetId){
 	generateWidget(widgetId);
+	homeCarousels();
 }
-
 
 buildWidgetList();
 buildFormList();
