@@ -10,15 +10,13 @@ function generateWidget(widgetId){
 }
 
 function generateWidgetList(){
-	console.log("widget block");
 	jQuery.ajax({
-		 url: "/widgetListCms.action?pageSize=300&requestType=ajax&date="+new Date(),
-		async: false,
-        success: function (data) {
-        //console.log("Loading widget");
-        jQuery("#widgetContainer").html(data);
-        }
-    });
+		url: "/widgetListCms.action?pageSize=300&requestType=ajax&date="+new Date(),
+		 async: false,
+		success: function (data) {
+        	jQuery("#widgetContainer").html(data);
+		}
+	});
 }
 
 function widgetPreview(widgetId){
@@ -40,6 +38,7 @@ function deleteWidget(widgetId,widgetName){
 			async: true,
 	        success: function (data) {
 	        	alert(widgetName + " - has been deleted successfully.");
+	        	window.parent.generateWidgetList();
 	        	window.parent.buildWidgetList();
 	        	window.location.href="widgetListCms.action";
 	        }
@@ -90,7 +89,8 @@ function deleteForm(formId,formName){
 			async: true,
 	        success: function (data) {
 	        	alert(formName + " - has been deleted successfully.");
-	        	window.parent.buildFormList();
+	        	//window.parent.buildFormList();
+	        	window.parent.generateFormList();
 	        	window.location.href="formListCms.action";
 	        }
 	    });

@@ -48,7 +48,8 @@ $(".save-form").on("click", function() {
             if (result.indexOf("success") != -1) {
             	alert("Form  created successfully");
                 window.location.href = "formListCms.action";
-                window.parent.buildFormList();
+                //window.parent.buildFormList();
+                window.parent.generateFormList();
                 window.parent.initDraggable();
             }
             else if(result.indexOf("unique constraint") != -1){

@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     #parse("head.html") 
-    <link href="$webThemes/CMS/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="$webThemes/CMS/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
     <link href="$webThemes/CMS/css/gridmanagerv2.css" rel="stylesheet" type="text/css" />
     <link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css"/>
     <link href="$webThemes/CMS/css/slick.css" rel="stylesheet" type="text/css"/>
@@ -20,7 +20,6 @@
     <link href="$webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/EcommereceCustomCss.css" />
     <link href="$webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-    #parse("stylesheets.html")
     <script>
       function paginationScriptCms(n_pages,page_link,iindex,pgno){
         var n_links=5;
@@ -84,12 +83,9 @@
     </script>
   </head>
   <body>
-    <div class="site-overlay" id="site-overlay" >
-    </div>
-    <div class="modalPopOverlay" id="overlay">
-    </div>
-    <div id="fixedHead">
-    </div>
+    <div class="site-overlay" id="site-overlay" ></div>
+    <div class="modalPopOverlay" id="overlay"></div>
+    <div id="fixedHead"></div>
     <div class="cimm_stickyPageWrap">
     #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
       <div id="normalHead">
@@ -119,74 +115,6 @@
       </div>
       #end
       <div class="cimm_bodyContentWrap">
-        <div class="cms_leftMenu">
-          <ul>
-            <li>
-              <div class="cms_widget">
-                <a href="listStaticPageCms.action" title="List Static Pages" class="cms_uploadBannerBtn">
-                  <i class="fa fa-file" aria-hidden="true">
-                  </i>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="HtmlElementsLabel">
-                <img title="HTML Elements" src="$webThemes/CMS/images/small/tools.png" />
-              </div>
-              #parse("cmsmenu.html") 
-            </li>
-            <li>
-              <div class="cms_staticForm">
-                <i class="fa fa-save" title="Save Page" aria-hidden="true">
-                </i>
-              </div>
-              #parse("cmsStaticPageForm.html")
-            </li>
-            <li>
-              <div class="cms_widget">
-                <a href="javascript:openBannerList();" title="Banner List" class="cms_uploadBannerBtn">
-                  <img src="$webThemes/CMS/images/small/listBrand.png" />
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="cms_bannerUpload">
-                <a class="iframe cms_uploadBannerBtn" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadIframeWindow();">
-                  <img src="$webThemes/CMS/images/small/upload.png" />
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="cms_widget">
-                <a class="iframe cms_uploadBannerBtn" href="widgetListCms.action" title="Widgets" onclick="javascript:showIframeWindow();">
-                  <i class="fa fa-cog" aria-hidden="true">
-                  </i>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="cms_widget" >
-                <a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList();" title="Menubuilder" class="cms_uploadBannerBtn" >
-                  <img src="$webThemes/CMS/images/small/manageTaxonomy.png" />
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="cms_widget">
-                <a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList1();" title="CSS" style="font-size: 12px;">
-                  CSS
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="cms_widget">
-                <a class="iframe cms_uploadBannerBtn" href="formListCms.action" title="Form Builder" onclick="javascript:showIframeWindow();">
-                  <img src="$webThemes/CMS/images/small/formBuilder.png" />
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
         #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
         	<div class="container">
         #else
@@ -206,11 +134,6 @@
           #end
           #end
           <div class="cimm_mainContentEnclosure cms_mainContentEnclosure">
-            #if($LayoutName!="HomePage" && $!isStaticHomePage !="Y")
-            <div class="cimm_BreadCrumbs">
-              #parse("fullBreadcrumbs.html")
-            </div>
-            #end
             #parse($bodyContent)
           </div>
           #if($rightContent)
@@ -221,69 +144,71 @@
         </div>
       </div>
     </div>
-    #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
-    <footer>
-      <div class="cimm_footerEnclosure">
-        #parse("footer.html") 
-      </div>
-    </footer>
-    #else
-    <div class="cimm_footerEnclosure">
-      #parse("footer.html")         
-    </div>
-    #end
-    <p id="backToTop">
-      <a href="#top">
-      </a>
-    </p>
-    #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="N")
-    #if($LayoutName=="ProductList" || $LayoutName=='ProductDetailPage')
-    <div class="cimm_addcartSlider hideForPrint">
-      #if($userLogin)
-      <a href="javascript:void(0)" data-perform="multipleAddToCart" onclick="Unilog.addToCartCookie();">
-        Add Item To 
-        <i class="fa fa-lg fa-shopping-cart" aria-hidden="true">
-        </i>
-      </a>
-      <a href="javascript:void(0)" data-perform="multipleProductGroup" onclick="Unilog.loadMyProductGroupData();">
-        Add Item To 
-        <i class="fa fa-list" aria-hidden="true">
-        </i>
-      </a>
-      #else
-      #set($addToCartCheckFlag = "N")
-      #if($!PropertyActionSystemParameter && ($!PropertyActionSystemParameter.get("EnableAnonymousCheckout")=="Y" || $PropertyActionSystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-      #set($addToCartCheckFlag = "Y")
-      #elseif($userLogin)
-      #set($addToCartCheckFlag = "Y")
-      #end
-      #if($addToCartCheckFlag == "Y")
-      <a href="javascript:void(0)" data-perform="multipleAddToCart" onclick="Unilog.addToCartCookie();">
-        Add Item To 
-        <i class="fa fa-lg fa-shopping-cart" aria-hidden="true">
-        </i>
-      </a>
-      #else
-      <a href="javascript:void(0)" onclick="loginPop(); return false;">
-        Add Item To 
-        <i class="fa fa-lg fa-shopping-cart" aria-hidden="true">
-        </i>
-      </a>
-      #end
-      <a href="javascript:void(0)" onclick="loginPop(); return false;">
-        Add Item To 
-        <i class="fa fa-list" aria-hidden="true">
-        </i>
-      </a>
-      #end
-      <a href="javascript:void(0)" onclick="compareItems(); return false;">
-        Compare Item 
-        <i class="fa fa-lg fa-bar-chart" aria-hidden="true">
-        </i>
-      </a>
-    </div>
-    #end
-    #end
+	#if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
+	<footer>
+		<div class="cimm_footerEnclosure">
+			#parse("footer.html") 
+		</div>
+	</footer>
+	#else
+	<div class="cimm_footerEnclosure">
+		#parse("footer.html")         
+	</div>
+	#end
+	<p id="backToTop">
+		<a href="#top"></a>
+	</p>
+    <div class="cms_leftMenu">
+		<ul>
+			<li>
+				<a href="listStaticPageCms.action" title="List Static Pages" class="cms_uploadBannerBtn">
+					<i class="fa fa-file" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a class="cms_SlideMenuBtn">
+					<img title="HTML Elements" src="$webThemes/CMS/images/small/tools.png" />
+				</a>
+				#parse("cmsmenu.html") 
+			</li>
+			<li>
+				<a class="cms_SlideMenuBtn">
+					<i class="fa fa-save" title="Save Page" aria-hidden="true"></i>
+				</a>
+				#parse("cmsStaticPageForm.html")
+			</li>
+			<li>
+				<a href="javascript:openBannerList();" class="cms_uploadBannerBtn" title="Banner List">
+					<img src="$webThemes/CMS/images/small/listBrand.png" />
+				</a>
+			</li>
+			<li>
+				<a class="iframe cms_uploadBannerBtn" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadIframeWindow();">
+					<img src="$webThemes/CMS/images/small/upload.png" />
+				</a>
+			</li>
+			<li>
+				<a class="iframe cms_uploadBannerBtn" href="widgetListCms.action" title="Widgets" onclick="javascript:showIframeWindow();">
+					<i class="fa fa-cog" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList();" title="Menubuilder" class="cms_uploadBannerBtn" >
+					<img src="$webThemes/CMS/images/small/manageTaxonomy.png" />
+				</a>
+			</li>
+			<li>
+				<a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList1();" title="CSS">
+					CSS
+				</a>
+			</li>
+			<li>
+				<a class="iframe cms_uploadBannerBtn" href="formListCms.action" title="Form Builder" onclick="javascript:showIframeWindow();">
+					<img src="$webThemes/CMS/images/small/formBuilder.png" />
+				</a>
+			</li>
+		</ul>
+	</div>
     <script type="text/javascript" src="$webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
     #parse("javascripts.html")
     #parse("cimmhead.html")
