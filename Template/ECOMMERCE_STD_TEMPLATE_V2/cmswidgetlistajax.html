@@ -1,8 +1,10 @@
 #foreach($widgets in $widgetList.resultSet)
-<dd><a href="javascript:void(0);" >$!widgets.name
-									<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
-								</a>
-								<div class="hiddenContent">
-									<div data-type="widget" data-widget-id="$widgets.id">Widget Block</div>
-								</div></dd>
+<li>
+	<a href="javascript:void(0);" >$!widgets.name
+		<i class="fa fa-arrows"></i>
+	</a>
+	<div class="hiddenContent">
+		<div data-type="widget" data-widget-id="$widgets.id">Widget Block</div>
+	</div>
+</li>
 #end

@@ -1,8 +1,8 @@
 #foreach($forms in $formList.resultSet)
-<dd><a href="javascript:void(0);" >$forms.formName
-									<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
-								</a>
-								<div class="hiddenContent">
-									<div data-type="form" data-widget="$forms.id">Form Block</div>
-								</div></dd>
+<li>
+	<a href="javascript:void(0);" >$forms.formName <i class="fa fa-arrows"></i></a>
+	<div class="hiddenContent">
+		<div data-type="form" data-widget="$forms.id">Form Block</div>
+	</div>
+</li>
 #end
