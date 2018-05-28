@@ -125,13 +125,6 @@ cursor: pointer;
 .topNav_rightIcons > ul > li:last-child{
  border-right:0px solid #ccc;
 }
-.topNav_rightIcons > ul > li > a{
- display:inline !important;
- float:left;
- background-position: center;
- cursor:pointer;
-}
-
 .slickSwipable ul li{
 	display:inline-block;
 }
@@ -1216,123 +1209,15 @@ height: 862px;
     color: #fff;
 }
 
-/*****Left Menu CSS*****/
-.cms_leftMenu{
-	float:left;
-	width:30px;
-	background: #fff;
-    box-shadow: 1px 1px 10px #565f65;
-    position: fixed;
-    z-index:9999;
-	}
-.cms_leftMenu ul li{
-	list-style-type:none;
-	border-bottom: 1px solid #8b8c8d;
-	}
-.HtmlElementsLabel{
-    padding: 5px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    width: 30px;
-    left: 0;
-}
-.HTMLElements{
-	width: 200px;
-    height: auto;
-    margin-bottom: 10px;
-    float: left;
-    box-shadow: 0px 0px 4px 2px #c6c6c6;
-    -webkit-box-shadow: 0px 0px 4px 2px #c6c6c6;
-    -moz-box-shadow: 0px 0px 4px 2px #c6c6c6;
-    padding: 0;
-    position:fixed;
-    left: 33px;
-    top:143px;
-    z-index: 999999999;
-    background: #fff;
-	}
-.HTMLElements h4 {
-	background: rgb(121, 125, 130);
-    color: #fff;
-    padding: 5px;
-    cursor: pointer;
-}
-.HTMLElements ul li{
-	font-size: 13px;
-	cursor: pointer;
-    line-height: 1.8em;
-    margin: 0px 10px 5px 10px;
-    border-bottom: 1px solid #CCC;
-	}
-.HTMLElements ul li:last-child {border-bottom: none;}
-.HTMLElements ul li a{
-display:block;
-}
 .float-right{
 	float:right !important;
 }
 .float-left{
 	float:left !important;
 	}
-.HTMLElements_Menuhide{
-	position: absolute;
- 	z-index:2; 
-  	width: 30px;
-  	cursor: pointer;
-  	color: rgb(121, 125, 130);
-  	text-align: center;
-  	padding: 4px;
-    top: 0px;
-    right: 15px;
-  }
-  
-  .cms_staticFormHide{
-position: absolute;
- z-index:2; 
-  width: 30px;
-  cursor: pointer;
-    background: #797d82;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  left: 230px;
-  top: 0px;
-  }
-#cmsForm input[type="text"],#cmsForm input[type="password"],#cmsForm select, .seoTab input[type="text"],.seoTab input[type="password"],.seoTab select{
-    width: 100%;
-    cursor: auto;
-    outline: none;
-    border: 1px solid #797d82;
-    color: #797d82;
-    background: #fff;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-style: normal;
-    padding: 10px;
-    height: 40px;
-    font-size: 13px;
-}
-#cmsForm input[type="checkbox"]{
-	float:right;
-	margin-top:10px;
-}
-.cmsForm{
-	display: block;
-    width: 230px;
-	position:fixed;
-	top:0px;
-	padding:10px;
-	border-color: rgb(212,212,212);
-    border-radius: 2px;
-    box-shadow: 0px 0px 4px 2px #c6c6c6;
-    left:33px;
-    background: #fff;
-    z-index: 2;
-	}
 #cmsForm h4{
 	margin:0;
-	}
+}
 .cmsSaveBtn{
 	color: #fff;
     text-decoration: none;
@@ -1343,17 +1228,6 @@ position: absolute;
 }
 .cms_StaticLabel{
 	margin:5px 0;
-	}
-.cms_staticForm{
-	padding: 5px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    width: 30px;
-    left: 0;
-    top:235px;
-    font-size: 20px;
-    color: #8b8c8d;
 	}
 	.pageTab, .seoTab{
 	border: 1px solid #797d82;
@@ -1387,10 +1261,6 @@ position: absolute;
      top:500px;
 	}
 	
-	.actionIcon {
-    padding: 8px;
-    margin: 2px;
-}
 .width80 {
     width: 80px;
     white-space: nowrap !important;
@@ -1475,9 +1345,6 @@ position: absolute;
     display: block;
     margin:0 auto;
 	}
-	.listPageFilterBox{
-	margin-bottom:10px;
-	}
 	.searchBox{
 		float:left;
 		position: relative;
@@ -1546,11 +1413,6 @@ position: absolute;
 .Cimm-MainContenthide{
 	padding:0px;
 }
-
-.resPreviewIcon{
-	display:none;
-	padding :3px 10px 3px 10px;
-}
 .pactive{
 background:#42e300;
 }
@@ -1566,15 +1428,6 @@ background:#42e300;
 	height:18px; 
 	width:18px;
 	float:right;
-}
-
-.widgetLabel, .formLabel, .componentLabel, .htmlLabel{
-	border-top: 1px solid;
-	padding: 5px;
-	background: rgb(121, 125, 130);
-	color: #fff;
-	font-size: 16px;
-	cursor:pointer;
 }
 .widgetContainer dd a{
 	border-bottom: 1px solid #ccc;
@@ -1645,23 +1498,23 @@ ul.cimm_formContent > li select{
 /*max-height:395px;
 overflow:auto;*/
 }
-.cimm_bodyContentWrap .cimm_siteWidth, .cimm_bodyContentWrap .container{
+/* .cimm_bodyContentWrap .cimm_siteWidth, .cimm_bodyContentWrap .container{
 	width: 1200px !important;
     margin: 0 auto;
     position: relative;
-	}
+	} */
 .right{
 	text-align:right;
 	}
  @media (max-width: 1366px){
-	.cimm_bodyContentWrap .cimm_siteWidth, .cimm_bodyContentWrap .container{
+/* 	.cimm_bodyContentWrap .cimm_siteWidth, .cimm_bodyContentWrap .container{
 width:1000px !important;
 float:right;
 
 }
-	.HTMLElements {
-    width: 200px;
-    }
+.HTMLElements {
+   width: 200px;
+} */
     .sampleTemplateSlider{
     	width: 540px !important;
     position: relative !important;
@@ -1673,3 +1526,194 @@ float:right;
  margin-top: -50px;
  }
 	}
+	
+	
+	
+/***** modified *****/
+iframe#iframeId {
+	transition: .5s width ease;
+	border: 0;
+}
+.cms_leftMenuSlide{
+	width: 220px;
+	height: auto;
+	margin-bottom: 10px;
+	box-shadow: 0px 0px 4px 2px #c6c6c6;
+	-webkit-box-shadow: 0px 0px 4px 2px #c6c6c6;
+	-moz-box-shadow: 0px 0px 4px 2px #c6c6c6;
+	padding: 0;
+	position: absolute;
+	left: -300px;
+	top: 0;
+	z-index: 999;
+	background: #fff;
+	transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+}
+.HTMLElements{
+	max-height:600px;
+	overflow:auto;
+	overflow-x:hidden;
+}
+.HTMLElements h4 {
+	background: rgb(121, 125, 130);
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+}
+.HTMLElements ul li{
+	font-size: 13px;
+	cursor: pointer;
+    line-height: 1.8em;
+    margin: 0px 10px 5px 10px;
+    border-bottom: 1px solid #CCC;
+}
+.HTMLElements ul li.ui-draggable-dragging{
+	width: 150px; 
+}
+.HTMLElements ul li:last-child {
+	border-bottom: none;
+}
+.HTMLElements ul li a{
+	display:block;
+	position: relative;
+}
+.HTMLElements ul li a i{
+	display:block;
+	position: absolute;
+	right: 2px;
+	top: 50%;
+	margin-top: -6px;
+}
+.widgetLabel, .formLabel, .componentLabel, .htmlLabel{
+	border-top: 1px solid;
+	padding: 5px 20px 5px 5px;
+	background: #777;
+	color: #fff;
+	font-size: 14px;
+	cursor:pointer;
+	position: relative;
+}
+.componentLabel i{
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	margin-top: -6px;
+}
+.cms_leftMenu{
+	float:left;
+	width:30px;
+	background: #fff;
+    box-shadow: 1px 1px 10px #565f65;
+    position: fixed;
+    z-index: 99;
+    top: 200px;
+}
+.cms_leftMenu ul li{
+	list-style-type:none;
+	border-bottom: 1px solid #8b8c8d;
+}
+.cms_leftMenu > ul > li > a{
+	padding: 5px;
+    color: #8b8c8d;
+    font-size: 12px;
+    width: 30px;
+    display: inline-block;
+}
+.cms_leftMenu > ul > li > a i{
+	font-size: 20px;
+}
+.cms_leftMenuClose{
+	position: absolute;
+	z-index: 2; 
+	width: 30px;
+	cursor: pointer;
+	background: #797d82;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	right: 0px;
+	top: 0px;
+}
+.componentWrap{
+	padding: 5px;
+	font-size: 16px;
+	color: #4b4e50;
+	font-weight: 600;
+	background: #fff;
+}
+.componentWrap a{
+	color: #4b4e50;
+}
+#cmsForm input[type="text"],#cmsForm input[type="password"],#cmsForm select, .seoTab input[type="text"],.seoTab input[type="password"],.seoTab select{
+	width: 100%;
+	cursor: auto;
+	outline: none;
+	border: 1px solid #797d82;
+	color: #797d82;
+	background: #fff;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 5px;
+	height: 30px;
+	font-size: 13px;
+}
+#cmsForm input[type="checkbox"]{
+	float:right;
+	margin-top:10px;
+}
+.resPreviewIcon{
+	display:none;
+	padding :3px 8px 3px 8px;
+}
+.topNav_rightIcons > ul > li > a{
+	display:inline !important;
+	float:left;
+	background: #dad9da;
+	font-weight: bold;
+	margin-right: 5px;
+	padding: 5px;
+}
+.actionIcon {
+    padding: 2px 5px;
+	margin: 0;
+}
+.listPageFilterBox{
+	margin-bottom: 15px;
+}
+/* .cms_staticForm{
+	padding: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    width: 30px;
+    left: 0;
+    top:235px;
+    font-size: 20px;
+    color: #8b8c8d;
+	}
+.cmsForm{
+	display: block;
+    width: 230px;
+	position:fixed;
+	top:0px;
+	padding:10px;
+	border-color: rgb(212,212,212);
+    border-radius: 2px;
+    box-shadow: 0px 0px 4px 2px #c6c6c6;
+    left:33px;
+    background: #fff;
+    z-index: 2;
+	}
+.HTMLElements_Menuhide{
+	position: absolute;
+ 	z-index:2; 
+  	width: 30px;
+  	cursor: pointer;
+  	color: rgb(121, 125, 130);
+  	text-align: center;
+  	padding: 4px;
+    top: 0px;
+    right: 15px;
+  }
+ */

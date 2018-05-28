@@ -18,10 +18,6 @@
 	height:auto;
 	display:inherit;
 }
-
-#gm-canvas{
-	margin-top:-5px;
-}
 .readyTemplates_container{
 	float:right;
 	width:600px;
@@ -37,36 +33,6 @@
 }
 #gm-canvas textarea{
 	min-height:640px;
-}
-
-.cmsEditrBtn{
-	padding: 6px !important;
-	height: 26px !important;
-	background: #fff !important;
-    text-transform: capitalize !important;
-    box-shadow: 1px 1px 10px #565f65;
-    font-size: 15px !important;
-    color: #8b8c8d !important;
-}
-.gm-edit-mode,
-.gm-preview,
-.gm-layout-mode,.dropdown-toggle{
-	height:35px;
-}
-#gm-controls {
-  /*margin: 5px 0;*/
-}
-#gm-controls button,#gm-controls a {
-  font-size: 14px;
-  color:#8b8c8d;
-  background: none;
-}
-#gm-canvas {
-	height:auto;
-	width:99%;
-	margin:0 1% 0 0;
-	background-color:transparent;	
-  /*background: #ededed;*/
 }
 #gm-canvas textarea {
   width: 100%;
@@ -143,13 +109,6 @@
 	height: 20px;
 /* border-radius: 8px 8px 0 0; */
 }
-#gm-canvas .gm-tools {
-  background-color: none;
-  /*min-height: 30px;*/
-  display: block;
-  clear: both;
-   margin: 10px 0 0 0;
-}
 #gm-canvas .gm-tools a {
   /*color: #1a99e2;*/
   font-size: 14px;
@@ -169,25 +128,7 @@
   color: #fff;
 }
 #gm-canvas .gm-tools .gm-moveCol,#gm-canvas .gm-tools .gm-moveRow {
-  cursor: move;
-}
-#gm-canvas .row.gm-editing,#gm-canvas .row-fluid.gm-editing {
-  background-color: #F5F5F5;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
-    border: 1px solid #DDDDDD;
-    border-radius: 4px 4px 4px 4px;
-    margin: 25px 0;
-    position: relative;
-    padding: 25px 14px 20px 30px;
-}
-#gm-canvas .row.gm-editing>.gm-tools,#gm-canvas .row-fluid.gm-editing>.gm-tools {
-  background-color: none;
-  margin:35px 0 0 0 ;
+	cursor: move;
 }
 #gm-canvas .row.gm-editing>.gm-tools a,#gm-canvas .row-fluid.gm-editing>.gm-tools a {
   color: #666;
@@ -264,21 +205,6 @@
 	background-color: #fff;
 	background-position: center;
 }
-
-.cmsMoveCol{
-	position: absolute;
-	top: -32px;
-    left: 1px;
-    display: block;
-    background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat; 
-    width: 31px;
-    height: 31px; 
-	background-color:#fff;
-}
-.cmsMoveCol:hover{
-	background:url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
-}
-
 .cmsAddRow{
 	position: absolute;
 	left: 103px;
@@ -351,43 +277,6 @@
 	background-color: #fff;
 	background-position: center;
 }
-
-.cmsRowRmv{
-	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
-	width: 40px;
-	background-size: 18px 18px;
-	position: absolute;
-    right: 40px;
-    top: 0;
-	height: 30px;
-	background-color: #fff;
-	background-position: center;
-}
-.cmsRowRmv:hover{
-	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
-	width: 40px;
-	background-size: 18px 18px;
-	position: absolute;
-    right: 40px;
-    top: 0;
-	height: 30px;
-	background-color: #fff;
-	background-position: center;
-}
-
-.cmsEditable{
-	background: url('../images/in-active-icons/editIcon.png') no-repeat;
-	display: block;
-	width: 35px;
-    height: 31px;
-    position: absolute;
-    top: -32px;
-    left: 33px;
-    background-size: 18px 18px;
-    background-color: #fff; 
-    background-position: center
-}
-
 .cmsAddCol{
 	position: relative;
 	display: block;
@@ -418,25 +307,6 @@
 	background-color: #fff;
 	background-position: center;
 }
-
-.cmsMoveRow{
-	display: block;
-	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
-	width: 40px;
-	height: 30px;
-	background-color:#fff;
-	position: absolute;
-    right: 0;
-    top: 0;
-}
-.cmsMoveRow:hover{
-	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
-	cursor:move;
-	width: 40px;
-	height: 30px;
-	background-color:#fff;
-}
-
 .cmsMoveContent{
 	display: block;
 	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
@@ -564,61 +434,9 @@ img.alignleft {
 #gm-canvas p a,#gm-canvas p a:visited,#gm-canvas p a:link {		
   text-decoration: underline;		
 }
-.prevBtn{
-	    margin-left: 5px;
-	    margin-right: 10px;
-	}
-	.gmControlsCustomClass{
-	/*position:absolute;*/
-	top:-57px;
-}
-#gm-canvas .row.gm-editing:before ,#gm-canvas .row-fluid.gm-editing:before{
-	content:'Row';
-	position:absolute;
-	font-size:13px;
-	top:0px;
-	background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 3px;
-    margin:0;
-    padding: 3px;
-    left:0;
-	font-weight:bold;
-}
-#gm-canvas > .row  > .gm-editing:before {
-	content:'Column';
-	background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 3px;
-    margin:0;
-    padding: 3px;
-    position:absolute;
-    top:0;
-	font-size:13px;
-	font-weight:bold;
-}
 .column{
 	min-height:100px;
 }
-.gm-rowSettingsID{
-	height:30px !important;
-	width:150px !important;
-	/*position: absolute;
-    right: 150px;
-    top: -25px;*/
-	}
-	.gm-rowSettings{
-		position: absolute;
-	    top: 0px;
-	    right: 70px;
-	    width:40px;
-	    height:30px;
-	    background:#fff;
-	}
-	.gm-rowSettings .fa{
-		font-size: large;
-		margin:6px 10px;
-	}
 	.fa-cog:hover{
 		color:#000;
 	}
@@ -636,16 +454,176 @@ img.alignleft {
 .gm-content span iframe{
 max-width:100%;
 }
-
-.bgColor{
-	position:absolute;
-	top:-1px;
-	right:115px;
-}
-.gmControlsCustomClass{
-	/*position:absolute;*/
-	top:-57px;
-}
 button[disabled]{
 	cursor: not-allowed !important;
-	}
+}
+
+/**** modified ****/
+.cmsMoveCol{
+	position: absolute;
+	top: -21px;
+    left: 0px;
+    display: block;
+    background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat; 
+    width: 20px;
+    height: 20px; 
+	background-color:#fff;
+	background-size: cover;
+}
+.cmsMoveCol:hover{
+	background:url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	background-size: cover;
+}
+.cmsMoveRow{
+	display: block;
+	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
+	width: 20px;
+	height: 20px;
+	background-color:#fff;
+	position: absolute;
+    left: 0;
+    top: -20px;
+    cursor:move;
+    background-size: cover;
+    box-shadow: 1px 1px 6px #565f65;
+}
+.cmsMoveRow:hover{
+	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	background-size: cover;
+}
+.cmsEditable{
+	background: url('../images/in-active-icons/editIcon.png') no-repeat;
+	display: block;
+	width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -21px;
+    left: 20px;
+    background-size: 15px 14px;
+    background-color: #fff; 
+    background-position: center
+}
+.cmsRowRmv{
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 20px;
+	background-size: 15px 15px;
+	position: absolute;
+    left: 22px;
+    top: -20px;
+	height: 20px;
+	background-color: #fff;
+	background-position: center;
+	box-shadow: 1px 1px 2px #565f65;
+}
+.cmsRowRmv:hover{
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	background-size: 15px 15px;
+	background-position: center;
+}
+.gm-rowSettings{
+	position: absolute;
+    top: -20px;
+    left: 44px;
+    width: 20px;
+    height: 20px;
+    background:#fff;
+    box-shadow: 1px 1px 2px #565f65;
+}
+.gm-rowSettings .fa{
+	font-size: large;
+	margin: 0px 3px;
+}
+#gm-canvas .row.gm-editing:before ,#gm-canvas .row-fluid.gm-editing:before{
+	content:'Row';
+	position:absolute;
+	font-size: 10px;
+	top:0px;
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    margin:0;
+    padding: 0 3px;
+    right: 0;
+	font-weight:bold;
+}
+#gm-canvas > .row  > .gm-editing:before {
+	content:'Column';
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    margin:0;
+    padding: 0 3px;
+    position:absolute;
+    top:0;
+    right: 0;
+	font-size: 10px;
+	font-weight: bold;
+}
+#gm-canvas .gm-tools {
+	display: block;
+	clear: both;
+	margin: 0;
+}
+#gm-canvas .row.gm-editing>.gm-tools,#gm-canvas .row-fluid.gm-editing>.gm-tools {
+	margin: 22px 0 0 0 ;
+}
+.gmControlsCustomClass{
+	top:-57px;
+}
+.cmsEditrBtn{
+	background: #fff !important;
+    box-shadow: 1px 1px 10px #565f65;
+    color: #8b8c8d !important;
+}
+#gm-canvas .row.gm-editing,#gm-canvas .row-fluid.gm-editing {
+	background-color: #F5F5F5;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.1);
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	margin: 24px 0 0 0;
+	position: relative;
+	padding: 5px;
+}
+.bgColor{
+	position:absolute;
+	top: 0px;
+	left: 60px;
+}
+#gm-controls button,#gm-controls a {
+	font-size: 12px;
+	color:#8b8c8d;
+	background: none;
+	text-transform: capitalize;
+}
+.prevBtn{
+	margin-left: 5px;
+}
+.gm-rowSettingsID{
+	height: 30px;
+	width: 150px;
+}
+#gm-canvas {
+	height:auto;
+	margin:0 1% 0 0;
+	background-color:transparent;
+	position: relative;	
+}
+/**** modified ****/
+
+
+.gm-edit-mode,
+.gm-preview,
+.gm-layout-mode,.dropdown-toggle{
+	/* height:35px; */
+}
+#gm-controls {
+  /*margin: 5px 0;*/
+}
+#gm-canvas{
+	/* margin-top:-5px; */
+}

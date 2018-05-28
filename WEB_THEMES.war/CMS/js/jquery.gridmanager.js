@@ -47,6 +47,7 @@
             gm.initDefaultButtons();
             gm.initCanvas();
             gm.log("FINISHED");
+            
 			
         };
 
@@ -200,7 +201,7 @@
             
 		   var buttons=[];
             // Dynamically generated row template buttons
-			buttons.push('<div id="layoutCarousel" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');
+			buttons.push('<div id="layoutCarousel" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');//<input type="checkbox" id="containF"/>
 			buttons.push('<span u="arrowleft" class="layout03l" style="width: 55px; height: 55px; top: 123px; left: 8px;"></span>'); 
 			//buttons.push('<div u="arrowleft" class="left-arrow1" style="position:relative;top:14px !important;left:0px !important;display:block;"></div>'); 
 			//buttons.push('<img u="arrowleft" src="../../ASSETS/WEB_THEMES/CMS/images/cms_images/left-arrow.png" style="position:relative;top:14px !important;left:0px !important;"></img>');
@@ -500,10 +501,10 @@
                  var drawer=row.find(".gm-rowSettingsDrawer");
                     if(drawer.length > 0){
                       drawer.remove();
-					 jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","35px 0 0 0");
+					// jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","35px 0 0 0");
                     } else {
                       row.prepend(gm.generateRowSettings(row));
-                      jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","25px 0 0 0");
+                      //jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","25px 0 0 0");
                     }
 
             // Change Row ID via rowsettings
@@ -874,6 +875,7 @@ console.log("Custom : "+curr_control.dataToolElement);
               // Show the template controls
               gm.$el.find("#gm-addnew").show();
               // Sort Rows First
+			  gm.activateContainer();
               gm.activateRows(rows);
               // Now Columns
               gm.activateCols(cols);
@@ -882,15 +884,26 @@ console.log("Custom : "+curr_control.dataToolElement);
               // Get cols & rows again after filter execution
               cols=canvas.find(gm.options.colSelector);
               rows=canvas.find(gm.options.rowSelector);
-              // Make Rows sortable
-              canvas.sortable({
-                items: rows,
-                axis: 'y',
+             $('.container-fluid, .container').sortable({
+				containment: "document",
+				items: rows,
+				connectWith: '.container-fluid, .container',
+				axis: 'y',
                 placeholder: gm.options.rowSortingClass,
                 handle: ".gm-moveRow",
                 forcePlaceholderSize: true,   opacity: 0.7,  revert: true,
-                tolerance: "pointer",
                 cursor: "move"
+			});
+              // Make Rows sortable
+              canvas.sortable({
+			//	containment: "parent",
+                items: '.container-fluid, .container',
+                axis: 'y',
+               // placeholder: gm.options.rowSortingClass,
+                handle: ".gm-moveRow",
+               // forcePlaceholderSize: true,   opacity: 0.7,  revert: true,
+                //tolerance: "pointer",
+                //cursor: "move"
                });
               /*
               Make columns sortable
@@ -984,7 +997,9 @@ console.log("Custom : "+curr_control.dataToolElement);
                .prepend(gm.toolFactory(gm.options.rowButtonsPrepend));
                //.append(gm.toolFactory(gm.options.rowButtonsAppend));
         };
-
+		gm.activateContainer = function(){
+           $('#mycanvas .container-fluid, #mycanvas  .container').addClass(gm.options.gmEditClass).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
+        };
          /**
          * Look for pre-existing rows and remove editing classes as appropriate
          * @rows: elements to act on
@@ -1006,11 +1021,20 @@ console.log("Custom : "+curr_control.dataToolElement);
          * @returns row
          */
         gm.createRow = function(colWidths){
-          var row= $("<div/>", {"class": gm.options.rowClass + " " + gm.options.gmEditClass});
-             $.each(colWidths, function(i, val){
-                row.append(gm.createCol(val));
-              });
-                gm.log("++ Created Row");
+          var canvas=gm.$el.find("#" + gm.options.canvasId);
+			row = $("<div/>", {"class": gm.options.rowClass + " " + gm.options.gmEditClass});
+			var row= $("<div/>", {"class": gm.options.rowClass + " " + gm.options.gmEditClass});
+			$.each(colWidths, function(i, val){
+				row.append(gm.createCol(val));
+			});
+			if($('#containF').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container-fluid')){
+				containerFluid = $("<div/>", {"class": 'container-fluid'});
+				row = containerFluid.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
+			}else if(!$('#containF').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container')){
+				container = $("<div/>", {"class": 'container'});
+				row = container.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
+			}
+            gm.log("++ Created Row");
           return row;
         };
 
@@ -1040,13 +1064,13 @@ console.log("Custom : "+curr_control.dataToolElement);
           // Row settings drawer
           var html=$("<div/>")
               .addClass("gm-rowSettingsDrawer")
-              .addClass(gm.options.gmToolClass)
-              .addClass(gm.options.gmClearClass)
+              //.addClass(gm.options.gmToolClass)
+              //.addClass(gm.options.gmClearClass)
               .prepend($("<div />")
                 .addClass(gm.options.gmBtnGroup)
                 .addClass(gm.options.gmFloatLeft)
                 .html(classBtns.join("")))
-              .append($("<div />").addClass("pull-right bgColor").html(
+              .append($("<div />").addClass("bgColor").html(
                 $("<label />").html("Row Background: ").append(
                 $("<input>").addClass("gm-rowSettingsID").attr({type: 'text', placeholder: 'Background Color', value: row.attr("id")})
                 )
@@ -1254,6 +1278,7 @@ console.log("Custom : "+curr_control.dataToolElement);
     		        		var formId = jQuery(content).data("widget");
     		        		jQuery("[data-widget='"+formId+"']").attr({'data-select':'form'});
     		        		generateForm(formId);
+    		        		
     		        	}
 						if(loadSlider)
 		        		{
@@ -1440,8 +1465,15 @@ console.log("Custom : "+curr_control.dataToolElement);
           var canvas=gm.$el.find("#" + gm.options.canvasId);
               gm.$el.on("click", string, function(e){
                 gm.log("Clicked " + string);
-                canvas.prepend(gm.createRow(colWidths));
-                 gm.reset();
+				if($('#containF').is(':checked') && $(canvas[0].firstElementChild).hasClass('container-fluid')){
+					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+				}else if(!$('#containF').is(':checked') && $(canvas[0].firstElementChild).hasClass('container')){
+					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+				}else{
+					canvas.prepend(gm.createRow(colWidths));
+				}
+			//$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+                gm.reset();
                 e.preventDefault();
             });
         };
@@ -1555,12 +1587,12 @@ console.log("Custom : "+curr_control.dataToolElement);
         	console.log("Widget Length: "+jQuery("[data-select='widget']").length);
         	jQuery("[data-select='widget']").each(function(i){
         		var widgetId = jQuery(this).data("widget");
-        		console.log("widget find class in page: "+jQuery(this).find('.slick-slider').length);
+        		//console.log("widget find class in page: "+jQuery(this).find('.slick-slider').length);
         	});
         	console.log("Widget reinit");
         	jQuery("[data-select='widget']").each(function(i){
         		var widgetId = jQuery(this).data("widget");
-        		console.log("widget count in page: "+i+" :widget ID:"+widgetId);
+        		//console.log("widget count in page: "+i+" :widget ID:"+widgetId);
         		generateWidget(widgetId);
         	});
         	console.log("Form reinit");
@@ -1570,6 +1602,9 @@ console.log("Custom : "+curr_control.dataToolElement);
         		generateForm(formId);
         	});
         	homeCarousels();
+        	jQuery("[data-type='widget']").click(function(){
+        		$(this).parent().attr('contenteditable','false');
+        	});
         };
 
         /**
@@ -1658,7 +1693,7 @@ console.log("Custom : "+curr_control.dataToolElement);
         remoteURL: "/replace-with-your-url",
 
         // Custom CSS to load
-        cssInclude: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
+        //cssInclude: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
 
         // Filter callback. Callback receives two params: the template grid element and whether is called from the init or deinit method
         filterCallback: null,
@@ -1693,12 +1728,12 @@ console.log("Custom : "+curr_control.dataToolElement);
         controlButtonSpanClass: "fa fa-plus-circle",
 
         // Control bar RH dropdown markup
-		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='button tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a class='button tiny' data-width='auto' title='Desktop'><span class='fa fa-desktop'></span></a><a class='button tiny'  title='Tablet' data-width='768'><span class='fa fa-tablet'></span></a><a title='Phone' class='button tiny' data-width='640'><span class='fa fa-mobile-phone'></span></a><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a></div>",*/
+		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a class='button tiny' data-width='auto' title='Desktop'><span class='fa fa-desktop'></span></a><a class='button tiny'  title='Tablet' data-width='768'><span class='fa fa-tablet'></span></a><a title='Phone' class='button tiny' data-width='640'><span class='fa fa-mobile-phone'></span></a><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a></div>",*/
 		 
-		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='button tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a><a title='iPhone' class='button tiny active' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPhone landscape' class='button tiny iPhone-l' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad landscape' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone iPhone-l'></span></a><a title='Desktop' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-laptop'></span></a></div>",*/
+		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a><a title='iPhone' class='button tiny active' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPhone landscape' class='button tiny iPhone-l' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad landscape' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone iPhone-l'></span></a><a title='Desktop' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-laptop'></span></a></div>",*/
 
 		
-		controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='button tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
+		controlAppend: "<div class='button-group text-right'><button title='Edit Source Code' type='button' class='btn-xs tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='btn-xs tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
 		
 		
         // Controls for content elements
@@ -1781,7 +1816,21 @@ console.log("Custom : "+curr_control.dataToolElement);
         // rowButtonsAppend: [
                 
             ],
+			containerButtonsPrepend: [
+                {
+                 title:"Move",
+                 element: "a",
+                 btnClass: "gm-moveRow pull-left",
+                 iconClass: "fa fa-arrows "
+              },
+                {
+                 title:"Remove Container",
+                 element: "a",
+                 btnClass: "pull-right gm-removeRow",
+                 iconClass: "fa fa-trash-o"
+                }
 
+            ],
 
         // CUstom row classes - add your own to make them available in the row settings
         rowCustomClasses: ["example-class","test-class"],
@@ -1902,6 +1951,11 @@ console.log("Custom : "+curr_control.dataToolElement);
             config: {
               inline: true,
 			   menubar: false,
+			   table_default_attributes:{
+				   class: 'table table-striped table-bordered display',
+				   width: '100%',
+				   table_tab_navigation: true
+			   },
 			   formats : {
 				   alignleft: [
 								{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'left'}},
@@ -1921,7 +1975,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			   extended_valid_elements:"i[class],iframe[*],img[*]", 
 			   valid_elements : '*[*]',
 			   
-			   content_css: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
+			   //content_css: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
 			   autosave_ask_before_unload:true,
              plugins: [
 						 "advlist autolink link image lists charmap print hr anchor pagebreak spellchecker autosave",

@@ -202,7 +202,8 @@
             		  
             				   if(msg.indexOf("success")!=-1){
                 				   alert(jQuery("#widgetName").val() + " saved successfully.");
-                				   window.parent.buildWidgetList();
+                				   window.parent.generateWidgetList();
+                				   //window.parent.buildWidgetList();
                 				   window.parent.initDraggable();
             					   var siteId = jQuery("#siteId").val();
             					   if(jQuery("#isEdit").val()=="Y"){

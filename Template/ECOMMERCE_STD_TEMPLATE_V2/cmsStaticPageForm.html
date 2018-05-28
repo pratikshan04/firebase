@@ -1,14 +1,11 @@
-<div class="cmsForm" style="display:none">
-	<div id="pageTab" class="TabSwitch">
+<div class="cms_leftMenuSlide">
+	<div id="pageTab" class="TabSwitch clearAfter">
 		<a href="javascript:void(0);" onclick="switchPage();" id="PageTabs" class="cms_pageTabBtn selected">Page</a>
 		<a href="javascript:void(0);" onclick="switchSEO();" id="SeoTabs" class="cms_pageTabBtn">SEO</a> 
-		<div class="clear-both"></div>
 	</div>
-	<div class="cms_staticFormHide">
-		<i class="fa fa-lg fa-chevron-left">
-		</i>
-	</div> 
-	<div class="clear-both"></div>
+	<div class="cms_leftMenuClose">
+		<i class="fa fa-lg fa-chevron-left"></i>
+	</div>
 	<div class="pageTab">
 		<form id="cmsForm">
 		#if($staticPageData.id>0)
@@ -56,9 +53,86 @@
 		</form>
 		<a href="javascript:void(0);" onclick="saveStaticPage()" class="cmsSaveBtn">Save</a><div class="clear-both"></div>
 		<input type="hidden" value="$!staticPageData.pageType" id="staticPageType" />
-	</div><script>	
+	</div>
+	<div id="seoTab" class="seoTab" style="display:none;">
+		<meta name="description" content="This is an example of a meta data. This will often show up in search results."></meta>	
+		<div id="SEOPreview" style="background:white;padding-bottom:12px;">
+				Preview
+				<ul style="list-style-type: none;border:1px solid #bbb !important;">
+				    <li>
+				        <div id="previewTitle">
+				              <h3 style="font-size: 18px;"><a href="#" style="font-size: 18px;" onclick="return false;"><span id="out_title" style="color:#1a0dab"></span></a></h3>
+				       </div>
+				    </li>
+				    <li>
+				        <div id="previewURL">
+				          <cite style="color:#006621;font-size: 14px;">
+				              <span id="out_url"></span><span id="out_dash1" style="display: inline;"></span>
+				            <span id="out_dash1" style="display: inline;"></span>         
+				          </cite>
+				       </div> 
+				    </li>   
+				    <li>
+				        <div id="previewSnippet">
+				         <span id="out_snippet"></span>
+				         <span id="out_dash1" style="display: inline;"></span>   
+				       </div>
+				    </li>
+				</ul>    
+			</div>
+			<div id="errDiv"></div> <br />
+		<div id="SEOPageTitle" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_title">SEO Title</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="titleCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			   <textarea id="in_title" name="in_title" rows="2" cols="35" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			</div>
 
+			<div id="SEOdescription" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_snippet">Meta Data</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="snippetCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			     <textarea id="in_snippet" name="in_snippet" rows="3" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			</div>
 
+			<div id="SEOURL" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_snippet">URL</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="snippetCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			   <textarea id="in_url" name="in_url" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			</div>
+
+			<div id="SEOKeywords" style="padding-bottom:10px;">
+			   <div id="sub-left">
+			         <label for="in_keyword">Keywords</label>
+			   </div>
+			   <div id="sub-right">
+			      <span id="snippetCharsLeft"/>
+			   </div>
+			   <div class="clear-both"></div>
+			   <textarea id="in_keyword" name="in_keyword" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
+			   <div style="margin:10px 3px 10px 0;">
+			  	 	<a href="javascript:void(0);" onclick="javascript: SEOAnalyzer();" id="seoValidatorButton" class="cmsSaveBtn float-left" style="margin-left:0;">SEO Validator</a>		
+		<a href="javascript:void(0);" onclick="javascript: checkKeywordExist();" id="keywordChecker" class="cmsSaveBtn float-right">Keyword Validator</a>
+		<div class="clear-both"></div>
+			  </div>
+			</div>
+			
+			
+			
+<script>	
 	if(document.getElementById('cmsPageId').value=='0'){
 
 		document.getElementById('pagestatus').checked = true;
@@ -277,86 +351,7 @@ if(jQuery('#clonePage').is(":checked")){
 	document.getElementById("clonePage").setAttribute("value","false");
 	
 }
-				}
-
-		</script>
-		
-	<div id="seoTab" class="seoTab" style="display:none;">
-		<meta name="description" content="This is an example of a meta data. This will often show up in search results."></meta>	
-		<div id="SEOPreview" style="background:white;padding-bottom:12px;">
-				Preview
-				<ul style="list-style-type: none;border:1px solid #bbb !important;">
-				    <li>
-				        <div id="previewTitle">
-				              <h3 style="font-size: 18px;"><a href="#" style="font-size: 18px;" onclick="return false;"><span id="out_title" style="color:#1a0dab"></span></a></h3>
-				       </div>
-				    </li>
-				    <li>
-				        <div id="previewURL">
-				          <cite style="color:#006621;font-size: 14px;">
-				              <span id="out_url"></span><span id="out_dash1" style="display: inline;"></span>
-				            <span id="out_dash1" style="display: inline;"></span>         
-				          </cite>
-				       </div> 
-				    </li>   
-				    <li>
-				        <div id="previewSnippet">
-				         <span id="out_snippet"></span>
-				         <span id="out_dash1" style="display: inline;"></span>   
-				       </div>
-				    </li>
-				</ul>    
-			</div>
-			<div id="errDiv"></div> <br />
-		<div id="SEOPageTitle" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_title">SEO Title</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="titleCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			   <textarea id="in_title" name="in_title" rows="2" cols="35" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
-			</div>
-
-			<div id="SEOdescription" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_snippet">Meta Data</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="snippetCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			     <textarea id="in_snippet" name="in_snippet" rows="3" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
-			</div>
-
-			<div id="SEOURL" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_snippet">URL</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="snippetCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			   <textarea id="in_url" name="in_url" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
-			</div>
-
-			<div id="SEOKeywords" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_keyword">Keywords</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="snippetCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			   <textarea id="in_keyword" name="in_keyword" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
-			   <div style="margin:10px 3px 10px 0;">
-			  	 	<a href="javascript:void(0);" onclick="javascript: SEOAnalyzer();" id="seoValidatorButton" class="cmsSaveBtn float-left" style="margin-left:0;">SEO Validator</a>		
-		<a href="javascript:void(0);" onclick="javascript: checkKeywordExist();" id="keywordChecker" class="cmsSaveBtn float-right">Keyword Validator</a>
-		<div class="clear-both"></div>
-			  </div>
-			</div>
-		<script>
+}
 
 		charactersRemainings();		
 		
