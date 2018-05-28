@@ -3422,8 +3422,11 @@ function validatePcardFormWithNewIds(){
 	}
 }
 function homeCarousels(){
-	if($('#featuredProductList').length>0){
-		  $('#featuredProductList').slick({
+	if($('.featuredProductList').length>0){
+		if($('.featuredProductList').hasClass('slick-initialized')){
+			$('.featuredProductList').slick('unslick');
+		}
+		  $('.featuredProductList').slick({
 			  infinite: true,
 			  slidesToShow: 5,
 			  slidesToScroll: 1,
@@ -3455,8 +3458,11 @@ function homeCarousels(){
 		  });
 		}
 
-		if($('#featuredBrands').length>0){
-			$('#featuredBrands').slick({
+		if($('.featuredBrands').length>0){
+			if($('.featuredBrands').hasClass('slick-initialized')){
+				$('.featuredBrands').slick('unslick');
+			}
+			$('.featuredBrands').slick({
 				  infinite: true,
 				  slidesToShow: 5,
 				  slidesToScroll: 1,
@@ -3487,8 +3493,11 @@ function homeCarousels(){
 				             ]
 			  });
 		}
-		if($('#featuredManufacturers').length>0){
-			$('#featuredManufacturers').slick({
+		if($('.featuredManufacturers').length>0){
+			if($('.featuredManufacturers').hasClass('slick-initialized')){
+				$('.featuredManufacturers').slick('unslick');
+			}
+			$('.featuredManufacturers').slick({
 				  infinite: true,
 				  slidesToShow: 5,
 				  slidesToScroll: 1,
@@ -3519,8 +3528,11 @@ function homeCarousels(){
 				             ]
 			  });
 		}
-		if($('#shopByCategory').length>0){
-			$('#shopByCategory').slick({
+		if($('.shopByCategory').length>0){
+			if($('.shopByCategory').hasClass('slick-initialized')){
+				$('.shopByCategory').slick('unslick');
+			}
+			$('.shopByCategory').slick({
 				  infinite: true,
 				  slidesToShow: 5,
 				  slidesToScroll: 1,
