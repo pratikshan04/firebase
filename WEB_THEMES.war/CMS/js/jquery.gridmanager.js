@@ -201,7 +201,7 @@
             
 		   var buttons=[];
             // Dynamically generated row template buttons
-			buttons.push('<div id="layoutCarousel" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');//<input type="checkbox" id="containF"/>
+			buttons.push('<div id="layoutCarousel" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');
 			buttons.push('<span u="arrowleft" class="layout03l" style="width: 55px; height: 55px; top: 123px; left: 8px;"></span>'); 
 			//buttons.push('<div u="arrowleft" class="left-arrow1" style="position:relative;top:14px !important;left:0px !important;display:block;"></div>'); 
 			//buttons.push('<img u="arrowleft" src="../../ASSETS/WEB_THEMES/CMS/images/cms_images/left-arrow.png" style="position:relative;top:14px !important;left:0px !important;"></img>');
@@ -224,13 +224,15 @@
               $('<div/>',
                   {'id': gm.options.controlId, 'class': gm.options.gmClearClass + " " + "gmControlsCustomClass"}
               ).prepend(
-                    $('<div/>', {"class": gm.options.rowClass}).html(
-                       $('<div/>', {"class": gm.options.colDesktopClass + gm.options.colMax}).addClass(gm.options.colAdditionalClass).html(
-                          $('<div/>', {'id': 'gm-addnew'})
-                          .addClass(gm.options.gmBtnGroup).html(
-                            buttons.join("")
-                          )
-                        ).append(gm.options.controlAppend)
+            		$('<div/>', {"style": 'max-width:1170px;margin: 0 auto;'}).html(
+	                    $('<div/>', {"class": gm.options.rowClass}).html(
+	                       $('<div/>', {"class": gm.options.colDesktopClass + gm.options.colMax}).addClass(gm.options.colAdditionalClass).html(
+	                          $('<div/>', {'id': 'gm-addnew'})
+	                          .addClass(gm.options.gmBtnGroup).html(
+	                            buttons.join("")
+	                          )
+	                        ).append(gm.options.controlAppend)
+	                     )
                      )
                   )
               );
@@ -352,7 +354,7 @@
            // Turn editing on or off
            gm.$el.on("click", ".gm-preview", function(){
                if(gm.status){
-            	   $(".cms_leftMenu").hide();
+            	   $(".cms_leftMenu, .containFluidEl").hide();
             	   $(".readyTemplatesForm").hide();
 				   $(".resPreviewIcon").show();
 				   jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');	
@@ -367,7 +369,7 @@
 				 gm.reBuildBanner(false);
 				 gm.switchLayoutMode(gm.options.layoutDefaultMode);
               } else {
-            	  $(".cms_leftMenu").show();
+            	  $(".cms_leftMenu, .containFluidEl").show();
             	  $(".readyTemplatesForm").show();
             	  //$("#template-slider").trigger("click");
 				  $(".resPreviewIcon").hide();
@@ -391,7 +393,7 @@
            // Switch editing mode
             }).on("click", ".gm-edit-mode", function(){
               if(gm.mode === "visual"){
-            	  $(".cms_leftMenu").hide();
+            	  $(".cms_leftMenu, .containFluidEl").hide();
                  gm.deinitCanvas();
 				 		jQuery(".readyTemplatesForm").hide();
 							
@@ -423,7 +425,7 @@
 						   $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
 						   hideActionIcons();
 						  } else {
-							  $(".cms_leftMenu").show();
+							  $(".cms_leftMenu, .containFluidEl").show();
 							  showActionIcons();
 							  //CodeMirror.toTextArea();
 							  document.getElementById("sourceEditor").value = editor.getValue();
@@ -898,7 +900,7 @@ console.log("Custom : "+curr_control.dataToolElement);
               canvas.sortable({
 			//	containment: "parent",
                 items: '.container-fluid, .container',
-                axis: 'y',
+                //axis: 'y',
                // placeholder: gm.options.rowSortingClass,
                 handle: ".gm-moveRow",
                // forcePlaceholderSize: true,   opacity: 0.7,  revert: true,
@@ -1027,10 +1029,10 @@ console.log("Custom : "+curr_control.dataToolElement);
 			$.each(colWidths, function(i, val){
 				row.append(gm.createCol(val));
 			});
-			if($('#containF').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container-fluid')){
+			if($('#containFluid').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container-fluid')){
 				containerFluid = $("<div/>", {"class": 'container-fluid'});
 				row = containerFluid.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
-			}else if(!$('#containF').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container')){
+			}else if(!$('#containFluid').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container')){
 				container = $("<div/>", {"class": 'container'});
 				row = container.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
 			}
@@ -1465,9 +1467,9 @@ console.log("Custom : "+curr_control.dataToolElement);
           var canvas=gm.$el.find("#" + gm.options.canvasId);
               gm.$el.on("click", string, function(e){
                 gm.log("Clicked " + string);
-				if($('#containF').is(':checked') && $(canvas[0].firstElementChild).hasClass('container-fluid')){
+				if($('#containFluid').is(':checked') && $(canvas[0].firstElementChild).hasClass('container-fluid')){
 					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
-				}else if(!$('#containF').is(':checked') && $(canvas[0].firstElementChild).hasClass('container')){
+				}else if(!$('#containFluid').is(':checked') && $(canvas[0].firstElementChild).hasClass('container')){
 					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
 				}else{
 					canvas.prepend(gm.createRow(colWidths));
@@ -1731,15 +1733,15 @@ console.log("Custom : "+curr_control.dataToolElement);
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a class='button tiny' data-width='auto' title='Desktop'><span class='fa fa-desktop'></span></a><a class='button tiny'  title='Tablet' data-width='768'><span class='fa fa-tablet'></span></a><a title='Phone' class='button tiny' data-width='640'><span class='fa fa-mobile-phone'></span></a><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a></div>",*/
 		 
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a><a title='iPhone' class='button tiny active' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPhone landscape' class='button tiny iPhone-l' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad landscape' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone iPhone-l'></span></a><a title='Desktop' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-laptop'></span></a></div>",*/
-
-		
-		controlAppend: "<div class='button-group text-right'><button title='Edit Source Code' type='button' class='btn-xs tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='btn-xs tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
+       
+        //<label class='customCheckBox containFluidEl'><input type='checkbox' id='containFluid'/><span> Create full width container</span></label>
+        controlAppend: "<div class='button-group clearfix mBottom-4 text-right'><button title='Edit Source Code' type='button' class='btn-xs tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='btn-xs tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
 		
 		
         // Controls for content elements
         controlContentElem: '<div class="gm-controls-element hideButton pull-left"> <a class="gm-move cmsMoveContent" href="#" title="Move" onclick="javascript:showDelIcon();"></a> <a class="gm-delete cmsContentRmv" href="#" title="Delete"></a> </div>',
    /*
-     General editing classes---------------
+     General editing classes--------------- 
   */
         // Standard edit class, applied to active elements
         gmEditClass: "gm-editing",
@@ -1818,16 +1820,16 @@ console.log("Custom : "+curr_control.dataToolElement);
             ],
 			containerButtonsPrepend: [
                 {
-                 title:"Move",
+                 title:"Move Container",
                  element: "a",
-                 btnClass: "gm-moveRow pull-left",
-                 iconClass: "fa fa-arrows "
+                 btnClass: "gm-moveRow cmsMoveRow",
+                 iconClass: ""
               },
                 {
                  title:"Remove Container",
                  element: "a",
-                 btnClass: "pull-right gm-removeRow",
-                 iconClass: "fa fa-trash-o"
+                 btnClass: "gm-removeRow cmsRowRmv",
+                iconClass: ""
                 }
 
             ],

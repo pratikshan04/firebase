@@ -2,49 +2,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	#parse("head.html") #parse("stylesheets.html") #parse("javascripts.html")
+	#parse("head.html")
 </head>
 <body>
-	<div class="cimm_stickyPageWrap">	
-		<div class="cimm_header"> 
-			#parse("header.html")	
-		</div>
-		<div class="cimm_navigationBar">
-			<div class="cimm_siteWidth">
-			#parse("navigation.html")
-			</div>
-		</div>
-		<div class="cimm_BreadCrumbs">
-			<div class="cimm_siteWidth">
-				#parse("fullBreadcrumbs.html")
-			</div>
-		</div>
-		<div class="cimm_siteWidth">
-			<div class="cimm_bodyContentWrap">       
-				#if($leftContent)
-				<div class="cimm_leftMenuEnclosure">
-					#parse($leftContent)
+	<div class="site-overlay" id="site-overlay" ></div>
+	<div class="modalPopOverlay" id="overlay"></div>
+	<!-- <div class="loadAfter">#if($userAgent != "WEBVIEW")<i class="fa fa-4x fa-spin fa-spinner"></i>#end</div> -->
+	<div id="fixedHead"></div>
+	<div class="cimm_stickyPageWrap">
+		<div id="normalHead">
+			<header>
+				<div class="cimm_header">
+					#parse("header.html")
 				</div>
-				#end
-				<div class="cimm_mainContentEnclosure">
+			</header>
+			<nav class="navbar navbar-default hideForIpad">
+				<div class="container">
+					<div class="cimm_navigationBar">
+						#parse("navigation.html")
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="cimm_bodyContentWrap">
+			#if($LayoutName!="HomePage" && $LayoutName!= "StaticPageFullPageLayout" && $userAgent != "WEBVIEW")
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cimm_BreadCrumbs">
+						#parse("fullBreadcrumbs.html")
+					</div>
+				</div>
+			</div>
+			#end
+			<div class="row">
+				<div class="col-md-12">
 					#parse($bodyContent)
 				</div>
-				#if($rightContent)
-				<div class="cimm_rightMenuEnclosure">
-					#parse($rightContent)
-				</div>
-				#end
 			</div>
-		</div>       
+		</div>
 	</div>
-	<div class="cimm_footerEnclosure">   		
-		#parse("footer.html")    	
-	</div>
-	#if($!userAgent != "WEBVIEW")
+	<footer>
+	    <div class="cimm_footerEnclosure">
+	     	#parse("footer.html")
+	    </div>
+    </footer>
+    #if($!userAgent != "WEBVIEW")
 	<p id="backToTop">
-		<a href="#top"><span><i class="fa fa-2x fa-arrow-up"></i></span></a>
+		<a href="#top"></a>
 	</p>
 	#end
+	#parse("javascripts.html")
 </body>
 </html>
 #end
