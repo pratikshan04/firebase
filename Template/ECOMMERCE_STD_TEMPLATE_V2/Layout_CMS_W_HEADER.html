@@ -115,10 +115,8 @@
       </div>
       #end
       <div class="cimm_bodyContentWrap">
-        #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
-        	<div class="container">
-        #else
-        	<div class="cimm_siteWidth">
+        #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") != "Y")
+        <div class="cimm_siteWidth">
         #end
           #if($leftContent)
           #if($LayoutName == "ProductList")
@@ -141,7 +139,9 @@
             #parse($rightContent)
           </div>
           #end
+        #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") != "Y")
         </div>
+        #end
       </div>
     </div>
 	#if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
