@@ -167,7 +167,10 @@
 						#foreach($agentsList in $agentUserList)
 							#if($loggedInUserId!=$agentsList.userId)
 								<tr class="odd">
-									<td class="alignLeft" data-th="$!locale.get('product.heading.agentName')">$!agentsList.firstName $!agentsList.lastName</td>
+									<td class="alignLeft" data-th="$!locale.get('product.heading.agentName')">
+										$!agentsList.firstName $!agentsList.lastName
+										#if($!agentsList.isPunchoutUser=="Y")<br/><b><span class="text-danger">Procurement User</span></b> #end
+									</td>
 									<td class="alignLeft" data-th="$!locale.get('form.label.UserNameEmail')">$!agentsList.userName</td>
 									<!--<td>$agentsList.emailAddress</td>-->
 									<td class="alignLeft" data-th="$!locale.get('form.label.role')">
