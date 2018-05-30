@@ -2846,9 +2846,13 @@ function validateProductSearch(){
 var userLogin = $("#userLogin").val();
 if (userLogin=="true") {
 	var isShipToSelected = getCookie("isShipToSelected");
-	if($("#isPunchoutUser").length>0 && $("#isPunchoutUser").val("Y") && $("#shipAddressForPunchoutUser").length>0 && $("#shipAddressForPunchoutUser").val("Y")){
-		if(isShipToSelected != "true"){
-			loadShippingInfo();
+	if($("#isPunchoutUser").length>0 && $("#isPunchoutUser").val()=="Y"){
+		if($("#shipAddressForPunchoutUser").length>0 && $("#shipAddressForPunchoutUser").val()=="Y"){
+			if(isShipToSelected != "true"){
+				loadShippingInfo();
+			}
+		}else{
+			setCookie("isShipToSelected", true);
 		}
 	}else{
 		if(isShipToSelected != "true"){
