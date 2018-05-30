@@ -696,7 +696,12 @@ function preventScreenFromSliding(){
 /*
 	*Initilaize GridManager 
 */
-function initGridManager(){  
+function initGridManager(){
+	if($('#mycanvas > div.container').length == 0 && $('#mycanvas > div.container-fluid').length == 0){
+		org_html = document.getElementById("mycanvas").innerHTML;
+		new_html = "<div class='container'>" + org_html + "</div>";
+		document.getElementById("mycanvas").innerHTML = new_html;
+	}
 	gm =  jQuery(unilogCMSContainerId).gridmanager({
 		  debug :1
 	}).data('gridmanager');	
