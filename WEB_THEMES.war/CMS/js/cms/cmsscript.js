@@ -96,3 +96,14 @@ function deleteForm(formId,formName){
 	    });
 	} 
 }
+
+function validateSearchCMSForm(){
+	var s = $('#queryTxtBox').val();
+	if(s==null || $.trim(s) == ""){
+		alert("Enter Search Keyword.");
+		$('#queryTxtBox').focus();
+		return false;
+	}else{
+		return true;
+	}
+}

@@ -99,8 +99,8 @@ input[type="text"], input[type="password"], select {
 			  	<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
 			  	<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>   
 		  	</form>
-		  	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;">
-		  		<input class="cms_bannerSearch" type="text" name="query" value="$!query" placeholder="Enter Page Name to Search"/> 
+		  	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
+		  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
 		  		<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
 		  		<input type="hidden" id="type" name="type" value="$!type"/> 
 		  		<input  type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
@@ -183,13 +183,13 @@ input[type="text"], input[type="password"], select {
 			#foreach($pageList in $staticPageList.resultSet)
 			<tr>
 				<td class="text-center">
-					<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Static Page"></a>
+					<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Page"></a>
 					#if($pageList.homePageIcon)
 					<a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon"></a>
-					<a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Delete Static Page" class="actionIcon" ></a>
+					<a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Unlink Home Page" class="actionIcon" ></a>
 					#else
 					<a href="javascript:setHomePage($pageList.id)"><img src="$webThemes/CMS/images/small/links.png" title="Set as Home page" class="actionIcon"></a>
-					<a href="javascript:deletePage($pageList.id)"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Static Page" class="actionIcon"></a>
+					<a href="javascript:deletePage($pageList.id)"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Page" class="actionIcon"></a>
 					#end
 				</td>
 				<td class="text-center"> $iindex </td>
