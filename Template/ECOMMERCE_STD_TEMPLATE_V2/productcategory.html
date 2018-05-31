@@ -67,34 +67,34 @@
 		</div>
 	</div>
 	#end
-	#if($!listPageHeading && $!listPageHeading.trim().length()>0)
-	<div class="cimm_searchWithin mBottom-3">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<form id="searchForm" action="itemLevelFilterPage.action" method="get">
-					<div class="input-group">
-					#set($search = "Search Within")
-					#if($!keyWordTxt)
-						<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
-					#else
-						<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
-					#end
-					<div class="input-group-btn">
-						<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><i class="fa fa-lg fa-search"></i></button>
-					</div>
-					<input type="hidden" name="codeId" value="$!codeId" /> 
-					<input type="hidden" name="levelNo" value="$!levelNo" /> 
-					<input type="hidden" name="gallery" value="$!gallery" />
-					<input type="hidden" name="resultPage" value="12" /> 
-					<input type="hidden" name="pageNo" value="$!pageNo" />   
-					<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
-					<input type="hidden" name="srchTyp" value="CATNAV"> 
-					
-					</div>
-				</form>
+	#if($!listPageHeading && $!listPageHeading.trim().length()>0 && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') != "Y")
+		<div class="cimm_searchWithin mBottom-3">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<form id="searchForm" action="itemLevelFilterPage.action" method="get">
+						<div class="input-group">
+						#set($search = "Search Within")
+						#if($!keyWordTxt)
+							<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
+						#else
+							<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
+						#end
+						<div class="input-group-btn">
+							<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><i class="fa fa-lg fa-search"></i></button>
+						</div>
+						<input type="hidden" name="codeId" value="$!codeId" /> 
+						<input type="hidden" name="levelNo" value="$!levelNo" /> 
+						<input type="hidden" name="gallery" value="$!gallery" />
+						<input type="hidden" name="resultPage" value="12" /> 
+						<input type="hidden" name="pageNo" value="$!pageNo" />   
+						<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
+						<input type="hidden" name="srchTyp" value="CATNAV"> 
+						
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
 	#end
 	<div class="row cimm_categoryItemBlockWrap">
 		#foreach($categoryList in $categoryListData)
