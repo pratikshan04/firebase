@@ -1,3 +1,4 @@
+
 button,
 input[type='submit'] {
     -moz-appearance: none;
@@ -20,7 +21,7 @@ input[type='submit'] {
 
 .button {
     @extend button;
-    background: $primaryColor;
+    background: $primary_color;
     padding: 12px;
     color: $white;
     font-family: $buttonFont;
@@ -39,16 +40,17 @@ input[type='submit'] {
 .cimm_button {
     @extend .button;
     color: $white;
-    background: $bodyFontColor;
+    background: $default_font-color;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
+    
     &:hover {
         background: $darkGrayColorTwo;
     }
 }
 .compareSimDiffBtns.active {
-    background: $darkGrayColorTwo;
+    background: $primaryColor;
 }
 
 .cimm_inlineButton {
@@ -63,18 +65,19 @@ input[type='submit'] {
 }
 
 //Add to Cart Button`
-.log-addTocart-btn {
-    background: $primaryColor;
+.btn-addtocart {
     text-transform: uppercase;
-    position: relative;
-    display: inline-block;
-	color: $white;
-	text-align: center;
-	padding: 6px 12px 6px 35px;
-    font-size: 14px;
-	background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
+    color: $white;
+	padding-left: 35px;
+    background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
+    vertical-align: unset;
     &:hover {
         color: $white;
+        background: url('../images/cartIcon.svg') 6px 6px/24px $darkgray no-repeat;
+    }
+    &:active,&:focus {
+        color: $white;
+        background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
     }
     &.btns-disable {
         opacity: .3;
@@ -84,7 +87,7 @@ input[type='submit'] {
 .btns-disable {
     cursor: not-allowed !important;
     opacity: 0.8;
-    &:before {}
+    //&:before {}
     &:hover {
         text-decoration: none;
     }
@@ -94,7 +97,65 @@ input[type='submit'] {
     color: $primaryColor;
     font-size: 24px;
 }
-
+.cimm_btnGroupEnclosure {
+    width: 70%;
+    margin: 25px auto;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $black;
+    ul {
+        li {
+            display: inline-block;
+            padding-right: 50px;
+            position: relative;
+            &:last-child {
+                padding-right: 0;
+            }
+            a:not(.button) {
+                color: $primaryColor;
+                font-size: 16px;
+				background: none;
+                i {
+                    margin-right: 10px;
+                    font-size: 18px;
+                }
+            }
+           /* ul {
+                position: absolute;
+                top: 22px;
+                left: 0;
+                width: 100%;
+                background: $white;
+                padding: 3px;
+                z-index: 1;
+                border: 1px solid $border-color;
+                border-radius: 2px;
+				max-height: 200px;
+				overflow-y: auto;
+                li {
+                    width: 100%;
+                    padding: 2px 0;
+                    border-bottom: 1px solid $border-color;
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                    a {
+                        padding: 2px;
+                        text-transform: capitalize;
+                        &:hover {
+                            color: $white;
+                            background: $primaryColor;
+                        }
+                    }
+                    input {
+                        width: 100%;
+                        height: 30px;
+                        padding: 10px 5px;
+                    }
+                }
+            }*/
+        }
+    }
+}
 // My Product Group Button
 .myProductGroupbutton {
     position: relative;
@@ -110,6 +171,76 @@ input[type='submit'] {
     }
 }
 
+.productGroupBtn {
+	cursor: pointer;
+	position: relative;
+	font-size: 14px;
+	a {
+		&.log-addTocart-btn{
+			color: $white;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		color: $default_font-color;
+		i {
+			margin-right: 10px;
+		}
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	ul {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		margin: 0;
+		width: 100%;
+		padding: 5px;
+		background: $white;
+		border: 1px solid $border-color;
+		li {
+			width: 100%;
+			border-bottom: 1px solid $border-color;
+			&:last-child {
+				border: none;
+			}
+			input {
+				height: 35px;
+				padding: 10px;
+				width: 100%;
+			}
+			a {
+				color: $default_font-color;
+				text-transform: capitalize;
+				display: block;
+				padding: 5px;
+				&:hover {
+					background: $primaryColor;
+					color: $white;
+				}
+			}
+		}
+	}
+}
+
+
+.slideBtns-hide {
+    -ms-transform: translate(0px, 100%);
+    -webkit-transform: translate(0px, 100%);
+    transform: translate(0px, 100%);
+    opacity: 0;
+}
+
+.slideBtns {
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+}
+
+.slideBtns.btns-disable {
+    opacity: 0.8;
+}
 
 /* The switch - the box around the slider */
 

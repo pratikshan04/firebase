@@ -1,0 +1,273 @@
+header {
+    .cimm_header {
+        font-family: $headingFont;
+
+        .cimm_headerTopContent {
+            position: relative;
+            height: 40px;
+            font-family: $defaultFont;
+            background: $header_top-bg;
+
+            .headerInfoBlock {
+                float: left;
+                ul {
+                    li {
+                        color: $white;
+                        padding: 10px;
+                    }
+                }
+            }
+
+            .cimm_headerUtilityMenu {
+                float: right;
+                text-align: right;
+
+                ul{
+                    li{
+                        text-transform: capitalize;
+                        display: inline-block;
+                        position: relative;
+
+                        &:hover ul{
+                            display: block;
+                        }
+                        ul.dropdown-menu{
+                            padding:0;
+                            li{
+                                border-bottom:1px solid $border-color;
+                                width:100%;
+                                a{
+                                    color:$default_font-color;
+                                    padding: 5px 10px;
+                                }
+                            }
+                        }
+                        a{
+                            color:$white;
+                            padding: 10px;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        .cimm_headerMidContent {
+            background: $header-midcontent-bg;
+            
+            .cimm_logo {
+                width: 250px;
+                height: 120px;
+                position: relative;
+
+                img {
+                    width: auto;
+                    max-width: 100%;
+                    height: auto;
+                    max-height: 100%;
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                }
+
+            }
+
+            .cimm_searchWrapper { 
+                text-align: center;     
+                margin: 45px 0 18px 0;
+                position: relative;
+                
+                input[type='text'] {
+                    border: 1px solid $border-color;
+                    border-radius: 0px;
+                    font-family: $defaultFont;
+                    height: 42px;
+                }
+                .cimm_searchIcon {
+                    border: 1px solid $border-color;
+                    border-radius: 0px;
+                    height: 42px;
+                    width: 47px;
+                    color: $white;
+                }
+            }
+            .cimm_signWrap {
+                text-align: right;
+                margin: 10px 0px;
+
+                li {
+                    display: inline-block;
+                    position: relative;
+                    text-align: center;
+                    width: 100px;
+                    a {
+                        display: block;
+                        color: $default_font-color;
+                        font-size: $headerNavLinkFontSize;
+                        font-weight: bold;
+                    }
+                    span {
+                        font-weight: normal;
+                        font-family: $defaultFont;
+                        text-transform: uppercase;
+                        margin-top: 4px;
+                    }
+                    span.imgBox {
+                        display: block;
+                        width: 50px;
+                        height: 50px;
+                        background: $secondary_color;
+                        position: relative;
+                        margin: 0 auto 8px auto;
+                        overflow: hidden;
+                        i {
+                            position: absolute;
+                            left: 10px;
+                            color: $white;
+                            top: 10px;
+                            font-size: 32px;
+                        }
+                    }
+                    .loginWindow {
+                        position: absolute;
+                        top: 50px;
+                        background: $white;
+                        right: 38px;
+                        width: 370px;
+                        min-height: 300px;
+                        left: auto;
+                        border: none;
+                        border-radius: 0;
+                        padding: 0;
+                        margin: 0;
+                        border: 2px solid $border-color;
+                        font-family: RobotoRegular;
+                        font-size: 12px;
+                        form {
+                            background: $navDropdownBg;
+                            padding: 18px;
+                            .form-control {
+                                height: 42px;
+                                box-shadow: none;
+                                border: 1px solid $border-color;
+                                border-radius: 2px;
+                            }
+                            .form-group{
+                                label{
+                                    text-transform: uppercase;
+                                }
+                            }
+                        }
+                        ul,
+                        ul li {
+                            width: 100%;
+                            text-transform: none;
+                            font-family: $defaultFont
+                        }
+                        .rememberLogWrap {
+                            text-transform: none;
+                            padding-top: 6px;
+                            .button {
+                                width: 192px;
+                                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+                            }
+                        }
+                        .customCheckBox {
+                            span{
+                                text-transform: capitalize;
+                            }
+                        }
+                        .forgotPassword {
+                            font-family: $defaultFont;
+                            margin-top: 15px;
+                            font-weight: normal;
+                            text-decoration: underline;
+                            text-align: right;
+                        }
+                        .register_link{
+                            padding: 26px 18px;
+                            a{
+                                color: $white;
+                                font-size: 16px;
+                                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+                            }
+                        }
+                    }
+                    .myAccountMenu {
+                        position: absolute;
+                        top: 48px;
+                        background: $navDropdownBg;
+                        right: 38px;
+                        width: 275px;
+                        /*min-height: 300px;*/
+                        left: auto;
+                        border: 1px solid $border-color;
+                        border-radius: 2px;
+                        padding: 0;
+                        li {
+                            width: 100%;
+                            text-transform: none;
+                            font-family: $defaultFont;
+                            text-align: left;
+                           /* border-bottom: 1px solid $border-color;*/
+                            a {
+                                font-weight: normal;
+                                color: $default_font-color;
+                                font-size: 16px;
+                                padding: 3px 10px;
+                                i {
+                                    margin-right: 10px;
+                                    font-size: 16px;
+                                }
+                            }
+                            &.loginLink{
+                                margin-top: 15px;
+                                padding: 15px 0;
+                                background: $white;
+                                text-align: center;
+                                a{
+                                    background: $default_font-color;
+                                    color: $white;
+                                    display: inline-block;
+                                    padding: 10px;
+                                }
+                            }
+                            &:last-child {
+                                border-bottom: none;
+                            }
+                            &.logoutBtn{
+                                background: $white;
+                                text-align: center;
+                                a{
+                                    background: $default_font-color;
+                                    color: $white;
+                                    display: inline-block;
+                                    padding: 12px;
+                                    margin: 25px 0;
+                                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+                                }
+                            }
+                        }
+
+                    }
+                }
+                >li:first-child {
+                    width: 125px;
+                }
+            }
+            .cimm_signWrap li.cartCountDisplayLi a span.cartCountrefresh {
+                display: block;
+            }
+            .cimm_signWrap li.cartCountDisplayLi a svg {
+                width: 35px;
+                fill: $white;
+                position: absolute;
+                top: 10px;
+                left: 5px;
+            }
+        }
+    }
+}

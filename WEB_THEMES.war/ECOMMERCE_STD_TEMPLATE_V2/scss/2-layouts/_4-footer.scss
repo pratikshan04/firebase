@@ -1,0 +1,95 @@
+footer {
+    
+
+    .footerMiddelContent {
+        background: $footer-midcontent_bg;
+        height: 300px; 
+
+        .footerCol {
+            h5 {
+                position: relative;
+				font-size: $fnav_hf-size;
+                margin: 15px 0;
+                font-weight: normal;
+                
+                a {
+                    color: $fnav_hf-color;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+                i {
+                    display: none;
+                    position: absolute;
+                    top: 2px;
+                    right: 10px;
+                    width: 10px;
+                    height: 10px;
+                }
+            }
+
+            ul {
+                li {
+                    font-size: $fnav_lf-size;
+                     
+                    a {
+                        font-size: $fnav_lf-size;
+                        color: $footerHeadingColor;
+                        padding: 3px 0;
+                        display: block;
+                    }
+                    a.btn-signup {
+                        padding: 10px;
+                        font-size: 16px;
+                        margin-top: 18px;
+                    }
+
+                    p{
+                        color: $fp_f-color;
+                    }
+                }
+            }
+        }
+        
+    }
+    .cimm_footerDownContent {
+        background: $footer-btmcontent_bg;
+        padding: 20px 10px;
+
+        
+        .foot_copy {
+            margin: 0;
+            font-size: $footer_copyright-fSize;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+
+// .footerBgColor {
+// 	background: $primaryColor;
+// 	padding: 10px 0;
+// 	position: fixed;
+// 	bottom: 0;
+// 	width: 100%;
+// 	a {
+// 		color: $white;
+// 		display: inline-block;
+// 		text-align: center;
+// 		width: 19%;
+// 		position: relative;
+// 		img{
+// 			width: 70%;
+// 		}
+// 		.cart_badge{
+// 			position: absolute;
+// 			left: -2px;
+// 			top: -3px;
+// 			background: #ffffff;
+// 			height: 20px;
+// 			width: 20px;
+// 			border-radius: 20px;
+// 			color: #c8102e;
+// 			font-weight: bold;
+// 		}
+// 	}
+// }

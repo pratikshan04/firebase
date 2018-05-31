@@ -1,5 +1,3 @@
-@import "customVariables";
-@import "customButtons";
 .multiTab {
     width: 100%;
     ul.multiTabHeading {
@@ -10,7 +8,7 @@
                 padding: 10px 15px;
                 display: block;
                 &.active {
-                    color: $bodyFontColor;
+                    color: $default_font-color;
                 }
             }
         }

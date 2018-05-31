@@ -1,0 +1,23 @@
+
+.bannerContainer {
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+.sliderCaption{
+	position: absolute;
+	left: 0;
+	bottom: 20px;
+	width: 75%;
+	height: 100px;
+	background: rgba(0, 0, 0, 0.6);
+	color: #FFF;
+	font-family: 'RobotoRegular';
+	padding: 10px 13px;
+	h2 {
+		margin: 0px 0 5px 0;
+	}
+}

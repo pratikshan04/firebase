@@ -24,8 +24,8 @@
 				#foreach($!footMenu in $!footerStaticMenu) 
 					<div class="col-md-2">
 						<div class="footerCol">
-							<h5><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><i class="fa fa-plus" data-toggle="collapse" data-target="#hi$!count"></i></h5>
-							<ul id="hi$!count" class="collapse in">
+							<h5><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><i class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></i></h5>
+							<ul id="footerMenu$!count" class="collapse in">
 							#if($!footMenu.menuList && $!footMenu.menuList.size()>0)
 								#foreach($!subStaticMenu in $!footMenu.menuList)
 									#if($!subStaticMenu.level2Menu && $!subStaticMenu.level2Menu =="Quick Order Pad")
@@ -46,8 +46,8 @@
 				#end
 					<div class="col-md-3">
 						<div class="footerCol">
-							<h5><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#hi$!count"></i></h5>
-							<ul id="hi$!count" class="collapse in">
+							<h5><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></i></h5>
+							<ul id="footerMenu$!count" class="collapse in">
 								<li><a>Your Company Address</a></li>
 								<li><a>#000, Lorem </a></li>
 								<li><a>Lorem, IL 0000</a></li>
@@ -56,11 +56,12 @@
 						</div>
 					</div>
 					<div class="col-md-3">
+						#set($count = $!count + 1)
 						<div class="footerCol">
-							<h5><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#hi$!count"></i></h5>
-							<ul id="hi$!count" class="collapse in">
+							<h5><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></i></h5>
+							<ul id="footerMenu$!count" class="collapse in">
 								<li><p>$!locale.get('footer.label.signupFor')</p></li>
-								<li><a class="cimm_button">$!locale.get('footer.label.signMeUp')</a></li>
+								<li><a class="btn btn-primary btn-lg btn-signup">$!locale.get('footer.label.signMeUp')</a></li>
 							</ul>
 						</div>
 					</div>

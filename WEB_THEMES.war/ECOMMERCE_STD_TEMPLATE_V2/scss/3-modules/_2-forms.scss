@@ -1,27 +1,29 @@
 /***********************Form Design***********************/
 input{
-	font-family: $defaultFont;
-	border: 1px solid $borderColor;
+	font-family: $default_font-color;
+	border: 1px solid $border-color;
 }
 textarea { resize: vertical; }
 
-.cimm_searchWithin{
-	input[type='text']{
-		width: calc(100% - 50px);
-		padding: 8px 10px;
-		float: left;
-		height: 36px;
-	}
-	button{
-		float: left;
-		padding: 8px 10px;
-		width:50px;
-	}
-}
+// .cimm_searchWithin{
+// 	input[type='text']{
+// 		width: calc(100% - 50px);
+// 		padding: 8px 10px;
+// 		float: left;
+// 		height: 36px;
+// 	}
+// 	button{
+// 		float: left;
+// 		padding: 8px 10px;
+// 		width:50px;
+// 	}
+// }
 .cimm_advancedSearchFilter{
 	margin-bottom: 10px;
 	border:1px solid #ccc;
 	padding:5px;
+	background: $darkgray;
+	
 	input{
 		width:100%;
 		padding: 5px 10px;
@@ -38,34 +40,6 @@ textarea { resize: vertical; }
 	background: url('../images/calIcon.png') no-repeat;
 	background-position: 96% 50%;
     background-size: 20px;
-}
-.file-control {
-	width: 100%;
-	height: 34px;
-	cursor: pointer;
-	position: relative;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-	-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-	span {
-		text-align: left;
-		display: block;
-		padding: 6px 12px;
-		color: #636c72;
-		position: absolute;
-		width: 100%;
-		font-size: 14px;
-	}
-	input[type=file] {
-		opacity: 0;
-		height: 35px;
-		width: 100%;
-		cursor: pointer;
-	}
 }
 /**********************custom check box*************************/
 .inline-radiobtn{
@@ -173,7 +147,7 @@ ul.cimm_formContent li label.customCheckBox2{
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);
 	z-index: 1;
-	webkit-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	-webkit-transition: all 0.2s ease-in-out;
@@ -188,11 +162,11 @@ ul.cimm_formContent li label.customCheckBox2{
 	width: 12px;
 	display: block;
 	height: 12px;
-	border: 1px solid $borderColor;
+	border: 1px solid $border-color;
 	top: 0;
 	left: 0;
 	background: #FFF;
-	webkit-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	-webkit-transition: all 0.2s ease-in-out;
@@ -300,7 +274,7 @@ ul.cimm_formContent li label.customCheckBox2 span{
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);
 	z-index: 1;
-	webkit-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	-webkit-transition: all 0.2s ease-in-out;
@@ -318,7 +292,7 @@ ul.cimm_formContent li label.customCheckBox2 span{
 	top: 0;
 	right: 0;
 	background: #FFF;
-	webkit-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	-webkit-transition: all 0.2s ease-in-out;
