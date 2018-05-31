@@ -101,13 +101,13 @@
 				 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 				<img id="imageName$productModeitemData.itemId" itemprop="image" height="250" width="250" src="$hostName$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
 				#else
-				<img id="imageName$productModeitemData.itemId"  height="250" width="250" src="$hostName$detailImage$escapeTool.url($productModeitemData.imageName)" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
+				<img id="imageName$productModeitemData.itemId"  height="250" width="250" src="$hostName$detailImage$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
 				#end
 				</span>
 				#if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 				#else
-				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$detailImage$escapeTool.url($productModeitemData.imageName)" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$!thumbNail$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 				#end
 				#if($!productModeitemData.clearance=="Y")
 				<span class="clearenceTag clearenceTagSmall">Clearence</span>
@@ -434,7 +434,7 @@
 										 #if($linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!detailImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #end
 					 				</a>
 					  			</div>
@@ -520,18 +520,18 @@
 						            #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 											#if($!linkItem.price>0)
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											#else
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											#end
 										#else
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 										#end
 									#else
 										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
 										#else
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 										#end
 									#end
 									</li>

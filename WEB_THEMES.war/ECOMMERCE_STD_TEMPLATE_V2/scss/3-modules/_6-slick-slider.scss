@@ -1,0 +1,355 @@
+
+.slick-slider {
+    position: relative;
+    display: block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-prev,
+.slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 45%;
+    display: block;
+    width: 30px;
+    height: 50px;
+    margin-top: -22px;
+    padding: 0;
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: $white;
+    z-index: 9;
+}
+
+.bxslider .slick-prev {
+    left: 0;
+}
+
+.slick-prev {
+    left: 20px;
+	box-shadow: 1px 2px 10px -1px $lightShadowColor;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 5px 8px 5px 5px;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+	&:after {
+		clear: both;
+		display: block;
+		content: '';
+	}
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+	height: auto;
+}
+
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+
+.slick-slide img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.slick-next {
+    right: 5px;
+	box-shadow: 1px 2px 10px -1px $lightShadowColor;
+}
+
+ul.slick-dots {
+    position: absolute;
+    bottom: 6px;
+    width: 100%;
+    text-align: center;
+
+    li {
+        position: relative;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        padding: 0;
+        cursor: pointer;
+
+        button {
+            font-size: 0;
+            line-height: 0;
+            display: block;
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            cursor: pointer;
+            color: transparent;
+            border: 0;
+            outline: none;
+            background: transparent;
+
+            &::before {
+                line-height: 20px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 10px;
+                height: 10px;
+                content: "";
+                text-align: center;
+                background: $primaryColor;
+                border-radius: 10px;
+            }
+        }
+
+        &.slick-active {
+            button{
+                &:before {
+                    background: #797d82;
+                }
+            }
+        }
+    }
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background: $white;
+	box-shadow: 1px 2px 10px 1px $lightShadowColor;
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+    color: $lightGrayColorTwo;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-family: FontAwesome;
+    font-size: 38px;
+    line-height: 1;
+    opacity: .75;
+    color: $default_font-color;
+}
+
+.slick-prev::before {
+    content: "\f104";
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+    color: $darkGrayColorTwo;
+}
+
+.slick-next::before {
+    content: "\f105";
+}
+
+
+.cimm_stickyPageWrap {
+    min-height: 100%;
+    margin: 0 auto -355px auto;
+    width: 100%;
+    &:after {
+        content: "";
+        display: block;
+    }
+}
+
+
+.cimm_sliderWrap {
+    overflow: hidden;
+
+   /*___________________Carosal Block Title (Eg: slick sliders in home page)____________________*/
+
+    .cimm_CaroBlockTitle{
+        color: $block_titlef-color;
+        font-family: $block_titlef-family;
+        font-size: $block_titlef-size;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+
+        margin: 15px 0;
+        position: relative;
+        text-align: left;
+        
+        label{
+            background: #FFF;
+            position: relative;
+            z-index: 1;
+            font-size: 22px;
+            text-transform: uppercase;
+            margin: 5px 0;
+        }
+        /*&:after {
+            content: "";
+            width: 100%;
+            height: 2px;
+            position: absolute;
+            background: $default_font-color;
+            left: 0;
+            top: 50%;
+        }*/
+    }
+
+
+    .cimm_caroWrap {
+        margin: 0 0 0 -15px;
+        padding: 0;
+
+        .slick-slide {
+            margin: 0 0 0 15px;
+			box-shadow: 0 0 6px $lightShadowColor;
+			border-radius: 3px;
+        }
+
+		li{
+			float: left;
+			ul{
+				li{
+					float: none;
+				}
+			}
+		}
+    }
+	.cimm_linkItemImg{
+		height: 200px;
+		width: 100%;
+		position: relative;
+		a{
+			display:block;
+			img{
+				max-width: 100%;
+				width: auto;
+				display: block;
+				//vertical-align: middle;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				max-height: 200px;
+			}
+		}
+	}
+	.cimm_linkItemDesp{
+		padding: 5px 10px 10px 10px;
+		li{
+			float: none;
+			img {
+				width: auto;
+				display: inline-block;
+			}
+		}
+	}
+}
+
+
+.cimm_slideBrandImg{
+	width: 100%;
+    height: 100px;
+    position: relative;
+
+    a {
+        text-align: center;
+        height: 100%;
+        img {
+            max-width: 100%;
+            width: auto;
+            display: block;
+            //vertical-align: middle;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            max-height: 100px;
+        }
+    }
+}
+
+
+.cimm_slideItemImg {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    
+    a {
+        text-align: center;
+        height: 100%;
+        img {
+            max-width: 100%;
+            width: auto;
+            display: block;
+            //vertical-align: middle;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            max-height: 200px;
+        }
+    }
+}
+
+.cimm_slideItemDesp {
+    padding: 10px;
+    /*background: $lightGrayColorTwo;*/
+	.productTitle {
+		height: 40px;
+		display: inline-block;
+		line-height: 20px;
+    }
+    ul {
+        li {
+            margin: 0 0 5px 0;
+        }
+    }
+}

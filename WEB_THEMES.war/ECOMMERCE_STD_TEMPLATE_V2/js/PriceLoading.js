@@ -354,9 +354,9 @@ function priceLoadMainFunction() {
 			var partNumber = $(this).val();
 			if (document.getElementById("priceValue_"+ partNumber) && document.getElementById("priceValue_"+ partNumber).value <= 0) {
 				if(document.querySelector("[data-select='addtoCartbtn_"+ partNumber + "']")){
-					document.querySelector("[data-select='addtoCartbtn_"+ partNumber + "']").innerHTML = '<a href="javascript:void(0);" class="log-addTocart-btn btns-disable">Add to Cart</a>';
+					document.querySelector("[data-select='addtoCartbtn_"+ partNumber + "']").innerHTML = '<a href="javascript:void(0);" class="btn btn-addtocart btns-disable">Add to Cart</a>';
 				}
-				//$("[data-select='addtoCartbtn_"+ partNumber +"']").html('<a href="javascript:void(0);" class="log-addTocart-btn btns-disable">Add to Cart</a>');
+				//$("[data-select='addtoCartbtn_"+ partNumber +"']").html('<a href="javascript:void(0);" class="btn btn-addtocart btns-disable">Add to Cart</a>');
 			}
 			populateCallForPrice(partNumber, 0);
 			populateCallForAvailability(partNumber);

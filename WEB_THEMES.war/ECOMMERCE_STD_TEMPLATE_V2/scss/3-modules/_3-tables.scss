@@ -1,0 +1,166 @@
+.table {
+    >tbody {
+        >tr {
+            >td {
+                vertical-align: middle;
+            }
+        }
+    }
+    >thead {
+        >tr {
+            >th {
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.table.customBorderTable {
+    thead{
+        tr{
+            th {
+                text-transform: uppercase;
+                border: none;
+                border-top: 1px solid $border-color !important;
+                text-align: center;
+                &:first-child {
+                    text-align: left;
+                }
+            }
+        }
+    }
+    tbody{
+        tr {
+            &:last-child {
+                td {
+                    border-bottom: 1px solid $border-color;
+                }
+            }
+        }
+        td {
+            border: none;
+            border-top: 1px solid $border-color;
+            position: relative;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 12px;
+            &:after {
+                content: '';
+                width: 1px;
+                min-height: 90%;
+				height: 110px;
+                background: $border-color;
+                position: absolute;
+                top: 5px;
+                right: 0;
+            }
+            a.updateLink {
+                display: block;
+                text-decoration: underline;
+            }
+            &:last-child:after {
+                content: none;
+            }
+            .cimm_cartProdDescription {
+                width: 280px;
+                text-align: left;
+				min-height: 110px;
+                input {
+                    padding: 2px 5px;
+                }
+            }
+        }
+    }
+}
+
+.compareTableWrap {
+    .table {
+        thead {
+            tr {
+                th {
+                    text-align: center;
+                    &:first-child {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    width: 120px;
+                    text-align: center;
+                    &:first-child {
+                        text-align: left;
+                    }
+                    a.comprProdTitle {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    .pushbtnGroup {
+        display: block;
+        text-align: center;
+		li {
+			display: inline-block;
+		}
+    }
+    .different.active {
+        background: #ff5555;
+        color: #fff;
+    }
+    .similar.active {
+        background: #9df59d;
+        color: $default_font-color;
+    }
+}
+
+.tableWrapper {
+	max-width: 100%;
+	overflow-y: auto;
+}
+
+@media only screen and (max-width: 992px) {    
+   /* Force table to not be like tables anymore */
+  table.rwd-table, 
+	.rwd-table thead, 
+	.rwd-table tbody, 
+	.rwd-table th, 
+	.rwd-table td, 
+	.rwd-table tr { 
+		display: block; 
+	}
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.rwd-table thead tr { 	
+		display: none;
+	}
+ 
+	.rwd-table tr { border: 1px solid #ccc; }
+ 
+	.table.rwd-table td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+        padding: 8px 8px 8px 50%;
+		white-space: normal;
+        text-align:left;
+        word-wrap: break-word;
+	}
+ 
+	.rwd-table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		max-width: 48%; 
+		padding-right: 10px; 		
+		text-align:left;
+		font-weight: bold;
+	}
+	.rwd-table td:before { content: attr( data-th); }
+}
