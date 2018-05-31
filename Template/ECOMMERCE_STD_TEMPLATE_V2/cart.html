@@ -84,7 +84,7 @@
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #else
-			                            <img itemprop="image" src="$!detailImage$!itemData.imageName"  width="80" height="80" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #end
                     			</span>
                             </a>
@@ -283,7 +283,7 @@
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			#else
-			<img itemprop="image" src="$!hostName$!detailImage$!itemData.imageName"  width="80" height="80" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			#end
 			</span>
 			</a>
