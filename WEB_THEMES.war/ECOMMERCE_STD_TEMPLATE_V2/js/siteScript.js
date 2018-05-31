@@ -2166,7 +2166,7 @@ function cleanLoading(){
 
 			if(userLogin!=null && userLogin == "true"){
 				if($("#priceValue_"+partNum).val()<=0){
-					//$("[data-select='addtoCartbtn_"+partNum+"']").html('<a href="javascript:void(0);" class="log-addTocart-btn btns-disable">Add to Cart &raquo;</a>');
+					//$("[data-select='addtoCartbtn_"+partNum+"']").html('<a href="javascript:void(0);" class="btn btn-addtocart btns-disable">Add to Cart &raquo;</a>');
 				}else
 				{
 					$("#enableCart_"+partNum).show();
@@ -2175,13 +2175,13 @@ function cleanLoading(){
 				if($('#enablePriceBeforeLogin').length>0 && $('#enablePriceBeforeLogin').val()=="Y" && price > 0){
 					$("#enableCart_"+partNum).show();
 				}else{
-					$("[data-select='addtoCartbtn_"+partNum+"']").html('<a href="javascript:void(0);" class="log-addTocart-btn" onclick="loginPop();">Add to cart</a>');
+					$("[data-select='addtoCartbtn_"+partNum+"']").html('<a href="javascript:void(0);" class="btn btn-addtocart" onclick="loginPop();">Add to cart</a>');
 				}
 			}
 		});
 		
 		if($("#enableNotificationOnCallForPrice").length>0 && $("#enableNotificationOnCallForPrice").val()=="Y"){
-			$(".log-addTocart-btn").each(function(i){
+			$(".btn-addtocart").each(function(i){
 				if($(this).hasClass("btns-disable")){
 					$(this).removeClass('btns-disable');
 					$(this).addClass('sendNotificationOnCallForPrice');

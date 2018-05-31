@@ -1,0 +1,96 @@
+.cimm_filterAttributes {
+
+    .filterColumn {
+        
+        .filterTitle {
+            padding: 15px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            cursor: pointer;
+
+            background: $lnav_title-bg;
+            color: $lnav_hf-color;
+            font-size: $lnav_hf-size;
+            font-family: $lnav_hf-family;
+			border-bottom: 1px solid $border-color;
+            
+            span {
+                position: absolute;
+                top: 12px;
+                right: 0px;
+				font-size: 18px;
+                color: $lnav_icon-color;
+            }
+            a {
+                color: $lnav_hf-color;
+                font-size: $lnav_hf-size;
+                text-transform: capitalize;
+                font-family: $lnav_hf-family;
+            }
+			+div > ul{
+				padding: 10px 0;
+			}
+        }
+        
+        ul {
+            li {
+                padding: 3px 0;
+                font-size: $lnav_lf-size;
+                a {
+                    font-family: $lnav_lf-family;
+                    color: $lnav_lf-color;
+                    &:hover {
+                        color: $lnav_lf-color;
+                        text-decoration: underline;
+                    }
+                }
+            }
+			&.myAccountLeftMenu{
+				li{
+					font-size: $lnav_lf-size + 2;
+					line-height: 22px;
+					i{
+						font-size: $lnav_lf-size + 4;
+						width: 26px;
+					}
+				}
+			}
+        }
+		.slimScrollBar {
+			width: 11px !important;
+			right: 3px !important;
+		}
+        .filterTypeTitle {
+            color: $lnav_lf-color;
+            font-family: $lnav_lf-family;
+            font-size: $lnav_lf-size;
+            padding: 10px 20px;
+            position: relative;
+            span {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+            }
+        }
+        .divWrap {
+            .filterTextBox { 
+                margin-bottom: 8px;
+                width: 90%;
+                margin: 15px 0 5px;
+                margin-left: 14px;
+                height: 30px;
+                padding: 5px 10px;
+            }
+        }
+        .testDiv {
+            padding-bottom: 10px;
+            .filterTextBox {
+                margin: 8px 0;
+                width: 100%;
+                height: 30px;
+                padding: 5px 10px;
+            }
+        }
+    }
+}

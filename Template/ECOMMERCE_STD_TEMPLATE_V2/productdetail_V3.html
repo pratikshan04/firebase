@@ -29,7 +29,7 @@
 				</div>
 			#else
 				<div class="cloneImg"> 
-					<img src='$!hostName$!detailImage$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="50" height="50" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+					<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="50" height="50" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 				</div>
 			#end
 			<div class="cloneTitle">
@@ -50,18 +50,18 @@
 					#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 					    #if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 					    	#if($itemData.price>0)
-					    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="log-addTocart-btn btn-sm">$!locale.get("product.button.addtocart")</a>
+					    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
 						    #else
-				     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="log-addTocart-btn btn-sm">$!locale.get("product.button.addtocart")</a>
+				     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
 							#end
 					    #else
-				    		<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+				    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 						#end
 					#else
 						#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-			     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="log-addTocart-btn btn-sm">$!locale.get("product.button.addtocart")</a>
+			     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
 						#else
-				    		<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+				    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 						#end
 					#end
 				</li>
@@ -137,7 +137,7 @@
 									<img id="img_$!count" itemprop="image" src="$!itemData.imageName" width="80" height="80" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 								</a>
 							#else
-								<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
+								<a href="#" data-image="$!hostName$!thumbNail$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
 									<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" width="80" height="80" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 								</a>
 							#end
@@ -419,23 +419,23 @@
 									#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 										#if($!itemData.price>0)
 											<span data-select='addtoCartbtn_$!itemData.partNumber'>
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											</span>
 										#else
 											<span data-select='addtoCartbtn_$!itemData.partNumber'>
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											</span>
 										#end
 									#else
-										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+										<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 									#end
 								#else
 									#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 										<span data-select='addtoCartbtn_$!itemData.partNumber'>
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 										</span>
 									#else
-										<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+										<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 									#end
 								#end
 							</li>
@@ -565,7 +565,7 @@
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 										 <img id="imageName$!productModeitemData.itemId" itemprop="image" src="$!hostName$!productModeitemData.imageName" height="75" width="75" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 										 #else
-										 <img id="imageName$!productModeitemData.itemId" itemprop="image" src="$!hostName$!detailImage$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+										 <img id="imageName$!productModeitemData.itemId" itemprop="image" src="$!hostName$!thumbNail$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 										 #end
 										 #if($productModeitemData.clearance=="Y")
 										 <span class="clearenceTag clearenceTagSmall">Clearence</span>
@@ -627,23 +627,23 @@
 								    	#if($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $userLogin)
 								    		#if($productModeitemData.price>0)
 								    			<span data-select='addtoCartbtn_$!productModeitemData.partNumber'>
-													<a href="javascript:void(0)" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+													<a href="javascript:void(0)" class="btn btn-addtocart addToCart" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
 									    	#else
 									    		<span data-select='addtoCartbtn_$!productModeitemData.partNumber'>
-													<a href="javascript:void(0)" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+													<a href="javascript:void(0)" class="btn btn-addtocart btns-disable" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
 									    	#end
 								    	#else
-								    		<a href="javascript:void(0)" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+								    		<a href="javascript:void(0)" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 								    	#end
 									#else
 								    	#if($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $userLogin)
 							    			<span data-select='addtoCartbtn_$!productModeitemData.partNumber'>
-												<a href="javascript:void(0)" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0)" class="btn btn-addtocart btns-disable" id="enableCart_$!productModeitemData.partNumber" data-itemId="$!productModeitemData.itemId" data-itemPriceId="$!productModeitemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											</span>
 								    	#else
-							    			<a href="javascript:void(0)" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+							    			<a href="javascript:void(0)" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 							    		#end
 									#end
 								</td>
@@ -874,18 +874,18 @@
 			#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 				#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 					#if($itemData.price>0)
-						<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" style="display:block;" id="enableCart_$!customerbought.partNumber" data-itemId="$!customerbought.itemId" data-itemPriceId="$!customerbought.itemPriceId">$!locale.get("product.button.addtocart") &raquo;</a>
+						<a href="javascript:void(0);" class="btn btn-addtocart addToCart" style="display:block;" id="enableCart_$!customerbought.partNumber" data-itemId="$!customerbought.itemId" data-itemPriceId="$!customerbought.itemPriceId">$!locale.get("product.button.addtocart") &raquo;</a>
 					#else
-						<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" style="display:block;" id="enableCart_$!customerbought.partNumber" data-itemId="$!customerbought.itemId" data-itemPriceId="$!customerbought.itemPriceId">$!locale.get("product.button.addtocart") &raquo;</a>
+						<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" style="display:block;" id="enableCart_$!customerbought.partNumber" data-itemId="$!customerbought.itemId" data-itemPriceId="$!customerbought.itemPriceId">$!locale.get("product.button.addtocart") &raquo;</a>
 					#end
 				#else
-					<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" onclick="loginPop(); return false;">$!locale.get("product.button.addtocart") &raquo;</a>
+					<a href="javascript:void(0);" class="btn btn-addtocart addToCart" onclick="loginPop(); return false;">$!locale.get("product.button.addtocart") &raquo;</a>
 				#end
 			#else
 			   	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-					<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" style="display:block;" id="enableCart_$!customerbought.partNumber" data-itemId="$!customerbought.itemId" data-itemPriceId="$!customerbought.itemPriceId">$!locale.get("product.button.addtocart") &raquo;</a>
+					<a href="javascript:void(0);" class="btn btn-addtocart addToCart" style="display:block;" id="enableCart_$!customerbought.partNumber" data-itemId="$!customerbought.itemId" data-itemPriceId="$!customerbought.itemPriceId">$!locale.get("product.button.addtocart") &raquo;</a>
 				#else
-					<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" onclick="loginPop(); return false;">$!locale.get("product.button.addtocart") &raquo;</a>
+					<a href="javascript:void(0);" class="btn btn-addtocart addToCart" onclick="loginPop(); return false;">$!locale.get("product.button.addtocart") &raquo;</a>
 				#end
 			#end
 				<input type="hidden" value="$!customerbought.minOrderQty" id="MinOrderQty_$!customerbought.partNumber" name="MinOrderQty_$!customerbought.partNumber"/>
@@ -922,7 +922,7 @@
 										 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!detailImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #end
 					 				</a>
 					  			</div>
@@ -1007,18 +1007,18 @@
 						            #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 											#if($!linkItem.price>0)
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											#else
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											#end
 										#else
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 										#end
 									#else
 										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
 										#else
-											<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 										#end
 									#end
 									</li>

@@ -219,10 +219,6 @@ $breakpoint-mobileView:480px;
 				}
 			}
 			td {
-				.alignCenter{
-					text-align: left;
-				}
-				text-align: left;
 				&:after {
 				   content: none;
 				}
@@ -258,7 +254,7 @@ $breakpoint-mobileView:480px;
 		margin: 0 auto;
 		float: none;
 	}
-	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist li .cimm_slideItemImg{
+	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .cimm_slideItemImg{
 		height: 82px;
 	}
 	.cimm_itemDetailWrap .cimm_itemMainImage .thumblist .cimm_slideItemImg a img{
@@ -315,21 +311,9 @@ $breakpoint-mobileView:480px;
 			width: 100%;
 		}
 	}
-	orderSummaryWrap{
-		margin-top: 10px;
-	}
 	.compareTableWrap .pushbtnGroup li{
 		text-align: right;
 		width: 49%;
-	}
-	#sortByForm {
-		text-align: left;
-		.dropdown-menu {
-			left: 0px;
-		}
-	}
-	#myProductGroup{
-		text-align: left;
 	}
 	.ac_results .itemWraper,.ac_results ul{
 		width: 100%;
@@ -396,7 +380,7 @@ $breakpoint-mobileView:480px;
 	.table.customBorderTable tbody td .cimm_cartProdDescription{
 		width: 100%;
 	}
-	.cimm_btnGroupEnclosure > ul > li{
+	.cimm_btnGroupEnclosure ul li{
 		padding:0;
 		display: block;
 		text-align: center;
@@ -440,27 +424,6 @@ $breakpoint-mobileView:480px;
 		float: none !important;
 		width: 100%;
 		text-align: center;
-	}
-	.cimm_categoryItems {
-		.cimm_categoryImg {
-			height: 160px;
-			a {
-				img {
-					height: 150px;
-				}
-			}
-		}
-	}
-	.searchZero{
-		h4{
-			.cimm_inlineButton{
-				margin: 2px 0;
-			}
-		}
-	}
-	.grpNameEditWrap{
-		text-align: left;
-		margin-top:10px;
 	}
 	.cartTotal_Top span{
 		margin-bottom: 10px;

@@ -1,6 +1,9 @@
-<ul class="nav navbar-nav clearAfter">
-    <li class="dropdown"><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") #if($categMenu.size()>0)<i class="fa"></i>#end</a>
-        <div class="dropdown-menu clearAfter">
+<ul class="nav navbar-nav">
+    <li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="$locale.get('website.url.ProductCategory')">
+			$locale.get("navigation.label.shopProducts") #if($categMenu.size()>0)<i class="fa"></i>#end
+		</a>
+        <div class="dropdown-menu">
 		#set($count=0)
 		#set($categoryListSize = 0)
 		#foreach($categoryMenu in $categMenu)

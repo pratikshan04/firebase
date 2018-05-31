@@ -1,0 +1,87 @@
+/* _________________________________________________________________ */
+
+//Color maping function 
+@function color($key){
+    @if map-has-key($color, $key){
+        @return map-get($color, $key);
+    } @else{
+        @warn "Unknown `#{$key}` in $color.";
+        @return null;
+    }
+}
+
+//Eg: color(primary);
+
+/* _________________________________________________________________ */
+
+//Font maping function
+@function font($key){
+    @if map-has-key($font, $key){
+        @return map-get($font, $key);
+    } @else{
+        @warn "Unknow `#{$key}` in  @font.";
+        @return null;
+    }
+}
+
+//Eg: font(primary);
+
+/* _________________________________________________________________ */
+
+//Font Size maping function
+
+@function font-size($key){
+    @if map-has-key($font-size, $key){
+        @return map-get($font-size, $key);
+    } @else {
+        @warn "Unknow `#{$key}` in @font-size";
+        @return null;
+    }
+}
+//Eg: font(primary);
+
+
+// retrieve color from $colors map ie. `color(base, primary)`
+@function theamcolor($color-name, $color-variant:null, $colorh-variant:null) {
+    // color variant is optional
+    @if ($color-variant != null) {
+        @return map-get(map-get($colorsm, $color-name), $color-variant);
+    } @else {
+        @return map-get($colorsm, $color-name);
+    }
+};
+
+
+//Eg: color(background)
+//Eg2: color(primary, base)
+/* _________________________________________________________________ */
+
+//Cange text color with respect to background color
+
+@function set-text-color($color){
+    @if global-variable-exists(mnav_lhf-color){
+        @return $mnav_lhf-color;
+    } @else if  (lightness($color) > 40 ){
+        @return $black;
+    } @else{
+        @return $white;
+    }
+};
+
+
+@function set-fhf-color($color){
+    @if(lightness($color) > 40){
+        @return $tertiary_color; 
+    } @else {
+        @return $white;
+    }
+}
+
+/* Eg: 
+.button-confirm {
+    background: $primary_color;
+    color: set-text-color($primary_color);
+}
+*/
+
+/* _________________________________________________________________ */

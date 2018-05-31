@@ -1,0 +1,187 @@
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff ttf svg, $svgFont: null) {
+	$src: null;
+
+	$extmods: (
+		eot: '?#iefix',
+		woff: '',
+		ttf: '',
+		svg: '#' + $svgFont,
+	);
+
+	$formats: (
+		eot: 'embedded-opentype',
+		woff: 'woff',
+		ttf: 'truetype',
+		svg: 'svg'
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+
+$icons: (
+	navdownarrow: "\f0d7",
+	home: "\f015",
+    newspaper: "\f001",
+    search: "\f002",
+    email: "\f003",
+	plus: "\f067",
+	plus-square: "\f0fe",
+	navigater: "\f041",
+	nav-seperater: "\007c",
+	arrow-down: "\f107",
+    arrow-left: "\f004", 
+    arrow-right: "\f005",
+	checkmark: "\f00c",
+	tachometer: "\f0e4",
+	user: "\f007",
+	user-cercle: "\f2be",
+	info-circle: "\f05a",
+	address-book: "\f2ba",
+	file-text: "\f15c",
+	list: "\f03a",
+	cog: "\f013",
+	cart: "\f07a",
+	remove: "\f00d",
+	savecart: "\f218",
+	download: "\f019",
+	filetexto:"\f0f6",
+	credit-card: "\f09d",
+	truck: "\f0d1",
+	uparrow: '\f077'
+); 
+
+@mixin icon($position: before, $icon: false, $styles: true, $color: $primary_font-color, $top: null, $left: null, $right:null, $size: $primary_font-size) {
+    @if $position == both {
+        $position: "before, &:after";
+    }
+    &:#{$position} {
+        @if $icon {
+            content: "#{map-get($icons, $icon)}";
+        }
+        @if $styles {
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-family: "FontAwesome"; 
+			position: absolute;
+			z-index: 11;
+			
+			top: $top;
+			left: $left;
+			right: $right;
+			font-size: $size;
+			color: $color;
+        }
+        @content;
+    }
+}
+
+@mixin custom-bootstrap-btns {
+
+    @each $class_name, $bgcolors in $btncolors {
+        .btn-#{$class_name} {
+			$btn_bg: map-get($bgcolors, bg-color);
+			$btn_f-color: map-get($bgcolors, btnf-color);
+			$btn_hbg: map-get($bgcolors, hbg-color);
+			$btn_hf-color: map-get($bgcolors, btnhf-color);
+
+			background: $btn_bg;
+			color: $btn_f-color;
+			border-radius: 2px;
+			border-color: darken($btn_bg, 5%);
+
+            &:hover {
+				background: $btn_hbg;
+				color: $btn_hf-color; 
+				border-color: darken($btn_hbg, 5%);
+			}
+			&:active{
+				background: $btn_bg;
+				&:hover{
+					background: #FFE393;
+					color: #333333;
+				}
+			}
+			&:focus{
+				background: #FFE393;
+				color: #333333;
+			}
+        }
+    }
+    //Button Sizes
+    .btn {
+        &-lg {
+            //Any Size Customizations here
+        }
+        &-sm {
+            //Any Size Customizations here
+        }
+        &-link {
+            //Any Customizations here
+        }
+    }
+}
+
+@include custom-bootstrap-btns;
+
+
+@mixin headings{
+	
+	@each $heading_name, $heading_value in $headings{
+		$color: map-get($heading_value, color);
+		$size: map-get($heading_value, size);
+
+		.cimm_#{$heading_name}{
+			color: $color;
+			font-size: $size;
+			font-family: 'Courier New', Courier, monospace; 
+			margin-bottom: 25px;
+		}
+	}
+}
+
+@include headings;
+
+@mixin border-direction($direction, $width, $style, $color) {
+	border-#{$direction}: $width $style $color;
+}
+@mixin border($width, $style, $color){
+	border: $width $style $color;
+}
+
+
+// @mixin border() {
+
+// 	@if variable-exists(direction) and  $direction != null {
+// 		border-#{$direction}: $width $style $color;
+// 	} @else {
+// 		border: $border-default;
+// 	}
+// }

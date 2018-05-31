@@ -8,18 +8,17 @@
 #set($searchWithInFormURL="taxonomyLevelFilterPage.action")
 #if($topBanners)
 <div class="cimm_topBannerEnclosure">
- <ul class="cimm_topBanners">
- #foreach($!topBanner in $!topBanners)
- #if($!topBanner.imageName)
- #if($!topBanner.imageURL)
- <li><a href="$!topBanner.imageURL" target="_blank"><img src="$!hostName$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></a></li>
- #else
- <li><img src="$!hostName$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></li>
- #end
- #end
- #end
- </ul>
-<div class="clear"></div>
+	<ul class="cimm_topBanners">
+		#foreach($!topBanner in $!topBanners)
+		#if($!topBanner.imageName)
+		#if($!topBanner.imageURL)
+		<li><a href="$!topBanner.imageURL" target="_blank"><img src="$!hostName$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></a></li>
+		#else
+		<li><img src="$!hostName$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></li>
+		#end
+		#end
+		#end
+	</ul>
 </div>
 #end
 #end
@@ -70,24 +69,31 @@
 	#end
 	#if($!listPageHeading && $!listPageHeading.trim().length()>0)
 	<div class="cimm_searchWithin mBottom-3">
-		<form id="searchForm" action="itemLevelFilterPage.action" method="get">
-			<div class="cimm_searchWithinWrap clearAfter">
-			#set($search = "Search Within")
-			#if($!keyWordTxt)
-				<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);">
-			#else
-				<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);">
-			#end
-			<input type="hidden" name="codeId" value="$!codeId" /> 
-			<input type="hidden" name="levelNo" value="$!levelNo" /> 
-			<input type="hidden" name="gallery" value="$!gallery" />
-			<input type="hidden" name="resultPage" value="12" /> 
-			<input type="hidden" name="pageNo" value="$!pageNo" />   
-			<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
-			<input type="hidden" name="srchTyp" value="CATNAV">
-			<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="button"><i class="fa fa-lg fa-search"></i></button>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<form id="searchForm" action="itemLevelFilterPage.action" method="get">
+					<div class="input-group">
+					#set($search = "Search Within")
+					#if($!keyWordTxt)
+						<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
+					#else
+						<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
+					#end
+					<div class="input-group-btn">
+						<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><i class="fa fa-lg fa-search"></i></button>
+					</div>
+					<input type="hidden" name="codeId" value="$!codeId" /> 
+					<input type="hidden" name="levelNo" value="$!levelNo" /> 
+					<input type="hidden" name="gallery" value="$!gallery" />
+					<input type="hidden" name="resultPage" value="12" /> 
+					<input type="hidden" name="pageNo" value="$!pageNo" />   
+					<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
+					<input type="hidden" name="srchTyp" value="CATNAV"> 
+					
+					</div>
+				</form>
 			</div>
-		</form>
+		</div>
 	</div>
 	#end
 	<div class="row cimm_categoryItemBlockWrap">
@@ -102,13 +108,15 @@
 				#end
 				</a>
 			</div> 
-			<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
-			#if($categoryList.categoryName.length()>22)
-		 		<p class="cimm_categoryHeading" data-toggle="tooltip" itemprop="Name" title="$!categoryList.categoryName"> $!categoryList.categoryName.substring(0, 22)...</p>
-		 	#else
-		 		<p class="cimm_categoryHeading" itemprop="Name"> $!categoryList.categoryName </p>
-		 	#end
-		 	</a>
+			<h4 class="cimm_categoryHeading" itemprop="Name" title="$!categoryList.categoryName">
+				<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+				#if($categoryList.categoryName.length()>22)
+					<span  data-toggle="tooltip"> $!categoryList.categoryName.substring(0, 22)...</span>
+				#else
+					<span> $!categoryList.categoryName </span>
+				#end
+				</a>
+			</h4>
 		</div>
 		#end
 	</div>
@@ -145,7 +153,7 @@
 				</div>
 				<div class='col-md-6 col-sm-12 col-xs-12'>
 					<div class="row">
-						<div class='col-md-6 col-sm-12 col-xs-12'>
+						<div class='col-md-5 col-sm-12 col-xs-12'>
 							<div class="bulkActionBtn">
 								<select class="selectpicker" id="bulkAction" onchange="performBulkAction(this);">
 									<option>$!locale.get("product.label.bulkOptions")</option>
@@ -156,7 +164,7 @@
 								</select>
 							</div>
 						</div>
-					    <div class='col-md-6 col-sm-12 col-xs-12'>
+					    <div class='col-md-7 col-sm-12 col-xs-12'>
 					    #if($!CommonDBQuerySystemParameter.get("EnableLoadMore")=="N")
 							<div class="searchMatchPaginatnEncl">
 							<div class="pgnation">
@@ -323,7 +331,7 @@
 									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!detailImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag">Clearence</span>
@@ -372,7 +380,7 @@
 								</div>
 								<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
 								<div class="itemCountList">
-									<button class="button" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
+									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
 									<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 										<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
 										<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
@@ -381,7 +389,7 @@
 									</form>
 							 	</div>
 							 	<div class="itemCountGrid">
-							 		<a class="button clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							</li>
 							<li class='selectCompareGroupBlock'>
@@ -510,23 +518,23 @@
 											#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 												#if($!itemData.price>0)
 													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="log-addTocart-btn btn-sm addToCart" id="enableCart_$!itemData.partNumber" clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+														<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!itemData.partNumber" clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 													</span>
 												#else
 													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+														<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 													</span>
 												#end
 											#else
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 											#end
 										#else
 											#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 												<span data-select='addtoCartbtn_$!itemData.partNumber'>
-													<a href="javascript:void(0);" class="log-addTocart-btn btn-sm btns-disable" clickStream" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+													<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" clickStream" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
 											#else
-												<a href="javascript:void(0);" class="log-addTocart-btn btn-sm" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+												<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 											#end
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>

@@ -22,26 +22,12 @@
 	#leftMenu +.col-md-9{
 		width: 100%;
 	}
-	.cimm_itemDetailWrap .cimm_itemDescription {
-		float: left;
-		width: calc(100% - 360px);
-	}
-	.cimm_itemDetailWrap .cimm_itemMainImage {
-		width: 340px;
-		float: left;
-	}
-	.tableScroll{
-		width: 100%;
-	}
     header,
     nav,
     footer,
     .hideForPrint,
     .cimm_BreadCrumbs,
     .imgEnlargeIcon,
-	.thumblist,
-	.dataTables_info,
-	.dataTables_paginate,
     #linkedItemSectionContent,
     .multiTabHeading,
     .documentStack li a {
