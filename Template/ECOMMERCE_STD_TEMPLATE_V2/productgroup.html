@@ -15,14 +15,14 @@
 				<input type="hidden" value="$savedGroupId" id="GroupId" />
 				<input type="hidden" value="P" id="GroupType" />
 				<input type="text" id="editedName" value="$savedGroupName" maxlength="25" class="form-control">
-				<button class="cimm_inlineButton" onclick="editGroupName();" id="groupNameSaveBtn">$!locale.get('savedCart.button.save')</button>
-				<button class="cimm_inlineButton" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
+				<button class="btn btn-primary" onclick="editGroupName();" id="groupNameSaveBtn">$!locale.get('savedCart.button.save')</button>
+				<button class="btn btn-primary" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
 			</div>
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
-			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('group.button.groupName')</button>
-			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('product.listOrgroup.name')</button>
-			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint cimm_inlineButton" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><i class="fa fa-lg fa-print"></i> <b>$locale.get("product.button.print")</b> </a> -->
+			<button class="btn btn-primary" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('group.button.groupName')</button>
+			<button class="btn btn-primary" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('product.listOrgroup.name')</button>
+			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint btn btn-primary" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><i class="fa fa-lg fa-print"></i> <b>$locale.get("product.button.print")</b> </a> -->
 		</div>
 	</div>
 	<div class="row mBottom-3">
@@ -94,8 +94,8 @@
 					<input type="hidden" value="$reqType" name="reqType"/>
 					<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" id="searchkeyWord"/>
 					<input type="text" class="form-control" placeholder="Search" id="searchKey" value="$!searchkeyWord" onkeypress="return runScript(event);"  maxlength="25" />
-					<button class="cimm_inlineButton" id="searchBtn" onclick="return validateProductSearch();">$locale.get('search.label.go')</button>
-					<button class="cimm_inlineButton" id="clearsearchBtn" onclick="return clearProductSearch();">$locale.get('search.label.clearSearch')</button>
+					<button class="btn btn-primary" id="searchBtn" onclick="return validateProductSearch();">$locale.get('search.label.go')</button>
+					<button class="btn btn-primary" id="clearsearchBtn" onclick="return clearProductSearch();">$locale.get('search.label.clearSearch')</button>
 				</form>
 			</div>
 		</div>

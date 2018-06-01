@@ -1,10 +1,3 @@
-//Eg @include font-face(Samplino, fonts/Samplino);
-
-//Eg @include font-face(Samplinoff, fonts/Samplinoff, null, null, woff);
-
-//Eg @include font-face(Samplinal, fonts/Samplinal, 500, normal, eot woff2 woff);
-
-
 @include font-face(RobotoRegular, './fonts/Roboto-Regular-webfont', normal, normal, eot woff ttf svg, robotoregular);
 @include font-face(RobotoBlack, './fonts/Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
 @include font-face(RobotoCondensedBold, './fonts/RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
@@ -69,17 +62,17 @@ $body_font-family: $default_font-family;
 /*________________Left navigation link_____________________*/
 
 //Left nav (hf = heading font)
-$lnav_hf-color: $primary_font-color;
+$lnav_hf-color: $default_font-color;
 $lnav_hf-family: $secondary_font-family;
-$lnav_hf-size: $font_md;
+$lnav_hf-size: $font_lg;
 
 //Left nav a link (lf=link font)
-$lnav_lf-color: $primary_font-color;
+$lnav_lf-color: $default_font-color;
 $lnav_lf-family: $default_font-family;
-$lnav_lf-size: $default_font-size;
+$lnav_lf-size: $font_md;
 
 //Left nav (lhf = link hover font)
-$lnav_lhf-color: color(secondary);
+$lnav_lhf-color: color(primary);
 $lnav_lhf-family: font(secondary);
 
 //Left nav (laf = link active font)
@@ -93,7 +86,7 @@ $fnav_hf-family: $default_font-family;
 $fnav_hf-size: $font_sm;
 
 //Footer a link (lf=link font)
-$fnav_lf-color: $primary_font-color;
+$fnav_lf-color: $default_font-color;
 $fnav_lf-family: $default_font-family;
 $fnav_lf-size: $font_sm;
 

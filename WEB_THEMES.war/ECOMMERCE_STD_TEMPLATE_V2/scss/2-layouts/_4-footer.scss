@@ -1,6 +1,5 @@
 footer {
-    
-
+    color: $white;
     .footerMiddelContent {
         background: $footer-midcontent_bg;
         height: 300px; 
@@ -17,7 +16,7 @@ footer {
                     text-transform: uppercase;
                     letter-spacing: 1px;
                 }
-                i {
+                em {
                     display: none;
                     position: absolute;
                     top: 2px;
@@ -63,33 +62,3 @@ footer {
         }
     }
 }
-
-
-// .footerBgColor {
-// 	background: $primaryColor;
-// 	padding: 10px 0;
-// 	position: fixed;
-// 	bottom: 0;
-// 	width: 100%;
-// 	a {
-// 		color: $white;
-// 		display: inline-block;
-// 		text-align: center;
-// 		width: 19%;
-// 		position: relative;
-// 		img{
-// 			width: 70%;
-// 		}
-// 		.cart_badge{
-// 			position: absolute;
-// 			left: -2px;
-// 			top: -3px;
-// 			background: #ffffff;
-// 			height: 20px;
-// 			width: 20px;
-// 			border-radius: 20px;
-// 			color: #c8102e;
-// 			font-weight: bold;
-// 		}
-// 	}
-// }

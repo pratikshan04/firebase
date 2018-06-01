@@ -193,11 +193,11 @@
 					#set($groupPop = "ulg"+$!productModeitemData.itemId+"_pop")
 					<a id="$!groupPop" class="popMsg hideMe"></a>
 					#if($userLogin)
-						<a id='linkg$!itemData.itemId' class="dropdown-toggle cimm_inlineButton" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
+						<a id='linkg$!itemData.itemId' class="dropdown-toggle btn btn-primary" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
 							$!locale.get("marketBasket.button.addToProductGroup")
 						</a>
 					#else
-						<a data-toggle="modal" data-target="#loginModal" class="cimm_inlineButton"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
+						<a data-toggle="modal" data-target="#loginModal" class="btn btn-primary"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
 					#end
 					<ul id="ulg$!productModeitemData.itemId" class="dropdown-menu">
 						<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>

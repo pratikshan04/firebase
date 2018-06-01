@@ -8,7 +8,6 @@
             text-transform: uppercase;
             position: relative;
             cursor: pointer;
-
             background: $lnav_title-bg;
             color: $lnav_hf-color;
             font-size: $lnav_hf-size;
@@ -24,7 +23,7 @@
             }
             a {
                 color: $lnav_hf-color;
-                font-size: $lnav_hf-size;
+                font-size: $lnav_lf-size;
                 text-transform: capitalize;
                 font-family: $lnav_hf-family;
             }
@@ -41,17 +40,17 @@
                     font-family: $lnav_lf-family;
                     color: $lnav_lf-color;
                     &:hover {
-                        color: $lnav_lf-color;
+                        color: $lnav_lhf-color;
                         text-decoration: underline;
                     }
                 }
             }
 			&.myAccountLeftMenu{
 				li{
-					font-size: $lnav_lf-size + 2;
+					font-size: $lnav_lf-size;
 					line-height: 22px;
-					i{
-						font-size: $lnav_lf-size + 4;
+					em{
+						font-size: $lnav_lf-size + 2;
 						width: 26px;
 					}
 				}
