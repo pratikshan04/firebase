@@ -8,7 +8,7 @@ eval(function(p, a, c, k, e, r) { e = function(c) { return (c < a ? '' : e(parse
 /* ajax.js */
 </script>
 <script type="text/javascript" src="$webThemes/$siteName/js/Encoder.js" defer></script>
-<script type="text/javascript" src="$webThemes/$siteName/js/hashtable.js"></script>
+<script type="text/javascript" src="$webThemes/$siteName/js/hashtable.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/respond.min.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/jqueryNumber.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery.i18n.properties-1.0.9.js" defer></script>
@@ -236,8 +236,9 @@ $(function(){
 			});
 		}
 	});
-
-	getNewSectionForHomePage();
+	$(document).ready(function(){
+		getNewSectionForHomePage();
+	});
 	jQuery(function(){
 		//priceLoadMainFunction();
 	});
