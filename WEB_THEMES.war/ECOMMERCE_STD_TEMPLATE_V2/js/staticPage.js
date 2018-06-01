@@ -40,6 +40,7 @@ var refreshBanner = function(bannerId,index){
 };
 function initInitalBanner(){
 	jQuery("[data-select='bannerBlock']").each(function(i){
+		$(this).parents('.container-fluid').css({'padding':'0px'});
 		var bannerListId = jQuery(this).data("bannerid");
 		if(typeof bannerListId!="undefined" && bannerListId!=""){
 			refreshBanner(bannerListId,i);
