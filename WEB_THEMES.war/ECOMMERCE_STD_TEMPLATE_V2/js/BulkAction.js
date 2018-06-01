@@ -66,17 +66,20 @@ var BulkAction = {};
 				BulkAction.processAddToCart(jsonObj); // //block();
 			} else {
 				bootAlert("small","error","Error","No Items to Process.");
-				$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+				BulkAction.refreshBulkSelect();
 			}
 		} else {
 			bootAlert("small","error","Error","No Items Selected.");
-			$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+			BulkAction.refreshBulkSelect();
 		}
 
 
 	};
 	BulkAction.confirmMinOrder = function(ErrorMsg) {
 		return confirm(ErrorMsg + '. To Continue with Min Order Qty click "Ok".To cancel this item click "Cancel"');
+	};
+	BulkAction.refreshBulkSelect = function() {
+		$("#bulkAction, #bulkActionSelect").val('');$('#bulkAction, #bulkActionSelect').selectpicker('refresh');
 	};
 	BulkAction.loadMyProductGroupData = function(){
 		var dataFromCookie = "";
@@ -112,7 +115,7 @@ var BulkAction = {};
 			});
 		}else{
 			bootAlert("small","error","Error","No Items Selected.");
-			$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+			BulkAction.refreshBulkSelect();
 		}
 	};
 	BulkAction.processMyProductGroup = function() {
@@ -165,7 +168,7 @@ var BulkAction = {};
 			$("#multipleProductGroupContent").html('<div class="addNewPgResponse"><ul class="msg"></ul></div>');
 		}else{
 			bootAlert("small","error","Error","No Items Selected.");
-			$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+			BulkAction.refreshBulkSelect();
 		}
 		}else{
 			bootAlert("small","error","Error","No Group Selected.");
@@ -415,19 +418,19 @@ var BulkAction = {};
 			}else{
 				if(BulkAction.getListOfCheckBox()>0){
 					bootAlert("small","error","Error","Cannot add Call For Price items to cart.");
-					$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+					$("#bulkActio, #bulkActionSelectn").val('');$('#bulkAction, #bulkActionSelect').selectpicker('refresh');
 				}else{
 					bootAlert("small","error","Error","No Items to Process.");
-					$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+					BulkAction.refreshBulkSelect();
 				}
 			}
 		}else{
 			if(BulkAction.getListOfCheckBox()>0){
 				bootAlert("small","error","Error","Cannot add Call For Price items to cart.");
-				$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+				BulkAction.refreshBulkSelect();
 			}else{
 				bootAlert("small","error","Error","No Items to Process.");
-				$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+				BulkAction.refreshBulkSelect();
 			}
 		}
 	};
@@ -710,21 +713,20 @@ var BulkAction = {};
 			}else{
 				if(BulkAction.getListOfCheckBox()>0){
 					bootAlert("small","error","Error","Cannot add Call For Price items to cart.");
-					$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+					BulkAction.refreshBulkSelect();
 				}else{
 					bootAlert("small","error","Error","No Items to Process.");
-					$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
+					BulkAction.refreshBulkSelect();
 				}
 			}
 		}else{
 			if(BulkAction.getListOfCheckBox()>0){
 				bootAlert("small","error","Error","Cannot add Call For Price items to cart.");
-				$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
 			}else{
 				bootAlert("small","error","Error","No Items to Process.");
-				$("#bulkAction").val('');$('#bulkAction').selectpicker('refresh');
 			}
 		}
+		BulkAction.refreshBulkSelect();
 	};
 	BulkAction.addGroupItemsToCookie = function(eachObj){
 		var dataFromCookie = "";
