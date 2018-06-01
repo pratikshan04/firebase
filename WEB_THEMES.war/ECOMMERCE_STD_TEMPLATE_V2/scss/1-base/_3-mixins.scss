@@ -77,7 +77,7 @@ $icons: (
 	uparrow: '\f077'
 ); 
 
-@mixin icon($position: before, $icon: false, $styles: true, $color: $primary_font-color, $top: null, $left: null, $right:null, $size: $primary_font-size) {
+@mixin icon($position: before, $icon: false, $styles: true, $color: $default_font-color, $top: null, $left: null, $right:null, $size: $primary_font-size) {
     @if $position == both {
         $position: "before, &:after";
     }
@@ -104,7 +104,6 @@ $icons: (
 }
 
 @mixin custom-bootstrap-btns {
-
     @each $class_name, $bgcolors in $btncolors {
         .btn-#{$class_name} {
 			$btn_bg: map-get($bgcolors, bg-color);
@@ -125,13 +124,13 @@ $icons: (
 			&:active{
 				background: $btn_bg;
 				&:hover{
-					background: #FFE393;
-					color: #333333;
+					background: lighten( $btn_bg, 10% );
+					border-color: darken($btn_bg, 5%);
 				}
 			}
 			&:focus{
-				background: #FFE393;
-				color: #333333;
+				background: lighten( $btn_bg, 10% );
+				border-color: darken($btn_bg, 5%);
 			}
         }
     }
@@ -149,24 +148,24 @@ $icons: (
     }
 }
 
-@include custom-bootstrap-btns;
-
-
 @mixin headings{
-	
 	@each $heading_name, $heading_value in $headings{
 		$color: map-get($heading_value, color);
-		$size: map-get($heading_value, size);
-
+		$fsize: map-get($heading_value, fontsize);
+		$ffamily: map-get($heading_value, fontfamily);
+		$ttransform: map-get($heading_value, texttransform);
+		$marginval: map-get($heading_value, marginvalue);
 		.cimm_#{$heading_name}{
 			color: $color;
-			font-size: $size;
-			font-family: 'Courier New', Courier, monospace; 
-			margin-bottom: 25px;
+			font-size: $fsize;
+			font-family: $ffamily; 
+			text-transform: $ttransform;
+			margin: $marginval;
 		}
 	}
 }
 
+@include custom-bootstrap-btns;
 @include headings;
 
 @mixin border-direction($direction, $width, $style, $color) {

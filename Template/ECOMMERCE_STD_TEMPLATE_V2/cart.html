@@ -12,21 +12,21 @@
 <input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!validEmailAddress">
 #end
 <div class="cartTotal_Top">
-	<span>
+	<span class="btn btn-lg">
 		<b class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</b>
 		<b>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</b>
 	</span>
 	#if($userLogin) 
 	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-		<a class="button marginX-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
+		<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 	#else
-		<a class="button marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
+		<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
 	#end 
 	#else
 	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-		<a class="button marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
+		<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
 	#else
-		<a class="button marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+		<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 	#end
 	#end
 	<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sharethis')" onclick="sendPageContent('sendPageContent');">
@@ -185,7 +185,6 @@
                         <a href="javascript:void(0);" data-toggle="tooltip" title="Delete Item" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteId=$!itemData.productListId','0','$!escapeTool.javascript($!itemData.partNumber)');"><i class="fa fa-2x fa-times-circle  fa-lg"></i></a>
                     </div>
                     </td>
-                    
                 </tr>
                 #end
                 <!--End of Cart content iterator-->
@@ -222,15 +221,15 @@
             <li>
             	#if($userLogin) 
 	            	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-						<a class="button" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
+						<a class="btn btn-primary btn-lg" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 					#else
-						<a class="button" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
+						<a class="btn btn-primary btn-lg" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
 					#end 
 	            #else
 	            	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-	            	 <a class="button" href="/Login">$!locale.get("product.button.checkout")</a>
+	            	 <a class="btn btn-primary btn-lg" href="/Login">$!locale.get("product.button.checkout")</a>
 	            	#else
-	            	<a class="button" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+	            	<a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 	            	#end
 	            #end
             </li>

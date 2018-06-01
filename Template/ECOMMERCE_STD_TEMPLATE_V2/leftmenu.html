@@ -33,7 +33,7 @@
 				<div class="divWrap collapse in" id="categoryMenu">
 				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
 			#end
-			<ul id="categoryMenu" class="collapse in">
+			<ul id="categoryMenu" class="collapse in pRight-3">
 			 	#foreach($categoryMenu in $categMenu)
 		           	<li><a href="$!categoryMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="active">$!categoryMenu.categoryName</a></li>
 		       	#end
@@ -60,7 +60,7 @@
 					<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'brandsMenu');"value="Search Brands"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
 					<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
 				#end
-				<ul class="collapse in navList_brandsMenu" id="brandsMenu">
+				<ul class="collapse in pRight-3 navList_brandsMenu" id="brandsMenu">
 					#foreach($bndName in $brandList) #set($countBrandList = $!countBrandList + 1)
 						<li><a href="$!bndName.brandId$!locale.get('website.url.ShopByBrand')$!bndName.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!bndName.brandName</a><label><span class="hideMe">$!bndName.brandName</span></label></li>
 					#end
@@ -89,7 +89,7 @@
 					<input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'manufacturersMenu');"value="Search Brands"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}">
 					<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
 				#end
-				<ul class="collapse in navList_manufacturersMenu" id="manufacturersMenu">
+				<ul class="collapse in pRight-3 navList_manufacturersMenu" id="manufacturersMenu">
 				#foreach($!manufacturers in $!manufacturerList)
 					#set($countManufacturerList = $!countManufacturerList + 1)
 					<li><a href="$!manufacturers.manufacturerId$!locale.get('website.url.ShopByManufacturer')$!manufacturers.itemUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','')">$!manufacturers.manufacturerName</a></li>
@@ -129,7 +129,7 @@
 					<div class="divWrap collapse in" id="eventsLocations">
 					<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
 					#end
-					<ul id="eventsLocations" class="collapse in">
+					<ul id="eventsLocations" class="collapse in pRight-3">
 				 	#foreach($locFilter in $eventsLocations)
 					<li>
 					<label class="cimm_customCheckBoxWrap">
@@ -151,7 +151,7 @@
 				<div class="divWrap collapse in" id="eventCategoryList">
 				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
 				#end
-				<ul id="eventCategoryList" class="collapse in">
+				<ul id="eventCategoryList" class="collapse in pRight-3">
 			 	#foreach($catFilter in $eventCatList)
 				<li>
 				<label class="cimm_customCheckBoxWrap"><input type="checkbox" value="$catFilter.eventCategory" onclick='filterCat("$catFilter.eventCategory","$!selectedLocationFilter",this);' name ="eventsCategoryFilter" class="catEvent hideDefaultCheckbox" #if($!selectedCategoryFilter==$catFilter.eventCategory) checked="checked" #end> <span class="checkBoxLabel">$catFilter.eventCategory</span></label>

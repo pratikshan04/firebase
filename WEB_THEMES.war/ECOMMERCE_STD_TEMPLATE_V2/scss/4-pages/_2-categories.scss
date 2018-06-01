@@ -1,20 +1,16 @@
 .cimm_productCategory {
-	
 	.cimm_searchWithin {
 		padding: 10px 0px;
         background: $lightGrayColorTwo;
-        
 		.cimm_searchWithinWrap {
 			width: 255px;
         }
-        
         .btn{
             border-radius: 0px;
         }
 	}
 
 	.cimm_categoryItemBlockWrap{
-		
 		.cimm_categoryImg {
 			padding: 10px;
 			@include border(1px, solid, $border-color);
@@ -46,27 +42,18 @@
 			color: $category_hf-color;
 			font-size: $category_hf-size;
 			font-family: $category_hf-family;
-			
 			font-weight: normal;
 			text-align: center;
 			text-transform: uppercase;
 			margin: 0;
 			padding: 10px;
 			height: 60px;
-
-			&:hover {
-				color: $primaryColor;
-				text-decoration: underline;
+			a{
+				&:hover {
+					color: $primaryColor;
+					text-decoration: underline;
+				}
 			}
 		}
-
-		// .cimm_categoryItemBlock {
-		// 	width: 30.5%;
-		// 	margin: 25px .5% 0;
-		// 	float: left;
-		// 	&:nth-child(3n+2) {
-		// 		margin: 25px 3.2% 0;
-		// 	}
-		// }
     }
 }

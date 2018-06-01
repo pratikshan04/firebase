@@ -10,7 +10,7 @@ body {
     position: relative;
     height: 100%;
     font-family: $body_font-family;
-	font-size: $body_font-size;
+	font-size: $body_font-size - 2;
     color: $body_font-color;
 	overflow-x: hidden;
 }
@@ -20,9 +20,9 @@ $pagination_border-color: $primary_color;
 
 $backtotop-bg: $gray;
 
-$modal_titlef-color: $primary_font-color;
-$modal_btn-color: $primary_font-color;
-$modal_closebtn-color: $primary_font-color;
+$modal_titlef-color: $default_font-color;
+$modal_btn-color: $default_font-color;
+$modal_closebtn-color: $default_font-color;
 
 
 .pagination>.active>a,
@@ -89,12 +89,6 @@ footer,
 .cimm_stickyPageWrap:after {
     height: 355px;
 }
-
-// .container {
-//     max-width: 1200px;
-//     width: 1200px;
-// }
-
 .cimm_bodyContentWrap {
     margin-bottom: 30px;
     height: 100%;
@@ -189,7 +183,7 @@ footer,
 	.breadcrumb {
         background: none;
         padding: 0px;
-        
+        margin: 15px 0;
         li+li:before {
             content: "|";
         }
@@ -210,24 +204,6 @@ footer,
 		}
 	}
 }
-
-/*___________________All Page Title____________________*/
-.cimm_pageTitle {
-    //color: $page_titlef-color;
-    font-family: $page_titlef-family;
-    //font-size: $page_titlef-size;
-    text-transform: uppercase;
-}
-
-/*___________________Single Block Title____________________*/
-.cimm_blockTitle {
-    color: $block_titlef-color;
-    font-family: $block_titlef-family;
-    font-size: $block_titlef-size;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-}
-
 
 .cimm_blockHeading {
     margin: 0 0 10px 0;
@@ -419,7 +395,7 @@ footer,
         p {
             color: $primaryColor;
             font-size: 16px;
-            i {
+            em {
                 margin-right: 10px;
             }
         }
@@ -473,7 +449,7 @@ footer,
         padding-left: 30px;
         li {
             list-style-type: disc;
-			i{
+			em{
 				vertical-align: middle;
 			}
         }
@@ -696,7 +672,7 @@ footer,
         li {
             line-height: 20px;
             color: $black;
-            >i {
+            >em {
                 color: $secandaryColor;
                 font-size: 18px;
             }
@@ -1012,12 +988,12 @@ footer,
                 font-size:14px;
                 display:block;  
                 padding: 10px 40px 10px 5px;
-                &:hover i{
+                &:hover em{
                     padding: 10px 8px 10px 12px;
                     color: #000;
                     right: 0px;
                 }
-                i {
+                em {
                     position: absolute;
                     right: 4px;
                     padding: 10px 8px 10px 8px;
@@ -1027,7 +1003,7 @@ footer,
                 }
             }
 
-            i{
+            em{
                 position: absolute;
                 top:10px;
                 right:10px;
@@ -1125,7 +1101,7 @@ footer,
         margin: 0;
         color: $default_font-color;
 
-        i {
+        em {
             position: absolute;
             left: 5px;
             color: #888;
@@ -1405,7 +1381,7 @@ footer,
 
 .cimm_topBanners{
     margin-bottom: 20px;
-    min-height: 200px;
+    min-height: 180px;
     border: 1px solid #e9e9e9;
     vertical-align: middle;
     text-align: center;
@@ -1440,19 +1416,13 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	text-align: right;
 	margin-bottom: 25px;
 	span {
-		background: #A1A1A1;
-		color: #FFF;
-		font-size: 14px;
-		padding: 12px 25px;
+		background: $border-color;
+		color: $white !important;
 		border-radius: 2px;
-		display: inline-block;
-	}
-	a{
-		display: inline-block;
 	}
 }
 .eMailLogo{
-	background:#FFF; 
+	background:$white; 
 	padding: 10px;
 	border-top:2px solid $border-color;
 	border-bottom:2px solid $border-color;

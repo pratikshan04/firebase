@@ -24,7 +24,7 @@
 				#foreach($!footMenu in $!footerStaticMenu) 
 					<div class="col-md-2">
 						<div class="footerCol">
-							<h5><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><i class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></i></h5>
+							<h5><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h5>
 							<ul id="footerMenu$!count" class="collapse in">
 							#if($!footMenu.menuList && $!footMenu.menuList.size()>0)
 								#foreach($!subStaticMenu in $!footMenu.menuList)
@@ -46,7 +46,7 @@
 				#end
 					<div class="col-md-3">
 						<div class="footerCol">
-							<h5><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></i></h5>
+							<h5><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h5>
 							<ul id="footerMenu$!count" class="collapse in">
 								<li><a>Your Company Address</a></li>
 								<li><a>#000, Lorem </a></li>
@@ -58,7 +58,7 @@
 					<div class="col-md-3">
 						#set($count = $!count + 1)
 						<div class="footerCol">
-							<h5><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><i class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></i></h5>
+							<h5><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h5>
 							<ul id="footerMenu$!count" class="collapse in">
 								<li><p>$!locale.get('footer.label.signupFor')</p></li>
 								<li><a class="btn btn-primary btn-lg btn-signup">$!locale.get('footer.label.signMeUp')</a></li>
@@ -107,7 +107,7 @@
 						<a href="$!locale.get('website.url.forgotPassword')" class="pullRight forgotPass" tabindex="5">$!locale.get("product.label.forgotPassword")</a>
 					</div>
 					<div class="clearAfter">
-						<a href="$!locale.get('website.url.Register')" class="pullLeft cimm_button" tabindex="7">$!locale.get("product.heading.signUp")</a>
+						<a href="$!locale.get('website.url.Register')" class="pullLeft btn btn-primary" tabindex="7">$!locale.get("product.heading.signUp")</a>
 						<button class="button pullRight" type="submit" tabindex="6">$!locale.get('product.heading.signIn')</button>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header noBorder">
-		      	<button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title pull-left">$!locale.get('product.heading.myCart')</h4><a href="$!locale.get('website.url.ShoppingCart')" class="mRight-3 pull-right"><i class="fa fa-lg fa-shopping-cart"></i> <span class="ATCCartCount"></span> $!locale.get("header.label.items")</a>
+		      	<button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title pull-left">$!locale.get('product.heading.myCart')</h4><a href="$!locale.get('website.url.ShoppingCart')" class="mRight-3 pull-right"><em class="fa fa-lg fa-shopping-cart"></em> <span class="ATCCartCount"></span> $!locale.get("header.label.items")</a>
 		    </div>
 		    <div class="modal-body row">
 			    <div class="col-md-3 col-sm-3 col-xs-3">
@@ -170,7 +170,7 @@
 <div id="orderPadCopyHead" style="display:none;"></div>
 <div class="cimm_customPopWrap" id="searchResultsWrap" style="display:none;">
 	<div class="quickOrder_customPopContent">
-		<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();"><i class="fa fa-lg fa-times-circle"></i></a>
+		<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();"><em class="fa fa-lg fa-times-circle"></em></a>
 		<div id="searchResultsHeader">
 			<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 		</div>
