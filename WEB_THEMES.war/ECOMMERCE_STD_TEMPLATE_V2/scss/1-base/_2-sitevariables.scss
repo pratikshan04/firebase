@@ -1,23 +1,7 @@
 $color:(
-    //Temp Theme
-    primary: #404040,
-    secondary: #46acee,
+    primary: #46acee,
+    secondary: #404040,
     tertiary: #f9f9f9,
-
-    // EECO Theme
-    // primary: #001E38, 
-    // secondary: #00549F,
-    // tertiary: #FABC00,
-
-    // ETNa Theme
-    // primary: #710D20,
-    // secondary: #87888D,
-    // tertiary: #FABC00,
-    
-    //Aaron
-    // primary: #333333,
-    // secondary: #ED1B25,
-    // tertiary: #FFCC00,
 
     white: #ffffff,
     black: #000000,
@@ -28,7 +12,8 @@ $color:(
     gray: #A1A1A1,
     darkgray:#585858,
     lightgray:#EBEBEB,
-    yellow: #e4de33
+    yellow: #e4de33,
+    borderColor: #A1A1A1
 );
 
 $primary_color:  color(primary);
@@ -45,24 +30,17 @@ $gray: color(gray);
 $darkgray: color(darkgray);
 $lightgray: color(lightgray);
 $yellow: color(yellow);
+$border-color: color(borderColor);
 
 //Font family declartion
 $font: (
     primary: 'RobotoRegular',
     secondary: 'RobotoBlack'
-
-    /*primary: 'RobotoCondenseRegular',
-    secondary: 'RobotoCondensedBold',
-    
-    tertiary: 'Robotocondensed-bolditalic',
+    /*tertiary: 'Robotocondensed-bolditalic',
     quaternary: 'Robotocondensed-light',
     quinary: 'Robotocondensed-italic',
     senary: 'Robotocondensed-bolditalic',
     septenary: 'Robotocondensed-lightitalic',*/
-    // octonary: '',
-    // nonary: '',
-    // denary: ''
-    
 );
 
 //Font size declaration
@@ -82,84 +60,44 @@ $font_lg: font-size(lg);
 $font_xlg: font-size(xlg);
 $font_xxlg: font-size(xxlg);
 
-$btncolors: (
-    primary: (
-        bg-color: $secondary_color, 
-        btnf-color: $white, 
-        hbg-color: $darkgray, 
-        btnhf-color: $white
-    ), 
-    secondary: (
-        bg-color: $primary_color, 
-        btnf-color: $white, 
-        hbg-color: $black, 
-        btnhf-color: $white
-    ),
-    success: (
-        bg-color: $tertiary_color, 
-        btnf-color: $black, 
-        hbg-color: $secondary_color, 
-        btnhf-color: $white
-    ),
-    danger: (bg-color: $red, btnf-color: $white, hbg-color: $primary_color, btnhf-color: $white),
-    warning: (bg-color: $yellow, btnf-color: $white, hbg-color: $primary_color, btnhf-color: $white),
-    info: (bg-color: $blue, btnf-color: $white, hbg-color: $primary_color, btnhf-color: $white),
-    light: (bg-color: $lightgray, btnf-color: $primary_color,   hbg-color: $black, btnhf-color: $white),
-    dark: (bg-color: $gray, btnf-color: $primary_color, hbg-color: $black, btnhf-color: $white)
-);
-
-
 
 //Font Colors
-$default_font-color: color(primary);
-
+$default_font-color: color(secondary);
 $primary-font_color: color(primary);
 $secondary-font_color: color(secondary);
 
-
-$headings:(
-    pageTitle:(
-        //font: 12px,
-        color: $primary-font_color,
-        size: $font_md
-    )
-    // blockTitle:(),
-    // blockHeading:(),
-    // CaroBlockTitle:( )
-);
-
 //Header
-$header_bg: $primary_color;
+$header_bg: $secondary_color;
 $header_top-bg: $secondary_color;
 $header-midcontent-bg: transparent;
 
 //Main Navigation background color
-$mnav_bg: $primary_color;
+$mnav_bg: $secondary_color;
 $mnav_lf-color: $white; //Main Navigation (lf=link text font) color
 
-$mnav_lh-bg: $secondary_color; //Main navigation (lh = link hover) bg
+$mnav_lh-bg: $primary_color; //Main navigation (lh = link hover) bg
 $mnav_lhf-color: $white; //Main navigation (lhf = link hover font) color 
 
-$mnav_la-bg: $secondary_color; //Main navigation (la = link active) bg 
+$mnav_la-bg: $primary_color; //Main navigation (la = link active) bg 
 $mnav_laf-color: $white; //Main navigation (la = link active font) color
 
 
 //Main sub navigation
 $msnav_bg: $lightgray;
-$msnav_lf-color: $primary-font_color;
+$msnav_lf-color: $secondary-font_color;
 $msnav_lh-bg: $secondary-font_color;
 $msnav_la-color: $secondary-font_color;
 
 //Left Navigation
 $lnav_title-bg: $white;
 $lnav_title_text-color: $black;
-$lnav_icon-color: $secondary_color;
+$lnav_icon-color: $primary_color;
 
 //Footer 
 $footer_bg: transparent;
-$footer-topcontent_bg: $primary_color;
-$footer-midcontent_bg: $primary_color; 
-$footer-btmcontent_bg: $secondary_color;
+$footer-topcontent_bg: $secondary_color;
+$footer-midcontent_bg: $secondary_color; 
+$footer-btmcontent_bg: $primary_color;
 
 //Footer a heading (hf = heading font)
 $fnav_hf-color: $white;
@@ -167,8 +105,41 @@ $fp_f-color: $white;
 $footer_copyright-fSize: $font_xs;
 $footer_copyright-fcolor: $white;
 
-$border-color: $darkgray;
+$border-color: $border-color;
 
 //Categories Heading 
 $category_hf-color: $primary-font_color;
  
+
+$btncolors: (
+    primary: (
+        bg-color: $primary_color, 
+        btnf-color: $white, 
+        hbg-color: $darkgray, 
+        btnhf-color: $white,
+        abg-color: $darkgray
+    ), 
+    secondary: (
+        bg-color: $secondary_color,
+        btnf-color: $white, 
+        hbg-color: $black, 
+        btnhf-color: $white,
+        abg-color: $darkgray
+    )
+);
+
+$headings:(
+    pageTitle:(
+        fontfamily: font(primary),
+        texttransform: uppercase,
+        color: $default_font-color,
+        fontsize: $font_lg
+    ),
+    blockTitle:(
+        fontfamily: font(primary),
+        texttransform: capitalize,
+        color: $default_font-color,
+        fontsize: $font_xlg,
+        marginvalue: 0
+    )
+);

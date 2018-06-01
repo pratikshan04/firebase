@@ -14,7 +14,7 @@
 					<ul>
 						#foreach($headerMenu in $headerStaticMenu)
 							<li>
-								<a data-toggle="dropdown" href="#if($headerMenu.itemUrl) #if($headerMenu.staticPageUrl) $!headerMenu.staticPageUrl #else /$!headerMenu.itemUrl #end #else javascript:void(0); #end" #if($headerMenu.level1Menu && $headerMenu.level1Menu=='Blog')target="_blank"#end>$!headerMenu.level1Menu #if($headerMenu.menuList && $headerMenu.menuList.size()>0) <i class="fa  fa-caret-down" aria-hidden="true"></i>#end</a>
+								<a data-toggle="dropdown" href="#if($headerMenu.itemUrl) #if($headerMenu.staticPageUrl) $!headerMenu.staticPageUrl #else /$!headerMenu.itemUrl #end #else javascript:void(0); #end" #if($headerMenu.level1Menu && $headerMenu.level1Menu=='Blog')target="_blank"#end>$!headerMenu.level1Menu #if($headerMenu.menuList && $headerMenu.menuList.size()>0) <em class="fa  fa-caret-down" aria-hidden="true"></em>#end</a>
 								#if($headerMenu.menuList && $headerMenu.menuList.size()>0)
 									<ul class="dropdown-menu">
 									#foreach($subStaticMenu in $headerMenu.menuList)
@@ -55,17 +55,17 @@
 		    	<div class="input-group">
 		    		<input class="form-control" type="text" onkeypress="return runScript(event);" id="txtSearch" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  />
 		    		<div class="input-group-btn">
-		    			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><i class="fa fa-search"></i></button>
-					<a class="cimm_cameraIcon" onclick="callToVisionapi();"><i class="fa fa-camera"></i></a>
+		    			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><em class="fa fa-search"></em></button>
+					<a class="cimm_cameraIcon" onclick="callToVisionapi();"><em class="fa fa-camera"></em></a>
 					</div>
 		    	</div>
 			</form>
 		<div class='mobileCartCountWrap'>
 			<a href="$!locale.get('website.url.ShoppingCart')" class="mobileCartCount"><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount</span></a>
 			#if($userLogin)
-			<a href="javascript:void(0);" onclick="doLogOffScript();"><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i></a>
+			<a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em></a>
 			#else
-			<a href="/Login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i></a>
+			<a href="/Login"><em class="glyphicon glyphicon-log-in" aria-hidden="true"></em></a>
 			#end
 		</div>
 	</div>
@@ -73,12 +73,13 @@
 	<div class="cimm_searchWrapper">
 	    <form class="cimm_searchForm" id="search_Form">
 	    	<div class="input-group">
-				<input type="text" onkeypress="return runScript(event);" id="txtSearch" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  class="form-control"/>
+				<input type="text" onkeypress="return runScript(event);" id="txtSearch" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  class="form-control"/>
 				<div class="input-group-btn">
-					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><i class="fa fa-search"></i></button>
+					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><em class="fa fa-search"></em></button>
 				</div>
 			</div>
 		</form>
+		#if($userLogin) <p class="mTop-2"><span>$!locale.get("product.heading.welcome"): </span>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p>  #end ##$!session.getAttribute("custName")
 		<a href="$!locale.get('website.url.ShoppingCart')" class="showInDevice mTop-1">$!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span></a>
 	</div>
 	#end
@@ -92,8 +93,8 @@
 					<p>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p> ##$!session.getAttribute("custName")
 					<img src='$!userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" id="profilePictureThumbnail" onerror="this.src='$!webThemes/$!siteName/images/default-profile.png'"/>
 				</span> -->
-				<span class="imgBox"><i class="fa fa-user-circle-o"></i></span>$!locale.get("product.heading.accountDashBoard")
-				<span class="blockElement">$!locale.get("product.heading.welcome")</span>
+				<span class="imgBox"><em class="fa fa-user-circle-o"></em></span>$!locale.get("product.heading.accountDashBoard")
+				<span class="blockElement">&nbsp;<!-- $!locale.get("product.heading.welcome") --></span>
 			</a>
 			<ul class="myAccountMenu dropdown-menu">
 				#parse("accountMenu.html")
@@ -102,7 +103,7 @@
 		#else
 			<li class="hideForDevices dropdown">
 				<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="loginDropDown">
-					<span class="imgBox"><i class="fa fa-user-circle-o"></i></span>$!locale.get("product.heading.accountDashBoard")
+					<span class="imgBox"><em class="fa fa-user-circle-o"></em></span>$!locale.get("product.heading.accountDashBoard")
 					<span class="blockElement">$!locale.get('product.heading.signInRegister')</span>
 				</a>
 				<div class="loginWindow dropdown-menu">
@@ -110,16 +111,16 @@
 						<div id="pLoginErr" class="text-danger text-center"></div>
 						<input type="hidden" value="popup" name="loginType">
 						<div class="form-group">
-							<label>$!locale.get("form.label.userName")</label>
+							<label for="popUserName">$!locale.get("form.label.userName")</label>
 							<input type="text" name="loginId" id="popUserName" tabindex="1" class="form-control"/>
 						</div>
 						<div class="form-group">
-							<label>$!locale.get("form.label.password")</label>
+							<label for="popPassword">$!locale.get("form.label.password")</label>
 							<input type="password" name="loginPassword" id="popPassword" tabindex="2" class="form-control"/>
 						</div>
 						<div class="rememberLogWrap row">
 							<div class="col-sm-12 col-md-5">
-								<label class="customCheckBox" tabindex="3" > 
+								<label for="rememberMeDrop" class="customCheckBox" tabindex="3" > 
 									<input type="checkbox" name="rememberMe" id="rememberMeDrop" />
 									<span>$!locale.get("form.label.rememberMyLogin")</span>
 								</label>
@@ -140,7 +141,7 @@
         <li class='cartCountDisplayLi dropdown'>
 				<a href="$!locale.get('website.url.ShoppingCart')" data-target="quickCartViewBlock"><!-- data-toggle="modal" class="dropdown-toggle" data-function="quickCartView"-->
 					<span class="imgBox" title="$!locale.get('product.heading.viewCart')" data-toggle="tooltip">
-						<svg id="icon_cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14"><path class="fillColor" d="M15.9 1.3H4.2L4.1.5C4 .2 3.7 0 3.4 0H.8C.4 0 .2.3.2.6c0 .4.3.6.6.6h2.1l1.8 8.2-.6 1c-.1.3-.1.6 0 .8.1.2.3.3.6.3H15c.4 0 .6-.3.6-.6 0-.4-.3-.6-.6-.6H5.8L6 10v-.5l-.2-.7c2.2-.2 9.6-1.1 10.1-1.1.6 0 .9-.4.9-.7V2.3c0-.7-.2-1-.9-1z"></path><circle class="fillColor" cx="5.3" cy="12.8" r="1.2"></circle><circle class="fillColor" cx="14.3" cy="12.8" r="1.2"></circle></svg>
+						<em class="fa fa-shopping-cart"></em>
 					</span>
 					 $!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh blockElement">($!cartCount) $!locale.get("product.label.items")</span>
 				</a>

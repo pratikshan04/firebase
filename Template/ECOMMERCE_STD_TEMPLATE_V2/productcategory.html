@@ -149,7 +149,7 @@
 						#end 
 					</div>
 					#end
-					<div class="pullLeft hidden-md hidden-lg marginY-3"><a data-function="slideLeft" class="cimm_inlineButton light-ripple"><i class="glyphicon glyphicon-filter"></i> Filter</a></div>
+					<div class="pullLeft hidden-md hidden-lg marginY-3"><a data-function="slideLeft" class="btn btn-primary light-ripple"><i class="glyphicon glyphicon-filter"></i> Filter</a></div>
 				</div>
 				<div class='col-md-6 col-sm-12 col-xs-12'>
 					<div class="row">
@@ -420,10 +420,10 @@
 								#end
 								<ul class="skuStyle">
 									#if($itemData.manufacturerName.trim() != "")
-										<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName.trim()</span></li>
+										<li itemprop="sku"><b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName.trim()</span></li>
 									#end
 									#if($itemData.brandName.trim() != "")
-										<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.brand"): </b><span>$!itemData.brandName.trim()</span></li>
+										<li itemprop="sku"><b>$!locale.get("product.label.brand"): </b><span>$!itemData.brandName.trim()</span></li>
 									#end
 									<li itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.itemId">$!itemData.partNumber</span></li>
 									#if($itemData.manufacturerPartNumber.trim() != "")
@@ -433,7 +433,7 @@
 									</li>
 									#end
 									#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
-									<li itemprop="sku" class="hideToHover">
+									<li itemprop="sku">
 										<b>$!locale.get("product.label.cpn"): </b>
 										<span>
 										#if($itemData.customerPartNumber)$!itemData.customerPartNumber, #end
@@ -453,9 +453,9 @@
 										</span>
 									</li>
 									#end
-									#if($itemData.upc != "" && $!itemData.upc)<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span></li>#end
+									#if($itemData.upc != "" && $!itemData.upc)<li itemprop="sku"><b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span></li>#end
 									
-									#if($itemData.uom != "" && $!itemData.uom)<li itemprop="sku" class="hideToHover"><b>$!locale.get("product.label.uom"): </b><span>$!itemData.uom</span></li>#end
+									#if($itemData.uom != "" && $!itemData.uom)<li itemprop="sku"><b>$!locale.get("product.label.uom"): </b><span>$!itemData.uom</span></li>#end
 									
 									<!-- <li class="productLeadTime productLeadTime_$!itemData.partNumber" style="display:none;">
 										<b>$!locale.get("product.label.leadTime"): </b>
@@ -475,13 +475,13 @@
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									<!-- <li class="hideToHover" id="allBranchAvail_$!itemData.partNumber">
+									<!-- <li id="allBranchAvail_$!itemData.partNumber">
 										<span class="priceSpanFa"><a href="javascript:void(0);" onClick="openAllBranchPop($!itemData.partNumber)">Branch Availability</a></span>
 									</li> -->
 										
 									#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
-									<li class="hideToHover"><b>$!locale.get("product.label.minorderqty"): </b><span> $!itemData.minOrderQty</span></li>
-									<li class="hideToHover"><b>$!locale.get("product.label.qtyinterval"): </b><span> $!itemData.orderInterval</span>
+									<li><b>$!locale.get("product.label.minorderqty"): </b><span> $!itemData.minOrderQty</span></li>
+									<li><b>$!locale.get("product.label.qtyinterval"): </b><span> $!itemData.orderInterval</span>
 										<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
 										<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
 										<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
@@ -489,8 +489,8 @@
 									#end
 								</ul>
 								<ul>
-									#if($itemData.packDesc)<li itemprop="sku" class="packDesc hideToHover"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
-									<li class="cimm_priceWrap hideToHover">
+									#if($itemData.packDesc)<li itemprop="sku" class="packDesc"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
+									<li class="cimm_priceWrap">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
 											#if($itemData.price>0)
@@ -560,7 +560,7 @@
 										</div>
 									</li>
 									<!--Branch Availabiltiy List Section-->
-									<li class='pTop-2 hideToHover'>
+									<li class='pTop-2'>
 										<!-- My Product Group-->
 										<div class="productGroupBtn dropdown">
 											#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
@@ -578,7 +578,7 @@
 										</div>
 										<!--My Product Group-->
 									</li>
-									<li class="selectItemBlock pTop-2 hideToHover">
+									<li class="selectItemBlock pTop-2">
 										<label class="customCheckBox">
 											#set($addToCartCheckFlag = "N")
 											#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")

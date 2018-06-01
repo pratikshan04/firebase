@@ -6,22 +6,22 @@
    <div class="cimm_slide first">
       <h2>Menu</h2>
       <ul>
-         <li><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a><i class="fa fa-lg fa-chevron-right" aria-hidden="true"  id="$locale.get('navigation.label.shopProducts').replace(' ','_')"></i></li>
+         <li><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a><em class="fa fa-lg fa-chevron-right" aria-hidden="true"  id="$locale.get('navigation.label.shopProducts').replace(' ','_')"></em></li>
          #if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
-         <li><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands")</a><i class="fa fa-lg fa-chevron-right" aria-hidden="true"></i></li>
+         <li><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands")</a><em class="fa fa-lg fa-chevron-right" aria-hidden="true"></em></li>
          #end
          #if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
-         <li><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a><i class="fa fa-lg fa-chevron-right" aria-hidden="true"></i></li>
+         <li><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a><em class="fa fa-lg fa-chevron-right" aria-hidden="true"></em></li>
          #end
          #foreach($topMenu in $topStaticMenu)
          <li><a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
          #if($topMenu.menuList && $topMenu.menuList.size()>0)
-         <i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="top_$topMenu.level1Menu.replace(' ','_')"></i>
+         <em class="fa fa-lg fa-chevron-right" aria-hidden="true" id="top_$topMenu.level1Menu.replace(' ','_')"></em>
          #end
          </li>
          #end
          <li>
-         	<li><a href='javascript:void(0)'>$!locale.get("product.heading.accountDashBoard")</a><i class="fa fa-lg fa-chevron-right" id="myAccount" aria-hidden="true"></i>
+         	<li><a href='javascript:void(0)'>$!locale.get("product.heading.accountDashBoard")</a><em class="fa fa-lg fa-chevron-right" id="myAccount" aria-hidden="true"></em>
          </li>
       </ul>
    </div>
@@ -46,7 +46,7 @@
             <a href="$!test" class="ripple-btn">$!categoryMenu.categoryName</a>
             #foreach($key in $secondLevelMenu.keySet())
             #if($categoryMenu.categoryCode==$!key)
-            <i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!categoryMenu.categoryCode.replace(' ','_')"></i>
+            <em class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!categoryMenu.categoryCode.replace(' ','_')"></em>
             #end
             #end
          </li>
@@ -70,7 +70,7 @@
             <a href="$!test" class="ripple-btn">$!secondLvlMenu.categoryName</a>
             #foreach($key3 in $secondLevelMenu.keySet())
             #if($secondLvlMenu.categoryCode==$!key3)
-            <i class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!secondLvlMenu.categoryCode.replace(' ','_')"></i>
+            <em class="fa fa-lg fa-chevron-right" aria-hidden="true" id="item_$!secondLvlMenu.categoryCode.replace(' ','_')"></em>
             #end
             #end
          </li>

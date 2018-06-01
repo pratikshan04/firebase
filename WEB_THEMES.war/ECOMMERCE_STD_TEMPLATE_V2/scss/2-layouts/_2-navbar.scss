@@ -1,46 +1,60 @@
+.navbar-default{
+    .navbar-nav{
+        >li{
+            >a:focus,>a:hover {
+                color: $white;
+                background-color: transparent;
+            }
+        }
+    }
+}
+ 
+
 nav.navbar {
     background: $mnav_bg;
     border-radius: 0px;
     border: 0px;
     box-shadow: 0px 5px 10px 0px #c4c4c4;
-
+    margin: 0;
     .cimm_navigationBar {
         position: relative;
-
-        ul {
-            li {
+        >ul {
+            >li {
                 &:hover{
                     background: $mnav_lh-bg;
                     //color: $mnav_lhf-color;
 					a{
-						i{
+						em{
                             @include icon(before, navdownarrow, $color: #fff, $right: -3px, $size: 20px);
 						}
 					}
                 }
-                
-                a {
+                &:last-child{
+					.dropdown-menu{
+						left: -143px;
+					}
+					a {
+						padding: 15px 30px 15px 26px;
+					}
+				}
+                >a {
                     color: $mnav_lf-color; 
                     font-size: $mnav_lf-size;
                     text-transform: uppercase;
                     letter-spacing: 1px;
-                    padding-right: 25px;
+                    padding: 15px 27px 15px 25px;
                     white-space: normal;
                     position: relative;
-                    
-					&:focus{
-						background: none;
-					}
                     &:hover {
                         color: $mnav_lhf-color;
 
-						i{
+						em{
 							&:before {
 								content: "\f0d7";
 							}
 						}
                     }
-					i{
+					em{
 						position: absolute;
 						right: 12px;
 						top: 16px;
@@ -59,7 +73,7 @@ nav.navbar {
                     padding: 10px 0;
                     
 					ul{
-						width:284px;
+						width:282px;
                         display: inline-block;
                         vertical-align: top;
                         

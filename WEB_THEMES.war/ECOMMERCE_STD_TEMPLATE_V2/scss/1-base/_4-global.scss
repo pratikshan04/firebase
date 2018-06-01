@@ -56,10 +56,6 @@ html {
     border: none !important;
 }
 
-.noMargin {
-    margin: 0 !important;
-}
-
 .dropdown-backdrop {
     cursor: wait;
 }
@@ -89,15 +85,12 @@ abbr[title] {
 .row.no-gutters {
     margin-right: 0;
     margin-left: 0;
+    >[class^="col-"], >[class*=" col-"]{
+        padding-right: 0;
+        padding-left: 0;
+        position: relative;
+    }
 }
-
-.row.no-gutters>[class^="col-"],
-.row.no-gutters>[class*=" col-"] {
-    padding-right: 0;
-    padding-left: 0;
-    position: relative;
-} 
-
 dt,
 label {
     font-weight: normal;

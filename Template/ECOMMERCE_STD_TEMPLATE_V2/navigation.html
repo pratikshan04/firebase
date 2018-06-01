@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav">
     <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="$locale.get('website.url.ProductCategory')">
-			$locale.get("navigation.label.shopProducts") #if($categMenu.size()>0)<i class="fa"></i>#end
+		<a href="$locale.get('website.url.ProductCategory')">
+			$locale.get("navigation.label.shopProducts") #if($categMenu.size()>0)<em class="fa"></em>#end
 		</a>
         <div class="dropdown-menu">
 		#set($count=0)
@@ -33,7 +33,7 @@
 		</div>
     </li>
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
-	<li class="dropdown"><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa"></i>#end</a>
+	<li class="dropdown"><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<em class="fa"></em>#end</a>
 		<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
 		#set($brandListSize = 0)
 		#set($brandIndex = 0)
@@ -65,7 +65,7 @@
 	</li>
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
-    <li class="dropdown"><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers") #if($manufacturerList.size() > 0)<i class="fa"></i>#end</a>
+    <li class="dropdown"><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers") #if($manufacturerList.size() > 0)<em class="fa"></em>#end</a>
 		<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
 		#set($manufacturerListSize = 0)
 		#set($mfgIndex = 0)
@@ -97,7 +97,7 @@
    #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
     #if($userLogin)
 		#if($LayoutName != "QuickOrderStdPage")
-		<li class="dropdown hideForDevices"><a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		<li class="dropdown hideForDevices"><a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a>
 			<div class="dropdown-menu" id="quickOrderPadDrop">
 				<div class="cartHead clearAfter">
 					<h5><a href="#speedEntry">Speed Entry</a></h5>
@@ -214,10 +214,10 @@
 			</div>
 		</li>
 		#else
-		<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a>
 		#end
 	#else
-	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a>
 	#end
 	#end
 	#foreach($topMenu in $topStaticMenu)
@@ -229,7 +229,7 @@
 					<a href="javascript:void(0);" onclick="loginPop(); return false;" data-staticLink="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end">$topMenu.level1Menu</a>
 				#end
 			#elseif($topMenu.level1Menu && $$topMenu.level1Menu =="Locations")
-				<a href="$topMenu.level1Menu">$topMenu.level1Menu  #if($!CommonDBQueryWareHouseList.size()>0)<i class="fa"></i>#end</a>
+				<a href="$topMenu.level1Menu">$topMenu.level1Menu  #if($!CommonDBQueryWareHouseList.size()>0)<em class="fa"></em>#end</a>
 				#if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
 				<ul class="dropdown-menu">
 					#foreach($wareHouseModel in $CommonDBQueryWareHouseList.entrySet())
@@ -238,7 +238,7 @@
 				</ul>
 				#end
 			#else
-				<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<i class="fa"></i>#end</a></a>
+				<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<em class="fa"></em>#end</a></a>
 			#end
 		
 			#if($topMenu.menuList && $topMenu.menuList.size()>0)
