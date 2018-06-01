@@ -1,6 +1,3 @@
-var typesHash = new Hashtable();
-var typesHash1 = new Hashtable();
-var priceRangeHash =  new Hashtable();
 var assets = "/ASSETS";mykeypass = "myPassword";
 var specialKeys = new Array();
 specialKeys.push(8); //Backspace
