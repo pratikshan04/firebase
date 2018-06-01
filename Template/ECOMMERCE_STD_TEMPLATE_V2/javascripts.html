@@ -1,12 +1,8 @@
 <script type="text/javascript" src="$webThemes/$siteName/js/bootstrap.min.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/bootbox.min.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/masonry.pkgd.min.js" defer></script>
-<script type="text/javascript" src="$webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript">
-/* ajax.js */
-eval(function(p, a, c, k, e, r) { e = function(c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function(e) { return r[e] } ]; e = function() { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p } ('d 7;f n(a,b,c){6(!7)7=j s;6(!7.n(a,b,c))g l;6(!7.k)7.o();g h}f s(){3.5=j t();3.8=9;3.k;3.m=h;3.n=f(a,b,c){u(d i=0;i<3.5.p;i++)6(3.5[i][0]==a&&3.5[i][1]==b&&3.5[i][2]==c)g l;6(3.8==9){3.k=l;3.m=h;3.8=0}v{++3.8}3.5[3.8]=j t();3.5[3.8][0]=a;3.5[3.8][1]=b;3.5[3.8][2]=c;6(3.k&&c)w(c);g h};3.o=f(){6(3.8==9||3.5.p==0)g;3.k=h;6(3.m){d r=q();d a;6(r){u(d i=0;i<3.5.p;i++){6(3.5[i][2])w(3.5[i][2])}}3.m=l}3.x(3.5[0][0],3.5[0][1])};3.x=f(a,b){d r=q();6(r){r.E("F",a,h);r.G=f(){6(r.H==4){6(b)b(r.I);7.5.J(0,1);7.8>0?--7.8:7.8=9;6(7.8==9){7.k=l;7.m=h;g}v{7.o()}}};r.K(9)}}}f q(){d A=9;y{A=j z("L.B")}C(e){y{A=j z("M.B")}C(N){A=9}}6(!A&&O D!="P"){A=j D()}g A}', 52, 52, '|||this||queue|if|g_q|position|null||||var||function|return|true||new|isProcessing|false|callPreFunctions|enqueue|process|length|getXMLHTTP||ajaxQueue|Array|for|else|eval|getAjaxQueueResult|try|ActiveXObject||XMLHTTP|catch|XMLHttpRequest|open|GET|onreadystatechange|readyState|responseText|splice|send|Msxml2|Microsoft|oc|typeof|undefined'.split('|'), 0, {}))
-/* ajax.js */
-</script>
+#parse("jquery-migrate-1-2-1-min.html")<!-- <script type="text/javascript" src="$webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script> -->
+#parse("ajaxscript.html")
 <script type="text/javascript" src="$webThemes/$siteName/js/Encoder.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/hashtable.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/respond.min.js" defer></script>
@@ -17,11 +13,7 @@ eval(function(p, a, c, k, e, r) { e = function(c) { return (c < a ? '' : e(parse
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery.slimscroll.min.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery.autocomplete.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/jsaes.js" defer></script>
-<script type="text/javascript">
-/* cookies.js */
-jQuery.cookie=function(name,value,options){if(typeof value!='undefined'){options=options||{};if(value===null){value='';options.expires=-1;}var expires='';if(options.expires&&(typeof options.expires=='number'||options.expires.toUTCString)){var date;if(typeof options.expires=='number'){date=new Date();date.setTime(date.getTime()+(options.expires*24*60*60*1000));}else{date=options.expires;}expires='; expires='+date.toUTCString();}var path=options.path?'; path='+(options.path):'';var domain=options.domain?'; domain='+(options.domain):'';var secure=options.secure?'; secure':'';document.cookie=[name,'=',encodeURIComponent(value),expires,path,domain,secure].join('');}else{var cookieValue=null;if(document.cookie&&document.cookie!=''){var cookies=document.cookie.split(';');for(var i=0;i<cookies.length;i++){var cookie=jQuery.trim(cookies[i]);if(cookie.substring(0,name.length+1)==(name+'=')){cookieValue=decodeURIComponent(cookie.substring(name.length+1));break;}}}return cookieValue;}};
-/* cookies.js */
-</script>
+#parse("cookiesscript.html")
 <script type="text/javascript" src="$webThemes/$siteName/js/addToCarts.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/PriceLoading.js" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/datatables.min.js" defer></script>
