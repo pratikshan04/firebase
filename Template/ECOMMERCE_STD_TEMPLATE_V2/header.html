@@ -53,9 +53,9 @@
 		<div class="cimm_searchWrapper">
 		    <form class="cimm_searchForm webViewSearch" id="search_Form">
 		    	<div class="input-group">
-		    		<input class="form-control" type="text" onkeypress="return runScript(event);" id="txtSearch" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  />
+		    		<input class="form-control" type="text" onkeypress="return runScript(event);" id="txtSearch" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}" title="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" />
 		    		<div class="input-group-btn">
-		    			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><em class="fa fa-search"></em></button>
+		    			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-search"></em></button>
 					<a class="cimm_cameraIcon" onclick="callToVisionapi();"><em class="fa fa-camera"></em></a>
 					</div>
 		    	</div>
@@ -75,7 +75,7 @@
 	    	<div class="input-group">
 				<input type="text" onkeypress="return runScript(event);" id="txtSearch" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" name="keyWord" value="#if($keyWord)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  class="form-control"/>
 				<div class="input-group-btn">
-					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();"><em class="fa fa-search"></em></button>
+					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-search"></em></button>
 				</div>
 			</div>
 		</form>

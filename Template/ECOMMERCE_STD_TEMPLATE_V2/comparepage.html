@@ -201,20 +201,20 @@
 		                                    <strong>N/A</strong>
 		                                #else
 		                                    #if($mainAvailability.homeBranchavailablity>0)
-		                                        <b class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</b>
-		                                        <b class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes" style="display:none;"></b>
+		                                        <strong class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</strong>
+		                                        <strong class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes" style="display:none;"></strong>
 		                                    #else
-		                                        <b style="color:red;">$locale.get("product.label.callforavailability")</b>
+		                                        <strong style="color:red;">$locale.get("product.label.callforavailability")</strong>
 		                                        <span class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes">
 		                                        #foreach($branch in $mainAvailability.branchAvail)
 		                                        	#if($branch.branchID == $session.getAttribute("shipBranchId"))
-		                                        	<b class="leadTime_$mainAvailability.partNumber">
+		                                        	<strong class="leadTime_$mainAvailability.partNumber">
 		                                        		#if($branch.earliestMoreDays > 0)
 		                                        			$!branch.earliestMoreDays Days
 		                                        		#elseif($branch.plentyDays > 0)
 		                                        			$branch.plentyDays Days
 		                                        		#end
-		                                        	</b>
+		                                        	</strong>
 		                                        	#end
 		                                        #end
 		                                        </span>
@@ -229,20 +229,20 @@
 		                                    <strong>N/A</strong>
 		                                #else
 		                                    #if($mainAvailability.homeBranchavailablity>0)
-		                                       <b class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</b>
-		                                        <b class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes" style="display:none;"></b>
+		                                       <strong class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</strong>
+		                                        <strong class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes" style="display:none;"></strong>
 		                                    #else
-		                                        <b style="color:red;">$locale.get("product.label.callforavailability")</b>
+		                                        <strong style="color:red;">$locale.get("product.label.callforavailability")</strong>
 		                                        <span class="orangeClr productLeadTime_$mainAvailability.partNumber" id="leadTimes">
 		                                        #foreach($branch in $mainAvailability.branchAvail)
 		                                        	#if($branch.branchID == $session.getAttribute("shipBranchId"))
-		                                        	<b class="leadTime_$mainAvailability.partNumber">
+		                                        	<strong class="leadTime_$mainAvailability.partNumber">
 		                                        		#if($branch.earliestMoreDays > 0)
 		                                        			$!branch.earliestMoreDays Days
 		                                        		#elseif($branch.plentyDays > 0)
 		                                        			$branch.plentyDays Days
 		                                        		#end
-		                                        	</b>
+		                                        	</strong>
 		                                        	#end
 		                                        #end
 		                                        </span>
