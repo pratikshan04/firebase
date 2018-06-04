@@ -54,7 +54,7 @@
 												<span>$!locale.get('product.heading.chooseProfilePicture')</span>
 												<input type="file" name="profileImage" id="profileImage"/>
 											</div>
-											<input type="submit" class="button pullLeft imgBtn" onclick="return validateImageUpload();" value="$locale.get('button.label.Upload')">
+											<input type="submit" class="button pull-left imgBtn" onclick="return validateImageUpload();" value="$locale.get('button.label.Upload')">
 											<input type="button" class="button imgBtn" value="Clear"  onclick="clearImage()"/>
 										</form>
 									</div>
@@ -102,7 +102,7 @@
 							<div class="cimm_moduleHeadEnclosure mTop-3">
 								<h3 class="cimm_blockHeading mBottom-3">$locale.get("product.heading.shipAddressList")
 									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><i class="fa fa-lg fa-refresh"></i></a>
-									<span class="pullRight" id="progressBar">
+									<span class="pull-right" id="progressBar">
 										#if($session.getAttribute("scynEntityStatus")!="Completed" && $session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 										$!session.getAttribute("scynEntityStatus")
 										#end

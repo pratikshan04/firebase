@@ -155,10 +155,10 @@
 					<div class="cimm_genericSearch">Keyword <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a> is too generic, resulting in numerous matches. Please <a href="searchPage.action?keyWord=$keyValue" target="_blank">click here</a> to refine the matches.</div>
 				#else
 				<div class="cimm_resultSelect clearAfter mBottom-3">
-					<div class="pullLeft">
+					<div class="pull-left">
 						$resultCount results for <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a>
 					</div>
-					<label class="customCheckBox pullRight" for="SALL_$keyValue$keyCountSelectAll">
+					<label class="customCheckBox pull-right" for="SALL_$keyValue$keyCountSelectAll">
 						<input type="checkbox" id="SALL_$keyValue$keyCountSelectAll" name="SALL_$keyValue$keyCountSelectAll" data-selectAll="CheckBox"/>
 						<span>$locale.get("product.label.selectAll")</span>
 					</label>

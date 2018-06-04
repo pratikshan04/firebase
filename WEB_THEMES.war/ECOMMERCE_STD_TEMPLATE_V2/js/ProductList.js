@@ -76,7 +76,7 @@ function buildSearchTrail(){
 					dispVal = "Category";
 				if(dispVal.toUpperCase()=="MANUFACTURERNAME")
 					dispVal = "Manufacturer";
-				buildString = buildString + c + '<span class="Refine-value">'+keyArr[j]+'<a class="removeFilter pullRight" href="javascript:void(0);" onclick="removeKeyword('+j+')" title="Remove This Item"> <i class="fa fa-times"></i></a></span>';
+				buildString = buildString + c + '<span class="Refine-value">'+keyArr[j]+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeKeyword('+j+')" title="Remove This Item"> <i class="fa fa-times"></i></a></span>';
 				c = " ";
 			}
 			buildString = buildString + '</li>';
@@ -98,7 +98,7 @@ function buildSearchTrail(){
 			buildString = buildString + '</span>';
 			var c = "";
 			for(j=0;j<valListArr.length;j++){
-				buildString = buildString + c + '<span class="Refine-value clearAfter">'+valListArr[j].substring(1, valListArr[j].length-1)+'<a class="removeFilter pullRight" href="javascript:void(0);" onclick="removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> <i class="fa fa-times"></i></a></span>';
+				buildString = buildString + c + '<span class="Refine-value clearAfter">'+valListArr[j].substring(1, valListArr[j].length-1)+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> <i class="fa fa-times"></i></a></span>';
 				c = " ";
 			}
 			buildString = buildString + '</li>';

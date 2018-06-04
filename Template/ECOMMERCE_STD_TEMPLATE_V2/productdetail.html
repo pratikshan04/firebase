@@ -154,16 +154,16 @@
 					<div class="detailreview clearAfter hideForPrint">
 						 <div class="detailreviewform clearAfter">
 						 	<input type="hidden" id="overAllRate" value="$!overAllRate"/>
-							<div id="ProdRating" class="ratingIconWrap hideForPrint pullLeft"></div>
+							<div id="ProdRating" class="ratingIconWrap hideForPrint pull-left"></div>
 							#if($userLogin)
-								<div class="writereview hideForPrint pullLeft">
+								<div class="writereview hideForPrint pull-left">
 									#if($reviewList && $!reviewList.size()>0) $!reviewListCount.size() Buyer(s) review(s) #end | <a data-toggle="modal" data-target="#ratingModal">$!locale.get("product.label.writReview")</a>
 								</div>
 							#end
 						</div>
 					</div>
 					#end
-					<div class="prodSharePrintBtnWrap pullRight hideForPrint">
+					<div class="prodSharePrintBtnWrap pull-right hideForPrint">
 						<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemData.itemPriceId);"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> 
 						<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
 						<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><i class="fa fa-lg fa-share"></i></a>
@@ -510,7 +510,7 @@
 				<div class="cimm_ProductFilterWrap clearAfter hideForPrint">
 					<div class="cimm_ProductFilterWrap clearAfter">
 						<div class="compareWrap"><b>$!productCount</b> Product Choices
-							<div class="compare_head pullRight hideForDevice">
+							<div class="compare_head pull-right hideForDevice">
 								<b><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$!locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</b>
 								<!--<b>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></b>-->
 							</div>
@@ -1184,9 +1184,9 @@ function LoadRecentViewedItem(){
 	<li class="clearAfter pBottom-3 mBottom-3">
 		<ul class="userReviewWrap">
 			<li class="clearAfter">
-				<span class="voteitReview_$!breadCrumbIdx pullLeft"></span>
-				<span class="pullLeft">by $!itemReview.userAdded</span>
-				<span class="pullRight"><abbr class="timeago" title="$!itemReview.date T$!itemReview.reviewTime"></abbr></span>
+				<span class="voteitReview_$!breadCrumbIdx pull-left"></span>
+				<span class="pull-left">by $!itemReview.userAdded</span>
+				<span class="pull-right"><abbr class="timeago" title="$!itemReview.date T$!itemReview.reviewTime"></abbr></span>
 			</li>
 			<li>
 				<h5>$!itemReview.title</h5>

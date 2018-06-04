@@ -51,8 +51,8 @@
 	#end
 	#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
 		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
-		<div class="filterTitle clearAfter">$!locale.get("leftmenu.label.filters")<!-- <span class="pullRight fa"></span> -->
-			<a href="$!navURL" class="cleatBtn pullRight">$!locale.get("product.label.clearAll")&nbsp;<i class="fa fa-times"></i></a>
+		<div class="filterTitle clearAfter">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
+			<a href="$!navURL" class="cleatBtn pull-right">$!locale.get("product.label.clearAll")&nbsp;<i class="fa fa-times"></i></a>
 		</div>
 		<!--Refined By  : Filter Attributes-->
 		<div class="filterColumn">
@@ -71,7 +71,7 @@
 								$!attributeFiltered.attrName.replaceAll("attr_","")
 							#end
 							</span>
-							<span class="Refine-value">$!attributeFiltered.attrValue.replaceAll('\"','')</span><a class="removeFilter pullRight" href="$!navURL#if($rUrl.length()>0)&attrFilterList=$!rUrl#end" title="$!locale.get('productGrid.label.removeThisItem')"> <i class="fa fa-times-circle"></i></a>
+							<span class="Refine-value">$!attributeFiltered.attrValue.replaceAll('\"','')</span><a class="removeFilter pull-right" href="$!navURL#if($rUrl.length()>0)&attrFilterList=$!rUrl#end" title="$!locale.get('productGrid.label.removeThisItem')"> <i class="fa fa-times-circle"></i></a>
 						</li>
 						#end
 					</ol>
