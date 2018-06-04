@@ -624,7 +624,7 @@ function performAdvSearch() {
 	
 	//s = replaceNonAscii(s);
 	s = $.trim(s);
-	s = s.replace('\u00AE', '&reg;').replace('\u2122', '&trade;');
+	s = s.replace(/\u00AE/g, '&reg;').replace(/\u2122/g, '&trade;');
 	s = escape(s);
 	s = s.replace(/#/g, "%23");
 	s = s.replace(/&/g, "%26");
@@ -816,7 +816,7 @@ $(document).ready(function(){
 	}
 });
 function loadShippingInfo(){
-	$.get("getAddresses.action?frPage=popLogin",function(data,status){
+	$.get("getAddresses.action?frPage=popLogin&showpopUp=Y",function(data,status){
 		$('#generalModel .modal-body').html(data);
 		if($('#example tbody tr').length == 1 || $('#example tbody tr').length == 0){
 			var flag = getCookie("isShipToSelected");
