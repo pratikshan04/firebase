@@ -14,7 +14,7 @@
 <div class="cartTotal_Top">
 	<span class="btn btn-lg">
 		<b class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</b>
-		<b>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</b>
+		<strong>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</strong>
 	</span>
 	#if($userLogin) 
 	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -92,7 +92,7 @@
                     </td>
                     <td class="alignLeft" data-th="$!locale.get('product.label.description')">
                         <div class="cimm_cartProdDescription">
-                        	<p itemprop="name"><b><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></b></p>
+                        	<p itemprop="name"><strong><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
                             <ul>
                                 <li>
                                     #if($itemData.shortDesc.length()>75)
@@ -106,12 +106,12 @@
                                 </li>
                                 #if($itemData.manufacturerPartNumber)
                                	<li itemprop="mpn">
-                               		<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+                               		<strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span>
                                		<input type="hidden" id="mpn_$!itemData.partNumber" value="$!itemData.manufacturerPartNumber"/>
                                		<input type="hidden" id="mpnDisplay_$!itemData.partNumber" value="Y"/>
                                	</li>
                                 #end
-                                <li itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span>$!itemData.partNumber</span></li>
+                                <li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></li>
                                 #set($leadTime = "N")
                                 #set($available = "N")
                                 #set($allBranch = $!itemData.branchAvail)
@@ -132,15 +132,15 @@
                                 #if($leadTime!="N" || $!available!="N")
                                 <li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
                                 	#if($leadTime!="N")
-                                	<b>$!locale.get("product.label.leadTime"): </b><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
+                                	<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
                                 	#elseif($!available!="N")
-                                    <b>$!locale.get("product.label.availableQuantity"): </b><span>$!available</span>
+                                    <strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
                                     #end
                                 </li>
                                 #end
                                 #if($itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 			                    <li>
-			                        <b>$!locale.get("product.label.cpn"): </b>
+			                        <strong>$!locale.get("product.label.cpn"): </strong>
 			                        #set($seperator = "")
 			                        #set($partList = "")
 			                            #foreach($customerPart in $itemData.customerPartNumberList)
@@ -290,16 +290,16 @@
 		</td>
 		<td style="border:1px solid #CCC;text-align: left;padding: 5px;" data-th="$!locale.get('product.label.description')">
 			<div class="cimm_cartProdDescription">
-			<b><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></b>
+			<strong><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
 			<p itemprop="description"> $!itemData.shortDesc </p>
 			#if($itemData.manufacturerPartNumber)
 			<p>
-			<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+			<strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span>
 			<input type="hidden" id="mpn_$!itemData.partNumber" value="$!itemData.manufacturerPartNumber"/>
 			<input type="hidden" id="mpnDisplay_$!itemData.partNumber" value="Y"/>
 			</p>
 			#end
-			<p><b>$!locale.get("product.label.partNumber"): </b><span>$!itemData.partNumber</span></p>
+			<p><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></p>
 			#set($leadTime = "N")
 			#set($available = "N")
 			#set($allBranch = $!itemData.branchAvail)
@@ -320,15 +320,15 @@
 			#if($leadTime!="N" || $!available!="N")
 			<p class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
 			#if($leadTime!="N")
-			<b>$!locale.get("product.label.leadTime"): </b><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
+			<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
 			#elseif($!available!="N")
-			<b>$!locale.get("product.label.availableQuantity"): </b><span>$!available</span>
+			<strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
 			#end
 			</p>
 			#end
 			#if($itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 			<p>
-			<b>$!locale.get("product.label.cpn"): </b>
+			<strong>$!locale.get("product.label.cpn"): </strong>
 			#set($seperator = "")
 			#set($partList = "")
 			#foreach($customerPart in $itemData.customerPartNumberList)

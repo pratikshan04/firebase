@@ -26,9 +26,9 @@
                   #foreach($customerArInvoiceObj in $customerArInvoiceList)
                   	   #set($orderNumAndSuffix = "")
                       <tr class="odd">
-                      	<td data-th="$locale.get("product.label.invoicNumber")" class="center"><b>$!customerArInvoiceObj.invoiceNumber</b></td> 
-                        <!-- <td class="center"><b>$!customerArInvoiceObj.invoiceNumber</b></td> -->
-                        <td data-th="$locale.get("product.label.orderNumber")" class="center"><b>$!customerArInvoiceObj.orderNum</b></td>
+                      	<td data-th="$locale.get("product.label.invoicNumber")" class="center"><strong>$!customerArInvoiceObj.invoiceNumber</strong></td> 
+                        <!-- <td class="center"><strong>$!customerArInvoiceObj.invoiceNumber</strong></td> -->
+                        <td data-th="$locale.get("product.label.orderNumber")" class="center"><strong>$!customerArInvoiceObj.orderNum</strong></td>
                         <!-- <td class="center">$!customerArInvoiceObj.orderDate</td> -->
                         <td data-th="$locale.get("form.label.invoicedate")" class="center">$!customerArInvoiceObj.invoiceDate</td> 
                         

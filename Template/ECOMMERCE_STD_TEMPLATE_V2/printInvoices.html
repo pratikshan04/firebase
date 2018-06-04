@@ -95,12 +95,12 @@
 <div class="cimm_salesBottomStrip orderConfBottomStrip">
 			  <ul>
                  <li>
-                     <span class="priceLabel"><b>$locale.get("product.label.subTotal") </b></span>
+                     <span class="priceLabel"><strong>$locale.get("product.label.subTotal") </strong></span>
                      <span class="priceValue">$$numberTool.format($numberToolFormat,$orderDetail.subtotal) </span>
                  </li>
                  #if($orderDetail.tax>0)
                   <li>
-                     <span class="priceLabel"><b>$locale.get("product.label.tax") </b></span>
+                     <span class="priceLabel"><strong>$locale.get("product.label.tax") </strong></span>
                      <span class="priceValue"> $$numberTool.format($numberToolFormat,$orderDetail.tax) </span>
                  </li>
                  #end
@@ -121,13 +121,13 @@
                   
                  #if($orderDetail.discount>0)
                   <li>
-                     <span class="priceLabel"><b>$locale.get("product.label.discount")</b></span>
+                     <span class="priceLabel"><strong>$locale.get("product.label.discount")</strong></span>
                      <span class="priceValue"> $$numberTool.format($numberToolFormat,$orderDetail.discount)</span>
                  </li>
                   #end
                 
                   <li>
-                     <span class="priceLabel"><b>$locale.get("product.label.orderTotal") </b></span>
+                     <span class="priceLabel"><strong>$locale.get("product.label.orderTotal") </strong></span>
                      <span class="priceValue orangeClr">$$numberTool.format($numberToolFormat,$orderDetail.total) </span>
                  </li>
             </ul>

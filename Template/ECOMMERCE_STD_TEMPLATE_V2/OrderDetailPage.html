@@ -17,25 +17,25 @@
 		<p>
             #if($orderDetail.orderNum)
             	#if($orderDetail.orderStatus.contains("Bid"))
-            		<b>$!locale.get("product.label.eclipsebidNumber"): </b> $!orderDetail.orderNum<br />
+            		<strong>$!locale.get("product.label.eclipsebidNumber"): </strong> $!orderDetail.orderNum<br />
             	#else
-            		<b>$!locale.get("product.label.eclipseOrderNumber"): </b> $!orderDetail.orderNum<br />
+            		<strong>$!locale.get("product.label.eclipseOrderNumber"): </strong> $!orderDetail.orderNum<br />
             	#end
             #end
             #if($orderDetail.orderDate)
-            <b>$!locale.get("form.label.orderDate"): </b> $!orderDetail.orderDate<br />
+            <strong>$!locale.get("form.label.orderDate"): </strong> $!orderDetail.orderDate<br />
             #end
             #if($orderDetail.orderedBy )
-            <b>$!locale.get("form.label.orderedBy"): </b> $!orderDetail.orderedBy<br />
+            <strong>$!locale.get("form.label.orderedBy"): </strong> $!orderDetail.orderedBy<br />
             #end 
             #if($orderDetail.poNumber)
-            <b>$!locale.get("product.label.poNumber"): </b> $!orderDetail.poNumber<br />
+            <strong>$!locale.get("product.label.poNumber"): </strong> $!orderDetail.poNumber<br />
             #end
             #if($orderDetail.shipViaID)
-            <b>$!locale.get("form.label.shipVia"): </b> $!orderDetail.shipViaID<br />
+            <strong>$!locale.get("form.label.shipVia"): </strong> $!orderDetail.shipViaID<br />
             #end  
             #if($orderDetail.shipDate)
-            <b>$!locale.get("product.label.shipDate"): </b> $!orderDetail.shipDate
+            <strong>$!locale.get("product.label.shipDate"): </strong> $!orderDetail.shipDate
             #end   
         </p>
 	</div>
@@ -130,11 +130,11 @@
                         <div>
                             <ul>
                             <li>
-                            <b>$!locale.get("product.label.partNumber"): </b> $!orderItem.partNumber</li>
+                            <strong>$!locale.get("product.label.partNumber"): </strong> $!orderItem.partNumber</li>
                             <li><a href="/searchPage.action?keyWord=$!orderItem.partNumber">$!orderItem.description</a></li>
                             #set($eachLineItemComment = "")
                             #if($orderItem.lineItemCommentsList.size() > 0)
-	                            <li><b>Line Item Comment: </b>
+	                            <li><strong>Line Item Comment: </strong>
 									#foreach($!lineItemComment in $!orderItem.lineItemCommentsList)
 										$!lineItemComment <br>
 										 #set($eachLineItemComment = $!eachLineItemComment + $!lineItemComment)
@@ -143,7 +143,7 @@
 								</li>
 							#end
 							#if($orderItem.customerPartNumberList.size() > 0)
-	                            <li><b>Customer Part Number: </b>
+	                            <li><strong>Customer Part Number: </strong>
 									#foreach($!customerPartNumberList in $!orderItem.customerPartNumberList)
 										$!customerPartNumberList.partNumber <br>
 									#end

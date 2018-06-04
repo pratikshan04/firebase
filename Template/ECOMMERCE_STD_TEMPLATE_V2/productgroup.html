@@ -22,7 +22,7 @@
 		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
 			<button class="btn btn-primary" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('group.button.groupName')</button>
 			<button class="btn btn-primary" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('product.listOrgroup.name')</button>
-			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint btn btn-primary" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><i class="fa fa-lg fa-print"></i> <b>$locale.get("product.button.print")</b> </a> -->
+			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint btn btn-primary" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><i class="fa fa-lg fa-print"></i> <strong>$locale.get("product.button.print")</strong> </a> -->
 		</div>
 	</div>
 	<div class="row mBottom-3">
@@ -154,16 +154,16 @@
 								</li>
 								<li>
 									#if($itemData.manufacturerPartNumber)
-									<p itemprop="mpn"><b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span></p>
+									<p itemprop="mpn"><strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span></p>
 									#end
-									<p itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span>$!itemData.partNumber</span></p>
+									<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></p>
 									#if($itemData.upc)
-									<p itemprop="sku"><b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span></p>
+									<p itemprop="sku"><strong>$!locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></p>
 									#end
 								</li>
 								#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
 									<li itemprop="sku" class="hideToHover">
-										<b>$!locale.get("product.label.cpn"): </b>
+										<strong>$!locale.get("product.label.cpn"): </strong>
 										<span>
 										#if($itemData.customerPartNumber)$!itemData.customerPartNumber, #end
 										#if($itemData.customerPartNumberList.size()>0)
@@ -183,19 +183,19 @@
 									</li>
 								#end
 								#if($itemData.availQty>0)
-					    			<b>$!locale.get("product.label.available"): </b>
+					    			<strong>$!locale.get("product.label.available"): </strong>
 									<span>$!itemData.availQty</span>
 					    		#else
 					    			<span class='text-danger'>Call for Availability</span>
 					    		#end
 								<!-- ##if($itemData.itemAvailability && $!itemData.itemAvailability>0)
 								<li>
-									<b>$!locale.get("product.label.available"): </b>
+									<strong>$!locale.get("product.label.available"): </strong>
 									<span>$!itemData.itemAvailability</span>
 								</li>
 								  	##end -->
 								#if($itemData.availQty>0)
-					    		<b>$!locale.get("product.label.available"): </b>
+					    		<strong>$!locale.get("product.label.available"): </strong>
 								<span>$!itemData.availQty</span>
 					    		#else
 					    		<span class='text-danger'>Call for Availability</span>
@@ -219,11 +219,11 @@
 								#end
 								#if($leadTime!="N")
 								<li class="productLeadTime_$itemData.partNumber" id="leadTimes" >
-									<b>$!locale.get("product.label.leadTime"): </b><span class="orangeClr leadTime_$itemData.partNumber">$!leadTime Days</span>
+									<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$itemData.partNumber">$!leadTime Days</span>
 								</li>
 								#elseif($available!="N")
 								<li class="productAvail_$itemData.partNumber" id="leadTimes" >
-									<b>$!locale.get("product.label.availableQuantity"): </b><span class="Avail_$itemData.partNumber">$!available</span>
+									<strong>$!locale.get("product.label.availableQuantity"): </strong><span class="Avail_$itemData.partNumber">$!available</span>
 								</li>
 								#end
 							</ul>

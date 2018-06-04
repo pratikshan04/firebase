@@ -48,13 +48,13 @@
 						</li>
 						<li>
 							#if($itemData.manufacturerPartNumber)
-							<p><b>$locale.get("product.label.mpn"): </b>$itemData.manufacturerPartNumber</p>
+							<p><strong>$locale.get("product.label.mpn"): </strong>$itemData.manufacturerPartNumber</p>
 							#end
-							<p><b>$locale.get("product.label.partNumber"): </b>$itemData.partNumber</p>
+							<p><strong>$locale.get("product.label.partNumber"): </strong>$itemData.partNumber</p>
 						</li>
 						#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 	                    <li>
-                        <b>$locale.get("product.label.cpn"): </b>
+                        <strong>$locale.get("product.label.cpn"): </strong>
                         #set($seperator = "")
                         #set($partList = "")
                             #foreach($customerPart in $itemData.customerPartNumberList)
@@ -84,9 +84,9 @@
 						#end
 						<li class="productLeadTime_$itemData.partNumber" id="leadTimes" >
 						#if($leadTime!="N")
-							<b>$locale.get("product.label.leadTime"): </b><span class="orangeClr leadTime_$itemData.partNumber">$leadTime Days</span>
+							<strong>$locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$itemData.partNumber">$leadTime Days</span>
 						#elseif($available!="N")
-							<b>$locale.get("product.label.availableQuantity"): </b><span>$available</span>
+							<strong>$locale.get("product.label.availableQuantity"): </strong><span>$available</span>
 						#end
 						</li>
 					</ul>

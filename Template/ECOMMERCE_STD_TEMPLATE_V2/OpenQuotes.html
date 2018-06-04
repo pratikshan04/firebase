@@ -14,7 +14,7 @@
             #if($openOrderList.size()>0)
     			#foreach($orderList in $openOrderList)
 				<tr class="odd">
-					<td valign="top" data-th="$locale.get('product.heading.ErpQuoteId')"><b><a href="/OrderDetailSale.action?orderId=$!orderList.orderID&requestType=openQuote">$!orderList.orderID</a></b></td>
+					<td valign="top" data-th="$locale.get('product.heading.ErpQuoteId')"><strong><a href="/OrderDetailSale.action?orderId=$!orderList.orderID&requestType=openQuote">$!orderList.orderID</a></strong></td>
 					<td valign="top" data-th="$locale.get('product.heading.Status')">$!orderList.orderStatus</td>
 					<td valign="top" data-th="$locale.get('product.heading.QuoteComments')">#if($!orderList.orderNotes)$!orderList.orderNotes #else &nbsp; #end</td>
 				</tr>

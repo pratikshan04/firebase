@@ -218,7 +218,7 @@
 										#set($attrValueForSearch = $attrListVal)
 										##if($attrList.attrFilterList.get($!attrListVal).size()>1)
 										<li class="selectOptions dropdown">
-										<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
+										<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><strong>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </strong></div>
 										<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
 											<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
 												#set($k = 0)
@@ -261,31 +261,31 @@
 						<ul id="productDetailList" class='skuStyle'>
 							#if($itemData.manufacturerName != "" && $!itemData.manufacturerName)
 							<li id="itemUom" itemprop="sku">
-								<b>$!locale.get("product.label.manufacturers"): </b><span>$!itemData.manufacturerName</span>
+								<strong>$!locale.get("product.label.manufacturers"): </strong><span>$!itemData.manufacturerName</span>
 							</li>
 							#end
 							#if($itemData.brandName != "" && $!itemData.brandName)
 							<li id="itemUom" itemprop="sku">
-								<b>$!locale.get("product.label.brandName"): </b><span>$!itemData.brandName</span>
+								<strong>$!locale.get("product.label.brandName"): </strong><span>$!itemData.brandName</span>
 							</li>
 							#end
 							<li id="sitePartNo" itemprop="sku">
-								<b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!itemData.ItemId">$!itemData.partNumber</span>
+								<strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!itemData.ItemId">$!itemData.partNumber</span>
 							</li>
 							#if($itemData.manufacturerPartNumber && $!itemData.manufacturerPartNumber != "")
 							<li id="mPartNo" itemprop="mpn">
-								<b>$!locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+								<strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span>
 								<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$!itemData.partNumber" />
 							</li>
 							#end
 							#if($itemData.upc != "" && $!itemData.upc)
 							<li id="upcNo" itemprop="sku">
-								<b>$!locale.get("product.label.upc"): </b><span>$!itemData.upc</span>
+								<strong>$!locale.get("product.label.upc"): </strong><span>$!itemData.upc</span>
 							</li>
 							#end
 							#if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
 							<li id="custMainBlock">        
-								<b>$!locale.get("product.label.cpn"):</b>
+								<strong>$!locale.get("product.label.cpn"):</strong>
 								<span id="custPartBlock">
 								#if($itemData.customerPartNumber)$!itemData.customerPartNumber#end
 								#set($seperator = "")
@@ -299,21 +299,21 @@
 							</li> 
 							#else
 							<li id="custMainBlock" style="display: none;">
-								<b>$!locale.get("product.label.cpn"): </b><span id="custPartBlock"></span>
+								<strong>$!locale.get("product.label.cpn"): </strong><span id="custPartBlock"></span>
 							</li>
 							#end
 							#if($itemData.uom != "" && $!itemData.uom)
 							<li id="itemUom" itemprop="sku">
-								<b>$!locale.get("product.label.uom"): </b><span>$!itemData.uom</span>
+								<strong>$!locale.get("product.label.uom"): </strong><span>$!itemData.uom</span>
 							</li>
 							#end
 							#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
 							<li id="minOrdQty">
-							<b>$!locale.get("product.label.minorderqty"): </b>
+							<strong>$!locale.get("product.label.minorderqty"): </strong>
 							<span>$!itemData.minOrderQty</span> 
 							</li>
 							<li id="qtyInt">
-							<b>$!locale.get("product.label.qtyinterval"): </b>
+							<strong>$!locale.get("product.label.qtyinterval"): </strong>
 							<span>$!itemData.orderInterval</span>
 							<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
 							<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
@@ -324,18 +324,18 @@
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
 								#if($itemData.itemAvailability && $!itemData.itemAvailability>0)
 								<li id="itemAvailable">
-									<b>$!locale.get("product.label.available"): </b>
+									<strong>$!locale.get("product.label.available"): </strong>
 									<span>$!itemData.itemAvailability</span>
 								</li>
 								#else
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
-									<b>$!locale.get("product.label.availability"): </b>
-									<b><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
-									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></b>
+									<strong>$!locale.get("product.label.availability"): </strong>
+									<strong><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
+									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
 								</li>
 								#end
 								<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
-									<b>$!locale.get("product.label.leadTime"): </b>
+									<strong>$!locale.get("product.label.leadTime"): </strong>
 									<span class="leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 								</li> -->
 								#if($userLogin)
@@ -343,7 +343,7 @@
 								#end
 							#else
 								#if($itemData.availQty>0)
-						    		<b>$!locale.get("product.label.available"): </b>
+						    		<strong>$!locale.get("product.label.available"): </strong>
 									<span>$!itemData.availQty</span>
 						    	#else
 						    		<span class='text-danger'>Call for Availability</span>
@@ -353,13 +353,13 @@
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<ul class='text-right'>
-							#if($itemData.packDesc)<li itemprop="sku" class='packDesc'><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$!itemData.packDesc</span></li>#end
+							#if($itemData.packDesc)<li itemprop="sku" class='packDesc'><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 							#if($userLogin)
 								#set($shipID = $!session.getAttribute("shipBranchId"))
 								#if($shipID && $!shipID!="")
 								<li id="shipBranchNames">
 									#set($shipBranchDetail = $!allWarehouseDetail.get("$!shipID"))
-									<b>$!locale.get("product.label.shipBranchName"): </b>$!shipBranchDetail.branchCity</span></b>
+									<strong>$!locale.get("product.label.shipBranchName"): </strong>$!shipBranchDetail.branchCity</span></strong>
 								</li>
 								#end
 							#end
@@ -381,16 +381,16 @@
 								</div>
 							    #else
 						    	<!-- <div id="listPrices" class="price">
-									<b>$!locale.get('product.label.listPrice'): </b>
+									<strong>$!locale.get('product.label.listPrice'): </strong>
 									<span id="listPriceSpan_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
 										<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 									</span>
 								</div> -->
 						    	<div id="yourPrices" class="price">
 									#if($userLogin)
-										<b>$!locale.get('product.label.yourprice'): </b>
+										<strong>$!locale.get('product.label.yourprice'): </strong>
 									#else
-										<b>$!locale.get('product.label.price'): </b>
+										<strong>$!locale.get('product.label.price'): </strong>
 									#end
 									#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
 										<span id="span_$!itemData.partNumber" class="priceSpan">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
@@ -403,7 +403,7 @@
 							 #end
 							</li>
 							<!-- <li class="quantityWrap hideForPrint clearAfter">
-								<b>$!locale.get("product.label.quantity")</b>
+								<strong>$!locale.get("product.label.quantity")</strong>
 								<span>
 									<a onclick="qtyUpdate('#itemTxtQty$!itemData.itemId','decr');"><i class="fa fa-minus"></i></a>
 									<input type="text" id="itemTxtQty$!itemData.itemId" data-originalQty="originalQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" onblur="if($(this).val().trim()=='')$(this).val($itemData.minOrderQty);"/> <span id="uomPk_$!itemData.partNumber"></span>
@@ -411,7 +411,7 @@
 								</span>
 							</li> -->
 							<li class='cimm_qtyWrap hideForPrint'>
-								<b>$!locale.get("form.label.tableQty")</b>
+								<strong>$!locale.get("form.label.tableQty")</strong>
 								<span>
 									<input type="text" id="itemTxtQty$!itemData.itemId" data-originalQty="originalQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" onblur="if($(this).val().trim()=='')$(this).val($itemData.minOrderQty);"/> <span id="uomPk_$!itemData.partNumber"></span>
 								</span>
@@ -502,10 +502,10 @@
 				<div class="cimm_ProductFilterWrap clearAfter hideForPrint">
 					<div class="cimm_ProductFilterWrap clearAfter">
 						<div class="compareWrap clearAfter">
-							<b>$!productCount</b> Product Choices
+							<strong>$!productCount</strong> Product Choices
 							<div class="compare_head pull-right hideForDevice mTop-2">
-								<b><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$!locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</b>
-								<!-- <b>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></b> -->
+								<strong><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$!locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</strong>
+								<!-- <strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></strong> -->
 							</div>
 						</div>
 						<div class="right_attribute">
@@ -568,7 +568,7 @@
 											 #set($attr = $!attributes.attrValue.replace('',""))
 											 		#set($attr = $!attr.split("`"))
 											 #if($attr.get(0))
-											 	<p style="display: block;"><b>$!attributes.attrName.replace(' ',"")</b>: $!attr.get(0)</p>
+											 	<p style="display: block;"><strong>$!attributes.attrName.replace(' ',"")</strong>: $!attr.get(0)</p>
 											 #end
 										#end
 									 #end
@@ -709,7 +709,7 @@
 					<table>
 						#foreach($attribute in $!itemAttributesList)
 						<tr>
-							<td><b>$!attribute.attrName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+							<td><strong>$!attribute.attrName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
 							<td><span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 							<td><span>$!attribute.attrValue</span></td>
 						</tr>
@@ -728,52 +728,52 @@
 					#foreach($itemDocument in $!itemDocumentsList)
 						#if($itemDocument.docName.contains('.pdf'))
 						<li>
-							<a onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><b>$!itemDocument.docDesc</b></a>
+							<a onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.doc'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/word.png" alt="word"/><b>$!itemDocument.docDesc</b></a>
+							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.docx'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/word.png" alt="word"/><b>$!itemDocument.docDesc</b></a>
+							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xlsx'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/excel.png" alt="excel"/><b>$!itemDocument.docDesc</b></a>
+							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.pptx'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><b>$!itemDocument.docDesc</b></a>
+							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.ppt'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><b>$!itemDocument.docDesc</b></a>
+							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xls'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/excel.png" alt="excel"/><b>$!itemDocument.docDesc</b></a>
+							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.cad'))
 						<li>
-							<a class="title"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><b>$!itemDocument.docDesc</b></a>
+							<a class="title"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('youtube') || $!itemDocument.docName.contains('.mp4') || $!itemDocument.docName.contains('.avi'))
 						<li>
-							<a href='$!itemDocument.docName' target="_blank"><img src="$!hostName$!webThemes/$!siteName/images/video.png" alt="video"/><b>$!itemDocument.docDesc</b></a>
+							<a href='$!itemDocument.docName' target="_blank"><img src="$!hostName$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 						</li>
 						#else
 							<li>
-								<a href='$!itemDocument.docName' target="_blank"><img src="$!hostName$!webThemes/$!siteName/images/link.png" alt="link"/><b>$!itemDocument.docDesc</b></a>
+								<a href='$!itemDocument.docName' target="_blank"><img src="$!hostName$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
 								<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 							</li>
 						#end
@@ -841,19 +841,19 @@
 			        		<p itemprop="description"> $!customerbought.shortDesc</p>
 			   			#end
 			   	</li>
-				<li itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b><span id="partNumber$!customerbought.itemId">$!customerbought.partNumber</span></li>
+				<li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!customerbought.itemId">$!customerbought.partNumber</span></li>
 			    #if($customerbought.manufacturerPartNumber)
-				<li itemprop="mpn"><b>$!locale.get("product.label.mpn"):</b> <span>$!customerbought.manufacturerPartNumber</span></li>
+				<li itemprop="mpn"><strong>$!locale.get("product.label.mpn"):</strong> <span>$!customerbought.manufacturerPartNumber</span></li>
 				#end
 			    #if($!customerbought.upc)
-			    <li itemprop="sku"><b>$!locale.get("product.label.upc"): </b><span> $!customerbought.upc</span></li>
+			    <li itemprop="sku"><strong>$!locale.get("product.label.upc"): </strong><span> $!customerbought.upc</span></li>
 			    #end
 			   <!-- 	#if($customerbought.minOrderQty>0 && $!customerbought.orderInterval>0)
-				<li><b>$!locale.get("product.label.minorderqty"):</b><span> $!customerbought.minOrderQty</spaN></li>
-				<li><b>$!locale.get("product.label.qtyinterval"):</b><span> $!customerbought.orderInterval</span></li>
+				<li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!customerbought.minOrderQty</spaN></li>
+				<li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!customerbought.orderInterval</span></li>
 				#end -->
 			    <!-- <li class="hideForPrint">
-					<b>$!locale.get("product.label.qty"): </b>
+					<strong>$!locale.get("product.label.qty"): </strong>
 					<span>
 						<input type="text" id="itemTxtQty$!customerbought.itemId" value='#if($customerbought.minOrderQty==0)1#else$!customerbought.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/> <span id="uomPk_$!customerbought.partNumber"></span>
 						<input type="hidden" id="itemTxtAvail$!customerbought.itemId" value="$!customerbought.itemAvailability"/>
@@ -931,27 +931,27 @@
 								 		</h4>
 								 	</li>
 								   <li itemprop="sku">
-								      <b>$!locale.get("product.label.partNumber"): </b>
+								      <strong>$!locale.get("product.label.partNumber"): </strong>
 								      <span id="partNumber$!linkItem.itemId">$!linkItem.partNumber</span>
 								   </li>
 								   
 									#if($linkItem.manufacturerPartNumber)
-									<li itemprop="mpn"><b>$!locale.get("product.label.mpn"):</b> <span>$!linkItem.manufacturerPartNumber</span></li>
+									<li itemprop="mpn"><strong>$!locale.get("product.label.mpn"):</strong> <span>$!linkItem.manufacturerPartNumber</span></li>
 									#end
 									
 								<!-- 	<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
-										 <b>$!locale.get("product.label.leadTime"): </b>
+										 <strong>$!locale.get("product.label.leadTime"): </strong>
 										 <span class="leadTime_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
-										 <b>$!locale.get("product.label.available") : </b>
+										 <strong>$!locale.get("product.label.available") : </strong>
 										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									#if($linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
-								    <li><b>$!locale.get("product.label.minorderqty"):</b><span> $!linkItem.minOrderQty</spaN></li>
-								    <li><b>$!locale.get("product.label.qtyinterval"):</b><span> $!linkItem.orderInterval</span></li>
+								    <li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!linkItem.minOrderQty</spaN></li>
+								    <li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!linkItem.orderInterval</span></li>
 								  	#end -->
 								  	
 								  	#set($customValue = $!linkItem.manufacturerId+"_SHOW_LIST_PRICE")
@@ -966,7 +966,7 @@
 									##if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->##end
 									#if($userLogin)
 								 	<li class="price">  
-										<b>$!locale.get('product.label.price'): </b>
+										<strong>$!locale.get('product.label.price'): </strong>
 										#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($!linkItem.price>0)
 											<span id="span_$!linkItem.partNumber" data-select='priceData'>
@@ -983,7 +983,7 @@
 									</li>
 									#end
 									<li class="cimm_itemDespQty">
-										<b>$!locale.get("product.label.qty"): </b>  
+										<strong>$!locale.get("product.label.qty"): </strong>  
 										<span><input type="text" name="itemTxtQty$!linkItem.itemId"  maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
 									</li>
 									<li data-select='addtoCartbtn_$!linkItem.partNumber'>

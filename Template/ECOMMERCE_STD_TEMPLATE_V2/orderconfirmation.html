@@ -28,54 +28,54 @@
 				<ul class="cimm_orderInfo">
 				#if($orderDetail.orderStatusDesc)
 				<li>
-					<b>$!locale.get("product.heading.Status"): </b><span>$!orderDetail.orderStatusDesc</span>
+					<strong>$!locale.get("product.heading.Status"): </strong><span>$!orderDetail.orderStatusDesc</span>
 				</li>
 				#end
 				#if($orderDetail.invoiceNumber)
 				<li>
-					<b> $!locale.get("product.label.invoicNumber"): </b><span>$!orderDetail.invoiceNumber</span>
+					<strong> $!locale.get("product.label.invoicNumber"): </strong><span>$!orderDetail.invoiceNumber</span>
 				</li>
 				#end
 				#if($orderDetail.erpOrderNumber)
 				<li>
 					#if($orderDetail.erpOrderNumber)
-					<b>$!locale.get("product.label.eclipseOrderNumber"): </b><span>$!orderDetail.erpOrderNumber</span>
+					<strong>$!locale.get("product.label.eclipseOrderNumber"): </strong><span>$!orderDetail.erpOrderNumber</span>
 					#end
 				</li>
 				#elseif($orderDetail.orderNum)
 				<li>
-					<b>$!locale.get("product.label.orderNumber"): </b><span>$!orderDetail.orderNum</span>
+					<strong>$!locale.get("product.label.orderNumber"): </strong><span>$!orderDetail.orderNum</span>
 				</li>
 				#end
 				#if($orderDetail.orderDate)
 				<li>
-					<b>$!locale.get("product.label.orderedDate"): </b><span>$!orderDetail.orderDate</span>
+					<strong>$!locale.get("product.label.orderedDate"): </strong><span>$!orderDetail.orderDate</span>
 				</li>
 				#end
 				#if($orderDetail.orderedBy)
 				<li>
-					<b>$!locale.get("form.label.orderedBy"): </b><span>$!orderDetail.orderedBy</span>        
+					<strong>$!locale.get("form.label.orderedBy"): </strong><span>$!orderDetail.orderedBy</span>        
 				</li>
 				#end
 				#if($orderDetail.poNumber)
 				<li>
-					<b>$!locale.get("product.label.poNumber"): </b><span>$!orderDetail.poNumber</span>
+					<strong>$!locale.get("product.label.poNumber"): </strong><span>$!orderDetail.poNumber</span>
 				</li>
 				#end
 				#if($orderDetail.ShipViaMethod)
 				<li>
-					<b>$!locale.get("form.label.shipVia"): </b><span>$!orderDetail.ShipViaMethod</span>
+					<strong>$!locale.get("form.label.shipVia"): </strong><span>$!orderDetail.ShipViaMethod</span>
 				</li>
 				#end
 				#if($orderDetail.shipDate)
 				<!-- <li>
-					<b>$!locale.get("product.label.shipDate"): </b><span>$!orderDetail.shipDate</span>
+					<strong>$!locale.get("product.label.shipDate"): </strong><span>$!orderDetail.shipDate</span>
 					<input type="hidden" value="$!orderDetail.trackingInfo" >
 				</li> -->
 				#end
 				#if($orderDetail.trackingInfo)
 				<!-- <li>
-					<b>$!locale.get("product.label.trackInfo"): </b>
+					<strong>$!locale.get("product.label.trackInfo"): </strong>
 					<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=$!orderDetail.trackingInfo' target="_blank">$!orderDetail.trackingInfo</a>
 				</li> -->
 				#end
@@ -149,7 +149,7 @@
 							<!-- $!itemList.productKeywords -->
 							#if($itemList.customerPartNumberList.size()>0)
 							<ul>
-								<li><b>Customer Part Number: </b>
+								<li><strong>Customer Part Number: </strong>
 									#foreach($!customerPartNumberList in $!itemList.customerPartNumberList)
 										$!customerPartNumberList.partNumber <br>
 									#end
@@ -157,7 +157,7 @@
 							</ul>
 							#end
 							#if($itemList.lineItemComment)
-								<ul><li><b>Line Item Comment: </b>$!itemList.lineItemComment </li></ul>
+								<ul><li><strong>Line Item Comment: </strong>$!itemList.lineItemComment </li></ul>
 							#end
 						</td>
 						<td data-th="$!locale.get('product.label.qty')">$!itemList.orderQty</td>
@@ -190,29 +190,29 @@
 					</div>
 					<ul>
 						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.subTotal") : </b></span>
+							<span class="priceLabel"><strong>$!locale.get("product.label.subTotal") : </strong></span>
 							<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
 						</li>
 						#if($orderDetail.tax>0)
 						<li>
-						     <span class="priceLabel"><b>$!locale.get("product.label.tax") : </b></span>
+						     <span class="priceLabel"><strong>$!locale.get("product.label.tax") : </strong></span>
 						     <span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.tax) </span>
 						</li>
 						#end
 						#if($orderDetail.discount>0)
 						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.discount") :</b></span>
+							<span class="priceLabel"><strong>$!locale.get("product.label.discount") :</strong></span>
 							<span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
 						</li>
 						#end
 						#if($orderDetail.freight>0)
 						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.shipping") : </b></span>
+							<span class="priceLabel"><strong>$!locale.get("product.label.shipping") : </strong></span>
 							<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</span>
 						</li>
 						#end
 						<li>
-							<span class="priceLabel"><b>$!locale.get("product.label.orderTotal") : </b></span>
+							<span class="priceLabel"><strong>$!locale.get("product.label.orderTotal") : </strong></span>
 							<span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
 						</li>
 					</ul>   
@@ -232,21 +232,21 @@
 	<table cellpadding="5" cellspacing="0" class="cimm_siteTable">    	
         #if($orderDetail.invoiceNumber)
          <tr>
-            <td><b> $!locale.get("product.label.invoicNumber"): </b></td>
+            <td><strong> $!locale.get("product.label.invoicNumber"): </strong></td>
             <td> <span>$!orderDetail.invoiceNumber</span></td>
         </tr>
         #end
         #if($orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))        
             #if($orderDetail.erpOrderNumber)
             <tr>
-                <td><b>$!locale.get("product.label.OrderNumber"): </b></td>
+                <td><strong>$!locale.get("product.label.OrderNumber"): </strong></td>
                 <td><span>$!orderDetail.erpOrderNumber</span></td>
             </tr>
             #end
         #else
             #if($orderDetail.orderNum)
             <tr>
-                <td><b>$!locale.get("product.label.OrderNumber"): </b></td>
+                <td><strong>$!locale.get("product.label.OrderNumber"): </strong></td>
                 <td><span>$!orderDetail.orderNum</span></td>
             </tr>            
             #end
@@ -254,34 +254,34 @@
         
         #if($orderDetail.orderDate)
         <tr>
-        	<td><b>$!locale.get("product.label.orderedDate"): </b></td>
+        	<td><strong>$!locale.get("product.label.orderedDate"): </strong></td>
             <td> <span>$!orderDetail.orderDate</span></td>
         </tr>
          #end
          
         #if($orderDetail.orderedBy)
         <tr>
-        	<td><b>$!locale.get("form.label.orderedBy"): </b></td>
+        	<td><strong>$!locale.get("form.label.orderedBy"): </strong></td>
             <td><span>$!orderDetail.orderedBy</span></td>
         </tr>
         #end        
         #if($orderDetail.poNumber)
         <tr>
-        	<td><b>$!locale.get("product.label.poNumber"): </b></td>
+        	<td><strong>$!locale.get("product.label.poNumber"): </strong></td>
             <td><span>$!orderDetail.poNumber</span></td>
         </tr>
         #end
 
         #if($orderDetail.shipDate)
         <tr>
-        	<td><b>$!locale.get("product.label.shipDate"): </b></td>
+        	<td><strong>$!locale.get("product.label.shipDate"): </strong></td>
             <td><span>$!orderDetail.shipDate</span>    	
             <input type="hidden" value="$!orderDetail.trackingInfo" /></td>
         </tr>
         #end        
         #if($orderDetail.trackingInfo)
         <tr>
-        	<td><b>$!locale.get("product.label.trackInfo"): </b></td>
+        	<td><strong>$!locale.get("product.label.trackInfo"): </strong></td>
             <td><a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=$!orderDetail.trackingInfo' target="_blank">$!orderDetail.trackingInfo</a></td>
         </tr>
         #end
@@ -302,7 +302,7 @@
 					#if($orderDetail.billEmailAddress)
 					$!orderDetail.billEmailAddress<br />
 					#end
-					<b>$!locale.get("form.label.phone"): </b> $!orderDetail.billPhone
+					<strong>$!locale.get("form.label.phone"): </strong> $!orderDetail.billPhone
                 </span>
             </p>
             </td>
@@ -316,7 +316,7 @@
                          #if($orderDetail.shipEmailAddress)
                         $!orderDetail.shipEmailAddress<br />
                         #end
-                       #if($orderDetail.shipPhone) <b>$!locale.get("form.label.phone"): </b> $!orderDetail.shipPhone#end
+                       #if($orderDetail.shipPhone) <strong>$!locale.get("form.label.phone"): </strong> $!orderDetail.shipPhone#end
                     </span>
                 </p>
             </td>
@@ -347,7 +347,7 @@
             </td>
             <td style="border-right:1px solid #CCC;">
             $!itemList.brandName $!itemList.manufacturerPartNumber
-                <b>$!locale.get("product.label.partno"): </b>$!itemList.partNumber<br />
+                <strong>$!locale.get("product.label.partno"): </strong>$!itemList.partNumber<br />
                 $!itemList.productKeywords
                 $!itemList.shortDesc 
             </td>
@@ -365,10 +365,10 @@
           <table cellpadding="5" cellspacing="0" style="width:880px;border:1px solid #CCC;border-collapse:collapse;text-align:left;">                   
             <tr>
                 #if($orderDetail.shippingInstruction)
-                   <th style="text-align:left;padding:5px;background:#404041;color:#FFF;"><b>$!locale.get("form.label.shippingInstructions") </b></th>
+                   <th style="text-align:left;padding:5px;background:#404041;color:#FFF;"><strong>$!locale.get("form.label.shippingInstructions") </strong></th>
                 #end
                  #if($orderDetail.orderNotes)
-                	<th style="text-align:left;padding:5px;background:#404041;color:#FFF;"><b>$!locale.get("form.label.orderNote")</b></th>
+                	<th style="text-align:left;padding:5px;background:#404041;color:#FFF;"><strong>$!locale.get("form.label.orderNote")</strong></th>
                 #end
                 
             </tr>
@@ -413,7 +413,7 @@
        </table>
         <!-- #if($orderDetail.discount>0)
           <tr>
-            </td><b>$!locale.get("product.label.discount")</b></td>
+            </td><strong>$!locale.get("product.label.discount")</strong></td>
             <td>$$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</td>
           </tr>
         #end -->

@@ -22,8 +22,8 @@
 						<div class="event_rigistration_box">
 							<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.label.coursePrSeminarRegestration")</h3>
 							<ul class="cimm_eventDetail">
-								<li><b>$!locale.get("event.label.eventName"): </b><span>$!eventsList.title</span></li>
-								<li><b>$!locale.get("event.label.dateAndTime"): </b>
+								<li><strong>$!locale.get("event.label.eventName"): </strong><span>$!eventsList.title</span></li>
+								<li><strong>$!locale.get("event.label.dateAndTime"): </strong>
 								<span>
 									#if($eventsList.date.substring(9,11).replaceAll('-','/') == $!eventsList.end.substring(9,11).replaceAll('-','/'))
 									$!eventsList.date.substring(0,16).replaceAll('-','/')
@@ -34,7 +34,7 @@
 									 / ;$!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/') 
 									<!-- </div> -->
 								</span></li>
-								<li><b>$!locale.get("event.label.location"): </b><span>$!eventsList.location</span></li>
+								<li><strong>$!locale.get("event.label.location"): </strong><span>$!eventsList.location</span></li>
 							</ul>
 						</div>
 					</div>
@@ -144,7 +144,7 @@
 				</div>
 				<div class="row">	
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						$!locale.get("event.label.ifContactInfoDifferentFromRegistrantInfo") <span><b><a data-toggle="collapse" data-target="#test">$!locale.get('product.label.clickHere')</a></b> $!locale.get('product.label.toAddContactInfo')</span>
+						$!locale.get("event.label.ifContactInfoDifferentFromRegistrantInfo") <span><strong><a data-toggle="collapse" data-target="#test">$!locale.get('product.label.clickHere')</a></strong> $!locale.get('product.label.toAddContactInfo')</span>
 					</div>
 				</div>
 				<div class="row">

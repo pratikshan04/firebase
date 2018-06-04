@@ -15,7 +15,7 @@
 			#set($attrValueForSearch = $attrListVal)
 			##if($attrList.attrFilterList.get($attrListVal).size()>1)
 			<li class="selectOptions dropdown">
-				<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><b>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </b></div>
+				<div class="toggle_attributeList" data-toggle="dropdown" data-target="#slide_$!attrValueForSearch.replace(' ','_').replace('/','_')"><strong>$!attrValueForSearch <span class="bs-caret"><span class="caret"></span></span> </strong></div>
 				<div class="dropdown-menu slideBlock" id="slide_$!attrValueForSearch.replace(' ','_').replace('/','_')">
 				<ul class="#if($attrList.attrFilterList.get($!attrListVal).size()>5)filterScroll#end clearAfter">
 					#set($k = 0)
@@ -54,10 +54,10 @@
 <div class="productdetail_list">
 	<div class="cimm_ProductFilterWrap clearAfter avoid-this">
 		<div class="cimm_ProductFilterWrap clearAfter">
-			<div class="compareWrap clearAfter"><b>$productCount</b> Product Choices
+			<div class="compareWrap clearAfter"><strong>$productCount</strong> Product Choices
 				<div class="compare_head pull-right hideForDevice mTop-2">
-					<b><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</b>
-					<b>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></b>
+					<strong><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</strong>
+					<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></strong>
 				</div>
 				<div class="cimm_multiAddcart hideForPrint">
 					<select class="selectpicker" id="bulkAction" onchange="performBulkAction(this);">
@@ -131,7 +131,7 @@
 						 #set($attr = $!attributes.attrValue.replace('',""))
 						 		#set($attr = $!attr.split("`"))
 						 #if($attr.get(0))
-						 	<p style="display: block;"><b>$!attributes.attrName.replace(' ',"")</b>: $!attr.get(0)</p>
+						 	<p style="display: block;"><strong>$!attributes.attrName.replace(' ',"")</strong>: $!attr.get(0)</p>
 						 #end
 					#end
 				 #end
@@ -247,25 +247,25 @@
 			<p class="cimm_itemShortDesc" id="itemShortDesc$itemData.itemId" itemprop="description">$!itemData.shortDesc</p> 
 			<ul class="skuStyle">
 				<li id="sitePartNo" itemprop="sku">
-					<b>$locale.get("product.label.partNumber"): </b><span id="partNumber$itemData.ItemId">$!itemData.partNumber</span>
+					<strong>$locale.get("product.label.partNumber"): </strong><span id="partNumber$itemData.ItemId">$!itemData.partNumber</span>
 				</li>
 				#if($!itemData.manufacturerPartNumber)
 				<li id="mPartNo" itemprop="mpn">
-					<b>$locale.get("product.label.mpn"): </b><span>$!itemData.manufacturerPartNumber</span>
+					<strong>$locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span>
 					<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$itemData.partNumber" />
 				</li>
 				#end
 				
 				#if($itemData.upc != "")
 				<li id="upcNo" itemprop="sku">
-					<b>$locale.get("product.label.upc"): </b><span>$!itemData.upc</span> 
+					<strong>$locale.get("product.label.upc"): </strong><span>$!itemData.upc</span> 
 				</li>
 				#end
 			</ul>
 			<ul class="skuStyle">
 				#if(($itemData.customerPartNumber && $itemData.customerPartNumber != "") || ($itemData.customerPartNumberList.size() && $itemData.customerPartNumberList.size()>0))
 				<li id="custMainBlock">        
-					<b>$locale.get("product.label.cpn"): </b>
+					<strong>$locale.get("product.label.cpn"): </strong>
 					<span id="custPartBlock">
 					#if($itemData.customerPartNumber)$itemData.customerPartNumber#end
 					#set($seperator = "")
@@ -279,11 +279,11 @@
 				</li> 
 				#else
 				<li id="custMainBlock" style="display: none;">
-					<b>$locale.get("product.label.cpn"): </b><span id="custPartBlock"></span>
+					<strong>$locale.get("product.label.cpn"): </strong><span id="custPartBlock"></span>
 				</li>
 				#end
 				#if($itemData.packDesc)
-					<li id="packDescs" class="packDesc"><b>$!locale.get("product.label.packageDesc"): </b><span class="packageDesc">$itemData.packDesc</span></li>
+					<li id="packDescs" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$itemData.packDesc</span></li>
 				#end
 			</ul>
 		</div>
@@ -362,7 +362,7 @@
 			<table cellspacing="0" cellpadding="0" border="0">
 				#foreach($attribute in $itemAttributesList)
 				<tr>
-					<td valign="top" nowrap><b>$attribute.attrName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					<td valign="top" nowrap><strong>$attribute.attrName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
 					<td valign="top"><span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 					<td valign="top"><span>$attribute.attrValue</span></td>
 				</tr>
@@ -495,27 +495,27 @@
 									</li> -->
 								   
 								   <li itemprop="sku">
-								      <b>$!locale.get("product.label.partNumber"): </b>
+								      <strong>$!locale.get("product.label.partNumber"): </strong>
 								      <span id="partNumber$!linkItem.itemId">$!linkItem.partNumber</span>
 								   </li>
 								   
 									#if($linkItem.manufacturerPartNumber)
-									<li itemprop="mpn"><b>$!locale.get("product.label.mpn"):</b> <span>$!linkItem.manufacturerPartNumber</span></li>
+									<li itemprop="mpn"><strong>$!locale.get("product.label.mpn"):</strong> <span>$!linkItem.manufacturerPartNumber</span></li>
 									#end
 									
 								<!-- 	<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
-										 <b>$!locale.get("product.label.leadTime"): </b>
+										 <strong>$!locale.get("product.label.leadTime"): </strong>
 										 <span class="leadTime_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
-										 <b>$!locale.get("product.label.available") : </b>
+										 <strong>$!locale.get("product.label.available") : </strong>
 										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									#if($linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
-								    <li><b>$!locale.get("product.label.minorderqty"):</b><span> $!linkItem.minOrderQty</spaN></li>
-								    <li><b>$!locale.get("product.label.qtyinterval"):</b><span> $!linkItem.orderInterval</span></li>
+								    <li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!linkItem.minOrderQty</spaN></li>
+								    <li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!linkItem.orderInterval</span></li>
 								  	#end -->
 								  	
 								  	#set($customValue = $!linkItem.manufacturerId+"_SHOW_LIST_PRICE")
@@ -530,7 +530,7 @@
 									#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->#end
 									#if($userLogin)
 								 	<li class="price">  
-										<b>$!locale.get('product.label.price'): </b>
+										<strong>$!locale.get('product.label.price'): </strong>
 										#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($!linkItem.price>0)
 											<span id="span_$!linkItem.partNumber" data-select='priceData'>
@@ -547,7 +547,7 @@
 									</li>
 									#end
 									<li class="cimm_itemDespQty">
-										<b>$!locale.get("product.label.qty"): </b>  
+										<strong>$!locale.get("product.label.qty"): </strong>  
 										<span><input type="text" name="itemTxtQty$!linkItem.itemId"  maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
 									</li>
 									<li data-select='addtoCartbtn_$!linkItem.partNumber'>

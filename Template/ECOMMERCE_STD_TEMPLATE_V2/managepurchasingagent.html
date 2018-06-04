@@ -169,7 +169,7 @@
 								<tr class="odd">
 									<td class="alignLeft" data-th="$!locale.get('product.heading.agentName')">
 										$!agentsList.firstName $!agentsList.lastName
-										#if($!agentsList.isPunchoutUser=="Y")<br/><b><span class="text-danger">Procurement User</span></b> #end
+										#if($!agentsList.isPunchoutUser=="Y")<br/><strong><span class="text-danger">Procurement User</span></strong> #end
 									</td>
 									<td class="alignLeft" data-th="$!locale.get('form.label.UserNameEmail')">$!agentsList.userName</td>
 									<!--<td>$agentsList.emailAddress</td>-->
@@ -183,7 +183,7 @@
 										#end
 									</td>
 									<td class="text-center" data-th="$!locale.get('product.heading.agentStatus')">
-										<b>#if($agentsList.userStatus == "Y")<span class="text-success">Active</span>#else<span class="text-danger">In active</span>#end</b>
+										<strong>#if($agentsList.userStatus == "Y")<span class="text-success">Active</span>#else<span class="text-danger">In active</span>#end</strong>
 									</td>
 									<td class="text-center" data-th="$!locale.get('product.heading.Action')">
 										<div class="clearAfter">

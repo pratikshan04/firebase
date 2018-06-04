@@ -24,7 +24,7 @@
 				//content = "<center>New Credit Card Added Successfully. Please wait..</center>";
 				content = "<center>";
 				content = content + "<img src='$webThemes/$siteName/images/brandloading.gif' alt='Loading'/>";
-				content = content + "<p><b>New Credit Card Added Successfully.</b></p>";
+				content = content + "<p><strong>New Credit Card Added Successfully.</strong></p>";
 				content = content + "<p>$locale.get('label.message.doNotPressRefreshOrBackButton')</p>";
 				content = content + "</center>";
 				setTimeout(function() {
@@ -37,7 +37,7 @@
 			} else {
 				content = "<center>";
 				content = content + "<img src='$webThemes/$siteName/images/brandloading.gif' alt='Loading'/>";
-				content = content + "<p><b>New Credit Card Added Successfully.</b></p>";
+				content = content + "<p><strong>New Credit Card Added Successfully.</strong></p>";
 				content = content + "<p>$locale.get('label.message.doNotPressRefreshOrBackButton')</p>";
 				content = content + "</center>";
 			}
@@ -45,7 +45,7 @@
 			if ($("#cardResponse").val() == "Success") {
 				$("#cardStatus").html(content);
 			} else {
-				$("#cardStatus").html("<center><b>"+$("#cardResponse").val()+"</b></center>");
+				$("#cardStatus").html("<center><strong>"+$("#cardResponse").val()+"</strong></center>");
 			}
 		});
 </script>
