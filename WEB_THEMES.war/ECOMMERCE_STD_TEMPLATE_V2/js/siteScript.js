@@ -786,6 +786,9 @@ $(document).ready(function(){
 							}
 							$('.loginWindow').hide();
 							loadShippingInfo();
+							if($("#isWebview").val() == "WEBVIEW"){
+								fingerPrint(un, ps);
+							}
 						} else if ($.trim(data) == "EcpliseDown") {
 							window.location.href = $("base").attr("href")+"eclipseDown.action";
 						}else if(data.indexOf("!DOCTYPE html")!= -1){
@@ -2915,7 +2918,7 @@ function eachCheckBox(chk){
 //------------------------------------footer dependent sources----------------------------------------
 var footer_icon_plus = 'fa-plus';
 var footer_icon_minus = 'fa-minus';
-$('.footerCol h5 i').click(function(){
+$('.footerCol h5 em').click(function(){
 	if($(this).parents('.footerCol').find('ul').hasClass('in')){
 		$(this).addClass(footer_icon_plus).removeClass(footer_icon_minus);
 	}
@@ -2925,11 +2928,11 @@ $('.footerCol h5 i').click(function(){
 });
 function toDoFooter(){
 	if ($(document).width() < 981){
-		$('.footerCol h5 i').show();
+		$('.footerCol h5 em').show();
 		$('.footerCol ul').removeClass('in');
 	}
 	else if ($(document).width() >= 981){
-		$('.footerCol h5 i').hide();
+		$('.footerCol h5 em').hide();
 		$('.footerCol ul').addClass('in');		
 	}
 }
