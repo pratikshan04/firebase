@@ -92,15 +92,15 @@
 			    <div class="modal-body">
 					<input type="hidden" value="popup" name="loginType">
 					<div class="form-group">
-						<label>$!locale.get("form.label.userName")</label>
+						<label for="modalUserName">$!locale.get("form.label.userName")</label>
 						<input type="text" name="loginId" id="modalUserName" tabindex="2" class="form-control"/>
 					</div>
 					<div class="form-group">
-						<label>$!locale.get("form.label.password")</label>
+						<label for="modalPassword">$!locale.get("form.label.password")</label>
 						<input type="password" name="loginPassword" id="modalPassword" tabindex="3" class="form-control"/>
 					</div>
 					<div class="form-group clearAfter">
-						<label class="customCheckBox pull-left" tabindex="4" >
+						<label for="modalRememberMe" class="customCheckBox pull-left" tabindex="4" >
 							<input type="checkbox" name="rememberMe" id="modalRememberMe" />
 							<span>$!locale.get("form.label.rememberMyLogin")</span>
 						</label>
@@ -147,12 +147,12 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-6">
-							<p><b>$!locale.get('product.label.partNumber'): </b><span class="ATCPartNumber"></span></p>
-							<p><b>$!locale.get('product.label.mpn'): </b><span class="ATCMPartNumber"></span></p>
+							<p><strong>$!locale.get('product.label.partNumber'): </strong><span class="ATCPartNumber"></span></p>
+							<p><strong>$!locale.get('product.label.mpn'): </strong><span class="ATCMPartNumber"></span></p>
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-6">
 							<p class="addedItemPrice priceSpan"><span class="ATCprice"></span></p>
-							<p><b>$!locale.get('product.label.qty'): </b><span class="ATCQuantity"></span></p>
+							<p><strong>$!locale.get('product.label.qty'): </strong><span class="ATCQuantity"></span></p>
 							<p style="display: none;"><b class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </b><span class="ATCLeadTime"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></p>
 						</div>
 					</div>

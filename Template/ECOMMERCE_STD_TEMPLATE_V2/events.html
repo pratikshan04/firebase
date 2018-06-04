@@ -50,9 +50,9 @@
 							$category.description
 							#end
 						#end
-						<span class='mRight-3'><b>Category: </b>$category.eventCategory</span>
-						#if($category.location)<span class='mRight-3'><b>Location: </b>$category.location</span>#end
-						<span class='mRight-3'><b>Date:</b>
+						<span class='mRight-3'><strong>Category: </strong>$category.eventCategory</span>
+						#if($category.location)<span class='mRight-3'><strong>Location: </strong>$category.location</span>#end
+						<span class='mRight-3'><strong>Date:</strong>
 						#if($category.dateV2.substring(9,11).replaceAll('-','/') == $category.endV2.substring(9,11).replaceAll('-','/'))
 						$category.dateV2.substring(4,11).replaceAll('-','/'),$category.dateV2.substring(11,16).replaceAll('-','/')
 						#else

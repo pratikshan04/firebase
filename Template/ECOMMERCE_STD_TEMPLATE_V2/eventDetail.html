@@ -4,7 +4,7 @@
 		<h3 class="cimm_pageTitle">$!eventsList.title</h3>
 		<table cellspacing="5" cellpadding="5">
 			 <tr>
-				<td><b>$!locale.get("eventDetail.label.date") :</b></td>
+				<td><strong>$!locale.get("eventDetail.label.date") :</strong></td>
 				<td>
 					#if($eventsList.date.substring(9,11).replaceAll('-','/') == $eventsList.end.substring(9,11).replaceAll('-','/'))
 						$!eventsList.date.substring(0,16).replaceAll('-','/')
@@ -14,18 +14,18 @@
 				</td>
 			</tr>
 			<tr>            		
-				<td><b>$!locale.get("eventDetail.label.time"): </b></td>
+				<td><strong>$!locale.get("eventDetail.label.time"): </strong></td>
 				<td>$!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/')</td>
 			</tr>
 			#if($!eventsList.location.trim() != "")
 			<tr>            		
-				<td><b>$!locale.get("event.label.location"): </b></td>
+				<td><strong>$!locale.get("event.label.location"): </strong></td>
 				<td>$!eventsList.location</td>
 			</tr>
 			#end
 			#if($eventsList.isCostRequired ==  "Y")
 			<tr>            		
-				<td><b>$!locale.get("event.label.eventFee"): </b></td>
+				<td><strong>$!locale.get("event.label.eventFee"): </strong></td>
 				<td>$! $!eventCost</td>
 			</tr>
 			#end
@@ -35,7 +35,7 @@
 			#if($eventsList.phoneNumber!= "")
 			<tr>
 				<td colspan="2">
-					<p><b>$!locale.get("event.label.moreInfoPleaseContact") <a href="mailto:$!eventsList.notification" class="mailtoLink">$!eventsList.contact</a> at <a href="tel:$!eventsList.phoneNumber">$!eventsList.phoneNumber</a></b></p>
+					<p><strong>$!locale.get("event.label.moreInfoPleaseContact") <a href="mailto:$!eventsList.notification" class="mailtoLink">$!eventsList.contact</a> at <a href="tel:$!eventsList.phoneNumber">$!eventsList.phoneNumber</a></strong></p>
 				</td>
 			</tr>
 			#end
@@ -43,12 +43,12 @@
 			<input type="hidden" id="total" value="$!eventsList.totalSeats"/>
 			#if($eventsList.totalSeats==-1)
 			 <tr>            		
-				<td><b>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></b></td>
+				<td><strong>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></strong></td>
 				<td>$!locale.get("event.seats.unlimited")</td>
 			</tr>
 			#else
 			<tr>
-				<td><b>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></b></td>
+				<td><strong>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></strong></td>
 	 			<td>$!eventsList.totalSeats</td>
 	 		</tr>
 			#end
@@ -56,12 +56,12 @@
 			#if($eventsList.totalSeats == -1)
 			#elseif($diff < 0)
 			<tr>
-				<td><b>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span></b></td>
+				<td><strong>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span></strong></td>
 				<td>0</td>
 			</tr>
 			#else
 			<tr>
-				<td><b>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span> </b></td>
+				<td><strong>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span> </strong></td>
 				<td>$!diff</td>
 			</tr>
 			#end

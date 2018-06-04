@@ -7,7 +7,7 @@
 			<h3 class="cimm_pageTitle">$!locale.get("product.heading.events")</h3>	
 			#foreach($!eventData in $!eventSearchData)
 			<p class="staticContent">
-				<span><b>$!eventData.staticPageTitle</b></span>- $!eventData.staticContent
+				<span><strong>$!eventData.staticPageTitle</strong></span>- $!eventData.staticContent
 		 	</p>
 		  	<a href="/eventDetailsUnit.action?eventID=$!eventData.staticPageId" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")</a>
 		  	<br />
@@ -38,7 +38,7 @@
 		#foreach($staticData in $staticContentData)	
 			#if(!$staticData.staticPageTitle.contains('Home') && $!staticData.staticPageTitle)
 				<p class="staticContent">
-					<span><b>$!staticData.staticPageTitle</b></span>- $!staticData.staticContent
+					<span><strong>$!staticData.staticPageTitle</strong></span>- $!staticData.staticContent
 				</p>
 			 	<a href="SP/$!staticData.pageName" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")</a>
 			  	<br />
@@ -60,7 +60,7 @@
 		#if($resultCount==0)
 			<div class="searchZero">
 				<h2 class="cimm_pageTitle">$!locale.get("product.label.productResults")</h2>
-				<h4>$!locale.get("search.result.zeroResult")&nbsp;<span><b>$!keyWord</b></span></h4>
+				<h4>$!locale.get("search.result.zeroResult")&nbsp;<span><strong>$!keyWord</strong></span></h4>
 				<h4>
 					$!locale.get("search.result.tryOtherSearch") $locale.get("label.text.or") 
 					$locale.get("label.text.goToOur") <a href="$locale.get('website.url.Welcome')" class="cimm_inlineButton">$locale.get("site.label.homePage")</a>   

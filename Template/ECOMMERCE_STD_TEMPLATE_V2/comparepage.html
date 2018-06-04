@@ -26,7 +26,7 @@
 			<table class="table table-bordered">
 			<thead>
 				<tr>
-		    		<th><b>$locale.get("product.label.selectItemToRemove")</b></th>
+		    		<th><strong>$locale.get("product.label.selectItemToRemove")</strong></th>
 					#foreach($compareItem in $compareItemData)
 						<th>
 							<label class="customCheckBox2">
@@ -45,7 +45,7 @@
 			</thead>
 		        <tbody>                       
 		            <tr>
-		                <td><b class="">$locale.get("product.label.details")</b></td>
+		                <td><strong>$locale.get("product.label.details")</strong></td>
 						#foreach($compareItem in $compareItemData)
 							#set($itemTitle=$compareItem.brandName+" "+$!compareItem.manufacturerPartNumber)
 							<td>
@@ -58,16 +58,16 @@
 									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#end
-								<b>
+								<strong>
 									<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')" id="itemTitle$compareItem.itemId">
 										<span  id="itemTitle$compareItem.itemId">$compareItem.brandName $!compareItem.manufacturerPartNumber</span>
 									</a>
-								</b>
+								</strong>
 							</td>
 						#end
 					</tr> 
 		            <tr>
-		                <td><b class="">$locale.get("product.label.mpn") </b> </td>
+		                <td><strong>$locale.get("product.label.mpn") </strong> </td>
 		                #foreach($mainMPartNo in $compareItemData)
 		                    #set( $showSimilar = 0 )
 		                    #foreach($subMPartNo in $compareItemData)
@@ -89,7 +89,7 @@
 		                #end
 		           </tr>                        
 		            <tr>
-		                <td><b class="">$locale.get("product.label.partNumber") </b> </td>
+		                <td><strong>$locale.get("product.label.partNumber") </strong> </td>
 		                    #foreach($mainPartNo in $compareItemData)
 		                        #set( $showSimilar = 0 )
 		                        #foreach($subPartNo in $compareItemData)
@@ -120,7 +120,7 @@
 		            #if($userLogin)
 		            <tr>
 		                <td>
-		                <b class="">$locale.get("product.label.price") </b> </td>
+		                <strong>$locale.get("product.label.price") </strong> </td>
 		                #foreach($mainPrice in $compareItemData)
 		                        #set( $showSimilar = 0 )
 		                        #foreach($subPrice in $compareItemData)
@@ -131,7 +131,7 @@
 		                        </td>
 		                        #if($showSimilar >= $diffrenceCount)
 		                            <td class="similar">
-		                               <b>
+		                               <strong>
 		                                    #if($mainPrice.price>0)
 		                                    <span class="priceSpan" data-select='priceData' id='span_$mainPrice.partNumber'>
 		                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
@@ -141,7 +141,7 @@
 		                                    #end	
 		                                    <!-- <img src="$webThemes/$siteName/images/loading.gif" /> -->
 		                                
-		                               </b>
+		                               </strong>
 		                               <input type="hidden" value="$mainPrice.minOrderQty" id="itemTxtQty$mainPrice.itemId" name="itemTxtQty$mainPrice.itemId"/>
 		                       </td>
 		                        #else
@@ -163,7 +163,7 @@
 		            
 		            <tr>
 		                <td>
-		                    <b class="">$locale.get("product.label.description") </b>
+		                    <strong>$locale.get("product.label.description") </strong>
 		                </td>
 		                #foreach($mainDesc in $compareItemData)
 		                    #set( $showSimilar = 0 )
@@ -185,7 +185,7 @@
 		                #end
 		           </tr>
 		            <!-- <tr>
-		                <td><b class="">$locale.get("product.label.availability") / $locale.get("product.label.leadTime")</b>  </td>
+		                <td><strong>$locale.get("product.label.availability") / $locale.get("product.label.leadTime")</strong>  </td>
 		                #foreach($mainAvailability in $compareItemData)
 		                     #set( $showSimilar = 0 )
 		                    #foreach($subAvailability in $compareItemData)
@@ -198,7 +198,7 @@
 		                        <td class="similar">
 		                            <span>
 		                            #if($mainAvailability.homeBranchavailablity=='')
-		                                    <b>N/A</b>
+		                                    <strong>N/A</strong>
 		                                #else
 		                                    #if($mainAvailability.homeBranchavailablity>0)
 		                                        <b class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</b>
@@ -226,7 +226,7 @@
 		                        <td class="different">
 		                            <span>
 		                            #if($mainAvailability.homeBranchavailablity=='')
-		                                    <b>N/A</b>
+		                                    <strong>N/A</strong>
 		                                #else
 		                                    #if($mainAvailability.homeBranchavailablity>0)
 		                                       <b class="orangeClr Avail_$mainAvailability.partNumber" id="Avail_$mainAvailability.partNumber">$mainAvailability.homeBranchavailablity</b>
@@ -261,7 +261,7 @@
 		                #end
 		            </tr> -->
 		            <tr>
-		                <td> <b class="">$locale.get("product.label.minorderqty")</b> </td>
+		                <td> <strong>$locale.get("product.label.minorderqty")</strong> </td>
 		                    #foreach($mainMinorderqty in $compareItemData)
 		                        #set( $showSimilar = 0 )
 		                        #foreach($subMinorderqty in $compareItemData)
@@ -305,7 +305,7 @@
 		            
 		            
 		            <tr>
-		                <td><b class="">$locale.get("product.label.orderqtyinterval")</b></td>
+		                <td><strong>$locale.get("product.label.orderqtyinterval")</strong></td>
 		                #foreach($mainOrderQtyInterval in $compareItemData)
 		                    #set( $showSimilar = 0 )
 		                    #foreach($subOrderQtyInterval in $compareItemData)
@@ -373,7 +373,7 @@
 		            #foreach( $key in $compareList.keySet() )
 		                #if($key!='Detail')
 		                <tr>
-		                    <td><b class="">$key </b> </td>
+		                    <td><strong>$key </strong> </td>
 		                    #foreach($mainIndex in $compareList.get($key))
                                 #set($attrVal = $mainIndex.attrValue)
                                 #set($indexVal = 1)

@@ -15,7 +15,7 @@
 			#foreach($groupData in $groupListData)
 			#set($linkUrl = $groupData.productListId+$locale.get('website.url.ProductGroup')+"?savedGroupName="+$groupData.productListName)
 			<tr>
-				<td data-th="$!locale.get('group.button.groupName')"><b><a href="$linkUrl">$groupData.productListName</a></b></td>
+				<td data-th="$!locale.get('group.button.groupName')"><strong><a href="$linkUrl">$groupData.productListName</a></strong></td>
 				<td data-th="$!locale.get('product.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
 				<td data-th="$!locale.get('product.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
 				<td data-th="$!locale.get('product.group.heading.AddGroupToCart')">
@@ -54,7 +54,7 @@
 				#end
 				<tr>
 					<td data-th="$!locale.get('savedCart.button.cartName')">
-						<b><a href="$linkUrl">$groupData.productListName #if($groupData.isSharedCart && $groupData.isSharedCart=='Y')<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>#end</a></b>
+						<strong><a href="$linkUrl">$groupData.productListName #if($groupData.isSharedCart && $groupData.isSharedCart=='Y')<img src="$webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>#end</a></strong>
 					</td>
 					<td data-th="$!locale.get('saved.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
 					<td data-th="$!locale.get('saved.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>

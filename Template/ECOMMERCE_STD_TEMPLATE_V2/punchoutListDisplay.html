@@ -82,12 +82,12 @@
                             <div id="minErr_$itemData.itemPriceId"></div>
                         </li>
 						#if($itemData.manufacturerPartNumber)
-                        <li><b>$locale.get("product.label.mpn"): </b><span>$itemData.manufacturerPartNumber</span></li>
+                        <li><strong>$locale.get("product.label.mpn"): </strong><span>$itemData.manufacturerPartNumber</span></li>
                         #end
-                        <li><b>$locale.get("product.label.partNumber"): </b><span>$itemData.partNumber</span></li>
+                        <li><strong>$locale.get("product.label.partNumber"): </strong><span>$itemData.partNumber</span></li>
                         #if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 						<li>
-							<b>$locale.get("product.label.cpn"): </b>
+							<strong>$locale.get("product.label.cpn"): </strong>
 							#set($seperator = "")
 							#set($partList = "")
 							#foreach($customerPart in $itemData.customerPartNumberList)

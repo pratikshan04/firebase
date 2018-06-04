@@ -23,13 +23,13 @@
 								</div>
 								<div class="col-md-9 col-sm-6 col-xs-12">
 									<div class="userInfoWrap clearAfter">
-											<b>$!locale.get('form.label.userName'): </b><span>$!addressList.firstName $!addressList.lastName</span><br />
-											<b>$!locale.get('form.label.address'): </b><span>$!addressList.address1	<br/>
+											<strong>$!locale.get('form.label.userName'): </strong><span>$!addressList.firstName $!addressList.lastName</span><br />
+											<strong>$!locale.get('form.label.address'): </strong><span>$!addressList.address1	<br/>
 											#if($addressList.address2)$!addressList.address2 <br/>#end
 											$!addressList.city, $!addressList.state<br/>
 											$!addressList.country, $!addressList.zipCode<br/></span>
-											<b>$!locale.get('form.label.phone'): </b><span>$!addressList.phoneNo</span><br />
-											<b>$!locale.get('form.label.email'): </b><span>$!addressList.emailAddress</span>
+											<strong>$!locale.get('form.label.phone'): </strong><span>$!addressList.phoneNo</span><br />
+											<strong>$!locale.get('form.label.email'): </strong><span>$!addressList.emailAddress</span>
 											<div class="clearfix"></div>
 											<h4>Last Login: 
 											#if($!lastLogin && $!lastLogin.size()>0)
@@ -236,7 +236,7 @@
 							<li><h5><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")$!resentItemTitle.replace(" ","-")' class="cimm_slideProdTitle">$resentItemTitle</a></h5>
 							</li>
 							<li>
-								<b>$locale.get("product.label.partNumber"): </b> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span>
+								<strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span>
 							</li>
 						</ul>
 					</div>

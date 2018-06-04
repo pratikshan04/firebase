@@ -46,19 +46,19 @@
 						<td class="alignLeft" data-th="$locale.get('product.label.productDescription')">
 							<ul>
 								<li>
-								<b><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></b>
+								<strong><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong>
 								</li>
 								#if($itemData.manufacturerPartNumber)
 								<li>
-								<b>$locale.get("product.label.mpn"): </b> $itemData.manufacturerPartNumber
+								<strong>$locale.get("product.label.mpn"): </strong> $itemData.manufacturerPartNumber
 								</li>
 								#end
 								<li>
-								<b>$locale.get("product.label.partNumber"): </b> $itemData.partNumber
+								<strong>$locale.get("product.label.partNumber"): </strong> $itemData.partNumber
 								</li>
 								#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 								<li>
-								<b>$locale.get("product.label.cpn"): </b>
+								<strong>$locale.get("product.label.cpn"): </strong>
 								#set($seperator = "")
 								#set($partList = "")
 								#foreach($customerPart in $itemData.customerPartNumberList)
@@ -70,10 +70,10 @@
 								#end
 								#if($itemData.minOrderQty>0 && $itemData.orderInterval>0)
 								<li>
-								<b>$locale.get("product.label.minorderqty"): $itemData.minOrderQty</b>
+								<strong>$locale.get("product.label.minorderqty"): $itemData.minOrderQty</strong>
 								</li>
 								<li>
-								<b>$locale.get("product.label.qtyinterval"): $itemData.orderInterval</b>
+								<strong>$locale.get("product.label.qtyinterval"): $itemData.orderInterval</strong>
 								</li>
 								#end
 								<li>
@@ -85,7 +85,7 @@
 								<span class='priceSpanFa'><i class='fa fa-phone fa-lg '></i> for Availability</span>
 								#end
 								<!-- <span id="Avail_$itemData.partNumber" data-select='availability'>
-								<b>$locale.get("product.label.availableQuantity")</b> : 
+								<strong>$locale.get("product.label.availableQuantity")</strong> : 
 								<img src="$webThemes/$siteName/images/loading.gif" />
 								</span> -->
 								</li>

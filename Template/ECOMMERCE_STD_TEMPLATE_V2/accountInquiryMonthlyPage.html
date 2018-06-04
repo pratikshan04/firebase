@@ -5,7 +5,7 @@
 <input type="hidden" name="reqType" value="MStat"/>
 	 #if($!shipAddressList)
 	<div class="selectShipto clearAfter">
-		<b>Ship-To: </b>
+		<strong>Ship-To: </strong>
 		<select name=entityId id="entityId" class="inputFieldBody appendChosen">
 			#foreach($shipToEntry in $shipToList.entrySet())
 				#if($shipToEntry.getKey() == $entityId)
@@ -27,7 +27,7 @@
                     <div class="date_monthWrap">
                         <table width="100%" border="0" cellspacing="0" cellpadding="1">
                           <tbody><tr valign="middle">
-                                <td width="180" valign="middle" align="left" height="22"><b>As of&nbsp;$!userAccountDetail.asOfDate</b></td>
+                                <td width="180" valign="middle" align="left" height="22"><strong>As of&nbsp;$!userAccountDetail.asOfDate</strong></td>
                                 <td width="*">&nbsp;</td> 
                                 <td width="25" align="right" valign="middle"><span class="formLabel"><strong>Month:&nbsp;</strong></span></td>
                                 <td width="100" align="left" valign="middle">

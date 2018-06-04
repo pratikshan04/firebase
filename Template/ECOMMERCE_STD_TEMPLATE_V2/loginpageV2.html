@@ -17,16 +17,16 @@
 			<ul class="cimm_formContent">
 				<li>
 					<input type="text" name="loginId" value="$!userNameTmp" id="mainUserName" />
-					<label>$locale.get("form.label.userName")</label>
+					<label for="mainUserName">$locale.get("form.label.userName")</label>
 				</li>
 				<li>
 					<input type="password" name="loginPassword" id="mainPassword" />
-					<label>$locale.get("form.label.password")</label>
+					<label for="mainPassword">$locale.get("form.label.password")</label>
 				</li>
 			</ul>
 			<div class="formBottom">
 				<div class="pull-left">					
-					<label class="customCheckBox" >
+					<label for="rememberMe" class="customCheckBox" >
 						<input type="checkbox" tabindex="3" name="rememberMe" id="rememberMe" onchange="checkRemember(this);"/>
 						<span>$locale.get("form.label.rememberMyLogin")</span>
 					</label>

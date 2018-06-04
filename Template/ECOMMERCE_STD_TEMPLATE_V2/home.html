@@ -168,7 +168,7 @@
 					 		#end
 						</a>
 					</li>
-					<li itemprop="sku"><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
+					<li itemprop="sku"><strong>$locale.get("product.label.partNumber"):</strong> $itemData.partNumber</li>
 					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
 					<p itemprop="description" id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
 					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>

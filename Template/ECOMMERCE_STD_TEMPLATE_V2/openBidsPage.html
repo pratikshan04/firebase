@@ -25,7 +25,7 @@
 			#foreach($orderDetail in $orderList)
 			#set($countOrderList =	$countOrderList + 1)
 				<tr class="odd">
-					<td style="text-align:left;" data-th="$locale.get('form.label.OrderNo')"><b><a class="orangeClr" href="OrderDetailSale.action?orderId=$orderDetail.orderNum">$orderDetail.orderNum</a></b></td>
+					<td style="text-align:left;" data-th="$locale.get('form.label.OrderNo')"><strong><a class="orangeClr" href="OrderDetailSale.action?orderId=$orderDetail.orderNum">$orderDetail.orderNum</a></strong></td>
 					<!-- <td data-th="$locale.get('form.label.customerPOnumber')">#if($!orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td> -->
 					<!-- <td data-th="$locale.get('form.label.CustomerRelease')">#if($!orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
 					<td data-th="$locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
@@ -65,7 +65,7 @@
 			#foreach($orderDetail in $orderList)
 			#if($!orderDetail.orderStatus && $!orderDetail.orderStatus.contains("Bid"))
 				<tr class="odd">
-					<td style="text-align: left;" data-th="$locale.get('form.label.OrderNo')"><b><a href="OrderDetailSale.action?orderId=$orderDetail.orderNum">$orderDetail.orderNum</a></b></td>
+					<td style="text-align: left;" data-th="$locale.get('form.label.OrderNo')"><strong><a href="OrderDetailSale.action?orderId=$orderDetail.orderNum">$orderDetail.orderNum</a></strong></td>
 					<td data-th="$locale.get('form.label.customerPOnumber')">#if($!orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
 					<!-- <td data-th="$locale.get('form.label.CustomerRelease')">#if($!orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
 					<td data-th="$locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>

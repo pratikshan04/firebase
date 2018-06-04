@@ -30,9 +30,9 @@
 		<tr class="odd">
 			<td data-th="$!locale.get('form.label.OrderNo')">
 			#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS") 
-			<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderId">$!orderDetail.orderNum</a></b>
+			<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderId">$!orderDetail.orderNum</a></strong>
 			#else
-			<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></b>
+			<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></strong>
 			#end
 			</td>
 			<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
@@ -89,9 +89,9 @@
 			<tr>
 				<td data-th="$!locale.get('form.label.OrderNo')">
 				#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS") 
-				<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderId">$!orderDetail.orderNum</a></b>
+				<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderId">$!orderDetail.orderNum</a></strong>
 				#else
-				<b><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></b>
+				<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></strong>
 				#end
 				</td>
 				<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
