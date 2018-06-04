@@ -324,9 +324,9 @@
 								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 						    	<div id="yourPrices" class="price">
 									#if($userLogin)
-										<b class='priceLabel'>$!locale.get('product.label.yourprice'): </b>
+										<strong class='priceLabel'>$!locale.get('product.label.yourprice'): </strong>
 									#else
-										<b class='priceLabel'>$!locale.get('product.label.price'): </b>
+										<strong class='priceLabel'>$!locale.get('product.label.price'): </strong>
 									#end
 									<span id="span_$!itemData.partNumber" class="formatPrice priceValue">
 										#if($itemData.price>0)

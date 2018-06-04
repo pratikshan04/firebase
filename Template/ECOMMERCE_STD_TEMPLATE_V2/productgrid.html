@@ -413,7 +413,7 @@
 										<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li> --> 
 									<li class="productAvail_$!itemData.partNumber">
-										<b class="availLabel">$!locale.get("product.label.availability"): </b>
+										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
 										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($itemData.availQty)
 												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>

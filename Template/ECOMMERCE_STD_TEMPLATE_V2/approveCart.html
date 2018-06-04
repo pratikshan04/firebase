@@ -108,7 +108,7 @@
 								#if($itemData.price>0)
 								$$numberTool.format($numberToolFormat,$itemData.price)#if($itemData.saleQty>0) per $itemData.saleQty #end #if($itemData.uom)/ $itemData.uom #end
 								#else
-								<b class="required">$locale.get("product.label.callforprice")</b>
+								<strong class="required">$locale.get("product.label.callforprice")</strong>
 								#end
 							</span>
 						</td>

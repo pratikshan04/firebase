@@ -495,7 +495,8 @@ $(document).ready(function () {
 	}
  });
  $(".loadAfter").fadeOut(800);
-</script>	
+</script>
+#if($!CommonDBQuerySystemParameter.get("CHECK_EMAIL_ID")=="Y")	
 <div id="emailAddressPrompt" class="modal fade" role="dialog">
 <div class="modal-dialog">
 <!-- Modal content-->
@@ -510,8 +511,8 @@ $(document).ready(function () {
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<!-- <label for="emailAddressPromptId">$locale.get("form.label.email")<span class="text-danger"> * </span></label> -->
-							<input type="text" name="email" id="emailAddressPromptId" class="form-control" placeholder='$locale.get("form.label.emailAddress")'/>
+							<label for="emailAddressPromptId">$locale.get("form.label.email")<span class="text-danger"> * </span></label> 
+							<input type="text" name="email" id="emailAddressPromptId" class="form-control" placeholder='Enter $locale.get("form.label.emailAddress")'/>
 						</div>
 					</div>
 				</div>
@@ -525,3 +526,4 @@ $(document).ready(function () {
 </div>
 </div>
 <!-- End of Update email id popup -->
+#end

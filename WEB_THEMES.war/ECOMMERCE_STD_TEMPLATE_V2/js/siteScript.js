@@ -1976,7 +1976,7 @@ function updateEmailAddress(email){
 				data: "email="+email,
 				success: function(msg){
 					var contactUpdateStatusString = locale('contact.information.updated.success');
-					bootAlert("small","error","Error",msg);
+					bootAlert("small","success","Info",msg);
 					if(msg == contactUpdateStatusString){
 						setCookie("validEmailAddress", true);
 						window.location.reload();			   

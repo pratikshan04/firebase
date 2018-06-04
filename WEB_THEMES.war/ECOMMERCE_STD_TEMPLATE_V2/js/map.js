@@ -623,7 +623,7 @@ function loadLocationDetails(obj){
 			btn2 = $(infoBlockId).find('.directionBtn').html();
 		}
 		$(obj).find(".Title").addClass("active");
-		var currentStore = "<div class='locDetailWrap marginY-4'><div><b class='productTitle'>"+title+"</b><span class='pull-right'>"+locDistance+"</span></div><ul><li>"+street+"</li><li>"+locality+"</li><li class='primaryColor'>"+phone+"</li><li class='lineHeight1'>"+fax+"</li><li class='lineHeight1'>"+email+"</li></ul><ul><li>"+workhours+"</li><li class='marginY-2'>"+btn2+"</li></ul></div>"; 
+		var currentStore = "<div class='locDetailWrap marginY-4'><div><strong class='productTitle'>"+title+"</strong><span class='pull-right'>"+locDistance+"</span></div><ul><li>"+street+"</li><li>"+locality+"</li><li class='primaryColor'>"+phone+"</li><li class='lineHeight1'>"+fax+"</li><li class='lineHeight1'>"+email+"</li></ul><ul><li>"+workhours+"</li><li class='marginY-2'>"+btn2+"</li></ul></div>"; 
 		$("#currentStore").html(currentStore);
 		$("#currentStoreNote").html(note);
 		var noImagePath = $('#webThemePath').val()+"/images/NoImage.png'";
