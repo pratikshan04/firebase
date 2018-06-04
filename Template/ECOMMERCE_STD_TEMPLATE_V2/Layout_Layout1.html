@@ -17,15 +17,13 @@
 				</div>
 			</header>
 			<nav class="navbar navbar-default hideForIpad">
-				<div class="container">
-					<div class="cimm_navigationBar">
-						#parse("navigation.html")
-					</div>
+				<div class="container cimm_navigationBar">
+					#parse("navigation.html")
 				</div>
 			</nav>
 		</div>
 		<div class="cimm_bodyContentWrap">
-		    <div class="container #if($LayoutName == "ProductList" && $resultCount > 0 && $!navigationType=="SEARCH")mTop-3 #end">
+		    <div class="container #if($LayoutName == 'ProductList' && $resultCount > 0 && $!navigationType=='SEARCH')mTop-3 #end">
 		    #if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $userAgent != "WEBVIEW")
 		    	<div class="row">
 			    	<div class="col-md-12">

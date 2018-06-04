@@ -60,7 +60,7 @@
 							</tr>
 							<tr>
                                 <td width="38%" style="border-right: 1px solid #666666;" background="images/site/tablerow0.gif">
-	                                <div class="halfBlokWrap left pullLeft">
+	                                <div class="halfBlokWrap left pull-left">
 										Terms<br>
 										Credit Limit<br>
 										Available Credit<br>
@@ -70,7 +70,7 @@
 										YTD Purchases<br>
 										Payment Days
 									</div>
-									<div class="halfBlokWrap right pullRight">
+									<div class="halfBlokWrap right pull-right">
 	                                  	$!userAccountDetail.arTerms<br>
 	                                  	$!userAccountDetail.arCreditLimitString<br>
 	                                  	$!userAccountDetail.arCreditAvailString<br>
@@ -84,7 +84,7 @@
 									</div>
                                 </td>
 								<td width="26%" style="border-right: 1px solid #666666;" background="images/site/tablerow0.gif">
-									<div class="halfBlokWrap left pullLeft">
+									<div class="halfBlokWrap left pull-left">
 										Future<br>
 										Current<br>
 										31-60<br>
@@ -93,7 +93,7 @@
 										Over120<br>
 										<strong>Total</strong>
 									</div>
-									<div class="halfBlokWrap right pullRight">
+									<div class="halfBlokWrap right pull-right">
 										$!userAccountDetail.future<br>
 										$!userAccountDetail.current<br>
 										$!userAccountDetail.thirty<br>
@@ -104,7 +104,7 @@
 									</div>
 								</td>
 								<td width="36%" background="images/site/tablerow0.gif">		
-									<div class="halfBlokWrap left pullLeft">
+									<div class="halfBlokWrap left pull-left">
 										&nbsp;<br>
 										<strong>Prev Balance</strong><br>
 										Payments/Credits<br>
@@ -112,7 +112,7 @@
 										<strong>New Balance</strong><br>
 										&nbsp;<br>
 									</div>
-									<div class="halfBlokWrap right pullRight">
+									<div class="halfBlokWrap right pull-right">
 										&nbsp;<br>
 										$numberTool.format("#0.00",$!userAccountDetail.previousBalance)<br>
 										$!userAccountDetail.aRDeposits<br>
@@ -183,9 +183,7 @@
     </tbody></table>
           </form>
 </div>
-    </div>
-	
-   <div class="clear"></div>       
+    </div>      
 <div class="dummyHeight"></div>
 <script type="text/javascript">
 $(document).ready( function () {
@@ -215,8 +213,7 @@ $(document).ready( function () {
 
 	}
 	
-</script> 
-<div class="clear"></div>
+</script>
 <style type="text/css">
 .hideMe .DataTables_sort_wrapper{
 	display:none;

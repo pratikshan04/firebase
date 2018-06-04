@@ -40,7 +40,7 @@
 
 .slick-prev {
     left: 20px;
-	box-shadow: 1px 2px 10px -1px $lightShadowColor;
+	box-shadow: 1px 2px 10px -1px $shadow-color;
 }
 
 .slick-slider .slick-track,
@@ -101,7 +101,7 @@
 
 .slick-next {
     right: 5px;
-	box-shadow: 1px 2px 10px -1px $lightShadowColor;
+	box-shadow: 1px 2px 10px -1px $shadow-color;
 }
 
 ul.slick-dots {
@@ -141,7 +141,7 @@ ul.slick-dots {
                 height: 10px;
                 content: "";
                 text-align: center;
-                background: $primaryColor;
+                background: $primary_color;
                 border-radius: 10px;
             }
         }
@@ -159,12 +159,12 @@ ul.slick-dots {
 .slick-prev:hover,
 .slick-next:hover {
     background: $white;
-	box-shadow: 1px 2px 10px 1px $lightShadowColor;
+	box-shadow: 1px 2px 10px 1px $shadow-color;
 }
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-    color: $lightGrayColorTwo;
+    color: $gray-lighten;
 }
 
 .slick-prev:before,
@@ -182,7 +182,7 @@ ul.slick-dots {
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-    color: $darkGrayColorTwo;
+    color: $gray;
 }
 
 .slick-next::before {
@@ -274,7 +274,7 @@ ul.slick-dots {
 		}
         .slick-slide {
             margin: 0 0 0 15px;
-			box-shadow: 0 0 6px $lightShadowColor;
+			box-shadow: 0 0 6px $shadow-color;
 			border-radius: 3px;
         }
 
@@ -370,7 +370,7 @@ ul.slick-dots {
 
 .cimm_slideItemDesp {
     padding: 10px;
-    /*background: $lightGrayColorTwo;*/
+    /*background: $gray-lighten;*/
 	.productTitle {
 		height: 40px;
 		display: inline-block;

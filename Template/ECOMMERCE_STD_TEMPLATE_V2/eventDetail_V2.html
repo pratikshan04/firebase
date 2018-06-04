@@ -2,7 +2,7 @@
 <div class="eventsSidebarWrap">	
 	<div class="eventRightContent">
 		<h3 class="cimm_pageTitle">$!eventsList.title</h3>
-		<ul class="eventInfoBlock pullLeft">
+		<ul class="eventInfoBlock pull-left">
 			<li>
 				<b>$!locale.get("eventDetail.label.date"): </b>
 				#if($eventsList.date.substring(9,11).replaceAll('-','/') == $eventsList.end.substring(9,11).replaceAll('-','/'))
@@ -27,7 +27,7 @@
 				#end
 			</li>
 		</ul>
-		<ul class="pullRight">
+		<ul class="pull-right">
 			<li>
 				<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';"/>
 			</li>
@@ -48,12 +48,12 @@
 		<table cellspacing="5" cellpadding="0">
 		#if($eventsList.totalSeats==-1)
 			 <tr>            		
-				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></b></td>
 				<td>$!locale.get("event.seats.unlimited")</td>
 			</tr>
 			#else
 			<tr>
-				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></b></td>
 	 			<td>$!eventsList.totalSeats</td>
 	 		</tr>
 			#end
@@ -61,12 +61,12 @@
 			#if($eventsList.totalSeats == -1)
 			#elseif($diff < 0)
 			<tr>
-				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span></b></td>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span></b></td>
 				<td>0</td>
 			</tr>
 			#else
 			<tr>
-				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span> </b></td>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span> </b></td>
 				<td>$!diff</td>
 			</tr>
 			#end

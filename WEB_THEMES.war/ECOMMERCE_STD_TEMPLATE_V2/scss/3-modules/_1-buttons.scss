@@ -3,7 +3,7 @@ input[type='submit'] {
     -moz-appearance: none;
     -webkit-appearance: none;
     -appearance: none;
-    font-family: $buttonFont;
+    font-family: $button_font_family;
     text-transform: uppercase;
     outline: none;
     &:active {
@@ -15,7 +15,7 @@ input[type='submit'] {
 .form-group .bootstrap-select .btn.dropdown-toggle {
     text-transform: capitalize;
     font-weight: normal;
-    font-family: $defaultFont;
+    font-family: $button_font_family;
 }
 
 .button {
@@ -23,7 +23,7 @@ input[type='submit'] {
     background: $primary_color;
     padding: 12px;
     color: $white;
-    font-family: $buttonFont;
+    font-family: $button_font_family;
     font-size: 14px;
     border-radius: 0;
     letter-spacing: normal;
@@ -32,11 +32,11 @@ input[type='submit'] {
     border: none;
 	border-radius: 2px;
     &:hover {
-        background: $secandaryColor;
+        background: $gray-lighter;
     }
 }
 .compareSimDiffBtns.active {
-    background: $primaryColor;
+    background: $primary_color;
 }
 
 .cimm_inlineButton {
@@ -55,20 +55,21 @@ input[type='submit'] {
     text-transform: uppercase;
     color: $white;
 	padding-left: 35px;
-    background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
+    background: url('../images/cartIcon.svg') 6px 6px/24px $primary_color no-repeat;
     vertical-align: unset;
     &:hover {
         color: $white;
-        background: url('../images/cartIcon.svg') 6px 6px/24px $darkgray no-repeat;
+        background: url('../images/cartIcon.svg') 6px 6px/24px $gray-dark no-repeat;
     }
     &:active,&:focus {
         color: $white;
-        background: url('../images/cartIcon.svg') 6px 6px/24px $primaryColor no-repeat;
+        background: url('../images/cartIcon.svg') 6px 6px/24px $primary_color no-repeat;
     }
     &.btns-disable {
         opacity: .3;
     }
 }
+
 
 .btns-disable {
     cursor: not-allowed !important;
@@ -80,11 +81,10 @@ input[type='submit'] {
 }
 
 .refreshBtn {
-    color: $primaryColor;
+    color: $primary_color;
     font-size: 24px;
 }
 .cimm_btnGroupEnclosure {
-   //width: 70%;
     margin: 25px auto;
     padding-bottom: 30px;
     border-bottom: 1px solid $black;
@@ -97,7 +97,7 @@ input[type='submit'] {
                 padding-right: 0;
             }
             a:not(.btn) {
-                color: $primaryColor;
+                color: $primary_color;
                 font-size: 16px;
 				background: none;
                 i {
@@ -129,7 +129,7 @@ input[type='submit'] {
                         text-transform: capitalize;
                         &:hover {
                             color: $white;
-                            background: $primaryColor;
+                            background: $primary_color;
                         }
                     }
                     input {
@@ -149,7 +149,7 @@ input[type='submit'] {
     text-decoration: underline !important;
     display: inline-block;
     font-size: 14px;
-    color: $primaryColor !important;
+    color: $primary_color !important;
     &:before {
         content: "+";
         position: absolute;
@@ -202,7 +202,7 @@ input[type='submit'] {
 				display: block;
 				padding: 5px;
 				&:hover {
-					background: $primaryColor;
+					background: $primary_color;
 					color: $white;
 				}
 			}
@@ -254,7 +254,7 @@ input[type='submit'] {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $lightGrayColorOne;
+    background-color: $gray-lighten;
     -webkit-transition: .4s;
     transition: .4s;
     z-index: 1;
@@ -270,7 +270,7 @@ input[type='submit'] {
     width: 60px;
     left: 0;
     bottom: 0;
-    background-color: $darkGrayColorTwo;
+    background-color: $gray;
     -webkit-transition: .4s;
     transition: .4s;
 }

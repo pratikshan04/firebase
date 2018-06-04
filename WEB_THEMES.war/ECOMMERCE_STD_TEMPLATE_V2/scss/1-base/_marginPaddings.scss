@@ -1,357 +1,371 @@
+$margin-zero: 0 !important;
+$margin-xs: 4px !important;
+$margin-sm: 8px !important;
+$margin-md: 16px !important;
+$margin-lg: 24px !important;
+$margin-xlg: 48px !important;
+
+$padding-zero: 0 !default;
+$padding-sx: 4px !default;
+$padding-sm: 8px !default;
+$padding-md: 16px !default;
+$padding-lg: 24px !default;
+$padding-xlg: 48px !default;
+
 .mTop-0 {
-    margin-top: 0!important;
+    margin-top: $margin-zero;
 }
 
 .mRight-0 {
-    margin-right: 0!important;
+    margin-right: $margin-zero;
 }
 
 .mBottom-0 {
-    margin-bottom: 0!important;
+    margin-bottom: $margin-zero;
 }
 
 .mLeft-0 {
-    margin-left: 0!important;
+    margin-left: $margin-zero;
 }
 
 .marginX-0 {
-    margin-right: 0!important;
-    margin-left: 0!important;
+    margin-right: $margin-zero;
+    margin-left: $margin-zero;
 }
 
 .marginY-0 {
-    margin-top: 0!important;
-    margin-bottom: 0!important;
+    margin-top: $margin-zero;
+    margin-bottom: $margin-zero;
 }
 
 .margin-1 {
-    margin: 4px!important;
+    margin: $margin-xs;
 }
 
 .mTop-1 {
-    margin-top: 4px!important;
+    margin-top: $margin-xs;
 }
 
 .mRight-1 {
-    margin-right: 4px!important;
+    margin-right: $margin-xs;
 }
 
 .mBottom-1 {
-    margin-bottom: 4px!important;
+    margin-bottom: $margin-xs;
 }
 
 .mLeft-1 {
-    margin-left: 4px!important;
+    margin-left: $margin-xs;
 }
 
 .marginX-1 {
-    margin-right: 4px!important;
-    margin-left: 4px!important;
+    margin-right: $margin-xs;
+    margin-left: $margin-xs;
 }
 
 .marginY-1 {
-    margin-top: 4px!important;
-    margin-bottom: 4px!important;
+    margin-top: $margin-xs;
+    margin-bottom: $margin-xs;
 }
 
 .margin-2 {
-    margin: 8px!important;
+    margin: $margin-sm;
 }
 
 .mTop-2 {
-    margin-top: 8px!important;
+    margin-top: $margin-sm;
 }
 
 .mRight-2 {
-    margin-right: 8px!important;
+    margin-right: $margin-sm;
 }
 
 .mBottom-2 {
-    margin-bottom: 8px!important;
+    margin-bottom: $margin-sm;
 }
 
 .mLeft-2 {
-    margin-left: 8px!important;
+    margin-left: $margin-sm;
 }
 
 .marginX-2 {
-    margin-right: 8px!important;
-    margin-left: 8px!important;
+    margin-right: $margin-sm;
+    margin-left: $margin-sm;
 }
 
 .marginY-2 {
-    margin-top: 8px!important;
-    margin-bottom: 8px!important;
+    margin-top: $margin-sm;
+    margin-bottom: $margin-sm;
 }
 
 .margin-3 {
-    margin: 16px!important;
+    margin: $margin-md;
 }
 
 .mTop-3 {
-    margin-top: 16px!important;
+    margin-top: $margin-md;
 }
 
 .mRight-3 {
-    margin-right: 16px!important;
+    margin-right: $margin-md;
 }
 
 .mBottom-3 {
-    margin-bottom: 16px!important;
+    margin-bottom: $margin-md;
 }
 
 .mLeft-3 {
-    margin-left: 16px!important;
+    margin-left: $margin-md;
 }
 
 .marginX-3 {
-    margin-right: 16px!important;
-    margin-left: 16px!important;
+    margin-right: $margin-md;
+    margin-left: $margin-md;
 }
 
 .marginY-3 {
-    margin-top: 16px!important;
-    margin-bottom: 16px!important;
+    margin-top: $margin-md;
+    margin-bottom: $margin-md;
 }
 
 .margin-4 {
-    margin: 24px!important;
+    margin: $margin-lg;
 }
 
 .mTop-4 {
-    margin-top: 24px!important;
+    margin-top: $margin-lg;
 }
 
 .mRight-4 {
-    margin-right: 24px!important;
+    margin-right: $margin-lg;
 }
 
 .mBottom-4 {
-    margin-bottom: 24px!important;
+    margin-bottom: $margin-lg;
 }
 
 .mLeft-4 {
-    margin-left: 24px!important;
+    margin-left: $margin-lg;
 }
 
 .marginX-4 {
-    margin-right: 24px!important;
-    margin-left: 24px!important;
+    margin-right: $margin-lg;
+    margin-left: $margin-lg;
 }
 
 .marginY-4 {
-    margin-top: 24px!important;
-    margin-bottom: 24px!important;
+    margin-top: $margin-lg;
+    margin-bottom: $margin-lg;
 }
 
 .margin-5 {
-    margin: 48px!important;
+    margin: $margin-xlg;
 }
 
 .mTop-5 {
-    margin-top: 48px!important;
+    margin-top: $margin-xlg;
 }
 
 .mRight-5 {
-    margin-right: 48px!important;
+    margin-right: $margin-xlg;
 }
 
 .mBottom-5 {
-    margin-bottom: 48px!important;
+    margin-bottom: $margin-xlg;
 }
 
 .mLeft-5 {
-    margin-left: 48px!important;
+    margin-left: $margin-xlg;
 }
 
 .marginX-5 {
-    margin-right: 48px!important;
-    margin-left: 48px!important;
+    margin-right: $margin-xlg;
+    margin-left: $margin-xlg;
 }
 
 .marginY-5 {
-    margin-top: 48px!important;
-    margin-bottom: 48px!important;
+    margin-top: $margin-xlg;
+    margin-bottom: $margin-xlg;
 }
 
 .padding-0 {
-    padding: 0!important;
+    padding: $padding-zero;
 }
 
 .pTop-0 {
-    padding-top: 0!important;
+    padding-top: $padding-zero;
 }
 
 .pRight-0 {
-    padding-right: 0!important;
+    padding-right: $padding-zero;
 }
 
 .pBottom-0 {
-    padding-bottom: 0!important;
+    padding-bottom: $padding-zero;
 }
 
 .pLeft-0 {
-    padding-left: 0!important;
+    padding-left: $padding-zero;
 }
 
 .paddingX-0 {
-    padding-right: 0!important;
-    padding-left: 0!important;
+    padding-right: $padding-zero;
+    padding-left: $padding-zero;
 }
 
 .paddingY-0 {
-    padding-top: 0!important;
-    padding-bottom: 0!important;
+    padding-top: $padding-zero;
+    padding-bottom: $padding-zero;
 }
 
 .padding-1 {
-    padding: 4px!important
+    padding: $padding-sx;
 }
 
 .pTop-1 {
-    padding-top: 4px!important
+    padding-top: $padding-sx;
 }
 
 .pRight-1 {
-    padding-right: 4px!important
+    padding-right: $padding-sx;
 }
 
 .pBottom-1 {
-    padding-bottom: 4px!important
+    padding-bottom: $padding-sx;
 }
 
 .pLeft-1 {
-    padding-left: 4px!important
+    padding-left: $padding-sx;
 }
 
 .paddingX-1 {
-    padding-right: 4px!important;
-    padding-left: 4px!important
+    padding-right: $padding-sx;;
+    padding-left: $padding-sx;
 }
 
 .paddingY-1 {
-    padding-top: 4px!important;
-    padding-bottom: 4px!important
+    padding-top: $padding-sx;;
+    padding-bottom: $padding-sx;
 }
 
 .padding-2 {
-    padding: 8px!important
+    padding: $padding-sm;
 }
 
 .pTop-2 {
-    padding-top: 8px!important
+    padding-top: $padding-sm;
 }
 
 .pRight-2 {
-    padding-right: 8px!important
+    padding-right: $padding-sm;
 }
 
 .pBottom-2 {
-    padding-bottom: 8px!important
+    padding-bottom: $padding-sm;
 }
 
 .pLeft-2 {
-    padding-left: 8px!important
+    padding-left: $padding-sm;
 }
 
 .paddingX-2 {
-    padding-right: 8px!important;
-    padding-left: 8px!important
+    padding-right: $padding-sm;;
+    padding-left: $padding-sm;
 }
 
 .paddingY-2 {
-    padding-top: 8px!important;
-    padding-bottom: 8px!important
+    padding-top: $padding-sm;;
+    padding-bottom: $padding-sm;
 }
 
 .padding-3 {
-    padding: 16px!important
+    padding: $padding-md;
 }
 
 .pTop-3 {
-    padding-top: 16px!important
+    padding-top: $padding-md;
 }
 
 .pRight-3 {
-    padding-right: 16px!important
+    padding-right: $padding-md;
 }
 
 .pBottom-3 {
-    padding-bottom: 16px!important
+    padding-bottom: $padding-md;
 }
 
 .pLeft-3 {
-    padding-left: 16px!important
+    padding-left: $padding-md;
 }
 
 .paddingX-3 {
-    padding-right: 16px!important;
-    padding-left: 16px!important
+    padding-right: $padding-md;;
+    padding-left: $padding-md;
 }
 
 .paddingY-3 {
-    padding-top: 16px!important;
-    padding-bottom: 16px!important
+    padding-top: $padding-md;;
+    padding-bottom: $padding-md;
 }
 
 .padding-4 {
-    padding: 24px!important
+    padding: $padding-lg;
 }
 
 .pTop-4 {
-    padding-top: 24px!important
+    padding-top: $padding-lg;
 }
 
 .pRight-4 {
-    padding-right: 24px!important
+    padding-right: $padding-lg;
 }
 
 .pBottom-4 {
-    padding-bottom: 24px!important
+    padding-bottom: $padding-lg;
 }
 
 .pLeft-4 {
-    padding-left: 24px!important
+    padding-left: $padding-lg;
 }
 
 .paddingX-4 {
-    padding-right: 24px!important;
-    padding-left: 24px!important
+    padding-right: $padding-lg;;
+    padding-left: $padding-lg;
 }
 
 .paddingY-4 {
-    padding-top: 24px!important;
-    padding-bottom: 24px!important
+    padding-top: $padding-lg;;
+    padding-bottom: $padding-lg;
 }
 
 .padding-5 {
-    padding: 48px!important
+    padding: $padding-xlg;
 }
 
 .pTop-5 {
-    padding-top: 48px!important
+    padding-top: $padding-xlg;
 }
 
 .pRight-5 {
-    padding-right: 48px!important
+    padding-right: $padding-xlg;
 }
 
 .pBottom-5 {
-    padding-bottom: 48px!important
+    padding-bottom: $padding-xlg;
 }
 
 .pLeft-5 {
-    padding-left: 48px!important
+    padding-left: $padding-xlg;
 }
 
 .paddingX-5 {
-    padding-right: 48px!important;
-    padding-left: 48px!important
+    padding-right: $padding-xlg;;
+    padding-left: $padding-xlg;
 }
 
 .paddingY-5 {
-    padding-top: 48px!important;
-    padding-bottom: 48px!important
+    padding-top: $padding-xlg;;
+    padding-bottom: $padding-xlg;
 }
 
 .margin-auto {

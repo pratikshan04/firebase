@@ -17,7 +17,7 @@
             position: absolute;
             height: 2px;
             left: 0;
-            background: $primaryColor;
+            background: $primary_color;
             bottom: 0;
             transition: left .25s cubic-bezier(.5, 0, .25, 1);
             -webkit-transition: left .25s cubic-bezier(.5, 0, .25, 1);
@@ -39,7 +39,7 @@
             font-size: $tabHeadingFontSize;
             cursor: pointer;
             height: 36px;
-            border-bottom: 1px solid $darkGrayColorTwo;
+            border-bottom: 1px solid $gray;
             &:after {
                 position: absolute;
                 top: 12px;
@@ -62,7 +62,7 @@
         >div {
             padding: 20px;
             background: $white;
-            border: 2px solid $lightGrayColorOne;
+            border: 2px solid $gray-lighten;
         }
         .buttonWrap {
             text-align: right;

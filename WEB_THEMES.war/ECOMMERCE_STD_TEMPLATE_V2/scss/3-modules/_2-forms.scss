@@ -8,7 +8,7 @@ textarea { resize: vertical; }
 	margin-bottom: 10px;
 	border:1px solid #ccc;
 	padding:5px;
-	background: $darkgray;
+	background: $gray-dark;
 	
 	input{
 		width:100%;
@@ -73,7 +73,7 @@ textarea { resize: vertical; }
 		
 		&:checked{
 			+ span:after, + span:before {
-				border: 2px solid $secandaryColor;
+				border: 2px solid $primary_color;
 				-webkit-transition: all 0.3s ease-out;
 				-moz-transition: all 0.3s ease-out;
 				-ms-transition: all 0.3s ease-out;
@@ -81,7 +81,7 @@ textarea { resize: vertical; }
 			}
 
 			+ span:before {
-				background: $secandaryColor;
+				background: $primary_color;
 				-webkit-transform: scale(.5);
 				-moz-transform: scale(.5);
 				-ms-transform: scale(.5);
@@ -89,9 +89,17 @@ textarea { resize: vertical; }
 			}
 		}
 		
-		&:disabled + span:after{
-			border: 2px solid #D2D2D2;
-			cursor: not-allowed;
+		&:disabled {
+			+ span:after{
+				border: 2px solid $gray-lighter;
+				cursor: not-allowed;
+			}
+		}
+		&:disabled:checked {
+			+ span:before {
+				background: $gray-lighter;
+				border: 2px solid $gray-lighter;
+			}
 		}
 	}
 } 
@@ -162,8 +170,8 @@ ul.cimm_formContent li label.customCheckBox2{
 }
 .customCheckBox input[type="checkbox"]:checked + span:after,
 .customCheckBox2 input[type="checkbox"]:checked + span:after{
-	border: 1px solid $primaryColor;
-	background: $primaryColor;
+	border: 1px solid $primary_color;
+	background: $primary_color;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
@@ -174,7 +182,7 @@ ul.cimm_formContent li label.customCheckBox2{
 }
 .customCheckBox input[type="checkbox"]:checked + span:before,
 .customCheckBox2 input[type="checkbox"]:checked + span:before {
-	background: $primaryColor;
+	background: $primary_color;
 	-ms-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);

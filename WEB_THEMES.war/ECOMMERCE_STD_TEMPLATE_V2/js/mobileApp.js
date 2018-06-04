@@ -45,3 +45,10 @@ function getcookiefromdocument(){
 		console.log('The native context does not exist yet');
 	}
 }
+function fingerPrint(userName, password){
+	try{Android.getusernameandpassword(userName, password)}
+	catch(err){
+	webkit.messageHandlers.callbackHandler.postMessage(userName, password);
+	console.log('The native context does not exist yet');
+	}
+}

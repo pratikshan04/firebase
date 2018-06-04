@@ -174,13 +174,3 @@ $icons: (
 @mixin border($width, $style, $color){
 	border: $width $style $color;
 }
-
-
-// @mixin border() {
-
-// 	@if variable-exists(direction) and  $direction != null {
-// 		border-#{$direction}: $width $style $color;
-// 	} @else {
-// 		border: $border-default;
-// 	}
-// }

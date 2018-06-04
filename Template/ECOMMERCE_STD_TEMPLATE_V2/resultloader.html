@@ -186,8 +186,8 @@
 	#else
 		<div class="mulAddTocartWrap">
 			<div class="addToCartHeaderContent clearAfter">
-				<h3 class="cimm_pageTitle pullLeft">$!locale.get('product.heading.myCart')</h3>
-				<div class="cartTotalCount pullRight">
+				<h3 class="cimm_pageTitle pull-left">$!locale.get('product.heading.myCart')</h3>
+				<div class="cartTotalCount pull-right">
 					<p><i class="fa fa-lg fa-shopping-cart"></i>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">$!cartCount Items</span>#else 0 Items #end</p>
 				</div>
 				<div class="clear"></div>
@@ -323,8 +323,8 @@
 				#end
 			</div>
 			<div class="popCheckout clearAfter"> 
-				<a href="javascript:void(0);" onclick='BulkAction.removeSliderAfterAddToCart();' class="pullLeft button">$!locale.get("product.button.continueShopping")</a>
-				<a href='$!locale.get("website.url.ShoppingCart")' class="pullRight button">$!locale.get("product.heading.viewCart")</a> 
+				<a href="javascript:void(0);" onclick='BulkAction.removeSliderAfterAddToCart();' class="pull-left button">$!locale.get("product.button.continueShopping")</a>
+				<a href='$!locale.get("website.url.ShoppingCart")' class="pull-right button">$!locale.get("product.heading.viewCart")</a> 
 			</div>
 			#if($!productListData.size()>0)
 				<span class='text-danger'>Note: Cannot add <i class="fa fa-phone fa-lg"></i> for Price items to cart</span>
@@ -888,10 +888,10 @@
 	 
 	  #if($!cardDetails.size()>0)
 		  #if($fromPage=="AccountPage" && $fromPage!="")
-		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=true; paymentProcessor.unHighLight();$('.addNewCardBtn').show();"  id="addNewCreditCardButton" class="button pullRight">Add new credit card</button>
+		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=true; paymentProcessor.unHighLight();$('.addNewCardBtn').show();"  id="addNewCreditCardButton" class="button pull-right">Add new credit card</button>
 		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=false;$('.addNewCardBtn').hide();" style="display:none;" id="cancelCreditCardButton" class="button">Cancel</button>
 		  #else
-		  <button type="button" onclick="paymentProcessor.userNewCreditCardUI();" id="addNewCreditCardButton" class="button pullRight">Use new credit card</button>
+		  <button type="button" onclick="paymentProcessor.userNewCreditCardUI();" id="addNewCreditCardButton" class="button pull-right">Use new credit card</button>
 		  <button type="button" onclick="$('#creditCardForm').toggle();$('#addNewCreditCardButton').toggle();$('#cancelCreditCardButton').toggle();paymentProcessor.addNewRequest=false;" style="display:none;" id="cancelCreditCardButton" class="button">Cancel</button>
 		  #end
 	  #end

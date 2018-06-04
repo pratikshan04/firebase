@@ -96,7 +96,7 @@
 	font-size:120%;
 }
 .eventsCalendar-daysList.showAsWeek li.eventCalendar-current {
-	background: $primaryColor;
+	background: $primary_color;
 }
 .eventsCalendar-daysList.showAsWeek li.eventCalendar-current a {
 	color: #FFF;
@@ -109,7 +109,7 @@
 }
 .calendarFilterWrap{
     .tableHeader{
-        background: $lightGrayColorOne;
+        background: $gray-lighten;
         h2{
             margin:0;
             color:$default_font-color;
@@ -122,10 +122,10 @@
                 @extend .button;
                 float: left;
                 background: $eventTabBg;
-                border-left:2px solid $lightGrayColorOne;
+                border-left:2px solid $gray-lighten;
                 width:100px;
                 &:hover,&.active{
-                    background: $primaryColor;
+                    background: $primary_color;
                     color: $white;
                 }
                 label{
@@ -140,10 +140,10 @@
 //.calendarFilter h3{}
 .calendarFilter h4{
 	margin: 3px 0;
-	color: $primaryColor;
+	color: $primary_color;
 }
 .calendarFilter h4 a{
-	color: $primaryColor;
+	color: $primary_color;
 }
 .calendarFilter ul li{
 	margin: 8px 0;
@@ -152,7 +152,7 @@
 }
 .calendarFilter{
 	.calendarFilterHead{
-		color: $primaryColor;
+		color: $primary_color;
 		h2 {
 			margin: 10px 0 6px 0;
 			font-size: 16px;
@@ -173,20 +173,20 @@
 	top: 3px;
 }
 .calendarFilter h5 {
-	color: $primaryColor;
+	color: $primary_color;
 	font-size: 15px;
 	border-top: 1px solid #BDBDBD;
 	padding-top: 5px;
 }
-.calendarFilter span.pullRight {
-    color: $primaryColor;
+.calendarFilter span.pull-right {
+    color: $primary_color;
     font-size: 14px;
     margin-top: 4px;
 }
 .eventsCalendar-list-wrap h2 {
 	margin: 0;
 	border-bottom: 1px solid #DFDFDF;
-	color: $primaryColor;
+	color: $primary_color;
 	text-transform: uppercase;
 }
 .eventsCalendarHead{
@@ -194,7 +194,7 @@
 	text-align: center;
 	font-size: 16px;
 	text-transform: uppercase;
-	color: $primaryColor;
+	color: $primary_color;
 }
  .cimm_subTitleev {
 	font-size: 14px;
@@ -221,7 +221,7 @@
 }
 .eventRightContent h3{
 	margin: 0 0 10px 0;
-    color: $primaryColor;
+    color: $primary_color;
 }
 
 ul.eventInfoBlock{
@@ -231,32 +231,32 @@ ul.eventInfoBlock{
 }
 
 form#eventForm h2 {
-	color: $primaryColor;
+	color: $primary_color;
 }
 .eventRightContent p a.mailtoLink {
-    color: $primaryColor;
+    color: $primary_color;
     font-size: 12px;
 }
 .eventRightContent p a {
-    color: $primaryColor;
+    color: $primary_color;
 }
 #events_Table_wrapper #events_Table_filter{display:none;}
 #events_Table_wrapper .dataTables_length{display:none;}
 #events_Table_wrapper #events_Table td:nth-child(2){width: 41%;}
 #events_Table_wrapper #events_Table td.calendarDetail {text-align: right;}
 #location,#events_Table_wrapper .dataTables_info,#events_Table_wrapper .dataTables_paginate{display:none;}
-.group td a{color: $primaryColor;}
-#events_Table_wrapper #events_Table td.calendarDetail a{color: $primaryColor;display: block;}
+.group td a{color: $primary_color;}
+#events_Table_wrapper #events_Table td.calendarDetail a{color: $primary_color;display: block;}
 #events_Table_wrapper #events_Table td p {margin: 5px 0 0 0;}
 #events_Table_wrapper #events_Table td.sorting_1 p.allEvent{font-size: 16px;}
 #events_Table_wrapper #events_Table td span.location a,#events_Table_wrapper #events_Table td span.location{
-	color: $primaryColor;
+	color: $primary_color;
 	font-size: 14px;
 	margin: 5px 0 8px 0;
 	display: block;
 }  
 #events_Table_wrapper #events_Table .group td{
-	color: $primaryColor;
+	color: $primary_color;
     font-size: 15px;
     border-top: 1px solid #BDBDBD;
     border-bottom: 1px solid #BDBDBD;
@@ -286,7 +286,7 @@ form#eventForm h2 {
     height: 45px;
     top: 0;
     padding: 11px;
-    background: $primaryColor;
+    background: $primary_color;
 }
 .eventCalendar-wrap .arrow:hover {opacity: 0.7;
 }
@@ -312,14 +312,14 @@ form#eventForm h2 {
 }
 .eventsCalendar-currentTitle {
 	line-height: 45px;
-	background:$primaryColor;
+	background:$primary_color;
 	margin: 0 0px 2px 0px;
 }
 .eventsCalendar-currentTitle .monthTitle {
     font-size: 16px;
     text-decoration: none;
     color: $white;
-    font-family: $headingFont;
+    font-family: $secondary_font-family;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -329,7 +329,7 @@ form#eventForm h2 {
 	width: 100%;
 }
 #events_Table_wrapper #events_Table td p a:hover,.eventsDetail_Calendar-list li div p a:hover {
-    color: $primaryColor;
+    color: $primary_color;
 }
 //.eventsCalendar-daysList.showDayNames.showAsWeek {}
 .eventsCalendar-daysList:before, .eventsCalendar-daysList:after {
@@ -342,7 +342,7 @@ form#eventForm h2 {
 .eventsCalendar-day-header {
 	text-align: center;
 	background: $white;
-	color: $primaryColor;
+	color: $primary_color;
 	padding: 4px 0px;
 	margin-bottom: 3px !important;
 }
@@ -370,15 +370,15 @@ form#eventForm h2 {
 	background: #A9A9A9;
 }
 .eventsCalendar-daysList li.dayWithEvents a {
-    color: $primaryColor;
+    color: $primary_color;
     font-weight: bold;
 }
 li.eventsCalendar-day.dayWithEvents a:hover {
-	background: $lightGrayColorOne;
+	background: $gray-lighten;
 	color: $black;
 }
 li.eventsCalendar-day.current a:hover {
-	background-color: $primaryColor;
+	background-color: $primary_color;
 	color: #FFF;
 }
 .eventsCalendar-loading {
@@ -435,7 +435,7 @@ li.eventsCalendar-day.current a:hover {
 	margin:10px 0px;
 }
 .eventsCalendar-list li time em {
-	color: $primaryColor;
+	color: $primary_color;
 	font-weight: bold;
 	padding-bottom: 10px;
 	font-style: normal;
@@ -449,7 +449,7 @@ li.eventsCalendar-day.current a:hover {
 	margin: 0 0 0 3px;
 }
 .eventsCalendar-list li .eventTitle {
-	color: $primaryColor;
+	color: $primary_color;
 	margin:4px 0 0 0;
 	font-size: 15px;
 }

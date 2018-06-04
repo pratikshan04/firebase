@@ -28,17 +28,6 @@ html {
     display: block;
     content: '';
 }
-.clearBoth {
-	clear: both;
-}
-
-.pullLeft {
-    float: left;
-}
-
-.pullRight {
-    float: right;
-}
 
 .alignCenter {
     text-align: center;
@@ -65,7 +54,7 @@ html {
     z-index: unset;
 }
 .dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover{
-    background: $primaryColor;
+    background: $primary_color;
 }
 abbr[data-original-title],
 abbr[title] {
@@ -74,7 +63,7 @@ abbr[title] {
 }
 
 .modal-body {
-    color: $bodyFontColor;
+    color: $default_font-color;
 }
 .required{
 	color: #F00;
@@ -108,10 +97,6 @@ ol li {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-a {
-    cursor: pointer;
 }
 
 a:focus,
