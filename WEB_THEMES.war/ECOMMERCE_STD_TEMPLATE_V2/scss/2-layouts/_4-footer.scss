@@ -2,8 +2,7 @@ footer {
     color: $white;
     .footerMiddelContent {
         background: $footer-midcontent_bg;
-        height: 300px; 
-
+        height: 300px;
         .footerCol {
             h5 {
                 position: relative;
@@ -29,7 +28,6 @@ footer {
             ul {
                 li {
                     font-size: $fnav_lf-size;
-                     
                     a {
                         font-size: $fnav_lf-size;
                         color: $footerHeadingColor;
@@ -41,7 +39,6 @@ footer {
                         font-size: 16px;
                         margin-top: 18px;
                     }
-
                     p{
                         color: $fp_f-color;
                     }
@@ -53,8 +50,6 @@ footer {
     .cimm_footerDownContent {
         background: $footer-btmcontent_bg;
         padding: 20px 10px;
-
-        
         .foot_copy {
             margin: 0;
             font-size: $footer_copyright-fSize;

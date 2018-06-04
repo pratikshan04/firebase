@@ -1,0 +1,103 @@
+#map_canvas{
+    width: 100%;
+    top: -100%;
+}
+.locationZipcode{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.labelWrap{
+	float: left;
+	width: 95px;
+	margin: 6px 15px 0 0;
+	text-align: right;
+}
+.inputWrap{
+	float: left;
+	width: calc(100% - 110px);
+	input{
+		width: 100%;
+		padding: 5px;
+	}
+}
+.locationSearch{
+	+a{
+		color: $primary_color;
+		text-decoration: underline;
+		display: block;
+		text-align: right;
+		margin: 14px 0;
+	}
+}
+.location-search{
+    input{
+        height: 34px;
+        padding:5px 10px;
+        float: left;
+        margin-right: 3px;
+    }
+    .cimm_inlineButton{
+        height: 34px;
+        display: inline-block;
+    }
+}
+.locationDataWrap{
+    .store-list{
+        li{
+            &:first-child{
+                padding: 0 0 10px;
+            }
+            div{
+                cursor: pointer;
+				color: $primary_color;
+				font-family: $default_font-family;
+                span.iconToggle{
+                    float: left;
+                    width: 8%;
+                    font-size: 20px;
+                }
+                span.pull-left{
+                    width:62%;
+					color: $primary_color;
+					font-family: $default_font-family;
+                }
+                span.pull-right{
+                    width:26%;
+                }
+            }
+            .locationDetailList li{
+                padding:2px 2px 2px 20px;
+				&.Phone{
+					margin: 10px 0;
+				}
+				&.Note {
+					display: none;
+				}
+            }
+        }
+    }
+}
+.crdirections {
+	text-decoration: underline;
+}
+.locDetailWrap{
+    ul{
+        li{
+            padding:3px 0;
+        }
+    }
+}
+.locationDetails{
+	font-size: 14px;
+	.searchHeading{
+		font-size: 16px;
+		color: $primary_color;
+		margin: 0 0 16px 0;
+	}
+	.locationHeading{
+		font-size: 20px;
+		color: $primary_color;
+		text-transform: uppercase;
+		margin: 0 0 12px 0;
+	}
+}
