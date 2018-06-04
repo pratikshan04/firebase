@@ -95,7 +95,7 @@
 					#else 
 						#set($attrValueForSearch = $!attrListVal)
 					#end
-					
+					#if($attrFilteredList.size()==0 && ($!navigationType=="SEARCH" ||$!navigationType=="BRAND"))
 					#if($attrListVal=="brand")	
 					#elseif($attrListVal=="category")	
 					#else 
