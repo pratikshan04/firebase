@@ -144,7 +144,7 @@ ul.calendarFilterHead li label{
 	border-top: 1px solid #BDBDBD;
 	padding-top: 5px;
 }
-.calendarFilter span.pullRight {
+.calendarFilter span.pull-right {
     color: #C8102E;
     font-size: 14px;
     margin-top: 4px;

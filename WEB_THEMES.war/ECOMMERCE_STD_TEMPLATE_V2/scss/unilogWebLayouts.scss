@@ -1,4 +1,3 @@
-@import "customVariables";
 @import "1-base/0-base";
 @import "2-layouts/0-layouts";
 @import "3-modules/0-modules";
@@ -12,7 +11,8 @@ body {
     font-family: $body_font-family;
 	font-size: $body_font-size - 2;
     color: $body_font-color;
-	overflow-x: hidden;
+    overflow-x: hidden;
+    outline: none;
 }
 
 $pagination_bg: $primary_color;
@@ -140,9 +140,9 @@ footer,
     .pagebarUTH {
         text-align: right;
         padding: 6px 0 0 0;
-        font-family: $headingFont;
+        font-family: $secondary_font-family;
         span {
-            color: $primaryColor;
+            color: $primary_color;
             font-size: 20px;
             padding: 0 3px;
         }
@@ -151,15 +151,15 @@ footer,
             font-size: 16px;
             padding: 0 3px;
             &:hover {
-                color: $primaryColor;
+                color: $primary_color;
             }
         }
     }
 }
 
-/*___________________Prince____________________*/
+/*___________________Price____________________*/
 .priceSpan {
-    font-family: $headingFont;
+    font-family: $secondary_font-family;
     font-size: 20px;
     img {
         width: auto !important;
@@ -167,7 +167,7 @@ footer,
     }
 }
 .price {
-    font-family: $headingFont;
+    font-family: $secondary_font-family;
     font-size: 16px;
     img {
         width: auto;
@@ -190,7 +190,6 @@ footer,
     }
 }
 
-
 /*___________________Search Results____________________*/
 .searchResults{
 	color: $default_font-color;
@@ -198,7 +197,7 @@ footer,
 	font-size: 16px;
 	font-weight: bold;
 	.spellCheckWrap{
-		color: $primaryColor;
+		color: $primary_color;
 		.spellCheckHighlight{
 			font-style: italic;
 		}
@@ -210,7 +209,7 @@ footer,
     text-transform: capitalize;
     font-size: 16px;
     a {
-        color: $primaryColor;
+        color: $primary_color;
     }
 }
 
@@ -227,7 +226,7 @@ footer,
     color: $default_font-color;
     font-size: 18px;
     text-transform: uppercase;
-    font-family: $headingFont;
+    font-family: $secondary_font-family;
 }
 
 
@@ -284,7 +283,7 @@ footer,
 				display: block;
 				padding: 5px;
 				&:hover {
-					background: $primaryColor;
+					background: $primary_color;
 					color: $white;
 				}
 			}
@@ -296,7 +295,7 @@ footer,
 	font-weight: 500;
 }
 .skuStyle span {
-	color: $primaryColor;
+	color: $primary_color;
 	font-weight: 600;
 }
 .cimm_qtyWrap span {
@@ -332,7 +331,7 @@ footer,
     }
     .existingPgListWrap {
         h4 {
-            color: $primaryColor;
+            color: $primary_color;
         }
         ul {
             li {
@@ -343,7 +342,7 @@ footer,
     }
     .selectedItemsWrap {
         h4 {
-            color: $primaryColor;
+            color: $primary_color;
         }
         div {
             margin: 10px 0;
@@ -362,7 +361,7 @@ footer,
         ul {
             li {
                 a {
-                    color: $primaryColor;
+                    color: $primary_color;
                     text-transform: capitalize;
                     font-size: 16px;
                     font-weight: bold;
@@ -371,29 +370,10 @@ footer,
         }
     }
 }
-
-.ratingModalWrap {
-    .modal-header {
-        padding: 10px 15px 0;
-        h3 {
-            margin: 0;
-        }
-    }
-    .modal-body {
-        ul {
-            li {
-                div {
-                    width: 100% !important;
-                }
-            }
-        }
-    }
-}
-
 .mulAddTocartWrap {
     .addToCartHeaderContent {
         p {
-            color: $primaryColor;
+            color: $primary_color;
             font-size: 16px;
             em {
                 margin-right: 10px;
@@ -412,22 +392,18 @@ footer,
     }
 }
 
-
-
 .cimm_salesBottomStrip {
     ul {
         width: 40%;
         float: right;
         li {
-            color: $primaryColor;
+            color: $primary_color;
             font-size: 20px;
             font-weight: bold;
             text-align: right;
         }
     }
 }
-
-
 
 .popMsg {
     background: #6b6a6a !important;
@@ -488,11 +464,12 @@ footer,
             height: 35px;
             width: 100%;
             cursor: pointer;
+            border: none;
         }
     }
     .uploadFile {
         @extend .uploadImage;
-        width: calc(100% - 75px);
+        width: calc(100% - 78px);
     }
     .button {
         margin-right: 3px;
@@ -534,7 +511,7 @@ footer,
             a {
                 color: $white;
                 &:hover {
-                    color: $primaryColor;
+                    color: $primary_color;
                 }
             }
         }
@@ -544,7 +521,7 @@ footer,
 .cimm_brandAtoZletters {
     width: 100%;
     margin: 0;
-    background: $primaryColor;
+    background: $primary_color;
     ul {
         margin: 5px 0;
         border-radius: 6px;
@@ -638,7 +615,7 @@ footer,
 }
 
 .registerRightBox {
-    background: $lightGrayColorOne;
+    background: $gray-lighten;
     padding: 20px;
     font-weight: bold;
     h6 {
@@ -646,7 +623,7 @@ footer,
         color: $black;
     }
     ul li a {
-        color: $primaryColor;
+        color: $primary_color;
         &:hover {
             text-decoration: underline;
         }
@@ -664,7 +641,7 @@ footer,
         font-weight: bold;
         vertical-align: top;
         a {
-            color: $primaryColor;
+            color: $primary_color;
         }
     }
     ul {
@@ -673,13 +650,13 @@ footer,
             line-height: 20px;
             color: $black;
             >em {
-                color: $secandaryColor;
+                color: $gray-lighter;
                 font-size: 18px;
             }
         }
     }
     .accountSelectionWrap {
-        background: $lightGrayColorOne;
+        background: $gray-lighten;
         padding: 10px;
         display: inline-block;
         margin: 0 0 20px;
@@ -694,10 +671,10 @@ footer,
         margin: 0 0 6px 0;
         text-transform: uppercase;
         font-size: 14px;
-        font-family: $headingFont;
+        font-family: $secondary_font-family;
     }
     a {
-        color: $primaryColor;
+        color: $primary_color;
         text-decoration: underline;
         font-weight: 700;
     }
@@ -746,9 +723,9 @@ footer,
     font-size: 22px;
     padding: 0;
     margin: 0 6px;
-    color: $primaryColor;
+    color: $primary_color;
     &:active {
-        color: $primaryColor;
+        color: $primary_color;
     }
 }
 
@@ -758,7 +735,7 @@ footer,
 }
 
 #example1 {
-    height: 260px;
+    height: 280px;
     overflow: auto;
 }
 
@@ -783,6 +760,10 @@ footer,
                 }
             }
         }
+    }
+    a {
+        color: $primary_color;
+        font-weight: 600;
     }
 }
 
@@ -826,9 +807,9 @@ footer,
                 cursor: pointer;
                 padding: 5px;
                 font-size: 16px;
-                color: $primaryColor;
+                color: $primary_color;
                 text-decoration: underline;
-                font-family: $headingFont;
+                font-family: $secondary_font-family;
             }
 			div.toggle_attributeList{
 				display: inline-block;
@@ -890,7 +871,7 @@ footer,
         float: left;
         margin: 0;
         padding: 4px 15px 8px;
-        background: $primaryColor;
+        background: $primary_color;
         a {
             padding: 0 !important;
             font-size: 12px !important;
@@ -943,7 +924,7 @@ footer,
 .fileUploadDescription {
     a {
         background: none !important;
-        color: $primaryColor !important;
+        color: $primary_color !important;
         padding: 0 !important;
         font-size: 14px !important;
         font-weight: bold;
@@ -955,80 +936,6 @@ footer,
     height: auto;
     float: left;
     margin-bottom: 25px;
-}
-
-
-.sleekNavigationLinks{
-    width: 300px;
-    position:fixed;
-    z-index:10000;
-    bottom: 0;
-    top: 0;
-    left: -450px;
-    transition: 0.5s ease;
-    -ms-transition: 0.5s ease;
-    -moz-transition: 0.5s ease;
-   	-webkit-transition: 0.5s ease;
-    overflow-x:hidden;
-    overflow-y: auto;
-    height: 100%;
-    background: $white;
-    ul{
-        margin:0;
-        padding:0;
-        background: $white;
-        height: calc(100% - 80px);
-        overflow-x: auto;
-
-        li{
-            position:relative;
-            margin:0;
-            padding: 0;
-            a{
-                font-size:14px;
-                display:block;  
-                padding: 10px 40px 10px 5px;
-                &:hover em{
-                    padding: 10px 8px 10px 12px;
-                    color: #000;
-                    right: 0px;
-                }
-                em {
-                    position: absolute;
-                    right: 4px;
-                    padding: 10px 8px 10px 8px;
-                    top: 4px;
-                    cursor: pointer;
-                    transition: padding 0.25s ease,right 0.25s ease;
-                }
-            }
-
-            em{
-                position: absolute;
-                top:10px;
-                right:10px;
-                color: $default_font-color;
-            }
-
-            ul{
-                display: none;
-            }
-
-            &.myAccountList ul{
-                display: block;
-            }
-
-            &.menuHead{
-                background: #444;
-                color: #FFF;
-                margin: 0;
-                padding: 8px 10px;
-                text-transform: uppercase;
-                font-size: 14px;
-                font-weight: 600;
-            }
-        }
-    }
 }
 
 .tog_myAccount{
@@ -1077,121 +984,6 @@ footer,
 		height: 48px;
 	}
 }
-.cimm_slide {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    height: calc(100% - 40px);
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    width: 100%;
-    background: $white;
-    opacity: 1;
-    overflow: auto;
-    padding: 0 20px;
-    z-index: 112;
-
-    h2 {
-        padding: 12px 30px;
-        text-align: center;
-        cursor: pointer;
-        position: relative;
-        font-size: 24px;
-        font-weight: 200;
-        margin: 0;
-        color: $default_font-color;
-
-        em {
-            position: absolute;
-            left: 5px;
-            color: #888;
-        }
-    }
-
-    li {
-        position: relative;
-    }
-}
-
-.cimm_slideWrap {
-    width: 200px;
-    position: relative;
-	height: 150px;
-	overflow: hidden;
-}
-.moveRight.cimm_slide {
-    left: 100%;
-	opacity:0;
-	visibility: hidden;
-}
-.moveLeft.cimm_slide {
-	left: -100%;
-	opacity:0;
-	visibility: hidden;
-}
-
-.cimm_slideIconWrap {
-	position: absolute;
-	height: 25px;
-	width: 25px;
-	left: 20px;
-	top: 30px;
-	pointer-events: none;
-}
-.cimm_slideMobileNavIcon{
-	height: 25px;
-	overflow: hidden;
-	position: relative;
-	width: 100%;
-    z-index: 113;
-    a{
-        height: 25px;
-        width: 25px;
-        position: absolute;
-        left: 0px;
-        bottom: 0;
-    }
-    span {
-        display: block;
-        position: absolute;
-        top: 13px;
-        right: 0px;
-        height: 2px;
-        width: 25px;
-        background: #444;
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-        &:after{
-            content: "";
-            position: absolute;
-            display: block;
-            left: 0;
-            width: 25px;
-            height: 2px;
-            background-color: #444;
-            top: 0;
-            -webkit-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            transform: rotate(90deg);
-            -webkit-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-        }
-        &.active{
-            top: 20px;
-            right: 8px;
-            width: 12px;
-            &:after {
-                left: -6px;
-                top: -6px;
-                width: 12px;
-            }
-        }
-    }
-}
-
 .site-overlay {
     display: none;
     height: 100%;
@@ -1210,10 +1002,10 @@ footer,
 }
 
 .cimm_resultSelect {
-    background: $lightGrayColorOne;
+    background: $gray-lighten;
     padding: 5px 10px;
     a {
-        color: $primaryColor;
+        color: $primary_color;
         font-weight: 600;
     }
 }
@@ -1223,7 +1015,7 @@ footer,
     margin: 0 0 15px 0;
     border: 1px solid $border-color;
     a {
-        color: $primaryColor;
+        color: $primary_color;
         font-weight: 600;
     }
 }
@@ -1232,28 +1024,9 @@ footer,
     font-size: 12px;
     text-align: center;
     padding: 8px;
-    background: $lightGrayColorOne;
+    background: $gray-lighten;
 }
 
-#slideLeft {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    background: $white;
-    padding: 10px;
-    transition: cubic-bezier(0.25, 0.1, 0.25, 1);
-    -webkit-transition: left 0.5s cubic-bezier(0.2, 0.05, 0.05, 0.8);
-    height: calc(100% - 40px);
-    overflow: auto;
-    @extend .cimm_slide;
-    h2 {
-        text-align: left;
-    }
-	&.active {
-		left: 0;
-	}
-}
 
 .poppupEnabled {
     overflow: hidden;
@@ -1262,109 +1035,7 @@ footer,
 	height: 500px;
 	overflow: hidden;
 }
-#map_canvas{
-    width: 100%;
-    top: -100%;
-}
-.locationZipcode{
-    width: 100%;
-    margin-bottom: 20px;
-}
-.labelWrap{
-	float: left;
-	width: 95px;
-	margin: 6px 15px 0 0;
-	text-align: right;
-}
-.inputWrap{
-	float: left;
-	width: calc(100% - 110px);
-	input{
-		width: 100%;
-		padding: 5px;
-	}
-}
-.locationSearch{
-	+a{
-		color: $primaryColor;
-		text-decoration: underline;
-		display: block;
-		text-align: right;
-		margin: 14px 0;
-	}
-}
-.location-search{
-    input{
-        height: 34px;
-        padding:5px 10px;
-        float: left;
-        margin-right: 3px;
-    }
-    .cimm_inlineButton{
-        height: 34px;
-        display: inline-block;
-    }
-}
-.locationDataWrap{
-    .store-list{
-        li{
-            &:first-child{
-                padding: 0 0 10px;
-            }
-            div{
-                cursor: pointer;
-				color: $primaryColor;
-				font-family: $defaultFont;
-                span.iconToggle{
-                    float: left;
-                    width: 8%;
-                    font-size: 20px;
-                }
-                span.pullLeft{
-                    width:62%;
-					color: $primaryColor;
-					font-family: $defaultFont
-                }
-                span.pullRight{
-                    width:26%;
-                }
-            }
-            .locationDetailList li{
-                padding:2px 2px 2px 20px;
-				&.Phone{
-					margin: 10px 0;
-				}
-				&.Note {
-					display: none;
-				}
-            }
-        }
-    }
-}
-.crdirections {
-	text-decoration: underline;
-}
-.locDetailWrap{
-    ul{
-        li{
-            padding:3px 0;
-        }
-    }
-}
-.locationDetails{
-	font-size: 14px;
-	.searchHeading{
-		font-size: 16px;
-		color: $primaryColor;
-		margin: 0 0 16px 0;
-	}
-	.locationHeading{
-		font-size: 20px;
-		color: $primaryColor;
-		text-transform: uppercase;
-		margin: 0 0 12px 0;
-	}
-}
+
 .compareWrap{ 
 	.cimm_multiAddcart{
 		float: right;
@@ -1377,19 +1048,6 @@ footer,
 }
 .divWrap {
     margin-top: 10px;
-}
-
-.cimm_topBanners{
-    margin-bottom: 20px;
-    min-height: 180px;
-    border: 1px solid #e9e9e9;
-    vertical-align: middle;
-    text-align: center;
-    line-height: 180px;
-
-	.slick-list{
-		padding: 0;
-	}
 }
 .cimm_itemTitle{
 	margin: 0;
@@ -1407,7 +1065,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	text-align: left;
 }
 .cartTotalBlock{
-	color: $primaryColor;
+	color: $primary_color;
 	font-size: 20px;
 	font-weight: bold;
 	text-align: right;

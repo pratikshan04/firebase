@@ -12,11 +12,7 @@
 
 
 $default_font-size: $font_md;
-$default_font-family: font(primary);
-
 $default_hedingf-size: $font_lg;
-
-$secondary_font-family: font(secondary);
 $tertiary_font-color: color(tertiary);
 
 
@@ -72,7 +68,7 @@ $lnav_lf-family: $default_font-family;
 $lnav_lf-size: $font_md;
 
 //Left nav (lhf = link hover font)
-$lnav_lhf-color: color(primary);
+$lnav_lhf-color: $primary_color;
 $lnav_lhf-family: font(secondary);
 
 //Left nav (laf = link active font)
@@ -117,6 +113,6 @@ $page_titlef-size: $font-lg;
 
 /*________________//Breadcrumb_____________________*/
 //Breadcrumb
-$breadcrumb_lf-color: $lightgray;
+$breadcrumb_lf-color: $gray-light;
 $breadcrumb_lf-family: $default_font-family;
 $breadcrumb_lf-size: $font-lg;

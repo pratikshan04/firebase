@@ -1,9 +1,9 @@
 .ac_results {
     position: absolute;
 	background-color: $white;
-	border: 1px solid $darkGrayColorTwo;
+	border: 1px solid $gray;
 	z-index: 999;
-	box-shadow: 0 2px 4px $darkGrayColorTwo;
+	box-shadow: 0 2px 4px $gray;
 	width: 100%;
     ul {
         li {
@@ -19,7 +19,7 @@
 			width: 100%;
             &.catheader, &.catheader.ac_over {
                 font-size: 14px;
-                background-color: $primaryColor;
+                background-color: $primary_color;
                 color: #fff;
                 cursor: default;
                 text-align: left;
@@ -28,7 +28,7 @@
 				background: $autocomleteBg;
 			}
             strong {
-                color: $primaryColor;
+                color: $primary_color;
             }
             &.suggest {
                 position: absolute;
@@ -36,10 +36,10 @@
                 top: -1px;
                 background: $white;
                 width: 450px;
-                border: 1px solid $darkGrayColorTwo;
+                border: 1px solid $gray;
                 padding: 0;
                 min-height: 424px;
-                box-shadow: 2px 2px 4px $darkGrayColorTwo;
+                box-shadow: 2px 2px 4px $gray;
                 padding: 10px;
                 min-height: 150px;
                 &.hideSuggest {
@@ -60,8 +60,8 @@
                         font-size: 16px;
                     }
                     a.title {
-                        color: $primaryColor;
-                        font-family: $headingFont;
+                        color: $primary_color;
+                        font-family: $secondary_font-family;
                         letter-spacing: 1px;
                         width: calc(100% - 90px);
                         float: left;
@@ -80,7 +80,7 @@
 						height: 50px;
 						margin-right: 10px;
 						float: left;
-						border: 1px solid $lightGrayColorOne;
+						border: 1px solid $gray-lighten;
 						img {
 							vertical-align: middle;
 							max-width: 100%;
@@ -142,7 +142,7 @@
 		font: menu;
 		line-height: 24px;
 		strong {
-			color: $primaryColor;
+			color: $primary_color;
 		}
 	}
 	li:first-child {

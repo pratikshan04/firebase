@@ -271,12 +271,12 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         outerDiv.appendChild(iconBlock);
         
         var titleBold = document.createElement("span");
-        titleBold.setAttribute("class", "productTitle pullLeft");
+        titleBold.setAttribute("class", "productTitle pull-left");
         titleBold.innerHTML = BranchName[i];
         outerDiv.appendChild(titleBold);
 
        /* var distanceBlock = document.createElement("span");
-        distanceBlock.setAttribute("class", "locDistance pullRight");
+        distanceBlock.setAttribute("class", "locDistance pull-right");
         distanceBlock.innerHTML = distance[i];
         outerDiv.appendChild(distanceBlock);*/
 
@@ -623,7 +623,7 @@ function loadLocationDetails(obj){
 			btn2 = $(infoBlockId).find('.directionBtn').html();
 		}
 		$(obj).find(".Title").addClass("active");
-		var currentStore = "<div class='locDetailWrap marginY-4'><div><b class='productTitle'>"+title+"</b><span class='pullRight'>"+locDistance+"</span></div><ul><li>"+street+"</li><li>"+locality+"</li><li class='primaryColor'>"+phone+"</li><li class='lineHeight1'>"+fax+"</li><li class='lineHeight1'>"+email+"</li></ul><ul><li>"+workhours+"</li><li class='marginY-2'>"+btn2+"</li></ul></div>"; 
+		var currentStore = "<div class='locDetailWrap marginY-4'><div><b class='productTitle'>"+title+"</b><span class='pull-right'>"+locDistance+"</span></div><ul><li>"+street+"</li><li>"+locality+"</li><li class='primaryColor'>"+phone+"</li><li class='lineHeight1'>"+fax+"</li><li class='lineHeight1'>"+email+"</li></ul><ul><li>"+workhours+"</li><li class='marginY-2'>"+btn2+"</li></ul></div>"; 
 		$("#currentStore").html(currentStore);
 		$("#currentStoreNote").html(note);
 		var noImagePath = $('#webThemePath').val()+"/images/NoImage.png'";

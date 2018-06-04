@@ -91,7 +91,7 @@
             .prodSharePrintBtnWrap {
                 float: right;
                 >a {
-                    color: $darkGrayColorTwo;
+                    color: $gray;
                     margin: 0 3px;
                     vertical-align: middle;
                     font-size: 16px;
@@ -148,7 +148,7 @@
     .cimm_prodDetailTitle {
         margin: 0;
         padding: 5px 0;
-        font-family: $headingFont;
+        font-family: $secondary_font-family;
         text-transform: uppercase;
 		font-size: 14px;
     }
@@ -166,7 +166,7 @@
                 }
                 span {
                     a {
-                        background: $lightGrayColorOne;
+                        background: $gray-lighten;
                         padding: 5px 10px;
                         float: left;
                         height: 30px;
@@ -230,7 +230,7 @@
                                     display: block;
                                     padding: 5px;
                                     &:hover {
-                                        background: $primaryColor;
+                                        background: $primary_color;
                                         color: $white;
                                     }
                                 }
@@ -285,4 +285,22 @@
 }
 .filterSelOptions {
 	margin-bottom: 10px;
+}
+
+.ratingModalWrap {
+    .modal-header {
+        padding: 10px 15px 0;
+        h3 {
+            margin: 0;
+        }
+    }
+    .modal-body {
+        ul {
+            li {
+                div {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
 }

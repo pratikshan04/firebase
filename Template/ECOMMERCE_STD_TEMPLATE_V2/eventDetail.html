@@ -43,12 +43,12 @@
 			<input type="hidden" id="total" value="$!eventsList.totalSeats"/>
 			#if($eventsList.totalSeats==-1)
 			 <tr>            		
-				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></b></td>
 				<td>$!locale.get("event.seats.unlimited")</td>
 			</tr>
 			#else
 			<tr>
-				<td><b>$!locale.get("event.label.totalSeats")<span class="pullRight"> :</span></b></td>
+				<td><b>$!locale.get("event.label.totalSeats")<span class="pull-right"> :</span></b></td>
 	 			<td>$!eventsList.totalSeats</td>
 	 		</tr>
 			#end
@@ -56,12 +56,12 @@
 			#if($eventsList.totalSeats == -1)
 			#elseif($diff < 0)
 			<tr>
-				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span></b></td>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span></b></td>
 				<td>0</td>
 			</tr>
 			#else
 			<tr>
-				<td><b>$!locale.get("event.label.availableSeats")<span class="pullRight"> : </span> </b></td>
+				<td><b>$!locale.get("event.label.availableSeats")<span class="pull-right"> : </span> </b></td>
 				<td>$!diff</td>
 			</tr>
 			#end
