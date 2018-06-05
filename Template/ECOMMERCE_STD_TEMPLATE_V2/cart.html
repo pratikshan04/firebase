@@ -1,4 +1,26 @@
 #parse("Macros/cartPageMacro.vm")
+<div class="col-md-4 col-sm-4 col-xs-12">
+	<form action="shoppingCartPage.action" id="sortByForm" class="form-inline" method="post">
+		<label>$!locale.get('product.label.sortBy'): </label>
+		<div class="form-group">
+			<select name="sortBy" id="sortByBrand" onchange="sortByManuPartNo();" class="form-control selectpicker">
+				<option value="">-- Select --</option>
+				<!--  <option value="ProdNameA" #if($sortBy=='ProdNameA') selected #end >Brand (A-Z)</option>
+				<option value="ProdNameB" #if($sortBy=='ProdNameB') selected #end >Brand (Z-A)</option> -->
+				<option value="PartA" #if($sortBy=='PartA') selected #end >Part Number (Asc)</option>
+				<option value="PartD" #if($sortBy=='PartD') selected #end >Part Number (Desc)</option>
+				<option value="MPNA" #if($sortBy=='MPNA') selected #end >Manf Part# (Asc)</option>
+				<option value="MPND" #if($sortBy=='MPND') selected #end >Manf Part# (Desc)</option>
+				<!--  <option value="CPNDesc" #if($sortBy=='CPNDesc') selected #end >CPN (Desc)</option>
+				<option value="CPNAsc" #if($sortBy=='CPNAsc') selected #end >CPN (Asc)</option>
+				<option value="UpcA" #if($sortBy=='UpcA') selected #end >UPC (Asc)</option>
+				<option value="UpcD" #if($sortBy=='UpcD') selected #end >UPC (Desc)</option>
+				<option value="DescA" #if($sortBy=='DescA') selected #end >Description (Asc)</option>
+				<option value="DescD" #if($sortBy=='DescD') selected #end >Description (Desc)</option> -->
+			</select>
+		</div>
+	</form>
+</div>
 #if($session.getAttribute("cartItemQtyUpdatedMessage") && $!session.getAttribute("cartItemQtyUpdatedMessage")!="")
 <div id="notificationDivCart">
     <span class="errMsg" id="errorMsgCart">$!session.getAttribute("cartItemQtyUpdatedMessage")</span>
