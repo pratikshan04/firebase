@@ -99,6 +99,10 @@ function updateShoppingCart(){
 	return false;
 }
 
+function sortByManuPartNo(){
+	$("#sortByForm").submit();
+}
+
 function updateCartQty(){
 	$("#updateQtyFrm").submit();
 }
