@@ -24,7 +24,7 @@
 				#foreach($!footMenu in $!footerStaticMenu) 
 					<div class="col-md-2">
 						<div class="footerCol">
-							<h5><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h5>
+							<h4><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h4>
 							<ul id="footerMenu$!count" class="collapse in">
 							#if($!footMenu.menuList && $!footMenu.menuList.size()>0)
 								#foreach($!subStaticMenu in $!footMenu.menuList)
@@ -46,7 +46,7 @@
 				#end
 					<div class="col-md-3">
 						<div class="footerCol">
-							<h5><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h5>
+							<h4><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h4>
 							<ul id="footerMenu$!count" class="collapse in">
 								<li><a>Your Company Address</a></li>
 								<li><a>#000, Lorem </a></li>
@@ -58,7 +58,7 @@
 					<div class="col-md-3">
 						#set($count = $!count + 1)
 						<div class="footerCol">
-							<h5><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h5>
+							<h4><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><em class="fa fa-plus" data-toggle="collapse" data-target="#footerMenu$!count"></em></h4>
 							<ul id="footerMenu$!count" class="collapse in">
 								<li><p>$!locale.get('footer.label.signupFor')</p></li>
 								<li><a class="btn btn-primary btn-lg btn-signup">$!locale.get('footer.label.signMeUp')</a></li>
@@ -87,7 +87,7 @@
 			<form id="modalLoginForm" method="post" data-form="login">
 				<div class="modal-header">
 					<h4 class="modal-title">$!locale.get("product.button.signIn")<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-					<div id="pLoginErr" class="text-danger text-center mBottom-1"></div>
+					<div class="text-danger text-center mBottom-1 pLoginErr"></div>
 			    </div>
 			    <div class="modal-body">
 					<input type="hidden" value="popup" name="loginType">
@@ -141,7 +141,7 @@
 				<div class="col-md-9 col-sm-9 col-xs-9">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<h3 class="productTitle ATCProductHeading"></h3>
+							<h5 class="productTitle ATCProductHeading"></h5>
 							<p class="ATCShortDesc"></p>
 						</div>
 					</div>

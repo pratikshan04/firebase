@@ -14,7 +14,7 @@
 		.cimm_categoryImg {
 			padding: 10px;
 			@include border(1px, solid, $border-color);
-			outline: $gray-lighten solid 5px;
+			outline: lighten($black, 95%) solid 5px;
 			width: 100%;
 			position: relative;
 			height: 200px;

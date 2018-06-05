@@ -748,7 +748,7 @@ $(document).ready(function(){
 				if($this.find("#formPageValue").val()){
 					showNotificationDiv("error",msg);
 				}else{
-					$this.find("#pLoginErr").html(msg);
+					$this.find(".pLoginErr").html(msg);
 				}
 			}else{
 				if($this.find('input[name="rememberMe"]').is(':checked')) {
@@ -763,7 +763,7 @@ $(document).ready(function(){
 					localStorage.removeItem("F30FB33A2");
 				}
 				block("Please Wait");
-				$this.find("#pLoginErr").html("");
+				$this.find(".pLoginErr").html("");
 				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize()+"&loginType=popup" ,function(data, status){
 					try{
@@ -797,8 +797,8 @@ $(document).ready(function(){
 							window.location.href = data;
 						}else{
 							unblock();
-							if($this.find("#pLoginErr").length>0){
-								$this.find("#pLoginErr").html(data);
+							if($this.find(".pLoginErr").length>0){
+								$this.find(".pLoginErr").html(data);
 							}else{
 								showNotificationDiv("Error",data);
 							}
@@ -2918,7 +2918,7 @@ function eachCheckBox(chk){
 //------------------------------------footer dependent sources----------------------------------------
 var footer_icon_plus = 'fa-plus';
 var footer_icon_minus = 'fa-minus';
-$('.footerCol h5 em').click(function(){
+$('.footerCol h4 em').click(function(){
 	if($(this).parents('.footerCol').find('ul').hasClass('in')){
 		$(this).addClass(footer_icon_plus).removeClass(footer_icon_minus);
 	}
@@ -2928,11 +2928,11 @@ $('.footerCol h5 em').click(function(){
 });
 function toDoFooter(){
 	if ($(document).width() < 981){
-		$('.footerCol h5 em').show();
+		$('.footerCol h4 em').show();
 		$('.footerCol ul').removeClass('in');
 	}
 	else if ($(document).width() >= 981){
-		$('.footerCol h5 em').hide();
+		$('.footerCol h4 em').hide();
 		$('.footerCol ul').addClass('in');		
 	}
 }
@@ -3237,7 +3237,7 @@ jQuery('#sleekoverlay').click(function(){
 jQuery('.sleekNavigationLinks').click(function(e) {
 	e.stopPropagation();
 });
-$(".cimm_slide li i").click(function () {
+$(".cimm_slide li em").click(function () {
 	var id = $(this).attr("id");
 	if(id){
 		$("[data-itemID="+id+"]").removeClass("moveRight");
@@ -3253,7 +3253,7 @@ $(".cimm_slide li i").click(function () {
 		}
 	}
 });
-$(".cimm_slide h2").click(function () {
+$(".cimm_slide h3").click(function () {
 	if(!$(this).parent().hasClass("first")){
 		$(this).parent().addClass("moveRight").removeClass("moveLeft");
 	}
