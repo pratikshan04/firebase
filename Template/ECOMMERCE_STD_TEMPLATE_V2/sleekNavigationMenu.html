@@ -4,7 +4,7 @@
       <div class="cimm_slideMobileNavIcon" id="slideIcon"><a href="javascript:void(0);"><span></span></a></div>
    </div>
    <div class="cimm_slide first">
-      <h2>Menu</h2>
+      <h3>Menu</h3>
       <ul>
          <li><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a><em class="fa fa-lg fa-chevron-right" aria-hidden="true"  id="$locale.get('navigation.label.shopProducts').replace(' ','_')"></em></li>
          #if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
@@ -26,13 +26,13 @@
       </ul>
    </div>
    <div class="cimm_slide sec" data-itemID="myAccount">
-		<h2>$locale.get("product.heading.accountDashBoard")</h2>
+		<h3>$locale.get("product.heading.accountDashBoard")</h3>
 		<ul>
 		#parse("accountMenu.html")
 		</ul>
    </div>
    <div class="cimm_slide sec" data-itemID="$locale.get('navigation.label.shopProducts').replace(' ','_')">
-      <h2>$locale.get("navigation.label.shopProducts")</h2>
+      <h3>$locale.get("navigation.label.shopProducts")</h3>
       <ul>
          #foreach($categoryMenu in $categMenu)
          <li>
@@ -55,7 +55,7 @@
    </div>
    #foreach($categoryMenu in $categMenu)
    <div class="cimm_slide third moveRight" data-itemID="item_$!categoryMenu.categoryCode.replace(' ','_')">
-      <h2>$!categoryMenu.categoryName</h2>
+      <h3>$!categoryMenu.categoryName</h3>
       <ul>
          #foreach($key in $secondLevelMenu.keySet())
          #if($categoryMenu.categoryCode==$!key)
@@ -87,7 +87,7 @@
    #foreach($key3 in $secondLevelMenu.keySet())
    #if($secondLvlMenu.categoryCode==$!key3)
    <div class="cimm_slide last moveRight" data-itemID="item_$!secondLvlMenu.categoryCode">
-      <h2>$!secondLvlMenu.categoryName</h2>
+      <h3>$!secondLvlMenu.categoryName</h3>
       <ul>
          #foreach($thirdLvlMenu in $secondLevelMenu.get($!key3))
          <li>
@@ -104,7 +104,7 @@
    #end
    #foreach($topMenu in $topStaticMenu)
    <div class="cimm_slide sec moveRight" data-itemID="top_$topMenu.level1Menu.replace(' ','_')">
-   <h2>$topMenu.level1Menu</h2>
+   <h3>$topMenu.level1Menu</h3>
       <ul>
 	   	#foreach($subStaticMenu in $topMenu.menuList)
 			<li>
