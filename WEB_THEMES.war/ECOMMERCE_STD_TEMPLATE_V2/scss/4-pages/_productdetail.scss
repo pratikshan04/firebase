@@ -159,7 +159,7 @@
     ul {
         li {
             &.quantityWrap {
-                b {
+                strong {
                     font-size: 20px;
                     float: left;
                     margin: 0px 15px 15px 0;
@@ -266,7 +266,7 @@
         text-align: center;
         a{
             display: block;
-            b{
+            strong {
                 display: block;
             }
         }
