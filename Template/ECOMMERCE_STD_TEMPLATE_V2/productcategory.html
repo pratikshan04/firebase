@@ -6,7 +6,7 @@
 #if($LayoutName=="SubCategoryPage")
 #set($itemsPerPageURL="taxonomyLevelFilterPage.action")
 #set($searchWithInFormURL="taxonomyLevelFilterPage.action")
-#if($topBanners)
+#if($topBanners && $topBanners != [])
 <div class="cimm_topBannerEnclosure">
 	<ul class="cimm_topBanners">
 		#foreach($!topBanner in $!topBanners)
@@ -80,7 +80,7 @@
 							<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
 						#end
 						<div class="input-group-btn">
-							<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><i class="fa fa-lg fa-search"></i></button>
+							<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><em class="fa fa-lg fa-search"></em></button>
 						</div>
 						<input type="hidden" name="codeId" value="$!codeId" /> 
 						<input type="hidden" name="levelNo" value="$!levelNo" /> 
@@ -149,13 +149,13 @@
 						#end 
 					</div>
 					#end
-					<div class="pull-left hidden-md hidden-lg marginY-3"><a data-function="slideLeft" class="btn btn-primary light-ripple"><i class="glyphicon glyphicon-filter"></i> Filter</a></div>
+					<div class="pull-left hidden-md hidden-lg marginY-3"><a data-function="slideLeft" class="btn btn-primary light-ripple"><em class="glyphicon glyphicon-filter"></em> Filter</a></div>
 				</div>
 				<div class='col-md-6 col-sm-12 col-xs-12'>
 					<div class="row">
 						<div class='col-md-5 col-sm-12 col-xs-12'>
 							<div class="bulkActionBtn">
-								<select class="selectpicker" id="bulkAction" onchange="performBulkAction(this);">
+								<select class="selectpicker" id="bulkAction" onchange="performBulkAction(this);" title="$!locale.get('product.label.bulkOptions')">
 									<option>$!locale.get("product.label.bulkOptions")</option>
 									#if($userLogin)
 										<option data-perform="multipleProductGroup">$!locale.get("product.label.addItemsToGroup")</option>
@@ -198,7 +198,7 @@
 							<input type="hidden" name="srchTyp" value="CATNAV">
 							#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
-							<select name="sortBy" id="sortBy" onchange="this.form.submit();" class="selectpicker" data-live-search="true">
+							<select name="sortBy" id="sortBy" onchange="this.form.submit();" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
 								<!-- <option value=""> - $!locale.get("form.label.select") -</option> -->
 								<!--option value="">Best Sellers</option>-->
 								#if($navigationType=="SEARCH")
@@ -235,7 +235,7 @@
 							#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							$!locale.get("product.label.show")&nbsp; 
-							<select class="quantity selectpicker" name="resultPage" id="resultPerPage" onchange="this.form.submit();" style='display:none;'>
+							<select class="quantity selectpicker" name="resultPage" id="resultPerPage" onchange="this.form.submit();" style='display:none;' title="$!locale.get('product.label.show')>
 								<option value="12" #if($resultPage==12) selected #end>12</option>
 								<option value="24" #if($resultPage==24) selected #end>24</option>
 								<option value="48" #if($resultPage==48) selected #end>48</option>
@@ -252,12 +252,12 @@
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<span class="cimm_compareControls">
 									<a href="javascript:void(0);" onclick="compareItems();">&nbsp;$!locale.get("product.button.compare") (<span id="compareSpan" class="compareCountSpanClass">0</span>) $!locale.get('product.label.items')</a>
-									<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></strong>
+									<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><em class="fa fa-lg fa-times"></em></a></strong>
 								</span>
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-								<a id="listView" class="listView" href="javascript:void(0);" title="$!locale.get('product.view.listView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 24 24" class="ng-element" data-id="380a6cd865b3b8c3e92a5d025062682d" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="30" height="30" style="fill: #343333;"></rect> <rect id="_x3C_Slice_x3E__81_" display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M0,21h8v-8H0V21z M2,15h4v4H2V15z M10,20h14v-2H10V20z M0,11h8V3H0V11z M2,5h4v4H2 V5z M10,4v2h14V4H10z M10,16h14v-2H10V16z M10,10h14V8H10V10z" style="fill: #343333;"></path> </g></svg></a> 
-						    	<a id="gridView" class="gridView" href="javascript:void(0);" title="$!locale.get('product.view.gridView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 28 28" class="ng-element" data-id="ac3984b32e6ab5276e657661bd64fcec" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="25" height="25" style="fill: #343333;"></rect> <rect id="_x3C_Slice_x3E__81_" display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M20,5v8h8V5H20z M26,11h-4V7h4V11z M0,23h8v-8H0V23z M2,17h4v4H2V17z M0,13h8V5H0 V13z M2,7h4v4H2V7z M10,13h8V5h-8V13z M12,7h4v4h-4V7z M10,23h8v-8h-8V23z M12,17h4v4h-4V17z M20,23h8v-8h-8V23z M22,17h4v4h-4V17z" style="fill: #343333;"></path> </g></svg></a>
+								<a id="listView" class="listView" href="javascript:void(0);" title="$!locale.get('product.view.listView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 24 24" class="ng-element" data-id="380a6cd865b3b8c3e92a5d025062682d" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="30" height="30" style="fill: #343333;"></rect> <rect display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M0,21h8v-8H0V21z M2,15h4v4H2V15z M10,20h14v-2H10V20z M0,11h8V3H0V11z M2,5h4v4H2 V5z M10,4v2h14V4H10z M10,16h14v-2H10V16z M10,10h14V8H10V10z" style="fill: #343333;"></path> </g></svg></a> 
+						    	<a id="gridView" class="gridView" href="javascript:void(0);" title="$!locale.get('product.view.gridView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 28 28" class="ng-element" data-id="ac3984b32e6ab5276e657661bd64fcec" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="25" height="25" style="fill: #343333;"></rect> <rect display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M20,5v8h8V5H20z M26,11h-4V7h4V11z M0,23h8v-8H0V23z M2,17h4v4H2V17z M0,13h8V5H0 V13z M2,7h4v4H2V7z M10,13h8V5h-8V13z M12,7h4v4h-4V7z M10,23h8v-8h-8V23z M12,17h4v4h-4V17z M20,23h8v-8h-8V23z M22,17h4v4h-4V17z" style="fill: #343333;"></path> </g></svg></a>
 								<div class="clear"></div>
 						    </div>
 					    </div>
@@ -380,7 +380,7 @@
 								</div>
 								<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
 								<div class="itemCountList">
-									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
+									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
 									<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 										<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
 										<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
@@ -389,7 +389,7 @@
 									</form>
 							 	</div>
 							 	<div class="itemCountGrid">
-							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId"><i class="fa fa-lg fa-eye"></i> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							</li>
 							<li class='selectCompareGroupBlock'>
@@ -542,7 +542,7 @@
 									<!--Branch Availabiltiy List Section
 									<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
 										<div class="cimm_customPopContent">
-										<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><i class="fa fa-lg fa-times-circle"></i></a>
+										<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><em class="fa fa-lg fa-times-circle"></em></a>
 											<div class="cimm_popupLogin">
 												<h3 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h3>
 												<div class="cimm_siteTableEnclosure" id="allBranch$!itemData.partNumber">
@@ -567,13 +567,13 @@
 											<a id="$!groupPop" class="popMsg hideMe"></a>
 											#if($userLogin)
 												<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">
-													<i class="fa fa-plus"></i>$!locale.get("marketBasket.button.addToProductGroup")
+													<em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")
 												</a>
 											#else
-												<a data-toggle="modal" data-target="#loginModal"><i class="fa fa-lg fa-plus"></i><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
+												<a data-toggle="modal" data-target="#loginModal"><em class="fa fa-lg fa-plus"></em><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
 											#end
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
-												<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>
+												<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 											</ul>
 										</div>
 										<!--My Product Group-->

@@ -1,7 +1,7 @@
 var webThemes = $("#webThemePath").val();
-jQuery.getScript(webThemes+'js/BulkAction.js', function(){
+/*jQuery.getScript(webThemes+'js/BulkAction.js', function(){
 	BulkAction.enableCheckBoxOnLoad();
-});
+});*/
 function validateSearchWithInMulti(a){
 	var s = jQuery('#keyWordTxt').val();
 	if(s == "" || s=="Search Within" || s=="Search%20With%20In" || s==a){
@@ -76,7 +76,7 @@ function buildSearchTrail(){
 					dispVal = "Category";
 				if(dispVal.toUpperCase()=="MANUFACTURERNAME")
 					dispVal = "Manufacturer";
-				buildString = buildString + c + '<span class="Refine-value">'+keyArr[j]+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeKeyword('+j+')" title="Remove This Item"> <i class="fa fa-times"></i></a></span>';
+				buildString = buildString + c + '<span class="Refine-value">'+keyArr[j]+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeKeyword('+j+')" title="Remove This Item"> <em class="fa fa-times"></em></a></span>';
 				c = " ";
 			}
 			buildString = buildString + '</li>';
@@ -98,7 +98,7 @@ function buildSearchTrail(){
 			buildString = buildString + '</span>';
 			var c = "";
 			for(j=0;j<valListArr.length;j++){
-				buildString = buildString + c + '<span class="Refine-value clearAfter">'+valListArr[j].substring(1, valListArr[j].length-1)+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> <i class="fa fa-times"></i></a></span>';
+				buildString = buildString + c + '<span class="Refine-value clearAfter">'+valListArr[j].substring(1, valListArr[j].length-1)+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> <em class="fa fa-times"></em></a></span>';
 				c = " ";
 			}
 			buildString = buildString + '</li>';
@@ -426,6 +426,7 @@ function returnObjectFromMeasurements(element, text){
 buildSearchTrail();
 checkItem();
 $(document).ready(function(){
+	BulkAction.enableCheckBoxOnLoad();
 	var url = window.location.href;
 	if(url.indexOf("isPreviouslyPurchased=Y") !== -1){
 		$('#previouslyPurchased').attr('checked', true);
@@ -438,7 +439,7 @@ $(document).ready(function(){
 	    var counter = 0;
 	    var children = jQuery(element).children();
 	    jQuery(children).each(function(index, ele) {
-	        els[index] = returnObjectFromMeasurements(ele, $(ele).find("i").text());
+	        els[index] = returnObjectFromMeasurements(ele, $(ele).find("em").text());
 	    });
 	    els.sort(sortByRationalValue);
 	    var elements = new Array();

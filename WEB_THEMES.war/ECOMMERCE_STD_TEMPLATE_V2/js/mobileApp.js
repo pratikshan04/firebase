@@ -46,9 +46,10 @@ function getcookiefromdocument(){
 	}
 }
 function fingerPrint(userName, password){
+	var unps = {"credentials":"username password"};
 	try{Android.getusernameandpassword(userName, password)}
 	catch(err){
-	webkit.messageHandlers.callbackHandler.postMessage(userName, password);
+	webkit.messageHandlers.callbackHandler.postMessage(unps);
 	console.log('The native context does not exist yet');
 	}
 }

@@ -2,7 +2,7 @@
 #parse("Macros/listPageMacro.vm")
 #urlType($!navigationType,$!codeIdSkip,$!gallery,$!levelNo,$!sortBy,$!resultPage,$!keyWord,$!srchTyp,$!narrowKeyword,$!brandId)
 #listPageFormUrls($!navigationType)
-<h2 onclick="closeLeftSlide();" class="visible-sm-block dark-ripple visible-xs-block"><i class="fa fa-chevron-left" aria-hidden="true"></i> $!locale.get("product.label.back")</h2>
+<h2 onclick="closeLeftSlide();" class="visible-sm-block dark-ripple visible-xs-block"><em class="fa fa-chevron-left" aria-hidden="true"></em> $!locale.get("product.label.back")</h2>
 <!-- <div id="filterBar" class="cimm_advancedSearchFilter">
 	<form>
 		<input type="text" id="txtAdvSearch" class="AdvanceInput"  onkeypress="return runScript(event);" placeholder="Search Within #if($keyWord)$!keyWord#else $!locale.get('product.label.search') #end" />
@@ -19,7 +19,7 @@
 			<option value="6">$!locale.get("search.label.oneOrMoreOfTheseWords")</option>
 		</select>
 		<div class="center">
-			<a href="javascript: void(0);" id="advSrchBtn" class="button" onclick="performAdvSearch();"><i class="fa fa-lg fa-search"></i> &nbsp;$!locale.get("product.label.search")</a>
+			<a href="javascript: void(0);" id="advSrchBtn" class="button" onclick="performAdvSearch();"><em class="fa fa-lg fa-search"></em> &nbsp;$!locale.get("product.label.search")</a>
 		</div>
 	</form>
 </div> -->
@@ -32,7 +32,7 @@
 		<div class="input-group">
 			<input type="text" class='form-control' placeholder="Search Within $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onkeypress="return runScript(event);" class="form-control"/>
 			<div class="input-group-btn">
-				<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="btn btn-primary"><i class="fa fa-lg fa-search"></i></button>
+				<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="btn btn-primary"><em class="fa fa-lg fa-search"></emi></button>
 			</div>
 		</div>
 	</div>
@@ -43,7 +43,7 @@
 				<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
 				#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
 				<div class="input-group-btn">
-					<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary"><i class="fa fa-lg fa-search"></i></button>
+					<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
 				</div>
 			</div>
 		</form>
@@ -52,7 +52,7 @@
 	#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
 		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
 		<div class="filterTitle clearAfter">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
-			<a href="$!navURL" class="cleatBtn pull-right">$!locale.get("product.label.clearAll")&nbsp;<i class="fa fa-times"></i></a>
+			<a href="$!navURL" class="cleatBtn pull-right">$!locale.get("product.label.clearAll")&nbsp;<em class="fa fa-times"></em></a>
 		</div>
 		<!--Refined By  : Filter Attributes-->
 		<div class="filterColumn">
@@ -71,7 +71,7 @@
 								$!attributeFiltered.attrName.replaceAll("attr_","")
 							#end
 							</span>
-							<span class="Refine-value">$!attributeFiltered.attrValue.replaceAll('\"','')</span><a class="removeFilter pull-right" href="$!navURL#if($rUrl.length()>0)&attrFilterList=$!rUrl#end" title="$!locale.get('productGrid.label.removeThisItem')"> <i class="fa fa-times-circle"></i></a>
+							<span class="Refine-value">$!attributeFiltered.attrValue.replaceAll('\"','')</span><a class="removeFilter pull-right" href="$!navURL#if($rUrl.length()>0)&attrFilterList=$!rUrl#end" title="$!locale.get('productGrid.label.removeThisItem')"> <em class="fa fa-times-circle"></em></a>
 						</li>
 						#end
 					</ol>
@@ -105,23 +105,23 @@
 					#if($displayAttribute=="Y")
 						<div class="filterColumn"><!-- #if($filterCount > 4)hideMe #end -->
 						#set($count = 0)
-							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><i class="fa fa-minus-circle"></i></span>#else<span class="plusToggle"><i class="fa fa-plus-circle"></i></span>#end</div>
+							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><em class="fa fa-minus-circle"></em></span>#else<span class="plusToggle"><em class="fa fa-plus-circle"></em></span>#end</div>
 								#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 									#set($count = $!count+1)
 								#end
 								<div class="collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replace(' ','_').replace('/','_')">
 								#if($count>6)
 								<div class="testDiv">
-									<input type="text" id="box_$!attrValueForSearch" class="filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');"value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
+									<input type="text" id="box_$!attrValueForSearch" class="filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');" title="Search $!attrValueForSearch" value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
 									<div class="leftFilterScroll">
 								#end
 								<ul class="#if($attrValueForSearch=='Amp Range' || $attrValueForSearch=='Size')sortByNumbers#end navList_$!attrValueForSearch.replaceAll(' ','-')">
 									#set($k = 0)
 									#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 										<li>
-											<i style="display:none">$!filterVal.attrValue</i>
-											<label class="customCheckBox">
-												<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y") onclick="appendSearchByCheckBox('multiFilter_$!iVal');" #end/>
+											<em style="display:none">$!filterVal.attrValue</em>
+											<label class="customCheckBox" for="multiFilter_$!{iVal}_$!{k}">
+												<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y") onclick="appendSearchByCheckBox('multiFilter_$!iVal');" #end />
 												<span>$!filterVal.attrValue ($!filterVal.resultCount)</span>
 												<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</span>
 												<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
@@ -131,7 +131,7 @@
 									#end
 									#if($k>5)
 										<!-- <li class="">
-											<i class="fa fa-plus"></i> <a href="javascript:void(0);" onclick="loadList(this);" data-id="col_$!attrValueForSearch.replaceAll(' ','-')" class="filerViewButton" data-title="$!attrValueForSearch.replaceAll(' ','-')">$!locale.get('leftmenu.label.seeAll') $!attrValueForSearch.replaceAll(' ','-')</a>
+											<em class="fa fa-plus"></em> <a href="javascript:void(0);" onclick="loadList(this);" data-id="col_$!attrValueForSearch.replaceAll(' ','-')" class="filerViewButton" data-title="$!attrValueForSearch.replaceAll(' ','-')">$!locale.get('leftmenu.label.seeAll') $!attrValueForSearch.replaceAll(' ','-')</a>
 										</li> -->
 									#end
 								#set($filterCount = $!filterCount + 1)
@@ -142,7 +142,7 @@
 							#end
 							#if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")!="Y")
 								<div class="alignCenter marginY-2">
-									<button class="btn btn-primary" onclick="appendSearchByCheckBox('multiFilter_$!iVal');"><i class="fa fa-filter" aria-hidden="true"></i> $!locale.get("product.label.filter")</button>
+									<button class="btn btn-primary" onclick="appendSearchByCheckBox('multiFilter_$!iVal');"><em class="fa fa-filter" aria-hidden="true"></em> $!locale.get("product.label.filter")</button>
 								</div>
 							#end
 							#set($iVal = $!iVal+1)
