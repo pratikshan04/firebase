@@ -285,7 +285,7 @@ var ProductMode = {};
 
 	ProductMode.submitProductModeFilterForm = function(itemPriceId){
 		$('.itemDetailInfoList a').removeClass('active');
-		if($("#productModeItemContent_"+itemPriceId).html()==""){
+		if($("#productModeItemContent_"+itemPriceId).html().trim()==""){
 			$(".multiSelectForm").removeClass('activeFilterForm');
 			$(".productModeItemContent").html("");
 			$('.cimm_attrFilterContent').html('');
