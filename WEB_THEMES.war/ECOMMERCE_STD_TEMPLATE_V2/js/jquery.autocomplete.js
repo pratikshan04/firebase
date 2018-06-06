@@ -916,7 +916,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 	function moveSelect(step) {
 		console.log(active);
 		if(active<0)
-			active = 8;
+			active = 0;
 		listItems.slice(active, active + 1).removeClass(CLASSES.ACTIVE);
 		movePosition(step);
         var activeItem = listItems.slice(active, active + 1).addClass(CLASSES.ACTIVE);
