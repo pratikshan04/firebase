@@ -5,6 +5,7 @@
 	z-index: 999;
 	box-shadow: 0 2px 4px $gray;
 	width: 100%;
+	top: 34px;
     ul {
         li {
             text-align: left;
@@ -179,7 +180,9 @@
 			padding: 6px 25px;
 			display: inline-block;
 			margin-bottom: 10px;
-			font: menu;
+			font-size: 14px;
+			font-family: $default_font-family;
+			font-weight: 300;
 		}
 	}
 }
