@@ -154,7 +154,7 @@ var BulkAction = {};
 					}
 					$.each(jsonObj,function(key,value){
 						$("#selectItemCheckbox_"+value.itemId).attr('checked', false);
-						$('#itemTxtQty'+itemID).attr("disabled",false);
+						$('#itemTxtQty'+value.itemId).attr("disabled",false);
 						if($('#multipleUom_'+value.partNumber).length>0){
 							$('#multipleUom_'+value.partNumber).attr('disabled', false);
 						}
@@ -263,7 +263,7 @@ var BulkAction = {};
 					triggerToolTip();
 					$.each(obj,function(i,value){
 						$("#selectItemCheckbox_"+obj[i].itemId).attr('checked', false);
-						$('#itemTxtQty'+itemID).attr("disabled",false);
+						$('#itemTxtQty'+obj[i].itemId).attr("disabled",false);
 						if($('#multipleUom_'+obj[i].partNumber).length>0){
 							$('#multipleUom_'+obj[i].partNumber).attr('disabled', false);
 						}
