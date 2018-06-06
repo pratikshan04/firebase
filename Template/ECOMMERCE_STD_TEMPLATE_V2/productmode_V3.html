@@ -261,8 +261,6 @@
 					<strong>$locale.get("product.label.upc"): </strong><span>$!itemData.upc</span> 
 				</li>
 				#end
-			</ul>
-			<ul class="skuStyle">
 				#if(($itemData.customerPartNumber && $itemData.customerPartNumber != "") || ($itemData.customerPartNumberList.size() && $itemData.customerPartNumberList.size()>0))
 				<li id="custMainBlock">        
 					<strong>$locale.get("product.label.cpn"): </strong>
@@ -282,6 +280,8 @@
 					<strong>$locale.get("product.label.cpn"): </strong><span id="custPartBlock"></span>
 				</li>
 				#end
+			</ul>
+			<ul>
 				#if($itemData.packDesc)
 					<li id="packDescs" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$itemData.packDesc</span></li>
 				#end

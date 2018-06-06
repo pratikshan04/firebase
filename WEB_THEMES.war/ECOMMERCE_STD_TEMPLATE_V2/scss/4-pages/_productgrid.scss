@@ -80,7 +80,7 @@
 					float: left;
 					width:50%;
 					padding-right: 8px;
-					li{
+					li {
 						width: 100%;
 						float: none;
 						font-size: 12px;
@@ -105,7 +105,7 @@
 						font-size: 14px;
 						width: 205px;
 						border-radius: 2px;
-						i{
+						em{
 							margin-right: 12%;
 						}
 					}
@@ -226,7 +226,7 @@
                 width: 100%;
 				margin-top: 10px;
 				ul{
-					li{
+					li {
 						padding: 0 0 5px;
 						&.hideToHover{
 							display: none;
@@ -260,7 +260,7 @@
 						letter-spacing: normal;
 						font-size: 14px;
 						border-radius: 2px;
-						i{
+					    em{
 							margin-right: 12%;
 						}
 					}
@@ -293,6 +293,14 @@
 			li.selectCompareGroupBlock{
 				display: none;
 			}
+        }
+    }
+    .cimm_productModeDetailWrap{
+        ul {
+            li {
+                
+                float: none;
+            }
         }
     }
 }
