@@ -3442,7 +3442,7 @@ function homeCarousels(){
 			                   slidesToShow: 4,
 			                 }
 			               },{
-								breakpoint: 600,
+								breakpoint: 770,
 								settings: {
 									slidesToShow: 3,
 								}
@@ -3478,7 +3478,7 @@ function homeCarousels(){
 				                   slidesToShow: 4,
 				                 }
 				               },{
-									breakpoint: 600,
+									breakpoint: 770,
 									settings: {
 										slidesToShow: 3,
 									}
@@ -3513,7 +3513,7 @@ function homeCarousels(){
 				                   slidesToShow: 4,
 				                 }
 				               },{
-									breakpoint: 600,
+									breakpoint: 770,
 									settings: {
 										slidesToShow: 3,
 									}
@@ -3548,7 +3548,7 @@ function homeCarousels(){
 				                   slidesToShow: 4,
 				                 }
 				               },{
-									breakpoint: 600,
+									breakpoint: 770,
 									settings: {
 										slidesToShow: 3,
 									}
