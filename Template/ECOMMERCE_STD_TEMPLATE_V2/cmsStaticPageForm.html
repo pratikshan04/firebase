@@ -15,12 +15,26 @@
 		<div class="clear-both"></div>
 			<label class="cms_StaticLabel">Page Name</label> <input type="text" name="pageData.pageName" onKeypress="return IsSpecialCharacter(event);" id="pageName" value="$!staticPageData.pageName" /> 
 			<label class="cms_StaticLabel">Page Type</label>  
-			<select id="selectStaticPageType" name="pageData.pageType" >
-				<option value="BODY">BODY</option>
-				<option value="TEMPLATE">TEMPLATE</option>
-				<option value="BLOG">BLOG</option>
-				<!-- <option value="CATEGORY">CATEGORY</option> -->
+			<select id="selectStaticPageType" name="pageData.pageType" onchange="getNextLevelForPageType(this);">
+				<option #if($!staticPageData.pageType=="BODY") selected #end value="BODY">BODY</option>
+				<option #if($!staticPageData.pageType=="TEMPLATE") selected #end value="TEMPLATE">TEMPLATE</option>
+				<option #if($!staticPageData.pageType=="BLOG") selected #end value="BLOG">BLOG</option>
+				<option #if($!staticPageData.pageType=="BRAND") selected #end value="BRAND">BRAND</option>
+				<option #if($!staticPageData.pageType=="MANUFACTURER") selected #end value="MANUFACTURER">MANUFACTURER</option> 
+				<!-- <option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">CATEGORY</option> -->
 			</select>
+			<div class="linkWraper">
+				<span id="brandListSpan" class="hideMe blockElement">
+					<a class="iframe" href="bandDetailListCms.action" title="Brand List" onclick="javascript:showIframeWindow();">Select Brand</a> 
+					<input type="hidden" id="selectBrand" name="pageData.brandId" value="$!selectedPageTypeValueId"/>
+					<span id="brandListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
+				</span> 
+				<span id="manuFacturerListSpan" class="hideMe blockElement">
+					<a class="iframe" href="manufacturerDetailListCms.action" title="Manufacturer List" onclick="javascript:showIframeWindow();">Select Manufacturer</a> 
+					<input type="hidden" id="selectManufacturer" name="pageData.manufacturerId" value="$!selectedPageTypeValueId"/>
+					<span id="manuFacturerListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
+				</span> 
+			</div>
 			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" onKeypress="return IsSpecialCharacter(event);" id="pageTitleId"   /> 
 			<label class="cms_StaticLabel">Website</label>  
 			<select name="selectedSiteId" id="selectedWebsite">
@@ -131,18 +145,25 @@
 			</div>
 			
 			
-			
+<style>
+	.linkWraper a{
+		color: #666;
+		font-size: 10px;
+		text-decoration: underline;
+		padding: 10px 0 2px 0;
+		display: inline-block;
+	}
+</style>	
 <script>	
 	if(document.getElementById('cmsPageId').value=='0'){
-
 		document.getElementById('pagestatus').checked = true;
-		}
+	}
 			var title = "";
-			if(jQuery.trim(jQuery("#staticPageType").val())!=""){
-					jQuery("#selectStaticPageType").val(jQuery.trim(jQuery("#staticPageType").val()));
-				}else{
-					jQuery("#selectStaticPageType").val("BODY");
-					}
+			/* if(jQuery.trim(jQuery("#staticPageType").val())!=""){
+				jQuery("#selectStaticPageType").val(jQuery.trim(jQuery("#staticPageType").val()));
+			}else{
+				jQuery("#selectStaticPageType").val("BODY");
+			} */
 			function enableSEOValidator(){
 			    jQuery('#seoValidatorButton').bind('click', function(ev) {
 			    	 resetTag('#errDiv');
@@ -342,16 +363,16 @@
 			var temp =document.getElementById('pageName').value;
 			function getValueForCLone(){
 
-document.getElementById('pageName').value="";
-if(jQuery('#clonePage').is(":checked")){
-	alert("Clone Has Been Selected");
-	document.getElementById("clonePage").setAttribute("value","true");
-}else{	
-	document.getElementById('pageName').value=temp;
-	document.getElementById("clonePage").setAttribute("value","false");
-	
-}
-}
+				document.getElementById('pageName').value="";
+				if(jQuery('#clonePage').is(":checked")){
+					alert("Clone Has Been Selected");
+					document.getElementById("clonePage").setAttribute("value","true");
+				}else{	
+					document.getElementById('pageName').value=temp;
+					document.getElementById("clonePage").setAttribute("value","false");
+					
+				}
+			}
 
 		charactersRemainings();		
 		
@@ -365,6 +386,32 @@ if(jQuery('#clonePage').is(":checked")){
 		       event.preventDefault();
 		       return false;
 		    }
+		}
+		if($("#selectStaticPageType").length>0){
+			getNextLevelForPageType($("#selectStaticPageType"))
+		}
+		function getNextLevelForPageType(obj){
+			console.log($(obj).val());
+			if(obj!=null){
+				if($(obj).val()=="BRAND" && $("#brandListSpan").length>0){
+					$("#brandListSpan").show();
+					$("#manuFacturerListSpan").hide();
+					$("#selectManufacturer").val("");
+				}else if($(obj).val()=="MANUFACTURER" && $("#manuFacturerListSpan").length>0){
+					$("#manuFacturerListSpan").show();
+					$("#brandListSpan").hide();
+					$("#selectBrand").val("");
+				}else{
+					if($("#manuFacturerListSpan").length>0){
+						$("#manuFacturerListSpan").hide();
+						$("#selectManufacturer").val("");
+					}
+					if($("#brandListSpan").length>0){
+						$("#brandListSpan").hide();
+						$("#selectBrand").val("");
+					}
+				}
+			}
 		}
 		</script>
 	</div>
