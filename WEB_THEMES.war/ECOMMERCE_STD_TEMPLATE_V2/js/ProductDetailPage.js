@@ -205,10 +205,10 @@ $(document).bind('click', function(e) {
 	var $clicked = $(e.target);
     if ($clicked.hasClass("select_attributeList")){
 		$($clicked).parent('.selectOptions').find('ul.scroll').slideToggle();
-		$($clicked).parent('.selectOptions').find(".cimm_drop > i").toggleClass("fa-angle-down fa-angle-right");
+		$($clicked).parent('.selectOptions').find(".cimm_drop > em").toggleClass("fa-angle-down fa-angle-right");
     }else{
 		$(".selectOptions").find('ul.scroll').slideUp();
-		$('.selectOptions').find(".cimm_drop > i").addClass("fa-angle-down");
+		$('.selectOptions').find(".cimm_drop > em").addClass("fa-angle-down");
       }
 });
 var custflag = 0;
@@ -216,7 +216,7 @@ $(document).delegate('[data-function="customerPartNumber"]', 'click',function(){
 	var toggleListID = "#"+$(this).attr('data-listTarget');
 	var itemId = $(this).attr('data-itemId');
 	var partNum = $("#itmId_"+itemId).val();
-	$(toggleListID).html('<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>');
+	$(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
 	jQuery.get('customerPartNumbersPage.action?itemPriceId='+itemId+'&partNumber='+partNum,function(data,status){
 		$(toggleListID).find("li").remove();
 		$(toggleListID).html(data);

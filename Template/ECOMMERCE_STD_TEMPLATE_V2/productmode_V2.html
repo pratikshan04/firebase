@@ -21,8 +21,8 @@
 					#set($k = 0)
 					#foreach($filterVal in $attrList.attrFilterList.get($!attrListVal))
 					<li class="cimm_listselect">
-						<i style="display:none">$!filterVal.attrValue</i>
-						<label class="customCheckBox" >
+						<em style="display:none">$!filterVal.attrValue</em>
+						<label class="customCheckBox" for="multiFilter_$!{iVal}_$!{k}">
 							<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" onclick="ProductMode.appendSearchByCheckBox('multiFilter_$!iVal');" />
 							<span>$!filterVal.attrValue</span>
 							<div style="display:none;" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</div>
@@ -57,11 +57,11 @@
 			<div class="compareWrap"><strong>$productCount</strong> Product Choices
 				<div class="compare_head pull-right hideForDevice">
 					<strong><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</strong>
-					<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><i class="fa fa-lg fa-times"></i></a></strong>
+					<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><em class="fa fa-lg fa-times"></em></a></strong>
 				</div>
 			</div>
 			<div class="right_attribute">
-				<div class="refine_head" style="cursor: pointer;" onclick='ProductMode.removeAllMultiAttr();'><span class="colorcode1"> Clear All</span> <i class="fa fa-times"></i></div>
+				<div class="refine_head" style="cursor: pointer;" onclick='ProductMode.removeAllMultiAttr();'><span class="colorcode1"> Clear All</span> <em class="fa fa-times"></em></div>
 				<span class=" selected_refine_values" id="mulitFilterTrailDetailPage"></span>
 			</div>
 		</div>
@@ -78,17 +78,17 @@
 		<th class="text-center">UOM</th>
 		<th class="text-center">Price</th>
 		<th class="text-center">Availability</th>
-		<th class="text-center removeForSend hideForPrint" title="Add to Cart / Add to Group"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i></th>
-		<!-- <th title="Add to Group"><i class="fa fa-lg fa-shopping-bag" aria-hidden="true"></i></th> -->
-		<th class="text-center removeForSend hideForDevice hideForPrint" title="Compare"><i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i></th>
-		<th class="text-center removeForSend hideForPrint" title="Item Information"><i class="fa fa-info-circle fa-lg"></i></th>
+		<th class="text-center removeForSend hideForPrint" title="Add to Cart / Add to Group"><em class="fa fa-lg fa-shopping-cart" aria-hidden="true"></em></th>
+		<!-- <th title="Add to Group"><em class="fa fa-lg fa-shopping-bag" aria-hidden="true"></em></th> -->
+		<th class="text-center removeForSend hideForDevice hideForPrint" title="Compare"><em class="fa fa-lg fa-bar-chart" aria-hidden="true"></em></th>
+		<th class="text-center removeForSend hideForPrint" title="Item Information"><em class="fa fa-info-circle fa-lg"></em></th>
 	</tr>
 </thead>
 <tbody class="text-center">
  #foreach($productModeitemData in $selectableItemList)
  #set($productModeItemtitle = $productModeitemData.brandName+"-"+$productModeitemData.manufacturerPartNumber)
 	<tr id="selectableItem_$productModeitemData.itemId" data-priceloading="N" data-partnumber="$productModeitemData.partNumber.replaceAll('\s+','_')"  data-rowid="identification" data-detailsload="N" itemscope itemtype="http://schema.org/Product">
-		 <td class="tabelImage" id="$productModeitemData.itemPriceId" style="cursor: pointer;">
+		 <td class="tabelImage" style="cursor: pointer;"><!-- id="$!productModeitemData.itemPriceId"  -->
 		 	#detailPageHiddenFields($productModeitemData.partNumber.replaceAll('\s+','_'),$productModeitemData.qty,$productModeitemData.price,$productModeitemData.salesUom,$productModeitemData.saleQty,$productModeitemData.ItemId,$productModeitemData.brandName,$productModeitemData.manufacturerPartNumber,$itemAvailability)
 			<input type="hidden" value="$productModeitemData.minOrderQty" id="MinOrderQty_$productModeitemData.partNumber" name="MinOrderQty_$productModeitemData.partNumber"/>
 			<input type="hidden" value="$productModeitemData.minOrderQty" id="minOrderQty_$productModeitemData.itemId"/>
@@ -99,15 +99,15 @@
 			 	<span itemprop="name">$productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 				<span class="imgForSend" style="display:none !important;">
 				 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-				<img id="imageName$productModeitemData.itemId" itemprop="image" height="250" width="250" src="$hostName$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
+				<img itemprop="image" height="250" width="250" src="$hostName$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
 				#else
-				<img id="imageName$productModeitemData.itemId"  height="250" width="250" src="$hostName$detailImage$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
+				<img height="250" width="250" src="$hostName$detailImage$productModeitemData.imageName" onerror="this.src='$hostName$webThemes/$siteName/images/NoImage.png';" />
 				#end
 				</span>
 				#if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+				<img itemprop="image" src="$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 				#else
-				<img id="imageName$productModeitemData.itemId"  itemprop="image" src="$!thumbNail$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+				<img itemprop="image" src="$!thumbNail$productModeitemData.imageName" height="75" width="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 				#end
 				#if($!productModeitemData.clearance=="Y")
 				<span class="clearenceTag clearenceTagSmall">Clearence</span>
@@ -128,7 +128,7 @@
 		 <td class="removeForSend">
 			#set($minQty = 1)
 			#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
-		 	<input type="text" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+		 	<input type="text" title="$!locale.get('product.label.quantity')" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 		 </td>
 	     <td itemprop="sku">
 	     	$!productModeitemData.salesUom
@@ -171,18 +171,18 @@
 			#else
 			 	#set($addToCartCheckFlag = "N")
 			#end
-		 	<label class="customCheckBox2">
+		 	<label class="customCheckBox2" id="selectItemCheckbox_$productModeitemData.itemId">
 			 	<input type="checkbox" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems" id="selectItemCheckbox_$productModeitemData.itemId" data-itemid="$productModeitemData.itemId" data-partnumber="$productModeitemData.partNumber.replaceAll('\s+','_')"  data-itemPriceId="$productModeitemData.itemPriceId"/>
 				<span></span>
 			</label>
 		 </td>
 		 <td title="Compare" class="hideForDevice removeForSend hideForPrint">
 			<label class="customCheckBox2">
-				<input type="checkbox" value="$productModeitemData.itemPriceId" name="compareId" id="check_$productModeitemData.itemPriceId" onclick="compareItemList(this);"/>
+				<input type="checkbox" value="$productModeitemData.itemPriceId" name="compareId" id="check_$productModeitemData.itemPriceId" onclick="compareItemList(this);" title="Compare"/>
 				<span></span>
 			</label>
 		 </td>
-		 <td class="details-control removeForSend hideForPrint" id="$productModeitemData.itemPriceId" title="Item Information"><i class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></i></td>
+		 <td class="details-control removeForSend hideForPrint" id="$productModeitemData.itemPriceId" title="Item Information"><em class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></em></td>
 	</tr>
  #end
  </tbody>
@@ -269,7 +269,7 @@
 				</dd>
 			<dt>
 				<a id='linkgcustom$itemData.itemId' class="button">
-				<i class="fa fa-lg fa-plus"></i><i class="fa fa-lg fa-minus"></i>
+				<em class="fa fa-lg fa-plus"></em><em class="fa fa-lg fa-minus"></em>
 				<span id="ulg${itemData.itemId}item">
 					$locale.get("product.label.customerpartnumber")
 				</span>
@@ -279,7 +279,7 @@
 			#else
 				<dt>
 					<a href="javascript:void(0)" id='linkgcustom$itemData.itemId' class="button" onclick="loginPop(); return false;">
-					<i class="fa fa-lg fa-plus"></i><i class="fa fa-lg fa-minus"></i>
+					<em class="fa fa-lg fa-plus"></em><em class="fa fa-lg fa-minus"></em>
 					<span id="ulg${itemData.itemId}item">
 						$locale.get("product.label.customerpartnumber")
 					</span>
@@ -514,7 +514,7 @@
 									#end
 									<li class="cimm_itemDespQty">
 										<strong>$!locale.get("product.label.qty"): </strong>  
-										<span><input type="text" name="itemTxtQty$!linkItem.itemId"  maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
+										<span><input type="text" title="$!locale.get('product.label.quantity')" name="itemTxtQty$!linkItem.itemId"  maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
 									</li>
 									<li data-select='addtoCartbtn_$!linkItem.partNumber'>
 						            #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")

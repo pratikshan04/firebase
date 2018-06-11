@@ -67,7 +67,7 @@ var ProductMode = {};
 							var splitAttrValue = attrValueTxt.split("`");
 							attrValueTxt = splitAttrValue[0];
 						}
-						buildString = buildString + c + '<span class="refine-value">'+attrValueTxt+'<a class="removeFilter" href="javascript:void(0);" data-priceId="'+id+'" onclick="ProductMode.removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> [<i class="fa fa-times"></i>]</a></span>';
+						buildString = buildString + c + '<span class="refine-value">'+attrValueTxt+'<a class="removeFilter" href="javascript:void(0);" data-priceId="'+id+'" onclick="ProductMode.removeMultiAttr(this)" title="Remove This Item"><div style="display:none">'+valArr[0]+'</div><span style="display:none;">'+valListArr[j]+'</span> [<em class="fa fa-times"></em>]</a></span>';
 						c = " ";
 					}
 					buildString = buildString + '</li>'; // For Filter results

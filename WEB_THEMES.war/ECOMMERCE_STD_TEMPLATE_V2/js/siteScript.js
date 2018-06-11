@@ -2322,7 +2322,7 @@ function displayCreditCardResponse(content){
 function sendSiteDetailPagePart(a){
 	var content="";
 	var siteName=$("#siteName").val();
-	var b=$("#itemName").val();
+	var b=$("#titleText").val();
 	
 	if($(".focusItemTabs").html()=="" || $(".focusItemTabs").html() == undefined){
 		var itemImg = $(".cimm_itemMainImage span.imgForSend").html();
@@ -2918,7 +2918,7 @@ function eachCheckBox(chk){
 //------------------------------------footer dependent sources----------------------------------------
 var footer_icon_plus = 'fa-plus';
 var footer_icon_minus = 'fa-minus';
-$('.footerCol h4 em').click(function(){
+$('.footerCol h3 em').click(function(){
 	if($(this).parents('.footerCol').find('ul').hasClass('in')){
 		$(this).addClass(footer_icon_plus).removeClass(footer_icon_minus);
 	}
@@ -2928,11 +2928,11 @@ $('.footerCol h4 em').click(function(){
 });
 function toDoFooter(){
 	if ($(document).width() < 981){
-		$('.footerCol h4 em').show();
+		$('.footerCol h3 em').show();
 		$('.footerCol ul').removeClass('in');
 	}
 	else if ($(document).width() >= 981){
-		$('.footerCol h4 em').hide();
+		$('.footerCol h3 em').hide();
 		$('.footerCol ul').addClass('in');		
 	}
 }
@@ -3253,7 +3253,7 @@ $(".cimm_slide li em").click(function () {
 		}
 	}
 });
-$(".cimm_slide h3").click(function () {
+$(".cimm_slide h2").click(function () {
 	if(!$(this).parent().hasClass("first")){
 		$(this).parent().addClass("moveRight").removeClass("moveLeft");
 	}

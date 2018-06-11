@@ -82,6 +82,8 @@
 <div class="row">
 	<div class="col-md-12">
 		#if($resultCount>0)
+			<input type="hidden" id="navigationType" name="navigationType" value="$!navigationType" />
+			<input type="hidden" value="$!srchTyp" id="searchType" name="searchType"/>
 			<div class="cimm_listGridTopControls clearAfter">	
 				<div class="cimm_listGridTopLeftCtrls row">
 				<div class='col-md-6 col-sm-12 col-xs-12'>
@@ -105,7 +107,7 @@
 					<div class="row">
 						<div class='col-md-5 col-sm-12 col-xs-12'>
 							<div class="bulkActionBtn">
-								<select class="selectpicker" id="bulkAction" onchange="performBulkAction(this);" title="$!locale.get('product.label.bulkOptions')">
+								<select class="selectpicker" id="bulkAction" title="$!locale.get('product.label.bulkOptions')">
 									<option>$!locale.get("product.label.bulkOptions")</option>
 									#if($userLogin)
 										<option data-perform="multipleProductGroup">$!locale.get("product.label.addItemsToGroup")</option>
@@ -148,7 +150,7 @@
 							#end
 							#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
-							<select name="sortBy" id="sortBy" onchange="this.form.submit();" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
+							<select name="sortBy" id="sortBy" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
 								<!-- <option value=""> - $!locale.get("form.label.select") -</option> -->
 								<!--option value="">Best Sellers</option>-->
 								#if($navigationType=="SEARCH")
@@ -185,7 +187,7 @@
 							#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							$!locale.get("product.label.show")&nbsp; 
-							<select class="quantity selectpicker" name="resultPage" id="resultPerPage" onchange="this.form.submit();" style='display:none;' title="$!locale.get('product.label.show')>
+							<select class="quantity selectpicker" name="resultPage" id="resultPerPage" style='display:none;' title="$!locale.get('product.label.show')>
 								<option value="12" #if($resultPage==12) selected #end>12</option>
 								<option value="24" #if($resultPage==24) selected #end>24</option>
 								<option value="48" #if($resultPage==48) selected #end>48</option>

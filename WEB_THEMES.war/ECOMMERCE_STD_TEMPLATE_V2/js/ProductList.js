@@ -470,6 +470,12 @@ $(document).ready(function(){
 	priceLoadMainFunction();
 	changeListtoGrid();
 	chkLeftMenu();
+	$("#resultPerPage, #sortBy").change(function(){
+		$(this).parents('form').submit();
+	});
+	$("#bulkAction").change(function(){
+		performBulkAction(this);
+	});
 	setTimeout(function(){
 		$("#filterBar .chosen-container .chosen-single span").attr('onchange','changeAdvSearchLeftMenu()');
 	},3500);
