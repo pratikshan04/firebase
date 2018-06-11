@@ -106,12 +106,12 @@ input[type="text"], input[type="password"], select {
     	console.log($(obj).val());
     	console.log($(obj).data("listtype"));
 			if($(obj).data("listtype")=="BRAND"){
-				alert("Selected Brand is: "+$(obj).data("name"));
+				alert("Selected Brand is: "+$(obj).data("name")+"\nPlease close the popup and click on Save button to update the changes");
 				$("#selectBrand", parent.document.body).val($(obj).val());
 				$("#brandListSpanTxt", parent.document.body).html(": <strong>"+$(obj).data("name")+"</strong>");
 				//console.log("Parent : "+$("#selectBrand", parent.document.body).val());
 			}else if($(obj).data("listtype")=="MANUFACTURER"){
-				alert("Selected Manufacturer is: "+$(obj).data("name"));
+				alert("Selected Manufacturer is: "+$(obj).data("name")+"\nPlease close the popup and click on Save button to update the changes");
 				$("#selectManufacturer", parent.document.body).val($(obj).val());
 				$("#manuFacturerListSpanTxt", parent.document.body).html(": <strong>"+$(obj).data("name")+"</strong>");
 			}
