@@ -15,16 +15,16 @@
 				<p>$!locale.get("login.label.pleaseEnterYourUserNameAndPassword")</p>
 			</div>
 			<div class="form-group">
-				<label for="mainUserName">$!locale.get("form.label.userName")</label>
+				<label for="mainUserName" for="mainUserName">$!locale.get("form.label.userName")</label>
 				<input type="text" name="loginId" value="$!userNameTmp" id="mainUserName" class="form-control" placeholder="$!locale.get('form.label.userName')"/>
 			</div>
 			<div class="form-group">
-				<label>$!locale.get("form.label.password")</label>
-				<input type="password" name="loginPassword" id="mainPassword"  class="form-control" placeholder="$!locale.get('form.label.password')"/>
+				<label for="mainPassword">$!locale.get("form.label.password")</label>
+				<input type="password" name="loginPassword" id="mainPassword" class="form-control" placeholder="$!locale.get('form.label.password')"/>
 			</div>
 			<div class="form-group">
 				<label for="rememberMe" class="customCheckBox" >
-					<input type="checkbox" tabindex="3" name="rememberMe" id="rememberMe" onchange="checkRemember(this);"/>
+					<input type="checkbox" tabindex="3" name="rememberMe" id="rememberMe" onchange="checkRemember(this);" title="Remember Me"/>
 					<span>$!locale.get("form.label.rememberMyLogin") | </span>
 				</label>
 				<a href="ForgotLink.action">$!locale.get("product.label.forgotPassword")</a>
@@ -41,7 +41,7 @@
 				<p align="center">$!locale.get("login.label.guestcheckoutmessage")</p>				
 			</div>
 			<div class="form-group">
-				<label> $!locale.get("form.guestcheckout.emailaddress")</label>
+				<label for="auEmail"> $!locale.get("form.guestcheckout.emailaddress")</label>
 				<input type="text" name="auEmail" id="auEmail" value="" onkeypress="return guestCheckoutWizard.runScript(event);" class="form-control" placeholder="$!locale.get('form.guestcheckout.emailaddress')"/>
 			</div>
 			<div class="form-group">
