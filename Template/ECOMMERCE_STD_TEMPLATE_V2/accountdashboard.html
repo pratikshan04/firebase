@@ -12,12 +12,12 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.label.userContact")
-								<a href="$!locale.get('website.url.EditContact')"><i class="glyphicon glyphicon-edit"></i></a>
+								<a href="$!locale.get('website.url.EditContact')"><em class="glyphicon glyphicon-edit"></em></a>
 							</h3>
 							<div class="row">
 								<div class="col-md-3 col-sm-6 col-xs-12">
 									<div class="profileImage">
-										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" width="180" id="profilePicture" onerror="this.src='$webThemes/$siteName/images/default-profile.png'"/>##$userProfileImagePath
+										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="Profile Picture" width="180" id="profilePicture" onerror="this.src='$webThemes/$siteName/images/default-profile.png'"/>##$userProfileImagePath
 										<input type="hidden" value="$userProfileImagePath" id="userProfileImagePath"/>
 									</div>
 								</div>
@@ -69,7 +69,7 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.billingAddress")
-							<a href="$locale.get('website.url.Address')"><i class="glyphicon glyphicon-edit"></i></a>
+							<a href="$locale.get('website.url.Address')"><em class="glyphicon glyphicon-edit"></em></a>
 							</h3>
 							<p>
 								<span>$!billAddress.customerName</span><br />
@@ -83,7 +83,7 @@
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.shippingAddress")
-							<a href="$locale.get('website.url.Address')"><i class="glyphicon glyphicon-edit"></i></a>
+							<a href="$locale.get('website.url.Address')"><em class="glyphicon glyphicon-edit"></em></a>
 							</h3>
 							<p>
 								<span>$!shipAddress.customerName</span><br />
@@ -101,7 +101,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="cimm_moduleHeadEnclosure mTop-3">
 								<h3 class="cimm_blockHeading mBottom-3">$locale.get("product.heading.shipAddressList")
-									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><i class="fa fa-lg fa-refresh"></i></a>
+									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><em class="fa fa-lg fa-refresh"></em></a>
 									<span class="pull-right" id="progressBar">
 										#if($session.getAttribute("scynEntityStatus")!="Completed" && $session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 										$!session.getAttribute("scynEntityStatus")
@@ -225,9 +225,9 @@
 					#set($resentItemTitle = $!recentOrders.brandName+" "+$!recentOrders.manufacturerPartNumber)
 						<a href="$!hostName$!recentOrders.itemPriceId$locale.get('website.url.ProductDetail')n/$resentItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							#if($recentOrders.imageType=="URL")
-							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$recentOrders.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
 							#else
-							<img id="imageName$recentOrders.itemId" src="$detailImage$recentOrders.imageName" alt='$recentOrders.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+							<img id="imageName$recentOrders.itemId" src="$detailImage$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
 							#end
 						</a>
 					</div>

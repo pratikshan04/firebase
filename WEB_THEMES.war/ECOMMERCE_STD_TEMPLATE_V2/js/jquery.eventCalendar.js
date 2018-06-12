@@ -1115,8 +1115,8 @@
 					        		   jQuery('td:eq(1)', nRow).html('<p>'+startTime+" to "+endTime+"</p>");
 					        	   }
 					        	   jQuery('td:eq(0)', nRow).append('<p>'+aData.title+'</p>');//<a href="/'+aData.id+'/EventDetail/'+aData.title+'"></a>
-					        	   jQuery('td:eq(0)', nRow).append('<p><b>Location:</b> '+aData.location+'</p>');
-					        	   jQuery('td:eq(2)', nRow).addClass('calendarDetail').html('<a href="/eventDetailsUnit.action?eventID='+aData.id+'"><i class="fa fa-2x fa-calendar"></i></a>');
+					        	   jQuery('td:eq(0)', nRow).append('<p><strong>Location:</strong> '+aData.location+'</p>');
+					        	   jQuery('td:eq(2)', nRow).addClass('calendarDetail').html('<a href="/eventDetailsUnit.action?eventID='+aData.id+'"><em class="fa fa-2x fa-calendar"></em></a>');
 					           }
                 } );
                 flags.wrap.find('.eventsCalendar-loading').hide();

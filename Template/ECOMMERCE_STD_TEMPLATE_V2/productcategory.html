@@ -102,9 +102,9 @@
 			<div class="cimm_categoryImg">
 				<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 				#if($categoryList.imageName.contains("http") || $categoryList.imageType.equalsIgnoreCase("URL"))
-			 		<img itemprop="Image" src="$!categoryList.imageName" alt="No Image" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+			 		<img itemprop="Image" src="$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
 				#else
-			 		<img itemprop="Image" src="$!taxonomyImage$!categoryList.imageName" alt="No Image" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+			 		<img itemprop="Image" src="$!taxonomyImage$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
 				#end
 				</a>
 			</div> 
@@ -656,9 +656,9 @@
 <ul class="cimm_bottomBanners">
 #foreach($bottomBanner in $bottomBanners)
 #if($bottomBanner.imageType=="URL")
-	<li><a href=""> <img src="$!bottomBanner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a></li>
+	<li><a href=""> <img src="$!bottomBanner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!bottomBanner.imageName"/></a></li>
 #else
-	<li><a href=""> <img src="$!bannerLogoPath$!bottomBanner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a></li>
+	<li><a href=""> <img src="$!bannerLogoPath$!bottomBanner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!bottomBanner.imageName"/></a></li>
 #end
 #end
 </ul>

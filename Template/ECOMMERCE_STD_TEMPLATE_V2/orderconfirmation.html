@@ -1,9 +1,9 @@
 <!-----------------------------------Order Confirmation Content-------------------------------->
 <!-- <div class="OrderConfBtnGroup cimm_groupManipulate">
-	<a href="javascript:void(0);" onclick="window.print();" class="hideForDevice" title="$!locale.get('product.button.printReceipt')"><i class="fa fa-lg fa-print"></i> &nbsp; $!locale.get('product.button.printReceipt')</a>
+	<a href="javascript:void(0);" onclick="window.print();" class="hideForDevice" title="$!locale.get('product.button.printReceipt')"><em class="fa fa-lg fa-print"></em> &nbsp; $!locale.get('product.button.printReceipt')</a>
 </div>
 <div class="clear"></div>
-<a href="javascript:void(0);" onclick="sendOrderConfirmation();" class="hideForDevice pull-right" title="$!locale.get('product.button.sendthispage')"><i class="fa fa-lg fa-share-square"></i></a>
+<a href="javascript:void(0);" onclick="sendOrderConfirmation();" class="hideForDevice pull-right" title="$!locale.get('product.button.sendthispage')"><em class="fa fa-lg fa-share-square"></em></a>
 <div class="clear"></div> -->
 <div id="printOrderConfirm">
 	<div id="SendOrderConfirmationPage">
@@ -137,9 +137,9 @@
 					<tr itemscope itemtype="http://schema.org/Product">
 						<td data-th="$!locale.get('product.label.Image')">
 							#if($itemData.imageName.contains("http") || $itemList.imageType=="URL")
-							<img class="OrderConfImg" itemprop="image" src="$!itemList.imageName" alt='$!itemList.imageName' onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+							<img class="OrderConfImg" itemprop="image" src="$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
 							#else
-							<img class="OrderConfImg" itemprop="image" src="$!hostName$!thumbNail$!itemList.imageName" alt='$!itemList.imageName' onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+							<img class="OrderConfImg" itemprop="image" src="$!hostName$!thumbNail$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
 							#end                     
 						</td>
 						<td class="alignLeft" data-th="$!locale.get('product.label.description')">
@@ -339,10 +339,10 @@
             <td style="border-right:1px solid #CCC;">
                 #if($itemData.imageName.contains("http") || $itemList.imageType=="URL")
                         <img src="$!hostName$!itemList.imageName"  width="75" height="75" 
-                        onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt='$!itemList.imageName'/>
+                        onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt='$!itemList.brandName $!itemList.manufacturerPartNumber'/>
                     #else
                         <img src="$!hostName$!thumbNail$!itemList.imageName"  width="75" height="75" 
-                        onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt='$!itemList.imageName'/>
+                        onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt='$!itemList.brandName $!itemList.manufacturerPartNumber'/>
                     #end                        
             </td>
             <td style="border-right:1px solid #CCC;">

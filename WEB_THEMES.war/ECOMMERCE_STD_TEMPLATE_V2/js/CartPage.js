@@ -15,7 +15,7 @@ $('[data-function="saveCartFunction"]').click(function() {
 	var itemId = $(this).attr('data-itemId');
 	$("#group_id").val(toggleListID);
 	$("#hidden_id").val(itemId);
-	$(toggleListID).html('<li class="text-center"><i class="fa fa-spin fa-spinner"></i></li>');
+	$(toggleListID).html('<li class="text-center"><em class="fa fa-spin fa-spinner"></em></li>');
 	$(toggleListID).show();
 	jQuery.get("productListIdNamePage.action?productIdList=0&groupType=C",function(data,status){
 		$(toggleListID).find("li").remove();

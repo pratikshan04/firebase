@@ -55,7 +55,7 @@ var ProductMode = {};
 					buildString = buildString + '<li>';
 					buildString = buildString + '<span class="Refine-label">';
 					var dispVal = valArr[0].replace("attr_","");
-					buildString= buildString + '<b>'+dispVal+': </b>';
+					buildString= buildString + '<strong>'+dispVal+': </strong>';
 					buildString = buildString + '</span>';
 
 					var c = "";

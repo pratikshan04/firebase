@@ -51,11 +51,11 @@
 							<td>
 								#if($compareItem.imageName.contains("http"))
 								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
-									<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#else
 								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
-									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$compareItem.imageName' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#end
 								<strong>
@@ -137,7 +137,7 @@
 		                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
 		                                     </span>
 		                                    #else
-		                                         <span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price </span>
+		                                         <span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
 		                                    #end	
 		                                    <!-- <img src="$webThemes/$siteName/images/loading.gif" /> -->
 		                                
@@ -150,7 +150,7 @@
 		                                    <span class="priceSpan" data-select='priceData' id='span_$mainPrice.partNumber'>
 		                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
 		                                    #else
-		                                        <span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price </span>
+		                                        <span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
 		                                    #end
 		                                    <!-- <img src="$webThemes/$siteName/images/loading.gif" /> -->
 		                                </span>

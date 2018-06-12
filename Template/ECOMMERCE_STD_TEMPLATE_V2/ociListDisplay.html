@@ -39,9 +39,9 @@
 	            	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ',"_")">
 	                    <span id="imageName$itemData.itemId">
 	                        #if($itemData.imageType=="URL")
-	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 	                        #else
-	                            <img src="$detailImage$itemData.imageName"  width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+	                            <img src="$detailImage$itemData.imageName"  width="75" height="75" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 	                        #end
 	                    </span>
 	                </a>
