@@ -32,7 +32,7 @@
 				<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
 				<td data-th="$!locale.get('product.label.debit')">$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 				<td data-th="$!locale.get('product.label.balance')">$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
-				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 			</tr>
 			#if($countOrderList == 5) #break #end #end #end
 		</tbody>
@@ -122,7 +122,7 @@
 							<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
 							<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 							<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
-							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 						</tr>
 						#end
 						#end

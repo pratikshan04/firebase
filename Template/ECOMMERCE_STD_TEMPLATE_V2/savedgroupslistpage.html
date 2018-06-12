@@ -19,8 +19,8 @@
 				<td data-th="$!locale.get('product.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
 				<td data-th="$!locale.get('product.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
 				<td data-th="$!locale.get('product.group.heading.AddGroupToCart')">
-					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><em class="fa fa-cart-plus" aria-hidden="true"></em></button>
+					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><em class="fa fa-trash" aria-hidden="true"></em></button>
 				</td>
 			</tr>
 			#end
@@ -59,8 +59,8 @@
 					<td data-th="$!locale.get('saved.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
 					<td data-th="$!locale.get('saved.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
 					<td data-th="$!locale.get('product.heading.Action')">
-						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.dateCreated')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><i class="fa fa-trash" aria-hidden="true"></i></button>
+						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><em class="fa fa-cart-plus" aria-hidden="true"></em></button>
+						<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('saved.group.heading.dateCreated')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><em class="fa fa-trash" aria-hidden="true"></em></button>
 					</td>
 				</tr>
 				#end
@@ -77,7 +77,7 @@
 	#if($approveCartData.size()>0)
 	#foreach($groupData in $approveCartData)
 	<div class="col-md-6 col-sm-6 col-xs-12 mBottom-2">
-		<i class="fa fa-lg fa-eercast" aria-hidden="true"></i> <a href="myProductGroupPage.action?reqType=$reqType&savedGroupId=$groupData.productListId&updatedDate=$groupData.date&assignedShipTo=$groupData.assignedShipTo">$groupData.productListName</a>
+		<em class="fa fa-lg fa-eercast" aria-hidden="true"></em> <a href="myProductGroupPage.action?reqType=$reqType&savedGroupId=$groupData.productListId&updatedDate=$groupData.date&assignedShipTo=$groupData.assignedShipTo">$groupData.productListName</a>
 	</div>
 	#end
 	#else

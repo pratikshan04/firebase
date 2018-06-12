@@ -20,9 +20,9 @@
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
 			#if($isShared!="Y")
-			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('savedCart.button.editCartName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('savedCart.button.cartName')</button>
-			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=C');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('header.label.cart')</button>
-			<button class="cimm_inlineButton" data-toggle="modal" data-target="#sharePop"><i class="glyphicon glyphicon-share"></i> $locale.get('product.heading.share')</button>
+			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('savedCart.button.editCartName')"><em class="glyphicon glyphicon-edit"></em> $!locale.get('savedCart.button.cartName')</button>
+			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=C');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><em class="glyphicon glyphicon-trash"></em>  $!locale.get('header.label.cart')</button>
+			<button class="cimm_inlineButton" data-toggle="modal" data-target="#sharePop"><em class="glyphicon glyphicon-share"></em> $locale.get('product.heading.share')</button>
 			#end
 		</div>
 	</div>
@@ -144,9 +144,9 @@
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							<span id="imageName$itemData.itemId">
 							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#else
-							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
+							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#end
 							</span>
 						</a>
@@ -272,13 +272,13 @@
 								#if($itemData.price>0)
 								<span class="priceSpan">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
-								<span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price</span>
+								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							#else
 								#if($itemData.price>0)
 								<span class="priceSpan">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
-								<span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price</span>
+								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							<!-- <span id="span_$itemData.partNumber" data-select='priceData'>
 							<img src="$hostName$webThemes/$siteName/images/loading.gif" />

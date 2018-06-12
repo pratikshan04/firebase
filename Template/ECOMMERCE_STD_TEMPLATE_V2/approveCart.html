@@ -36,9 +36,9 @@
 							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 									#else
-									<img src="$detailImage$itemData.imageName"  width="75" height="75" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									<img src="$detailImage$itemData.imageName"  width="75" height="75" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 									#end
 								</span>
 							</a>
@@ -82,7 +82,7 @@
 								#if($itemData.branchTotalQty>0)
 								<span class='availSpanFa'>In Stock</span>
 								#else
-								<span class='priceSpanFa'><i class='fa fa-phone fa-lg '></i> for Availability</span>
+								<span class='priceSpanFa'><em class='fa fa-phone fa-lg '></em> for Availability</span>
 								#end
 								<!-- <span id="Avail_$itemData.partNumber" data-select='availability'>
 								<strong>$locale.get("product.label.availableQuantity")</strong> : 
@@ -92,7 +92,7 @@
 							</ul>
 						</td>
 						<td data-th="$locale.get('product.label.Iqty')">
-							<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="4" class="quantity" />
+							<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="4" class="quantity" title="Quantity"/>
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 							<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>

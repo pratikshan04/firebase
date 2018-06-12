@@ -245,7 +245,7 @@ form#eventForm h2 {
 #events_Table_wrapper #events_Table td:nth-child(2){width: 41%;}
 #events_Table_wrapper #events_Table td.calendarDetail {text-align: right;}
 #location,#events_Table_wrapper .dataTables_info,#events_Table_wrapper .dataTables_paginate{display:none;}
-.group td a{color: $primary_color;}
+.group td a:not(.cimm_inlineButton) {color: $primary_color;}
 #events_Table_wrapper #events_Table td.calendarDetail a{color: $primary_color;display: block;}
 #events_Table_wrapper #events_Table td p {margin: 5px 0 0 0;}
 #events_Table_wrapper #events_Table td.sorting_1 p.allEvent{font-size: 16px;}

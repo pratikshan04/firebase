@@ -1,26 +1,4 @@
 #parse("Macros/cartPageMacro.vm")
-<div class="col-md-4 col-sm-4 col-xs-12">
-	<form action="shoppingCartPage.action" id="sortByForm" class="form-inline" method="post">
-		<label>$!locale.get('product.label.sortBy'): </label>
-		<div class="form-group">
-			<select name="sortBy" id="sortByBrand" onchange="sortByManuPartNo();" class="form-control selectpicker">
-				<option value="">-- Select --</option>
-				<!--  <option value="ProdNameA" #if($sortBy=='ProdNameA') selected #end >Brand (A-Z)</option>
-				<option value="ProdNameB" #if($sortBy=='ProdNameB') selected #end >Brand (Z-A)</option> -->
-				<option value="PartA" #if($sortBy=='PartA') selected #end >Part Number (Asc)</option>
-				<option value="PartD" #if($sortBy=='PartD') selected #end >Part Number (Desc)</option>
-				<option value="MPNA" #if($sortBy=='MPNA') selected #end >Manf Part# (Asc)</option>
-				<option value="MPND" #if($sortBy=='MPND') selected #end >Manf Part# (Desc)</option>
-				<!--  <option value="CPNDesc" #if($sortBy=='CPNDesc') selected #end >CPN (Desc)</option>
-				<option value="CPNAsc" #if($sortBy=='CPNAsc') selected #end >CPN (Asc)</option>
-				<option value="UpcA" #if($sortBy=='UpcA') selected #end >UPC (Asc)</option>
-				<option value="UpcD" #if($sortBy=='UpcD') selected #end >UPC (Desc)</option>
-				<option value="DescA" #if($sortBy=='DescA') selected #end >Description (Asc)</option>
-				<option value="DescD" #if($sortBy=='DescD') selected #end >Description (Desc)</option> -->
-			</select>
-		</div>
-	</form>
-</div>
 #if($session.getAttribute("cartItemQtyUpdatedMessage") && $!session.getAttribute("cartItemQtyUpdatedMessage")!="")
 <div id="notificationDivCart">
     <span class="errMsg" id="errorMsgCart">$!session.getAttribute("cartItemQtyUpdatedMessage")</span>
@@ -33,27 +11,43 @@
 #if($userLogin)
 <input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!validEmailAddress">
 #end
-<div class="cartTotal_Top">
-	<span class="btn btn-lg">
-		<strong class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</strong>
-		<strong>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</strong>
-	</span>
-	#if($userLogin) 
-	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-		<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
-	#else
-		<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
-	#end 
-	#else
-	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-		<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
-	#else
-		<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
-	#end
-	#end
-	<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sharethis')" onclick="sendPageContent('sendPageContent');">
-		$!locale.get("product.button.sharethis") <i class="fa fa-paper-plane" aria-hidden="true"></i>
-	</a>
+<div class="row">
+	<div class="col-md-4 col-sm-4 col-xs-12 text-left">
+		<form action="shoppingCartPage.action" id="sortByForm" class="form-inline" method="post">
+			<label>$!locale.get('product.label.sortBy'): </label>
+			<div class="form-group">
+				<select name="sortBy" id="sortByBrand" onchange="sortByManuPartNo();" class="form-control selectpicker">
+					<option value="">-- Select --</option>
+					<option value="PartA" #if($sortBy=='PartA') selected #end >Part Number (Asc)</option>
+					<option value="PartD" #if($sortBy=='PartD') selected #end >Part Number (Desc)</option>
+					<option value="MPNA" #if($sortBy=='MPNA') selected #end >Manf Part# (Asc)</option>
+					<option value="MPND" #if($sortBy=='MPND') selected #end >Manf Part# (Desc)</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div class="cartTotal_Top col-md-8 col-sm-8 col-xs-12">
+		<span class="btn btn-lg">
+			<strong class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</strong>
+			<strong>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</strong>
+		</span>
+		#if($userLogin) 
+		#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
+			<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
+		#else
+			<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
+		#end 
+		#else
+		#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+			<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
+		#else
+			<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+		#end
+		#end
+		<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sharethis')" onclick="sendPageContent('sendPageContent');">
+			$!locale.get("product.button.sharethis") <em class="fa fa-paper-plane" aria-hidden="true"></em>
+		</a>
+	</div>
 </div>
 <!-- <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">    		
@@ -104,9 +98,9 @@
                             <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
                                 <span id="imageName$!itemData.itemId">
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #else
-			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #end
                     			</span>
                             </a>
@@ -204,7 +198,7 @@
                     </td>
                     <td>
                     <div class="cartUpdateBtn">
-                        <a href="javascript:void(0);" data-toggle="tooltip" title="Delete Item" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteId=$!itemData.productListId','0','$!escapeTool.javascript($!itemData.partNumber)');"><i class="fa fa-2x fa-times-circle  fa-lg"></i></a>
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="Delete Item" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteId=$!itemData.productListId','0','$!escapeTool.javascript($!itemData.partNumber)');"><em class="fa fa-2x fa-times-circle  fa-lg"></em></a>
                     </div>
                     </td>
                 </tr>
@@ -221,7 +215,7 @@
             #if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "Y")
             <li><a class="addSelected">$!locale.get("product.label.addSelectedToProductList")</a></li>
             #end
-            <li><a href="$!locale.get('website.url.ProductCategory')"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$!locale.get("product.button.continueShopping")</a></li>
+            <li><a href="$!locale.get('website.url.ProductCategory')"><em class="fa fa-shopping-bag" aria-hidden="true"></em>$!locale.get("product.button.continueShopping")</a></li>
             <li><a href="javascript:void(0);" onclick="updateShoppingCart(); return false;"><span class="glyphicon glyphicon-history"></span>$!locale.get("product.button.updateCart")</a></li>
 			#if($userLogin)
 				##if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -230,16 +224,16 @@
 						#set($groupPop = "ulg"+$!savedCartItemId+"_custPop")
 						<a id="$!groupPop" class="popMsg hideMe"></a>
 						<a id='linkg$!savedCartItemId' class="dropdown-toggle" data-toggle="dropdown" data-itemId="$!savedCartItemId" data-listTarget="ulg$!savedCartItemId" data-function="saveCartFunction">
-							<i class="fa fa-shopping-cart" aria-hidden="true"></i>$!locale.get("product.button.saveCart")
+							<em class="fa fa-shopping-cart" aria-hidden="true"></em>$!locale.get("product.button.saveCart")
 						</a>
 						<ul id="ulg$!savedCartItemId" class="dropdown-menu customDropDown">
-							<li class="text-center"><i class="fa fa-spin fa-spinner"></i></li>
+							<li class="text-center"><em class="fa fa-spin fa-spinner"></em></li>
 						</ul>
 					</div>
 					</li>
 				##end
 			#end
-			<li><a class="" href="javascript:void(0);" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteFlag=Y','1','')"><i class="glyphicon glyphicon-shopping-cart"></i>$!locale.get("product.button.emptyCart")</a></li>
+			<li><a class="" href="javascript:void(0);" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteFlag=Y','1','')"><em class="glyphicon glyphicon-shopping-cart"></em>$!locale.get("product.button.emptyCart")</a></li>
             <li>
             	#if($userLogin) 
 	            	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -268,7 +262,7 @@
         <li>$!locale.get('site.text.toModifyCartPageNote')</li>
         <!-- <li>$!locale.get('site.text.toDeleteCartPageNote')</li> -->
         <li>$!locale.get('site.text.toDeleteItemCartPageNote')
-            <i class="fa fa-2x fa-times-circle"></i>
+            <em class="fa fa-2x fa-times-circle"></em>
         </li>
         <li>$!locale.get('site.text.toRefreshItemCartPageNote')</li>
         #if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -302,9 +296,9 @@
 			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			#else
-			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemData.imageName' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			#end
 			</span>
 			</a>
