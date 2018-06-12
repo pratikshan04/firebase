@@ -19,7 +19,7 @@ function disableAuthorization(userID){
 		size: "small",
 		closeButton:false,
 		message: "Are you sure you want to Disable Authorized Purchase Agent for this User?",
-		title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+		title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 		callback: function(result){
 			if(result){
 				block("Please Wait");

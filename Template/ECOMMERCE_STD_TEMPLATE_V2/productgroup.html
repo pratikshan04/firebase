@@ -20,9 +20,9 @@
 			</div>
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
-			<button class="btn btn-primary" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><i class="glyphicon glyphicon-edit"></i> $!locale.get('group.button.groupName')</button>
-			<button class="btn btn-primary" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><i class="glyphicon glyphicon-trash"></i>  $!locale.get('product.listOrgroup.name')</button>
-			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint btn btn-primary" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><i class="fa fa-lg fa-print"></i> <strong>$locale.get("product.button.print")</strong> </a> -->
+			<button class="btn btn-primary" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><em class="glyphicon glyphicon-edit"></em> $!locale.get('group.button.groupName')</button>
+			<button class="btn btn-primary" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><em class="glyphicon glyphicon-trash"></em>  $!locale.get('product.listOrgroup.name')</button>
+			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint btn btn-primary" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><em class="fa fa-lg fa-print"></em> <strong>$locale.get("product.button.print")</strong> </a> -->
 		</div>
 	</div>
 	<div class="row mBottom-3">
@@ -137,9 +137,9 @@
 							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageType=="URL")
-								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								#else
-								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								#end
 								</span>
 							</a>
@@ -251,7 +251,7 @@
 							#if($itemData.price > 0)
 							<span data-select='extPriceData' class='priceSpan'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else
-							<span class='priceSpanFa'><i class="fa fa-phone fa-lg"></i> for Price </span>
+							<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
 							#end
 							<em>#if($!itemData.qtyUOM && $itemData.qtyUOM.length() > 0 && $itemData.price > 0) / $!itemData.qtyUOM #end</em>
 							##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)

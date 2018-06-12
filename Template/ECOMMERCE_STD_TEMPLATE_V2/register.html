@@ -57,7 +57,7 @@
 				</div>
 				<div>
 		        	<label class="customCheckBox">
-		        	<input type="checkbox" checked="checked" name="newsLetterSub1B" id="newsLetterSub1B" />
+		        	<input type="checkbox" checked="checked" name="newsLetterSub1B" id="newsLetterSub1B" title="News Letter"/>
 					<span>$!locale.get("sentmailconfig.newslettersubscriptionform.subject") $!siteDisplayName $!locale.get("sentmailconfig.newsletter").</span>
 					</label>
 		        </div>
@@ -117,7 +117,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label for="chkInternationalUser2A" class="customCheckBox2">
-							<input id="chkInternationalUser2A" type="checkbox" name="chkInternationalUser2AB" onclick="RefreshPageForInternationalUser2AB();" /> <span>$locale.get("register.text.checkIfYouAreInternationalCustomer")</span>
+							<input id="chkInternationalUser2A" type="checkbox" name="chkInternationalUser2AB" onclick="RefreshPageForInternationalUser2AB();" title="International User"/> <span>$locale.get("register.text.checkIfYouAreInternationalCustomer")</span>
 						</label>
 					</div>
 				</div>
@@ -179,7 +179,7 @@
 				</div>
 				<div>
 		        	<label class="customCheckBox">
-		        	<input type="checkbox" checked="checked" name="newsLetterSub2AB" id="newsLetterSub2A" />
+		        	<input type="checkbox" checked="checked" name="newsLetterSub2AB" id="newsLetterSub2A" title="News Letter"/>
 					<span>$!locale.get("sentmailconfig.newslettersubscriptionform.subject") $!siteDisplayName $!locale.get("sentmailconfig.newsletter").</span>
 					</label>
 		        </div>
@@ -242,7 +242,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label for="chkInternationalUser2B" class="customCheckBox2">
-							<input id="chkInternationalUser2AB" type="checkbox" name="chkInternationalUser2AB" onclick="RefreshPageForInternationalUser2AB();" /> <span>$locale.get("register.text.checkIfYouAreInternationalCustomer")</span>
+							<input id="chkInternationalUser2AB" type="checkbox" name="chkInternationalUser2AB" onclick="RefreshPageForInternationalUser2AB();" title="International User"/> <span>$locale.get("register.text.checkIfYouAreInternationalCustomer")</span>
 						</label>
 					</div>
 				</div>
@@ -304,7 +304,7 @@
 				</div>
 				<div>
 		        	<label class="customCheckBox">
-		        	<input type="checkbox" checked="checked" name="newsLetterSub2AB" id="newsLetterSub2AB" />
+		        	<input type="checkbox" checked="checked" name="newsLetterSub2AB" id="newsLetterSub2AB" title="News Letter"/>
 					<span>$!locale.get("sentmailconfig.newslettersubscriptionform.subject") $!siteDisplayName $!locale.get("sentmailconfig.newsletter").</span>
 					</label>
 		        </div>
@@ -321,14 +321,14 @@
 </div>
 
 <div  class="hideMe" id="registrationComplete">
-	<h4 id="afterRegistration">$!afterRegistration</h4>
+	<h4>$!afterRegistration</h4>
 	<br />
 	<div class="afterRegInstructions">
-	<p><i class="fa fa-lg fa-info"></i> &nbsp;$locale.get("register.label.WelcomeTo") $siteDisplayName, $locale.get("register.message.registerSuccessMessage")</p> 
+	<p><em class="fa fa-lg fa-info"></em> &nbsp;$locale.get("register.label.WelcomeTo") $siteDisplayName, $locale.get("register.message.registerSuccessMessage")</p> 
 	<br />
 	<div class="clear"></div>
 	<a href='$locale.get("website.url.Welcome")' class="button">$locale.get("product.heading.home")</a>
-	<span id="RegCompleteLoginConti">
+	<span>
 	<a href="javascript:void(0);" onclick="showLogin();" class="button">$locale.get("product.button.login")</a>
 	</span>
 	<div class="clear"></div>
@@ -339,10 +339,10 @@
 </div>
 
 <div  class="hideMe" id="retailRegistrationComplete">
-	<h4 id="afterRegistration">$!afterRegistration</h4>
+	<h4>$!afterRegistration</h4>
 	<br />
 	<div class="afterRegInstructions">
-	<p><i class="fa fa-lg fa-info"></i> &nbsp;$locale.get("register.label.WelcomeTo") $siteDisplayName, $locale.get("register.message.retailRegisterSuccessMessage")</p> 
+	<p><em class="fa fa-lg fa-info"></em> &nbsp;$locale.get("register.label.WelcomeTo") $siteDisplayName, $locale.get("register.message.retailRegisterSuccessMessage")</p> 
 	<br />
 	<div class="clear"></div>
 	<a href='$locale.get("website.url.Welcome")' class="button">$locale.get("product.heading.home")</a>

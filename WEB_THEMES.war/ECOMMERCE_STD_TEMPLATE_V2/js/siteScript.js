@@ -76,7 +76,7 @@ function changeAction(s, selectId){
 			size: "small",
 			closeButton:false,
 			message: "Are you sure you want delete?",
-			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			callback: function(result){
 				if(result){
 					$("#productGroupForm").attr("action","deleteSavedCartPage.action");
@@ -97,7 +97,7 @@ function changeAction(s, selectId){
 						size: "small",
 						closeButton:false,
 						message: locale("savedcart.item.delete"),
-						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 						callback: function(result){
 							deleteSelectedItem(result, selectId);
 						}
@@ -107,7 +107,7 @@ function changeAction(s, selectId){
 						size: "small",
 						closeButton:false,
 						message: locale("productgroup.item.delete"),
-						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 						callback: function(result){
 							deleteSelectedItem(result, selectId);
 						}
@@ -117,7 +117,7 @@ function changeAction(s, selectId){
 						size: "small",
 						closeButton:false,
 						message: "Delete selected items?",
-						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 						callback: function(result){
 							deleteSelectedItem(result, selectId);
 						}
@@ -128,7 +128,7 @@ function changeAction(s, selectId){
 					size: "small",
 					closeButton:false,
 					message: "Delete selected items?",
-					title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+					title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 					callback: function(result){
 						deleteSelectedItem(result, selectId);
 					}
@@ -295,7 +295,7 @@ function deleteSavedProductGroup(delProductgroup,reqType){
 				size: "small",
 				closeButton:false,
 				message: locale("savedcart.label.delete"),
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function(result){
 					if(result)
 					window.location.href= delProductgroup;
@@ -306,7 +306,7 @@ function deleteSavedProductGroup(delProductgroup,reqType){
 				size: "small",
 				closeButton:false,
 				message: locale("productgroup.label.delete"),
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function(result){
 					if(result)
 					window.location.href= delProductgroup;
@@ -317,7 +317,7 @@ function deleteSavedProductGroup(delProductgroup,reqType){
 				size: "small",
 				closeButton:false,
 				message: locale("savedcart.label.delete"),
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function(result){
 					if(result)
 					window.location.href= delProductgroup;
@@ -549,7 +549,7 @@ function performSearch() {
 			size: "small",
 			closeButton:false,
 			message: "Selected Inner Search will be cleared.",
-			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			callback: function(result){
 				if(result == false){
 					$("#narrowText").val("");
@@ -564,7 +564,7 @@ function performSearch() {
 			size: "small",
 			closeButton:false,
 			message: "Selected Filters will be cleared.",
-			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<i class='glyphicon glyphicon-alert'></i></span>",
+			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			callback: function(result){
 				continueSearch(result);
 			}
@@ -1098,7 +1098,7 @@ $(document).delegate('[data-function="productGroupDropDown"]', 'click',function(
 	var itemId = $(this).attr('data-itemId');
 	$("#group_id").val(toggleListID);
 	$("#hidden_id").val(itemId);
-	$(toggleListID).html('<li class="alignCenter"><i class="fa fa-spin fa-spinner"></i></li>');
+	$(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
 	$(toggleListID).show();
 	jQuery.get("productListIdNamePage.action?productIdList="+itemId+"&groupType=P",function(data,status){
 		$(toggleListID).find("li").remove();
@@ -2071,10 +2071,10 @@ $('[data-function="quickCartView"]').click(function() {
 	var obj = this;
 	if(toggleType == "dropdown"){
 		if($('.quickCartViewBlock').length==0){
-			var str = '<div class="quickCartViewBlock dropdown-menu"><div class="alignCenter"><i class="fa fa-spin fa-spinner"></i></div></div>';
+			var str = '<div class="quickCartViewBlock dropdown-menu"><div class="alignCenter"><em class="fa fa-spin fa-spinner"></em></div></div>';
 			$(obj).parent().append(str);
 		}else{
-			var str='<div class="alignCenter"><i class="fa fa-spin fa-spinner"></i></div>';
+			var str='<div class="alignCenter"><em class="fa fa-spin fa-spinner"></em></div>';
 			$('.quickCartViewBlock').html(str);
 		}
 		$(toggleElem).dropdown('toggle');
@@ -2322,7 +2322,7 @@ function displayCreditCardResponse(content){
 function sendSiteDetailPagePart(a){
 	var content="";
 	var siteName=$("#siteName").val();
-	var b=$("#itemName").val();
+	var b=$("#titleText").val();
 	
 	if($(".focusItemTabs").html()=="" || $(".focusItemTabs").html() == undefined){
 		var itemImg = $(".cimm_itemMainImage span.imgForSend").html();
@@ -2918,7 +2918,7 @@ function eachCheckBox(chk){
 //------------------------------------footer dependent sources----------------------------------------
 var footer_icon_plus = 'fa-plus';
 var footer_icon_minus = 'fa-minus';
-$('.footerCol h4 em').click(function(){
+$('.footerCol h3 em').click(function(){
 	if($(this).parents('.footerCol').find('ul').hasClass('in')){
 		$(this).addClass(footer_icon_plus).removeClass(footer_icon_minus);
 	}
@@ -2928,11 +2928,11 @@ $('.footerCol h4 em').click(function(){
 });
 function toDoFooter(){
 	if ($(document).width() < 981){
-		$('.footerCol h4 em').show();
+		$('.footerCol h3 em').show();
 		$('.footerCol ul').removeClass('in');
 	}
 	else if ($(document).width() >= 981){
-		$('.footerCol h4 em').hide();
+		$('.footerCol h3 em').hide();
 		$('.footerCol ul').addClass('in');		
 	}
 }
@@ -3253,7 +3253,7 @@ $(".cimm_slide li em").click(function () {
 		}
 	}
 });
-$(".cimm_slide h3").click(function () {
+$(".cimm_slide h2").click(function () {
 	if(!$(this).parent().hasClass("first")){
 		$(this).parent().addClass("moveRight").removeClass("moveLeft");
 	}
@@ -3371,7 +3371,7 @@ if ( navigator.appVersion.indexOf('MSIE 7')!=-1 || document.documentMode==7) {
 }
 var blockModal="";
 function block(msg){
-	blockModal = bootbox.dialog({ message: '<div class="text-center"><h3 class="cimm_blockTitle"><i class="fa fa-spin fa-spinner"></i> '+msg+'...</h3></div>', closeButton: false });
+	blockModal = bootbox.dialog({ message: '<div class="text-center"><h3 class="cimm_blockTitle"><em class="fa fa-spin fa-spinner"></em> '+msg+'...</h3></div>', closeButton: false });
 }
 function unblock(){
 	if(blockModal){

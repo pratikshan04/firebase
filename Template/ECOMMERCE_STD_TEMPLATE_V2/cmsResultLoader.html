@@ -1,0 +1,264 @@
+#if($!responseType)
+<script type="text/javascript" src="$webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="$webThemes/CMS/js/cms/cmsscript.js"></script>
+<script type="text/javascript" src="$webThemes/CMS/js/jquery.colorbox.js" ></script>
+<link href="$webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
+<link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogWebLayouts.css" media="all" />
+<style>
+.banner_addNewBtn, .banner_addNewBtn:hover {
+    background-color: rgb(27, 99, 171);
+    color: rgb(255, 255, 255);
+    padding: 11px 8px 8px 8px;
+    margin-left: -4px;
+}
+#staticForm div label span{
+	vertical-align: middle;
+}
+input[type="text"], input[type="password"], select {
+    width: auto;
+    cursor: auto;
+    outline: none;
+    border: 1px solid #797d82;
+    color: #797d82;
+    background: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-style: normal;
+    height: 31px;
+    font-size: 14px;
+    padding:5px;
+}
+.listStaticSelect{
+	float:left;
+	margin-right:10px;
+}
+.listStaticSelect select{
+	width:200px;
+}
+.clearStaticSearch {
+	position: relative;
+}
+</style>
+#parse("head.html")
+<script type="text/javascript">
+      function paginationScriptCms(n_pages,page_link,iindex,pgno){
+        var n_links=5;
+        //page_link = page_link.replace(/[%]/g,"%25");
+        var s_fileName=page_link;
+        pageno=pgno;
+        n_index=(iindex/pageno)+1;
+        var jump=n_pages/5;
+        var mod=n_pages%5;
+        var skipstep=parseInt(jump);
+        if(mod>0){
+          skipstep=skipstep+1;
+        }
+        var start=1;
+        var ss=n_index/n_links;
+        var change=parseInt(ss);
+        if((n_index%n_links)>0){
+          change=change+1;
+        }
+        n_links=n_links*change;
+        start=(n_links-5)+1;
+        var prevpage=pageno*5*(change-2);
+        var pagenumber=0;
+        document.write('<div class="pagebarUTH">');
+        if((n_index)>=6)
+          document.write('<a href="'+page_link+prevpage+'">Previous</a>\n');
+        if(n_links){
+          var n_sideLinks=1,n_firstLink,n_lastLink;
+          if(n_index>=n_pages){
+            n_firstLink=start;
+            n_lastLink=n_pages;
+          }
+          else if(n_index<=0)
+          {
+            n_firstLink=start;
+            n_lastLink=5;
+          }
+            else
+            {
+              n_firstLink=start;
+              if(n_links>n_pages)
+                n_lastLink=n_pages;
+              else
+                n_lastLink=n_firstLink+5-1;
+            }
+          for(var i=n_firstLink;i<=n_lastLink;i++)
+          {
+            pagenumber=(i*pageno)-pageno;
+            if(i==(n_index))
+            {
+              var nexpage=pagenumber+pageno;
+              nexpage=pageno*n_lastLink;
+            }
+            document.write(i==(n_index)?'<span class="this-page">'+i+'</span>\n':'<a href="'+page_link+pagenumber+'" title="Go to page '+i+'">'+i+'</a>\n');
+          }
+        }
+        if((n_lastLink)!=n_pages)
+          document.write('<a href="'+page_link+nexpage+'">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
+        document.write(' </div>');
+      }
+      function setThisValueToInput(obj){
+    	console.log($(obj).val());
+    	console.log($(obj).data("listtype"));
+			if($(obj).data("listtype")=="BRAND"){
+				alert("Selected Brand is: "+$(obj).data("name")+"\nPlease close the popup and click on Save button to update the changes");
+				$("#selectBrand", parent.document.body).val($(obj).val());
+				$("#brandListSpanTxt", parent.document.body).html(": <strong>"+$(obj).data("name")+"</strong>");
+				//console.log("Parent : "+$("#selectBrand", parent.document.body).val());
+			}else if($(obj).data("listtype")=="MANUFACTURER"){
+				alert("Selected Manufacturer is: "+$(obj).data("name")+"\nPlease close the popup and click on Save button to update the changes");
+				$("#selectManufacturer", parent.document.body).val($(obj).val());
+				$("#manuFacturerListSpanTxt", parent.document.body).html(": <strong>"+$(obj).data("name")+"</strong>");
+			}
+		}
+    </script>
+	#if($responseType=="Brand")
+	<div class="cms_staticTable"> 
+	<div class="listPageFilterBox clearfix">
+			<div class="searchBox">
+			  	<form method="get" id="brandForm" action="bandDetailListCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
+			  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
+			  		<input  type="hidden" id="pageSize" name="pageSize" value="$brandsList.pageSize" /> 
+			  		<input type="hidden" id="type" name="type" value="$!type"/> 
+					<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
+				</form>
+			  	<form class="clearStaticSearch">
+			  		<input type="hidden" name="query" value=""/>
+			  		<input type="hidden" name="searchColumnType" value=""/>
+			  		<input type="hidden" id="type" name="type" value="$!type"/>   
+				  	<input type="hidden" name="pageSize" value="$brandsList.pageSize" /> 
+				  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+			  		<button type="submit"><i class="fa fa-lg fa-times"></i> Clear Search</button>
+			  	</form>
+		  	</div>
+		  	<div class="displayBox">
+		  		<form method="get" action="bandDetailListCms.action">
+		  			<label>Display </label>
+		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
+						<option #if($brandsList.pageSize==10) selected #end value="10" >10</option>
+						<option #if($brandsList.pageSize==25) selected #end value="25" >25</option>
+						<option #if($brandsList.pageSize==50) selected #end value="50" >50</option> 
+						<option #if($brandsList.pageSize==100) selected #end  value="100" >100</option>
+					</select>
+					<label> Records</label>
+					<input type="hidden" name="query" value="$!query" />
+					<input type="hidden" id="type" name="type" value="$!type"/> 
+					<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+					<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
+		  		</form>
+		  		<div class="text-right mTop-2">#if($!brandsList.totalRows>0)Showing $brandsList.rowsOnPage of $!brandsList.totalRows Records #end</div>
+		  	</div>
+		</div> 
+			<table class="table table-bordered table-striped display rwd-table" id="brandListTable">
+				<thead>
+					<tr>
+						<th class="text-center">SI No.</th>
+						<th class="width260">
+							<a href="bandDetailListCms.action?sortEnabled=true&sortColumn=brandName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+							Brand Name
+							<a href="bandDetailListCms.action?sortEnabled=false&sortColumn=brandName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+						</th>
+						<th class="text-center width50">Select One</th>
+					</tr>
+				</thead>
+				<tbody>
+				#set($pageNo = ($brandsList.pageNo - 1))
+				#set($counter = $pageNo * $brandsList.pageSize)
+				#if($brandsList.resultSet.size()>0)
+					#set($iindex = $counter + 1)
+					#foreach($brand in $brandsList.resultSet)
+					<tr>
+						<td class="text-center"> $iindex </td>
+						<td>$!brand.brandName</td>
+						<td class="text-center"><input type="radio" name="brandSelectRadio" data-listtype="BRAND" data-name="$!brand.brandName" value="$!brand.id" onclick="setThisValueToInput(this);"/></td>
+					</tr>
+					#set($iindex = $iindex + 1)
+					#end
+				#else
+				<tr><td colspan="3" align="center"> No data </td></tr>
+				#end
+				</tbody>
+			</table>
+			<script>
+			paginationScriptCms($brandsList.totalPages,"bandDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!brandsList.pageSize&page=",$pageNo,1);
+			</script>
+		</div>
+	#end
+	#if($responseType=="Manufacturer")
+	<div class="cms_staticTable"> 
+	<div class="listPageFilterBox clearfix">
+			<div class="searchBox">
+			  	<form method="get" id="brandForm" action="manufacturerDetailListCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
+			  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
+			  		<input  type="hidden" id="pageSize" name="pageSize" value="$manufacturersList.pageSize" /> 
+			  		<input type="hidden" id="type" name="type" value="$!type"/> 
+					<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
+				</form>
+			  	<form class="clearStaticSearch">
+			  		<input type="hidden" name="query" value=""/>
+			  		<input type="hidden" name="searchColumnType" value=""/>
+			  		<input type="hidden" id="type" name="type" value="$!type"/>   
+				  	<input type="hidden" name="pageSize" value="$manufacturersList.pageSize" /> 
+				  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+			  		<button type="submit"><i class="fa fa-lg fa-times"></i> Clear Search</button>
+			  	</form>
+		  	</div>
+		  	<div class="displayBox">
+		  		<form method="get" action="manufacturerDetailListCms.action">
+		  			<label>Display </label>
+		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
+						<option #if($manufacturersList.pageSize==10) selected #end value="10" >10</option>
+						<option #if($manufacturersList.pageSize==25) selected #end value="25" >25</option>
+						<option #if($manufacturersList.pageSize==50) selected #end value="50" >50</option> 
+						<option #if($manufacturersList.pageSize==100) selected #end  value="100" >100</option>
+					</select>
+					<label> Records</label>
+					<input type="hidden" name="query" value="$!query" />
+					<input type="hidden" id="type" name="type" value="$!type"/> 
+					<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+					<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
+		  		</form>
+		  		<div class="text-right mTop-2">#if($!manufacturersList.totalRows>0)Showing $manufacturersList.rowsOnPage of $!manufacturersList.totalRows Records #end</div>
+		  	</div>
+		</div> 
+			<table class="table table-bordered table-striped display rwd-table" id="manufacturerListTable">
+				<thead>
+					<tr>
+						<th class="text-center">SI No.</th>
+						<th class="width260">
+							<a href="manufacturerDetailListCms.action?sortEnabled=true&sortColumn=manufacturerName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+							Manufacturer Name
+							<a href="manufacturerDetailListCms.action?sortEnabled=false&sortColumn=manufacturerName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+						</th>
+						<th class="text-center width50">Select One</th>
+					</tr>
+				</thead>
+				<tbody>
+				#set($pageNo = ($manufacturersList.pageNo - 1))
+				#set($counter = $pageNo * $manufacturersList.pageSize)
+				#if($manufacturersList.resultSet.size()>0)
+					#set($iindex = $counter + 1)
+					#foreach($manufacturer in $manufacturersList.resultSet)
+					<tr>
+						<td class="text-center"> $iindex </td>
+						<td>$!manufacturer.manufacturerName</td>
+						<td class="text-center"><input type="radio" name="manufacturerSelectRadio" data-listtype="MANUFACTURER" data-name="$!manufacturer.manufacturerName"  value="$!manufacturer.id" onclick="setThisValueToInput(this);"/></td>
+					</tr>
+					#set($iindex = $iindex + 1)
+					#end
+				#else
+				<tr><td colspan="3" align="center"> No data </td></tr>
+				#end
+				</tbody>
+			</table>
+			<script>
+			paginationScriptCms($manufacturersList.totalPages,"manufacturerDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!manufacturersList.pageSize&page=",$pageNo,1);
+			</script>
+		</div>
+	#end
+#end

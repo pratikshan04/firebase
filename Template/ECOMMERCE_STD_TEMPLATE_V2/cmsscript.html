@@ -22,7 +22,9 @@ function cmsbannersmenubuilderList1(){
 	window.parent.document.getElementById("cssmenuandbanner:cssmenuandbannerList").click();
 	document.cookie="CSS_BTN_CLICKED";
 }
-
+function componentCreationRedirect(){
+	window.parent.document.getElementById("componentForm:componentRedirectBtn").click();
+}
 function showPageProperty(){
 	jQuery("#addNewStaticFormId").toggle();
 	jQuery("#pageTab").toggle();
@@ -50,6 +52,27 @@ function saveStaticPage(){
 	 if(pageName == '' || pageName == null){
 	   errMsg = "Please enter Page Name to save\n";
 	   isValid = false;
+	 }
+	 if($('#selectStaticPageType').length>0){
+		var staticPageType = $('#selectStaticPageType').val();
+		if(staticPageType=="BRAND"){
+			 if($('#selectBrand').length>0){
+				var selectedBrand = $('#selectBrand').val();
+				 if(typeof selectedBrand == undefined || selectedBrand == '' || selectedBrand == null || selectedBrand == -1){
+					 errMsg = errMsg + "Please select a Brand\n";
+					 isValid = false;
+				 }
+			 }
+		}else if(staticPageType=="MANUFACTURER"){
+				if($('#selectManufacturer').length>0){
+					var selectedMfr = $('#selectManufacturer').val();
+					 if(typeof selectedMfr == undefined || selectedMfr == '' || selectedMfr == null || selectedMfr == -1){
+						 errMsg = errMsg + "Please select a Manufacturer\n";
+						 isValid = false;
+					 }
+				 }
+				
+			}
 	 }
 	 if($('#selectedWebsite').length>0 ){
 		 var siteId = $('#selectedWebsite').val();

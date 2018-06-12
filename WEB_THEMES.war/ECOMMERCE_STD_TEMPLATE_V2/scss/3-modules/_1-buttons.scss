@@ -99,8 +99,9 @@ input[type='submit'] {
             a:not(.btn) {
                 color: $primary_color;
                 font-size: 16px;
-				background: none;
-                i {
+                background: none;
+                cursor: pointer;
+                em {
                     margin-right: 10px;
                     font-size: 18px;
                 }
@@ -169,7 +170,7 @@ input[type='submit'] {
 			}
 		}
 		color: $default_font-color;
-		i {
+		em {
 			margin-right: 10px;
 		}
 		&:hover {

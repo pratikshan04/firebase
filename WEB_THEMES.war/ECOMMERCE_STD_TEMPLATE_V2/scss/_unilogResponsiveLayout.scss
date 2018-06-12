@@ -56,7 +56,7 @@ $breakpoint-mobileView:480px;
 		border-radius: 4px;
 		background: $gray-lighten;
 		box-shadow: inset 1px 1px 1px $shadow-color;
-		i{
+		em{
 			color: #BABABA;
 		}
 	}
@@ -116,7 +116,7 @@ $breakpoint-mobileView:480px;
 	#generalModel .modal-dialog{
 		min-width:auto;
 	}
-	.showFromTab,.footerCol h4 i{
+	.showFromTab,.footerCol h4 em{
 		display: block;
 	}
 	.listGridContainer .gridView ul li.sessionDespTwo ul li p input{

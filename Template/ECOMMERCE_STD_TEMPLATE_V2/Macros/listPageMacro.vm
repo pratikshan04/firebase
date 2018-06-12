@@ -27,8 +27,8 @@
 <input type="hidden" id="itemTxtSXAvail$partNumber" name="itemTxtSXAvail$partNumber" value="$!itemAvailability"/>
 <input type="hidden" id="itemTxtAvail$itemId" name="itemTxtAvail$itemId" value="$!itemAvailability"/>
 <input type="hidden" id="priceSaleQty_$partNumber" name="priceSaleQty_$partNumber" value="$qty" />
-<input type="hidden" id="navigationType" name="navigationType" value="$!navigationType" />
-<input type="hidden" value="$!srchTyp" id="searchType" name="searchType"/>
+<input type="hidden" id="" name="navigationType" value="$!navigationType" />
+<input type="hidden" value="$!srchTyp" id="" name="searchType"/>
 #end
 
 #macro(listAndGridSwap $navigationType,$hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)

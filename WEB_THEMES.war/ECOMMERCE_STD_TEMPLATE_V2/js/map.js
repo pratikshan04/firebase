@@ -267,7 +267,7 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
 
         var iconBlock = document.createElement("span");
         iconBlock.setAttribute("class", "iconToggle");
-        iconBlock.innerHTML = '<i class="fa fa-caret-right"></i>';
+        iconBlock.innerHTML = '<em class="fa fa-caret-right"></em>';
         outerDiv.appendChild(iconBlock);
         
         var titleBold = document.createElement("span");
@@ -298,21 +298,21 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         if(FaxNum[i]!= null && FaxNum[i]!="") {
             var faxDiv = document.createElement("li");
             faxDiv.setAttribute("class", 'Fax');
-            faxDiv.innerHTML = '<b>Fax:</b> <a href="tel:' + FaxNum[i] + '">' + FaxNum[i] + '</a>';
+            faxDiv.innerHTML = '<strong>Fax:</strong> <a href="tel:' + FaxNum[i] + '">' + FaxNum[i] + '</a>';
             listBlock.appendChild(faxDiv);
         }
 
         if(Email[i]!= null && Email[i]!=""){
 	        var emailDiv = document.createElement("li");
 	        faxDiv.setAttribute("class", 'Email');
-	        faxDiv.innerHTML = '<b>Email: </b><a href="mailto:' + Email[i] + '">' + Email[i] + '</a>';
+	        faxDiv.innerHTML = '<strong>Email: </strong><a href="mailto:' + Email[i] + '">' + Email[i] + '</a>';
 	        listBlock.appendChild(emailDiv);
         }
 
         if(Note[i]!= null && Note[i]!=""){
 	        var noteDiv = document.createElement("li");
 	        noteDiv.setAttribute("class", 'Note');
-	        noteDiv.innerHTML = '<b>Note: </b>'+Note[i];
+	        noteDiv.innerHTML = '<strong>Note: </strong>'+Note[i];
 	        listBlock.appendChild(noteDiv);
         }
 
@@ -516,7 +516,7 @@ function initialize2(latlng2, obj) {
     var infoBlockId = $(obj).attr('data-target');
     var locList = $(infoBlockId).html();
     var ZoomHere = "<a href='javascript:void(0);' onclick='ZoomHereCallBack();'>Zoom here</a>";
-    var currentStore = "<p class='mBottom-1'><b>" + siteDisplayName+" - "+ title + "</b></p><ul>"+locList+"<li>"+ZoomHere+"</li></ul>";
+    var currentStore = "<p class='mBottom-1'><strong>" + siteDisplayName+" - "+ title + "</strong></p><ul>"+locList+"<li>"+ZoomHere+"</li></ul>";
     $(ZoomHere).click(ZoomHereCallBack);
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(currentStore);

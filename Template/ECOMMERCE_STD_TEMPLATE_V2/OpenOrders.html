@@ -49,9 +49,9 @@
 			<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
 			<td data-th="">
 			#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-			<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+			<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a>
 			#else
-			<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+			<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a>
 			#end
 			</td>
 		</tr>
@@ -108,9 +108,9 @@
 				<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
 				<td data-th="">
 				#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS") 
-				<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a>
 				#else
-				<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a>
 				#end
 				</td>
 			</tr>

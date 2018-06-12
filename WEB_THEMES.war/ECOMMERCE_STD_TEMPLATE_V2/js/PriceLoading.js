@@ -468,7 +468,7 @@ function priceLoadMainFunction() {
 				tr.removeClass('shown');
 				$("#linkedItemContentDiv_" + $(this).attr('id')).hide();
 				$("#linkedItemAvailable_" + $(this).attr('id')).hide();
-				$('td.details-control i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
 			} else if (typeof $(tr).attr("data-detailsload") != "undefined" && $(tr).attr("data-detailsload") == "Y") {
 				$("[data-rowid='identification']").each(
 						function(i) {
@@ -483,10 +483,10 @@ function priceLoadMainFunction() {
 						.show();
 				$("#linkedItemAvailable_" + $(this).attr('id'))
 						.show();
-				$('td.details-control i').removeClass(
+				$('td.details-control em').removeClass(
 						'fa-minus-circle').addClass(
 						'fa-plus-circle');
-				$(this).closest('tr').find('i').toggleClass(
+				$(this).closest('tr').find('em').toggleClass(
 						'fa-minus-circle');
 				row.child.show();
 				tr.addClass('shown');
@@ -507,8 +507,8 @@ function priceLoadMainFunction() {
 				var linkedItemExistFlag = false;
 				var domTabsExistFlag = false;
 				//$(".focusItemTabs").hide();
-				$('td.details-control i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
-				$(this).closest('tr').find('i').toggleClass('fa-minus-circle');
+				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+				$(this).closest('tr').find('em').toggleClass('fa-minus-circle');
 				$(tr).attr("data-detailsload", "Y");
 				$.ajax({
 					type : "POST",

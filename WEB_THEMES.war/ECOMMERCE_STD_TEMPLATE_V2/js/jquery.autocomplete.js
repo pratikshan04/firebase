@@ -1072,7 +1072,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		var count = 0;
 		var webThemes = $("#webThemePath").val();
 		if(autoCompleteVersion == "V2"){
-			li = $("<li />").html('<i>Search for</i><br/> "<strong>'+unescape(term)+'"</strong> <i>in:</i>').appendTo(catWrap)[0];
+			li = $("<li />").html('<em>Search for</em><br/> "<strong>'+unescape(term)+'"</strong> <i>in:</i>').appendTo(catWrap)[0];
 			searchBtn = $("<a />").attr('href','searchPage.action?keyWord='+term).text('More Results');
 		}
 		for (var i=0; i < max; i++) {

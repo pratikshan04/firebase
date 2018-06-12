@@ -46,7 +46,7 @@ function getcookiefromdocument(){
 	}
 }
 function fingerPrint(userName, password){
-	var unps = {"credentials":"username password"};
+	var unps = {"credentials":""+ userName+" "+ password };
 	try{Android.getusernameandpassword(userName, password)}
 	catch(err){
 	webkit.messageHandlers.callbackHandler.postMessage(unps);
