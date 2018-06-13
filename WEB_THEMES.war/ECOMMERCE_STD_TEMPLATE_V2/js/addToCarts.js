@@ -120,6 +120,7 @@
 				if(result[0]==-1){
 					if(settings.combinCart=='N'){
 						var checkCart = bootbox.dialog({
+							closeButton: false,
 							title: 'Alert',
 							message: 'This product currently exist in your cart.<br/> To create two separate line items of the same SKU select "separate".<br/> To combine into one line item select "combine".',
 							buttons: {

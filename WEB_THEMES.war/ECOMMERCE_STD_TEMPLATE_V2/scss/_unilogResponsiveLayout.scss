@@ -236,6 +236,26 @@ $breakpoint-mobileView:480px;
 		/*top: 80px;
 		width: 100%;*/
 	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist .slick-prev{
+		top: 49%;
+		width: 25px;
+		height: 50px;
+		left: -25px;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist .slick-next {
+		top: 49%;
+		width: 25px;
+		height: 50px;
+		left: 100%;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist .slick-next:before {
+		content: "\f105";
+		top: 0;
+	}
+	.cimm_itemDetailWrap .cimm_itemMainImage.verticalThumblist .thumblist .slick-prev:before {
+		content: "\f104";
+		top: 0;
+	}
 	.cimm_itemDetailWrap .cimm_itemMainImage,.cimm_itemDetailWrap .cimm_itemDescription{
 		float: none;
 		width: 100%;

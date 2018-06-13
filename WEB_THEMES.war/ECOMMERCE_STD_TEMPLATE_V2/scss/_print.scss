@@ -1,10 +1,11 @@
 @media print {
     @page {
         //size: auto;
-        // margin: 10px;
+       // margin: 10px;
     }
     body {
         height: auto;
+        width: 800px;
     }
 	a[href]:after {
 		content: none !important;
@@ -30,12 +31,21 @@
     .imgEnlargeIcon,
     #linkedItemSectionContent,
     .multiTabHeading,
-    .documentStack li a {
+    .documentStack li a,
+    .thumblist {
         display: none !important;
     }
     .cimm_pdfLink {
         display: block !important;
         color: $primary_color;
+    }
+    .cimm_itemDetailWrap .cimm_itemMainImage {
+        width: 330px;
+        float: left;
+    }
+    .cimm_itemDetailWrap .cimm_itemDescription {
+        width: calc(100% - 350px);
+        float: left;
     }
     .multiTab.detailPage .multiTabContent div ul.documentStack li {
         float: none;

@@ -164,7 +164,7 @@
 				</div>
 				#end
 				<div class="prodSharePrintBtnWrap pull-right hideForPrint">
-					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemData.itemPriceId);"><em class="fa fa-paper-plane" aria-hidden="true"></em></a> 
+					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemPriceId);"><em class="fa fa-paper-plane" aria-hidden="true"></em></a> 
 					<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
 					<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><em class="fa fa-lg fa-share"></em></a>
 					<ol class="sharePageWrap">
@@ -681,9 +681,8 @@
 	#else
 	<div class="row">
 		<div class="col-md-12">
-		<span class="hideMe" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber</span>
 		<!-- Item Dom Section Start -->
-		<div class="multiTab detailPage" id="multiTabOne" itemscope itemtype="http://schema.org/Product">
+		<div class="multiTab detailPage" id="multiTabOne">
 			<ul class="multiTabHeading clearAfter">
 				#if($itemMarketingText != "" || $!itemLongDesc != "")
 					<li><a href="#descriptionSection" class="dark-ripple" data-type="descriptionSection">$!locale.get("product.detail.descriptions")</a></li>
@@ -706,10 +705,10 @@
 				#if($itemMarketingText != "" || $!itemLongDesc != "")
 					<div id="descriptionSection">
 					#if($itemMarketingText && $!itemMarketingText.trim() != "")
-						<p itemprop="description">$!itemMarketingText</p>
+						<p>$!itemMarketingText</p>
 					#end 
 					#if($itemLongDesc && $!itemLongDesc.trim() != "")
-						<p itemprop="description">$!itemLongDesc</p>
+						<p>$!itemLongDesc</p>
 					#end
 					</div>
 				#end 
@@ -1106,10 +1105,12 @@ function LoadRecentViewedItem(){
 	});
 }
 </script>
-##detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
-<input type="hidden" id="userId" value="$!userId" />
-<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
-<!-- <span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span> -->
+	#if($!productCount < 1)
+	#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
+	<input type="hidden" id="userId" value="$!userId" />
+	<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
+	<!-- <span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span> -->
+	#end
 #end
 #end
 <!-- ***************************Product Detail page dependent sources********************* --> 

@@ -372,7 +372,7 @@ footer,
 }
 .mulAddTocartWrap {
     .addToCartHeaderContent {
-        p {
+        a {
             color: $primary_color;
             font-size: 16px;
             em {
@@ -1126,6 +1126,15 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
             text-decoration: underline;
         }
     }
+}
+.clearenceTag{
+    background: url(../images/Clearance_Icon.png) no-repeat 0 0;
+    height: 65px;
+    width: 65px;
+    display: block;
+    background-size: contain;
+    position: absolute;
+    top: 0;
 }
 @import "unilogResponsiveLayout";
 @import "print";

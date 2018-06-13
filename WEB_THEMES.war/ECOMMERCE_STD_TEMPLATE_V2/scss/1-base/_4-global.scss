@@ -98,12 +98,16 @@ ol li {
     padding: 0;
     margin: 0;
 }
-
+a{
+    cursor: pointer;
+}
 a:focus,
 a:hover {
     text-decoration: none;
 }
-
+.text-wrap{
+    word-break: break-word;
+}
 h1,
 h2,
 h3,
