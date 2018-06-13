@@ -164,7 +164,7 @@
 				</div>
 				#end
 				<div class="prodSharePrintBtnWrap pull-right hideForPrint">
-					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemData.itemPriceId);"><em class="fa fa-paper-plane" aria-hidden="true"></em></a> 
+					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemPriceId);"><em class="fa fa-paper-plane" aria-hidden="true"></em></a> 
 					<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
 					<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><em class="fa fa-lg fa-share"></em></a>
 					<ol class="sharePageWrap">
@@ -539,12 +539,13 @@
 									<input type="hidden" value="$!productModeitemData.minOrderQty" id="minOrderQty_$!productModeitemData.itemId"/>
 									<input type="hidden" value="$!productModeitemData.orderInterval" id="OrderQtyInterval_$!productModeitemData.partNumber" name="OrderQtyInterval_$!productModeitemData.partNumber"/>
 									<span id="quantityBreakPricingDetails_$!productModeitemData.partNumber" style="display: none;"></span>
-									<label class="customCheckBox2 removeForSend">
+									<label class="customCheckBox mBottom-1 text-wrap">
 										<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);" title="Compare"/>
-										<span></span>
-									</label>
+										<span itemprop="name">
+											<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">$!productModeitemData.partNumber.replaceAll('\s+','_')</a>
+										</span>
+									</label><br/>
 									<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
-										<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 										<span class="imgForSend" style="display:none !important;">
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 										 <img itemprop="image"  height="250" width="250" src="$!productModeitemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
@@ -1088,10 +1089,12 @@ function LoadRecentViewedItem(){
 	});
 }
 </script>
-##detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
-<input type="hidden" id="userId" value="$!userId" />
-<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
-<!-- <span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span> -->
+	#if($!productCount < 1)
+	#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
+	<input type="hidden" id="userId" value="$!userId" />
+	<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
+	<!-- <span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span> -->
+	#end
 #end
 #end
 <!-- ***************************Product Detail page dependent sources********************* --> 

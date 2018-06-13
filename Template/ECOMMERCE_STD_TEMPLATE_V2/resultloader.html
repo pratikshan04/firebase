@@ -109,7 +109,7 @@
 			jQuery(".cartCountrefresh").html("($!cartCount) $!locale.get('product.label.items')");
 		}else{
 			jQuery(".cartCountDisplayLi").addClass("ItemsInCart");
-			jQuery(".cartCountDisplayLi").html('<a href="$!locale.get("website.url.ShoppingCart")"><i class="fa fa-shopping-cart"></i><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount $!locale.get("header.label.items")</span></a>')
+			jQuery(".cartCountDisplayLi").html('<a href="$!locale.get("website.url.ShoppingCart")"><em class="fa fa-shopping-cart"></em><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount $!locale.get("product.label.items")</span></a>')
 		}
 	</script>
 	#if($!productListData.get(0).requestType=="SEPERATE" || $!productListData.get(0).requestType=="UPDATE")
@@ -188,7 +188,7 @@
 			<div class="addToCartHeaderContent clearAfter">
 				<h3 class="cimm_pageTitle pull-left">$!locale.get('product.heading.myCart')</h3>
 				<div class="cartTotalCount pull-right">
-					<p><i class="fa fa-lg fa-shopping-cart"></i>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">$!cartCount Items</span>#else 0 Items #end</p>
+					<a href="$!locale.get('website.url.ShoppingCart')"><em class="fa fa-lg fa-shopping-cart"></em>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span>#else 0 $!locale.get("product.label.items") #end</a>
 				</div>
 				<div class="clear"></div>
 			</div>

@@ -102,12 +102,13 @@
 				<input type="hidden" value="$!productModeitemData.minOrderQty" id="minOrderQty_$!productModeitemData.itemId"/>
 				<input type="hidden" value="$!productModeitemData.orderInterval" id="OrderQtyInterval_$!productModeitemData.partNumber" name="OrderQtyInterval_$!productModeitemData.partNumber"/>
 				<span id="quantityBreakPricingDetails_$!productModeitemData.partNumber" style="display: none;"></span>
-				<label class="customCheckBox2">
+				<label class="customCheckBox mBottom-1 text-wrap">
 					<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);" title="Compare"/>
-					<span></span>
-				</label>
+					<span itemprop="name">
+						<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">$!productModeitemData.partNumber.replaceAll('\s+','_')</a>
+					</span>
+				</label><br/>
 				<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
-					<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 					<span class="imgForSend" style="display:none !important;">
 					 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 					 <img itemprop="image"  height="250" width="250" src="$!hostName$!productModeitemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />

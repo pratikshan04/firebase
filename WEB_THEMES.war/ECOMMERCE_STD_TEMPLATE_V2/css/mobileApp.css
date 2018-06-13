@@ -48,6 +48,7 @@
 }
 header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch input[type='text'] {
 	width: calc(100% - 80px);
+	float: left;
 }
 header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .cimm_searchIcon{
 	width: 40px;
