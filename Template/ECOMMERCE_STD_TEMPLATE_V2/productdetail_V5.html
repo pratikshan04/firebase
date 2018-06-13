@@ -129,7 +129,7 @@
 					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 				#end
 				#if($itemData.clearance=="Y" && $!productCount<1)
-					<span class="clearenceTag">$!locale.get('product.label.clearance')</span>
+					<span class="clearenceTag"></span>
 				#end
 			</div>
 			#if($itemImagesList && $!itemImagesList.size()>0)

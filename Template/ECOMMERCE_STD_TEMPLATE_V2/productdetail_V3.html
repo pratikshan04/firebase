@@ -142,7 +142,7 @@ $!productCount>0) #else
 						title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em
 						class="fa fa-search fa-2" aria-hidden="true"></em></a> #end
 					#if($itemData.clearance=="Y" && $!productCount<1) <span
-						class="clearenceTag">$!locale.get('product.label.clearance')</span>
+						class="clearenceTag"></span>
 					#end
 				</div>
 				#if($itemImagesList && $!itemImagesList.size()>0)
@@ -625,7 +625,7 @@ $!productCount>0) #else
 											 <img itemprop="image" src="$!hostName$!thumbNail$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 											 #end
 											 #if($productModeitemData.clearance=="Y")
-											 <span class="clearenceTag clearenceTagSmall">Clearence</span>
+											 <span class="clearenceTag clearenceTagSmall"></span>
 											 #end
 										</a>
 									 </td>

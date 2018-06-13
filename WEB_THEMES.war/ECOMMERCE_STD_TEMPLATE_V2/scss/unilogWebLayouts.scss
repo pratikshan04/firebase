@@ -1127,5 +1127,14 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         }
     }
 }
+.clearenceTag{
+    background: url(../images/Clearance_Icon.png) no-repeat 0 0;
+    height: 65px;
+    width: 65px;
+    display: block;
+    background-size: contain;
+    position: absolute;
+    top: 0;
+}
 @import "unilogResponsiveLayout";
 @import "print";
