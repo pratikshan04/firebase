@@ -81,7 +81,7 @@
 		#end
 	#end
 	#if($!responseType=="CustomerPartNumberList")
-		<li><input type="text" maxlength="25" id="newCustomerPartNumber" name="newCustomerPartNumber" value="$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')" onkeyup="if(event.keyCode == 13){manageCustomerPartNumber(this);}" onfocus="if(this.value=='$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')'){this.value='';}" onblur="if(this.value==''){this.value='';this.value='$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')';}" onkeypress="return runScriptAddCustPnum(event);"/></li>
+		<li><input type="text" maxlength="25" id="newCustomerPartNumber" name="newCustomerPartNumber" value="$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')" onfocus="if(this.value=='$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')'){this.value='';}" onblur="if(this.value==''){this.value='';this.value='$!locale.get('customerPartNumber.label.enterNewCustomerpartNumber')';}" onkeypress="return runScriptAddCustPnum(event);"/></li>
 		#foreach($!customerpartNumber in $!customerPartNumberList)
 		<li>
 			<label class="customCheckBoxRight"> 
