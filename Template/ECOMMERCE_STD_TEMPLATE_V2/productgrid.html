@@ -13,6 +13,13 @@
 <input type="hidden" value="#if($beforeLoginAvaiabilityProductList)$!beforeLoginAvaiabilityProductList#end" id="beforeLoginAvaiabilityProductList" /> -->
 <input type="hidden" id="userId" value="$!userId" />
 <!-- MArketing And Event Results -->
+#if($assignedStaticPageId && $assignedStaticPageId>0 && $!assignedStaticPageContent!="")
+<div class="row cimm_staticPageWrap">
+	<div class="col-md-12 ">
+		$!assignedStaticPageContent
+	</div>
+</div>
+#end
 #if($eventSearchData.size()>0)	
 <br/>
 <div class="row">
