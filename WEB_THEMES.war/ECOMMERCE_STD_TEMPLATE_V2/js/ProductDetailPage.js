@@ -95,6 +95,7 @@ $(document).ready(function(){
 	ProductMode.buildSearchTrail();
 	disableCustomCheckbox();
 	ProductMode.checkCookieToCheck();
+	checkItem();
 	if($('.verticalThumblist .thumblist').length > 0){
 		$('.verticalThumblist .thumblist').slick({
 			infinite: true,
