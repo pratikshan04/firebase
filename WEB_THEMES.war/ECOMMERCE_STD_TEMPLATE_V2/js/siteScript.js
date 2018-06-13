@@ -3437,7 +3437,7 @@ function homeCarousels(){
 			  pauseOnHover:true,
 			  responsive: [
 			               {
-			                 breakpoint: 1024,
+			                 breakpoint: 1030,
 			                 settings: {
 			                   slidesToShow: 4,
 			                 }
@@ -3473,7 +3473,7 @@ function homeCarousels(){
 				  pauseOnHover:true,
 				  responsive: [
 				               {
-				                 breakpoint: 1024,
+				                 breakpoint: 1030,
 				                 settings: {
 				                   slidesToShow: 4,
 				                 }
@@ -3508,7 +3508,7 @@ function homeCarousels(){
 				  pauseOnHover:true,
 				  responsive: [
 				               {
-				                 breakpoint: 1024,
+				                 breakpoint: 1030,
 				                 settings: {
 				                   slidesToShow: 4,
 				                 }
@@ -3543,7 +3543,7 @@ function homeCarousels(){
 				  pauseOnHover:true,
 				  responsive: [
 				               {
-				                 breakpoint: 1024,
+				                 breakpoint: 1030,
 				                 settings: {
 				                   slidesToShow: 4,
 				                 }

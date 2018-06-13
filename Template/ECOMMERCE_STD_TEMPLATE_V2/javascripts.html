@@ -122,8 +122,9 @@ function deviceSelectAll(){
 #if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList")
 <!-- **** Site Script ********* -->
 #set($jsPath = $webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js')
-<script type="text/javascript" src="$jsPath" defer></script>
 #end
+<!-- <script type="text/javascript" src="$webThemes/$siteName/js/jquery.eventCalendar.js"></script> -->
+<script type="text/javascript" src="$jsPath" defer></script>
 <script type="text/javascript" src="$webThemes/$siteName/js/bootstrap-select.min.js" defer></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
   <script type="text/javascript" src="$webThemes/$siteName/js/selectivizr-min.js"></script>
@@ -136,6 +137,12 @@ $("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
 			$("#query-form").trigger('submit');
 		}
 	});
+/* 
+$("#eventCalendarInline").eventCalendar({
+	eventsjson:'calendarEventUnit.action',
+	cacheJson:false
+});
+$("#FirstLoadEvent").val("N"); */
 });
 	// http://localhost:8983/solr/collection1/terms?terms.fl=name&terms.prefix=i&terms.sort=count&wt=velocity&v.template=suggest
 </script>

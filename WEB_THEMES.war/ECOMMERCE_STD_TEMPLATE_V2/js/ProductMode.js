@@ -631,14 +631,18 @@ $(function(){
 					}
 					ProductMode.buildSearchTrail(itemPriceId);
 					hideBulkAction();
+					
+					priceLoading.beginProductModePriceLoading(itemPriceId);
+					//ProductMode.loadPriceInDataTable();
+					//productModeCustomFunc();
+					ProductMode.checkCookieToCheck();
+					hideForDevice();
+					filterScroll();
+					$('.selectpicker').selectpicker('refresh');
+					if($("#productModeItemContent_"+itemPriceId).find(".cimm_multiAddcart").length>0 && ($("#layoutName").val() == "ProductList" || $("#layoutName").val() == "SubCategoryPage")){
+						$("#productModeItemContent_"+itemPriceId).find(".cimm_multiAddcart").remove();
+					}
 				}
-				priceLoading.beginProductModePriceLoading(itemPriceId);
-				//ProductMode.loadPriceInDataTable();
-				//productModeCustomFunc();
-				ProductMode.checkCookieToCheck();
-				hideForDevice();
-				filterScroll();
-				$('.selectpicker').selectpicker('refresh');
 				unblock();
 				if($("#mulitFilterTrailDetailPage").html()!=""){
 					$(".right_attribute").show();

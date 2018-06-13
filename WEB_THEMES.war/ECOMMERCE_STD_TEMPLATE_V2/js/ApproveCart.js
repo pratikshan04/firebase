@@ -40,7 +40,7 @@ function deviceSelectAll(){
 		$("#chkSelectall").attr("checked",true);
 	}
 	var checked_status = $("#chkSelectall").is(':checked');
-	$("input:checkbox[name='quotePartNumberSelected']").each(function(){
+	$("input:checkbox[name='idList']").each(function(){
 		this.checked = checked_status;
 	});
 }

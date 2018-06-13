@@ -93,7 +93,7 @@
 			<input type="hidden" value="$!srchTyp" id="searchType" name="searchType"/>
 			<div class="cimm_listGridTopControls clearAfter">	
 				<div class="cimm_listGridTopLeftCtrls row">
-				<div class='col-md-6 col-sm-12 col-xs-12'>
+				<div class='col-md-5 col-sm-12 col-xs-12'>
 					#if($resultCount > 0)
 					<div class="searchResults">
 						#if($navigationType=="SEARCH")
@@ -110,7 +110,7 @@
 					#end
 					<div class="pull-left hidden-md hidden-lg marginY-3"><a data-function="slideLeft" class="btn btn-primary light-ripple"><em class="glyphicon glyphicon-filter"></em> Filter</a></div>
 				</div>
-				<div class='col-md-6 col-sm-12 col-xs-12'>
+				<div class='col-md-7 col-sm-12 col-xs-12'>
 					<div class="row">
 						<div class='col-md-5 col-sm-12 col-xs-12'>
 							<div class="bulkActionBtn">
@@ -293,7 +293,7 @@
 										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 									#if($itemData.clearance=="Y")
-										<span class="clearenceTag">Clearence</span>
+										<span class="clearenceTag"></span>
 									#end
 								</div>
 							</a>
