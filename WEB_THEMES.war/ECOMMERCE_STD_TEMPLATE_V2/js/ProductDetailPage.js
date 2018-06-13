@@ -342,8 +342,8 @@ function manageCustomerPartNumber(performAction){
 
 function runScriptAddCustPnum(e) {
 	if (e.keyCode == 13) {
-		return false;
 		$('#add').click();
+		return false;
 	}
 }
 function runScriptUpdateCustPnum(e) {
