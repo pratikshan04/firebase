@@ -653,9 +653,8 @@
 	#else
 	<div class="row">
 		<div class="col-md-12">
-		<span class="hideMe" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber</span>
 		<!-- Item Dom Section Start -->
-		<div class="multiTab detailPage" id="multiTabOne" itemscope itemtype="http://schema.org/Product">
+		<div class="multiTab detailPage" id="multiTabOne">
 			<ul class="multiTabHeading clearAfter">
 				#if($itemMarketingText != "" || $!itemLongDesc != "")
 					<li><a href="#descriptionSection" class="dark-ripple" data-type="descriptionSection">$!locale.get("product.detail.descriptions")</a></li>
@@ -678,10 +677,10 @@
 				#if($itemMarketingText != "" || $!itemLongDesc != "")
 					<div id="descriptionSection">
 					#if($itemMarketingText && $!itemMarketingText.trim() != "")
-						<p itemprop="description">$!itemMarketingText</p>
+						<p>$!itemMarketingText</p>
 					#end 
 					#if($itemLongDesc && $!itemLongDesc.trim() != "")
-						<p itemprop="description">$!itemLongDesc</p>
+						<p>$!itemLongDesc</p>
 					#end
 					</div>
 				#end 
