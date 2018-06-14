@@ -35,7 +35,11 @@ function addAllItemsToCart(linkUrl){
 					});
 					jsonObjList = jQuery.grep(jsonObjList, function(n, i){return (n !== "" && n != null);});
 					unblock();
-					BulkAction.processAddToCart(jsonObjList);
+					if(jsonObjList != []){
+					     BulkAction.processAddToCart(jsonObjList);
+					}else{
+					     bootAlert("small","error","Error","Cannot add Call for Price item to cart");
+					}
 				}
 			}
 		}
