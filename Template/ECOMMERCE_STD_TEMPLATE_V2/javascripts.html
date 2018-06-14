@@ -47,6 +47,7 @@ jQuery(".clickStream").click(function() {
     str = str+"&eventType="+jQuery(this).data("clicktype");
     str = str+"&pageNumber="+pageNum;
     str = str+"&clientName=unilog";
+    str = str+"&clientId=1";
 	str = str+"&actionType=search";
     jQuery.ajax({
 		type: "POST",
