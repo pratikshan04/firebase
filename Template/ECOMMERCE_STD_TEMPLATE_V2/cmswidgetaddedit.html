@@ -170,7 +170,7 @@
           						 window.location.href="widgetListCms.action";
           					   }
           			  		}else{
-          			  		alert("Error occured while updating widget");
+          			  			alert("Error occured while updating widget");
           				   }
           	   			}	
           	 		 });
@@ -207,21 +207,18 @@
                 				   window.parent.initDraggable();
             					   var siteId = jQuery("#siteId").val();
             					   if(jQuery("#isEdit").val()=="Y"){
-            					   refreshBanner(jQuery("#bannerListId").val());
-            					   closeBannerPopup();
+	            					   refreshBanner(jQuery("#bannerListId").val());
+	            					   closeBannerPopup();
             					   }else{
-            					   window.location.href="widgetListCms.action";
+            					   		window.location.href="widgetListCms.action";
             					   }
             			  		}else if(msg.indexOf("unique constraint") != -1){
             			  			alert("Widget With Same Name Already Exists");
-                			  		}
-
-              			  		else{
+                			  	}else{
             			  			alert("Error occured while saving widget");
             				   }
             	   			}	
             	 		 });
-            
             		 return false;
             		}
       		
