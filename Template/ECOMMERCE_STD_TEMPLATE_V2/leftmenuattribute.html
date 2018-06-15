@@ -42,6 +42,11 @@
 			<div class="input-group">
 				<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
 				#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
+				#if($srchTyp)
+				<input type="hidden" id="srchTyp" name="srchTyp" value="$!srchTyp" />
+				#else
+				<input type="hidden" id="srchTyp" name="srchTyp" value="CATNAV" />
+				#end
 				<div class="input-group-btn">
 					<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
 				</div>
