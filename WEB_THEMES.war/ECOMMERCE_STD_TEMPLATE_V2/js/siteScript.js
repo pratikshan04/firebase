@@ -904,14 +904,20 @@ function compareItemList(obj){
 	var obj2=obj1.split("_");
 
 	if($(obj).is(':checked')){
+		var compareItemCount = 5;
+		if(window.innerWidth < 700){
+			var compareItemCount = 2;
+		}else if(window.innerWidth < 1200){
+			var compareItemCount = 3;
+		}
 		var addToList = 1;
 		list = getCookie("compareList");
 		if(list==null){
 			list = "";
 		}
 		listArr = list.split(",");
-		if(listArr.length>=5){
-			bootAlert("small","error","Error",locale("compare.label.cannotcomparemore"));
+		if(listArr.length>= compareItemCount){
+			bootAlert("small","error","Error","You cannot compare more than "+ compareItemCount +" items at a time");
 			$(obj).removeAttr('checked','checked');
 		}else{
 			for(i=0;i<listArr.length;i++){
@@ -1045,6 +1051,12 @@ function removeItems() {
 	}
 }
 function compareItems() {
+	var compareItemCount = 5;
+	if(window.innerWidth < 700){
+		var compareItemCount = 2;
+	}else if(window.innerWidth < 1200){
+		var compareItemCount = 3;
+	}
 	var list = getCookie('compareList');
 	if(list==null)
 		list = "";
@@ -1053,8 +1065,8 @@ function compareItems() {
 	if (listArray.length <= 1) {
 		bootAlert("small","error","Error","Please select minimum 2 items to compare");
 		return false;
-	} else if (listArray.length > 5) {
-		bootAlert("small","error","Error",locale("compare.label.cannotcomparemore"));
+	} else if (listArray.length > compareItemCount) {
+		bootAlert("small","error","Error","You cannot compare more than "+ compareItemCount +" items at a time");
 		return false;
 	}else{
 		window.location.href="/itemComparePage.action?compareId="+list;

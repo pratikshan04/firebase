@@ -214,10 +214,10 @@
 			</div>
 		</li>
 		#else
-		<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a>
+		<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a></li>
 		#end
 	#else
-	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a>
+	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a></li>
 	#end
 	#end
 	#foreach($topMenu in $topStaticMenu)
@@ -228,7 +228,7 @@
 				#else
 					<a href="javascript:void(0);" onclick="loginPop(); return false;" data-staticLink="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end">$topMenu.level1Menu</a>
 				#end
-			#elseif($topMenu.level1Menu && $$topMenu.level1Menu =="Locations")
+			#elseif($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
 				<a href="$topMenu.level1Menu">$topMenu.level1Menu  #if($!CommonDBQueryWareHouseList.size()>0)<em class="fa"></em>#end</a>
 				#if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
 				<ul class="dropdown-menu">
