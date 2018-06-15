@@ -1136,5 +1136,10 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     position: absolute;
     top: 0;
 }
+.cimm_staticPageWrap{
+    .container-fluid{
+        padding: 0;
+    }
+}
 @import "unilogResponsiveLayout";
 @import "print";
