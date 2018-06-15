@@ -240,8 +240,7 @@ function manageCustomerPartNumber(performAction){
 			if(!characterReg.test(newCustPartNum)){
 				bootAlert("medium","error","Error","Please Enter Valid Customer Part Number with no special character except underscore or hyphen ( _ , - ).");
 				return false;
-			}
-			else{
+			}else{
 				$("[name='customPartNumList']").each(function(){
 					if($(this).val().toLowerCase() == newCustPartNum.toLowerCase()){
 						bootAlert("small","error","Error","Customer Part Number already exists.");
@@ -304,8 +303,7 @@ function manageCustomerPartNumber(performAction){
 				}
 			}
 		}
-	}
-	else{
+	}else{
 		$("[name='customPartNumList']").each(function(){
 			if($(this).is(':checked')){
 				if(cPartList == ""){
