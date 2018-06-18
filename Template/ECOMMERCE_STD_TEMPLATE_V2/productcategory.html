@@ -250,14 +250,14 @@
 						</form>
 					</div>
 					<div class="col-md-5 col-sm-12 col-xs-12">
-						<div class='row hideForDevices'>
+						<div class='row'>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<span class="cimm_compareControls">
 									<a href="javascript:void(0);" onclick="compareItems();">&nbsp;$!locale.get("product.button.compare") (<span id="compareSpan" class="compareCountSpanClass">0</span>) $!locale.get('product.label.items')</a>
 									<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><em class="fa fa-lg fa-times"></em></a></strong>
 								</span>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-12 text-right">
+							<div class="col-md-4 col-sm-4 col-xs-12 text-right hideForDevices">
 								<a id="listView" class="listView" href="javascript:void(0);" title="$!locale.get('product.view.listView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 24 24" class="ng-element" data-id="380a6cd865b3b8c3e92a5d025062682d" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="30" height="30" style="fill: #343333;"></rect> <rect display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M0,21h8v-8H0V21z M2,15h4v4H2V15z M10,20h14v-2H10V20z M0,11h8V3H0V11z M2,5h4v4H2 V5z M10,4v2h14V4H10z M10,16h14v-2H10V16z M10,10h14V8H10V10z" style="fill: #343333;"></path> </g></svg></a> 
 						    	<a id="gridView" class="gridView" href="javascript:void(0);" title="$!locale.get('product.view.gridView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 28 28" class="ng-element" data-id="ac3984b32e6ab5276e657661bd64fcec" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="25" height="25" style="fill: #343333;"></rect> <rect display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M20,5v8h8V5H20z M26,11h-4V7h4V11z M0,23h8v-8H0V23z M2,17h4v4H2V17z M0,13h8V5H0 V13z M2,7h4v4H2V7z M10,13h8V5h-8V13z M12,7h4v4h-4V7z M10,23h8v-8h-8V23z M12,17h4v4h-4V17z M20,23h8v-8h-8V23z M22,17h4v4h-4V17z" style="fill: #343333;"></path> </g></svg></a>
 								<div class="clear"></div>
@@ -341,7 +341,7 @@
 								</div>
 							</a>
 							#if($itemData.productItemCount<1)
-							<div class="checkToCompare hideForDevice">
+							<div class="checkToCompare">
 								<label class="customCheckBox">
 									<input type="checkbox" value="$!itemData.itemPriceId" name="compareId" id="check_$!itemData.itemPriceId" onclick="compareItemList(this);"/>
 									<span><a href="javascript:void(0);" onclick="compareItems();">$!locale.get("product.heading.compare")</a></span>
