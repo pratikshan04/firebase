@@ -23,11 +23,13 @@
 			</nav>
 		</div>
 		<div class="cimm_bodyContentWrap">
-			#if($LayoutName!="HomePage" && $LayoutName!= "StaticPageFullPageLayout" && $userAgent != "WEBVIEW")
-			<div class="row">
-				<div class="col-md-12">
-					<div class="cimm_BreadCrumbs">
-						#parse("fullBreadcrumbs.html")
+			#if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $userAgent != "WEBVIEW")
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="cimm_BreadCrumbs">
+							#parse("fullBreadcrumbs.html")
+						</div>
 					</div>
 				</div>
 			</div>
