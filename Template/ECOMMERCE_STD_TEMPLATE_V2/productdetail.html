@@ -107,45 +107,67 @@
 	<div class="cimm_itemDetailWrap clearAfter" itemscope itemtype="http://schema.org/Product">
 		<div class="cimm_itemMainImage verticalThumblist clearAfter">
 			<div class="itemDetailImage">
-				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-				<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
-				<span class="imgForSend">
-					<img itemprop="image" src="$!itemData.imageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-				</span>
+				#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length()>0)
+				<!-- Product Mode -->
+					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
+					<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
+					<span class="imgForSend">
+						<img itemprop="image" src="$!itemData.productCategoryImageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.productCategoryImageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+					</span>
+					#else
+					<span class="imgForSend">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!hostName$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'">
+					</span>
+					#end
+					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
+						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$itemData.productCategoryImageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+					#else
+						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!ProductEnlargedImage$itemData.productCategoryImageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+					#end
+				<!-- Product Mode -->
 				#else
-				<span class="imgForSend">
-					<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'">
-				</span>
-				#end
-				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
-				#else
-					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
-				#end
-				#if($itemData.clearance=="Y" && $!productCount<1)
-					<span class="clearenceTag"></span>
+					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+					<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
+					<span class="imgForSend">
+						<img itemprop="image" src="$!itemData.imageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+					</span>
+					#else
+					<span class="imgForSend">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'">
+					</span>
+					#end
+					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+					#else
+						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+					#end
+					#if($itemData.clearance=="Y" && $!productCount<1)
+						<span class="clearenceTag"></span>
+					#end
 				#end
 			</div>
-			#if($itemImagesList && $!itemImagesList.size()>0)
-				<ul id="gallery" class="thumblist">
-					#set($count=0)
-					#foreach($imageList In $itemImagesList)
-						<li>
-							<div class="cimm_slideItemImg">
-							#if($itemData.imageName.contains("http") || $imageList.imageType=="URL")
-								<a href="#" data-image="$!itemData.imageName" data-zoom-image="$!itemData.imageName">
-									<img id="img_$!count" itemprop="image" src="$!itemData.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-								</a>
-							#else
-								<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
-									<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-								</a>
-							#end
-							#set($count = $!count + 1)
-							</div>
-						</li>
-					#end
-				</ul>
+			#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length()>0)#else
+				#if($itemImagesList && $!itemImagesList.size()>0)
+					<ul id="gallery" class="thumblist">
+						#set($count=0)
+						#foreach($imageList In $itemImagesList)
+							<li>
+								<div class="cimm_slideItemImg">
+								#if($itemData.imageName.contains("http") || $imageList.imageType=="URL")
+									<a href="#" data-image="$!itemData.imageName" data-zoom-image="$!itemData.imageName">
+										<img id="img_$!count" itemprop="image" src="$!itemData.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+									</a>
+								#else
+									<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
+										<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+									</a>
+								#end
+								#set($count = $!count + 1)
+								</div>
+							</li>
+						#end
+					</ul>
+				#end
 			#end
 		</div>
 			<div class="cimm_itemDescription clearAfter">
@@ -194,13 +216,12 @@
 					#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					#set($itemProductDescription = $!itemData.shortDesc)
 					
-					#if($productDataList && $productDataList.size()>0)
-						#if($productDataList.get(0) && $!productDataList.get(0).productName.length()>0)
-							#set($itemProductTitle = $!productDataList.get(0).productName)
-						#end
-						#if($productDataList.get(0) && $productDataList.get(0).longDesc.length()>0)
-							#set($itemProductDescription = $!productDataList.get(0).longDesc)
-						#end	
+					
+					#if($itemData.productName && $!itemData.productName.length() > 1)
+						#set($itemProductTitle = $!itemData.productName)
+					#end
+					#if($itemData.productDescription && $!itemData.productDescription.length() > 1)
+						#set($itemProductDescription = $!itemData.productDescription)
 					#end
 					<h2 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemProductTitle</h2>
 					<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemProductDescription</p>
