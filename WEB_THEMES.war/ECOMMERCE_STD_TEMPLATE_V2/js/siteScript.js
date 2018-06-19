@@ -2925,7 +2925,7 @@ function runScript(e) {
 function eachCheckBox(chk){
 	var chkName = chk.name;
 	var allChecked = $("input:checkbox[name='"+chkName+"']:checked").length === $("input:checkbox[name='"+chkName+"']").length;
-	$('#chkSelectall').prop('checked', allChecked);
+	$('#chkSelectall, .deviceSelectAllChkBox').prop('checked', allChecked);
 }
 //------------------------------------footer dependent sources----------------------------------------
 var footer_icon_plus = 'fa-plus';

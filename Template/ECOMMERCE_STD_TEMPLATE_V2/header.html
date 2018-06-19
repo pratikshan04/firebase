@@ -36,7 +36,7 @@
 	#if($userAgent != "WEBVIEW")
 	<div class="col-md-3 col-sm-12 col-xs-12">
 		<div itemscope itemtype="http://schema.org/Organization" class="cimm_logo">
-				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="$!webThemes/$!siteName/images/logo.png" alt="$!siteDisplayName" /></a>
+				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="$!webThemes/$!siteName/images/logo.png" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
 		</div>
 	</div>
 	#end
