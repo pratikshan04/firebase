@@ -330,6 +330,13 @@
 						<li class="sessionImg">
 							<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<div class="prodImage">
+								#if($itemData.productItemCount>1 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length() > 1)
+									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+									#else
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!escapeTool.url($!itemData.productCategoryImageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+									#end
+								#else	
 									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
@@ -338,6 +345,7 @@
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag"></span>
 									#end
+								#end
 								</div>
 							</a>
 							#if($itemData.productItemCount<1)

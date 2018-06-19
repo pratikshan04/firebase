@@ -214,7 +214,7 @@
                     #if($orderDetail.discount>0)
                     <li>
                          <span class="priceLabel">$!locale.get("product.label.discount"): </span>
-                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
+                         <span class="priceValue formatPrice">$($!numberTool.format($!numberToolFormat,$!orderDetail.discount))</span>
                     </li>
                     #end
                     #if($orderDetail.total>0)
