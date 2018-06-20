@@ -1082,7 +1082,7 @@
 					        	   }
 					        	   var noImagePath = "this.src='"+$('#webThemePath').val()+"/images/NoImage.png'";
 					        	   // jQuery('td:eq(0)', nRow).html('<img src="'+aData.EVENT_IMAGE_URL+'" onerror="'+noImagePath+'" width="225" alt="event Image"/>');
-					        	   var timeZone = "",timeZoneOffset = "";
+					        	   /*var timeZone = "",timeZoneOffset = "";
 					        	   var eventDateForTime = new Date();
 					        	   var january = new Date(eventDateForTime.getFullYear(), 0, 1);
 					        	   var januaryOffset = january.getTimezoneOffset();
@@ -1109,10 +1109,39 @@
 					        	   }else{
 				                	   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + statrMonthDate + ", " + startTimeChanged.getFullYear()+ " to " +eventsOpts.dayFullNames[endTimeChanged.getDay()]+ ", " + endMonthDate + ", " + endTimeChanged.getFullYear()+"</p>");
 					        	   }
-					        	   if(aData.isAllDayEvent==1){
+			                	   
+			                	   if(aData.isAllDayEvent==1){
 					        		   jQuery('td:eq(1)', nRow).html("<p class='allEvent'>All Day</p>");
 					        	   }else{
 					        		   jQuery('td:eq(1)', nRow).html('<p>'+startTime+" to "+endTime+"</p>");
+					        	   }
+					        	  */
+					        	   
+					        	   var res = aData.timezoneOffset.substring(3, 4);
+			                	   if(res == 3){
+			                		   res = aData.timezoneOffset.substring(0, 3)+".5";
+			                	   }else{
+			                		   res = aData.timezoneOffset.substring(0, 3)
+			                	   }
+			                	   var startTime = calcTime(aData.date, res);
+			                	   var endTime = calcTime(aData.end, res);
+			                	   
+			                	   var startTimeChanged = new Date(startTime)
+			                	   var endTimeChanged = new Date(endTime)
+			                	   
+			                	   var statrMonthDate = eventsOpts.monthNames[startTimeChanged.getMonth()] +" "+startTimeChanged.getDate(), endMonthDate = eventsOpts.monthNames[endTimeChanged.getMonth()] +" "+endTimeChanged.getDate();
+			                	   if(statrMonthDate == endMonthDate){
+					        		   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + statrMonthDate + ", " + startTimeChanged.getFullYear()+"</p>");
+					        	   }else{
+				                	   jQuery('td:eq(0)', nRow).html("<p>"+eventsOpts.dayFullNames[startTimeChanged.getDay()]+ ", " + statrMonthDate + ", " + startTimeChanged.getFullYear()+ " to " +eventsOpts.dayFullNames[endTimeChanged.getDay()]+ ", " + endMonthDate + ", " + endTimeChanged.getFullYear()+"</p>");
+					        	   }
+			                	   
+			                	   if(aData.isAllDayEvent==1){
+					        		   jQuery('td:eq(1)', nRow).html("<p class='allEvent'>All Day</p>");
+					        	   }else{
+					        		   startTime = new Date(startTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
+					        		   endTime = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
+					        		   jQuery('td:eq(1)', nRow).html('<p>'+ startTime + " to " + endTime +"</p>");
 					        	   }
 					        	   jQuery('td:eq(0)', nRow).append('<p>'+aData.title+'</p>');//<a href="/'+aData.id+'/EventDetail/'+aData.title+'"></a>
 					        	   jQuery('td:eq(0)', nRow).append('<p><strong>Location:</strong> '+aData.location+'</p>');
@@ -1129,6 +1158,13 @@
         });
         setCalendarWidth();
     }
+function calcTime(timeStamp, offset) {
+	var timeDate = parseInt(timeStamp)
+    d = new Date(timeDate);
+    utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    nd = new Date(utc + (3600000*offset));
+    return nd.toLocaleString();
+}
 
     function formatAMPM(date) {
         var hours = date.getHours();
