@@ -396,7 +396,6 @@ var QuickOrder = {};
 							}
 							
 						}else if(lines[ln].indexOf("\t") > -1){
-							block("Please Wait");
 							var valuesTabSeparate = lines[ln].split("\t");
 							if(valuesTabSeparate!=null && valuesTabSeparate.length>0){
 								if(valuesTabSeparate[1]==null || valuesTabSeparate[1]==""){
