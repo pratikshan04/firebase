@@ -1,24 +1,24 @@
 <link rel="shortcut icon" href="$webThemes/$siteName/images/favicon.ico">
 #parse("font-awesome.html")<!-- <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/font-awesome.min.css" /> -->
 #if($LayoutName != "HomePage" && $!isStaticHomePage != "Y")
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap-select.min.css" media="all" />
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/datatables.min.css" media="all">
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/dataTables.bootstrap.min.css" media="all">
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap-datepicker.standalone.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/plugins/datatables.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/plugins/css/dataTables.bootstrap.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/plugins/css/bootstrap-datepicker.standalone.min.css" media="all">
 #end
 #if($LayoutName=="ProductDetailPage")
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/prettyPhoto.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/plugins/prettyPhoto.css" media="all"/>
 #elseif($LayoutName=="CalendarEventsPage" || $LayoutName=="EventDetailPage")
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogEventCss.css" media="all" />
+<!-- <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogEventCss.css" media="all" /> -->
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css" media="all" />
 #end
 <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogWebLayouts.css" media="all" />
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogweb.css" media="all" />
 #if($LayoutName=="QuickOrderStdPage")
-<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/handsontable.full.css">
+<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/plugins/handsontable.full.css">
 #end
-#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/mobileApp.css">#end
+#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$webThemes/$siteName/css/unilogweb_app.css">#end
 <!--[if IE 9]>
 	<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/IE9.css">
 <![endif]-->
