@@ -24,9 +24,9 @@
 	</form>
 </div> -->
 <!-- ******************End of Leftmenu Single attribute Filter************************-->
-<div class="cimm_filterAttributes">
-<div class="filterColumn noBorder">
-	<div class="filterTitle clearAfter">$!locale.get("product.label.search")</div>
+<div class="cimm_filter">
+<div class="cimm_filter-block noBorder">
+	<div class="cimm_filter-block-title clearAfter">$!locale.get("product.label.search")</div>
 	#if($navigationType=="SEARCH")
 	<div class="cimm_searchWithin clearAfter marginY-2">
 		<div class="input-group">
@@ -56,11 +56,11 @@
 	#end
 	#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
 		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
-		<div class="filterTitle clearAfter">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
+		<div class="cimm_filter-block-title clearAfter">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
 			<a href="$!navURL" class="cleatBtn pull-right">$!locale.get("product.label.clearAll")&nbsp;<em class="fa fa-times"></em></a>
 		</div>
 		<!--Refined By  : Filter Attributes-->
-		<div class="filterColumn">
+		<div class="cimm_filter-block">
 			<div class="cimm_refinedMultiFilterResults">
 			<p class="filterTypeTitle" data-toggle="collapse" data-target="#mulitFilterTrail">$!locale.get("product.label.searchFilter")</p>
 				<div class="cimm_refinedAttribute" id="mulitFilterTrail">
@@ -86,7 +86,7 @@
 		#end 
 	 <!--End of Refined By-->
 			#set($iVal = 0)
-			<div class="cimm_filterAttributes filterBlock">
+			<div class="cimm_filter filterBlock">
 			#set($filterCount = 0)
 			#foreach($!attrList in $!attrFilterData)
 				#foreach($!attrListVal in $!attrList.attrFilterList.keySet())
@@ -108,9 +108,9 @@
 						#end
 					#end
 					#if($displayAttribute=="Y")
-						<div class="filterColumn"><!-- #if($filterCount > 4)hideMe #end -->
+						<div class="cimm_filter-block"><!-- #if($filterCount > 4)hideMe #end -->
 						#set($count = 0)
-							<div class="filterTitle" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><em class="fa fa-minus-circle"></em></span>#else<span class="plusToggle"><em class="fa fa-plus-circle"></em></span>#end</div>
+							<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><em class="fa fa-minus-circle"></em></span>#else<span class="plusToggle"><em class="fa fa-plus-circle"></em></span>#end</div>
 								#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 									#set($count = $!count+1)
 								#end
@@ -158,7 +158,7 @@
 			#end
 			</div>
 		#if($filterCount > 5)
-		<!-- <div class="filterColumn alignCenter" id="loadMore">
+		<!-- <div class="cimm_filter-block alignCenter" id="loadMore">
 			<a href="javascript:void(0);" class="loadMore" data-index="$!filterCount">$!locale.get('leftmenu.label.showMoreFilter')</a>
 		</div> -->
 		#end
