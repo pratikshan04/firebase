@@ -178,7 +178,7 @@ function filterForAllSelectedAttributes(){
 	var val = ""
 	var c = "|";
 	var map = {};
-	$('.cimm_filterAttributes input:checked').each(function() {
+	$('.cimm_filter input:checked').each(function() {
 		var tId = jQuery(this).attr("id");
 		key = jQuery("#"+tId+"_div").text();
 		if(map[key]){
