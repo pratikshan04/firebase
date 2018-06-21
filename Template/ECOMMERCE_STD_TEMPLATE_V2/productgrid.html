@@ -14,9 +14,13 @@
 <input type="hidden" id="userId" value="$!userId" />
 <!-- MArketing And Event Results -->
 #if($assignedStaticPageId && $assignedStaticPageId>0 && $!assignedStaticPageContent!="")
-<div class="row cimm_staticPageWrap">
-	<div class="col-md-12 ">
-		$!assignedStaticPageContent
+<div class="assignedStaticPageWrap">
+	<div class="row cimm_staticPageWrap">
+		<div class="overlay"></div>
+		<div class="col-md-12 ">
+			$!assignedStaticPageContent
+		</div>
+		<div class="text-center hideMe"><span class="recal_overlay"> </span></div>
 	</div>
 </div>
 #end
@@ -617,3 +621,52 @@
 		<!-- Pagination Block End-->
 	</div>
 </div>
+<style>
+.assignedStaticPageWrap {
+    height: 210px;
+    overflow: hidden;
+    position: relative;
+}
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 5;
+    background: rgba(255,255,255,0);
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.59) 46%, rgba(255,255,255,1) 78%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0)), color-stop(46%, rgba(255,255,255,0.59)), color-stop(78%, rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.59) 46%, rgba(255,255,255,1) 78%);
+    background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.59) 46%, rgba(255,255,255,1) 78%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.59) 46%, rgba(255,255,255,1) 78%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.59) 70%, rgba(255,255,255,1) 90%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
+}
+.overlay:after {
+    font-family: FontAwesome;
+    content: "\f103  Show More";
+    color: #46acee;
+    font-size: 16px;
+    position: absolute;
+    left: 45%;
+    bottom: 20px;
+}
+.recal_overlay:after {
+    font-family: FontAwesome;
+    content: "\f102  Show Less";
+    color: #46acee;
+    font-size: 16px;
+}
+</style>
+<script>
+$(".overlay").click(function(){
+	$(this).hide();
+	$(".assignedStaticPageWrap").height('auto');
+	$(".recal_overlay").parent().show();
+});
+$(".recal_overlay").click(function(){
+	$(this).parent().hide();
+	$(".assignedStaticPageWrap").height(210);
+	$(".overlay").show();
+});
+</script>
