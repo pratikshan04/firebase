@@ -1,6 +1,7 @@
-@include font-face(RobotoRegular, './fonts/Roboto-Regular-webfont', normal, normal, eot woff ttf svg, robotoregular);
-@include font-face(RobotoBlack, './fonts/Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
-@include font-face(RobotoCondensedBold, './fonts/RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
+
+@include font-face(RobotoRegular, '../fonts/Roboto-Regular-webfont', normal, normal, eot woff ttf svg, robotoregular);
+@include font-face(RobotoBlack, '../fonts/Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
+@include font-face(RobotoCondensedBold, '../fonts/RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
 
 /*@include font-face(RobotoCondenseRegular, './fonts/robotocondensed-regular-webfont', normal, normal, eot woff ttf svg, robotocondensedregular);
 @include font-face(Robotocondensed-bolditalic, './fonts/robotocondensed-bolditalic-webfont', bold, italic, eot woff ttf svg, robotocondensedbolditalic);
@@ -8,13 +9,10 @@
 @include font-face(Robotocondensed-light, './fonts/robotocondensed-light-webfont', normal, normal, eot woff ttf svg, robotocondensedlight);
 @include font-face(Robotocondensed-lightitalic, './fonts/robotocondensed-lightitalic-webfont', normal, italic, eot woff ttf svg, robotocondensed-lightitalic);*/
 
-@include font-face(Glyphicons Halflings, './fonts/glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
+@include font-face(Glyphicons Halflings, '../fonts/glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
 
 
-$default_font-size: $font_md;
 $default_hedingf-size: $font_lg;
-$tertiary_font-color: color(tertiary);
-
 
 /*________________Global A link_____________________*/
 //a link (f=font)

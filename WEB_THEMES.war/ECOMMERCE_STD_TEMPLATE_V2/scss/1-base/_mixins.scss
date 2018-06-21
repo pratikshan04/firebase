@@ -45,8 +45,19 @@
 }
 
 
+@mixin font($family: false, $size: false, $color: false, $weight: false, $lineheight: false){
+	@if $family {font-family: $default_font-family;}
+	@if $size { font-size: $size; }
+	@if $color { color: $color; }
+	@if $weight { font-weight: $weight; }
+	@if $lineheight { line-height: $lineheight; }
+}
+
+
 $icons: (
-	navdownarrow: "\f0d7",
+	eye: "\f06e",
+	caret-down: "\f0d7",
+	caret-right: "\f0da",
 	home: "\f015",
     newspaper: "\f001",
     search: "\f002",
@@ -77,7 +88,16 @@ $icons: (
 	uparrow: '\f077'
 ); 
 
-@mixin icon($position: before, $icon: false, $styles: true, $color: $default_font-color, $top: null, $left: null, $right:null, $size: $primary_font-size) {
+@mixin icon(
+		$position: before, 
+		$icon: false, 
+		$styles: true, 
+		$color: $default_font-color, 
+		$top: null, 
+		$left: null, 
+		$right:null, 
+		$size: $primary_font-size
+	) {
     @if $position == both {
         $position: "before, &:after";
     }
@@ -97,25 +117,43 @@ $icons: (
 			left: $left;
 			right: $right;
 			font-size: $size;
-			color: $color;
+			color: $color; 
         }
         @content;
     }
 }
 
-@mixin custom-bootstrap-btns {
+@mixin custom-btns {
     @each $class_name, $bgcolors in $btncolors {
         .btn-#{$class_name} {
 			$btn_bg: map-get($bgcolors, bg-color);
 			$btn_f-color: map-get($bgcolors, btnf-color);
 			$btn_hbg: map-get($bgcolors, hbg-color);
 			$btn_hf-color: map-get($bgcolors, btnhf-color);
+			$bgicon: map-get($bgcolors, bg-icon);
+			$onlyborder: map-get($bgcolors, onlyborder);
 
 			background: $btn_bg;
 			color: $btn_f-color;
 			border-radius: 2px;
+			position: relative;
 			border-color: darken($btn_bg, 5%);
 
+			@if $onlyborder != false{
+				border: 1px solid $btn_bg;
+				background: transparent;
+			}
+
+			@if $bgicon != false{
+				@if($class_name == "addtocart"){
+					padding-left: 35px;
+					@include icon(before, cart, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
+				} 
+				@if($class_name == "viewallchoice"){
+					padding-left: 25px; 
+					@include icon(before, eye, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
+				}
+			}
             &:hover {
 				background: $btn_hbg;
 				color: $btn_hf-color; 
@@ -148,6 +186,13 @@ $icons: (
     }
 }
 
+@include custom-btns;
+
+
+@mixin border-position($direction, $width, $style, $color) {
+	border-#{$direction}: $width $style $color;
+}
+
 @mixin headings{
 	@each $heading_name, $heading_value in $headings{
 		$color: map-get($heading_value, color);
@@ -155,22 +200,93 @@ $icons: (
 		$ffamily: map-get($heading_value, fontfamily);
 		$ttransform: map-get($heading_value, texttransform);
 		$marginval: map-get($heading_value, marginvalue);
+		$paddingvalue: map-get($heading_value, paddingvalue);
+		$border: map-get($heading_value, border);
+
 		.cimm_#{$heading_name}{
 			color: $color;
 			font-size: $fsize;
 			font-family: $ffamily; 
 			text-transform: $ttransform;
 			margin: $marginval;
+			padding: $paddingvalue;
+			position: relative;
+			
+			@if $border != false {
+				//@include border(1px, solid, $border-color);
+				@include border-position(bottom, 1px, solid, $border-color);
+			}
+			@include clearfix();
 		}
 	}
 }
 
-@include custom-bootstrap-btns;
 @include headings;
 
-@mixin border-direction($direction, $width, $style, $color) {
-	border-#{$direction}: $width $style $color;
-}
 @mixin border($width, $style, $color){
 	border: $width $style $color;
+}
+
+@mixin box-shadow($left, $top, $radius, $color) {
+	box-shadow: $left $top $radius $color;
+	-webkit-box-shadow: $left $top $radius $color;
+	-moz-box-shadow: $left $top $radius $color;
+}
+
+@mixin transition($property, $duration, $easing: linear) {
+	transition: $property $duration $easing;
+	-webkit-transition: $property $duration $easing;
+	-moz-transition: $property $duration $easing;
+}
+
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+}
+
+@mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
+	border-top-left-radius: $topleft;
+	border-top-right-radius: $topright;
+	border-bottom-right-radius: $bottomright;
+	border-bottom-left-radius: $bottomleft;
+	-webkit-border-top-left-radius: $topleft;
+	-webkit-border-top-right-radius: $topright;
+	-webkit-border-bottom-right-radius: $bottomright;
+	-webkit-border-bottom-left-radius: $bottomleft;
+	-moz-border-radius-topleft: $topleft;
+	-moz-border-radius-topright: $topright;
+	-moz-border-radius-bottomright: $bottomright;
+	-moz-border-radius-bottomleft: $bottomleft;
+}
+
+@mixin gradient($color1, $color2) {
+	background-color: $color1;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$color1}, endColorstr=#{$color2});
+	background-image: -moz-linear-gradient(center top, $color1, $color2);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to($color2));
+}
+
+@mixin category_item-border{
+	// @include box-shadow(0px, 0px, 5px, $border-color);
+	// @include border-radius(4px);
+	// @include border-position(bottom, 1px, solid, $red);
+	
+	outline: $gray-lighten solid 5px;
+}
+
+@mixin category_item-box($border:false, $shadow: false, $borderpos: false, $border-radius: false) {
+	@if $border{
+		@include border(1px, solid, $border-color);
+	}
+	@if $borderpos{
+		@include border-position(bottom, 1px, solid, $red);
+	}
+	@if $shadow{
+		@include box-shadow(0px, 0px, 5px, $border-color);
+	}
+	@if $border-radius{
+		@include border-radius(5px);
+	}
+	@content;
 }
