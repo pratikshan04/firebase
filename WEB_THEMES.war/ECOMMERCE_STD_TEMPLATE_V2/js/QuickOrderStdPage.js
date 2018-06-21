@@ -280,7 +280,7 @@ var QuickOrder = {};
 							  tdQty.addClass('tdValidate');
 				   			  var qtyValmessage = "Enter Valid Quantity to row# : "+(tr.index()+1);
 				   			  qtyValidate = qtyValidate+separatorQty+qtyValmessage;
-				   			  separatorQty = "\n";
+				   			  separatorQty = "<br/>";
 						  }
 					  });
 				   }
@@ -360,7 +360,7 @@ var QuickOrder = {};
 		if(jQuery('#copyPasteText').length>0 && jQuery('#copyPasteText').val()!=null && jQuery('#copyPasteText').val().trim()!=""){
 			block("Please Wait");
 			var  copyText = jQuery('#copyPasteText').val();
-			var lines = copyText.split("\n");
+			var lines = copyText.split("<br/>");
 			var quickOrderRecordLimit = 50;
 			if($('#quickOrderRecordLimit').lengt>0 && $('#quickOrderRecordLimit').val()!=null && $('#quickOrderRecordLimit').val()!="" && QuickOrder.isInt($('#quickOrderRecordLimit').val())){
 				quickOrderRecordLimit = parseInt($('#quickOrderRecordLimit').val());
@@ -422,13 +422,13 @@ var QuickOrder = {};
 							}
 						}else{
 							unblock();
-							bootAlert("small","error","Error","Entered text is not in expected format. \nPlease copy the text with below pattern. \nQuantity [TAB or COMMA] Part#");
+							bootAlert("small","error","Error","Entered text is not in expected format. <br/> Please copy the text with below pattern. <br/> Quantity [TAB or COMMA] Part#");
 							submitFlag = false;
 							break;
 						}
 					}
 					rowNumber = rowNumber+1;
-					stringSeparator = "\n";
+					stringSeparator = "<br/>";
 				}
 			}else{
 				unblock();
@@ -444,7 +444,7 @@ var QuickOrder = {};
 		if(invalidQtyFlag){
 			unblock();
 			setTimeout(function(){
-				bootAlert("small","error","Error","Enter Valid Keyword to row# : \n"+rowNumberString);
+				bootAlert("small","error","Error","Enter Valid Keyword to row# : <br/>"+rowNumberString);
 			}, 500);
 			submitFlag = false;
 			return false;
@@ -452,7 +452,7 @@ var QuickOrder = {};
 		if(invalidKeyWordFlag){
 			unblock();
 			setTimeout(function(){
-				bootAlert("small","error","Error","Enter Valid Keyword to row# : \n"+rowNumberString);
+				bootAlert("small","error","Error","Enter Valid Keyword to row# : <br/>"+rowNumberString);
 			}, 500);
 			submitFlag = false;
 			return false;
@@ -653,7 +653,7 @@ if($("#quickOrderRecordLimit").length>0){
 var textarea = document.getElementById("copyPasteText");
 var spaces = textarea.getAttribute("cols");
 textarea.onkeyup = function() {
-   var lines = textarea.value.split("\n");
+   var lines = textarea.value.split("<br/>");
     
    for (var i = 0; i < lines.length; i++) {
          if (lines[i].length <= spaces) continue;
@@ -681,5 +681,5 @@ textarea.onkeyup = function() {
             $("#copyPasteInstruction").css("text-decoration", "")
         },2000);
     }    
-   textarea.value = lines.slice(0, limit).join("\n");
+   textarea.value = lines.slice(0, limit).join("<br/>");
 };
