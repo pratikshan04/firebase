@@ -64,15 +64,22 @@ function saveStaticPage(){
 				 }
 			 }
 		}else if(staticPageType=="MANUFACTURER"){
-				if($('#selectManufacturer').length>0){
-					var selectedMfr = $('#selectManufacturer').val();
-					 if(typeof selectedMfr == undefined || selectedMfr == '' || selectedMfr == null || selectedMfr == -1){
-						 errMsg = errMsg + "Please select a Manufacturer\n";
-						 isValid = false;
-					 }
+			if($('#selectManufacturer').length>0){
+				var selectedMfr = $('#selectManufacturer').val();
+				 if(typeof selectedMfr == undefined || selectedMfr == '' || selectedMfr == null || selectedMfr == -1){
+					 errMsg = errMsg + "Please select a Manufacturer\n";
+					 isValid = false;
 				 }
-				
-			}
+			 }
+		}else if(staticPageType=="CATEGORY"){
+			if($('#selectCategory').length>0){
+				var selectedCateg = $('#selectCategory').val();
+				 if(typeof selectedCateg == undefined || selectedCateg == '' || selectedCateg == null || selectedCateg == -1){
+					 errMsg = errMsg + "Please select a Category\n";
+					 isValid = false;
+				 }
+			 }
+		}
 	 }
 	 if($('#selectedWebsite').length>0 ){
 		 var siteId = $('#selectedWebsite').val();
