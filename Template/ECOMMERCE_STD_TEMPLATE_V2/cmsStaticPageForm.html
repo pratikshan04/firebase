@@ -21,7 +21,7 @@
 				<option #if($!staticPageData.pageType=="BLOG") selected #end value="BLOG">BLOG</option>
 				<option #if($!staticPageData.pageType=="BRAND") selected #end value="BRAND">BRAND</option>
 				<option #if($!staticPageData.pageType=="MANUFACTURER") selected #end value="MANUFACTURER">MANUFACTURER</option> 
-				<!-- <option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">CATEGORY</option> -->
+				<option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">CATEGORY</option>
 			</select>
 			<div class="linkWraper">
 				<span id="brandListSpan" class="hideMe blockElement">
@@ -33,6 +33,11 @@
 					<a class="iframe" href="manufacturerDetailListCms.action" title="Manufacturer List" onclick="javascript:showIframeWindow();">Select Manufacturer</a> 
 					<input type="hidden" id="selectManufacturer" name="pageData.manufacturerId" value="$!selectedPageTypeValueId"/>
 					<span id="manuFacturerListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
+				</span> 
+				<span id="categoryListSpan" class="hideMe blockElement">
+					<a class="iframe" href="categoryDetailListCms.action" title="Category List" onclick="javascript:showIframeWindow();">Select Category</a> 
+					<input type="hidden" id="selectCategory" name="pageData.taxonomyTreeId" value="$!selectedPageTypeValueId"/>
+					<span id="categoryListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
 				</span> 
 			</div>
 			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" onKeypress="return IsSpecialCharacter(event);" id="pageTitleId"   /> 
@@ -397,10 +402,20 @@
 					$("#brandListSpan").show();
 					$("#manuFacturerListSpan").hide();
 					$("#selectManufacturer").val("");
+					$("#categoryListSpan").hide();
+					$("#selectCategory").val("");
 				}else if($(obj).val()=="MANUFACTURER" && $("#manuFacturerListSpan").length>0){
 					$("#manuFacturerListSpan").show();
 					$("#brandListSpan").hide();
 					$("#selectBrand").val("");
+					$("#categoryListSpan").hide();
+					$("#selectCategory").val("");
+				}else if($(obj).val()=="CATEGORY" && $("#categoryListSpan").length>0){
+					$("#categoryListSpan").show();
+					$("#brandListSpan").hide();
+					$("#selectBrand").val("");
+					$("#manuFacturerListSpan").hide();
+					$("#selectManufacturer").val("");
 				}else{
 					if($("#manuFacturerListSpan").length>0){
 						$("#manuFacturerListSpan").hide();
@@ -409,6 +424,10 @@
 					if($("#brandListSpan").length>0){
 						$("#brandListSpan").hide();
 						$("#selectBrand").val("");
+					}
+					if($("#categoryListSpan").length>0){
+						$("#categoryListSpan").hide();
+						$("#selectCategory").val("");
 					}
 				}
 			}

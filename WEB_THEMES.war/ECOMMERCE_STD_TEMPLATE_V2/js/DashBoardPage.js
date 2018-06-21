@@ -85,8 +85,8 @@ $(document).ready(function() {
 			var pathNew = userProfileImagePath+response.responseText;
 		    console.log(pathNew);
 		    unblock();
-		    $('#profilePicture').attr("src",pathNew);
-		    $('#profilePictureThumbnail').attr("src",pathNew);
+		    $('#profilePicture').attr("src",pathNew+"?dt="+new Date());
+		    $('#profilePictureThumbnail').attr("src",pathNew+"?dt="+new Date());
 		    enqueue('sessionValueLink.action?crud=s&keyValue=userProfileImage&insertValue='+response.responseText+'&dt='+new Date())
 		    $('#profileImage').attr({ value: ""});
 		    $('#cimm_customImageUpload > span').text("Choose File");
