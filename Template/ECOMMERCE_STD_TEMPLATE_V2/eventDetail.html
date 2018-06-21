@@ -1,7 +1,7 @@
 #if($!eventsList && $!eventsList.title && $!eventsList!="")
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-sx-12 eventInfoBlock">
-		<h3 class="cimm_pageTitle">$!eventsList.title</h3>
+		<h3 class="cimm_page-title">$!eventsList.title</h3>
 		<table cellspacing="5" cellpadding="5">
 			 <tr>
 				<td><strong>$!locale.get("eventDetail.label.date") :</strong></td>
@@ -85,24 +85,52 @@
 	<div align="center" id="chkDate">
 		#if($eventsList.blockOnlineReg == "N")
 			#if($eventsList.totalSeats == "-1")
-				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="cimm_inlineButton">$!locale.get("event.label.registerNow")</a>
+				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerNow")</a>
 			#elseif($eventsList.availableSeats >= $!eventsList.totalSeats)
-				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="cimm_inlineButton">$!locale.get("event.label.registerrForWaitingList")</a>
+				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerrForWaitingList")</a>
 			#else
-				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="cimm_inlineButton">$!locale.get("event.label.registerNow")</a>
+				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerNow")</a>
 			#end
 		#else
-			<a href="javascript:void(0);" class="cimm_inlineButton">$!locale.get("event.label.registerClosed")</a>
+			<a href="javascript:void(0);" class="btn button">$!locale.get("event.label.registerClosed")</a>
 		#end
 	</div>
 	<br />
 </div>
+#set($offset = "")
+#if($!eventsList.timezoneOffset.substring(3,4) == 3)
+	#set($offset = $!eventsList.timezoneOffset.substring(0,3)+".5")
+#else
+	#set($offset = $!eventsList.timezoneOffset.substring(0,3))
+#end
+
+#set($startTime = "")
+#set($endTime = "")
+#if($eventsList.date.substring(9,11).replaceAll('-','/') == $eventsList.end.substring(9,11).replaceAll('-','/'))
+	#set($startTime = $!eventsList.date.substring(0,16).replaceAll('-','/')+" "+$!eventsList.date.substring(16,25).replaceAll('-','/'))
+	#set($endTime = $!eventsList.date.substring(0,16).replaceAll('-','/')+" "+$!eventsList.end.substring(16,25).replaceAll('-','/'))
+#else
+	#set($startTime = $!eventsList.date.substring(0,16).replaceAll('-','/')+" "+$!eventsList.date.substring(16,25).replaceAll('-','/'))
+	#set($endTime = $!eventsList.end.substring(0,16).replaceAll('-','/')+" "+$!eventsList.end.substring(16,25).replaceAll('-','/'))
+#end
 <script>
 	var D1 = "$!eventsList.date";
 	var D2 = new Date();
 	if ((new Date(D1).getTime()) <= (new Date(D2).getTime())) {
-		$("#chkDate").html('<a href="javascript:void(0);" class="button">$!locale.get("event.label.registerClosed")</a>');
+		$("#chkDate").html('<a href="javascript:void(0);" class="btn button">$!locale.get("event.label.registerClosed")</a>');
 	}
+
+	/* function calcTime(timeStamp, offset) {
+	    d = new Date(timeStamp);
+	    utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+	    nd = new Date(utc + (3600000*offset));
+	    return nd.toLocaleString();
+	}
+	var startTime = calcTime('$startTime', '$offset');
+	var endTime = calcTime('$endTime', '$offset');
+	$('#startTime').html(startTime);
+	$('#endTime').html(endTime); */
+	</script>
 </script>
 #else
 	$!locale.get('product.label.noDataAvailable')
