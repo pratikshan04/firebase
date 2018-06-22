@@ -3436,6 +3436,18 @@ function validatePcardFormWithNewIds(){
 		return true;
 	}
 }
+
+$(".overlay").click(function(){
+	$(this).hide();
+	$(".assignedStaticPageWrap").height('auto');
+	$(".recal_overlay").parent().show();
+});
+$(".recal_overlay").click(function(){
+	$(this).parent().hide();
+	$(".assignedStaticPageWrap").height(210);
+	$(".overlay").show();
+});
+
 function homeCarousels(){
 	if($('.featuredProductList').length>0){
 		if($('.featuredProductList').hasClass('slick-initialized')){
@@ -3578,14 +3590,39 @@ function homeCarousels(){
 				             ]
 			  });
 		}
+		if($('.featuredCategory').length>0){
+			if($('.featuredCategory').hasClass('slick-initialized')){
+				$('.featuredCategory').slick('unslick');
+			}
+			$('.featuredCategory').slick({
+				  infinite: true,
+				  slidesToShow: 5,
+				  slidesToScroll: 1,
+				  pauseOnHover:true,
+				  responsive: [
+				               {
+				                 breakpoint: 1030,
+				                 settings: {
+				                   slidesToShow: 4,
+				                 }
+				               },{
+									breakpoint: 770,
+									settings: {
+										slidesToShow: 3,
+									}
+								},{
+									breakpoint: 500,
+									settings: {
+										slidesToShow: 2,
+									}
+								},
+								{
+									breakpoint: 400,
+									settings: {
+										slidesToShow: 1,
+									}
+								}
+				             ]
+			  });
+		}
 }
-$(".overlay").click(function(){
-	$(this).hide();
-	$(".assignedStaticPageWrap").height('auto');
-	$(".recal_overlay").parent().show();
-});
-$(".recal_overlay").click(function(){
-	$(this).parent().hide();
-	$(".assignedStaticPageWrap").height(210);
-	$(".overlay").show();
-});
