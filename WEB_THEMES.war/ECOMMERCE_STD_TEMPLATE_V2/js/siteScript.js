@@ -3579,3 +3579,13 @@ function homeCarousels(){
 			  });
 		}
 }
+$(".overlay").click(function(){
+	$(this).hide();
+	$(".assignedStaticPageWrap").height('auto');
+	$(".recal_overlay").parent().show();
+});
+$(".recal_overlay").click(function(){
+	$(this).parent().hide();
+	$(".assignedStaticPageWrap").height(210);
+	$(".overlay").show();
+});
