@@ -1,36 +1,39 @@
 #parse("globalhiddeninput.html")
-<!-- <div class="cimm_headerTopContent">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="headerInfoBlock">
-					<ul>
-						<li>
-							Call Us for Assistance:123-965-9842
-						</li>
-					</ul>
-				</div>
-				<div class="cimm_headerUtilityMenu hideForDevices">
-					<ul>
-						#foreach($headerMenu in $headerStaticMenu)
+<!-- <div class="cimm_header_top">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="cimm_header_top-phone">
+						<ul>
 							<li>
-								<a data-toggle="dropdown" href="#if($headerMenu.itemUrl) #if($headerMenu.staticPageUrl) $!headerMenu.staticPageUrl #else /$!headerMenu.itemUrl #end #else javascript:void(0); #end" #if($headerMenu.level1Menu && $headerMenu.level1Menu=='Blog')target="_blank"#end>$!headerMenu.level1Menu #if($headerMenu.menuList && $headerMenu.menuList.size()>0) <em class="fa  fa-caret-down" aria-hidden="true"></em>#end</a>
-								#if($headerMenu.menuList && $headerMenu.menuList.size()>0)
-									<ul class="dropdown-menu">
-									#foreach($subStaticMenu in $headerMenu.menuList)
-										<li><a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $!subStaticMenu.staticPageUrl #else /$!subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$!subStaticMenu.level2Menu</a></li>
-									#end
-									</ul>
-								#end
+								Call Us for Assistance:123-965-9842
 							</li>
-						#end
-					</ul>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="cimm_header_top-menu hideForDevices">
+						<ul class="nav navbar-right">
+							#foreach($headerMenu in $headerStaticMenu)
+								<li>
+									<a data-toggle="dropdown" href="#if($headerMenu.itemUrl) #if($headerMenu.staticPageUrl) $!headerMenu.staticPageUrl #else /$!headerMenu.itemUrl #end #else javascript:void(0); #end" #if($headerMenu.level1Menu && $headerMenu.level1Menu=='Blog')target="_blank"#end>$!headerMenu.level1Menu #if($headerMenu.menuList && $headerMenu.menuList.size()>0) <em class="fa  fa-caret-down" aria-hidden="true"></em>#end</a>
+									#if($headerMenu.menuList && $headerMenu.menuList.size()>0)
+										<ul class="dropdown-menu">
+										#foreach($subStaticMenu in $headerMenu.menuList)
+											<li><a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $!subStaticMenu.staticPageUrl #else /$!subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$!subStaticMenu.level2Menu</a></li>
+										#end
+										</ul>
+									#end
+								</li>
+							#end
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div> -->
-<div class="cimm_headerMidContent">
+<div class="cimm_header_mid">
 <div class="container">
 <div class="row">
 	#if($userAgent != "WEBVIEW")

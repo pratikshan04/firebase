@@ -1,0 +1,270 @@
+
+$black: #000 !default;
+$gray-darker: lighten($black, 13.5%) !default; // #222
+$gray-dark: lighten($black, 20%) !default;   // #333
+$gray: lighten($black, 33.5%) !default; // #555
+$gray-light: lighten($black, 46.7%) !default; // #777
+$gray-lighter: lighten($black, 93.5%) !default; // #eee
+$gray-lighten: lighten($black, 89.7%) !default; // #E5E5E5
+
+
+//** Global Temp Theme
+$primary_color      : #46acee;
+$secondary_color    : #404040; 
+$tertiary_color     : #f9f9f9;
+
+// $primary_color      : #8a8a8a;
+// $secondary_color    : #9e0c24;
+// $tertiary_color     : #f9f9f9;
+
+
+$white              : #FFF;
+$red                : #ee3426;
+$blue               : #00a9e7;
+$green              : #37ff3b;
+$yellow             : #e4de33;
+
+$border-color       : #A1A1A1;
+$shadow-color : lighten($black, 68%) !default;
+
+$default_font-color     : $secondary_color; //** Global font color
+$heading_font-color		: $secondary_color; //** Global heading font color
+
+//** Global Temp Fonts 
+$default_font-family    : 'RobotoRegular';
+$secondary_font-family  : 'RobotoBlack';
+$heading_font-family    : 'RobotoCondensedBold';
+
+
+//** Global Font sizes
+$font_xs    : 10px;
+$font_sm    : 12px;
+$font_md    : 14px;
+$font_lg    : 16px;
+$font_xlg   : 18px;
+$font_xxlg  : 20px;
+
+$default_font-size		: $font_md;
+$heading_font-size		: $font_lg; //** Global heading font size
+
+
+//** Background color for `<body>`.
+$body-bg    : $white !default;
+
+//Font Colors
+$primary_font-color     : $primary_color;
+$secondary_font-color   : $secondary_color;
+
+//** body font style declaration
+$body_font-family		: $default_font-family;
+$body_font-color		: $default_font-color;
+$body_font-size			: $default_font-size;
+
+//** Global textual link color.
+$link-color         : $gray-dark !default;
+$link-hover-color   : darken($link-color, 15%) !default;
+
+
+/*__________________________________Heading Setting_______________________________________*/
+//Header
+$header_bg      : $secondary_color;
+$header_top-bg  : $secondary_color;
+$header_mid-bg  : transparent;
+
+
+/*__________________________________Navigation Setting_______________________________________*/
+//Navigation color and font declaration
+$mnav-bg			: $secondary_color;
+$mnav_lf-family		: $default_font-family; // Main navigation link font family
+$mnav_lf-color		: $tertiary_color;  //Main navigation link font color
+$mnav_lf-size		: $default_font-size;   //Main navigation link font size
+
+$mnav_lh-bg			: $primary_color;       //Main navigation link hover background
+$mnav_lhf-color		: $white;               //Main navigation link hover font color
+
+$mnav_la-bg         : $primary_color;       //Main navigation (la = link active) bg 
+$mnav_laf-color     : $white;               //Main navigation (la = link active font) color
+
+//Main sub navigation
+$msnav_bg			: $tertiary_color;
+
+$mnav_primary-bg	: $primary-color;
+$mnav_secondary-bg	: $secondary-color;
+
+$msnav_lf-color     : $secondary-font_color;
+$msnav_lh-bg        : $secondary-font_color;
+$msnav_la-color     : $secondary-font_color;
+
+
+/*______________________________Left Navigation Setting_______________________________________*/
+//Left Navigation
+$cimm_leftmenu          : transparent;
+$lnav_title-bg          : $white;
+$lnav_title_text-color  : $black;
+$lnav_icon-color        : $primary_color;
+
+$lnav_filter-bg         : transparent;
+$lnav_filter-title-bg   : transparent;
+
+$lnav_filter-title-font-family  : $heading_font-family;
+$lnav_filter-title-font-color   : $heading_font-color;
+$lnav_filter-title-font-size    : $heading_font-size;
+
+/*___________________________________Footer Setting___________________________________________*/
+//Footer 
+$footer_bg      : transparent;
+$footer_top-bg  : $secondary_color;
+$footer_mid-bg  : $secondary_color; 
+$footer_btm-bg  : $primary_color;
+
+//Footer a heading (hf = heading font)
+$fnav_hf-color  : $white;
+$fnav_pf-color  : $white;
+$fnav_lf-color  : $white;
+$fnav_lf-family : $default_font-family;
+$fnav_lf-size   : $font_md;
+
+$copyright_font-color   : $white;
+$copyright_font-Size    : $font_xs;
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MODULES *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+/*__________________________________Buttons Setting_______________________________________*/
+
+$button_font_family: $default_font-family;
+
+$btncolors: (
+    primary: (
+        bg-color    : $primary_color, //Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $gray-dark, // Button hover backogrund color
+        btnhf-color : $white,   // Button hover font color
+        abg-color   : $gray-dark,    //Button Active background color
+        bg-icon     : false,
+        onlyborder  : false
+    ), 
+    secondary: (
+        bg-color    : $secondary_color,//Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $black, // Button hover backogrund color
+        btnhf-color : $white, // Button hover font color
+        abg-color   : $gray-dark, //Button Active background color
+        bg-icon     : true,
+        onlyborder  : flase
+    ),
+    addtocart:(
+        bg-color    : $primary_color,//Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $black, // Button hover backogrund color
+        btnhf-color : $white, // Button hover font color
+        abg-color   : $gray-dark, //Button Active background color
+        bg-icon     : true,
+        onlyborder  : false
+    ),
+    viewallchoice:(
+        bg-color    : $primary_color, //Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $gray-dark, // Button hover backogrund color
+        btnhf-color : $white,   // Button hover font color
+        abg-color   : $gray-dark,    //Button Active background color
+        bg-icon     : true,
+        onlyborder  : flase
+    )
+);
+
+
+/*__________________________________Headdings Setting_______________________________________*/
+$headings:(
+    page-title:(
+        fontfamily: $heading_font-family,
+        texttransform: uppercase,
+        color: $heading_font-color,
+        fontsize: $heading_font-size,
+        marginvalue: 0px 0px 20px 0px,
+        paddingvalue: 15px 0px,
+        border: false
+    ),
+    block-title:(
+        fontfamily: $heading_font-family,
+        texttransform: capitalize,
+        color: $default_font-color,
+        fontsize: $font_xlg,
+        marginvalue: 10px 0px,
+        paddingvalue: 0px 0px 10px 0px,
+        border: false
+    ),
+    filter-block-title:(
+        fontfamily: $heading_font-family,
+        texttransform: uppercase,
+        color: $default_font-color,
+        fontsize: $font_xlg,
+        marginvalue: 0px 0px,
+        paddingvalue: 12px 0px,
+        border: true
+    )
+);
+
+/*________________________________________ Slick Slider _______________________________________*/
+
+$slider_tf-family   : $heading_font-family; //Slick Slider Title Font Family
+$slider_tf-color    : $heading_font-color; //Slick Slider Title Font color
+$slider-tf-size     : $heading_font-size; //Slick Slider Title Font size
+
+$slider_container-bg    : transparent;
+//$slider_container-border: $border-color; 
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* PAGES *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+/*__________________________________ Category Page Setting_______________________________________*/
+//Categories Heading 
+
+
+/* Check Box and Radio btn border color*/
+$radiobtn_border-color: $border-color;
+$radiobtn_bg-color: $primary_color;
+$radiobtn_checked-color: $primary_color;
+
+$checkbox_bg-color: $primary_color;
+$checkbox_border-color: $border-color;
+$checkbox_checked-color: $primary_color;
+
+
+$category-item-bg: transparent;
+$category-itemimage-bg: transparent;
+$category-itemname-bg: transparent;
+
+$category_hf-color: $primary-font_color;
+
+$headerNavLinkColor: #FFF;
+$headerNavLinkFontSize: 12px;
+
+$mainNavBackground: #404040;
+$mainNavLinkColor: #FFF;
+$mainNavLinkFontSize: 14px;
+$navDropdownBg: #EBEBEB;
+
+$leftNavTitleBackgroud: #FFF;
+$leftNavTitleFontSize: 14px;
+$leftNavTitleFontColor: #404040;
+$leftNavLabelFontSize: 12px;
+$leftNavLabelFontColor: #404040;
+$leftNavTitleFontFamily: $secondary_font-family;
+
+$footerLinkFontSize: 12px;
+$footerHeadingColor: $white;
+$footerCopyRightFontSize: 10px;
+
+$tabHeadingBackgroundColor: #ebebeb;
+$tabHeadingFontColor: #404040;
+$tabHeadingActiveBackgroundColor: #404040;
+$tabHeadingActiveFontColor : $white;
+$tabHeadingIconContent: "\e113";
+$tabHeadingActiveIconContent: "\e114";
+$tabHeadingIconFontFamily: 'Glyphicons Halflings';
+$tabHeadingFontSize: 14px;
+
+$packDescColor: #ed7118;
+$eventTabBg: #A1A1A1;
+
+$autocomleteBg: #e6e6e6

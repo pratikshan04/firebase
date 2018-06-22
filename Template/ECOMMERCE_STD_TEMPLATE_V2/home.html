@@ -26,7 +26,7 @@
 </ul>
 #if($categMenu.size()>0)
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.heading.shopByCategory")</label></h3>
+	<h3 class="cimm_block-title"><label>$locale.get("product.heading.shopByCategory")</label></h3>
 	<ul id="shopByCategory" class="cimm_caroWrap">
 	#foreach($categoryMenu in $categMenu)
 		<li>
@@ -57,7 +57,7 @@
 #set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
 #if($!featuredBrands && $featuredBrands.size()>0)	 	
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredBrands")</label></h3>
+	<h3 class="cimm_block-title"><label>$locale.get("product.label.featuredBrands")</label></h3>
 	<ul id="featuredBrands" class="cimm_caroWrap">
 		#foreach($brandset in $featuredBrands.entrySet())
 		#set($keyValue = $brandset.getKey())
@@ -77,7 +77,7 @@
 <!-- <div class="cimm_eventNews">
 	<div class="cimm_halfBlockColumns">
 		<div class="upcomingEvent">
-			<h3 class="cimm_blockTitle"><label>Upcoming Events</label></h3>
+			<h3 class="cimm_block-title"><label>Upcoming Events</label></h3>
 			<h2>UPCOMING EVENTS <a href="/eventsUnit.action"><i class="fa fa-calendar"></i></a></h2>
 			<ul id="upcomingEvents" class="customScroll">
 			#foreach($eventsDetails in $eventsList)
@@ -111,7 +111,7 @@
 	
 	<div class="cimm_halfBlockColumns">
 		<div class="recentNews">
-			<h3 class="cimm_blockTitle"><label>Recent News</label></h3>
+			<h3 class="cimm_block-title"><label>Recent News</label></h3>
 			<div id="news-scroller" class="newsList customScroll">
 				<div class="center"><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
 			</div>
@@ -123,7 +123,7 @@
 #set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
 #if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
+	<h3 class="cimm_block-title"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
 	<ul id="featuredManufacturers" class="cimm_caroWrap">
 		#foreach($manufacturerset in $featuredManufacturers.entrySet())
 		#set($keyValue = $manufacturerset.getKey())
@@ -142,7 +142,7 @@
 
 #if($featuredProducts.size()>0)	 	
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.label.featuredProducts")</label></h3>
+	<h3 class="cimm_block-title"><label>$locale.get("product.label.featuredProducts")</label></h3>
 	<ul id="featuredProductList" class="cimm_caroWrap">
 		#foreach($itemData in $featuredProducts)
 		#set($itemTitle= $itemData.shortDesc)
@@ -188,7 +188,7 @@
 <input type="hidden" id="startRecent" value="Y"/>
 
 <div class="recentlyhide" id="recentitembox">
-	<h3 class="cimm_blockTitle"><label>$locale.get("product.heading.recentlyviewedproducts")</label></h3>
+	<h3 class="cimm_block-title"><label>$locale.get("product.heading.recentlyviewedproducts")</label></h3>
 	#set($itemTitle=$itemData.brandName+" "+$itemData.partNumber)
 	<div class="cimm_sliderWrap" >
 		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></ul>

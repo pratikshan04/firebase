@@ -68,12 +68,12 @@ textarea { resize: vertical; }
 		
 		+ span:after {
 			display: block;
-			border: 2px solid #000;
+			border: 2px solid $radiobtn_border-color;
 		}
 		
 		&:checked{
 			+ span:after, + span:before {
-				border: 2px solid $primary_color;
+				border: 2px solid $radiobtn_checked-color;
 				-webkit-transition: all 0.3s ease-out;
 				-moz-transition: all 0.3s ease-out;
 				-ms-transition: all 0.3s ease-out;
@@ -81,7 +81,7 @@ textarea { resize: vertical; }
 			}
 
 			+ span:before {
-				background: $primary_color;
+				background: $radiobtn_bg-color;
 				-webkit-transform: scale(.5);
 				-moz-transform: scale(.5);
 				-ms-transform: scale(.5);
@@ -156,7 +156,7 @@ ul.cimm_formContent li label.customCheckBox2{
 	width: 12px;
 	display: block;
 	height: 12px;
-	border: 1px solid $border-color;
+	border: 1px solid $checkbox_border-color;
 	top: 0;
 	left: 0;
 	background: #FFF;
@@ -170,8 +170,8 @@ ul.cimm_formContent li label.customCheckBox2{
 }
 .customCheckBox input[type="checkbox"]:checked + span:after,
 .customCheckBox2 input[type="checkbox"]:checked + span:after{
-	border: 1px solid $primary_color;
-	background: $primary_color;
+	border: 1px solid $checkbox_checked-color;
+	background: $checkbox_bg-color;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
@@ -182,7 +182,7 @@ ul.cimm_formContent li label.customCheckBox2{
 }
 .customCheckBox input[type="checkbox"]:checked + span:before,
 .customCheckBox2 input[type="checkbox"]:checked + span:before {
-	background: $primary_color;
+	background: $checkbox_bg-color;
 	-ms-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);

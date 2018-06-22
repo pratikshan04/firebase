@@ -158,7 +158,7 @@ var QuickOrder = {};
     					  tdQty.find('input').addClass('tdValidate');
     		   			  var qtyValmessage = "Enter Valid Quantity to row# : "+(tr.index()+1);
     		   			  qtyValidate = qtyValidate+separatorQty+qtyValmessage;
-    		   			  separatorQty = "\n";
+    		   			  separatorQty = "<br/>";
     				  }
     			  });
     		   }
@@ -233,7 +233,7 @@ var QuickOrder = {};
 		if(jQuery('#headerCopyPasteText').length>0 && jQuery('#headerCopyPasteText').val()!=null && jQuery('#headerCopyPasteText').val().trim()!=""){
 			block("Please Wait");
 			var  copyText = jQuery('#headerCopyPasteText').val();
-			var lines = copyText.split("\n");
+			var lines = copyText.split("<br/>");
 			var quickOrderRecordLimit = 50;
 			if($('#quickOrderRecordLimit').length>0 && $('#quickOrderRecordLimit').val()!=null && $('#quickOrderRecordLimit').val()!="" && QuickOrder.isInt($('#quickOrderRecordLimit').val())){
 				quickOrderRecordLimit = parseInt($('#quickOrderRecordLimit').val());
@@ -296,13 +296,13 @@ var QuickOrder = {};
 							}
 						}else{
 							unblock();
-							bootAlert("small","error","Error","Entered text is not in expected format. \nPlease copy the text with below pattern. \nQuantity [TAB or COMMA] Part#");
+							bootAlert("small","error","Error","Entered text is not in expected format. <br/>Please copy the text with below pattern. <br/>Quantity [TAB or COMMA] Part#");
 							submitFlag = false;
 							break;
 						}
 					}
 					rowNumber = rowNumber+1;
-					stringSeparator = "\n";
+					stringSeparator = "<br/>";
 				}
 			}else{
 				unblock();
@@ -318,7 +318,7 @@ var QuickOrder = {};
 		if(invalidQtyFlag){
 			unblock();
 			setTimeout(function(){
-				bootAlert("small","error","Error","Enter Valid Quantity to row# : \n"+rowNumberString);
+				bootAlert("small","error","Error","Enter Valid Quantity to row# : <br/>"+rowNumberString);
 			}, 500);
 			submitFlag = false;
 			return false;
@@ -326,7 +326,7 @@ var QuickOrder = {};
 		if(invalidKeyWordFlag){
 			unblock();
 			setTimeout(function(){
-				bootAlert("small","error","Error","Enter Valid Keyword to row# : \n"+rowNumberString);
+				bootAlert("small","error","Error","Enter Valid Keyword to row# : <br/>"+rowNumberString);
 			}, 500);
 			submitFlag = false;
 			return false;
@@ -594,7 +594,7 @@ var Headtextarea = document.getElementById("copyPasteTextHead");
 if(Headtextarea!= null){
 	var spaces = Headtextarea.getAttribute("cols");
 	Headtextarea.onkeyup = function() {
-	   var lines = Headtextarea.value.split("\n");
+	   var lines = Headtextarea.value.split("<br/>");
 	    
 	   for (var i = 0; i < lines.length; i++) 
 	   {
@@ -623,7 +623,7 @@ if(Headtextarea!= null){
 	            $("#copyPasteInstruction").css("text-decoration", "")
 	        },2000);
 	    }    
-	   Headtextarea.value = lines.slice(0, limit).join("\n");
+	   Headtextarea.value = lines.slice(0, limit).join("<br/>");
 	};
 }
 

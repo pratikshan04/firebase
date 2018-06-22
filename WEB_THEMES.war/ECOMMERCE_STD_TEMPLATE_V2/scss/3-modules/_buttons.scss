@@ -53,18 +53,7 @@ input[type='submit'] {
 //Add to Cart Button`
 .btn-addtocart {
     text-transform: uppercase;
-    color: $white;
-	padding-left: 35px;
-    background: url('../images/cartIcon.svg') 6px 6px/24px $primary_color no-repeat;
-    vertical-align: unset;
-    &:hover {
-        color: $white;
-        background: url('../images/cartIcon.svg') 6px 6px/24px $gray-dark no-repeat;
-    }
-    &:active,&:focus {
-        color: $white;
-        background: url('../images/cartIcon.svg') 6px 6px/24px $primary_color no-repeat;
-    }
+	vertical-align: unset;
     &.btns-disable {
         opacity: .3;
     }

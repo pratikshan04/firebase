@@ -3,6 +3,19 @@
 #listAndGridSwap($navigationType,$hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$escapeTool.url($attrFilterList),$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
 #listPageHeading($navigationType,$keyWord,$heading)
 #listPageFormUrls($navigationType)
+
+#if($assignedStaticPageId && $assignedStaticPageId>0 && $!assignedStaticPageContent!="")
+<div class="assignedStaticPageWrap">
+	<div class="row cimm_staticPageWrap">
+		<div class="overlay"></div>
+		<div class="col-md-12 ">
+			$!assignedStaticPageContent
+		</div>
+		<div class="text-center hideMe"><span class="recal_overlay"> </span></div>
+	</div>
+</div>
+#end
+
 #if($LayoutName=="SubCategoryPage")
 #set($itemsPerPageURL="taxonomyLevelFilterPage.action")
 #set($searchWithInFormURL="taxonomyLevelFilterPage.action")
@@ -56,69 +69,71 @@
 	#else
 		#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-")+"/")
 	#end
-<h3 class="cimm_pageTitle">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $!locale.get("product.heading.productCategory") #end</h3>
-<div class="cimm_productCategory">
-	#if($!categoryDescription.shortDesc)
-	<div class="row mBottom-4">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="categoryDescriptionBlock">
-				$!categoryDescription.shortDesc
-			</div>
-		</div>
-	</div>
-	#end
-	#if($!listPageHeading && $!listPageHeading.trim().length()>0 && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') != "Y")
-		<div class="cimm_searchWithin mBottom-3">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<form id="searchForm" action="itemLevelFilterPage.action" method="get">
-						<div class="input-group">
-						#set($search = "Search Within")
-						#if($!keyWordTxt)
-							<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
-						#else
-							<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
-						#end
-						<div class="input-group-btn">
-							<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><em class="fa fa-lg fa-search"></em></button>
-						</div>
-						<input type="hidden" name="codeId" value="$!codeId" /> 
-						<input type="hidden" name="levelNo" value="$!levelNo" /> 
-						<input type="hidden" name="gallery" value="$!gallery" />
-						<input type="hidden" name="resultPage" value="12" /> 
-						<input type="hidden" name="pageNo" value="$!pageNo" />   
-						<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
-						<input type="hidden" name="srchTyp" value="CATNAV"> 
-						
-						</div>
-					</form>
+<h3 class="cimm_page-title">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $!locale.get("product.heading.productCategory") #end</h3>
+<div class="cimm_categories">
+	<div class="cimm_categies_container">
+		#if($!categoryDescription.shortDesc)
+		<div class="row mBottom-4">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="cimm_category_description">
+					$!categoryDescription.shortDesc
 				</div>
 			</div>
 		</div>
-	#end
-	<div class="row cimm_categoryItemBlockWrap">
-		#foreach($categoryList in $categoryListData)
-		<div class="col-md-4 col-sm-4 col-xs-6 cimm_categoryItems" itemscope itemtype="http://schema.org/Product"> <!-- cimm_categoryItemBlock -->
-			<div class="cimm_categoryImg">
-				<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
-				#if($categoryList.imageName.contains("http") || $categoryList.imageType.equalsIgnoreCase("URL"))
-			 		<img itemprop="Image" src="$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
-				#else
-			 		<img itemprop="Image" src="$!taxonomyImage$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
-				#end
-				</a>
-			</div> 
-			<h4 class="cimm_categoryHeading" itemprop="Name" title="$!categoryList.categoryName">
-				<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
-				#if($categoryList.categoryName.length()>22)
-					<span  data-toggle="tooltip"> $!categoryList.categoryName.substring(0, 22)...</span>
-				#else
-					<span> $!categoryList.categoryName </span>
-				#end
-				</a>
-			</h4>
-		</div>
 		#end
+		#if($!listPageHeading && $!listPageHeading.trim().length()>0 && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') != "Y")
+			<div class="cimm_searchWithin mBottom-3">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<form id="searchForm" action="itemLevelFilterPage.action" method="get">
+							<div class="input-group">
+							#set($search = "Search Within")
+							#if($!keyWordTxt)
+								<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
+							#else
+								<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" class="form-control">
+							#end
+							<div class="input-group-btn">
+								<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary cimm_searchIcon"><em class="fa fa-lg fa-search"></em></button>
+							</div>
+							<input type="hidden" name="codeId" value="$!codeId" /> 
+							<input type="hidden" name="levelNo" value="$!levelNo" /> 
+							<input type="hidden" name="gallery" value="$!gallery" />
+							<input type="hidden" name="resultPage" value="12" /> 
+							<input type="hidden" name="pageNo" value="$!pageNo" />   
+							<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
+							<input type="hidden" name="srchTyp" value="CATNAV"> 
+							
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		#end
+		<div class="row cimm_category-items">
+			#foreach($categoryList in $categoryListData)
+			<div class="col-md-4 col-sm-4 col-xs-6 cimm_categoryItems" itemscope itemtype="http://schema.org/Product"> <!-- cimm_categoryItemBlock -->
+				<div class="cimm_category-itemimage">
+					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					#if($categoryList.imageName.contains("http") || $categoryList.imageType.equalsIgnoreCase("URL"))
+				 		<img itemprop="Image" src="$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					#else
+				 		<img itemprop="Image" src="$!taxonomyImage$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					#end
+					</a>
+				</div> 
+				<h4 class="cimm_category-itemname" itemprop="Name" title="$!categoryList.categoryName">
+					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					#if($categoryList.categoryName.length()>22)
+						<span  data-toggle="tooltip"> $!categoryList.categoryName.substring(0, 22)...</span>
+					#else
+						<span> $!categoryList.categoryName </span>
+					#end
+					</a>
+				</h4>
+			</div>
+			#end
+		</div>
 	</div>
 </div>
 #if($LayoutName=="SubCategoryPage" && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y")
@@ -291,7 +306,7 @@
 	<div class="col-md-12">
 		#if($resultCount==0)
 			<div class="searchZero">
-				<h2 class="cimm_pageTitle">$!locale.get("product.label.productResults")</h2>
+				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
 				<h3>$!locale.get("search.result.zeroResult")&nbsp;<span> $!keyWord </span>$!locale.get("search.result.tryOtherSearch")</h3>
 			</div>
 			#if($itemSuggest)

@@ -1,9 +1,9 @@
 <ul class="nav navbar-nav">
     <li class="dropdown">
 		<a href="$locale.get('website.url.ProductCategory')">
-			$locale.get("navigation.label.shopProducts") #if($categMenu.size()>0)<em class="fa"></em>#end
+			$locale.get("navigation.label.shopProducts")
 		</a>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu shopbyprod">
 		#set($count=0)
 		#set($categoryListSize = 0)
 		#foreach($categoryMenu in $categMenu)
@@ -34,7 +34,7 @@
     </li>
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
 	<li class="dropdown"><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<em class="fa"></em>#end</a>
-		<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
+		<div class="shopbybrand dropdown-menu clearAfter">
 		#set($brandListSize = 0)
 		#set($brandIndex = 0)
 		#foreach($brands in $brandList)
@@ -66,7 +66,7 @@
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
     <li class="dropdown"><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers") #if($manufacturerList.size() > 0)<em class="fa"></em>#end</a>
-		<div class="cimm_shopByManufacturer dropdown-menu clearAfter">
+		<div class="shopbymanuf dropdown-menu clearAfter">
 		#set($manufacturerListSize = 0)
 		#set($mfgIndex = 0)
 		#if($manufacturerList.size()>0)
@@ -220,8 +220,15 @@
 	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a></li>
 	#end
 	#end
+	
 	#foreach($topMenu in $topStaticMenu)
-		<li class="dropdown">
+		#set($subMenu = 0)
+		#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations" && $!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
+			#set($subMenu = 1)
+		#elseif($topMenu.menuList && $topMenu.menuList.size()>0)
+			#set($subMenu = 1)
+		#end
+		<li #if($subMenu == 1) class="dropdown" #end>
 			#if($topMenu.level1Menu && $topMenu.level1Menu =="Quick Order Pad")
 				#if($userLogin)
 					<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>

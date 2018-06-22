@@ -1,7 +1,7 @@
 #if($!eventsList && $!eventsList.title && $!eventsList!="")
 <div class="eventsSidebarWrap">	
 	<div class="eventRightContent">
-		<h3 class="cimm_pageTitle">$!eventsList.title</h3>
+		<h3 class="cimm_page-title">$!eventsList.title</h3>
 		<ul class="eventInfoBlock pull-left">
 			<li>
 				<strong>$!locale.get("eventDetail.label.date"): </strong>
@@ -111,7 +111,7 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="event_rigistration_box">
-								<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.label.coursePrSeminarRegestration")</h3>
+								<h3 class="cimm_page-title mTop-4">$!locale.get("event.label.coursePrSeminarRegestration")</h3>
 								<ul class="cimm_eventDetail">
 									<li><strong>$!locale.get("event.label.eventName"): </strong><span>$!eventsList.title</span></li>
 									<li><strong>$!locale.get("event.label.dateAndTime"): </strong>
@@ -132,7 +132,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.heading.registrantInformation")</h3>
+							<h3 class="cimm_page-title mTop-4">$!locale.get("event.heading.registrantInformation")</h3>
 						</div>
 					</div>
 					<div class="row">
@@ -241,7 +241,7 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="collapse marginY-4" id="test">
-								<h3 class="cimm_pageTitle">$!locale.get("event.label.additionalInformation")</h3>  
+								<h3 class="cimm_page-title">$!locale.get("event.label.additionalInformation")</h3>  
 								<div class="row">
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="form-group">
@@ -345,7 +345,7 @@
 					</div>
 					<!-- Hidden form -->
 					#if($eventCost!=0)       
-					<h3 class="cimm_pageTitle mTop-4">$!locale.get("event.label.billingInformation")</h3>
+					<h3 class="cimm_page-title mTop-4">$!locale.get("event.label.billingInformation")</h3>
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<label>$!locale.get("event.label.methodOfPayment")<span class="text-danger">*</span></label>

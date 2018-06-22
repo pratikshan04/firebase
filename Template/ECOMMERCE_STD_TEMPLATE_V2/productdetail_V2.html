@@ -648,7 +648,7 @@
 									#else
 									 	#set($addToCartCheckFlag = "N")
 									#end
-								 	<label class="customCheckBox2" id="selectItemCheckbox_$!productModeitemData.itemId">
+								 	<label class="customCheckBox2" for="selectItemCheckbox_$!productModeitemData.itemId">
 									 	<input type="checkbox" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems" id="selectItemCheckbox_$!productModeitemData.itemId" data-itemid="$!productModeitemData.itemId" data-partnumber="$!productModeitemData.partNumber.replaceAll('\s+','_')"  data-itemPriceId="$!productModeitemData.itemPriceId"/>
 										<span></span>
 									</label>
@@ -1159,7 +1159,7 @@ function LoadRecentViewedItem(){
 		<!-- Modal content-->
 		<div class="modal-content">
 		    <div class="modal-header">
-		      	<h3 class="modal-title cimm_pageTitle">$!locale.get("product.label.writeReview")<button type="button" class="close" data-dismiss="modal">&times;</button></h3>
+		      	<h3 class="modal-title cimm_page-title">$!locale.get("product.label.writeReview")<button type="button" class="close" data-dismiss="modal">&times;</button></h3>
 		    </div>
 		    <div class="modal-body">
 		    	<div id="modalLoginErr" class="center"></div>
@@ -1204,7 +1204,7 @@ function LoadRecentViewedItem(){
 #if($reviewList && $!reviewList.size()>0)
 <div id="reviewSection" class="reviewsBlock" itemscope itemtype="http://schema.org/Product">
 	<p class="hideMe" id="prodName" itemprop="name">$!productTitleForUse</p>
-	<h3 class="cimm_blockTitle">User Reviews</h3>
+	<h3 class="cimm_block-title">User Reviews</h3>
 	<ul class="clearAfter" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
 	#set($breadCrumbIdx = 1 )
 	#foreach($itemReview in $reviewList)
