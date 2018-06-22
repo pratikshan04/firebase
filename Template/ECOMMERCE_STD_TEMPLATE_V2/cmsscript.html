@@ -880,7 +880,7 @@ function initContextMenu(id){
 				}
 		});
 }
-				
+
 var bannerLogoPath = '$bannerLogoPath';	
 
 jQuery(document).ready(function(){
@@ -1079,8 +1079,21 @@ function showIframeWindow(){
 function showUploadIframeWindow(){
 	  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
    	   }); 
-}	
+}
+function editWidgetIframeWindow(){
+	jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+}
 
+$("#mycanvas").delegate("[data-type='widget']", "click", function() {
+	var widgetId = $(this).attr('data-widget');
+	$(this).parent().addClass("widgetEditEnable").append('<div class="widgetEditOverlay"></div><a class="iframe btn widgetEditBtn" href="editWidgetDataCms.action?widgetId='+widgetId+'" onclick="editWidgetIframeWindow();"><i class="fa fa-pencil mRight-2" aria-hidden="true"></i> Edit</a>');
+	$("body").append('<div class="widgetEditEnableOvelay"></div>');
+});
+jQuery(document).bind('click', function(e){
+	if ($(e.target).hasClass("widgetEditEnableOvelay")){
+		$(".widgetEditEnableOvelay, .widgetEditOverlay, .widgetEditBtn").remove();
+	}
+});
 var iframeOrgHeight = 0;	  
 function changeresponsivefunct(e){
 	var previewType = $(e).attr("title");
@@ -1227,4 +1240,37 @@ function showHTMLElement(){
     jQuery(".htmlEle_contents").slideToggle(500);
     jQuery(".htmlLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
 }  -->
+
+<style>
+.widgetEditBtn{
+	background: #eee;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -16px 0px 0px -30px;
+	z-index: 12;
+	box-shadow: 0px 0 8px #000
+}
+.widgetEditEnable{
+	position: relative;
+}
+.widgetEditOverlay{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(265, 265, 265, 0.7);
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+.widgetEditEnableOvelay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: none;
+	top: 0;
+	left: 0;
+	z-index: 11;
+}
+</style>
 
