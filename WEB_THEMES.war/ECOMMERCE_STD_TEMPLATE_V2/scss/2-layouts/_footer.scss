@@ -1,7 +1,7 @@
 footer {
     color: $white;
-    .footerMiddelContent {
-        background: $footer-midcontent_bg;
+    .cimm_footer_mid {
+        background: $footer_mid-bg;
         height: 300px;
         .footerCol {
             h3 {
@@ -40,19 +40,20 @@ footer {
                         margin-top: 18px;
                     }
                     p{
-                        color: $fp_f-color;
+                        color: $fnav_pf-color;
                     }
                 }
             }
         }
         
     }
-    .cimm_footerDownContent {
-        background: $footer-btmcontent_bg;
+    .cimm_footer_down {
+        background: $footer_btm-bg;
         padding: 20px 10px;
-        .foot_copy {
+        .cimm_footer-copyright {
             margin: 0;
-            font-size: $footer_copyright-fSize;
+            color: $copyright_font-color;
+            font-size: $copyright_font-Size;
             letter-spacing: 1px;
         }
     }

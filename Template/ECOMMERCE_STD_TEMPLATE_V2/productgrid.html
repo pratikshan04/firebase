@@ -29,7 +29,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="CategoryEventBlk clearAfter">
-			<h3 class="cimm_pageTitle">$!locale.get("product.heading.events")</h3>
+			<h3 class="cimm_page-title">$!locale.get("product.heading.events")</h3>
 			#foreach($!eventData in $!eventSearchData)
 			<p class="staticContent">
 				<span><strong>$!eventData.staticPageTitle</strong></span>- $!eventData.staticContent
@@ -58,7 +58,7 @@
 	<div class="col-md-12">
 		<div class="CategoryEventBlk clearAfter">	
 		#if($resCount > 0)
-		   	<h3 class="cimm_pageTitle">$!locale.get("product.label.siteResults")</h3>
+		   	<h3 class="cimm_page-title">$!locale.get("product.label.siteResults")</h3>
 		#end
 		#foreach($staticData in $staticContentData)	
 			#if(!$staticData.staticPageTitle.contains('Home') && $!staticData.staticPageTitle)
@@ -252,7 +252,7 @@
 	<div class="col-md-12">
 		#if($resultCount==0)
 			<div class="searchZero">
-				<h2 class="cimm_pageTitle">$!locale.get("product.label.productResults")</h2>
+				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
 				<h3>$!locale.get("search.result.zeroResult")&nbsp;<span> $!keyWord </span>$!locale.get("search.result.tryOtherSearch")</h3>
 			</div>
 			#if($itemSuggest)

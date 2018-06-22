@@ -1,19 +1,11 @@
-.cimm_filterAttributes {
+.cimm_filter {
 
-    .filterColumn {
+    .cimm_filter-block {
         
-        .filterTitle {
-            padding: 15px 0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
+        .cimm_filter-block-title {
             cursor: pointer;
             background: $lnav_title-bg;
-            color: $lnav_hf-color;
-            font-size: $lnav_hf-size;
-            font-family: $lnav_hf-family;
-			border-bottom: 1px solid $border-color;
-            
+
             span {
                 position: absolute;
                 top: 12px;

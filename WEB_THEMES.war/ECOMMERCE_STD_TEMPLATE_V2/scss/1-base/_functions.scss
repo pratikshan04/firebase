@@ -1,33 +1,3 @@
-/* _________________________________________________________________ */
-
-//Color maping function 
-@function color($key){
-    @if map-has-key($color, $key){
-        @return map-get($color, $key);
-    } @else{
-        @warn "Unknown `#{$key}` in $color.";
-        @return null;
-    }
-}
-
-//Eg: color(primary);
-
-/* _________________________________________________________________ */
-
-//Font maping function
-@function font($key){
-    @if map-has-key($font, $key){
-        @return map-get($font, $key);
-    } @else{
-        @warn "Unknow `#{$key}` in  @font.";
-        @return null;
-    }
-}
-
-//Eg: font(primary);
-
-/* _________________________________________________________________ */
-
 //Font Size maping function
 
 @function font-size($key){
@@ -78,3 +48,4 @@
 }
 
 /* _________________________________________________________________ */
+

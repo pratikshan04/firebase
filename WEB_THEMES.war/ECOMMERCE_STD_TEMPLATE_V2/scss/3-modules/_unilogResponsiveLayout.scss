@@ -355,15 +355,15 @@ $breakpoint-mobileView:480px;
 			width: 100%;
 		}
 	}
-	#sortByForm .dropdown-menu {
-		left: 0;
-	}
 	.compareTableWrap .pushbtnGroup li{
 		text-align: right;
 		width: 49%;
 	}
 	.ac_results .itemWraper,.ac_results ul{
 		width: 100%;
+	}
+	#sortByForm .dropdown-menu {
+		left: 0;
 	}
 	.compareTableWrap .pushbtnGroup li:nth-child(2n+2){
 		text-align: left;

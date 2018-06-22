@@ -1,7 +1,7 @@
 <div class="shippingAddres" id="ShipDiv">
 #set($jsPath = $hostName+$webThemes+"/"+$siteName+"/js/"+$LayoutName+".js")
 <script type="text/javascript" src="$jsPath"></script>
-<h3 class="cimm_pageTitle">$!locale.get("breadcrumbs.label.$!LayoutName")</h3>
+<h3 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h3>
 #if($shipEntity.size()>0)
 <input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!validEmailAddress">
 	<div class="shipping">

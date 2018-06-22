@@ -2,13 +2,13 @@ header {
     .cimm_header {
         font-family: $secondary_font-family;
 
-        .cimm_headerTopContent {
+        .cimm_header_top {
             position: relative;
             height: 40px;
-            font-family: $default_font-family;
             background: $header_top-bg;
-
-            .headerInfoBlock {
+            @include font($family: $default_font-family, $size: 12px, $color: $white, $weight: normal);
+            @include border-position(bottom, 4px, solid, $red);
+            .cimm_header_top-phone {
                 float: left;
                 ul {
                     li {
@@ -17,7 +17,7 @@ header {
                     }
                 }
             }
-            .cimm_headerUtilityMenu {
+            .cimm_header_top-menu {
                 float: right;
                 text-align: right;
 
@@ -50,8 +50,8 @@ header {
                 }
             }
         }
-        .cimm_headerMidContent {
-            background: $header-midcontent-bg;
+        .cimm_header_mid {
+            background: $header_mid-bg;
             
             .cimm_logo {
                 width: 250px;

@@ -1,7 +1,7 @@
 #if($userLogin)
-	<h4 class="cimm_pageTitle">$locale.get("product.heading.addNewCreditCard")</h4>
+	<h4 class="cimm_page-title">$locale.get("product.heading.addNewCreditCard")</h4>
 #else
-	<h1 class="cimm_pageTitle">$locale.get("product.heading.creditCardDetails")</h1>
+	<h1 class="cimm_page-title">$locale.get("product.heading.creditCardDetails")</h1>
 #end
 <form id="ccSubmitForm" action="processCheckout.action" method="post">
 	<input type="hidden" name="billEntityId" value="$billEntityId"/>

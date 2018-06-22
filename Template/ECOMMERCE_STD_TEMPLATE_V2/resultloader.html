@@ -3,7 +3,7 @@
 		#if($allItemData)
 			<div class="productGroupPopWrap">
 				<div class="addToCartHeaderContent">
-		            <h3 class="cimm_pageTitle" id="addToCartHeaderContent">$!locale.get('marketBasket.button.addToProductGroup')</h3>
+		            <h3 class="cimm_page-title" id="addToCartHeaderContent">$!locale.get('marketBasket.button.addToProductGroup')</h3>
 		        </div>
 		        <div id="multipleProductGroupContent">
 			        <div class="addNewPgWrap">
@@ -186,7 +186,7 @@
 	#else
 		<div class="mulAddTocartWrap">
 			<div class="addToCartHeaderContent clearAfter">
-				<h3 class="cimm_pageTitle pull-left">$!locale.get('product.heading.myCart')</h3>
+				<h3 class="cimm_page-title pull-left">$!locale.get('product.heading.myCart')</h3>
 				<div class="cartTotalCount pull-right">
 					<a href="$!locale.get('website.url.ShoppingCart')"><em class="fa fa-lg fa-shopping-cart"></em>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span>#else 0 $!locale.get("product.label.items") #end</a>
 				</div>

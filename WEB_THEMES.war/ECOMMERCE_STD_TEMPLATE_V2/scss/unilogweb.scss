@@ -1,11 +1,9 @@
-@import "1-base/0-base";
-@import "2-layouts/0-layouts";
-@import "3-modules/0-modules";
-@import "4-pages/0-pages";
+@import "1-base/base";
+@import "2-layouts/layouts";
+@import "4-pages/pages";
 
 
 body {
-    padding-top: 2px;
     position: relative;
     height: 100%;
     font-family: $body_font-family;
@@ -133,6 +131,17 @@ footer,
 
 .dummyHeight {
     height: 30px;
+}
+.fixIt,#fixedHead{
+    position: fixed;
+    background: $white;
+    width: 100%;
+    z-index: 999;
+    top: 0;
+    -webkit-transition: top .5s ease-in-out;
+    -moz-transition: top .5s ease-in-out;
+    -o-transition: top .5s ease-in-out;
+    transition: top .5s ease-in-out;
 }
 
 /*___________________Pagination____________________*/
@@ -496,7 +505,6 @@ footer,
         font-size: 14px;
     }
 }
-
 
 .searchBoxWrap {
     background: $default_font-color;
@@ -1141,5 +1149,4 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         padding: 0;
     }
 }
-@import "unilogResponsiveLayout";
-@import "print";
+@import "3-modules/modules";

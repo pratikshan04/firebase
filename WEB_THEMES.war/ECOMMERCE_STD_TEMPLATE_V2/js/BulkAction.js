@@ -418,7 +418,7 @@ var BulkAction = {};
 			}else{
 				if(BulkAction.getListOfCheckBox()>0){
 					bootAlert("small","error","Error","Cannot add Call For Price items to cart.");
-					$("#bulkActio, #bulkActionSelectn").val('');$('#bulkAction, #bulkActionSelect').selectpicker('refresh');
+					BulkAction.refreshBulkSelect();
 				}else{
 					bootAlert("small","error","Error","No Items to Process.");
 					BulkAction.refreshBulkSelect();
