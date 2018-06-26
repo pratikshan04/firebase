@@ -117,7 +117,7 @@
 								
 		                    #end
 		                </tr>                   
-		            #if($userLogin)
+		            #if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 		            <tr>
 		                <td>
 		                <strong>$locale.get("product.label.price") </strong> </td>
@@ -347,7 +347,7 @@
 		                #end
 		            </tr>
 		            
-		            #if($userLogin)
+		            #if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 		             <tr>
 		                <td>&nbsp;
 		                    
