@@ -152,7 +152,7 @@
 							<input type="hidden" name="pageNo" value="$!pageNo">
 							<input type="hidden" name="resultPage" value="#if($resultPage)$!resultPage#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
-					
+							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							#if($navigationType=="SEARCH")
 							<input type="hidden" name="keyWord" value="#if($keyWord)$!escapeTool.html($!keyWord)#end" /> 
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
@@ -187,6 +187,7 @@
 							#if($levelNoSkip)<input type="hidden" name="levelNo" value="$!levelNoSkip">#end
 							#if($gallery)<input type="hidden" name="gallery" value="$!gallery">#end
 							#if($pageNo)<input type="hidden" name="pageNo" value="$!pageNo">#end
+							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
 							#if($navigationType=="SEARCH")
