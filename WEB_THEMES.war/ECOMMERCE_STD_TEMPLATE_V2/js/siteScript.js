@@ -515,7 +515,7 @@ function performSearch() {
 	var conti = true;
 	if(s != undefined && s!=""){
 		s = $.trim(s);
-		//s = s.replace(/</g, "<&nbsp;");
+		s = s.replace(/</g, "<&nbsp;");
 		s = replaceNonAscii(s);
 		s = escape(s);
 		s = s.replace('\u00AE', '&reg;');
@@ -542,6 +542,9 @@ function performSearch() {
 	}
 	if(s == "" || s=="Search" || s.toLowerCase().indexOf("search") > -1 ||s.toLowerCase().indexOf("enter keyword") > -1||s.toLowerCase().indexOf("enter%20keyword") > -1|| $.trim(s)=="Product Search" || $.trim(s)=="Product%20Search" || $.trim(s.toUpperCase())=="ENTER KEYWORD OR PART NUMBER" || $.trim(s.toUpperCase())=="ENTER%20KEYWORD%20OR%20PART%20NUMBER" || $.trim(s.toUpperCase())=="SEARCH"){
 		bootAlert("small","error","Error","Enter Search Keyword.");
+		return false;
+	}else if(s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") >-1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") >-1){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
 		return false;
 	}else if( typeof keywordText!="undefined" && keywordText!=""){
 		var conti = false;
@@ -624,6 +627,7 @@ function performAdvSearch() {
 	
 	//s = replaceNonAscii(s);
 	s = $.trim(s);
+	s = s.replace(/</g, "<&nbsp;");
 	s = s.replace(/\u00AE/g, '&reg;').replace(/\u2122/g, '&trade;');
 	s = escape(s);
 	s = s.replace(/#/g, "%23");
@@ -638,6 +642,9 @@ function performAdvSearch() {
 	
 	if(s == "" || s=="Search" || $.trim(s)=="Product Search" || $.trim(s)=="Product%20Search" || $.trim(s)=="Enter keyword or part number" || $.trim(s)=="Enter%20keyword%20or%20part%20number" || $.trim(s)=="keywords" || $.trim(s)=="%20keywords%20"){
 		bootAlert("small","error","Error","Enter Search Keyword.");
+		return false;
+	}else if(s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") >-1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") >-1){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
 		return false;
 	}
 	if(sType==-1){
@@ -2834,6 +2841,7 @@ function validateProductSearch(){
 	var s = text.value;
 	if(s != undefined && s!=""){
 		s = $.trim(s);
+		s = s.replace(/</g, "<&nbsp;");
 		s = s.replace('\u00AE', '&reg;');
 		//s = escape(s);
 		//s = s.replace(/#/g, "%23");
@@ -2848,7 +2856,10 @@ function validateProductSearch(){
 	}
 	if(text.value==""){
 		bootAlert("small","error","Error","Enter keyword for search");
-    }else{
+    }else if(s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") >-1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") >-1){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
+		return false;
+	}else{
     	$('#searchkeyWord').val(s);
     	$("#productSearchForm").submit();
 		return false;
