@@ -1,14 +1,13 @@
 <script type="text/javascript" src="$webThemes/$siteName/js/guestCheckoutWizard.js"></script>
 <div class="cimm_logInEnclosure">
-	 #if($!message)
-	<div class="errMsg">
-		<span>$!message</span>
-	</div>
+	#if($!message.trim().length()>0)
+		#if($!message.toLowerCase().contains("success"))
+	 	<div class="alert alert-success">$!message</div>
+		#else
+			<div class="alert alert-danger">$!message</div>
+		#end
 	#else
-	<div id="notificationDiv">
-		<span class="successMsg" id="message"></span>
-		<span class="errMsg" id="errorMsg">$!message</span>
-	</div>
+		<div id="notificationDiv"></div>
 	#end
 	<h4 align="center" class="main">$locale.get("login.label.pleaseEnterYourUserNameAndPassword")<span class="pull-right"><em class="fa fa-minus-circle"></em></span></h4>
 	<form id="mainLoginForm" class="mainLoginForm" method="post" action="doLogin.action">
