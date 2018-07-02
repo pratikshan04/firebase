@@ -1846,23 +1846,24 @@
             if(!before && !after) {
                 return;
             }
-
-            if(before) {
-                el.className += " " + pseudoHide + "-before";
-                el.parentNode.insertBefore(before, el);
-                parseElement(before, stack, true);
-                el.parentNode.removeChild(before);
-                el.className = el.className.replace(pseudoHide + "-before", "").trim();
+            try{
+	            if(before) {
+	                el.className += " " + pseudoHide + "-before";
+	                el.parentNode.insertBefore(before, el);
+	                parseElement(before, stack, true);
+	                el.parentNode.removeChild(before);
+	                el.className = el.className.replace(pseudoHide + "-before", "").trim();
+	            }
+	            if (after) {
+	                el.className += " " + pseudoHide + "-after";
+	                el.appendChild(after);
+	                parseElement(after, stack, true);
+	                el.removeChild(after);
+	                el.className = el.className.replace(pseudoHide + "-after", "").trim();
+	            }
+            }catch(e){
+            	console.log(e);
             }
-
-            if (after) {
-                el.className += " " + pseudoHide + "-after";
-                el.appendChild(after);
-                parseElement(after, stack, true);
-                el.removeChild(after);
-                el.className = el.className.replace(pseudoHide + "-after", "").trim();
-            }
-
         }
 
         function renderBackgroundRepeat(ctx, image, backgroundPosition, bounds) {
