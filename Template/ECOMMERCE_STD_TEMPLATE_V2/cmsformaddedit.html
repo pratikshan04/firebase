@@ -96,8 +96,7 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 .formTitle {
 	width: 30%;
 	float: right;
-	padding: 20px;
-	margin-top: 45px;
+	padding: 0 20px 20px 20px;
 }
 .formBuilderWrap {
 	width: 68%;
@@ -132,12 +131,20 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 </head>
 <body>
 
-
+<div class="dragelementWrap">
+<div class="dragelement" data-type="input">Input Text</div>
+<div class="dragelement" data-type="textarea">Text Area</div>
+<div class="dragelement" data-type="select">Select</div>
+<div class="dragelement" data-type="radio">Radio</div>
+<div class="dragelement" data-type="checkbox">Check Box</div>
+<div class="dragelement" data-type="text">Text Field</div>
+<div class="dragelement" data-type="captcha" title="Drag & Drop">Captcha</div>
+</div>
 <div class="formTitle">
 <form id="mainFormBuilder">
 <ul>
 <li>
-<label>Form Name :</label> <input type="text" value="$!formData.formName" name="formData.formName" id="formNameMain" />
+<label>Form Name :</label> <input type="text" value="$!formData.formName" maxlength="20" name="formData.formName" id="formNameMain" />
 </li>
 <li>
 <label>Notification :</label> <select id="formNotification" name="formData.formNotification">
@@ -169,17 +176,6 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 </div>
 
 <div class="formBuilderWrap">
-<div class="dragelementWrap">
-<div class="dragelement" data-type="input">Input Text</div>
-<div class="dragelement" data-type="textarea">Text Area</div>
-<div class="dragelement" data-type="select">Select</div>
-<div class="dragelement" data-type="radio">Radio</div>
-<div class="dragelement" data-type="checkbox">Check Box</div>
-<div class="dragelement" data-type="text">Text Field</div>
-<div class="dragelement" data-type="captcha" title="Drag & Drop">Captcha</div>
-</div>
-
-
 <div class="dropelement">
 #if($formData.htmlCode)
 $formData.htmlCode
