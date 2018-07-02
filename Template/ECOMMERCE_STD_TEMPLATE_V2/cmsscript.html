@@ -143,7 +143,7 @@ jQuery.ajax({
 	 jQuery("[data-select='form']").each(function(i){
 		 jQuery(this).html("");
 	 });
- 	var newText = escapeHtmlEntities(jQuery("#gm-canvas").html());
+ 	var newText = escapeHtmlEntities(jQuery("#gm-canvas").html().replace(/-clsstmp/g,''));
 	$("#pageContent").val(newText);
 	console.log(jQuery("#gm-canvas").text());
 	generateJson();
@@ -1200,46 +1200,6 @@ jQuery(function() {
 	});
 });
 </script>
-
-<!-- 	jQuery(".HtmlElementsLabel").click(function() {
-		jQuery(".cmsForm").hide();
-		jQuery(".HTMLElementsWraper").toggle('right', function(){						
-			jQuery('.HTMLElements_Menuhide').show();
-		});					
-	});
-	jQuery(".HTMLElements_Menuhide").click(function() {
-		jQuery('.HTMLElementsWraper').toggle(function(){
-			jQuery('.HTMLElements_Menuhide').hide();
-		});					
-	});					
-});
-
-jQuery(function() {
-	jQuery(".cms_staticForm").click(function() {
-		jQuery(".HTMLElements").hide();
-		jQuery(".cmsForm").toggle('right', function(){						
-			jQuery('.cms_staticFormHide').show();
-		});					
-	});
-	jQuery(".cms_staticFormHide").click(function() {
-		jQuery('.cmsForm').toggle(function(){
-			jQuery('.cms_staticFormHide').hide();
-		});					
-	});
-});
-function showWidgets(){
-	jQuery("#widgetContainer").slideToggle(500);
-	jQuery(".widgetLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
-}  
-
-function showForms(){
-	jQuery("#formContainer").slideToggle(500);
-	jQuery(".formLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
-}  
-function showHTMLElement(){
-    jQuery(".htmlEle_contents").slideToggle(500);
-    jQuery(".htmlLabel > .togglePlusIcon").toggleClass("toggleMinusIcon");
-}  -->
 
 <style>
 .widgetEditBtn{

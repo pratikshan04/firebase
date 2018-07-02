@@ -201,7 +201,7 @@
             
 		   var buttons=[];
             // Dynamically generated row template buttons
-			buttons.push('<div id="layoutCarousel" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');
+			buttons.push('<div class="row"><div id="layoutCarousel" class="col-sm-6 col-xs-12" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');
 			buttons.push('<span u="arrowleft" class="layout03l" style="width: 55px; height: 55px; top: 123px; left: 8px;"></span>'); 
 			//buttons.push('<div u="arrowleft" class="left-arrow1" style="position:relative;top:14px !important;left:0px !important;display:block;"></div>'); 
 			//buttons.push('<img u="arrowleft" src="../../ASSETS/WEB_THEMES/CMS/images/cms_images/left-arrow.png" style="position:relative;top:14px !important;left:0px !important;"></img>');
@@ -215,7 +215,7 @@
 			buttons.push('</div>');
 			buttons.push('<span u="arrowright" class="layout03r" style="width: 55px; height: 55px; top: 123px; right: 8px"></span>');	
 			//buttons.push('<img u="arrowright" src="../../ASSETS/WEB_THEMES/CMS/images/cms_images/right-arrow.png" style="position:relative;top:10px;left:100px;"></img>');
-			buttons.push("</div>");
+			buttons.push('</div></div>');
 
          /*
           Generate the control bar markup
@@ -236,6 +236,16 @@
                      )
                   )
               );
+	         $("input[type=radio][name='deviceCol']").change(function(){
+	        	 var selectedDevice = $(this).val();
+	        	 if(selectedDevice === "tablet"){
+	        		 gm.switchLayoutMode(768, 'reInit')
+	        	 }else if(selectedDevice === "mobile"){
+	        		 gm.switchLayoutMode(640, 'reInit')
+	        	 }else{
+	        		 gm.switchLayoutMode('auto', 'reInit')
+	        	 }
+	         });
             };
 
         /**
@@ -268,7 +278,7 @@
          * @param {} mode
          * @returns null
          */
-        gm.switchLayoutMode = function(mode) {
+        gm.switchLayoutMode = function(mode, reInit) {
           var canvas=gm.$el.find("#" + gm.options.canvasId), temp_html = canvas.html(), regex1 = '', regex2 = '', uimode = '';
           // Reset previous changes
           temp_html = gm.cleanSubstring(gm.options.classRenameSuffix, temp_html, '');
@@ -301,6 +311,10 @@
           temp_html = temp_html.replace(new RegExp((regex1+'(?=[^"]*">)'), 'gm'), '$1'+gm.options.classRenameSuffix);
           temp_html = temp_html.replace(new RegExp((regex2+'(?=[^"]*">)'), 'gm'), '$1'+gm.options.classRenameSuffix);
           canvas.html(temp_html);
+          if(reInit){
+        	  gm.deinitCanvas();
+              gm.initCanvas();
+          }
         };
 
 
@@ -429,7 +443,7 @@
 							  showActionIcons();
 							  //CodeMirror.toTextArea();
 							  document.getElementById("sourceEditor").value = editor.getValue();
-							var editedSource=canvas.find("textarea").val();
+							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
 							jQuery(".readyTemplatesForm").show();
 							 canvas.html(editedSource);
 							 gm.initCanvas();
@@ -577,8 +591,8 @@
               var t=gm.getColClass(col);
               if(t.colWidth > parseInt(gm.options.colResizeStep, 10)){
                        t.colWidth=(parseInt(t.colWidth, 10) - parseInt(gm.options.colResizeStep, 10));
-                       //col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200);
-					   col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize);
+					   //col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize); //comment for device resize changes
+                       col.removeClass(t.colClass).addClass(gm.options.currentClassMode + t.colWidth);
 					   canvas.find(gm.options.colSelector)
 		                  .find("img")
 		                  .addClass("img-responsive");
@@ -590,8 +604,8 @@
                var t=gm.getColClass(col);
                 if(t.colWidth < gm.options.colMax){
                     t.colWidth=(parseInt(t.colWidth, 10) + parseInt(gm.options.colResizeStep, 10));
-                    //col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200);
-					col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize);
+					//col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize); //comment for device resize changes
+					col.removeClass(t.colClass).addClass(gm.options.currentClassMode + t.colWidth);
 					// $("a.gm-colIncrease").removeClass("cmsColWider");
 					// $("a.gm-colIncrease").addClass("cmsColWiderActive");
                 }
@@ -1676,6 +1690,8 @@ console.log("Custom : "+curr_control.dataToolElement);
     /**
      Options which can be overridden by the .gridmanager() call on the requesting page------------------------------------------------------
     */
+    
+    var deviseSelection = '<div class="deviseSelection"> <label class="customCheckBox"><input type="checkbox" id="containFluid"/><span> Create full width container</span></label> <label>Modify Layout For :</label><label for="sel_desktop" class="cms_RadioBtn"><input type="radio" name="deviceCol" id="sel_desktop" value="desktop" checked /><span>Desktop <i class="fa fa-lg fa-desktop" aria-hidden="true"></i></span></label> <label for="sel_tablet" class="cms_RadioBtn"><input type="radio" id="sel_tablet" name="deviceCol" value="tablet" /><span>Tablet <i class="fa fa-lg fa-tablet" aria-hidden="true"></i></span></label> <label for="sel_mobile" class="cms_RadioBtn"><input type="radio" id="sel_mobile" name="deviceCol" value="mobile" /><span>Mobile <i class="fa fa-lg fa-mobile" aria-hidden="true"></i></span></label> </div>';
     $.gridmanager.defaultOptions = {
      /*
      General Options---------------
@@ -1734,7 +1750,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		 
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a><a title='iPhone' class='button tiny active' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPhone landscape' class='button tiny iPhone-l' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad landscape' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone iPhone-l'></span></a><a title='Desktop' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-laptop'></span></a></div>",*/
        
-        controlAppend: "<div class='button-group clearfix mBottom-4 text-right'><label class='customCheckBox containFluidEl'><input type='checkbox' id='containFluid'/><span> Create full width container</span></label><button title='Edit Source Code' type='button' class='btn-xs tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='btn-xs tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
+        controlAppend: "<div class='button-group clearfix mBottom-4 text-right'>"+deviseSelection+"<button title='Edit Source Code' type='button' class='btn-xs tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='btn-xs tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
 		
 		
         // Controls for content elements
