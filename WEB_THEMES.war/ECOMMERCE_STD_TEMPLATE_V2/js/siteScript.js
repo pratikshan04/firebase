@@ -3316,7 +3316,7 @@ if($("#enableHeaderQuickOderLink").val() == "Y"){
 		$(".cimm_navigationBar ul > li > a").removeClass("active");
 	}
 }
-if($("#enableStickyHeader").val() == "Y"){
+if($("#enableStickyHeader").val() == "Y" && $("#layoutName").val()!= "CMSStaticPage"){
 	$(window).resize(function(){
 		var width = $(window).innerWidth();
 		if(width < 980){
