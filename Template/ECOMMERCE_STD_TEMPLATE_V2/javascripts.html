@@ -142,6 +142,7 @@ $("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
 #end
 
 <script type="text/javascript">
+_paq.push(['trackPageView']);
 /*********************Header Script***********************/
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
@@ -495,6 +496,7 @@ $(document).ready(function () {
 	}
  });
  $(".loadAfter").fadeOut(800);
+ $('.cimm_formContent li').removeAttr('title');
 </script>
 #if($!CommonDBQuerySystemParameter.get("CHECK_EMAIL_ID")=="Y")	
 <div id="emailAddressPrompt" class="modal fade" role="dialog">
