@@ -621,11 +621,34 @@ button[disabled]{
 	margin-bottom: 15px;
 	min-height: 20px;
 }
-.containFluidEl{
+.deviseSelection{
 	float: left;
-	margin: 5px 0 0 26px;
-	font-size: 12px;
+	margin: 12px 0 10px 12px;
+}
+.deviseSelection label{
 	font-weight: 600;
+	font-size: 13px;
+	margin-right: 14px;
+}
+.deviseSelection label:nth-child(2) {
+	margin-right: 4px;
+}
+.cms_RadioBtn input[type=radio]+span i {
+	margin-left: 10px;
+}
+.cms_RadioBtn {
+    cursor: pointer;
+}
+.cms_RadioBtn input[type=radio] {
+    display: none;
+}
+.cms_RadioBtn input[type=radio]+span {
+	background: #bebebe;
+	color: #FFF;
+	padding: 4px 10px 5px 10px;
+}
+.cms_RadioBtn input[type=radio]:checked+span {
+	background: #59a152;
 }
 /**** modified ****/
 
