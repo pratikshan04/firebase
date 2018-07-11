@@ -279,6 +279,7 @@ $.Autocompleter = function(input, options) {
 		var currentValue = $('#txtSearch').val();
 		if(currentValue != undefined && currentValue!=""){
 			currentValue = $.trim(currentValue);
+			currentValue = currentValue.replace(/</g, "<&nbsp;");
 			currentValue = replaceNonAscii(currentValue);
 			currentValue = escape(currentValue);
 			currentValue = currentValue.replace('\u00AE', '&reg;');
