@@ -466,6 +466,18 @@ h6 {
   clear: both;
 }
 
+.dataTables_filter {
+  text-align: right;
+}
+
+.dataTables_paginate {
+  text-align: right;
+}
+
+.dataTables_paginate .pagination {
+  margin: 0;
+}
+
 @font-face {
   font-family: "RobotoRegular";
   font-style: normal;
