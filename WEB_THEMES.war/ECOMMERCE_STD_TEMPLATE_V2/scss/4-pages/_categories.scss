@@ -1,70 +1,60 @@
 
+.cimm_category_bannercont{
+	.cimm_category-banners{
+		margin-bottom: 20px;
+		min-height: 180px;
+		border: 1px solid $border-color;
+		vertical-align: middle;
+		text-align: center;
+		line-height: 180px;
+		.slick-list{
+			padding: 0; 
+		}
+	}
 
-.cimm_categories{
-	.cimm_categies_container{
-		.cimm_category-items{
-			margin-bottom: 25px;
-			background: $category-item-bg;
-			//@include category_item-border;
-			.cimm_category-itemimage{
-				height: 200px;
-				position: relative;
-				background: $category-itemimage-bg;
-				//@include category_item-border; category_item-box($border:false, $shadow: false, $borderpos: false)
-				@include category_item-box($border: true){
-					outline: $gray-lighten solid 5px;
-				}; 
-				padding: 10px;
-				a {
-					display: block;
-					
-					img {
-						height: 180px; 
-						padding: 2px;
-						max-width: 100%;
-						display: block;
-						//vertical-align: middle;
-						position: absolute;
-						top: 0;
-						bottom: 0;
-						left: 0;
-						right: 0;
-						margin: auto;
-						width: auto;
-					}
-				}
-			}
+}
 
-			.cimm_category-itemname{
-				background: $category-itemname-bg;
-				color: $category_hf-color;
-				font-size: $category_hf-size;
-				font-family: $category_hf-family;
-				font-weight: normal;
-				text-align: center;
-				text-transform: uppercase;
-				margin: 0;
-				padding: 10px;
-				height: 60px;
-				a{
-					&:hover {
-						color: $primary_color;
-						text-decoration: underline;
-					}
-				}
+.cimm_ctegory-description{
+	text-align: justify;
+}
+.cimm_category-item{
+	@include category_border;
+	.cimm_category-itemimage{
+		height: 200px;  
+		position: relative;
+		background: $category-itemimage-bg;
+		a {
+			display: block;
+			img {
+				height: 180px; 
+				padding: 2px;
+				max-width: 100%;
+				display: block;
+				//vertical-align: middle;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				width: auto;
 			}
 		}
 	}
-	
-}
-
-.cimm_topBanners{
-	margin-bottom: 20px;
-	min-height: 160px;
-	border: 1px solid #e9e9e9;
-	vertical-align: middle;
-	text-align: center;
-	.slick-list{
-		padding: 0; 
+	.cimm_category-itemname{
+		font-weight: normal;
+		text-align: center;
+		text-transform: uppercase;
+		margin: 0;
+		padding: 10px;
+		height: 60px;
+		a{
+			font-size: $category_hf-size; 
+			font-family: $category_hf-family;
+			&:hover {
+				color: $primary_color;
+				text-decoration: underline;
+			}
+		}
 	}
 }
