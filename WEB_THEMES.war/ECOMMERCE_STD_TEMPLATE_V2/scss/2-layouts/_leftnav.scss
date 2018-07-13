@@ -2,6 +2,19 @@
 
     .cimm_filter-block {
         
+        .cimm_refinedMultiFilterResults {
+            ol {
+                li {
+                    padding: 5px 20px;
+                    text-transform: capitalize;
+                    span.Refine-value {
+                        display: block;
+                        padding-left: 15px;
+                    }
+                }
+            }
+        }
+
         .cimm_filter-block-title {
             cursor: pointer;
             background: $lnav_title-bg;
