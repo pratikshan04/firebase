@@ -75,7 +75,6 @@ header {
             }
             .cimm_searchWrapper { 
                 text-align: center;
-                float: left;
                 margin: 55px 0 18px;
                 position: relative;
 
@@ -103,7 +102,6 @@ header {
                     a {
                         display: block;
                         color: $default_font-color;
-                        font-size: $headerNavLinkFontSize;
                         font-weight: bold;
                     }
                     span {
@@ -144,7 +142,7 @@ header {
                         font-family: RobotoRegular;
                         font-size: 12px;
                         form {
-                            background: $navDropdownBg;
+                            background: $login_form-bg;
                             padding: 18px;
                             .form-control {
                                 height: 42px;
@@ -190,13 +188,12 @@ header {
                                 color: $white;
                                 font-size: 16px;
                                 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-                                background: $secondary_color;
                             }
                         }
                     }
                     .myAccountMenu {
                         top: 48px;
-                        background: $navDropdownBg;
+                        background: $myaccount_menu-bg;
                         right: 38px;
                         width: 275px;
                         left: auto;

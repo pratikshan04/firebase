@@ -774,6 +774,8 @@ $(document).ready(function(){
 				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize()+"&loginType=popup" ,function(data, status){
 					try{
+						sessionStorage.setItem("salesUserSelected","Y");
+			        	sessionStorage.setItem("currentCustomerSU","");
 						var afterLoginUrl = window.location.href;
 						var previousPageUrl = document.referrer;
 						var currentLayout = $("#layoutName").val();
@@ -792,6 +794,7 @@ $(document).ready(function(){
 								}
 							}
 							$('.loginWindow').hide();
+							$('#loginModal').modal('hide');
 							loadShippingInfo();
 							if($("#isWebview").val() == "WEBVIEW"){
 								fingerPrint(un, ps);
@@ -802,7 +805,12 @@ $(document).ready(function(){
 							window.location.href = "/Login";
 						}else if(data.indexOf("/AFP/")!= -1){
 							window.location.href = data;
-						}else{
+						}else if($.trim(data) && $.trim(data).indexOf("{") == 0){
+				        	  var responseDetails = JSON.parse(data);
+				        	  if(responseDetails && responseDetails['salesUser'] == 'Y'){
+				        		  loadCustomForSalesUser(responseDetails);
+				        	  }
+				          }else{
 							unblock();
 							if($this.find(".pLoginErr").length>0){
 								$this.find(".pLoginErr").html(data);
@@ -1113,15 +1121,16 @@ function deleteCookie( name ) {
 }
 //----------- Add to product group action
 $(document).delegate('[data-function="productGroupDropDown"]', 'click',function(){
-	var toggleListID = "#"+$(this).attr('data-listTarget');
-	var itemId = $(this).attr('data-itemId');
+	var _this = $(this);
+	var toggleListID = "#"+_this.attr('data-listTarget');
+	var itemId = _this.attr('data-itemId');
 	$("#group_id").val(toggleListID);
 	$("#hidden_id").val(itemId);
-	$(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
-	$(toggleListID).show();
+	_this.next(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
+	_this.next(toggleListID).show();
 	jQuery.get("productListIdNamePage.action?productIdList="+itemId+"&groupType=P",function(data,status){
-		$(toggleListID).find("li").remove();
-		$(toggleListID).html(data);
+		_this.next(toggleListID).find("li").remove();
+		_this.next(toggleListID).html(data);
 	});
 });
 function addToProductList(groupName,groupId){
@@ -1439,7 +1448,7 @@ function send(){
 	var pathArray = window.location.pathname.split( '/' );
 	host = pathArray[1];
 	var emailitemlink=localStorage.getItem("emailFriendlink");
-	$(".cimm_itemMainImage img").css({"position":"relative","width":"300px"});
+	$(".cimm_itemdetail-imgcontainer img").css({"position":"relative","width":"300px"});
 	$("#mailContentDisplay .contentPart .imgForSend").remove();
 	$("#mailContentDisplay .contentPart > table tr td").each(function () {
 		$(this).css({"border":"1px solid #CCC","border-collapse":"collapse"});
@@ -1467,7 +1476,7 @@ function send(){
 
 	});
 	$("#mailContent a").attr("href", emailitemlink);
-	$('#imgPart').val($('.cimm_itemMainImage').html());
+	$('#imgPart').val($('.cimm_itemdetail-imgcontainer').html());
 	$('#contentPart').val($('.cimm_itemDescription').html());
 	$('#pricePart').val($('.priceCont').html());
 	$('#descPart').val($('.contentPart').html());
@@ -2344,7 +2353,7 @@ function sendSiteDetailPagePart(a){
 	var b=$("#titleText").val();
 	
 	if($(".focusItemTabs").html()=="" || $(".focusItemTabs").html() == undefined){
-		var itemImg = $(".cimm_itemMainImage span.imgForSend").html();
+		var itemImg = $(".cimm_itemdetail-imgcontainer span.imgForSend").html();
 		var ProductName=$("#titleText").val();
 		var PrintShrtDesc=$(".cimm_itemShortDesc").html();
 		var custPartBlock=$("#custPartBlock").html();
@@ -2428,7 +2437,7 @@ function sendSiteDetailPagePart(a){
 	//titleDesc = titleDesc+"</div>";
 	skuList = skuList+"</div>";
 
-	var itemDetailList = "<div class='cimm_itemDetailWrap clearAfter'><div class='cimm_itemMainImage'>"+itemImg+"</div><div class='cimm_itemDescription clearAfter'>"+titleDesc+skuList+"</div></div>";
+	var itemDetailList = "<div class='cimm_itemdetail clearAfter'><div class='cimm_itemdetail-imgcontainer'>"+itemImg+"</div><div class='cimm_itemDescription clearAfter'>"+titleDesc+skuList+"</div></div>";
 	var content;
 	if ($('[data-type="descriptionSection"]').length > 0){
 		var Desc=$('[data-type="descriptionSection"]').html();
@@ -3637,3 +3646,92 @@ function homeCarousels(){
 			  });
 		}
 }
+
+
+function loadCustomForSalesUser(salesUserDetails){
+	setCookie("isShipToSelected", true);
+	$("#loginModal").modal('hide');
+	$.get("getCustomersUnit.action",function(data,status,xhr){
+		unblock();
+		$("#salesrepModal .modal-body").html(data);		
+		$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+		$('#salesrepModal').on('shown.bs.modal', function () {
+		$('body').addClass('modal-open');
+		});
+	})
+	.fail(function(error){
+		unblock();
+		bootAlert("medium", "error", "Error", "Unable To Load Customers");
+	});
+}
+
+$(document).ready(function(){
+	var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+	var selectedUser = sessionStorage.getItem("salesUserSelected");
+	var isSalesUser = $("#isSalesUser").val();
+	if(!selectedCustomer && isSalesUser == "Y"){
+		loadCustomForSalesUser();
+	}
+	else if(!selectedUser && selectedCustomer && isSalesUser == "Y"){
+		selectedCustomer = JSON.parse(selectedCustomer);
+		loadUserByCustomer(selectedCustomer);
+	}
+	
+	function loadUserByCustomer(attributes){
+		sessionStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
+		block();
+		$.get("getUsersByCustomerUnit.action",
+			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
+			function(data,status,xhr){
+			$("#salesrepModal").modal('hide');
+			$("#salesrepModal .modal-body").html(data);			
+			unblock();
+			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			$('#salesrepModal').on('shown.bs.modal', function () {
+				$('body').addClass('modal-open');
+			});
+		})
+		.fail(function(error){
+			unblock();
+			bootAlert("medium", "error", "Error", "Unable To Load Users");
+		});
+	}
+	
+	$(".switchCustomer").on('click', function(){
+		block();
+		loadCustomForSalesUser();
+	});
+	
+	$(".switchUser").on('click', function(){
+		var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+		selectedCustomer = JSON.parse(selectedCustomer);
+		loadUserByCustomer(selectedCustomer);
+	});
+	
+	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
+		$("#salesrepModal").modal('hide');
+		var attributes = src.target.dataset;
+		loadUserByCustomer(attributes);
+	});
+
+	$("#salesrepModal").on('click', '.persistUserDetails', function(src){
+		block();
+		sessionStorage.setItem("salesUserSelected","Y");
+		var attributes = src.target.dataset;
+		$.post("setSelectedUserDetailsUnit.action",
+			{"userName" : attributes['username']},
+			function(data,status,xhr){
+			if(data && data=="SUCCESS"){
+				//setCookie("isShipToSelected", true);
+				window.location.href = "/Products";
+			}else{
+				unblock();
+				bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
+			}
+		})
+		.fail(function(error){
+			unblock();
+			bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
+		});
+	});
+});

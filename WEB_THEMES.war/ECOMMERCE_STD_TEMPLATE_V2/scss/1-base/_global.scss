@@ -146,3 +146,12 @@ h6 {
     border: 0px;
     @include clearfix();
 }
+.dataTables_filter{
+    text-align: right;
+}
+.dataTables_paginate{
+    text-align: right;
+    .pagination{
+        margin: 0;
+    }
+}

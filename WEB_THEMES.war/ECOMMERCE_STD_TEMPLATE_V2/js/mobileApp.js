@@ -53,3 +53,13 @@ function fingerPrint(userName, password){
 	console.log('The native context does not exist yet');
 	}
 }
+function fingerPrintpopup(){
+	var unps = "FPauthenticationpopup";
+	try {
+		Android.fingerprintpopup();
+	}
+	catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(unps);
+	console.log('The native context does not exist yet');
+	}
+}

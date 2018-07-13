@@ -1,16 +1,14 @@
-.cimm_itemDetailWrap {
+.cimm_itemdetail {
     margin-bottom: 15px;
-    
-    .cimm_itemMainImage {
+    .cimm_itemdetail-imgcontainer {
 		width: 430px;
 		float: left;
         margin-right: 20px;
-        
 		&.verticalThumblist{
-			.itemDetailImage{
+			.cimm_itemdetail-image{
 				float: left;
 			}
-			.thumblist {
+			.cimm_itemdetail_thumblist {
 				float: left;
 				width: 100px;
 				padding: 25px 0;
@@ -44,7 +42,7 @@
 				}
 			}
 		}
-        .itemDetailImage {
+        .cimm_itemdetail-image {
             width: 320px;
             height: 320px;
             text-align: center;
@@ -71,7 +69,7 @@
             font-size: 24px;
 			z-index:2;
         }
-        .thumblist{
+        .cimm_itemdetail_thumblist{
             .cimm_slideItemImg{
                 height: 80px;
 				border: 1px solid $border-color;
@@ -310,6 +308,23 @@
         li {
             list-style-type: disc;
             float: none;
+        }
+    }
+}
+.cloneImg{
+    float: left;
+    margin: 10px 0;
+}
+.cloneTitle {
+    float: left;
+    width: calc(100% - 300px);
+}
+.cloneAddtocartWrap{
+    float: right;
+    text-align: right;
+    ul{
+        li{
+            padding: 3px 0;
         }
     }
 }
