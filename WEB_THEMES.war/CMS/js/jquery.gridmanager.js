@@ -890,6 +890,7 @@ console.log("Custom : "+curr_control.dataToolElement);
            gm.log("+ InitCanvas Running");
               // Show the template controls
               gm.$el.find("#gm-addnew").show();
+              $(".deviseSelection").show();
               // Sort Rows First
 			  gm.activateContainer();
               gm.activateRows(rows);
@@ -973,6 +974,7 @@ console.log("Custom : "+curr_control.dataToolElement);
            gm.log("- deInitCanvas Running");
               // Hide template control
               gm.$el.find("#gm-addnew").hide();
+              $(".deviseSelection").hide();
               // Sort Rows First
               gm.deactivateRows(rows);
               // Now Columns
