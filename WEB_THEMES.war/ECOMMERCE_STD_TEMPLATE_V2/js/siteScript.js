@@ -3679,7 +3679,7 @@ $(document).ready(function(){
 	
 	function loadUserByCustomer(attributes){
 		sessionStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
-		block();
+		block('Please wait');
 		$.get("getUsersByCustomerUnit.action",
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
 			function(data,status,xhr){
@@ -3698,7 +3698,7 @@ $(document).ready(function(){
 	}
 	
 	$(".switchCustomer").on('click', function(){
-		block();
+		block('Please wait');
 		loadCustomForSalesUser();
 	});
 	
@@ -3715,7 +3715,7 @@ $(document).ready(function(){
 	});
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function(src){
-		block();
+		block('Please wait');
 		sessionStorage.setItem("salesUserSelected","Y");
 		var attributes = src.target.dataset;
 		$.post("setSelectedUserDetailsUnit.action",
