@@ -55,37 +55,46 @@
 
 
 $icons: (
-	eye: "\f06e",
-	caret-down: "\f0d7",
-	caret-right: "\f0da",
-	home: "\f015",
-    newspaper: "\f001",
-    search: "\f002",
-    email: "\f003",
-	plus: "\f067",
-	plus-square: "\f0fe",
-	navigater: "\f041",
-	nav-seperater: "\007c",
-	arrow-down: "\f107",
-    arrow-left: "\f004", 
-    arrow-right: "\f005",
-	checkmark: "\f00c",
-	tachometer: "\f0e4",
-	user: "\f007",
-	user-cercle: "\f2be",
-	info-circle: "\f05a",
+	eye			: "\f06e",	// Used in View All Button
+	caret-right	: "\f0da",	// Used in Main Navigation
+	caret-down	: "\f0d7",	// Used in Main Navigation for hover
+	arrow-down	: "\f078",	// Used in detail page image thumb list
+	arrow-up	: '\f077',	// Used in detail page image thumb list
+	arrow-left	: "\f053", 
+	arrow-right	: "\f054",
+	nav-seperater: "\007c",	// Navigation Separeter |
+	
+	continueshop: "\f290",	// Used in continue shopping button
+	cart		: "\f07a",	// Usend Cart Buttons
+	savecart	: "\f218",	// Used in save cart button
+
+	home		: "\f015",	
+    newspaper	: "\f001",
+    search		: "\f002",	// Used in all search button
+    email		: "\f003",	// Email Icon
+	plus		: "\f067",
+	plus-square	: "\f0fe",
+	navigater	: "\f041",	// Navigation icon
+	 
+	checkmark	: "\f00c",	
+	tachometer	: "\f0e4",
+	user		: "\f007",
+	user-cercle	: "\f2be",
+	info-circle	: "\f05a",
 	address-book: "\f2ba",
-	file-text: "\f15c",
-	list: "\f03a",
-	cog: "\f013",
-	cart: "\f07a",
-	remove: "\f00d",
-	savecart: "\f218",
-	download: "\f019",
-	filetexto:"\f0f6",
-	credit-card: "\f09d",
-	truck: "\f0d1",
-	uparrow: '\f077'
+	file-text	: "\f15c",
+	list		: "\f03a",
+	cog			: "\f013",
+	remove		: "\f00d",	// Cross Icon X
+	download	: "\f019",
+	filetexto	:"\f0f6",
+	credit-card	: "\f09d",
+	truck		: "\f0d1",
+
+	slick_arrow-prev	: "\f104",  
+	slick_arrow-next	: "\f105",
+	slick_arrow-up		: "\f106",
+	slick_arrow-down	: "\f107"
 ); 
 
 @mixin icon(
@@ -96,7 +105,9 @@ $icons: (
 		$top: null, 
 		$left: null, 
 		$right:null, 
-		$size: $primary_font-size
+		$bottom: null,
+		$size: $primary_font-size,
+		$font-faily: "FontAwesome"
 	) {
     @if $position == both {
         $position: "before, &:after";
@@ -107,16 +118,19 @@ $icons: (
         }
         @if $styles {
             speak: none;
-            font-style: normal;
-            font-weight: normal;
-            font-family: "FontAwesome"; 
 			position: absolute;
 			z-index: 11;
+			
+            font: {
+				weight: normal;
+				size: $size;
+				family: $font-faily; 
+			}
 			
 			top: $top;
 			left: $left;
 			right: $right;
-			font-size: $size;
+			bottom: $bottom;
 			color: $color; 
         }
         @content;
@@ -152,6 +166,10 @@ $icons: (
 				@if($class_name == "viewallchoice"){
 					padding-left: 25px; 
 					@include icon(before, eye, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
+				}
+				@if($class_name == "continueshop"){
+					padding-left: 35;
+					@include icon(before, continueshop, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
 				}
 			}
             &:hover {
@@ -193,6 +211,20 @@ $icons: (
 	border-#{$direction}: $width $style $color;
 }
 
+@mixin add_border(
+	$border-position: all,  
+	$border-size: 1px, 
+	$border-type:solid, 
+	$border_color: $border_color){
+		$border-position-all: all;
+
+		@if $border-position == $border-position-all{
+			border: $border-size $border-type $border_color;
+		}@else{
+			border-#{$border-position}: $border-size  $border-type $border_color;
+		}
+};
+
 @mixin headings{
 	@each $heading_name, $heading_value in $headings{
 		$color: map-get($heading_value, color);
@@ -214,7 +246,7 @@ $icons: (
 			
 			@if $border != false {
 				//@include border(1px, solid, $border-color);
-				@include border-position(bottom, 1px, solid, $border-color);
+				@include add_border(bottom);
 			}
 			@include clearfix();
 		}
@@ -243,6 +275,7 @@ $icons: (
 	border-radius: $radius;
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
 }
 
 @mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
@@ -271,22 +304,137 @@ $icons: (
 	// @include box-shadow(0px, 0px, 5px, $border-color);
 	// @include border-radius(4px);
 	// @include border-position(bottom, 1px, solid, $red);
-	
 	outline: $gray-lighten solid 5px;
 }
 
-@mixin category_item-box($border:false, $shadow: false, $borderpos: false, $border-radius: false) {
-	@if $border{
-		@include border(1px, solid, $border-color);
+
+/* Mixin for Category page */
+
+@mixin category_border{
+    .cimm_category-itemimage{
+        @if map-get($categories, border_all) != false {
+            @include add_border(all);
+        } 
+        @if map-get($categories, border_bottom) != false{
+            @include add_border(bottom);
+        }
+        @if map-get($categories, box_radius) != false{
+            @include border-radius(5px);
+        }
+        @if map-get($categories, box_shadow) != false {
+            @include box-shadow(0px, 0px, 4px, $secondary-color);
+		}
+    }
+    .cimm_category-itemname{
+        @if map-get($categories, title_bg) != false{
+			background: $category-itemname-bg;
+			a{
+				color: set-text-color($category-itemname-bg);
+			}
+        }
+    }
+};
+
+
+
+/* Mixin for Detail Page */
+@mixin itemdetail_image{
+	.cimm_itemdetail-imgcontainer{
+	//	li{
+			.cimm_itemdetail_image{
+				@include border-radius(2px);
+				border: 1px solid map-get($itemdetail_image, mainimage_border-color);
+
+				a.imgEnlargeIcon{
+					position: absolute;
+					z-index:2;
+
+					@if map-get($itemdetail_image, enlarge_icon-posi) == "top-left" {
+						top: 0px;
+						left: 6px;
+
+					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "top-right"{
+						top: 0px;
+						right: 6px;
+					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "bottom-left"{
+						bottom: 0px;
+						left: 6px;
+					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "bottom-right"{
+						bottom: 0px;
+						right: 6px;
+					}
+				}
+			}
+			.cimm_itemdetail_thumblist{
+				.cimm_itemdetail_thumblist-img{
+					border: 1px solid map-get($itemdetail_image, thumbimage_border-color);
+				}
+			}
+
+		//}
 	}
-	@if $borderpos{
-		@include border-position(bottom, 1px, solid, $red);
-	}
-	@if $shadow{
-		@include box-shadow(0px, 0px, 5px, $border-color);
-	}
-	@if $border-radius{
-		@include border-radius(5px);
-	}
-	@content;
 }
+/* Mixin for Detail Page */
+
+/* Mixin for slick slider */
+@mixin slider-item-container{
+	.cimm_slider-item-container{
+		@if map-get($slider-item-container, border) == true{
+			border: 1px solid $border-color;
+		}
+		@if map-get($slider-item-container, border-radius) == true{
+			@include border-radius(3px);
+		}
+		@if map-get($slider-item-container, box-shadow) == true{
+			box-shadow: 0 0 6px $shadow-color;
+		}  
+
+		.cimm_slider_item-image{
+			@if map-get($slider-item-container, image-border) == true{
+				border: 1px solid $border-color;
+			}
+			@if map-get($slider-item-container, image-border-radius) == true{
+				@include border-radius(3px);
+			}
+		}
+		.cimm_slider_item-desc{
+
+		}
+	}
+}
+
+@mixin slick-arrows{
+	.slick-prev{
+		@include icon(before, slick_arrow-prev, $top: 18px, $left: 0px,
+		$color: map-get($slider-item-container, icon-color), 
+		$size: map-get($slider-item-container, icon-size), 
+		$font-faily: map-get($slider-item-container, icon-family));
+	}
+	.slick-next{
+		@include icon(before, slick_arrow-next, $top: 18px, $right: 0px,
+		$color: map-get($slider-item-container, icon-color), 
+		$size: map-get($slider-item-container, icon-size), 
+		$font-faily: map-get($slider-item-container, icon-family)); 
+	} 
+}
+/* Mixin for slick slider */
+
+/* Mixin for Responsive Breakpoint */
+@mixin breakpoint($point) { 
+	@if $point == lg {
+		@media only screen and (min-width: 980px) and (max-width: 1024px)  { @content ; }
+   	}
+	@else if $point == md {
+		@media only screen and (min-width: 768px) and (max-width: 980px) { @content ; }
+   	}
+	@else if $point == sm {
+		@media only screen and (min-width: 480px) and (max-width: 768px) { @content ; }
+   	}
+	@else if $point == xs {
+		@media only screen and (min-width: 320px) and (max-width: 480px)  { @content ; }
+   	} 
+   	@else if $point == xsonly {
+		@media (max-width: 37.5em)  { @content ; }
+	}
+}
+/* End Mixin for Responsive Breakpoint */

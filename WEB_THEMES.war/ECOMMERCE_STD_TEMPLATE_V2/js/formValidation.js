@@ -173,7 +173,11 @@ function submitFormToServer(that){
 						$(that).parent().prepend('<div class="alert alert-success">The Purchasing Agent was successfully added.<br/> Login credentials have been emailed to '+responseCont[1]+'</div>');
 						setTimeout(function(){window.location.href=$("base").attr("href")+"/ManagePurchaseAgent"} , 5000);
 					}else{
-						if(hideThat && hideThat != "Y"){
+						if(notified=="Password Updated Successfully"){
+							unblock();
+							bootAlert("medium","success","Success","Password Updated Successfully, Please login again to continue");
+							window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+						}else if(hideThat && hideThat != "Y"){
 							if(hideThat != "N"){
 								$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
 							}else{
