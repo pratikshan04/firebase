@@ -199,8 +199,8 @@ $headings:(
         texttransform   : capitalize,
         color           : $default_font-color,
         fontsize        : $font_xlg,
-        marginvalue     : 10px 0px,
-        paddingvalue    : 0px 0px 10px 0px,
+        marginvalue     : 0px,
+        paddingvalue    : 0px,
         border          : false
     ),
     filter-block-title:(
