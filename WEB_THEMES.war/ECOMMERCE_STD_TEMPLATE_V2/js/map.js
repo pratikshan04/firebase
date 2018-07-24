@@ -304,8 +304,8 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
 
         if(Email[i]!= null && Email[i]!=""){
 	        var emailDiv = document.createElement("li");
-	        faxDiv.setAttribute("class", 'Email');
-	        faxDiv.innerHTML = '<strong>Email: </strong><a href="mailto:' + Email[i] + '">' + Email[i] + '</a>';
+	        emailDiv.setAttribute("class", 'Email');
+	        emailDiv.innerHTML = '<strong>Email: </strong><a href="mailto:' + Email[i] + '">' + Email[i] + '</a>';
 	        listBlock.appendChild(emailDiv);
         }
 
