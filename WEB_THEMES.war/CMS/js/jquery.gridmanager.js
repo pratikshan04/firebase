@@ -392,6 +392,7 @@
 					jQuery(".Cimm-Footer").show();
 					var frameHeight = jQuery(".Cimm-MainContent").height();
 					window.parent.document.getElementById("iframeId").style.height ="920px";
+					window.parent.document.getElementById("iframeId").style.width = "100%";
 					//$("#template-slider").trigger("click");
                 gm.initCanvas();
                
