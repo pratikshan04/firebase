@@ -236,9 +236,10 @@
                      )
                   )
               );
-	         $("input[type=radio][name='deviceCol']").change(function(){
-	        	 var selectedDevice = $(this).val();
-	        	 if(selectedDevice === "tablet"){
+         	$('.readyTemplatesForm').detach().appendTo("#gm-addnew .row");
+         	$("input[type=radio][name='deviceCol']").change(function(){
+	        	var selectedDevice = $(this).val();
+	        	if(selectedDevice === "tablet"){
 	        		 gm.switchLayoutMode(768, 'reInit')
 	        	 }else if(selectedDevice === "mobile"){
 	        		 gm.switchLayoutMode(640, 'reInit')
@@ -447,6 +448,7 @@
 							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
 							jQuery(".readyTemplatesForm").show();
 							 canvas.html(editedSource);
+							 canvas.find('[data-type="widget"]').html("");
 							 gm.initCanvas();
 							 gm.mode="visual";
 							 $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', false);

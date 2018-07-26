@@ -398,6 +398,9 @@
 }
 
 .lslide{
-	width:56px !important;
 	margin:0 10px;
+}
+.lslide a{
+	display: inline-block;
+	border: 1px solid #8b8c8d !important;
 }
