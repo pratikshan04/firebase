@@ -13,6 +13,10 @@
 /* Check Box and Radio btn border color*/
 /*__________________________________ Category Page Setting_______________________________________*/
 /*__________________________________ Item Detail Page Setting_______________________________________*/
+/*__________________________________Main Navigation Mixin ______________________________*/
+/*__________________________________End Main Navigation Mixin ______________________________*/
+/*______________________________________ Custom Buttons ___________________________________*/
+/*______________________________________ End Custom Buttons ___________________________________*/
 .btn-primary {
   background: #46acee;
   color: #FFF;
@@ -296,6 +300,7 @@
 }
 
 /* Mixin for Category page */
+/* End Mixin for Category page */
 /* Mixin for Detail Page */
 /* Mixin for Detail Page */
 /* Mixin for slick slider */
@@ -1183,20 +1188,15 @@ nav.navbar {
   margin: 0;
 }
 
-nav.navbar .cimm_navigationBar {
+nav.navbar .cimm_nav {
   position: relative;
 }
 
-nav.navbar .cimm_navigationBar > ul > li:last-child .dropdown-menu {
-  left: -143px;
-}
-
-nav.navbar .cimm_navigationBar > ul > li.dropdown {
-  position: relative;
+nav.navbar .cimm_nav > ul > li.dropdown {
   padding-right: 5px;
 }
 
-nav.navbar .cimm_navigationBar > ul > li.dropdown:after {
+nav.navbar .cimm_nav > ul > li.dropdown:after {
   content: "";
   speak: none;
   position: absolute;
@@ -1209,7 +1209,7 @@ nav.navbar .cimm_navigationBar > ul > li.dropdown:after {
   color: #FFF;
 }
 
-nav.navbar .cimm_navigationBar > ul > li.dropdown:hover:after {
+nav.navbar .cimm_nav > ul > li.dropdown:hover:after {
   content: "";
   speak: none;
   position: absolute;
@@ -1220,52 +1220,71 @@ nav.navbar .cimm_navigationBar > ul > li.dropdown:hover:after {
   color: #FFF;
 }
 
-nav.navbar .cimm_navigationBar > ul > li > a {
-  color: #f9f9f9;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 15px 20px 15px 20px;
-}
-
-nav.navbar .cimm_navigationBar > ul > li:hover {
+nav.navbar .cimm_nav > ul > li:hover {
   background: #46acee;
 }
 
-nav.navbar .cimm_navigationBar > ul > li:hover > a {
+nav.navbar .cimm_nav > ul > li:hover > a {
   color: #FFF;
 }
 
-nav.navbar .cimm_navigationBar > ul > li:hover .dropdown-menu {
+nav.navbar .cimm_nav > ul > li:hover .dropdown-menu {
   display: block;
 }
 
-nav.navbar .cimm_navigationBar > ul > li .dropdown-menu {
+nav.navbar .cimm_nav > ul > li > a {
+  padding: 15px 20px 15px 20px;
+  text-transform: uppercase;
+  font-family: "RobotoRegular";
+  font-size: 14px;
+  color: #f9f9f9;
+}
+
+nav.navbar .cimm_nav > ul > li > .dropdown-menu {
   background: #f9f9f9;
   padding: 10px 0px;
-  width: 275px;
+  min-width: 275px;
 }
 
-nav.navbar .cimm_navigationBar > ul > li .dropdown-menu.shopbyprod, nav.navbar .cimm_navigationBar > ul > li .dropdown-menu.shopbymanuf, nav.navbar .cimm_navigationBar > ul > li .dropdown-menu.shopbybrand {
-  width: 855px;
+nav.navbar .cimm_nav > ul > li > .dropdown-menu li > a {
+  color: #404040;
+  padding: 4px 10px;
+  display: block;
 }
 
-nav.navbar .cimm_navigationBar > ul > li .dropdown-menu > ul {
+nav.navbar .cimm_nav > ul > li > .dropdown-menu li > a:hover {
+  background: #46acee;
+  color: #FFF;
+}
+
+nav.navbar .cimm_nav > ul > li > .dropdown-menu > ul {
   width: 282px;
   vertical-align: top;
   display: inline-block;
 }
 
-nav.navbar .cimm_navigationBar > ul > li .dropdown-menu > ul > li a {
-  color: #404040;
-  padding: 5px 10px;
-  display: block;
-  text-transform: capitalize;
+nav.navbar .cimm_nav > ul > li:last-child .dropdown-menu {
+  left: -143px;
 }
 
-nav.navbar .cimm_navigationBar > ul > li .dropdown-menu > ul > li a:hover {
-  background: #46acee;
-  color: #FFF;
+nav.navbar .cimm_nav > ul > li a {
+  letter-spacing: 1px;
+}
+
+nav.navbar .cimm_nav > ul > li > .dropdown-menu {
+  padding: 10px 0px;
+}
+
+nav.navbar .cimm_nav > ul > li > .dropdown-menu.shopbyprod, nav.navbar .cimm_nav > ul > li > .dropdown-menu.shopbymanuf, nav.navbar .cimm_nav > ul > li > .dropdown-menu.shopbybrand {
+  width: 855px;
+}
+
+nav.navbar .cimm_nav > ul > li > .dropdown-menu > ul {
+  width: 282px;
+}
+
+nav.navbar .cimm_nav > ul > li > .dropdown-menu > ul > li > a {
+  text-transform: capitalize;
 }
 
 .cimm_filter .cimm_filter-block .cimm_refinedMultiFilterResults ol li {
@@ -1448,7 +1467,11 @@ footer .cimm_footer_down .cimm_footer-copyright {
 }
 
 .cimm_category-item .cimm_category-itemimage {
-  border: 1px solid #A1A1A1;
+  border: 0px;
+}
+
+.cimm_category-item .cimm_category-itemname {
+  background: transparent;
 }
 
 .cimm_category-item .cimm_category-itemimage {
