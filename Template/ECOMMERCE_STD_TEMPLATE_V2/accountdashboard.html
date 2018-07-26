@@ -23,14 +23,29 @@
 								</div>
 								<div class="col-md-9 col-sm-6 col-xs-12">
 									<div class="userInfoWrap clearAfter">
-											<strong>$!locale.get('form.label.userName'): </strong><span>$!addressList.firstName $!addressList.lastName</span><br />
-											<strong>$!locale.get('form.label.address'): </strong><span>$!addressList.address1	<br/>
-											#if($addressList.address2)$!addressList.address2 <br/>#end
-											$!addressList.city, $!addressList.state<br/>
-											$!addressList.country, $!addressList.zipCode<br/></span>
-											<strong>$!locale.get('form.label.phone'): </strong><span>$!addressList.phoneNo</span><br />
-											<strong>$!locale.get('form.label.email'): </strong><span>$!addressList.emailAddress</span>
-											<div class="clearfix"></div>
+									<table>
+										<tr>
+											<td width="100px" valign="top"><strong>$!locale.get('form.label.userName'): </strong></td>
+											<td><span>$!addressList.firstName $!addressList.lastName</span></td>
+										</tr>
+										<tr>
+											<td valign="top"><strong>$!locale.get('form.label.address'): </strong></td>
+											<td>
+												<span>$!addressList.address1 <br/>
+												#if($addressList.address2)$!addressList.address2 <br/>#end
+												$!addressList.city, $!addressList.state<br/>
+												$!addressList.country, $!addressList.zipCode</span>
+											</td>
+										</tr>
+										<tr>
+											<td valign="top"><strong>$!locale.get('form.label.phone'): </strong></td>
+											<td><span>$!addressList.phoneNo</span></td>
+										</tr>
+										<tr>
+											<td valign="top"><strong>$!locale.get('form.label.email'): </strong></td>
+											<td><span>$!addressList.emailAddress</span></td>
+										</tr>
+									</table>
 											<h4>Last Login: 
 											#if($!lastLogin && $!lastLogin.size()>0)
 											#foreach($loginDetails in $lastLogin.entrySet())
@@ -217,7 +232,7 @@
 	<div class="col-md-3 col-sm-12 col-xs-12">
 		#if($recentlyOrderedItems.size()>0)	
 		<div class="cimm_sliderWrap">
-			<h3 class="cimm_block-title text-center"><label>$locale.get("product.label.recentlyOrderedItems")</label></h3>
+			<h3 class="cimm_block-title text-center mBottom-2"><label>$locale.get("product.label.recentlyOrderedItems")</label></h3>
 			<ul id="recentorders" class="cimm_caroWrap">
 			#foreach($recentOrders in  $recentlyOrderedItems)
 				<li>

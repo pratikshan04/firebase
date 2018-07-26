@@ -474,14 +474,6 @@ footer,
 
 .userInfoWrap {
     height: 160px;
-    >span {
-        float: right;
-        width: 80%;
-    }
-    strong {
-        float: left;
-        width: 20%;
-    }
     h4 {
         position: absolute;
         bottom: 0;
@@ -1132,5 +1124,9 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     .container-fluid{
         padding: 0;
     }
+}
+.locationDataWrap .panel {
+    margin: 0;
+    box-shadow: none;
 }
 @import "3-modules/modules";

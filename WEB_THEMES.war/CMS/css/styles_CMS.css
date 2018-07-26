@@ -165,10 +165,10 @@ padding: 5px;
 
 
 /* START Add new static page */
-.sampleTemplateSlider{
+/* .sampleTemplateSlider{
  position:absolute;
  width:900px; 
-}
+} */
 .sampleTemplateSlider img{
  display:block;
  border:1px solid #CCC;
