@@ -515,7 +515,7 @@ function performSearch() {
 	var conti = true;
 	if(s != undefined && s!=""){
 		s = $.trim(s);
-		//s = s.replace(/</g, "<&nbsp;");
+		s = s.replace(/</g, "<&nbsp;");
 		s = replaceNonAscii(s);
 		s = escape(s);
 		s = s.replace('\u00AE', '&reg;');
@@ -542,6 +542,9 @@ function performSearch() {
 	}
 	if(s == "" || s=="Search" || s.toLowerCase().indexOf("search") > -1 ||s.toLowerCase().indexOf("enter keyword") > -1||s.toLowerCase().indexOf("enter%20keyword") > -1|| $.trim(s)=="Product Search" || $.trim(s)=="Product%20Search" || $.trim(s.toUpperCase())=="ENTER KEYWORD OR PART NUMBER" || $.trim(s.toUpperCase())=="ENTER%20KEYWORD%20OR%20PART%20NUMBER" || $.trim(s.toUpperCase())=="SEARCH"){
 		bootAlert("small","error","Error","Enter Search Keyword.");
+		return false;
+	}else if(s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") >-1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") >-1){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
 		return false;
 	}else if( typeof keywordText!="undefined" && keywordText!=""){
 		var conti = false;
@@ -624,6 +627,7 @@ function performAdvSearch() {
 	
 	//s = replaceNonAscii(s);
 	s = $.trim(s);
+	s = s.replace(/</g, "<&nbsp;");
 	s = s.replace(/\u00AE/g, '&reg;').replace(/\u2122/g, '&trade;');
 	s = escape(s);
 	s = s.replace(/#/g, "%23");
@@ -638,6 +642,9 @@ function performAdvSearch() {
 	
 	if(s == "" || s=="Search" || $.trim(s)=="Product Search" || $.trim(s)=="Product%20Search" || $.trim(s)=="Enter keyword or part number" || $.trim(s)=="Enter%20keyword%20or%20part%20number" || $.trim(s)=="keywords" || $.trim(s)=="%20keywords%20"){
 		bootAlert("small","error","Error","Enter Search Keyword.");
+		return false;
+	}else if(s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") >-1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") >-1){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
 		return false;
 	}
 	if(sType==-1){
@@ -767,6 +774,8 @@ $(document).ready(function(){
 				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize()+"&loginType=popup" ,function(data, status){
 					try{
+						sessionStorage.setItem("salesUserSelected","Y");
+			        	sessionStorage.setItem("currentCustomerSU","");
 						var afterLoginUrl = window.location.href;
 						var previousPageUrl = document.referrer;
 						var currentLayout = $("#layoutName").val();
@@ -785,6 +794,7 @@ $(document).ready(function(){
 								}
 							}
 							$('.loginWindow').hide();
+							$('#loginModal').modal('hide');
 							loadShippingInfo();
 							if($("#isWebview").val() == "WEBVIEW"){
 								fingerPrint(un, ps);
@@ -795,7 +805,12 @@ $(document).ready(function(){
 							window.location.href = "/Login";
 						}else if(data.indexOf("/AFP/")!= -1){
 							window.location.href = data;
-						}else{
+						}else if($.trim(data) && $.trim(data).indexOf("{") == 0){
+				        	  var responseDetails = JSON.parse(data);
+				        	  if(responseDetails && responseDetails['salesUser'] == 'Y'){
+				        		  loadCustomForSalesUser(responseDetails);
+				        	  }
+				          }else{
 							unblock();
 							if($this.find(".pLoginErr").length>0){
 								$this.find(".pLoginErr").html(data);
@@ -1106,15 +1121,16 @@ function deleteCookie( name ) {
 }
 //----------- Add to product group action
 $(document).delegate('[data-function="productGroupDropDown"]', 'click',function(){
-	var toggleListID = "#"+$(this).attr('data-listTarget');
-	var itemId = $(this).attr('data-itemId');
+	var _this = $(this);
+	var toggleListID = "#"+_this.attr('data-listTarget');
+	var itemId = _this.attr('data-itemId');
 	$("#group_id").val(toggleListID);
 	$("#hidden_id").val(itemId);
-	$(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
-	$(toggleListID).show();
+	_this.next(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
+	_this.next(toggleListID).show();
 	jQuery.get("productListIdNamePage.action?productIdList="+itemId+"&groupType=P",function(data,status){
-		$(toggleListID).find("li").remove();
-		$(toggleListID).html(data);
+		_this.next(toggleListID).find("li").remove();
+		_this.next(toggleListID).html(data);
 	});
 });
 function addToProductList(groupName,groupId){
@@ -1432,7 +1448,7 @@ function send(){
 	var pathArray = window.location.pathname.split( '/' );
 	host = pathArray[1];
 	var emailitemlink=localStorage.getItem("emailFriendlink");
-	$(".cimm_itemMainImage img").css({"position":"relative","width":"300px"});
+	$(".cimm_itemdetail-imgcontainer img").css({"position":"relative","width":"300px"});
 	$("#mailContentDisplay .contentPart .imgForSend").remove();
 	$("#mailContentDisplay .contentPart > table tr td").each(function () {
 		$(this).css({"border":"1px solid #CCC","border-collapse":"collapse"});
@@ -1460,7 +1476,7 @@ function send(){
 
 	});
 	$("#mailContent a").attr("href", emailitemlink);
-	$('#imgPart').val($('.cimm_itemMainImage').html());
+	$('#imgPart').val($('.cimm_itemdetail-imgcontainer').html());
 	$('#contentPart').val($('.cimm_itemDescription').html());
 	$('#pricePart').val($('.priceCont').html());
 	$('#descPart').val($('.contentPart').html());
@@ -2337,7 +2353,7 @@ function sendSiteDetailPagePart(a){
 	var b=$("#titleText").val();
 	
 	if($(".focusItemTabs").html()=="" || $(".focusItemTabs").html() == undefined){
-		var itemImg = $(".cimm_itemMainImage span.imgForSend").html();
+		var itemImg = $(".cimm_itemdetail-imgcontainer span.imgForSend").html();
 		var ProductName=$("#titleText").val();
 		var PrintShrtDesc=$(".cimm_itemShortDesc").html();
 		var custPartBlock=$("#custPartBlock").html();
@@ -2421,7 +2437,7 @@ function sendSiteDetailPagePart(a){
 	//titleDesc = titleDesc+"</div>";
 	skuList = skuList+"</div>";
 
-	var itemDetailList = "<div class='cimm_itemDetailWrap clearAfter'><div class='cimm_itemMainImage'>"+itemImg+"</div><div class='cimm_itemDescription clearAfter'>"+titleDesc+skuList+"</div></div>";
+	var itemDetailList = "<div class='cimm_itemdetail clearAfter'><div class='cimm_itemdetail-imgcontainer'>"+itemImg+"</div><div class='cimm_itemDescription clearAfter'>"+titleDesc+skuList+"</div></div>";
 	var content;
 	if ($('[data-type="descriptionSection"]').length > 0){
 		var Desc=$('[data-type="descriptionSection"]').html();
@@ -2834,6 +2850,7 @@ function validateProductSearch(){
 	var s = text.value;
 	if(s != undefined && s!=""){
 		s = $.trim(s);
+		s = s.replace(/</g, "<&nbsp;");
 		s = s.replace('\u00AE', '&reg;');
 		//s = escape(s);
 		//s = s.replace(/#/g, "%23");
@@ -2848,7 +2865,10 @@ function validateProductSearch(){
 	}
 	if(text.value==""){
 		bootAlert("small","error","Error","Enter keyword for search");
-    }else{
+    }else if(s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") >-1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") >-1){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
+		return false;
+	}else{
     	$('#searchkeyWord').val(s);
     	$("#productSearchForm").submit();
 		return false;
@@ -3316,7 +3336,7 @@ if($("#enableHeaderQuickOderLink").val() == "Y"){
 		$(".cimm_navigationBar ul > li > a").removeClass("active");
 	}
 }
-if($("#enableStickyHeader").val() == "Y"){
+if($("#enableStickyHeader").val() == "Y" && $("#layoutName").val()!= "CMSStaticPage"){
 	$(window).resize(function(){
 		var width = $(window).innerWidth();
 		if(width < 980){
@@ -3626,3 +3646,92 @@ function homeCarousels(){
 			  });
 		}
 }
+
+
+function loadCustomForSalesUser(salesUserDetails){
+	setCookie("isShipToSelected", true);
+	$("#loginModal").modal('hide');
+	$.get("getCustomersUnit.action",function(data,status,xhr){
+		unblock();
+		$("#salesrepModal .modal-body").html(data);		
+		$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+		$('#salesrepModal').on('shown.bs.modal', function () {
+		$('body').addClass('modal-open');
+		});
+	})
+	.fail(function(error){
+		unblock();
+		bootAlert("medium", "error", "Error", "Unable To Load Customers");
+	});
+}
+
+$(document).ready(function(){
+	var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+	var selectedUser = sessionStorage.getItem("salesUserSelected");
+	var isSalesUser = $("#isSalesUser").val();
+	if(!selectedCustomer && isSalesUser == "Y"){
+		loadCustomForSalesUser();
+	}
+	else if(!selectedUser && selectedCustomer && isSalesUser == "Y"){
+		selectedCustomer = JSON.parse(selectedCustomer);
+		loadUserByCustomer(selectedCustomer);
+	}
+	
+	function loadUserByCustomer(attributes){
+		sessionStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
+		block('Please wait');
+		$.get("getUsersByCustomerUnit.action",
+			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
+			function(data,status,xhr){
+			$("#salesrepModal").modal('hide');
+			$("#salesrepModal .modal-body").html(data);			
+			unblock();
+			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			$('#salesrepModal').on('shown.bs.modal', function () {
+				$('body').addClass('modal-open');
+			});
+		})
+		.fail(function(error){
+			unblock();
+			bootAlert("medium", "error", "Error", "Unable To Load Users");
+		});
+	}
+	
+	$(".switchCustomer").on('click', function(){
+		block('Please wait');
+		loadCustomForSalesUser();
+	});
+	
+	$(".switchUser").on('click', function(){
+		var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+		selectedCustomer = JSON.parse(selectedCustomer);
+		loadUserByCustomer(selectedCustomer);
+	});
+	
+	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
+		$("#salesrepModal").modal('hide');
+		var attributes = src.target.dataset;
+		loadUserByCustomer(attributes);
+	});
+
+	$("#salesrepModal").on('click', '.persistUserDetails', function(src){
+		block('Please wait');
+		sessionStorage.setItem("salesUserSelected","Y");
+		var attributes = src.target.dataset;
+		$.post("setSelectedUserDetailsUnit.action",
+			{"userName" : attributes['username']},
+			function(data,status,xhr){
+			if(data && data=="SUCCESS"){
+				//setCookie("isShipToSelected", true);
+				window.location.href = "/Products";
+			}else{
+				unblock();
+				bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
+			}
+		})
+		.fail(function(error){
+			unblock();
+			bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
+		});
+	});
+});

@@ -82,7 +82,7 @@ jQuery("#"+imageId).bind("click", function(e) {
 	e.preventDefault();
 	return false;
 });
-$('.thumblist li img').on('click' , function(){
+$('.cimm_itemdetail_thumblist li img').on('click' , function(){
 	var origImg = $(this).parent().attr("data-image");
 	var thumblistImg = $(this).parent().attr("data-zoom-image");
 	$('.imgEnlargeIcon').attr('href' , thumblistImg);
@@ -96,8 +96,8 @@ $(document).ready(function(){
 	disableCustomCheckbox();
 	ProductMode.checkCookieToCheck();
 	checkItem();
-	if($('.verticalThumblist .thumblist').length > 0){
-		$('.verticalThumblist .thumblist').slick({
+	if($('.verticalThumblist .cimm_itemdetail_thumblist').length > 0){
+		$('.verticalThumblist .cimm_itemdetail_thumblist').slick({
 			infinite: true,
 			slidesToShow: 3,
 			slidesToScroll: 1,
@@ -112,7 +112,7 @@ $(document).ready(function(){
 		         ]
 		});
 	}else{
-		$('.thumblist').slick({
+		$('.cimm_itemdetail_thumblist').slick({
 			infinite: true,
 			slidesToShow: 3,
 			slidesToScroll: 1,

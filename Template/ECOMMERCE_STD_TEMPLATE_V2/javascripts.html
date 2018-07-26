@@ -120,7 +120,7 @@ function deviceSelectAll(){
 }
 </script>
 #end
-#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList")
+#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage")
 #set($jsPath = $webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js')
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
@@ -142,6 +142,7 @@ $("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
 #end
 
 <script type="text/javascript">
+_paq.push(['trackPageView']);
 /*********************Header Script***********************/
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
@@ -299,7 +300,7 @@ $(document).ready(function () {
 <script type="text/javascript" src="$webThemes/$siteName/js/ProductList.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('.cimm_topBanners').slick({
+			$('.cimm_category-banners').slick({
 				infinite: true,
 				slidesToShow: 1,
 				slidesToScroll: 1,
@@ -495,6 +496,7 @@ $(document).ready(function () {
 	}
  });
  $(".loadAfter").fadeOut(800);
+ $('.cimm_formContent li').removeAttr('title');
 </script>
 #if($!CommonDBQuerySystemParameter.get("CHECK_EMAIL_ID")=="Y")	
 <div id="emailAddressPrompt" class="modal fade" role="dialog">
