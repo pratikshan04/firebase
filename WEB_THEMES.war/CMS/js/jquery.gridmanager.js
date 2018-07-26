@@ -375,6 +375,7 @@
 				   jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');	
 					jQuery(".header-wrap").hide();
 					jQuery(".Cimm-Footer").hide();
+					$(this).html("Back");
 					var frameHeight = jQuery(".Cimm-MainContenthide").height() + 120;
 					//window.parent.jQuery("#iframeId").height =;
 					//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
@@ -392,6 +393,7 @@
 					jQuery(".header-wrap").show();
 					jQuery(".Cimm-Footer").show();
 					var frameHeight = jQuery(".Cimm-MainContent").height();
+					$(this).html('<span class="fa fa-eye"></span> Preview');
 					window.parent.document.getElementById("iframeId").style.height ="920px";
 					window.parent.document.getElementById("iframeId").style.width = "100%";
 					//$("#template-slider").trigger("click");
