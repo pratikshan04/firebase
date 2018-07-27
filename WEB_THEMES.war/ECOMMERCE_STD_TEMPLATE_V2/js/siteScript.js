@@ -3735,3 +3735,9 @@ $(document).ready(function(){
 		});
 	});
 });
+
+$("#loginModal").on('shown.bs.modal', function() {
+	if($("#isWebview").val() == "WEBVIEW"){
+		prodGrpCpnPopup();
+	}
+});
