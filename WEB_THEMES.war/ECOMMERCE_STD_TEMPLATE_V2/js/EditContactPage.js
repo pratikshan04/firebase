@@ -9,7 +9,11 @@ var countrySelectShip = new initCountry({
 	defaultSelect: true,
 	selectState: billAddressState
 });
-
+$("#editContactAddressForm").submit(function(){
+	if($("#billAddressEmail").val() != $("#email").val()){
+		$("#email").val($("#billAddressEmail").val());
+	}
+});
 function getContactEntityAddress(obj){
 	if(obj.checked){
 		$("#useEntityAddress").val("Yes");

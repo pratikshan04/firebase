@@ -119,7 +119,6 @@
                             overflow: visible;
                             -webkit-transition: scale .1s ease-in-out;
                             -moz-transition: scale .1s ease-in-out;
-                            -ms-transform: scale .1s ease-in-out;
                             -o-transition: scale .1s ease-in-out;
                             transition: scale .1s ease-in-out;
                         }
@@ -327,4 +326,7 @@
             padding: 3px 0;
         }
     }
+}
+.zoomContainer {
+    z-index: 10;
 }

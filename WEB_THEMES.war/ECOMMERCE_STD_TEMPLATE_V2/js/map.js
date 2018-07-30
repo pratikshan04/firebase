@@ -240,21 +240,23 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
         var outerUL = document.getElementById("list");
         var addressLI = document.createElement('li');
         addressLI.setAttribute("id", i);
+        addressLI.setAttribute("class", "panel");
         outerUL.appendChild(addressLI);
         var addressLIEventFunction = function() {
             if (Selected != -1) {
                 infowindow.close();
-                document.getElementById(Selected).setAttribute("class", 'store');
+                document.getElementById(Selected).setAttribute("class", 'store panel');
             }
             Selected = this.id;
-            document.getElementById(Selected).setAttribute("class", 'crselected1');
+            document.getElementById(Selected).setAttribute("class", 'crselected1 panel');
             infowindow.setContent(GMarkers[this.id].info);
         };
         
         $(addressLI).click(addressLIEventFunction);
         var outerDiv = document.createElement("div");
         outerDiv.setAttribute("data-toggle", 'collapse');
-        outerDiv.setAttribute("class", "clearAfter");
+        outerDiv.setAttribute("data-parent", '#list');
+        outerDiv.setAttribute("class", "clearAfter collapsed");
         outerDiv.setAttribute("data-target", '#locDetails' + "_" + BranchId[i]);
         outerDiv.setAttribute("data-locName", BranchName[i]);
         outerDiv.setAttribute("onclick", "loadLocationDetails(this); newmap(this);");
@@ -368,11 +370,11 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
                 infowindow1.setContent(marker.info);
                 infowindow1.open(map, marker);
                 if (Selected != -1) {
-                    document.getElementById(Selected).setAttribute("class", 'store');
+                    document.getElementById(Selected).setAttribute("class", 'store panel');
                 }
                 Selected = marker.id;
                 var first = marker.info.firstChild;
-                $(first).find("a").first().attr("class", 'crselected1');
+                $(first).find("a").first().attr("class", 'crselected1 panel');
                 $(first).addClass("active");
                 map.setZoom(8);
                 map.panTo(GMarkers[locId].getPosition());
@@ -390,14 +392,14 @@ function initialize(lattitude, longitude, zoomVal, nearestLocationVal) {
                     if (Selected != -1) {
                         if (typeof infowindow1 != 'undefined')
                             infowindow1.close();
-                        document.getElementById(Selected).setAttribute("class", 'store');
+                        document.getElementById(Selected).setAttribute("class", 'store panel');
                     }
                     Selected = this.id;
-                    document.getElementById(Selected).setAttribute("class", 'crselected1');
+                    document.getElementById(Selected).setAttribute("class", 'crselected1 panel');
                 });
     }
     if (Latitude.length > 1) {
-        var allLocation = "<li><a class='store'><div class='productTitle Title' id='viweAll'>All Locations</div></a></li>";
+        var allLocation = "";//<li><a class='store'><div class='productTitle Title' id='viweAll'>All Locations</div></a></li>
         $("ul.store-list").prepend(allLocation);
     }
     var input = document.getElementById('searchTextField');
@@ -482,16 +484,18 @@ var Lon = "";
 var latlng2 = "";
 
 function newmap(obj) {
-	if($(obj).find('.iconToggle i').hasClass('fa-caret-right')){
-		jQuery(obj).find('.iconToggle i').removeClass('fa-caret-right').addClass('fa-caret-down');
-	}else{
-		jQuery(obj).find('.iconToggle i').removeClass('fa-caret-down').addClass('fa-caret-right');
+	if($(obj).hasClass("collapsed")){
+		if($(obj).find('.iconToggle i').hasClass('fa-caret-right')){
+			jQuery(obj).find('.iconToggle i').removeClass('fa-caret-right').addClass('fa-caret-down');
+		}else{
+			jQuery(obj).find('.iconToggle i').removeClass('fa-caret-down').addClass('fa-caret-right');
+		}
+	    var inFoBlockId = $(obj).attr('data-target');
+	    Lat = $(inFoBlockId).find('.Lat').text();
+	    Lon = $(inFoBlockId).find('.Lon').text();
+	    latlng2 = new google.maps.LatLng(Lat, Lon);
+	    initialize2(latlng2, obj);
 	}
-    var inFoBlockId = $(obj).attr('data-target');
-    Lat = $(inFoBlockId).find('.Lat').text();
-    Lon = $(inFoBlockId).find('.Lon').text();
-    latlng2 = new google.maps.LatLng(Lat, Lon);
-    initialize2(latlng2, obj);
 }
 var mapCanvas = "";
 var state = '';
@@ -593,7 +597,7 @@ function directionsEventFunction(idVal) {
     }
 }
 function loadLocationDetails(obj){
-	if(!$(obj).hasClass("active")){
+	if($(obj).hasClass("collapsed")){
 		var title = $(obj).attr('data-locName');
 		var locDistance = $(obj).find('.locDistance').text();
 		var infoBlockId = $(obj).attr('data-target');
@@ -632,13 +636,17 @@ function loadLocationDetails(obj){
 			$("#storeImage").html("<div class='cimm_slideItemImg'><a><img src='"+wImage+"' alt='"+title+"'></a></div>");
 		else
 			$("#storeImage").html("<div class='cimm_slideItemImg'><a><img src='"+noImagePath+"' alt='Warehouse Image Not Available'></a></div>");
+	
+		$("#googleMap").css({'z-index':'-1','opacity':'0'});
+		$("#map_canvas").css({'z-index':'1','opacity':'1'});
+		$(".storeDetailview").show();
+		$('#directions-panel').hide();
+	}else{
+		$("#map_canvas").css({'z-index':'-1','opacity':'0'});
+		$("#googleMap").css({'z-index':'1','opacity':'1'});
+		$('.storeDetailview').hide();
 	}
-	$("#googleMap").css('z-index','-1');
-	$("#googleMap").css('opacity','0');
-	$("#map_canvas").css('z-index','1');
-	$("#map_canvas").css('opacity','1');
-	$(".storeDetailview").show();
-	$('#directions-panel').hide();
+	
 }
 function findDistance(lat1,lon1,lat2,lon2) {
 	var R = 3959; // Radius of the earth in km
