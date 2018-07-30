@@ -74,27 +74,25 @@ $header_mid-bg  : transparent;
 
 /*__________________________________Navigation Setting_______________________________________*/
 //Navigation color and font declaration
-$mnav-bg			: $secondary_color;
-$mnav_lf-family		: $default_font-family; // Main navigation link font family
-$mnav_lf-color		: $tertiary_color;  //Main navigation link font color
-$mnav_lf-size		: $default_font-size;   //Main navigation link font size
 
-$mnav_lh-bg			: $primary_color;       //Main navigation link hover background
-$mnav_lhf-color		: $white;               //Main navigation link hover font color
-
-$mnav_la-bg         : $primary_color;       //Main navigation (la = link active) bg 
-$mnav_laf-color     : $white;               //Main navigation (la = link active font) color
-
-//Main sub navigation
-$msnav_bg			: $tertiary_color;
-
-$mnav_primary-bg	: $primary-color;
-$mnav_secondary-bg	: $secondary-color;
-
-$msnav_lf-color     : $secondary-font_color;
-$msnav_lh-bg        : $secondary-font_color;
-$msnav_la-color     : $secondary-font_color;
-
+$main_nav: (
+    navbar: (
+        mnav-bg: $secondary_color,
+        mnav_lf-color: $tertiary_color,         //Main navigation link font color
+        mnav_lf-size: $default_font-size,       //Main navigation link font size
+        mnav_lf-family: $default_font-family,   //Main navigation link font family
+        mnav_lf-uppercase: true,                //Main navigation link in uppercase
+        mnav_lf-dividers: false,                //Main navigation link dividers Ex: "|" 
+        //on hover section
+        mnav_lh-bg: $primary_color,             //Main navigation link hover background
+        mnav_lhf-color: $white,                 //Main navigation link hover font color
+        //Sub Navigation Section
+        subnav-bg: $tertiary_color, 
+        subnav-lf-size: $default_font-size,
+        subnav-lf-color: $secondary-font_color,
+        subnav-lf-family: $default_font-family
+    )
+);
 
 /*______________________________Left Navigation Setting_______________________________________*/
 //Left Navigation
@@ -199,8 +197,8 @@ $headings:(
         texttransform   : capitalize,
         color           : $default_font-color,
         fontsize        : $font_xlg,
-        marginvalue     : 10px 0px,
-        paddingvalue    : 0px 0px 10px 0px,
+        marginvalue     : 0px,
+        paddingvalue    : 0px,
         border          : false
     ),
     filter-block-title:(

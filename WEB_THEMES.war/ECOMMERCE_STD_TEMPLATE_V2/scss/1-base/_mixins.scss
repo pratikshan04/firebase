@@ -46,7 +46,7 @@
 
 
 @mixin font($family: false, $size: false, $color: false, $weight: false, $lineheight: false){
-	@if $family {font-family: $default_font-family;}
+	@if $family {font-family: $family;}
 	@if $size { font-size: $size; }
 	@if $color { color: $color; }
 	@if $weight { font-weight: $weight; }
@@ -91,6 +91,9 @@ $icons: (
 	credit-card	: "\f09d",
 	truck		: "\f0d1",
 
+	minus-circle: "\f056",
+	plus-circle : "\f055",
+	
 	slick_arrow-prev	: "\f104",  
 	slick_arrow-next	: "\f105",
 	slick_arrow-up		: "\f106",
@@ -137,6 +140,109 @@ $icons: (
     }
 }
 
+/*__________________________________Main Navigation Mixin ______________________________*/
+
+@mixin main_nav {
+
+    @each $nav_type, $nav_style in $main_nav {
+        $nav_bg: map-get($nav_style, mnav-bg);
+        $lf-family: map-get($nav_style, mnav_lf-family);
+        $lf-size: map-get($nav_style, mnav_lf-size);
+        $lf-color: map-get($nav_style, mnav_lf-color);
+        $lh_bg: map-get($nav_style, mnav_lh-bg);
+        $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
+        $lf-dividers: map-get($nav_style, mnav_lf-dividers);
+        $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
+        $subnav-bg: map-get($nav_style, subnav-bg);  
+        $subnav-lf-color: map-get($nav_style, subnav-lf-color);
+
+        nav.#{$nav_type}{ 
+            background: $nav_bg;
+            border-radius: 0px;
+            border: 0px;
+            margin: 0;
+
+            .cimm_nav{
+                position: relative;
+
+                >ul{
+                    >li{
+                        &.dropdown{
+                            padding-right: 5px; 
+
+                            @include icon(
+                                after, caret-right, 
+                                $color: $white, 
+                                $right: 10px, 
+                                $top: 10px, 
+                                $size: 20px
+                            );
+                            &:hover{
+                                @include icon(
+                                    after, caret-down,
+                                    $color: $white,
+                                    $size: 20px
+                                );
+                            }
+                        }
+                        &:hover{
+                            background: $lh_bg;
+                            > a{
+                                color: $white;
+                            }
+                            .dropdown-menu{
+                                display: block;
+                            }
+                        }
+
+                        > a{
+                            padding: 15px 20px 15px 20px;
+                            @if $lf-uppercase != false {
+                                text-transform: uppercase;
+                            }
+                            @include font($family: $lf-family, $size: $lf-size, $color:$lf-color);
+                            @if $lf-dividers != false {
+                                @include icon(after, nav-seperater, $color: $white, $size: 20px, $top: 13px, $right: 0px);
+                            }
+                        }
+
+                        > .dropdown-menu{
+                            background: $subnav-bg;
+                            padding: 10px 0px; 
+                            min-width: 275px;
+                            
+                            li{
+                                > a{
+                                    color: $subnav-lf-color;    
+                                    padding: 4px 10px;
+                                    display: block;
+
+                                    &:hover {
+                                        background: $lh_bg; 
+                                        color: $white; 
+                                    } 
+                                }
+                            }
+
+                            > ul{
+                                width: 282px;
+                                vertical-align: top;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    } 
+};
+
+/*__________________________________End Main Navigation Mixin ______________________________*/
+
+
+/*______________________________________ Custom Buttons ___________________________________*/
 @mixin custom-btns {
     @each $class_name, $bgcolors in $btncolors {
         .btn-#{$class_name} {
@@ -203,7 +309,7 @@ $icons: (
         }
     }
 }
-
+/*______________________________________ End Custom Buttons ___________________________________*/
 @include custom-btns;
 
 
@@ -311,13 +417,21 @@ $icons: (
 /* Mixin for Category page */
 
 @mixin category_border{
+
     .cimm_category-itemimage{
-        @if map-get($categories, border_all) != false {
-            @include add_border(all);
-        } 
-        @if map-get($categories, border_bottom) != false{
-            @include add_border(bottom);
-        }
+		@if (map-get($categories, border) == true){
+			@include add_border(all); 
+		} @else if (map-get($categories, border) == "top" ){
+			@include add_border(top);
+		} @else if (map-get($categories, border) == "bottom"){
+			@include add_border(bottom);
+		} @else if (map-get($categories, border) == "top-bottom"){
+			@include add_border(top);
+			@include add_border(bottom);
+		} @else {
+			border: 0px; 
+		}
+		
         @if map-get($categories, box_radius) != false{
             @include border-radius(5px);
         }
@@ -326,21 +440,29 @@ $icons: (
 		}
     }
     .cimm_category-itemname{
-        @if map-get($categories, title_bg) != false{
-			background: $category-itemname-bg;
+
+		$itemname_bg: map-get($categories, title_bg); 
+
+		@if ($itemname_bg != false) and ($category-itemname-bg == transparent){
+			background: $secondary-color;
 			a{
-				color: set-text-color($category-itemname-bg);
+				color: $white;
 			}
-        }
+		} @else if($itemname_bg == true) and ($category-itemname-bg != transparent) { 
+			background: $category-itemname-bg; 
+		} @else {
+			background: transparent;  
+		}
+ 
     }
 };
 
-
+/* End Mixin for Category page */
 
 /* Mixin for Detail Page */
 @mixin itemdetail_image{
 	.cimm_itemdetail-imgcontainer{
-	//	li{
+		li{
 			.cimm_itemdetail_image{
 				@include border-radius(2px);
 				border: 1px solid map-get($itemdetail_image, mainimage_border-color);
@@ -371,7 +493,7 @@ $icons: (
 				}
 			}
 
-		//}
+		}
 	}
 }
 /* Mixin for Detail Page */
