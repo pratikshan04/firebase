@@ -236,9 +236,10 @@
                      )
                   )
               );
-	         $("input[type=radio][name='deviceCol']").change(function(){
-	        	 var selectedDevice = $(this).val();
-	        	 if(selectedDevice === "tablet"){
+         	$('.readyTemplatesForm').detach().appendTo("#gm-addnew .row");
+         	$("input[type=radio][name='deviceCol']").change(function(){
+	        	var selectedDevice = $(this).val();
+	        	if(selectedDevice === "tablet"){
 	        		 gm.switchLayoutMode(768, 'reInit')
 	        	 }else if(selectedDevice === "mobile"){
 	        		 gm.switchLayoutMode(640, 'reInit')
@@ -374,6 +375,7 @@
 				   jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');	
 					jQuery(".header-wrap").hide();
 					jQuery(".Cimm-Footer").hide();
+					$(this).html("Back");
 					var frameHeight = jQuery(".Cimm-MainContenthide").height() + 120;
 					//window.parent.jQuery("#iframeId").height =;
 					//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
@@ -391,7 +393,9 @@
 					jQuery(".header-wrap").show();
 					jQuery(".Cimm-Footer").show();
 					var frameHeight = jQuery(".Cimm-MainContent").height();
+					$(this).html('<span class="fa fa-eye"></span> Preview');
 					window.parent.document.getElementById("iframeId").style.height ="920px";
+					window.parent.document.getElementById("iframeId").style.width = "100%";
 					//$("#template-slider").trigger("click");
                 gm.initCanvas();
                
@@ -446,6 +450,7 @@
 							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
 							jQuery(".readyTemplatesForm").show();
 							 canvas.html(editedSource);
+							 canvas.find('[data-type="widget"]').html("");
 							 gm.initCanvas();
 							 gm.mode="visual";
 							 $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', false);

@@ -63,3 +63,13 @@ function fingerPrintpopup(){
 	console.log('The native context does not exist yet');
 	}
 }
+function prodGrpCpnPopup(){
+	var unps = "prodGrpCpnPopup";
+	try {
+		Android.prodGrpCpnPopup();
+	}
+	catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(unps);
+		console.log('The native context does not exist yet');
+	}
+}

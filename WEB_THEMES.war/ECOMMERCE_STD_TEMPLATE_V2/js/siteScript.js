@@ -31,7 +31,7 @@ function isPhoneNumberValid(strPhone){
 //---------------------- Phone number validate
 function IsNumeric(e) {
 	var keyCode = (e.which) ? e.which : e.keyCode;
-	if (keyCode > 31 && (keyCode < 37 || keyCode > 39) && (keyCode < 48 || keyCode > 57) || keyCode == 13){
+	if (keyCode > 31 && (keyCode < 48 || keyCode > 57) || keyCode == 13){
 		return false;
 	}
 	return true;
@@ -3683,13 +3683,13 @@ $(document).ready(function(){
 		$.get("getUsersByCustomerUnit.action",
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
 			function(data,status,xhr){
-			$("#salesrepModal").modal('hide');
+			//$("#salesrepModal").modal('hide');
 			$("#salesrepModal .modal-body").html(data);			
 			unblock();
-			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
-			$('#salesrepModal').on('shown.bs.modal', function () {
-				$('body').addClass('modal-open');
-			});
+			//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			//$('#salesrepModal').on('shown.bs.modal', function () {
+			//	$('body').addClass('modal-open');
+			//});
 		})
 		.fail(function(error){
 			unblock();
@@ -3709,7 +3709,7 @@ $(document).ready(function(){
 	});
 	
 	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
-		$("#salesrepModal").modal('hide');
+		//$("#salesrepModal").modal('hide');
 		var attributes = src.target.dataset;
 		loadUserByCustomer(attributes);
 	});
@@ -3734,4 +3734,10 @@ $(document).ready(function(){
 			bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
 		});
 	});
+});
+
+$("#loginModal").on('shown.bs.modal', function() {
+	if($("#isWebview").val() == "WEBVIEW"){
+		prodGrpCpnPopup();
+	}
 });

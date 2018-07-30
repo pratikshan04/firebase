@@ -1,216 +1,38 @@
-// .navbar-default{
-//     .navbar-nav{
-//         >li{
-//             >a:focus,>a:hover {
-//                 color: $white;
-//                 background-color: transparent;
-//             }
-//         }
-//     }
-// }
  
+@include main_nav;
 
 nav.navbar {
-    background: $mnav_bg;
-    border-radius: 0px;
-    border: 0px;
-    margin: 0;
     // box-shadow: 0px 5px 10px 0px #c4c4c4;
-
-    .cimm_navigationBar {
-        position: relative;
-
-        > ul{
-             > li{
+    .cimm_nav{
+        >ul{
+            >li{
                 &:last-child{
 					.dropdown-menu{
 					    left: -143px;
 					}
-                }
-                &.dropdown{
-                    position: relative;
-                    padding-right: 5px; 
+                }  
+                a{
+                    letter-spacing: 1px; 
+                } 
 
-                    @include icon(
-                        after, caret-right, 
-                        $color: $white, 
-                        $right: 10px, 
-                        $top: 10px, 
-                        $size: 20px
-                    );
-                    &:hover{
-                        @include icon(
-                            after, caret-down,
-                            $color: $white,
-                            $size: 20px
-                        );
-                    }
-                }
-                > a{
-                    color: $mnav_lf-color;
-                    font-size: $mnav_lf-size;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;   
-                    padding: 15px 20px 15px 20px;
-                    // @include fa-icon;
-                    // @extend .fas;
-                    // &::after { 
-                    //     content: fa-content($fa-var-caret-right);
-                    // }
-                }
-                
-                &:hover{
-                    background: $mnav_lh-bg;
-                    > a{
-                        color: $white;
-                    }
-
-                    .dropdown-menu{
-                        display: block;
-                    }
-                }
-
-                .dropdown-menu{
-                    background: $msnav_bg;
+                > .dropdown-menu{
                     padding: 10px 0px;
-                    width: 275px;
+
                     &.shopbyprod, &.shopbymanuf, &.shopbybrand{
                         width: 855px;
                     }
 
                     > ul{
-                        width: 282px;
-                        vertical-align: top;
-                        display: inline-block;
+                        width: 282px;   
                         > li{
-                            a{
-                                color: $msnav_lf-color;
-                                padding: 5px 10px;
-                                display: block;
+                            >a{
                                 text-transform: capitalize;
-                                &:hover {
-                                    background: $mnav_lh-bg;
-                                    color: $white;
-                                }
                             }
                         }
                     }
                 }
             }
         }
-//      >ul {
-//             >li {
-//                 &:hover{
-//                     background: $mnav_lh-bg;
-//                     //color: $mnav_lhf-color;
-//                 }
-//                 &:last-child{
-// 					.dropdown-menu{
-// 						left: -143px;
-// 					}
-// 					a {
-// 						padding: 15px 30px 15px 26px;
-// 					}
-// 				}
-//                 >a {
-//                     color: $mnav_lf-color; 
-//                     font-size: $mnav_lf-size;
-//                     text-transform: uppercase;
-//                     letter-spacing: 1px;
-//                     padding: 15px 27px 15px 25px;
-//                     white-space: normal;
-//                     position: relative;
-//                     &:hover {
-//                         color: $mnav_lhf-color;
-
-// 						em{
-// 							&:before {
-// 								content: "\f0d7";
-// 							}
-// 						}
-//                     }
-// 					em{
-// 						position: absolute;
-// 						right: 12px;
-// 						top: 16px;
-// 						font-size: 18px;
-// 						&:before {
-// 							content: "\f0da";
-// 						}
-// 					}
-// 					&.cimm_inlineButton {
-// 						padding: 7px 15px;
-// 					}
-//                 }
-// 				div.dropdown-menu {
-// 					width: 855px;
-//                     background: $msnav_bg;
-//                     padding: 10px 0;
-                    
-// 					ul{
-// 						width:282px;
-//                         display: inline-block;
-//                         vertical-align: top;
-                        
-// 						li{
-// 							border: none;
-// 						}
-// 					}
-// 				}
-//                 .dropdown-menu {
-//                     display: none;
-//                     position: absolute;
-//                     top: 50px;
-//                     left: 0;
-//                     width: 275px;
-//                     height: auto;
-//                     z-index: 100;
-//                     margin: 0;
-//                     border-radius: 0;
-//                     background: $msnav_bg;
-//                     padding: 0;
-
-//                     li {
-//                         width: 100%;
-//                        // border-bottom: 1px solid $gray-lighten;
-//                         &:last-child {
-//                             border: none;
-//                         }
-//                         a {
-//                             color: $msnav_lf-color;
-//                             padding: 5px 10px;
-//                             display: block;
-//                             margin: 0;
-// 							text-transform: capitalize;
-//                             &:hover {
-//                                 background: $mnav_lh-bg;
-//                                 color: $white;
-//                             }
-//                         }
-//                     }
-//                     &.cimm_shopByBrand {
-//                         width: 100%;
-//                         padding: 20px;
-
-//                         ul {
-//                             li {
-//                                 float: left;
-//                                 width: 23%;
-//                                 margin-right: 2%;
-//                                 a {
-//                                     font-size: 14px;
-//                                 }
-//                             }
-//                         }
-//                     }
-//                 }
-//                 &#brandLink {
-//                     position: static;
-//                 }
-//                 &:hover>.dropdown-menu {
-//                     display: block;
-//                 }
-//             }
-//         }
-     } 
+    }
  }
+ 

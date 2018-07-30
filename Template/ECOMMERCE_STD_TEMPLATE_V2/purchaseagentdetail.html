@@ -26,7 +26,7 @@
 	</div>
 	<div class="row mBottom-4">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div id="radioGroup" class="NotChanged #if($isGeneralUser!="Y") hideMe #end">
+			<div id="radioGroup" class="NotChanged #if($isSuperUser=='Y' || $isAuthPurchaseAgent=='Y') hideMe #end">
 				<h4>$locale.get("product.label.purchaseagentListforGeneralUsercartAproval")</h4>
 				#if($agentUserList.size()>0)
 				<ul class="cimm_purchaseagentList">
