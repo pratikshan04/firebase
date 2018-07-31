@@ -313,6 +313,7 @@
           temp_html = temp_html.replace(new RegExp((regex2+'(?=[^"]*">)'), 'gm'), '$1'+gm.options.classRenameSuffix);
           canvas.html(temp_html);
           if(reInit){
+        	  canvas.find('[data-type="widget"]').html("");
         	  gm.deinitCanvas();
               gm.initCanvas();
           }
@@ -962,7 +963,21 @@ console.log("Custom : "+curr_control.dataToolElement);
             gm.initGlobalCustomControls();
             gm.initNewContentElem();
             gm.reBuildBanner(true);
-            $("#mycanvas a[href]").click(function(e) { e.preventDefault(); });
+            $("#mycanvas a[href]").click(function(e) {
+            	e.preventDefault();
+				if($(this).attr("href").indexOf('cmsStaticPageByPageNameCms') >= 0){
+					var url = $(this).attr("href");
+					$.ajax({
+						type: "GET",
+						url: url,
+						success: function(msg){
+							var dataHTML = $(msg).find("#mycanvas").html();
+							$("#gm-canvas").html(dataHTML);
+							gm.initCanvas();
+						}
+					});
+				}
+            });
         };
 
         /**
@@ -1309,7 +1324,21 @@ console.log("Custom : "+curr_control.dataToolElement);
 		        		console.log("Slide Var : " + sliderVar);
 		        		initJssorSlides(sliderVar);
 		        		}
-						$("#mycanvas a[href]").click(function(e) { e.preventDefault(); });
+						$("#mycanvas a[href]").click(function(e) {
+							e.preventDefault();
+							if($(this).attr("href").indexOf('cmsStaticPageByPageNameCms') >= 0){
+								var url = $(this).attr("href");
+								$.ajax({
+									type: "GET",
+									url: url,
+									success: function(msg){
+										var dataHTML = $(msg).find("#mycanvas").html();
+										$("#gm-canvas").html(dataHTML);
+										gm.initCanvas();
+									}
+								});
+							}
+						});
                     },tolerance: 'pointer'
             };
           
@@ -1595,7 +1624,7 @@ console.log("Custom : "+curr_control.dataToolElement);
         gm.reset=function(){
             gm.log("~~RESET~~");
             gm.deinitCanvas();
-            gm.initCanvas();            
+            gm.initCanvas();
         };
         
         gm.reBuildBanner = function(loadBanner){
