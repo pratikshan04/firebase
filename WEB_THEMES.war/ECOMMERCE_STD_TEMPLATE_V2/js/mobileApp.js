@@ -36,11 +36,11 @@ function callToVisionapi(){
 }
 function getcookiefromdocument(){
 	var msg="passsessionid:";
-	var cookie = document.cookie;
-	var session = cookie.split(";");
-	try{Android.passSessionid(session);}
+	var cookie = document.getElementById("appID").value;
+	//var session = cookie.split(";");
+	try{Android.passSessionid(cookie);}
 	catch(err){
-		msg = msg+session;
+		msg = msg+cookie;
 		webkit.messageHandlers.callbackHandler.postMessage(msg);
 		console.log('The native context does not exist yet');
 	}
