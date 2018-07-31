@@ -56,11 +56,10 @@ function fingerPrint(userName, password){
 function fingerPrintpopup(){
 	var unps = "FPauthenticationpopup";
 	try {
-		Android.fingerprintpopup();
-	}
-	catch(err){
+		Android.enablefpauthentication();
+	}catch(err){
 		webkit.messageHandlers.callbackHandler.postMessage(unps);
-	console.log('The native context does not exist yet');
+		console.log('The native context does not exist yet');
 	}
 }
 function prodGrpCpnPopup(){
