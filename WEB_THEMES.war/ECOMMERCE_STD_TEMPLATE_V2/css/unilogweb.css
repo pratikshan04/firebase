@@ -970,25 +970,6 @@ header .cimm_header .cimm_header_mid .cimm_logo img {
   margin: auto;
 }
 
-header .cimm_header .cimm_header_mid .cimm_searchWrapper {
-  text-align: center;
-  margin: 55px 0 18px;
-  position: relative;
-}
-
-header .cimm_header .cimm_header_mid .cimm_searchWrapper input[type='text'] {
-  border: 1px solid #A1A1A1;
-  border-radius: 0px;
-  font-family: "RobotoRegular";
-}
-
-header .cimm_header .cimm_header_mid .cimm_searchWrapper .cimm_searchIcon {
-  border: 1px solid #A1A1A1;
-  border-radius: 0px;
-  width: 47px;
-  color: #FFF;
-}
-
 header .cimm_header .cimm_header_mid .cimm_signWrap {
   text-align: right;
   margin: 10px 0px;
@@ -1030,79 +1011,6 @@ header .cimm_header .cimm_header_mid .cimm_signWrap li span.imgBox em {
   color: #FFF;
   top: 10px;
   font-size: 32px;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow {
-  position: absolute;
-  top: 50px;
-  background: #FFF;
-  right: 38px;
-  width: 370px;
-  min-height: 300px;
-  left: auto;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
-  border: 2px solid #A1A1A1;
-  font-family: RobotoRegular;
-  font-size: 12px;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow form {
-  background: #EBEBEB;
-  padding: 18px;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow form .form-control {
-  height: 42px;
-  box-shadow: none;
-  border: 1px solid #A1A1A1;
-  border-radius: 2px;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow form .form-group label {
-  text-transform: uppercase;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow ul,
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow ul li {
-  width: 100%;
-  text-transform: none;
-  font-family: "RobotoRegular";
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap {
-  text-transform: none;
-  padding-top: 6px;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .button, header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .calendarFilterWrap .tableHeader ul.calendarFilterHead li, .calendarFilterWrap .tableHeader ul.calendarFilterHead header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap li, header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .cimm_inlineButton, header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .multiTab .multiTabContent .buttonWrap .btnPrevious, .multiTab .multiTabContent .buttonWrap header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .btnPrevious,
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .multiTab .multiTabContent .buttonWrap .btnNext, .multiTab .multiTabContent .buttonWrap header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .btnNext, header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .rememberLogWrap .btnFinish {
-  width: 192px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .customCheckBox span {
-  text-transform: capitalize;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .forgotPassword {
-  font-family: "RobotoRegular";
-  margin-top: 15px;
-  font-weight: normal;
-  text-decoration: underline;
-  text-align: right;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .register_link {
-  padding: 26px 18px;
-}
-
-header .cimm_header .cimm_header_mid .cimm_signWrap li .loginWindow .register_link a {
-  color: #FFF;
-  font-size: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 header .cimm_header .cimm_header_mid .cimm_signWrap li .myAccountMenu {
@@ -1181,6 +1089,98 @@ header .cimm_header .cimm_header_mid .cimm_signWrap li.cartCountDisplayLi a svg 
   position: absolute;
   top: 10px;
   left: 5px;
+}
+
+.loginWindow {
+  position: absolute;
+  top: 50px;
+  background: #FFF;
+  right: 38px;
+  width: 370px;
+  min-height: 300px;
+  left: auto;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  border: 2px solid #A1A1A1;
+  font-family: RobotoRegular;
+  font-size: 12px;
+}
+
+.loginWindow form {
+  background: #EBEBEB;
+  padding: 18px;
+}
+
+.loginWindow form .form-control {
+  height: 42px;
+  box-shadow: none;
+  border: 1px solid #A1A1A1;
+  border-radius: 2px;
+}
+
+.loginWindow form .form-group label {
+  text-transform: uppercase;
+}
+
+.loginWindow ul,
+.loginWindow ul li {
+  width: 100%;
+  text-transform: none;
+  font-family: "RobotoRegular";
+}
+
+.loginWindow .rememberLogWrap {
+  text-transform: none;
+  padding-top: 6px;
+}
+
+.loginWindow .rememberLogWrap .button, .loginWindow .rememberLogWrap .calendarFilterWrap .tableHeader ul.calendarFilterHead li, .calendarFilterWrap .tableHeader ul.calendarFilterHead .loginWindow .rememberLogWrap li, .loginWindow .rememberLogWrap .cimm_inlineButton, .loginWindow .rememberLogWrap .multiTab .multiTabContent .buttonWrap .btnPrevious, .multiTab .multiTabContent .buttonWrap .loginWindow .rememberLogWrap .btnPrevious,
+.loginWindow .rememberLogWrap .multiTab .multiTabContent .buttonWrap .btnNext, .multiTab .multiTabContent .buttonWrap .loginWindow .rememberLogWrap .btnNext, .loginWindow .rememberLogWrap .btnFinish {
+  width: 192px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.loginWindow .customCheckBox span {
+  text-transform: capitalize;
+}
+
+.loginWindow .forgotPassword {
+  font-family: "RobotoRegular";
+  margin-top: 15px;
+  font-weight: normal;
+  text-decoration: underline;
+  text-align: right;
+}
+
+.loginWindow .register_link {
+  padding: 26px 18px;
+}
+
+.loginWindow .register_link a {
+  color: #FFF;
+  font-size: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.cimm_searchWrapper {
+  text-align: center;
+  margin: 55px 0 18px;
+  position: relative;
+}
+
+.cimm_searchWrapper input[type='text'] {
+  border: 1px solid #A1A1A1;
+  border-radius: 0px;
+  font-family: "RobotoRegular";
+}
+
+.cimm_searchWrapper .cimm_searchIcon {
+  border: 1px solid #A1A1A1;
+  border-radius: 0px;
+  width: 47px;
+  color: #FFF;
 }
 
 nav.navbar {
@@ -1297,7 +1297,7 @@ nav.navbar .cimm_nav > ul > li > .dropdown-menu > ul > li > a {
 .cimm_leftnav .cimm_filter .cimm_filter-block, .cimm_leftnav .cimm_filter .cimm_search-block {
   background: transparent;
   padding: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   border: 0px;
 }
 
@@ -1340,7 +1340,15 @@ nav.navbar .cimm_nav > ul > li > .dropdown-menu > ul > li > a {
   color: #46acee;
 }
 
-.cimm_leftnav .cimm_filter .cimm_filter-block .cimm_filter_block-container ul li a, .cimm_leftnav .cimm_filter .cimm_search-block .cimm_filter_block-container ul li a {
+.cimm_leftnav .cimm_filter .cimm_filter-block .cimm_filter_block-container .filterTextBox, .cimm_leftnav .cimm_filter .cimm_search-block .cimm_filter_block-container .filterTextBox {
+  margin-top: 10px;
+}
+
+.cimm_leftnav .cimm_filter .cimm_filter-block .cimm_filter_block-container .slimScrollDiv, .cimm_leftnav .cimm_filter .cimm_search-block .cimm_filter_block-container .slimScrollDiv {
+  margin-top: 10px;
+}
+
+.cimm_leftnav .cimm_filter .cimm_filter-block .cimm_filter_block-container ul li a, .cimm_leftnav .cimm_filter .cimm_search-block .cimm_filter_block-container ul li a, .cimm_leftnav .cimm_filter .cimm_filter-block .cimm_filter_block-container ul li label span, .cimm_leftnav .cimm_filter .cimm_search-block .cimm_filter_block-container ul li label span {
   font-family: "RobotoRegular";
   font-size: 14px;
   color: #404040;
