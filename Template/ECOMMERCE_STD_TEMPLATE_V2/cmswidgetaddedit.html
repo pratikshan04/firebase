@@ -55,8 +55,7 @@
 #end
 </select></div>
 <br />
-<div id="CMS_widgetDataHidden" style="display:none;">$!widgetData.templateCode</div>
-<label class="editFormLabel">Template Code<span style="color:red;">*</span> :</label> <textarea style="width:200px;" name="widget.templateCode" id="templateCode"></textarea>
+<label class="editFormLabel">Template Code<span style="color:red;">*</span> :</label> <textarea style="width:200px;" name="widget.templateCode" id="templateCode">$!widgetData.templateCode.replaceAll('</textarea>','&lt;/textarea&gt;')</textarea>
 <br />
 
 <br />
@@ -106,7 +105,6 @@
 			 
 			 
 			 <script>
-			 document.getElementById("templateCode").value = document.getElementById("CMS_widgetDataHidden").innerHTML;
 			 var editor = CodeMirror.fromTextArea(document.getElementById("templateCode"), {
 		          lineNumbers: true,
 					mode: "text/html",
