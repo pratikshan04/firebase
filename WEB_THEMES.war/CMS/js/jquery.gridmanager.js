@@ -1525,6 +1525,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 					canvas.prepend(gm.createRow(colWidths));
 				}
 			//$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+				canvas.find('[data-type="widget"]').html("");
                 gm.reset();
                 e.preventDefault();
             });
