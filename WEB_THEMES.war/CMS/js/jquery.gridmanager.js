@@ -415,7 +415,7 @@
             	  $(".cms_leftMenu, .containFluidEl").hide();
                  gm.deinitCanvas();
 				 		jQuery(".readyTemplatesForm").hide();
-							
+			 			$(this).html("Back");
 							 canvas.html($('<textarea/>').attr("id","sourceEditor").attr("cols", 130).attr("rows", 25).val(canvas.html()));
 			                 gm.mode="html";
 			                // $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
@@ -446,6 +446,7 @@
 						  } else {
 							  $(".cms_leftMenu, .containFluidEl").show();
 							  showActionIcons();
+							  $(this).html("<span class='fa fa-code'></span> Source");
 							  //CodeMirror.toTextArea();
 							  document.getElementById("sourceEditor").value = editor.getValue();
 							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
