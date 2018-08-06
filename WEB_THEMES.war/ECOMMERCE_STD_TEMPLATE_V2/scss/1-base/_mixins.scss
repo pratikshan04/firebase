@@ -372,9 +372,16 @@ $icons: (
 					$lf-uppercase: map-get($leftnav_style, filter_block_lf-uppercase);
 					
                     .cimm_filter_block-container{
+						.filterTextBox{
+							margin-top:10px;
+						}
+						.slimScrollDiv{
+							margin-top: 10px;
+						}
+						
                         ul{
                             li{
-                                a{
+                                a, label span{
                                     @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
                                     @if ($lf-uppercase != false){
                                         text-transform: uppercase; 
