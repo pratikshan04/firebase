@@ -1119,6 +1119,16 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     background-size: contain;
     position: absolute;
     top: 0;
+    &.clearenceTagSmall {
+        height: 45px;
+        width: 45px;
+    }
+}
+.tabelImage{
+    a{
+        display: inline-block;
+        position: relative;
+    }
 }
 .cimm_staticPageWrap{
     .container-fluid{

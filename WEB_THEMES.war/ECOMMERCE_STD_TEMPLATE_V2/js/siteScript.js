@@ -1181,7 +1181,7 @@ function addToProductList(groupName,groupId){
 	});
 }
 function leftFilterScroll(){
-	$('.leftFilterScroll').slimScroll({
+	$('.cimm_filter-scrollbar').slimScroll({
 		height: '210px',
 		railVisible: true,
 		alwaysVisible: true,
@@ -3106,14 +3106,6 @@ $(function(){
 		alwaysVisible: true,
 		opacity:'0.8'
 	});
-	
-	$('.collapse').on('shown.bs.collapse', function(event) {
-      	event.stopPropagation();
-        $(this).parent().find(".fa-plus-circle").removeClass("fa-plus-circle").addClass("fa-minus-circle");
-    }).on('hidden.bs.collapse', function(event) {
-    	event.stopPropagation();
-        $(this).parent().find(".fa-minus-circle").removeClass("fa-minus-circle").addClass("fa-plus-circle");
-    });
 	
 	if ($(".formatPhoneNumber").length > 0) {
 		$(".formatPhoneNumber").each(function(){
