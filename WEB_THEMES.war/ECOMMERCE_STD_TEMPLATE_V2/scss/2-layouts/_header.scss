@@ -71,25 +71,8 @@ header {
                     right: 0;
                     margin: auto;
                 }
-
             }
-            .cimm_searchWrapper { 
-                text-align: center;
-                margin: 55px 0 18px;
-                position: relative;
-
-                input[type='text'] {
-                    border: 1px solid $border-color;
-                    border-radius: 0px;
-                    font-family: $default_font-family;
-                }
-                .cimm_searchIcon {
-                    border: 1px solid $border-color;
-                    border-radius: 0px;
-                    width: 47px;
-                    color: $white;
-                }
-            }
+            
             .cimm_signWrap {
                 text-align: right;
                 margin: 10px 0px;
@@ -124,71 +107,6 @@ header {
                             color: $white;
                             top: 10px;
                             font-size: 32px;
-                        }
-                    }
-                    .loginWindow {
-                        position: absolute;
-                        top: 50px;
-                        background: $white;
-                        right: 38px;
-                        width: 370px;
-                        min-height: 300px;
-                        left: auto;
-                        border: none;
-                        border-radius: 0;
-                        padding: 0;
-                        margin: 0;
-                        border: 2px solid $border-color;
-                        font-family: RobotoRegular;
-                        font-size: 12px;
-                        form {
-                            background: $login_form-bg;
-                            padding: 18px;
-                            .form-control {
-                                height: 42px;
-                                box-shadow: none;
-                                border: 1px solid $border-color;
-                                border-radius: 2px;
-                            }
-                            .form-group{
-                                label{
-                                    text-transform: uppercase;
-                                }
-                            }
-                        }
-                        ul,
-                        ul li {
-                            width: 100%;
-                            text-transform: none;
-                            font-family: $default_font-family;
-                        }
-                        .rememberLogWrap {
-                            text-transform: none;
-                            padding-top: 6px;
-                            .button {
-                                width: 192px;
-                                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-                            }
-                        }
-                        .customCheckBox {
-                            span{
-                                text-transform: capitalize;
-                            }
-                        }
-                        .forgotPassword {
-                            font-family: $default_font-family;
-                            margin-top: 15px;
-                            font-weight: normal;
-                            text-decoration: underline;
-                            text-align: right;
-                        }
-                        .register_link{
-                            padding: 26px 18px;
-                            a{
-                                color: $white;
-                                font-size: 16px;
-                                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-                            }
                         }
                     }
                     .myAccountMenu {
@@ -261,5 +179,90 @@ header {
                 left: 5px;
             }
         }
+    }
+}
+
+
+.loginWindow {
+    position: absolute;
+    top: 50px;
+    background: $white;
+    right: 38px;
+    width: 370px;
+    min-height: 300px;
+    left: auto;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    border: 2px solid $border-color;
+    font-family: RobotoRegular;
+    font-size: 12px;
+    form {
+        background: $login_form-bg;
+        padding: 18px;
+        .form-control {
+            height: 42px;
+            box-shadow: none;
+            border: 1px solid $border-color;
+            border-radius: 2px;
+        }
+        .form-group{
+            label{
+                text-transform: uppercase;
+            }
+        }
+    }
+    ul,
+    ul li {
+        width: 100%;
+        text-transform: none;
+        font-family: $default_font-family;
+    }
+    .rememberLogWrap {
+        text-transform: none;
+        padding-top: 6px;
+        .button {
+            width: 192px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+    }
+    .customCheckBox {
+        span{
+            text-transform: capitalize;
+        }
+    }
+    .forgotPassword {
+        font-family: $default_font-family;
+        margin-top: 15px;
+        font-weight: normal;
+        text-decoration: underline;
+        text-align: right;
+    }
+    .register_link{
+        padding: 26px 18px;
+        a{
+            color: $white;
+            font-size: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+    }
+}
+
+.cimm_searchWrapper { 
+    text-align: center;
+    margin: 55px 0 18px;
+    position: relative;
+
+    input[type='text'] {
+        border: 1px solid $border-color;
+        border-radius: 0px;
+        font-family: $default_font-family;
+    }
+    .cimm_searchIcon {
+        border: 1px solid $border-color;
+        border-radius: 0px;
+        width: 47px;
+        color: $white;
     }
 }
