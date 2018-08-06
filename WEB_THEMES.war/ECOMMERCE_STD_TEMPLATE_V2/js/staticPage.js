@@ -62,6 +62,7 @@ function loadWidgets(){
 		generateWidget(widgetId);
 	});
 	homeCarousels();
+	$('.cimm_formContent li').removeAttr('title');
 }
 function generateForm(formId){
 	jQuery.ajax({

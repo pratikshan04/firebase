@@ -31,7 +31,7 @@
 			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts")</div>
 			#if($categMenu.size()>5)
 			<div class="cimm_filter_block-container collapse in" id="categoryMenu">
-			<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+			<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 			<ul class="pRight-3">
 			#else
 			<ul id="categoryMenu" class="collapse in pRight-3">
@@ -60,7 +60,7 @@
 				#if($count>5)
 				<div class="cimm_filter_block-container collapse in" id="brandsMenu">
 				<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'brandsMenu');"value="Search Brands"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
-				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="navList_brandsMenu pRight-3">
 				#else
 				<ul class="collapse in pRight-3 navList_brandsMenu" id="brandsMenu">
@@ -91,7 +91,7 @@
 				#if($count>5)
 				<div class="cimm_filter_block-container collapse in" id="manufacturersMenu">
 				<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'manufacturersMenu');"value="Search Manufacturers"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
-				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="navList_manufacturersMenu pRight-3">
 				#else
 				<ul class="collapse in pRight-3 navList_manufacturersMenu" id="manufacturersMenu">
@@ -133,7 +133,7 @@
 				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventsLocations">$locale.get("event.label.location") </div>
 					#if($eventsLocations.size()>5)
 					<div class="cimm_filter_block-container collapse in" id="eventsLocations">
-					<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+					<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 					<ul class="pRight-3">
 					#else
 					<ul id="eventsLocations" class="collapse in pRight-3">
@@ -157,7 +157,7 @@
 				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventCategoryList">$locale.get("product.label.category")</div>
 				#if($eventCatList.size()>5)
 				<div class="cimm_filter_block-container collapse in" id="eventCategoryList">
-				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="pRight-3">
 				#else
 				<ul id="eventCategoryList" class="collapse in pRight-3">
