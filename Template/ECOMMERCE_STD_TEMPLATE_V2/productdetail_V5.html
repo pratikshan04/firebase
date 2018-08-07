@@ -27,71 +27,73 @@
 	#else
 	#if($!CommonDBQuerySystemParameter.get("ENABLE_STICKY_HEADER")=="Y")
 	<div class="detailCloneWrap hideForPrint row hidden">
-		<div id="detailClone" class="clearAfter container">
-			<div class="row">
-				<div class="col-xs-12">
-					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-					<div class="cloneImg"> 
-						<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-					</div>
-					#else
-					<div class="cloneImg"> 
-						<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
-					</div>
-					#end
-					<div class="cloneTitle">
-						#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
-						<h2>
-						#if($categoryList.categoryName.length()>22)
-							$!itemProductTitle.substring(0, 22)...
+		<div id="detailClone">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+						<div class="cloneImg"> 
+							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+						</div>
 						#else
-							$!itemProductTitle
+						<div class="cloneImg"> 
+							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+						</div>
 						#end
-						</h2>
-					</div>
-					<div class="cloneAddtocartWrap">
-						<div id="clonePrice" class="price"></div>
-						<ul>
-							<li class="cimm_qtyWrap">
-							<strong>$!locale.get("form.label.tableQty")</strong>
-							<span>
-							<input type="text" title="$!locale.get('product.label.quantity')" data-cloneQty="cloneQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
-							</span>
-							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-							    #if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-							    	#if($itemData.price>0)
-							    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
-								    #else
-						     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
-									#end
-							    #else
-						    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-								#end
+						<div class="cloneTitle">
+							#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+							<h2>
+							#if($categoryList.categoryName.length()>22)
+								$!itemProductTitle.substring(0, 22)...
 							#else
-								#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-					     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
-								#else
-						    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-								#end
+								$!itemProductTitle
 							#end
-							</li>
-							<li class="detailButtonWrap hideForPrint clearAfter">
-								<!-- My Product Group -->
-								<div class="productGroupBtn dropdown paddingY-2">
-									#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
-									<a id="$!groupPop" class="popMsg hideMe"></a>
-									#if($userLogin)
-										<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
-									#else
-										<a data-toggle="modal" data-target="#loginModal"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+							</h2>
+						</div>
+						<div class="cloneAddtocartWrap">
+							<div id="clonePrice" class="price"></div>
+							<ul>
+								<li class="cimm_qtyWrap">
+								<strong>$!locale.get("form.label.tableQty")</strong>
+								<span>
+								<input type="text" title="$!locale.get('product.label.quantity')" data-cloneQty="cloneQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+								</span>
+								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+								    #if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+								    	#if($itemData.price>0)
+								    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+									    #else
+							     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+										#end
+								    #else
+							    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 									#end
-									<ul id="ulg$!itemData.itemId" class="dropdown-menu">
-										<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
-									</ul>
-								</div>
-								<!-- My Product Group -->
-							</li>
-						</ul>
+								#else
+									#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+						     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+									#else
+							    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+									#end
+								#end
+								</li>
+								<li class="detailButtonWrap hideForPrint clearAfter">
+									<!-- My Product Group -->
+									<div class="productGroupBtn dropdown paddingY-2">
+										#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
+										<a id="$!groupPop" class="popMsg hideMe"></a>
+										#if($userLogin)
+											<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+										#else
+											<a data-toggle="modal" data-target="#loginModal"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+										#end
+										<ul id="ulg$!itemData.itemId" class="dropdown-menu">
+											<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
+										</ul>
+									</div>
+									<!-- My Product Group -->
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

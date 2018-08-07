@@ -191,7 +191,7 @@ input[type="text"], input[type="password"], select {
 					<a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Unlink Home Page" class="actionIcon" ></a>
 					#else
 					<a href="javascript:setHomePage($pageList.id)"><img src="$webThemes/CMS/images/small/links.png" title="Set as Home page" class="actionIcon"></a>
-					<a href="javascript:deletePage($pageList.id)"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Page" class="actionIcon"></a>
+					<a href="javascript:deletePage($pageList.id,'$pageList.pageType','$pageList.pageName')"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Page" class="actionIcon"></a>
 					#end
 				</td>
 				<td class="text-center"> $iindex </td>
@@ -260,13 +260,13 @@ function setHomePage(id){
 return false;
 }
 
-function deletePage(id){
+function deletePage(id,pType,pName){
 	var r = confirm("Are you sure you want to delete?");
 	if (r == true) {
 		jQuery.ajax({
 			   type: "POST",
 			   url: "addUpdateStaticPageCms.action",
-			   data: "type=delete&pageData.id="+id+"&dt="+new Date(),
+			   data: "type=delete&pageData.id="+id+"&dt="+new Date()+"&pageData.pageType="+pType+"&pageData.pageName="+pName,
 			   success: function(msg){
 	  		  		 window.location.href="listStaticPageCms.action";
 				}	

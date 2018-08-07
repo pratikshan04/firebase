@@ -74,41 +74,68 @@ $header_mid-bg  : transparent;
 
 /*__________________________________Navigation Setting_______________________________________*/
 //Navigation color and font declaration
-$mnav-bg			: $secondary_color;
-$mnav_lf-family		: $default_font-family; // Main navigation link font family
-$mnav_lf-color		: $tertiary_color;  //Main navigation link font color
-$mnav_lf-size		: $default_font-size;   //Main navigation link font size
 
-$mnav_lh-bg			: $primary_color;       //Main navigation link hover background
-$mnav_lhf-color		: $white;               //Main navigation link hover font color
-
-$mnav_la-bg         : $primary_color;       //Main navigation (la = link active) bg 
-$mnav_laf-color     : $white;               //Main navigation (la = link active font) color
-
-//Main sub navigation
-$msnav_bg			: $tertiary_color;
-
-$mnav_primary-bg	: $primary-color;
-$mnav_secondary-bg	: $secondary-color;
-
-$msnav_lf-color     : $secondary-font_color;
-$msnav_lh-bg        : $secondary-font_color;
-$msnav_la-color     : $secondary-font_color;
-
+$main_nav: (
+    navbar: (
+        mnav-bg: $secondary_color,
+        mnav_lf-color: $tertiary_color,         //Main navigation link font color
+        mnav_lf-size: $default_font-size,       //Main navigation link font size
+        mnav_lf-family: $default_font-family,   //Main navigation link font family
+        mnav_lf-uppercase: true,                //Main navigation link in uppercase
+        mnav_lf-dividers: false,                //Main navigation link dividers Ex: "|" 
+        //on hover section
+        mnav_lh-bg: $primary_color,             //Main navigation link hover background
+        mnav_lhf-color: $white,                 //Main navigation link hover font color
+        //Sub Navigation Section
+        subnav-bg: $tertiary_color, 
+        subnav-lf-size: $default_font-size,
+        subnav-lf-color: $secondary-font_color,
+        subnav-lf-family: $default_font-family
+    )
+);
 
 /*______________________________Left Navigation Setting_______________________________________*/
 //Left Navigation
-$cimm_leftmenu          : transparent;
-$lnav_title-bg          : $white;
-$lnav_title_text-color  : $black;
-$lnav_icon-color        : $primary_color;
 
-$lnav_filter-bg         : transparent;
-$lnav_filter-title-bg   : transparent;
+$left_nav:(
+    leftnav:( 
+        filter-bg: transparent,
+        filter-border: false,               //Options true, "top", "bottom" and "top-bottom"
+        filter-padding: 0px, 
 
-$lnav_filter-title-font-family  : $heading_font-family;
-$lnav_filter-title-font-color   : $heading_font-color;
-$lnav_filter-title-font-size    : $heading_font-size;
+        filter_block-bg: transparent, 
+        filter_block-border: false,         //Options true, "top", "bottom" and "top-bottom"
+        filter_block-padding: 0px,
+        filter_block-margin: 0px, 
+        
+        //Left Nav Title 
+        filter_block_tf-bg: transparent,
+        filter_block_tf-border: bottom,       //Options true, "top", "bottom" and "top-bottom"
+        filter_block_tf-margin: 0px 0px,
+        filter_block_tf-padding: 12px 0px,
+        
+        filter_block_tf-color: $default_font-color,
+        filter_block_tf-fontfamily: $heading_font-family,
+        filter_block_tf-uppercase: true,
+        filter_block_tf-fontsize: $font_xlg,
+        
+        //Left Nav Title Accordian Icon
+        filter_block_ticon-close: "minus-circle", 
+        filter_block_ticon-open: "plus-circle",
+        filter_block_ticon-size: 18px,
+        filter_block_ticon-color: $primary_color,
+        filter_block_ticon_pos-top: 30%, 
+        filter_block_ticon_pos-right: 0px,
+
+        //Left Nav Link
+        filter_block_lf-color: $default_font-color,
+        filter_block_lhf-color: $secondary-color,
+        filter_block_lf-family: $default_font-family,
+        filter_block_lf-size: $font_md, 
+        filter_block_lf-uppercase: false
+    )
+);
+
 
 /*___________________________________Footer Setting___________________________________________*/
 //Footer 
@@ -199,8 +226,8 @@ $headings:(
         texttransform   : capitalize,
         color           : $default_font-color,
         fontsize        : $font_xlg,
-        marginvalue     : 10px 0px,
-        paddingvalue    : 0px 0px 10px 0px,
+        marginvalue     : 0px,
+        paddingvalue    : 0px,
         border          : false
     ),
     filter-block-title:(
@@ -256,21 +283,21 @@ $checkbox_checked-color: $primary_color;
 /*__________________________________ Category Page Setting_______________________________________*/
 
 //Categories Heading 
-
-$categories:(
-    border_all      : true, 
-    border_bottom   : false,
+$categories:( 
+    border          : true,   
     box_radius      : false, //If true kinldy update border as true
     box_shadow      : false,
+       
     title_bg        : false, // It it is true kidly update title background color in $category-item-bg
     title_font-color    : $default_font-color,
     title_font-family   : $default_font-family
-);
-
+); 
 $category-item-bg: transparent;
 $category-itemimage-bg: transparent;
+
 $category-itemname-bg: transparent;
 $category_hf-color: $secondary_font-color;
+
 
 
 /*__________________________________ Item Detail Page Setting_______________________________________*/

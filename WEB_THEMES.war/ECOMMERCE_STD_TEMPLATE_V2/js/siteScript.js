@@ -31,7 +31,7 @@ function isPhoneNumberValid(strPhone){
 //---------------------- Phone number validate
 function IsNumeric(e) {
 	var keyCode = (e.which) ? e.which : e.keyCode;
-	if (keyCode > 31 && (keyCode < 37 || keyCode > 39) && (keyCode < 48 || keyCode > 57) || keyCode == 13){
+	if (keyCode > 31 && (keyCode < 48 || keyCode > 57) || keyCode == 13){
 		return false;
 	}
 	return true;
@@ -1181,7 +1181,7 @@ function addToProductList(groupName,groupId){
 	});
 }
 function leftFilterScroll(){
-	$('.leftFilterScroll').slimScroll({
+	$('.cimm_filter-scrollbar').slimScroll({
 		height: '210px',
 		railVisible: true,
 		alwaysVisible: true,
@@ -3107,14 +3107,6 @@ $(function(){
 		opacity:'0.8'
 	});
 	
-	$('.collapse').on('shown.bs.collapse', function(event) {
-      	event.stopPropagation();
-        $(this).parent().find(".fa-plus-circle").removeClass("fa-plus-circle").addClass("fa-minus-circle");
-    }).on('hidden.bs.collapse', function(event) {
-    	event.stopPropagation();
-        $(this).parent().find(".fa-minus-circle").removeClass("fa-minus-circle").addClass("fa-plus-circle");
-    });
-	
 	if ($(".formatPhoneNumber").length > 0) {
 		$(".formatPhoneNumber").each(function(){
 			$(this).attr("maxlength","12");
@@ -3683,13 +3675,13 @@ $(document).ready(function(){
 		$.get("getUsersByCustomerUnit.action",
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
 			function(data,status,xhr){
-			$("#salesrepModal").modal('hide');
+			//$("#salesrepModal").modal('hide');
 			$("#salesrepModal .modal-body").html(data);			
 			unblock();
-			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
-			$('#salesrepModal').on('shown.bs.modal', function () {
-				$('body').addClass('modal-open');
-			});
+			//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			//$('#salesrepModal').on('shown.bs.modal', function () {
+			//	$('body').addClass('modal-open');
+			//});
 		})
 		.fail(function(error){
 			unblock();
@@ -3709,7 +3701,7 @@ $(document).ready(function(){
 	});
 	
 	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
-		$("#salesrepModal").modal('hide');
+		//$("#salesrepModal").modal('hide');
 		var attributes = src.target.dataset;
 		loadUserByCustomer(attributes);
 	});
@@ -3734,4 +3726,10 @@ $(document).ready(function(){
 			bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
 		});
 	});
+});
+
+$("#loginModal").on('shown.bs.modal', function() {
+	if($("#isWebview").val() == "WEBVIEW"){
+		prodGrpCpnPopup();
+	}
 });

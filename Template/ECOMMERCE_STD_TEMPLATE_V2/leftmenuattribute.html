@@ -25,125 +25,128 @@
 </div> -->
 <!-- ******************End of Leftmenu Single attribute Filter************************-->
 <div class="cimm_filter">
-<div class="cimm_filter-block noBorder">
-	<div class="cimm_filter-block-title clearAfter">$!locale.get("product.label.search")</div>
-	#if($navigationType=="SEARCH")
-	<div class="cimm_searchWithin clearAfter marginY-2">
-		<div class="input-group">
-			<input type="text" class='form-control' placeholder="Search Within $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onkeypress="return runScript(event);" class="form-control"/>
-			<div class="input-group-btn">
-				<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
-			</div>
-		</div>
-	</div>
-	#else
-	<div class="cimm_searchWithin clearAfter marginY-2">
-		<form id="searchForm" action="$!searchWithInFormURL" method="get" class="clearAfter">
+	<div class="cimm_search-block">
+		<div class="cimm_search-block-title">$!locale.get("product.label.search")</div>
+		#if($navigationType=="SEARCH")
+		<div class="cimm_searchWithin marginY-2">
 			<div class="input-group">
-				<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
-				#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
-				#if($srchTyp)
-				<input type="hidden" name="srchTyp" value="$!srchTyp" />
-				#else
-				<input type="hidden" name="srchTyp" value="CATNAV" />
-				#end
+				<input type="text" class='form-control' placeholder="Search Within $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onkeypress="return runScript(event);" class="form-control"/>
 				<div class="input-group-btn">
-					<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
+					<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
 				</div>
 			</div>
-		</form>
-	</div>
-	#end
-	#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
-		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
-		<div class="cimm_filter-block-title clearAfter">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
-			<a href="$!navURL" class="cleatBtn pull-right">$!locale.get("product.label.clearAll")&nbsp;<em class="fa fa-times"></em></a>
 		</div>
-		<!--Refined By  : Filter Attributes-->
-		<div class="cimm_filter-block">
-			<div class="cimm_refinedMultiFilterResults">
-			<p class="filterTypeTitle" data-toggle="collapse" data-target="#mulitFilterTrail">$!locale.get("product.label.searchFilter")</p>
-				<div class="cimm_refinedAttribute" id="mulitFilterTrail">
-					<ol>
-						#foreach($!attributeFiltered in $!attrFilteredList)
-						#generateFileter($!attributeFiltered.attrName,$!attributeFiltered.attrValueEncoded,$!attributeFiltered.attrName,$!filterList)
-						<li>
-							<span class="Refine-label">
-							#if($attributeFiltered.attrName=="brand")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
-							#elseif($attributeFiltered.attrName=="category")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
-							#elseif($attributeFiltered.attrName=="manufacturerName")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
-							#else
-								$!attributeFiltered.attrName.replaceAll("attr_","")
+		#else
+		<div class="cimm_searchWithin marginY-2">
+			<form id="searchForm" action="$!searchWithInFormURL" method="get" class="clearAfter">
+				<div class="input-group">
+					<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
+					#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
+					#if($srchTyp)
+					<input type="hidden" name="srchTyp" value="$!srchTyp" />
+					#else
+					<input type="hidden" name="srchTyp" value="CATNAV" />
+					#end
+					<div class="input-group-btn">
+						<button type="submit" value=" $!locale.get('search.label.go') " id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
+					</div>
+				</div>
+			</form>
+		</div>
+		#end
+		
+		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
+			#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
+			<div class="cimm_filter-block-title">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
+				<a href="$!navURL" class="cleatBtn pull-right">$!locale.get("product.label.clearAll")&nbsp;<em class="fa fa-times"></em></a>
+			</div>
+			<!--Refined By  : Filter Attributes-->
+			<div class="cimm_filter-block">
+				<div class="cimm_refinedMultiFilterResults">
+					<p class="filterTypeTitle" data-toggle="collapse" data-target="#mulitFilterTrail">$!locale.get("product.label.searchFilter")</p>
+					<div class="cimm_refinedAttribute" id="mulitFilterTrail">
+						<ol>
+							#foreach($!attributeFiltered in $!attrFilteredList)
+							#generateFileter($!attributeFiltered.attrName,$!attributeFiltered.attrValueEncoded,$!attributeFiltered.attrName,$!filterList)
+							<li>
+								<span class="Refine-label">
+								#if($attributeFiltered.attrName=="brand")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
+								#elseif($attributeFiltered.attrName=="category")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
+								#elseif($attributeFiltered.attrName=="manufacturerName")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
+								#else
+									$!attributeFiltered.attrName.replaceAll("attr_","")
+								#end
+								</span>
+								<span class="Refine-value">$!attributeFiltered.attrValue.replaceAll('\"','')</span><a class="removeFilter pull-right" href="$!navURL#if($rUrl.length()>0)&attrFilterList=$!rUrl#end" title="$!locale.get('productGrid.label.removeThisItem')"> <em class="fa fa-times-circle"></em></a>
+							</li>
 							#end
-							</span>
-							<span class="Refine-value">$!attributeFiltered.attrValue.replaceAll('\"','')</span><a class="removeFilter pull-right" href="$!navURL#if($rUrl.length()>0)&attrFilterList=$!rUrl#end" title="$!locale.get('productGrid.label.removeThisItem')"> <em class="fa fa-times-circle"></em></a>
-						</li>
-						#end
-					</ol>
+						</ol>
+					</div>
 				</div>
 			</div>
-		</div>
+			<!--End of Refined By-->
 		#end 
-	 <!--End of Refined By-->
-			#set($iVal = 0)
-			<div class="cimm_filter filterBlock">
-			#set($filterCount = 0)
-			#foreach($!attrList in $!attrFilterData)
-				#foreach($!attrListVal in $!attrList.attrFilterList.keySet())
-					#set($displayAttribute = "Y")
-					#if($attrListVal=="brand")
-						#set($attrValueForSearch = "Brands")
-					#elseif($attrListVal=="manufacturerName")
-						#set($attrValueForSearch = "Manufacturer")
-					#elseif($attrListVal=="category")
-						#set($attrValueForSearch = "Category")
-					#else 
-						#set($attrValueForSearch = $!attrListVal)
-					#end
-					#if($attrFilteredList.size()==0 && ($!navigationType=="SEARCH" ||$!navigationType=="BRAND"))
-						#if($attrListVal=="brand")	
-						#elseif($attrListVal=="category")	
-						#else 
-							##set($displayAttribute = "N")
+	</div>
+		 
+	#set($iVal = 0)
+	#set($filterCount = 0)
+	#foreach($!attrList in $!attrFilterData)
+		#foreach($!attrListVal in $!attrList.attrFilterList.keySet())
+			#set($displayAttribute = "Y")
+			#if($attrListVal=="brand")
+				#set($attrValueForSearch = "Brands")
+			#elseif($attrListVal=="manufacturerName")
+				#set($attrValueForSearch = "Manufacturer")
+			#elseif($attrListVal=="category")
+				#set($attrValueForSearch = "Category")
+			#else 
+				#set($attrValueForSearch = $!attrListVal)
+			#end
+			
+			#if($attrFilteredList.size()==0 && ($!navigationType=="SEARCH" ||$!navigationType=="BRAND"))
+				#if($attrListVal=="brand")	
+				#elseif($attrListVal=="category")	
+				#else 
+					##set($displayAttribute = "N")
+				#end
+			#end
+			
+			#if($displayAttribute=="Y")
+				<div class="cimm_filter-block"><!-- #if($filterCount > 4)hideMe #end -->
+					#set($count = 0)
+					<div class="cimm_filter-block-title #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')  #else collapsed #end" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch</div>
+						#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
+							#set($count = $!count+1)
 						#end
-					#end
-					#if($displayAttribute=="Y")
-						<div class="cimm_filter-block"><!-- #if($filterCount > 4)hideMe #end -->
-						#set($count = 0)
-							<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_')">$!attrValueForSearch #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')<span class="plusToggle"><em class="fa fa-minus-circle"></em></span>#else<span class="plusToggle"><em class="fa fa-plus-circle"></em></span>#end</div>
+						<div class="cimm_filter_block-container collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replace(' ','_').replace('/','_')">
+							#if($count>6)
+								<input type="text" id="box_$!attrValueForSearch" class="form-control filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');" title="Search $!attrValueForSearch" value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
+								<div class="cimm_filter-scrollbar">
+							#end
+							<ul class="#if($attrValueForSearch=='Amp Range' || $attrValueForSearch=='Size')sortByNumbers#end navList_$!attrValueForSearch.replaceAll(' ','-')">
+								#set($k = 0)
 								#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
-									#set($count = $!count+1)
+									<li>
+										<em style="display:none">$!filterVal.attrValue</em>
+										<label class="customCheckBox" for="multiFilter_$!{iVal}_$!{k}">
+											<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y") onclick="appendSearchByCheckBox('multiFilter_$!iVal');" #end />
+											<span>$!filterVal.attrValue ($!filterVal.resultCount)</span>
+											<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</span>
+											<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
+										</label>
+									</li>
+									#set($k = $!k+1)
 								#end
-								<div class="collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replace(' ','_').replace('/','_')">
-								#if($count>6)
-								<div class="testDiv">
-									<input type="text" id="box_$!attrValueForSearch" class="filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');" title="Search $!attrValueForSearch" value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
-									<div class="leftFilterScroll">
+								
+								#if($k>5)
+									<!-- <li class="">
+										<em class="fa fa-plus"></em> <a href="javascript:void(0);" onclick="loadList(this);" data-id="col_$!attrValueForSearch.replaceAll(' ','-')" class="filerViewButton" data-title="$!attrValueForSearch.replaceAll(' ','-')">$!locale.get('leftmenu.label.seeAll') $!attrValueForSearch.replaceAll(' ','-')</a>
+									</li> -->
 								#end
-								<ul class="#if($attrValueForSearch=='Amp Range' || $attrValueForSearch=='Size')sortByNumbers#end navList_$!attrValueForSearch.replaceAll(' ','-')">
-									#set($k = 0)
-									#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
-										<li>
-											<em style="display:none">$!filterVal.attrValue</em>
-											<label class="customCheckBox" for="multiFilter_$!{iVal}_$!{k}">
-												<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y") onclick="appendSearchByCheckBox('multiFilter_$!iVal');" #end />
-												<span>$!filterVal.attrValue ($!filterVal.resultCount)</span>
-												<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</span>
-												<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
-											</label>
-										</li>
-										#set($k = $!k+1)
-									#end
-									#if($k>5)
-										<!-- <li class="">
-											<em class="fa fa-plus"></em> <a href="javascript:void(0);" onclick="loadList(this);" data-id="col_$!attrValueForSearch.replaceAll(' ','-')" class="filerViewButton" data-title="$!attrValueForSearch.replaceAll(' ','-')">$!locale.get('leftmenu.label.seeAll') $!attrValueForSearch.replaceAll(' ','-')</a>
-										</li> -->
-									#end
 								#set($filterCount = $!filterCount + 1)
 							</ul>
 							#if($count>6)
 								</div>
-							</div>
 							#end
 							#if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")!="Y")
 								<div class="alignCenter marginY-2">
@@ -151,19 +154,18 @@
 								</div>
 							#end
 							#set($iVal = $!iVal+1)
-							</div>
 						</div>
-					#end                     
-				#end
+					</div>
+				#end                     
 			#end
-			</div>
+		#end
+				
 		#if($filterCount > 5)
 		<!-- <div class="cimm_filter-block alignCenter" id="loadMore">
-			<a href="javascript:void(0);" class="loadMore" data-index="$!filterCount">$!locale.get('leftmenu.label.showMoreFilter')</a>
-		</div> -->
+				<a href="javascript:void(0);" class="loadMore" data-index="$!filterCount">$!locale.get('leftmenu.label.showMoreFilter')</a>
+			</div> -->
 		#end
 	#end
-</div>
 </div>
 
 #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y")
@@ -175,31 +177,32 @@
 #end
 <!--Refine MUlti Filter Dependency-->
 #if($resultCount > 0 )
-<div style="display:none;" id="keyWordTxtTrail">$!keyWordTxt</div> 
- <div id="attrFilterList" style="display:none;">$!attrFilterList</div>
-<form action="Category.action" method="get" id="categoryForm">
- #if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip">#end
- <input type="hidden" name="levelNo" value="0">
- </form>
-<form action="$!itemsPerPageURL" method="get" id="multiFilterAttr">
-#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip" />#end
-#if($levelNoSkip)<input type="hidden" name="levelNo" value="$!levelNoSkip" />#end
-#if($gallery)<input type="hidden" name="gallery" value="$!gallery" />#end
-<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end" />
-<input type="hidden" name="keyWordTxt" id="keyWordTxtMulti" value="#if($keyWordTxt)$!keyWordTxt#end" />
-#if($srchTyp)
-<input type="hidden" id="srchTyp" name="srchTyp" value="$!srchTyp" />
-#else
-<input type="hidden" id="srchTyp" name="srchTyp" value="CATNAV" />
-#end
-#if($navigationType=="SEARCH")
-<input type="hidden" name="keyWord" value="#if($keyWord)$!keyWord#end" /> 
-<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
-<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
-#end
-#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
-#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
-<input type="hidden" id="multiFilterAttrList" name="attrFilterList" value='$!attrFilterList' />
-<input type="hidden" name="resultPage" value='$!resultPage' /> 
-</form> 
+	<div style="display:none;" id="keyWordTxtTrail">$!keyWordTxt</div> 
+	<div id="attrFilterList" style="display:none;">$!attrFilterList</div>
+	<form action="Category.action" method="get" id="categoryForm">
+		#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip">#end
+		<input type="hidden" name="levelNo" value="0">
+	</form>
+	
+	<form action="$!itemsPerPageURL" method="get" id="multiFilterAttr">
+		#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip" />#end
+		#if($levelNoSkip)<input type="hidden" name="levelNo" value="$!levelNoSkip" />#end
+		#if($gallery)<input type="hidden" name="gallery" value="$!gallery" />#end
+		<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end" />
+		<input type="hidden" name="keyWordTxt" id="keyWordTxtMulti" value="#if($keyWordTxt)$!keyWordTxt#end" />
+		#if($srchTyp)
+			<input type="hidden" id="srchTyp" name="srchTyp" value="$!srchTyp" />
+		#else
+			<input type="hidden" id="srchTyp" name="srchTyp" value="CATNAV" />
+		#end
+		#if($navigationType=="SEARCH")
+			<input type="hidden" name="keyWord" value="#if($keyWord)$!keyWord#end" /> 
+			<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
+			<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
+		#end
+		#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
+		#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
+		<input type="hidden" id="multiFilterAttrList" name="attrFilterList" value='$!attrFilterList' />
+		<input type="hidden" name="resultPage" value='$!resultPage' /> 
+	</form> 
  #end

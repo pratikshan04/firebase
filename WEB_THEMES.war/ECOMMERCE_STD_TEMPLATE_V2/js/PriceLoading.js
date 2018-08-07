@@ -159,9 +159,11 @@ function priceLoadMainFunction() {
 		if(availabilityElements.length<1){
 			availabilityElements = document.getElementById('Avail_'+partNumber);
 		}
-		for (var i = 0; i < availabilityElements.length; i++) {
-			var eachElement = availabilityElements[i];
-			eachElement.innerHTML = availabilityStr;
+		if(availabilityElements!=null){
+			for (var i = 0; i < availabilityElements.length; i++) {
+				var eachElement = availabilityElements[i];
+				eachElement.innerHTML = availabilityStr;
+			}
 		}
 	}
 
