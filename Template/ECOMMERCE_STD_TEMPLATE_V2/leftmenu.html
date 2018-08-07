@@ -28,10 +28,10 @@
 	<div class="cimm_filter">
 	#if($!LayoutName!="EventsPage")
 		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts") <span class="plusToggle"><em class="fa fa-minus-circle"></em></span></div>
+			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts")</div>
 			#if($categMenu.size()>5)
-			<div class="divWrap collapse in" id="categoryMenu">
-			<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+			<div class="cimm_filter_block-container collapse in" id="categoryMenu">
+			<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 			<ul class="pRight-3">
 			#else
 			<ul id="categoryMenu" class="collapse in pRight-3">
@@ -48,7 +48,7 @@
 		
 		#if($!CommonDBQuerySystemParameter.get("EnableSideMenuBrand")=="Y")
 		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#brandsMenu">$!locale.get("product.label.brands")<span class="plusToggle"><em class="fa fa-minus-circle"></em></div>
+			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#brandsMenu">$!locale.get("product.label.brands")</div>
 			#set($count = 0)
 			#if($brandList.size()>0) 
 				#set($countBrandList = 0)
@@ -58,9 +58,9 @@
 					#set($count = $count+1)
 				#end
 				#if($count>5)
-				<div class="divWrap collapse in" id="brandsMenu">
+				<div class="cimm_filter_block-container collapse in" id="brandsMenu">
 				<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'brandsMenu');"value="Search Brands"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
-				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="navList_brandsMenu pRight-3">
 				#else
 				<ul class="collapse in pRight-3 navList_brandsMenu" id="brandsMenu">
@@ -79,7 +79,7 @@
 	
 		#if($!CommonDBQuerySystemParameter.get("EnableSideMenuManufacturer")=="Y")
 		<div class="cimm_filter-block">
-		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#manufacturersMenu">$!locale.get("product.label.manufacturers")<span class="plusToggle"><em class="fa fa-minus-circle"></em></div>
+		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#manufacturersMenu">$!locale.get("product.label.manufacturers")</div>
 			#set($count = 0)
 			#if($!manufacturerList.size()>0) 
 				#set($countManufacturerList = 0)
@@ -89,9 +89,9 @@
 					#set($count = $count+1)
 				#end
 				#if($count>5)
-				<div class="divWrap collapse in" id="manufacturersMenu">
+				<div class="cimm_filter_block-container collapse in" id="manufacturersMenu">
 				<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'manufacturersMenu');"value="Search Manufacturers"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
-				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="navList_manufacturersMenu pRight-3">
 				#else
 				<ul class="collapse in pRight-3 navList_manufacturersMenu" id="manufacturersMenu">
@@ -111,7 +111,7 @@
 		#end
 		#if($leftStaticMenu.size > 0)
 		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#leftUtilityMenu">$!locale.get("product.heading.quickLinks")<span class="plusToggle"><em class="fa fa-minus-circle"></em></div>
+			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#leftUtilityMenu">$!locale.get("product.heading.quickLinks")</div>
 			<ul class="collapse in" id="leftUtilityMenu">
 				#foreach($headerMenu in $leftStaticMenu)
 					<li>
@@ -122,7 +122,7 @@
 		</div>
 		#end
 		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title">$!locale.get("product.heading.yourAccount")</div>
+			<div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div>
 			<ul class='myAccountLeftMenu'>
 				#parse("accountMenu.html")
 			</ul>
@@ -130,10 +130,10 @@
 		#else
 			#if($eventsLocations.size()>0)
 			<div class="cimm_filter-block">
-				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventsLocations">$locale.get("event.label.location") <span class="plusToggle"><em class="fa fa-minus-circle"></em></span></div>
+				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventsLocations">$locale.get("event.label.location") </div>
 					#if($eventsLocations.size()>5)
-					<div class="divWrap collapse in" id="eventsLocations">
-					<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+					<div class="cimm_filter_block-container collapse in" id="eventsLocations">
+					<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 					<ul class="pRight-3">
 					#else
 					<ul id="eventsLocations" class="collapse in pRight-3">
@@ -154,10 +154,10 @@
 			
 			#if($eventCatList.size()>0)
 			<div class="cimm_filter-block">
-				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventCategoryList">$locale.get("product.label.category") <span class="plusToggle"><em class="fa fa-minus-circle"></em></span></div>
+				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventCategoryList">$locale.get("product.label.category")</div>
 				#if($eventCatList.size()>5)
-				<div class="divWrap collapse in" id="eventCategoryList">
-				<div class="leftFilterScroll collapse in"> <!-- Add scrollWrap class for scroll -->
+				<div class="cimm_filter_block-container collapse in" id="eventCategoryList">
+				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="pRight-3">
 				#else
 				<ul id="eventCategoryList" class="collapse in pRight-3">

@@ -207,6 +207,12 @@ function submitFormToServer(that){
 		},
 		error: function(){
 			unblock();
+			var curSubmit = $(that).find("input[type='submit']"), curSubmitBtn = $(that).find("button[type='submit']"), btnVal = localStorage.getItem("btnVal");
+			if(curSubmit[0]){
+				$(curSubmit[0]).val(btnVal).attr("disabled", false);
+			}else if(curSubmitBtn[0]){
+				$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
+			}
 			bootAlert("small","error","Error","Something went wrong");
 		}
 	});
