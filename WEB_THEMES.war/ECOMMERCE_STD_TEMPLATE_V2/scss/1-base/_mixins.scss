@@ -241,6 +241,184 @@ $icons: (
 
 /*__________________________________End Main Navigation Mixin ______________________________*/
 
+/*_________________________________Left Navigation _________________________________________*/
+
+@mixin leftnav {
+    
+    @each $leftnav_type, $leftnav_style in $left_nav {
+        
+        $filter-bg: map-get($leftnav_style, filter-bg);
+        $filter-padding: map-get($leftnav_style, filter-padding);
+        $filter-border: map-get($leftnav_style, filter-border);
+
+        $filter_block-bg: map-get($leftnav_style, filter_block-bg);
+        $filter_block-border: map-get($leftnav_style, filter_block-border);
+        $filter_block-padding: map-get($leftnav_style, filter_block-padding);
+        $filter_block-margin: map-get($leftnav_style, filter_block-margin);
+        
+        $title-bg: map-get($leftnav_style, filter_block_tf-bg);
+        $title-border: map-get($leftnav_style, filter_block_tf-border);
+        $title-margin: map-get($leftnav_style, filter_block_tf-margin);
+		$title-padding: map-get($leftnav_style, filter_block_tf-padding);
+		
+        $title_icon-open: map-get($leftnav_style,  filter_block_ticon-open);
+		$title_icon-close: map-get($leftnav_style, filter_block_ticon-close);
+		$title_icon-size: map-get($leftnav_style, filter_block_ticon-size);
+		$title_icon-color: map-get($leftnav_style, filter_block_ticon-color);
+		$title_icon_pos-top: map-get($leftnav_style, filter_block_ticon_pos-top);
+		$title_icon_pos-right: map-get($leftnav_style, filter_block_ticon_pos-right);
+
+        $tf-faimly: map-get($leftnav_style, filter_block_tf-fontfamily);
+        $tf-color: map-get($leftnav_style, filter_block_tf-color);
+        $tf-size: map-get($leftnav_style, filter_block_tf-fontsize); 
+        $tf-uppercase: map-get($leftnav_style, filter_block_tf-uppercase);
+
+        
+        .cimm_#{$leftnav_type}{
+            //background: $nav-bg; 
+            .cimm_filter{ 
+
+                @if ($filter-bg != transparent){
+                    background: $filter-bg;
+                    padding: 10px; 
+                }
+                padding: $filter-padding;
+
+                @if $filter-border == true {
+                    @include add_border(all);
+                } @else if $filter-border == "bottom"{
+                    @include add_border(bottom);
+                } @else if $filter_border == "top"{
+                    @include add_border(top);
+                } @else if $filter_border == "top-bottom"{
+                    @include add_border(top);
+                    @include add_border(bottom);
+                } @else {
+                    border: 0px;
+                } 
+
+                .cimm_filter-block{
+                    background: $filter_block-bg;
+                    padding: $filter_block-padding;
+                    margin-bottom:  $filter_block-margin;
+                    
+                    @if $filter_block-border == true {
+                        @include add_border(all);
+                    } @else if $filter_block-border == "bottom"{
+                        @include add_border(bottom);
+                    } @else if $filter_block-border == "top"{
+                        @include add_border(top);
+                    } @else if $filter_block-border == "top-bottom"{
+                        @include add_border(top);
+                        @include add_border(bottom);
+                    } @else {
+                        border: 0px;
+                    }
+
+                    .cimm_filter-block-title{
+                        cursor: pointer;
+                        position: relative;
+                        background: $title-bg;
+                        padding: $title-padding; 
+                        margin: $title-margin; 
+                         
+						@include icon(after, 
+							$title_icon-close, 
+							$color: $title_icon-color, 
+							$size: $title_icon-size, 
+							$right: $title_icon_pos-right, 
+							$top: $title_icon_pos-top);
+ 
+                        &.collapsed{
+							@include icon(after, 
+							$title_icon-open, 
+							$color:$title_icon-color, 
+							$size: $title_icon-size, 
+							$right: $title_icon_pos-right, 
+							$top: $title_icon_pos-top);
+                        } 
+
+
+                        @if ($tf-uppercase != false){
+                            text-transform: uppercase; 
+                        } @else {
+                            text-transform: capitalize;
+                        }
+
+                        @include font(
+                            $family: $tf-faimly,
+                            $size: $tf-size, 
+                            $color: $tf-color
+                        );
+
+                        @if $title-border == true {
+                            @include add_border(all);
+                        } @else if $title-border == "bottom"{
+                            @include add_border(bottom);
+                        } @else if $title-border == "top"{
+                            @include add_border(top);
+                        } @else if $title-border == "top-bottom"{
+                            @include add_border(top);
+                            @include add_border(bottom);
+                        } @else {
+                            border: 0px;
+                        }
+                    }
+                    
+                    $lf-color: map-get($leftnav_style, filter_block_lf-color);
+                    $lhf-color: map-get($leftnav_style, filter_block_lhf-color);
+                    $lf-family: map-get($leftnav_style, filter_block_lf-family);
+                    $lf-size: map-get($leftnav_style, filter_block_lf-size);
+					$lf-uppercase: map-get($leftnav_style, filter_block_lf-uppercase);
+					
+                    .cimm_filter_block-container{
+						.filterTextBox{
+							margin-top:10px;
+						}
+						.slimScrollDiv{
+							margin-top: 10px;
+						}
+						
+                        ul{
+                            li{
+                                a, label span{
+                                    @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
+                                    @if ($lf-uppercase != false){
+                                        text-transform: uppercase; 
+                                    } @else {
+                                        text-transform: capitalize;
+                                    }
+                                }
+                            }
+                        }
+					}	
+
+					.cimm_myaccount-block-title{
+						@extend .cimm_filter-block-title;
+						&:after{
+							content: "";
+						}
+					}
+					
+				}
+				.cimm_search-block{ 
+					@extend .cimm_filter-block; 
+					.cimm_search-block-title{
+						@extend .cimm_filter-block-title;
+						&:after{
+							content: ""; 
+						}
+					}
+				}
+
+            }
+        }
+
+    }
+}
+
+/*_________________________________End Left Navigation__________________________*/
+
 
 /*______________________________________ Custom Buttons ___________________________________*/
 @mixin custom-btns {
@@ -418,7 +596,7 @@ $icons: (
 
 @mixin category_border{
 
-    .cimm_category-itemimage{
+    .cimm_category-itemimage{ 
 		@if (map-get($categories, border) == true){
 			@include add_border(all); 
 		} @else if (map-get($categories, border) == "top" ){
