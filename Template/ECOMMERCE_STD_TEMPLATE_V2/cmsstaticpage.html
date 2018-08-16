@@ -7,33 +7,29 @@ jQuery(document).ready(function() {
 		loop:false,
         keyPress:true,
         pager:false,
-        item:1
+        item:8
     });
 });
 </script>
 <style>
-#normalHead{pointer-events: none;}
-.cimm_footerEnclosure{pointer-events: none;}
+footer,header,nav{pointer-events: none;}
 ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li textarea {
  margin-top: 10px;
  }
 </style>
-<div class="row">
-	<div class="col-md-12">
-		<div class="readyTemplatesForm" >
-			<div class="sampleTemplateSlider">
-			<div id="template-slider" class="template-slider">				
-			#foreach($templateNamesList in $templateNames)	
+<div class="container">
+	<div class="row hideMe">
+		<div class="col-sm-6 col-xs-6 readyTemplatesForm">
+			<div id="template-slider" class="template-slider">
+				#foreach($templateNamesList in $templateNames)
 				<div>
-					<a href="cmsStaticPageByPageNameCms.action?pageName=$templateNamesList.templateName">					
-						<!--  img  height="28px" width="50px"  src="#{skinBean.imagePath}#{resourceBean.STATIC_PAGE_TEMPLATE_IMAGE_LIST}#{dynamicTemplates.templateImgName}" /-->
-						<img  height="28px" width="50px"  src="$templateNamesList.templateImgName" />
-					</a>								
-				</div>																					
-			#end
+					<a href="cmsStaticPageByPageNameCms.action?pageName=$templateNamesList.templateName">
+						<img  height="26px" width="100%" src="$templateNamesList.templateImgName" />
+					</a>
+				</div>
+				#end
 			</div>
-			</div>           
-			</div>
+		</div>
 	</div>
 </div>
 <div id="mycanvas">$!staticPageData.pageContent</div>   		

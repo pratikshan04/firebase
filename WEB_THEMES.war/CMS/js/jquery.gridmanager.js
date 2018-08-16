@@ -236,9 +236,10 @@
                      )
                   )
               );
-	         $("input[type=radio][name='deviceCol']").change(function(){
-	        	 var selectedDevice = $(this).val();
-	        	 if(selectedDevice === "tablet"){
+         	$('.readyTemplatesForm').detach().appendTo("#gm-addnew .row");
+         	$("input[type=radio][name='deviceCol']").change(function(){
+	        	var selectedDevice = $(this).val();
+	        	if(selectedDevice === "tablet"){
 	        		 gm.switchLayoutMode(768, 'reInit')
 	        	 }else if(selectedDevice === "mobile"){
 	        		 gm.switchLayoutMode(640, 'reInit')
@@ -312,6 +313,7 @@
           temp_html = temp_html.replace(new RegExp((regex2+'(?=[^"]*">)'), 'gm'), '$1'+gm.options.classRenameSuffix);
           canvas.html(temp_html);
           if(reInit){
+        	  canvas.find('[data-type="widget"]').html("");
         	  gm.deinitCanvas();
               gm.initCanvas();
           }
@@ -374,6 +376,7 @@
 				   jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');	
 					jQuery(".header-wrap").hide();
 					jQuery(".Cimm-Footer").hide();
+					$(this).html("Back");
 					var frameHeight = jQuery(".Cimm-MainContenthide").height() + 120;
 					//window.parent.jQuery("#iframeId").height =;
 					//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
@@ -391,7 +394,9 @@
 					jQuery(".header-wrap").show();
 					jQuery(".Cimm-Footer").show();
 					var frameHeight = jQuery(".Cimm-MainContent").height();
+					$(this).html('<span class="fa fa-eye"></span> Preview');
 					window.parent.document.getElementById("iframeId").style.height ="920px";
+					window.parent.document.getElementById("iframeId").style.width = "100%";
 					//$("#template-slider").trigger("click");
                 gm.initCanvas();
                
@@ -410,7 +415,7 @@
             	  $(".cms_leftMenu, .containFluidEl").hide();
                  gm.deinitCanvas();
 				 		jQuery(".readyTemplatesForm").hide();
-							
+			 			$(this).html("Back");
 							 canvas.html($('<textarea/>').attr("id","sourceEditor").attr("cols", 130).attr("rows", 25).val(canvas.html()));
 			                 gm.mode="html";
 			                // $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
@@ -441,11 +446,13 @@
 						  } else {
 							  $(".cms_leftMenu, .containFluidEl").show();
 							  showActionIcons();
+							  $(this).html("<span class='fa fa-code'></span> Source");
 							  //CodeMirror.toTextArea();
 							  document.getElementById("sourceEditor").value = editor.getValue();
 							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
 							jQuery(".readyTemplatesForm").show();
 							 canvas.html(editedSource);
+							 canvas.find('[data-type="widget"]').html("");
 							 gm.initCanvas();
 							 gm.mode="visual";
 							 $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', false);
@@ -890,6 +897,7 @@ console.log("Custom : "+curr_control.dataToolElement);
            gm.log("+ InitCanvas Running");
               // Show the template controls
               gm.$el.find("#gm-addnew").show();
+              $(".deviseSelection").show();
               // Sort Rows First
 			  gm.activateContainer();
               gm.activateRows(rows);
@@ -956,7 +964,21 @@ console.log("Custom : "+curr_control.dataToolElement);
             gm.initGlobalCustomControls();
             gm.initNewContentElem();
             gm.reBuildBanner(true);
-            $("#mycanvas a[href]").click(function(e) { e.preventDefault(); });
+            $("#mycanvas a[href]").click(function(e) {
+            	e.preventDefault();
+				if($(this).attr("href").indexOf('cmsStaticPageByPageNameCms') >= 0){
+					var url = $(this).attr("href");
+					$.ajax({
+						type: "GET",
+						url: url,
+						success: function(msg){
+							var dataHTML = $(msg).find("#mycanvas").html();
+							$("#gm-canvas").html(dataHTML);
+							gm.initCanvas();
+						}
+					});
+				}
+            });
         };
 
         /**
@@ -973,6 +995,7 @@ console.log("Custom : "+curr_control.dataToolElement);
            gm.log("- deInitCanvas Running");
               // Hide template control
               gm.$el.find("#gm-addnew").hide();
+              $(".deviseSelection").hide();
               // Sort Rows First
               gm.deactivateRows(rows);
               // Now Columns
@@ -1302,7 +1325,21 @@ console.log("Custom : "+curr_control.dataToolElement);
 		        		console.log("Slide Var : " + sliderVar);
 		        		initJssorSlides(sliderVar);
 		        		}
-						$("#mycanvas a[href]").click(function(e) { e.preventDefault(); });
+						$("#mycanvas a[href]").click(function(e) {
+							e.preventDefault();
+							if($(this).attr("href").indexOf('cmsStaticPageByPageNameCms') >= 0){
+								var url = $(this).attr("href");
+								$.ajax({
+									type: "GET",
+									url: url,
+									success: function(msg){
+										var dataHTML = $(msg).find("#mycanvas").html();
+										$("#gm-canvas").html(dataHTML);
+										gm.initCanvas();
+									}
+								});
+							}
+						});
                     },tolerance: 'pointer'
             };
           
@@ -1489,6 +1526,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 					canvas.prepend(gm.createRow(colWidths));
 				}
 			//$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+				canvas.find('[data-type="widget"]').html("");
                 gm.reset();
                 e.preventDefault();
             });
@@ -1588,7 +1626,7 @@ console.log("Custom : "+curr_control.dataToolElement);
         gm.reset=function(){
             gm.log("~~RESET~~");
             gm.deinitCanvas();
-            gm.initCanvas();            
+            gm.initCanvas();
         };
         
         gm.reBuildBanner = function(loadBanner){

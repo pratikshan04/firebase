@@ -38,7 +38,6 @@ $modal_closebtn-color: $default_font-color;
     width: 45px;
     height: 45px;
     background: $backtotop-bg;
-
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
     border-radius: 25px;
@@ -56,7 +55,6 @@ $modal_closebtn-color: $default_font-color;
         position: relative;
         width: 45px;
         height: 45px;
-
         -webkit-transition: 1s;
         -moz-transition: 1s;
         transition: 1s;
@@ -72,7 +70,7 @@ $modal_closebtn-color: $default_font-color;
             animation-timing-function: ease-in-out;
             z-index: 10;
         }
-        @include icon(after, uparrow, $color: $white, $size: 18px, $left: 14px, $top: 10px);
+        @include icon(after, arrow-up, $color: $white, $size: 18px, $left: 14px, $top: 10px);
     }
     &:hover {
         opacity: 1;
@@ -238,25 +236,6 @@ footer,
     font-family: $secondary_font-family;
 }
 
-
-.cimm_refinedMultiFilterResults {
-    .narrowSearchText {
-        color: $leftNavLabelFontColor;
-        font-family: $leftNavTitleFontFamily;
-        font-size: $leftNavTitleFontSize;
-    }
-    ol {
-        li {
-            padding: 5px 20px;
-            text-transform: capitalize;
-            span.Refine-value {
-                display: block;
-                padding-left: 15px;
-            }
-        }
-    }
-}
-
 .cimm_compareControls {
     margin-top: 6px;
     display: block;
@@ -300,12 +279,17 @@ footer,
 	}
 }
 
-.skuStyle strong {
-	font-weight: 500;
-}
-.skuStyle span {
-	color: $primary_color;
-	font-weight: 600;
+.cimm_item-skus{
+	li{
+		padding: 2px 0px;
+		strong{
+			font-weight: 500;
+		}
+		span{
+			color: $primary_color;
+			font-weight: 600;
+		}		
+	}
 }
 .cimm_qtyWrap span {
 	display: inline-block;
@@ -490,14 +474,6 @@ footer,
 
 .userInfoWrap {
     height: 160px;
-    >span {
-        float: right;
-        width: 80%;
-    }
-    strong {
-        float: left;
-        width: 20%;
-    }
     h4 {
         position: absolute;
         bottom: 0;
@@ -1143,10 +1119,24 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     background-size: contain;
     position: absolute;
     top: 0;
+    &.clearenceTagSmall {
+        height: 45px;
+        width: 45px;
+    }
+}
+.tabelImage{
+    a{
+        display: inline-block;
+        position: relative;
+    }
 }
 .cimm_staticPageWrap{
     .container-fluid{
         padding: 0;
     }
+}
+.locationDataWrap .panel {
+    margin: 0;
+    box-shadow: none;
 }
 @import "3-modules/modules";

@@ -78,7 +78,20 @@
 				</div>
 			</div>
 		</form>
-		#if($userLogin) <p class="mTop-2"><span>$!locale.get("product.heading.welcome"): </span>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p>  #end ##$!session.getAttribute("custName")
+		#if($userLogin)
+		<p class="mTop-2 clearAfter">
+		#if($!session.getAttribute("isSalesUser").equals("Y"))
+		<span class="pull-left">
+			#if($!session.getAttribute("isSalesAdmin") && $!session.getAttribute("isSalesAdmin") != "")
+	    	<b>$!locale.get("label.salesuser.admin"):</b>
+	    	#else
+	    	<b>$!locale.get("label.salesuser.rep"):</b>
+	    	#end
+	    	$!session.getAttribute("salesUserDetails").get("firstName") $!session.getAttribute("salesUserDetails").get("lastName")
+	    </span>
+    	#end
+    	<span class="pull-right"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span></p>
+		#end ##$!session.getAttribute("custName")
 		<a href="$!locale.get('website.url.ShoppingCart')" class="showInDevice mTop-1">$!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span></a>
 	</div>
 	#end

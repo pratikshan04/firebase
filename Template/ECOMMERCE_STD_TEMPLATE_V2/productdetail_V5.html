@@ -26,81 +26,76 @@
 	#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0)
 	#else
 	#if($!CommonDBQuerySystemParameter.get("ENABLE_STICKY_HEADER")=="Y")
-	<div class="detailCloneWrap hideForPrint">
-		<div id="detailClone" class="clearAfter">
-			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-				<div class="cloneImg"> 
-					<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="50" height="50" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-				</div>
-			#else
-				<div class="cloneImg"> 
-					<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="50" height="50" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
-				</div>
-			#end
-			<div class="cloneTitle">
-				#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
-				<h2>
-				#if($categoryList.categoryName.length()>22)
-					$!itemProductTitle.substring(0, 22)...
-				#else
-					$!itemProductTitle
-				#end
-				</h2>
-			</div>
-			<div id="clonePrice" class="clonePrice"></div>
-			<div class="cloneAddtocartWrap">
-			<ul>
-				<li><input type="text" title="$!locale.get('product.label.quantity')" data-cloneQty="cloneQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/> <!-- <span id="uomPk_$!itemData.partNumber"></span> --></li>
-				<li>
-					#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-					    #if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-					    	#if($itemData.price>0)
-					    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
-						    #else
-				     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
-							#end
-					    #else
-				    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-						#end
-					#else
-						#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-			     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+	<div class="detailCloneWrap hideForPrint row hidden">
+		<div id="detailClone">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
+						<div class="cloneImg"> 
+							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+						</div>
 						#else
-				    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+						<div class="cloneImg"> 
+							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+						</div>
 						#end
-					#end
-				</li>
-				<li>
-					<div id="popSelectorClone">
-						<div class="popProductClone prodDetail-popup" id="cloneUlg$!{itemData.itemId}pop">
-							<span id="cloneUlg$!{itemData.itemId}popCont"></span>
+						<div class="cloneTitle">
+							#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+							<h2>
+							#if($categoryList.categoryName.length()>22)
+								$!itemProductTitle.substring(0, 22)...
+							#else
+								$!itemProductTitle
+							#end
+							</h2>
+						</div>
+						<div class="cloneAddtocartWrap">
+							<div id="clonePrice" class="price"></div>
+							<ul>
+								<li class="cimm_qtyWrap">
+								<strong>$!locale.get("form.label.tableQty")</strong>
+								<span>
+								<input type="text" title="$!locale.get('product.label.quantity')" data-cloneQty="cloneQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
+								</span>
+								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+								    #if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+								    	#if($itemData.price>0)
+								    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+									    #else
+							     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+										#end
+								    #else
+							    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+									#end
+								#else
+									#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+						     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+									#else
+							    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
+									#end
+								#end
+								</li>
+								<li class="detailButtonWrap hideForPrint clearAfter">
+									<!-- My Product Group -->
+									<div class="productGroupBtn dropdown paddingY-2">
+										#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
+										<a id="$!groupPop" class="popMsg hideMe"></a>
+										#if($userLogin)
+											<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+										#else
+											<a data-toggle="modal" data-target="#loginModal"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+										#end
+										<ul id="ulg$!itemData.itemId" class="dropdown-menu">
+											<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
+										</ul>
+									</div>
+									<!-- My Product Group -->
+								</li>
+							</ul>
 						</div>
 					</div>
-					<dl class="dropdownClone">
-					<input type="hidden" value='$!locale.get("product.heading.myProductGroups")' id="myProductGroupLabel" />
-						 #if($userLogin)
-						 <dt class="clearAfter">
-							 <a id='cloneLinkg$!itemData.itemId' class="button">
-							 <em class="fa fa-lg fa-plus-circle"></em>
-							 <span id="cloneUlg$!{itemData.itemId}item">$!locale.get("product.heading.myProductGroups")</span>
-							 </a>
-						 </dt>
-						 <dd>
-							 <div id="drpdwnDivClone">
-								 <ul id="cloneUlg$!itemData.itemId" style="display: none;"></ul>
-					 		</div>
-						</dd>
-						#else
-						<dt class="clearAfter">
-						 <a href="javascript:void(0)" id='cloneLinkg$!itemData.itemId' class="button" data-toggle="modal" data-target="#loginModal">
-							 <em class="fa fa-lg fa-plus-circle"></em>
-							 <span id="cloneUlg$!{itemData.itemId}item">$!locale.get("product.heading.myProductGroups")</span> 
-							 </a>
-						 </dt>
-						 #end
-					</dl>
-				</li>
-			</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -109,10 +104,10 @@
 
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
-	<div class="cimm_itemDetailWrap clearAfter" itemscope itemtype="http://schema.org/Product">
+	<div class="cimm_itemdetail clearAfter" itemscope itemtype="http://schema.org/Product">
 	<input type="hidden" id="currentSelectedItemId" value="$itemData.itemId" />
-		<div class="cimm_itemMainImage verticalThumblist clearAfter">
-			<div class="itemDetailImage">
+		<div class="cimm_itemdetail-imgcontainer verticalThumblist clearAfter">
+			<div class="cimm_itemdetail-image">
 				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 				<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
 				<span class="imgForSend">
@@ -133,7 +128,7 @@
 				#end
 			</div>
 			#if($itemImagesList && $!itemImagesList.size()>0)
-				<ul id="gallery" class="thumblist">
+				<ul id="gallery" class="cimm_itemdetail_thumblist">
 					#set($count=0)
 					#foreach($imageList In $itemImagesList)
 						<li>

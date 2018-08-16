@@ -36,11 +36,11 @@ function callToVisionapi(){
 }
 function getcookiefromdocument(){
 	var msg="passsessionid:";
-	var cookie = document.cookie;
-	var session = cookie.split(";");
-	try{Android.passSessionid(session);}
+	var cookie = document.getElementById("appID").value;
+	//var session = cookie.split(";");
+	try{Android.passSessionid(cookie);}
 	catch(err){
-		msg = msg+session;
+		msg = msg+cookie;
 		webkit.messageHandlers.callbackHandler.postMessage(msg);
 		console.log('The native context does not exist yet');
 	}
@@ -51,5 +51,24 @@ function fingerPrint(userName, password){
 	catch(err){
 	webkit.messageHandlers.callbackHandler.postMessage(unps);
 	console.log('The native context does not exist yet');
+	}
+}
+function fingerPrintpopup(){
+	var unps = "FPauthenticationpopup";
+	try {
+		Android.enablefpauthentication();
+	}catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(unps);
+		console.log('The native context does not exist yet');
+	}
+}
+function prodGrpCpnPopup(){
+	var unps = "prodGrpCpnPopup";
+	try {
+		Android.prodGrpCpnPopup();
+	}
+	catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(unps);
+		console.log('The native context does not exist yet');
 	}
 }

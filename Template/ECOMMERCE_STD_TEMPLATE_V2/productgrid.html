@@ -164,9 +164,9 @@
 							<select name="sortBy" id="sortBy" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
 								<!-- <option value=""> - $!locale.get("form.label.select") -</option> -->
 								<!--option value="">Best Sellers</option>-->
-								#if($navigationType=="SEARCH")
+								##if($navigationType=="SEARCH")
 								<option value="score|desc" #if($sortBy=="score|desc") selected #end>Relevance</option>
-								#end
+								##end
 								<option value="externalHitSort_desc" #if($sortBy=="externalHitSort_desc" || $sortBy=="externalhitsort_desc") selected #end>Best Seller</option>
 								<option value="brand_asc" #if($sortBy=="brand_asc") selected #end>Brand (Asc)</option>
 								<option value="brand_desc" #if($sortBy=="brand_desc") selected #end>Brand (Desc)</option>

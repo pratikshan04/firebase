@@ -903,3 +903,69 @@
   </div>
   </div>
 #end
+
+#if($requestType.equalsIgnoreCase("CustomersForSalesUser"))
+#if($customers.size() > 0)
+<table id="customersList" class="table display rwd-table">
+	<thead>
+		<tr>
+			<th>$locale.get("label.salesuser.customer.account.number")</th>
+			<th>$locale.get("label.salesuser.address1")</th>
+			<th>$locale.get("label.salesuser.location")</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		#foreach($customer in $customers)
+		<tr>
+			<td>$!customer.accountNumber.getAsString()</td>
+			<td>$!customer.address1.getAsString()</td>
+			<td>$!customer.city.getAsString(), $!customer.state.getAsString(), $!customer.country.getAsString(), $!customer.zipCode.getAsString()</td>
+			<td><button class="usersForCustomer button" data-customerid="$!customer.customerId.getAsString()" data-accountnumber="$!customer.accountNumber.getAsString()">Select</button></td>
+		</tr>
+		#end
+	</tbody>
+</table>
+<script>
+	$(document).ready(function(){
+		$("#customersList").DataTable();
+	});
+</script>
+#else
+<h3>No Active Customers Found</h3><a href="javascript:void(0);" onclick="doLogOffScript();" class="button">Exit</a>
+#end
+#end
+
+#if($requestType.equalsIgnoreCase("UsersByCustomer"))
+#if($users.size() > 0)
+<table id="usersList" class="table display rwd-table">
+	<thead>
+		<tr>
+			<th>$locale.get("label.salesuser.username")</th>
+			<th>$locale.get("label.salesuser.firstName")</th>
+			<th>$locale.get("label.salesuser.address1")</th>
+			<th>$locale.get("label.salesuser.location")</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		#foreach($user in $users)
+		<tr>
+			<td>$!user.userName.getAsString()</td>
+			<td>$!user.firstName.getAsString()</td>
+			<td>$!user.address1.getAsString()</td>
+			<td>$!user.city.getAsString(), $!user.state.getAsString(), $!user.country.getAsString(), $!user.zipCode.getAsString()</td>
+			<td><button class="persistUserDetails button" data-username="$!user.userName.getAsString()">Select</button></td>
+		</tr>
+		#end
+	</tbody>
+</table>
+<script>
+	$(document).ready(function(){
+		$("#usersList").DataTable();
+	});
+</script>
+#else
+<h3>No Active Users Found</h3><a href="javascript:void(0);" onclick="doLogOffScript();" class="button">Exit</a>
+#end
+#end

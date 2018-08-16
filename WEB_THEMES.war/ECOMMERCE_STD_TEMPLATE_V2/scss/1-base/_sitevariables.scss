@@ -23,7 +23,7 @@ $red                : #ee3426;
 $blue               : #00a9e7;
 $green              : #37ff3b;
 $yellow             : #e4de33;
-
+$lightgray          : #EBEBEB;
 $border-color       : #A1A1A1;
 $shadow-color : lighten($black, 68%) !default;
 
@@ -74,41 +74,68 @@ $header_mid-bg  : transparent;
 
 /*__________________________________Navigation Setting_______________________________________*/
 //Navigation color and font declaration
-$mnav-bg			: $secondary_color;
-$mnav_lf-family		: $default_font-family; // Main navigation link font family
-$mnav_lf-color		: $tertiary_color;  //Main navigation link font color
-$mnav_lf-size		: $default_font-size;   //Main navigation link font size
 
-$mnav_lh-bg			: $primary_color;       //Main navigation link hover background
-$mnav_lhf-color		: $white;               //Main navigation link hover font color
-
-$mnav_la-bg         : $primary_color;       //Main navigation (la = link active) bg 
-$mnav_laf-color     : $white;               //Main navigation (la = link active font) color
-
-//Main sub navigation
-$msnav_bg			: $tertiary_color;
-
-$mnav_primary-bg	: $primary-color;
-$mnav_secondary-bg	: $secondary-color;
-
-$msnav_lf-color     : $secondary-font_color;
-$msnav_lh-bg        : $secondary-font_color;
-$msnav_la-color     : $secondary-font_color;
-
+$main_nav: (
+    navbar: (
+        mnav-bg: $secondary_color,
+        mnav_lf-color: $tertiary_color,         //Main navigation link font color
+        mnav_lf-size: $default_font-size,       //Main navigation link font size
+        mnav_lf-family: $default_font-family,   //Main navigation link font family
+        mnav_lf-uppercase: true,                //Main navigation link in uppercase
+        mnav_lf-dividers: false,                //Main navigation link dividers Ex: "|" 
+        //on hover section
+        mnav_lh-bg: $primary_color,             //Main navigation link hover background
+        mnav_lhf-color: $white,                 //Main navigation link hover font color
+        //Sub Navigation Section
+        subnav-bg: $tertiary_color, 
+        subnav-lf-size: $default_font-size,
+        subnav-lf-color: $secondary-font_color,
+        subnav-lf-family: $default_font-family
+    )
+);
 
 /*______________________________Left Navigation Setting_______________________________________*/
 //Left Navigation
-$cimm_leftmenu          : transparent;
-$lnav_title-bg          : $white;
-$lnav_title_text-color  : $black;
-$lnav_icon-color        : $primary_color;
 
-$lnav_filter-bg         : transparent;
-$lnav_filter-title-bg   : transparent;
+$left_nav:(
+    leftnav:( 
+        filter-bg: transparent,
+        filter-border: false,               //Options true, "top", "bottom" and "top-bottom"
+        filter-padding: 0px, 
 
-$lnav_filter-title-font-family  : $heading_font-family;
-$lnav_filter-title-font-color   : $heading_font-color;
-$lnav_filter-title-font-size    : $heading_font-size;
+        filter_block-bg: transparent, 
+        filter_block-border: false,         //Options true, "top", "bottom" and "top-bottom"
+        filter_block-padding: 0px,
+        filter_block-margin: 0px, 
+        
+        //Left Nav Title 
+        filter_block_tf-bg: transparent,
+        filter_block_tf-border: bottom,       //Options true, "top", "bottom" and "top-bottom"
+        filter_block_tf-margin: 0px 0px,
+        filter_block_tf-padding: 12px 0px,
+        
+        filter_block_tf-color: $default_font-color,
+        filter_block_tf-fontfamily: $heading_font-family,
+        filter_block_tf-uppercase: true,
+        filter_block_tf-fontsize: $font_xlg,
+        
+        //Left Nav Title Accordian Icon
+        filter_block_ticon-close: "minus-circle", 
+        filter_block_ticon-open: "plus-circle",
+        filter_block_ticon-size: 18px,
+        filter_block_ticon-color: $primary_color,
+        filter_block_ticon_pos-top: 30%, 
+        filter_block_ticon_pos-right: 0px,
+
+        //Left Nav Link
+        filter_block_lf-color: $default_font-color,
+        filter_block_lhf-color: $secondary-color,
+        filter_block_lf-family: $default_font-family,
+        filter_block_lf-size: $font_md, 
+        filter_block_lf-uppercase: false
+    )
+);
+
 
 /*___________________________________Footer Setting___________________________________________*/
 //Footer 
@@ -150,8 +177,8 @@ $btncolors: (
         hbg-color   : $black, // Button hover backogrund color
         btnhf-color : $white, // Button hover font color
         abg-color   : $gray-dark, //Button Active background color
-        bg-icon     : true,
-        onlyborder  : flase
+        bg-icon     : false,
+        onlyborder  : false
     ),
     addtocart:(
         bg-color    : $primary_color,//Button Background color
@@ -170,6 +197,15 @@ $btncolors: (
         abg-color   : $gray-dark,    //Button Active background color
         bg-icon     : true,
         onlyborder  : flase
+    ),
+    continueshop:(
+        bg-color    : transparent, //Button Background color
+        btnf-color  : $primary_color, //Button Font Color
+        hbg-color   : transparent, // Button hover backogrund color
+        btnhf-color : $primary_color,   // Button hover font color
+        abg-color   : $gray-dark,    //Button Active background color
+        bg-icon     : true,
+        onlyborder  : flase
     )
 );
 
@@ -177,22 +213,22 @@ $btncolors: (
 /*__________________________________Headdings Setting_______________________________________*/
 $headings:(
     page-title:(
-        fontfamily: $heading_font-family,
-        texttransform: uppercase,
-        color: $heading_font-color,
-        fontsize: $heading_font-size,
-        marginvalue: 0px 0px 20px 0px,
-        paddingvalue: 15px 0px,
-        border: false
+        fontfamily      : $heading_font-family,
+        texttransform   : uppercase,
+        color           : $heading_font-color,
+        fontsize        : $heading_font-size,
+        marginvalue     : 0px 0px 20px 0px,
+        paddingvalue    : 15px 0px,
+        border          : false 
     ),
     block-title:(
-        fontfamily: $heading_font-family,
-        texttransform: capitalize,
-        color: $default_font-color,
-        fontsize: $font_xlg,
-        marginvalue: 10px 0px,
-        paddingvalue: 0px 0px 10px 0px,
-        border: false
+        fontfamily      : $heading_font-family,
+        texttransform   : capitalize,
+        color           : $default_font-color,
+        fontsize        : $font_xlg,
+        marginvalue     : 0px,
+        paddingvalue    : 0px,
+        border          : false
     ),
     filter-block-title:(
         fontfamily: $heading_font-family,
@@ -202,6 +238,24 @@ $headings:(
         marginvalue: 0px 0px,
         paddingvalue: 12px 0px,
         border: true
+    ),
+    item-name:(
+        fontfamily: $heading_font-family,
+        texttransform: uppercase,
+        color: $default_font-color,
+        fontsize: $font_xlg,
+        marginvalue: 0px 0px,
+        paddingvalue: 12px 0px,
+        border: false
+    ),
+    slider-title:(
+        fontfamily: $heading_font-family,
+        texttransform: uppercase,
+        color: $default_font-color,
+        fontsize: $font_xlg,
+        marginvalue: 0px 0px,
+        paddingvalue: 12px 0px,
+        border: false
     )
 );
 
@@ -216,10 +270,6 @@ $slider_container-bg    : transparent;
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* PAGES *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
-/*__________________________________ Category Page Setting_______________________________________*/
-//Categories Heading 
-
-
 /* Check Box and Radio btn border color*/
 $radiobtn_border-color: $border-color;
 $radiobtn_bg-color: $primary_color;
@@ -230,30 +280,69 @@ $checkbox_border-color: $border-color;
 $checkbox_checked-color: $primary_color;
 
 
+/*__________________________________ Category Page Setting_______________________________________*/
+
+//Categories Heading 
+$categories:( 
+    border          : true,   
+    box_radius      : false, //If true kinldy update border as true
+    box_shadow      : false,
+       
+    title_bg        : false, // It it is true kidly update title background color in $category-item-bg
+    title_font-color    : $default_font-color,
+    title_font-family   : $default_font-family
+); 
 $category-item-bg: transparent;
 $category-itemimage-bg: transparent;
+
 $category-itemname-bg: transparent;
+$category_hf-color: $secondary_font-color;
 
-$category_hf-color: $primary-font_color;
 
-$headerNavLinkColor: #FFF;
-$headerNavLinkFontSize: 12px;
 
-$mainNavBackground: #404040;
-$mainNavLinkColor: #FFF;
-$mainNavLinkFontSize: 14px;
-$navDropdownBg: #EBEBEB;
+/*__________________________________ Item Detail Page Setting_______________________________________*/
+// Item Detail image border settings
+$itemdetail_image:(
+    mainimage_border-color: $border-color,
+    thumbimage_border-color: $border-color, 
+	thumbarrow_icon-color: $secondary_color,
+	enlarge_icon-posi: top-right
+);
 
-$leftNavTitleBackgroud: #FFF;
-$leftNavTitleFontSize: 14px;
-$leftNavTitleFontColor: #404040;
-$leftNavLabelFontSize: 12px;
-$leftNavLabelFontColor: #404040;
-$leftNavTitleFontFamily: $secondary_font-family;
 
-$footerLinkFontSize: 12px;
-$footerHeadingColor: $white;
-$footerCopyRightFontSize: 10px;
+// Slick Slider dessign setting
+$slider-item-container:(
+    border: true,
+    border-radius: true,
+    box-shadow: true,
+    image-border: false,
+    image-border-radius: true,
+
+    icon-width: 25px,
+    icon-height: 40px,
+    icon-bg: transparent,
+    icon-size : 40px,
+    icon-top-position: 40%,
+    icon-family: "FontAwesome",
+    icon-color: $secondary_font-color,
+    icon-border: transparent 
+);
+
+$login_form-bg: $lightgray;
+$myaccount_menu-bg: $lightgray;
+
+
+$mtap:(
+    tabHeading-bg: $secondary_color,
+    tabHeading-hbg: $white,
+    tabHeading_abg: $white,
+    tabHeading_border: $secondary_color,
+
+    tabHeading_heading-color: $white,
+    tabHeading_activeh-color: $secondary_font-color,
+    tabHeading_heading-fsize: $font-lg,
+    tabHeading_heading-ffamily: $heading_font-family
+);
 
 $tabHeadingBackgroundColor: #ebebeb;
 $tabHeadingFontColor: #404040;

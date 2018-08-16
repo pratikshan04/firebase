@@ -46,7 +46,7 @@
 
 
 @mixin font($family: false, $size: false, $color: false, $weight: false, $lineheight: false){
-	@if $family {font-family: $default_font-family;}
+	@if $family {font-family: $family;}
 	@if $size { font-size: $size; }
 	@if $color { color: $color; }
 	@if $weight { font-weight: $weight; }
@@ -55,37 +55,49 @@
 
 
 $icons: (
-	eye: "\f06e",
-	caret-down: "\f0d7",
-	caret-right: "\f0da",
-	home: "\f015",
-    newspaper: "\f001",
-    search: "\f002",
-    email: "\f003",
-	plus: "\f067",
-	plus-square: "\f0fe",
-	navigater: "\f041",
-	nav-seperater: "\007c",
-	arrow-down: "\f107",
-    arrow-left: "\f004", 
-    arrow-right: "\f005",
-	checkmark: "\f00c",
-	tachometer: "\f0e4",
-	user: "\f007",
-	user-cercle: "\f2be",
-	info-circle: "\f05a",
+	eye			: "\f06e",	// Used in View All Button
+	caret-right	: "\f0da",	// Used in Main Navigation
+	caret-down	: "\f0d7",	// Used in Main Navigation for hover
+	arrow-down	: "\f078",	// Used in detail page image thumb list
+	arrow-up	: '\f077',	// Used in detail page image thumb list
+	arrow-left	: "\f053", 
+	arrow-right	: "\f054",
+	nav-seperater: "\007c",	// Navigation Separeter |
+	
+	continueshop: "\f290",	// Used in continue shopping button
+	cart		: "\f07a",	// Usend Cart Buttons
+	savecart	: "\f218",	// Used in save cart button
+
+	home		: "\f015",	
+    newspaper	: "\f001",
+    search		: "\f002",	// Used in all search button
+    email		: "\f003",	// Email Icon
+	plus		: "\f067",
+	plus-square	: "\f0fe",
+	navigater	: "\f041",	// Navigation icon
+	 
+	checkmark	: "\f00c",	
+	tachometer	: "\f0e4",
+	user		: "\f007",
+	user-cercle	: "\f2be",
+	info-circle	: "\f05a",
 	address-book: "\f2ba",
-	file-text: "\f15c",
-	list: "\f03a",
-	cog: "\f013",
-	cart: "\f07a",
-	remove: "\f00d",
-	savecart: "\f218",
-	download: "\f019",
-	filetexto:"\f0f6",
-	credit-card: "\f09d",
-	truck: "\f0d1",
-	uparrow: '\f077'
+	file-text	: "\f15c",
+	list		: "\f03a",
+	cog			: "\f013",
+	remove		: "\f00d",	// Cross Icon X
+	download	: "\f019",
+	filetexto	:"\f0f6",
+	credit-card	: "\f09d",
+	truck		: "\f0d1",
+
+	minus-circle: "\f056",
+	plus-circle : "\f055",
+	
+	slick_arrow-prev	: "\f104",  
+	slick_arrow-next	: "\f105",
+	slick_arrow-up		: "\f106",
+	slick_arrow-down	: "\f107"
 ); 
 
 @mixin icon(
@@ -96,7 +108,9 @@ $icons: (
 		$top: null, 
 		$left: null, 
 		$right:null, 
-		$size: $primary_font-size
+		$bottom: null,
+		$size: $primary_font-size,
+		$font-faily: "FontAwesome"
 	) {
     @if $position == both {
         $position: "before, &:after";
@@ -107,22 +121,306 @@ $icons: (
         }
         @if $styles {
             speak: none;
-            font-style: normal;
-            font-weight: normal;
-            font-family: "FontAwesome"; 
 			position: absolute;
 			z-index: 11;
+			
+            font: {
+				weight: normal;
+				size: $size;
+				family: $font-faily; 
+			}
 			
 			top: $top;
 			left: $left;
 			right: $right;
-			font-size: $size;
+			bottom: $bottom;
 			color: $color; 
         }
         @content;
     }
 }
 
+/*__________________________________Main Navigation Mixin ______________________________*/
+
+@mixin main_nav {
+
+    @each $nav_type, $nav_style in $main_nav {
+        $nav_bg: map-get($nav_style, mnav-bg);
+        $lf-family: map-get($nav_style, mnav_lf-family);
+        $lf-size: map-get($nav_style, mnav_lf-size);
+        $lf-color: map-get($nav_style, mnav_lf-color);
+        $lh_bg: map-get($nav_style, mnav_lh-bg);
+        $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
+        $lf-dividers: map-get($nav_style, mnav_lf-dividers);
+        $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
+        $subnav-bg: map-get($nav_style, subnav-bg);  
+        $subnav-lf-color: map-get($nav_style, subnav-lf-color);
+
+        nav.#{$nav_type}{ 
+            background: $nav_bg;
+            border-radius: 0px;
+            border: 0px;
+            margin: 0;
+
+            .cimm_nav{
+                position: relative;
+
+                >ul{
+                    >li{
+                        &.dropdown{
+                            padding-right: 5px; 
+
+                            @include icon(
+                                after, caret-right, 
+                                $color: $white, 
+                                $right: 10px, 
+                                $top: 10px, 
+                                $size: 20px
+                            );
+                            &:hover{
+                                @include icon(
+                                    after, caret-down,
+                                    $color: $white,
+                                    $size: 20px
+                                );
+                            }
+                        }
+                        &:hover{
+                            background: $lh_bg;
+                            > a{
+                                color: $white;
+                            }
+                            .dropdown-menu{
+                                display: block;
+                            }
+                        }
+
+                        > a{
+                            padding: 15px 20px 15px 20px;
+                            @if $lf-uppercase != false {
+                                text-transform: uppercase;
+                            }
+                            @include font($family: $lf-family, $size: $lf-size, $color:$lf-color);
+                            @if $lf-dividers != false {
+                                @include icon(after, nav-seperater, $color: $white, $size: 20px, $top: 13px, $right: 0px);
+                            }
+                        }
+
+                        > .dropdown-menu{
+                            background: $subnav-bg;
+                            padding: 10px 0px; 
+                            min-width: 275px;
+                            
+                            li{
+                                > a{
+                                    color: $subnav-lf-color;    
+                                    padding: 4px 10px;
+                                    display: block;
+
+                                    &:hover {
+                                        background: $lh_bg; 
+                                        color: $white; 
+                                    } 
+                                }
+                            }
+
+                            > ul{
+                                width: 282px;
+                                vertical-align: top;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    } 
+};
+
+/*__________________________________End Main Navigation Mixin ______________________________*/
+
+/*_________________________________Left Navigation _________________________________________*/
+
+@mixin leftnav {
+    
+    @each $leftnav_type, $leftnav_style in $left_nav {
+        
+        $filter-bg: map-get($leftnav_style, filter-bg);
+        $filter-padding: map-get($leftnav_style, filter-padding);
+        $filter-border: map-get($leftnav_style, filter-border);
+
+        $filter_block-bg: map-get($leftnav_style, filter_block-bg);
+        $filter_block-border: map-get($leftnav_style, filter_block-border);
+        $filter_block-padding: map-get($leftnav_style, filter_block-padding);
+        $filter_block-margin: map-get($leftnav_style, filter_block-margin);
+        
+        $title-bg: map-get($leftnav_style, filter_block_tf-bg);
+        $title-border: map-get($leftnav_style, filter_block_tf-border);
+        $title-margin: map-get($leftnav_style, filter_block_tf-margin);
+		$title-padding: map-get($leftnav_style, filter_block_tf-padding);
+		
+        $title_icon-open: map-get($leftnav_style,  filter_block_ticon-open);
+		$title_icon-close: map-get($leftnav_style, filter_block_ticon-close);
+		$title_icon-size: map-get($leftnav_style, filter_block_ticon-size);
+		$title_icon-color: map-get($leftnav_style, filter_block_ticon-color);
+		$title_icon_pos-top: map-get($leftnav_style, filter_block_ticon_pos-top);
+		$title_icon_pos-right: map-get($leftnav_style, filter_block_ticon_pos-right);
+
+        $tf-faimly: map-get($leftnav_style, filter_block_tf-fontfamily);
+        $tf-color: map-get($leftnav_style, filter_block_tf-color);
+        $tf-size: map-get($leftnav_style, filter_block_tf-fontsize); 
+        $tf-uppercase: map-get($leftnav_style, filter_block_tf-uppercase);
+
+        
+        .cimm_#{$leftnav_type}{
+            //background: $nav-bg; 
+            .cimm_filter{ 
+
+                @if ($filter-bg != transparent){
+                    background: $filter-bg;
+                    padding: 10px; 
+                }
+                padding: $filter-padding;
+
+                @if $filter-border == true {
+                    @include add_border(all);
+                } @else if $filter-border == "bottom"{
+                    @include add_border(bottom);
+                } @else if $filter_border == "top"{
+                    @include add_border(top);
+                } @else if $filter_border == "top-bottom"{
+                    @include add_border(top);
+                    @include add_border(bottom);
+                } @else {
+                    border: 0px;
+                } 
+
+                .cimm_filter-block{
+                    background: $filter_block-bg;
+                    padding: $filter_block-padding;
+                    margin-bottom:  $filter_block-margin;
+                    
+                    @if $filter_block-border == true {
+                        @include add_border(all);
+                    } @else if $filter_block-border == "bottom"{
+                        @include add_border(bottom);
+                    } @else if $filter_block-border == "top"{
+                        @include add_border(top);
+                    } @else if $filter_block-border == "top-bottom"{
+                        @include add_border(top);
+                        @include add_border(bottom);
+                    } @else {
+                        border: 0px;
+                    }
+
+                    .cimm_filter-block-title{
+                        cursor: pointer;
+                        position: relative;
+                        background: $title-bg;
+                        padding: $title-padding; 
+                        margin: $title-margin; 
+                         
+						@include icon(after, 
+							$title_icon-close, 
+							$color: $title_icon-color, 
+							$size: $title_icon-size, 
+							$right: $title_icon_pos-right, 
+							$top: $title_icon_pos-top);
+ 
+                        &.collapsed{
+							@include icon(after, 
+							$title_icon-open, 
+							$color:$title_icon-color, 
+							$size: $title_icon-size, 
+							$right: $title_icon_pos-right, 
+							$top: $title_icon_pos-top);
+                        } 
+
+
+                        @if ($tf-uppercase != false){
+                            text-transform: uppercase; 
+                        } @else {
+                            text-transform: capitalize;
+                        }
+
+                        @include font(
+                            $family: $tf-faimly,
+                            $size: $tf-size, 
+                            $color: $tf-color
+                        );
+
+                        @if $title-border == true {
+                            @include add_border(all);
+                        } @else if $title-border == "bottom"{
+                            @include add_border(bottom);
+                        } @else if $title-border == "top"{
+                            @include add_border(top);
+                        } @else if $title-border == "top-bottom"{
+                            @include add_border(top);
+                            @include add_border(bottom);
+                        } @else {
+                            border: 0px;
+                        }
+                    }
+                    
+                    $lf-color: map-get($leftnav_style, filter_block_lf-color);
+                    $lhf-color: map-get($leftnav_style, filter_block_lhf-color);
+                    $lf-family: map-get($leftnav_style, filter_block_lf-family);
+                    $lf-size: map-get($leftnav_style, filter_block_lf-size);
+					$lf-uppercase: map-get($leftnav_style, filter_block_lf-uppercase);
+					
+                    .cimm_filter_block-container{
+						.filterTextBox{
+							margin-top:10px;
+						}
+						.slimScrollDiv{
+							margin-top: 10px;
+						}
+						
+                        ul{
+                            li{
+                                a, label span{
+                                    @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
+                                    @if ($lf-uppercase != false){
+                                        text-transform: uppercase; 
+                                    } @else {
+                                        text-transform: capitalize;
+                                    }
+                                }
+                            }
+                        }
+					}	
+
+					.cimm_myaccount-block-title{
+						@extend .cimm_filter-block-title;
+						&:after{
+							content: "";
+						}
+					}
+					
+				}
+				.cimm_search-block{ 
+					@extend .cimm_filter-block; 
+					.cimm_search-block-title{
+						@extend .cimm_filter-block-title;
+						&:after{
+							content: ""; 
+						}
+					}
+				}
+
+            }
+        }
+
+    }
+}
+
+/*_________________________________End Left Navigation__________________________*/
+
+
+/*______________________________________ Custom Buttons ___________________________________*/
 @mixin custom-btns {
     @each $class_name, $bgcolors in $btncolors {
         .btn-#{$class_name} {
@@ -152,6 +450,10 @@ $icons: (
 				@if($class_name == "viewallchoice"){
 					padding-left: 25px; 
 					@include icon(before, eye, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
+				}
+				@if($class_name == "continueshop"){
+					padding-left: 35;
+					@include icon(before, continueshop, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
 				}
 			}
             &:hover {
@@ -185,13 +487,27 @@ $icons: (
         }
     }
 }
-
+/*______________________________________ End Custom Buttons ___________________________________*/
 @include custom-btns;
 
 
 @mixin border-position($direction, $width, $style, $color) {
 	border-#{$direction}: $width $style $color;
 }
+
+@mixin add_border(
+	$border-position: all,  
+	$border-size: 1px, 
+	$border-type:solid, 
+	$border_color: $border_color){
+		$border-position-all: all;
+
+		@if $border-position == $border-position-all{
+			border: $border-size $border-type $border_color;
+		}@else{
+			border-#{$border-position}: $border-size  $border-type $border_color;
+		}
+};
 
 @mixin headings{
 	@each $heading_name, $heading_value in $headings{
@@ -214,7 +530,7 @@ $icons: (
 			
 			@if $border != false {
 				//@include border(1px, solid, $border-color);
-				@include border-position(bottom, 1px, solid, $border-color);
+				@include add_border(bottom);
 			}
 			@include clearfix();
 		}
@@ -243,6 +559,7 @@ $icons: (
 	border-radius: $radius;
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
 }
 
 @mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
@@ -271,22 +588,153 @@ $icons: (
 	// @include box-shadow(0px, 0px, 5px, $border-color);
 	// @include border-radius(4px);
 	// @include border-position(bottom, 1px, solid, $red);
-	
 	outline: $gray-lighten solid 5px;
 }
 
-@mixin category_item-box($border:false, $shadow: false, $borderpos: false, $border-radius: false) {
-	@if $border{
-		@include border(1px, solid, $border-color);
+
+/* Mixin for Category page */
+
+@mixin category_border{
+
+    .cimm_category-itemimage{ 
+		@if (map-get($categories, border) == true){
+			@include add_border(all); 
+		} @else if (map-get($categories, border) == "top" ){
+			@include add_border(top);
+		} @else if (map-get($categories, border) == "bottom"){
+			@include add_border(bottom);
+		} @else if (map-get($categories, border) == "top-bottom"){
+			@include add_border(top);
+			@include add_border(bottom);
+		} @else {
+			border: 0px; 
+		}
+		
+        @if map-get($categories, box_radius) != false{
+            @include border-radius(5px);
+        }
+        @if map-get($categories, box_shadow) != false {
+            @include box-shadow(0px, 0px, 4px, $secondary-color);
+		}
+    }
+    .cimm_category-itemname{
+
+		$itemname_bg: map-get($categories, title_bg); 
+
+		@if ($itemname_bg != false) and ($category-itemname-bg == transparent){
+			background: $secondary-color;
+			a{
+				color: $white;
+			}
+		} @else if($itemname_bg == true) and ($category-itemname-bg != transparent) { 
+			background: $category-itemname-bg; 
+		} @else {
+			background: transparent;  
+		}
+ 
+    }
+};
+
+/* End Mixin for Category page */
+
+/* Mixin for Detail Page */
+@mixin itemdetail_image{
+	.cimm_itemdetail-imgcontainer{
+		li{
+			.cimm_itemdetail_image{
+				@include border-radius(2px);
+				border: 1px solid map-get($itemdetail_image, mainimage_border-color);
+
+				a.imgEnlargeIcon{
+					position: absolute;
+					z-index:2;
+
+					@if map-get($itemdetail_image, enlarge_icon-posi) == "top-left" {
+						top: 0px;
+						left: 6px;
+
+					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "top-right"{
+						top: 0px;
+						right: 6px;
+					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "bottom-left"{
+						bottom: 0px;
+						left: 6px;
+					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "bottom-right"{
+						bottom: 0px;
+						right: 6px;
+					}
+				}
+			}
+			.cimm_itemdetail_thumblist{
+				.cimm_itemdetail_thumblist-img{
+					border: 1px solid map-get($itemdetail_image, thumbimage_border-color);
+				}
+			}
+
+		}
 	}
-	@if $borderpos{
-		@include border-position(bottom, 1px, solid, $red);
-	}
-	@if $shadow{
-		@include box-shadow(0px, 0px, 5px, $border-color);
-	}
-	@if $border-radius{
-		@include border-radius(5px);
-	}
-	@content;
 }
+/* Mixin for Detail Page */
+
+/* Mixin for slick slider */
+@mixin slider-item-container{
+	.cimm_slider-item-container{
+		@if map-get($slider-item-container, border) == true{
+			border: 1px solid $border-color;
+		}
+		@if map-get($slider-item-container, border-radius) == true{
+			@include border-radius(3px);
+		}
+		@if map-get($slider-item-container, box-shadow) == true{
+			box-shadow: 0 0 6px $shadow-color;
+		}  
+
+		.cimm_slider_item-image{
+			@if map-get($slider-item-container, image-border) == true{
+				border: 1px solid $border-color;
+			}
+			@if map-get($slider-item-container, image-border-radius) == true{
+				@include border-radius(3px);
+			}
+		}
+		.cimm_slider_item-desc{
+
+		}
+	}
+}
+
+@mixin slick-arrows{
+	.slick-prev{
+		@include icon(before, slick_arrow-prev, $top: 18px, $left: 0px,
+		$color: map-get($slider-item-container, icon-color), 
+		$size: map-get($slider-item-container, icon-size), 
+		$font-faily: map-get($slider-item-container, icon-family));
+	}
+	.slick-next{
+		@include icon(before, slick_arrow-next, $top: 18px, $right: 0px,
+		$color: map-get($slider-item-container, icon-color), 
+		$size: map-get($slider-item-container, icon-size), 
+		$font-faily: map-get($slider-item-container, icon-family)); 
+	} 
+}
+/* Mixin for slick slider */
+
+/* Mixin for Responsive Breakpoint */
+@mixin breakpoint($point) { 
+	@if $point == lg {
+		@media only screen and (min-width: 980px) and (max-width: 1024px)  { @content ; }
+   	}
+	@else if $point == md {
+		@media only screen and (min-width: 768px) and (max-width: 980px) { @content ; }
+   	}
+	@else if $point == sm {
+		@media only screen and (min-width: 480px) and (max-width: 768px) { @content ; }
+   	}
+	@else if $point == xs {
+		@media only screen and (min-width: 320px) and (max-width: 480px)  { @content ; }
+   	} 
+   	@else if $point == xsonly {
+		@media (max-width: 37.5em)  { @content ; }
+	}
+}
+/* End Mixin for Responsive Breakpoint */

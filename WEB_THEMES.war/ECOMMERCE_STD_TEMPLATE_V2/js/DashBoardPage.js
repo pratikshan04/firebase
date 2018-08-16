@@ -32,6 +32,9 @@ function validateImageUpload(){
 			}
 		}else{
 			bootAlert("small","error","Error","Please choose a image file to upload.");
+			$("[data-bb-handler='ok']").click(function(){
+				$('#profileImage').trigger("click");
+			});
 			return false;
 		}
 	}else{
