@@ -161,6 +161,15 @@ header {
             }            
          
         }
+        .homeHeader{
+            position: absolute;
+            width: 1140px;
+            z-index: 1;
+            .cimm_logo{
+                position: absolute;
+                top: 30px;
+            }
+        }
     }
 }
 

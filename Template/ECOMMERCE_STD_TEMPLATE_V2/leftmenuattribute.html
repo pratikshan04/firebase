@@ -24,9 +24,7 @@
 	</form>
 </div> -->
 <!-- ******************End of Leftmenu Single attribute Filter************************-->
-<div class="cimm_filter">
-	<div class="cimm_search-block">
-		<div class="cimm_search-block-title">$!locale.get("product.label.search")</div>
+<div class="cimm_filter">			
 		#if($navigationType=="SEARCH")
 		<div class="cimm_searchWithin marginY-2">
 			<div class="input-group">
@@ -54,7 +52,7 @@
 			</form>
 		</div>
 		#end
-		
+	<div class="cimm_search-block">		
 		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
 			#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
 			<div class="cimm_filter-block-title">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
