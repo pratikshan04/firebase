@@ -223,9 +223,9 @@
 	
 	#foreach($topMenu in $topStaticMenu)
 		#set($subMenu = 0)
-		#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations" && $!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
+		#if($topMenu.level1Menu && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
 			#set($subMenu = 1)
-		#elseif($topMenu.menuList && $topMenu.menuList.size()>0)
+		#elseif($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
 			#set($subMenu = 1)
 		#end
 		<li #if($subMenu == 1) class="dropdown" #end>
