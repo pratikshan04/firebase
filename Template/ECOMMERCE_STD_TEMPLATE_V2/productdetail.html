@@ -181,9 +181,9 @@
 					</div>
 					#end
 					<div class="prodSharePrintBtnWrap pull-right hideForPrint">
-						<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemPriceId);"><em class="fa fa-paper-plane" aria-hidden="true"></em></a> 
-						<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span></a>
-						<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><em class="fa fa-lg fa-share"></em></a>
+						<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemPriceId);"><svg version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 -0.49508840864440273 56 56" class="ng-element" data-id="bb883c158b914c178666da3b604fc777" style="mix-blend-mode: normal; fill: rgb(2, 65, 106); width: 14px; height: 16px; filter: none;" xmlns="http://www.w3.org/2000/svg"><g><polygon xmlns:default="http://www.w3.org/2000/svg" id="Send_1_" points="0,54.8 5.3,29.9 38.6,27.6 38.6,27.2 5.3,24.9 0,0 55.5,27.4 " style="fill: rgb(2, 65, 106);"/></g></svg> Send</a> 
+						<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><svg version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 800 800" class="ng-element" data-id="a928b895b9f14f6bbbf6ed722704e0db" style="mix-blend-mode: normal; fill: rgb(2, 65, 106); width: 16px; height: 16px; filter: none;" xmlns="http://www.w3.org/2000/svg"><g><path xmlns:default="http://www.w3.org/2000/svg" d="M732,240H400H68c-44,0-68,32-68,76v84v200h160v160h480V600h160V400v-84C800,272,776,240,732,240z M560,680H240V480h320V680z   M720,400h-80v-80h80V400z" style="fill: rgb(2, 65, 106);"/><rect xmlns:default="http://www.w3.org/2000/svg" x="160" y="40" width="480" height="160" style="fill: rgb(2, 65, 106);"/></g></svg> Print</a>
+						<!-- <a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><em class="fa fa-lg fa-share"></em></a> -->
 						<ol class="sharePageWrap">
 						 	<li>
 								<a id="pinInt" class="fb-share-button" data-href="" data-layout="button_count">
@@ -283,7 +283,7 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<ul id="productDetailList" class='skuStyle'>
-							#if($itemData.manufacturerName != "" && $!itemData.manufacturerName)
+							<!-- #if($itemData.manufacturerName != "" && $!itemData.manufacturerName)
 							<li id="itemManufacturers" itemprop="sku">
 								<strong>$!locale.get("product.label.manufacturers"): </strong><span>$!itemData.manufacturerName</span>
 							</li>
@@ -292,7 +292,7 @@
 							<li id="itemBrandName" itemprop="sku">
 								<strong>$!locale.get("product.label.brandName"): </strong><span>$!itemData.brandName</span>
 							</li>
-							#end
+							#end -->
 							<li id="sitePartNo" itemprop="sku">
 								<strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!itemData.ItemId">$!itemData.partNumber</span>
 							</li>
@@ -469,9 +469,9 @@
 											#set($groupPop = "ulg"+$!itemData.itemId+"_pop")
 											<a id="$!groupPop" class="popMsg hideMe"></a>
 											#if($userLogin)
-												<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+												<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-itemId="$!itemData.itemId" data-toggle="dropdown" data-target="ulg$!itemData.itemId" data-listTarget="ulg$!itemData.itemId" data-function="productGroupDropDown">+ $!locale.get("marketBasket.button.addToProductGroup")</a>
 											#else
-												<a data-toggle="modal" data-target="#loginModal"><em class="fa fa-plus"></em>$!locale.get("marketBasket.button.addToProductGroup")</a>
+												<a data-toggle="modal" data-target="#loginModal">+ $!locale.get("marketBasket.button.addToProductGroup")</a>
 											#end
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 												<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
