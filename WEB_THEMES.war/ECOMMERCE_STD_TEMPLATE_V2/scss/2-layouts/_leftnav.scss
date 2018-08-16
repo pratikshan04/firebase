@@ -16,9 +16,9 @@
             }
         }
 
-        .cimm_filter-block-title {
+        .cimm_filter-block-title {           
 			+div > ul{
-				padding: 10px 0;
+				padding: 10px;
 			}
         }
         
@@ -39,6 +39,9 @@
 		.slimScrollBar {
 			width: 11px !important;
 			right: 3px !important;
-		} 
+        } 
+        .cimm_filter_block-container,.myAccountLeftMenu{
+            padding: 10px;
+        }
     }
 }

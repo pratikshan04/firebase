@@ -29,6 +29,17 @@
             }
 			margin-right: 0px;
         }
+        .switchIcons{
+            a{
+                vertical-align: middle;
+               i{
+                font-size: 16px;
+                top: 2px;
+                position: relative;
+                color:$primary_color;
+               }
+            }
+        }
     }
 }
 
@@ -85,7 +96,15 @@
 						float: none;
 						font-size: 12px;
 						padding: 0 0 5px 0;
-						font-family: $default_font-family;
+                        font-family: $default_font-family;
+                        .productGroupBtn{
+                            a{
+                                font-size: 12px;
+                            }
+                        }
+                        strong{
+                            font-weight: 100;
+                        }
 					}
 				}
                 .listGridItemDesc {
@@ -112,7 +131,13 @@
                 }
 				.itemCountGrid {
 					display: none;
-				}
+                }
+                .productTitle{
+                    a{
+                        color:$primary_color;
+                        font-size: 15px;
+                    }                    
+                }
             }
             li.prodModeItemCountGrid{
                 width: 100%;
@@ -231,7 +256,15 @@
                         font-size: 12px;
 						&.hideToHover{
 							display: none;
-						}
+                        }
+                        .productGroupBtn{
+                            a{
+                                font-size: 12px;
+                            }
+                        }
+                        strong{
+                            font-weight: 100;
+                        }
 					}
 				}
                 .listGridItemDesc {
@@ -265,7 +298,13 @@
 							margin-right: 12%;
 						}
 					}
-				}
+                }
+                .productTitle{
+                    a{
+                        color:$primary_color;
+                        font-size: 15px;  
+                    }
+                }
             }
             li.prodModeItemCountGrid,
             li.productModeItemsDiv,

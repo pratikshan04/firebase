@@ -97,7 +97,8 @@ $icons: (
 	slick_arrow-prev	: "\f104",  
 	slick_arrow-next	: "\f105",
 	slick_arrow-up		: "\f106",
-	slick_arrow-down	: "\f107"
+	slick_arrow-down	: "\f107",
+	addtocart			:"\f07a"
 ); 
 
 @mixin icon(
@@ -446,6 +447,7 @@ $icons: (
 				@if($class_name == "addtocart"){
 					padding-left: 35px;
 					@include icon(before, cart, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
+
 				} 
 				@if($class_name == "viewallchoice"){
 					padding-left: 25px; 
@@ -453,7 +455,7 @@ $icons: (
 				}
 				@if($class_name == "continueshop"){
 					padding-left: 35;
-					@include icon(before, continueshop, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
+					@include icon(before, continueshop, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px)
 				}
 			}
             &:hover {
