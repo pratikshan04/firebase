@@ -24,7 +24,7 @@
 				</div>
 			</nav> -->
 		</div>
-		<div class="cimm_bodyContentWrap">
+		<div class="cimm_bodyContentWrap #if($LayoutName=='HomePage' || $!isStaticHomePage =='Y') removeMargin #end">
 		    <div class="container #if($LayoutName == 'ProductList' && $resultCount > 0 && $!navigationType=='SEARCH')mTop-3 #end">
 		    #if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $userAgent != "WEBVIEW")
 		    	<div class="row">

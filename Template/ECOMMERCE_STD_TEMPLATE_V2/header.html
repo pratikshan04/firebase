@@ -177,7 +177,7 @@
 		</div>
 	</div>	
 </div>
-<div class="cimm_header_mid">
+<div class="#if($LayoutName=='HomePage' || $!isStaticHomePage =='Y') homeHeader #else cimm_header_mid #end">
 <div class="row no-gutters">
 	#if($userAgent != "WEBVIEW")
 	<div class="col-md-3 col-sm-12 col-xs-12">
