@@ -51,8 +51,6 @@
 		a{
 			font-size: $category_hf-size; 
 			font-family: $category_hf-family;
-			color:$primary_color ;
-			font-weight: bold;
 			&:hover {
 				color: $primary_color;
 				text-decoration: underline;

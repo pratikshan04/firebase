@@ -236,6 +236,7 @@
 	 ##end
 	</ul>
 #elseif($LayoutName!="ShipEntityPage")
+<h1 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
 	<ul class="breadcrumb">
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
 	    #if($!LayoutName=="OrderHistoryPage" || $!LayoutName=="AddresssesPage" || $!LayoutName=="EditContactPage")
@@ -245,5 +246,4 @@
 	    	<li class="active">$!locale.get("breadcrumbs.label.$!LayoutName")</li>
 	    #end
 	</ul>
-<h1 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
 #end
