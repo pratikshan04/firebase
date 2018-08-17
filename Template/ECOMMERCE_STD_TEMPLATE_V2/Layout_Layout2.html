@@ -11,26 +11,22 @@
 	<div id="fixedHead"></div>
 	<div class="cimm_stickyPageWrap">
 		<div id="normalHead">
-			<header>				
-				<div class="cimm_header">	
-					<div class="container">				
-						#parse("header.html")
-					</div>
+			<header>
+				<div class="cimm_header">
+					#parse("header.html")
 				</div>
 			</header>
-			<!-- <nav class="navbar navbar-default hideForIpad">
+			<nav class="navbar navbar-default hideForIpad">
 				<div class="container cimm_nav">
 					#parse("navigation.html")
 				</div>
-			</nav> -->
+			</nav>
 		</div>
-		<div class="cimm_bodyContentWrap #if($LayoutName=='HomePage' || $!isStaticHomePage =='Y') removeMargin #end">
+		<div class="cimm_bodyContentWrap">
 			<div class="container">
 				#if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $userAgent != "WEBVIEW")
 				<div class="row">
-					<div class="col-md-3">
-		    		</div>
-			    	<div class="col-md-9">
+					<div class="col-md-12">
 						<div class="cimm_BreadCrumbs">
 							#parse("fullBreadcrumbs.html")
 						</div>
@@ -47,9 +43,7 @@
 	</div>
 	<footer>
 	    <div class="cimm_footerEnclosure">
-	     	<div class="container">
 	     	#parse("footer.html")
-	     	</div>
 	    </div>
     </footer>
     #if($!userAgent != "WEBVIEW")

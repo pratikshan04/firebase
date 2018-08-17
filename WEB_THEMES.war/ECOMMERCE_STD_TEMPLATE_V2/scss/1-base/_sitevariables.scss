@@ -9,11 +9,9 @@ $gray-lighten: lighten($black, 89.7%) !default; // #E5E5E5
 
 
 //** Global Temp Theme
-$primary_color      : #02416a;
+$primary_color      : #46acee;
 $secondary_color    : #404040; 
 $tertiary_color     : #f9f9f9;
-$searchBtn_color    : #6b7c8e;
-$addToCartBtnBg     : #328bc3;
 
 // $primary_color      : #8a8a8a;
 // $secondary_color    : #9e0c24;
@@ -27,16 +25,15 @@ $green              : #37ff3b;
 $yellow             : #e4de33;
 $lightgray          : #EBEBEB;
 $border-color       : #A1A1A1;
-$navMenuColor       : #ed8b00;
 $shadow-color : lighten($black, 68%) !default;
 
 $default_font-color     : $secondary_color; //** Global font color
 $heading_font-color		: $secondary_color; //** Global heading font color
 
 //** Global Temp Fonts 
-$default_font-family    : 'nimbus-sans';
-$secondary_font-family  : 'nimbus-sans';
-$heading_font-family    : 'nimbus-sans';
+$default_font-family    : 'RobotoRegular';
+$secondary_font-family  : 'RobotoBlack';
+$heading_font-family    : 'RobotoCondensedBold';
 
 
 //** Global Font sizes
@@ -107,17 +104,17 @@ $left_nav:(
         filter-padding: 0px, 
 
         filter_block-bg: transparent, 
-        filter_block-border: true,         //Options true, "top", "bottom" and "top-bottom"
+        filter_block-border: false,         //Options true, "top", "bottom" and "top-bottom"
         filter_block-padding: 0px,
-        filter_block-margin: 15px, 
+        filter_block-margin: 0px, 
         
-        //Left Nav Title Section
-        filter_block_tf-bg: $primary_color,
+        //Left Nav Title 
+        filter_block_tf-bg: transparent,
         filter_block_tf-border: bottom,       //Options true, "top", "bottom" and "top-bottom"
         filter_block_tf-margin: 0px 0px,
-        filter_block_tf-padding: 10px 10px,
+        filter_block_tf-padding: 12px 0px,
         
-        filter_block_tf-color: $white,
+        filter_block_tf-color: $default_font-color,
         filter_block_tf-fontfamily: $heading_font-family,
         filter_block_tf-uppercase: true,
         filter_block_tf-fontsize: $font_xlg,
@@ -126,9 +123,9 @@ $left_nav:(
         filter_block_ticon-close: "minus-circle", 
         filter_block_ticon-open: "plus-circle",
         filter_block_ticon-size: 18px,
-        filter_block_ticon-color: $white,
+        filter_block_ticon-color: $primary_color,
         filter_block_ticon_pos-top: 30%, 
-        filter_block_ticon_pos-right: 10px,
+        filter_block_ticon_pos-right: 0px,
 
         //Left Nav Link
         filter_block_lf-color: $default_font-color,
@@ -144,8 +141,8 @@ $left_nav:(
 //Footer 
 $footer_bg      : transparent;
 $footer_top-bg  : $secondary_color;
-$footer_mid-bg  : $black; 
-$footer_btm-bg  : $black;
+$footer_mid-bg  : $secondary_color; 
+$footer_btm-bg  : $primary_color;
 
 //Footer a heading (hf = heading font)
 $fnav_hf-color  : $white;
@@ -190,7 +187,7 @@ $btncolors: (
         btnhf-color : $white, // Button hover font color
         abg-color   : $gray-dark, //Button Active background color
         bg-icon     : true,
-        onlyborder  : true        
+        onlyborder  : false
     ),
     viewallchoice:(
         bg-color    : $primary_color, //Button Background color
@@ -349,11 +346,11 @@ $mtap:(
 
 $tabHeadingBackgroundColor: #ebebeb;
 $tabHeadingFontColor: #404040;
-$tabHeadingActiveBackgroundColor: #4181bd;
+$tabHeadingActiveBackgroundColor: #404040;
 $tabHeadingActiveFontColor : $white;
-$tabHeadingIconContent: "\f055";
-$tabHeadingActiveIconContent: "\f056";
-$tabHeadingIconFontFamily: 'FontAwesome';
+$tabHeadingIconContent: "\e113";
+$tabHeadingActiveIconContent: "\e114";
+$tabHeadingIconFontFamily: 'Glyphicons Halflings';
 $tabHeadingFontSize: 14px;
 
 $packDescColor: #ed7118;
