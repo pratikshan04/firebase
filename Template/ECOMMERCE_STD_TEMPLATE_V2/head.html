@@ -238,21 +238,21 @@
 #end
 <script type="text/javascript" src="$webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<!-- Piwik -->
 <script type="text/javascript">
-  var _paq = _paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['enableLinkTracking']);
+  var paq = paq || [];
+  / tracker methods like "setCustomDimension" should be called before "trackPageView" /
+  paq.push(['trackPageView']);
+  paq.push(['enableLinkTracking']);
   (function() {
-    var u="//templatestage.cimm2.com/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
-    _paq.push(['setUserId', '$!session.getAttribute("com.common.username")']);
+    var u="//hirschbeta.cimm2.com/piwik/";
+    paq.push(['setTrackerUrl', u+'piwik.php']);
+    paq.push(['setSiteId', '1']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//templatestage.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
+<!-- End Piwik Code -->
+<noscript><p><img src="//hirschbeta.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
 <!-- End Piwik Code -->
 #end
 #parse("stylesheets.html")
