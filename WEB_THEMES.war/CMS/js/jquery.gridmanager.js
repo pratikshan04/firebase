@@ -1792,7 +1792,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		
 		
         // Controls for content elements
-        controlContentElem: '<div class="gm-controls-element hideButton pull-left"> <a class="gm-move cmsMoveContent" href="#" title="Move" onclick="javascript:showDelIcon();"></a> <a class="gm-delete cmsContentRmv" href="#" title="Delete"></a> </div>',
+        controlContentElem: '<div class="gm-controls-element hideButton pull-left"> <a class="gm-move cmsMoveContent" title="Move" onclick="javascript:showDelIcon();"></a> <a class="gm-delete cmsContentRmv" href="#" title="Delete"></a> </div>',
    /*
      General editing classes--------------- 
   */
