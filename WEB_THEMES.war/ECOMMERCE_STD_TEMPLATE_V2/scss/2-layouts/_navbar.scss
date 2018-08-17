@@ -1,38 +1,74 @@
  
 @include main_nav;
 
-nav.navbar {
+//nav.navbar {
     // box-shadow: 0px 5px 10px 0px #c4c4c4;
-    .cimm_nav{
-        >ul{
-            >li{
-                &:last-child{
-					.dropdown-menu{
-					    left: -143px;
-					}
-                }  
+    .cimm_nav{       
+        ul.navbar-nav{
+            padding: 50px 0 50px 50px;
+            display: inline-block;
+            width: 100%;
+          li {  
+            padding: 10px 15px;                             
+              a{
+                  color: $white;
+                  font-size: 15px;
+                  text-transform: uppercase;
+                  //padding: 10px 15px;  
+                  font-weight: bold;                              
+              }
+            &:hover{
+                background: url(../images/texture.jpg) no-repeat;                
+                color:$black;
                 a{
-                    letter-spacing: 1px; 
-                } 
-
-                > .dropdown-menu{
-                    padding: 10px 0px;
-
-                    &.shopbyprod, &.shopbymanuf, &.shopbybrand{
-                        width: 855px;
+                    color:$black;                    
+                }
+                .dropdown-menu{
+                    display: block;
+                    background: url(../images/texture.jpg) no-repeat;
+                    top: 39px;
+                    color:$black;
+                    padding: 10px;
+                    left:-1px;
+                    > li{
+                        padding: 5px;
                     }
-
-                    > ul{
-                        width: 282px;   
-                        > li{
-                            >a{
-                                text-transform: capitalize;
+                    p{
+                        .cimm_inlineButton{
+                            background: none;
+                            font-size: 12px;
+                            font-weight: normal;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            
+            .shopbyprod,.shopbymanuf{
+                width: 650px;
+                ul{
+                    float: left;
+                    li{                        
+                        display: block;
+                        padding: 0;
+                        a{
+                            color:$black;
+                            font-size: 13px;
+                            text-transform: capitalize;
+                            padding: 5px;
+                            display: block;
+                            &:hover{
+                                background: none;
+                                color:$navMenuColor;
+                                padding: 5px;
                             }
                         }
                     }
                 }
             }
+          } 
         }
+           
     }
- }
+ //}
  

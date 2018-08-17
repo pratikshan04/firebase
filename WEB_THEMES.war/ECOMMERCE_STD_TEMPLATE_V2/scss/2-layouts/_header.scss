@@ -4,10 +4,10 @@ header {
 
         .cimm_header_top {
             position: relative;
-            height: 40px;
-            background: $header_top-bg;
-            @include font($family: $default_font-family, $size: 12px, $color: $white, $weight: normal);
-            @include border-position(bottom, 4px, solid, $red);
+            height: 70px;
+            background: $black;
+            padding: 15px 10px;
+            @include font($family: $default_font-family, $size: 12px, $color: $white, $weight: normal);           
             .cimm_header_top-phone {
                 float: left;
                 ul {
@@ -20,44 +20,131 @@ header {
             .cimm_header_top-menu {
                 float: right;
                 text-align: right;
-
-                ul{
-                    li{
-                        text-transform: capitalize;
+            }
+                .cimm_signWrap {
+                    text-align: right;
+                    margin: 0;    
+                    li {
                         display: inline-block;
                         position: relative;
-
-                        &:hover ul{
+                        text-align: left;
+                        vertical-align: top;
+                        margin-right: 10px;
+                        //width: 100px;
+                        a {
                             display: block;
+                            color: $white;
+                            font-weight: bold;
                         }
-                        ul.dropdown-menu{
-                            padding:0;
-                            li{
-                                border-bottom:1px solid $border-color;
-                                width:100%;
-                                a{
-                                    color:$default_font-color;
-                                    padding: 5px 10px;
-                                }
+                        span {
+                            font-weight: normal;
+                            font-family: $default_font-family;
+                            text-transform: uppercase;
+                            margin-top: 4px;
+                        }
+                        span.imgBox {
+                            display: block;
+                            width: 40px;
+                            height: 40px;
+                            background: $primary_color;
+                            position: relative;
+                            margin: 0 auto;
+                            overflow: hidden;
+                            em {
+                                position: absolute;
+                                left: 10px;
+                                color: $white;
+                                top: 10px;
+                                font-size: 20px;
                             }
                         }
-                        a{
-                            color:$white;
-                            padding: 10px;
-                            display: block;
+                        .myAccountMenu {
+                            top: 40px;
+                            background: $myaccount_menu-bg;
+                            right: 0px;
+                            width: 275px;
+                            left: auto;
+                            border: 1px solid $border-color;
+                            border-radius: 2px;
+                            padding: 0;
+                            li {
+                                width: 100%;
+                                text-transform: none;
+                                font-family: $default_font-family;
+                                text-align: left;
+                                a {
+                                    font-weight: normal;
+                                    color: $default_font-color;
+                                    font-size: 16px;
+                                    padding: 3px 10px;
+                                    em {
+                                        margin-right: 10px;
+                                        font-size: 16px;
+                                    }
+                                }
+                                &.loginLink{
+                                    margin-top: 15px;
+                                    padding: 15px 0;
+                                    background: $white;
+                                    text-align: center;
+                                    a{
+                                        background: $default_font-color;
+                                        color: $white;
+                                        display: inline-block;
+                                        padding: 10px;
+                                    }
+                                }
+                                &:last-child {
+                                    border-bottom: none;
+                                }
+                                &.logoutBtn{
+                                    background: $white;
+                                    text-align: center;
+                                    a{
+                                        background: $default_font-color;
+                                        color: $white;
+                                        display: inline-block;
+                                        padding: 12px;
+                                        margin: 25px 0;
+                                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+                                    }
+                                }
+                            }
+    
                         }
-                    }
+                    }                    
                 }
-            }
+                .cimm_signWrap li.cartCountDisplayLi a span.cartCountrefresh {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    background: #e70026;
+                    border-radius: 10px;
+                    color: $white;
+                    padding: 1px 5px;
+                }
+                .cimm_signWrap li.cartCountDisplayLi a svg {
+                    width: 35px;
+                    fill: $white;
+                    position: absolute;
+                    top: 10px;
+                    left: 5px;
+                }               
+            
         }
         .cimm_header_mid {
-            background: $header_mid-bg;
-            
+            background: url(../images/header-bg.png) no-repeat;
+            background-size: cover;            
             .cimm_logo {
                 width: 250px;
                 height: 120px;
                 position: relative;
-
+                a{
+                    position: absolute;
+                    top:20px;
+                    left: 20px;
+                }
                 img {
                     width: auto;
                     max-width: 100%;
@@ -71,112 +158,17 @@ header {
                     right: 0;
                     margin: auto;
                 }
-            }
-            
-            .cimm_signWrap {
-                text-align: right;
-                margin: 10px 0px;
-
-                li {
-                    display: inline-block;
-                    position: relative;
-                    text-align: center;
-                    width: 100px;
-                    a {
-                        display: block;
-                        color: $default_font-color;
-                        font-weight: bold;
-                    }
-                    span {
-                        font-weight: normal;
-                        font-family: $default_font-family;
-                        text-transform: uppercase;
-                        margin-top: 4px;
-                    }
-                    span.imgBox {
-                        display: block;
-                        width: 50px;
-                        height: 50px;
-                        background: $primary_color;
-                        position: relative;
-                        margin: 0 auto 8px auto;
-                        overflow: hidden;
-                        em {
-                            position: absolute;
-                            left: 10px;
-                            color: $white;
-                            top: 10px;
-                            font-size: 32px;
-                        }
-                    }
-                    .myAccountMenu {
-                        top: 48px;
-                        background: $myaccount_menu-bg;
-                        right: 38px;
-                        width: 275px;
-                        left: auto;
-                        border: 1px solid $border-color;
-                        border-radius: 2px;
-                        padding: 0;
-                        li {
-                            width: 100%;
-                            text-transform: none;
-                            font-family: $default_font-family;
-                            text-align: left;
-                            a {
-                                font-weight: normal;
-                                color: $default_font-color;
-                                font-size: 16px;
-                                padding: 3px 10px;
-                                em {
-                                    margin-right: 10px;
-                                    font-size: 16px;
-                                }
-                            }
-                            &.loginLink{
-                                margin-top: 15px;
-                                padding: 15px 0;
-                                background: $white;
-                                text-align: center;
-                                a{
-                                    background: $default_font-color;
-                                    color: $white;
-                                    display: inline-block;
-                                    padding: 10px;
-                                }
-                            }
-                            &:last-child {
-                                border-bottom: none;
-                            }
-                            &.logoutBtn{
-                                background: $white;
-                                text-align: center;
-                                a{
-                                    background: $default_font-color;
-                                    color: $white;
-                                    display: inline-block;
-                                    padding: 12px;
-                                    margin: 25px 0;
-                                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-                                }
-                            }
-                        }
-
-                    }
-                }
-                >li:first-child {
-                    width: 125px;
-                }
-            }
-            .cimm_signWrap li.cartCountDisplayLi a span.cartCountrefresh {
-                display: block;
-            }
-            .cimm_signWrap li.cartCountDisplayLi a svg {
-                width: 35px;
-                fill: $white;
+            }            
+         
+        }
+        .homeHeader{
+            position: absolute;
+            width: 1140px;
+            z-index: 1;
+            background: url(../images/overlay.png) no-repeat;
+            .cimm_logo{
                 position: absolute;
-                top: 10px;
-                left: 5px;
+                top: 30px;
             }
         }
     }
@@ -185,9 +177,9 @@ header {
 
 .loginWindow {
     position: absolute;
-    top: 50px;
-    background: $white;
-    right: 38px;
+    top: 40px;
+    //background: url(../images/Clearance_Icon.png) no-repeat;
+    right: 0px;
     width: 370px;
     min-height: 300px;
     left: auto;
@@ -195,12 +187,13 @@ header {
     border-radius: 0;
     padding: 0;
     margin: 0;
-    border: 2px solid $border-color;
+    border: 2px solid #d2d1d1;
+    box-shadow: 0px 3px 4px #ccc;
     font-family: RobotoRegular;
     font-size: 12px;
     form {
-        background: $login_form-bg;
-        padding: 18px;
+        background: url(../images/texture.jpg) no-repeat;
+        padding: 30px 30px 10px;
         .form-control {
             height: 42px;
             box-shadow: none;
@@ -210,7 +203,14 @@ header {
         .form-group{
             label{
                 text-transform: uppercase;
+                color:$black;
             }
+        }
+        .link{
+            color:$black !important;
+            margin: 0;
+            font-weight: normal !important;
+            text-decoration: underline;
         }
     }
     ul,
@@ -222,6 +222,12 @@ header {
     .rememberLogWrap {
         text-transform: none;
         padding-top: 6px;
+        .customCheckBox{
+            margin: 15px 0;
+        }
+        span{
+            color:$black;
+        }
         .button {
             width: 192px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
@@ -251,18 +257,24 @@ header {
 
 .cimm_searchWrapper { 
     text-align: center;
-    margin: 55px 0 18px;
+    margin: 0px 0 0px;
     position: relative;
-
+    width: 450px;
     input[type='text'] {
         border: 1px solid $border-color;
         border-radius: 0px;
         font-family: $default_font-family;
+        height: 40px;
     }
     .cimm_searchIcon {
-        border: 1px solid $border-color;
+        //border: 1px solid $border-color;
         border-radius: 0px;
         width: 47px;
+        height: 40px;
         color: $white;
+        font-size: 24px;
+        padding: 0px;
+        background: $searchBtn_color;
+        border: none;
     }
 }

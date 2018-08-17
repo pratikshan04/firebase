@@ -83,9 +83,10 @@ $modal_closebtn-color: $default_font-color;
 
 footer,
 .cimm_stickyPageWrap:after {
-    height: 355px;
+    height: 382px;
 }
 .cimm_bodyContentWrap {
+    margin-top: 40px;
     margin-bottom: 30px;
     height: 100%;
 }
@@ -230,7 +231,7 @@ footer,
 
 .productTitle {
 	margin: 0;
-    color: $default_font-color;
+    color: $primary_color;
     font-size: 18px;
     text-transform: uppercase;
     font-family: $secondary_font-family;
@@ -1138,5 +1139,18 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 .locationDataWrap .panel {
     margin: 0;
     box-shadow: none;
+}
+.btn-signup{
+    width:250px;
+}
+.mainLoginForm{
+    width:400px;
+    margin: 0 auto;
+}
+.form-control{
+    border-radius: 0;
+}
+.removeMargin{
+    margin-top: 0 !important;
 }
 @import "3-modules/modules";

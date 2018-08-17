@@ -2,7 +2,7 @@ footer {
     color: $white;
     .cimm_footer_mid {
         background: $footer_mid-bg;
-        height: 300px;
+        //height: 300px;
         .footerCol {
             h3 {
                 position: relative;
@@ -11,9 +11,10 @@ footer {
                 font-weight: normal;
                 
                 a {
-                    color: $fnav_hf-color;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
+                    color: $fnav_hf-color;                    
+                    text-transform: capitalize;
+                    font-size: 16px;
+                    font-weight: bold;
                 }
                 em {
                     display: none;
@@ -45,11 +46,33 @@ footer {
                 }
             }
         }
-        
+      .locationDetail{
+        margin: 20px 0;
+          p{
+              margin-bottom: 15px;
+              font-size: 16px;
+          }
+      }  
     }
     .cimm_footer_down {
         background: $footer_btm-bg;
         padding: 20px 10px;
+        ul.socialMediaLinks{
+            li{
+                display: inline-block;
+                vertical-align: bottom;
+                margin-right: 20px;
+                p{
+                    margin-bottom: 10px;
+                    text-align: left;
+                    font-size: 15px;
+                }
+                .btn-signup{
+                    text-transform: uppercase;
+                    font-weight: bold;
+                }
+            }
+        }
         .cimm_footer-copyright {
             margin: 0;
             color: $copyright_font-color;
