@@ -1129,8 +1129,8 @@ $(document).delegate('[data-function="productGroupDropDown"]', 'click',function(
 	_this.next(toggleListID).html('<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>');
 	_this.next(toggleListID).show();
 	jQuery.get("productListIdNamePage.action?productIdList="+itemId+"&groupType=P",function(data,status){
-		_this.next(toggleListID).find("li").remove();
-		_this.next(toggleListID).html(data);
+		_this.parent().find(toggleListID +" li").remove();
+		_this.parent().find(toggleListID).html(data);
 	});
 });
 function addToProductList(groupName,groupId){
