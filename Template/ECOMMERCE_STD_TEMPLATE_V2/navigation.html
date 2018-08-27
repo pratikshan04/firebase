@@ -223,9 +223,9 @@
 	
 	#foreach($topMenu in $topStaticMenu)
 		#set($subMenu = 0)
-		#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations" && $!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
+		#if($topMenu.level1Menu && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
 			#set($subMenu = 1)
-		#elseif($topMenu.menuList && $topMenu.menuList.size()>0)
+		#elseif($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
 			#set($subMenu = 1)
 		#end
 		<li #if($subMenu == 1) class="dropdown" #end>
@@ -236,13 +236,13 @@
 					<a href="javascript:void(0);" onclick="loginPop(); return false;" data-staticLink="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end">$topMenu.level1Menu</a>
 				#end
 			#elseif($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
-				<a href="$topMenu.level1Menu">$topMenu.level1Menu  #if($!CommonDBQueryWareHouseList.size()>0)<em class="fa"></em>#end</a>
+				<a href="$topMenu.level1Menu">$topMenu.level1Menu</a><!-- #if($!CommonDBQueryWareHouseList.size()>0)<em class="fa"></em>#end -->
 				#if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
-				<ul class="dropdown-menu">
+				<!-- <ul class="dropdown-menu">
 					#foreach($wareHouseModel in $CommonDBQueryWareHouseList.entrySet())
 						<li class="locationLink"><a href="javascript:void(0);">$!wareHouseModel.getValue()</a></li>
 					#end
-				</ul>
+				</ul> -->
 				#end
 			#else
 				<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<em class="fa"></em>#end</a></a>
