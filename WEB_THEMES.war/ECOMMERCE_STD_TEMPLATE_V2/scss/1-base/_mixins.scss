@@ -321,7 +321,11 @@ $icons: (
                         background: $title-bg;
                         padding: $title-padding; 
                         margin: $title-margin; 
-                         
+                        &.cleatBtn{
+                        	&:after{
+                        		content: "";
+                        	}
+                        }
 						@include icon(after, 
 							$title_icon-close, 
 							$color: $title_icon-color, 
