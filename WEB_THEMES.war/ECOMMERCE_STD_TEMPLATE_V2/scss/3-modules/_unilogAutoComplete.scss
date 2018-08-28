@@ -1,3 +1,36 @@
+.ac_trending{
+	position: absolute;
+	background-color: $white;
+	z-index: 999;
+	box-shadow: 0 2px 4px $gray;
+	width: 100%;
+	top: 34px;
+	padding: 10px 0;
+	text-align:left;
+	font: menu;
+	ul {
+		li {
+			line-height: 24px;
+			font-weight: 600;
+			text-transform: capitalize;
+			&.ac_heading{
+				color: #8e8e8e;
+				padding: 0 15px;
+				em{
+					margin-right: 8px;
+				}
+			}
+			a{
+				display: block;
+				padding: 0 15px;
+				&:hover{
+					background: $gray-lighten;
+				}
+			}
+		}
+	}
+}
+
 .ac_results {
     position: absolute;
 	background-color: $white;
