@@ -360,7 +360,7 @@ var QuickOrder = {};
 		if(jQuery('#copyPasteText').length>0 && jQuery('#copyPasteText').val()!=null && jQuery('#copyPasteText').val().trim()!=""){
 			block("Please Wait");
 			var  copyText = jQuery('#copyPasteText').val();
-			var lines = copyText.split("<br/>");
+			var lines = copyText.split("\n");
 			var quickOrderRecordLimit = 50;
 			if($('#quickOrderRecordLimit').lengt>0 && $('#quickOrderRecordLimit').val()!=null && $('#quickOrderRecordLimit').val()!="" && QuickOrder.isInt($('#quickOrderRecordLimit').val())){
 				quickOrderRecordLimit = parseInt($('#quickOrderRecordLimit').val());
@@ -422,7 +422,7 @@ var QuickOrder = {};
 							}
 						}else{
 							unblock();
-							bootAlert("small","error","Error","Entered text is not in expected format. <br/> Please copy the text with below pattern. <br/> Quantity [TAB or COMMA] Part#");
+							bootAlert("small","error","Error","Entered text is not in expected format. <br/> Please copy the text with below pattern. <br/> Part# [TAB or COMMA] Quantity");
 							submitFlag = false;
 							break;
 						}
