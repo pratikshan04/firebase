@@ -137,6 +137,7 @@ function getEntityAddress(obj){
 						return val;
 					});
 				}
+				formatPhoneVal();
 				unblock();
 			}
 		});
