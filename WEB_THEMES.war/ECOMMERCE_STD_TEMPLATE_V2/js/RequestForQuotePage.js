@@ -89,7 +89,7 @@ function validateRFQ(){
 			emailVal = emailVal + "Please Enter Contact Email Address.<br />";
 			emailMsg = 1;
 		}else{
-			var email = $.trim($("#rfnpEmail").val());
+			var email = $.trim($("#rfnpEmail").val().toLowerCase());
 			var reg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 			if (reg.test(email)){}
 			else{
