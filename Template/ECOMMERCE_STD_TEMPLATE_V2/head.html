@@ -6,15 +6,17 @@
 #else
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 #end
-<meta property="og:image" content="$!hostName$!webThemes/$!siteName/images/logo.png" />
 #if($LayoutName!="ProductDetailPage")
+	<meta property="og:image" content="$!hostName$!webThemes/$!siteName/images/logo.png" />
 	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
 		#set($ststicMetaDesc = $!metaDesc.trim())
 		#set($ststicMetaKey = $!metaTagString.trim())
 		#if($!ststicMetaDesc && $!ststicMetaDesc != "")
 			<meta name="description" content="$!ststicMetaDesc">
+			<meta property="og:description" content="$!ststicMetaDesc" />
 		#else
 			<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
+			<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
 		#end
 		#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
 			<meta name="metaKeywords" content="$!ststicMetaKey">
@@ -22,8 +24,10 @@
 	#elseif($LayoutName=="SubCategoryPage" && $!categoryDescription.shortDesc != "")	
 		<meta name="description" content="$!categoryDescription.shortDesc.trim()">
 		<meta name="metaKeywords" content="$!categoryDescription.shortDesc.trim()">
+		<meta property="og:description" content="$!categoryDescription.shortDesc.trim()" />
 	#else
 		<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
+		<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
 	#end
 #end
 #set($pageTitleVelo = $!siteDisplayName.trim())
@@ -96,10 +100,13 @@
 			<meta property="og:image:height" content="500" />
 			#if($itemData.metaDesc)
 				<meta name="description" content="$!itemData.metaDesc">
+				<meta property="og:description" content="$itemData.metaDesc" />
 			#elseif($itemData.shortDesc)
 				<meta name="description" content="$!itemData.shortDesc">
+				<meta property="og:description" content="$!itemData.shortDesc" />
 			#else
 				<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
+				<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
 			#end
 		#end
 	#end
@@ -257,3 +264,5 @@
 #end
 #parse("stylesheets.html")
 <title>$!pageTitleVelo.replace("Page","").trim()</title>
+#set($pageTitleVelo = $!pageTitleVelo.replace("Page","").trim())
+<meta property="og:title" content="$!pageTitleVelo" />
