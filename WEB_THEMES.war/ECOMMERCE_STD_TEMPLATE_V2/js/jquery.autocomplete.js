@@ -232,7 +232,7 @@ $.Autocompleter = function(input, options) {
 			dataVal = dataVal.split(" ").join("-");
 			window.location.href='/'+val+'/category/'+dataVal.replace(/ /g,"-").toLowerCase().replace(/&#{0,1}[a-z0-9]+;/ig, "").replace(/[^A-Za-z0-9-]*/g, "").replace(/---/g,"-").replace(/--/g,"-");
 		}else if(selected.category=="item"){
-			dataVal = dataVal.split(" ").join("_");
+			dataVal = dataVal.split(" ").join("-");
 			itemDetailPage(val,dataVal);
 		}else{
 			return false;
