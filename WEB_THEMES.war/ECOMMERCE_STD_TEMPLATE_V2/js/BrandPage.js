@@ -12,6 +12,10 @@ $(document).ready(function(){
 				(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
 			});
 		}else if(len>1){
+			$(".brandsListRow h2").each(function(){
+				var text = jQuery(this).text().substr(0,len).toLowerCase();
+				(text.toLowerCase().indexOf(valThis.split("")[0].toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
+			});
 			$(".sBlack").each(function(){
 				var text = jQuery(this).text().substr(0,len).toLowerCase();
 				(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().fadeIn() : jQuery(this).parent().fadeOut(); 
