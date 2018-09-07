@@ -279,9 +279,9 @@
 				}else{
 					tempPrice = price;
 				}
-				if(shortDesc.length>97){
+				/*if(shortDesc.length>97){
 					shortDesc=shortDesc.substring(0,97)+"...";
-				}
+				}*/
 				var displayPrice = (tempPrice) * parseInt(qty);
 				if(displayPrice==0){
 					displayPrice="Call for Price";
