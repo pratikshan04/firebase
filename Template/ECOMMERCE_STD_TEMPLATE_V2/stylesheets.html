@@ -14,7 +14,13 @@
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css" media="all" />
 #end
 #parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/bootstrap.min.css" /> -->
-<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/unilogweb.css" media="all" />
+#set($currentWebTheme = "unilogweb.css")
+#if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
+	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ScheduledThemeFileName"))
+#elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
+	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
+#end
+<link rel="stylesheet" type="text/css" href="$webThemes/$siteName/css/$!currentWebTheme" media="all" />
 #if($LayoutName=="QuickOrderStdPage")
 <link rel="stylesheet" href="$webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
 #end

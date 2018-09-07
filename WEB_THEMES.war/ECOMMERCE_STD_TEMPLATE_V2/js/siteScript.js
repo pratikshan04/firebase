@@ -3066,9 +3066,16 @@ $dRipple.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd mousel
 	$(this).find(".dRipple").remove();
 });
 
+function formatPhoneVal(){
+	$(".formatPhoneVal").val(function(i, text) {
+	    text = text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1-$2-$3");
+	    return text;
+	});
+}
 $(function(){
 	toDoFooter();
 	formatPrice();
+	formatPhoneVal();
 	triggerToolTip();
 	hideBulkAction();
 	leftFilterScroll();
@@ -3140,17 +3147,11 @@ $(function(){
 			}
 		});
 	}
-
 	$(".formatPhoneText").text(function(i, text) {
 	    text = text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1-$2-$3");
 	    return text;
 	});
-	
-	$(".formatPhoneText").val(function(i, text) {
-	    text = text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1-$2-$3");
-	    return text;
-	});
-	
+
 	$(".formatZipCodeText").text(function(i, text) {
 	    text = text.replace(/(\d\d\d\d\d)(\d\d\d\d)/, "$1-$2");
 	    return text;

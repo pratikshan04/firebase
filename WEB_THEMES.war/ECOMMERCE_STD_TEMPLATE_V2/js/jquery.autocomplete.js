@@ -167,7 +167,7 @@ $.Autocompleter = function(input, options) {
 		}
 	}).click(function() {
 		// show select when clicking in a focused field
-		if ( hasFocus++ > 1 && !select.visible() ) {
+		if ( hasFocus++ > 0 && !select.visible() ) {
 			onChange(0, true);
 		}
 	}).bind("search", function() {
@@ -232,7 +232,7 @@ $.Autocompleter = function(input, options) {
 			dataVal = dataVal.split(" ").join("-");
 			window.location.href='/'+val+'/category/'+dataVal.replace(/ /g,"-").toLowerCase().replace(/&#{0,1}[a-z0-9]+;/ig, "").replace(/[^A-Za-z0-9-]*/g, "").replace(/---/g,"-").replace(/--/g,"-");
 		}else if(selected.category=="item"){
-			dataVal = dataVal.split(" ").join("_");
+			dataVal = dataVal.split(" ").join("-");
 			itemDetailPage(val,dataVal);
 		}else{
 			return false;
@@ -303,11 +303,41 @@ $.Autocompleter = function(input, options) {
 				currentValue = currentValue.toLowerCase();
 			request(currentValue, receiveData, hideResultsNow);
 		} else {
+			if($("#trendingSearch") && $("#trendingSearch").val() == "Y"){
+				loadTrending();
+			}
 			stopLoading();
 			select.hide();
 		}
 	};
 	
+	function loadTrending(){
+		if($(".ac_trending").length < 1){
+			$("#search_Form").parent().append("<div class='ac_trending'></div>");
+		}
+		if($(".ac_trending").html().trim() == ""){
+			$(".ac_trending").html("Loading...");
+			$.get("TrendingSearchSuggestion.slt", function(data, status){
+				var tendData = JSON.parse(data);
+				var list = $(".ac_trending");
+				list.empty();
+				dataListObj =  new Hashtable();
+				var max = tendData.data.length;
+				var prodWrap = $('<ul/>');
+				var li;
+				$("<li/>").html('<em class="fa fa-lg fa-line-chart" aria-hidden="true"></em> Popular Searches').addClass("ac_heading").appendTo(prodWrap)[0];
+				for (var i=0; i < max; i++) {
+					if (!data[i])
+						continue;
+	
+					li = $("<li/>").html('<a href="/searchPage.action?keyWord='+tendData.data[i].searchedKeyword.trim()+'">'+tendData.data[i].searchedKeyword+'</a>').addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("data-value",tendData.data[i].searchedKeyword).appendTo(prodWrap)[0];
+				}
+				$(prodWrap).appendTo(list)[0];
+			});
+		}else{
+			$(".ac_trending").show()
+		}
+	}
 	function trimWords(value) {
 		if ( !value ) {
 			return [""];
@@ -345,8 +375,11 @@ $.Autocompleter = function(input, options) {
 	function hideResults() {
 		clearTimeout(timeout);
 		timeout = setTimeout(hideResultsNow, 200);
+		hideTrendResultsNow();
 	};
-
+	function hideTrendResultsNow(){
+		$(".ac_trending").fadeOut(300);
+	}
 	function hideResultsNow() {
 		var wasVisible = select.visible();
 		select.hide();
@@ -1062,6 +1095,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 	
 	function fillList() {
 		list.empty();
+		$(".ac_trending").fadeOut(300);
 		dataListObj =  new Hashtable();
 		var isList =false;
 		var max = limitNumberOfItems(data.length);
