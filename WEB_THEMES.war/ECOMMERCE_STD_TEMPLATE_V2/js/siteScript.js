@@ -2474,7 +2474,7 @@ function sendSiteDetailPagePart(a){
 	localStorage.setItem("emailFriendItem", html);
 	localStorage.setItem("emailFriendlink", location.href);
 	localStorage.setItem("itemID",a);
-	localStorage.setItem("itemName",'<a href="/itemDetailPage.action?codeId='+a+'">'+b+'</a>');
+	localStorage.setItem("itemName",'<a href="'+window.location.pathname+'">'+b+'</a>');
 	location.href="/SendThisPageLink.action";
 }
 /*End of Send Site Detail page*/
@@ -2546,7 +2546,7 @@ function sendProduct(){
 		}
 
 		$("#mailLink").val(emailitemlink);
-
+		$(".cimm_itemdetail-imgcontainer img").width('350px');
 	}else if(emailitem==null){
 		$("#SendItem").hide();
 		$("#ErrorField").append("Please <a onclick='history.go(-1);' href='javascript:void(0);'>Go Back</a> and select a Product to Send to your Friends/Associates");
