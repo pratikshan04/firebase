@@ -28,7 +28,7 @@
 					<div class="col-xs-12">
 						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 						<div class="cloneImg"> 
-							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 						</div>
 						#else
 						<div class="cloneImg"> 
@@ -1241,7 +1241,7 @@ function LoadRecentViewedItem(){
 						<ul>
 							<li>
 								<h4>
-									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
+									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft</a>
 								</h4>
 							</li>
 						</ul>
