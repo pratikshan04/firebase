@@ -45,7 +45,7 @@ function saveStaticPage(){
 	jQuery("#addNewStaticFormId").show();
 	console.log("save function called");
 	var pageName = $("#pageName").val();
-	
+	$(".bgColor").remove();
 	var lang = "1";
 	var errMsg = "";
 	var isValid = true;
@@ -732,6 +732,7 @@ function initGridManager(){
 		new_html = "<div class='container'>" + org_html + "</div>";
 		document.getElementById("mycanvas").innerHTML = new_html;
 	}
+	$(".cms_leftMenu").show();
 	gm =  jQuery(unilogCMSContainerId).gridmanager({
 		  debug :1
 	}).data('gridmanager');	
