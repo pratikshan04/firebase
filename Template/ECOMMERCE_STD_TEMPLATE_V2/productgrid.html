@@ -300,7 +300,7 @@
 									#end
 								#else
 									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!cdnUrl$!itemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
 										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end

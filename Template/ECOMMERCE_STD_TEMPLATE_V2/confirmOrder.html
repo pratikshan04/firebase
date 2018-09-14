@@ -28,7 +28,7 @@
 		    <td data-th="$!locale.get('product.label.Image')">
 		    	<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">
 					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-						<img src="$!cdnUrl$!itemData.imageName" itemprop="image" width="100" height="100" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
+						<img src="$!itemData.imageName" itemprop="image" width="100" height="100" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
 					#else
 						<img src="$!thumbNail$!itemData.imageName" itemprop="image" width="100" alt='$itemTitle' height="100" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
 					#end

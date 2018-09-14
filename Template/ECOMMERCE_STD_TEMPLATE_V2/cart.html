@@ -100,7 +100,7 @@
                             <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
                                 <span id="imageName$!itemData.itemId">
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			                            <img itemprop="image" src="$!cdnUrl$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #else
 			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #end
@@ -298,7 +298,7 @@
 			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			<img itemprop="image" src="$!cdnUrl$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			#else
 			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			#end
