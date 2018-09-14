@@ -143,7 +143,7 @@
 				    		<span class='text-danger'>$!locale.get("product.label.callforprice")</span>
 				    	#end
 				    #else
-				    	<img src="$!hostName$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+				    	<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 				    #end
 			    </span>
 			 </td>
@@ -156,7 +156,7 @@
 				    		<span class='text-danger'>Call for Availability</span>
 				    	#end
 				    #else
-				    	<img src="$!hostName$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+				    	<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 					#end
 				</span>
 			</td>
@@ -432,9 +432,9 @@
 								<div class="cimm_slideItemImg">
 					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 										 #if($linkItem.imageType=="URL")
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #end
 					 				</a>
 					  			</div>
@@ -471,12 +471,12 @@
 									
 								<!-- 	<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
 										 <strong>$!locale.get("product.label.leadTime"): </strong>
-										 <span class="leadTime_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										 <span class="leadTime_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
 										 <strong>$!locale.get("product.label.available") : </strong>
-										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									#if($linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
@@ -489,7 +489,7 @@
 								 	<!-- <li>
 								 		<h4>$!locale.get('product.label.listPrice'): </h4>
 										 <span id="listPriceSpan_$!linkItem.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										 </span>
 									</li> -->
 									#end
@@ -507,7 +507,7 @@
 											#end
 										#else
 										<span id="span_$!linkItem.partNumber" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										</span>
 										#end
 									</li>
