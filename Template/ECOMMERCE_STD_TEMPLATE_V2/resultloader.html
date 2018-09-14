@@ -489,7 +489,7 @@
 				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 					<div class="prodImage">
 						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 						#else
 							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!itemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 						#end
