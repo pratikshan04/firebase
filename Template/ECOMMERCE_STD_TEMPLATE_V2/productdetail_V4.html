@@ -149,11 +149,11 @@
 								<div class="cimm_slideItemImg">
 								#if($!imageList.imageName.contains("http") || $imageList.imageType=="URL")
 									<a href="#" data-image="$!imageList.imageName" data-zoom-image="$!imageList.imageName">
-										<img id="img_$!count" itemprop="image" src="$!imageList.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
+										<img id="img_$!count" itemprop="image" src="$!imageList.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 									</a>
 								#else
 									<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
-										<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
+										<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 									</a>
 								#end
 								#set($count = $!count + 1)
@@ -1251,7 +1251,7 @@ function LoadRecentViewedItem(){
 						<ul>
 							<li>
 								<h4>
-									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
+									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft</a>
 							cimm_slideItemImg	</h4>
 							</li>
 						</ul>
