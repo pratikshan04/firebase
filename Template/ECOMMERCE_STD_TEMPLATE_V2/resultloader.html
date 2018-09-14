@@ -810,7 +810,7 @@
           <td><input type="radio" id="r_$count" class="addedCardDetails" onclick="paymentProcessor.selectCardOnRadio(this);" value="$cardDetail.customerPaymentId" name="radioBtn" />
     <span id="cTyper_$count">
    
-    <img src="$webThemes/$siteName/images/credit-card-generic.png" class="CCLogo">
+    <img src="$!cdnUrl$!webThemes/$siteName/images/credit-card-generic.png" class="CCLogo">
     <span class="CCText">$!cardDetail.creditCardType.trim()</span> card ending with number <span id="cNumr_$count" class="ccNum">$!cardDetail.creditCardNumber</span>
    
     </span><br>
@@ -835,7 +835,7 @@
 		<input type="radio" id="r_$count" class="addNewCardRadioBtn" name="radioBtn" data-card ="radio"  #if($!cardDetails.size()==0) checked #end /> NEW CREDIT CARD 
      #end
      <br>
-      <img src="$webThemes/$siteName/images/credit-cards.png" class="CCLogo">
+      <img src="$!cdnUrl$!webThemes/$siteName/images/credit-cards.png" class="CCLogo">
      
       </h1>
     </div>

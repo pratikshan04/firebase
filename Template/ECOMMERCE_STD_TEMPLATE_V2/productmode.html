@@ -385,7 +385,7 @@
 					</li>
 					#else
 					<li>
-						<!-- <a href='$documentPath$itemDocument.docName' target="_blank"><img src="$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a> -->
+						<!-- <a href='$documentPath$itemDocument.docName' target="_blank"><img src="$!cdnUrl$!webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a> -->
 						<a href='$itemDocument.docName' target="_blank" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a>
 						<span class="cimm_pdfLink"><a href='$itemDocument.docName' target="_blank" class="removeForSend">$hostName$itemDocument.docName</a></span>
 					</li>
@@ -398,7 +398,7 @@
 			<div id="videoSection">
 				#foreach($videoLink in $videoLinkList)
 					<span>
-						<a href='$videoLink.videoName' target="_blank"><img src="$webThemes/$siteName/images/video.png" /><span>$!videoLink.videoCaption</span></a>
+						<a href='$videoLink.videoName' target="_blank"><img src="$!cdnUrl$!webThemes/$siteName/images/video.png" /><span>$!videoLink.videoCaption</span></a>
 					</span>
 				#end
 			</div>

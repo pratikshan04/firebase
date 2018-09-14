@@ -186,7 +186,7 @@ $(document).ready(function(){
 <div class="recentNews">
 	<h3 class="cimm_CaroBlockTitle"><label>Recent News</label></h3>
 	<div id="news-scroller" class="newsList customScroll">
-		<div class="center"><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+		<div class="center"><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
 	</div>
 </div>
 <script type="text/javascript">

@@ -247,7 +247,7 @@
 							#end
 						</td>
 						<td data-th="$locale.get('product.label.yourprice')" class="tabelPrice">
-							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$webThemes/$siteName/images/loading.gif" /></span> -->
+							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span> -->
 							#if($itemData.price > 0)
 							<span data-select='extPriceData' class='priceSpan'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else

@@ -3,7 +3,7 @@
 #foreach($orderDetail in $orderHistoryDetailList)
 <div class="cimm_invociesWrap">
 	<div class="PrintLogo">
-		<img src="$webThemes/$siteName/images/logo.png" alt="$!siteDisplayName"/>
+		<img src="$!cdnUrl$!webThemes/$siteName/images/logo.png" alt="$!siteDisplayName"/>
 	</div>
 	<h3 class="invoiceStatus">Order Status: <span class="orangeClr">#if($session.getAttribute("erpType") == "eclipse") #if($orderDetail.orderStatus)$orderDetail.orderStatus #end #else #if($orderInformation.stage) $orderInformation.stage #end #end</span></h3>
 	<hr class="dividerLine" />
