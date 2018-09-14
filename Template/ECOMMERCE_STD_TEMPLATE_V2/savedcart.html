@@ -144,9 +144,9 @@
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							<span id="imageName$itemData.itemId">
 							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#else
-							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#end
 							</span>
 						</a>

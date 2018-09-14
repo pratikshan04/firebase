@@ -33,7 +33,7 @@
 			<li>				
 				<div itemscope itemtype="http://schema.org/Brand" class="cimm_linkItemImg">
 					<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">                    
-						<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
+						<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
 					</a>
 				</div>
 			</li>

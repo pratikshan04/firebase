@@ -51,11 +51,11 @@
 							<td>
 								#if($compareItem.imageName.contains("http"))
 								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
-									<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#else
 								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
-									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#end
 								<strong>

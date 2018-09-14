@@ -27,9 +27,9 @@
 		    <td data-th="$locale.get('product.label.Image')">
 		    	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">
 					#if($itemData.imageType=="URL")
-						<img src="$itemData.imageName" width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" title="$itemTitle"/>
+						<img src="$itemData.imageName" width="150" height="150" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" title="$itemTitle"/>
 					#else
-						<img src="$thumbNail$itemData.imageName" width="150" height="150" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" title="$itemTitle"/>
+						<img src="$thumbNail$itemData.imageName" width="150" height="150" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" title="$itemTitle"/>
 					#end
 				</a>
 				<input type="hidden" name="idList" value="$itemData.partNumber" /> 
