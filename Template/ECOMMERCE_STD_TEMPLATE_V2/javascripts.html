@@ -121,7 +121,7 @@ function deviceSelectAll(){
 </script>
 #end
 #if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage")
-#set($jsPath = $!cdnUrl$webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js')
+#set($jsPath = $!cdnUrl+$webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js')
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
 <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap-select.min.js" defer></script>
