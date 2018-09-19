@@ -1,7 +1,7 @@
 
-@include font-face(RobotoRegular, 'https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/Roboto-Regular-webfont', normal, normal, eot woff ttf svg, robotoregular);
-@include font-face(RobotoBlack, 'https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
-@include font-face(RobotoCondensedBold, 'https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
+@include font-face(RobotoRegular, 'https://fonts.cimm2.com//Roboto-Regular-webfont', normal, normal, eot woff ttf svg, robotoregular);
+@include font-face(RobotoBlack, 'https://fonts.cimm2.com//Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
+@include font-face(RobotoCondensedBold, 'https://fonts.cimm2.com//RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
 
 /*@include font-face(RobotoCondenseRegular, './fonts/robotocondensed-regular-webfont', normal, normal, eot woff ttf svg, robotocondensedregular);
 @include font-face(Robotocondensed-bolditalic, './fonts/robotocondensed-bolditalic-webfont', bold, italic, eot woff ttf svg, robotocondensedbolditalic);
@@ -9,7 +9,7 @@
 @include font-face(Robotocondensed-light, './fonts/robotocondensed-light-webfont', normal, normal, eot woff ttf svg, robotocondensedlight);
 @include font-face(Robotocondensed-lightitalic, './fonts/robotocondensed-lightitalic-webfont', normal, italic, eot woff ttf svg, robotocondensed-lightitalic);*/
 
-@include font-face(Glyphicons Halflings, 'https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
+@include font-face(Glyphicons Halflings, 'https://fonts.cimm2.com//glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
 
 
 $default_hedingf-size: $font_lg;

@@ -270,7 +270,7 @@ td,th {
 }
 
 @font-face {
-  font-family:'Glyphicons Halflings';src:url(https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/glyphicons-halflings-regular.eot);src:url(https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/glyphicons-halflings-regular.woff) format('woff'),url(https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(https://cdn-12100bies.cimm2.com/CIMM2VirtualFolder/ASSETS.war/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
+  font-family:'Glyphicons Halflings';src:url(https://fonts.cimm2.com//glyphicons-halflings-regular.eot);src:url(https://fonts.cimm2.com//glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(https://fonts.cimm2.com//glyphicons-halflings-regular.woff) format('woff'),url(https://fonts.cimm2.com//glyphicons-halflings-regular.ttf) format('truetype'),url(https://fonts.cimm2.com//glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
 }
 
 .glyphicon {
