@@ -1,3 +1,15 @@
+/******************************************************************************
+ * jquery.i18n.properties
+ *
+ * Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and
+ * MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses.
+ *
+ * @version     1.2.7
+ * @url         https://github.com/jquery-i18n-properties/jquery-i18n-properties
+ * @inspiration Localisation assistance for jQuery (http://keith-wood.name/localisation.html)
+ *              by Keith Wood (kbwood{at}iinet.com.au) June 2007
+ *
+ *****************************************************************************/
 (function($){$.i18n={};$.i18n.map={};$.i18n.properties=function(settings){var defaults={name:'properties',language:'',path:'',mode:'vars',cache:false,encoding:'UTF-8',callback:null};settings=$.extend(defaults,settings);if(settings.language===null||settings.language==''){settings.language=$.i18n.browserLang();}if(settings.language===null){settings.language='';}var files=getFiles(settings.name);for(i=0;i<files.length;i++){loadAndParseFile(settings.path+files[i]+'.properties',settings);}if(settings.callback){settings.callback();}};$.i18n.prop=function(key){var value=$.i18n.map[key];if(value==null)return'['+key+']';var i;if(typeof(value)=='string'){i=0;while((i=value.indexOf('\\',i))!=-1){if(value[i+1]=='t')value=value.substring(0,i)+'\t'+value.substring((i++)+2);else if(value[i+1]=='r')value=value.substring(0,i)+'\r'+value.substring((i++)+2);else if(value[i+1]=='n')value=value.substring(0,i)+'\n'+value.substring((i++)+2);else if(value[i+1]=='f')value=value.substring(0,i)+'\f'+value.substring((i++)+2);else if(value[i+1]=='\\')value=value.substring(0,i)+'\\'+value.substring((i++)+2);else
 value=value.substring(0,i)+value.substring(i+1);}var arr=[],j,index;i=0;while(i<value.length){if(value[i]=='\''){if(i==value.length-1)value=value.substring(0,i);else if(value[i+1]=='\'')value=value.substring(0,i)+value.substring(++i);else{j=i+2;while((j=value.indexOf('\'',j))!=-1){if(j==value.length-1||value[j+1]!='\''){value=value.substring(0,i)+value.substring(i+1,j)+value.substring(j+1);i=j-1;break;}else{value=value.substring(0,j)+value.substring(++j);}}if(j==-1){value=value.substring(0,i)+value.substring(i+1);}}}else if(value[i]=='{'){j=value.indexOf('}',i+1);if(j==-1)i++;else{index=parseInt(value.substring(i+1,j));if(!isNaN(index)&&index>=0){var s=value.substring(0,i);if(s!="")arr.push(s);arr.push(index);i=0;value=value.substring(j+1);}else
 i=j+1;}}else
