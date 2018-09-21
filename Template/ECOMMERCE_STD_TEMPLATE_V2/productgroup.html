@@ -137,9 +137,9 @@
 							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageType=="URL")
-								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" />
 								#else
-								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" alt='$itemTitle' onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" />
 								#end
 								</span>
 							</a>
@@ -247,7 +247,7 @@
 							#end
 						</td>
 						<td data-th="$locale.get('product.label.yourprice')" class="tabelPrice">
-							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$webThemes/$siteName/images/loading.gif" /></span> -->
+							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span> -->
 							#if($itemData.price > 0)
 							<span data-select='extPriceData' class='priceSpan'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else

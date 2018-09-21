@@ -133,7 +133,7 @@
 				</div>
 				<div class="col-lg-8 col-md-7 col-ms-6 col-xs-12">
 					<ol class="quickcartclass">
-						<li>File Upload is supported by .xlsx <a href="$webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</li> 
+						<li>File Upload is supported by .xlsx <a href="$!cdnUrl$!webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</li> 
 						<li>Use Speed Entry to manually enter part number or UPC to upload it to quickly create a cart.</li>
 						<li>File upload feature supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end records</li> 
 						<li>If there are duplicates in the given input ? Choose one from below 3 option

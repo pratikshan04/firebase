@@ -1,13 +1,13 @@
-<link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
-<link href="$webThemes/CMS/css/banner.css" rel="stylesheet" type="text/css" />
-<script src="$webThemes/CMS/js/cms/bannerpluginv2.js"></script>
-<script  src="$webThemes/CMS/js/slider/jssor.js" type="text/javascript"></script>
-<script src="$webThemes/CMS/js/slider/jssor.slider.js" type="text/javascript"></script>
-<script src="$webThemes/CMS/js/slider/jssor.player.ytiframe.js" type="text/javascript"></script>
+<link href="$!cdnUrl$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
+<link href="$!cdnUrl$!webThemes/CMS/css/banner.css" rel="stylesheet" type="text/css" />
+<script src="$!cdnUrl$!webThemes/CMS/js/cms/bannerpluginv2.js"></script>
+<script  src="$!cdnUrl$!webThemes/CMS/js/slider/jssor.js" type="text/javascript"></script>
+<script src="$!cdnUrl$!webThemes/CMS/js/slider/jssor.slider.js" type="text/javascript"></script>
+<script src="$!cdnUrl$!webThemes/CMS/js/slider/jssor.player.ytiframe.js" type="text/javascript"></script>
 
-<script src="$webThemes/CMS/js/slider/jsor.customJs.js" type="text/javascript"></script>
-<!-- <script type="text/javascript" src="$webThemes/CMS/js/slider/jssor.slider.min.js"></script>
-<script type="text/javascript" src="$webThemes/CMS/js/slider/jssor.slider.mini.js"></script> -->
+<script src="$!cdnUrl$!webThemes/CMS/js/slider/jsor.customJs.js" type="text/javascript"></script>
+<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/js/slider/jssor.slider.min.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/js/slider/jssor.slider.mini.js"></script> -->
 <div id="bannerWrapper">
 	<div id="bannerLeftColumn">
 		<div id="previewWrapper" style="width:800px; height:400px;">
@@ -28,10 +28,10 @@
 				
 				#foreach($bannerData in $bannerList.resultSet)
 				<li>
-				<img src="$webThemes/CMS/images/small/viewItems.png" title="Preview" style="cursor:pointer;" onclick="bannerPreview('$bannerData.id')">
+				<img src="$!cdnUrl$!webThemes/CMS/images/small/viewItems.png" title="Preview" style="cursor:pointer;" onclick="bannerPreview('$bannerData.id')">
 				<label><input type="radio" value="$bannerData.id" name="bannerGroup">  <i class="fa fa-check fa-2x" title="Selected Banner List"></i></label>
-				<a href="editBannerCms.action?bannerListId=$bannerData.id"><img src="$webThemes/CMS/images/small/edit.png" title="Edit Banner List" style="cursor:pointer;margin:-10px 10px 0 0;"></a>
-				<img src="$webThemes/CMS/images/small/delete.png" title="Delete Banner List" style="cursor:pointer;margin:-8px 10px 0 0;height:16px;" onclick="deleteBanner($bannerData.id,'$bannerData.bannerListName')">
+				<a href="editBannerCms.action?bannerListId=$bannerData.id"><img src="$!cdnUrl$!webThemes/CMS/images/small/edit.png" title="Edit Banner List" style="cursor:pointer;margin:-10px 10px 0 0;"></a>
+				<img src="$!cdnUrl$!webThemes/CMS/images/small/delete.png" title="Delete Banner List" style="cursor:pointer;margin:-8px 10px 0 0;height:16px;" onclick="deleteBanner($bannerData.id,'$bannerData.bannerListName')">
 				<a href="editBannerCms.action?bannerListId=$bannerData.id">$bannerData.bannerListName </a><br />
 				</li>
 				#end
