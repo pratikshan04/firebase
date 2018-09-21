@@ -95,9 +95,9 @@ $(document).ready(function(){
 			<div class="cimm_linkItemImg">
 				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">                    
 					#if($itemData.imageName.contains("http"))
-					<img id="imageName$itemData.itemId" src="$itemData.imageName" width="100" alt='$itemData.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					<img id="imageName$itemData.itemId" src="$itemData.imageName" width="100" alt='$itemData.imageName' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
 					#else
-					<img id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					<img id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
 					#end
 				</a>
 			</div>
@@ -186,7 +186,7 @@ $(document).ready(function(){
 <div class="recentNews">
 	<h3 class="cimm_CaroBlockTitle"><label>Recent News</label></h3>
 	<div id="news-scroller" class="newsList customScroll">
-		<div class="center"><img src="$webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+		<div class="center"><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -210,7 +210,7 @@ $('#newsSection').val("$pageName");
 		<li>				
 			<div class="cimm_linkItemImg">
 				<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName">                    
-					<img src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
+					<img src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
 				</a>
 			</div>
 		</li>
@@ -234,7 +234,7 @@ $('#newsSection').val("$pageName");
 		<li>				
 			<div class="cimm_linkItemImg">
 				<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
-					<img src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
+					<img src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
 				</a>
 			</div>
 		</li>
@@ -256,7 +256,7 @@ $('#newsSection').val("$pageName");
 		<li>
 			<div class="cimm_linkItemImg">
 				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
-					<img src="$taxonomyImage/$categoryMenu.imageName" alt='$categoryMenu.imageName' onerror="this.src='$webThemes/$siteName/images/NoImage.png';"/>
+					<img src="$taxonomyImage/$categoryMenu.imageName" alt='$categoryMenu.imageName' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
 				</a>
 			</div>
 			<div class="cimm_linkItemDesp">

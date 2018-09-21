@@ -14,7 +14,7 @@
 <input type="hidden" id="isRetailUser" name="isRetailUser" value='$!session.getAttribute("isRetailUser")'/>
 <input type="hidden" id="userLogin" name="userLogin" value='$!session.getAttribute("userLogin")'/>
 <input type="hidden" id="siteName" name="siteName" value="$!siteName">
-<input type="hidden" id="webThemes" name="webThemes" value="$!webThemes">
+<input type="hidden" id="webThemes" name="webThemes" value="$!cdnUrl$!webThemes">
 <input type="hidden" id="punchoutUser" name="punchoutUser" value='$!checkOciUser'/>
 <input type="hidden" id="loggedInUserName" name="loggedInUserName" value='$!session.getAttribute("com.common.username")'/>
 <input type="hidden" id="siteDisplayName" name="siteDisplayName" value='$!siteDisplayName'/>
@@ -29,7 +29,7 @@
 <input type="hidden" id="enablePiwik" name="enablePiwik" value='$!CommonDBQuerySystemParameter.get("EnablePiwik")'/>
 <input type="hidden" id="enableAnonymousCheckout" name="enableAnonymousCheckout" value='$!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")'/>
 <input type="hidden" id="autoCompleteDesignVersion" name="autoCompleteDesignVersion" value='$!CommonDBQuerySystemParameter.get("AUTO_COMPLETE_DESIGN_VERSION")'/>
-<input type="hidden" id="webThemePath" value='$webThemes/$siteName/'/>
+<input type="hidden" id="webThemePath" value='$!cdnUrl$!webThemes/$siteName/'/>
 <input type="hidden" id="wareHouseCode" name="wareHouseCode" value='$!session.getAttribute("wareHouseCode")'/>
 <input type="hidden" id="shipAddressForPunchoutUser" name="shipAddressForPunchoutUser" value='$!CommonDBQuerySystemParameter.get("SHIPADDRESS_FOR_PUNCHOUT_USER")'/>
 <input type="hidden" id="isPunchoutUser" value="$!session.getAttribute('isPunchoutUser')" />

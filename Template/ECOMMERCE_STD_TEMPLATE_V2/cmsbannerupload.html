@@ -1,19 +1,19 @@
 
-		<link href="$webThemes/CMS/filemanager/css/browser.css" type="text/css" rel="stylesheet">
+		<link href="$!cdnUrl$!webThemes/CMS/filemanager/css/browser.css" type="text/css" rel="stylesheet">
 		
-		<link href="$webThemes/CMS/filemanager/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="$webThemes/CMS/filemanager/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-		<link href="$webThemes/CMS/filemanager/css/bootstrap-lightbox.min.css" rel="stylesheet" type="text/css" />
-		<link href="$webThemes/CMS/filemanager/css/style.css" rel="stylesheet" type="text/css" />
-		<link href="$webThemes/CMS/filemanager/css/dropzone.min.css" type="text/css" rel="stylesheet" />
+		<link href="$!cdnUrl$!webThemes/CMS/filemanager/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="$!cdnUrl$!webThemes/CMS/filemanager/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+		<link href="$!cdnUrl$!webThemes/CMS/filemanager/css/bootstrap-lightbox.min.css" rel="stylesheet" type="text/css" />
+		<link href="$!cdnUrl$!webThemes/CMS/filemanager/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="$!cdnUrl$!webThemes/CMS/filemanager/css/dropzone.min.css" type="text/css" rel="stylesheet" />
 	
-		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/fckxml.js"></script>
+		<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/filemanager/js/fckxml.js"></script>
 		
 		
-		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/common.js"></script>
-		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/dropzone.js"></script>
-			<script type="text/javascript" src="$webThemes/CMS/filemanager/js/jquery.lazyload.min.js"></script>
-		<script type="text/javascript" src="$webThemes/CMS/filemanager/js/jquery.scrollstop.min.js"></script>
+		<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/filemanager/js/common.js"></script>
+		<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/filemanager/js/dropzone.js"></script>
+			<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/filemanager/js/jquery.lazyload.min.js"></script>
+		<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/filemanager/js/jquery.scrollstop.min.js"></script>
 		
 		<script language="javascript">
 		var contextPath='';
@@ -235,7 +235,7 @@ oListManager.AddFolder = function( folderName, folderPath )
 	connectorUrl = connectorUrl + "CurrentFolder="+oConnector.CurrentFolder +escape(folderName)+"/";
 	  var row = $('#main-item-container');
  var dummy1='<div class="box"><h4 class="ellipsis"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
- var dummy = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><div class="img-container directory"><span></span><img class="directory-img" src="$webThemes/CMS/filemanager/img/ico/folder.png"></div></div><div class="img-precontainer-mini directory"><div class="img-container-mini"><span></span><img class="directory-img" src="$webThemes/CMS/filemanager/img/ico/folder.png"></div></div></a>';
+ var dummy = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><div class="img-container directory"><span></span><img class="directory-img" src="$!cdnUrl$!webThemes/CMS/filemanager/img/ico/folder.png"></div></div><div class="img-precontainer-mini directory"><div class="img-container-mini"><span></span><img class="directory-img" src="$!cdnUrl$!webThemes/CMS/filemanager/img/ico/folder.png"></div></div></a>';
  var figVal = $('<figure/>').attr({"data-name": folderName, class: "directory","data-type": "dir"}).html(dummy+dummy1);
  var liVal = $('<li/>').attr({"data-name": folderName, class: "dir ui-draggable ui-droppable"}).html(figVal)
  
@@ -300,7 +300,7 @@ var openFileUrl = fileUrl;
 
 	if(extenstion.toUpperCase()!="JPG" && extenstion.toUpperCase()!="PNG" && extenstion.toUpperCase()!="GIF" && extenstion.toUpperCase()!="JPEG"){
 		filename = extenstion+".jpg";
-		fileUrl = "$webThemes/CMS/filemanager/img/ico/";
+		fileUrl = "$!cdnUrl$!webThemes/CMS/filemanager/img/ico/";
 	}
 		else{
 			fileUrl = fileUrl+"thumbnail/";
