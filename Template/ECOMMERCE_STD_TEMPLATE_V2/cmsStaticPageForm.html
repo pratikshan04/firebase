@@ -62,7 +62,7 @@
 			<label class="cms_StaticLabel">Canonical Url</label>  <input type="text" name="pageData.canonicalUrl" value="$!staticPageData.canonicalUrl" id="canonicalURLId" /> 
 			<label class="cms_StaticLabel">Full Page Layout</label><input type="checkbox" name="fullPageLayout" #if($staticPageData.fullPageLayout) checked #end  /><div class="clear-both"></div>
 			<label class="cms_StaticLabel">Active</label><input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end /><div class="clear-both"></div>
-			#if($!staticPageData.homePageIcon)<label class="cms_StaticLabel"><img src="$webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon"></label><div class="clear-both"></div>#end
+			#if($!staticPageData.homePageIcon)<label class="cms_StaticLabel"><img src="$!cdnUrl$!webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon"></label><div class="clear-both"></div>#end
 			<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
 			<input type="hidden" name="pageData.pageContent" id="pageContent" value="" />
 			<input type="hidden" name="pageData.id" id="cmsPageId" value="$!staticPageData.id" />

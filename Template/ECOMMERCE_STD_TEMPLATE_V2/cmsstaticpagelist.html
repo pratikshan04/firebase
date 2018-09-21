@@ -1,9 +1,9 @@
 #if($LayoutName=="CMSStaticPageList")
-<script type="text/javascript" src="$webThemes/CMS/js/cms/cmsscript.js"></script>
-<script type="text/javascript" src="$webThemes/CMS/js/jquery.colorbox.js" ></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/js/cms/cmsscript.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/CMS/js/jquery.colorbox.js" ></script>
 #end
-<link href="$webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-<link href="$webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
+<link href="$!cdnUrl$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
+<link href="$!cdnUrl$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
 <style>
 .banner_addNewBtn, .banner_addNewBtn:hover {
     background-color: rgb(27, 99, 171);
@@ -41,12 +41,12 @@ input[type="text"], input[type="password"], select {
 		<ul>
 			<li>
 				<a href="javascript:openBannerList();" class="cms_uploadBannerBtn" title="Banner List">
-					<img src="$webThemes/CMS/images/small/listBrand.png" />
+					<img src="$!cdnUrl$!webThemes/CMS/images/small/listBrand.png" />
 				</a>
 			</li>
 			<li>
 				<a class="iframe cms_uploadBannerBtn" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadIframeWindow();">
-					<img src="$webThemes/CMS/images/small/upload.png" />
+					<img src="$!cdnUrl$!webThemes/CMS/images/small/upload.png" />
 				</a>
 			</li>
 			<li>
@@ -56,7 +56,7 @@ input[type="text"], input[type="password"], select {
 			</li>
 			<li>
 				<a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList();" title="Menubuilder" class="cms_uploadBannerBtn" >
-					<img src="$webThemes/CMS/images/small/manageTaxonomy.png" />
+					<img src="$!cdnUrl$!webThemes/CMS/images/small/manageTaxonomy.png" />
 				</a>
 			</li>
 			<li>
@@ -66,7 +66,7 @@ input[type="text"], input[type="password"], select {
 			</li>
 			<li>
 				<a class="iframe cms_uploadBannerBtn" href="formListCms.action" title="Form Builder" onclick="javascript:showIframeWindow();">
-					<img src="$webThemes/CMS/images/small/formBuilder.png" />
+					<img src="$!cdnUrl$!webThemes/CMS/images/small/formBuilder.png" />
 				</a>
 			</li>
 		</ul>
@@ -75,7 +75,7 @@ input[type="text"], input[type="password"], select {
 		<ul>
 			<li>
 				<a href="/cmsStaticPageCms.action?&selectedSiteId=$!selectedSiteId" class="btnClass" onclick="getDynamicData();">
-					<img src="$webThemes/CMS/images/small/add.png"  title="New Static Page" > <span style="vertical-align: top;"> New Static Page</span>
+					<img src="$!cdnUrl$!webThemes/CMS/images/small/add.png"  title="New Static Page" > <span style="vertical-align: top;"> New Static Page</span>
 				</a>        
 			</li>
 		</ul>
@@ -185,13 +185,13 @@ input[type="text"], input[type="password"], select {
 			#foreach($pageList in $staticPageList.resultSet)
 			<tr>
 				<td class="text-center">
-					<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Page"></a>
+					<a href="cmsStaticPageCms.action?pageId=$pageList.id&selectedSiteId=$!selectedSiteId"><img src="$!cdnUrl$!webThemes/CMS/images/small/edit.png" class="actionIcon" title="Edit Page"></a>
 					#if($pageList.homePageIcon)
-					<a href="javascript:void(0);"><img src="$webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon"></a>
-					<a href="javascript:delink();"><img src="$webThemes/CMS/images/small/de-link.png" title="Unlink Home Page" class="actionIcon" ></a>
+					<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon"></a>
+					<a href="javascript:delink();"><img src="$!cdnUrl$!webThemes/CMS/images/small/de-link.png" title="Unlink Home Page" class="actionIcon" ></a>
 					#else
-					<a href="javascript:setHomePage($pageList.id)"><img src="$webThemes/CMS/images/small/links.png" title="Set as Home page" class="actionIcon"></a>
-					<a href="javascript:deletePage($pageList.id,'$pageList.pageType','$pageList.pageName')"><img src="$webThemes/CMS/images/small/delete.png" title="Delete Page" class="actionIcon"></a>
+					<a href="javascript:setHomePage($pageList.id)"><img src="$!cdnUrl$!webThemes/CMS/images/small/links.png" title="Set as Home page" class="actionIcon"></a>
+					<a href="javascript:deletePage($pageList.id,'$pageList.pageType','$pageList.pageName')"><img src="$!cdnUrl$!webThemes/CMS/images/small/delete.png" title="Delete Page" class="actionIcon"></a>
 					#end
 				</td>
 				<td class="text-center"> $iindex </td>

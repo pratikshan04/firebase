@@ -39,7 +39,7 @@
 	#if($userAgent != "WEBVIEW")
 	<div class="col-md-3 col-sm-12 col-xs-12">
 		<div itemscope itemtype="http://schema.org/Organization" class="cimm_logo">
-				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="$!webThemes/$!siteName/images/logo.png" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
+				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="$!cdnUrl$!webThemes/$!siteName/images/logo.png" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
 		</div>
 	</div>
 	#end
@@ -103,7 +103,7 @@
 			<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="myAccountMenu">
 				<!-- <span class="imgBox">
 					<p>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p> ##$!session.getAttribute("custName")
-					<img src='$!userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" id="profilePictureThumbnail" onerror="this.src='$!webThemes/$!siteName/images/default-profile.png'"/>
+					<img src='$!userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" id="profilePictureThumbnail" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/default-profile.png'"/>
 				</span> -->
 				<span class="imgBox"><em class="fa fa-user-circle-o"></em></span>$!locale.get("product.heading.accountDashBoard")
 				<span class="blockElement">&nbsp;<!-- $!locale.get("product.heading.welcome") --></span>
