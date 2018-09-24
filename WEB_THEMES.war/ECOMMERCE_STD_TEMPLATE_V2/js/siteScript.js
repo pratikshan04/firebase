@@ -2353,6 +2353,7 @@ function sendSiteDetailPagePart(a){
 	var b=$("#titleText").val();
 	
 	if($(".focusItemTabs").html()=="" || $(".focusItemTabs").html() == undefined){
+		$(".cimm_itemdetail-imgcontainer span.imgForSend img").removeAttr('style');
 		var itemImg = $(".cimm_itemdetail-imgcontainer span.imgForSend").html();
 		var ProductName=$("#titleText").val();
 		var PrintShrtDesc=$(".cimm_itemShortDesc").html();
@@ -2361,6 +2362,7 @@ function sendSiteDetailPagePart(a){
 		var thisid = $(".focusItemTabs").attr("id");
 		var test = thisid.split("_");
 		var id = test[1];
+		//$('#'+id).find('span.imgForSend img').removeAttr('style');
 		var itemImg = $('#'+id).find('span.imgForSend').html();
 		var ProductName= $('.focusItemTabs .productTitle').html();
 		var PrintShrtDesc= $('.focusItemTabs .cimm_itemShortDesc').html();
@@ -2544,9 +2546,9 @@ function sendProduct(){
 		}else{
 			$("#mailBody").val(mailCon);	
 		}
-
+		
 		$("#mailLink").val(emailitemlink);
-		$(".cimm_itemdetail-imgcontainer img").width('350px');
+		$(".cimm_itemdetail-imgcontainer img").width('100%');
 	}else if(emailitem==null){
 		$("#SendItem").hide();
 		$("#ErrorField").append("Please <a onclick='history.go(-1);' href='javascript:void(0);'>Go Back</a> and select a Product to Send to your Friends/Associates");
