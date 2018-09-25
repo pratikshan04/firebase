@@ -318,7 +318,7 @@ function priceLoadMainFunction() {
 			}
 			
 				//if (!priceDispalyed && (warehouseCode == wareHouseDetails.wareHouseCode || warehouseCode == product.cimm2BCentralPricingWarehouse.warehouseCode)) {
-			if (product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
+			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
 				product.cimm2BCentralPricingWarehouse.partNumber=partNumber;
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
@@ -328,7 +328,7 @@ function priceLoadMainFunction() {
 			}
 		}
 		}else{
-			if (product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
+			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
 				product.cimm2BCentralPricingWarehouse.partNumber=partNumber;
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
