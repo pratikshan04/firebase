@@ -227,12 +227,14 @@
 											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly/>
 										</div>
 									</div>
+									#if($!CommonDBQuerySystemParameter.get("IS_DISCOUNT_COUPONS_ENABLED") == "Y")
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.coupon")</label>
 											<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
 										</div>
 									</div>
+									#end
 								</div>
 								<div class="row">
 									<div class="col-md-6">
