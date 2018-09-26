@@ -121,9 +121,9 @@
 </form>
 #end
 <div class="clear"></div> 
-<form action="submitNewCreditCardSale.action?fromPage=payWithNewCC" method="post" id="addNewCardForm">  
-<h4>$locale.get("product.label.enterNewCreditCardDetails")</h4>
-<br />
+<form id="addNewCardForm"><!-- action="submitNewCreditCardSale.action?fromPage=payWithNewCC" method="post"  -->
+<!-- <h4>$locale.get("product.label.enterNewCreditCardDetails")</h4>
+<br /> -->
 <div id="notificationDiv"></div>
 	<div class="row">
 		<div class="col-md-12 ">
@@ -132,19 +132,17 @@
 		</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-12">
+	<div class="row mBottom-3">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">	
 						<label for="nickNameNewID">$!locale.get("product.label.nickName") <span class="text-danger">*</span></label>
 						<input type="text" id="nickNameNewID" name="nickName" class="form-control" placeholder="$!locale.get('product.label.nickName')"/>
 						<em class="required" id="nickNameSpan"></em>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">	
 						<label for="cardHolderNewID">$!locale.get("product.label.cardHolderName") <span class="text-danger">*</span></label>
 						<input type="text" id="cardHolderNewID" name="cardHolder" class="form-control" placeholder="$!locale.get('product.label.cardHolderName')"/>
@@ -153,16 +151,14 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">	
 						<label for="cardAddressNewID">$!locale.get("product.label.streetAddress") <span class="text-danger">*</span></label>
 						<input type="text" id="cardAddressNewID" name="streetAddress" class="form-control" placeholder="$!locale.get('product.label.streetAddress')"/>
 						<em class="required" id="cardAddressSpan"></em>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">	
 						<label for="postalCodeNewID">$!locale.get("product.label.postalCode") <span class="text-danger">*</span></label>
 						<input type="text" id="postalCodeNewID" name="postalCode" class="form-control" placeholder="$!locale.get('product.label.postalCode')"/>
@@ -180,7 +176,7 @@
 		<div class="cimm_formTbx"><input type="password" value="" /></div>-->
 	    <div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
-				<button type="submit" id="addPcard" class="button" onclick="return validatePcardFormWithNewIds();">$locale.get("product.heading.addNewCreditCard")</button><!-- onclick="return validatePcardForm();" -->
+				<button type="button" id="addPcard" class="button" onclick="return checkoutWizard.validatePcardFormWithNewIds();">$locale.get("product.heading.addNewCreditCard")</button><!-- onclick="return validatePcardForm();" -->
 			</div>
 		</div>
 	</div>
@@ -215,11 +211,11 @@
 		
 		<!-- Order Details -->
 		<input type="hidden" name="orderType" value="$!orderType"/>
-		<input type="hidden" name="reqDate" id="reqDate" value="$!reqDate"/>
-		<input type="hidden" name="orderedBy" id="orderedBy" value="$!orderedBy"/>
+		<input type="hidden" name="reqDate" value="$!reqDate"/>
+		<input type="hidden" name="orderedBy" value="$!orderedBy"/>
 		<input type="hidden" name="erpQuoteNumber" value="$!erpQuoteNumber"/>
-    	<input type="hidden" name="poNumber" id="poNumber" value="$!poNumber"/>
-		<input type="hidden" name="shipVia" id="shipVia" value="$!shipVia"/> 
+    	<input type="hidden" name="poNumber" value="$!poNumber"/>
+		<input type="hidden" name="shipVia" value="$!shipVia"/> 
 		<input type="hidden" name="shipViaDescription" value="$!shipViaDisplay"/>
 		<input type="hidden" name="orderStatus" value="$!orderStatus"/>
 		<input type="hidden" name="shippingInstruction" value="$!shippingInstruction"/> 
