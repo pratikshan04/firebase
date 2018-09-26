@@ -909,8 +909,8 @@
 <table id="customersList" class="table display rwd-table">
 	<thead>
 		<tr>
-			<th>$locale.get("label.salesuser.customer.account.number")</th>
-			<th>$locale.get("label.salesuser.address1")</th>
+			<th>$locale.get("label.salesuser.customer.account.number") </th>
+			<th>Name & $locale.get("label.salesuser.address1")</th>
 			<th>$locale.get("label.salesuser.location")</th>
 			<th></th>
 		</tr>
@@ -919,7 +919,7 @@
 		#foreach($customer in $customers)
 		<tr>
 			<td>$!customer.accountNumber.getAsString()</td>
-			<td>$!customer.address1.getAsString()</td>
+			<td>$!customer.customerName.getAsString()<br/> $!customer.address1.getAsString()</td>
 			<td>$!customer.city.getAsString(), $!customer.state.getAsString(), $!customer.country.getAsString(), $!customer.zipCode.getAsString()</td>
 			<td><button class="usersForCustomer button" data-customerid="$!customer.customerId.getAsString()" data-accountnumber="$!customer.accountNumber.getAsString()">Select</button></td>
 		</tr>
