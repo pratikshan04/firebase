@@ -3679,7 +3679,11 @@ $(document).ready(function(){
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
 			function(data,status,xhr){
 			//$("#salesrepModal").modal('hide');
-			$("#salesrepModal .modal-body").html(data);			
+			$("#salesrepModal .modal-body").html(data);	
+			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			$('#salesrepModal').on('shown.bs.modal', function () {
+			$('body').addClass('modal-open');
+			});
 			unblock();
 			//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 			//$('#salesrepModal').on('shown.bs.modal', function () {
@@ -3693,14 +3697,51 @@ $(document).ready(function(){
 	}
 	
 	$(".switchCustomer").on('click', function(){
-		block('Please wait');
-		loadCustomForSalesUser();
+		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
+			bootbox.confirm({
+				size: "medium",
+				closeButton:false,
+				message: "There are item(s) in your cart. Do you want to switch customer",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				callback: function(result){
+					if(result){
+						block('Please wait');
+						loadCustomForSalesUser()
+					}else{
+						unblock();
+						return true;
+					}
+				}
+			});
+    	}else{
+    		block('Please wait');
+    		loadCustomForSalesUser();
+    	}
+		
 	});
 	
 	$(".switchUser").on('click', function(){
 		var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
 		selectedCustomer = JSON.parse(selectedCustomer);
-		loadUserByCustomer(selectedCustomer);
+		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
+			bootbox.confirm({
+				size: "medium",
+				closeButton:false,
+				message: "There are item(s) in your cart. Do you want to switch user",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				callback: function(result){
+					if(result){
+						loadUserByCustomer(selectedCustomer);
+					}else{
+						unblock();
+						return true;
+					}
+				}
+			});
+    	}else{
+    		loadUserByCustomer(selectedCustomer);
+    	}
+		
 	});
 	
 	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
