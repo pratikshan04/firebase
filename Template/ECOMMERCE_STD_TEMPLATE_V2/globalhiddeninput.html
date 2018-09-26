@@ -1,4 +1,5 @@
 #set($shipViaListTemp = $!session.getAttribute("customerShipViaList") ) ## variable reference
+<input type="hidden" id="countInCart" name="countInCart" value="$!cartCount"/>
 <input type="hidden" id="isInternationalUser" name="isInternationalUser" value='$!session.getAttribute("isInternationalUser")'/>
 <input type="hidden" id="pricePrecision" name="pricePrecision" value='#if($!session.getAttribute("pricePrecision"))$!session.getAttribute("pricePrecision")#else 2#end'/>
 <input type="hidden" id="combinCart" name="combinCart" value='$!session.getAttribute("combinCart")'/>
