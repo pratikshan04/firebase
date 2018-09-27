@@ -703,6 +703,8 @@ function scynInitiate(){
 $(document).ready(function(){
 	var userLogin = $("#userLogin").val();
 	if (userLogin!="true" ) {
+		localStorage.removeItem("salesUserSelected");
+    	localStorage.removeItem("currentCustomerSU");
 		var remember = "false";
 		var keyflag = localStorage.getItem("F30FB33A2");
 		if(keyflag!=null && keyflag!=undefined && $.trim(keyflag)!="" ){
@@ -774,8 +776,8 @@ $(document).ready(function(){
 				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize()+"&loginType=popup" ,function(data, status){
 					try{
-						sessionStorage.setItem("salesUserSelected","Y");
-			        	sessionStorage.setItem("currentCustomerSU","");
+						localStorage.setItem("salesUserSelected","Y");
+			        	localStorage.setItem("currentCustomerSU","");
 						var afterLoginUrl = window.location.href;
 						var previousPageUrl = document.referrer;
 						var currentLayout = $("#layoutName").val();
@@ -1865,6 +1867,8 @@ function doLogOff(){
 		localStorage.removeItem("emailFriendItem");
 		localStorage.removeItem("itemID");
 		localStorage.removeItem("itemName");
+		localStorage.removeItem("salesUserSelected");
+    	localStorage.removeItem("currentCustomerSU");
 		window.location.href = "/doLogOff.action";
 	}catch(e){
 		console.log(e);
@@ -3661,8 +3665,8 @@ function loadCustomForSalesUser(salesUserDetails){
 }
 
 $(document).ready(function(){
-	var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
-	var selectedUser = sessionStorage.getItem("salesUserSelected");
+	var selectedCustomer = localStorage.getItem("currentCustomerSU");
+	var selectedUser = localStorage.getItem("salesUserSelected");
 	var isSalesUser = $("#isSalesUser").val();
 	if(!selectedCustomer && isSalesUser == "Y"){
 		loadCustomForSalesUser();
@@ -3673,7 +3677,8 @@ $(document).ready(function(){
 	}
 	
 	function loadUserByCustomer(attributes){
-		sessionStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
+    	localStorage.removeItem("currentCustomerSU");
+		localStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
 		block('Please wait');
 		$.get("getUsersByCustomerUnit.action",
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
@@ -3721,7 +3726,7 @@ $(document).ready(function(){
 	});
 	
 	$(".switchUser").on('click', function(){
-		var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+		var selectedCustomer = localStorage.getItem("currentCustomerSU");
 		selectedCustomer = JSON.parse(selectedCustomer);
 		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
 			bootbox.confirm({
@@ -3752,7 +3757,8 @@ $(document).ready(function(){
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function(src){
 		block('Please wait');
-		sessionStorage.setItem("salesUserSelected","Y");
+		localStorage.removeItem("salesUserSelected");
+		localStorage.setItem("salesUserSelected","Y");
 		var attributes = src.target.dataset;
 		$.post("setSelectedUserDetailsUnit.action",
 			{"userName" : attributes['username']},
@@ -3777,3 +3783,8 @@ $("#loginModal").on('shown.bs.modal', function() {
 		prodGrpCpnPopup();
 	}
 });
+
+/*$(window).unload(function(){
+	  localStorage.salesUserSelected=undefined;
+	  localStorage.currentCustomerSU=undefined;
+});*/
