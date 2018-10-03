@@ -68,15 +68,15 @@
     <input type="hidden" id="siteName" name="siteName" value="$siteName" />
     <input type="hidden" id="moodname" name="moodname" value="$moodname">
     #parse($bodyContent)
-    <script type="text/javascript" src="$webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
     #parse("javascripts.html")
     #if($LayoutName == "CMSBannerEdit")
     #parse("cmsbannereditscript.html")
     #end
     #if($LayoutName == "CMSFormEdit")
-    <script src="$webThemes/CMS/js/cms/formsettings.js">
+    <script src="$!cdnUrl$!webThemes/CMS/js/cms/formsettings.js">
     </script>
-    <script src="$webThemes/CMS/js/cms/formbuilder.js">
+    <script src="$!cdnUrl$!webThemes/CMS/js/cms/formbuilder.js">
     </script>
     #end
   </body>

@@ -376,7 +376,7 @@
 				   jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');	
 					jQuery(".header-wrap").hide();
 					jQuery(".Cimm-Footer").hide();
-					$(this).html("Back");
+					$(this).html("Back").attr('title', 'Back');
 					var frameHeight = jQuery(".Cimm-MainContenthide").height() + 120;
 					//window.parent.jQuery("#iframeId").height =;
 					//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
@@ -415,7 +415,7 @@
             	  $(".cms_leftMenu, .containFluidEl").hide();
                  gm.deinitCanvas();
 				 		jQuery(".readyTemplatesForm").hide();
-			 			$(this).html("Back");
+			 			$(this).html("Back").attr('title', 'Back');
 							 canvas.html($('<textarea/>').attr("id","sourceEditor").attr("cols", 130).attr("rows", 25).val(canvas.html()));
 			                 gm.mode="html";
 			                // $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);

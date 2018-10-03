@@ -225,12 +225,18 @@
 					if($(".cartCountDisplayLi").hasClass("ItemsInCart")){
 						$("#"+settings.cartCountRefreshId).each(function(){
 							$(this).html(result[0]+' '+locale("header.label.items"));
+							if($('#countInCart').length>0){
+					    		$('#countInCart').val(result[0]);
+					    	}
 							//$(".cartCountrefresh").html(result[0]);
 						});
 					}else{
 						//$(".cartCountDisplayLi").addClass("ItemsInCart");
 						//$(".cartCountDisplayLi").html('<a href="/'+locale("website.url.ShoppingCart")+'"><i class="fa fa-shopping-cart"></i><span id="cartCountrefresh" class="cartCountrefresh"> '+result[0]+' '+locale("header.label.items")+'</span></a>')
 						$(".cartCountrefresh").html(result[0]+' '+locale("header.label.items"));
+						if($('#countInCart').length>0){
+				    		$('#countInCart').val(result[0]);
+				    	}
 					}
 					
 					/*if($(".cartTotalDisplayLi").hasClass("ItemsInCart")){

@@ -32,9 +32,9 @@
 				        			<div class="col-md-2 col-sm-12 col-xs-12">
 				        				<div class="selectedItemImg alignCenter">
 					        			#if($!eachItemData.imageType=="URL")
-					                        <img src="$!eachItemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+					                        <img src="$!eachItemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 										#else 
-											<img src="$!thumbNail$!escapeTool.url($!eachItemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+											<img src="$!thumbNail$!escapeTool.url($!eachItemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					                    #end
 				        				</div>
 				        			</div>
@@ -124,9 +124,9 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-6 col-xs-12">
 					#if($eachData.imageType=="URL")
-						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#else
-						<img src="$!thumbNail$!escapeTool.url($!eachData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!thumbNail$!escapeTool.url($!eachData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#end										
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
@@ -150,9 +150,9 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-6 col-xs-12">
 					#if($!eachData.imageType=="URL")
-						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#else
-						<img src="$!thumbNail$!escapeTool.url($!eachData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!thumbNail$!escapeTool.url($!eachData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#end										
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
@@ -210,9 +210,9 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-6 col-xs-12">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#end											
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-12">
@@ -243,9 +243,9 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-6 col-xs-12">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#end											
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-12">
@@ -280,9 +280,9 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-6 col-xs-12">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#end											
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-12">
@@ -364,9 +364,9 @@
 								<span data-select="imageSpanToSetID">
 									#set($itemImg = $!item.imageName.replace('%26','&amp;') )
 									#if($itemData.imageName.toUpperCase().contains("HTTP"))
-										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
+										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImg.replace('&','&amp;')" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
 									#else
-										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImage$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
+										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImage$!itemImg.replace('&','&amp;')" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
 									#end
 								</span>
 							</a>
@@ -402,9 +402,9 @@
 		<div class="cat-product clearAfter">
 			<div class="cat_img">
 				#if($productListData.imageType=="URL")
-				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!productListData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
+				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!productListData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" /></a>
 				#else
-				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!thumbNail$!escapeTool.url($!productListData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
+				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!thumbNail$!escapeTool.url($!productListData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" /></a>
 				#end
 			</div>
 			<div class="info">
@@ -453,7 +453,7 @@
 		<li itemscope itemtype="http://schema.org/Product">
 			<div class="cimm_linkItemImg">
 			<a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!customerViewedItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
-				<img itemprop="image" id="imageName$!customerViewed.itemId" src="$!customerViewed.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+				<img itemprop="image" id="imageName$!customerViewed.itemId" src="$!customerViewed.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
 			</a>
 			</div>
 			<div class="cimm_linkItemDesp">
@@ -489,9 +489,9 @@
 				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 					<div class="prodImage">
 						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 						#else
-							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+							<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!itemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 						#end
 						#if($itemData.clearance=="Y")
 							<span class="clearenceTag"></span>
@@ -620,7 +620,7 @@
 						
 						<!-- <li class="productLeadTime productLeadTime_$!itemData.partNumber" style="display:none;">
 							<strong>$!locale.get("product.label.leadTime"): </strong>
-							<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+							<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 						</li> --> 
 						<li class="productAvail_$!itemData.partNumber">
 							<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
@@ -632,7 +632,7 @@
 								#end
 								<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
 							#else
-								<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+								<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 								<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 							#end
 						</li>
@@ -665,7 +665,7 @@
 								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 							#else
 								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
-									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 								</span>
 							#end
 					    #end
@@ -810,7 +810,7 @@
           <td><input type="radio" id="r_$count" class="addedCardDetails" onclick="paymentProcessor.selectCardOnRadio(this);" value="$cardDetail.customerPaymentId" name="radioBtn" />
     <span id="cTyper_$count">
    
-    <img src="$webThemes/$siteName/images/credit-card-generic.png" class="CCLogo">
+    <img src="$!cdnUrl$!webThemes/$siteName/images/credit-card-generic.png" class="CCLogo">
     <span class="CCText">$!cardDetail.creditCardType.trim()</span> card ending with number <span id="cNumr_$count" class="ccNum">$!cardDetail.creditCardNumber</span>
    
     </span><br>
@@ -835,7 +835,7 @@
 		<input type="radio" id="r_$count" class="addNewCardRadioBtn" name="radioBtn" data-card ="radio"  #if($!cardDetails.size()==0) checked #end /> NEW CREDIT CARD 
      #end
      <br>
-      <img src="$webThemes/$siteName/images/credit-cards.png" class="CCLogo">
+      <img src="$!cdnUrl$!webThemes/$siteName/images/credit-cards.png" class="CCLogo">
      
       </h1>
     </div>
@@ -909,8 +909,8 @@
 <table id="customersList" class="table display rwd-table">
 	<thead>
 		<tr>
-			<th>$locale.get("label.salesuser.customer.account.number")</th>
-			<th>$locale.get("label.salesuser.address1")</th>
+			<th>$locale.get("label.salesuser.customer.account.number") </th>
+			<th>Name & $locale.get("label.salesuser.address1")</th>
 			<th>$locale.get("label.salesuser.location")</th>
 			<th></th>
 		</tr>
@@ -919,7 +919,7 @@
 		#foreach($customer in $customers)
 		<tr>
 			<td>$!customer.accountNumber.getAsString()</td>
-			<td>$!customer.address1.getAsString()</td>
+			<td>$!customer.customerName.getAsString()<br/> $!customer.address1.getAsString()</td>
 			<td>$!customer.city.getAsString(), $!customer.state.getAsString(), $!customer.country.getAsString(), $!customer.zipCode.getAsString()</td>
 			<td><button class="usersForCustomer button" data-customerid="$!customer.customerId.getAsString()" data-accountnumber="$!customer.accountNumber.getAsString()">Select</button></td>
 		</tr>

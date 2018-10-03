@@ -78,6 +78,9 @@ var QuickOrder = {};
     	}
     	$('.cartCountrefresh').html(cartCountString);
     	$('.cartTotal').html(total);
+    	if($('#countInCart').length>0){
+    		$('#countInCart').val(cartCountString);
+    	}
     };
     
     QuickOrder.resetTable = function(){
