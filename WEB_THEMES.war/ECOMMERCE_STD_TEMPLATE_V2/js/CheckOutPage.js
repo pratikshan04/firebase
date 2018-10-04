@@ -60,7 +60,7 @@ var checkoutWizard = {};
 	
 	checkoutWizard.showAStepCallback = function(obj){
 		var step_num= obj.attr('index');
-		if(step_num==4){
+		if(step_num==3){
 			block("Please Wait");
 			if($('#wizFinishButtonId').length>0){
 				$('#wizFinishButtonId').addClass("buttonDisabled");
@@ -96,12 +96,13 @@ var checkoutWizard = {};
 			str = str + "&dt="+new Date();
 			enqueue("/confirmOrderSale.action?"+str+"&dt="+new Date(),function(data){
 				if(data!=null && data!=""){
-					if($(data).filter(".reviewOrderWrap").length>0){
+					/*if($(data).filter(".reviewOrderWrap").length>0){
 						$('#confirmOrderPageDiv').html($(data).filter(".reviewOrderWrap").html());
 					}
 					if($(data).filter("#orderDetailTotalPriceWrap").length>0){
 						$('.cimm_salesBottomStrip').html($(data).filter("#orderDetailTotalPriceWrap").html());
-					}
+					}*/
+					$('#confirmOrderPageDiv').html(data);
 					var value = $('#poNumberTxt').val();
 					console.log("setPoNumberToSession: "+value);
 					if($('#poNumber').length>0){
@@ -388,46 +389,49 @@ var checkoutWizard = {};
 	};
 	
 	checkoutWizard.submitCheckoutRequest = function(){
-		if($('#orderType').length>0 && typeof $('#orderType').val()!="undefined" && $('#orderType').val()!=null && $('#orderType').val().trim().length > 0){
-				if($('#orderType').val().trim() == "checkoutWithPo"){
-					var data = $("#quickCartHiddenInfo").serialize();
-					block("Please Wait");
-					$.ajax({
-						type: "POST",
-						url: "processCheckout.action",
-						data: data,
-						success: function(msg){
-							window.location.href = 'orderConfirmation.action?salesOrderId='+msg;
+		if(checkoutWizard.stepThreeValidate("3")){
+			if($('#orderType').length>0 && typeof $('#orderType').val()!="undefined" && $('#orderType').val()!=null && $('#orderType').val().trim().length > 0){
+					if($('#orderType').val().trim() == "checkoutWithPo"){
+						var data = $("#quickCartHiddenInfo").serialize();
+						block("Please Wait");
+						$.ajax({
+							type: "POST",
+							url: "processCheckout.action",
+							data: data,
+							success: function(msg){
+								window.location.href = 'orderConfirmation.action?salesOrderId='+msg;
+							}
+						});
+						
+					}else if($('#orderType').val().trim() == "checkoutWithCreditCard"){
+						block("Please Wait");
+						setCookie("poNumber",$("#poNumber").val(),10);
+						setCookie("orderedBy",$("#orderedBy").val(),10);
+						setCookie("reqDate",$("#reqDate").val(),10);
+						if($("textarea#shippingInstruction").val()!=null && $("textarea#shippingInstruction").val()!=""){
+							setCookie("shippingInstruction",$("textarea#shippingInstruction").val(),10);
+						}else{
+							setCookie("shippingInstruction","",10);
 						}
-					});
-					
-				}else if($('#orderType').val().trim() == "checkoutWithCreditCard"){
-					block("Please Wait");
-					setCookie("poNumber",$("#poNumber").val(),10);
-					setCookie("orderedBy",$("#orderedBy").val(),10);
-					setCookie("reqDate",$("#reqDate").val(),10);
-					if($("textarea#shippingInstruction").val()!=null && $("textarea#shippingInstruction").val()!=""){
-						setCookie("shippingInstruction",$("textarea#shippingInstruction").val(),10);
+						setCookie("defaultShipToId",$("#defaultShipToId").val(),10);
+						setCookie("shipVia",$("#shipVia").val(),10);
+						$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
+						$("#quickCartHiddenInfo").submit();
+					}else if($('#orderType').val().trim() == "checkoutWithQuote"){
+						bootAlert("small","error","Error","Submit Quote Order");
 					}else{
-						setCookie("shippingInstruction","",10);
+						bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
 					}
-					setCookie("defaultShipToId",$("#defaultShipToId").val(),10);
-					setCookie("shipVia",$("#shipVia").val(),10);
-					$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
-					$("#quickCartHiddenInfo").submit();
-				}else if($('#orderType').val().trim() == "checkoutWithQuote"){
-					bootAlert("small","error","Error","Submit Quote Order");
-				}else{
-					bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
-				}
-		}else{
-			bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
+			}else{
+				bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
+			}
 		}
 	};
 	
 	
 	
 	checkoutWizard.displayNotification = function(msg,step){
+		$("#step-"+step+" #notificationDiv").remove();
 		$("#step-"+step).prepend('<div id="notificationDiv"><div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>'+msg+'</div></div>');
 		$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 	};
@@ -435,7 +439,7 @@ var checkoutWizard = {};
 		$("#step-"+step+" #notificationDiv").remove();
 	}
 	checkoutWizard.orderTypeOnchange = function(obj){
-		console.log($(obj).val());
+		console.log();
 		if($('#wizFinishButtonId').length>0){
 			$('#wizFinishButtonId').addClass("buttonDisabled");
 			if($(obj).val().trim() == "checkoutWithPo"){
@@ -448,6 +452,73 @@ var checkoutWizard = {};
 			}
 		}
 	};
+	checkoutWizard.orderTypeOnWizchange = function(obj){
+		var paymentType = obj.data().type;
+		
+		$("#orderType").val(paymentType);
+		if($('#wizFinishButtonId').length>0){
+			if(paymentType == "checkoutWithPo"){
+				$('#wizFinishButtonId').html("Submit Order");
+				$("#chkMandatory").find("span").remove();
+				$("#chkMandatory").append("<span class='text-danger'>*</span>");
+			}else if(paymentType == "checkoutWithCreditCard"){
+				$('#wizFinishButtonId').html("Continue with Credit Card");
+				$("#chkMandatory").find("span").remove();
+				if($("#creditCard").html().trim() == ""){
+					var data = $("#quickCartHiddenInfo").serialize();
+					block("Please Wait");
+					$.ajax({
+						type: "POST",
+						url: "displayCreditCardSale.action",
+						data: data,
+						success: function(html){
+							$("#creditCard").html($(html).find('#addNewCardForm')[0]);
+							unblock();
+						}
+					});
+				}
+			}
+		}
+	};
+	checkoutWizard.validatePcardFormWithNewIds = function(){
+		var cardHolder = $.trim($("#cardHolderNewID").val());
+		var cardAddress = $.trim($("#cardAddressNewID").val());
+		var postalCode = $.trim($("#postalCodeNewID").val());
+		var nickName = $.trim($("#nickNameNewID").val());
+		var email = $.trim($("#emailNewID").val());
+		var isValid = 1;
+		var error = "";
+		if(cardHolder==""){
+			error += "Please Enter Card Holder Name.<br/>";
+			isValid = 0;
+		}
+		if(cardAddress==""){
+			error += "Please Enter Street Address.<br/>";
+			isValid = 0;
+		}
+		if(postalCode==""){
+			error += "Please Enter Postal Code.<br/>";
+			isValid = 0;
+		}
+		if(nickName==""){
+			error += "Please Enter Nick Name.";
+			isValid = 0;
+		}
+		if(isValid == 0){
+			showNotificationDiv("error",error);
+			return false;
+		}else{
+			block("Please Wait");
+			$.ajax({
+				type: "POST",
+				url: "submitNewCreditCardSale.action?fromPage=payWithNewCC",
+				success: function(msg){
+					unblock();
+					$("#creditCard").html(msg);
+				}
+			});
+		}
+	}
 	
 })();
 $.getScript(webThemes+'js/multiTab.min.js', function(){
@@ -463,4 +534,15 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 		onFinish:checkoutWizard.submitCheckoutRequest,
 		appendFinishButtonTo: '#triggerOrderButtonDiv'
 	});
+	$('#paymentOptBlock').multiTab({
+	   tabHeading: '.multiTabHeading2',
+	   contentWrap: '.multiTabContent2',
+	   transitionEffect: "fade",
+	   onShowStep: checkoutWizard.orderTypeOnWizchange
+	});
+
+});
+
+$("#shipVia").change(function(){
+	$("#quickCartHiddenInfo input[name='shipVia']").val($(this).val());
 });
