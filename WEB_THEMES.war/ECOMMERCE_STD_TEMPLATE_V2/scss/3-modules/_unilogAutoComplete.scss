@@ -7,11 +7,11 @@
 	top: 34px;
 	padding: 10px 0;
 	text-align:left;
-	font: menu;
+	font-size: 12px;
 	ul {
 		li {
 			line-height: 24px;
-			font-weight: 600;
+			font-weight: 500;
 			text-transform: capitalize;
 			&.ac_heading{
 				color: #8e8e8e;
@@ -23,6 +23,7 @@
 			a{
 				display: block;
 				padding: 0 15px;
+				color: $default_font-color;
 				&:hover{
 					background: $gray-lighten;
 				}

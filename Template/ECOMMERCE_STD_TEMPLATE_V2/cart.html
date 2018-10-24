@@ -13,6 +13,7 @@
 #end
 <div class="row">
 	<div class="col-md-4 col-sm-4 col-xs-12 text-left">
+	#if($productListData.size()>1)
 		<form action="shoppingCartPage.action" id="sortByForm" class="form-inline" method="post">
 			<label>$!locale.get('product.label.sortBy'): </label>
 			<div class="form-group">
@@ -25,6 +26,7 @@
 				</select>
 			</div>
 		</form>
+	#end
 	</div>
 	<div class="cartTotal_Top col-md-8 col-sm-8 col-xs-12">
 		<span class="btn btn-lg">
@@ -98,9 +100,9 @@
                             <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
                                 <span id="imageName$!itemData.itemId">
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #else
-			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #end
                     			</span>
                             </a>
@@ -296,9 +298,9 @@
 			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			#else
-			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" />
 			#end
 			</span>
 			</a>

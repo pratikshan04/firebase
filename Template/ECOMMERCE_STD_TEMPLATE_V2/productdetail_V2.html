@@ -28,11 +28,11 @@
 					<div class="col-xs-12">
 						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 						<div class="cloneImg"> 
-							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+							<img src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 						</div>
 						#else
 						<div class="cloneImg"> 
-							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 						</div>
 						#end
 						<div class="cloneTitle">
@@ -107,11 +107,11 @@
 					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
 					<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
 					<span class="imgForSend">
-						<img itemprop="image" src="$!itemData.productCategoryImageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.productCategoryImageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+						<img itemprop="image" src="$!itemData.productCategoryImageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.productCategoryImageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!hostName$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!hostName$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png'">
 					</span>
 					#end
 					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
@@ -124,15 +124,15 @@
 					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 					<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
 					<span class="imgForSend">
-						<img itemprop="image" src="$!itemData.imageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+						<img itemprop="image" src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!cdnUrl$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png'" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png'" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 					</span>
 					#end
 					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!cdnUrl$!escapeTool.url($!itemData.imageName)"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 					#else
 						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 					#end
@@ -149,12 +149,12 @@
 							<li>
 								<div class="cimm_slideItemImg">
 								#if($!imageList.imageName.contains("http") || $imageList.imageType=="URL")
-									<a href="#" data-image="$!itemData.imageName" data-zoom-image="$!itemData.imageName">
-										<img id="img_$!count" itemprop="image" src="$!imageList.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+									<a href="#" data-image="$!cdnUrl$!escapeTool.url($!itemData.imageName)" data-zoom-image="$!cdnUrl$!escapeTool.url($!itemData.imageName)">
+										<img id="img_$!count" itemprop="image" src="$!imageList.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 									</a>
 								#else
 									<a href="#" data-image="$!hostName$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
-										<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" onerror="this.src='$!hostName/$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+										<img id="img_$!count" itemprop="image" src="$!hostName$!thumbNail$!imageList.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 									</a>
 								#end
 								#set($count = $!count + 1)
@@ -357,12 +357,12 @@
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 									<strong>$!locale.get("product.label.availability"): </strong>
 									<strong><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
-									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
+									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
 								</li>
 								#end
 								<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
 									<strong>$!locale.get("product.label.leadTime"): </strong>
-									<span class="leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+									<span class="leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 								</li> -->
 								#if($userLogin)
 									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink" data-popup-target="#modalBodyContent">$!locale.get("label.text.viewAllBranchAvailability")</a></span></li>
@@ -409,7 +409,7 @@
 						    	<!-- <div id="listPrices" class="price">
 									<strong>$!locale.get('product.label.listPrice'): </strong>
 									<span id="listPriceSpan_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
-										<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+										<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 									</span>
 								</div> -->
 						    	<div id="yourPrices" class="price">
@@ -422,7 +422,7 @@
 										<span id="span_$!itemData.partNumber" class="priceSpan">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 									#else
 										<span id="span_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										</span>
 									#end
 								</div>
@@ -444,11 +444,11 @@
 								#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 									#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 										#if($!itemData.price>0)
-											<span data-select='addtoCartbtn_$!itemData.partNumber'>
+											<span data-select='addtoCartbtn_$!itemData.partNumber' data-oAddCartBtn='originalAddtoCartbtn'>
 												<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											</span>
 										#else
-											<span data-select='addtoCartbtn_$!itemData.partNumber'>
+											<span data-select='addtoCartbtn_$!itemData.partNumber' data-oAddCartBtn='originalAddtoCartbtn'>
 												<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 											</span>
 										#end
@@ -457,7 +457,7 @@
 									#end
 								#else
 									#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-										<span data-select='addtoCartbtn_$!itemData.partNumber'>
+										<span data-select='addtoCartbtn_$!itemData.partNumber' data-oAddCartBtn='originalAddtoCartbtn'>
 											<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 										</span>
 									#else
@@ -571,15 +571,15 @@
 										<span itemprop="name">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
 										<span class="imgForSend" style="display:none !important;">
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-										 <img itemprop="image"  height="250" width="250" src="$!hostName$!productModeitemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
+										 <img itemprop="image"  height="250" width="250" src="$!hostName$!productModeitemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
 										 #else
-										 <img itemprop="image" height="250" width="250" src="$!hostName$!detailImage$!productModeitemData.imageName" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
+										 <img itemprop="image" height="250" width="250" src="$!hostName$!detailImage$!productModeitemData.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
 										 #end
 										 </span>
 										 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-										 <img itemprop="image" src="$!hostName$!productModeitemData.imageName" height="75" width="75" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
+										 <img itemprop="image" src="$!hostName$!productModeitemData.imageName" height="75" width="75" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
 										 #else
-										 <img itemprop="image" src="$!hostName$!thumbNail$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
+										 <img itemprop="image" src="$!hostName$!thumbNail$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$productModeItemtitle"  />
 										 #end
 										 #if($productModeitemData.clearance=="Y")
 										 <span class="clearenceTag clearenceTagSmall"></span>
@@ -615,7 +615,7 @@
 									    		<span class='text-danger'>$!locale.get("product.label.callforprice")</span>
 									    	#end
 									    #else
-									    	<img src="$!hostName$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									    	<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 									    #end
 								    </span>
 								 </td>
@@ -628,7 +628,7 @@
 									    		<span class='text-danger'>Call for Availability</span>
 									    	#end
 									    #else
-									    	<img src="$!hostName$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									    	<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										#end
 									</span>
 								</td>
@@ -727,52 +727,52 @@
 					#foreach($itemDocument in $!itemDocumentsList)
 						#if($itemDocument.docName.contains('.pdf'))
 						<li>
-							<a onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<a onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.doc'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.docx'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xlsx'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.pptx'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.ppt'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xls'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.cad'))
 						<li>
-							<a class="title"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="title"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('youtube') || $!itemDocument.docName.contains('.mp4') || $!itemDocument.docName.contains('.avi'))
 						<li>
-							<a href='$!itemDocument.docName' target="_blank"><img src="$!hostName$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
+							<a href='$!itemDocument.docName' target="_blank"><img src="$!cdnUrl$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 						</li>
 						#else
 							<li>
-								<a href='$!itemDocument.docName' target="_blank"><img src="$!hostName$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
+								<a href='$!itemDocument.docName' target="_blank"><img src="$!cdnUrl$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
 								<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 							</li>
 						#end
@@ -784,7 +784,7 @@
 				<div id="videoSection">
 					#foreach($videoLink in $!videoLinkList)
 						<span>
-							<a href='$!videoLink.videoName' target="_blank"><img src="$!webThemes/$!siteName/images/video.png" alt="Video"/><span>$!videoLink.videoCaption</span></a>
+							<a href='$!videoLink.videoName' target="_blank"><img src="$!cdnUrl$!webThemes/$!siteName/images/video.png" alt="Video"/><span>$!videoLink.videoCaption</span></a>
 						</span>
 					#end
 				</div>
@@ -808,9 +808,9 @@
 			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span> 
 			 #if($linkItem.imageType=="URL")
-				 <img image="image" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+				 <img image="image" src="$!customerbought.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 			 #else
-				 <img image="image" src="$!itemImage$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+				 <img image="image" src="$!itemImage$!customerbought.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 			 #end
 			</span>
 			</a>
@@ -910,9 +910,9 @@
 								<div class="cimm_slideItemImg">
 					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 										 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
 										 #end
 					 				</a>
 					  			</div>
@@ -948,12 +948,12 @@
 									
 								<!-- 	<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
 										 <strong>$!locale.get("product.label.leadTime"): </strong>
-										 <span class="leadTime_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										 <span class="leadTime_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
 										 <strong>$!locale.get("product.label.available") : </strong>
-										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									#if($linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
@@ -966,7 +966,7 @@
 								 	<!-- <li>
 								 		<h4>$!locale.get('product.label.listPrice'): </h4>
 										 <span id="listPriceSpan_$!linkItem.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										 </span>
 									</li> -->
 									#end
@@ -984,7 +984,7 @@
 											#end
 										#else
 										<span id="span_$!linkItem.partNumber" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										</span>
 										#end
 									</li>
@@ -1237,14 +1237,14 @@ function LoadRecentViewedItem(){
 				<li>
 					<div class="cimm_linkItemImg">
 						<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">
-							<img id="imageName$!customerAlsoViewed.itemId" src="$!customerAlsoViewed.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+							<img id="imageName$!customerAlsoViewed.itemId" src="$!customerAlsoViewed.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
 						</a>
 					</div>
 					<div class="cimm_linkItemDesp">
 						<ul>
 							<li>
 								<h4>
-									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraft®</a>
+									<a class="cimm_linkProdTitle" href="$!customerAlsoViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerAlsoViewed.replace(" ","_")">BrassCraftï¿½</a>
 							cimm_slideItemImg	</h4>
 							</li>
 						</ul>

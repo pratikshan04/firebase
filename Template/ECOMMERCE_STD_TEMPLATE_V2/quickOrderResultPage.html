@@ -29,9 +29,9 @@
 						<!-- <strong>$itemCount)</strong> -->
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">                    
 							#if($itemData.imageName.contains("http"))
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#else
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#end
 						</a>
 					</div>
@@ -81,9 +81,9 @@
 					<!-- <strong>$itemCount)</strong> -->
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							#if($itemData.imageName.contains("http"))
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#else
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#end
 						</a>
 					</div>
@@ -188,9 +188,9 @@
 								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
 									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">                    
 										#if($itemData.imageName.contains("http"))
-										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 										#else
-										<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+										<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 										#end
 									</a>
 								</div>
@@ -273,7 +273,7 @@
 var webThemes = $("#webThemePath").val();
 jQuery.getScript(webThemes+'js/multiTab.min.js', function(){
 	$('#orderResults').multiTab({
-		transitionEffect:"fade"
+		transitionEffect:"right"
 	});
 });
 jQuery.getScript(webThemes+'js/BulkAction.js', function(){});

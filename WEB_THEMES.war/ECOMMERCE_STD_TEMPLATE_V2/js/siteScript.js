@@ -703,6 +703,8 @@ function scynInitiate(){
 $(document).ready(function(){
 	var userLogin = $("#userLogin").val();
 	if (userLogin!="true" ) {
+		localStorage.removeItem("salesUserSelected");
+    	localStorage.removeItem("currentCustomerSU");
 		var remember = "false";
 		var keyflag = localStorage.getItem("F30FB33A2");
 		if(keyflag!=null && keyflag!=undefined && $.trim(keyflag)!="" ){
@@ -774,8 +776,8 @@ $(document).ready(function(){
 				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize()+"&loginType=popup" ,function(data, status){
 					try{
-						sessionStorage.setItem("salesUserSelected","Y");
-			        	sessionStorage.setItem("currentCustomerSU","");
+						localStorage.setItem("salesUserSelected","Y");
+			        	localStorage.setItem("currentCustomerSU","");
 						var afterLoginUrl = window.location.href;
 						var previousPageUrl = document.referrer;
 						var currentLayout = $("#layoutName").val();
@@ -1865,6 +1867,8 @@ function doLogOff(){
 		localStorage.removeItem("emailFriendItem");
 		localStorage.removeItem("itemID");
 		localStorage.removeItem("itemName");
+		localStorage.removeItem("salesUserSelected");
+    	localStorage.removeItem("currentCustomerSU");
 		window.location.href = "/doLogOff.action";
 	}catch(e){
 		console.log(e);
@@ -2353,6 +2357,7 @@ function sendSiteDetailPagePart(a){
 	var b=$("#titleText").val();
 	
 	if($(".focusItemTabs").html()=="" || $(".focusItemTabs").html() == undefined){
+		$(".cimm_itemdetail-imgcontainer span.imgForSend img").removeAttr('style');
 		var itemImg = $(".cimm_itemdetail-imgcontainer span.imgForSend").html();
 		var ProductName=$("#titleText").val();
 		var PrintShrtDesc=$(".cimm_itemShortDesc").html();
@@ -2361,6 +2366,7 @@ function sendSiteDetailPagePart(a){
 		var thisid = $(".focusItemTabs").attr("id");
 		var test = thisid.split("_");
 		var id = test[1];
+		//$('#'+id).find('span.imgForSend img').removeAttr('style');
 		var itemImg = $('#'+id).find('span.imgForSend').html();
 		var ProductName= $('.focusItemTabs .productTitle').html();
 		var PrintShrtDesc= $('.focusItemTabs .cimm_itemShortDesc').html();
@@ -2474,7 +2480,7 @@ function sendSiteDetailPagePart(a){
 	localStorage.setItem("emailFriendItem", html);
 	localStorage.setItem("emailFriendlink", location.href);
 	localStorage.setItem("itemID",a);
-	localStorage.setItem("itemName",'<a href="/itemDetailPage.action?codeId='+a+'">'+b+'</a>');
+	localStorage.setItem("itemName",'<a href="'+window.location.pathname+'">'+b+'</a>');
 	location.href="/SendThisPageLink.action";
 }
 /*End of Send Site Detail page*/
@@ -2544,9 +2550,9 @@ function sendProduct(){
 		}else{
 			$("#mailBody").val(mailCon);	
 		}
-
+		
 		$("#mailLink").val(emailitemlink);
-
+		$(".cimm_itemdetail-imgcontainer img").width('100%');
 	}else if(emailitem==null){
 		$("#SendItem").hide();
 		$("#ErrorField").append("Please <a onclick='history.go(-1);' href='javascript:void(0);'>Go Back</a> and select a Product to Send to your Friends/Associates");
@@ -3066,9 +3072,16 @@ $dRipple.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd mousel
 	$(this).find(".dRipple").remove();
 });
 
+function formatPhoneVal(){
+	$(".formatPhoneVal").val(function(i, text) {
+	    text = text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1-$2-$3");
+	    return text;
+	});
+}
 $(function(){
 	toDoFooter();
 	formatPrice();
+	formatPhoneVal();
 	triggerToolTip();
 	hideBulkAction();
 	leftFilterScroll();
@@ -3140,17 +3153,11 @@ $(function(){
 			}
 		});
 	}
-
 	$(".formatPhoneText").text(function(i, text) {
 	    text = text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1-$2-$3");
 	    return text;
 	});
-	
-	$(".formatPhoneText").val(function(i, text) {
-	    text = text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1-$2-$3");
-	    return text;
-	});
-	
+
 	$(".formatZipCodeText").text(function(i, text) {
 	    text = text.replace(/(\d\d\d\d\d)(\d\d\d\d)/, "$1-$2");
 	    return text;
@@ -3658,8 +3665,8 @@ function loadCustomForSalesUser(salesUserDetails){
 }
 
 $(document).ready(function(){
-	var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
-	var selectedUser = sessionStorage.getItem("salesUserSelected");
+	var selectedCustomer = localStorage.getItem("currentCustomerSU");
+	var selectedUser = localStorage.getItem("salesUserSelected");
 	var isSalesUser = $("#isSalesUser").val();
 	if(!selectedCustomer && isSalesUser == "Y"){
 		loadCustomForSalesUser();
@@ -3670,13 +3677,18 @@ $(document).ready(function(){
 	}
 	
 	function loadUserByCustomer(attributes){
-		sessionStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
+    	localStorage.removeItem("currentCustomerSU");
+		localStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
 		block('Please wait');
 		$.get("getUsersByCustomerUnit.action",
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
 			function(data,status,xhr){
 			//$("#salesrepModal").modal('hide');
-			$("#salesrepModal .modal-body").html(data);			
+			$("#salesrepModal .modal-body").html(data);	
+			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			$('#salesrepModal').on('shown.bs.modal', function () {
+			$('body').addClass('modal-open');
+			});
 			unblock();
 			//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 			//$('#salesrepModal').on('shown.bs.modal', function () {
@@ -3690,14 +3702,51 @@ $(document).ready(function(){
 	}
 	
 	$(".switchCustomer").on('click', function(){
-		block('Please wait');
-		loadCustomForSalesUser();
+		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
+			bootbox.confirm({
+				size: "medium",
+				closeButton:false,
+				message: "There are item(s) in your cart. Do you want to switch customer",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				callback: function(result){
+					if(result){
+						block('Please wait');
+						loadCustomForSalesUser()
+					}else{
+						unblock();
+						return true;
+					}
+				}
+			});
+    	}else{
+    		block('Please wait');
+    		loadCustomForSalesUser();
+    	}
+		
 	});
 	
 	$(".switchUser").on('click', function(){
-		var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+		var selectedCustomer = localStorage.getItem("currentCustomerSU");
 		selectedCustomer = JSON.parse(selectedCustomer);
-		loadUserByCustomer(selectedCustomer);
+		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
+			bootbox.confirm({
+				size: "medium",
+				closeButton:false,
+				message: "There are item(s) in your cart. Do you want to switch user",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				callback: function(result){
+					if(result){
+						loadUserByCustomer(selectedCustomer);
+					}else{
+						unblock();
+						return true;
+					}
+				}
+			});
+    	}else{
+    		loadUserByCustomer(selectedCustomer);
+    	}
+		
 	});
 	
 	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
@@ -3708,7 +3757,8 @@ $(document).ready(function(){
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function(src){
 		block('Please wait');
-		sessionStorage.setItem("salesUserSelected","Y");
+		localStorage.removeItem("salesUserSelected");
+		localStorage.setItem("salesUserSelected","Y");
 		var attributes = src.target.dataset;
 		$.post("setSelectedUserDetailsUnit.action",
 			{"userName" : attributes['username']},
@@ -3733,3 +3783,8 @@ $("#loginModal").on('shown.bs.modal', function() {
 		prodGrpCpnPopup();
 	}
 });
+
+/*$(window).unload(function(){
+	  localStorage.salesUserSelected=undefined;
+	  localStorage.currentCustomerSU=undefined;
+});*/
