@@ -20,7 +20,7 @@ function priceLoadMainFunction() {
 	};
 
 	function populatePrice(product) {
-		itemHolder = document.getElementById("unitPriceValue_" + partNumber);
+		/*itemHolder = document.getElementById("unitPriceValue_" + partNumber);
 		if (itemHolder!=null && itemHolder.value > 0) {
 			price = itemHolder.value;
 		} else {
@@ -29,7 +29,9 @@ function priceLoadMainFunction() {
 			}else {
 				price = product.customerPrice, partNumber = product.partNumber, qty = 1, priceLabel = "";
 			}
-		}
+		}*/
+		price = product.customerPrice, partNumber = product.partNumber, qty = 1, priceLabel = "";
+		
 		if (price > 0) {
 			priceLabel = preparePriceLabelStr(price, product);
 			populatePriceLable(product, priceLabel, price);
@@ -192,8 +194,7 @@ function priceLoadMainFunction() {
 
 	function appendToAllBranchAvailability(newBranch, partNumber) {
 		if (document.getElementById("allBranchHTML" + partNumber)) {
-			var currentTable = document.getElementById("allBranchHTML"
-					+ partNumber);
+			var currentTable = document.getElementById("allBranchHTML"+ partNumber);
 			$(currentTable).append(newBranch);
 		}
 	}
@@ -273,12 +274,14 @@ function priceLoadMainFunction() {
 	}
 
 	function requestPriceLoadingAPI(partNumbers) {
+		console.log("Hi: "+partNumbers);
 		$.ajax({
 			url : markUpPrefixes.PRICE_LOADING_API,
 			type : "POST",
 			data : {
 				"productIdList" : partNumbers,
-				"loadAllBranchAvailability" : "Y"
+				"loadAllBranchAvailability" : "Y",
+				"LABAvailability" : "Y"
 			},
 			success : function(responseData) {
 				if (responseData && responseData !=  '$renderContent') {
@@ -310,9 +313,11 @@ function priceLoadMainFunction() {
 		}
 		
 		wareHouseList = product.branchAvail;
+		
 		if(wareHouseList.length>0){
 		for (var j = 0; j < wareHouseList.length; j++) {
 			wareHouseDetails = wareHouseList[j];
+			wareHouseDetails.partNumber = partNumber;
 			if (wareHouseDetails.branchAvailability !== undefined) {
 				totalAvailability += parseInt(wareHouseDetails.branchAvailability);
 			}
@@ -323,9 +328,9 @@ function priceLoadMainFunction() {
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
 				}
-			if (wareHouseDetails.branchAvailability > 0) {
+			//if (wareHouseDetails.branchAvailability > 0) {
 				populateAllBranchAvailability(wareHouseDetails);
-			}
+			//}
 		}
 		}else{
 			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
@@ -345,7 +350,7 @@ function priceLoadMainFunction() {
 		priceDispalyed = false;
 		qtyBreakDisplayed = false;
 	}
-	//cleanLoading();
+	cleanLoading();
 	productModeCustomFunc();
 	}
 
