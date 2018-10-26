@@ -135,7 +135,7 @@
 	     	<!-- <select id='productMultipleUOMSelect_$productModeitemData.partNumber.replaceAll(" ","_")'  data-partnumber = '$productModeitemData.partNumber.replaceAll(" ","_")' style="display:none;" class="appendChosen"></select> -->
 	     </td>
 		  <td class="tabelPrice" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
-			 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan">
+			 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan" data-select='priceData'>
 				 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 						#if($productModeitemData.price>0)
 				    		$$!numberTool.format($!pricePrecisionFormate,$!productModeitemData.price)
@@ -148,7 +148,7 @@
 			    </span>
 			 </td>
 			 <td class="tableAvail">
-			 	<span class="Avail_$!productModeitemData.partNumber">
+			 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
 				 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 						#if($productModeitemData.availQty>0)
 				    		$!productModeitemData.availQty

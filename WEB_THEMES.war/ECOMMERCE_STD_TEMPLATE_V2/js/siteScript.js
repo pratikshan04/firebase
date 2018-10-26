@@ -2157,12 +2157,31 @@ function quickCartItemDelete(productListId){
 		}
 	});
 }
+function cleanLoadingV2(){
+	try{
+		var userLogin = $("#userLogin").val();
+		$("[data-select='availability']").each(function(i){
+			if($(this).find("img").length>0){
+				$(this).html("<span class='priceSpanFa'>Call for Availability</span>");
+				$("#HomeBranchQty").html("<span class='required'>Call for Availability</span>");
+				console.log("In Full Script");
+			}
+		});
+		$("[data-select='priceData']").each(function(i){
+			if($(this).find("img").length>0){
+				$(this).html("<span class='priceSpanFa'>Call for Price</span>");
+			}
+		});
+	}catch(e){
+		console.log(e);
+	}
+}
 function cleanLoading(){
 	try{
 		var userLogin = $("#userLogin").val();
 		$("[data-select='availability']").each(function(i){
 			if($(this).find("img").length>0){
-				$(this).html("<span class='priceSpanFa'>Out of Stock</span>");
+				$(this).html("<span class='priceSpanFa'>Call for Availability</span>");
 				$("#HomeBranchQty").html("<span class='required'>Call for Availability</span>");
 				console.log("In Full Script");
 			}

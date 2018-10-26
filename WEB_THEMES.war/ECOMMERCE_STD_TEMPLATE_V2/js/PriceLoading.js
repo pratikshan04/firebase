@@ -290,6 +290,7 @@ function priceLoadMainFunction() {
 				} else {
 					onPriceLoadingAPIFailure();
 					productModeCustomFunc();
+					cleanLoadingV2();
 				}
 			},
 			error : function(xhr, status, error) {
@@ -350,8 +351,8 @@ function priceLoadMainFunction() {
 		priceDispalyed = false;
 		qtyBreakDisplayed = false;
 	}
-	//cleanLoading();
 	productModeCustomFunc();
+	cleanLoadingV2();
 	}
 
 	function onPriceLoadingAPIFailure() {

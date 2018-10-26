@@ -620,7 +620,7 @@
 								    </span>
 								 </td>
 								 <td class="tableAvail">
-								 	<span class="Avail_$!productModeitemData.partNumber">
+								 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.availQty>0)
 									    		$!productModeitemData.availQty
