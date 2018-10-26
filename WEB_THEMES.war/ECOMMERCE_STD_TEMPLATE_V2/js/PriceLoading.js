@@ -350,7 +350,7 @@ function priceLoadMainFunction() {
 		priceDispalyed = false;
 		qtyBreakDisplayed = false;
 	}
-	cleanLoading();
+	//cleanLoading();
 	productModeCustomFunc();
 	}
 
