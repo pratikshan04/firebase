@@ -444,13 +444,13 @@
 											#end
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
 										#else
-											<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+											<span class="orangeClr Avail_$!itemData.partNumber" data-select='availability'><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									<!-- <li id="allBranchAvail_$!itemData.partNumber">
-										<span class="priceSpanFa"><a href="javascript:void(0);" onClick="openAllBranchPop($!itemData.partNumber)">Branch Availability</a></span>
-									</li> -->
+									 <li id="allBranchAvail_$!itemData.partNumber">
+										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber"><strong>Branch Availability</strong></a></span>
+									</li> 
 										
 									#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
 									<li><strong>$!locale.get("product.label.minorderqty"): </strong><span> $!itemData.minOrderQty</span></li>
@@ -512,27 +512,6 @@
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>
 									</li>
-									<!--Branch Availabiltiy List Section
-									<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
-										<div class="cimm_customPopContent">
-										<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><em class="fa fa-lg fa-times-circle"></em></a>
-											<div class="cimm_popupLogin">
-												<h3 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h3>
-												<div class="cimm_siteTableEnclosure" id="allBranch$!itemData.partNumber">
-													<table id="allBranch_$!itemData.partNumber" class="cimm_siteTable"> 
-														<thead>
-															<tr>
-																<th>$!locale.get("product.label.branchName")</th>
-																<th class="center">$!locale.get("product.label.available")</th>
-															</tr>
-														</thead>
-														<tbody id="allBranchHTML_$!itemData.partNumber"></tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!--Branch Availabiltiy List Section-->
 									<li class='pTop-2'>
 										<!-- My Product Group-->
 										<div class="productGroupBtn dropdown">
@@ -589,6 +568,31 @@
 						</li>
 					</ul>
 				</li>
+				<!--Branch Availabiltiy List Section -->
+									<div id="branchavail_$!itemData.partNumber" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content yellowTheme bold">
+												<div class="modal-header">
+											      	<h4 class="modal-title"><button type="button" class="close" data-dismiss="modal">×</button></h4>
+											    </div>
+											    <div class="modal-body size-13">
+											    	<table class="table">
+											    		<thead>
+															<tr>
+																<th>$!locale.get("product.label.branchName")</th>
+																<th class="center">$!locale.get("product.label.available")</th>
+															</tr>
+														</thead>
+											    		<tbody id="allBranchHTML$!itemData.partNumber">
+											    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
+											    		</tbody>
+											    	</table>
+											    </div>
+											</div>
+										</div>
+									</div>
+									<!--Branch Availabiltiy List Section-->
 			#end
 		</ul>
 	</div>

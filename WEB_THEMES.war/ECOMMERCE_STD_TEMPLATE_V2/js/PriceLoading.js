@@ -195,6 +195,10 @@ function priceLoadMainFunction() {
 	function appendToAllBranchAvailability(newBranch, partNumber) {
 		if (document.getElementById("allBranchHTML" + partNumber)) {
 			var currentTable = document.getElementById("allBranchHTML"+ partNumber);
+			var noRecoredRow = document.getElementById("allBranchHTML_NoRec_"+ partNumber);
+			if(typeof(noRecoredRow) != "undefined" && noRecoredRow!=null){
+				$(noRecoredRow).remove();
+			}
 			$(currentTable).append(newBranch);
 		}
 	}

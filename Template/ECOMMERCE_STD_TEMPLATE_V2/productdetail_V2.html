@@ -365,7 +365,7 @@
 									<span class="leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 								</li> -->
 								##if($userLogin)
-									<li><strong><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink"  data-toggle="modal" data-target="#branchavail">$!locale.get("label.text.viewAllBranchAvailability")</a></span></strong></li>
+									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink"  data-toggle="modal" data-target="#branchavail"><strong>$!locale.get("label.text.viewAllBranchAvailability")</strong></a></span></li>
 								##end
 							#else
 								#if($itemData.availQty>0)
@@ -1124,7 +1124,9 @@ function LoadRecentViewedItem(){
 							<th class="center">$!locale.get("product.label.available")</th>
 						</tr>
 					</thead>
-		    		<tbody id="allBranchHTML$!skuPartNumber"></tbody>
+		    		<tbody id="allBranchHTML$!skuPartNumber">
+		    			<tr id="allBranchHTML_NoRec_$!skuPartNumber"><td colspan="2"> No Records Found</td></tr>
+		    		</tbody>
 		    	</table>
 		    </div>
 		</div>
