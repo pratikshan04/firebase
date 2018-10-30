@@ -69,10 +69,13 @@
 			partNumber = partNumber.replace(regex, '\\/');
 			var minOrderQty = 1;
 			var quantityInterval = 1;
-			var uom = $("#"+settings.functionalBlock.uomValuePrefix+partNumber).val();
+			//var uom = $("#"+settings.functionalBlock.uomValuePrefix+partNumber).val();
+			var uom = document.getElementById(settings.functionalBlock.uomValuePrefix + partNumber).value;
 			if(settings.qtyIntervalRefrence=="Y"){
-				minOrderQty = parseInt($("#"+settings.functionalBlock.minOrderQtyPrefix+partNumber).val());
-				quantityInterval = parseInt($("#"+settings.functionalBlock.qtyIntervalPrefix+partNumber).val());
+				//minOrderQty = parseInt($("#"+settings.functionalBlock.minOrderQtyPrefix+partNumber).val());
+				//quantityInterval = parseInt($("#"+settings.functionalBlock.qtyIntervalPrefix+partNumber).val());
+				minOrderQty = parseInt(document.getElementById(settings.functionalBlock.minOrderQtyPrefix + partNumber).value);
+				quantityInterval = parseInt(document.getElementById(settings.functionalBlock.qtyIntervalPrefix + partNumber).value);
 			}
 			if(qty=="NaN")
 			{

@@ -449,7 +449,7 @@
 										#end
 									</li>
 									 <li id="allBranchAvail_$!itemData.partNumber">
-										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber"><strong>Branch Availability</strong></a></span>
+										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
 									</li> 
 										
 									#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
@@ -569,7 +569,7 @@
 					</ul>
 				</li>
 				<!--Branch Availabiltiy List Section -->
-									<div id="branchavail_$!itemData.partNumber" class="modal fade" role="dialog">
+									<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
 										<div class="modal-dialog">
 											<!-- Modal content-->
 											<div class="modal-content yellowTheme bold">

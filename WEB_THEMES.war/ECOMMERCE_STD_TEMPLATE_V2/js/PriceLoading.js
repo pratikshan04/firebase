@@ -42,8 +42,25 @@ function priceLoadMainFunction() {
 		} else {
 			populateCallForPrice(product.partNumber, price);
 		}
+		populateMinOrderAndOrderInterval(product);
 	}
-
+	
+	function populateMinOrderAndOrderInterval(product) {
+		var minOrder = 1, orderInterval = 1;
+		if (product.minimumOrderQuantity > 0) {
+			minOrder = product.minimumOrderQuantity;
+			if (document.getElementById('MinOrderQty_' + product.partNumber)) {
+				document.getElementById('MinOrderQty_' + product.partNumber).value = minOrder;
+			}
+		}
+		if (product.orderQuantityInterval > 0) {
+			orderInterval = product.orderQuantityInterval;
+			if (document.getElementById('OrderQtyInterval_' + product.partNumber)) {
+				document.getElementById('OrderQtyInterval_' + product.partNumber).value = orderInterval;
+			}
+		}
+	}
+	
 	function populatePriceLable(product, priceLabel, price) {
 
 		var qty = 1, i = 0;
@@ -61,8 +78,7 @@ function priceLoadMainFunction() {
 		if (spanLinkedItems) {
 			spanLinkedItems.innerHTML = priceLabel;
 		}
-		var priceValues = document.getElementById("priceValue_"
-				+ product.partNumber);
+		var priceValues = document.getElementById("priceValue_"+ product.partNumber);
 		if (priceValues) {
 			priceValues.value = price;
 		}
@@ -73,12 +89,17 @@ function priceLoadMainFunction() {
 		var pricestr = "$" + Number(price).toFixed(pricePrecision);
 		var layoutName = getLayoutName();
 		if (product.uom && product.uom.length > 0) {
+			uom = product.uom;
 			if (layoutName === "ProductDetailPage") {
 				pricestr = pricestr + " / <em id='prodUOM'>"
 						+ product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
 			} else {
 				pricestr = pricestr + " / <em>" + product.uom.toUpperCase()
 						+ "</em>";
+			}
+			
+			if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
+				document.getElementById('uomValue_' + product.partNumber).value = uom;
 			}
 		}
 		return pricestr;
@@ -278,7 +299,6 @@ function priceLoadMainFunction() {
 	}
 
 	function requestPriceLoadingAPI(partNumbers) {
-		console.log("Hi: "+partNumbers);
 		$.ajax({
 			url : markUpPrefixes.PRICE_LOADING_API,
 			type : "POST",
