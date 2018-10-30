@@ -20,7 +20,7 @@ function priceLoadMainFunction() {
 	};
 
 	function populatePrice(product) {
-		itemHolder = document.getElementById("unitPriceValue_" + partNumber);
+		/*itemHolder = document.getElementById("unitPriceValue_" + partNumber);
 		if (itemHolder!=null && itemHolder.value > 0) {
 			price = itemHolder.value;
 		} else {
@@ -29,7 +29,9 @@ function priceLoadMainFunction() {
 			}else {
 				price = product.customerPrice, partNumber = product.partNumber, qty = 1, priceLabel = "";
 			}
-		}
+		}*/
+		price = product.customerPrice, partNumber = product.partNumber, qty = 1, priceLabel = "";
+		
 		if (price > 0) {
 			priceLabel = preparePriceLabelStr(price, product);
 			populatePriceLable(product, priceLabel, price);
@@ -40,8 +42,25 @@ function priceLoadMainFunction() {
 		} else {
 			populateCallForPrice(product.partNumber, price);
 		}
+		populateMinOrderAndOrderInterval(product);
 	}
-
+	
+	function populateMinOrderAndOrderInterval(product) {
+		var minOrder = 1, orderInterval = 1;
+		if (product.minimumOrderQuantity > 0) {
+			minOrder = product.minimumOrderQuantity;
+			if (document.getElementById('MinOrderQty_' + product.partNumber)) {
+				document.getElementById('MinOrderQty_' + product.partNumber).value = minOrder;
+			}
+		}
+		if (product.orderQuantityInterval > 0) {
+			orderInterval = product.orderQuantityInterval;
+			if (document.getElementById('OrderQtyInterval_' + product.partNumber)) {
+				document.getElementById('OrderQtyInterval_' + product.partNumber).value = orderInterval;
+			}
+		}
+	}
+	
 	function populatePriceLable(product, priceLabel, price) {
 
 		var qty = 1, i = 0;
@@ -59,8 +78,7 @@ function priceLoadMainFunction() {
 		if (spanLinkedItems) {
 			spanLinkedItems.innerHTML = priceLabel;
 		}
-		var priceValues = document.getElementById("priceValue_"
-				+ product.partNumber);
+		var priceValues = document.getElementById("priceValue_"+ product.partNumber);
 		if (priceValues) {
 			priceValues.value = price;
 		}
@@ -71,12 +89,17 @@ function priceLoadMainFunction() {
 		var pricestr = "$" + Number(price).toFixed(pricePrecision);
 		var layoutName = getLayoutName();
 		if (product.uom && product.uom.length > 0) {
+			uom = product.uom;
 			if (layoutName === "ProductDetailPage") {
 				pricestr = pricestr + " / <em id='prodUOM'>"
 						+ product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
 			} else {
 				pricestr = pricestr + " / <em>" + product.uom.toUpperCase()
 						+ "</em>";
+			}
+			
+			if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
+				document.getElementById('uomValue_' + product.partNumber).value = uom;
 			}
 		}
 		return pricestr;
@@ -192,8 +215,11 @@ function priceLoadMainFunction() {
 
 	function appendToAllBranchAvailability(newBranch, partNumber) {
 		if (document.getElementById("allBranchHTML" + partNumber)) {
-			var currentTable = document.getElementById("allBranchHTML"
-					+ partNumber);
+			var currentTable = document.getElementById("allBranchHTML"+ partNumber);
+			var noRecoredRow = document.getElementById("allBranchHTML_NoRec_"+ partNumber);
+			if(typeof(noRecoredRow) != "undefined" && noRecoredRow!=null){
+				$(noRecoredRow).remove();
+			}
 			$(currentTable).append(newBranch);
 		}
 	}
@@ -278,7 +304,8 @@ function priceLoadMainFunction() {
 			type : "POST",
 			data : {
 				"productIdList" : partNumbers,
-				"loadAllBranchAvailability" : "Y"
+				"loadAllBranchAvailability" : "Y",
+				"LABAvailability" : "Y"
 			},
 			success : function(responseData) {
 				if (responseData && responseData !=  '$renderContent') {
@@ -287,6 +314,7 @@ function priceLoadMainFunction() {
 				} else {
 					onPriceLoadingAPIFailure();
 					productModeCustomFunc();
+					cleanLoadingV2();
 				}
 			},
 			error : function(xhr, status, error) {
@@ -310,9 +338,11 @@ function priceLoadMainFunction() {
 		}
 		
 		wareHouseList = product.branchAvail;
+		
 		if(wareHouseList.length>0){
 		for (var j = 0; j < wareHouseList.length; j++) {
 			wareHouseDetails = wareHouseList[j];
+			wareHouseDetails.partNumber = partNumber;
 			if (wareHouseDetails.branchAvailability !== undefined) {
 				totalAvailability += parseInt(wareHouseDetails.branchAvailability);
 			}
@@ -323,9 +353,9 @@ function priceLoadMainFunction() {
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
 				}
-			if (wareHouseDetails.branchAvailability > 0) {
+			//if (wareHouseDetails.branchAvailability > 0) {
 				populateAllBranchAvailability(wareHouseDetails);
-			}
+			//}
 		}
 		}else{
 			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
@@ -345,8 +375,8 @@ function priceLoadMainFunction() {
 		priceDispalyed = false;
 		qtyBreakDisplayed = false;
 	}
-	//cleanLoading();
 	productModeCustomFunc();
+	cleanLoadingV2();
 	}
 
 	function onPriceLoadingAPIFailure() {

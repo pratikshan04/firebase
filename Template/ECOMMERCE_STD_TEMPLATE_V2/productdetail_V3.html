@@ -353,9 +353,9 @@
 									<strong>$!locale.get("product.label.leadTime"): </strong>
 									<span class="leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 								</li> -->
-								#if($userLogin)
-									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink" data-popup-target="#modalBodyContent">$!locale.get("label.text.viewAllBranchAvailability")</a></span></li>
-								#end
+								##if($userLogin)
+									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink"  data-toggle="modal" data-target="#branchavail"><strong>$!locale.get("label.text.viewAllBranchAvailability")</strong></a></span></li>
+								##end
 							#else
 								#if($itemData.availQty>0)
 						    		<strong>$!locale.get("product.label.available"): </strong>
@@ -625,7 +625,7 @@
 								    </span>
 								 </td>
 								 <td class="tableAvail">
-								 	<span class="Avail_$!productModeitemData.partNumber">
+								 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.availQty>0)
 									    		$!productModeitemData.availQty
@@ -827,7 +827,6 @@
 	  #foreach($customerbought in $!customerAlsoBought)
 	  #set($itemcustomerbought=$!customerbought.brandName+" "+$!customerbought.manufacturerPartNumber) 
 	  <li itemscope itemtype="http://schema.org/Product">
-		#itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
 		<div class="cimm_linkItemImg">
 			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span> 
@@ -907,6 +906,7 @@
 				<input type="hidden" value="$!customerbought.orderInterval" id="OrderQtyInterval_$!customerbought.partNumber" name="OrderQtyInterval_$!customerbought.partNumber"/>
 				<input type="hidden" value="$!customerbought.manufacturerPartNumber" id="MPNValue_$!customerbought.partNumber" />
 			</span>
+			#itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
 			Add to cart -->
 		</div>	
 	  </li>
@@ -1122,6 +1122,7 @@ function LoadRecentViewedItem(){
 </script>
 	#if($!productCount < 1)
 	#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
+	#set($skuPartNumber = $!itemData.partNumber)
 	<input type="hidden" id="userId" value="$!userId" />
 	<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
 	<!-- <span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span> -->
@@ -1132,45 +1133,29 @@ function LoadRecentViewedItem(){
 
 <!-- **********************Product Detail Page ends ***********************-->
 <!--Branch Availabiltiy List Section-->
-<!-- <div id="modalBodyContent" class="modalPopup">
- <div class="modalPopBody">
- <span class="modalPopExit orangeClr"><em class="fa fa-times-circle"></em></span>
- <div class="modalPopupContent">
-        <h2 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h2>
- <div class="cimm_siteTableEnclosure">
-<table id="allBranch" cellpadding="0" cellspacing="0" width="100%" border="0" class="cimm_siteTable"> 
-<thead>
-<tr>
- <th class="left">$!locale.get("product.label.branchName")</th>
- <th class="left">$!locale.get("product.label.available")</th>
-</tr>
-</thead>
-<tbody id="allBranchHTML">
-</tbody>
-</table>
- </div>
- </div>
- </div>
-</div> -->
-<!-- <div class="cimm_customPopWrap allBranchWrap" id="modalBodyContent" style="cursor: default">
-	<div class="cimm_customPopContent">
-	<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><em class="fa fa-lg fa-times-circle"></em></a>
-		<div class="cimm_popupLogin">
-			<h3 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h3>
-			<div class="cimm_siteTableEnclosure">
-				<table id="allBranch" cellpadding="0" cellspacing="0" width="100%" border="0" class="cimm_siteTable"> 
-					<thead>
+<div id="branchavail" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content yellowTheme bold">
+			<div class="modal-header">
+		      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+		    </div>
+		    <div class="modal-body size-13">
+		    	<table class="table">
+		    		<thead>
 						<tr>
 							<th>$!locale.get("product.label.branchName")</th>
 							<th class="center">$!locale.get("product.label.available")</th>
 						</tr>
 					</thead>
-					<tbody id="allBranchHTML"></tbody>
-				</table>
-			</div>
+		    		<tbody id="allBranchHTML$!skuPartNumber">
+		    			<tr id="allBranchHTML_NoRec_$!skuPartNumber"><td colspan="2"> No Records Found</td></tr>
+		    		</tbody>
+		    	</table>
+		    </div>
 		</div>
 	</div>
-</div> -->
+</div>
 <!--Branch Availabiltiy List Section-->
 
 <div id="ratingModal" class="modal fade ratingModalWrap" role="dialog">
