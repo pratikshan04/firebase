@@ -44,11 +44,11 @@
 		<p> 
             #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
             #if($requestType == "openQuote")<strong><span> $!orderDetail.billToName </span></strong><br />#end
-            <span>$!orderDetail.billAddress1 </span><br />
-            #if($orderDetail.billAddress2)<span>$!orderDetail.billAddress2 </span><br />#end
-            <span> $!orderDetail.billCity, $!orderDetail.billState</span>
+            <span>$!orderDetail.billAddress.address1 </span><br />
+            #if($!orderDetail.billAddress.address2!="")<span>$!orderDetail.billAddress.address2</span><br />#end
+            <span> $!orderDetail.billAddress.city, $!orderDetail.billAddress.state</span>
             <br />
-            <span> #if($orderDetail.billCountry)$!orderDetail.billCountry,#end $!orderDetail.billZipCode</span>
+            <span> #if($!orderDetail.billAddress.country)$!orderDetail.billAddress.country,#end $!orderDetail.billAddress.zipCode</span>
             <br />
             #if($orderDetail.billPhone)
             <span>$!orderDetail.billPhone</span>
@@ -60,12 +60,11 @@
 		   <p>
 	            #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
 	            #if($requestType == "openQuote")<strong><span> $!orderDetail.shipToName </span></strong><br />#end
-	            <span>$!orderDetail.shipAddress1</span><br />
-	            #if($orderDetail.shipAddress2)<span>$!orderDetail.shipAddress2 </span><br />#end
-	            <span>$!orderDetail.shipCity, $!orderDetail.shipState</span>
+	            <span>$!orderDetail.shipAddress.address1</span><br />
+	            #if($!orderDetail.shipAddress.address2!="")<span>$!orderDetail.shipAddress.address2 </span><br />#end
+	            <span>$!orderDetail.shipAddress.city, $!orderDetail.shipAddress.state</span>
 	            <br />
-	            <span>
-	            #if($orderDetail.Country)$!orderDetail.Country,#end $!orderDetail.shipZipCode</span>
+	            <span>#if($!orderDetail.shipAddress.country)$!orderDetail.shipAddress.country,#end $!orderDetail.shipAddress.zipCode</span>
 	            <br />
 	            #if($orderDetail.shipPhone)
 	            <span>$!orderDetail.shipPhone</span>
