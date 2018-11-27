@@ -19,7 +19,7 @@ function submitShippingAddress(){
 		var str=jQuery("#selectShipAddress").serialize();
 		setCookie("afterLoginUrl", '');
 		block("Please Wait");
-		
+		setCookie("afterLoginUrl", '');
 		jQuery.ajax({
 			type: "POST",
 			url: "assignShipEntity.action",

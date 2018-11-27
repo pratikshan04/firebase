@@ -132,7 +132,7 @@ jQuery.ajax({
 	});
 } */
 
- function saveContent(){	
+ function saveContent(){
  //generatePluginCode();
 	 jQuery("[data-select='bannerBlock']").each(function(i){
 		 jQuery(this).html("");
@@ -143,6 +143,7 @@ jQuery.ajax({
 	 jQuery("[data-select='form']").each(function(i){
 		 jQuery(this).html("");
 	 });
+	 $(".widgetEditOverlay").remove();
  	var newText = escapeHtmlEntities(jQuery("#gm-canvas").html().replace(/-clsstmp/g,''));
 	$("#pageContent").val(newText);
 	console.log(jQuery("#gm-canvas").text());
@@ -1085,16 +1086,6 @@ function editWidgetIframeWindow(){
 	jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 }
 
-$("#mycanvas").delegate("[data-type='widget']", "click", function() {
-	var widgetId = $(this).attr('data-widget');
-	$(this).parent().addClass("widgetEditEnable").append('<div class="widgetEditOverlay"></div><a class="iframe btn widgetEditBtn" href="editWidgetDataCms.action?widgetId='+widgetId+'" onclick="editWidgetIframeWindow();"><i class="fa fa-pencil mRight-2" aria-hidden="true"></i> Edit</a>');
-	$("body").append('<div class="widgetEditEnableOvelay"></div>');
-});
-jQuery(document).bind('click', function(e){
-	if ($(e.target).hasClass("widgetEditEnableOvelay")){
-		$(".widgetEditEnableOvelay, .widgetEditOverlay, .widgetEditBtn").remove();
-	}
-});
 var iframeOrgHeight = 0;	  
 function changeresponsivefunct(e){
 	var previewType = $(e).attr("title");
@@ -1212,9 +1203,6 @@ jQuery(function() {
 	z-index: 12;
 	box-shadow: 0px 0 8px #000
 }
-.widgetEditEnable{
-	position: relative;
-}
 .widgetEditOverlay{
 	position: absolute;
 	width: 100%;
@@ -1223,14 +1211,16 @@ jQuery(function() {
 	top: 0;
 	left: 0;
 	z-index: 10;
+	display: none;
 }
-.widgetEditEnableOvelay {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: none;
-	top: 0;
-	left: 0;
-	z-index: 11;
+[data-type="widget"]:hover > .widgetEditOverlay, .widgetEditOverlay:hover{
+	display: block;
 }
+.widgetEditOverlay h3 {
+    text-align: center;
+    background: #fff;
+    margin: 0;
+    padding: 20px 0 10px 0;
+}
+
 </style>

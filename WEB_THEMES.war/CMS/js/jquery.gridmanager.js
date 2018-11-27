@@ -394,7 +394,7 @@
 					jQuery(".header-wrap").show();
 					jQuery(".Cimm-Footer").show();
 					var frameHeight = jQuery(".Cimm-MainContent").height();
-					$(this).html('<span class="fa fa-eye"></span> Preview');
+					$(this).html('<span class="fa fa-eye"></span> Preview').attr('title', 'Preview');
 					window.parent.document.getElementById("iframeId").style.height ="920px";
 					window.parent.document.getElementById("iframeId").style.width = "100%";
 					//$("#template-slider").trigger("click");
@@ -446,7 +446,7 @@
 						  } else {
 							  $(".cms_leftMenu, .containFluidEl").show();
 							  showActionIcons();
-							  $(this).html("<span class='fa fa-code'></span> Source");
+							  $(this).html("<span class='fa fa-code'></span> Source").attr('title', 'Edit Source Code');
 							  //CodeMirror.toTextArea();
 							  document.getElementById("sourceEditor").value = editor.getValue();
 							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
