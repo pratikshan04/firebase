@@ -69,10 +69,13 @@
 			partNumber = partNumber.replace(regex, '\\/');
 			var minOrderQty = 1;
 			var quantityInterval = 1;
-			var uom = $("#"+settings.functionalBlock.uomValuePrefix+partNumber).val();
+			//var uom = $("#"+settings.functionalBlock.uomValuePrefix+partNumber).val();
+			var uom = document.getElementById(settings.functionalBlock.uomValuePrefix + partNumber).value;
 			if(settings.qtyIntervalRefrence=="Y"){
-				minOrderQty = parseInt($("#"+settings.functionalBlock.minOrderQtyPrefix+partNumber).val());
-				quantityInterval = parseInt($("#"+settings.functionalBlock.qtyIntervalPrefix+partNumber).val());
+				//minOrderQty = parseInt($("#"+settings.functionalBlock.minOrderQtyPrefix+partNumber).val());
+				//quantityInterval = parseInt($("#"+settings.functionalBlock.qtyIntervalPrefix+partNumber).val());
+				minOrderQty = parseInt(document.getElementById(settings.functionalBlock.minOrderQtyPrefix + partNumber).value);
+				quantityInterval = parseInt(document.getElementById(settings.functionalBlock.qtyIntervalPrefix + partNumber).value);
 			}
 			if(qty=="NaN")
 			{
@@ -225,12 +228,18 @@
 					if($(".cartCountDisplayLi").hasClass("ItemsInCart")){
 						$("#"+settings.cartCountRefreshId).each(function(){
 							$(this).html(result[0]+' '+locale("header.label.items"));
+							if($('#countInCart').length>0){
+					    		$('#countInCart').val(result[0]);
+					    	}
 							//$(".cartCountrefresh").html(result[0]);
 						});
 					}else{
 						//$(".cartCountDisplayLi").addClass("ItemsInCart");
 						//$(".cartCountDisplayLi").html('<a href="/'+locale("website.url.ShoppingCart")+'"><i class="fa fa-shopping-cart"></i><span id="cartCountrefresh" class="cartCountrefresh"> '+result[0]+' '+locale("header.label.items")+'</span></a>')
 						$(".cartCountrefresh").html(result[0]+' '+locale("header.label.items"));
+						if($('#countInCart').length>0){
+				    		$('#countInCart').val(result[0]);
+				    	}
 					}
 					
 					/*if($(".cartTotalDisplayLi").hasClass("ItemsInCart")){

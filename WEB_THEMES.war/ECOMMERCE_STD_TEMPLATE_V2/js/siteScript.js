@@ -703,6 +703,8 @@ function scynInitiate(){
 $(document).ready(function(){
 	var userLogin = $("#userLogin").val();
 	if (userLogin!="true" ) {
+		localStorage.removeItem("salesUserSelected");
+    	localStorage.removeItem("currentCustomerSU");
 		var remember = "false";
 		var keyflag = localStorage.getItem("F30FB33A2");
 		if(keyflag!=null && keyflag!=undefined && $.trim(keyflag)!="" ){
@@ -774,8 +776,8 @@ $(document).ready(function(){
 				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize()+"&loginType=popup" ,function(data, status){
 					try{
-						sessionStorage.setItem("salesUserSelected","Y");
-			        	sessionStorage.setItem("currentCustomerSU","");
+						localStorage.setItem("salesUserSelected","Y");
+			        	localStorage.setItem("currentCustomerSU","");
 						var afterLoginUrl = window.location.href;
 						var previousPageUrl = document.referrer;
 						var currentLayout = $("#layoutName").val();
@@ -1865,6 +1867,8 @@ function doLogOff(){
 		localStorage.removeItem("emailFriendItem");
 		localStorage.removeItem("itemID");
 		localStorage.removeItem("itemName");
+		localStorage.removeItem("salesUserSelected");
+    	localStorage.removeItem("currentCustomerSU");
 		window.location.href = "/doLogOff.action";
 	}catch(e){
 		console.log(e);
@@ -2153,12 +2157,31 @@ function quickCartItemDelete(productListId){
 		}
 	});
 }
+function cleanLoadingV2(){
+	try{
+		var userLogin = $("#userLogin").val();
+		$("[data-select='availability']").each(function(i){
+			if($(this).find("img").length>0){
+				$(this).html("<span class='priceSpanFa'>Call for Availability</span>");
+				$("#HomeBranchQty").html("<span class='required'>Call for Availability</span>");
+				console.log("In Full Script");
+			}
+		});
+		$("[data-select='priceData']").each(function(i){
+			if($(this).find("img").length>0){
+				$(this).html("<span class='priceSpanFa'>Call for Price</span>");
+			}
+		});
+	}catch(e){
+		console.log(e);
+	}
+}
 function cleanLoading(){
 	try{
 		var userLogin = $("#userLogin").val();
 		$("[data-select='availability']").each(function(i){
 			if($(this).find("img").length>0){
-				$(this).html("<span class='priceSpanFa'>Out of Stock</span>");
+				$(this).html("<span class='priceSpanFa'>Call for Availability</span>");
 				$("#HomeBranchQty").html("<span class='required'>Call for Availability</span>");
 				console.log("In Full Script");
 			}
@@ -3661,8 +3684,8 @@ function loadCustomForSalesUser(salesUserDetails){
 }
 
 $(document).ready(function(){
-	var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
-	var selectedUser = sessionStorage.getItem("salesUserSelected");
+	var selectedCustomer = localStorage.getItem("currentCustomerSU");
+	var selectedUser = localStorage.getItem("salesUserSelected");
 	var isSalesUser = $("#isSalesUser").val();
 	if(!selectedCustomer && isSalesUser == "Y"){
 		loadCustomForSalesUser();
@@ -3673,13 +3696,18 @@ $(document).ready(function(){
 	}
 	
 	function loadUserByCustomer(attributes){
-		sessionStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
+    	localStorage.removeItem("currentCustomerSU");
+		localStorage.setItem("currentCustomerSU",JSON.stringify(attributes));
 		block('Please wait');
 		$.get("getUsersByCustomerUnit.action",
 			{"customerId" : attributes['customerid'], "accountNumber" : attributes['accountnumber']},
 			function(data,status,xhr){
 			//$("#salesrepModal").modal('hide');
-			$("#salesrepModal .modal-body").html(data);			
+			$("#salesrepModal .modal-body").html(data);	
+			$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+			$('#salesrepModal').on('shown.bs.modal', function () {
+			$('body').addClass('modal-open');
+			});
 			unblock();
 			//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 			//$('#salesrepModal').on('shown.bs.modal', function () {
@@ -3693,14 +3721,51 @@ $(document).ready(function(){
 	}
 	
 	$(".switchCustomer").on('click', function(){
-		block('Please wait');
-		loadCustomForSalesUser();
+		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
+			bootbox.confirm({
+				size: "medium",
+				closeButton:false,
+				message: "There are item(s) in your cart. Do you want to switch customer",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				callback: function(result){
+					if(result){
+						block('Please wait');
+						loadCustomForSalesUser()
+					}else{
+						unblock();
+						return true;
+					}
+				}
+			});
+    	}else{
+    		block('Please wait');
+    		loadCustomForSalesUser();
+    	}
+		
 	});
 	
 	$(".switchUser").on('click', function(){
-		var selectedCustomer = sessionStorage.getItem("currentCustomerSU");
+		var selectedCustomer = localStorage.getItem("currentCustomerSU");
 		selectedCustomer = JSON.parse(selectedCustomer);
-		loadUserByCustomer(selectedCustomer);
+		if($('#countInCart').length>0 && parseInt($('#countInCart').val())>0){
+			bootbox.confirm({
+				size: "medium",
+				closeButton:false,
+				message: "There are item(s) in your cart. Do you want to switch user",
+				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				callback: function(result){
+					if(result){
+						loadUserByCustomer(selectedCustomer);
+					}else{
+						unblock();
+						return true;
+					}
+				}
+			});
+    	}else{
+    		loadUserByCustomer(selectedCustomer);
+    	}
+		
 	});
 	
 	$("#salesrepModal").on('click', '.usersForCustomer', function(src){
@@ -3711,7 +3776,8 @@ $(document).ready(function(){
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function(src){
 		block('Please wait');
-		sessionStorage.setItem("salesUserSelected","Y");
+		localStorage.removeItem("salesUserSelected");
+		localStorage.setItem("salesUserSelected","Y");
 		var attributes = src.target.dataset;
 		$.post("setSelectedUserDetailsUnit.action",
 			{"userName" : attributes['username']},
@@ -3736,3 +3802,8 @@ $("#loginModal").on('shown.bs.modal', function() {
 		prodGrpCpnPopup();
 	}
 });
+
+/*$(window).unload(function(){
+	  localStorage.salesUserSelected=undefined;
+	  localStorage.currentCustomerSU=undefined;
+});*/

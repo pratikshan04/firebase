@@ -184,6 +184,9 @@ var QuickOrder = {};
     		cartCountString = "0";
     	}
     	$('.cartCountrefresh').html(cartCountString);
+    	if($('#countInCart').length>0){
+    		$('#countInCart').val(cartCountString);
+    	}
     };
     
     QuickOrder.initHandsontable = function(){

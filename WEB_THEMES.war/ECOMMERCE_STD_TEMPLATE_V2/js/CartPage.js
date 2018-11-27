@@ -171,7 +171,8 @@ function processAction(r,path,typ,item){
 	}
 }
 function refreshShoppingCart(id,partNum){
-	partNum = partNum.replace(/ +/g,"_");
+	var originalPartNumber = partNum;
+	//partNum = partNum.replace(/ +/g,"_");
 	partNum = partNum.replace(/[#;&,.+*~':"!^$[\]()=>|\/ ]/g, "\\$&");
 	var curQty = $("#textQtyCur_"+partNum).val();
 	var mpnDisplay = "";
@@ -228,9 +229,9 @@ function refreshShoppingCart(id,partNum){
 				}
 			}else{
 				if(lessThanMinOrder){
-					valu = "Item# "+partNum+" is only available in multiples of "+orderQtyInterval+" and Min. Order Quantity is : "+minimumOrderQty;
+					valu = "Item# "+originalPartNumber+" is only available in multiples of "+orderQtyInterval+" and Min. Order Quantity is : "+minimumOrderQty;
 				}else{
-					valu = "Item# "+partNum+" is only available in multiples of "+orderQtyInterval;
+					valu = "Item# "+originalPartNumber+" is only available in multiples of "+orderQtyInterval;
 				}
 			}
 			showNotificationDiv("error", valu);

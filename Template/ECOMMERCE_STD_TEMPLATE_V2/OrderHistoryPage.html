@@ -93,11 +93,11 @@
 					<thead>
 						<tr>
 							<th class="left">$!locale.get("form.label.OrderNo")</th>
-							#if($searchBy=="partNumber")
+							##if($searchBy=="partNumber")
 							<th class="left">Ship Date</th>
-							#else
-							<th class="left">$!locale.get("product.heading.PostDate")</th>
-							#end
+							##else
+							<!-- <th class="left">$!locale.get("product.heading.PostDate")</th> -->
+							##end
 							<th class="left">$!locale.get("product.label.description")</th>
 							<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
 							<th>$!locale.get("product.label.processingStatus")</th>
@@ -111,18 +111,18 @@
 						#foreach($orderList in $orderList)
 						#if(!$!orderList.accountRegId.contains("C"))
 						<tr>
-							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History">$!orderList.accountRegId</a></td>
-							#if($searchBy=="partNumber")
-							<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
-							#else
-							<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($orderList.postDate)$!orderList.postDate #else &nbsp; #end</td>
-							#end
+							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+							##if($searchBy=="partNumber")
+							<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
+							##else
+							<!-- <td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.postDate)$!orderList.postDate #else &nbsp; #end</td> -->
+							##end
 							<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
 							<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
 							<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
 							<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 							<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
-							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 						</tr>
 						#end
 						#end
