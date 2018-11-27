@@ -1,10 +1,10 @@
 #foreach($widgets in $widgetList.resultSet)
 <li>
-	<a href="javascript:void(0);" >$!widgets.name
+	<a href="javascript:void(0);">$!widgets.name
 		<i class="fa fa-arrows"></i>
 	</a>
 	<div class="hiddenContent">
-		<div data-type="widget" data-widget-id="$widgets.id">Widget Block</div>
+		<div data-type="widget" data-widget-id="$widgets.id" data-widget-name="$!widgets.name">Widget Block</div>
 	</div>
 </li>
 #end
