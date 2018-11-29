@@ -454,6 +454,13 @@
 									#end
 								#end
 							</li>
+								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y")
+								<li class='hideForPrint'>
+									<span>
+										<a href="javascript:void(0);" class="cimm_inlineButton" id="cspConfig_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator()">$!locale.get("product.button.cspConfigurator")</a>
+									</span>
+								</li>
+								#end
 								<li class="detailButtonWrap hideForPrint clearAfter">
 										<!-- My Product Group -->
 										<div class="productGroupBtn dropdown paddingY-2">

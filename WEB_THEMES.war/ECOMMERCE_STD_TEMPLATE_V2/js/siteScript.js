@@ -3802,6 +3802,10 @@ $("#loginModal").on('shown.bs.modal', function() {
 		prodGrpCpnPopup();
 	}
 });
+function callCSPConfigurator(obj){
+	console.log("CallCSPConfigurator");
+	window.location.href="cspConfiguratorLink.action";
+}
 
 /*$(window).unload(function(){
 	  localStorage.salesUserSelected=undefined;

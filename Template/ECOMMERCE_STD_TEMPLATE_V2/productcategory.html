@@ -372,6 +372,11 @@
 									<input type="hidden" value="itemTitle$!itemData.itemId" id="titleId_$!itemData.itemPriceId" /> 
 									<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
 								</label>
+								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y")
+								<span style="float: right;"> 
+									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b></a>
+								</span>
+								#end
 							</div>
 							#end
 						</li>
@@ -500,10 +505,9 @@
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									<!-- <li id="allBranchAvail_$!itemData.partNumber">
-										<span class="priceSpanFa"><a href="javascript:void(0);" onClick="openAllBranchPop($!itemData.partNumber)">Branch Availability</a></span>
-									</li> -->
-										
+									<li id="allBranchAvail_$!itemData.partNumber">
+										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
+									</li> 
 									#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
 									<li><strong>$!locale.get("product.label.minorderqty"): </strong><span> $!itemData.minOrderQty</span></li>
 									<li><strong>$!locale.get("product.label.qtyinterval"): </strong><span> $!itemData.orderInterval</span>
@@ -564,27 +568,6 @@
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>
 									</li>
-									<!--Branch Availabiltiy List Section
-									<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
-										<div class="cimm_customPopContent">
-										<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><em class="fa fa-lg fa-times-circle"></em></a>
-											<div class="cimm_popupLogin">
-												<h3 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h3>
-												<div class="cimm_siteTableEnclosure" id="allBranch$!itemData.partNumber">
-													<table id="allBranch_$!itemData.partNumber" class="cimm_siteTable"> 
-														<thead>
-															<tr>
-																<th>$!locale.get("product.label.branchName")</th>
-																<th class="center">$!locale.get("product.label.available")</th>
-															</tr>
-														</thead>
-														<tbody id="allBranchHTML_$!itemData.partNumber"></tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!--Branch Availabiltiy List Section-->
 									<li class='pTop-2'>
 										<!-- My Product Group-->
 										<div class="productGroupBtn dropdown">
@@ -639,6 +622,31 @@
 						</li>
 					</ul>
 				</li>
+				<!--Branch Availabiltiy List Section -->
+									<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content yellowTheme bold">
+												<div class="modal-header">
+											      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+											    </div>
+											    <div class="modal-body size-13">
+											    	<table class="table">
+											    		<thead>
+															<tr>
+																<th>$!locale.get("product.label.branchName")</th>
+																<th class="center">$!locale.get("product.label.available")</th>
+															</tr>
+														</thead>
+											    		<tbody id="allBranchHTML$!itemData.partNumber">
+											    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
+											    		</tbody>
+											    	</table>
+											    </div>
+											</div>
+										</div>
+									</div>
+									<!--Branch Availabiltiy List Section-->
 			#end
 		</ul>
 	</div>
