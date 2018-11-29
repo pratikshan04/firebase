@@ -195,6 +195,8 @@
 	#if($!categoryDescription && $!categoryDescription.marketingText)
 		<meta name="description" content="$!categoryDescription.marketingText">
 	#end
+#elseif($LayoutName=="cspConfiguratorPage")
+	#set($pageTitleVelo = "CSP Configurator" + $!pageTitleseparator + $!siteDisplayName.trim())
 #elseif($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
 	#set($pageTitleVelo = $!pageTitle.trim() + $!pageTitleseparator + $!siteDisplayName.trim())
 #else

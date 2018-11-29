@@ -1,0 +1,129 @@
+<style>
+/* .navbar{display:none;}	 */
+.cimm_BreadCrumbs{display:none;}
+/* .cimm_footer_mid{display:none;} */
+.iframecss{
+	width: 98vw;
+    position: relative;
+    margin-left: -19vw;
+    height: calc(100vh - 80px);
+} 
+</style>
+<script type="text/javascript" src="http://cspaptdemo.azurewebsites.net/Content/Scripts/Configurator/configurator.js"></script>
+<iframe id="configurator" name="configurator" class="csp-app-iframe iframecss" src="http://cspaptdemo.azurewebsites.net/cspconfigurator/configurator" frameborder="0" scrolling="auto"></iframe>
+<script>
+jQuery(document).ready(function ($) {
+	$(window).load(function() {
+		var data = {
+                UserId: '54589',
+                ProductFamily: 'HV215',
+                PackQuantity: 1,
+                DecimalPrecision: 2,
+                Pricing: [
+                     {
+                         Sku: '1053006',
+                         PricingTable: [
+                              {
+                                  Qty: 0,
+                                  UnitPrice: 17.28
+                              }
+
+
+                         ]
+                     }
+                    ,
+                     {
+                         Sku: '1018297',
+                         PricingTable: [
+                              {
+                                  Qty: 0,
+                                  UnitPrice: 17.28
+                              }
+
+
+                         ]
+                     }
+                    ,
+                     {
+                         Sku: '1018298',
+                         PricingTable: [
+                              {
+                                  Qty: 0,
+                                  UnitPrice: 17.28
+                              }
+
+
+                         ]
+                     }
+                    ,
+                     {
+                         Sku: '1018299',
+                         PricingTable: [
+                              {
+                                  Qty: 0,
+                                  UnitPrice: 17.28
+                              }
+
+
+                         ]
+                     }
+                    ,
+                     {
+                         Sku: '1018304',
+                         PricingTable: [
+                              {
+                                  Qty: 0,
+                                  UnitPrice: 17.28
+                              }
+
+
+                         ]
+                     }
+
+
+                ]
+            };
+
+        readyConfigurator.init(data);
+        
+       // document.getElementById('configurator').width = "100%";
+    	//document.getElementById('configurator').height = "800";
+    });
+	
+	var domain = 'http://cspaptdemo.azurewebsites.net';
+    function OnMessage(messageEvent) {
+        if (messageEvent && messageEvent.origin == domain) {
+            var data = messageEvent.data;
+            if (data && data.Success && data.MessageType) {
+                if (data.MessageType == 'Ready') {
+                    $("#loadConfigurator").fadeIn();
+                    $("#loadConfigurator2").fadeIn();
+                }
+                else if (data.MessageType == 'AddToCart') {
+                    alert(data.DesignId);
+                    //Do work to add to cart
+                }
+
+                console.log(data);
+            }
+        }
+        if (messageEvent.data === "scrollTop") {
+            if ($(document).scrollTop() !== 0) {
+                var previewContainer = $("#configurator");
+                $('html, body').animate({
+                    scrollTop: previewContainer.offset().top
+                }, "slow");
+
+                if (navigator.userAgent.match(/(iPod|iPhone|iPad|Android)/)) {
+                    previewContainer.css('overflow-y', 'hidden');
+                    previewContainer.scrollTop(0);
+                    previewContainer.css('overflow-y', 'auto');
+                }
+                settings.messageOut('scrollTop');
+            }
+        }
+    }
+    var readyConfigurator = aperture.configuratorWindow({ proxy: domain + '/CSPConfigurator/Proxy', iframeName: 'configurator', messageCallBack: OnMessage }, $);
+
+ });
+</script>
