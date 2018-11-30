@@ -320,9 +320,9 @@
 									<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
 								</label>
 								
-								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y")
+								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<span style="float: right;">
-									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b></a>
+									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productId="$!itemData.productId" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b></a>
 								</span>
 								#end
 							</div>
@@ -360,7 +360,7 @@
 								</div>
 								<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
 								<div class="itemCountList">
-									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
+									<button class="btn btn-primary clickStream" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
 									<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 										<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
 										<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
@@ -371,6 +371,11 @@
 							 	<div class="itemCountGrid">
 							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
+							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
+								<span>
+									<button class="btn btn-primary" id="cspConfig_$!itemData.partNumber" data-productId="$!itemData.productId" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"> $!locale.get("product.button.cspConfigurator")</button>
+								</span>
+								#end
 							</li>
 							<li class='selectCompareGroupBlock'>
 								<div class="itemDetailInfoList">

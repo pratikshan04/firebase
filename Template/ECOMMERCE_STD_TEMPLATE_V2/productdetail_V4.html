@@ -96,6 +96,8 @@
 	</div>
 #end
 #end
+
+#set($customVal = $customFieldVal.get($itemData.itemId))
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="cimm_itemdetail cimm_itemdetail clearAfter" itemscope itemtype="http://schema.org/Product">
@@ -166,6 +168,11 @@
 		</div>
 		<div class="cimm_itemDescription clearAfter">
 			<div class="itemDetailUtility clearAfter">
+				#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
+					<div class="detailreview clearAfter hideForPrint">
+						<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productId="$!productId" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b>    </a>
+					</div>
+				#end
 				#if($CommonDBQuerySystemParameter.get("EnableDetailPageRating")=="Y")
 				<div class="detailreview clearAfter hideForPrint">
 					 <div class="detailreviewform clearAfter">
@@ -266,6 +273,7 @@
 				<!-- Attribute Drop Down End -->
 				<!-- Product Mode --> 
 			#else	
+				#set($customVal = $customFieldVal.get($itemData.itemId))
 				<!-- Single Item Without Product Mode -->
 				<h2 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
 					<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
@@ -454,13 +462,6 @@
 									#end
 								#end
 							</li>
-								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y")
-								<li class='hideForPrint'>
-									<span>
-										<a href="javascript:void(0);" class="cimm_inlineButton" id="cspConfig_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator()">$!locale.get("product.button.cspConfigurator")</a>
-									</span>
-								</li>
-								#end
 								<li class="detailButtonWrap hideForPrint clearAfter">
 										<!-- My Product Group -->
 										<div class="productGroupBtn dropdown paddingY-2">
