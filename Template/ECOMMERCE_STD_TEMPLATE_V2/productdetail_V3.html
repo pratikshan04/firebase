@@ -96,7 +96,7 @@
 	</div>
 #end
 #end
-
+#set($customVal = $customFieldVal.get($itemData.itemId))
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="cimm_itemdetail clearAfter" itemscope itemtype="http://schema.org/Product">
@@ -167,6 +167,11 @@
 		</div>
 		<div class="cimm_itemDescription clearAfter">
 			<div class="itemDetailUtility clearAfter">
+				#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
+					<div class="detailreview clearAfter hideForPrint">
+						<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productId="$!productId" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b>    </a>
+					</div>
+				#end
 				#if($CommonDBQuerySystemParameter.get("EnableDetailPageRating")=="Y")
 				<div class="detailreview clearAfter hideForPrint">
 					 <div class="detailreviewform clearAfter">

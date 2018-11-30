@@ -9,8 +9,8 @@
     height: calc(100vh - 80px);
 } 
 </style>
-<script type="text/javascript" src="http://cspaptdemo.azurewebsites.net/Content/Scripts/Configurator/configurator.js"></script>
-<iframe id="configurator" name="configurator" class="csp-app-iframe iframecss" src="http://cspaptdemo.azurewebsites.net/cspconfigurator/configurator" frameborder="0" scrolling="auto"></iframe>
+<script type="text/javascript" src="https://cspaptdemo.azurewebsites.net/Content/Scripts/Configurator/configurator.js"></script>
+<iframe id="configurator" name="configurator" class="csp-app-iframe iframecss" src="https://cspaptdemo.azurewebsites.net/cspconfigurator/configurator" frameborder="0" scrolling="auto"></iframe>
 <script>
 jQuery(document).ready(function ($) {
 	$(window).load(function() {
@@ -90,7 +90,7 @@ jQuery(document).ready(function ($) {
     	//document.getElementById('configurator').height = "800";
     });
 	
-	var domain = 'http://cspaptdemo.azurewebsites.net';
+	var domain = 'https://cspaptdemo.azurewebsites.net';
     function OnMessage(messageEvent) {
         if (messageEvent && messageEvent.origin == domain) {
             var data = messageEvent.data;
