@@ -3804,7 +3804,33 @@ $("#loginModal").on('shown.bs.modal', function() {
 });
 function callCSPConfigurator(obj){
 	console.log("CallCSPConfigurator");
-	window.location.href="cspConfiguratorLink.action";
+	if(typeof obj!='undefined' && obj!=null && obj!=""){
+		var productId = "0";
+		var itemId = "0";
+		var itemPriceId = "0";
+		var paramString = "";
+		var paramItemIdString = "";
+		if(typeof $(obj).data("itemid")!='undefined' && $(obj).data("itemid") !=null && $(obj).data("itemid")!="" && parseInt($(obj).data("itemid"))>0){
+			itemId = $(obj).data("itemid");
+			paramItemIdString = "&iid="+itemId;
+		}
+		if(typeof $(obj).data("productid")!='undefined' && $(obj).data("productid") !=null && $(obj).data("productid")!="" && parseInt($(obj).data("productid"))>0){
+			productId = $(obj).data("productid");
+			paramString = "pid="+productId+paramItemIdString;
+		}else if(typeof $(obj).data("itempriceid")!='undefined' && $(obj).data("itempriceid") !=null && $(obj).data("itempriceid")!="" && parseInt($(obj).data("itempriceid"))>0){
+			itemPriceId = $(obj).data("itempriceid");
+			paramString = "ipid="+itemPriceId+paramItemIdString;
+		}
+		$.ajax({
+			type: "POST",
+			url: "cspConfiguratorPage.action",
+			data: paramString,
+			success: function(msg){
+				return false;
+			}
+		});
+		//window.location.href="cspConfiguratorPage.action?"+paramString;
+	}
 }
 
 /*$(window).unload(function(){

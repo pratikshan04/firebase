@@ -169,7 +169,7 @@
 				<div class="itemDetailUtility clearAfter">
 					#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 						<div class="detailreview clearAfter hideForPrint">
-							<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productId="$!productId" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b>    </a>
+							<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productid="$!productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b>    </a>
 						</div>
 					#end
 					#if($CommonDBQuerySystemParameter.get("EnableDetailPageRating")=="Y")
