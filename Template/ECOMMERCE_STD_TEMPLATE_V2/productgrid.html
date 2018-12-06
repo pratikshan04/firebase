@@ -322,7 +322,10 @@
 								
 								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<span style="float: right;">
-									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"><b>$!locale.get("product.button.cspConfigurator")</b></a>
+									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
+										<i class="fa fa-lg fa-upload text-primary" aria-hidden="true"></i>
+										<b>$!locale.get("product.button.cspConfigurator")</b>
+									</a>
 								</span>
 								#end
 							</div>
@@ -373,7 +376,10 @@
 							 	</div>
 							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<span>
-									<button class="btn btn-primary" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);"> $!locale.get("product.button.cspConfigurator")</button>
+									<button class="btn btn-primary" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
+										<i class="fa fa-lg fa-upload" aria-hidden="true"></i>
+										<b>$!locale.get("product.button.cspConfigurator")</b>
+									</button>
 								</span>
 								#end
 							</li>
