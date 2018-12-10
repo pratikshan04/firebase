@@ -47,17 +47,44 @@ $breakpoint-mobileView:480px;
 	.cartTotal_Top a.hideForIpad{
 		display: none;
 	}
-	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch input[type=text],
-	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .cimm_searchIcon	{
-		border: 0;
-		background: transparent;
-	}
-	.webViewSearch {
-		border-radius: 4px;
-		background: $gray-lighten;
-		box-shadow: inset 1px 1px 1px $shadow-color;
-		em{
-			color: #BABABA;
+	.cimm_searchWrapper{
+		.webViewSearch {
+			&.cimm_searchForm{
+				border-radius: 4px;
+				background: $gray-lighten;
+				box-shadow: inset 1px 1px 1px $shadow-color;
+				input[type=text] {
+					border: 0;
+					font-family: RobotoRegular;
+					width: calc(100% - 72px);
+					float: left;
+					background: #e5e5e5;
+					height: 30px;
+					margin-top: 1px;
+				}
+				.cimm_searchIcon {
+					border: 0;
+					border-radius: 0;
+					width: 35px;
+					color: #FFF;
+					background: transparent;
+					height: 30px;
+					float: left;
+					padding: 0 20px 0 0;
+				}
+				.cimm_cameraIcon {
+					display: block;
+					padding: 4px 0;
+					float: left;
+				}
+				em{
+					color: #BABABA;
+				}
+			}
+		}
+		.mobileCartCountWrap .glyphicon-log-in {
+			font-size: 18px;
+			color: #bababa;
 		}
 	}
 	.multiTab {

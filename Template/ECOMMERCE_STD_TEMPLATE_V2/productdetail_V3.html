@@ -140,6 +140,14 @@
 					<span class="clearenceTag">$!locale.get('product.label.clearance')</span>
 				#end
 			#end
+			#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!customVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
+			<div class="text-right marginY-2">
+				<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productid="$!productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
+					<i class="fa fa-lg fa-upload text-primary" aria-hidden="true"></i>
+					<b>$!locale.get("product.button.cspConfigurator")</b>
+				</a>
+			</div>
+			#end
 			</div>
 			#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length()>0)#else
 				#if($itemImagesList && $!itemImagesList.size()>0)
