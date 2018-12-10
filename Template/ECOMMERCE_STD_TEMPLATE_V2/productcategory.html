@@ -363,8 +363,8 @@
 								#end
 								</div>
 							</a>
-							#if($itemData.productItemCount<1)
 							<div class="checkToCompare">
+								#if($itemData.productItemCount<1)
 								<label class="customCheckBox">
 									<input type="checkbox" value="$!itemData.itemPriceId" name="compareId" id="check_$!itemData.itemPriceId" onclick="compareItemList(this);"/>
 									<span><a href="javascript:void(0);" onclick="compareItems();">$!locale.get("product.heading.compare")</a></span>
@@ -372,6 +372,7 @@
 									<input type="hidden" value="itemTitle$!itemData.itemId" id="titleId_$!itemData.itemPriceId" /> 
 									<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
 								</label>
+								#end
 								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<span style="float: right;">
 									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
@@ -381,7 +382,6 @@
 								</span>
 								#end
 							</div>
-							#end
 						</li>
 						#if($itemData.productItemCount>1)
 							<!-- Product Mode -->
@@ -425,12 +425,12 @@
 							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
-								<span>
+								<!-- <span>
 									<button class="btn btn-primary" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
 										<i class="fa fa-lg fa-upload" aria-hidden="true"></i>
 										<b>$!locale.get("product.button.cspConfigurator")</b>
 									</button>
-								</span>
+								</span> -->
 								#end
 							</li>
 							<li class='selectCompareGroupBlock'>
