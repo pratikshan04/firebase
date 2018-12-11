@@ -1,11 +1,11 @@
 #parse("sleekNavigationMenu.html")
 #if($!userAgent == "WEBVIEW")
 <!-- <div id="navbar" class="footerBgColor">
-	<a id='navbar_home' href="#homePage"><img src="$!cdnUrl$!webThemes/$!siteName/images/App/FooterHome.png" alt=""/><p class="footerTextColor">Home</p></a>
-	<a href="javascript:search();" id='navbar_search'><img src="$!cdnUrl$!webThemes/$!siteName/images/App/FooterSearch.png" alt=""/><p class="footerTextColor">Search</p></a>
-	<a id='navbar_feedback'><img src="$!cdnUrl$!webThemes/$!siteName/images/App/FooterFeedback.png" alt=""/><p class="footerTextColor">Feedback</p></a>
-	<a id="navbar_cart" href="$!locale.get('website.url.ShoppingCart')"><span id="cartCountrefresh" class="cart_badge cartCountrefresh">$!cartCount</span><img src="$!cdnUrl$!webThemes/$!siteName/images/App/FooterCart.png" alt=""/><p class="footerTextColor">Cart</p></a>
-	<a id="navbar_help" ><img src="$!cdnUrl$!webThemes/$!siteName/images/App/FooterHelp.png" alt=""/><p class="footerTextColor">Help</p></a>
+	<a id='navbar_home' href="#homePage"><img src="$!webThemes/$!siteName/images/App/FooterHome.png" alt=""/><p class="footerTextColor">Home</p></a>
+	<a href="javascript:search();" id='navbar_search'><img src="$!webThemes/$!siteName/images/App/FooterSearch.png" alt=""/><p class="footerTextColor">Search</p></a>
+	<a id='navbar_feedback'><img src="$!webThemes/$!siteName/images/App/FooterFeedback.png" alt=""/><p class="footerTextColor">Feedback</p></a>
+	<a id="navbar_cart" href="$!locale.get('website.url.ShoppingCart')"><span id="cartCountrefresh" class="cart_badge cartCountrefresh">$!cartCount</span><img src="$!webThemes/$!siteName/images/App/FooterCart.png" alt=""/><p class="footerTextColor">Cart</p></a>
+	<a id="navbar_help" ><img src="$!webThemes/$!siteName/images/App/FooterHelp.png" alt=""/><p class="footerTextColor">Help</p></a>
 </div> -->
 #else
 <div class="row no-gutters">
@@ -144,7 +144,7 @@
 		    </div>
 		    <div class="modal-body row">
 			    <div class="col-md-3 col-sm-3 col-xs-3">
-					<img class="addedItemImg ATCimageName" src="$!cdnUrl$!webThemes/$!siteName/images/NoImage.png" alt="NoImage">
+					<img class="addedItemImg ATCimageName" src="$!webThemes/$!siteName/images/NoImage.png" alt="NoImage">
 				</div>
 				<div class="col-md-9 col-sm-9 col-xs-9">
 					<div class="row">
@@ -161,7 +161,7 @@
 						<div class="col-md-6 col-sm-6 col-xs-6">
 							<p class="addedItemPrice priceSpan"><span class="ATCprice"></span></p>
 							<p><strong>$!locale.get('product.label.qty'): </strong><span class="ATCQuantity"></span></p>
-							<p style="display: none;"><strong class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </strong><span class="ATCLeadTime"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></p>
+							<p style="display: none;"><strong class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </strong><span class="ATCLeadTime"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></p>
 						</div>
 					</div>
 				</div>
@@ -180,7 +180,7 @@
 	<div class="quickOrder_customPopContent">
 		<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();"><em class="fa fa-lg fa-times-circle"></em></a>
 		<div id="searchResultsHeader">
-			<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+			<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 		</div>
 	</div>
 </div>

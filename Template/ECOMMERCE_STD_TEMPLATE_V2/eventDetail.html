@@ -69,14 +69,14 @@
 		</table>
 	</div>
 	<div class="col-md-6 col-sm-6 col-sx-12 text-right">
-		<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
+		<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 	</div>
 </div>
 <div class="row eventInfoBlock">
 	<div class="col-md-6 col-sm-6 col-sx-12">
 		<p class="mBottom-3"><a href='/EventCalendar'>$!locale.get("event.label.backToEventsCalendar")</a></p>
 		#if($eventsList.fileLocation != "No Attachment" && $eventsList.fileLocation)
-		<p><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>
+		<p><img src="$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>
 		#end
 	</div>
 </div>

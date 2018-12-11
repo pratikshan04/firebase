@@ -1,34 +1,34 @@
 #set($refreshVersion = "?rv=$!session.getId()")
-<link rel="shortcut icon" href="$!cdnUrl$!webThemes/$siteName/images/favicon.ico">
-#parse("font-awesome.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
+<link rel="shortcut icon" href="$!webThemes/$siteName/images/favicon.ico">
+#parse("font-awesome.html")<!-- <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/font-awesome.min.css" /> -->
 #if($LayoutName != "HomePage" && $!isStaticHomePage != "Y")
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/datatables.min.css" media="all">
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/dataTables.bootstrap.min.css" media="all">
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/bootstrap-datepicker.standalone.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/datatables.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/dataTables.bootstrap.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/bootstrap-datepicker.standalone.min.css" media="all">
 #end
 #if($LayoutName=="ProductDetailPage")
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/prettyPhoto.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/prettyPhoto.css" media="all"/>
 #elseif($LayoutName=="CalendarEventsPage" || $LayoutName=="EventDetailPage")
-<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/unilogEventCss.css" media="all" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/unilogEventCss.css" media="all" /> -->
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css$!refreshVersion" media="all" />
 #end
-#parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/bootstrap.min.css" /> -->
+#parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/bootstrap.min.css" /> -->
 #set($currentWebTheme = "unilogweb.css")
 #if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ScheduledThemeFileName"))
 #elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/$!currentWebTheme$!refreshVersion" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme$!refreshVersion" media="all" />
 <style id="cssSelector">.demo{color:red;}</style> 
 #if($LayoutName=="QuickOrderStdPage")
-<link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
+<link rel="stylesheet" href="$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
 #end
-#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$!cdnUrl$!webThemes/$siteName/css/unilogweb_app.css$!refreshVersion">#end
+#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$!webThemes/$siteName/css/unilogweb_app.css$!refreshVersion">#end
 <!--[if IE 9]>
-	<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/IE9.css">
+	<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/IE9.css">
 <![endif]-->
 #if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
 <style type="text/css">
