@@ -15,13 +15,13 @@
 #end
 #end
 <li>
-<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/$siteName/images/slide1.png" alt="No image" /></a>
+<a href="javascript:void(0);"><img src="$!webThemes/$siteName/images/slide1.png" alt="No image" /></a>
 </li>
 <li>
-<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/$siteName/images/slide2.png" alt="No image" /></a>
+<a href="javascript:void(0);"><img src="$!webThemes/$siteName/images/slide2.png" alt="No image" /></a>
 </li>
 <li>
-<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/$siteName/images/slide3.png" alt="No image" /></a>
+<a href="javascript:void(0);"><img src="$!webThemes/$siteName/images/slide3.png" alt="No image" /></a>
 </li>
 </ul>
 #if($categMenu.size()>0)
@@ -32,7 +32,7 @@
 		<li>
 			<div class="cimm_linkItemImg">
 				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
-					<img src="$taxonomyImage/$categoryMenu.imageName" width="150" height="150" border="0" alt='$!categoryMenu.imageName' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+					<img src="$taxonomyImage/$categoryMenu.imageName" width="150" height="150" border="0" alt='$!categoryMenu.imageName' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 				</a>
 			</div>
 			<div class="cimm_linkItemDesp">
@@ -65,7 +65,7 @@
 		<li>				
 			<div itemscope itemtype="http://schema.org/Brand" class="cimm_linkItemImg">
 				<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName">                    
-					<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" width="100" height="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
+					<img itemprop="logo" src="$brandLogoPath$brandModel.brandImage" width="100" height="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
 				</a>
 			</div>
 		</li>
@@ -113,7 +113,7 @@
 		<div class="recentNews">
 			<h3 class="cimm_block-title"><label>Recent News</label></h3>
 			<div id="news-scroller" class="newsList customScroll">
-				<div class="center"><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+				<div class="center"><img src="$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
 			</div>
 		</div>
 	</div>
@@ -131,7 +131,7 @@
 		<li>				
 			<div class="cimm_linkItemImg" itemscope itemtype="http://schema.org/Brand">
 				<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
-					<img itemprop="logo" src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" width="100" height="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
+					<img itemprop="logo" src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" width="100" height="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
 				</a>
 			</div>
 		</li>
@@ -150,9 +150,9 @@
 			<div class="cimm_linkItemImg">
 				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">                    
 					#if($itemData.imageName.contains("http"))
-					<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+					<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#else
-					<img itemprop="image" id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+					<img itemprop="image" id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#end
 				</a>
 			</div>
@@ -191,6 +191,6 @@
 	<h3 class="cimm_block-title"><label>$locale.get("product.heading.recentlyviewedproducts")</label></h3>
 	#set($itemTitle=$itemData.brandName+" "+$itemData.partNumber)
 	<div class="cimm_sliderWrap" >
-		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></ul>
+		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></ul>
 	</div>
 </div>

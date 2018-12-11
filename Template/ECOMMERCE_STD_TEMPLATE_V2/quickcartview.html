@@ -30,9 +30,9 @@
              <a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
                <span id="imageName$itemData.itemId">          
             #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-                <img class="ATCimageName" src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"  alt='$itemData.brandName $!itemData.manufacturerPartNumbee'/>
+                <img class="ATCimageName" src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"  alt='$itemData.brandName $!itemData.manufacturerPartNumbee'/>
             #else
-                <img class="ATCimageName" src="$detailImage$itemData.imageName"  width="75" height="75" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$itemData.brandName $!itemData.manufacturerPartNumbe' />
+                <img class="ATCimageName" src="$detailImage$itemData.imageName"  width="75" height="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemData.brandName $!itemData.manufacturerPartNumbe' />
             #end
              </span>
             </a>

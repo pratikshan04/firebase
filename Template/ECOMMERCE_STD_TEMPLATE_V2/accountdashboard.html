@@ -17,7 +17,7 @@
 							<div class="row">
 								<div class="col-md-3 col-sm-6 col-xs-12">
 									<div class="profileImage">
-										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="Profile Picture" width="180" id="profilePicture" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/default-profile.png'"/>##$userProfileImagePath
+										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="Profile Picture" width="180" id="profilePicture" onerror="this.src='$!webThemes/$siteName/images/default-profile.png'"/>##$userProfileImagePath
 										<input type="hidden" value="$userProfileImagePath" id="userProfileImagePath"/>
 									</div>
 								</div>
@@ -162,7 +162,7 @@
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
-											<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+											<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
 										</a>
 										#else
 										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">$groupData.productListName </a>
@@ -195,7 +195,7 @@
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
-											<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+											<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
 										</a>
 										#else
 										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName"> $groupData.productListName </a>                                       
@@ -240,9 +240,9 @@
 					#set($resentItemTitle = $!recentOrders.brandName+" "+$!recentOrders.manufacturerPartNumber)
 						<a href="$!hostName$!recentOrders.itemPriceId$locale.get('website.url.ProductDetail')n/$resentItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							#if($recentOrders.imageType=="URL")
-							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 							#else
-							<img id="imageName$recentOrders.itemId" src="$detailImage$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+							<img id="imageName$recentOrders.itemId" src="$detailImage$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 							#end
 						</a>
 					</div>
