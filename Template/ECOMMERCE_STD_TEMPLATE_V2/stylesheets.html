@@ -1,3 +1,4 @@
+#set($refreshVersion = "?rv=$!session.getId()")
 <link rel="shortcut icon" href="$!cdnUrl$!webThemes/$siteName/images/favicon.ico">
 #parse("font-awesome.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
 #if($LayoutName != "HomePage" && $!isStaticHomePage != "Y")
@@ -11,7 +12,7 @@
 #elseif($LayoutName=="CalendarEventsPage" || $LayoutName=="EventDetailPage")
 <!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/unilogEventCss.css" media="all" /> -->
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
-<link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css$!refreshVersion" media="all" />
 #end
 #parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/bootstrap.min.css" /> -->
 #set($currentWebTheme = "unilogweb.css")
@@ -20,12 +21,12 @@
 #elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/$!currentWebTheme" media="all" />
+<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/$!currentWebTheme$!refreshVersion" media="all" />
 <style id="cssSelector">.demo{color:red;}</style> 
 #if($LayoutName=="QuickOrderStdPage")
 <link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
 #end
-#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$!cdnUrl$!webThemes/$siteName/css/unilogweb_app.css">#end
+#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$!cdnUrl$!webThemes/$siteName/css/unilogweb_app.css$!refreshVersion">#end
 <!--[if IE 9]>
 	<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/IE9.css">
 <![endif]-->
