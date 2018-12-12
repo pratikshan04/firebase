@@ -29,14 +29,14 @@
 		</ul>
 		<ul class="pull-right">
 			<li>
-				<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';"/>
+				<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 			</li>
 		</ul>
 		<div class="clear"></div>
 		<p><a href='/EventCalendar'>$!locale.get("event.label.backToEventsCalendar")</a><br/></p>
 		#if($eventsList.fileLocation)
 			#if($eventsList.fileLocation != "No Attachment")
-				<p class="mTop-3"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>
+				<p class="mTop-3"><img src="$!webThemes/$!siteName/images/pdf.png" alt='pdf' width="16px" class="pdfImg" alt=""> <a href="/ASSETS/DOCUMENTS/CMS/EN/$!eventsList.fileLocation" target="_blank">$!locale.get("event.label.courseSummary")</a></p>
 			#end
 		#end
 	</div>

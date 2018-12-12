@@ -144,9 +144,9 @@
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							<span id="imageName$itemData.itemId">
 							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#else
-							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#end
 							</span>
 						</a>
@@ -291,7 +291,7 @@
 							#if($itemData.total>0) $$numberTool.format("$numberToolFormat",$itemData.total) #else N/A #end
 						</span>
 						<!-- <span class="productGrpRightAlign"><span id="spanEx_$itemData.partNumber" data-select='extPriceData'>
-						<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span></span> -->
+						<img src="$!webThemes/$siteName/images/loading.gif" /></span></span> -->
 					</td>
 					<td data-th="select">
 						<label class="customCheckBox2">
@@ -363,4 +363,4 @@
 $locale.get("product.label.noDataAvailable")
 #end
 
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/BulkAction.js"></script>
+<script type="text/javascript" src="$!webThemes/$siteName/js/BulkAction.js"></script>

@@ -1,5 +1,5 @@
 <div class="shippingAddres" id="ShipDiv">
-#set($jsPath = $hostName+$webThemes+"/"+$siteName+"/js/"+$LayoutName+".js")
+#set($jsPath = $!webThemes+"/"+$siteName+"/js/"+$LayoutName+".js")
 <script type="text/javascript" src="$jsPath"></script>
 <h3 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h3>
 #if($shipEntity.size()>0)

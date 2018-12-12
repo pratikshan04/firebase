@@ -116,9 +116,9 @@
 				<div class="cimm_category-itemimage">
 					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 					#if($categoryList.imageName.contains("http") || $categoryList.imageType.equalsIgnoreCase("URL"))
-				 		<img itemprop="Image" src="$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+				 		<img itemprop="Image" src="$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#else
-				 		<img itemprop="Image" src="$!taxonomyImage$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
+				 		<img itemprop="Image" src="$!taxonomyImage$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#end
 					</a>
 				</div> 
@@ -347,15 +347,15 @@
 								<div class="prodImage">
 								#if($itemData.productItemCount>1 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length() > 1)
 									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.productCategoryImageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!escapeTool.url($!itemData.productCategoryImageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!escapeTool.url($!itemData.productCategoryImageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 								#else	
 									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!cdnUrl$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag"></span>
@@ -363,8 +363,8 @@
 								#end
 								</div>
 							</a>
-							#if($itemData.productItemCount<1)
 							<div class="checkToCompare">
+								#if($itemData.productItemCount<1)
 								<label class="customCheckBox">
 									<input type="checkbox" value="$!itemData.itemPriceId" name="compareId" id="check_$!itemData.itemPriceId" onclick="compareItemList(this);"/>
 									<span><a href="javascript:void(0);" onclick="compareItems();">$!locale.get("product.heading.compare")</a></span>
@@ -372,8 +372,16 @@
 									<input type="hidden" value="itemTitle$!itemData.itemId" id="titleId_$!itemData.itemPriceId" /> 
 									<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
 								</label>
+								#end
+								#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
+								<span style="float: right;">
+									<a href="javascript:void(0);" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
+										<i class="fa fa-lg fa-upload text-primary" aria-hidden="true"></i>
+										<b>$!locale.get("product.button.cspConfigurator")</b>
+									</a>
+								</span>
+								#end
 							</div>
-							#end
 						</li>
 						#if($itemData.productItemCount>1)
 							<!-- Product Mode -->
@@ -404,7 +412,7 @@
 									#end
 								</div>
 								<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
-								<div class="itemCountList">
+								<div class="itemCountList clickStream">
 									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
 									<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 										<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
@@ -416,6 +424,14 @@
 							 	<div class="itemCountGrid">
 							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
+							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
+								<!-- <span>
+									<button class="btn btn-primary" id="cspConfig_$!itemData.partNumber" data-productid="$!itemData.productId" data-itemid="$!itemData.itemId" data-itempriceid="$!itemData.itemPriceId" onclick="callCSPConfigurator(this);">
+										<i class="fa fa-lg fa-upload" aria-hidden="true"></i>
+										<b>$!locale.get("product.button.cspConfigurator")</b>
+									</button>
+								</span> -->
+								#end
 							</li>
 							<li class='selectCompareGroupBlock'>
 								<div class="itemDetailInfoList">
@@ -484,7 +500,7 @@
 									
 									<!-- <li class="productLeadTime productLeadTime_$!itemData.partNumber" style="display:none;">
 										<strong>$!locale.get("product.label.leadTime"): </strong>
-										<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li> --> 
 									<li class="productAvail_$!itemData.partNumber">
 										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
@@ -496,14 +512,13 @@
 											#end
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
 										#else
-											<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+											<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									<!-- <li id="allBranchAvail_$!itemData.partNumber">
-										<span class="priceSpanFa"><a href="javascript:void(0);" onClick="openAllBranchPop($!itemData.partNumber)">Branch Availability</a></span>
-									</li> -->
-										
+									<li id="allBranchAvail_$!itemData.partNumber">
+										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
+									</li> 
 									#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
 									<li><strong>$!locale.get("product.label.minorderqty"): </strong><span> $!itemData.minOrderQty</span></li>
 									<li><strong>$!locale.get("product.label.qtyinterval"): </strong><span> $!itemData.orderInterval</span>
@@ -529,7 +544,7 @@
 											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 										#else
 											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
-												<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+												<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 											</span>
 										#end
 								    #end
@@ -564,27 +579,6 @@
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>
 									</li>
-									<!--Branch Availabiltiy List Section
-									<li class="cimm_customPopWrap allBranchWrap" id="modalBodyContent_$!itemData.partNumber" style="cursor: default">
-										<div class="cimm_customPopContent">
-										<a class="closeBtn" href="javascript:void(0);" onclick="closeBlockPop();" tabindex="-2"><em class="fa fa-lg fa-times-circle"></em></a>
-											<div class="cimm_popupLogin">
-												<h3 class="modalPopupTitle">$!locale.get("label.text.availabilityByBranch")</h3>
-												<div class="cimm_siteTableEnclosure" id="allBranch$!itemData.partNumber">
-													<table id="allBranch_$!itemData.partNumber" class="cimm_siteTable"> 
-														<thead>
-															<tr>
-																<th>$!locale.get("product.label.branchName")</th>
-																<th class="center">$!locale.get("product.label.available")</th>
-															</tr>
-														</thead>
-														<tbody id="allBranchHTML_$!itemData.partNumber"></tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!--Branch Availabiltiy List Section-->
 									<li class='pTop-2'>
 										<!-- My Product Group-->
 										<div class="productGroupBtn dropdown">
@@ -639,6 +633,31 @@
 						</li>
 					</ul>
 				</li>
+				<!--Branch Availabiltiy List Section -->
+									<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content yellowTheme bold">
+												<div class="modal-header">
+											      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+											    </div>
+											    <div class="modal-body size-13">
+											    	<table class="table">
+											    		<thead>
+															<tr>
+																<th>$!locale.get("product.label.branchName")</th>
+																<th class="center">$!locale.get("product.label.available")</th>
+															</tr>
+														</thead>
+											    		<tbody id="allBranchHTML$!itemData.partNumber">
+											    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
+											    		</tbody>
+											    	</table>
+											    </div>
+											</div>
+										</div>
+									</div>
+									<!--Branch Availabiltiy List Section-->
 			#end
 		</ul>
 	</div>
@@ -679,9 +698,9 @@
 <ul class="cimm_bottomBanners">
 #foreach($bottomBanner in $bottomBanners)
 #if($bottomBanner.imageType=="URL")
-	<li><a href=""> <img src="$!bottomBanner.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!bottomBanner.imageName"/></a></li>
+	<li><a href=""> <img src="$!bottomBanner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!bottomBanner.imageName"/></a></li>
 #else
-	<li><a href=""> <img src="$!bannerLogoPath$!bottomBanner.imageName" onerror="this.src='$!cdnUrl$!webThemes/$!siteName/images/NoImage.png';" alt="$!bottomBanner.imageName"/></a></li>
+	<li><a href=""> <img src="$!bannerLogoPath$!bottomBanner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!bottomBanner.imageName"/></a></li>
 #end
 #end
 </ul>

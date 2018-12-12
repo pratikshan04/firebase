@@ -29,9 +29,9 @@
 						<!-- <strong>$itemCount)</strong> -->
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">                    
 							#if($itemData.imageName.contains("http"))
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#else
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#end
 						</a>
 					</div>
@@ -81,9 +81,9 @@
 					<!-- <strong>$itemCount)</strong> -->
 						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 							#if($itemData.imageName.contains("http"))
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#else
-							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+							<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 							#end
 						</a>
 					</div>
@@ -188,9 +188,9 @@
 								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
 									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">                    
 										#if($itemData.imageName.contains("http"))
-										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 										#else
-										<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
+										<img id="imageName$itemData.itemId" class="lazyLoad" src="$detailImage$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
 										#end
 									</a>
 								</div>
@@ -213,7 +213,7 @@
 										#end
 										<li><strong>$locale.get("product.label.partNumber"): </strong>$itemData.partNumber</li>
 										<li>
-											<strong>$locale.get("form.label.tableQty"): </strong><input type="text" name="itemTxtQty$itemData.itemId"  maxlength="6" value="$itemData.minOrderQty" id="itemTxtQty$itemData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
+											<strong>$locale.get("form.label.tableQty"): </strong><input type="text" name="itemTxtQty$itemData.itemId"  maxlength="6" value="$itemData.qty" id="itemTxtQty$itemData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
 										</li>
 								    	<li class="price">
 											<strong>$locale.get('product.label.yourprice'): </strong>

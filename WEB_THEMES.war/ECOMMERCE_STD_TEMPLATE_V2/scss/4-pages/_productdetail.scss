@@ -44,11 +44,17 @@
 		}
         .cimm_itemdetail-image {
             width: 320px;
-            height: 320px;
+            //height: 320px;
             text-align: center;
             position: relative;
             margin: 0 auto;
-			border: 1px solid $border-color;
+            .imgForSend{
+                display: block;
+                width: 320px;
+                height: 320px;
+                border: 1px solid $border-color;
+                position: relative;
+            }
             img {
                 max-height: 330px;
                 position: absolute;
