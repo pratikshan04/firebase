@@ -41,11 +41,11 @@
 	<link rel="canonical" href="$!hostName" />
 #elseif($!LayoutName=="OrderDetailPage")
 	#if($orderDetail.orderStatus.contains("Bid"))
-	#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
+		#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
     #elseif($!requestType != "openQuote")
-    #set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    	#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
     #else
-    #set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
+   		#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
     #end
 #elseif($LayoutName=='ProductDetailPage')
 	#if($breadCrumbList && $!breadCrumbList.size()>0)
@@ -149,10 +149,14 @@
 	#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
 	#set($BCTCat1 = $finalPageTitle.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
 	#if($navigationType=='MANF')
-		<meta name="description" content="$metaDescriptions"/>
+		#if($!metaDescriptions)
+			<meta name="description" content="$!metaDescriptions"/>
+		#else
+			<meta name="description" content="$!pageTitleVelo"/>
+		#end
 		<link rel="canonical" href="$hostName$manfId/manufacturer/$BCTCat1" />
 	#else
-		<meta name="description" content="$siteName"/>
+		<meta name="description" content="$!pageTitleVelo"/>
 		<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
 	#end
 #elseif($LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
