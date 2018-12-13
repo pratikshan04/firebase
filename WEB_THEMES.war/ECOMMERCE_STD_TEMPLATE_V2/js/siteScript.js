@@ -3821,15 +3821,8 @@ function callCSPConfigurator(obj){
 			itemPriceId = $(obj).data("itempriceid");
 			paramString = "ipid="+itemPriceId+paramItemIdString;
 		}
-		$.ajax({
-			type: "POST",
-			url: "cspConfiguratorPage.action",
-			data: paramString,
-			success: function(msg){
-				return false;
-			}
-		});
-		//window.location.href="cspConfiguratorPage.action?"+paramString;
+		
+		window.location.href="cspConfiguratorPage.action?"+paramString;
 	}
 }
 
