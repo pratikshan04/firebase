@@ -39,11 +39,11 @@
 	#if($userAgent != "WEBVIEW")
 	<div class="col-md-3 col-sm-12 col-xs-12">
 		<div itemscope itemtype="http://schema.org/Organization" class="cimm_logo">
-				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="$!webThemes/$!siteName/images/logo.png" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
+				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="/ASSETS/IMAGES/LOGOS/CLIENT/$!siteId/$!siteLogo" onerror="this.src='$!webThemes/$!siteName/images/logo.png'" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
 		</div>
 	</div>
 	#end
-	<div class="col-md-6 col-sm-12 col-xs-12">
+	<div class="col-md-6 col-sm-12 col-xs-12 #if($!userAgent == "WEBVIEW") webViewSearchWrap #end">
 		<div class="cimm_mobileNavIconWrap clearAfter showFromTab">
 			<button type="button" class="navbar-toggle" id="mobileNavigationTrigger">
 		        <span class="sr-only">Toggle navigation</span>
@@ -58,6 +58,7 @@
 	    		<input class="form-control" type="text" onkeypress="return runScript(event);" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" id="txtSearch" name="keyWord" value="#if($keyWord && $resultCount>0)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"/>
     			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-2x fa-search"></em></button>
 				<a class="cimm_cameraIcon" onclick="callToVisionapi();"><em class="fa fa-2x fa-camera"></em></a>
+				<a class="cimm_cameraIcon mLeft-3" onclick="voiceSearch();"><em class="fa fa-2x fa-microphone"></em></a>
 			</form>
 		<div class='mobileCartCountWrap'>
 			<a href="$!locale.get('website.url.ShoppingCart')" class="mobileCartCount"><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount</span></a>

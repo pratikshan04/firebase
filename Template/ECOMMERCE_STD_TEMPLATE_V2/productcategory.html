@@ -25,9 +25,9 @@
 		#foreach($!topBanner in $!topBanners)
 		#if($!topBanner.imageName)
 		#if($!topBanner.imageURL)
-		<li><a href="$!topBanner.imageURL" target="_blank"><img src="$!hostName$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></a></li>
+		<li><a href="$!topBanner.imageURL" target="_blank"><img src="$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></a></li>
 		#else
-		<li><img src="$!hostName$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></li>
+		<li><img src="$!bannerLogoPath$!topBanner.imageName" alt='$!topBanner.imageName'/></li>
 		#end
 		#end
 		#end
