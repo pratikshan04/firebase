@@ -1,6 +1,12 @@
 var priceLoading = {};
 function priceLoadMainFunction() {
-	priceLoading.beginPriceLoading();
+	var loadPrice = true;
+	if($("#userLogin").length>0 && $("#userLogin").val()=="false" && $('#enablePriceBeforeLogin').length>0 && $('#enablePriceBeforeLogin').val()!="Y") {
+		loadPrice = false;
+	}
+	if(loadPrice){
+		priceLoading.beginPriceLoading();
+	}	
 }
 /*some comments*/
 (function() {
