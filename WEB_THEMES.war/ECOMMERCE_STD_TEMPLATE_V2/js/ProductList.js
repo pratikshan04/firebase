@@ -500,13 +500,13 @@ function chkLeftMenu(){
 	var leftMenu = '';
 	if(width > 980){
 		if($("#leftMenu").html().trim() == ""){
-			leftMenu = $(".cimm_leftMenuEnclosure").detach();
+			leftMenu = $(".cimm_leftnav").detach();
 			leftMenu.appendTo("#leftMenu");
 		}
 		$("#slideLeft").removeClass("active");
 	}else{
 		if($("#slideLeft").html().trim() == ""){
-			leftMenu = $(".cimm_leftMenuEnclosure").detach();
+			leftMenu = $(".cimm_leftnav").detach();
 			leftMenu.appendTo("#slideLeft");
 		}
 	}
@@ -518,4 +518,5 @@ function closeLeftSlide(){
 $('[data-function="slideLeft"]').click(function(){
 	$("#slideLeft").addClass("active");
 	$("html, body").addClass("poppupEnabled");
+	//chkLeftMenu();
 });

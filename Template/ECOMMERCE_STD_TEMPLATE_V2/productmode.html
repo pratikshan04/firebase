@@ -345,48 +345,48 @@
 				#foreach($itemDocument in $itemDocumentsList)
 					#if($itemDocument.docName.contains('.pdf'))
 					<li>
-						<a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
+						<a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/pdf.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.doc'))
 					<li>
-						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.docx'))
 					<li>
-						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a class="docx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.xlsx'))
 					<li>
-						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a class="xlsx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.pptx'))
 					<li>
-						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.ppt'))
 					<li>
-						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.xls'))
 					<li>
-						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" alt="" /><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.cad'))
 					<li>
-						<a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
+						<a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/pdf.png" alt=""/><label>$itemDocument.docDesc</label></a>
 						<span class="cimm_pdfLink"><a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#else
 					<li>
 						<!-- <a href='$documentPath$itemDocument.docName' target="_blank"><img src="$!webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a> -->
-						<a href='$itemDocument.docName' target="_blank" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a>
+						<a href='$itemDocument.docName' target="_blank" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/video.png" alt="video" /><span>$itemDocument.docDesc</span></a>
 						<span class="cimm_pdfLink"><a href='$itemDocument.docName' target="_blank" class="removeForSend">$hostName$itemDocument.docName</a></span>
 					</li>
 					#end
@@ -398,7 +398,7 @@
 			<div id="videoSection">
 				#foreach($videoLink in $videoLinkList)
 					<span>
-						<a href='$videoLink.videoName' target="_blank"><img src="$!webThemes/$siteName/images/video.png" /><span>$!videoLink.videoCaption</span></a>
+						<a href='$videoLink.videoName' target="_blank"><img src="$!webThemes/$siteName/images/video.png" alt="video" /><span>$!videoLink.videoCaption</span></a>
 					</span>
 				#end
 			</div>
@@ -430,9 +430,9 @@
 								<div class="cimm_slideItemImg">
 					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 										 #if($linkItem.imageType=="URL")
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!linkItem.imageName"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!linkItem.imageName"/>
 										 #end
 					 				</a>
 					  			</div>
