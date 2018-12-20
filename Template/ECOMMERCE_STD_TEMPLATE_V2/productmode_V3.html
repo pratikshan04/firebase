@@ -111,15 +111,15 @@
 				<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="Detail">
 					<span class="imgForSend" style="display:none !important;">
 					 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-					 <img itemprop="image"  height="250" width="250" src="$!hostName$!productModeitemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+					 <img itemprop="image"  height="250" width="250" src="$!productModeitemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 					 #else
-					 <img itemprop="image" height="250" width="250" src="$!hostName$!detailImage$!escapeTool.url($!productModeitemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+					 <img itemprop="image" height="250" width="250" src="$!detailImage$!escapeTool.url($!productModeitemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 					 #end
 					 </span>
 					 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-					 <img itemprop="image" src="$!hostName$!productModeitemData.imageName" height="75" width="75" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+					 <img itemprop="image" src="$!productModeitemData.imageName" height="75" width="75" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 					 #else
-					 <img itemprop="image" src="$!hostName$!thumbNail$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+					 <img itemprop="image" src="$!thumbNail$!escapeTool.url($!productModeitemData.imageName)" height="75" width="75" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 					 #end
 					 #if($productModeitemData.clearance=="Y")
 					 <span class="clearenceTag clearenceTagSmall"></span>
@@ -469,7 +469,7 @@
 										 #if($linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!hostName$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 										 #end
 					 				</a>
 					  			</div>

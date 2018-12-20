@@ -139,7 +139,7 @@
 							#if($itemData.imageName.contains("http") || $itemList.imageType=="URL")
 							<img class="OrderConfImg" itemprop="image" src="$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
 							#else
-							<img class="OrderConfImg" itemprop="image" src="$!hostName$!thumbNail$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+							<img class="OrderConfImg" itemprop="image" src="$!thumbNail$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
 							#end                     
 						</td>
 						<td class="alignLeft" data-th="$!locale.get('product.label.description')">
@@ -338,10 +338,10 @@
           <tr style="border-bottom:1px solid #CCC;">
             <td style="border-right:1px solid #CCC;">
                 #if($itemData.imageName.contains("http") || $itemList.imageType=="URL")
-                        <img src="$!hostName$!itemList.imageName"  width="75" height="75" 
+                        <img src="$!itemList.imageName"  width="75" height="75" 
                         onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt='$!itemList.brandName $!itemList.manufacturerPartNumber'/>
                     #else
-                        <img src="$!hostName$!thumbNail$!itemList.imageName"  width="75" height="75" 
+                        <img src="$!thumbNail$!itemList.imageName"  width="75" height="75" 
                         onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt='$!itemList.brandName $!itemList.manufacturerPartNumber'/>
                     #end                        
             </td>
