@@ -270,7 +270,7 @@ td,th {
 }
 
 @font-face {
-  font-family:'Glyphicons Halflings';src:url(https://fonts.cimm2.com//glyphicons-halflings-regular.eot);src:url(https://fonts.cimm2.com//glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(https://fonts.cimm2.com//glyphicons-halflings-regular.woff) format('woff'),url(https://fonts.cimm2.com//glyphicons-halflings-regular.ttf) format('truetype'),url(https://fonts.cimm2.com//glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
+  font-family:'Glyphicons Halflings';src:url(https://cdn.cimm2.com/fonts/glyphicons-halflings-regular.eot);src:url(https://cdn.cimm2.com/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(https://cdn.cimm2.com/fonts/glyphicons-halflings-regular.woff) format('woff'),url(https://cdn.cimm2.com/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(https://cdn.cimm2.com/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
 }
 
 .glyphicon {

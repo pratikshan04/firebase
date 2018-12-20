@@ -53,6 +53,15 @@ function fingerPrint(userName, password){
 	console.log('The native context does not exist yet');
 	}
 }
+function voiceSearch(){
+	var msg = "voicesearchforios"
+	try{
+		Android.voicesearchforandroid();
+	}catch(err){
+		webkit.messageHandlers.callbackHandler.postMessage(msg);
+		console.log('The native context does not exist yet');
+	}
+}
 function fingerPrintpopup(){
 	var unps = "FPauthenticationpopup";
 	try {
