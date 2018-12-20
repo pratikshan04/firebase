@@ -32,7 +32,7 @@
 						</div>
 						#else
 						<div class="cloneImg"> 
-							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+							<img src='$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 						</div>
 						#end
 						<div class="cloneTitle">
@@ -111,7 +111,7 @@
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!hostName$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!hostName$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
 					</span>
 					#end
 					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
