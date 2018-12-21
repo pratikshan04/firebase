@@ -111,13 +111,13 @@
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!hostName$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
 					</span>
 					#end
 					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
 						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$itemData.productCategoryImageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 					#else
-						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!hostName$!ProductEnlargedImage$itemData.productCategoryImageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+						<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!ProductEnlargedImage$itemData.productCategoryImageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 					#end
 				<!-- Product Mode -->
 				#else
