@@ -31,7 +31,7 @@
 <input type="hidden" value="$!srchTyp" id="" name="searchType"/>
 #end
 
-#macro(listAndGridSwap $navigationType,$hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
+#macro(listAndGridSwap $navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
 #if($navigationType=="NAVIGATION")
 #set($gridURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=0&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
 #set($listURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=1&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")

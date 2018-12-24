@@ -386,49 +386,49 @@
 				#foreach($itemDocument in $itemDocumentsList)
 					#if($itemDocument.docName.contains('.pdf'))
 					<li>
-						<a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');" class="removeForSend"><img src="$!hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.doc'))
 					<li>
-						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.docx'))
 					<li>
-						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a class="docx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="docx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/word.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="docx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.xlsx'))
 					<li>
-						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a class="xlsx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="xlsx removeForSend"  onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.pptx'))
 					<li>
-						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.ppt'))
 					<li>
-						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="pptx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/ppt.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.xls'))
 					<li>
-						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/excel.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="xlsx removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#elseif($itemDocument.docName.contains('.cad'))
 					<li>
-						<a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
-						<span class="cimm_pdfLink"><a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$hostName$documentPath$itemDocument.docName</a></span>
+						<a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!hostName$webThemes/$siteName/images/pdf.png" /><label>$itemDocument.docDesc</label></a>
+						<span class="cimm_pdfLink"><a class="title removeForSend" onclick="window.open('$documentPath$itemDocument.docName','mywindow','width=1100,height=500');">$!hostName$documentPath$itemDocument.docName</a></span>
 					</li>
 					#else
 					<li>
 						<!-- <a href='$documentPath$itemDocument.docName' target="_blank"><img src="$!webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a> -->
-						<a href='$itemDocument.docName' target="_blank" class="removeForSend"><img src="$hostName$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a>
-						<span class="cimm_pdfLink"><a href='$itemDocument.docName' target="_blank" class="removeForSend">$hostName$itemDocument.docName</a></span>
+						<a href='$itemDocument.docName' target="_blank" class="removeForSend"><img src="$!hostName$webThemes/$siteName/images/video.png" /><span>$itemDocument.docDesc</span></a>
+						<span class="cimm_pdfLink"><a href='$itemDocument.docName' target="_blank" class="removeForSend">$!hostName$itemDocument.docName</a></span>
 					</li>
 					#end
 				#end
