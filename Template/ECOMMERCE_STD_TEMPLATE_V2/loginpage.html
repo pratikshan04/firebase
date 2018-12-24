@@ -11,7 +11,7 @@
 			<div id="notificationDiv"></div>
 		#end
 		<form id="mainLoginForm" class="mainLoginForm" data-form="login">
-			<input type="hidden" name="fromPageValue" value='$hostName.replace("","")Welcome'/>
+			<input type="hidden" name="fromPageValue" value='$!hostName.replace("","")Welcome'/>
 			<input type="hidden" name="formPageValue" value='$!LayoutName' id="formPageValue"/>  
 			<div class="form-group">
 				<p>$!locale.get("login.label.pleaseEnterYourUserNameAndPassword")</p>

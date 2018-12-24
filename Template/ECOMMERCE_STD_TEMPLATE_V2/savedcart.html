@@ -232,7 +232,7 @@
 					#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 					#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 					<li>
-					<a href="$hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
 					</li>
 					#end
 					</ul>
@@ -281,7 +281,7 @@
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							<!-- <span id="span_$itemData.partNumber" data-select='priceData'>
-							<img src="$hostName$webThemes/$siteName/images/loading.gif" />
+							<img src="$!hostName$webThemes/$siteName/images/loading.gif" />
 							</span> -->
 							#end
 						</span>

@@ -154,10 +154,10 @@
 		#else
 			<meta name="description" content="$!pageTitleVelo"/>
 		#end
-		<link rel="canonical" href="$hostName$manfId/manufacturer/$BCTCat1" />
+		<link rel="canonical" href="$!hostName$manfId/manufacturer/$BCTCat1" />
 	#else
 		<meta name="description" content="$!pageTitleVelo"/>
-		<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
+		<link rel="canonical" href="$!hostName$codeId/category/$BCTCat1" />
 	#end
 #elseif($LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
 #set($listPageHeading = "")
@@ -186,15 +186,15 @@
 		#if($finalPageTitle)
 			#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
 			#set($BCTCat1 = $pageTitleBreadCrumbLast.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
+			<link rel="canonical" href="$!hostName$codeId/category/$BCTCat1" />
 		#else
 			#set($pageTitleVelo = $!listPageHeading + $!pageTitleseparator + $!pageTitleVelo)
 			#set($BCTCat1 = $listPageHeading.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$hostName$codeId/category/$BCTCat1" />
+			<link rel="canonical" href="$!hostName$codeId/category/$BCTCat1" />
 		#end
 	#else
 		#set($pageTitleVelo = "Products"+ $!pageTitleseparator + $!pageTitleVelo)
-		<link rel="canonical" href="$hostName/products" />
+		<link rel="canonical" href="$!hostName/products" />
 	#end
 	#if($!categoryDescription && $!categoryDescription.marketingText)
 		<meta name="description" content="$!categoryDescription.marketingText">
