@@ -38,7 +38,7 @@
 						</div>
 						#else
 						<div class="cloneImg"> 
-							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+							<img src='$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 						</div>
 						#end
 						<div class="cloneTitle">
@@ -167,7 +167,7 @@
 									<img id="img_$!count" itemprop="image" src="$!imageList.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 								</a>
 							#else
-								<a href="#" data-image="$!detailImage$!imageList.imageName" data-zoom-image="$!hostName$!enlargedImage$!imageList.imageName">
+								<a href="#" data-image="$!detailImage$!imageList.imageName" data-zoom-image="$!enlargedImage$!imageList.imageName">
 									<img id="img_$!count" itemprop="image" src="$!thumbNail$!imageList.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 								</a>
 							#end
