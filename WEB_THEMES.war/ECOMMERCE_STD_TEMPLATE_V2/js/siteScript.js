@@ -3522,7 +3522,47 @@ function homeCarousels(){
 			             ]
 		  });
 		}
-
+        if($('#featuredProductGroupSize').length>0 && parseInt($('#featuredProductGroupSize').val())>0){
+        	var featuredProductGroupSizeIndex = parseInt($('#featuredProductGroupSize').val());
+        	for(i=0;i<featuredProductGroupSizeIndex;i++) {
+        		if($('.featuredProductGroupList_'+i).length>0){
+        			if($('.featuredProductGroupList_'+i).hasClass('slick-initialized')){
+        				$('.featuredProductGroupList_'+i).slick('unslick');
+        			}
+        			  $('.featuredProductGroupList_'+i).slick({
+        				  infinite: true,
+        				  slidesToShow: 5,
+        				  slidesToScroll: 1,
+        				  pauseOnHover:true,
+        				  responsive: [
+        				               {
+        				                 breakpoint: 1030,
+        				                 settings: {
+        				                   slidesToShow: 4,
+        				                 }
+        				               },{
+        									breakpoint: 770,
+        									settings: {
+        										slidesToShow: 3,
+        									}
+        								},{
+        									breakpoint: 500,
+        									settings: {
+        										slidesToShow: 2,
+        									}
+        								},
+        								{
+        									breakpoint: 400,
+        									settings: {
+        										slidesToShow: 1,
+        									}
+        								}
+        				             ]
+        			  });
+        			}
+        	}
+        }
+	
 		if($('.featuredBrands').length>0){
 			if($('.featuredBrands').hasClass('slick-initialized')){
 				$('.featuredBrands').slick('unslick');
