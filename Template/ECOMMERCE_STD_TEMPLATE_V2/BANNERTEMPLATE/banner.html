@@ -1,0 +1,11 @@
+#if($bannerInfoList && $bannerInfoList.bannerInfo && $bannerInfoList.bannerInfo.size()>0)
+<div class="cimm_supplierImages">
+            <ul>
+			#foreach($bannerList in $bannerInfoList.bannerInfo)
+                 <li><a href="$!bannerList.bannerUrl"><img src="$bannerImagePath$bannerList.banner.imageName" alt=""><span class="cimm_linkText">$!bannerList.captionText</span></a></li>
+                 
+			#end
+           </ul>
+ </div>
+ #end
+
