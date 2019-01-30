@@ -630,6 +630,13 @@ var gm;
 
 jQuery(document).ready(function() {
 	jQuery("#addNewStaticFormId").hide();
+	 if(jQuery("#loggedInCIMMUserId", window.parent.document).length>0){
+		 console.log("loggedInCIMMUserId : "+jQuery("#loggedInCIMMUserId", window.parent.document).val());
+		 if(jQuery("#userEditedId").length>0){
+			 jQuery("#userEditedId").val(jQuery("#loggedInCIMMUserId", window.parent.document).val());
+			 console.log("userEditedId : "+jQuery("#userEditedId").val());
+		 }
+	 }
 		try{
 			init3rdpartLibs();
 			/** Custom handle for responsive behavior on desktop top*/
