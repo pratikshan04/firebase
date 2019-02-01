@@ -316,6 +316,7 @@ input[type="text"], input[type="password"], select {
 						Category Level
 						<a href="categoryDetailListCms.action?sortEnabled=false&sortColumn=levelNumber&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
 						</th>
+						<th class="text-center">Taxonomy Name</th>
 						<th class="text-center width50">Select One</th>
 					</tr>
 				</thead>
@@ -329,12 +330,13 @@ input[type="text"], input[type="password"], select {
 						<td class="text-center"> $iindex </td>
 						<td>$!category.categoryName</td>
 						<td class="text-center">Level - $category.levelNumber</td>
+						<td class="text-center">$category.taxonomyDTO.name</td>
 						<td class="text-center"><input type="radio" name="categorySelectRadio" data-listtype="CATEGORY" data-name="$!category.categoryName" value="$!category.id" onclick="setThisValueToInput(this);"/></td>
 					</tr>
 					#set($iindex = $iindex + 1)
 					#end
 				#else
-				<tr><td colspan="4" align="center"> No data </td></tr>
+				<tr><td colspan="5" align="center"> No data </td></tr>
 				#end
 				</tbody>
 			</table>
