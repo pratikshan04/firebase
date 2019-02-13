@@ -738,54 +738,62 @@
 				<div id="documentsSection">
 					<ul class="documentStack clearAfter">
 					#foreach($itemDocument in $!itemDocumentsList)
+						#set($documentLinkPath = "")
+						#set($hostNameLink = "")
+						 #if($!itemDocument.docType=="URL" || $!itemDocument.contains("http"))
+							#set($documentLinkPath = $!itemDocument.docName)
+						 #else
+							#set($documentLinkPath = $!documentPath+$!itemDocument.docName)
+							#set($hostNameLink = $!hostName)
+						 #end
 						#if($itemDocument.docName.contains('.pdf'))
 						<li>
-							<a onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.doc'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="docx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.docx'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="docx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xlsx'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="xlsx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.pptx'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="pptx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.ppt'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="pptx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xls'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="xlsx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.cad'))
 						<li>
-							<a class="title"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="title removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('youtube') || $!itemDocument.docName.contains('.mp4') || $!itemDocument.docName.contains('.avi'))
 						<li>
-							<a href='$!itemDocument.docName' target="_blank"><img src="$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
+							<a href='$!itemDocument.docName' target="_blank" class="removeForSend"><img src="$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 						</li>
 						#else
 							<li>
-								<a href='$!itemDocument.docName' target="_blank"><img src="$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
+								<a href='$!itemDocument.docName' target="_blank" class="removeForSend"><img src="$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
 								<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 							</li>
 						#end
