@@ -141,9 +141,12 @@ $("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
 	// http://localhost:8983/solr/collection1/terms?terms.fl=name&terms.prefix=i&terms.sort=count&wt=velocity&v.template=suggest
 </script>
 #end
-
+#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <script type="text/javascript">
 _paq.push(['trackPageView']);
+</script>
+#end
+<script type="text/javascript">
 /*********************Header Script***********************/
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
