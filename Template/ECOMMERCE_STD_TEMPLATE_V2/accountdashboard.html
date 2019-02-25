@@ -162,7 +162,7 @@
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
-											<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+											<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
 										</a>
 										#else
 										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">$groupData.productListName </a>
@@ -195,7 +195,7 @@
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
-											<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+											<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
 										</a>
 										#else
 										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName"> $groupData.productListName </a>                                       
