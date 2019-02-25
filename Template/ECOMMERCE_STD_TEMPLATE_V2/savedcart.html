@@ -291,7 +291,7 @@
 							#if($itemData.total>0) $$numberTool.format("$numberToolFormat",$itemData.total) #else N/A #end
 						</span>
 						<!-- <span class="productGrpRightAlign"><span id="spanEx_$itemData.partNumber" data-select='extPriceData'>
-						<img src="$!webThemes/$siteName/images/loading.gif" /></span></span> -->
+						<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span></span> -->
 					</td>
 					<td data-th="select">
 						<label class="customCheckBox2">
@@ -363,4 +363,4 @@
 $locale.get("product.label.noDataAvailable")
 #end
 
-<script type="text/javascript" src="$!webThemes/$siteName/js/BulkAction.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/BulkAction.js"></script>

@@ -500,7 +500,7 @@
 									
 									<!-- <li class="productLeadTime productLeadTime_$!itemData.partNumber" style="display:none;">
 										<strong>$!locale.get("product.label.leadTime"): </strong>
-										<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li> --> 
 									<li class="productAvail_$!itemData.partNumber">
 										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
@@ -512,7 +512,7 @@
 											#end
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
 										#else
-											<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+											<span class="orangeClr Avail_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
@@ -544,7 +544,7 @@
 											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 										#else
 											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
-												<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+												<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 											</span>
 										#end
 								    #end
