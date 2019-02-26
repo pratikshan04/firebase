@@ -1214,8 +1214,8 @@ console.log("Custom : "+curr_control.dataToolElement);
          var col= $("<div/>")
             .addClass(gm.options.colClass)
             .addClass(gm.options.colDesktopClass + size)
-            .addClass(gm.options.colTabletClass + size)
-            .addClass(gm.options.colPhoneClass + size)
+            .addClass(gm.options.colTabletClass + 12)
+            .addClass(gm.options.colPhoneClass + 12)
             .addClass(gm.options.gmEditClass)
             .addClass(gm.options.colAdditionalClass)
             .html(gm.toolFactory(gm.options.colButtonsPrepend))
@@ -2024,6 +2024,11 @@ console.log("Custom : "+curr_control.dataToolElement);
 								{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'right'}},
 								{selector: 'img,table', classes: 'alignright'}
 							]},
+                                        image_class_list: [
+    {title: 'None', value: ''},
+    {title: 'Push Image To Left', value: 'pushImgLeft'},
+    {title: 'Push Image To Right', value: 'pushImgRight'}
+  ],
 			   browser_spellcheck : true,
 			  
 			   toolbar_items_size: 'medium',
