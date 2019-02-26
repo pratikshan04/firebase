@@ -1,36 +1,35 @@
-#set($refreshVersion = "?rv=$!session.getId()")
-<script type="text/javascript" src="$!webThemes/$siteName/js/bootstrap.min.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/bootbox.min.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/masonry.pkgd.min.js" defer></script>
-#parse("jquery-migrate-1-2-1-min.html")<!-- <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script> -->
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootbox.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/masonry.pkgd.min.js" defer></script>
+#parse("jquery-migrate-1-2-1-min.html")<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script> -->
 #parse("ajaxscript.html")
-<script type="text/javascript" src="$!webThemes/$siteName/js/Encoder.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/hashtable.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/respond.min.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jqueryNumber.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery.i18n.properties-1.0.9.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/slick.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/nprogress.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery.slimscroll.min.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery.autocomplete.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jsaes.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/Encoder.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/hashtable.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/respond.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jqueryNumber.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.i18n.properties-1.0.9.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/slick.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/nprogress.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.slimscroll.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.autocomplete.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jsaes.js" defer></script>
 #parse("cookiesscript.html")
-<script type="text/javascript" src="$!webThemes/$siteName/js/addToCarts.js$!refreshVersion" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/PriceLoading.js$!refreshVersion" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/datatables.min.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/dataTables.bootstrap.min.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/countryState.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/formValidation.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery.form.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery.ajaxfileupload.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/siteScript.js$!refreshVersion"></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/recentlyViewed.js" defer></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/BulkAction.js" defer></script>
-#if($userAgent == "WEBVIEW")<script type="text/javascript" src="$!webThemes/$siteName/js/mobileApp.js$!refreshVersion"></script>#end
-#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")<script type="text/javascript" src="$!webThemes/$siteName/js/quickOrderPadHead.js"></script>#end
-#if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$!webThemes/$siteName/js/handsontable.full.js"></script>#end
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/addToCarts.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/PriceLoading.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/datatables.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/dataTables.bootstrap.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/countryState.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/formValidation.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.form.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.ajaxfileupload.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/siteScript.js?$!refreshVersion"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/recentlyViewed.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/BulkAction.js" defer></script>
+#if($userAgent == "WEBVIEW")<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/mobileApp.js?$!refreshVersion"></script>#end
+#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/quickOrderPadHead.js"></script>#end
+#if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/handsontable.full.js"></script>#end
 #if($LayoutName=="ProductList")
-	<script type="text/javascript" src="$!webThemes/$siteName/js/ProductMode.js$!refreshVersion"></script>
+	<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductMode.js?$!refreshVersion"></script>
 	#if($paginate>1)
 	<script type="text/javascript">
 		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
@@ -125,9 +124,9 @@ function deviceSelectAll(){
 #set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js'+$refreshVersion)
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
-<script type="text/javascript" src="$!webThemes/$siteName/js/bootstrap-select.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap-select.min.js" defer></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
-  <script type="text/javascript" src="$!webThemes/$siteName/js/selectivizr-min.js"></script>
+  <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/selectivizr-min.js"></script>
 <![endif]-->
 #if($LayoutName != "CMSStaticPage")
 <script type="text/javascript" defer>
@@ -141,9 +140,12 @@ $("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
 	// http://localhost:8983/solr/collection1/terms?terms.fl=name&terms.prefix=i&terms.sort=count&wt=velocity&v.template=suggest
 </script>
 #end
-
+#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <script type="text/javascript">
 _paq.push(['trackPageView']);
+</script>
+#end
+<script type="text/javascript">
 /*********************Header Script***********************/
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
@@ -202,10 +204,10 @@ $("link[rel='stylesheet']").each(function(){
 	</script>
 #end
 #if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
-<script src="$!webThemes/$siteName/js/jssor.js" defer></script>
-<script src="$!webThemes/$siteName/js/jssor.slider.js" defer></script>
-<script src="$!webThemes/$siteName/js/jsor.customJs.js" defer></script>
-<script src="$!webThemes/$siteName/js/staticPage.js" defer></script>
+<script src="$!cdnUrl$!webThemes/$siteName/js/jssor.js" defer></script>
+<script src="$!cdnUrl$!webThemes/$siteName/js/jssor.slider.js" defer></script>
+<script src="$!cdnUrl$!webThemes/$siteName/js/jsor.customJs.js" defer></script>
+<script src="$!cdnUrl$!webThemes/$siteName/js/staticPage.js" defer></script>
 <script>
 $(function(){
 	jssorSliderFunction();
@@ -237,7 +239,7 @@ $(function(){
 #end
 
 #if($LayoutName=="ProductDetailPage")
-<script type="text/javascript" src="$!webThemes/$siteName/js/ProductMode.js$!refreshVersion"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductMode.js?$!refreshVersion"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <!-- PIWIK Tracking Product Page Views -->
 <script type="text/javascript">
@@ -272,7 +274,7 @@ $(document).ready(function () {
 #end
 #elseif($LayoutName=="BranchLocationPage")	
 <script src='//maps.googleapis.com/maps/api/js?key=$!CommonDBQuerySystemParameter.get("GEO_API_KEY")&sensor=false&libraries=places'></script><!-- key need to change based on project -->
-<script type="text/javascript" src="$!webThemes/$siteName/js/map.js$!refreshVersion"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/map.js?$!refreshVersion"></script>
 <script type="text/javascript" defer>
 $(document).ready(function () {
 	var data = '$!locationResponseList';
@@ -285,7 +287,7 @@ $(document).ready(function () {
 });
 </script>
 #elseif($LayoutName=="LoginPage")	
-	<script type="text/javascript" src="$!webThemes/$siteName/js/GuestCheckoutPage.js$!refreshVersion"></script>
+	<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/GuestCheckoutPage.js?$!refreshVersion"></script>
 	<script type="text/javascript">
 	var userLogin = $("#userLogin").val();
 	var path = window.location.hostname;
@@ -294,8 +296,8 @@ $(document).ready(function () {
 	}
 	</script>
 #elseif($LayoutName=="ProductPage" || $LayoutName=="SubCategoryPage")
-<script type="text/javascript" src="$!webThemes/$siteName/js/ProductMode.js$!refreshVersion"></script>
-<script type="text/javascript" src="$!webThemes/$siteName/js/ProductList.js$!refreshVersion"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductMode.js?$!refreshVersion"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductList.js?$!refreshVersion"></script>
 	<script>
 		$(document).ready(function(){
 			$('.cimm_category-banners').slick({

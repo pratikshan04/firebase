@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 #end
 #if($LayoutName!="ProductDetailPage")
-	<meta property="og:image" content="$!webThemes/$!siteName/images/logo.png" />
+	<meta property="og:image" content="$!cdnUrl$!webThemes/$!siteName/images/logo.png" />
 	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
 		#set($ststicMetaDesc = $!metaDesc.trim())
 		#set($ststicMetaKey = $!metaTagString.trim())
@@ -249,7 +249,7 @@
 		<link rel="canonical" href="$!hostName" />
 	#end
 #end
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <!-- Piwik -->
 <script type="text/javascript">
@@ -257,7 +257,7 @@
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="//templatestage.cimm2.com/piwik/";
+    var u="//973ecb.cimm2.com/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
     _paq.push(['setSiteId', '2']);
     _paq.push(['setUserId', '$!session.getAttribute("com.common.username")']);
@@ -265,7 +265,7 @@
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//templatestage.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
+<noscript><p><img src="//973ecb.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
 <!-- End Piwik Code -->
 #end
 #parse("stylesheets.html")
