@@ -2,6 +2,7 @@
 <html>
   <head>
     #parse("head.html")
+    #parse("bootstrap-min-css.html")
     <script>
       function paginationScriptCms(n_pages,page_link,iindex,pgno){
         var n_links=5;
@@ -27,7 +28,7 @@
         var pagenumber=0;
         document.write('<div class="pagebarUTH">');
         if((n_index)>=6)
-          document.write('<a href="'+page_link+prevpage+'">Previous</a>\n');
+          document.write('<a href="'+page_link+prevpage+'"><i class="fas fa-lg fa-angle-double-left"></i></a>\n');
         if(n_links){
           var n_sideLinks=1,n_firstLink,n_lastLink;
           if(n_index>=n_pages){
@@ -59,12 +60,12 @@
           }
         }
         if((n_lastLink)!=n_pages)
-          document.write('<a href="'+page_link+nexpage+'">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
+          document.write('<a href="'+page_link+nexpage+'"><i class="fas fa-lg fa-angle-double-right"></i></a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
         document.write(' </div>');
       }
     </script>
   </head>
-  <body class="cimm_bodyBackground" id="top">
+  <body>
     <input type="hidden" id="siteName" name="siteName" value="$siteName" />
     <input type="hidden" id="moodname" name="moodname" value="$moodname">
     #parse($bodyContent)

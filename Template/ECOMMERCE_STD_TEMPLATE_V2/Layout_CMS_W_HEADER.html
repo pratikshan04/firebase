@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    #parse("head.html") 
+    #parse("head.html")
     <!-- <link href="$!webThemes/CMS/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
     <link href="$!webThemes/CMS/css/gridmanagerv2.css" rel="stylesheet" type="text/css" />
     <link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css"/>
@@ -81,10 +81,12 @@
         document.write(' </div>');
       }
     </script>
+    <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
+	<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
+	<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
   </head>
   <body>
-    <div class="site-overlay" id="site-overlay" ></div>
-    <div class="modalPopOverlay" id="overlay"></div>
+    <div class="cms_staticTable">
     <div id="fixedHead"></div>
     <div class="cimm_stickyPageWrap">
     #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
@@ -153,59 +155,9 @@
 		#parse("footer.html")         
 	</div>
 	#end
-	<p id="backToTop">
-		<a href="#top"></a>
-	</p>
+	</div>
     <div class="cms_leftMenu hideMe">
-		<ul>
-			<li>
-				<a href="listStaticPageCms.action" title="List Static Pages" class="cms_uploadBannerBtn">
-					<i class="fa fa-file" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a class="cms_SlideMenuBtn" style="cursor: pointer;">
-					<img title="HTML Elements" src="$!webThemes/CMS/images/small/tools.png" />
-				</a>
-				#parse("cmsmenu.html") 
-			</li>
-			<li>
-				<a class="cms_SlideMenuBtn" style="cursor: pointer;">
-					<i class="fa fa-save" title="Save Page" aria-hidden="true"></i>
-				</a>
-				#parse("cmsStaticPageForm.html")
-			</li>
-			<li>
-				<a href="javascript:openBannerList();" class="cms_uploadBannerBtn" title="Banner List">
-					<img src="$!webThemes/CMS/images/small/listBrand.png" />
-				</a>
-			</li>
-			<li>
-				<a class="iframe cms_uploadBannerBtn" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadIframeWindow();">
-					<img src="$!webThemes/CMS/images/small/upload.png" />
-				</a>
-			</li>
-			<li>
-				<a class="iframe cms_uploadBannerBtn" href="widgetListCms.action" title="Widgets" onclick="javascript:showIframeWindow();">
-					<i class="fa fa-cog" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList();" title="Menubuilder" class="cms_uploadBannerBtn" >
-					<img src="$!webThemes/CMS/images/small/manageTaxonomy.png" />
-				</a>
-			</li>
-			<li>
-				<a class="iframe cms_uploadBannerBtn" href="javascript:cmsbannersmenubuilderList1();" title="CSS">
-					CSS
-				</a>
-			</li>
-			<li>
-				<a class="iframe cms_uploadBannerBtn" href="formListCms.action" title="Form Builder" onclick="javascript:showIframeWindow();">
-					<img src="$!webThemes/CMS/images/small/formBuilder.png" />
-				</a>
-			</li>
-		</ul>
+    	#parse("cmsLeftmenu.html")
 	</div>
     <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
     #parse("javascripts.html")
