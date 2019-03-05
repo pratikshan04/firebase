@@ -779,7 +779,7 @@ height: 862px;
 		-webkit-border-top-right-radius: 2px;
 }
 
-#bannerSelectList{
+/* #bannerSelectList{
 	height: 100%;
 	max-height: 150px;
 	overflow-y: auto;
@@ -796,7 +796,7 @@ height: 862px;
 	border-radius:0;
 	-webkit-border-radius:0;
 	-moz-border-radius:0;
-}
+} */
 
 /* Manage Banners CSS Ends */
 
@@ -1774,12 +1774,12 @@ iframe#iframeId {
 	float: left;
 }
 .listPageFilterBox{
-	padding: 15px 22px;
+	padding: 18px 22px;
 	margin-bottom: 20px;
 	position: relative;
 	background: #e5e7e7;
 }
-.clearStaticSearch button {
+.outLineBtn_left {
 	background: transparent;
 	text-transform: capitalize;
 	font-weight: 600;
@@ -1789,7 +1789,6 @@ iframe#iframeId {
 	border: 2px solid #456078;
 	padding: 6px 10px;
 	height: 42px;
-	width: 167px;
 	border-radius: 21px;
 	font-size: 18px;
 }
@@ -1799,6 +1798,11 @@ iframe#iframeId {
 .sort-pageList{
 	position: relative;
 	float: left;
+}
+.cms_pageCount{
+	float: left;
+	margin: 20px 0 0 25px;
+    font-size: 16px;
 }
 .sort-pageList select {
 	background: #456078;
@@ -2052,7 +2056,7 @@ select:focus {
 	margin: 14px 20px 14px 0;
 	text-align: right;
 }
-.create-newPage a{
+.create-newPage a, .cms_blueBtn{
 	background: #009bd0;
 	color: #FFF;
 	font-size: 18px;
@@ -2077,7 +2081,7 @@ select:focus {
 	font-size: 16px;
 }
 .table>tbody>tr>td.cms_actionIcons {
-	width: 190px;
+	width: 180px;
 }
 .cms_actionIcons a:nth-child(2) {
 	margin: 0 34px;
@@ -2275,6 +2279,89 @@ select:focus {
 .cms_componentBtn sup{
 	font-size: 12px;
 }
+.listRightColumn{
+	width: 530px;
+	float: left;
+	min-height: 560px;
+	border-right: 1px solid #c9c9c9;
+	border-top-right-radius: 15px;
+}
+.previewSection{
+	width: calc(100% - 530px);
+	overflow: auto;
+    background: #FFF;
+	height: 560px;
+	float:left;
+}
+.popupWraper{
+	padding: 0 12px;
+}
+.prev_heading {
+	padding: 18px;
+	background: #999;
+	color: #FFF;
+	text-align: center;
+	font-size: 15px;
+	border-radius: 10px 0 0 0;
+	height: 58px;
+}
+.prev_heading i{
+	margin-right: 10px;
+}
+.listRightColumn .cms_customTable.table {
+	border-top-left-radius: 0;
+}
+.listRightColumn .cms_customTable.table>thead>tr>th {
+	border: 0;
+}
+.previewSection {
+	border: 1px solid #c9c9c9;
+	border-top-left-radius: 11px;
+	border-top: 0;
+	border-bottom: 0;
+}
+.cms_customTable.table>tbody>tr:nth-child(10)>td {
+	border-bottom: 0;
+}
+.cms_customSearch {
+	position: relative;
+	width: 400px;
+	margin: 4px 8% 10px auto;
+}
+.cms_customSearch input[type="text"] {
+	border: 1px solid #c9c9c9;
+	background: #FFF;
+	border-radius: 21px;
+	padding: 8px 40px 8px 8px;
+	font-size: 16px;
+	width: 100%;
+}
+.cms_customSearch button {
+	border-radius: 20px;
+	height: 39px;
+	width: 40px;
+	background: #456078;
+	padding: 6px;
+	color: #FFF;
+	font-size: 20px;
+	position: absolute;
+	right: 0;
+	top: 1px;
+}
+.pageDesignLogo {
+	background: #e5e7e7;
+	padding: 20px;
+	font-size: 28px;
+	color: #000;
+}
+.pageDesignLogo i{
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.pageDesignLogo strong{
+	font-family: RobotoBlack;
+}
+
 /* .cms_staticForm{
 	padding: 5px;
     color: #fff;

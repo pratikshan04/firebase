@@ -7,7 +7,7 @@ function generateWidget(widgetId){
         	var widgetName = jQuery("[data-widget-id='"+widgetId+"']").attr("data-widget-name");
         	jQuery("[data-widget='"+widgetId+"']").next(".widgetEditOverlay").remove();
         	jQuery("[data-widget='"+widgetId+"']").html("");
-        	jQuery("[data-widget='"+widgetId+"']").html(data).append('<div class="widgetEditOverlay"><h3>'+widgetName+'</h3><a class="iframe btn widgetEditBtn" href="editWidgetDataCms.action?widgetId='+widgetId+'" onclick="editWidgetIframeWindow();"><i class="fa fa-pencil mRight-2" aria-hidden="true"></i> Edit</a></div>');
+        	jQuery("[data-widget='"+widgetId+"']").html(data).append('<div class="widgetEditOverlay"><h3>'+widgetName+'</h3><a class="iframe btn widgetEditBtn" href="editWidgetDataCms.action?widgetId='+widgetId+'" onclick="editWidgetIframeWindow();"><i class="fa fa-pencil-alt mRight-2" aria-hidden="true"></i> Edit</a></div>');
         }
     });
 }

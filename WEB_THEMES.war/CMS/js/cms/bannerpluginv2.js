@@ -125,11 +125,10 @@ $.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId, function(data
 };
 
 var scrollToSelected = function(){
-	
-	var radioInput = $("input[name=bannerGroup]:checked") ;
+var radioInput = $("input[name=bannerGroup]:checked") ;
 	$('#bannerSelectList').animate({
-	            scrollTop: radioInput.offset().top
-	        }, 100);
+        scrollTop: radioInput.offset().top
+    }, 100);
 };
 
 

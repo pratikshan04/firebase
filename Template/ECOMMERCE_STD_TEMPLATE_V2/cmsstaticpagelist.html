@@ -54,7 +54,7 @@
 		  	<input type="hidden" name="pageSize" value="$staticPageList.pageSize" /> 
 		  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
 		  	<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
-	  		<button type="submit"><i class="fa fa-lg fa-times-circle"></i> Clear Search</button>
+	  		<button type="submit" class="outLineBtn_left"><i class="fa fa-lg fa-times-circle"></i> Clear Search</button>
 	  	</form>
 	  	<div class="displayBox">
 	  		<form method="get" action="listStaticPageCms.action">
@@ -77,7 +77,6 @@
 				<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />  
 				<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
 	  		</form>
-	  		<div class="text-right">#if($!staticPageList.totalRows>0)Showing $staticPageList.rowsOnPage of $!staticPageList.totalRows Records #end</div>
 	  	</div>
 					
 	  	<div class="siteDisplayBox">
@@ -101,14 +100,15 @@
 	  		</form>
 	  	</div>
 	</div>
-	<div class="create-newPage">
+	<div class="create-newPage clearfix">
+		<div class="cms_pageCount">#if($!staticPageList.totalRows>0)Showing $staticPageList.rowsOnPage of $!staticPageList.totalRows Records #end</div>
 		<a href="/cmsStaticPageCms.action?&selectedSiteId=$!selectedSiteId" onclick="getDynamicData();">
 	  		<span class="action-text">
 				Create New Static Page                                                                            
 			</span>
 			<span class="action-icon">
 				<i class="fa fa-lg fa-file"></i>
-				<sup class="fa fa-pencil-alt"></sup>
+				<!-- <sup class="fa fa-pencil-alt"></sup> -->
 			</span>
 		</a>
 	</div>
