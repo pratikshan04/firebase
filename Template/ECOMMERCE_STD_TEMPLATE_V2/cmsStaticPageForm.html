@@ -24,12 +24,12 @@
 			<div class="form-group custom-select">
 				<label>Page Type:</label>  
 				<select id="selectStaticPageType" name="pageData.pageType" onchange="getNextLevelForPageType(this);">
-					<option #if($!staticPageData.pageType=="BODY") selected #end value="BODY">BODY</option>
-					<option #if($!staticPageData.pageType=="TEMPLATE") selected #end value="TEMPLATE">TEMPLATE</option>
-					<option #if($!staticPageData.pageType=="BLOG") selected #end value="BLOG">BLOG</option>
-					<option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">CATEGORY</option>
-					<option #if($!staticPageData.pageType=="BRAND") selected #end value="BRAND">BRAND</option>
-					<option #if($!staticPageData.pageType=="MANUFACTURER") selected #end value="MANUFACTURER">MANUFACTURER</option> 
+					<option #if($!staticPageData.pageType=="BODY") selected #end value="BODY">Body</option>
+					<option #if($!staticPageData.pageType=="BLOG") selected #end value="BLOG">Blog</option>
+					<option #if($!staticPageData.pageType=="BRAND") selected #end value="BRAND">Brand</option>
+					<option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">Category</option>
+					<option #if($!staticPageData.pageType=="MANUFACTURER") selected #end value="MANUFACTURER">Manufacturer</option> 
+					<option #if($!staticPageData.pageType=="TEMPLATE") selected #end value="TEMPLATE">Template</option>
 				</select>
 				<span>
 					<i class="fas fa-chevron-down"></i>
