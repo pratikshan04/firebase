@@ -302,13 +302,13 @@ $.Autocompleter = function(input, options) {
 			if (!options.matchCase)
 				currentValue = currentValue.toLowerCase();
 			request(currentValue, receiveData, hideResultsNow);
-		} else {
+		}/* else {
 			if($("#trendingSearch") && $("#trendingSearch").val() == "Y"){
 				loadTrending();
 			}
 			stopLoading();
 			select.hide();
-		}
+		}*/
 	};
 	
 	function loadTrending(){

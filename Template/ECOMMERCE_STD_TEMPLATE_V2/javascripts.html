@@ -121,7 +121,7 @@ function deviceSelectAll(){
 </script>
 #end
 #if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage")
-#set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js'+$refreshVersion)
+#set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js?'+$refreshVersion)
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
 <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap-select.min.js" defer></script>
@@ -208,14 +208,45 @@ $("link[rel='stylesheet']").each(function(){
 <script src="$!cdnUrl$!webThemes/$siteName/js/jssor.slider.js" defer></script>
 <script src="$!cdnUrl$!webThemes/$siteName/js/jsor.customJs.js" defer></script>
 <script src="$!cdnUrl$!webThemes/$siteName/js/staticPage.js" defer></script>
-<script>
-$(function(){
-	jssorSliderFunction();
-	initInitalBanner();
-	loadStaticForms();
-	loadWidgets();
-});
-</script>
+	#if($!enablePrebuiltCmsHomepageScript=="Y")
+		<script>
+			$(function(){
+				if(jQuery("[data-bannertype='slider']").length>0){
+					jQuery("[data-bannertype='slider']").each(function(){
+						var bannerId = $(this).attr('data-bannerid');
+						jQuery("[data-bannerid='"+bannerId+"']").each(function(){
+							var bannerData = "";
+							var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
+							var wrapperId = jQuery(this).attr("id");
+							var bannerType = jQuery(this).data("bannertype");
+							console.log("Wrapper id :"+sliderId);
+							bannerData = $(this).html().replace("slidercontainer",sliderId);
+							jQuery(this).html(bannerData);
+							initJssorSlides(sliderId,"");
+							
+							if(bannerType=="slider"){
+								initJssorSlides(sliderId,"");
+							}/* else if(bannerType=="carousel"){
+								initCarousel(sliderId,carouselSetting);
+							} */
+						});
+					});
+				}
+
+				homeCarousels();
+			});
+			
+		</script>
+	#else
+		<script>
+			$(function(){
+				jssorSliderFunction();
+				initInitalBanner();
+				loadStaticForms();
+				loadWidgets();
+			}); 
+		</script>
+	#end
 #end
 
 #if($LayoutName=="HomePage" || $!isStaticHomePage =="Y")
@@ -232,9 +263,9 @@ $(function(){
 			});
 		}
 	});
-	jQuery(function(){
-		//priceLoadMainFunction();
-	});
+	/* jQuery(function(){
+		priceLoadMainFunction();
+	}); */
 </script>
 #end
 
