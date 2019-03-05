@@ -181,15 +181,13 @@ function refreshShoppingCart(id,partNum){
 	var lessThanMinOrder = true;
 	if(id != ""){
 		$("#refreshCartId").val(id);
-		//$("#refreshQty").val($("#textQty_"+partNum).val());
-		$("#refreshQty").val($.trim($("[data-cartitemid='"+id+"']").val()));
+		$("#refreshQty").val($("#textQty_"+partNum).val());
 		$("#lineItemCommentRef").val($("#lineItemComment_"+id).val());
 		if($("#requiredByDateRef").length > 0){
 			$("#requiredByDateRef").val($("#reqDate_"+id).val());
 		}
 	}
-	//var qtyEntered = parseInt($.trim($("#textQty_"+partNum).val()));
-	var qtyEntered = parseInt($.trim($("[data-cartitemid='"+id+"']").val()));
+	var qtyEntered = parseInt($.trim($("#textQty_"+partNum).val()));
 	if($("#mpn_"+partNum).length > 0 && $("#mpnDisplay"+partNum).length > 0){
 		mpn = $("#mpn_"+partNum).val();
 		mpnDisplay = $("#mpnDisplay"+partNum).val();
