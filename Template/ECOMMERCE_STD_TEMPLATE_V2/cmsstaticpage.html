@@ -1,4 +1,3 @@
-<!-- <link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> -->
 <link href="$!webThemes/CMS/css/lightslider.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="$!webThemes/CMS/js/lightslider.js"></script>
 <script>
@@ -12,14 +11,13 @@ jQuery(document).ready(function() {
 });
 </script>
 <style>
-footer,header,nav{pointer-events: none;}
-ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li textarea {
- margin-top: 10px;
- }
+footer,header,nav{
+	pointer-events: none;
+}
 </style>
 <div class="container">
 	<div class="row hideMe">
-		<div class="col-sm-6 col-xs-6 readyTemplatesForm">
+		<div class="readyTemplatesForm">
 			<div id="template-slider" class="template-slider">
 				#foreach($templateNamesList in $templateNames)
 				<div>
