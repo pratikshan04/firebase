@@ -18,10 +18,10 @@
 		 		<option #if($!type=="ALL") selected #end value="ALL" >All Pages</option>
 		 		<option #if($!type=="BODY") selected #end value="BODY" >Body</option>
 		 		<option #if($!type=="BLOG") selected #end value="BLOG">Blog</option>
-		 		<option #if($!type=="TEMPLATE") selected #end value="TEMPLATE" >Template</option>
-		 		<option #if($!type=="BRAND") selected #end value="BRAND">BRAND</option>
-				<option #if($!type=="MANUFACTURER") selected #end value="MANUFACTURER">MANUFACTURER</option> 
-		 		<!-- <option #if($!type=="CATEGORY") selected #end value="CATEGORY">Category</option> -->
+		 		<option #if($!type=="BRAND") selected #end value="BRAND">Brand</option>
+		 		<option #if($!type=="CATEGORY") selected #end value="CATEGORY">Category</option>
+				<option #if($!type=="MANUFACTURER") selected #end value="MANUFACTURER">Manufacturer</option> 
+				<option #if($!type=="TEMPLATE") selected #end value="TEMPLATE" >Template</option>
 		  	</select>
 		  	<input type="hidden" id="query" name="query" value="$!query"/>  
 		  	<input type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
