@@ -60,7 +60,7 @@ function showNotificationDiv(type,message){
 	}else{
 		$("#notificationDiv").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>'+message+'</div>');
 	}
-	$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
+	//$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 }
 function replaceNonAscii(s){
 	if(s!=undefined)
