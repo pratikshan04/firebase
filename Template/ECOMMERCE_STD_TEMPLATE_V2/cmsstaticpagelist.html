@@ -99,7 +99,8 @@ input[type="text"], input[type="password"], select {
 			  	<input type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" /> 
 			  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
 			  	<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
-			  	<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>   
+			  	<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
+			  	<input type="hidden" name="sortEnabled" value="$!sortEnabled"/>
 		  	</form>
 		  	<form method="get" id="staticForm" action="listStaticPageCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
 		  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
@@ -142,6 +143,7 @@ input[type="text"], input[type="password"], select {
 				<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
 				<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />  
 				<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
+				<input type="hidden" name="sortEnabled" value="$!sortEnabled"/>
 	  		</form>
 	  		<div class="text-right mTop-2">#if($!staticPageList.totalRows>0)Showing $staticPageList.rowsOnPage of $!staticPageList.totalRows Records #end</div>
 	  	</div>
@@ -167,9 +169,9 @@ input[type="text"], input[type="password"], select {
 				<th class="text-center width120">Actions</th>
 				<th class="text-center width80">SI No.</th>
 				<th class="width200">
-					<a href="listStaticPageCms.action?sortEnabled=true&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+					<a href="listStaticPageCms.action?sortEnabled=true&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Ascending">&#8679;</a>
 					Static Page Name
-					<a href="listStaticPageCms.action?sortEnabled=false&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+					<a href="listStaticPageCms.action?sortEnabled=false&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Descending">&#x21E9;</a>
 				</th>
 				<th>Url By PageId</th>
 				<th>Url By Page Name</th>
@@ -223,7 +225,7 @@ input[type="text"], input[type="password"], select {
 		</tbody>
 	</table>
 	<script>
-	paginationScriptCms($staticPageList.totalPages,"listStaticPageCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!staticPageList.pageSize&page=",$pageNo,1);
+	paginationScriptCms($staticPageList.totalPages,"listStaticPageCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!staticPageList.pageSize&sortEnabled=$!sortEnabled&page=",$pageNo,1);
 	</script>
 </div>
 <script>
