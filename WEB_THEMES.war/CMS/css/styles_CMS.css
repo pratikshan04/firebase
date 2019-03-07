@@ -1423,7 +1423,7 @@ float:right;
 	margin-bottom: 10px;
 }
 .pageTab .form-group label,.seoTab .form-group label{
-	font-size: 16px;
+	font-size: 15px;
 	color: #456078;
 }
 .pageTab .form-group.custom-select.custom-select span {
@@ -1497,9 +1497,9 @@ float:right;
 }
 .linkWraper a{
 	color: #666;
-	font-size: 10px;
+	font-size: 12px;
 	text-decoration: underline;
-	padding: 10px 0 2px 0;
+	padding: 4px 0 2px 0;
 	display: inline-block;
 }
 .staticPageSave .cms_leftMenuClose {
@@ -1720,8 +1720,7 @@ iframe#iframeId {
 	margin-top:10px;
 }
 .pageTab .cms_customCheckBox {
-	display: block;
-	margin-bottom: 12px;
+	margin: 2px 12px 5px 0;
 }
 .topNav_rightIcons > ul > li > a{
 	display:inline !important;
@@ -1778,6 +1777,14 @@ iframe#iframeId {
 	margin-bottom: 20px;
 	position: relative;
 	background: #e5e7e7;
+}
+.cms_pageSelection .listPageFilterBox form {
+	margin-bottom: 0;
+}
+.cms_pageSelection .listPageFilterBox {
+	background: #FFF;
+	margin: 0;
+	padding: 20px 10px;
 }
 .outLineBtn_left {
 	background: transparent;
@@ -1845,6 +1852,9 @@ select:focus {
 	background: #FFF;
 	border-radius: 0 21px 21px 0;
 }
+.cms_pageSelection .cms_customSearch {
+	margin: 0;
+}
 .cms_pageSearch + div {
 	float: left;
 	margin: 7px 0 0 20px;
@@ -1866,6 +1876,18 @@ select:focus {
 	float: left;
 	color: #FFF;
 	font-size: 20px;
+}
+.cms_customRadioBtn.blankText{
+	padding: 0;
+}
+.cms_customRadioBtn.blankText input[type=radio] {
+	display: block;
+	opacity: 0;
+	margin: 0;
+}
+.cms_customRadioBtn.blankText input[type=radio]+span:after,.cms_customRadioBtn.blankText input[type=radio]+span:before{
+	top: -2px;
+    left: -2px;
 }
 .cms_customRadioBtn {
     position: relative;
@@ -2051,7 +2073,17 @@ select:focus {
 .cms_customCheckBox input[type=checkbox]:disabled,.cms_customCheckBox2 input[type=checkbox]:disabled {
     cursor: not-allowed
 }
-
+.cms_customCheckBox.cms_customCheckBoxRight {
+    padding: 0 28px 0 0;
+}
+.cms_customCheckBoxRight.cms_customCheckBox input[type=checkbox]+span:after, .cms_customCheckBoxRight.cms_customCheckBox2 input[type=checkbox]+span:after {
+	right: 0;
+	left: inherit;
+}
+.cms_customCheckBoxRight.cms_customCheckBox input[type=checkbox]:checked+span:before, .cms_customCheckBoxRight.cms_customCheckBox2 input[type=checkbox]:checked+span:before{
+	left: inherit;
+	right: 7px;
+}
 .create-newPage {
 	margin: 14px 20px 14px 0;
 	text-align: right;
@@ -2065,12 +2097,22 @@ select:focus {
 	padding: 8px 16px;
 	border-radius: 21px;
 }
+.cms_greenBtn{
+	background: #47aa9d;
+	color: #FFF;
+	font-size: 18px;
+	height: 42px;
+	display: inline-block;
+	padding: 8px 16px;
+	border-radius: 21px;
+}
 .create-newPage .action-text {
 	margin-right: 10px;
 }
 .displayBox{
-	float:right;
+	float: left;
 	font-size: 16px;
+	margin: 0 0 0 25px;
 }
 .displayBox .custom-select select{
 	width: 104px;
@@ -2124,7 +2166,23 @@ select:focus {
 	overflow: hidden;
 	margin-bottom: 0;
 }
-.cms_staticTable .pagebarUTH {
+.cms_pageSelection .cms_customTable.table{
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+}
+.cms_pageSelection .cms_staticTable .pagebarUTH,
+.cms_pageSelection .cms_pageSelection .pagebarUTH {
+	border-bottom-left-radius: 1em;
+	border-bottom-right-radius: 1em;
+}
+.linkWraper {
+	color: #47aa9d;
+}
+.cms_pageSelection{
+	padding: 0 10px;
+}
+.cms_staticTable .pagebarUTH,
+.cms_pageSelection .pagebarUTH {
 	background: #f5f5f5;
 	height: 65px;
 	padding: 22px 10px;
@@ -2288,10 +2346,17 @@ select:focus {
 }
 .previewSection{
 	width: calc(100% - 530px);
-	overflow: auto;
     background: #FFF;
-	height: 560px;
 	float:left;
+	border: 1px solid #c9c9c9;
+	border-top-left-radius: 11px;
+	border-top: 0;
+	border-bottom: 0;
+}
+.previewSection #previewContainer{
+	overflow: auto;
+	height: calc(560px - 58px);
+	padding: 10px;
 }
 .popupWraper{
 	padding: 0 12px;
@@ -2314,19 +2379,16 @@ select:focus {
 .listRightColumn .cms_customTable.table>thead>tr>th {
 	border: 0;
 }
-.previewSection {
-	border: 1px solid #c9c9c9;
-	border-top-left-radius: 11px;
-	border-top: 0;
-	border-bottom: 0;
-}
 .cms_customTable.table>tbody>tr:nth-child(10)>td {
 	border-bottom: 0;
+}
+.cms_customSearch.cms_customSearchRight {
+	margin: 4px 8% 10px auto;
 }
 .cms_customSearch {
 	position: relative;
 	width: 400px;
-	margin: 4px 8% 10px auto;
+	margin: 4px 10px;
 }
 .cms_customSearch input[type="text"] {
 	border: 1px solid #c9c9c9;
@@ -2361,8 +2423,215 @@ select:focus {
 .pageDesignLogo strong{
 	font-family: RobotoBlack;
 }
-
-/* .cms_staticForm{
+.cms_pgnation {
+	background: #f5f5f5;
+	padding: 10px;
+	border-radius: 0 0 10px 10px;
+	border: 1px solid #c9c9c9;
+	border-top: none;
+}
+.cms_pgnation .pagebarUTH {
+	float: right;
+	width: 270px;
+	font-size: 15px;
+	color: #254460;
+	text-align: center;
+	margin-top: 12px;
+}
+.cms_formBtn {
+	float: left;
+	width: calc(100% - 270px);
+	text-align: right;
+}
+.cms_formBtn .outLineBtn_left {
+	float: left;
+}
+.cms_formBtn .cms_blueBtn {
+    margin-left: 20px;
+}
+.dragelementWrap {
+	padding: 0;
+	background: #424141;
+	display: table;
+	border-spacing: 7px;
+	margin-bottom: 10px
+}
+.dragelementWrap .dragFormElement {
+	width: 130px;
+	background: #2c2b2b;
+	padding: 5px;
+	color: #c8c8c8;
+	cursor: move;
+	font-size: 16px;
+	text-align: center;
+	height: 68px;
+	vertical-align: middle;
+	display: table-cell;
+	border-spacing: 5px;
+}
+.dragelementWrap .dragFormElement span {
+	display: block;
+}
+.dragelementWrap .dragFormElement .input-text, .text-area, .input-select, .input-captcha {
+	width: 70px;
+	border: 1px solid #c8c8c8;
+	margin: 0 auto;
+	text-align: left;
+	font-size: 13px;
+	padding: 2px 5px;
+	line-height: 13px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	position: relative;
+}
+.display-text{
+	font-size: 26px;
+}
+.dragelementWrap .dragFormElement .text-area {
+	padding: 2px 5px 16px 5px;
+}
+.dragelementWrap .dragFormElement .input-captcha {
+	padding: 8px;
+	text-align: center;
+}
+.input-select::after {
+    content: '\f0dd';
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-family: "Font Awesome 5 Free";
+    color: #c8c8c8;
+}
+.input-radio i {
+	width: 26px;
+	height: 26px;
+	border: 2px solid;
+	display: inline-block;
+	border-radius: 13px;
+	position: relative;
+}
+.input-radio i:after {
+	content: "";
+	height: 14px;
+	width: 14px;
+	background: #c7c7c7;
+	display: inline-block;
+	border-radius: 9px;
+	top: 4px;
+	left: 4px;
+	position: absolute;
+}
+.formEditWrap {
+	padding: 0 10px;
+}
+.formTitle {
+	width: 350px;
+	float: left;
+	margin-left: 15px;
+	border-radius: 7px;
+	border: 1px solid #b7b7b7
+}
+.formTitle form{
+	padding: 15px;
+	height: 486px;
+	overflow: auto;
+}
+.formBuilderWrap {
+	width: calc(100% - 365px);
+	float: left;
+	position: relative;
+	padding-right: 0;
+	overflow: hidden;
+}
+.formBuilderWrap.active {
+	padding-right: 365px;
+}
+.editelementWrap{
+	width: 350px;
+	border: 1px solid #b1b1b1;
+	border-radius: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	overflow: auto;
+}
+.editelement {
+	width: 100%;
+	padding: 15px;
+	height: 486px;
+	overflow: auto;
+}
+.cms_sectionHeading {
+	margin: 0;
+	padding: 10px;
+	background: #456078;
+	color: #FFF;
+	border-radius: 6px 6px 0 0;
+}
+.dropelementWrap{
+	width:100%;
+	border: 1px solid #b1b1b1;
+	border-radius: 7px;
+}
+.dropelement{
+	height: 548px;
+	padding: 15px;
+	overflow: auto;
+}
+.cms_footerSection,.save-btnBlock {
+	width: 100%;
+	clear: both;
+	background: #f5f5f5;
+	padding: 10px 15px;
+	border-radius: 0 0 7px 7px;
+}
+.save-btnBlock .cms_greenBtn{
+	margin-right: 20px;
+}
+.editelement label, .formTitle label {
+	color: #456078;
+	margin-bottom: 8px;
+	font-size: 15px;
+	font-weight: 500;
+}
+.editelement input[type="text"],
+.editelement input[type="password"],
+.editelement select,
+.formTitle ul li input[type="text"],
+.formTitle ul li select {
+	padding: 5px 12px;
+	height: 34px;
+	border: 1px solid #c7c6c6;
+	background: #ffffff;
+	width: 100%;
+	border-radius: 20px;
+}
+.editelement textarea {
+	padding: 5px;
+	min-height: 34px;
+	border: 1px solid #c7c6c6;
+	background: #ffffff;
+	width: 100%;
+	border-radius: 5px;
+}
+.editelement ul,.formTitle ul{
+	margin-bottom: 0;
+}
+.editelement ul li, .formTitle ul li {
+	margin-bottom: 10px;
+}
+/*.dropelement form ul li{
+	padding:10px;
+}
+a.save-form {
+	text-align: center;
+    padding: 5px 25px;
+    background: #007580;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+.save-btnBlock {clear: both;}
+.cms_staticForm{
 	padding: 5px;
     color: #fff;
     cursor: pointer;
@@ -2445,4 +2714,45 @@ overflow:auto;
     #in_title, #in_snippet, #in_url, #in_richtext, #in_datevalue, #in_bold {
         font-family: 'Trebuchet MS'; 
     }
-   */
+   .toggelFormElem,.getFormElem {
+	position: absolute;
+	bottom: -36px;
+	left: 0px;
+	color: #c8c8c8;
+	content: "\f102";
+	background: #424141;
+	min-width: 45px;
+	text-align: center;
+	height: 36px;
+	padding: 4px 12px;
+	cursor: pointer;
+}
+.dragelementWrap {
+	padding: 0;
+	background: #424141;
+	display: table;
+	border-spacing: 7px;
+	top: -85px;
+	position: absolute;
+	z-index: 2;
+	width: 970px;
+	transition: top 0.3s ease-in-out;
+	-webkit-transition: top 0.3s ease-in-out;
+	-moz-transition: top 0.3s ease-in-out;
+}
+.dragelementWrap.active{
+	top: 0;
+}
+.dragelementWrap.active .showOnActive,.dragelementWrap .hideOnActive{
+	display: block;
+}
+.dragelementWrap.active .hideOnActive,.dragelementWrap .showOnActive {
+	display: none;
+}
+.getFormElem > span{
+	vertical-align: middle;
+}
+.getFormElem > b{
+	font-size: 16px;
+	margin-left: 10px;
+}*/

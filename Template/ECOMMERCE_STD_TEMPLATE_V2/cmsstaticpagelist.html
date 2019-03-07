@@ -57,29 +57,6 @@
 		  	<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
 	  		<button type="submit" class="outLineBtn_left"><i class="fa fa-lg fa-times-circle"></i> Clear Search</button>
 	  	</form>
-	  	<div class="displayBox">
-	  		<form method="get" action="listStaticPageCms.action">
-	  			<label>Display: </label>
-	  			<div class="custom-select">
-		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
-						<option #if($staticPageList.pageSize==10) selected #end value="10" >10</option>
-						<option #if($staticPageList.pageSize==25) selected #end value="25" >25</option>
-						<option #if($staticPageList.pageSize==50) selected #end value="50" >50</option> 
-						<option #if($staticPageList.pageSize==100) selected #end  value="100" >100</option>
-					</select>
-					<span>
-						<i class="fas fa-chevron-down"></i>
-					</span>
-				</div>
-				<label> Records</label>
-				<input type="hidden" name="query" value="$!query" />
-				<input type="hidden" id="type" name="type" value="$!type"/> 
-				<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-				<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />  
-				<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
-				<input type="hidden" name="sortEnabled" value="$!sortEnabled"/> 
-	  		</form>
-	  	</div>
 					
 	  	<div class="siteDisplayBox">
 	  		<form method="get" action="listStaticPageCms.action">
@@ -103,7 +80,29 @@
 	  	</div>
 	</div>
 	<div class="create-newPage clearfix">
-		<div class="cms_pageCount">#if($!staticPageList.totalRows>0)Showing $staticPageList.rowsOnPage of $!staticPageList.totalRows Records #end</div>
+		<div class="displayBox">
+	  		<form method="get" action="listStaticPageCms.action">
+	  			<label>Display: </label>
+	  			<div class="custom-select">
+		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
+						<option #if($staticPageList.pageSize==10) selected #end value="10" >10</option>
+						<option #if($staticPageList.pageSize==25) selected #end value="25" >25</option>
+						<option #if($staticPageList.pageSize==50) selected #end value="50" >50</option> 
+						<option #if($staticPageList.pageSize==100) selected #end  value="100" >100</option>
+					</select>
+					<span>
+						<i class="fas fa-chevron-down"></i>
+					</span>
+				</div>
+				<label> #if($!staticPageList.totalRows>0) of $!staticPageList.totalRows Records #end</label>
+				<input type="hidden" name="query" value="$!query" />
+				<input type="hidden" id="type" name="type" value="$!type"/> 
+				<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+				<input type="hidden" name="selectedSiteName" value="$!selectedSiteName" />  
+				<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
+	  		</form>
+	  	</div>
+		<!-- <div class="cms_pageCount">#if($!staticPageList.totalRows>0)Showing $staticPageList.rowsOnPage of $!staticPageList.totalRows Records #end</div> -->
 		<a href="/cmsStaticPageCms.action?&selectedSiteId=$!selectedSiteId" onclick="getDynamicData();">
 	  		<span class="action-text">
 				Create New Static Page                                                                            

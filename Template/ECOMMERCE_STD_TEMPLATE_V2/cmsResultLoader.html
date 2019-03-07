@@ -5,42 +5,9 @@
 <link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
 <link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/unilogWebLayouts.css" media="all" />
-<style>
-.banner_addNewBtn, .banner_addNewBtn:hover {
-    background-color: rgb(27, 99, 171);
-    color: rgb(255, 255, 255);
-    padding: 11px 8px 8px 8px;
-    margin-left: -4px;
-}
-#staticForm div label span{
-	vertical-align: middle;
-}
-input[type="text"], input[type="password"], select {
-    width: auto;
-    cursor: auto;
-    outline: none;
-    border: 1px solid #797d82;
-    color: #797d82;
-    background: #fff;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-style: normal;
-    height: 31px;
-    font-size: 14px;
-    padding:5px;
-}
-.listStaticSelect{
-	float:left;
-	margin-right:10px;
-}
-.listStaticSelect select{
-	width:200px;
-}
-.clearStaticSearch {
-	position: relative;
-}
-</style>
+<link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
+<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
+<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
 #parse("head.html")
 <script type="text/javascript">
       function paginationScriptCms(n_pages,page_link,iindex,pgno){
@@ -123,226 +90,251 @@ input[type="text"], input[type="password"], select {
     </script>
 	#if($responseType=="Brand")
 	<div class="cms_staticTable"> 
-	<div class="listPageFilterBox clearfix">
-			<div class="searchBox">
-			  	<form method="get" id="brandForm" action="bandDetailListCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
-			  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
-			  		<input  type="hidden" id="pageSize" name="pageSize" value="$brandsList.pageSize" /> 
-			  		<input type="hidden" id="type" name="type" value="$!type"/> 
-					<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
-				</form>
-			  	<form class="clearStaticSearch">
-			  		<input type="hidden" name="query" value=""/>
-			  		<input type="hidden" name="searchColumnType" value=""/>
-			  		<input type="hidden" id="type" name="type" value="$!type"/>   
-				  	<input type="hidden" name="pageSize" value="$brandsList.pageSize" /> 
-				  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-			  		<button type="submit"><i class="fa fa-lg fa-times"></i> Clear Search</button>
-			  	</form>
-		  	</div>
-		  	<div class="displayBox">
-		  		<form method="get" action="bandDetailListCms.action">
-		  			<label>Display </label>
-		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
-						<option #if($brandsList.pageSize==10) selected #end value="10" >10</option>
-						<option #if($brandsList.pageSize==25) selected #end value="25" >25</option>
-						<option #if($brandsList.pageSize==50) selected #end value="50" >50</option> 
-						<option #if($brandsList.pageSize==100) selected #end  value="100" >100</option>
-					</select>
-					<label> Records</label>
+		<div class="listPageFilterBox clearfix">
+			<form method="get" id="brandForm" action="bandDetailListCms.action" class="page-inList clearfix" onsubmit="return validateSearchCMSForm();">
+				<div class="cms_customSearch clearfix">
+					<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
+					<input  type="hidden" id="pageSize" name="pageSize" value="$brandsList.pageSize" /> 
+					<input type="hidden" id="type" name="type" value="$!type"/> 
+					<button type="submit"><i class="fa fa-search"></i>	</button>
+				</div>
+			</form>
+			<form class="clearStaticSearch">
+				<input type="hidden" name="query" value=""/>
+				<input type="hidden" name="searchColumnType" value=""/>
+				<input type="hidden" id="type" name="type" value="$!type"/>   
+				<input type="hidden" name="pageSize" value="$brandsList.pageSize" /> 
+				<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+				<button type="submit" class="outLineBtn_left"><i class="fa fa-lg fa-times-circle"></i> Clear Search</button>
+			</form>
+			<div class="displayBox">
+				<form method="get" action="bandDetailListCms.action">
+					<label>Display </label>
+					<div class="custom-select">
+						<select name="pageSize" id="pageSize" onchange="this.form.submit()">
+							<option #if($brandsList.pageSize==10) selected #end value="10" >10</option>
+							<option #if($brandsList.pageSize==25) selected #end value="25" >25</option>
+							<option #if($brandsList.pageSize==50) selected #end value="50" >50</option> 
+							<option #if($brandsList.pageSize==100) selected #end  value="100" >100</option>
+						</select>
+						<span>
+							<i class="fas fa-chevron-down"></i>
+						</span>
+					</div>
+					<label> #if($!brandsList.totalRows>0) of $!brandsList.totalRows Records #end</label>
 					<input type="hidden" name="query" value="$!query" />
 					<input type="hidden" id="type" name="type" value="$!type"/> 
 					<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
 					<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
-		  		</form>
-		  		<div class="text-right mTop-2">#if($!brandsList.totalRows>0)Showing $brandsList.rowsOnPage of $!brandsList.totalRows Records #end</div>
-		  	</div>
-		</div> 
-			<table class="table table-bordered table-striped display rwd-table" id="brandListTable">
-				<thead>
-					<tr>
-						<th class="text-center">SI No.</th>
-						<th class="width260">
-							<a href="bandDetailListCms.action?sortEnabled=true&sortColumn=brandName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
-							Brand Name
-							<a href="bandDetailListCms.action?sortEnabled=false&sortColumn=brandName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
-						</th>
-						<th class="text-center width50">Select One</th>
-					</tr>
-				</thead>
-				<tbody>
-				#set($pageNo = ($brandsList.pageNo - 1))
-				#set($counter = $pageNo * $brandsList.pageSize)
-				#if($brandsList.resultSet.size()>0)
-					#set($iindex = $counter + 1)
-					#foreach($brand in $brandsList.resultSet)
-					<tr>
-						<td class="text-center"> $iindex </td>
-						<td>$!brand.brandName</td>
-						<td class="text-center"><input type="radio" name="brandSelectRadio" data-listtype="BRAND" data-name="$!brand.brandName" value="$!brand.id" onclick="setThisValueToInput(this);"/></td>
-					</tr>
-					#set($iindex = $iindex + 1)
-					#end
-				#else
-				<tr><td colspan="3" align="center"> No data </td></tr>
-				#end
-				</tbody>
-			</table>
-			<script>
-			paginationScriptCms($brandsList.totalPages,"bandDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!brandsList.pageSize&page=",$pageNo,1);
-			</script>
+				</form>
+				<!--<div class="text-right mTop-2">#if($!brandsList.totalRows>0)Showing $brandsList.rowsOnPage of $!brandsList.totalRows Records #end</div>-->
+			</div>
 		</div>
+		<table class="table cms_customTable rwd-table" id="brandListTable">
+			<thead>
+				<tr>
+					<th class="text-center">Serial Number</th>
+					<th class="width260">
+						<a href="bandDetailListCms.action?sortEnabled=true&sortColumn=brandName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+						Brand Name
+						<a href="bandDetailListCms.action?sortEnabled=false&sortColumn=brandName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+					</th>
+					<th class="text-center width50">Select One</th>
+				</tr>
+			</thead>
+			<tbody>
+			#set($pageNo = ($brandsList.pageNo - 1))
+			#set($counter = $pageNo * $brandsList.pageSize)
+			#if($brandsList.resultSet.size()>0)
+				#set($iindex = $counter + 1)
+				#foreach($brand in $brandsList.resultSet)
+				<tr>
+					<td class="text-center cms_slNo"> $iindex </td>
+					<td>$!brand.brandName</td>
+					<td class="text-center"><input type="radio" name="brandSelectRadio" data-listtype="BRAND" data-name="$!brand.brandName" value="$!brand.id" onclick="setThisValueToInput(this);"/></td>
+				</tr>
+				#set($iindex = $iindex + 1)
+				#end
+			#else
+			<tr><td colspan="3" align="center"> No data </td></tr>
+			#end
+			</tbody>
+		</table>
+		<script>
+		paginationScriptCms($brandsList.totalPages,"bandDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!brandsList.pageSize&page=",$pageNo,1);
+		</script>
+	</div>
 	#end
 	#if($responseType=="Manufacturer")
-	<div class="cms_staticTable"> 
-	<div class="listPageFilterBox clearfix">
-			<div class="searchBox">
-			  	<form method="get" id="brandForm" action="manufacturerDetailListCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
-			  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
-			  		<input  type="hidden" id="pageSize" name="pageSize" value="$manufacturersList.pageSize" /> 
-			  		<input type="hidden" id="type" name="type" value="$!type"/> 
-					<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
-				</form>
-			  	<form class="clearStaticSearch">
-			  		<input type="hidden" name="query" value=""/>
-			  		<input type="hidden" name="searchColumnType" value=""/>
-			  		<input type="hidden" id="type" name="type" value="$!type"/>   
-				  	<input type="hidden" name="pageSize" value="$manufacturersList.pageSize" /> 
-				  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-			  		<button type="submit"><i class="fa fa-lg fa-times"></i> Clear Search</button>
-			  	</form>
-		  	</div>
-		  	<div class="displayBox">
-		  		<form method="get" action="manufacturerDetailListCms.action">
-		  			<label>Display </label>
-		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
-						<option #if($manufacturersList.pageSize==10) selected #end value="10" >10</option>
-						<option #if($manufacturersList.pageSize==25) selected #end value="25" >25</option>
-						<option #if($manufacturersList.pageSize==50) selected #end value="50" >50</option> 
-						<option #if($manufacturersList.pageSize==100) selected #end  value="100" >100</option>
-					</select>
-					<label> Records</label>
-					<input type="hidden" name="query" value="$!query" />
+	<div class="cms_pageSelection"> 
+		<div class="listPageFilterBox clearfix">
+			<form method="get" id="brandForm" action="manufacturerDetailListCms.action" class="page-inList clearfix" onsubmit="return validateSearchCMSForm();">
+				<div class="cms_customSearch clearfix">
+					<input type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
+					<input  type="hidden" id="pageSize" name="pageSize" value="$manufacturersList.pageSize" /> 
 					<input type="hidden" id="type" name="type" value="$!type"/> 
-					<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-					<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
-		  		</form>
-		  		<div class="text-right mTop-2">#if($!manufacturersList.totalRows>0)Showing $manufacturersList.rowsOnPage of $!manufacturersList.totalRows Records #end</div>
-		  	</div>
-		</div> 
-			<table class="table table-bordered table-striped display rwd-table" id="manufacturerListTable">
-				<thead>
-					<tr>
-						<th class="text-center">SI No.</th>
-						<th class="width260">
-							<a href="manufacturerDetailListCms.action?sortEnabled=true&sortColumn=manufacturerName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
-							Manufacturer Name
-							<a href="manufacturerDetailListCms.action?sortEnabled=false&sortColumn=manufacturerName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
-						</th>
-						<th class="text-center width50">Select One</th>
-					</tr>
-				</thead>
-				<tbody>
-				#set($pageNo = ($manufacturersList.pageNo - 1))
-				#set($counter = $pageNo * $manufacturersList.pageSize)
-				#if($manufacturersList.resultSet.size()>0)
-					#set($iindex = $counter + 1)
-					#foreach($manufacturer in $manufacturersList.resultSet)
-					<tr>
-						<td class="text-center"> $iindex </td>
-						<td>$!manufacturer.manufacturerName</td>
-						<td class="text-center"><input type="radio" name="manufacturerSelectRadio" data-listtype="MANUFACTURER" data-name="$!manufacturer.manufacturerName"  value="$!manufacturer.id" onclick="setThisValueToInput(this);"/></td>
-					</tr>
-					#set($iindex = $iindex + 1)
-					#end
-				#else
-				<tr><td colspan="3" align="center"> No data </td></tr>
-				#end
-				</tbody>
-			</table>
-			<script>
-			paginationScriptCms($manufacturersList.totalPages,"manufacturerDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!manufacturersList.pageSize&page=",$pageNo,1);
-			</script>
+					<button type="submit"><i class="fa fa-search"></i>	</button>
+				</div>
+			</form>
+			<form class="clearStaticSearch">
+				<input type="hidden" name="query" value=""/>
+				<input type="hidden" name="searchColumnType" value=""/>
+				<input type="hidden" id="type" name="type" value="$!type"/>   
+				<input type="hidden" name="pageSize" value="$manufacturersList.pageSize" /> 
+				<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+				<button type="submit" class="outLineBtn_left"><i class="fa fa-lg fa-times-circle"></i> Clear Search</button>
+			</form>
+			<div class="displayBox">
+				<form method="get" action="manufacturerDetailListCms.action">
+					<label>Display </label>
+					<div class="custom-select">
+						<select name="pageSize" id="pageSize" onchange="this.form.submit()">
+							<option #if($manufacturersList.pageSize==10) selected #end value="10" >10</option>
+							<option #if($manufacturersList.pageSize==25) selected #end value="25" >25</option>
+							<option #if($manufacturersList.pageSize==50) selected #end value="50" >50</option> 
+							<option #if($manufacturersList.pageSize==100) selected #end  value="100" >100</option>
+						</select>
+						<span>
+							<i class="fas fa-chevron-down"></i>
+						</span>
+					</div>
+					<label> #if($!manufacturersList.totalRows>0) of $!manufacturersList.totalRows Records #end</label>
+						<input type="hidden" name="query" value="$!query" />
+						<input type="hidden" id="type" name="type" value="$!type"/> 
+						<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+						<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
+				</form>
+				<!--<div class="text-right mTop-2">#if($!manufacturersList.totalRows>0)Showing $manufacturersList.rowsOnPage of $!manufacturersList.totalRows Records #end</div>-->
+			</div>
 		</div>
+		<table class="table cms_customTable rwd-table" id="manufacturerListTable">
+			<thead>
+				<tr>
+					<th class="text-center">Serial Number</th>
+					<th>
+						<a href="manufacturerDetailListCms.action?sortEnabled=true&sortColumn=manufacturerName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+						Manufacturer Name
+						<a href="manufacturerDetailListCms.action?sortEnabled=false&sortColumn=manufacturerName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+					</th>
+					<th class="text-center width50">Select One</th>
+				</tr>
+			</thead>
+			<tbody>
+			#set($pageNo = ($manufacturersList.pageNo - 1))
+			#set($counter = $pageNo * $manufacturersList.pageSize)
+			#if($manufacturersList.resultSet.size()>0)
+				#set($iindex = $counter + 1)
+				#foreach($manufacturer in $manufacturersList.resultSet)
+				<tr>
+					<td class="text-center cms_slNo"> $iindex </td>
+					<td>$!manufacturer.manufacturerName</td>
+					<td class="text-center">
+						<label class="cms_customRadioBtn blankText">
+							<input type="radio" name="manufacturerSelectRadio" data-listtype="MANUFACTURER" data-name="$!manufacturer.manufacturerName"  value="$!manufacturer.id" onclick="setThisValueToInput(this);"/>
+							<span></span>
+						</label>
+					</td>
+				</tr>
+				#set($iindex = $iindex + 1)
+				#end
+			#else
+			<tr><td colspan="3" align="center"> No data </td></tr>
+			#end
+			</tbody>
+		</table>
+		<script>
+		paginationScriptCms($manufacturersList.totalPages,"manufacturerDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!manufacturersList.pageSize&page=",$pageNo,1);
+		</script>
+	</div>
 	#end
 	#if($responseType=="Category")
-	<div class="cms_staticTable"> 
-	<div class="listPageFilterBox clearfix">
-			<div class="searchBox">
-			  	<form method="get" id="categoryForm" action="categoryDetailListCms.action" style="float:left;" onsubmit="return validateSearchCMSForm();">
+	<div class="cms_pageSelection"> 
+		<div class="listPageFilterBox clearfix">
+		  	<form method="get" id="categoryForm" action="categoryDetailListCms.action" class="page-inList clearfix" onsubmit="return validateSearchCMSForm();">
+			  	<div class="cms_customSearch clearfix">
 			  		<input class="cms_bannerSearch" type="text" id="queryTxtBox" name="query" value="$!query" placeholder="Enter Keyword to Search"/> 
 			  		<input  type="hidden" id="pageSize" name="pageSize" value="$categoryList.pageSize" /> 
 			  		<input type="hidden" id="type" name="type" value="$!type"/> 
-					<button class="banner_addNewBtn" type="submit" value="" ><i class="list-search-icn fa fa-search"></i></button>
-				</form>
-			  	<form class="clearStaticSearch">
-			  		<input type="hidden" name="query" value=""/>
-			  		<input type="hidden" name="searchColumnType" value=""/>
-			  		<input type="hidden" id="type" name="type" value="$!type"/>   
-				  	<input type="hidden" name="pageSize" value="$categoryList.pageSize" /> 
-				  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
-			  		<button type="submit"><i class="fa fa-lg fa-times"></i> Clear Search</button>
-			  	</form>
-		  	</div>
+					<button type="submit"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		  	<form class="clearStaticSearch">
+		  		<input type="hidden" name="query" value=""/>
+		  		<input type="hidden" name="searchColumnType" value=""/>
+		  		<input type="hidden" id="type" name="type" value="$!type"/>   
+			  	<input type="hidden" name="pageSize" value="$categoryList.pageSize" /> 
+			  	<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
+		  		<button type="submit" class="outLineBtn_left"><i class="fa fa-lg fa-times-circle"></i> Clear Search</button>
+		  	</form>
 		  	<div class="displayBox">
 		  		<form method="get" action="categoryDetailListCms.action">
-		  			<label>Display </label>
-		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
-						<option #if($categoryList.pageSize==10) selected #end value="10" >10</option>
-						<option #if($categoryList.pageSize==25) selected #end value="25" >25</option>
-						<option #if($categoryList.pageSize==50) selected #end value="50" >50</option> 
-						<option #if($categoryList.pageSize==100) selected #end  value="100" >100</option>
-					</select>
-					<label> Records</label>
+		  			<label>Display: </label>
+		  			<div class="custom-select">
+			  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
+							<option #if($categoryList.pageSize==10) selected #end value="10" >10</option>
+							<option #if($categoryList.pageSize==25) selected #end value="25" >25</option>
+							<option #if($categoryList.pageSize==50) selected #end value="50" >50</option> 
+							<option #if($categoryList.pageSize==100) selected #end  value="100" >100</option>
+						</select>
+						<span>
+							<i class="fas fa-chevron-down"></i>
+						</span>
+					</div>
+					<label> #if($!categoryList.totalRows>0) of $!categoryList.totalRows Records #end</label>
 					<input type="hidden" name="query" value="$!query" />
 					<input type="hidden" id="type" name="type" value="$!type"/> 
 					<input type="hidden" name="selectedSiteId" value="$!selectedSiteId" />
 					<input type="hidden" name="searchColumnType" value="$!searchColumnType"/>
 		  		</form>
-		  		<div class="text-right mTop-2">#if($!categoryList.totalRows>0)Showing $categoryList.rowsOnPage of $!categoryList.totalRows Records #end</div>
+		  		<!-- <div class="text-right mTop-2">#if($!categoryList.totalRows>0)Showing $categoryList.rowsOnPage of $!categoryList.totalRows Records #end</div> -->
 		  	</div>
-		</div> 
-			<table class="table table-bordered table-striped display rwd-table" id="categoryListTable">
-				<thead>
-					<tr>
-						<th class="text-center">SI No.</th>
-						<th class="width260">
-							<a href="categoryDetailListCms.action?sortEnabled=true&sortColumn=categoryName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
-							Category Name
-							<a href="categoryDetailListCms.action?sortEnabled=false&sortColumn=categoryName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
-						</th>
-						<th class="text-center">
-						<a href="categoryDetailListCms.action?sortEnabled=true&sortColumn=levelNumber&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
-						Category Level
-						<a href="categoryDetailListCms.action?sortEnabled=false&sortColumn=levelNumber&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
-						</th>
-						<th class="text-center">Taxonomy Name</th>
-						<th class="text-center width50">Select One</th>
-					</tr>
-				</thead>
-				<tbody>
-				#set($pageNo = ($categoryList.pageNo - 1))
-				#set($counter = $pageNo * $categoryList.pageSize)
-				#if($categoryList.resultSet.size()>0)
-					#set($iindex = $counter + 1)
-					#foreach($category in $categoryList.resultSet)
-					<tr>
-						<td class="text-center"> $iindex </td>
-						<td>$!category.categoryName</td>
-						<td class="text-center">Level - $category.levelNumber</td>
-						<td class="text-center">$category.taxonomyDTO.name</td>
-						<td class="text-center"><input type="radio" name="categorySelectRadio" data-listtype="CATEGORY" data-name="$!category.categoryName" value="$!category.id" onclick="setThisValueToInput(this);"/></td>
-					</tr>
-					#set($iindex = $iindex + 1)
-					#end
-				#else
-				<tr><td colspan="5" align="center"> No data </td></tr>
-				#end
-				</tbody>
-			</table>
-			<script>
-			paginationScriptCms($categoryList.totalPages,"categoryDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!categoryList.pageSize&page=",$pageNo,1);
-			</script>
 		</div>
+		<table class="table cms_customTable rwd-table" id="categoryListTable">
+			<thead>
+				<tr>
+					<th class="text-center">Serial Number</th>
+					<th>
+						<a href="categoryDetailListCms.action?sortEnabled=true&sortColumn=categoryName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+							Category Name
+						<a href="categoryDetailListCms.action?sortEnabled=false&sortColumn=categoryName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+					</th>
+					<th class="text-center">
+						<a href="categoryDetailListCms.action?sortEnabled=true&sortColumn=levelNumber&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Ascending">&#8679;</a>
+							Category Level
+						<a href="categoryDetailListCms.action?sortEnabled=false&sortColumn=levelNumber&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId" title="Descending">&#x21E9;</a>
+					</th>
+					<th class="text-center">Taxonomy Name</th>
+					<th class="text-center width50">Select One</th>
+				</tr>
+			</thead>
+			<tbody>
+			#set($pageNo = ($categoryList.pageNo - 1))
+			#set($counter = $pageNo * $categoryList.pageSize)
+			#if($categoryList.resultSet.size()>0)
+				#set($iindex = $counter + 1)
+				#foreach($category in $categoryList.resultSet)
+				<tr>
+					<td class="text-center cms_slNo"> $iindex </td>
+					<td>$!category.categoryName</td>
+					<td class="text-center">Level - $category.levelNumber</td>
+					<td class="text-center">$category.taxonomyDTO.name</td>
+					<td class="text-center">
+						<label class="cms_customRadioBtn blankText">
+							<input type="radio" name="categorySelectRadio" data-listtype="CATEGORY" data-name="$!category.categoryName" value="$!category.id" onclick="setThisValueToInput(this);"/>
+							<span></span>
+						</label>
+					</td>
+				</tr>
+				#set($iindex = $iindex + 1)
+				#end
+			#else
+			<tr><td colspan="5" align="center"> No data </td></tr>
+			#end
+			</tbody>
+		</table>
+		<script>
+		paginationScriptCms($categoryList.totalPages,"categoryDetailListCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!categoryList.pageSize&page=",$pageNo,1);
+		</script>
+	</div>
 	#end
 #end

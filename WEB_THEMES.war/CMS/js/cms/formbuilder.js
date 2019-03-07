@@ -209,7 +209,6 @@ $(".dropelement form ul").on("click", ".tool-edit", function() {
 });
 
 $(".dropelement form ul").on("click", ".tool-delete", function() {
-
     var r = confirm("Are you sure, you want to delete this element?");
     if (r) {
         $(".editelement").html("");
@@ -262,7 +261,7 @@ function buildEditForm(type, parentObj) {
         }
     }
     if(type!="text"){
-    	list = list + '<li><div class="form-group"><label>Validate</label>' + validationListElement + '</li></div>';
+    	list = list + '<li><div class="form-group"><label>Validate</label>' + validationListElement + '</div></li>';
     }
     $(".editelement").append($("<ul></ul>").html(list));
     if (type == "select") {
@@ -335,12 +334,12 @@ function buildEditElement(key, label, type, value, parentObj) {
     			valuetxt =idGen.getId();*/
     		}	
     	}
-        element = '<label>' + label + ' </label> : <input type="text" id="' + key + '" value="' + valuetxt + '" />';
+        element = '<label>' + label + ' :</label> <input type="text" id="' + key + '" value="' + valuetxt + '" />';
     } else if (type == "checkbox") {
-        element = label + ' : <input type="checkbox" id="' + key + '" ' + valuetxt + ' />';
+        element = '<label class="cms_customCheckBox cms_customCheckBoxRight"><input type="checkbox" id="' + key + '" ' + valuetxt + ' /><span>' + label + ' :</span></label>';
     } else if (type == "textarea") {
         c = "";
-        element = '<label>' + label + ' </label>  <textarea id="' + key + '">';
+        element = '<label>' + label + ' :</label>  <textarea id="' + key + '">';
         if (parentObj.data("type") == "select" || parentObj.data("type") == "radio" || parentObj.data("type") == "checkbox") {
             if (key == "radios") {
                 element = element + c + radios;
@@ -356,7 +355,7 @@ function buildEditElement(key, label, type, value, parentObj) {
         element = element + "</textarea>"
     }
 
-    return "<li><div class='form-group'>" + element + "</div></li>";
+    return "<li>" + element + "</li>";
 
 }
 

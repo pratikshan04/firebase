@@ -105,14 +105,12 @@
 					<input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end />
 					<span>Active</span>
 				</label>
-			</div>
-			#if($!staticPageData.homePageIcon)
-			<div class="form-group">
-				<label>
-					<img src="$!webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon">
+				#if($!staticPageData.homePageIcon)
+				<label title="Home page">
+					<i class="fa fa-lg fa-home"></i>
 				</label>
+				#end
 			</div>
-			#end
 			<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
 			<input type="hidden" name="pageData.pageContent" id="pageContent" value="" />
 			<input type="hidden" name="pageData.id" id="cmsPageId" value="$!staticPageData.id" />
