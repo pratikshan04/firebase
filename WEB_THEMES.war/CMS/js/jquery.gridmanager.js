@@ -1021,10 +1021,10 @@ console.log("Custom : "+curr_control.dataToolElement);
 			$.each(colWidths, function(i, val){
 				row.append(gm.createCol(val));
 			});
-			if($('#containFluid').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container-fluid')){
+			if($('#containFluid').is(':checked') && !$(canvas[0].lastElementChild).hasClass('container-fluid')){
 				containerFluid = $("<div/>", {"class": 'container-fluid'});
 				row = containerFluid.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
-			}else if(!$('#containFluid').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container')){
+			}else if(!$('#containFluid').is(':checked') && !$(canvas[0].lastElementChild).hasClass('container')){
 				container = $("<div/>", {"class": 'container'});
 				row = container.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
 			}
@@ -1473,17 +1473,19 @@ console.log("Custom : "+curr_control.dataToolElement);
           var canvas=gm.$el.find("#" + gm.options.canvasId);
               gm.$el.on("click", string, function(e){
                 gm.log("Clicked " + string);
-				if($('#containFluid').is(':checked') && $(canvas[0].firstElementChild).hasClass('container-fluid')){
-					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
-				}else if(!$('#containFluid').is(':checked') && $(canvas[0].firstElementChild).hasClass('container')){
-					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+                var rowObj = gm.createRow(colWidths);
+				if($('#containFluid').is(':checked') && $(canvas[0].lastElementChild).hasClass('container-fluid')){
+					$(canvas[0].lastElementChild).append(rowObj);
+				}else if(!$('#containFluid').is(':checked') && $(canvas[0].lastElementChild).hasClass('container')){
+					$(canvas[0].lastElementChild).append(rowObj);
 				}else{
-					canvas.prepend(gm.createRow(colWidths));
+					canvas.append(rowObj);
 				}
-			//$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+			//$(canvas[0].firstElementChild).prepend(rowObj);
 				canvas.find('[data-type="widget"]').html("");
                 gm.reset();
                 e.preventDefault();
+               
             });
         };
 
