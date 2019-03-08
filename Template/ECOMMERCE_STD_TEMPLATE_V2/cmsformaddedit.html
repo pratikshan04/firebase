@@ -1,62 +1,65 @@
 <link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
-<link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
-<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
-<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
 <style>
-.fa-wpforms:before {
-    content: "\f298";
-}
-
-.cimm_formContent{
-width:100% !important;
-}
-
-ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
-width:30% !important;
-}
-.editing{
-background-color : #fffdca;
-}
-.dropelement form ul{
-min-height:200px;
-}
-ul.cimm_formContent a.tool-edit, ul.cimm_formContent a.tool-delete {
+.tool-edit, .tool-delete {
 	padding: 3px 10px;
-    background: #1B63AB;
-    color: #fff;
+	color: #456078;
 }
-.dropelement input[type="submit"] {
-	padding: 5px 10px;
-    color: #fff;
-	margin: 0 0 10px 10px;
-}
-ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
+.dropelement form > .row{
+	min-height:200px;
 	margin-bottom: 10px;
 }
-.cimm_formContent .customRadioBtn input[type="radio"] {
-    display: block;
-    opacity: 1;
-    float: left;
-    width: 18px;
-    height: 18px;
-    margin-left:-20px;
-    margin-top:-1px;
-    background: #fff;
-    -webkit-appearance: none;
+.dropelement .placeholder{
+	background: #f5f5f5;
 }
-.cimm_formContent .customCheckBox input[type="checkbox"] {
-    display: block;
-    opacity: 1;
-    width: 18px;
-    float: left;
-    height: 18px;
-    margin-left: -22px;
-    margin-top: -1px;
-    background: #fff;
-    -webkit-appearance: none;
+.dropelement .col{
+	cursor: pointer;
 }
-:focus {
-  outline: -webkit-focus-ring-color auto 5px !important;
+.dropelement .col select, .dropelement .col textarea, .dropelement .col input,.btnBlock button{
+	pointer-events: none;
+}
+.dropelement .col:hover .cms_form-btn-block,.btnBlock:hover .cms_form-btn-block {
+	opacity: 1;
+	bottom: 0;
+}
+.dropelement .form-group{
+	margin-bottom: 8px;
+}
+.cms_form-btn-block {
+	opacity: 0;
+	position: relative;
+	bottom: -16px;
+	text-align: right;
+	transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+}
+.btnBlock .cms_form-btn-block {
+	text-align: left;
+}
+.editing{
+	background-color : #fffdca;
+}
+.cms_form-btn-block .colDecrease, .cms_form-btn-block .colIncrease {
+	background: #456078;
+	color: #FFF;
+	padding: 6px 10px 3px 10px;
+	float: left;
+}
+.ui-draggable-dragging{
+	z-index: 99;
+}
+.editelement li span i {
+	margin: 0 5px;
+	padding: 8px;
+	background: #c7c7c7;
+	color: #FFF;
+	cursor: pointer;
+}
+.editelement label.cms_formBtnRadio input[type=radio] {
+    display: none;
+}
+.editelement label.cms_formBtnRadio input[type=radio]:checked + i {
+	background: #456078;
 }
 </style>
 <div class="formEditWrap clearfix">
@@ -93,27 +96,29 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 		</div>
 		<div class="dragelement dragFormElement" data-type="captcha" title="Captcha">
 			<span class="input-captcha">
-				A i 6
+				<i>A</i> <b>i</b> 6
 			</span>
 			Captcha
 		</div>
 	</div>
-	<div class="formBuilderWrap active">
+	<div class="formBuilderWrap">
 		<div class="dropelementWrap">
 			<h5 class="cms_sectionHeading">Form Layout Section</h5>
 			<div class="dropelement">
 				#if($formData.htmlCode)
 					$formData.htmlCode
 				#else
-				<form class="sp-form" action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
-					<ul class="cimm_formContent fullWidthForm"></ul>
-					<input type="submit" value="Submit" class="button" />
+				<form action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
+					<div class="row"></div>
+					<div class="text-left btnBlock" data-type='submitBtn' data-align="left">
+						<button type="submit" class="button">Submit</button>
+					</div>
 					<input type="hidden" name="NotificationName" id="notificationName" value=''/>
 					<input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
 					<input type="hidden" name="SendMail" id="sendMail" value=''/>
 					<input type="hidden" name="Subject" id="subject" value=''/>
 					<input type="hidden" name="formName" id="formName" value=''/>
-					<input  type="hidden"   id="webthemesval" value='$!webThemes/'/>
+					<input type="hidden" id="webthemesval" value='$!webThemes/'/>
 				</form>
 				#end
 			</div>
@@ -122,6 +127,7 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 			<h5 class="cms_sectionHeading">Form Layout Section</h5>
 			<div class="editelement"></div>
 			<div class="cms_footerSection clearfix">
+				<a href="javascript:void(0)" class="cancel-apply outLineBtn_left pull-left"><i class="fa fa-times-circle"></i> Cancel</a>
 				<a href="javascript:void(0)" class="apply-changes cms_greenBtn pull-right">Apply <i class="fa fa-check-circle"></i></a>
 			</div>
 		</div>
@@ -145,14 +151,17 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 					<label>Email Subject :</label> <input type="text" value="$!formData.emailSubject" name="formData.emailSubject" id="emailSubject" />
 				</li>
 				<li>
+					<label>Form ClassName :</label> <input type="text" value="" id="formClass" />
+				</li>
+				<li>
 					<label class="cms_customCheckBox cms_customCheckBoxRight">
-						<input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox' checked/>
+						<input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox'/>
 						<span>Save User Entered Form Data to DB :</span>
 					</label>
 				</li>
 				<li>
 					<label class="cms_customCheckBox cms_customCheckBoxRight">
-						<input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"  checked/>
+						<input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"/>
 						<span>Send Email after User Submits Form :</span>
 					</label>
 				</li>
@@ -169,15 +178,18 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
-<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.slimscroll.min.js"></script> -->
 <script>
-$(".dropelement ul li").append('<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>');
+var arrows = '<a title="Make Column Narrower" class="colDecrease"><i class="fa fa-lg fa-caret-left"></i></a> <a title="Make Column Wider" class="colIncrease"><i class="fa fa-lg fa-caret-right"></i></a>';
+$(".dropelement .col").append('<div class="cms_form-btn-block">'+arrows+'<a href="javascirpt:void(0);" class="tool-edit"><i class="fa fa-lg fa-pencil-alt"></i></a> <a href="javascirpt:void(0);" class="tool-delete"><i class="fa fa-lg fa-trash-alt"></i></a></div>');
+$(".btnBlock").append('<div class="cms_form-btn-block"><a href="javascirpt:void(0);" class="editBtnStyle"><i class="fa fa-lg fa-pencil-alt"></i></a></div>');
 var frmName=document.getElementById('formName').value;
 //alert(document.getElementById('formName').length);
 if(frmName==='' || frmName==='undefined'){
 	document.getElementById('formExportBtn').style.visibility = "hidden";
 }
+var dropForm = document.getElementsByClassName('dropelement')[0];
+var dropFormArr = dropForm.children[0].classList;
+document.getElementById('formClass').value = dropFormArr.value;
 $(document).ready(function(){
 	$('.editelement,.cms_sectionHeading > form').slimScroll({
 		height: '486px',

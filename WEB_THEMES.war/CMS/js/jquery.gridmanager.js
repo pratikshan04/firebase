@@ -223,11 +223,12 @@
         */
 	gm.$el.prepend(
 		$('<div/>', {'id': gm.options.controlId, 'class': gm.options.gmClearClass + " " + "gmControlsCustomClass"}).prepend(
-			$('<div/>', {'id': 'gm-addnew'}).addClass(gm.options.gmBtnGroup).html(
+			$('<div/>', {'id': 'gm-addnew'}).addClass(gm.options.gmBtnGroup+' clearfix').html(
 				buttons.join("")
 			).append(gm.options.controlAppend)
 		)
 	);
+	$("#mycanvas").prepend('<div class="gmControlsPlaceholder"></div>');
 	$('.readyTemplatesForm').detach().appendTo("#gm-addnew .layoutSelectionBlock");
 	$("input[type=radio][name='deviceCol']").change(function(){
 		var selectedDevice = $(this).val();
@@ -1482,6 +1483,9 @@ console.log("Custom : "+curr_control.dataToolElement);
 					canvas.append(rowObj);
 				}
 			//$(canvas[0].firstElementChild).prepend(rowObj);
+				$('html, body').animate({
+			        scrollTop: $(rowObj).offset().top - 155
+			    }, 2000);
 				canvas.find('[data-type="widget"]').html("");
                 gm.reset();
                 e.preventDefault();
@@ -2121,3 +2125,14 @@ console.log("Custom : "+curr_control.dataToolElement);
 		}
 	};
 })(jQuery );
+
+
+$(window).scroll(function(){
+	var bodyScroll = $(this).scrollTop();
+	var toScroll = $("#gm-canvas").offset().top;
+	if(bodyScroll >= toScroll && !$("#gm-controls").hasClass('fixConrtroles')){
+		$("#gm-controls").addClass('fixConrtroles');
+	}else if(bodyScroll < toScroll && $("#gm-controls").hasClass('fixConrtroles')){
+		$("#gm-controls").removeClass('fixConrtroles');
+	}
+});
