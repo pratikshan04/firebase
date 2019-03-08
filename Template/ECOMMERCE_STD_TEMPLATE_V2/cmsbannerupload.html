@@ -29,6 +29,7 @@ function DeleteImages()
 	var fileRemoveFromSP="fileRemoveFromSP";
 	var selectedType=document.getElementById("fileTypeSelect").value;  
 	var browseImagesCount=document.getElementById("imgCountId").value;
+	var browseFolderCount=document.getElementById("folderCountId").value;
 	
 	
 	 for(var j=0;j<browseImagesCount;j++)
@@ -41,38 +42,47 @@ function DeleteImages()
 		 }
 		
 	 }
+
+	 for(var j=0;j<browseFolderCount;j++)
+	 {
+	 if(document.getElementById("fold"+j)!=null){
+		 if(document.getElementById("fold"+j).checked)
+			 {
+			 	imageList.push(document.getElementById("fold"+j).value);
+			 }
+		 }
+		
+	 }
 	 jQuery.ajax({
 		  type: "POST",
 		    url:contextPath+"/connector.slt",
 		    enctype : "multipart/form-data",
 		    data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
 		    success:function(response){
-		    	 var spDeletedList=response;
+		    	var spDeletedList=response;
 			    var strsplit=spDeletedList.split(",");   
 			   if(spDeletedList=='[]'){
-				    alert("Selected file(s) are deleted from the server. Do you want to proceed to delete the file(s)?");
+				    alert("Selected file(s)/folder(s) are deleted from the server.");
 				    location.reload(); 
-				    }else{
-		    var r=confirm("Selected file(s) are referenced with other static page(s) designings, Do you want to delete the selected file(s) from the server?");
-		          if (r==true)
-		            {                                           
-		    	 jQuery.ajax({
-	                    type: "POST",
-	                    url: contextPath+"/connector.slt",
-	                    data: {spDeletedList:spDeletedList,selectedType:selectedType,fileRemoveFromSP:fileRemoveFromSP},
-	                    success: function(response){
-	                        //alert(response);
-	                        location.reload(); 
-	                        
-	                    },
-	                });
-	               // return true;
-	           } else {
-	        	   location.reload(); 
-	              // return false;
-			              
+				}else{
+		    		var r=confirm("Selected file(s)/folder(s) are referenced with static page(s) design,\nDeleting file(s)/folder(s) may cause design issue in static page(s),\nDo you want to delete the selected file(s) from the server?");
+		          	if (r==true){
+				    	 jQuery.ajax({
+			                    type: "POST",
+			                    url: contextPath+"/connector.slt",
+			                    data: {spDeletedList:spDeletedList,selectedType:selectedType,fileRemoveFromSP:fileRemoveFromSP},
+			                    success: function(response){
+			                        //alert(response);
+			                        location.reload(); 
+			                        
+			                    },
+			                });
+	               		// return true;
+	           		} else {
+	        	   		location.reload(); 
+	              		// return false;
 				   }
-				    }
+				 }
 		    }, 
 		}); 
 	        
@@ -226,7 +236,7 @@ oListManager.Clear = function()
 		this.Table.deleteRow(0) ;
 }
 
-oListManager.AddFolder = function( folderName, folderPath )
+oListManager.AddFolder = function( folderName, folderPath, folderId )
 {
 	// Create the new row.
 	
@@ -234,7 +244,7 @@ oListManager.AddFolder = function( folderName, folderPath )
 	connectorUrl = connectorUrl+ ( connectorUrl.indexOf('?') != -1 ? '&' : '?' ) ;
 	connectorUrl = connectorUrl + "CurrentFolder="+oConnector.CurrentFolder +escape(folderName)+"/";
 	  var row = $('#main-item-container');
- var dummy1='<div class="box"><h4 class="ellipsis"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
+ var dummy1='<div class="box"><h4 class="ellipsis"><input style="margin: 10px auto; width: 20px;"type="checkbox" id="'+folderId+'" value="'+oConnector.CurrentFolder +escape(folderName)+'"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
  var dummy = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><div class="img-container directory"><span></span><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></div><div class="img-precontainer-mini directory"><div class="img-container-mini"><span></span><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></div></a>';
  var figVal = $('<figure/>').attr({"data-name": folderName, class: "directory","data-type": "dir"}).html(dummy+dummy1);
  var liVal = $('<li/>').attr({"data-name": folderName, class: "dir ui-draggable ui-droppable"}).html(figVal)
@@ -397,10 +407,12 @@ function GetFoldersAndFilesCallBack( fckXml )
 
 	// Add the Folders.	
 	var oNodes = fckXml.SelectNodes( 'Connector/Folders/Folder' ) ;
+	var folderCount=document.getElementById("folderCountId").value=oNodes.length;
 	for ( var i = 0 ; i < oNodes.length ; i++ )
 	{
+		var folderId = "fold"+i;
 		var sFolderName = oNodes[i].attributes.getNamedItem('name').value ;
-		oListManager.AddFolder( sFolderName, sCurrentFolderPath + sFolderName + "/" ) ;
+		oListManager.AddFolder( sFolderName, sCurrentFolderPath + sFolderName + "/",folderId ) ;
 	}
 	
 	// Add the Files.	
@@ -511,7 +523,8 @@ window.onload = function()
 			    	<button class="tip btn paste-here-btn disabled hide"  data-original-title="Paste to this directory" title="Paste"><i class="rficon-clipboard-apply"></i></button> 
 				    <button class="tip btn clear-clipboard-btn disabled hide"  data-original-title="Clear clipboard" title="Clear"><i class="rficon-clipboard-clear"></i></button>
 					<button class="tip btn clear-clipboard-btn disabled"  data-original-title="Clear clipboard" title="Delete" id="imageId" onclick="DeleteImages();"><i class="rficon-clipboard-delete" style="height: 17px !important"></i></button>	
-					<input id="imgCountId" type="hidden" value=""/>		
+					<input id="imgCountId" type="hidden" value=""/>
+					<input id="folderCountId" type="hidden" value=""/>		
 							</div>
 			<div class="span2 half view-controller">
 				  <span class="mobile-inline-visible">View:</span>
