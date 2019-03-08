@@ -22,71 +22,76 @@
 			contextPath = "";
 var acceptedType = ".png,.jpg,.gif";
 
-function DeleteImages()
-{
+function DeleteImages(){
 	var  imageList=[];
 	var fileRemove="fileRemoveFromServer";
 	var fileRemoveFromSP="fileRemoveFromSP";
 	var selectedType=document.getElementById("fileTypeSelect").value;  
 	var browseImagesCount=document.getElementById("imgCountId").value;
 	var browseFolderCount=document.getElementById("folderCountId").value;
+	var deleteFlag = false;
 	
-	
-	 for(var j=0;j<browseImagesCount;j++)
-	 {
-	 if(document.getElementById("img"+j)!=null){
-		 if(document.getElementById("img"+j).checked)
-			 {
+	 for(var j=0;j<browseImagesCount;j++){
+	 	if(document.getElementById("img"+j)!=null){
+		 if(document.getElementById("img"+j).checked){
 			 	imageList.push(document.getElementById("img"+j).value);
+			 	deleteFlag = true;
 			 }
 		 }
-		
 	 }
 
-	 for(var j=0;j<browseFolderCount;j++)
-	 {
-	 if(document.getElementById("fold"+j)!=null){
-		 if(document.getElementById("fold"+j).checked)
-			 {
+	 for(var j=0;j<browseFolderCount;j++){
+	 	if(document.getElementById("fold"+j)!=null){
+		 if(document.getElementById("fold"+j).checked){
 			 	imageList.push(document.getElementById("fold"+j).value);
+			 	deleteFlag = true;
 			 }
 		 }
-		
 	 }
-	 jQuery.ajax({
-		  type: "POST",
-		    url:contextPath+"/connector.slt",
-		    enctype : "multipart/form-data",
-		    data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
-		    success:function(response){
-		    	var spDeletedList=response;
-			    var strsplit=spDeletedList.split(",");   
-			   if(spDeletedList=='[]'){
-				    alert("Selected file(s)/folder(s) are deleted from the server.");
-				    location.reload(); 
-				}else{
-		    		var r=confirm("Selected file(s)/folder(s) are referenced with static page(s) design,\nDeleting file(s)/folder(s) may cause design issue in static page(s),\nDo you want to delete the selected file(s) from the server?");
-		          	if (r==true){
-				    	 jQuery.ajax({
-			                    type: "POST",
-			                    url: contextPath+"/connector.slt",
-			                    data: {spDeletedList:spDeletedList,selectedType:selectedType,fileRemoveFromSP:fileRemoveFromSP},
-			                    success: function(response){
-			                        //alert(response);
-			                        location.reload(); 
-			                        
-			                    },
-			                });
-	               		// return true;
-	           		} else {
-	        	   		location.reload(); 
-	              		// return false;
-				   }
-				 }
-		    }, 
-		}); 
-	        
+
+	if(deleteFlag){
+		var delC = confirm("Selected file(s) / folder(s) will be deleted from the server?");
+      	if(delC==true){
+      		jQuery.ajax({
+  			  type: "POST",
+  			    url:contextPath+"/connector.slt",
+  			    enctype : "multipart/form-data",
+  			    data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
+  			    success:function(response){
+  			    	var spDeletedList=response;
+  				    var strsplit=spDeletedList.split(",");   
+  				   if(spDeletedList==''){
+  					    alert("Selected file(s) / folder(s) are deleted from the server.");
+  					    location.reload(); 
+  					}else{
+  			    		var r=confirm("Selected file(s) / folder(s) are referenced with static page(s) design,\nDeleting file(s) / folder(s) may cause design issue in static page(s),\nDo you want to delete the selected file(s) from the server?");
+  			          	if (r==true){
+  					    	 jQuery.ajax({
+  				                    type: "POST",
+  				                    url: contextPath+"/connector.slt",
+  				                    data: {spDeletedList:spDeletedList,selectedType:selectedType,fileRemoveFromSP:fileRemoveFromSP},
+  				                    success: function(response){
+  				                        //alert(response);
+  				                        location.reload(); 
+  				                        
+  				                    },
+  				                });
+  		               		// return true;
+  		           		} else {
+  		        	   		location.reload(); 
+  		              		// return false;
+  					   }
+  					 }
+  			    }, 
+  			});
+        }else{
+            alert("Delete process cancelled");
+        	location.reload(); 
+        }
+	}else{
+		alert("Please select file(s) / folder(s) to delete");
 	}
+}
 
 function GetUrlParam( paramName )
 {
