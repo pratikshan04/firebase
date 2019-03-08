@@ -1526,7 +1526,7 @@ iframe#iframeId {
 	position: fixed;
 	z-index: 99;
 	top: 0;
-	left: -350px;
+	left: -400px;
 	height: auto;
 	background: #444343;
 	transition: left 0.3s ease-in-out;
@@ -1535,7 +1535,6 @@ iframe#iframeId {
 }
 .cms_leftMenuSlide.staticPageSave {
 	background: #FFF;
-	/* border: 1px solid #b7b7b7; */
 	border: none;
 	padding: 10px;
 	width: 340px;
@@ -1546,7 +1545,7 @@ iframe#iframeId {
 	-webkit-box-shadow: 1px 1px 10px #565f65;
 	-moz-box-shadow: 1px 1px 10px #565f65;
 	position: fixed;
-	z-index: 99;
+	z-index: 120;
 	top: 0;
 	height: 100%;
 	background: #444343;
@@ -2268,6 +2267,7 @@ select:focus {
 .gmControlsCustomClass.fixConrtroles{
 	position: fixed;
     box-shadow: 3px 2px 5px #737373;
+    width: calc(100% - 270px);
 }
 .cmsEditrBtn .action-icon, .resPreviewIcon .action-icon{
 	display: block;
