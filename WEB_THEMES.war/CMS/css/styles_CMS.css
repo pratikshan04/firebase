@@ -2250,12 +2250,24 @@ select:focus {
 .prevBtn{
 	width: 110px;
 }
+#mycanvas{
+	position: relative;
+}
+.gmControlsPlaceholder {
+	height: 155px;
+}
 .gmControlsCustomClass{
 	padding: 15px;
-	margin-bottom: 40px;
-	position: relative;
+	position: absolute;
 	background: #e5e7e7;
 	height: 115px;
+	top: 0;
+	width: 100%;
+	z-index: 111;
+}
+.gmControlsCustomClass.fixConrtroles{
+	position: fixed;
+    box-shadow: 3px 2px 5px #737373;
 }
 .cmsEditrBtn .action-icon, .resPreviewIcon .action-icon{
 	display: block;
