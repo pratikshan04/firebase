@@ -477,35 +477,17 @@
 <option value="{$Duration:1000,x:1,$Easing:$JssorEasing$.$EaseInBounce}">Bounce Right</option>
 </select>
 <input type="hidden" value="$!bannerTransistion" id="bannerTransistion" />
-<input type="hidden" value="$!bannerTransistionDelay" id="bannerTransistionDelay" />
 <input type="hidden" value="$!bannerTransistionAutoPlay" id="bannerTransistionAutoPlay" />
 <label>Transition Delay : </label>
-	<select name="ssTransitionDelay" id="ssTransitionDelay" style="width: 300px;border: 1px solid #C2C2C2;">
-		<option value="">----Select----</option>
-		<option value="500">0.5 second</option>
-		<option value="600">0.6 second</option>
-		<option value="700">0.7 second</option>
-		<option value="800">0.8 second</option>
-		<option value="800">0.8 second</option>
-		<option value="1000">1 second</option>
-		<option value="2000">2 second</option>
-		<option value="3000">3 second</option>
-		<option value="4000">4 second</option>
-		<option value="5000">5 second</option>
-		<option value="6000">6 second</option>
-		<option value="7000">7 second</option>
-		<option value="8000">8 second</option>
-		<option value="9000">9 second</option>
-		<option value="10000">10 second</option>
-	</select>
+	<input type="text" value="$!bannerTransistionDelay" id="bannerTransistionDelay" name="ssTransitionDelay" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;"/>(Enter value in milliseconds ex: 1 second = 1000 milliseconds)
 <label>Auto Play : </label>
 	<select name="ssTransitionAutoPlay" id="ssTransitionAutoPlay" style="width: 300px;border: 1px solid #C2C2C2;">
 		<option value="">----Select----</option>
 		<option value="1">Continuously</option>
 		<option value="2">Stop at last slide</option>
-		<option value="4">Stop on click</option>
+		<!-- <option value="4">Stop on click</option>
 		<option value="8">Stop on user navigation</option>
-		<option value="12">Stop on click or user navigation</option>
+		<option value="12">Stop on click or user navigation</option> -->
 		<option value="0">No auto play</option>
 	</select>
 <!-- <div>
