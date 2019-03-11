@@ -18,7 +18,16 @@ jQuery(function () {
 				jQuery('#ssTransition option[value="'+bannerTransistion+'"]');
 				jQuery('#ssTransition').val(bannerTransistion);
 			}
-		    
+			var bannerTransistionDelay = jQuery("#bannerTransistionDelay").val();    
+			if(jQuery.trim(bannerTransistionDelay)!=""){
+				jQuery('#ssTransitionDelay option[value="'+bannerTransistionDelay+'"]');
+				jQuery('#ssTransitionDelay').val(bannerTransistionDelay);
+			}
+			var bannerTransistionAutoPlay = jQuery("#bannerTransistionAutoPlay").val();    
+			if(jQuery.trim(bannerTransistionAutoPlay)!=""){
+				jQuery('#ssTransitionAutoPlay option[value="'+bannerTransistionAutoPlay+'"]');
+				jQuery('#ssTransitionAutoPlay').val(bannerTransistionAutoPlay);
+			}
 		});
 
 

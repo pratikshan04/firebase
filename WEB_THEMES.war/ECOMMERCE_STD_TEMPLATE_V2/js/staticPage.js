@@ -13,9 +13,17 @@ var refreshBanner = function(bannerId,index){
 			var dynamicProperties = data.dynamicProperties;
 			var bannerType = dynamicProperties.bannerType;
 			var transistion = "";
+			var transistionDelay = "";
+			var transistionAutoPlay = "";
 			var carouselSetting = "";
 			if(typeof dynamicProperties.bannerTransistion!='undefined'){
 				transistion = dynamicProperties.bannerTransistion;
+			}
+			if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
+				transistionDelay = dynamicProperties.bannerTransistionDelay;
+			}
+			if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
+				transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
 			}
 			if(typeof dynamicProperties.carouselSetting!='undefined'){
 				carouselSetting = dynamicProperties.carouselSetting;
@@ -30,7 +38,7 @@ var refreshBanner = function(bannerId,index){
 				jQuery(this).html(bannerData);
 				
 				if(bannerType=="slider"){
-					initJssorSlides(sliderId,transistion);
+					initJssorSlides(sliderId, transistion, transistionDelay,transistionAutoPlay);
 				}else if(bannerType=="carousel"){
 					initCarousel(sliderId,carouselSetting);
 				}
