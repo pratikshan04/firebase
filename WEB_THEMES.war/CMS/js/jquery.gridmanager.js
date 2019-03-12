@@ -2088,6 +2088,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			$("#gm-canvas").addClass('gm-container');
 		}
 		$(".cms_staticTable").css({'padding':'0'});
+		$(".gmControlsCustomClass").addClass('doNotFix');
 		/*jQuery('#pageTab,#addNewStaticFormId').hide();
 		jQuery("#SeoTabs").css('pointer-events', 'none');
 		jQuery('#seoTab,.addStaticPage_innerWrap,.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon').css({'pointer-events':'none','opacity':'0.5'});
@@ -2108,6 +2109,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			$("#gm-canvas").removeClass('gm-container');
 		}
 		$(".cms_staticTable").css({'padding':'0 0 0 270px'});
+		$(".gmControlsCustomClass").removeClass('doNotFix');
 		/*jQuery('#pageTab,#addNewStaticFormId').show();
 		jQuery("#SeoTabs").css('pointer-events', 'visible');
 		jQuery('#seoTab,.addStaticPage_innerWrap,.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon').css({'pointer-events':'visible','opacity':'1'});
