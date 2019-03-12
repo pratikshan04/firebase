@@ -31,6 +31,8 @@
 									#set($bannerTemplateName = $!bannerProperties.get("templateName"))
 									<input type="hidden" id="bannerTemplateNamecheck" value="$bannerTemplateName" />
 									#set($bannerTransistion = $!bannerProperties.get("bannerTransistion"))
+									#set($bannerTransistionDelay = $!bannerProperties.get("bannerTransistionDelay"))
+									#set($bannerTransistionAutoPlay = $!bannerProperties.get("bannerTransistionAutoPlay"))
 								#end
 								
 								#if(!$bannerType)
@@ -69,7 +71,7 @@
 						 <div style="border:1px solid #dadada;padding:10px;">
 						 <div id="transitionBlock">
 						<label style="vertical-align: top;">Banner Transition : </label><select name="ssTransition" id="ssTransition" style="width: 300px;border: 1px solid #C2C2C2;">
-<option value=""></option>
+<option value="">----Select----</option>
 <option value="">------------ Fade Effects --------------</option>
 <option value="{$Duration:1200,$Opacity:2}">Fade</option>
 <option value="{$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$JssorEasing$.$EaseInCubic,$Opacity:$JssorEasing$.$EaseLinear},$Opacity:2}">Fade in L</option>
@@ -474,7 +476,21 @@
 <option value="{$Duration:1000,y:1,$Easing:$JssorEasing$.$EaseInBounce}">Bounce Down</option>
 <option value="{$Duration:1000,x:1,$Easing:$JssorEasing$.$EaseInBounce}">Bounce Right</option>
 </select>
-<input type="hidden" value="$bannerTransistion" id="bannerTransistion" />
+<input type="hidden" value="$!bannerTransistion" id="bannerTransistion" />
+<input type="hidden" value="$!bannerTransistionAutoPlay" id="bannerTransistionAutoPlay" />
+<label>Transition Delay : </label>
+	<input type="text" value="$!bannerTransistionDelay" id="bannerTransistionDelay" name="ssTransitionDelay" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;"/>(Enter value in milliseconds ex: 1 second = 1000 milliseconds)
+<label>Auto Play : </label>
+	<select name="ssTransitionAutoPlay" id="ssTransitionAutoPlay" style="width: 300px;border: 1px solid #C2C2C2;">
+		<option value="">----Select----</option>
+		<option value="1">Continuously</option>
+		<option value="2">Stop at last slide</option>
+		<option value="0">No auto play</option>
+		<!-- <option value="4">Stop on click</option>
+		<option value="8">Stop on user navigation</option>
+		<option value="12">Stop on click or user navigation</option> -->
+		
+	</select>
 <!-- <div>
 <label>Arrow Skin : </label><select><option>----Select----</option></select>
 <label style="margin-left:50px;">Bullet Skin  : </label><select><option>----Select----</option></select>

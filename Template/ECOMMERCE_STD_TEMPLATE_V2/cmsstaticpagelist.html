@@ -86,9 +86,9 @@
 	  			<div class="custom-select">
 		  			<select name="pageSize" id="pageSize" onchange="this.form.submit()">
 						<option #if($staticPageList.pageSize==10) selected #end value="10" >10</option>
-						<option #if($staticPageList.pageSize==25) selected #end value="25" >25</option>
-						<option #if($staticPageList.pageSize==50) selected #end value="50" >50</option> 
-						<option #if($staticPageList.pageSize==100) selected #end  value="100" >100</option>
+						#if($!staticPageList.totalRows>10 || $!staticPageList.totalRows>=25)<option #if($staticPageList.pageSize==25) selected #end value="25" >25</option>#end
+						#if($!staticPageList.totalRows>25 || $!staticPageList.totalRows>=50)<option #if($staticPageList.pageSize==50) selected #end value="50" >50</option>#end 
+						#if($!staticPageList.totalRows>50 || $!staticPageList.totalRows>=100)<option #if($staticPageList.pageSize==100) selected #end  value="100" >100</option>#end
 					</select>
 					<span>
 						<i class="fas fa-chevron-down"></i>
