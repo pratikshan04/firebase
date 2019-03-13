@@ -146,6 +146,8 @@ function saveContent(){
 	 });
 	if($('#selectStaticPageType').val() == "BLOG"){
 		newText = $('#gm-canvas').clone().find(".row").unwrap().end().html();
+	}else{
+		newText = $('#gm-canvas').html();
 	}
 	 $(".widgetEditOverlay").remove();
  	newText = escapeHtmlEntities(newText.replace(/-clsstmp/g,''));
