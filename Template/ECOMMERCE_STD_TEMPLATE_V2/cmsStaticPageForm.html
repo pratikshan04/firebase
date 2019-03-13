@@ -90,7 +90,7 @@
 			</div>
 			<div class="form-group">
 				<label>Custom Url:</label>
-				<input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" onKeypress="return IsSpecialCharacter(event);" id="customURLId" /> 
+				<input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" onKeypress="return IsSpecialCharacterAllowSlash(event);" id="customURLId" /> 
 			</div>
 			<div class="form-group">
 				<label>Canonical Url:</label>
@@ -396,6 +396,15 @@
 	jQuery("#seoTab").hide();
 	function IsSpecialCharacter(e){
 		var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+		var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+		if (!regex.test(key)) {
+			event.preventDefault();
+			return false;
+		}
+	}
+
+	function IsSpecialCharacterAllowSlash(e){
+		var regex = new RegExp("^[a-zA-Z0-9 \/-]+$");
 		var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
 		if (!regex.test(key)) {
 			event.preventDefault();
