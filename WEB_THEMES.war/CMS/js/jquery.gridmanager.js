@@ -2101,7 +2101,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'block';
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
-			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '100px';
+			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '72px';
 		}
 		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 103 +'px';
 		window.parent.document.getElementById("iframeId").style.width = '100%';
