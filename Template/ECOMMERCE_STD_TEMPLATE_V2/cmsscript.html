@@ -1121,18 +1121,23 @@ function changeresponsivefunct(e){
 	if(jQuery.trim(previewType)=="Tablet Landscape"){
 		frameHeight = "768px";
 		frameWidth = "1024px";
+		regulerVeiw();
 	}else if(jQuery.trim(previewType)=="Tablet Portrait"){
 		frameHeight = "1024px";
 		frameWidth = "768px";
+		regulerVeiw();
 	}else if(jQuery.trim(previewType)=="Mobile Landscape"){
 		frameHeight = "320px";
 		frameWidth = "480px";
+		mobileVeiw();
 	}else if(jQuery.trim(previewType)=="Mobile Portrait"){
 		frameHeight = "480px";
 		frameWidth = "320px";
+		mobileVeiw();
 	}else{
 		frameHeight = window.outerHeight;
 		frameWidth = "100%";
+		regulerVeiw();
 		// $( "#previewBtnId" ).prop( "disabled", false );
 	}
 	 

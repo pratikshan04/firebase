@@ -2039,9 +2039,10 @@ select:focus {
 .mobile_View .prevBtn {
 	margin-right: 0;
 	border-right: none;
+	width: 40px;
 }
 #gm-addnew .mobile_View a.resPreviewIcon {
-    width: 40px;
+    width: 45px;
 }
 .mobile_View span.action-text {
     display: none;
