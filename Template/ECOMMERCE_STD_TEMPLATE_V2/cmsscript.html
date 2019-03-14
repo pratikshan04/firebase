@@ -1115,26 +1115,26 @@ function changeresponsivefunct(e){
 	// Enable #x
 	var frameHeight = window.parent.jQuery(".Cimm-MainContenthide").height() + 120;
 	if(iframeOrgHeight == 0){
-	iframeOrgHeight = window.parent.document.getElementById("iframeId").style.height;
+		iframeOrgHeight = window.parent.document.getElementById("iframeId").style.height;
 	}
 	var frameWidth = "100%";
-	if(jQuery.trim(previewType)=="iPad Landscape"){
+	if(jQuery.trim(previewType)=="Tablet Landscape"){
 		frameHeight = "768px";
 		frameWidth = "1024px";
-	}else if(jQuery.trim(previewType)=="iPad Portrait"){
+	}else if(jQuery.trim(previewType)=="Tablet Portrait"){
 		frameHeight = "1024px";
 		frameWidth = "768px";
 		
-	}else if(jQuery.trim(previewType)=="iPhone Landscape"){
+	}else if(jQuery.trim(previewType)=="Mobile Landscape"){
 		frameHeight = "320px";
 		frameWidth = "480px";
-	}else if(jQuery.trim(previewType)=="iPhone Portrait"){
+	}else if(jQuery.trim(previewType)=="Mobile Portrait"){
 		frameHeight = "480px";
 		frameWidth = "320px";
 	}else{
-	frameHeight = iframeOrgHeight;
-	frameWidth = "100%";
-	// $( "#previewBtnId" ).prop( "disabled", false );
+		frameHeight = iframeOrgHeight;
+		frameWidth = "100%";
+		// $( "#previewBtnId" ).prop( "disabled", false );
 	}
 	 
 	//window.parent.jQuery("#iframeId").height =;
