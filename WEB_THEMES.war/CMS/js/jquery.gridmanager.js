@@ -373,6 +373,7 @@ gm.initControls = function(){
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span>").attr('title', 'Preview');
 			gm.initCanvas();
 			$(this).parent().find(".gm-edit-mode").prop('disabled', false);
+			regulerVeiw();
 		}
 		//$(this).toggleClass(gm.options.gmDangerClass);
 		
@@ -2103,7 +2104,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
 			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '72px';
 		}
-		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 103 +'px';
+		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
 		window.parent.document.getElementById("iframeId").style.width = '100%';
 		if(clickType == 'preview'){
 			$(".resPreviewIcon").removeClass('active');
