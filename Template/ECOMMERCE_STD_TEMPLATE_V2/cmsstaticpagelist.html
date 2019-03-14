@@ -118,11 +118,11 @@
 			<thead>
 				<tr>
 					<th>Actions</th>
-					<th>Serial Number</th>
-					<th class="width200">
-						<a href="listStaticPageCms.action?sortEnabled=true&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Ascending">&#8679;</a>
+					<th>Serial #</th>
+					<th>
+						<a href="listStaticPageCms.action?sortEnabled=true&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Ascending"><i class="fa fa-sort-alpha-up"></i></a>
 						Static Page Name
-						<a href="listStaticPageCms.action?sortEnabled=false&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Descending">&#x21E9;</a>
+						<a href="listStaticPageCms.action?sortEnabled=false&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Descending"><i class="fa fa-sort-alpha-down"></i></a>
 					</th>
 					<th>Url By PageId</th>
 					<th>Url By Page Name</th>
@@ -157,7 +157,7 @@
 						</a>
 						#end
 					</td>
-					<td class="text-center cms_slNo"> $iindex </td>
+					<td class="text-center"> $iindex </td>
 					<td>
 						<a href="cmsStaticPageCms.action?pageId=$pageList.id">$pageList.pageName </a><br />
 					</td>

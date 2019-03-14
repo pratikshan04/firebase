@@ -2081,7 +2081,8 @@ console.log("Custom : "+curr_control.dataToolElement);
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'none';
 			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '0px';
 		}
-		window.parent.document.getElementById("iframeId").style.height = window.outerHeight;
+		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight+'px';
+		window.parent.document.getElementById("iframeId").style.width = '100%';
 		if(clickType == 'preview'){
 			$(".resPreviewIcon").addClass('active');
 			jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');
@@ -2102,7 +2103,8 @@ console.log("Custom : "+curr_control.dataToolElement);
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
 			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '100px';
 		}
-		window.parent.document.getElementById("iframeId").style.height = window.outerHeight - 100;
+		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 103 +'px';
+		window.parent.document.getElementById("iframeId").style.width = '100%';
 		if(clickType == 'preview'){
 			$(".resPreviewIcon").removeClass('active');
 			jQuery('.Cimm-MainContenthide').addClass('Cimm-MainContent').removeClass('Cimm-MainContenthide');
