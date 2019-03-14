@@ -1899,6 +1899,9 @@ select:focus {
 	color: #FFF;
 	font-size: 15px;
 }
+.cms_customTable.table>thead>tr>th a{
+	color: #FFF;
+}
 .cms_customTable.table>tbody>tr>td:first-child{
 	border-left: 1px solid #c9c9c9;
 }
@@ -1976,10 +1979,12 @@ select:focus {
 	transition: left 0.3s, opacity 0.3s ease-in-out;
 	-webkit-transition: left 0.3s, opacity 0.3s ease-in-out;
 	-moz-transition: left 0.3s, opacity 0.3s ease-in-out;
+	z-index: -1;
 }
 .layoutSelectionBlock.active{
 	left: 310px;
 	opacity: 1;
+	z-index: 1;
 }
 .select-fullwidth {
 	margin-top: 10px;
@@ -2028,6 +2033,19 @@ select:focus {
 	background: none;
 	text-transform: capitalize;
 }
+.mobile_View .sorceBtn {
+	display: none;
+}
+.mobile_View .prevBtn {
+	margin-right: 0;
+	border-right: none;
+}
+#gm-addnew .mobile_View a.resPreviewIcon {
+    width: 40px;
+}
+.mobile_View span.action-text {
+    display: none;
+}
 .prevBtn{
 	margin-right: 5px;
 	border-right: 1px solid #d5d6d6;
@@ -2035,16 +2053,19 @@ select:focus {
 }
 .deviseSelection{
 	float: left;
-	position: relative;
 	left: 100px;
 	opacity: 0;
 	transition: left 0.3s, opacity 0.3s ease-in-out;
 	-webkit-transition: left 0.3s, opacity 0.3s ease-in-out;
 	-moz-transition: left 0.3s, opacity 0.3s ease-in-out;
+	z-index: -1;
+	position: absolute;
 }
 .deviseSelection.active{
 	left: 0;
 	opacity: 1;
+	position: relative;
+	z-index: 1;
 }
 .deviseSelection label{
 	font-weight: 600;
