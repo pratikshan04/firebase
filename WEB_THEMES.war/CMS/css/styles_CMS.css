@@ -1540,7 +1540,6 @@ iframe#iframeId {
 	padding: 6px 10px;
 	height: 42px;
 	border-radius: 21px;
-	font-size: 18px;
 }
 .displayBox > div{
 	margin-top: 8px;
@@ -2624,7 +2623,7 @@ select:focus {
 }
 .grid li {
 	display: inline-block;
-	width: 140px;
+	width: 138px;
 	border: none;
 	margin: 10px 5px;
 	vertical-align: top;
@@ -2746,6 +2745,15 @@ select:focus {
 .addFolder_modal .close{
 	display: none;
 }
+.scrollBlock{
+	height: 555px;
+	overflow: auto;
+	padding: 0 15px;
+}
+.list-view1.grid .img-precontainer,.list-view2.grid .img-precontainer {
+	display: none
+}
+
 /*.dropelement form ul li{
 	padding:10px;
 }
