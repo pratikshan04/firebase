@@ -302,7 +302,7 @@ oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, ext
 	var imageId="img";
 	var row = $('#main-item-container');
 	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><span></span></label>';
-	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'WEB_THEMES/CMS/filemanager/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'WEB_THEMES/CMS/filemanager/img/ico/png.jpg'"+';"/></div></a>'; 
+	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/filemanager/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/filemanager/img/ico/png.jpg'"+';"/></div></a>'; 
 	var imgName = '<div class="box"><h4 class="ellipsis"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></h4></div>';
 	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
 	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">'+typeSplit[1]+'</div><div class="file_size">'+fsize+'KB</div>';
@@ -539,23 +539,19 @@ window.onload = function(){
 			<li><a href="/" title="Home"><i class="fa fa-home"></i></a></li>
 		</ul>
 	</div>
-	<div class="container-fluid">
-		<div class="row-fluid ff-container">
-			<div class="span12">	    
-				<h4 id="help">Swipe the name of file/folder to show options</h4>
-				<!-- sorter -->
-				<div class="sorter-container list-view0 clearfix">
-					<div class="file-name"><a class="sorter sort-name descending" href="javascript:void('')" data-sort="name">Filename</a></div>
-					<div class="file-date"><a class="sorter sort-date " href="javascript:void('')" data-sort="date">Date</a></div>
-					<div class="file-extension"><a class="sorter sort-extension " href="javascript:void('')" data-sort="extension">Type</a></div>
-					<div class="file-size"><a class="sorter sort-size " href="javascript:void('')" data-sort="size">Size</a></div>
-					<div class="img-dimension">Dimension</div>
-					<div class="file-operations">Operations</div>
-				</div>
-				<input type="hidden" id="file_number" value="6">
-				<ul class="grid cs-style-2 list-view0" id="main-item-container"></ul>
-			</div>
+	<div class="scrollBlock">	    
+		<h4 id="help">Swipe the name of file/folder to show options</h4>
+		<!-- sorter -->
+		<div class="sorter-container list-view0 clearfix">
+			<div class="file-name"><a class="sorter sort-name descending" href="javascript:void('')" data-sort="name">Filename</a></div>
+			<div class="file-date"><a class="sorter sort-date " href="javascript:void('')" data-sort="date">Date</a></div>
+			<div class="file-extension"><a class="sorter sort-extension " href="javascript:void('')" data-sort="extension">Type</a></div>
+			<div class="file-size"><a class="sorter sort-size " href="javascript:void('')" data-sort="size">Size</a></div>
+			<div class="img-dimension">Dimension</div>
+			<div class="file-operations">Operations</div>
 		</div>
+		<input type="hidden" id="file_number" value="6">
+		<ul class="grid cs-style-2 list-view0" id="main-item-container"></ul>
 	</div>
 </div>
 <input type="hidden" id="insert_folder_name" value="Insert folder name:">
@@ -566,6 +562,21 @@ window.onload = function(){
 <input type="hidden" id="oldUrlType" value="">
 
 <script>
+$(document).ready(function(){
+	$('.scrollBlock').slimScroll({
+		height: '555px',
+		railVisible: false,
+		alwaysVisible: true,
+		size:'10px',
+		railColor:'#ccc',
+		color:'#e0e0e0',
+		railOpacity: '0.5',
+		opacity:'0.5',
+		borderRadius : '5px',
+		railBorderRadius: '0px',
+		top: '10px'
+	});
+});
 var filterImages =  function (input,id){
 	var valThis = jQuery(input).val().toLowerCase();
 	//console.log("search text" + valThis);

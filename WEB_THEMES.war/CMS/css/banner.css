@@ -1,41 +1,288 @@
-#bannerWrapper{
-	width:100%;
-}
-
-#bannerLeftColumn{
-	width: 76%;
-	background-color: #dadada;
-	height: 600px;
-	margin: 10px;
-	float:left;
-	overflow-y: scroll;
-}
-
-#bannerRightColumn{
+.bannerLeftColumn{
+	width: 440px;
 	float: left;
-	width: 22%;
-	background-color: #FFf;
-	height: 600px;
-	margin-top: 10px;
+	margin-right: 25px;
+	border: 1px solid #c9c9c9;
+	border-radius: 8px;
 }
-#previewContainer .container{
+.bannerLeftColumn ul{
+	width: 100%;
+	padding: 5px;
+	height: 555px;
+	overflow: auto;
+}
+.bannerLeftColumn ul li{
+	display: inline-block;
+	width: 30.6%;
+	border: none;
+	margin: 5px 1%;
+	padding: 0;
+	vertical-align: top;
+}
+.bannerRightColumn{
+	width: calc(100% - 465px);
+	float: left;
+}
+.img-container {
+	height: 65px;
+	width: 120px;
+	border: 1px solid #c9c9c9;
+	position: relative;
+	overflow: hidden;
+}
+.img-container img {
+	width: 160px;
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-height: 70px;
+}
+.bannerLeftColumn > h4 {
+	margin: 0;
+	padding: 18px 20px;
+	background: #436079;
+	color: #FFF;
+	border-radius: 8px 8px 0 0;
+}
+.cms_pgnation {
+	background: #f5f5f5;
+	padding: 10px;
+	border-radius: 0 0 10px 10px;
+	border-top: none;
+}
+.cms_pgnation .pagebarUTH {
+	font-size: 15px;
+	color: #254460;
+	margin-top: 12px;
+}
+.uploaderContainerClass {
+	padding: 10px;
+}
+.bannerLeftColumn .ellipsis .link{
+	max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+.bannerLeftColumn .ellipsis {
+    margin: 0;
+}
+.bannerLeftColumn .link {
+	display: inline-block;
+}
+.bannerTab{
+	width: 200px;
+	height: 50px;
+	background: #e4e7e9;
+	float: left;
+	border-radius: 5px 5px 0 0;
+	font-size: 16px;
+	color: #436079;
+	padding: 14px 0;
+	text-align: center;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.tabSelected{
+	background: #436079;
+	color: #FFF;
+}
+.bannerDropBoxWrap {
+	clear: both;
+	border: 1px solid #c9c9c9;
+	border-radius: 5px;
+}
+.bannerDropBox {
+	width: calc(100% - 270px);
+	float: left;
+	padding: 15px;
+	height: 625px;
+	overflow: auto;
+}
+.bannerSaveBox {
+	width: 270px;
+	float: left;
+	background: #f5f5f5;
+	padding: 15px 10px;
+	border-radius: 0 6px 6px 0;
+	height: 625px;
+	overflow: auto;
+}
+.bannerSaveBox label,.bannerDropBox label {
+	font-size: 16px;
+	color: #436079;
+}
+.bannerSaveBox input, .bannerSaveBox select {
+	width: 100%;
+	height: 44px;
+	border-radius: 24px;
+	padding: 10px;
+	font-size: 16px;
+	text-overflow: ellipsis;
+}
+.cancelBtnBlock {
+	margin: 25px 0 10px 0;
+	border-top: 1px solid #c2c2c2;
+	padding-top: 20px;
+}
+.bannerImgContainer img{
 	width: 100%;
 }
-#bannerEditorLeftColumn{
+#bannerSelect li{
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #c9c9c9;
+}
+.bannerImgContainer{
+	float: left;
+	width: 50%;
+	padding-right: 20px;
+}
+.banner_leftWrap{
+	float: left;
+	width: 50%;
+}
+.banner_leftWrap .form-group{
+	margin-bottom: 8px;
+}
+.bannerDropBox .form-group input, .bannerDropBox .form-group select {
 	width: 100%;
-	height: 650px;
-	overflow:auto;
-	margin-left:10px;
+	height: 36px;
+	border-radius: 24px;
+	padding: 5px;
+	font-size: 14px;
+	text-overflow: ellipsis;
+}
+.banner_leftWrap .form-group textarea {
+	width: 100%;
+	height: 72px;
+	border-radius: 5px;
+	padding: 5px 10px;
+	font-size: 14px;
+}
+.banner_delIcon{
+	display: block;
+	cursor: pointer;
+	font-size: 16px;
+	margin-top: 20px;
+	color: #436079;
+}
+.captchaPosBlock{
+	margin: 0 -15px;
+}
+.captchaPos{
+	padding: 0 15px;
+	width: 50%;
+	float: left;
+}
+.captchaPos label {
+	font-size: 16px;
+	color: #436079;
+	width: 95px;
+	vertical-align: middle;
+}
+.captchaPos input {
+	width: 90px;
+	height: 40px;
+	border-radius: 22px;
+	padding: 10px;
+	font-size: 14px;
+	text-overflow: ellipsis;
+	display: inline-block;
+	margin-left: 5px;
+}
+#bannerSelect{
+	padding-bottom: 60px;
+}
+#bannerSelect li:last-child {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.settingsBlockInner {
+	width: 60%;
+}
+#transitionBlock .form-group > span {
+	font-size: 12px;
+}
+.bannerDropBox .custom-select span {
+	border-radius: 18px;
+	height: 36px;
+	width: 36px;
+	padding: 9px;
 }
 
-#bannerEditorRightColumn{	
+
+
+
+.custom-select {
+    position: relative;
+    display: inline-block;
 	width: 100%;
-	background-color: #FFf;
-	overflow: auto;
-	height: 630px;
-	margin-bottom:10px;
 }
-#settingsBlock {
+.custom-select select {
+    border-radius: 21px;
+    height: 41px;
+    width: 100%;
+	padding: 8px 30px 8px 8px;
+}
+.custom-select span {
+    border-radius: 21px;
+    height: 41px;
+    width: 40px;
+    background: #456078;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 12px;
+	pointer-events: none;
+	display: inline-block;
+}
+.custom-select i {
+	font-size: 20px;
+	color: #FFF;
+}
+.cms_blueBtn{
+	background: #009bd0;
+	color: #FFF;
+	font-size: 18px;
+	height: 42px;
+	display: inline-block;
+	padding: 8px 16px;
+	border-radius: 21px;
+	border: none;
+}
+.cms_blueBtn .action-icon {
+	margin-left: 8px;
+}
+.outLineBtn_left {
+	background: transparent;
+	text-transform: capitalize;
+	font-weight: 600;
+	color: #456078;
+	outline: none;
+	font-size: 18px;
+	border: 2px solid #456078;
+	padding: 7px 10px;
+	height: 42px;
+	border-radius: 21px;
+	display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+/* #settingsBlock {
 	width: 100%;
 	overflow: auto;
 	height: 630px;
@@ -48,22 +295,18 @@
 
 #bannerSelectList > li > label > input {
     visibility: hidden;
-
 }
-
 #bannerSelectList > li > label > input + i {
     cursor:pointer;
     color: grey;
     margin-left: -0.5em;
     margin-right: 15px;
 }
-
 #bannerSelectList > li > label > input:checked + i {
 	visibility: visible;
 	color: green;
 	cursor:pointer;
 }
-
 #bannerSelectList{
 	width:100%;
 	height: 100%;
@@ -71,34 +314,13 @@
 	min-height: 480px;
 	overflow-y: auto;
 }
-
-#bannerSelect{
-	background: white;
-	padding: 10px;
-}
 #previewWrapper{
 	width:700px;
 	height:400px;
 	margin:100px auto;
 }
 
-/* Edit Banner and New Banner css */
-.bannerContainer{
-	height:165px;
-	float:left;
-	width:50%;
-	
-	position: relative; 
-     left: 0; 
-     right: 0; 
-     margin-left: 0; 
-    margin-right: 0; 
-}
 
-.bannerContainer > img{
-	height:150px;
-	width:90%;
-}
 .banners_saveListBtn{
 	background-color:#1b63ab;
 	padding:7px 5px;
@@ -118,15 +340,11 @@
 	color:#fff !important;
 	border: 1px solid #1b63ab;
 }
-.banner_leftWrap{
-	float: left;
-	width: 50%;
-	height: auto;
-}
+
 .banner_formLabel{
 	float:left;
 	width:75px;
-}
+} */
 
 /*!
  * jQuery UI Datepicker 1.9.0
@@ -141,9 +359,14 @@
 .ui-datepicker {
     display: none;
     padding: .2em .2em 0;
-    width: 17em;
-    background: #f3f3f3;
-    border: 1px solid #bbb;
+    width: 260px;
+    background: #FFF;
+    box-shadow: 0 3px 5px #7e7e7e;
+	border-radius: 5px;
+}
+.ui-datepicker td.ui-state-disabled span {
+	cursor: not-allowed;
+	color: #c6c6c6;
 }
 
 .ui-datepicker .ui-datepicker-header {
@@ -326,7 +549,7 @@
     z-index: -1; /*must have*/
 }
 
-.banner_addNewBtn,.banner_addNewBtn:hover{
+/* .banner_addNewBtn,.banner_addNewBtn:hover{
 	background-color:#1b63ab;
 	padding:7px 5px;
 	color:#fff !important;
@@ -374,29 +597,9 @@
 	color:#bbb;
 	width:78% !important;
 	height:30px !important;
-	/*margin-bottom: 10px !important;*/
 	padding:5px 10px !important;
 	}
-.bannerTab{
-  width: 200px;
-    height: 24px;
-    background: #EBEBEB;
-    border-left: 1px solid #cfcfcf;
-    border-top: 1px solid #cfcfcf;
-  border-right: 1px solid #cfcfcf; 
-    padding: 4px;
-    float: left;}
-    
- .tabSelected{
- width: 200px;
-    float: left;
-    height: 24px;
-    background: white;
-    border-left: 1px solid #cfcfcf;
-    border-top: 1px solid #cfcfcf;
-    border-right: 1px solid #cfcfcf;
-    padding: 4px;
- }
+
  #bannerSelect li{
 	list-style: none;
 	padding-bottom: 10px;
@@ -456,4 +659,53 @@
     background-image: none;
     border: 0px solid #fff;
     margin-bottom:10px;
- }
+ } */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* #bannerEditorLeftColumn{
+	width: 100%;
+	height: 650px;
+	overflow:auto;
+	margin-left:10px;
+}
+#bannerLeftColumn{
+	width: 76%;
+	background-color: #dadada;
+	height: 600px;
+	margin: 10px;
+	float:left;
+	overflow-y: scroll;
+}
+#bannerEditorRightColumn{	
+	width: 100%;
+	background-color: #FFf;
+	overflow: auto;
+	height: 630px;
+	margin-bottom:10px;
+}
+#bannerWrapper{
+	width:100%;
+}
+#bannerRightColumn{
+	float: left;
+	width: 22%;
+	background-color: #FFf;
+	height: 600px;
+	margin-top: 10px;
+}
+#previewContainer .container{
+	width: 100%;
+}
+ #bannerSelect{
+	background: white;
+	padding: 10px;
+}
+ */

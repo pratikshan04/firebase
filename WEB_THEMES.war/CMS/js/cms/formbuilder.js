@@ -230,6 +230,7 @@ $(".dropelement .row").on("click", ".tool-edit", function() {
     if (r) {
         $(".editelement").html("");
         $(this).parents('.col').remove();
+        $(".formBuilderWrap").removeClass("active");
     }
 }).on("click", ".colIncrease", function(){
 	var col = $(this).closest(".col");
