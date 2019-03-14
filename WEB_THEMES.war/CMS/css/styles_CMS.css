@@ -2612,10 +2612,20 @@ select:focus {
 	text-align: center;
 	background: #fff;
 	height: 70px;
+	position: relative;
+	border: 1px solid #e5e7e7;
 }
 .img-precontainer img {
-	width: 100%;
 	max-width: 100%;
+	width: auto;
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	max-height: 66px;
 }
 .grid li input[type=checkbox] {
 	display: inline-block;
