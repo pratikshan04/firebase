@@ -11,6 +11,9 @@
     font-weight: 400;
     src: url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.eot?#iefix) format("embedded-opentype"),url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.woff) format("woff"),url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.ttf) format("truetype"),url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.svg#robotoblack) format("svg")
 }
+body{
+	font-family: RobotoRegular, RobotoBlack;
+}
 /* New CMS CSS */
 .cms_mainContentEnclosure {
 	width: 100% !important;
@@ -1283,8 +1286,33 @@ iframe#iframeId {
 	padding: 10px;
 	width: 340px;
 }
+.expand-nav .cms_leftMenu {
+	width: 70px;
+}
+.expand-nav .cms_leftMenu ul li:hover .action-text {
+	display: inline-block;
+}
+.expand-nav .cms_leftMenu ul li:hover a {
+	width: 280px;
+	position: absolute;
+}
+.expand-nav .cms_leftMenu ul li .action-text,
+.expand-nav .cms_backToList .action-text,
+.expand-nav .pageDesignLogo strong,
+.expand-nav .pageDesignLogo span {
+	display: none;
+}
+.expand-nav .cms_staticTable{
+	padding: 0 0 0 70px;
+}
+.expand-nav .cms_backToList > i {
+	margin: 0 10px 0 4px;
+}
+.expand-nav .cms_backToList {
+	padding: 2px 0px;
+}
 .cms_leftMenu{
-	width: 270px;
+	width: 280px;
 	box-shadow: 1px 1px 10px #565f65;
 	-webkit-box-shadow: 1px 1px 10px #565f65;
 	-moz-box-shadow: 1px 1px 10px #565f65;
@@ -1293,9 +1321,9 @@ iframe#iframeId {
 	top: 0;
 	height: 100%;
 	background: #444343;
-	transition: left 0.3s ease-in-out;
-	-webkit-transition: left 0.3s ease-in-out;
-	-moz-transition: left 0.3s ease-in-out;
+	transition: left 0.2s,width 0.2s ease-in-out;
+	-webkit-transition: left 0.2s,width 0.2s ease-in-out;
+	-moz-transition: left 0.2s,width 0.2s ease-in-out;
 }
 .cms_leftMenu ul{
 	padding: 0;
@@ -1305,6 +1333,8 @@ iframe#iframeId {
 	list-style-type:none;
 	border-bottom: 1px solid #5e5e5e;
 	color: #c7c7c7;
+	position: relative;
+    height: 59px;
 }
 .cms_leftMenu ul li.selectWebsite{
 	padding: 15px 20px;
@@ -1315,16 +1345,17 @@ iframe#iframeId {
 	display: inline-block;
 }
 .cms_leftMenu > ul > li > a{
-	padding: 20px 5px;
+	padding: 16px 5px;
     color: #c7c7c7;
-    font-size: 19px;
+    font-size: 16px;
     display: block;
+    background: #444343;
 }
 .cms_leftMenu > ul > li > a i{
-	font-size: 25px;
+	font-size: 24px;
 }
 .cms_leftMenu .action-icon{
-	width: 65px;
+	width: 62px;
 	text-align: center;
 	position: relative;
 	display: inline-block;
@@ -1478,10 +1509,10 @@ iframe#iframeId {
 	margin: 0;
 }
 .cms_staticTable{
-	padding: 0 0 0 270px;
-	transition: padding 0.3s ease-in-out;
-	-webkit-transition: padding 0.3s ease-in-out;
-	-moz-transition: padding 0.3s ease-in-out;
+	padding: 0 0 0 280px;
+	transition: padding 0.2s ease-in-out;
+	-webkit-transition: padding 0.2s ease-in-out;
+	-moz-transition: padding 0.2s ease-in-out;
 }
 .staticpageList-tableWrap {
 	padding: 0 20px;
@@ -1879,7 +1910,7 @@ select:focus {
 	color: #456078;
 }
 .table>tbody>tr>td.cms_slNo {
-	width: 103px;
+	width: 70px;
 }
 .cms_customTable.table>tbody>tr>td{
 	vertical-align: middle;
@@ -1906,7 +1937,7 @@ select:focus {
 	border-left: 1px solid #c9c9c9;
 }
 .cms_customTable.table>tbody>tr>td:last-child{
-	border-right: 1px solid #c9c9c9;
+	border-right: 2px solid #c9c9c9;
 }
 .cms_customTable.table{
 	border-collapse: collapse;
@@ -2096,13 +2127,13 @@ select:focus {
 	background: #456078;
 }
 .cms_backToList{
-	padding: 3px 0px;
+	padding: 5px 3px;
 	color: #c7c7c7;
-	font-size: 19px;
+	font-size: 16px;
 	display: block;
 	border: 3px solid #c7c7c7;
-	margin: 20px;
-	border-radius: 20px;
+	margin: 15px 20px;
+	border-radius: 18px;
 }
 .cms_backToList > i{
 	margin: 0 10px 0 15px;
@@ -2164,9 +2195,6 @@ select:focus {
 .listRightColumn .cms_customTable.table>thead>tr>th {
 	border: 0;
 }
-/* .cms_customTable.table>tbody>tr:nth-child(10)>td {
-	border-bottom: 0;
-} */
 .cms_customSearch.cms_customSearchRight {
 	margin: 4px 8% 10px auto;
 }
@@ -2197,7 +2225,7 @@ select:focus {
 }
 .pageDesignLogo {
 	background: #e5e7e7;
-	padding: 20px;
+	padding: 20px 16px;
 	font-size: 28px;
 	color: #000;
 }
@@ -2785,7 +2813,58 @@ select:focus {
 .list-view1.grid .img-precontainer,.list-view2.grid .img-precontainer {
 	display: none
 }
-
+@media all and (max-width: 1800px){
+	.cms_leftMenu {
+		width: 260px;
+	}
+	.pageDesignLogo {
+		font-size: 24px;
+	}
+	.cms_staticTable{
+		padding: 0 0 0 260px;
+	}
+	.sort-pageList select{
+		width: 125px;
+		font-size: 14px;
+	}
+	.cms_pageSearch{
+		float: none;
+	}
+	.cms_pageSearch + div {
+		float: none;
+		margin: 6px 0 0 0px;
+	}
+	.cms_actionIcons a:nth-child(2) {
+		margin: 0 10px;
+	}
+	.table>tbody>tr>td.cms_actionIcons {
+		width: 115px;
+	}
+	.cms_customTable.table>tbody>tr>td,.cms_customTable.table>thead>tr>th {
+		padding: 6px 8px;
+		font-size: 13px;
+	}
+	.displayBox,.siteDisplayBox{
+		font-size: 14px;
+	}
+	.create-newPage a, .cms_blueBtn{
+	    font-size: 14px;
+		height: 36px;
+		padding: 8px 16px;
+	}
+	.custom-select select{
+		height: 36px;
+		padding: 7px 30px 7px 8px;
+	}
+	.outLineBtn_left,.cms_pageSearch input[type=text]{
+		font-size: 16px;
+	}
+	.custom-select span{
+		height: 36px;
+		width: 36px;
+		padding: 10px;
+	}
+}
 /*.dropelement form ul li{
 	padding:10px;
 }
