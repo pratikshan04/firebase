@@ -254,7 +254,7 @@
 		#if($resultCount==0)
 			<div class="searchZero">
 				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
-				<h3>$!locale.get("search.result.zeroResult")&nbsp;<span> $!keyWord </span>$!locale.get("search.result.tryOtherSearch")</h3>
+				<h3>$!locale.get("search.result.zeroResult")&nbsp;<span>#if($!narrowKeyword && $!narrowKeyword.length()>0) <em>$!narrowKeyword</em> within #end $!keyWord </span>$!locale.get("search.result.tryOtherSearch")</h3>
 			</div>
 			#if($itemSuggest)
 			 <div class="pageTitle">
