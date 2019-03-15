@@ -1,4 +1,4 @@
-<script type="text/javascript" src="$!webThemes/$siteName/js/guestCheckoutWizard.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/guestCheckoutWizard.js"></script>
 <div class="cimm_logInEnclosure">
 	#if($!message.trim().length()>0)
 		#if($!message.toLowerCase().contains("success"))
@@ -11,7 +11,7 @@
 	#end
 	<h4 align="center" class="main">$locale.get("login.label.pleaseEnterYourUserNameAndPassword")<span class="pull-right"><em class="fa fa-minus-circle"></em></span></h4>
 	<form id="mainLoginForm" class="mainLoginForm" method="post" action="doLogin.action">
-		<input type="hidden" name="fromPageValue" value='$hostName.replace("","")Welcome'/>    
+		<input type="hidden" name="fromPageValue" value='$!hostName.replace("","")Welcome'/>    
 		<div class="cimm_loginContent">
 			<ul class="cimm_formContent">
 				<li>

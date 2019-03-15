@@ -234,7 +234,7 @@
 							#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 							#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 							<li>
-							<a href="$hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+							<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
 							</li>
 							#end
 							</ul>
@@ -247,7 +247,7 @@
 							#end
 						</td>
 						<td data-th="$locale.get('product.label.yourprice')" class="tabelPrice">
-							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!webThemes/$siteName/images/loading.gif" /></span> -->
+							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span> -->
 							#if($itemData.price > 0)
 							<span data-select='extPriceData' class='priceSpan'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else

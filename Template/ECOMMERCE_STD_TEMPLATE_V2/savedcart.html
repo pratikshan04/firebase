@@ -232,7 +232,7 @@
 					#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 					#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 					<li>
-					<a href="$hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
 					</li>
 					#end
 					</ul>
@@ -281,7 +281,7 @@
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							<!-- <span id="span_$itemData.partNumber" data-select='priceData'>
-							<img src="$hostName$webThemes/$siteName/images/loading.gif" />
+							<img src="$!hostName$webThemes/$siteName/images/loading.gif" />
 							</span> -->
 							#end
 						</span>
@@ -291,7 +291,7 @@
 							#if($itemData.total>0) $$numberTool.format("$numberToolFormat",$itemData.total) #else N/A #end
 						</span>
 						<!-- <span class="productGrpRightAlign"><span id="spanEx_$itemData.partNumber" data-select='extPriceData'>
-						<img src="$!webThemes/$siteName/images/loading.gif" /></span></span> -->
+						<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span></span> -->
 					</td>
 					<td data-th="select">
 						<label class="customCheckBox2">
@@ -363,4 +363,4 @@
 $locale.get("product.label.noDataAvailable")
 #end
 
-<script type="text/javascript" src="$!webThemes/$siteName/js/BulkAction.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/BulkAction.js"></script>

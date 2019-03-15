@@ -1,0 +1,17 @@
+<div>
+#set ($map = $data )
+#set ($entriesMap = $data.get("entries"))
+
+#foreach($entryList in $entriesMap)
+
+$entryList.get("title") <br />
+
+#end
+
+
+$entries.size()
+#foreach ($mapEntry in $map.entrySet())
+    <name>$mapEntry.key</name>
+  
+#end
+</div>

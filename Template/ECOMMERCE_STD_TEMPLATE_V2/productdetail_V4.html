@@ -32,7 +32,7 @@
 						</div>
 						#else
 						<div class="cloneImg"> 
-							<img src='$!hostName$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+							<img src='$!thumbNail$!itemData.imageName' title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 						</div>
 						#end
 						<div class="cloneTitle">
@@ -129,7 +129,7 @@
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!detailImage$!itemData.imageName" data-zoom-image="$!hostName$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
+						<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!detailImage$!itemData.imageName" data-zoom-image="$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
 					</span>
 					#end
 					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
@@ -357,12 +357,12 @@
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 									<strong>$!locale.get("product.label.availability"): </strong>
 									<strong><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
-									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
+									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
 								</li>
 								#end
 								<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
 									<strong>$!locale.get("product.label.leadTime"): </strong>
-									<span class="leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+									<span class="leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 								</li> -->
 								##if($userLogin)
 									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink"  data-toggle="modal" data-target="#branchavail"><strong>$!locale.get("label.text.viewAllBranchAvailability")</strong></a></span></li>
@@ -409,7 +409,7 @@
 						    	<!-- <div id="listPrices" class="price">
 									<strong>$!locale.get('product.label.listPrice'): </strong>
 									<span id="listPriceSpan_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
-										<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+										<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 									</span>
 								</div> -->
 						    	<div id="yourPrices" class="price">
@@ -422,7 +422,7 @@
 										<span id="span_$!itemData.partNumber" class="priceSpan">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 									#else
 										<span id="span_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										</span>
 									#end
 								</div>
@@ -622,7 +622,7 @@
 									    		<span class='text-danger'>$!locale.get("product.label.callforprice")</span>
 									    	#end
 									    #else
-									    	<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									    	<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 									    #end
 								    </span>
 								 </td>
@@ -635,7 +635,7 @@
 									    		<span class='text-danger'>Call for Availability</span>
 									    	#end
 									    #else
-									    	<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									    	<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										#end
 									</span>
 								</td>
@@ -752,54 +752,62 @@
 				<div id="documentsSection">
 					<ul class="documentStack clearAfter">
 					#foreach($itemDocument in $!itemDocumentsList)
+						#set($documentLinkPath = "")
+						#set($hostNameLink = "")
+						 #if($!itemDocument.docType=="URL" || $!itemDocument.contains("http"))
+							#set($documentLinkPath = $!itemDocument.docName)
+						 #else
+							#set($documentLinkPath = $!documentPath+$!itemDocument.docName)
+							#set($hostNameLink = $!hostName)
+						 #end
 						#if($itemDocument.docName.contains('.pdf'))
 						<li>
-							<a onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.doc'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="docx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.docx'))
 						<li>
-							<a class="docx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="docx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/word.png" alt="word"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xlsx'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="xlsx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.pptx'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="pptx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.ppt'))
 						<li>
-							<a class="pptx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="pptx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/ppt.png" alt="ppt"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.xls'))
 						<li>
-							<a class="xlsx"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="xlsx removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/excel.png" alt="excel"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.cad'))
 						<li>
-							<a class="title"  onclick="window.open('$!documentPath$!itemDocument.docName','mywindow','width=1100,height=500');"><img src="$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
-							<span class="cimm_pdfLink hideMe">$!hostName$!documentPath$!itemDocument.docName</span>
+							<a class="title removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('youtube') || $!itemDocument.docName.contains('.mp4') || $!itemDocument.docName.contains('.avi'))
 						<li>
-							<a href='$!itemDocument.docName' target="_blank"><img src="$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
+							<a href='$!itemDocument.docName' target="_blank" class="removeForSend"><img src="$!cdnUrl$!webThemes/$!siteName/images/video.png" alt="video"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 						</li>
 						#else
 							<li>
-								<a href='$!itemDocument.docName' target="_blank"><img src="$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
+								<a href='$!itemDocument.docName' target="_blank" class="removeForSend"><img src="$!cdnUrl$!webThemes/$!siteName/images/link.png" alt="link"/><strong>$!itemDocument.docDesc</strong></a>
 								<span class="cimm_pdfLink hideMe">$!itemDocument.docName</span>
 							</li>
 						#end
@@ -811,7 +819,7 @@
 				<div id="videoSection">
 					#foreach($videoLink in $!videoLinkList)
 						<span>
-							<a href='$!videoLink.videoName' target="_blank"><img src="$!webThemes/$!siteName/images/video.png"  alt='video'/><span>$!videoLink.videoCaption</span></a>
+							<a href='$!videoLink.videoName' target="_blank"><img src="$!cdnUrl$!webThemes/$!siteName/images/video.png"  alt='video'/><span>$!videoLink.videoCaption</span></a>
 						</span>
 					#end
 				</div>
@@ -966,12 +974,12 @@
 									
 								<!-- 	<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
 										 <strong>$!locale.get("product.label.leadTime"): </strong>
-										 <span class="leadTime_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										 <span class="leadTime_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
 										 <strong>$!locale.get("product.label.available") : </strong>
-										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
+										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
 									</li>
 									
 									#if($linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
@@ -984,7 +992,7 @@
 								 	<!-- <li>
 								 		<h4>$!locale.get('product.label.listPrice'): </h4>
 										 <span id="listPriceSpan_$!linkItem.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										 </span>
 									</li> -->
 									#end
@@ -1002,7 +1010,7 @@
 											#end
 										#else
 										<span id="span_$!linkItem.partNumber" data-select='priceData'>
-											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
 										</span>
 										#end
 									</li>
