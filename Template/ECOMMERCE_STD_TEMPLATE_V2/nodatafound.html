@@ -58,9 +58,9 @@
 <div class="row">
 	<div class="col-md-12">
 		#if($resultCount==0)
-			<div class="searchZero">
+			<div class="searchZero"> 
 				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
-				<p>$!locale.get("search.result.zeroResult")&nbsp;<span><strong>$!keyWord</strong></span></p>
+				<p>$!locale.get("search.result.zeroResult")&nbsp;<span><strong>#if($!narrowKeyword && $!narrowKeyword.length()>0) <em>$!narrowKeyword</em> within #end $!keyWord</strong></span></p>
 				<p>
 					$!locale.get("search.result.tryOtherSearch") $locale.get("label.text.or") 
 					$locale.get("label.text.goToOur") <a href="$locale.get('website.url.Welcome')" class="cimm_inlineButton">$locale.get("site.label.homePage")</a>   
