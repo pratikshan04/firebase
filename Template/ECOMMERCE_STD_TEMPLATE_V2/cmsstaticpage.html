@@ -41,6 +41,8 @@ footer,header,nav{
 <div class="container">
 	<div class="row hideMe">
 		<div class="readyTemplatesForm">
+			#if($templateNames.size() > 0)
+			<label>Ready Templates: </label>
 			<div id="template-slider" class="template-slider">
 				#foreach($templateNamesList in $templateNames)
 				<div>
@@ -50,6 +52,7 @@ footer,header,nav{
 				</div>
 				#end
 			</div>
+			#end
 		</div>
 	</div>
 </div>
