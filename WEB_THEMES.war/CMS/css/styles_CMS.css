@@ -1286,7 +1286,7 @@ iframe#iframeId {
 	padding: 10px;
 	width: 340px;
 }
-.expand-nav .cms_leftMenu {
+/*.expand-nav .cms_leftMenu {
 	width: 70px;
 }
 .expand-nav .cms_leftMenu ul li:hover .action-text {
@@ -1313,7 +1313,7 @@ iframe#iframeId {
 }
 .expand-nav .gmControlsCustomClass.fixConrtroles {
 	width: calc(100% - 70px);
-}
+} */
 .cms_leftMenu{
 	width: 280px;
 	box-shadow: 1px 1px 10px #565f65;
@@ -2024,9 +2024,43 @@ select:focus {
 	margin-top: 10px;
 }
 .readyTemplatesForm{
-	height: 40px;
 	float: left;
-	width: 460px;
+	width: 400px;
+	margin-left: 20px;
+}
+#template-slider{
+	margin-left: -6px;
+}
+.readyTemplatesForm .slick-slide {
+	margin-left: 6px;
+}
+#gm-controls .readyTemplatesForm .slick-next, #gm-controls .readyTemplatesForm .slick-prev {
+	box-shadow: none;
+	text-indent: 0;
+	font-size: 0;
+	height: 40px;
+	width: 24px;
+	margin-top: -18px;
+}
+#gm-controls .readyTemplatesForm .slick-prev {
+	left: -16px;
+}
+#gm-controls .readyTemplatesForm .slick-next{
+	right: -18px;
+}
+#gm-controls .readyTemplatesForm .slick-slide a{
+	border: 1px solid #456078;
+}
+.readyTemplatesForm label {
+	font-size: 14px;
+	margin: 0 0 4px 0;
+	color: #456078;
+	font-weight: 600;
+}
+.readyTemplatesForm .slick-next:before, .readyTemplatesForm .slick-prev:before{
+	font-family: "Font Awesome 5 Free";
+	font-size: 24px;
+	opacity: 1;
 }
 .sorceBtn{
 	width: 100px;
@@ -2066,6 +2100,7 @@ select:focus {
 	color: #456078;
 	background: none;
 	text-transform: capitalize;
+	display: block;
 }
 .mobile_View .sorceBtn {
 	display: none;
