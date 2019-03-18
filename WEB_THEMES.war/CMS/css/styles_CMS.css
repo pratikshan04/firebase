@@ -1292,7 +1292,7 @@ iframe#iframeId {
 .expand-nav .cms_leftMenu ul li:hover .action-text {
 	display: inline-block;
 }
-.expand-nav .cms_leftMenu ul li:hover a {
+.expand-nav .cms_leftMenu > ul > li:hover > a {
 	width: 280px;
 	position: absolute;
 }
@@ -1310,6 +1310,9 @@ iframe#iframeId {
 }
 .expand-nav .cms_backToList {
 	padding: 2px 0px;
+}
+.expand-nav .gmControlsCustomClass.fixConrtroles {
+	width: calc(100% - 70px);
 }
 .cms_leftMenu{
 	width: 280px;
@@ -2102,7 +2105,7 @@ select:focus {
 .deviseSelection label{
 	font-weight: 600;
 	font-size: 13px;
-	margin: 0 10px 0 0;
+	margin: 0 8px 0 0;
 }
 .deviseSelection label:nth-child(1) {
 	display: block;
@@ -2171,20 +2174,20 @@ select:focus {
 }
 .previewSection #previewContainer{
 	overflow: auto;
-	height: calc(560px - 58px);
+	height: calc(560px - 35px);
 	padding: 15px;
 }
 .popupWraper{
 	padding: 10px;
 }
 .prev_heading {
-	padding: 18px;
+	padding: 8px;
 	background: #999;
 	color: #FFF;
 	text-align: center;
 	font-size: 15px;
 	border-radius: 10px 0 0 0;
-	height: 58px;
+	height: 35px;
 }
 .prev_heading i{
 	margin-right: 10px;
@@ -2663,7 +2666,7 @@ select:focus {
 	background: #fff;
 	height: 70px;
 	position: relative;
-	border: 1px solid #e5e7e7;
+	/* border: 1px solid #e5e7e7; */
 }
 .img-precontainer img {
 	max-width: 100%;
@@ -2840,8 +2843,14 @@ select:focus {
 	.table>tbody>tr>td.cms_actionIcons {
 		width: 115px;
 	}
-	.cms_customTable.table>tbody>tr>td,.cms_customTable.table>thead>tr>th {
-		padding: 6px 8px;
+	.cms_customTable.table>tbody>tr>td {
+		padding: 12px 8px;
+		font-size: 13px;
+	}
+	.listRightColumn .table>tbody>tr>td.cms_actionIcons {
+		padding: 13px 8px;
+	}
+	.cms_customTable.table>thead>tr>th{
 		font-size: 13px;
 	}
 	.displayBox,.siteDisplayBox{
@@ -2863,6 +2872,9 @@ select:focus {
 		height: 36px;
 		width: 36px;
 		padding: 10px;
+	}
+	.gmControlsCustomClass.fixConrtroles{
+		width: calc(100% - 260px);
 	}
 }
 /*.dropelement form ul li{
