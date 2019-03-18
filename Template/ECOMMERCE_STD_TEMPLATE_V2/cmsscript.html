@@ -539,7 +539,18 @@ jQuery(document).ready(function(){
         window.onbeforeunload = null;
 	  }
 		},(autoSaveTime*60000));
-	});	
+		chkForLeftMenu();
+	});
+	function chkForLeftMenu(){
+		if($(window).width() < 1370){
+			$('body').addClass('expand-nav');
+		}else{
+			$('body').removeClass('expand-nav');
+		}
+	}
+	$(window).resize(function() {
+		chkForLeftMenu();
+	});
 //]]>
 </script>
 <script type="text/javascript">
@@ -895,7 +906,7 @@ function initContextMenu(id){
 					  if(typeof bannerListId=="undefined" || bannerListId==null || jQuery.trim(bannerListId)==""){
 						connector = "/bannerListCms.action";
 					  }
-				      jQuery.colorbox({open:true,href:connector,iframe:true, width:"80%", height:"530px"});
+				      jQuery.colorbox({open:true,href:connector,iframe:true, width: iframeWidth(), height:"530px"});
 				   },
 		items: {
 				  "edit": {name: "Edit", icon: "edit"},    
@@ -1089,22 +1100,22 @@ function switchSEO(){
 	jQuery("#SeoTabs").addClass("selected");
 	jQuery("#PageTabs").removeClass("selected");				
 }
-
 function showIframeWindow(){
-	jQuery(".iframe").colorbox({
-		iframe:true, width:"80%", height:"80%"  
-	});
-	
+	jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(), height:"80%"});
 }
-
 function showUploadIframeWindow(){
-	  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
-   	   }); 
+	jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(),height:"88%"}); 
 }
 function editWidgetIframeWindow(){
-	jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(), height:"80%"});
 }
-
+function iframeWidth(){
+	if($(window).width() < 1370){
+		return '90%';
+	}else{
+		return '80%';
+	}
+}
 var iframeOrgHeight = 0;	  
 function changeresponsivefunct(e){
 	var previewType = $(e).attr("title");
