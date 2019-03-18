@@ -3001,10 +3001,14 @@ var formatPrice = function(){
 		$(".formatPrice").each(function(){
 			var e=$(this).text().trim();
 			var result = e.match(/\d+/g);
-			if(result!=null){
-				e=e.replace("$","");
-				e="$"+commaSeparateNumber(e);
-				$(this).text(e);
+			var finalResult = e;
+			if(result!=null && result.length>0){
+				finalResult = result[0];
+				finalResult = "$"+commaSeparateNumber(finalResult);
+				if(result.length>1){
+					finalResult = finalResult+"."+result[1];
+				}
+				$(this).text(finalResult);
 			}
 		});
 	}
