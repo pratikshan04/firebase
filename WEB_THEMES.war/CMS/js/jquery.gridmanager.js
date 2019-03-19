@@ -2075,7 +2075,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 	};
 	
 	 hideActionIcons = function(clickType){
-		$(".readyTemplatesForm, #canvasImage").hide();
+		$(".readyTemplatesForm").hide();
 		$(".cms_leftMenu").css({'left':'-280px'});
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'none';
@@ -2097,7 +2097,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		jQuery(".cimm_srcCodeIcon").attr('title','Content View');*/
 	};
 	showActionIcons = function(clickType){
-		$(".readyTemplatesForm, #canvasImage").show();
+		$(".readyTemplatesForm").show();
 		$(".cms_leftMenu").css({'left':'0'});
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'block';

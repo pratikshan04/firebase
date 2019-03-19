@@ -37,12 +37,18 @@ jQuery(document).ready(function() {
 footer,header,nav{
 	pointer-events: none;
 }
+#canvasImage{
+	width:100px;
+	height:100px;
+	overflow:hidden;
+	opacity: 0;
+}
 </style>
 <div class="container">
 	<div class="row hideMe">
 		<div class="readyTemplatesForm">
 			#if($templateNames.size() > 0)
-			<label>Ready Templates: </label>
+			<label>Templates List: </label>
 			<div id="template-slider" class="template-slider">
 				#foreach($templateNamesList in $templateNames)
 				<div>
@@ -57,4 +63,4 @@ footer,header,nav{
 	</div>
 </div>
 <div id="mycanvas">$!staticPageData.pageContent</div>   		
-<div id="canvasImage" style="width:150px;height:150px;overflow:hidden"></div>
+<div id="canvasImage"></div>
