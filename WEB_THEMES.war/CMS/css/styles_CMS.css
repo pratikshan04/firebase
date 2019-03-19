@@ -1286,7 +1286,7 @@ iframe#iframeId {
 	padding: 10px;
 	width: 340px;
 }
-/*.expand-nav .cms_leftMenu {
+.expand-nav .cms_leftMenu {
 	width: 70px;
 }
 .expand-nav .cms_leftMenu ul li:hover .action-text {
@@ -1313,7 +1313,7 @@ iframe#iframeId {
 }
 .expand-nav .gmControlsCustomClass.fixConrtroles {
 	width: calc(100% - 70px);
-} */
+}
 .cms_leftMenu{
 	width: 280px;
 	box-shadow: 1px 1px 10px #565f65;
