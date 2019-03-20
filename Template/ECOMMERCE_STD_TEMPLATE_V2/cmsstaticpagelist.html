@@ -185,12 +185,13 @@
 			#end
 			</tbody>
 		</table>
-		<script>
-		paginationScriptCms($staticPageList.totalPages,"listStaticPageCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!staticPageList.pageSize&sortEnabled=$!sortEnabled&page=",$pageNo,1);
-		</script>
+		<div class="pgnation"></div>
 	</div>
 </div>
 <script>
+var pagination = paginationScriptCms($staticPageList.totalPages,"listStaticPageCms.action?type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&query=$!query&pageSize=$!staticPageList.pageSize&sortEnabled=$!sortEnabled&page=",$pageNo,1);
+$(".pgnation").html(pagination);
+
 function submitForm(){
 	$('#staticForm').submit();
 }

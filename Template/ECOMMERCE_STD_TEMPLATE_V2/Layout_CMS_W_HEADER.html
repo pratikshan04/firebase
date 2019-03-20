@@ -20,67 +20,6 @@
     <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/EcommereceCustomCss.css" />
     <link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-    <script>
-      function paginationScriptCms(n_pages,page_link,iindex,pgno){
-        var n_links=5;
-        //page_link = page_link.replace(/[%]/g,"%25");
-        var s_fileName=page_link;
-        pageno=pgno;
-        n_index=(iindex/pageno)+1;
-        var jump=n_pages/5;
-        var mod=n_pages%5;
-        var skipstep=parseInt(jump);
-        if(mod>0){
-          skipstep=skipstep+1;
-        }
-        var start=1;
-        var ss=n_index/n_links;
-        var change=parseInt(ss);
-        if((n_index%n_links)>0){
-          change=change+1;
-        }
-        n_links=n_links*change;
-        start=(n_links-5)+1;
-        var prevpage=pageno*5*(change-2);
-        var pagenumber=0;
-        document.write('<div class="pagebarUTH">');
-        if((n_index)>=6)
-          document.write('<a href="'+page_link+prevpage+'">Previous</a>\n');
-        if(n_links){
-          var n_sideLinks=1,n_firstLink,n_lastLink;
-          if(n_index>=n_pages){
-            n_firstLink=start;
-            n_lastLink=n_pages;
-          }
-          else if(n_index<=0)
-          {
-            n_firstLink=start;
-            n_lastLink=5;
-          }
-            else
-            {
-              n_firstLink=start;
-              if(n_links>n_pages)
-                n_lastLink=n_pages;
-              else
-                n_lastLink=n_firstLink+5-1;
-            }
-          for(var i=n_firstLink;i<=n_lastLink;i++)
-          {
-            pagenumber=(i*pageno)-pageno;
-            if(i==(n_index))
-            {
-              var nexpage=pagenumber+pageno;
-              nexpage=pageno*n_lastLink;
-            }
-            document.write(i==(n_index)?'<span class="this-page">'+i+'</span>\n':'<a href="'+page_link+pagenumber+'" title="Go to page '+i+'">'+i+'</a>\n');
-          }
-        }
-        if((n_lastLink)!=n_pages)
-          document.write('<a href="'+page_link+nexpage+'">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
-        document.write(' </div>');
-      }
-    </script>
     <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
 	<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
 	<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
