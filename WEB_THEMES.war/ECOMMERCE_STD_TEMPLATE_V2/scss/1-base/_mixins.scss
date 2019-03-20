@@ -111,7 +111,7 @@ $icons: (
 		$right:null, 
 		$bottom: null,
 		$size: $primary_font-size,
-		$font-faily: "FontAwesome"
+		$font-faily: "Font Awesome 5 Free"
 	) {
     @if $position == both {
         $position: "before, &:after";
