@@ -105,7 +105,7 @@ $icons: (
 		$position: before, 
 		$icon: false, 
 		$styles: true, 
-		$color: $default_font-color, 
+		$color: $default_font-color,
 		$top: null, 
 		$left: null, 
 		$right:null, 
@@ -126,11 +126,10 @@ $icons: (
 			z-index: 11;
 			
             font: {
-				weight: normal;
+				weight: 900;
 				size: $size;
 				family: $font-faily; 
 			}
-			
 			top: $top;
 			left: $left;
 			right: $right;
