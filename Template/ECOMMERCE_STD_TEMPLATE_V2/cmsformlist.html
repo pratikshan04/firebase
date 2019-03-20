@@ -53,10 +53,7 @@
 		</table>
 	</div>
 	<div class="cms_pgnation clearfix clear-both">
-		<script>
-			#set($pageNo = ($formList.pageNo - 1))
-			paginationScript($formList.totalPages,"formListCms.action?query=$!query&page=",$pageNo,1);
-		</script>
+		<div class="pgnation"></div>
 		<div class="cms_formBtn">
 			<button onclick="closeBannerPopup();" class="outLineBtn_left"> <i class="fa fa-times-circle"></i> Cancel</button>
 			<a href="editFormDataCms.action?formId=0" class="cms_blueBtn"> Add New Form <i class="fa fa-list-alt"></i> </a>
@@ -64,14 +61,8 @@
 	</div>
 </div>
 <!-- <div id="cleared"></div> -->
-<style>
-ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li textarea {
-	margin-top: 15px !important;
-}
-ul.cimm_formContent{
-	width:100% !important;
-}
-#CustomForm .banner_addNewBtn{
-	margin-left:50px;
-}
-</style>
+<script>
+	#set($pageNo = ($formList.pageNo - 1))
+	var pagination = paginationScriptCms($formList.totalPages,"formListCms.action?query=$!query&page=",$pageNo,1);
+	$(".pgnation").html(pagination);
+</script>

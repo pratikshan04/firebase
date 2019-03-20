@@ -312,16 +312,8 @@ var deleteBanner = function(bannerListId,bannerListName){
     } else {
     	console.log("Delete Cancelled!");
     }
-    
-    
-	
-		
-	
 	 return false;
 }
-
-
-
 
 /*var deleteBanner = function(bannerListName,siteId){
 	
@@ -348,9 +340,7 @@ var deleteBanner = function(bannerListId,bannerListName){
  		 });
 	
 	 return false;
-}*/
-
-
+}
 
 function paginationScript(n_pages,page_link,iindex,pgno){
 	
@@ -412,4 +402,4 @@ function paginationScript(n_pages,page_link,iindex,pgno){
 		document.write('<a href="'+page_link+nexpage+'">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
 
 	document.write('  </div>');
-}
+}*/

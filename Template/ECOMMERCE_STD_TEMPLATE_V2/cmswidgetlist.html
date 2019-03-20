@@ -53,10 +53,7 @@
 		</table>
 	</div>
 	<div class="cms_pgnation clearfix clear-both">
-		<script>
-			#set($pageNo = ($widgetList.pageNo - 1))
-			paginationScript($widgetList.totalPages,"widgetListCms.action?query=$!query&page=",$pageNo,1);
-		</script>
+		<div class="pgnation"></div>
 		<div class="cms_formBtn">
 			<button onclick="closeBannerPopup();" class="outLineBtn_left"> <i class="fa fa-times-circle"></i> Cancel</button>
 			<a href="editWidgetDataCms.action?widgetId=0" class="cms_blueBtn">
@@ -77,3 +74,8 @@
 	</div>
 	<div id="cleared"></div>
 </div>
+<script>
+	#set($pageNo = ($widgetList.pageNo - 1))
+	var pagination = paginationScriptCms($widgetList.totalPages,"widgetListCms.action?query=$!query&page=",$pageNo,1);
+	$(".pgnation").html(pagination);
+</script>
