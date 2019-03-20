@@ -1066,19 +1066,6 @@ height: 862px;
 .pactive{
 background:#42e300;
 }
-.togglePlusIcon{
-	background: url('../images/small/add.png') no-repeat;
-	height:18px; 
-	width:18px;
-	float:right;
-}
-
-.toggleMinusIcon{
-	background: url('../images/small/minus.png') no-repeat;
-	height:18px; 
-	width:18px;
-	float:right;
-}
 .widgetContainer dd a{
 	border-bottom: 1px solid #ccc;
 	display:block;
@@ -1101,47 +1088,6 @@ background:#42e300;
 }
 :focus {
   outline: -webkit-focus-ring-color auto 5px !important;
-}
-.cimm_formContent .customRadioBtn input[type="radio"] {
-    display: block;
-    opacity: 1;
-    float: left;
-    width: 18px;
-    height: 18px;
-    margin-left:-20px;
-    margin-top:-1px;
-    background: #fff;
-    -webkit-appearance: none;
-}
-.cimm_formContent .customCheckBox input[type="checkbox"] {
-    display: block;
-    opacity: 1;
-    width: 18px;
-    float: left;
-    height: 18px;
-    margin-left: -23px;
-    margin-top: -1px;
-    background: #fff;
-    -webkit-appearance: none;
-	border: 2px solid #ccc;
-}
-ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
-width:30% !important;
-    display: block;
-	position: unset !important;
-	font-size: 12px !important;
-}
-ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
-	margin-bottom: 10px;
-    position: inherit;
-    pointer-events: auto;
-    left: 0;
-    top: 0;
-    transform: translate(0px, 0px);
-	font-size: 12px !important;
-}
-ul.cimm_formContent > li select{
-	padding:5px 5px 5px 10px !important;
 }
 .right{
 	text-align:right;
@@ -1287,7 +1233,7 @@ iframe#iframeId {
 	width: 340px;
 }
 .expand-nav .cms_leftMenu {
-	width: 70px;
+	width: 75px;
 }
 .expand-nav .cms_leftMenu ul li:hover .action-text {
 	display: inline-block;
@@ -1744,7 +1690,7 @@ select:focus {
     display: none
 }
 
-.cms_customCheckBox2,ul.cimm_formContent li label.customCheckBox2 {
+.cms_customCheckBox2 {
     position: relative;
     display: inline-block;
     padding-left: 0;
@@ -2855,6 +2801,12 @@ select:focus {
 	.cms_leftMenu {
 		width: 260px;
 	}
+	.expand-nav .cms_leftMenu {
+		width: 60px;
+	}
+	.cms_leftMenu .action-icon{
+		width: 55px;
+	}
 	.pageDesignLogo {
 		font-size: 24px;
 	}
@@ -3225,4 +3177,58 @@ float:right;
 }
 .HTMLElements {
    width: 200px;
+}
+.cimm_formContent .customRadioBtn input[type="radio"] {
+    display: block;
+    opacity: 1;
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-left:-20px;
+    margin-top:-1px;
+    background: #fff;
+    -webkit-appearance: none;
+}
+.cimm_formContent .customCheckBox input[type="checkbox"] {
+    display: block;
+    opacity: 1;
+    width: 18px;
+    float: left;
+    height: 18px;
+    margin-left: -23px;
+    margin-top: -1px;
+    background: #fff;
+    -webkit-appearance: none;
+	border: 2px solid #ccc;
+}
+ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
+width:30% !important;
+    display: block;
+	position: unset !important;
+	font-size: 12px !important;
+}
+ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
+	margin-bottom: 10px;
+    position: inherit;
+    pointer-events: auto;
+    left: 0;
+    top: 0;
+    transform: translate(0px, 0px);
+	font-size: 12px !important;
+}
+ul.cimm_formContent > li select{
+	padding:5px 5px 5px 10px !important;
+}
+.togglePlusIcon{
+	background: url('../images/small/add.png') no-repeat;
+	height:18px; 
+	width:18px;
+	float:right;
+}
+
+.toggleMinusIcon{
+	background: url('../images/small/minus.png') no-repeat;
+	height:18px; 
+	width:18px;
+	float:right;
 }*/
