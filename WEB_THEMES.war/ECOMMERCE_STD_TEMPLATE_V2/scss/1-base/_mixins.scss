@@ -161,81 +161,109 @@ $icons: (
             border-radius: 0px;
             border: 0px;
             margin: 0;
-
             .cimm_nav{
                 position: relative;
-
                 >ul{
                     >li{
-                        &.dropdown{
-                            padding-right: 5px; 
-
-                            @include icon(
-                                after, caret-right, 
-                                $color: $white, 
-                                $right: 10px, 
-                                $top: 10px, 
-                                $size: 20px
-                            );
-                            &:hover{
-                                @include icon(
-                                    after, caret-down,
-                                    $color: $white,
-                                    $size: 20px
-                                );
-                            }
-                        }
-                        &:hover{
-                            background: $lh_bg;
-                            > a{
-                                color: $white;
-                            }
-                            > .dropdown-menu{
-                                display: block;
-                            }
-                        }
-
-                        > a{
-                            padding: 15px 20px 15px 20px;
-                            @if $lf-uppercase != false {
-                                text-transform: uppercase;
-                            }
-                            @include font($family: $lf-family, $size: $lf-size, $color:$lf-color);
-                            @if $lf-dividers != false {
-                                @include icon(after, nav-seperater, $color: $white, $size: 20px, $top: 13px, $right: 0px);
-                            }
-                        }
-
-                        > .dropdown-menu{
+						span{
+							display: inline-block;
+							position: relative;
+							a{
+								letter-spacing: 1px;
+								padding: 15px 30px 15px 15px;
+								display: block;
+								@if $lf-uppercase != false {
+									text-transform: uppercase;
+								}
+								@include font($family: $lf-family, $size: $lf-size, $color:$lf-color);
+								@if $lf-dividers != false {
+									@include icon(after, nav-seperater, $color: $white, $size: 20px, $top: 13px, $right: 0px);
+								}
+							}
+							em{
+								position: absolute;
+								right: 0;
+								top: 5px;
+								display: inline-block;
+								padding: 20px 14px;
+								@include icon(
+									after, caret-right, 
+									$color: $white, 
+									$right: 8px, 
+									$top: 10px, 
+									$size: 20px
+								);
+							}
+						}
+                        .dropdown-menu{
                             background: $subnav-bg;
-                            padding: 10px 0px; 
+                            padding: 10px 0px;
                             min-width: 275px;
                             
                             li{
-                                > a{
-                                    color: $subnav-lf-color;    
-                                    padding: 4px 10px;
-                                    display: block;
-
-                                    &:hover {
-                                        background: $lh_bg; 
-                                        color: $white; 
-                                    } 
-                                }
+								position: relative;
+								span{
+									display: block;
+									a{
+										text-transform: capitalize;
+										color: $subnav-lf-color;    
+										padding: 4px 10px;
+									}
+									em{
+										top: 0;
+										padding: 14px 14px;
+										&:after{
+											top: 4px;
+											color: #444;
+										}
+									}
+								}
+								> .dropdown-menu{
+									left: 100%;
+									top: 0;
+									border-radius: 0;
+									border: none;
+								}
+								&:hover{
+									background: $lh_bg;
+									> span {
+										a,em:after{
+											color: $white;
+										}
+									}
+									> .dropdown-menu{
+										display: block;
+									}
+								}
                             }
-
                             > ul{
                                 width: 282px;
                                 vertical-align: top;
                                 display: inline-block;
                             }
+						}
+						&:hover{
+							background: $lh_bg;
+							>span{
+								a{
+									color: $white;
+								}
+								em{
+									@include icon(
+										after, caret-down,
+										$color: $white,
+										$size: 20px
+									);
+								}
+							}
+							> .dropdown-menu{
+                                display: block;
+							}
                         }
                     }
                 }
             }
-
         }
-
     } 
 };
 

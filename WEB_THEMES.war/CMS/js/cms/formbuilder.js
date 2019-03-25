@@ -42,6 +42,7 @@ $(".save-form").on("click", function() {
     $("#htmlCode").val($('<div>').append(jFormElement).html());
     var str = $("#mainFormBuilder").serialize();
     var isUpdate = false;
+    var formName = document.getElementById('formNameMain').value;
     $.ajax({
         type: "POST",
         url: "addUpdateFormDataCms.action",
@@ -49,14 +50,14 @@ $(".save-form").on("click", function() {
         success: function(msg) {
         	var result = $.trim(msg);
             if (result.indexOf("success") != -1) {
-            	alert("Form  created successfully");
+            	alert(formName+" Form created successfully");
                 window.location.href = "formListCms.action";
                 //window.parent.buildFormList();
                 window.parent.generateFormList();
                 window.parent.initDraggable();
             }
             else if(result.indexOf("unique constraint") != -1){
-            	alert("Form Name Already Exists");
+            	alert(formName+" Form Name Already Exists");
             }
             else {
                 alert("Error while saving form");
@@ -90,8 +91,8 @@ $(".apply-changes").on("click", function() {
         if ($("#required").is(":checked")) {
         	obj.find('input').attr("data-required","Y");
         }
-        var el = '<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
-        obj.append(el);
+        //var el = '<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
+        //obj.append(el);
     } else if (type == "select") {
         obj.find("select").html("");
         obj.find("label").html($("#label").val() + requiredEl);

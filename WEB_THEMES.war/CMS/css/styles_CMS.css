@@ -1283,7 +1283,7 @@ iframe#iframeId {
 	border-bottom: 1px solid #5e5e5e;
 	color: #c7c7c7;
 	position: relative;
-    height: 59px;
+    height: 60px;
 }
 .cms_leftMenu ul li.selectWebsite{
 	padding: 15px 20px;
@@ -1557,6 +1557,7 @@ iframe#iframeId {
 	background: #456078;
 	pointer-events: none;
 	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
 	color: #FFF;
 }
 select:focus {
@@ -2005,6 +2006,7 @@ select:focus {
 }
 .readyTemplatesForm .slick-next:before, .readyTemplatesForm .slick-prev:before{
 	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
 	font-size: 24px;
 	opacity: 1;
 }
@@ -2297,6 +2299,7 @@ select:focus {
     top: 0;
     right: 5px;
     font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     color: #c8c8c8;
 }
 .input-radio i {

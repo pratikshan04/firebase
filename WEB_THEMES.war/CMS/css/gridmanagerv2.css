@@ -69,38 +69,6 @@
 .layout-mode a:hover {
   cursor: pointer;
 }
-.cmsColSettings{
-	position: absolute;
-	top: 15px;
-	left: -31px;
-	display: block;
-	background: url('../images/in-active-icons/settings.png') no-repeat;
-	width: 30px;
-	height: 27px;
-	margin: 15px 0px 0 0;
-	background-color: #dadada;
-	background-position: center;
-}
-.cmsAddCol{
-	position: relative;
-	display: block;
-	background: url('../images/in-active-icons/vertical-plus1.png') no-repeat;
-	width: 64px;
-	height: 27px;
-	margin: -23px 0 0 0;
-	background-color: #fff;
-	background-position: center;
-}
-.cmsAddCol:hover{
-	position: relative;
-	display: block;
-	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
-	width: 64px;
-	height: 27px;
-	margin: -23px 0 0 0;
-	background-color: #fff;
-	background-position: center;
-}
 .hideButton{
 	display:none;
 }
@@ -199,67 +167,6 @@ button[disabled]{
 }
 
 /**** modified ****/
-.cmsMoveCol{
-	position: absolute;
-	top: -21px;
-    left: 0px;
-    display: block;
-    background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat; 
-    width: 20px;
-    height: 20px; 
-	background-color:#fff;
-	background-size: cover;
-}
-.cmsMoveCol:hover{
-	background:url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
-	background-size: cover;
-}
-.cmsMoveRow{
-	display: block;
-	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
-	width: 20px;
-	height: 20px;
-	background-color:#fff;
-	position: absolute;
-    left: 0;
-    top: -20px;
-    cursor:move;
-    background-size: cover;
-    box-shadow: 1px 1px 6px #565f65;
-}
-.cmsMoveRow:hover{
-	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
-	background-size: cover;
-}
-.cmsEditable{
-	background: url('../images/in-active-icons/editIcon.png') no-repeat;
-	display: block;
-	width: 20px;
-    height: 20px;
-    position: absolute;
-    top: -21px;
-    left: 20px;
-    background-size: 15px 14px;
-    background-color: #fff; 
-    background-position: center
-}
-.cmsRowRmv{
-	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
-	width: 20px;
-	background-size: 15px 15px;
-	position: absolute;
-    left: 22px;
-    top: -20px;
-	height: 20px;
-	background-color: #fff;
-	background-position: center;
-	box-shadow: 1px 1px 2px #565f65;
-}
-.cmsRowRmv:hover{
-	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
-	background-size: 15px 15px;
-	background-position: center;
-}
 .gm-rowSettings .fa{
 	font-size: large;
 	margin: 0px 3px;
@@ -273,7 +180,6 @@ button[disabled]{
 	height: 30px;
 	width: 150px;
 }
-/**** modified ****/
 #gm-canvas {
 	height:auto;
 	margin: 0 1% 0 10px;
@@ -655,4 +561,98 @@ img.alignleft {
 
 .alignleft {
 	float: left;
-} */
+}
+.cmsMoveCol{
+	position: absolute;
+	top: -21px;
+    left: 0px;
+    display: block;
+    background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat; 
+    width: 20px;
+    height: 20px; 
+	background-color:#fff;
+	background-size: cover;
+}
+.cmsMoveCol:hover{
+	background:url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	background-size: cover;
+}
+.cmsMoveRow{
+	display: block;
+	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
+	width: 20px;
+	height: 20px;
+	background-color:#fff;
+	position: absolute;
+    left: 0;
+    top: -20px;
+    cursor:move;
+    background-size: cover;
+    box-shadow: 1px 1px 6px #565f65;
+}
+.cmsMoveRow:hover{
+	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	background-size: cover;
+}
+.cmsEditable{
+	background: url('../images/in-active-icons/editIcon.png') no-repeat;
+	display: block;
+	width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -21px;
+    left: 20px;
+    background-size: 15px 14px;
+    background-color: #fff; 
+    background-position: center
+}
+.cmsRowRmv{
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 20px;
+	background-size: 15px 15px;
+	position: absolute;
+    left: 22px;
+    top: -20px;
+	height: 20px;
+	background-color: #fff;
+	background-position: center;
+	box-shadow: 1px 1px 2px #565f65;
+}
+.cmsRowRmv:hover{
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	background-size: 15px 15px;
+	background-position: center;
+}
+.cmsColSettings{
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/settings.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #dadada;
+	background-position: center;
+}
+.cmsAddCol{
+	position: relative;
+	display: block;
+	background: url('../images/in-active-icons/vertical-plus1.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddCol:hover{
+	position: relative;
+	display: block;
+	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+ */

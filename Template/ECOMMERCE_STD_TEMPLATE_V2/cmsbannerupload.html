@@ -1,12 +1,12 @@
-<link href="$!webThemes/CMS/filemanager/css/style.css" rel="stylesheet" type="text/css" />
-<link href="$!webThemes/CMS/filemanager/css/dropzone.min.css" type="text/css" rel="stylesheet" />
+<link href="$!webThemes/CMS/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!webThemes/CMS/css/dropzone.min.css" type="text/css" rel="stylesheet" />
 <link href="$!webThemes/CMS/css/styles_CMS.css" type="text/css" rel="stylesheet" />
 #parse("font-awesomeV5.html")
-<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/fckxml.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/common.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/dropzone.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/jquery.scrollstop.min.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/fckxml.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/common.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/dropzone.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/jquery.scrollstop.min.js"></script>
 <script language="javascript">
 var contextPath='';
 if(contextPath=="/"){
@@ -233,7 +233,7 @@ oListManager.AddFolder = function( folderName, folderPath, folderId ){
 	var row = $('#main-item-container');
 	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+folderId+'" value="'+oConnector.CurrentFolder +escape(folderName)+'"><span></span></label>';
 	var imgName = '<div class="box"><h4 class="ellipsis"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
-	var imgBlock = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div><div class="img-precontainer-mini"><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></a>';
+	var imgBlock = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><img class="directory-img" src="$!webThemes/CMS/images/img/ico/folder.png"></div><div class="img-precontainer-mini"><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></a>';
 	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
 	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">File Folder</div>';
 	var liVal = $('<li/>').attr({"data-name": folderName, class: "dir ui-draggable ui-droppable clearfix"}).html(fileNameBlock).append(dummy1)
@@ -291,7 +291,7 @@ oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, ext
 	var openFileUrl = fileUrl;
 	if(extenstion.toUpperCase()!="JPG" && extenstion.toUpperCase()!="PNG" && extenstion.toUpperCase()!="GIF" && extenstion.toUpperCase()!="JPEG"){
 		filename = extenstion+".jpg";
-		fileUrl = "$!webThemes/CMS/filemanager/img/ico/";
+		fileUrl = "$!webThemes/CMS/images/img/ico/";
 	}else{
 		fileUrl = fileUrl+"thumbnail/";
 		filename = fileName;
@@ -302,7 +302,7 @@ oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, ext
 	var imageId="img";
 	var row = $('#main-item-container');
 	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><span></span></label>';
-	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/filemanager/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/filemanager/img/ico/png.jpg'"+';"/></div></a>'; 
+	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/images/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/images/img/ico/png.jpg'"+';"/></div></a>'; 
 	var imgName = '<div class="box"><h4 class="ellipsis"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></h4></div>';
 	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
 	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">'+typeSplit[1]+'</div><div class="file_size">'+fsize+'KB</div>';
