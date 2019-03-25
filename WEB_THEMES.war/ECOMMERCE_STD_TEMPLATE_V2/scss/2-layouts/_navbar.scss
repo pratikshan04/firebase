@@ -1,76 +1,30 @@
- 
 @include main_nav;
-
+.nav_headingBlock{
+	display: none;
+}
 nav.navbar {
-    // box-shadow: 0px 5px 10px 0px #c4c4c4;
     .cimm_nav{
         >ul{
             >li{
                 &:last-child{
 					> .dropdown-menu{
 					    left: -143px;
-					    .dropdown-submenu{
+					    li{
 						    >.dropdown-menu {
-								left: -160px;
+								top: 0;
+								left: -100%;
+								margin: 0;
+								border-radius: 0;
 							}
 						}
 					}
-                }  
-                a{
-                    letter-spacing: 1px; 
-                } 
-
-                > .dropdown-menu{
-                    padding: 10px 0px;
-
+                }
+                .dropdown-menu{
                     &.shopbyprod, &.shopbymanuf, &.shopbybrand{
                         width: 855px;
-                    }
-
-                    > ul{
-                        width: 282px;   
-                        > li{
-                            >a{
-                                text-transform: capitalize;
-                            }
-                        }
                     }
                 }
             }
         }
-        .dropdown-submenu {
-  			position: relative;
-			>.dropdown-menu {
-				top: -2px;
-				left: 100%;
-				border: none;
-				display: none;
-				-webkit-border-radius: 0;
-				-moz-border-radius: 0;
-				border-radius: 0;
-			}
-			>a:after {
-				display: block;
-				content: " ";
-				float: right;
-				width: 0;
-				height: 0;
-				border-color: transparent;
-				border-style: solid;
-				border-width: 5px 0 5px 5px;
-				border-left-color: #ccc;
-				margin-top: 5px;
-				margin-right: -10px;
-			}
-			&:hover{
-				>.dropdown-menu {
-					display: block;
-				}
-				>a:after {
-					border-left-color: #fff;
-				}
-			}
-		}
     }
  }
- 
