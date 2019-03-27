@@ -38,6 +38,151 @@ $breakpoint-mobileView:480px;
 	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
 		width:57%;
 	}
+	/*********************** responsive menu style start **************************/
+	.cimm_mobileNavIconWrap{
+		float: left;
+    	margin: 3px 8px 0px 0px;
+		button{
+			position: relative;
+			float: right;
+			padding: 0;
+			margin: 2px 0;
+			background-color: transparent;
+			background-image: none;
+			border: 1px solid transparent;
+			border-radius: 4px;
+		}
+	}
+	.cimm_searchWrapper{
+		float: left;
+		width: calc(100% - 38px);
+		margin: 0 0 18px 0;
+	}
+	header .cimm_header .cimm_header_mid .cimm_logo{
+		margin: 0 auto;
+	}
+	.icon-bar {
+		background-color: $gray-dark;
+		width: 100%;
+		height: 4px !important;
+		width: 28px !important;
+	}
+	.navbar-toggle .icon-bar+.icon-bar{
+		margin-top: 5px;
+	}
+	nav.navbar{
+		&.active{
+			left: 0;
+		}
+		width: 300px;
+		position: fixed;
+		z-index: 10000;
+		bottom: 0;
+		top: 0;
+		left: -450px;
+		transition: .3s ease;
+		-ms-transition: .3s ease;
+		-moz-transition: .3s ease;
+		-webkit-transition: .3s ease;
+		overflow-x: hidden;
+		overflow-y: auto;
+		height: 100%;
+		background: #FFF;
+		.cimm_nav >ul {
+			float: none;
+			position: relative;
+			margin: 0 -15px;
+			>li{
+				position: static;
+				float: none;
+				span{
+					display: block;
+					a{
+						color: #444;
+						padding: 10px 40px 10px 15px;
+					}
+					em {
+						top: 0;
+						right: 5px;
+						padding: 20px 16px;
+						&:after{
+							color: #444;
+						}
+					}
+				}
+				&:hover{
+					background: transparent;
+					>span{
+						a{
+							color: #444;
+						}
+						em{
+							@include icon(
+								after, caret-right,
+								$color: #444,
+								$size: 20px
+							);
+						}
+					}
+				}
+				.dropdown-menu{
+					padding: 10px 0px;
+					display: block;
+					top: 0;
+					left: 320px !important;
+					height: 100vh;
+					width: 300px;
+					padding: 0 0 10px 0;
+					overflow-x: hidden;
+					overflow-y: auto;
+					transition: left .3s ease;
+					-ms-transition: left .3s ease;
+					-moz-transition: left .3s ease;
+					-webkit-transition: left .3s ease;
+					background: #FFF;
+					border: none;
+					margin: 0;
+					&.slideDropMenu{
+						left: 0 !important;
+					}
+					&.shopbyprod, &.shopbymanuf, &.shopbybrand{
+						width: 300px;
+					}
+					li{
+						position: static;
+						&:hover{
+							background: transparent;
+							span{
+								a,em:after{
+									color: #444;
+								}
+							}
+						}
+					}
+					ul{
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+	.nav_headingBlock {
+		padding: 10px 10px 10px 40px;
+		font-size: 22px;
+		font-weight: 600;
+		text-align: center;
+		position: relative;
+		display: block;
+		i {
+			position: absolute;
+			left: 12px;
+			top: 15px;
+		}
+	}
+	.navbar-toggle{
+		display: block;
+	}
+	/*********************** responsive menu style end **************************/
 }
 @media all and (max-width: $breakpoint-tablet){
 	header .cimm_header .cimm_headerMidContent .cimm_searchWrapper{
@@ -113,9 +258,6 @@ $breakpoint-mobileView:480px;
 	.cimm_bodyContentWrap .container{
 		box-shadow: none;
 	}
-	nav.navbar{
-		display: none;
-	}
 	.cimm_inlineButton{
 		letter-spacing: 0.5px;
 	}
@@ -129,15 +271,6 @@ $breakpoint-mobileView:480px;
 	}
 	.hideForIpad{
 		display: none;
-	}
-	.icon-bar {
-		background-color: $gray-dark;
-		width: 100%;
-		height: 4px !important;
-		width: 28px !important;
-	}
-	.navbar-toggle .icon-bar+.icon-bar{
-		margin-top: 5px;
 	}
 	header .cimm_header .cimm_headerMidContent .cimm_headerLeft .cimm_logo{
 		width: 100%;
@@ -165,9 +298,10 @@ $breakpoint-mobileView:480px;
 	}
 	.breadcrumb li+li:before{
 		content:"\f104";
-		font-family: FontAwesome;
+		font-family: "Font Awesome 5 Free";
 		font-size: 18px;
 		color: $default_font-color;
+		font-weight: 900;
 	}
 	ul.breadcrumb li:nth-last-child(2){
 		display: block;
@@ -229,23 +363,6 @@ $breakpoint-mobileView:480px;
 					margin: 0;
 				}
 			}
-		}
-	}
-	.cimm_mobileNavIconWrap{
-		position: relative;
-		float: left;
-		margin-right: 8px;
-		right: 0;
-		top: 4px;
-		button{
-			position: relative;
-			float: right;
-			padding: 0;
-			margin: 2px 0;
-			background-color: transparent;
-			background-image: none;
-			border: 1px solid transparent;
-			border-radius: 4px;
 		}
 	}
 	.table.customBorderTable {

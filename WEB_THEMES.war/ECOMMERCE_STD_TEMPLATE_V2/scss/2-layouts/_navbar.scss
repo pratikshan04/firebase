@@ -1,38 +1,30 @@
- 
 @include main_nav;
-
+.nav_headingBlock{
+	display: none;
+}
 nav.navbar {
-    // box-shadow: 0px 5px 10px 0px #c4c4c4;
     .cimm_nav{
         >ul{
             >li{
                 &:last-child{
-					.dropdown-menu{
+					> .dropdown-menu{
 					    left: -143px;
+					    li{
+						    >.dropdown-menu {
+								top: 0;
+								left: -100%;
+								margin: 0;
+								border-radius: 0;
+							}
+						}
 					}
-                }  
-                a{
-                    letter-spacing: 1px; 
-                } 
-
-                > .dropdown-menu{
-                    padding: 10px 0px;
-
+                }
+                .dropdown-menu{
                     &.shopbyprod, &.shopbymanuf, &.shopbybrand{
                         width: 855px;
-                    }
-
-                    > ul{
-                        width: 282px;   
-                        > li{
-                            >a{
-                                text-transform: capitalize;
-                            }
-                        }
                     }
                 }
             }
         }
     }
  }
- 

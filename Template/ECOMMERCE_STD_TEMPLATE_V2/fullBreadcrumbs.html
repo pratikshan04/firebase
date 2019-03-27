@@ -68,11 +68,27 @@
 </ul>
 #elseif($!LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
 	#if($!isStaticHomePage!="Y")
-	<h1 class="cimm_page-title">$!pageTitle</h1>
-	<ul class="breadcrumb">
-	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
-	    <li class="active">$!pageTitle</li>
-	</ul>
+		#if($!staticPageBreadCrumbSolr && $!staticPageBreadCrumbSolr.size()>0)
+			#set($breadCrumbStpSize = $!staticPageBreadCrumbSolr.size())
+			#set($breadCrumbStIdx = 1 )
+			<ul class="breadcrumb">
+				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+				 #foreach($!breadCrumb in $staticPageBreadCrumbSolr)
+					#if($!breadCrumbStIdx == $!breadCrumbStpSize)
+						<li class="active">$!breadCrumb.linkName</li>
+					#else
+						<li><a href="$!breadCrumb.pageUrl">$!breadCrumb.linkName</a></li> ##.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')
+					#end
+					#set($breadCrumbStIdx = $!breadCrumbStIdx+1)
+				 #end
+			</ul>
+		#else
+			<!-- <h1 class="cimm_page-title">$!pageTitle</h1> -->
+			<ul class="breadcrumb">
+			    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+			    <li class="active">$!pageTitle</li>
+			</ul>
+		#end
 	#end
 #elseif($!LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
 	#set($listPageHeading = "")
