@@ -902,7 +902,7 @@ form {
 .list-view2.grid .img-precontainer-mini .filetype.ade,.list-view1.grid .img-precontainer-mini .filetype.ade,.list-view2.grid .img-precontainer-mini .filetype.adp,.list-view1.grid .img-precontainer-mini .filetype.adp,.list-view2.grid .img-precontainer-mini .filetype.mdb,.list-view1.grid .img-precontainer-mini .filetype.mdb,.list-view2.grid .img-precontainer-mini .filetype.accdb,.list-view1.grid .img-precontainer-mini .filetype.accdb {
 	background: #B61C19
 }
-@media (max-width: 839px){
+/* @media (max-width: 839px){
 .pagebarUTH{
 position:unset;
 }
@@ -917,4 +917,4 @@ position:unset;
  .list-view1.grid li figure .box{
  height:50px;
  }
- }
+ } */
