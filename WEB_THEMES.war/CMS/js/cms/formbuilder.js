@@ -30,19 +30,15 @@ $(".save-form").on("click", function() {
     $("#subject").val($("#emailSubject").val());
     $("#saveToDB").val(saveToDb);
     $("#sendMail").val(sendEmail);
-    $('.dropelement > form').removeAttr('class').addClass($("#formClass").val());
 
     var formElement = $(".dropelement").html();
     var jFormElement = $(formElement);
-    //jFormElement.find("div").not('.form-group').not('.text-content').remove();
-    jFormElement.find(".cms_form-btn-block").remove();
-    jFormElement.find(".col").removeClass('editing');
-   // console.log(jFormElement);
-  //  console.log($('<div>').append(jFormElement).html());
+    jFormElement.find("div").not('.form-group').not('.text-content').remove();
+    console.log(jFormElement);
+    console.log($('<div>').append(jFormElement).html());
     $("#htmlCode").val($('<div>').append(jFormElement).html());
     var str = $("#mainFormBuilder").serialize();
     var isUpdate = false;
-    var formName = document.getElementById('formNameMain').value;
     $.ajax({
         type: "POST",
         url: "addUpdateFormDataCms.action",
@@ -50,14 +46,14 @@ $(".save-form").on("click", function() {
         success: function(msg) {
         	var result = $.trim(msg);
             if (result.indexOf("success") != -1) {
-            	alert(formName+" Form created successfully");
+            	alert("Form  created successfully");
                 window.location.href = "formListCms.action";
                 //window.parent.buildFormList();
                 window.parent.generateFormList();
                 window.parent.initDraggable();
             }
             else if(result.indexOf("unique constraint") != -1){
-            	alert(formName+" Form Name Already Exists");
+            	alert("Form Name Already Exists");
             }
             else {
                 alert("Error while saving form");
@@ -68,11 +64,6 @@ $(".save-form").on("click", function() {
 
 });
 
-
-$(".cancel-apply").on("click", function() {
-	$(".formBuilderWrap").removeClass("active");
-	$('.col').removeClass("editing");
-});
 $(".apply-changes").on("click", function() {
     var type = $(".editing").data("type");
     var requiredEl = "";
@@ -91,8 +82,8 @@ $(".apply-changes").on("click", function() {
         if ($("#required").is(":checked")) {
         	obj.find('input').attr("data-required","Y");
         }
-        //var el = '<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
-        //obj.append(el);
+        var el = '<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
+        obj.append(el);
     } else if (type == "select") {
         obj.find("select").html("");
         obj.find("label").html($("#label").val() + requiredEl);
@@ -106,15 +97,6 @@ $(".apply-changes").on("click", function() {
         }
     }else if(type == "text"){
     	obj.find('.text-content').html($('#textarea').val());
-    }else if(type == "submitBtn"){
-    	var btnObj = obj.find('button');
-    	btnObj.html($('#btnText').val());
-    	btnObj.removeAttr('class');
-    	btnObj.addClass($('#btnClass').val());
-    	var className = $("input[name='btnAlign']:checked").val();
-        $(obj).removeClass(function (index, css) {
-        	return (css.match (/\btext-\S+/g) || []).join(' ');
-    	}).addClass('text-'+className).attr('data-align', className);
     } else {
         obj.find("label").html($("#label").val() + requiredEl);
         obj.find(type).removeAttr("data-type");
@@ -137,7 +119,7 @@ $(".apply-changes").on("click", function() {
         'name': $("#id").val()+"_Label",
         'value': $("#label").val(),
     });
-    //$(obj).append($input);
+    $(obj).append($input);
     alert("Changes applied Successfully.");
 });
 
@@ -199,13 +181,12 @@ initDraggable();
 var dropOpts = {
     accept: ":not(.ui-sortable-helper)",
     drop: function(event, ui) {
-        $('<div title="Drag to Reorder" class="col col-md-12"></div>').attr("data-type", ui.draggable.data("type")).html(buildElement(ui.draggable.data("type"))).appendTo(this);
+        $("<li title='Drag to Reorder'></li>").attr("data-type", ui.draggable.data("type")).html(buildElement(ui.draggable.data("type"))).appendTo(this);
     }
 };
 
-$(".dropelement form > .row").droppable(dropOpts).sortable({
-    //items: ".form-group:not(.ui-state-disabled)",
-	items: '.col',
+$(".dropelement form ul").droppable(dropOpts).sortable({
+    items: "li:not(.ui-state-disabled)",
     axis: 'y',
     placeholder: 'placeholder',
     forcePlaceholderSize: true,
@@ -220,66 +201,21 @@ $(".dropelement form > .row").droppable(dropOpts).sortable({
     e.stopImmediatePropagation();
 });
 
-$(".dropelement .row").on("click", ".tool-edit", function() {
-	$(".dropelement form .row .col,.btnBlock").removeClass("editing");
-	$(".formBuilderWrap").addClass("active");
-	var colBlock = $(this).parents('.col');
-	colBlock.addClass("editing");
-	buildEditForm(colBlock.data("type"), colBlock);
-}).on("click", ".tool-delete", function() {
+$(".dropelement form ul").on("click", ".tool-edit", function() {
+
+    $(".dropelement form ul li").removeClass("editing");
+    $(this).closest('li').addClass("editing");
+    buildEditForm($(this).closest('li').data("type"), $(this).closest('li'));
+});
+
+$(".dropelement form ul").on("click", ".tool-delete", function() {
+
     var r = confirm("Are you sure, you want to delete this element?");
     if (r) {
         $(".editelement").html("");
-        $(this).parents('.col').remove();
-        $(".formBuilderWrap").removeClass("active");
+        $(this).closest('li').remove();
     }
-}).on("click", ".colIncrease", function(){
-	var col = $(this).closest(".col");
-	var t = getColClass(col);
-	if(t.colWidth < 12){
-		t.colWidth=(parseInt(t.colWidth, 10) + parseInt(1, 10));
-		col.removeClass(t.colClass).addClass('col-md-' + t.colWidth);
-	}
-}).on("click", ".colDecrease", function(){
-	var col = $(this).closest(".col");
-	var t = getColClass(col);
-	if(t.colWidth > parseInt(1, 10)){
-		t.colWidth=(parseInt(t.colWidth, 10) - parseInt(1, 10));
-		col.removeClass(t.colClass).addClass('col-md-' + t.colWidth);
-	}
 });
-
-$(".btnBlock").on("click", ".editBtnStyle", function(){
-	$(".editelement").html("");
-	$(".dropelement form .row .col").removeClass("editing");
-	$(".formBuilderWrap").addClass("active");
-	$(".btnBlock").addClass("editing");
-	buildFormBtnAttr($(".btnBlock"),$(".btnBlock button"))
-});
-function buildFormBtnAttr(fBlock, formBtn) {
-	var formBtnArr = formBtn[0].classList, list = '';
-	var alignBtns = '<label class="cms_formBtnRadio" for="btnLeft"><input type="radio" value="left" id="btnLeft" name="btnAlign"><i class="fa fa-lg fa-align-left"></i></label><label class="cms_formBtnRadio" for="btnCenter"><input type="radio" value="center" name="btnAlign" id="btnCenter"><i class="fa fa-lg fa-align-center"></i></label><label class="cms_formBtnRadio" for="btnRight"><input type="radio" value="right" name="btnAlign" id="btnRight"><i class="fa fa-lg fa-align-right"></i></label>';
-    list = list + '<li><label>Align Button: </label><span>'+alignBtns+'</span></li>';
-    list = list + '<li><label>Button Text: </label><input type="text" id="btnText" value="'+formBtn.html()+'"></li>';
-    list = list + '<li><label>Button ClassName</label>:</div><input type="text" id="btnClass" value="'+formBtnArr.value+'"></li>';
-    $(".editelement").append($("<ul></ul>").html(list));
-    var align = fBlock.attr('data-align');
-    var btnRadio = $('.cms_formBtnRadio');
-    for(i=0; i < btnRadio.length; i++){
-    	if(btnRadio[i].children[i].value == align){
-    		btnRadio[i].children[i].checked = true;
-    		break;
-    	}
-    }
-}
-
-getColClass = function(col){
-    var colClass = $.grep(col.attr("class").split(" "), function(v){
-        return v.indexOf('col-md-') === 0;
-	}).join();
-	var colWidth=colClass.replace('col-md-', "");
-	return {colClass:colClass, colWidth:colWidth};
-};
 
 
 function buildElement(type) {
@@ -300,11 +236,10 @@ function buildElement(type) {
     	var webthemesval=document.getElementById('webthemesval').value+"/CMS/images/active-icons/captcha.png";
         el = '<div class="form-group"><label>Captcha<span class="text-danger"> *</span></label><input type="text" class="form-control" name="jcaptcha" data-required="Y" data-type="text" data-error="Please enter Captcha." data-invalid="" /><div class="captchaWrap form-group"><img src="CaptchaServlet.slt" id="captchaImg" /><a href="javascript:void(0);" id="refreshbtn" onclick="refreshjcaptcha();" class="captchaButton"><i class="fa fa-refresh" aria-hidden="true"></i></a></div></div>';
     }
-    var arrows = '<a title="Make Column Narrower" class="colDecrease"><i class="fa fa-lg fa-caret-left"></i></a> <a title="Make Column Wider" class="colIncrease"><i class="fa fa-lg fa-caret-right"></i></a>';
     if(type != "captcha"){
-    el = el + '<div class="cms_form-btn-block">'+arrows+'<a href="javascirpt:void(0);" class="tool-edit"><i class="fa fa-lg fa-pencil-alt"></i></a> <a href="javascirpt:void(0);" class="tool-delete"><i class="fa fa-lg fa-trash-alt"></i></a></div>';
+    el = el + '<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
     }else{
-    	 el = el + '<div class="cms_form-btn-block"><a href="javascirpt:void(0);" class="tool-delete"><i class="fa fa-lg fa-trash-alt"></i></a></div>';
+    	 el = el + '<div><a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
     }
     return el;
 }
@@ -327,7 +262,7 @@ function buildEditForm(type, parentObj) {
         }
     }
     if(type!="text"){
-    	list = list + '<li><div class="form-group"><label>Validate</label>' + validationListElement + '</div></li>';
+    	list = list + '<li><div class="form-group"><label>Validate</label>' + validationListElement + '</li></div>';
     }
     $(".editelement").append($("<ul></ul>").html(list));
     if (type == "select") {
@@ -400,12 +335,12 @@ function buildEditElement(key, label, type, value, parentObj) {
     			valuetxt =idGen.getId();*/
     		}	
     	}
-        element = '<label>' + label + ' :</label> <input type="text" id="' + key + '" value="' + valuetxt + '" />';
+        element = '<label>' + label + ' </label> : <input type="text" id="' + key + '" value="' + valuetxt + '" />';
     } else if (type == "checkbox") {
-        element = '<label class="cms_customCheckBox cms_customCheckBoxRight"><input type="checkbox" id="' + key + '" ' + valuetxt + ' /><span>' + label + ' :</span></label>';
+        element = label + ' : <input type="checkbox" id="' + key + '" ' + valuetxt + ' />';
     } else if (type == "textarea") {
         c = "";
-        element = '<label>' + label + ' :</label>  <textarea id="' + key + '">';
+        element = '<label>' + label + ' </label>  <textarea id="' + key + '">';
         if (parentObj.data("type") == "select" || parentObj.data("type") == "radio" || parentObj.data("type") == "checkbox") {
             if (key == "radios") {
                 element = element + c + radios;
@@ -421,7 +356,7 @@ function buildEditElement(key, label, type, value, parentObj) {
         element = element + "</textarea>"
     }
 
-    return "<li>" + element + "</li>";
+    return "<li><div class='form-group'>" + element + "</div></li>";
 
 }
 
@@ -433,7 +368,7 @@ Generator.prototype.getId = function() {
 return this.rand++;
 };
 
-/*function initHover() {
+function initHover() {
     $(".dropelement form ul li").mouseover(function() {
         if (!$(this).find("div").data("mode")) {
             $(this).append('<div data-mode="tool">edit</tool>')
@@ -446,7 +381,7 @@ return this.rand++;
         }
     });
 
-}*/
+}
 
 function getValueTxt(key, parentObj, value) {
     var valuetxt = "";

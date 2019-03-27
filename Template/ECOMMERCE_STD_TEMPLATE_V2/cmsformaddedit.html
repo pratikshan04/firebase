@@ -1,221 +1,209 @@
 <link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
 <style>
-.tool-edit, .tool-delete {
-	padding: 3px 10px;
-	color: #456078;
+.fa-wpforms:before {
+    content: "\f298";
 }
-.dropelement form > .row{
-	min-height:200px;
-	margin-bottom: 10px;
+.dropelement{
+width:49%;
+float:left;
+min-height:300px;
+border: 1px dashed #b1b1b1;
 }
-.dropelement .placeholder{
-	background: #f5f5f5;
+.cimm_formContent{
+width:100% !important;
 }
-.dropelement .col{
-	cursor: move;
-}
-.dropelement .col select, .dropelement .col textarea, .dropelement .col input,.btnBlock button{
-	pointer-events: none;
-}
-.dropelement .col:hover .cms_form-btn-block,.btnBlock:hover .cms_form-btn-block {
-	opacity: 1;
-	bottom: 0;
-}
-.dropelement .form-group{
-	margin-bottom: 8px;
-}
-.cms_form-btn-block {
-	opacity: 0;
-	position: relative;
-	bottom: -16px;
-	text-align: right;
-	transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	-moz-transition: all 0.3s ease-in-out;
-}
-.btnBlock .cms_form-btn-block {
-	text-align: left;
+
+ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
+width:30% !important;
 }
 .editing{
-	background-color : #fffdca;
+background-color : #fffdca;
 }
-.cms_form-btn-block .colDecrease, .cms_form-btn-block .colIncrease {
-	background: #456078;
-	color: #FFF;
-	padding: 6px 10px 3px 10px;
-	float: left;
+.editelement{
+width:49%;
+float:left;
+min-height:300px;
+border: 1px solid #b1b1b1;
+padding:20px;
 }
-.ui-draggable-dragging{
-	z-index: 99;
+
+.dropelement form{
+min-height:200px;
 }
-.editelement li span i {
-	margin: 0 5px;
-	padding: 8px;
-	background: #c7c7c7;
-	color: #FFF;
-	cursor: pointer;
+.dropelement form ul{
+min-height:200px;
 }
-.editelement label.cms_formBtnRadio input[type=radio] {
-    display: none;
+
+.dropelement form ul li{
+padding:10px;
 }
-.editelement label.cms_formBtnRadio input[type=radio]:checked + i {
-	background: #456078;
+ul.cimm_formContent a.tool-edit, ul.cimm_formContent a.tool-delete {
+	padding: 3px 10px;
+    background: #1B63AB;
+    color: #fff;
+}
+.editelement ul li, .formTitle ul li {margin-bottom: 10px;}
+.editelement ul li label, .formTitle ul li label {
+	color: #003b4d;
+}
+.editelement ul li input[type="text"], .editelement ul li input[type="password"], .editelement ul li select, .formTitle ul li input[type="text"], .formTitle ul li select {
+	padding: 5px;
+    height: 34px;
+	border: none;
+    background: #e1e1e1;
+    width: 100%;
+}
+.editelement ul li textarea {
+	padding: 5px;
+    min-height: 34px;
+	border: none;
+    background: #e1e1e1;
+    width: 100%;
+}
+.dropelement input[type="submit"] {
+	padding: 5px 10px;
+    color: #fff;
+	margin: 0 0 10px 10px;
+}
+a.apply-changes {
+    padding: 4px 10px;
+    background: #007655;
+    color: #fff;
+	float: right;
+    margin-right: 23px;
+}
+a.save-form {
+	text-align: center;
+    padding: 5px 25px;
+    background: #007580;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+.save-btnBlock {clear: both;}
+ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
+	margin-bottom: 10px;
+}
+.dragelementWrap {padding: 10px;margin-bottom: 20px;}
+.dragelementWrap .dragelement {
+	width: auto;
+    display: inline-block;
+    background: #00696C;
+    padding: 5px 20px;
+    color: #FDF3E7;
+    text-transform: uppercase;
+    cursor:move;
+}
+.formTitle {
+	width: 30%;
+	float: right;
+	padding: 0 20px 20px 20px;
+}
+.formBuilderWrap {
+	width: 68%;
+	float: right;
+}
+.cimm_formContent .customRadioBtn input[type="radio"] {
+    display: block;
+    opacity: 1;
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-left:-20px;
+    margin-top:-1px;
+    background: #fff;
+    -webkit-appearance: none;
+}
+.cimm_formContent .customCheckBox input[type="checkbox"] {
+    display: block;
+    opacity: 1;
+    width: 18px;
+    float: left;
+    height: 18px;
+    margin-left: -22px;
+    margin-top: -1px;
+    background: #fff;
+    -webkit-appearance: none;
+}
+:focus {
+  outline: -webkit-focus-ring-color auto 5px !important;
 }
 </style>
-<div class="formEditWrap clearfix">
-	<div class="dragelementWrap">
-		<div class="dragelement dragFormElement" data-type="input" title="Input Text">
-			<span class="input-text">Abc</span>
-			Input Text
-		</div>
-		<div class="dragelement dragFormElement" data-type="textarea" title="Text Area">
-			<span class="text-area">Abc</span>
-			Text Area
-		</div>
-		<div class="dragelement dragFormElement" data-type="select" title="Dropdown">
-			<span class="input-select">Select</span>
-			Dropdown
-		</div>
-		<div class="dragelement dragFormElement" data-type="radio" title="Radio Button">
-			<span class="input-radio">
-				<i></i>
-			</span>
-			Radio Button
-		</div>
-		<div class="dragelement dragFormElement" data-type="checkbox" title="Check Box">
-			<span class="input-checkBox">
-				<i class="fa fa-check-square"></i>
-			</span>
-			Check Box
-		</div>
-		<div class="dragelement dragFormElement" data-type="text" title="Display Text">
-			<span class="display-text">
-				<b>Abc</b>
-			</span>
-			Display Text
-		</div>
-		<div class="dragelement dragFormElement" data-type="captcha" title="Captcha">
-			<span class="input-captcha">
-				<i>A</i> <b>i</b> 6
-			</span>
-			Captcha
-		</div>
-	</div>
-	<div class="formBuilderWrap">
-		<div class="dropelementWrap">
-			<h5 class="cms_sectionHeading">Form Layout Section</h5>
-			<div class="dropelement">
-				#if($formData.htmlCode)
-					$formData.htmlCode
-				#else
-				<form action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
-					<div class="row"></div>
-					<div class="text-left btnBlock" data-type='submitBtn' data-align="left">
-						<button type="submit" class="button">Submit</button>
-					</div>
-					<input type="hidden" name="NotificationName" id="notificationName" value=''/>
-					<input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
-					<input type="hidden" name="SendMail" id="sendMail" value=''/>
-					<input type="hidden" name="Subject" id="subject" value=''/>
-					<input type="hidden" name="formName" id="formName" value=''/>
-					<input type="hidden" id="webthemesval" value='$!webThemes/'/>
-				</form>
-				#end
-			</div>
-		</div>
-		<div class="editelementWrap">
-			<h5 class="cms_sectionHeading">Form Layout Section</h5>
-			<div class="editelement"></div>
-			<div class="cms_footerSection clearfix">
-				<a href="javascript:void(0)" class="cancel-apply outLineBtn_left pull-left"><i class="fa fa-times-circle"></i> Cancel</a>
-				<a href="javascript:void(0)" class="apply-changes cms_greenBtn pull-right">Apply <i class="fa fa-check-circle"></i></a>
-			</div>
-		</div>
-	</div>
-	<div class="formTitle">
-		<h5 class="cms_sectionHeading">Form Details</h5>
-		<form id="mainFormBuilder">
-			<ul>
-				<li>
-					<label>Form Name :</label> <input type="text" value="$!formData.formName" maxlength="20" name="formData.formName" id="formNameMain" />
-				</li>
-				<li>
-					<label>Notification :</label> <select id="formNotification" name="formData.formNotification">
-					<option value=""></option>
-					#foreach($notification in $notificationList)
-					<option  vlaue="$notification" #if($!formData.formNotification == $notification) selected #end>$notification</option>
-					#end
-					</select>
-				</li>
-				<li>
-					<label>Email Subject :</label> <input type="text" value="$!formData.emailSubject" name="formData.emailSubject" id="emailSubject" />
-				</li>
-				<li>
-					<label>Form ClassName :</label> <input type="text" value="" id="formClass" />
-				</li>
-				<li>
-					<label class="cms_customCheckBox cms_customCheckBoxRight">
-						<input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox'/>
-						<span>Save User Entered Form Data to DB :</span>
-					</label>
-				</li>
-				<li>
-					<label class="cms_customCheckBox cms_customCheckBoxRight">
-						<input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"/>
-						<span>Send Email after User Submits Form :</span>
-					</label>
-				</li>
-			</ul>
-			<input type="hidden" name="formData.htmlCode" id="htmlCode" />
-			#if($formData.id)
-			<input type="hidden" name="formData.id" value="$formData.id" id="formDataId" /> 
-			#end
-		</form>
-		<div class="save-btnBlock clearfix text-right">
-			<!-- <a href="formListCms.action" class="outLineBtn_left pull-left"> <i class="fa fa-times-circle"></i> Cancel</a> -->
-			<a href="javascript:void(0)" class="export-form cms_greenBtn" id="formExportBtn">Download <i class="fa fa-download"></i></a>
-			<a href="javascript:void(0)" class="save-form cms_blueBtn">Save <i class="fa fa-save"></i></a>
-		</div>
-	</div>
+</head>
+<body>
+
+<div class="dragelementWrap">
+<div class="dragelement" data-type="input">Input Text</div>
+<div class="dragelement" data-type="textarea">Text Area</div>
+<div class="dragelement" data-type="select">Select</div>
+<div class="dragelement" data-type="radio">Radio</div>
+<div class="dragelement" data-type="checkbox">Check Box</div>
+<div class="dragelement" data-type="text">Text Field</div>
+<div class="dragelement" data-type="captcha" title="Drag & Drop">Captcha</div>
 </div>
+<div class="formTitle">
+<form id="mainFormBuilder">
+<ul>
+<li>
+<label>Form Name :</label> <input type="text" value="$!formData.formName" maxlength="20" name="formData.formName" id="formNameMain" />
+</li>
+<li>
+<label>Notification :</label> <select id="formNotification" name="formData.formNotification">
+<option value=""></option>
+#foreach($notification in $notificationList)
+<option  vlaue="$notification" #if($!formData.formNotification == $notification) selected #end>$notification</option>
+#end
+</select>
+</li>
+<li>
+<label>Save User Entered Form Data to DB :</label> <input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox'  checked/>
+</li>
+<li>
+<label>Email Subject :</label> <input type="text" value="$!formData.emailSubject" name="formData.emailSubject" id="emailSubject" />
+</li>
+<li>
+<label>Send Email after User Submits Form :</label> <input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"  checked/>
+</li>
+</ul>
+<input type="hidden" name="formData.htmlCode" id="htmlCode" />
+#if($formData.id)
+<input type="hidden" name="formData.id" value="$formData.id" id="formDataId" /> 
+#end
+</form>
+<div class="save-btnBlock">
+<a href="javascript:void(0)" class="save-form">Save</a>
+<a href="javascript:void(0)" class="export-form"  id="formExportBtn">Export</a>
+</div>
+</div>
+
+<div class="formBuilderWrap">
+<div class="dropelement">
+#if($formData.htmlCode)
+$formData.htmlCode
+#else
+<form class="sp-form" action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
+<ul class="cimm_formContent fullWidthForm">
+</ul>
+<input type="submit" value="Submit" class="button" />
+<input type="hidden" name="NotificationName" id="notificationName" value=''/>
+<input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
+<input type="hidden" name="SendMail" id="sendMail" value=''/>
+<input type="hidden" name="Subject" id="subject" value=''/>
+<input type="hidden" name="formName" id="formName" value=''/>
+<input  type="hidden"   id="webthemesval" value='$!webThemes/'/>
+</form>
+#end
+</div>
+<div class="editelement">
+
+</div>
+<a href="javascript:void(0)" class="apply-changes">Apply <i class="fa fa-wpforms"></i></a>
+</div>
+
 <script>
-var arrows = '<a title="Make Column Narrower" class="colDecrease"><i class="fa fa-lg fa-caret-left"></i></a> <a title="Make Column Wider" class="colIncrease"><i class="fa fa-lg fa-caret-right"></i></a>';
-$(".dropelement .col").append('<div class="cms_form-btn-block">'+arrows+'<a href="javascirpt:void(0);" class="tool-edit"><i class="fa fa-lg fa-pencil-alt"></i></a> <a href="javascirpt:void(0);" class="tool-delete"><i class="fa fa-lg fa-trash-alt"></i></a></div>');
-$(".btnBlock").append('<div class="cms_form-btn-block"><a href="javascirpt:void(0);" class="editBtnStyle"><i class="fa fa-lg fa-pencil-alt"></i></a></div>');
+$(".dropelement ul li").append('<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>');
 var frmName=document.getElementById('formName').value;
 //alert(document.getElementById('formName').length);
 if(frmName==='' || frmName==='undefined'){
 	document.getElementById('formExportBtn').style.visibility = "hidden";
 }
-var dropForm = document.getElementsByClassName('dropelement')[0];
-var dropFormArr = dropForm.children[0].classList;
-document.getElementById('formClass').value = dropFormArr.value;
-$(document).ready(function(){
-	$('.editelement,.cms_sectionHeading > form').slimScroll({
-		height: '486px',
-		railVisible: false,
-		alwaysVisible: true,
-		size:'10px',
-		railColor:'#ccc',
-		color:'#e0e0e0',
-		railOpacity: '0.5',
-		opacity:'0.5',
-		borderRadius : '5px',
-		railBorderRadius: '0px',
-		top: '10px'
-	});
-	$('.dropelement').slimScroll({
-		height: '548px',
-		railVisible: false,
-		alwaysVisible: true,
-		size:'10px',
-		railColor:'#ccc',
-		color:'#e0e0e0',
-		railOpacity: '0.5',
-		opacity:'0.5',
-		borderRadius : '5px',
-		railBorderRadius: '0px',
-		top: '10px'
-	});
-});
 </script>

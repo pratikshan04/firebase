@@ -1,6 +1,6 @@
 <link rel="shortcut icon" href="$!cdnUrl$!webThemes/$siteName/images/favicon.ico">
-#parse("font-awesomeV5.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
-#if($LayoutName != "HomePage" && $!isStaticHomePage != "Y" && $LayoutName != 'CMSStaticPageList')
+#parse("font-awesome.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
+#if($LayoutName != "HomePage" && $!isStaticHomePage != "Y")
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/datatables.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/dataTables.bootstrap.min.css" media="all">
@@ -13,7 +13,6 @@
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css?$!refreshVersion" media="all" />
 #end
-<!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
 #parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/bootstrap.min.css" /> -->
 #set($currentWebTheme = "unilogweb.css")
 #if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
@@ -47,7 +46,7 @@
 	overflow:hidden;
 }
 .jssora05l {
-	display: block !important;
+	display: block;
 	background: #FFF;
 	top: 48% !important;
 	position: absolute;
@@ -57,7 +56,7 @@
 	box-shadow: 1px 2px 10px -1px #ABABAB;
 }
 .jssora05r {
-	display: block !important;
+	display: block;
 	background: #FFF;
 	top: 48% !important;
 	position: absolute;
@@ -67,7 +66,7 @@
 	box-shadow: 1px 2px 10px -1px #ABABAB;
 }
 .jssora05l:before, .jssora05r:before {
-    font-family: "Font Awesome 5 Free";
+    font-family: FontAwesome;
     font-size: 20px;
     line-height: 1;
     opacity: .75;
@@ -75,7 +74,6 @@
     position: absolute;
     top: 10px;
     left: 12px;
-    font-weight: 900;
 }
 .jssora05l::before {
     content: "\f0d9";
@@ -83,8 +81,8 @@
 .jssora05r:before {
 	content: "\f0da";
 }
-.jssora05l:hover,.jssora05r:hover { background: #FFF; }
-.jssora05l:hover:before,.jssora05r:hover:before{ color: #797d82; }
+.jssora05l:hover,.jssora05r:hover {background: #FFF;}
+.jssora05l:hover:before,.jssora05r:hover:before{color: #797d82;}
 .jssora05ldn { background-position: -250px -40px; }
 .jssora05rdn { background-position: -310px -40px; }
 </style>

@@ -11,26 +11,24 @@
 		left: 0;
 		&:after{
 			content: "\f0d9";
-			font-family: "Font Awesome 5 Free";
+			font-family: fontAwesome;
 			position: absolute;
 			top: 5px;
 			left: 18px;
 			color: #fff;
 			font-size: 24px;
-			font-weight: 900;
 		}
 	}
 	.next {
 		right: 0;
 		&:after{
 			content: "\f0da";
-			font-family: "Font Awesome 5 Free";
+			font-family: fontAwesome;
 			position: absolute;
 			top: 5px;
 			left: 18px;
 			color: #fff;
 			font-size: 24px;
-			font-weight: 900;
 		}
 	}
 }

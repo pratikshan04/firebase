@@ -108,34 +108,10 @@
       <ul>
 	   	#foreach($subStaticMenu in $topMenu.menuList)
 			<li>
-				<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
-				$subStaticMenu.level2Menu
-				</a>
-				#if($subStaticMenu.menuList && $subStaticMenu.menuList.size()>0)
-				<em class="fa fa-lg fa-chevron-right" aria-hidden="true" id="top_$subStaticMenu.level2Menu.replace(' ','_')"></em>
-				#end
+				<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
 			</li>
 		#end
 		</ul>
    </div>
    #end
-   
-   #foreach($topMenu in $topStaticMenu)
-    #if($topMenu.menuList && $topMenu.menuList.size()>0)
-	#foreach($subStaticMenu in $topMenu.menuList)
-	#if($subStaticMenu.menuList && $subStaticMenu.menuList.size()>0)
-	<div class="cimm_slide last moveRight" data-itemID="top_$subStaticMenu.level2Menu.replace(' ','_')">
-	 	<h2>$subStaticMenu.level2Menu</h2>
-		<ul>
-		#foreach($subStaticMenuL3 in $subStaticMenu.menuList)
-			<li>
-				<a href="#if($subStaticMenuL3.itemUrl) #if($subStaticMenuL3.staticPageUrl) $subStaticMenuL3.staticPageUrl #else /$subStaticMenuL3.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='ST') #end #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NT')target="_blank"#end #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenuL3.level3Menu</a>
-			</li>
-		#end
-		</ul>
-	</div>
-	#end
-	#end
-	#end
-	#end
 </div>

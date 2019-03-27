@@ -219,18 +219,16 @@ $("link[rel='stylesheet']").each(function(){
 							var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
 							var wrapperId = jQuery(this).attr("id");
 							var bannerType = jQuery(this).data("bannertype");
-							var bannerTransistion = jQuery(this).data("transistion");
-							var bannerTransistionDelay = jQuery(this).data("transistiondelay");
-							var bannerTransistionAutoPlay = jQuery(this).data("transistionautoplay");
-							
 							console.log("Wrapper id :"+sliderId);
 							bannerData = $(this).html().replace("slidercontainer",sliderId);
 							jQuery(this).html(bannerData);
-							 if(bannerType=="slider"){
-								initJssorSlides(sliderId, bannerTransistion, bannerTransistionDelay, bannerTransistionAutoPlay);
-							} else if(bannerType=="carousel"){
+							initJssorSlides(sliderId,"");
+							
+							if(bannerType=="slider"){
+								initJssorSlides(sliderId,"");
+							}/* else if(bannerType=="carousel"){
 								initCarousel(sliderId,carouselSetting);
-							}  
+							} */
 						});
 					});
 				}

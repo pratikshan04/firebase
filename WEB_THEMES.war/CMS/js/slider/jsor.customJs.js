@@ -1,8 +1,10 @@
- function initJssorSlides(sliderId, transistion, slideDelay, autoPlay) {
+ function initJssorSlides(sliderId,transistion){
             //Reference http://www.jssor.com/development/slider-with-slideshow-jquery.html
             //Reference http://www.jssor.com/development/tool-slideshow-transition-viewer.html
 
-	 var jssor_1_SlideoTransitions = [{$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$JssorEasing$.$EaseInCubic,$Opacity:$JssorEasing$.$EaseLinear},$Opacity:2}];
+	 var jssor_1_SlideoTransitions = [
+	                                  {$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$JssorEasing$.$EaseInCubic,$Opacity:$JssorEasing$.$EaseLinear},$Opacity:2}
+ ];
 	 
 	                                  var _CaptionTransitions = [];
 	  _CaptionTransitions["CLIP|LR"] = {$Duration: 900, $Clip: 3, $Easing: $JssorEasing$.$EaseInOutCubic };
@@ -15,20 +17,11 @@
 		 jssor_1_SlideoTransitions = obj;
 		
 	}
-	 var dataSlideDelay = 2000;
-	    if (jQuery.trim(slideDelay) != "") {
-	    	dataSlideDelay = slideDelay;
-	    }
-	   var dataAutoPlay = 1;
-	    if (jQuery.trim(autoPlay) != "") {
-	    	dataAutoPlay = autoPlay;
-	    }
-	    
 	 console.log($JssorBulletNavigator$);
 	
 	                                var jssor_1_options = {
-	                                  $AutoPlay: dataAutoPlay,
-	                                  $Idle: dataSlideDelay,
+	                                  $AutoPlay: true,
+	                                  $Idle: 2000,
 	                                  $SlideshowOptions: {
 	                                      $Class: $JssorSlideshowRunner$,
 	                                      $Transitions: jssor_1_SlideoTransitions,

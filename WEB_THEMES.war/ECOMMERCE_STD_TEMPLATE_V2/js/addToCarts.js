@@ -316,8 +316,7 @@
 				$("."+settings.designsBlock.itemShortDescClass).html(shortDesc);
 				$("."+settings.designsBlock.priceClass).html(displayPrice);
 				$("."+settings.designsBlock.cartCountClass).html(cartCount);
-				//$(".ATCMPartNumber").html($("#MPNValue_"+partNumber).val());
-				$(".ATCMPartNumber").html($("[id='MPNValue_"+partNumber+"']").val());
+				$(".ATCMPartNumber").html($("#MPNValue_"+partNumber).val());
 				
 				if($(".productLeadTime_"+partNumber).is(":visible")){
 					$(".ATCavailableorLeadTime").html("Lead Time: ");

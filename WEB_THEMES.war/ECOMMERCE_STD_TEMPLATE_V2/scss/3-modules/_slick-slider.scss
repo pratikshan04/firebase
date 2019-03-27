@@ -169,12 +169,11 @@ ul.slick-dots {
 
 .slick-prev:before,
 .slick-next:before {
-    font-family: "Font Awesome 5 Free";
+    font-family: FontAwesome;
     font-size: 38px;
     line-height: 1;
     opacity: .75;
     color: $default_font-color;
-    font-weight: 900;
 }
 
 .slick-prev::before {

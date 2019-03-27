@@ -449,17 +449,17 @@ $(document).ready(function(){
 	    jQuery(this).html(elements);
 	});
 	var viewMode = getCookie("pagemode");
-	if(viewMode == null && viewMode == undefined){
+	if(viewMode == "listView"){
 		$("#listView").hide();
 		$("#gridView").show();
 	}else{
-		if(viewMode == "listView"){
-			$("#listView").hide();
-			$("#gridView").show();
-		}else{
-			$("#listView").show();
-			$("#gridView").hide();
-		}
+		$("#listView").show();
+		$("#gridView").hide();
+	}
+	if(viewMode == null){
+		$("#listView").show();
+		$("#gridView").hide();
+	}else{
 		var checkmode1 = $("[data-getchangemode='getchangemode']").attr('class');
 		$("[data-getchangemode='getchangemode']").each(function(){
 			$(this).removeClass(checkmode1).addClass(viewMode);

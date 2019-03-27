@@ -1,66 +1,8 @@
 <ul class="nav navbar-nav">
-#if($!CommonDBQuerySystemParameter.get("EnableMultiLevelCategoryDisplay") == "Y")
-    <li>
-    	<span>
-			<a href="$locale.get('website.url.ProductCategory')">
-				$locale.get("navigation.label.shopProducts")
-			</a>
-			<em class="fa"></em>
-		</span>
-		<ul class="dropdown-menu">
-			#foreach($categoryMenu in $categMenu)
-			<li class="sec">
-				<span>
-					<a href="$!categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$!categoryMenu.categoryName.replaceAll(' ','-')">$!categoryMenu.categoryName</a>
-					#foreach($key in $secondLevelMenu.keySet())
-					#if($categoryMenu.categoryCode==$key)
-					<em class="fa"></em>
-					#end
-					#end
-				</span>
-				#foreach($key in $secondLevelMenu.keySet())
-				#if($categoryMenu.categoryCode==$key)
-				<ul class="dropdown-menu">
-					#foreach($secondLvlMenu in $secondLevelMenu.get($key))
-					<li class="third">
-						<span>
-							<a href="$!secondLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!secondLvlMenu.categoryName.replaceAll(' ','-')">$!secondLvlMenu.categoryName</a>
-							#foreach($key3 in $secondLevelMenu.keySet())
-							#if($secondLvlMenu.categoryCode==$key3)
-							<em class="fa"></em>
-							#end
-							#end
-						</span>
-						#foreach($key3 in $secondLevelMenu.keySet())
-						#if($secondLvlMenu.categoryCode==$key3)
-						<ul class="dropdown-menu">
-							#foreach($thirdLvlMenu in $secondLevelMenu.get($key3))
-								<li>
-									<span>
-										<a href="$!thirdLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!thirdLvlMenu.categoryName.replaceAll(' ','-')">$!thirdLvlMenu.categoryName</a>
-									</span>
-								</li>
-							#end
-						</ul>
-						#end
-						#end
-					</li>
-					#end
-				</ul>
-				#end
-				#end
-			</li>
-			#end
-		</ul>
-	</li>
-	#else
-	<li>
-		<span>
-			<a href="$locale.get('website.url.ProductCategory')">
-				$locale.get("navigation.label.shopProducts")
-			</a>
-			<em class="fa"></em>
-		</span>
+    <li class="dropdown">
+		<a href="$locale.get('website.url.ProductCategory')">
+			$locale.get("navigation.label.shopProducts")
+		</a>
         <div class="dropdown-menu shopbyprod">
 		#set($count=0)
 		#set($categoryListSize = 0)
@@ -71,11 +13,9 @@
 			#end
 			#set($count=$count+1)
 			<li>
-				<span>
-					<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="$categoryMenu.categoryName">
-						$categoryMenu.categoryName
-					</a>
-				</span>
+				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="$categoryMenu.categoryName">
+					$categoryMenu.categoryName
+				</a>
 			</li>
 			#if($count==9 && $count<=9)
 			#set($count=0)
@@ -92,13 +32,8 @@
 		#end
 		</div>
     </li>
-	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
-	<li>
-		<span>
-			<a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands")</a>
-			#if($brandList.size()>0)<em class="fa"></em>#end
-		</span>
+	<li class="dropdown"><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<em class="fa"></em>#end</a>
 		<div class="shopbybrand dropdown-menu clearAfter">
 		#set($brandListSize = 0)
 		#set($brandIndex = 0)
@@ -108,12 +43,10 @@
 			<ul>
 			#end
 			#set($brandListSize = $brandListSize+1)
-			<li class="sec">
-				<span>
-					<a href="$brands.brandId$locale.get('website.url.ShopByBrand')$brands.brandName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">
-						$brands.brandName
-					</a>
-				</span>
+			<li>
+				<a href="$brands.brandId$locale.get('website.url.ShopByBrand')$brands.brandName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">
+					$brands.brandName
+				</a>
 			</li>
 			#if($brandListSize==9 && $brandListSize<=9)
 			#set($brandListSize=0)
@@ -132,11 +65,7 @@
 	</li>
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
-    <li>
-    	<span>
-    		<a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a>
-			#if($manufacturerList.size() > 0)<em class="fa"></em>#end
-		</span>
+    <li class="dropdown"><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers") #if($manufacturerList.size() > 0)<em class="fa"></em>#end</a>
 		<div class="shopbymanuf dropdown-menu clearAfter">
 		#set($manufacturerListSize = 0)
 		#set($mfgIndex = 0)
@@ -147,13 +76,7 @@
 					<ul>
 					#end
 					#set($manufacturerListSize = $manufacturerListSize+1)
-					<li class="sec">
-						<span>
-							<a href="$manufacturers.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturers.manufacturerName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">
-								$manufacturers.manufacturerName
-							</a>
-						</span>
-					</li>
+					<li><a href="$manufacturers.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturers.manufacturerName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">$manufacturers.manufacturerName</a></li>
 					#if($manufacturerListSize==9 && $manufacturerListSize<=9)
 						#set($manufacturerListSize=0)
 						#set($mfgIndex = $mfgIndex+1)
@@ -174,11 +97,7 @@
    #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
     #if($userLogin)
 		#if($LayoutName != "QuickOrderStdPage")
-		<li class="hideForDevices">
-			<span>
-				<a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder")</a>
-				<em class="fa"></em>
-			</span>
+		<li class="dropdown hideForDevices"><a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a>
 			<div class="dropdown-menu" id="quickOrderPadDrop">
 				<div class="cartHead clearAfter">
 					<h5><a href="#speedEntry">Speed Entry</a></h5>
@@ -309,9 +228,15 @@
 		#elseif($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
 			#set($subMenu = 1)
 		#end
-		<li>
-			#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
-				<span><a href="$topMenu.level1Menu">$topMenu.level1Menu</a>#if($!CommonDBQueryWareHouseList.size()>0)<!-- <em class="fa"></em> -->#end</span>
+		<li #if($subMenu == 1) class="dropdown" #end>
+			#if($topMenu.level1Menu && $topMenu.level1Menu =="Quick Order Pad")
+				#if($userLogin)
+					<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
+				#else
+					<a href="javascript:void(0);" onclick="loginPop(); return false;" data-staticLink="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end">$topMenu.level1Menu</a>
+				#end
+			#elseif($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
+				<a href="$topMenu.level1Menu">$topMenu.level1Menu</a><!-- #if($!CommonDBQueryWareHouseList.size()>0)<em class="fa"></em>#end -->
 				#if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
 				<!-- <ul class="dropdown-menu">
 					#foreach($wareHouseModel in $CommonDBQueryWareHouseList.entrySet())
@@ -320,37 +245,14 @@
 				</ul> -->
 				#end
 			#else
-				<span>
-					<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
-					#if($topMenu.menuList.size()>0)<em class="fa"></em>#end
-				</span>
+				<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<em class="fa"></em>#end</a></a>
 			#end
 		
 			#if($topMenu.menuList && $topMenu.menuList.size()>0)
 			<ul class="dropdown-menu">
 				#foreach($subStaticMenu in $topMenu.menuList)
-					<li class="sec">
-						<span>
-							<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
-								$subStaticMenu.level2Menu
-							</a>
-							#if($subStaticMenu.menuList.size()>0)
-							<em class="fa"></em>
-							#end
-						</span>
-						#if($subStaticMenu.menuList && $subStaticMenu.menuList.size()>0)
-						<ul class="dropdown-menu">
-							#foreach($subStaticMenuL3 in $subStaticMenu.menuList)
-								<li class="third">
-									<span>
-										<a href="#if($subStaticMenuL3.itemUrl) #if($subStaticMenuL3.staticPageUrl) $subStaticMenuL3.staticPageUrl #else /$subStaticMenuL3.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='ST') #end #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NT')target="_blank"#end #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
-											$subStaticMenuL3.level3Menu
-										</a>
-									</span>
-								</li>
-							#end
-						</ul>
-						#end
+					<li>
+						<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>$subStaticMenu.level2Menu</a>
 					</li>
 				#end
 			</ul>

@@ -79,17 +79,11 @@
 								<li>
 								$!itemData.shortDesc
 								<div id="minErr_$itemData.itemPriceId"></div>
-								#if($itemData.availQty>0)
-					    		<strong>$!locale.get("product.label.available"): </strong>
-								<span>$!itemData.availQty</span>
-					    		#else
-					    		<span class='text-danger'>Call for Availability</span>
-					    		#end
-								<!-- #if($itemData.branchTotalQty>0)
+								#if($itemData.branchTotalQty>0)
 								<span class='availSpanFa'>In Stock</span>
 								#else
 								<span class='priceSpanFa'><em class='fa fa-phone fa-lg '></em> for Availability</span>
-								#end -->
+								#end
 								<!-- <span id="Avail_$itemData.partNumber" data-select='availability'>
 								<strong>$locale.get("product.label.availableQuantity")</strong> : 
 								<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" />
