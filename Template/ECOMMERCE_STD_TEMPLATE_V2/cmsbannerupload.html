@@ -1,82 +1,88 @@
-
-		<link href="$!webThemes/CMS/filemanager/css/browser.css" type="text/css" rel="stylesheet">
-		
-		<link href="$!webThemes/CMS/filemanager/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="$!webThemes/CMS/filemanager/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-		<link href="$!webThemes/CMS/filemanager/css/bootstrap-lightbox.min.css" rel="stylesheet" type="text/css" />
-		<link href="$!webThemes/CMS/filemanager/css/style.css" rel="stylesheet" type="text/css" />
-		<link href="$!webThemes/CMS/filemanager/css/dropzone.min.css" type="text/css" rel="stylesheet" />
-	
-		<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/fckxml.js"></script>
-		
-		
-		<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/common.js"></script>
-		<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/dropzone.js"></script>
-			<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/jquery.lazyload.min.js"></script>
-		<script type="text/javascript" src="$!webThemes/CMS/filemanager/js/jquery.scrollstop.min.js"></script>
-		
-		<script language="javascript">
-		var contextPath='';
-	
-		if(contextPath=="/")
-			contextPath = "";
+<link href="$!webThemes/CMS/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!webThemes/CMS/css/dropzone.min.css" type="text/css" rel="stylesheet" />
+<link href="$!webThemes/CMS/css/styles_CMS.css" type="text/css" rel="stylesheet" />
+#parse("font-awesomeV5.html")
+<script type="text/javascript" src="$!webThemes/CMS/js/fckxml.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/common.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/dropzone.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="$!webThemes/CMS/js/jquery.scrollstop.min.js"></script>
+<script language="javascript">
+var contextPath='';
+if(contextPath=="/"){
+	contextPath = "";
+}
 var acceptedType = ".png,.jpg,.gif";
-
-function DeleteImages()
-{
+function DeleteImages(){
 	var  imageList=[];
 	var fileRemove="fileRemoveFromServer";
 	var fileRemoveFromSP="fileRemoveFromSP";
 	var selectedType=document.getElementById("fileTypeSelect").value;  
 	var browseImagesCount=document.getElementById("imgCountId").value;
+	var browseFolderCount=document.getElementById("folderCountId").value;
+	var deleteFlag = false;
 	
-	
-	 for(var j=0;j<browseImagesCount;j++)
-	 {
-	 if(document.getElementById("img"+j)!=null){
-		 if(document.getElementById("img"+j).checked)
-			 {
+	 for(var j=0;j<browseImagesCount;j++){
+	 	if(document.getElementById("img"+j)!=null){
+		 if(document.getElementById("img"+j).checked){
 			 	imageList.push(document.getElementById("img"+j).value);
+			 	deleteFlag = true;
 			 }
 		 }
-		
 	 }
-	 jQuery.ajax({
-		  type: "POST",
-		    url:contextPath+"/connector.slt",
-		    enctype : "multipart/form-data",
-		    data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
-		    success:function(response){
-		    	 var spDeletedList=response;
-			    var strsplit=spDeletedList.split(",");   
-			   if(spDeletedList=='[]'){
-				    alert("Selected file(s) are deleted from the server. Do you want to proceed to delete the file(s)?");
-				    location.reload(); 
-				    }else{
-		    var r=confirm("Selected file(s) are referenced with other static page(s) designings, Do you want to delete the selected file(s) from the server?");
-		          if (r==true)
-		            {                                           
-		    	 jQuery.ajax({
-	                    type: "POST",
-	                    url: contextPath+"/connector.slt",
-	                    data: {spDeletedList:spDeletedList,selectedType:selectedType,fileRemoveFromSP:fileRemoveFromSP},
-	                    success: function(response){
-	                        //alert(response);
-	                        location.reload(); 
-	                        
-	                    },
-	                });
-	               // return true;
-	           } else {
-	        	   location.reload(); 
-	              // return false;
-			              
-				   }
-				    }
-		    }, 
-		}); 
-	        
+
+	 for(var j=0;j<browseFolderCount;j++){
+	 	if(document.getElementById("fold"+j)!=null){
+		 if(document.getElementById("fold"+j).checked){
+			 	imageList.push(document.getElementById("fold"+j).value);
+			 	deleteFlag = true;
+			 }
+		 }
+	 }
+
+	if(deleteFlag){
+		var delC = confirm("Selected file(s) / folder(s) will be deleted from the server?");
+      	if(delC==true){
+      		jQuery.ajax({
+  			  type: "POST",
+  			    url:contextPath+"/connector.slt",
+  			    enctype : "multipart/form-data",
+  			    data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
+  			    success:function(response){
+  			    	var spDeletedList=response;
+  				    var strsplit=spDeletedList.split(",");   
+  				   if(spDeletedList==''){
+  					    alert("Selected file(s) / folder(s) are deleted from the server.");
+  					    location.reload(); 
+  					}else{
+  			    		var r=confirm("Selected file(s) / folder(s) are referenced with static page(s) design,\nDeleting file(s) / folder(s) may cause design issue in static page(s),\nDo you want to delete the selected file(s) from the server?");
+  			          	if (r==true){
+  					    	 jQuery.ajax({
+  				                    type: "POST",
+  				                    url: contextPath+"/connector.slt",
+  				                    data: {spDeletedList:spDeletedList,selectedType:selectedType,fileRemoveFromSP:fileRemoveFromSP},
+  				                    success: function(response){
+  				                        //alert(response);
+  				                        location.reload(); 
+  				                        
+  				                    },
+  				                });
+  		               		// return true;
+  		           		} else {
+  		        	   		location.reload(); 
+  		              		// return false;
+  					   }
+  					 }
+  			    }, 
+  			});
+        }else{
+            alert("Delete process cancelled");
+        	location.reload(); 
+        }
+	}else{
+		alert("Please select file(s) / folder(s) to delete");
 	}
+}
 
 function GetUrlParam( paramName )
 {
@@ -198,48 +204,40 @@ oIcons.AvailableIcons = new Object() ;
 for ( var i = 0 ; i < oIcons.AvailableIconsArray.length ; i++ )
 	oIcons.AvailableIcons[ oIcons.AvailableIconsArray[i] ] = true ;
 
-oIcons.GetIcon = function( fileName )
-{
+oIcons.GetIcon = function( fileName ) {
 	var sExtension = fileName.substr( fileName.lastIndexOf('.') + 1 ).toLowerCase() ;
-
 	if ( this.AvailableIcons[ sExtension ] == true )
 		return sExtension ;
 	else
 		return 'default.icon' ;
 }
-		</script>
-		
-		<script language="javascript">
 
 var oListManager = new Object() ;
 
-oListManager.Init = function()
-{
+oListManager.Init = function(){
 	this.Table = document.getElementById('tableFiles') ;
 	this.ul = document.getElementById('main-item-container');
 }
 
-oListManager.Clear = function()
-{
+oListManager.Clear = function(){
 	// Remove all other rows available.
 	while ( this.Table.rows.length > 0 )
 		this.Table.deleteRow(0) ;
 }
 
-oListManager.AddFolder = function( folderName, folderPath )
-{
+oListManager.AddFolder = function( folderName, folderPath, folderId ){
 	// Create the new row.
-	
 	var connectorUrl = "bannerUploadCms.action?Connector="+sConnUrl ;
 	connectorUrl = connectorUrl+ ( connectorUrl.indexOf('?') != -1 ? '&' : '?' ) ;
 	connectorUrl = connectorUrl + "CurrentFolder="+oConnector.CurrentFolder +escape(folderName)+"/";
-	  var row = $('#main-item-container');
- var dummy1='<div class="box"><h4 class="ellipsis"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
- var dummy = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><div class="img-container directory"><span></span><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></div><div class="img-precontainer-mini directory"><div class="img-container-mini"><span></span><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></div></a>';
- var figVal = $('<figure/>').attr({"data-name": folderName, class: "directory","data-type": "dir"}).html(dummy+dummy1);
- var liVal = $('<li/>').attr({"data-name": folderName, class: "dir ui-draggable ui-droppable"}).html(figVal)
- 
-             row.append(liVal);
+	var row = $('#main-item-container');
+	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+folderId+'" value="'+oConnector.CurrentFolder +escape(folderName)+'"><span></span></label>';
+	var imgName = '<div class="box"><h4 class="ellipsis"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
+	var imgBlock = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><img class="directory-img" src="$!webThemes/CMS/images/img/ico/folder.png"></div><div class="img-precontainer-mini"><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></a>';
+	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
+	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">File Folder</div>';
+	var liVal = $('<li/>').attr({"data-name": folderName, class: "dir ui-draggable ui-droppable clearfix"}).html(fileNameBlock).append(dummy1)
+	row.append(liVal);
 	var oRow = this.Table.insertRow(-1) ;
 
 	// Build the link to view the folder.
@@ -257,17 +255,14 @@ oListManager.AddFolder = function( folderName, folderPath )
 	oCell.innerHTML = '&nbsp;' + sLink + folderName + '</a>' ;
 }
 
-
 oListManager.AddBreadCrumb = function (){
 	var connectorUrl = "bannerUploadCms.action?Connector="+sConnUrl+"&CurrentFolder=" ;
 	$('ul.breadcrumb li:first').find('a').attr({href: connectorUrl});
 	if(oConnector.CurrentFolder!="/" && oConnector.CurrentFolder.length > 1){
-		
 		var myString = oConnector.CurrentFolder.substring(0);
 		myString = unescape(myString);
 		console.log(myString);
 		myString = myString.substring(0,myString.length-1);
-		
 		var pathArr = myString.split("/");
 		console.log("pathArr : "+ pathArr);
 		console.log(pathArr.length);
@@ -283,42 +278,38 @@ oListManager.AddBreadCrumb = function (){
 				linkVal = '<a href="'+connectorUrl+'">'+pathArr[i]+'</a></li>';
 				var liVal = $('<li/>').html(linkVal);
 			    row.append(liVal);
-				var divider = '<span class="divider">/</span>';
+				/*var divider = '<span class="divider">/</span>';
 				liVal = $('<li/>').html(divider);
-				row.append(liVal);
+				row.append(liVal);*/
 			}
 		}
-		
 	}
-	 
 }
 
-oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, extenstion,imgId )
-{
-var filename ="";
-var openFileUrl = fileUrl;
-
+oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, extenstion,imgId ) {
+	var filename ="";
+	var openFileUrl = fileUrl;
 	if(extenstion.toUpperCase()!="JPG" && extenstion.toUpperCase()!="PNG" && extenstion.toUpperCase()!="GIF" && extenstion.toUpperCase()!="JPEG"){
 		filename = extenstion+".jpg";
-		fileUrl = "$!webThemes/CMS/filemanager/img/ico/";
-	}
-		else{
-			fileUrl = fileUrl+"thumbnail/";
+		fileUrl = "$!webThemes/CMS/images/img/ico/";
+	}else{
+		fileUrl = fileUrl+"thumbnail/";
 		filename = fileName;
-		}
-	 var fsize = fileSize;
-	 var dummy2=''+fileName+'';
-	 var typeSplit = dummy2.split(".");	
-	 var imageId="img";
-	
-	
-	 var row = $('#main-item-container');
-	 var dummy1='<div class="box"><h4 class="ellipsis"><input style="margin: 10px auto; width: 20px;"type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></div><div style="float:left;width:14%;margin-left:40px;"><a href="javascript:void(0)" id="fsizeId">'+fsize+'KB</a></div><div><a href="javascript:void(0)" id="fTypeId">'+typeSplit[1]+'</a></h4></div>';
-	 var dummy = '<div><a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><div class="img-container"><span></span><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" style="display: inline;"/></div></div><div class="img-precontainer-mini original-thumb"><div class="filetype jpg  hide">jpg</div><div class="img-container-mini"><span></span><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'"/></div></div></a></div>';
-	 var figVal = $('<figure/>').attr({"data-name": "imagename","data-type": "img"}).html(dummy+dummy1);
-	 var liVal = $('<li/>').attr({"data-name": "imagename", class: "ff-item-type-2 file ui-draggable "}).html(figVal);
+	}
+	var fsize = fileSize;
+	var dummy2=''+fileName+'';
+	var typeSplit = dummy2.split(".");	
+	var imageId="img";
+	var row = $('#main-item-container');
+	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><span></span></label>';
+	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/images/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/images/img/ico/png.jpg'"+';"/></div></a>'; 
+	var imgName = '<div class="box"><h4 class="ellipsis"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></h4></div>';
+	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
+	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">'+typeSplit[1]+'</div><div class="file_size">'+fsize+'KB</div>';
+	//var figVal = $('<figure/>').attr({"data-name": "imagename","data-type": "img"}).html(dummy+dummy1);
+	var liVal = $('<li/>').attr({"data-name": "imagename", class: "ff-item-type-2 file ui-draggable clearfix"}).html(fileNameBlock).append(dummy1);
 
-	 row.append(liVal);
+	row.append(liVal);
 	// Create the new row.
 	var oRow = this.Table.insertRow(-1) ;
 
@@ -347,17 +338,14 @@ var openFileUrl = fileUrl;
 	oCell.noWrap = true ;
 	oCell.align = 'right' ;
 	oCell.innerHTML = '&nbsp;' + fileSize + ' KB' ;
-	
 }
 
-function OpenFolder( folderPath )
-{
+function OpenFolder( folderPath ) {
 	// Load the resources list for this folder.
 	window.parent.frames['frmFolders'].LoadFolders( folderPath ) ;
 }
 
-function OpenFile( fileUrl )
-{
+function OpenFile( fileUrl ) {
 	 //parent.window.document.getElementById("mceu_38-inp").value = fileUrl;
 	var fieldId =  window.parent.tinyfck_field;
 	 console.log("tinyfck_field : " + fieldId)
@@ -372,21 +360,18 @@ function OpenFile( fileUrl )
 	//window.parent.opener.tinyfck.focus();
 }
 
-function LoadResources( resourceType, folderPath )
-{
+function LoadResources( resourceType, folderPath ) {
 	oListManager.Clear() ;
 	oConnector.ResourceType = resourceType ;
 	oConnector.CurrentFolder = folderPath;
 	oConnector.SendCommand( 'GetFoldersAndFiles', null, GetFoldersAndFilesCallBack ) ;
 }
 
-function Refresh()
-{
+function Refresh() {
 	LoadResources( oConnector.ResourceType, oConnector.CurrentFolder ) ;
 }
 
-function GetFoldersAndFilesCallBack( fckXml )
-{
+function GetFoldersAndFilesCallBack( fckXml ) {
 	if ( oConnector.CheckError( fckXml ) != 0 )
 		return ;
 
@@ -397,18 +382,18 @@ function GetFoldersAndFilesCallBack( fckXml )
 
 	// Add the Folders.	
 	var oNodes = fckXml.SelectNodes( 'Connector/Folders/Folder' ) ;
-	for ( var i = 0 ; i < oNodes.length ; i++ )
-	{
+	var folderCount=document.getElementById("folderCountId").value=oNodes.length;
+	for ( var i = 0 ; i < oNodes.length ; i++ ) {
+		var folderId = "fold"+i;
 		var sFolderName = oNodes[i].attributes.getNamedItem('name').value ;
-		oListManager.AddFolder( sFolderName, sCurrentFolderPath + sFolderName + "/" ) ;
+		oListManager.AddFolder( sFolderName, sCurrentFolderPath + sFolderName + "/",folderId ) ;
 	}
 	
 	// Add the Files.	
 	var oNodes = fckXml.SelectNodes( 'Connector/Files/File' ) ;
 	var imgCount=document.getElementById("imgCountId").value=oNodes.length;
 	
-	for ( var i = 0 ; i < oNodes.length ; i++ )
-	{
+	for ( var i = 0 ; i < oNodes.length ; i++ )	{
 		var sFileName = oNodes[i].attributes.getNamedItem('name').value ;
 		var sFileSize = oNodes[i].attributes.getNamedItem('size').value ;
 		var sdimension = oNodes[i].attributes.getNamedItem('dimension').value ;
@@ -424,343 +409,350 @@ function GetFoldersAndFilesCallBack( fckXml )
 	oListManager.AddBreadCrumb();
 }
 
-window.onload = function()
-{
+window.onload = function(){
 	oListManager.Init() ;
 	window.parent.IsLoadedResourcesList = true ;
 	LoadResources( oConnector.ResourceType, oConnector.CurrentFolder);
-
 	var cook=document.cookie;
-	 if(cook.includes("STATIC_DOCUMENTS")){
-				 document.getElementById('fileTypeSelect').value='STATIC_DOCUMENTS';
-	  }else{
-			      			
-		         document.getElementById('fileTypeSelect').value='STATIC_IMAGES';
-			 }
+	if(cook.includes("STATIC_DOCUMENTS")){
+		document.getElementById('fileTypeSelect').value='STATIC_DOCUMENTS';
+	}else{
+		document.getElementById('fileTypeSelect').value='STATIC_IMAGES';
+	}
 }
-		</script>
-		
-		<style type="text/css">
-		.dropzone.dz-started .dz-message {
-		  opacity: 0.5;
-		  -ms-filter: "alpha(Opacity=0.5)";
-		  filter: alpha(opacity=0.5);
-		}
-		</style>
-	</head>
-	<body class="FileArea" bottomMargin="10" leftMargin="10" topMargin="10" rightMargin="10">
-	
-	
+</script>
+
 <div class="uploader">
-    <div class="text-center">
-    	<button class="btn btn-inverse close-uploader"><i class="icon-backward icon-white"></i> Return to Files List</button>
-    </div>
-	<div class="space10"></div><div class="space10"></div>
+	<div class="text-center">
+		<button class="close-uploader outLineBtn_left"><i class="fas fa-arrow-circle-left"></i> Return to Files List</button>
+	</div>
+	<div class="space10"></div>
+	<div class="space10"></div>
 	<div class="tabbable upload-tabbable"> <!-- Only required for left/right tabs -->
-	
-	    
-	    <div class="tab-content">
+		<div class="tab-content">
 			<div class="tab-pane active" id="tab1">
-		    
 				<form action="/connector.slt?Command=FileUpload&Type=File&CurrentFolder=/" method="post" enctype="multipart/form-data" id="myAwesomeDropzone" class="dropzone">
-				    <input type="hidden" id="currentFolderPath" name="path" value="/"/>
-				     <input type="hidden" id="fileType" name="fileType" value="File"/>
-				     <input type="hidden"  name="command" value="FileUpload"/>  
-				     <input type="hidden"  id="overwriteImage" name="overwriteImage" value=""/>
-				   
-				    <div class="fallback">
-					
-					<input name="file" type="file" />
-					
+					<input type="hidden" id="currentFolderPath" name="path" value="/"/>
+					<input type="hidden" id="fileType" name="fileType" value="File"/>
+					<input type="hidden"  name="command" value="FileUpload"/>  
+					<input type="hidden"  id="overwriteImage" name="overwriteImage" value=""/>
+					<div class="fallback">
+						<input name="file" type="file" />
 					</div>
-					
-					
 				</form>
 			</div>
-		    <div class="upload-help"></div>
-			
-			</div>
-	    </div>
-	</div>
-	
-
-	
-	<div id="uploaderContainer">
-	
-		<table id="tableFiles" style="display:none" cellSpacing="1" cellPadding="0" width="100%" border="0">
-		</table>
-		<div class="container-fluid">
-		
-		<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-	    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	    </button>
-	    <div class="brand">Toolbar -&gt;</div>
-	    <div class="nav-collapse collapse">
-		<div class="filters">
-		    <div class="row-fluid">
-			<div class="span4 half"> 
-				  <span class="mobile-inline-visible">Operations:</span>
-			    						    <button class="tip btn upload-btn"  data-original-title="Upload" title="Upload Image/Documents"><i class="rficon-upload"></i></button> 
-			    			    				 <input type="checkbox" id="overwriteImageCheckBox" >Do you want to Overwrite the Image</input> 		    
-			    			    						    <button class="tip btn new-folder" data-original-title="New Folder" title="New Folder"><i class="icon-plus"></i><i class="icon-folder-open"></i></button> 
-			    	<button class="tip btn paste-here-btn disabled hide"  data-original-title="Paste to this directory" title="Paste"><i class="rficon-clipboard-apply"></i></button> 
-				    <button class="tip btn clear-clipboard-btn disabled hide"  data-original-title="Clear clipboard" title="Clear"><i class="rficon-clipboard-clear"></i></button>
-					<button class="tip btn clear-clipboard-btn disabled"  data-original-title="Clear clipboard" title="Delete" id="imageId" onclick="DeleteImages();"><i class="rficon-clipboard-delete" style="height: 17px !important"></i></button>	
-					<input id="imgCountId" type="hidden" value=""/>		
-							</div>
-			<div class="span2 half view-controller">
-				  <span class="mobile-inline-visible">View:</span>
-			    <button class="btn tip btn-inverse" id="view0" data-value="0"  data-original-title="Box view" title="Grid View"><i class="icon-th icon-white"></i></button>
-			    <button class="btn tip " id="view1" data-value="1" data-original-title="List view" title="List View"><i class="icon-align-justify "></i></button>
-			    <button class="btn tip" id="view2" data-value="2"  data-original-title="Columns list view" title="Column View"><i class="icon-fire "></i></button>
-			</div>
-			<div class="span6 half types"> 
-				<span>Select Type:</span>
-			    			   <select class="form-control" id="fileTypeSelect" onchange="changeUploadType(this);">
-  <option value="STATIC_IMAGES">Static Image</option>
-  <option  value="STATIC_DOCUMENTS">Static Document</option>
- 
-</select>
-			</div>
-		    </div>
+			<div class="upload-help"></div>
 		</div>
-	    </div>
 	</div>
-    </div>
 </div>
+<div id="uploaderContainer">
+	<table id="tableFiles" style="display:none" cellSpacing="1" cellPadding="0" width="100%" border="0"></table>
+	<div class="mediaUploadPageFilterBox clearfix">
+		<div class="searchMediaWrap clearfix">
+			<div class="search_typeSelect">
+				<select id="fileTypeSelect" onchange="changeUploadType(this);">
+					<option value="STATIC_IMAGES">Static Image</option>
+					<option value="STATIC_DOCUMENTS">Static Document</option>
+				</select>
+				<i class="fas fa-angle-down"></i>
+			</div>
+			<div class="searchMedia">
+				<input type="text" id="staticImageSearchBox" onkeyup="filterImages(this,'grid');" placeholder="Enter Name to Search" />
+			</div>
+		</div>
+		<div class="mediaBtnBlockWrap">
+			<span class="mediaBtnBlock">
+				<button class="upload-btn" data-original-title="Upload" title="Upload Image/Documents">
+					<span class="action-icon">
+						<i class="fas fa-2x fa-file-image"></i>
+						<sup class="fas fa-upload"></sup>
+					</span>
+					<span>
+						Upload Image/ Document
+					</span>
+				</button>
+				<input id="imgCountId" type="hidden" value=""/>
+				<input id="folderCountId" type="hidden" value=""/>
+			</span>
+			<span class="mediaBtnBlock">
+				<label class="cms_customCheckBox2">
+					<input type="checkbox" id="overwriteImageCheckBox">
+			        <span></span>
+			    </label>
+				<span>Overwrite Image</span>
+			</span>
+			<span class="mediaBtnBlock">
+				<button class="new-folder" data-original-title="New Folder" title="New Folder">
+					<span class="action-icon">
+						<i class="fas fa-2x fa-folder-open"></i>
+						<sup class="fas plus-circle"></sup>
+					</span>
+					<span>
+						New Folder
+					</span>
+				</button>
+			</span>
+			<span class="mediaBtnBlock">
+				<button class="btn" data-original-title="Clear clipboard" title="Delete" id="imageId" onclick="DeleteImages();"><!-- disabled -->
+					<span class="action-icon">
+						<i class="fas fa-2x fa-trash-alt"></i>
+					</span>
+					<span>
+						Delete
+					</span>
+				</button>
+			</span>
+			<span class="mediaBtnBlock view-controller">
+				<button class="btn" id="view0" data-value="0" data-original-title="Box view" title="Grid View">
+					<span class="action-icon">
+						<i class="fas fa-2x fa-th-large"></i>
+					</span>
+					<span>
+						Grid View
+					</span>
+				</button>
+			<!-- </span>
+			<span class="mediaBtnBlock view-controller"> -->
+				<button class="btn" id="view1" data-value="1" data-original-title="List view" title="List View">
+					<span class="action-icon">
+						<i class="fas fa-2x fa-columns"></i>
+					</span>
+					<span>
+						Column View
+					</span>
+				</button>
+			<!-- </span>
+			<span class="mediaBtnBlock view-controller"> -->
+				<button class="btn tip" id="view2" data-value="2"  data-original-title="Columns list view" title="Column View">
+					<span class="action-icon">
+						<i class="fas fa-2x fa-th-list"></i>
+					</span>
+					<span>
+						List View
+					</span>
+				</button>
+			</span>
+		</div>
+	</div>
+	<div class="cms_breadcrumb">
+		<ul class="breadcrumb">	
+			<li><a href="/" title="Home"><i class="fa fa-home"></i></a></li>
+		</ul>
+	</div>
+	<div class="scrollBlock">	    
+		<h4 id="help">Swipe the name of file/folder to show options</h4>
+		<!-- sorter -->
+		<div class="sorter-container list-view0 clearfix">
+			<div class="file-name"><a class="sorter sort-name descending" href="javascript:void('')" data-sort="name">Filename</a></div>
+			<div class="file-date"><a class="sorter sort-date " href="javascript:void('')" data-sort="date">Date</a></div>
+			<div class="file-extension"><a class="sorter sort-extension " href="javascript:void('')" data-sort="extension">Type</a></div>
+			<div class="file-size"><a class="sorter sort-size " href="javascript:void('')" data-sort="size">Size</a></div>
+			<div class="img-dimension">Dimension</div>
+			<div class="file-operations">Operations</div>
+		</div>
+		<input type="hidden" id="file_number" value="6">
+		<ul class="grid cs-style-2 list-view0" id="main-item-container"></ul>
+	</div>
+</div>
+<input type="hidden" id="insert_folder_name" value="Insert folder name:">
+<input type="hidden" id="new_folder" value="New Folder">
+<input type="hidden" id="ok" value="OK">
+<input type="hidden" id="cancel" value="Cancel">
+<input type="hidden" id="rename" value="Rename">
+<input type="hidden" id="oldUrlType" value="">
 
-
-<div class="row-fluid">
+<script>
+$(document).ready(function(){
+	$('.scrollBlock').slimScroll({
+		height: '555px',
+		railVisible: false,
+		alwaysVisible: true,
+		size:'10px',
+		railColor:'#ccc',
+		color:'#e0e0e0',
+		railOpacity: '0.5',
+		opacity:'0.5',
+		borderRadius : '5px',
+		railBorderRadius: '0px',
+		top: '10px'
+	});
+});
+var filterImages =  function (input,id){
+	var valThis = jQuery(input).val().toLowerCase();
+	//console.log("search text" + valThis);
+	jQuery('.'+id+' > li').each(function(){
+		var text = jQuery(this).find('a').text().toLowerCase();
+		(text.indexOf(valThis) == 0) ? jQuery(this).show() : jQuery(this).hide(); 
+	});
+	jQuery('.'+id+' > li.ff-item-type-2').each(function(){
+		var text1 = jQuery(this).find('a').attr('data-file').toLowerCase();
+		//console.log("search" + text);
+		(text1.indexOf(valThis) == 0) ? jQuery(this).show() : jQuery(this).hide();        
+	});
+};
+$("#fileTypeSelect").val(oConnector.ResourceType);
+$("#currentFolderPath").val(oConnector.CurrentFolder);
+$("#oldUrlType").val(oConnector.ResourceType);
+$("#fileType").val(oConnector.ResourceType);
+var ext_img=new Array('jpg','jpeg','png','gif','bmp','tiff','svg');
+var allowed_ext=new Array('jpg','jpeg','png','gif','bmp','tiff','svg','doc','docx','rtf','pdf','xls','xlsx','txt','csv','html','xhtml','psd','sql','log','fla','xml','ade','adp','mdb','accdb','ppt','pptx','odt','ots','ott','odb','odg','otp','otg','odf','ods','odp','css','ai','zip','rar','gz','tar','iso','dmg','mov','mpeg','m4v','mp4','avi','mpg','wma','flv','webm','mp3','m4a','ac3','aiff','mid','ogg','wav');
+var image_editor=true;
+//dropzone config
+Dropzone.options.myAwesomeDropzone = {
+	dictInvalidFileType: "File extension is not allowed.",
+	dictFileTooBig: "The uploaded file exceeds the max size allowed.",
+	dictResponseError: "SERVER ERROR",
+	paramName: "file", // The name that will be used to transfer the file
+	maxFilesize: 8, 
+	addRemoveLinks: true, // MB
+	url: contextPath+"/connector.slt",
+	acceptedFiles:acceptedType,
+	accept: function(file, done) {
+		var extension=file.name.split('.').pop();
+		extension=extension.toLowerCase();
+		if (jQuery.inArray(extension, allowed_ext) > -1) {
+			done();
+		}
+		else { 
+			done("File extension is not allowed."); 
+		}
+	},init: function() {
+		this.on("addedfile", function(file) {
+			if (this.files.length) {
+				var _i, _len;
+				for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) {// -1 to exclude current file
+					if(this.files[_i].name === file.name && this.files[_i].size === file.size && this.files[_i].lastModifiedDate.toString() === file.lastModifiedDate.toString()){
+						this.removeFile(file);
+					}
+				}
+			}
+		});
+		this.on( 'removedfile', removedFileCallback );
+	},
+	success: function(file, response){
+		console.log(response);
+		return file.previewElement.classList.add("dz-success");
+	}
+};
+$('.upload-btn').on('click',function(){
+	$('.uploader').show(500);
+});
+$('#overwriteImageCheckBox' ).click(function() {
+	if($(this).is(':checked')){
+		$('#overwriteImage').val('Y');
+	}else{
+		$('#overwriteImage').val('N');
+	}
+});
+$('.close-uploader').on('click',function(){
+	$('.uploader').hide(500);
+	setTimeout(function(){window.location.reload();},420);
+});
+$('.new-folder').on('click',function(){
+	bootbox.prompt({
+	    size: "medium",
+	    title: "Add New Folder",
+	    className: "addFolder_modal",
+	    buttons: {
+	        confirm: {
+	            label: 'Ok <i class="fa fa-lg fa-check-circle"></i>',
+	            className: 'cms_blueBtn'
+	        },
+	        cancel: {
+	            label: '<i class="fa fa-lg fa-times-circle"></i> Cancel',
+	            className: 'outLineBtn_left pull-left'
+	        }
+	    },
+	    callback: function(result){
+	        if(result){
+	        	if(result!=null && jQuery.trim(result)!=null){
+	    			if(validateFileName(result)){
+	    				console.log("folder name" + result);
+	    				oConnector.SendCommand( 'CreateFolder', 'NewFolderName=' + escape( result) , RefreshCallBack(result) ) ;
+	    			}else{
+						bootbox.alert("Error: Invalid folder name!, folder name should contain only alphanu meric with '_' allowed.'");
+						return false; // on invalid character entry remain with this step.
+					}
+	    		}
+		    }else if(result == ""){
+		    	bootbox.alert("Please enter folder name to create new folder");
+				return false;
+			}
+	    }
+	});
+});
+function validateFileName(name){
+	var regex = /^[0-9a-zA-Z\_]+$/;
+	if(!regex.test(name)) {
+		$('.new-folder').focus();
+		return false;
+	}
+	// validation was successful
+	return true;
+}
+$('.view-controller button').on('click',function(){
+	var _this = $(this);
+	$('.view-controller button').removeClass('btn-inverse');
+	$('.view-controller i').removeClass('icon-white');
+	_this.addClass('btn-inverse');
+	_this.find('i').addClass('icon-white');
+	if (typeof  $('ul.grid')[0] !== "undefined" &&  $('ul.grid')[0]){
+		$('ul.grid')[0].className = $('ul.grid')[0].className.replace(/\blist-view.*?\b/g, '');
+	}
+	if (typeof $('.sorter-container')[0] !== "undefined" && $('.sorter-container')[0]){
+		$('.sorter-container')[0].className = $('.sorter-container')[0].className.replace(/\blist-view.*?\b/g, '');
+	}
+	var value=_this.attr('data-value');
+	$('#view').val(value);
+	$('ul.grid').addClass('list-view'+value);
+	$('.sorter-container').addClass('list-view'+value);
+	if (_this.attr('data-value')>=1){
+	//fix_colums(14);
+	}
+	else {
 	
-	<ul class="breadcrumb cmsFB_stickBreadcrumbStrip">	
-	<li class="pull-left"><a href="/" title="Home"><i class="icon-home"></i></a></li>
-	<li><span class="divider">/</span></li>
-	</ul>
-	
-		  <div class="pull-right search-images" style="position:fixed;top:56px;z-index:999;right:10px;">
-			<input style="color#bbb;height:30px;width:300px;" type="text" id="staticImageSearchBox" onkeyup="filterImages(this,'grid');" value="Enter Name to Search" 
-			onfocus="if(this.value=='Enter Name to Search'){this.value='';this.style.color='#bbb';this.style.fontStyle='normal'}" 
-			onblur="if(this.value==''){this.style.fontStyle='normal';this.style.color='#bbb';this.value='Enter Name to Search';}" />
-		  </div>	
-    </div>
-    
-		<div class="row-fluid ff-container">
-	<div class="span12">	    
-	    	    <h4 id="help">Swipe the name of file/folder to show options</h4>
-	    	    	    <!-- sorter -->
-	    <div class="sorter-container list-view0">
-		<div class="file-name"><a class="sorter sort-name descending" href="javascript:void('')" data-sort="name">Filename</a></div>
-		<div class="file-operations">Operations</div>
-		<div class="img-dimension">Dimension</div>
-		<div class="file-date"><a class="sorter sort-date " href="javascript:void('')" data-sort="date">Date</a></div>
-		<div class="file-size"><a class="sorter sort-size " href="javascript:void('')" data-sort="size">Size</a></div>
-		<div class="file-extension"><a class="sorter sort-extension " href="javascript:void('')" data-sort="extension">Type</a></div>
-		
-		<div class="clear"></div>
-	    </div>
-	    	    
-	    <input type="hidden" id="file_number" value="6">
-	    <!--ul class="thumbnails ff-items"--> 
-	    <ul class="grid cs-style-2 list-view0" id="main-item-container">
-					   
-			</ul></div>
-	  
-	    	</div>
-	    	</div>
-	    	</div>
-	    	<input type="hidden" id="insert_folder_name" value="Insert folder name:">
-			<input type="hidden" id="new_folder" value="New Folder">
-			<input type="hidden" id="ok" value="OK">
-			<input type="hidden" id="cancel" value="Cancel">
-			<input type="hidden" id="rename" value="Rename">
-			<input type="hidden" id="oldUrlType" value="">	    	
-	    	
-	    	<script>
-	    	
-	    	var filterImages =  function (input,id){
-	    		var valThis = jQuery(input).val().toLowerCase();
-	    		//console.log("search text" + valThis);
-	    		jQuery('.'+id+' > li').each(function(){
-	    			var text = jQuery(this).find('a').text().toLowerCase();
-	    				(text.indexOf(valThis) == 0) ? jQuery(this).show() : jQuery(this).hide(); 
-	    		});
-	    		jQuery('.'+id+' > li.ff-item-type-2').each(function(){
-	    			var text1 = jQuery(this).find('a').attr('data-file').toLowerCase();
-	    			//console.log("search" + text);
-	    			(text1.indexOf(valThis) == 0) ? jQuery(this).show() : jQuery(this).hide();        
-	    		});
-	    	};
-	    	
-	    	$("#fileTypeSelect").val(oConnector.ResourceType);
-	    	 $("#currentFolderPath").val(oConnector.CurrentFolder);
-	    	 $("#oldUrlType").val(oConnector.ResourceType);
-			$("#fileType").val(oConnector.ResourceType);
-	    	 var ext_img=new Array('jpg','jpeg','png','gif','bmp','tiff','svg');
-		  	    var allowed_ext=new Array('jpg','jpeg','png','gif','bmp','tiff','svg','doc','docx','rtf','pdf','xls','xlsx','txt','csv','html','xhtml','psd','sql','log','fla','xml','ade','adp','mdb','accdb','ppt','pptx','odt','ots','ott','odb','odg','otp','otg','odf','ods','odp','css','ai','zip','rar','gz','tar','iso','dmg','mov','mpeg','m4v','mp4','avi','mpg','wma','flv','webm','mp3','m4a','ac3','aiff','mid','ogg','wav');
-		  	    var image_editor=true;
-		  	    //dropzone config
-		  	    Dropzone.options.myAwesomeDropzone = {
-		  		    dictInvalidFileType: "File extension is not allowed.",
-		  		    dictFileTooBig: "The uploaded file exceeds the max size allowed.",
-		  		    dictResponseError: "SERVER ERROR",
-		  		    paramName: "file", // The name that will be used to transfer the file
-		  		    maxFilesize: 8, 
-		  		  addRemoveLinks: true, // MB
-		  		   url: contextPath+"/connector.slt",
-		  		   acceptedFiles:acceptedType,
-		  		    accept: function(file, done) {
-		  			    var extension=file.name.split('.').pop();
-		  			    extension=extension.toLowerCase();
-		  			    if (jQuery.inArray(extension, allowed_ext) > -1) {
-		  					done();
-		  			    }
-		  			    else { 
-		  			    	done("File extension is not allowed."); 
-		  				}
-		  		    },init: function() {
-		  		    	 
-		  		    	
-		  		    	this.on("addedfile", function(file) {
-		  		  			if (this.files.length) {
-		  		    		    var _i, _len;
-		  		    		    for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) // -1 to exclude current file
-		  		    		    {
-		  		    		        if(this.files[_i].name === file.name && this.files[_i].size === file.size && this.files[_i].lastModifiedDate.toString() === file.lastModifiedDate.toString())
-		  		    		        {
-		  		    		            this.removeFile(file);
-		  		    		        }
-		  		    		    }
-		  		    		}
-		  		    		});
-		  		    	this.on( 'removedfile', removedFileCallback );
-		  	
-		  			  },
-			  		  success: function(file, response){
-				  		  console.log(response);
-				  		
-			                return file.previewElement.classList.add("dz-success");
-			            }
-		  	    };
-
-		  	   $('.upload-btn').on('click',function(){
-	    		  $('.uploader').show(500);
-	    	    });
-	    	  $('#overwriteImageCheckBox' ).click(function() {
-	    		   if($(this).is(':checked')){
-		    		   
-	    			  $('#overwriteImage').val('Y');
-	    		 }else{
-	    	    	 $('#overwriteImage').val('N');
-	    	     }
-	    		});
-	    	  $('.close-uploader').on('click',function(){
-	    		  $('.uploader').hide(500);
-	  			setTimeout(function(){window.location.reload();},420);
-	    	    });
-	    	  $('.new-folder').on('click',function(){
-	    			bootbox.prompt("Add New Folder<span> *</span>", function(name) {
-		    			if(name!=null && jQuery.trim(name)!=null){
-		    			if(validateFileName(name)){
-		    			console.log("folder name" + name);
-	    				oConnector.SendCommand( 'CreateFolder', 'NewFolderName=' + escape( name) , RefreshCallBack(name) ) ;
-		    			}else{
-		    				bootbox.alert("Error: Invalid folder name!, folder name should contain only alphanu meric with '_' allowed.'");
-							return false; // on invalid character entry remain with this step.
-				    	}
-		    			}
-	    			});
-	    		    });
-
-	    	  function validateFileName(name){
-	    		  var regex = /^[0-9a-zA-Z\_]+$/;
-
-	    	      if(!regex.test(name)) {
-	    	          $('.new-folder').focus();
-	    	          return false;
-	    	        }
-
-	    	        // validation was successful
-	    	        return true;
-		      }
-		    	
-	    	   $('.view-controller button').on('click',function(){
-	    		   var _this = $(this);
-
-	    		    $('.view-controller button').removeClass('btn-inverse');
-	    		    $('.view-controller i').removeClass('icon-white');
-	    		    _this.addClass('btn-inverse');
-	    		    _this.find('i').addClass('icon-white');
-
-	    		    if (typeof  $('ul.grid')[0] !== "undefined" &&  $('ul.grid')[0])
-	    				$('ul.grid')[0].className = $('ul.grid')[0].className.replace(/\blist-view.*?\b/g, '');
-	    			    if (typeof $('.sorter-container')[0] !== "undefined" && $('.sorter-container')[0])
-	    				$('.sorter-container')[0].className = $('.sorter-container')[0].className.replace(/\blist-view.*?\b/g, '');
-
-	    			    var value=_this.attr('data-value');
-	    			    $('#view').val(value);
-	    			    $('ul.grid').addClass('list-view'+value);
-	    			    $('.sorter-container').addClass('list-view'+value);
-	    			    if (_this.attr('data-value')>=1){
-	    				fix_colums(14);
-	    			    }
-	    			    else {
-	    				
-	    			    }
-		    	   });
-	    	  function RefreshCallBack(name){
-		    	  if(name=="" && jQuery.trim(name)==""){
-					bootbox.alert("Folder not created. Folder name required");
-			    	  }
-		    	  else{
-	    		  setTimeout(function(){window.location.reload();},420);
-		    	  }
-	  		    }
-	    	  function changeUploadType(id){
-		    	  var type=id.value;
-		    	  document.cookie = id.value;
-		    	  var urlVal = window.location.search;
-		    	  console.log("URl beof" + urlVal + "-" + $("#oldUrlType").val());
-		    	  urlVal = urlVal.replace("&Type="+$("#oldUrlType").val(), "");
-		    	  console.log("URl after" + urlVal);
-	    		 // window.location.href = "/bannerUploadCms.action"+urlVal+"&Type="+type;
-		    	  window.location.href = "/bannerUploadCms.action?Connector=/connector.slt&Type="+type;
-		    	 }
-
-	    	</script>
-	    	<div id="errorMsg"></div>
-	    	<style>
-	    	.list-view0 div > #fsizeId,.list-view0  div > #fTypeId,.list-view2  div > #fsizeId,.list-view2  div > #fTypeId{
-	    	display:none;
-	    	}
-	    	.types select.form-control{
+	}
+});
+function RefreshCallBack(name){
+	if(name=="" && jQuery.trim(name)==""){
+		bootbox.alert("Folder not created. Folder name required");
+	}
+	else{
+		setTimeout(function(){window.location.reload();},420);
+	}
+}
+function changeUploadType(id){
+	var type=id.value;
+	document.cookie = id.value;
+	var urlVal = window.location.search;
+	console.log("URl beof" + urlVal + "-" + $("#oldUrlType").val());
+	urlVal = urlVal.replace("&Type="+$("#oldUrlType").val(), "");
+	console.log("URl after" + urlVal);
+	// window.location.href = "/bannerUploadCms.action"+urlVal+"&Type="+type;
+	window.location.href = "/bannerUploadCms.action?Connector=/connector.slt&Type="+type;
+}
+</script>
+<div id="errorMsg"></div>
+<style>
+/* .types select.form-control{
 	display:inline-block !important;
 	width:220px !important;
--webkit-appearance: menulist !important;
+	-webkit-appearance: menulist !important;
 }
-div.box{
-  	border:none;
-  	padding:0;
-  	margin:0;
-  	width:150px !important; 	
-  	}
-  	.box a{
-  	font-size:14px;
-  	font-family:'Open Sans',sans-serif;
-  	}
-  	.modal-title span{
-  	color:red;
-  	}
+.modal-title span{
+	color:red;
+} */
+.dropzone.dz-started .dz-message {
+	opacity: 0.5;
+	-ms-filter: "alpha(Opacity=0.5)";
+	filter: alpha(opacity=0.5);
+}
 @media (max-width:1200px) and (min-width:1024px) {
-	    	.cmsFB_stickBreadcrumbStrip{
-	    		top:75px !important;
-	    	}
-	    	.search-images{
-	    	top:81px !important;
-	    	}
+/* 	.cmsFB_stickBreadcrumbStrip{
+		top:75px !important;
+	}
+	.search-images{
+		top:81px !important;
+	} */
 }
-	    	</style>
+</style>
