@@ -2082,7 +2082,12 @@ console.log("Custom : "+curr_control.dataToolElement);
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'none';
 			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '0px';
 		}
-		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight+'px';
+		
+		var iframeId = window.parent.document.getElementById("iframeId");
+		if(iframeId.getHeight() < window.parent.innerHeight){
+			iframeId.style.height = window.parent.innerHeight+'px';
+		}
+		
 		window.parent.document.getElementById("iframeId").style.width = '100%';
 		if(clickType == 'preview'){
 			$(".resPreviewIcon").addClass('active');
@@ -2104,7 +2109,12 @@ console.log("Custom : "+curr_control.dataToolElement);
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
 			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '72px';
 		}
-		window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+		
+		var iframeId = window.parent.document.getElementById("iframeId");
+		if(iframeId.getHeight() < window.parent.innerHeight){
+			window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+		}
+		
 		window.parent.document.getElementById("iframeId").style.width = '100%';
 		if(clickType == 'preview'){
 			$(".resPreviewIcon").removeClass('active');
