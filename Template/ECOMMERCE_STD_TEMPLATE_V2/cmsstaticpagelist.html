@@ -119,7 +119,7 @@
 				<tr>
 					<th>Actions</th>
 					<th>Serial #</th>
-					<th>
+					<th style="width: 180px;">
 						<a href="listStaticPageCms.action?sortEnabled=true&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Ascending"><i class="fa fa-sort-alpha-up"></i></a>
 						Static Page Name
 						<a href="listStaticPageCms.action?sortEnabled=false&sortColumn=pageName&query=$!query&type=$!type&searchColumnType=$!searchColumnType&selectedSiteId=$!selectedSiteId&pageSize=$!staticPageList.pageSize" title="Descending"><i class="fa fa-sort-alpha-down"></i></a>
@@ -159,22 +159,38 @@
 					</td>
 					<td class="text-center cms_slNo"> $iindex </td>
 					<td>
-						<a href="cmsStaticPageCms.action?pageId=$pageList.id">$pageList.pageName </a><br />
+						#if($pageList.pageName.length() > 19)
+							<a href="cmsStaticPageCms.action?pageId=$pageList.id" data-toggle="tooltip" title="$pageList.pageName">$pageList.pageName.substring(0, 19)... </a>
+						#else
+							<a href="cmsStaticPageCms.action?pageId=$pageList.id">$pageList.pageName</a>
+						#end
 					</td>
 					<td>
 						<a href="/staticPages.action?ID=$pageList.id" target="_blank">/staticPages.action?ID=$pageList.id</a>
 					</td>
 					<td>
-						<a href="/$pageList.pageName.replaceAll(" ","-")" target="_blank">/$pageList.pageName.replaceAll(" ","-")</a>
+						#if($pageList.pageName.length() > 20)
+							<a href="/$pageList.pageName.replaceAll(' ','-')" data-toggle="tooltip" title="$pageList.pageName.replaceAll(' ','-')">/$pageList.pageName.substring(0, 20)... </a>
+						#else
+							<a href="/$pageList.pageName.replaceAll(' ','-')" target="_blank">/$pageList.pageName.replaceAll(" ","-")</a>
+						#end
 					</td>
 					<td>
 						#if($pageList.pageTitle)
-						<a href="/$pageList.pageTitle.replaceAll(" ","-")" target="_blank">/$pageList.pageTitle.replaceAll(" ","-")</a>
+							#if($pageList.pageName.length() > 20)
+							<a href="/$pageList.pageTitle.replaceAll(' ','-')" data-toggle="tooltip" title="$pageList.pageTitle.replaceAll(' ','-')">/$pageList.pageTitle.substring(0, 20)... </a>
+							#else
+							<a href="/$pageList.pageTitle.replaceAll(' ','-')" target="_blank">/$pageList.pageTitle.replaceAll(" ","-")</a>
+							#end
 						#end
 					</td>
 					<td>
 						#if($pageList.customUrl)
-						<a href="/$pageList.customUrl" target="_blank">/$pageList.customUrl</a>
+							#if($pageList.pageName.length() > 30)
+							<a href="/$pageList.customUrl" data-toggle="tooltip" title="$pageList.customUrl">/$pageList.customUrl.substring(0, 30)... </a>
+							#else
+							<a href="/$pageList.customUrl" target="_blank">/$pageList.customUrl</a>
+							#end
 						#end
 					</td>
 				</tr>

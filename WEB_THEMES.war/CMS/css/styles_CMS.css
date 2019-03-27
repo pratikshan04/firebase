@@ -1855,7 +1855,7 @@ select:focus {
 	color: #456078;
 }
 .table>tbody>tr>td.cms_slNo {
-	width: 85px;
+	width: 80px;
 }
 .cms_customTable.table>tbody>tr>td{
 	vertical-align: middle;
@@ -1871,9 +1871,6 @@ select:focus {
 }
 .cms_customTable.table>tbody>tr>td a{
 	color: #456078;
-	width: 200px;
-	display: block;
-	word-break: break-word;
 }
 .cms_customTable.table>thead>tr>th{
 	vertical-align: middle;
@@ -2833,7 +2830,7 @@ select:focus {
 		margin: 0 10px;
 	}
 	.table>tbody>tr>td.cms_actionIcons {
-		width: 135px;
+		width: 115px;
 	}
 	.cms_customTable.table>tbody>tr>td {
 		padding: 12px 8px;
