@@ -3001,10 +3001,14 @@ var formatPrice = function(){
 		$(".formatPrice").each(function(){
 			var e=$(this).text().trim();
 			var result = e.match(/\d+/g);
-			if(result!=null){
-				e=e.replace("$","");
-				e="$"+commaSeparateNumber(e);
-				$(this).text(e);
+			var finalResult = e;
+			if(result!=null && result.length>0){
+				finalResult = result[0];
+				finalResult = "$"+commaSeparateNumber(finalResult);
+				if(result.length>1){
+					finalResult = finalResult+"."+result[1];
+				}
+				$(this).text(finalResult);
 			}
 		});
 	}
@@ -3038,20 +3042,6 @@ function textbox(){
 	}else{
 		$('.cimm_searchWrapper').find('label').removeClass('label-select');
 	}
-}
-function closeSlide(){
-	jQuery('.sleekNavigationLinks').css('left', '-450px');
-	jQuery('#mobileNavigationTrigger').removeClass('active');
-	jQuery('#overlay').fadeOut();
-	$('html, body').removeClass("poppupEnabled");
-}
-function openSlide(){
-	jQuery('.sleekNavigationLinks').css('left', '0');
-	jQuery('#mobileNavigationTrigger').addClass('active');
-	jQuery('#overlay').fadeIn();
-	jQuery('.first').removeClass("moveRight, moveLeft");
-	jQuery('.sec, .third, .last').removeClass("moveRight, moveLeft").addClass("moveRight");
-	$('html, body').addClass("poppupEnabled");
 }
 
 $(".year").html(new Date().getFullYear());
@@ -3273,7 +3263,20 @@ $(function(){
 		}
 	});
 });
-
+function closeSlide(){
+	//jQuery('.sleekNavigationLinks').css('left', '-450px');
+	jQuery('#mobileNavigationTrigger,nav.navbar').removeClass('active');
+	jQuery('#overlay').fadeOut();
+	$('html, body').removeClass("poppupEnabled");
+}
+function openSlide(){
+	//jQuery('.sleekNavigationLinks').css('left', '0');
+	jQuery('#mobileNavigationTrigger,nav.navbar').addClass('active');
+	jQuery('#overlay').fadeIn();
+	//jQuery('.first').removeClass("moveRight, moveLeft");
+	//jQuery('.sec, .third, .last').removeClass("moveRight, moveLeft").addClass("moveRight");
+	$('html, body').addClass("poppupEnabled");
+}
 jQuery('#mobileNavigationTrigger').click(function(){
 	if(jQuery(this).hasClass('active')){
 		closeSlide();
@@ -3281,12 +3284,12 @@ jQuery('#mobileNavigationTrigger').click(function(){
 		openSlide();
 	}
 });
-jQuery('#sleekoverlay').click(function(){
+jQuery('#overlay').click(function(){
 	closeSlide();
 });
-jQuery('.sleekNavigationLinks').click(function(e) {
+/*jQuery('.sleekNavigationLinks').click(function(e) {
 	e.stopPropagation();
-});
+});*/
 $(".cimm_slide li em").click(function () {
 	var id = $(this).attr("id");
 	if(id){
@@ -3303,6 +3306,33 @@ $(".cimm_slide li em").click(function () {
 		}
 	}
 });
+$(".navbar-nav li em").click(function () {
+	var heading = $(this).parent().text().trim();
+	var parentLi = $(this).parent().parent();
+	var getSlideMenu = "";
+	if(parentLi.hasClass('sec')){
+		getSlideMenu = parentLi.find('.dropdown-menu')[0];
+		$(this).parent().parent().find('.nav_headingBlock').remove();
+	}else if(parentLi.hasClass('third')){
+		getSlideMenu = parentLi.find('.dropdown-menu')[0];
+		$(this).parent().parent().find('.nav_headingBlock').remove();
+	}else{
+		getSlideMenu = parentLi.find('.dropdown-menu')[0];
+		$(this).parents('.navbar-nav').find('.dropdown-menu').removeClass('slideDropMenu');
+		$(this).parents('.navbar-nav').find('.nav_headingBlock').remove();
+	}
+	
+	if(getSlideMenu.nodeName == "UL"){
+		$(getSlideMenu).prepend('<li class="nav_headingBlock"><i class="fa fa-lg fa-chevron-left"></i>'+heading+'</li>')
+	}else{
+		$(getSlideMenu).prepend('<p class="nav_headingBlock"><i class="fa fa-lg fa-chevron-left"></i>'+heading+'</p>')
+	}
+	$(getSlideMenu).addClass('slideDropMenu');
+});
+$(".dropdown-menu").on('click', ".nav_headingBlock", function () {
+	$(this).parent().removeClass('slideDropMenu');
+});
+
 $(".cimm_slide h2").click(function () {
 	if(!$(this).parent().hasClass("first")){
 		$(this).parent().addClass("moveRight").removeClass("moveLeft");
@@ -3318,6 +3348,8 @@ $(".cimm_slide h2").click(function () {
 		closeSlide();
 	}
 });
+
+
 $('.dropdown').on('show.bs.dropdown', function(e){
 	$(this).find('.dropdown-menu').first().stop(true, true).fadeIn(300);
 });
