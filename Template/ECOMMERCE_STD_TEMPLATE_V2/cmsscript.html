@@ -1048,9 +1048,9 @@ jQuery(document).ready(function() {
 	jQuery('.slickSwipable').slick({
 		  slidesToShow: 8,
 		  slidesToScroll: 4
-	}); 
+	});
+	 $('[data-toggle="tooltip"]').tooltip(); 
 });
-				
 function closePopup(){
 	jQuery.unblockUI();
 	jQuery('.gm-preview').trigger("click");
@@ -1059,33 +1059,31 @@ function closePopup(){
 //]]>
 			
 function generateJson(){
-var val = $('#cmsForm').serialize();
-//val = encodeURIComponent(val);
-console.log(val);
-  jQuery.ajax({
-	   type: "POST",
-	   url: "addUpdateStaticPageCms.action",
-	   data: val,
-	   success: function(msg){
-		  if(msg.indexOf("error")!=-1){
-			  var errMsgList = msg.split("|");
-			  if(errMsgList[1].indexOf("constraint")!=-1){
-				  var pageName = $("#pageName").val();
-				  alert(pageName + " already exists, please try to save with a different name");
-				  }else{
-						alert("Error occured while saving the file");
-					  }
-			  
-			  }else{
-				  alert("Saved Successfully");
-				  $(window).off('beforeunload');
-				  if(jQuery.trim(jQuery("#cmsPageId").val())=="0"){								 
-						window.location.href="/cmsStaticPageCms.action?pageId="+msg;
-					  }
-				  } 
-	  // window.location.reload();
-	   }	
-	  });
+	var val = $('#cmsForm').serialize();
+	//val = encodeURIComponent(val);
+	console.log(val);
+	jQuery.ajax({
+		type: "POST",
+		url: "addUpdateStaticPageCms.action",
+		data: val,
+		success: function(msg){
+			var pageName = $("#pageName").val();
+			if(msg.indexOf("error")!=-1){
+				var errMsgList = msg.split("|");
+				if(errMsgList[1].indexOf("constraint")!=-1){
+					alert(pageName + " already exists, please try to save with a different name");
+				}else{
+					alert("Error occured while saving the file");
+				}
+			}else{
+				alert(pageName + "Saved Successfully");
+				$(window).off('beforeunload');
+				if(jQuery.trim(jQuery("#cmsPageId").val())=="0"){								 
+					window.location.href="/cmsStaticPageCms.action?pageId="+msg;
+				}
+			} 
+		}	
+	});
 }
 function switchPage(){
 	jQuery(".pageTab").show();
@@ -1261,5 +1259,7 @@ jQuery(function() {
     margin: 0;
     padding: 20px 0 10px 0;
 }
-
+.tooltip-inner{
+	word-break: break-word;
+}
 </style>

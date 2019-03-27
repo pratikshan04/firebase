@@ -1871,9 +1871,6 @@ select:focus {
 }
 .cms_customTable.table>tbody>tr>td a{
 	color: #456078;
-	width: 200px;
-	display: block;
-	word-break: break-word;
 }
 .cms_customTable.table>thead>tr>th{
 	vertical-align: middle;
