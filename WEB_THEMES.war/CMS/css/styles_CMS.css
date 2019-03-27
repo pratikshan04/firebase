@@ -1091,21 +1091,7 @@ background:#42e300;
 }
 .right{
 	text-align:right;
-	}
- @media (max-width: 1366px){
-    .sampleTemplateSlider{
-    	width: 540px !important;
-    position: relative !important;
-    top:10px;
-    }
-    .readyTemplatesForm{
- right:45%;
- margin-top: -50px;
- }
-	}
-	
-	
-	
+}
 /***** modified *****/
 .pageTab, .seoTab{
 	border: 1px solid #b8b8b8;
@@ -1242,20 +1228,21 @@ iframe#iframeId {
 	width: 280px;
 	position: absolute;
 }
-.expand-nav .cms_leftMenu ul li .action-text,
+.expand-nav .cms_leftMenu > ul > li > a > .action-text,
 .expand-nav .cms_backToList .action-text,
 .expand-nav .pageDesignLogo strong,
 .expand-nav .pageDesignLogo span {
 	display: none;
 }
 .expand-nav .cms_staticTable{
-	padding: 0 0 0 70px;
+	padding: 0 0 0 60px;
 }
 .expand-nav .cms_backToList > i {
 	margin: 0 10px 0 4px;
 }
 .expand-nav .cms_backToList {
 	padding: 2px 0px;
+	margin: 15px;
 }
 .expand-nav .gmControlsCustomClass.fixConrtroles {
 	width: calc(100% - 70px);
@@ -1860,7 +1847,7 @@ select:focus {
 	color: #456078;
 }
 .table>tbody>tr>td.cms_slNo {
-	width: 70px;
+	width: 80px;
 }
 .cms_customTable.table>tbody>tr>td{
 	vertical-align: middle;
@@ -1870,8 +1857,15 @@ select:focus {
 	font-size: 16px;
 	color: #456078;
 }
+.cms_customTable.table>tbody>tr>td:first-child a {
+	display: inline-block;
+	width: auto;
+}
 .cms_customTable.table>tbody>tr>td a{
 	color: #456078;
+	width: 200px;
+	display: block;
+	word-break: break-word;
 }
 .cms_customTable.table>thead>tr>th{
 	vertical-align: middle;
@@ -2020,7 +2014,7 @@ select:focus {
 	position: relative;
 }
 .gmControlsPlaceholder {
-	height: 155px;
+	height: 175px;
 }
 .gmControlsCustomClass{
 	padding: 15px;
@@ -2866,372 +2860,30 @@ select:focus {
 	.gmControlsCustomClass.fixConrtroles{
 		width: calc(100% - 260px);
 	}
-}
-/*.dropelement form ul li{
-	padding:10px;
-}
-a.save-form {
-	text-align: center;
-    padding: 5px 25px;
-    background: #007580;
-    color: #fff;
-    margin: 10px 0 0 10px;
-}
-.save-btnBlock {clear: both;}
-.cms_staticForm{
-	padding: 5px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    width: 30px;
-    left: 0;
-    top:235px;
-    font-size: 20px;
-    color: #8b8c8d;
+	.deviseSelection label:nth-child(1) {
+		display: inline-block;
+		margin: 0 5px 10px 0;
 	}
-.cmsForm{
-	display: block;
-    width: 230px;
-	position:fixed;
-	top:0px;
-	padding:10px;
-	border-color: rgb(212,212,212);
-    border-radius: 2px;
-    box-shadow: 0px 0px 4px 2px #c6c6c6;
-    left:33px;
-    background: #fff;
-    z-index: 2;
+	.layoutSelectionBlock.active{
+		left: 0;
+		top: 32px;
 	}
-.HTMLElements_Menuhide{
-	position: absolute;
- 	z-index:2; 
-  	width: 30px;
-  	cursor: pointer;
-  	color: rgb(121, 125, 130);
-  	text-align: center;
-  	padding: 4px;
-    top: 0px;
-    right: 15px;
-  }
-  	.searchBox{
-		float:left;                                                               
-		position: relative;
+	.gmControlsCustomClass{
+		padding: 10px 15px;
+		height: 140px;
 	}
-.searchBox form{
-		float:left;
+	.listRightColumn{
+		min-height: 530px;
 	}
-	.searchBox form input{
-		width:220px;
+	.previewSection #previewContainer{
+		height: calc(530px - 35px);
 	}
-	.siteDisplayBox{
-		float:right;
-		padding-right:15px;
+	.editformBlock {
+		width: 32%;
+		margin-bottom: 6px;
 	}
-	.siteDisplayBox select{
-		width: auto;
+	.editFormLabel{
+		font-size: 20px;
+		margin-bottom: 10px;
 	}
-#cmsForm,#seoTab{
-max-height:395px;
-overflow:auto;
 }
-.cimm_bodyContentWrap .cimm_siteWidth, .cimm_bodyContentWrap .container{
-	width: 1200px !important;
-    margin: 0 auto;
-    position: relative;
-}
-.componentWrap{
-	padding: 5px;
-	font-size: 16px;
-	color: #4b4e50;
-	font-weight: 600;
-	background: #fff;
-}
-.componentWrap a{
-	color: #4b4e50;
-}
-.htmlEle_contents,.widgetContainer{background:#fff;} 
-    #sub-left {
-       float: left;
-    }
-    #sub-right {
-       float: right;
-       margin-right:7px;
-    }
-      
-    #in_title, #in_snippet, #in_url, #in_richtext, #in_datevalue, #in_bold {
-        font-family: 'Trebuchet MS'; 
-    }
-   .toggelFormElem,.getFormElem {
-	position: absolute;
-	bottom: -36px;
-	left: 0px;
-	color: #c8c8c8;
-	content: "\f102";
-	background: #424141;
-	min-width: 45px;
-	text-align: center;
-	height: 36px;
-	padding: 4px 12px;
-	cursor: pointer;
-}
-.dragelementWrap {
-	padding: 0;
-	background: #424141;
-	display: table;
-	border-spacing: 7px;
-	top: -85px;
-	position: absolute;
-	z-index: 2;
-	width: 970px;
-	transition: top 0.3s ease-in-out;
-	-webkit-transition: top 0.3s ease-in-out;
-	-moz-transition: top 0.3s ease-in-out;
-}
-.dragelementWrap.active{
-	top: 0;
-}
-.dragelementWrap.active .showOnActive,.dragelementWrap .hideOnActive{
-	display: block;
-}
-.dragelementWrap.active .hideOnActive,.dragelementWrap .showOnActive {
-	display: none;
-}
-.getFormElem > span{
-	vertical-align: middle;
-}
-.getFormElem > b{
-	font-size: 16px;
-	margin-left: 10px;
-}
-.topNav_rightIcons{
- float:right;
-}
-.topNav_rightIcons > ul > li{
- list-style-type:none; 
- display:inline;
- float:left;
- border-left:1px solid #ccc;
-}
-.topNav_rightIcons > ul > li:hover {
- background-color: #fff;
- color: #999;
- border-top-left-radius: 8px;
- border-top-right-radius: 8px;
- -moz-border-top-left-radius: 8px;
- -moz-border-top-right-radius: 8px;
- -webkit-border-top-left-radius: 8px;
- -webkit-border-top-right-radius: 8px;
- cursor: pointer;
-}
-.topNav_rightIcons > ul > li:first-child{
- border-left:0px solid #ccc !important;
-}
-.topNav_rightIcons > ul > li:last-child{
- border-right:0px solid #ccc;
-}
-.leftIcons_container > ul > li:first-child{
- border-left:0px solid #ccc !important;
-}
-.leftIcons_container  #main-menu  li{
-list-style-type:none;
-border-bottom:1px solid #ccc;
-margin: 5px 5px 5px 20px;
-padding: 5px;
-}
-
-#main-menu li{
-	list-style-type:none;
-}
-#main-menu li a{
-	display:block;
-}
-.cms_cssTable  tbody tr{
-	height:30px !important;
-	background:#fff;
-}
-.cms_cssTable  > tbody > tr:nth-child(odd){
-	background:#fff;
-}
-.cms_cssTable > tbody >tr:nth-child(even){
-	height:1px !important;
-}
-.cms_cssTable  .rich-table-cell{
-	border-bottom:none;
-}
-.cms_cssTableLabel{
-	background-color:#dadada;
-	padding:10px;
-}
-
-.cms_cssNestedTable tbody tr {
-	height:30px !important;
-}
-.cms_cssNestedTable{
-	box-shadow:0px 1px 3px #b3b2b2;
-	position:relative;
-	border-top: 1px solid #b3b2b2 !important;
-}
-.cms_cssNestedTable > tbody > tr:nth-child(odd){
-	background: #b3b2b2 !important;
-	color:#fff;
-}
-.cms_cssNestedTable > tbody > tr:nth-child(even) {
-	background: #fff !important;
-}
-.cms_cssNestedTable > tbody > tr > td{
-	border-right:1px solid #e1e1e1;
-}
-.cssEditor_container{
-	float: left;
-	width: 85%;
-	margin-top: 32%;
-	margin-left:-2px;
-}
-.cssEditor_container .rich-table tbody tr{
-	height:30px;
-}	
-.listNested-table > tbody > tr:nth-child(even) {
-	background: #fff !important;
-	height: 55px !important;
-}
-.hideTableFormat > tbody > tr > td.rich-table-cell:first-child {
-	padding: 0 0 0 15px;
-}
-.hideTableFormat  tbody > tr > td.rich-table-cell{
-	border-top:1px solid #dadada;
-	border-bottom:1px solid #dadada;
-}
-.iphoneMode {
- /*width: 320px;
- height: 480px;
- overflow:auto;
- width: 358px;
-height: 700px;			
-background: url('../images/iphone-portrait.png') top left no-repeat;
-background-size: contain;
-position: relative;
-}
-.iphone-lMode{
- /*width: 480px;
- height: 320px;
- overflow:auto;
-width: 700px;
-height: 358px;
-background: url('../images/iphone-landscape.png') top left no-repeat;
-background-size: contain;
-position: relative;
-
-}
-.ipadMode {
- width: 680px;
-height: 870px;			
-background: url('../images/tab-portrait.png') top left no-repeat;
-background-size: contain;
-position: relative;
-}
-.ipad-lMode {
- width: 1024px;
-height: 801px;
-background: url('../images/tab-landscape.png') top left no-repeat;
-background-size: contain;
-position: relative;
-}
-#responsivePreviewBlock .closeResp a {
-	color: #2e2e2e !important;
-	padding-left:20px;
-}
-
-#responsivePreviewBlock .closePreview {
-	top: 4px;
-}
-.closePreview{
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	float: right;
-	padding: 2px 20px 2px 2px;
-	background: url(../images/cms_images/cancelPreview.png) no-repeat right center;
-	text-indent: -9999px;
-	color: #000;
-}
-.closeResp{
-	float: right;
-	position: relative;
-	right: 15px;
-	z-index: 9;
-	padding: 0px 10px 5px 5px;
-}
-.closeResp  > .iconbutton,.closeResp  > .iconbutton:hover{
-	background-color:transparent !important; 
-	border-color:transparent;
-	border:none;
-	font-size:20px;
-}.iPhone-l{
- transform:rotate(90deg);
-  -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-}
-.cimm_bodyContentWrap .cimm_siteWidth, .cimm_bodyContentWrap .container{
-width:1000px !important;
-float:right;
-
-}
-.HTMLElements {
-   width: 200px;
-}
-.cimm_formContent .customRadioBtn input[type="radio"] {
-    display: block;
-    opacity: 1;
-    float: left;
-    width: 18px;
-    height: 18px;
-    margin-left:-20px;
-    margin-top:-1px;
-    background: #fff;
-    -webkit-appearance: none;
-}
-.cimm_formContent .customCheckBox input[type="checkbox"] {
-    display: block;
-    opacity: 1;
-    width: 18px;
-    float: left;
-    height: 18px;
-    margin-left: -23px;
-    margin-top: -1px;
-    background: #fff;
-    -webkit-appearance: none;
-	border: 2px solid #ccc;
-}
-ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
-width:30% !important;
-    display: block;
-	position: unset !important;
-	font-size: 12px !important;
-}
-ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
-	margin-bottom: 10px;
-    position: inherit;
-    pointer-events: auto;
-    left: 0;
-    top: 0;
-    transform: translate(0px, 0px);
-	font-size: 12px !important;
-}
-ul.cimm_formContent > li select{
-	padding:5px 5px 5px 10px !important;
-}
-.togglePlusIcon{
-	background: url('../images/small/add.png') no-repeat;
-	height:18px; 
-	width:18px;
-	float:right;
-}
-
-.toggleMinusIcon{
-	background: url('../images/small/minus.png') no-repeat;
-	height:18px; 
-	width:18px;
-	float:right;
-}*/

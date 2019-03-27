@@ -2075,7 +2075,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 	};
 	
 	 hideActionIcons = function(clickType){
-		$(".readyTemplatesForm").hide();
+		//$(".readyTemplatesForm").hide();
 		$(".cms_leftMenu").css({'left':'-280px'});
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'none';
@@ -2097,7 +2097,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		jQuery(".cimm_srcCodeIcon").attr('title','Content View');*/
 	};
 	showActionIcons = function(clickType){
-		$(".readyTemplatesForm").show();
+		//$(".readyTemplatesForm").show();
 		$(".cms_leftMenu").css({'left':'0'});
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'block';
@@ -2111,7 +2111,11 @@ console.log("Custom : "+curr_control.dataToolElement);
 			jQuery('.Cimm-MainContenthide').addClass('Cimm-MainContent').removeClass('Cimm-MainContenthide');
 			$("#gm-canvas").removeClass('gm-container');
 		}
-		$(".cms_staticTable").css({'padding':'0 0 0 270px'});
+		if($('body').hasClass('expand-nav')){
+			$(".cms_staticTable").css({'padding':'0 0 0 60px'});
+		}else{
+			$(".cms_staticTable").css({'padding':'0 0 0 270px'});
+		}
 		$(".gmControlsCustomClass").removeClass('doNotFix');
 		/*jQuery('#pageTab,#addNewStaticFormId').show();
 		jQuery("#SeoTabs").css('pointer-events', 'visible');
