@@ -2084,7 +2084,8 @@ console.log("Custom : "+curr_control.dataToolElement);
 		}
 		
 		var iframeId = window.parent.document.getElementById("iframeId");
-		if(iframeId.getHeight() < window.parent.innerHeight){
+		var frameHeight = parseInt(iframeId.style.height.replace('px',''));
+		if(frameHeight < window.parent.innerHeight){
 			iframeId.style.height = window.parent.innerHeight+'px';
 		}
 		
@@ -2111,7 +2112,8 @@ console.log("Custom : "+curr_control.dataToolElement);
 		}
 		
 		var iframeId = window.parent.document.getElementById("iframeId");
-		if(iframeId.getHeight() < window.parent.innerHeight){
+		var frameHeight = parseInt(iframeId.style.height.replace('px',''));
+		if(frameHeight < window.parent.innerHeight){
 			window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
 		}
 		
