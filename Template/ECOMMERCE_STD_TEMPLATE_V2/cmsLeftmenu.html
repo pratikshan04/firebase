@@ -1,0 +1,124 @@
+<div class="pageDesignLogo">
+	<i class="fa fa-lg fa-pencil-ruler"></i>
+	<strong>page</strong><span>designer</span>
+</div>
+#if($LayoutName == "CMSStaticPage")
+<a href="listStaticPageCms.action" title="List Static Pages" class="cms_backToList">
+	<i class="fas fa-arrow-circle-left"></i>
+	<span class="action-text">
+		Back to List Page
+	</span>
+</a>
+#end
+<ul>
+	<!-- <li class="selectWebsite">
+		<span>Select Website:</span>
+		<form method="get" action="listStaticPageCms.action">
+			<div class="custom-select">
+	  			<select name="selectedSiteId" id="selectedWebsite" onchange="this.form.submit()">
+	  				<option value>- Select Website -</option>
+		  			#if($!websiteList && $websiteList.size()>0)
+		  				#foreach($website in $websiteList)
+		  					<option #if($selectedSiteId==$website.siteId) selected #end value="$website.siteId">$website.siteName</option>
+		  				#end 
+		  			#end
+				</select>
+				<span>
+					<i class="fas fa-chevron-down"></i>
+				</span>
+			</div>
+			<input  type="hidden" name="selectedSiteName" value="$!selectedSiteName" />
+			<input  type="hidden" id="pageSize" name="pageSize" value="$staticPageList.pageSize" />
+	 		</form>
+	</li> -->
+	#if($LayoutName == "CMSStaticPage")
+	<li>
+		<a class="cms_SlideMenuBtn" style="cursor: pointer;">
+			<span class="action-icon">
+				<i class="fas fa-tools"></i>
+			</span>
+			<span class="action-text">
+				Basic Elements
+			</span>
+		</a>
+		#parse("cmsmenu.html") 
+	</li>
+	<li>
+		<a class="cms_SlideMenuBtn" style="cursor: pointer;" title="Save Page">
+			<span class="action-icon">
+				<i class="fas fa-save"></i>
+			</span>
+			<span class="action-text">
+				Save Page
+			</span>
+		</a>
+		#parse("cmsStaticPageForm.html")
+	</li>
+	#end
+	<li>
+		<a href="javascript:openBannerList();" title="Banner List">
+			<span class="action-icon">
+				<i class="fas fa-image"></i>
+				<sup class="fas fa-list"></sup>
+			</span>
+			<span class="action-text">
+				Banner List
+			</span>
+		</a>
+	</li>
+	<li>
+		<a class="iframe" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadIframeWindow();">
+			<span class="action-icon">
+				<i class="fas fa-file-image"></i>
+				<sup class="fas fa-upload"></sup>
+			</span>
+			<span class="action-text">
+				Upload Image/Docs
+			</span>
+		</a>
+	</li>
+	<li>
+		<a class="iframe" href="widgetListCms.action" title="Widgets" onclick="javascript:showIframeWindow();">
+			<span class="action-icon">
+				<i class="fas fa-th-large"></i>
+				<sup class="fa fa-cog"></sup>
+			</span>
+			<span class="action-text">
+				Widgets
+			</span>
+		</a>
+	</li>
+	<li>
+		<a href="javascript:cmsbannersmenubuilderList();" title="Menu Builder" >
+			<span class="action-icon">
+				<i class="fas fa-sitemap"></i>
+				<sup class="fa fa-cog"></sup>
+			</span>
+			<span class="action-text">
+				Menu Builder
+			</span>
+		</a>
+	</li>
+	<li>
+		<a href="javascript:cmsbannersmenubuilderList1();" title="CSS">
+			<span class="action-icon">
+				<i class="fas fa-code"></i>
+				<sup style="font-size: 8px;">CSS</sup>
+			</span>
+			<span class="action-text">
+				CSS
+			</span>
+		</a>
+	</li>
+	<li>
+		<a class="iframe" href="formListCms.action" title="Form Builder" onclick="javascript:showIframeWindow();">
+			<span class="action-icon">
+				<i class="fas fa-list-alt"></i>
+				<sup class="fa fa-cog"></sup>
+			</span>
+			<span class="action-text">
+				Form Builder
+			</span>
+		</a>
+	</li>
+</ul>
