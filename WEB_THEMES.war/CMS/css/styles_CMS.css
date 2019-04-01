@@ -1848,7 +1848,7 @@ select:focus {
 	width: 180px;
 }
 .cms_actionIcons a:nth-child(2) {
-	margin: 0 34px;
+	margin: 0 15px;
 }
 .cms_actionIcons a {
 	font-size: 16px;
@@ -2828,9 +2828,6 @@ select:focus {
 	.cms_pageSearch + div {
 		float: none;
 		margin: 6px 0 0 0px;
-	}
-	.cms_actionIcons a:nth-child(3) {
-		margin: 0 8px 0 10px;
 	}
 	.table>tbody>tr>td.cms_actionIcons {
 		width: 115px;
