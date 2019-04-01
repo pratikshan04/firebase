@@ -8,11 +8,21 @@ jQuery(function () {
 		    var currentDate = date.getDate();
 		    var currentYear = date.getFullYear();
 		    jQuery('#startDate').datepicker({			 
-		       minDate: new Date(currentYear, currentMonth, currentDate)
+		       minDate: new Date(currentYear, currentMonth, currentDate),
+			    onSelect: function (selected) {
+		            var dt = new Date(selected);
+		            dt.setDate(dt.getDate() + 1);
+		            $("#endDate").datepicker("option", "minDate", dt);
+		        }
 		    });
 		    jQuery('#endDate').datepicker({
-			       minDate: new Date(currentYear, currentMonth, currentDate)
-			    });
+				minDate: new Date(currentYear, currentMonth, currentDate),
+			    onSelect: function (selected) {
+		            var dt = new Date(selected);
+		            dt.setDate(dt.getDate() - 1);
+		            $("#startDate").datepicker("option", "maxDate", dt);
+		        }
+			});
 			var bannerTransistion = jQuery("#bannerTransistion").val();    
 			if(jQuery.trim(bannerTransistion)!=""){
 				jQuery('#ssTransition option[value="'+bannerTransistion+'"]');

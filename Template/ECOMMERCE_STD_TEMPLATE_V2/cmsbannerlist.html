@@ -1,6 +1,9 @@
 <link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
 <link href="$!webThemes/CMS/css/banner.css" rel="stylesheet" type="text/css" />
 #parse("font-awesomeV5.html")
+<script src="$!webThemes/CMS/js/slider/jssor.js" defer></script>
+<script src="$!webThemes/CMS/js/slider/jssor.slider.js" defer></script>
+<script src="$!webThemes/CMS/js/slider/jsor.customJs.js" defer></script>
 <script src="$!webThemes/CMS/js/cms/cmsscript.js"></script>
 <script src="$!webThemes/CMS/js/cms/bannerpluginv2.js"></script>
 <div id="bannerWrapper" class="clearfix popupWraper">
@@ -37,6 +40,10 @@
 						<a href="javascript:void(0);" title="Preview" onclick="bannerPreview('$bannerData.id')">
 							<i class="fas fa-lg fa-eye"></i>
 						</a>
+						<label class="cms_customRadioBtn blankText" title="Select Banner List">
+							<input type="radio" value="$bannerData.id" name="bannerGroup">
+							<span></span>
+						</label>
 						<a href="editBannerCms.action?bannerListId=$bannerData.id" title="Edit Banner List">
 							<i class="fas fa-lg fa-pencil-alt"></i>
 						</a>
