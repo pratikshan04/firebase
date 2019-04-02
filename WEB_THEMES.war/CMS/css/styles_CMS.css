@@ -2894,4 +2894,7 @@ select:focus {
 		font-size: 20px;
 		margin-bottom: 10px;
 	}
+	.cms_actionIcons a {
+		font-size: 14px;
+	}
 }
