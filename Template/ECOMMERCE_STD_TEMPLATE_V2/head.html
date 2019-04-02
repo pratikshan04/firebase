@@ -268,9 +268,9 @@
 <noscript><p><img src="//973ecb.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
 <!-- End Piwik Code -->
 #end
-##if($LayoutName != 'CMSStaticPageList')
+#if($LayoutName != 'CMSStaticPageList')
 	#parse("stylesheets.html")
-##end
+#end
 <title>$!pageTitleVelo.replace("Page","").trim()</title>
 #set($pageTitleVelo = $!pageTitleVelo.replace("Page","").trim())
 <meta property="og:title" content="$!pageTitleVelo" />
