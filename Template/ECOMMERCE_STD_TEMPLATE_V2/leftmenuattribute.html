@@ -127,12 +127,12 @@
 								#set($k = 0)
 								#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 									<li>
-										<em style="display:none">$!filterVal.attrValue</em>
 										<label class="customCheckBox" for="multiFilter_$!{iVal}_$!{k}">
 											<input type="checkbox" id="multiFilter_$!{iVal}_$!{k}" name="multiFilter_$!{iVal}" #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y") onclick="appendSearchByCheckBox('multiFilter_$!iVal');" #end />
 											<span>$!filterVal.attrValue ($!filterVal.resultCount)</span>
-											<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</span>
-											<span class="hideMe" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
+											<span class="hidden" id="multiFilter_$!{iVal}_$!{k}_div">$!attrValueForSearch</span>
+											<span class="hidden" id="multiFilter_$!{iVal}_$!{k}_span">$!filterVal.attrValueEncoded</span>
+											<em class="hidden" >$!filterVal.attrValue</em>
 										</label>
 									</li>
 									#set($k = $!k+1)
