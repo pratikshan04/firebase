@@ -2156,7 +2156,6 @@ select:focus {
 }
 #bannerWrapper .previewSection #previewContainer{
 	padding: 15px 0;
-	pointer-events: none;
 }
 .previewSection #previewContainer{
 	overflow: auto;
@@ -2898,7 +2897,4 @@ select:focus {
 	.cms_actionIcons a {
 		font-size: 14px;
 	}
-}
-.mce-container-body .mce-widget * {
-	vertical-align: middle;
 }
