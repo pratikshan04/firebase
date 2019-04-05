@@ -2899,6 +2899,3 @@ select:focus {
 		font-size: 14px;
 	}
 }
-.mce-container-body .mce-widget * {
-	vertical-align: middle;
-}

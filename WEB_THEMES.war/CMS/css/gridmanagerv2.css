@@ -8,10 +8,9 @@
 	border:0 !important;
 }
 .mce-i-close:before{
-	font-family: "Font Awesome 5 Free";
+	font-family: FontAwesome;
 	content:"\f00d";
-	font-size: 16px;
-	font-weight: 900;
+	font-size:14px;
 }
 .gm-content p{
 	margin:0px;
