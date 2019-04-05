@@ -897,7 +897,7 @@ function LoadRecentViewedItem(){
 #detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
 #set($skuPartNumber = $!itemData.partNumber)
 <input type="hidden" id="userId" value="$!userId" />
-<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!ItemId'>
+<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!itemData.ItemId'>
 <span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span>
 
 #end
