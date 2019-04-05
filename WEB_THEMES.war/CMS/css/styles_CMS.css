@@ -2156,6 +2156,7 @@ select:focus {
 }
 #bannerWrapper .previewSection #previewContainer{
 	padding: 15px 0;
+	pointer-events: none;
 }
 .previewSection #previewContainer{
 	overflow: auto;
