@@ -883,14 +883,23 @@ function CheckoutValidate(type){
 	}
 	return false;
 }
-function filterAttributes(input,id){
+/*function filterAttributes(input,id){
 	var valThis = jQuery(input).val().toLowerCase();
 	var len = valThis.length;
 	jQuery('.navList_'+id+'>li>label>span').each(function(){
 		var text = jQuery(this).text().substr(0,len).toLowerCase();
 		(text.toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().parent().show() : jQuery(this).parent().parent().hide();    
 	});
+}*/
+
+function filterAttributes(input,id){
+	var valThis = jQuery(input).val().replace(/\s+/g, '').toLowerCase();
+	jQuery('.navList_'+id+'>li>label>em').each(function(){
+		var text = jQuery(this).text().toLowerCase();
+		(text.replace(/\s+/g, '').toLowerCase().indexOf(valThis.toLowerCase()) >= 0) ? jQuery(this).parent().parent().show() : jQuery(this).parent().parent().hide(); 
+	});
 }
+
 //------------ compare
 function checkItem(){
 	var list = getCookie('compareList');
