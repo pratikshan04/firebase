@@ -107,10 +107,10 @@ $.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId, function(data
 			transistion = dynamicProperties.bannerTransistion;
 		}
 		if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
-			transistionDelay = dynamicProperties.bannerTransistionDelay;
+			transistionDelay =  parseInt(dynamicProperties.bannerTransistionDelay);
 		}
 		if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
-			transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
+			transistionAutoPlay =  parseInt(dynamicProperties.bannerTransistionAutoPlay);
 		}
 		if(typeof dynamicProperties.carouselSetting!='undefined'){
 			carouselSetting = dynamicProperties.carouselSetting;

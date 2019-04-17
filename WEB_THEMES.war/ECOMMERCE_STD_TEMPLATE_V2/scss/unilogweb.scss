@@ -2,15 +2,14 @@
 @import "2-layouts/layouts";
 @import "4-pages/pages";
 
-
 body {
-    position: relative;
-    height: 100%;
-    font-family: $body_font-family;
-	font-size: $body_font-size - 2;
-    color: $body_font-color;
-    overflow-x: hidden;
-    outline: none;
+  position: relative;
+  height: 100%;
+  font-family: $body_font-family;
+  font-size: $body_font-size - 2;
+  color: $body_font-color;
+  overflow-x: hidden;
+  outline: none;
 }
 
 $pagination_bg: $primary_color;
@@ -22,1121 +21,1129 @@ $modal_titlef-color: $default_font-color;
 $modal_btn-color: $default_font-color;
 $modal_closebtn-color: $default_font-color;
 
-
-.pagination>.active>a,
-.pagination>.active>a:focus,
-.pagination>.active>a:hover,
-.pagination>.active>span,
-.pagination>.active>span:focus,
-.pagination>.active>span:hover {
-    background-color: $pagination_bg;
-    border-color: $pagination_border-color;
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+  background-color: $pagination_bg;
+  border-color: $pagination_border-color;
 }
 
 #backToTop {
-    text-align: center;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  background: $backtotop-bg;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  opacity: 0.6;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  z-index: 99;
+
+  a {
+    display: block;
+    position: relative;
     width: 45px;
     height: 45px;
-    background: $backtotop-bg;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px;
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    opacity: 0.6;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-    filter: alpha(opacity=60);
-    z-index: 99;
- 
-    a {
-        display: block;
-        position: relative;
-        width: 45px;
-        height: 45px;
-        -webkit-transition: 1s;
-        -moz-transition: 1s;
-        transition: 1s;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
 
-        &:after {
-            -webkit-animation-name: backToTop-arrow;
-            animation-name: backToTop-arrow;
-            -webkit-animation-duration: 2s;
-            animation-duration: 2s;
-            -webkit-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
-            -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out;
-            z-index: 10;
-        }
-        @include icon(after, arrow-up, $color: $white, $size: 18px, $left: 14px, $top: 10px);
+    &:after {
+      -webkit-animation-name: backToTop-arrow;
+      animation-name: backToTop-arrow;
+      -webkit-animation-duration: 2s;
+      animation-duration: 2s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      z-index: 10;
     }
-    &:hover {
-        opacity: 1;
-        background: $default_font-color;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        filter: alpha(opacity=100);
-    } 
+    @include icon(
+      after,
+      arrow-up,
+      $color: $white,
+      $size: 18px,
+      $left: 14px,
+      $top: 10px
+    );
+  }
+  &:hover {
+    opacity: 1;
+    background: $default_font-color;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+  }
 }
-
 
 footer,
 .cimm_stickyPageWrap:after {
-    height: 355px;
+  height: 355px;
 }
 .cimm_bodyContentWrap {
-    margin-bottom: 30px;
-    height: 100%;
+  margin-bottom: 30px;
+  height: 100%;
 }
 
 /*___________________Poup Modal____________________*/
 .modal-title {
-    position: relative;
-    color: $modal_titlef-color;
-    
-    .backBtn {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 20px;
-        height: 20px;
-        font-size: 14px;
-        color: $modal_btn-color;
-        cursor: pointer;
-    }
-    .close {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        width: 20px;
-        height: 20px;
-        font-size: 24px;
-        color: $modal_closebtn-color;
-        opacity: 1;
-    }
+  position: relative;
+  color: $modal_titlef-color;
+
+  .backBtn {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    color: $modal_btn-color;
+    cursor: pointer;
+  }
+  .close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    font-size: 24px;
+    color: $modal_closebtn-color;
+    opacity: 1;
+  }
 }
 
 .modal-body {
-    ul {
-        li {
-            a.forgotPass {
-                margin-top: 10px;
-            }
-        }
+  ul {
+    li {
+      a.forgotPass {
+        margin-top: 10px;
+      }
     }
+  }
 }
 
 .dummyHeight {
-    height: 30px;
+  height: 30px;
 }
-.fixIt,#fixedHead{
-    position: fixed;
-    background: $white;
-    width: 100%;
-    z-index: 999;
-    top: 0;
-    -webkit-transition: top .5s ease-in-out;
-    -moz-transition: top .5s ease-in-out;
-    -o-transition: top .5s ease-in-out;
-    transition: top .5s ease-in-out;
+.fixIt,
+#fixedHead {
+  position: fixed;
+  background: $white;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  -webkit-transition: top 0.5s ease-in-out;
+  -moz-transition: top 0.5s ease-in-out;
+  -o-transition: top 0.5s ease-in-out;
+  transition: top 0.5s ease-in-out;
 }
 
 /*___________________Pagination____________________*/
 .pgnation {
-    .pagebarUTH {
-        text-align: right;
-        padding: 6px 0 0 0;
-        font-family: $secondary_font-family;
-        span {
-            color: $primary_color;
-            font-size: 20px;
-            padding: 0 3px;
-        }
-        a {
-            color: $default_font-color;
-            font-size: 16px;
-            padding: 0 3px;
-            &:hover {
-                color: $primary_color;
-            }
-        }
+  .pagebarUTH {
+    text-align: right;
+    padding: 6px 0 0 0;
+    font-family: $secondary_font-family;
+    span {
+      color: $primary_color;
+      font-size: 20px;
+      padding: 0 3px;
     }
+    a {
+      color: $default_font-color;
+      font-size: 16px;
+      padding: 0 3px;
+      &:hover {
+        color: $primary_color;
+      }
+    }
+  }
 }
 
 /*___________________Price____________________*/
 .priceSpan {
-    font-family: $secondary_font-family;
-    font-size: 20px;
-    img {
-        width: auto !important;
-        display: inline-block !important;
-    }
+  font-family: $secondary_font-family;
+  font-size: 20px;
+  img {
+    width: auto !important;
+    display: inline-block !important;
+  }
 }
 .price {
-    font-family: $secondary_font-family;
-    font-size: 16px;
-    img {
-        width: auto;
-        display: inline-block;
-    }
-	//.priceLabel {}
-	//.priceValue {}
+  font-family: $secondary_font-family;
+  font-size: 16px;
+  img {
+    width: auto;
+    display: inline-block;
+  }
+  //.priceLabel {}
+  //.priceValue {}
 }
 
 /*___________________Breadcrumb____________________*/
 
-.cimm_BreadCrumbs{
-	.breadcrumb {
-        background: none;
-        padding: 0px;
-        margin: 15px 0;
-        li+li:before {
-            content: "|";
-        }
+.cimm_BreadCrumbs {
+  .breadcrumb {
+    background: none;
+    padding: 0px;
+    margin: 15px 0;
+    li + li:before {
+      content: "|";
     }
+  }
 }
 
 /*___________________Search Results____________________*/
-.searchResults{
-	color: $default_font-color;
-	font-family: 'RobotoRegular';
-	font-size: 16px;
-	font-weight: bold;
-	.spellCheckWrap{
-		color: $primary_color;
-		.spellCheckHighlight{
-			font-style: italic;
-		}
-	}
+.searchResults {
+  color: $default_font-color;
+  font-family: "RobotoRegular";
+  font-size: 16px;
+  font-weight: bold;
+  .spellCheckWrap {
+    color: $primary_color;
+    .spellCheckHighlight {
+      font-style: italic;
+    }
+  }
 }
 
 .cimm_blockHeading {
-    margin: 0 0 10px 0;
-    text-transform: capitalize;
-    font-size: 16px;
-    a {
-        color: $primary_color;
-    }
+  margin: 0 0 10px 0;
+  text-transform: capitalize;
+  font-size: 16px;
+  a {
+    color: $primary_color;
+  }
 }
 
 .quantity {
-    width: 50px;
-    text-align: center;
-	height: 32px;
-	padding: 5px;
-	text-align: center;
+  width: 50px;
+  text-align: center;
+  height: 32px;
+  padding: 5px;
+  text-align: center;
 }
 
 .productTitle {
-	margin: 0;
-    color: $default_font-color;
-    font-size: 18px;
-    text-transform: uppercase;
-    font-family: $secondary_font-family;
+  margin: 0;
+  color: $default_font-color;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: $secondary_font-family;
 }
 
 .cimm_compareControls {
-    margin-top: 6px;
-    display: block;
+  margin-top: 6px;
+  display: block;
 }
 
-.groupList{
-	cursor: pointer;
-	position: relative;
-	font-size: 14px;
-	ul {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		margin: 0;
-		width: 100%;
-		padding: 5px;
-		background: $white;
-		border: 1px solid $border-color;
-		li {
-			width: 100%;
-			border-bottom: 1px solid $border-color;
-			&:last-child {
-				border: none;
-			}
-			input {
-				height: 35px;
-				padding: 10px;
-				width: 100%;
-			}
-			a {
-				color: $default_font-color;
-				text-transform: capitalize;
-				display: block;
-				padding: 5px;
-				&:hover {
-					background: $primary_color;
-					color: $white;
-				}
-			}
-		}
-	}
+.groupList {
+  cursor: pointer;
+  position: relative;
+  font-size: 14px;
+  ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    padding: 5px;
+    background: $white;
+    border: 1px solid $border-color;
+    li {
+      width: 100%;
+      border-bottom: 1px solid $border-color;
+      &:last-child {
+        border: none;
+      }
+      input {
+        height: 35px;
+        padding: 10px;
+        width: 100%;
+      }
+      a {
+        color: $default_font-color;
+        text-transform: capitalize;
+        display: block;
+        padding: 5px;
+        &:hover {
+          background: $primary_color;
+          color: $white;
+        }
+      }
+    }
+  }
 }
 
-.cimm_item-skus{
-	li{
-		padding: 2px 0px;
-		strong{
-			font-weight: 500;
-		}
-		span{
-			color: $primary_color;
-			font-weight: 600;
-		}		
-	}
+.cimm_item-skus {
+  li {
+    padding: 2px 0px;
+    strong {
+      font-weight: 500;
+    }
+    span {
+      color: $primary_color;
+      font-weight: 600;
+    }
+  }
 }
 .cimm_qtyWrap span {
-	display: inline-block;
+  display: inline-block;
 }
 #generalModel {
-    .modal-dialog {
-        min-width: 840px;
-    }
-    .modal-body {
-        max-height: 500px;
-        overflow-y: auto;
-    }
+  .modal-dialog {
+    min-width: 840px;
+  }
+  .modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+  }
 }
 
 .dataTables_wrapper {
-    color: $default_font-color;
+  color: $default_font-color;
 }
 
 .productGroupPopWrap {
-    color: $default_font-color;
-    .addNewPgWrap {
-        .button {
-            width: 130px;
-            float: left;
-        }
-        input {
-            width: calc(100% - 130px);
-            float: left;
-            height: 40px;
-            padding: 5px 10px;
-        }
+  color: $default_font-color;
+  .addNewPgWrap {
+    .button {
+      width: 130px;
+      float: left;
     }
-    .existingPgListWrap {
-        h4 {
-            color: $primary_color;
-        }
-        ul {
-            li {
-                width: 25%;
-                display: inline-block;
-            }
-        }
+    input {
+      width: calc(100% - 130px);
+      float: left;
+      height: 40px;
+      padding: 5px 10px;
     }
-    .selectedItemsWrap {
-        h4 {
-            color: $primary_color;
-        }
-        div {
-            margin: 10px 0;
-            .row {
-                border-bottom: 1px solid $border-color;
-                a.delBtn {
-                    display: block;
-                }
-            }
-        }
+  }
+  .existingPgListWrap {
+    h4 {
+      color: $primary_color;
     }
-    .submitProductGroup a {
+    ul {
+      li {
+        width: 25%;
         display: inline-block;
+      }
     }
-    .addNewPgResponse {
-        ul {
-            li {
-                a {
-                    color: $primary_color;
-                    text-transform: capitalize;
-                    font-size: 16px;
-                    font-weight: bold;
-                }
-            }
+  }
+  .selectedItemsWrap {
+    h4 {
+      color: $primary_color;
+    }
+    div {
+      margin: 10px 0;
+      .row {
+        border-bottom: 1px solid $border-color;
+        a.delBtn {
+          display: block;
         }
+      }
     }
+  }
+  .submitProductGroup a {
+    display: inline-block;
+  }
+  .addNewPgResponse {
+    ul {
+      li {
+        a {
+          color: $primary_color;
+          text-transform: capitalize;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
 .mulAddTocartWrap {
-    .addToCartHeaderContent {
-        a {
-            color: $primary_color;
-            font-size: 16px;
-            em {
-                margin-right: 10px;
-            }
-        }
+  .addToCartHeaderContent {
+    a {
+      color: $primary_color;
+      font-size: 16px;
+      em {
+        margin-right: 10px;
+      }
     }
-    .muladdtoCartItemsWrap {
-        .muladdtoCartItems {
-            padding: 10px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid $border-color;
-        }
+  }
+  .muladdtoCartItemsWrap {
+    .muladdtoCartItems {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid $border-color;
     }
-    .popCheckout {
-        margin-bottom: 10px;
-    }
+  }
+  .popCheckout {
+    margin-bottom: 10px;
+  }
 }
 
 .cimm_salesBottomStrip {
-    ul {
-        width: 40%;
-        float: right;
-        li {
-            color: $primary_color;
-            font-size: 20px;
-            font-weight: bold;
-            text-align: right;
-        }
+  ul {
+    width: 40%;
+    float: right;
+    li {
+      color: $primary_color;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: right;
     }
+  }
 }
 
 .popMsg {
-    background: #6b6a6a !important;
-    padding: 5px;
-    border-radius: 4px;
-    position: absolute;
-    width: 250px;
-    top: 25px;
-    font-size: 14px;
-    color: #fff !important;
-    z-index: 10;
+  background: #6b6a6a !important;
+  padding: 5px;
+  border-radius: 4px;
+  position: absolute;
+  width: 250px;
+  top: 25px;
+  font-size: 14px;
+  color: #fff !important;
+  z-index: 10;
+  right: 0;
 }
 
 .cimm_instructions {
-    width: 70%;
-    margin: 40px auto;
-    ul {
-        list-style-type: disc;
-        padding-left: 30px;
-        li {
-            list-style-type: disc;
-			em{
-				vertical-align: middle;
-			}
-        }
+  width: 70%;
+  margin: 40px auto;
+  ul {
+    list-style-type: disc;
+    padding-left: 30px;
+    li {
+      list-style-type: disc;
+      em {
+        vertical-align: middle;
+      }
     }
+  }
 }
 
 .cimm_refreshList {
-    font-size: 16px;
-    margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .profileImage {
-    img {
-        width: 100%;
-    }
+  img {
+    width: 100%;
+  }
 }
 
 .uploadImage_wrap {
-    .uploadImage {
-        width: calc(100% - 150px);
-        float: left;
-        border: 2px solid $default_font-color;
-        height: 35px;
-        cursor: pointer;
-        position: relative;
-        span {
-            text-align: center;
-            display: block;
-            padding: 6px;
-            color: $default_font-color;
-            position: absolute;
-            width: 100%;
-        }
-        input {
-            opacity: 0;
-            height: 35px;
-            width: 100%;
-            cursor: pointer;
-            border: none;
-        }
+  .uploadImage {
+    width: calc(100% - 150px);
+    float: left;
+    border: 2px solid $default_font-color;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+    span {
+      text-align: center;
+      display: block;
+      padding: 6px;
+      color: $default_font-color;
+      position: absolute;
+      width: 100%;
     }
-    .uploadFile {
-        @extend .uploadImage;
-        width: calc(100% - 78px);
+    input {
+      opacity: 0;
+      height: 35px;
+      width: 100%;
+      cursor: pointer;
+      border: none;
     }
-    .button {
-        margin-right: 3px;
-        float: left;
-        height: 35px;
-        padding: 5px 10px;
-    }
+  }
+  .uploadFile {
+    @extend .uploadImage;
+    width: calc(100% - 78px);
+  }
+  .button {
+    margin-right: 3px;
+    float: left;
+    height: 35px;
+    padding: 5px 10px;
+  }
 }
 
 .userInfoWrap {
-    height: 160px;
-    h4 {
-        position: absolute;
-        bottom: 0;
-        margin: 0;
-        font-size: 14px;
-    }
+  height: 160px;
+  h4 {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    font-size: 14px;
+  }
 }
 
 .searchBoxWrap {
-    background: $default_font-color;
-    .gotoWrap {
-        h4.header {
-            float: left;
-            color: $white;
-        }
-        .brandsShortCut li {
-            float: left;
-            margin: 12px 0 0 10px;
-            a {
-                color: $white;
-                &:hover {
-                    color: $primary_color;
-                }
-            }
-        }
+  background: $default_font-color;
+  .gotoWrap {
+    h4.header {
+      float: left;
+      color: $white;
     }
+    .brandsShortCut li {
+      float: left;
+      margin: 12px 0 0 10px;
+      a {
+        color: $white;
+        &:hover {
+          color: $primary_color;
+        }
+      }
+    }
+  }
 }
 
 .cimm_brandAtoZletters {
-    width: 100%;
-    margin: 0;
-    background: $primary_color;
-    ul {
-        margin: 5px 0;
-        border-radius: 6px;
-        padding: 0 10px;
-        li {
-            display: inline-block;
-            padding: 10px 5px;
-            a {
-                color: $white;
-            }
-        }
+  width: 100%;
+  margin: 0;
+  background: $primary_color;
+  ul {
+    margin: 5px 0;
+    border-radius: 6px;
+    padding: 0 10px;
+    li {
+      display: inline-block;
+      padding: 10px 5px;
+      a {
+        color: $white;
+      }
     }
-	&.cimm_brandLetter{
-		background: none;
-		ul {
-			padding: 0;
-			li {
-				padding: 0 6px 0 4px;
-				border-right: 1px solid $default_font-color;
-				line-height: 14px;
-				font-size: 14px;
-				a {
-					padding: 0 8px;
-					color: $default_font-color;
-				}
-				&:first-child{
-					padding: 0 6px 0 0;
-					a {
-						padding: 0 8px 0 0 ;
-					}
-				}
-				&:last-child{
-					border-right: none;
-				}
-			}
-		}
-	}
+  }
+  &.cimm_brandLetter {
+    background: none;
+    ul {
+      padding: 0;
+      li {
+        padding: 0 6px 0 4px;
+        border-right: 1px solid $default_font-color;
+        line-height: 14px;
+        font-size: 14px;
+        a {
+          padding: 0 8px;
+          color: $default_font-color;
+        }
+        &:first-child {
+          padding: 0 6px 0 0;
+          a {
+            padding: 0 8px 0 0;
+          }
+        }
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
 }
 
 .cimm_brandAtoZletters.fixIt {
-    position: fixed;
-    top: 0;
-    width: 1170px;
-    z-index: 2;
+  position: fixed;
+  top: 0;
+  width: 1170px;
+  z-index: 2;
 }
 
 #sharePop {
-    .modal-body {
-        max-height: 190px;
-        overflow: auto;
-    }
+  .modal-body {
+    max-height: 190px;
+    overflow: auto;
+  }
 }
 
 .hideOverflow {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-
 #updateSelectedItems {
-    -ms-transform: translate(-239px, 0%);
-    -webkit-transform: translate(-239px, 0%);
-    transform: translate(-239px, 0%);
+  -ms-transform: translate(-239px, 0%);
+  -webkit-transform: translate(-239px, 0%);
+  transform: translate(-239px, 0%);
 }
 
 #updateSelectedItems.slideBtns-hide {
-    -ms-transform: translate(-239px, 100%);
-    -webkit-transform: translate(-239px, 100%);
-    transform: translate(-239px, 100%);
+  -ms-transform: translate(-239px, 100%);
+  -webkit-transform: translate(-239px, 100%);
+  transform: translate(-239px, 100%);
 }
 
 .fixed {
-    position: fixed;
-    top: -50px;
-    width: 100%;
-    background: $white;
-    z-index: 115;
-    padding: 5px 0;
-    ul {
-        max-width: 1180px;
-        margin: 0 auto;
-    }
+  position: fixed;
+  top: -50px;
+  width: 100%;
+  background: $white;
+  z-index: 115;
+  padding: 5px 0;
+  ul {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
 }
 
 .brandsListRow {
-    border-bottom: 1px solid $border-color;
-    &.grid-item {
-        border: 0;
-    }
+  border-bottom: 1px solid $border-color;
+  &.grid-item {
+    border: 0;
+  }
 }
 
 .registerRightBox {
-    background: $gray-lighten;
-    padding: 20px;
-    font-weight: bold;
-    h6 {
-        font-size: 13px;
-        color: $black;
+  background: $gray-lighten;
+  padding: 20px;
+  font-weight: bold;
+  h6 {
+    font-size: 13px;
+    color: $black;
+  }
+  ul li a {
+    color: $primary_color;
+    &:hover {
+      text-decoration: underline;
     }
-    ul li a {
-        color: $primary_color;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+  }
 }
 
 .registerLeftBox {
-    h5 {
-        font-size: 13px;
-        color: $black;
-        font-weight: bold;
+  h5 {
+    font-size: 13px;
+    color: $black;
+    font-weight: bold;
+  }
+  label {
+    color: $black;
+    font-weight: bold;
+    vertical-align: top;
+    a {
+      color: $primary_color;
     }
-    label {
-        color: $black;
-        font-weight: bold;
-        vertical-align: top;
-        a {
-            color: $primary_color;
-        }
+  }
+  ul {
+    margin: 20px 0;
+    li {
+      line-height: 20px;
+      color: $black;
+      > em {
+        color: $gray-lighter;
+        font-size: 18px;
+      }
     }
-    ul {
-        margin: 20px 0;
-        li {
-            line-height: 20px;
-            color: $black;
-            >em {
-                color: $gray-lighter;
-                font-size: 18px;
-            }
-        }
-    }
-    .accountSelectionWrap {
-        background: $gray-lighten;
-        padding: 10px;
-        display: inline-block;
-        margin: 0 0 20px;
-    }
-    label.customCheckBox {
-        margin-bottom: 20px;
-    }
+  }
+  .accountSelectionWrap {
+    background: $gray-lighten;
+    padding: 10px;
+    display: inline-block;
+    margin: 0 0 20px;
+  }
+  label.customCheckBox {
+    margin-bottom: 20px;
+  }
 }
 
 .orderSummaryWrap {
-    h3 {
-        margin: 0 0 6px 0;
-        text-transform: uppercase;
-        font-size: 14px;
-        font-family: $secondary_font-family;
-    }
-    a {
-        color: $primary_color;
-        text-decoration: underline;
-        font-weight: 700;
-    }
-    .table {
-        thead {
-            tr {
-                th {
-                    border-bottom: 1px solid $default_font-color;
-                }
-            }
+  h3 {
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: $secondary_font-family;
+  }
+  a {
+    color: $primary_color;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+  .table {
+    thead {
+      tr {
+        th {
+          border-bottom: 1px solid $default_font-color;
         }
-        tbody {
-            text-align: center;
-            tr {
-                td {
-                    p {
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
+      }
     }
-    .cimm_salesBottomStrip {
-        border-top: 1px solid $default_font-color;
-        padding: 6px 0 10px 0;
-        ul {
-            width: 100%;
-            float: none;
-            li {
-				font-size: 18px;
-                .priceLabel {
-                    float: left;
-                    text-transform: capitalize;
-                }
-                .priceValue {
-                    float: right;
-                }
-            }
+    tbody {
+      text-align: center;
+      tr {
+        td {
+          p {
+            font-size: 12px;
+          }
         }
+      }
     }
+  }
+  .cimm_salesBottomStrip {
+    border-top: 1px solid $default_font-color;
+    padding: 6px 0 10px 0;
+    ul {
+      width: 100%;
+      float: none;
+      li {
+        font-size: 18px;
+        .priceLabel {
+          float: left;
+          text-transform: capitalize;
+        }
+        .priceValue {
+          float: right;
+        }
+      }
+    }
+  }
 }
 
 .actionIcon {
-    background: none;
-    border: 0;
-    font-size: 22px;
-    padding: 0;
-    margin: 0 6px;
+  background: none;
+  border: 0;
+  font-size: 22px;
+  padding: 0;
+  margin: 0 6px;
+  color: $primary_color;
+  &:active {
     color: $primary_color;
-    &:active {
-        color: $primary_color;
-    }
+  }
 }
 
 .copyPaste {
-    width: 100%;
-    height: 200px;
+  width: 100%;
+  height: 200px;
 }
 
 #example1 {
-    height: 280px;
-    overflow: auto;
+  height: 280px;
+  overflow: auto;
 }
 
 .quickcartclass {
-    li {
-        list-style-type: decimal;
-        margin-left: 15px;
-        ul {
-            li {
-                display: block;
-                float: none;
-                position: relative;
-                &:after {
-                    content: "";
-                    height: 6px;
-                    width: 6px;
-                    background: #585858;
-                    position: absolute;
-                    left: -12px;
-                    border-radius: 50%;
-                    top: 6px;
-                }
-            }
+  li {
+    list-style-type: decimal;
+    margin-left: 15px;
+    ul {
+      li {
+        display: block;
+        float: none;
+        position: relative;
+        &:after {
+          content: "";
+          height: 6px;
+          width: 6px;
+          background: #585858;
+          position: absolute;
+          left: -12px;
+          border-radius: 50%;
+          top: 6px;
         }
+      }
     }
-    a {
-        color: $primary_color;
-        font-weight: 600;
-    }
+  }
+  a {
+    color: $primary_color;
+    font-weight: 600;
+  }
 }
 
 .cimm_regCapthaWrap {
-    margin-bottom: 10px;
-    input {
-        float: left;
-        padding: 4px 10px;
-        width: 50%;
-        height: 30px;
-    }
-    input[type='button'] {
-        float: left;
-    }
+  margin-bottom: 10px;
+  input {
+    float: left;
+    padding: 4px 10px;
+    width: 50%;
+    height: 30px;
+  }
+  input[type="button"] {
+    float: left;
+  }
 }
 
 .select_attributeBody {
-    >ul {
-        >li {
-			&.selectOptions{
-				float: left;
-				width: 31.33%;
-				margin-bottom: 20px;
-				padding:0;
-				margin-right: 2%;
-				.slideBlock{
-				width: 100%;
-				margin: 0;
-					li {
-						width: 100%;
-						margin-right: 0;
-						float: none;
-						padding: 5px 0;
-					}
-					&.open{
-						display: block;
-					}
-				}
-			}
-            div.select_attributeList {
-                cursor: pointer;
-                padding: 5px;
-                font-size: 16px;
-                color: $primary_color;
-                text-decoration: underline;
-                font-family: $secondary_font-family;
-            }
-			div.toggle_attributeList{
-				display: inline-block;
-				padding: 6px 25px 6px 12px;
-				margin-bottom: 0;
-				font-size: 14px;
-				font-weight: 400;
-				line-height: 1.42857143;
-				text-align: left;
-				white-space: nowrap;
-				vertical-align: middle;
-				cursor: pointer;
-				border: 1px solid $border-color;
-				border-radius: 4px;
-				color: #333;
-				background-color: #fff;
-				width: 100%;
-				position: relative;
-				.caret{
-					position: absolute;
-					top: 50%;
-					right: 12px;
-					margin-top: -2px;
-					vertical-align: middle;
-				}
-			}
-            ul {
-                padding: 5px;
-               /* max-height: 120px;*/
-                overflow: auto;
-                li {
-                    width: 30%;
-                    margin-right: 10px;
-                    float: left;
-                    padding: 4px 5px 4px;
-                }
-            }
+  > ul {
+    > li {
+      &.selectOptions {
+        float: left;
+        width: 31.33%;
+        margin-bottom: 20px;
+        padding: 0;
+        margin-right: 2%;
+        .slideBlock {
+          width: 100%;
+          margin: 0;
+          li {
+            width: 100%;
+            margin-right: 0;
+            float: none;
+            padding: 5px 0;
+          }
+          &.open {
+            display: block;
+          }
         }
+      }
+      div.select_attributeList {
+        cursor: pointer;
+        padding: 5px;
+        font-size: 16px;
+        color: $primary_color;
+        text-decoration: underline;
+        font-family: $secondary_font-family;
+      }
+      div.toggle_attributeList {
+        display: inline-block;
+        padding: 6px 25px 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        color: #333;
+        background-color: #fff;
+        width: 100%;
+        position: relative;
+        .caret {
+          position: absolute;
+          top: 50%;
+          right: 12px;
+          margin-top: -2px;
+          vertical-align: middle;
+        }
+      }
+      ul {
+        padding: 5px;
+        /* max-height: 120px;*/
+        overflow: auto;
+        li {
+          width: 30%;
+          margin-right: 10px;
+          float: left;
+          padding: 4px 5px 4px;
+        }
+      }
     }
+  }
 }
 
 .cimm_multiAddcart {
-    width: 150px;
+  width: 150px;
 }
 
 .site-overlay,
 .modalPopOverlay {
-    display: none;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.18);
-    z-index: 116;
-    cursor: wait;
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 116;
+  cursor: wait;
 }
 
 .cartHead {
-    h5 {
-        float: left;
-        margin: 0;
-        padding: 4px 15px 8px;
-        background: $primary_color;
-        a {
-            padding: 0 !important;
-            font-size: 12px !important;
-            &.active {
-                text-decoration: underline;
-            }
-        }
+  h5 {
+    float: left;
+    margin: 0;
+    padding: 4px 15px 8px;
+    background: $primary_color;
+    a {
+      padding: 0 !important;
+      font-size: 12px !important;
+      &.active {
+        text-decoration: underline;
+      }
     }
+  }
 }
 
 .cartBody {
-    padding: 10px;
+  padding: 10px;
 }
 
 #quickOrderPadDrop {
-    width: 342px;
-    border: 0;
+  width: 342px;
+  border: 0;
 }
 
 #headerCopyPasteText {
-    width: 100%;
-    height: 150px;
+  width: 100%;
+  height: 150px;
 }
 
 #ManagePurchaseAgent_wrapper {
-    .dt-buttons {
-        float: left;
-    }
-    .dataTables_filter {
-        float: right;
-        margin-bottom: 5px;
-    }
-    table {
-        tbody {
-            tr {
-                td {
-                    a.cimm_inlineButton {
-                        float: left;
-                        height: 30px;
-                    }
-                    label.switch {
-                        float: right;
-                    }
-                }
-            }
+  .dt-buttons {
+    float: left;
+  }
+  .dataTables_filter {
+    float: right;
+    margin-bottom: 5px;
+  }
+  table {
+    tbody {
+      tr {
+        td {
+          a.cimm_inlineButton {
+            float: left;
+            height: 30px;
+          }
+          label.switch {
+            float: right;
+          }
         }
+      }
     }
+  }
 }
 
 .fileUploadDescription {
-    a {
-        background: none !important;
-        color: $primary_color !important;
-        padding: 0 !important;
-        font-size: 14px !important;
-        font-weight: bold;
-    }
+  a {
+    background: none !important;
+    color: $primary_color !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+    font-weight: bold;
+  }
 }
 
 .grid-item {
-    width: 20%;
-    height: auto;
-    float: left;
-    margin-bottom: 25px;
+  width: 20%;
+  height: auto;
+  float: left;
+  margin-bottom: 25px;
 }
 
-.tog_myAccount{
-	cursor:pointer;
+.tog_myAccount {
+  cursor: pointer;
 }
-.tog_myAccount span{
-	float: right;
+.tog_myAccount span {
+  float: right;
 }
-.site-overlay,.modalPopOverlay {
-	display: none;
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	background: rgba(0, 0, 0, 0.3);
-	z-index: 112;
-	cursor: wait;
+.site-overlay,
+.modalPopOverlay {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 112;
+  cursor: wait;
 }
-.loadAfter{
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	background: rgba(255, 255, 255, 1);
-	z-index: 112;
-	cursor: wait;
-	img{
-		max-width: 100%;
-		display: block;
-		//vertical-align: middle;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
-	}
-	i{
-		display: block;
-		//vertical-align: middle;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
-		width: 48px;
-		height: 48px;
-	}
+.loadAfter {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: rgba(255, 255, 255, 1);
+  z-index: 112;
+  cursor: wait;
+  img {
+    max-width: 100%;
+    display: block;
+    //vertical-align: middle;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  i {
+    display: block;
+    //vertical-align: middle;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 48px;
+    height: 48px;
+  }
 }
 .site-overlay {
-    display: none;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 112;
-    cursor: wait;
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 112;
+  cursor: wait;
 }
 
 #multipleResult {
-    .bulkActionBtn {
-        width: 150px;
-        margin: 0 auto 12px auto;
-    }
+  .bulkActionBtn {
+    width: 150px;
+    margin: 0 auto 12px auto;
+  }
 }
 
 .cimm_resultSelect {
-    background: $gray-lighten;
-    padding: 5px 10px;
-    a {
-        color: $primary_color;
-        font-weight: 600;
-    }
+  background: $gray-lighten;
+  padding: 5px 10px;
+  a {
+    color: $primary_color;
+    font-weight: 600;
+  }
 }
 
 .cimm_genericSearch {
-    padding: 10px 5px;
-    margin: 0 0 15px 0;
-    border: 1px solid $border-color;
-    a {
-        color: $primary_color;
-        font-weight: 600;
-    }
+  padding: 10px 5px;
+  margin: 0 0 15px 0;
+  border: 1px solid $border-color;
+  a {
+    color: $primary_color;
+    font-weight: 600;
+  }
 }
 
 .multipleResult {
-    font-size: 12px;
-    text-align: center;
-    padding: 8px;
-    background: $gray-lighten;
+  font-size: 12px;
+  text-align: center;
+  padding: 8px;
+  background: $gray-lighten;
 }
-
 
 .poppupEnabled {
-    overflow: hidden;
+  overflow: hidden;
 }
-#googleMap, #panel, #map_canvas {
-	height: 500px;
-	overflow: hidden;
+#googleMap,
+#panel,
+#map_canvas {
+  height: 500px;
+  overflow: hidden;
 }
 
-.compareWrap{ 
-	.cimm_multiAddcart{
-		float: right;
-		margin-right: 20px;
-	}
+.compareWrap {
+  .cimm_multiAddcart {
+    float: right;
+    margin-right: 20px;
+  }
 }
-.packDesc{
-	color: $packDescColor;
-	font-size: 14px;
+.packDesc {
+  color: $packDescColor;
+  font-size: 14px;
 }
 .divWrap {
-    margin-top: 10px;
+  margin-top: 10px;
 }
-.cimm_itemTitle{
-	margin: 0;
-	padding: 5px 0;
-	font-family: 'RobotoBlack';
-	text-transform: uppercase;
-	font-size: 14px;
+.cimm_itemTitle {
+  margin: 0;
+  padding: 5px 0;
+  font-family: "RobotoBlack";
+  text-transform: uppercase;
+  font-size: 14px;
 }
 #customerPartNumSubmit {
-	left: auto;
-	right: 0;
-	width: 300px;
+  left: auto;
+  right: 0;
+  width: 300px;
 }
 div.dataTables_wrapper .cartPagination div.dataTables_paginate {
-	text-align: left;
+  text-align: left;
 }
-.cartTotalBlock{
-	color: $primary_color;
-	font-size: 20px;
-	font-weight: bold;
-	text-align: right;
+.cartTotalBlock {
+  color: $primary_color;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
 }
-.cartTotal_Top{
-	text-align: right;
-	margin-bottom: 25px;
-	span {
-		background: $border-color;
-		color: $white !important;
-		border-radius: 2px;
-	}
+.cartTotal_Top {
+  text-align: right;
+  margin-bottom: 25px;
+  span {
+    background: $border-color;
+    color: $white !important;
+    border-radius: 2px;
+  }
 }
-.eMailLogo{
-	background:$white; 
-	padding: 10px;
-	border-top:2px solid $border-color;
-	border-bottom:2px solid $border-color;
-	margin-bottom: 20px;
+.eMailLogo {
+  background: $white;
+  padding: 10px;
+  border-top: 2px solid $border-color;
+  border-bottom: 2px solid $border-color;
+  margin-bottom: 20px;
 }
 #sortByForm {
-	.dropdown-menu {
-		left: -60px;
-	}
+  .dropdown-menu {
+    left: -60px;
+  }
 }
 
-.dropdown-menu.customDropDown{
-	padding: 5px;
-	background: $white;
-	border: 1px solid $border-color;
-	li{
-		width: 100%;
-		border-bottom: 1px solid $border-color;
-		text-align: left;
-		padding: 3px 0;
-		input{
-			height: 35px;
-			padding: 10px;
-			width: 100%;
-		}
-		a{
-			color: $default_font-color !important;
-			text-transform: capitalize;
-			display: block;
-			padding: 5px;
-		}
-		&.text-center{
-			text-align: center;
-		}
-	}
+.dropdown-menu.customDropDown {
+  padding: 5px;
+  background: $white;
+  border: 1px solid $border-color;
+  li {
+    width: 100%;
+    border-bottom: 1px solid $border-color;
+    text-align: left;
+    padding: 3px 0;
+    input {
+      height: 35px;
+      padding: 10px;
+      width: 100%;
+    }
+    a {
+      color: $default_font-color !important;
+      text-transform: capitalize;
+      display: block;
+      padding: 5px;
+    }
+    &.text-center {
+      text-align: center;
+    }
+  }
 }
 .searchZero {
-    p {
-        font-size: 20px;
-        font-weight: 600;
-        a:not(.cimm_inlineButton){
-            color: $primary_color;
-            text-decoration: underline;
-        }
+  p {
+    font-size: 20px;
+    font-weight: 600;
+    a:not(.cimm_inlineButton) {
+      color: $primary_color;
+      text-decoration: underline;
     }
+  }
 }
-.clearenceTag{
-    background: url(../images/Clearance_Icon.png) no-repeat 0 0;
-    height: 65px;
-    width: 65px;
-    display: block;
-    background-size: contain;
-    position: absolute;
-    top: 0;
-    &.clearenceTagSmall {
-        height: 45px;
-        width: 45px;
-    }
+.clearenceTag {
+  background: url(../images/Clearance_Icon.png) no-repeat 0 0;
+  height: 65px;
+  width: 65px;
+  display: block;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  &.clearenceTagSmall {
+    height: 45px;
+    width: 45px;
+  }
 }
-.tabelImage{
-    a{
-        display: inline-block;
-        position: relative;
-    }
+.tabelImage {
+  a {
+    display: inline-block;
+    position: relative;
+  }
 }
-.cimm_staticPageWrap{
-    .container-fluid{
-        padding: 0;
-    }
+.cimm_staticPageWrap {
+  .container-fluid {
+    padding: 0;
+  }
 }
 .locationDataWrap .panel {
-    margin: 0;
-    box-shadow: none;
+  margin: 0;
+  box-shadow: none;
 }
 @import "3-modules/modules";

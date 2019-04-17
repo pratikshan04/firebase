@@ -1271,6 +1271,7 @@ iframe#iframeId {
 	color: #c7c7c7;
 	position: relative;
     height: 60px;
+    overflow: auto;
 }
 .cms_leftMenu ul li #SEOPreview li{
 	height: 40px;
@@ -2153,10 +2154,6 @@ select:focus {
 	border-top-left-radius: 11px;
 	border-top: 0;
 	border-bottom: 0;
-}
-#bannerWrapper .previewSection #previewContainer{
-	padding: 15px 0;
-	pointer-events: none;
 }
 .previewSection #previewContainer{
 	overflow: auto;
