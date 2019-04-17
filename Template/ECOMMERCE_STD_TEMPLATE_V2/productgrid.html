@@ -556,11 +556,11 @@
 										<label class="customCheckBox">
 											#set($addToCartCheckFlag = "N")
 											#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-										    	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+										    	##if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 										    		#if($itemData.price>0)
 										    			#set($addToCartCheckFlag = "Y")
 											   		#end
-										    	#end
+										    	##end
 										    #else
 											   	#set($addToCartCheckFlag = "Y")
 										    #end
@@ -587,32 +587,32 @@
 							<!-- <input type="hidden" id="displayPrice_$!itemData.partNumber" value="$!itemData.displayPricing"/> -->
 						</li>
 					</ul>
+					<!--Branch Availabiltiy List Section -->
+					<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content yellowTheme bold">
+								<div class="modal-header">
+							      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+							    </div>
+							    <div class="modal-body size-13">
+							    	<table class="table">
+							    		<thead>
+											<tr>
+												<th>$!locale.get("product.label.branchName")</th>
+												<th class="center">$!locale.get("product.label.available")</th>
+											</tr>
+										</thead>
+							    		<tbody id="allBranchHTML$!itemData.partNumber">
+							    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
+							    		</tbody>
+							    	</table>
+							    </div>
+							</div>
+						</div>
+					</div>
+					<!--Branch Availabiltiy List Section-->
 				</li>
-				<!--Branch Availabiltiy List Section -->
-									<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
-										<div class="modal-dialog">
-											<!-- Modal content-->
-											<div class="modal-content yellowTheme bold">
-												<div class="modal-header">
-											      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-											    </div>
-											    <div class="modal-body size-13">
-											    	<table class="table">
-											    		<thead>
-															<tr>
-																<th>$!locale.get("product.label.branchName")</th>
-																<th class="center">$!locale.get("product.label.available")</th>
-															</tr>
-														</thead>
-											    		<tbody id="allBranchHTML$!itemData.partNumber">
-											    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
-											    		</tbody>
-											    	</table>
-											    </div>
-											</div>
-										</div>
-									</div>
-									<!--Branch Availabiltiy List Section-->
 			#end
 		</ul>
 	</div>

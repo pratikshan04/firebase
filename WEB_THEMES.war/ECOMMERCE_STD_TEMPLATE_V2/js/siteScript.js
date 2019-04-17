@@ -1144,13 +1144,16 @@ $(document).delegate('[data-function="productGroupDropDown"]', 'click',function(
 		_this.parent().find(toggleListID).html(data);
 	});
 });
-function addToProductList(groupName,groupId){
-	var id = $("#hidden_id").val();
-	var partNumber =  $("#itmId_"+id).val();
-	var uomValue =  $("#uomValue_"+partNumber).val();
-	var qty = $("#itemTxtQty"+id).val();
-	var toggleListID = $("#group_id").val();
+function addToProductList(_this){
+	var id = $("#hidden_id").val(),
+	partNumber =  $("#itmId_"+id).val(),
+	uomValue =  $("#uomValue_"+partNumber).val(),
+	qty = $("#itemTxtQty"+id).val(),
+	toggleListID = $("#group_id").val();
 	qty = qty.trim();
+	var groupId = _this.id ? _this.id : 0;
+	var groupName = $(_this).data('groupname') ? $(_this).data('groupname') : $(_this).val();
+	
 	if(qty=="")
 		qty = "1";
 	groupName = groupName.trim();
@@ -1183,12 +1186,12 @@ function addToProductList(groupName,groupId){
 	block('Please Wait');
 	jQuery.get('insertProductListItemPage.action?listId='+groupId+'&listName='+groupName+"&productIdList="+id+"&itemQty="+qty+"&uomValue="+uomValue+"&dt="+new Date(),function(data,status){
 		unblock();
-		$(toggleListID).hide();
+		$(_this).parents('.productGroupBtn').find(toggleListID).hide();
 		var itemDesc = $("#itemTitle"+id).text().trim();
 		var result = data.split('|');
 		//$(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
-		$(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","/"+result[1]+"/ProductGroup/Product?savedGroupName="+$("#group_name").val()).fadeIn();
-		setTimeout(function(){$(toggleListID+"_pop").fadeOut(); }, 3000);
+		$(_this).parents('.productGroupBtn').find(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","/"+result[1]+"/ProductGroup/Product?savedGroupName="+$("#group_name").val()).fadeIn();
+		setTimeout(function(){$(".popMsg").fadeOut(); }, 3000);
 	});
 }
 function leftFilterScroll(){

@@ -67,10 +67,10 @@
 			#if($!fromPage == "fileUpload")
 				<li><input type="text" maxlength="25" onkeypress="return noenter()" onkeyup="if(event.keyCode == 13){addItemList(this.value,0);}"/></li>
 			#else
-				<li><input type="text" maxlength="25" onkeypress="return noenter()" placeholder="$!locale.get('product.label.enterNewGroupName')" onkeyup="if(event.keyCode == 13){addToProductList(this.value,0);}"/></li>
+				<li><input type="text" maxlength="25" onkeypress="return noenter()" placeholder="$!locale.get('product.label.enterNewGroupName')" onkeyup="if(event.keyCode == 13){addToProductList(this);}"/></li>
 			#end
 			#foreach($!pListDate in $!productListData)
-				<li><a id="$!pListDate.productListId" onclick="addToProductList('',this.id);" data-groupName="$!pListDate.productListName">$!pListDate.productListName</a></li>
+				<li><a id="$!pListDate.productListId" onclick="addToProductList(this);" data-groupName="$!pListDate.productListName">$!pListDate.productListName</a></li>
 			#end
 		#end
 	#end

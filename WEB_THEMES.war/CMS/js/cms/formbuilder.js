@@ -298,7 +298,7 @@ function buildElement(type) {
         el = '<div class="form-group"><p>Checkbox</p><label class="customCheckBox" style="display:block;"><input type="checkbox" name="checkbox1" class="form-control" /><span>checkboxname</span><label></div>';
     }else if (type == "captcha") {
     	var webthemesval=document.getElementById('webthemesval').value+"/CMS/images/active-icons/captcha.png";
-        el = '<div class="form-group"><label>Captcha<span class="text-danger"> *</span></label><input type="text" class="form-control" name="jcaptcha" data-required="Y" data-type="text" data-error="Please enter Captcha." data-invalid="" /><div class="captchaWrap form-group"><img src="CaptchaServlet.slt" id="captchaImg" /><a href="javascript:void(0);" id="refreshbtn" onclick="refreshjcaptcha();" class="captchaButton"><i class="fa fa-refresh" aria-hidden="true"></i></a></div></div>';
+        el = '<div class="form-group"><label>Captcha<span class="text-danger"> *</span></label><input type="text" class="form-control" name="jcaptcha" data-required="Y" data-type="text" data-error="Please enter Captcha." data-invalid="" /><div class="captchaWrap form-group"><img src="CaptchaServlet.slt" id="captchaImg" /><a href="javascript:void(0);" id="refreshbtn" onclick="refreshjcaptcha();" class="captchaButton"><i class="fa fa-sync" aria-hidden="true"></i></a></div></div>';
     }
     var arrows = '<a title="Make Column Narrower" class="colDecrease"><i class="fa fa-lg fa-caret-left"></i></a> <a title="Make Column Wider" class="colIncrease"><i class="fa fa-lg fa-caret-right"></i></a>';
     if(type != "captcha"){
