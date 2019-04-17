@@ -49,8 +49,12 @@ $(".save-form").on("click", function() {
         data: str,
         success: function(msg) {
         	var result = $.trim(msg);
-            if (result.indexOf("success") != -1) {
-            	alert(formName+" Form created successfully");
+            if (result.indexOf("success") != -1 || result.indexOf("update") != -1) {
+            	if(result.indexOf("update") != -1){
+            		alert(formName+" Form update successfully");
+            	}else{
+            		alert(formName+" Form created successfully");
+            	}
                 window.location.href = "formListCms.action";
                 //window.parent.buildFormList();
                 window.parent.generateFormList();
