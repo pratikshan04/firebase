@@ -358,19 +358,26 @@ var BulkAction = {};
 		}
 	};
 	BulkAction.enableCheckBoxOnLoad = function(){
-		var dataFromCookie = "";
-		var productGroupDataFromCookie = "";
+		var dataFromCookie = null;
+		var productGroupDataFromCookie = null;
+		var groupListDataFromCookie = null;
 		var jsonObj = [];
 		var jsonObjPGroup = [];
 		var jsonObjGList = [];
 		if(typeof(Storage) !== "undefined") {
-			dataFromCookie = localStorage.getItem("selectedItemsAOP");
-			productGroupDataFromCookie  = localStorage.getItem("selectedItemsToGroup");
-			groupListDataFromCookie  = localStorage.getItem("selectedGroupItems");
+			if($('#layoutName').val()!="ProductGroupPage" && $('#layoutName').val()!="SavedCartPage"){
+				dataFromCookie = localStorage.getItem("selectedItemsAOP");
+				productGroupDataFromCookie  = localStorage.getItem("selectedItemsToGroup");
+			}else{
+				groupListDataFromCookie  = localStorage.getItem("selectedGroupItems");
+			}			
 		} else {
-			dataFromCookie = getCookie("selectedItemsAOP");
-			productGroupDataFromCookie  = getCookie("selectedItemsToGroup");
-			groupListDataFromCookie  = localStorage.getItem("selectedGroupItems");
+			if($('#layoutName').val()!="ProductGroupPage" && $('#layoutName').val()!="SavedCartPage"){
+				dataFromCookie = getCookie("selectedItemsAOP");
+				productGroupDataFromCookie  = getCookie("selectedItemsToGroup");
+			}else{
+				groupListDataFromCookie  = localStorage.getItem("selectedGroupItems");
+			}			
 		}
 		if(dataFromCookie!=null){
 			jsonObj = JSON.parse(dataFromCookie);
