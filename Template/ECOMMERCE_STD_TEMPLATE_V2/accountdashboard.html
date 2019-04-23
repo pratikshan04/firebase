@@ -46,18 +46,20 @@
 											<td><span>$!addressList.emailAddress</span></td>
 										</tr>
 									</table>
+										#if($!CommonDBQuerySystemParameter.get("DashboardEnableLastLoginDetails") == 'Y')
 											<h4>Last Login: 
 											#if($!lastLogin && $!lastLogin.size()>0)
-											#foreach($loginDetails in $lastLogin.entrySet())
-											#if($!loginDetails.getKey() && $loginDetails.getKey().trim().toUpperCase()=="LASTLOGIN")
-											<span id="divLocal"></span>
-											<input type="hidden" id="divUTC" value="$loginDetails.getValue()" />
-											#end
-											#end
+												#foreach($loginDetails in $lastLogin.entrySet())
+													#if($!loginDetails.getKey() && $loginDetails.getKey().trim().toUpperCase()=="LASTLOGIN")
+													<span id="divLocal"></span>
+													<input type="hidden" id="divUTC" value="$loginDetails.getValue()" />
+													#end
+												#end
 											#else
 											N/A
 											#end
-										</h4>
+											</h4>
+										#end
 									</div>
 								</div>
 							</div>
@@ -116,7 +118,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="cimm_moduleHeadEnclosure mTop-3">
 								<h3 class="cimm_blockHeading mBottom-3">$locale.get("product.heading.shipAddressList")
-									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiate();"><em class="fa fa-lg fa-sync-alt"></em></a>
+									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiateV2();"><em class="fa fa-lg fa-sync-alt"></em></a>
 									<span class="pull-right" id="progressBar">
 										#if($session.getAttribute("scynEntityStatus")!="Completed" && $session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 										$!session.getAttribute("scynEntityStatus")
@@ -229,6 +231,7 @@
 			</div>
 		</div>
 	</div>
+	#if($!CommonDBQuerySystemParameter.get("DashboardRecentlyOrderedItems") == 'Y')
 	<div class="col-md-3 col-sm-12 col-xs-12">
 		#if($recentlyOrderedItems.size()>0)	
 		<div class="cimm_sliderWrap">
@@ -261,4 +264,5 @@
 		</div>
 		#end
 	</div>
+	#end
 </div>

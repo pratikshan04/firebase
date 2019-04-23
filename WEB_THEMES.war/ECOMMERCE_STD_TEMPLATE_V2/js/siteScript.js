@@ -699,6 +699,26 @@ function scynInitiate(){
 		}
 	});
 }
+//------------ ship sync New
+function scynInitiateV2(){
+    $.get("getAddressesAddressSync.action?frPage=popLogin&showpopUp=Y",function(data,status){
+          // $('#generalModel .modal-body').html(data);
+                 // unblock();
+                  if(status!="" && status!=null && typeof  status != 'undefined' && status=='success'){
+                        bootAlert("medium","success","Success"," Thank you for your patience while your Ship To/Jobs list is being refreshed.");
+                  }else{
+                        window.location.href = locale('website.url.ProductCategory');
+                  }
+                //  $('#generalModel').modal({backdrop: 'static', keyboard: false});
+                  var flag = getCookie("isShipToSelected");
+                  if(flag != undefined && flag!=null && flag!=""){
+                                  setCookie("isShipToSelected", false);
+                  }
+                       
+    });
+}
+//------------ ship sync New
+
 //----------------------------Login Page
 $(document).ready(function(){
 	var userLogin = $("#userLogin").val();
