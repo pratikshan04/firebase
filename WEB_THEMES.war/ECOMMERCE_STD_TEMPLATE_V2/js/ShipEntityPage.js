@@ -26,6 +26,7 @@ function submitShippingAddress(obj){
 		var itemId=getCookie('itemId');
 		var itemPriceID=getCookie('itemPriceId');
 		var str=jQuery("#selectShipAddress").serialize();
+		console.log("str : "+str);
 		setCookie("afterLoginUrl", '');
 		block("Please Wait");
 		setCookie("afterLoginUrl", '');
