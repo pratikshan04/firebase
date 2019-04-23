@@ -860,12 +860,31 @@ $(document).ready(function(){
 function loadShippingInfo(){
 	$.get("getAddresses.action?frPage=popLogin&showpopUp=Y",function(data,status){
 		$('#generalModel .modal-body').html(data);
+		var value = getCookie("afterLoginUrl");
+		if(typeof value == 'undefined' || value==null || value==""){
+			var afterLoginUrl = window.location.href;
+			var previousPageUrl = document.referrer;
+			var currentLayout = $("#layoutName").val();
+			if(typeof currentLayout!="undefined" && currentLayout!=null && currentLayout.toLowerCase().indexOf('loginpage')>-1){
+				if (typeof previousPageUrl!="undefined" && previousPageUrl != "" && (previousPageUrl.toLowerCase().indexOf('register')<=-1 && previousPageUrl.toLowerCase().indexOf('forgot')<=-1 && previousPageUrl.toLowerCase().indexOf('login')<=-1 && previousPageUrl.toLowerCase().indexOf('afp')<=-1 && previousPageUrl.toLowerCase().indexOf('dfp')<=-1)){
+					setCookie("afterLoginUrl", previousPageUrl,7);
+				}else{
+					setCookie("afterLoginUrl", "");
+				}
+			}else{
+				if (afterLoginUrl != "" && (afterLoginUrl.toLowerCase().indexOf('register')<=-1 && afterLoginUrl.toLowerCase().indexOf('forgot')<=-1 && afterLoginUrl.toLowerCase().indexOf('login')<=-1 && afterLoginUrl.toLowerCase().indexOf('afp')<=-1 && afterLoginUrl.toLowerCase().indexOf('dfp')<=-1)){
+					setCookie("afterLoginUrl", afterLoginUrl,7);
+				}else{
+					setCookie("afterLoginUrl", "");
+				}
+			}
+		}
+		value = getCookie("afterLoginUrl");
 		if($('#example tbody tr').length == 1 || $('#example tbody tr').length == 0){
 			var flag = getCookie("isShipToSelected");
 			if(flag != "true"){
 				setCookie("isShipToSelected", true);
 			}
-			var value = getCookie("afterLoginUrl");
 			if(value!="" && value!=null && typeof  value != 'undefined'){
 				window.location.href=value;
 				setCookie('afterLoginUrl',"");
@@ -2950,6 +2969,25 @@ if (userLogin=="true") {
 		}
 	}else{
 		if(isShipToSelected != "true"){
+			var value = getCookie("afterLoginUrl");
+			if(typeof value == 'undefined' || value==null || value==""){
+				var afterLoginUrl = window.location.href;
+				var previousPageUrl = document.referrer;
+				var currentLayout = $("#layoutName").val();
+				if(typeof currentLayout!="undefined" && currentLayout!=null && currentLayout.toLowerCase().indexOf('loginpage')>-1){
+					if (typeof previousPageUrl!="undefined" && previousPageUrl != "" && (previousPageUrl.toLowerCase().indexOf('register')<=-1 && previousPageUrl.toLowerCase().indexOf('forgot')<=-1 && previousPageUrl.toLowerCase().indexOf('login')<=-1 && previousPageUrl.toLowerCase().indexOf('afp')<=-1 && previousPageUrl.toLowerCase().indexOf('dfp')<=-1)){
+						setCookie("afterLoginUrl", previousPageUrl,7);
+					}else{
+						setCookie("afterLoginUrl", "");
+					}
+				}else{
+					if (afterLoginUrl != "" && (afterLoginUrl.toLowerCase().indexOf('register')<=-1 && afterLoginUrl.toLowerCase().indexOf('forgot')<=-1 && afterLoginUrl.toLowerCase().indexOf('login')<=-1 && afterLoginUrl.toLowerCase().indexOf('afp')<=-1 && afterLoginUrl.toLowerCase().indexOf('dfp')<=-1)){
+						setCookie("afterLoginUrl", afterLoginUrl,7);
+					}else{
+						setCookie("afterLoginUrl", "");
+					}
+				}
+			}
 			loadShippingInfo();
 		}
 	}
