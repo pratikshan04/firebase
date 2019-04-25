@@ -84,6 +84,27 @@ function DeleteImages(){
 	}
 }
 
+function RemoveImages(e){
+	var  imageList=[];
+	var fileRemove="fileRemoveFromServer";
+	var selectedType=document.getElementById("fileTypeSelect").value;  
+
+	 if($(e).siblings('.dz-error-message').text() == undefined || $(e).siblings('.dz-error-message').text().length==0){
+		imageList.push($(e).siblings('.dz-details').find(".dz-filename").text());
+	 jQuery.ajax({
+		  type: "POST",
+		    url:contextPath+"/connector.slt",
+		    enctype : "multipart/form-data",
+		    data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
+		    success:function(response){
+		    	 var spDeletedList=response;
+			    var strsplit=spDeletedList.split(",");   
+		    }, 
+		}); 
+	}
+	        
+}
+
 function GetUrlParam( paramName )
 {
 	var oRegex = new RegExp( '[\?&]' + paramName + '=([^&]+)', 'i' ) ;
