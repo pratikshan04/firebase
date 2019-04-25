@@ -145,11 +145,11 @@
 						<a href="javascript:void(0);">
 							<i class="fas fa-home fa-lg"></i>
 						</a>
-						<a href="javascript:delink();" title="Unlink Home Page">
+						<a href="javascript:delink('$pageList.pageName');" title="Unlink Home Page">
 							<i class="fas fa-unlink fa-lg"></i>
 						</a>
 						#else
-						<a href="javascript:setHomePage($pageList.id)" title="Set as Home page">
+						<a href="javascript:setHomePage($pageList.id,'$pageList.pageName')" title="Set as Home page">
 							<i class="fas fa-band-aid fa-lg"></i>
 						</a>
 						<a href="javascript:deletePage($pageList.id,'$pageList.pageType','$pageList.pageName')" title="Delete Page">
@@ -211,8 +211,8 @@ $(".pgnation").html(pagination);
 function submitForm(){
 	$('#staticForm').submit();
 }
-function delink(){
-	var r = confirm("Are you sure you want to unlink this page from home page");
+function delink(pName){
+	var r = confirm("Are you sure you want to unlink "+pName+" from home page");
 	if (r == true) {
 	jQuery.ajax({
 		   type: "POST",
@@ -226,8 +226,8 @@ function delink(){
 return false;
 }
 
-function setHomePage(id){
-	var r = confirm("Are you sure you want to set this page as home page");
+function setHomePage(id, pName){
+	var r = confirm("Are you sure you want to set "+pName+" page as home page");
 	if (r == true) {
 	jQuery.ajax({
 		   type: "POST",
@@ -242,7 +242,7 @@ return false;
 }
 
 function deletePage(id,pType,pName){
-	var r = confirm("Are you sure you want to delete?");
+	var r = confirm("Are you sure you want to delete "+pName+" page?");
 	if (r == true) {
 		jQuery.ajax({
 			   type: "POST",
