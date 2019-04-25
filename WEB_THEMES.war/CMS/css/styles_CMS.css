@@ -1271,10 +1271,10 @@ iframe#iframeId {
 	color: #c7c7c7;
 	position: relative;
     height: 60px;
-    overflow: auto;
 }
 .cms_leftMenu ul li #SEOPreview li{
 	height: 40px;
+	overflow: auto;
 }
 #errDiv {
 	color: #F00;
