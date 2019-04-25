@@ -73,14 +73,12 @@ function priceLoadMainFunction() {
 		if (product.qty > 0) {
 			qty = product.qty;
 		}
-		var spanPriceLabels = document.getElementById("span_"
-				+ product.partNumber);
+		var spanPriceLabels = document.getElementById("span_"+ product.partNumber);
 		if (spanPriceLabels) {
 			spanPriceLabels.innerHTML = priceLabel;
 		}
 
-		var spanLinkedItems = document.getElementById("spanLinkItem_"
-				+ product.partNumber);
+		var spanLinkedItems = document.getElementById("spanLinkItem_"+ product.partNumber);
 		if (spanLinkedItems) {
 			spanLinkedItems.innerHTML = priceLabel;
 		}

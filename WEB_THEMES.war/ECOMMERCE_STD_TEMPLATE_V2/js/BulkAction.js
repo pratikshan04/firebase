@@ -27,6 +27,7 @@ var BulkAction = {};
 				item["MinimumOrderQuantity"] = minOrderQty;
 				item["uom"] = $("#uomValue_" + partNumber).val();
 				item["unitPrice"] = $("#priceValue_" + partNumber).val();
+				item["price"] = $("#priceValue_" + partNumber).val();
 
 				if (qty == "NaN") {
 					ErrorMsg = ErrorMsg + "Invalid Qty. For "+locale("product.label.partNumber")+": " + $(eachObj).data("partnumber");
@@ -304,6 +305,7 @@ var BulkAction = {};
 			item["uom"] = "";
 		}
 		item["unitPrice"] = $(itemData).data("price");
+		item["price"] = $(itemData).data("price");
 		item["qty"] = $(itemData).data("qty");
 		if ($(eachObj).data("requsetype") != "undefined") {
 			requestType = $(eachObj).data("requestype");
@@ -485,6 +487,7 @@ var BulkAction = {};
 			if (typeof(partNumber) == "string") {
 				partNumber = partNumber.replace(regex, '\\/');
 			}
+			var price = parseFloat($("#priceValue_" + partNumber).val());
 			var qty = $.trim(parseInt($("#itemTxtQty" + itemID).val()));
 			var minOrderQty = (parseInt($("#MinOrderQty_" + partNumber).val())) != "NaN" || parseInt($("#MinOrderQty_" + partNumber).val()) != 0 ? parseInt($("#MinOrderQty_" + partNumber).val()) : 1;
 			var quantityInterval = (parseInt($("#OrderQtyInterval_" + partNumber).val())) != "NaN" || parseInt($("#OrderQtyInterval_" + partNumber).val()) != 0 ? parseInt($("#OrderQtyInterval_" + partNumber).val()) : 1;
@@ -517,7 +520,7 @@ var BulkAction = {};
 			item["qty"] = qty;
 			item["orderInterval"] = quantityInterval;
 			item["MinimumOrderQuantity"] = minOrderQty;
-			
+			item["price"] = price;
 			var forCartFlag = false;
 			if($(eachObj).data("addtocartflag")=="Y"){
 				forCartFlag = true;
@@ -765,6 +768,7 @@ var BulkAction = {};
 			if (typeof(partNumber) == "string") {
 				partNumber = partNumber.replace(regex, '\\/');
 			}
+			var price = parseFloat($("#priceValue_" + partNumber).val());
 			var qty = $.trim(parseInt($("#itemTxtQty" + itemID).val()));
 			var minOrderQty = (parseInt($("#MinOrderQty_" + partNumber).val())) != "NaN" || parseInt($("#MinOrderQty_" + partNumber).val()) != 0 ? parseInt($("#MinOrderQty_" + partNumber).val()) : 1;
 			var quantityInterval = (parseInt($("#OrderQtyInterval_" + partNumber).val())) != "NaN" || parseInt($("#OrderQtyInterval_" + partNumber).val()) != 0 ? parseInt($("#OrderQtyInterval_" + partNumber).val()) : 1;
@@ -793,6 +797,8 @@ var BulkAction = {};
 			item["qty"] = qty;
 			item["orderInterval"] = quantityInterval;
 			item["MinimumOrderQuantity"] = minOrderQty;
+			item["price"] = price;
+			
 			
 			var forCartFlag = false;
 			if($(eachObj).data("addtocartflag")=="Y"){
