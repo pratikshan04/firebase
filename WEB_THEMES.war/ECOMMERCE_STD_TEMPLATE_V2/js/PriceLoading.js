@@ -7,7 +7,7 @@ function priceLoadMainFunction() {
 	if(loadPrice){
 		priceLoading.beginPriceLoading();
 	}else{
-		productModeCustomFunc();
+		priceLoading.productModeCustomFunc();
 	}	
 }
 /*some comments*/
@@ -319,13 +319,13 @@ function priceLoadMainFunction() {
 					processPriceLoadingResponse(productDataList);
 				} else {
 					onPriceLoadingAPIFailure();
-					productModeCustomFunc();
+					priceLoading.productModeCustomFunc();
 					cleanLoadingV2();
 				}
 			},
 			error : function(xhr, status, error) {
 				onPriceLoadingAPIFailure();
-				productModeCustomFunc();
+				priceLoading.productModeCustomFunc();
 			}
 		});
 	}
@@ -381,7 +381,7 @@ function priceLoadMainFunction() {
 		priceDispalyed = false;
 		qtyBreakDisplayed = false;
 	}
-	productModeCustomFunc();
+	priceLoading.productModeCustomFunc();
 	cleanLoadingV2();
 	}
 
@@ -430,7 +430,7 @@ function priceLoadMainFunction() {
 	function getErpType() {
 		var erpType = document.getElementById(markUpPrefixes.ERP_TYPE).value;
 		if(erpType && erpType.toUpperCase()=="DEFAULTS"){
-			productModeCustomFunc();
+			priceLoading.productModeCustomFunc();
 			erpType = false;
 		}
 		return erpType;
@@ -466,11 +466,11 @@ function priceLoadMainFunction() {
 			}
 		} else {
 			console.info("ERP Type is not available");
-			//productModeCustomFunc();
+			//priceLoading.productModeCustomFunc();
 		}
 	};
 
-	function productModeCustomFunc() {
+	priceLoading.productModeCustomFunc = function() {
 		var oTable = $('#childItemTable').DataTable({
 			"sPaginationType" : "full_numbers",
 			"bSort" : false,
@@ -591,6 +591,6 @@ function priceLoadMainFunction() {
 				});
 			}
 		});
-	}
+	};
 
 })();
