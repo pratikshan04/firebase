@@ -6,6 +6,8 @@ function priceLoadMainFunction() {
 	}
 	if(loadPrice){
 		priceLoading.beginPriceLoading();
+	}else{
+		productModeCustomFunc();
 	}	
 }
 /*some comments*/
