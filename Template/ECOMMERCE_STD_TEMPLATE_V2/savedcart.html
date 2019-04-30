@@ -192,12 +192,6 @@
 					    	#else
 					    		<span class='text-danger'>Call for Availability</span>
 					    	#end
-							<!-- #if($itemData.itemAvailability && $!itemData.itemAvailability>0)
-							<li>
-								<strong>$!locale.get("product.label.available"): </strong>
-								<span>$!itemData.itemAvailability</span>
-							</li>
-								#end -->
 							#set($leadTime = "N")
 							#set($available = "N")
 							#set($allBranch = $itemData.branchAvail)
@@ -242,8 +236,8 @@
 						<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 						<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 						<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/> 
-						<input type="hidden" id="itemTxtAvail$itemData.itemId" value="$itemData.itemAvailability"/>
-						<input type="hidden" id="itemPriceTxtAvail$itemData.itemPriceId" value="$itemData.itemAvailability"/>
+						<input type="hidden" id="itemTxtSXAvail$itemData.partNumber" name="itemTxtSXAvail$itemData.partNumber" value="$itemData.availQty"/>
+						<input type="hidden" id="itemTxtAvail$itemData.itemId" name="itemTxtAvail$itemData.itemId" value="$itemData.availQty"/>
 						<input type="hidden" name="shoppingCartId" value="$itemData.productListId"/>
 						<input type="hidden" name="lineItemIdList" id="tempItemId_$itemData.partNumber" value="$itemData.itemId"/>
 						<input type="hidden" name="idListItem" value="$itemData.partNumber"/>
@@ -305,7 +299,7 @@
 						</label>
 					</td>
 				</tr>
-				##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+				##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.availQty, $itemData.srchTyp, $navigationType)
 				#end
 				#else
 				<tr>

@@ -295,18 +295,11 @@
 							</li>
 							#end
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
-								#if($itemData.itemAvailability && $!itemData.itemAvailability>0)
-								<li id="itemAvailable">
-									<strong>$!locale.get("product.label.available"): </strong>
-									<span>$!itemData.itemAvailability</span>
-								</li>
-								#else
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 									<strong>$!locale.get("product.label.availability"): </strong>
 									<strong><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
 									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
 								</li>
-								#end
 								<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
 									<strong>$!locale.get("product.label.leadTime"): </strong>
 									<span class="leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
@@ -894,7 +887,7 @@ function LoadRecentViewedItem(){
 	});
 }
 </script>
-#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
+#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemData.availQty)
 #set($skuPartNumber = $!itemData.partNumber)
 <input type="hidden" id="userId" value="$!userId" />
 <input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!itemData.ItemId'>
