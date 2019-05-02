@@ -54,7 +54,7 @@
 								<input type="text" title="$!locale.get('product.label.quantity')" data-cloneQty="cloneQty" value='#if($itemData.minOrderQty==0)1#else$!itemData.minOrderQty#end' maxlength="4" class="quantity" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 								</span>
 								#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-								    #if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+								    #if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 								    	#if($itemData.price>0)
 								    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
 									    #else
@@ -359,18 +359,11 @@
 							</li>
 							#end
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
-								#if($itemData.itemAvailability && $!itemData.itemAvailability>0)
-								<li id="itemAvailable">
-									<strong>$!locale.get("product.label.available"): </strong>
-									<span>$!itemData.itemAvailability</span>
-								</li>
-								#else
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 									<strong>$!locale.get("product.label.availability"): </strong>
 									<strong><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
 									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
 								</li>
-								#end
 								<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
 									<strong>$!locale.get("product.label.leadTime"): </strong>
 									<span class="leadTime_$!itemData.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
@@ -572,7 +565,7 @@
 						 	#set($productModeItemtitle = $!productModeitemData.brandName+"-"+$!productModeitemData.manufacturerPartNumber)
 						 	<tr id="selectableItem_$!productModeitemData.itemId" data-priceloading="N" data-partnumber="$!productModeitemData.partNumber.replaceAll('\s+','_')" data-rowid="identification" data-detailsload="N" itemscope itemtype="http://schema.org/Product">
 								<td class="tabelImage" style="cursor: pointer;"><!-- id="$!productModeitemData.itemPriceId"  -->
-									#detailPageHiddenFields($!productModeitemData.partNumber.replaceAll('\s+','_'),$!productModeitemData.qty,$!productModeitemData.price,$!productModeitemData.salesUom,$!productModeitemData.saleQty,$!productModeitemData.ItemId,$!productModeitemData.brandName,$!productModeitemData.manufacturerPartNumber,$!itemAvailability)
+									#detailPageHiddenFields($!productModeitemData.partNumber.replaceAll('\s+','_'),$!productModeitemData.qty,$!productModeitemData.price,$!productModeitemData.salesUom,$!productModeitemData.saleQty,$!productModeitemData.ItemId,$!productModeitemData.brandName,$!productModeitemData.manufacturerPartNumber,$!productModeitemData.availQty)
 									<input type="hidden" value="$!productModeitemData.minOrderQty" id="MinOrderQty_$!productModeitemData.partNumber" name="MinOrderQty_$!productModeitemData.partNumber"/>
 									<input type="hidden" value="$!productModeitemData.minOrderQty" id="minOrderQty_$!productModeitemData.itemId"/>
 									<input type="hidden" value="$!productModeitemData.orderInterval" id="OrderQtyInterval_$!productModeitemData.partNumber" name="OrderQtyInterval_$!productModeitemData.partNumber"/>
@@ -1115,7 +1108,7 @@ function LoadRecentViewedItem(){
 }
 </script>
 	#if($!productCount < 1)
-	#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemAvailability)
+	#detailPageHiddenFields($!itemData.partNumber,$!itemData.qty,$!itemData.price,$!itemData.uom,$!itemData.saleQty,$!itemData.ItemId,$!itemData.brandName,$!itemData.manufacturerPartNumber,$!itemData.availQty)
 	#set($skuPartNumber = $!itemData.partNumber)
 	<input type="hidden" id="userId" value="$!userId" />
 	<input type="hidden" name="itemIdTemp" id="itemIdTemp" value='$!itemData.ItemId'>

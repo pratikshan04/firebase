@@ -634,7 +634,7 @@ $(function(){
 					
 					priceLoading.beginProductModePriceLoading(itemPriceId);
 					//ProductMode.loadPriceInDataTable();
-					//productModeCustomFunc();
+					//priceLoading.productModeCustomFunc();
 					ProductMode.checkCookieToCheck();
 					hideForDevice();
 					filterScroll();
