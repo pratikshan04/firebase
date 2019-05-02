@@ -33,6 +33,7 @@
 							itemImagePrefix:"imageName",
 							quantityBreakFlagPrefix:"quantityBreakFlag_",
 							quantityBreakSpanPrefix:"quantityBreakPricingDetails_"
+							
 			},
 			designsBlock:{	
 							priceClass:"ATCprice",
@@ -116,10 +117,37 @@
 					return false;
 				}
 			}
-			enqueue(settings.checkCartItemsURL+'?productIdList='+id+'&qty='+qty+'&itemPriceId='+itemPriceId+'&partNumber='+partNumber+'&uom='+uom+'&dt='+new Date(),checkForDuplicateItems);
+			//-- storing price in cart 23-04-2019
+			var priceToCartStr = document.getElementById(settings.functionalBlock.priceValuePrefix+partNumber).value;
+			var availabilityToCartStr = document.getElementById("itemTxtSXAvail"+partNumber).value;
+			var salesPriceQty = $("#"+settings.functionalBlock.salesPriceQtyPrefix+partNumber).val();
+			var quantityBreakFlag = "N";
+			if($("#quantityBreakFlag_"+partNumber).length>0){
+				quantityBreakFlag = $("#quantityBreakFlag_"+partNumber).val();
+			}
+			priceToCartStr = priceToCartStr.replace(",","");
+			if(quantityBreakFlag=="Y" && $("#quantityBreakPricingDetails_"+partNumber).length>0){
+				var quantityBreak = $("#quantityBreakPricingDetails_"+partNumber).html();
+				var qBreakArray = quantityBreak.split("~");
+				if(qBreakArray!=null && qBreakArray.length>0){
+					for(var q=0; q<qBreakArray.length; q++){
+						var qtyBreakNpriceArr = qBreakArray[q].split("|");
+						if(qtyBreakNpriceArr!=null && qtyBreakNpriceArr.length>0){
+							if(parseFloat(qtyBreakNpriceArr[0])>0 && parseFloat(qty)>=parseFloat(qtyBreakNpriceArr[0])){
+								priceToCartStr = qtyBreakNpriceArr[1].replace(",","");
+							}
+						}
+					}
+				}
+			}
+			var priceToCart = parseFloat(priceToCartStr);
+			var availabilityToCart = parseInt(availabilityToCartStr);
+			//-- storing price in cart 23-04-2019
+			
+			enqueue(settings.checkCartItemsURL+'?productIdList='+id+'&qty='+qty+'&itemPriceId='+itemPriceId+'&partNumber='+partNumber+'&uom='+uom+'&price='+priceToCart+'&availbility='+availabilityToCart+'&dt='+new Date(),checkForDuplicateItems);
 			function checkForDuplicateItems(s){
 				var result = s.split("|");
-				var requestURL = "?uom="+uom+'&productIdList='+id+'&qty='+qty+'&itemPriceId='+result[1]+'&partNumber='+result[4]+'&minOrdQty='+minOrderQty+'&ordQtyInter='+quantityInterval+'&dt='+new Date();
+				var requestURL = "?uom="+uom+'&productIdList='+id+'&qty='+qty+'&itemPriceId='+result[1]+'&partNumber='+result[4]+'&minOrdQty='+minOrderQty+'&ordQtyInter='+quantityInterval+'&price='+priceToCart+'&availbility='+availabilityToCart+'&dt='+new Date();
 				if(result[0]==-1){
 					if(settings.combinCart=='N'){
 						var checkCart = bootbox.dialog({

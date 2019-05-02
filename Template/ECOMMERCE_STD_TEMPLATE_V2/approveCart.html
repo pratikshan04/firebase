@@ -29,7 +29,7 @@
 				<tbody>
 					#foreach($itemData in $productListData)
 					<input id="HomePlentyDate_$itemData.partNumber" type="hidden">
-					#itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+					#itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.availQty, $itemData.srchTyp, $navigationType)
 					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					<tr>
 						<td data-th="$locale.get('product.label.Image')">    
@@ -102,7 +102,7 @@
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 							<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>
-							<input type="hidden" id="itemPriceTxtAvail$itemData.itemPriceId" value="$itemData.itemAvailability"/>
+							<input type="hidden" id="itemPriceTxtAvail$itemData.itemPriceId" value="$itemData.availQty"/>
 							<input type="hidden" name="shoppingCartId" value="$itemData.productListId"/>
 							<input type="hidden" name="lineItemIdList" value="$itemData.itemId"/>
 							<input type="hidden" name="idListItem" value="$itemData.partNumber"/>

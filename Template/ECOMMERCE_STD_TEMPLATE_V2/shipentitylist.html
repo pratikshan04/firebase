@@ -38,7 +38,7 @@
 						<td class="alignLeft" data-th="$!locale.get('form.label.shipToName')">
 						<label class="customRadioBtn">
 								<input type="radio" name="useThisAddress" data-addressBookId="$!shippAddressList.addressBookId" data-buyingCompanyId="$!shippAddressList.buyingCompanyId" data-entityId="$!shippAddressList.entityId" data-customerName="$!shippAddressList.customerName" data-zipCode="$!shippAddressList.zipCodeStringFormat" onclick="submitShippingAddress(this);">
-								<span>$!shippAddressList.customerName</span>
+								<span>$!shippAddressList.firstName $!shippAddressList.lastName</span> ##$!shippAddressList.customerName
 							</label>
 						</td>
 						<td class="alignLeft" data-th="$!locale.get('form.label.address')">
