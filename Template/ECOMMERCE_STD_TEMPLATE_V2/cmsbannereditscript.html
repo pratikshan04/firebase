@@ -8,29 +8,51 @@ jQuery(function () {
 		    var currentDate = date.getDate();
 		    var currentYear = date.getFullYear();
 		    jQuery('#startDate').datepicker({			 
-		       minDate: new Date(currentYear, currentMonth, currentDate)
+		       minDate: new Date(currentYear, currentMonth, currentDate),
+			    onSelect: function (selected) {
+		            var dt = new Date(selected);
+		            dt.setDate(dt.getDate() + 1);
+		            $("#endDate").datepicker("option", "minDate", dt);
+		        }
 		    });
 		    jQuery('#endDate').datepicker({
-			       minDate: new Date(currentYear, currentMonth, currentDate)
-			    });
+				minDate: new Date(currentYear, currentMonth, currentDate),
+			    onSelect: function (selected) {
+		            var dt = new Date(selected);
+		            dt.setDate(dt.getDate() - 1);
+		            $("#startDate").datepicker("option", "maxDate", dt);
+		        }
+			});
 			var bannerTransistion = jQuery("#bannerTransistion").val();    
 			if(jQuery.trim(bannerTransistion)!=""){
 				jQuery('#ssTransition option[value="'+bannerTransistion+'"]');
 				jQuery('#ssTransition').val(bannerTransistion);
 			}
-		    
+			//var bannerTransistionDelay = jQuery("#bannerTransistionDelay").val();    
+			//if(jQuery.trim(bannerTransistionDelay)!=""){
+			//	jQuery('#ssTransitionDelay option[value="'+bannerTransistionDelay+'"]');
+			//	jQuery('#ssTransitionDelay').val(bannerTransistionDelay);
+			//} 
+			var bannerTransistionAutoPlay = jQuery("#bannerTransistionAutoPlay").val();    
+			if(jQuery.trim(bannerTransistionAutoPlay)!=""){
+				jQuery('#ssTransitionAutoPlay option[value="'+bannerTransistionAutoPlay+'"]');
+				jQuery('#ssTransitionAutoPlay').val(bannerTransistionAutoPlay);
+			}
 		});
-
-
+	function IsNumeric(e) {
+		var keyCode = (e.which) ? e.which : e.keyCode;
+		if (keyCode > 31 && (keyCode < 48 || keyCode > 57) || keyCode == 13){
+			return false;
+		}
+		return true;
+	}
 	function updateBannerList(){
 		jQuery("#errMsg").html("");
 		if(jQuery.trim(jQuery("#bannerListName").val())==""){
 			jQuery("#errMsg").html("Please Enter Banner List Name");	
-		}
-		else if(jQuery('#bannerSelect > li').length == 0){
+		}else if(jQuery('#bannerSelect > li').length == 0){
 			jQuery("#errMsg").html("Please Select Banner To Save");
-		}
-		else{
+		}else{
 			 $("#bannerSelect li").each(function(i, el){
 		           var obj = jQuery(this).find("input[name=tempBannerId]").val();
 		           jQuery("input[name=displaySeq_"+obj+"]").val($(el).index()+1);
@@ -42,7 +64,7 @@ jQuery(function () {
 				   url: "updateBannerCms.action",
 				   data: str,
 				   success: function(msg){
-		   console.log("update msg :" + msg);
+		   		   console.log("update msg :" + msg);
 				   if(msg.indexOf("success")!=-1){
 					   var siteId = jQuery("#siteId").val();
 					   if(jQuery("#isEdit").val()=="Y"){
@@ -125,7 +147,7 @@ jQuery(function () {
 	function removeNewBanner(id){
 		jQuery(id).closest("li").remove();
 	}
-	function initDraggable(){	
+	function initDraggable(){
 		 jQuery('.ui-draggable').draggable({
 			//containment : "#unilogContainer", //makes sure that it does not flow outside the unilogCMSContainer
 			helper : 'clone',
@@ -162,8 +184,8 @@ jQuery(function () {
 					console.log("image list : " + jQuery(this).find('img').attr('src').replace(window.parent.bannerLogoPath,''));
             	});
         	if(insertBanner){	
-        	content = "<div class='bannerContainer'><img src='"+bannerLogoPath+content+"' /></div><div class='banner_leftWrap'><div class='pull-left' style='width:100%;'>URL <input type='text' name='URL_"+bannerId+"'/></div><div class='banner_formLabel'>Caption </div><div> <input type='text' name='bannerCaptionNew_"+bannerId+"'/><input type='hidden' name='bannerIdNew' value='"+bannerId+"' /><input type='hidden' name='tempBannerId' value='"+bannerId+"' /><input type='hidden' name='displaySeq_"+bannerId+"' value='' /></div><div style='float:left;width:100%;'><div class='pull-left' style='width:45%;'>Top Pos <input type='text' name='bannerTopPosNew_"+bannerId+"' style='width:50px;margin:0 0 0 5px;'/> (in px)</div><div class='pull-left' style='width:45%';>Left Pos <input type='text' name='bannerLeftPosNew_"+bannerId+"' style='width:50px;margin:0 0 0 5px;'/>(in px)<div class='clear'></div><input type='hidden' name='bannerImageNameNew' value='"+content+"'  /></div><a href='javascript:void(0);' onclick='removeNewBanner(this);' class='banner_delIcon pull-right' title='Remove From List'></a></div></div>";
-        	var liVal = $('<li/>').html(content);
+        		content = "<div class='bannerImgContainer'><img src='"+bannerLogoPath+content+"' /><a href='javascript:void(0);' onclick='removeBanner(this);' class='banner_delIcon' title='Remove From List'><i class='fa fa-lg fa-trash-alt'></i>  Delete Banner Image</a></div><div class='banner_leftWrap'><div class='form-group'><label>Banner Image URL:</label> <input type='text' name='URL_"+bannerId+"' placeholder='Type URL here'/></div><div class='form-group'><label>Banner Caption:</label><textarea name='bannerCaptionNew_"+bannerId+"'></textarea><input type='hidden' name='bannerIdNew' value='"+bannerId+"' /><input type='hidden' name='tempBannerId' value='"+bannerId+"' /><input type='hidden' name='displaySeq_"+bannerId+"' value='' /></div><div class='captchaPosBlock'><div class='captchaPos'><label>Top Position(px):</label><input type='text' name='bannerTopPosNew_"+bannerId+"' /></div><div class='captchaPos'><label>Left Position(px):</label><input type='text' name='bannerLeftPosNew_"+bannerId+"' /><input type='hidden' name='bannerImageNameNew' value='"+content+"'  /></div></div></div>";
+        	var liVal = $('<li/>').html(content).addClass('clearfix');
         	console.log(jQuery(this).attr("id"));
          	var target = jQuery('#bannerSelect');
          	
@@ -200,21 +222,20 @@ jQuery(document).ready(function(){
 	jQuery(".bannerTab").click(function(){
 		jQuery("#transitionBlock").hide();
 		jQuery("#carouselSettingBlock").hide();
-	var bannerType = jQuery("#bannerType").val();
-	if(bannerType=="slider"){
-		jQuery("#transitionBlock").show();
-	}else if(bannerType=="carousel"){
-		jQuery("#carouselSettingBlock").show();
-	}
-			if(!jQuery(this).hasClass("tabSelected")){
-					jQuery("#bannerEditorRightColumn").toggle();
-					jQuery("#settingsBlock").toggle();
-					jQuery("#bannerTab").toggleClass("tabSelected");
-					jQuery("#settingsTab").toggleClass("tabSelected");
-					
-				}
-		});
+		var bannerType = jQuery("#bannerType").val();
+		if(bannerType=="slider"){
+			jQuery("#transitionBlock").show();
+		}else if(bannerType=="carousel"){
+			jQuery("#carouselSettingBlock").show();
+		}
+		if(!jQuery(this).hasClass("tabSelected")){
+			jQuery("#bannerEditorRightColumn").toggle();
+			jQuery("#settingsBlock").toggle();
+			jQuery("#bannerTab").toggleClass("tabSelected");
+			jQuery("#settingsTab").toggleClass("tabSelected");
+		}
 	});
+});
 
 
 	

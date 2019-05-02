@@ -12,10 +12,15 @@
 <input type="hidden" value="" id="group_name"/>
 <input type="hidden" id="itemName" value='$!brandName $!manufacturerPartNumber' />
 <input type="hidden" id="userId" value="$!userId" />-->
-<input type="hidden" id='packageQty_$!partNumber' value="$!packageQty" /> 
+<input type="hidden" id='packageQty_$!partNumber' value="$!packageQty" />
+<input type="hidden" id="itemTxtSXAvail$partNumber" name="itemTxtSXAvail$partNumber" value="$!itemAvailability"/> 
 <input type="hidden" id="itemTxtAvail$!ItemId" value="$!itemAvailability"/>
 <input type="hidden" value="$!partNumber" name="idListPrice" /> 
 <!--<input type="hidden" id='branch_' value="" />-->
 <input type="hidden" id="tempItemId_$!partNumber" value="$!ItemId"/>
 <input type="hidden" id="MPNValue_$partNumber" value='$!manufacturerPartNumber' />
+<input type="hidden" id="uomForCart_$ItemId" value=""/>
+<input type="hidden" id="minOrderQtyForCart_$ItemId" value=""/>
+<input type="hidden" id="priceForCart_$ItemId" value=""/>
+
 #end

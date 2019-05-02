@@ -365,7 +365,7 @@ var QuickOrder = {};
 			var  copyText = jQuery('#copyPasteText').val();
 			var lines = copyText.split("\n");
 			var quickOrderRecordLimit = 50;
-			if($('#quickOrderRecordLimit').lengt>0 && $('#quickOrderRecordLimit').val()!=null && $('#quickOrderRecordLimit').val()!="" && QuickOrder.isInt($('#quickOrderRecordLimit').val())){
+			if($('#quickOrderRecordLimit').length>0 && $('#quickOrderRecordLimit').val()!=null && $('#quickOrderRecordLimit').val()!="" && QuickOrder.isInt($('#quickOrderRecordLimit').val())){
 				quickOrderRecordLimit = parseInt($('#quickOrderRecordLimit').val());
 			}
 			if(lines!=null && lines.length>0 && lines.length<=quickOrderRecordLimit){

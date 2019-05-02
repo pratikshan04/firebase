@@ -699,6 +699,31 @@ function scynInitiate(){
 		}
 	});
 }
+//------------ ship sync New
+function scynInitiateV2(){
+	block("Please Wait");
+	$.get("getAddressesAddressSync.action?frPage=popLogin&showpopUp=Y",function(data,status){
+        // $('#generalModel .modal-body').html(data);
+               // unblock();
+                if(status!="" && status!=null && typeof  status != 'undefined' && status=='success'){
+                	if(typeof data != 'undefined' && data!=null && data!=""){
+                		$("#ShipDiv").html($(data).filter("#ShipDiv").html());
+                	}
+                	unblock();
+                    bootAlert("medium","success","Success"," Thank you for your patience while your Ship To/Jobs list is being refreshed.");
+                }else{
+                      window.location.href = locale('website.url.ProductCategory');
+                }
+              //  $('#generalModel').modal({backdrop: 'static', keyboard: false});
+                var flag = getCookie("isShipToSelected");
+                if(flag != undefined && flag!=null && flag!=""){
+                                setCookie("isShipToSelected", false);
+                }
+                     
+  });
+}
+//------------ ship sync New
+
 //----------------------------Login Page
 $(document).ready(function(){
 	var userLogin = $("#userLogin").val();
@@ -835,12 +860,31 @@ $(document).ready(function(){
 function loadShippingInfo(){
 	$.get("getAddresses.action?frPage=popLogin&showpopUp=Y",function(data,status){
 		$('#generalModel .modal-body').html(data);
+		var value = getCookie("afterLoginUrl");
+		if(typeof value == 'undefined' || value==null || value==""){
+			var afterLoginUrl = window.location.href;
+			var previousPageUrl = document.referrer;
+			var currentLayout = $("#layoutName").val();
+			if(typeof currentLayout!="undefined" && currentLayout!=null && currentLayout.toLowerCase().indexOf('loginpage')>-1){
+				if (typeof previousPageUrl!="undefined" && previousPageUrl != "" && (previousPageUrl.toLowerCase().indexOf('register')<=-1 && previousPageUrl.toLowerCase().indexOf('forgot')<=-1 && previousPageUrl.toLowerCase().indexOf('login')<=-1 && previousPageUrl.toLowerCase().indexOf('afp')<=-1 && previousPageUrl.toLowerCase().indexOf('dfp')<=-1)){
+					setCookie("afterLoginUrl", previousPageUrl,7);
+				}else{
+					setCookie("afterLoginUrl", "");
+				}
+			}else{
+				if (afterLoginUrl != "" && (afterLoginUrl.toLowerCase().indexOf('register')<=-1 && afterLoginUrl.toLowerCase().indexOf('forgot')<=-1 && afterLoginUrl.toLowerCase().indexOf('login')<=-1 && afterLoginUrl.toLowerCase().indexOf('afp')<=-1 && afterLoginUrl.toLowerCase().indexOf('dfp')<=-1)){
+					setCookie("afterLoginUrl", afterLoginUrl,7);
+				}else{
+					setCookie("afterLoginUrl", "");
+				}
+			}
+		}
+		value = getCookie("afterLoginUrl");
 		if($('#example tbody tr').length == 1 || $('#example tbody tr').length == 0){
 			var flag = getCookie("isShipToSelected");
 			if(flag != "true"){
 				setCookie("isShipToSelected", true);
 			}
-			var value = getCookie("afterLoginUrl");
 			if(value!="" && value!=null && typeof  value != 'undefined'){
 				window.location.href=value;
 				setCookie('afterLoginUrl',"");
@@ -1144,13 +1188,16 @@ $(document).delegate('[data-function="productGroupDropDown"]', 'click',function(
 		_this.parent().find(toggleListID).html(data);
 	});
 });
-function addToProductList(groupName,groupId){
-	var id = $("#hidden_id").val();
-	var partNumber =  $("#itmId_"+id).val();
-	var uomValue =  $("#uomValue_"+partNumber).val();
-	var qty = $("#itemTxtQty"+id).val();
-	var toggleListID = $("#group_id").val();
+function addToProductList(_this){
+	var id = $("#hidden_id").val(),
+	partNumber =  $("#itmId_"+id).val(),
+	uomValue =  $("#uomValue_"+partNumber).val(),
+	qty = $("#itemTxtQty"+id).val(),
+	toggleListID = $("#group_id").val();
 	qty = qty.trim();
+	var groupId = _this.id ? _this.id : 0;
+	var groupName = $(_this).data('groupname') ? $(_this).data('groupname') : $(_this).val();
+	
 	if(qty=="")
 		qty = "1";
 	groupName = groupName.trim();
@@ -1183,12 +1230,12 @@ function addToProductList(groupName,groupId){
 	block('Please Wait');
 	jQuery.get('insertProductListItemPage.action?listId='+groupId+'&listName='+groupName+"&productIdList="+id+"&itemQty="+qty+"&uomValue="+uomValue+"&dt="+new Date(),function(data,status){
 		unblock();
-		$(toggleListID).hide();
+		$(_this).parents('.productGroupBtn').find(toggleListID).hide();
 		var itemDesc = $("#itemTitle"+id).text().trim();
 		var result = data.split('|');
 		//$(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
-		$(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","/"+result[1]+"/ProductGroup/Product?savedGroupName="+$("#group_name").val()).fadeIn();
-		setTimeout(function(){$(toggleListID+"_pop").fadeOut(); }, 3000);
+		$(_this).parents('.productGroupBtn').find(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","/"+result[1]+"/ProductGroup/Product?savedGroupName="+$("#group_name").val()).fadeIn();
+		setTimeout(function(){$(".popMsg").fadeOut(); }, 3000);
 	});
 }
 function leftFilterScroll(){
@@ -2922,6 +2969,25 @@ if (userLogin=="true") {
 		}
 	}else{
 		if(isShipToSelected != "true"){
+			var value = getCookie("afterLoginUrl");
+			if(typeof value == 'undefined' || value==null || value==""){
+				var afterLoginUrl = window.location.href;
+				var previousPageUrl = document.referrer;
+				var currentLayout = $("#layoutName").val();
+				if(typeof currentLayout!="undefined" && currentLayout!=null && currentLayout.toLowerCase().indexOf('loginpage')>-1){
+					if (typeof previousPageUrl!="undefined" && previousPageUrl != "" && (previousPageUrl.toLowerCase().indexOf('register')<=-1 && previousPageUrl.toLowerCase().indexOf('forgot')<=-1 && previousPageUrl.toLowerCase().indexOf('login')<=-1 && previousPageUrl.toLowerCase().indexOf('afp')<=-1 && previousPageUrl.toLowerCase().indexOf('dfp')<=-1)){
+						setCookie("afterLoginUrl", previousPageUrl,7);
+					}else{
+						setCookie("afterLoginUrl", "");
+					}
+				}else{
+					if (afterLoginUrl != "" && (afterLoginUrl.toLowerCase().indexOf('register')<=-1 && afterLoginUrl.toLowerCase().indexOf('forgot')<=-1 && afterLoginUrl.toLowerCase().indexOf('login')<=-1 && afterLoginUrl.toLowerCase().indexOf('afp')<=-1 && afterLoginUrl.toLowerCase().indexOf('dfp')<=-1)){
+						setCookie("afterLoginUrl", afterLoginUrl,7);
+					}else{
+						setCookie("afterLoginUrl", "");
+					}
+				}
+			}
 			loadShippingInfo();
 		}
 	}

@@ -1,45 +1,78 @@
-<!-- <script src="$!webThemes/CMS/js/cms/cmsscript.js"></script> -->
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.slimscroll.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('.HTMLElements').slimScroll({
+		height: '100vh',
+		railVisible: false,
+		alwaysVisible: true,
+		size:'10px',
+		railColor:'#ccc',
+		color:'#e0e0e0',
+		railOpacity: '0.5',
+		opacity:'0.5',
+		borderRadius : '5px',
+		railBorderRadius: '0px',
+		top: '10px'
+	});
+});
+</script>
 <div class="cms_leftMenuSlide">
 	<div class="HTMLElements">
-		<div class="componentWrap">
-			<a href="javascript:componentCreationRedirect();" title="Add Components" >
-				<i class="fa fa-plus"></i> Component
-			</a>
-			<div class="cms_leftMenuClose">
-				<i class="fa fa-lg fa-chevron-left"></i>
-			</div>  
-		</div>
+		<div class="cms_leftMenuClose">
+			<span class="mRight-3">Back</span><i class="fa fa-lg fa-angle-double-left"></i>
+		</div>  
 		<div class="componentLabel" data-toggleID="htmlEle_contents" data-react="toggle">
-			HTML Elements <i class="fa fa-chevron-down"></i>
+			<span class="action-icon">
+				<i class="fas fa-laptop-code"></i>
+			</span>
+			<span class="action-text">
+				HTML Elements
+			</span>
+			 <i class="fa fa-chevron-down"></i>
 		</div>
-		<ul id="htmlEle_contents" style="display:none;">						
+		<ul id="htmlEle_contents" class="basicElements">						
 			<li>
-				<a href="javascript:void(0);">Heading <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<span> &lt;H/&gt; </span>
+					Heading
+				</a>
 				<div class="hiddenContent">
 					<h1>Add your heading here</h1>
 				</div>
 			</li>
 			<li>
-				<a href="javascript:void(0);" >Text <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<span>A</span>
+					Text
+				</a>
 				<div class="hiddenContent">
 					<p> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				</div>
 			</li>
 			<li>
-				<a href="javascript:void(0);">Link <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<i class="fas fa-link"></i>
+					Link 
+				</a>
 				<div class="hiddenContent">
 					<a href="javascript:void(0);" target="_self" >Add your link here</a>
 				</div>
 			</li>
 			
 			<li>
-				<a href="javascript:void(0);">Image <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<i class="fas fa-image"></i>
+					Image
+				</a>
 				<div class="hiddenContent">
 					<img src="$!webThemes/CMS/images/cms_images/person.png"  class="img-responsive"/>
 				</div>
 			</li>
 			<li>
-				<a href="javascript:void(0);">Ordered list <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<i class="fas fa-list-ol"></i>
+					Ordered list
+				</a>
 				<div class="hiddenContent">
 					<ol id="orderListId">
 						<li>List Item1</li>
@@ -50,7 +83,10 @@
 				</div>
 			</li>
 			<li>
-				<a href="javascript:void(0);">Unordered list <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<i class="fas fa-list-ul"></i>
+					Unordered list
+				</a>
 				<div class="hiddenContent">
 					<ul id = "unorderListId">
 						<li>List Item1</li>
@@ -61,16 +97,10 @@
 				</div>
 			</li>
 			<li>
-				<a href="javascript:void(0);">BlockQuote <i class="fa fa-arrows"></i></a>
-				<div class="hiddenContent">
-					<blockquote>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-						<small>Someone famous <cite title="Source Title">Source Title</cite></small>
-					</blockquote>
-				</div>
-			</li>
-			<li>
-				<a href="javascript:void(0);">Image Slider <i class="fa fa-arrows"></i></a>
+				<a href="javascript:void(0);">
+					<i class="fas fa-image"></i>
+					Image Slider
+				</a>
 				<div class="hiddenContent">
 					<div id="slidercontainer" class="Widget_slideJssor" style='position: relative; width:600px; height: 300px; overflow: hidden;' >
 						<!-- Loading Screen -->
@@ -119,11 +149,31 @@
 						</div> <!-- Jssor Slider End -->						
 				</div>
 				<!-- Jssor Slider End -->
-			</li>														
+			</li>
+			<li>
+				<a href="javascript:void(0);">
+					<i class="fa fa-quote-right"></i>
+					BlockQuote
+				</a>
+				<div class="hiddenContent">
+					<blockquote>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+						<small>Someone famous <cite title="Source Title">Source Title</cite></small>
+					</blockquote>
+				</div>
+			</li>
 		</ul>
 		
 		<!-- Left menu widgets list -->
-		<div class="componentLabel" data-toggleID="widgetContainer" data-react="toggle"> Widgets <i class="fa fa-chevron-down"></i></div>
+		<div class="componentLabel" data-toggleID="widgetContainer" data-react="toggle">
+			<span class="action-icon">
+				<i class="fas fa-th-large"></i>
+			</span>
+			<span class="action-text">
+				Widgets
+			</span>
+			<i class="fa fa-chevron-down"></i>
+		</div>
 		<div class="filterTextBox_widget hidden">
 			<input type="text" id="box_widget" class="filterTextBox" style="width: 100%;padding: 2px 5px 2px 5px;height: 30px;border-radius: 5px;color: #797d82;" onkeyup="filterContainer(this,'widgetContainer');" value="Search Widgets" onfocus="if(this.value=='Search Widgets'){this.value='';}" onblur="if(this.value==''){this.value='Search Widgets';}">
 		</div>
@@ -131,7 +181,15 @@
 		<!-- Left menu widgets list -->
 		
 		<!-- Left menu form list -->
-		<div class="componentLabel" data-toggleID="formContainer" data-react="toggle"> Forms <i class="fa fa-chevron-down"></i></div>
+		<div class="componentLabel" data-toggleID="formContainer" data-react="toggle"> 
+			<span class="action-icon">
+				<i class="fas fa-list-alt"></i>
+			</span>
+			<span class="action-text">
+				Forms
+			</span>
+			<i class="fa fa-chevron-down"></i>
+		</div>
 		<div class="filterTextBox_form hidden">
 			<input type="text" id="box_form" class="filterTextBox" style="width: 100%;padding: 2px 5px 2px 5px;height: 30px;border-radius: 5px;color: #797d82;" onkeyup="filterContainer(this,'formContainer');" value="Search Forms" onfocus="if(this.value=='Search Forms'){this.value='';}" onblur="if(this.value==''){this.value='Search Forms';}">
 		</div>
@@ -140,11 +198,25 @@
 		
 		#foreach($libraries in $libraryList.resultSet)						
 		<div class="componentLabel" data-toggleID="library_$libraries.id" data-libID="$libraries.id" data-react="toggle">
-			$libraries.userLibraryGroupName <i class="fa fa-chevron-down"></i>
+			<span class="action-icon">
+				<i class="fas fa-file"></i>
+			</span>
+			<span class="action-text">
+				$libraries.userLibraryGroupName
+			</span>
+			 <i class="fa fa-chevron-down"></i>
 		</div>
 		<dl class="widget widgetContainer libraryContainer" id="library_$libraries.id" style="display: none;"></dl>
 		#end
-		
+		<a href="javascript:componentCreationRedirect();" title="Add Components" class="cms_componentBtn">
+			<span class="action-text">
+				Add New Component
+			</span>
+			<span class="action-icon">
+				<i class="fas fa-cog"></i>
+				<sup class="fa fa-plus"></sup>
+			</span>
+		</a>
 	</div>
 </div>
 <script>

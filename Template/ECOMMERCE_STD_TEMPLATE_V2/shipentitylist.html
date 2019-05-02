@@ -1,22 +1,25 @@
 <div class="shippingAddres" id="ShipDiv">
 #set($jsPath = $!webThemes+"/"+$siteName+"/js/"+$LayoutName+".js")
 <script type="text/javascript" src="$jsPath"></script>
-<h3 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h3>
+
 #if($shipEntity.size()>0)
 <input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!validEmailAddress">
 	<div class="shipping">
 		<div class="row mBottom-3">
 			<div class="col-md-6 col-sm-6 col-xs-6 text-left">
-				<a href="javascript:void(0);" onclick="scynInitiate();" class="cimm_refreshList"><em class="fa fa-lg fa-sync-alt"></em> &nbsp;$!locale.get("product.label.refreshShippingInformation")</a>
+				<h6>$!locale.get("breadcrumbs.label.$!LayoutName")</h6>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+				<a href="javascript:void(0);" onclick="scynInitiateV2();" class="cimm_refreshList"><em class="fa fa-lg fa-sync-alt"></em> &nbsp;$!locale.get("product.label.refreshShippingInformation")</a>
 				<div id="progressBar" class="text-success mTop-1">
 					#if($!session.getAttribute("scynEntityStatus")!="Completed" && $!session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 					$!session.getAttribute("scynEntityStatus")
 					#end
 				</div>
 			</div>
-			<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+			 <!-- <div class="col-md-6 col-sm-6 col-xs-6 text-right">
 				<a class="cimm_inlineButton" id="selectButton" onclick="submitShippingAddress();"><span>$!locale.get("button.label.useSelectedAddress")</span></a>
-			</div>
+			</div> --> 
 		</div>
 		<div id="fw_container" class="">
 			<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered display rwd-table" id="example" width="100%">
@@ -34,8 +37,8 @@
 					<tr>
 						<td class="alignLeft" data-th="$!locale.get('form.label.shipToName')">
 						<label class="customRadioBtn">
-								<input type="radio" name="useThisAddress" data-addressBookId="$!shippAddressList.addressBookId" data-buyingCompanyId="$!shippAddressList.buyingCompanyId" data-entityId="$!shippAddressList.entityId" data-customerName="$!shippAddressList.customerName" data-zipCode="$!shippAddressList.zipCodeStringFormat" onclick="useThisAddress(this);">
-								<span>$!shippAddressList.customerName</span>
+								<input type="radio" name="useThisAddress" data-addressBookId="$!shippAddressList.addressBookId" data-buyingCompanyId="$!shippAddressList.buyingCompanyId" data-entityId="$!shippAddressList.entityId" data-customerName="$!shippAddressList.customerName" data-zipCode="$!shippAddressList.zipCodeStringFormat" onclick="submitShippingAddress(this);">
+								<span>$!shippAddressList.firstName $!shippAddressList.lastName</span> ##$!shippAddressList.customerName
 							</label>
 						</td>
 						<td class="alignLeft" data-th="$!locale.get('form.label.address')">
