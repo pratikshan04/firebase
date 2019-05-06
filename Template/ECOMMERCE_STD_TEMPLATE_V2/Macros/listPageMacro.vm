@@ -29,13 +29,16 @@
 <input type="hidden" id="priceSaleQty_$partNumber" name="priceSaleQty_$partNumber" value="$qty" />
 <input type="hidden" id="" name="navigationType" value="$!navigationType" />
 <input type="hidden" value="$!srchTyp" id="" name="searchType"/>
+<input type="hidden" id="uomForCart_$itemId" value=""/>
+<input type="hidden" id="minOrderQtyForCart_$itemId" value=""/>
+<input type="hidden" id="priceForCart_$itemId" value=""/>
 #end
 
 #macro(listAndGridSwap $navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
 #if($navigationType=="NAVIGATION")
 #set($gridURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=0&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
 #set($listURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=1&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
-#set($paginationURL="itemLevelFilterPage.action?pageClick=Y&codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=$gallery#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
+#set($paginationURL="itemLevelFilterPage.action?pageClick=Y&codeId=$codeIdSkip&srchTyp=$srchTyp&levelNo=$levelNoSkip&gallery=$gallery#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
 #end
 #if($navigationType=="SEARCH")
 #set($gridURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")

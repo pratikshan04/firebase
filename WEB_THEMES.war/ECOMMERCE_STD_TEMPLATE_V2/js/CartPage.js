@@ -9,6 +9,14 @@ $(document).ready(function(){
 		"sDom": 't<"row"<"col-md-6 col-ms-6 col-sm-12 cartPagination"p><"col-md-6 col-ms-6 col-sm-12 cartTotalBlock">>'
 	});
 	$('.cartTotalBlock').html($("#copyPrice").html());
+	jQuery.ajax({ 
+		type: "POST",
+		url: "/SalesPromotionSynchService.slt?loadKieModule=true",
+		data:"",
+		success: function(msg){
+			console.log(msg);
+		}
+	});
 });
 $('[data-function="saveCartFunction"]').click(function() {
 	var toggleListID = "#"+$(this).attr('data-listTarget');

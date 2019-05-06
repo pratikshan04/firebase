@@ -91,6 +91,13 @@
 						<strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
 					#end
 					</li>
+					#if($!CommonDBQuerySystemParameter.get("SavePriceInShoppingCart") == 'Y')
+						#if($itemData.unitPriceChanged)
+							<li><span class="text-danger">*Unit Price revised ##from $$numberTool.format($numberToolFormat,$itemData.oldUnitPrice) to $$numberTool.format($numberToolFormat,$itemData.unitPrice)</span></li>
+						#elseif($itemData.priceChanged)	
+							<li><span class="text-danger">*Unit Price revised ##from $$numberTool.format($numberToolFormat,$itemData.oldPrice) to $$numberTool.format($numberToolFormat,$itemData.price)</span></li>
+						#end
+					#end
 				</ul>
 			</td>
 			<!-- <td data-th="$!locale.get('product.heading.PerUnitPrice')">
