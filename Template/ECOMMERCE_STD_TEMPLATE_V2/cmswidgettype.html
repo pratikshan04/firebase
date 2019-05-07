@@ -1,80 +1,57 @@
-<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="$!webThemes/CMS/css/bootstrap.min.css" />
+<link href="$!webThemes/CMS/css/bootstrap-glyphicons.css" rel="stylesheet" />
 <style>
-.cboxClose_ghost {
-	position: absolute;
-	top: 11px;
-	right: 11px;
-	background: none;
-	width: auto;
-	height: auto;
-	font-size: 18px;
-    color: #FFF;
-	border: 0;
-	padding: 0;
-	margin: 0;
-	overflow: visible;
-	pointer-events: none;
+body{background:#fff;font-size:14px;}
+.saveListBtn{
+	background-color: #1b63ab;
+    padding: 8px 10px;
+    color: #fff !important;
+    border: 1px solid #1b63ab;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
 }
-.widgetBlockWrap .cms_customTable.table>tbody>tr>td{
-	padding: 8px 15px;
+.widgetHeading{
+font-size: 20px; padding: 10px;  margin: 50px 20px 25px 20px; box-shadow: 0px 2px 5px #888888;
 }
 </style>
-<button type="button" class="cboxClose_ghost"><i class="far fa-lg fa-times-circle"></i></button>
-<script type="text/javascript" src="$!webThemes/CMS/js/jquery.tabledit.js"></script>
-<div class="widgetBlock">
-	<h4>Widget Types</h4>
-	<div class="widgetBlockWrap">
-		<div class="editformBlock">
-			Type<span style="color:red;">*</span> : <input type="text" id="widgetType" />
-		</div>
-		<div class="editformBlock">
-			Api Url<span style="color:red;">*</span> : <input type="text" id="widgetUrl" />
-		</div>
-		<a href="javascirpt:void(0);" onclick="addNewWidget();" class="cms_blueBtn">Add <i class="fa fa-lg- fa-plus-square"></i></a>
-		<form id="widgetTypeForm">
-			<table class="table rwd-table cms_customTable" id="widgetTable">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Type</th>
-						<th>Api Url</th>
-					</tr>
-				</thead>
-				<tbody>
-				#set($i = 1)
-				#foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
-				<tr>
-					<td scope="row">$i</td>
-					<td>$widgetKey</td>
-					<td>$widgetTypeList.get($widgetKey)</td>
-				</tr>
-				#set($i = $i+1)
-				#end
-				</tbody>
-			</table>
-			<div class="widget_saveBtn text-right">
-				<input name="widgetTypeKey" id="newKey" type="hidden" />
-				<input name="widgetTypeValue" id="newValue" type="hidden" />
-				<a class="outLineBtn_left" href="widgetListCms.action"><i class="fa fa-times-circle"></i> Cancel</a>
-				<a href="javscript:void(0);" onclick="updateWidget()" class="cms_blueBtn">
-					Update
-					<span class="action-icon">
-						<i class="fa fa-lg fa-th-large"></i>
-						<sup class="fas fa-sync-alt"></sup>
-					</span>
-				</a>
-			</div>
-		</form>
-	</div>
+
+    <script type="text/javascript" src="$!webThemes/CMS/js/jquery.tabledit.js"></script>
+
+
+<h2 class="widgetHeading">Widget Types</h2>
+<div style="padding: 30px 0px 0px 30px;">
+
+Type<span style="color:red;">*</span> : <input type="text" id="widgetType" style="padding:5px;"/>  Api Url<span style="color:red;">*</span> : <input type="text" id="widgetUrl" style="padding:5px;" /> <a href="javascirpt:void(0);" onclick="addNewWidget();" class="saveListBtn">Add</a>
 </div>
+<form style="padding:30px;" id="widgetTypeForm">
+  <table class="table table-striped table-bordered" id="widgetTable">
+  <thead><tr><th>Id</th><th>Type</th><th>Api Url</th></tr></thead>
+  <tbody>
+  #set($i = 1)
+#foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
+<tr><th scope="row">$i</th><td>$widgetKey</td><td>$widgetTypeList.get($widgetKey)</td></tr>
+ #set($i = $i+1)
+#end
+
+</tbody>
+</table>
+<input name="widgetTypeKey" id="newKey" type="hidden" /> <input name="widgetTypeValue" id="newValue" type="hidden" />
+<a href="javscript:void(0);" onclick="updateWidget()" class="saveListBtn">Update</a>  <a class="saveListBtn" href="widgetListCms.action">CANCEL</a>
+</form>
+
 <script>
+
 $('#widgetTable').Tabledit({
 	editButton: false,
 	columns: { 
-		identifier: [0, 'id'],              
-		editable: [[1, 'widgetTypeKey'], [2, 'widgetTypeValue']]
+		
+		 identifier: [0, 'id'],              
+	  editable: [[1, 'widgetTypeKey'], [2, 'widgetTypeValue']]
 	}
-});
+
+	});
 
 function removeRows(){
 	jQuery(".tabledit-input").prop('disabled', false);
@@ -82,40 +59,45 @@ function removeRows(){
 	jQuery(".tabledit-input").prop('disabled', true);
 }
 function updateWidget(){
-	jQuery("#errMsg").html("");
-	jQuery(".tabledit-input").prop('disabled', false);
-	jQuery(".tabledit-deleted-row").find(".tabledit-input").prop('disabled', true);
-	var str = jQuery("#widgetTypeForm").serialize();
-	jQuery.ajax({
-		type: "POST",
-		url: "addUpdateWidgetTypeCms.action",
-		data: str,
-		success: function(msg){
-			if(msg.indexOf("Success")!=-1){
-				window.location.reload();  	
-				alert("Widget Types Table data add/updated successfully.");			   			   
-			}else{
-				jQuery("#errMsg").html(msg);
+		jQuery("#errMsg").html("");
+		jQuery(".tabledit-input").prop('disabled', false);
+		jQuery(".tabledit-deleted-row").find(".tabledit-input").prop('disabled', true);
+
+
+			var str = jQuery("#widgetTypeForm").serialize();
+			  jQuery.ajax({
+				   type: "POST",
+				   url: "addUpdateWidgetTypeCms.action",
+				   data: str,
+				   success: function(msg){
+		   
+				   if(msg.indexOf("Success")!=-1){
+				    window.location.reload();  	
+  				    alert("Widget Types Table data add/updated successfully.");			   			   
+			  		}else{
+				   jQuery("#errMsg").html(msg);
+				   }
+					jQuery(".tabledit-input").prop('disabled', true);
+	   			}	
+	 		 });
+
+		 return false;
+		}
+		function addNewWidget(){
+			var widgetType = jQuery("#widgetType").val();
+			var widgetUrl = jQuery("#widgetUrl").val();
+			if(jQuery.trim(widgetType)==""){
+				alert("Please enter widget type");
+				return;
 			}
-			jQuery(".tabledit-input").prop('disabled', true);
-		}	
-	});
-	return false;
-}
-function addNewWidget(){
-	var widgetType = jQuery("#widgetType").val();
-	var widgetUrl = jQuery("#widgetUrl").val();
-	if(jQuery.trim(widgetType)==""){
-		alert("Please enter widget type");
-		return;
-	}
-	if(jQuery.trim(widgetUrl)==""){
-		alert("Please enter widget url");
-		return;
-	}
-	jQuery("#newKey").val(widgetType);
-	jQuery("#newValue").val(widgetUrl);
-	updateWidget();
-}
-jQuery(".tabledit-toolbar").attr('title', 'Delete Row');
+			if(jQuery.trim(widgetUrl)==""){
+				alert("Please enter widget url");
+				return;
+			}
+			jQuery("#newKey").val(widgetType);
+			jQuery("#newValue").val(widgetUrl);
+			updateWidget();
+			}
+		jQuery(".tabledit-toolbar")
+         .attr('title', 'Delete Row')
 </script>

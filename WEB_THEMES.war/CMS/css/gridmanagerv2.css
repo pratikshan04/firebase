@@ -8,10 +8,9 @@
 	border:0 !important;
 }
 .mce-i-close:before{
-	font-family: "Font Awesome 5 Free";
+	font-family: FontAwesome;
 	content:"\f00d";
-	font-size: 16px;
-	font-weight: 900;
+	font-size:14px;
 }
 .gm-content p{
 	margin:0px;
@@ -60,16 +59,275 @@
   min-height: 30px -10;
   padding: 0 20;
 }
-
+#gm-canvas .gm-editable-region .gm-controls-element {
+	position: relative;
+	margin-top: -30px;
+	margin-left: 48%;
+	background: #fff;
+}
+.gm-editing{
+	border:none;
+	/*min-height:100px;*/
+}
+.row > .gm-editing{
+	border:1px solid #ccc;
+}
+.gm-controls-element > .gm-delete,.gm-controls-element > .gm-delete:hover{ 
+	position:relative;
+	/*top:-9px;
+	left:-16px;*/
+}
+/*.gm-controls-element > .gm-move{ 
+	position:absolute;
+	top:-16px;
+	left:16px;
+}
+#gm-canvas .gm-editable-region .gm-controls-element a {
+  color: #fff;
+  font-size: 8px;
+}*/
+#gm-canvas .gm-editable-region .gm-controls-element .gm-move {
+  -moz-background-clip: padding-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	float: right;
+	padding: 4px;
+	margin-right: 0;
+}
+#gm-canvas .gm-editable-region .gm-controls-element .gm-delete {
+	-moz-background-clip: padding-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	float: right;
+	padding: 2px;
+	margin-top: 5px;
+	margin-right: 0;
+	height: 20px;
+/* border-radius: 8px 8px 0 0; */
+}
+#gm-canvas .gm-tools a {
+  /*color: #1a99e2;*/
+  font-size: 14px;
+  float: left;
+  cursor: pointer;
+  background-color: none;
+}
+#gm-canvas .gm-tools a:hover {
+  background-color: #fff;
+  /*color: #fff;*/
+  text-decoration: none;
+}
 #gm-canvas .gm-tools label,#gm-canvas .gm-tools input {
-	font-size: 10px;
+  font-size: 10px;
 }
 #gm-canvas .gm-tools .gm-removeRow:hover,#gm-canvas .gm-tools .gm-removeCol:hover {
   color: #fff;
 }
+#gm-canvas .gm-tools .gm-moveCol,#gm-canvas .gm-tools .gm-moveRow {
+	cursor: move;
+}
+#gm-canvas .row.gm-editing>.gm-tools a,#gm-canvas .row-fluid.gm-editing>.gm-tools a {
+  color: #666;
+  background-color: none;
+  font-size: 15px;
+}
+#gm-canvas .row.gm-editing>.gm-tools a:hover,#gm-canvas .row-fluid.gm-editing>.gm-tools a:hover {
+  /*color: #fff;*/
+}
 .layout-mode a:hover {
   cursor: pointer;
 }
+
+.cmsColNarrow{
+	position: absolute;
+	top: 36px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/in-left-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 21px 0px 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsColNarrow:hover{
+	position: absolute;
+	top: 36px;
+	left: -31px;
+	display: block;
+	background: url('../images/roll-over-icons/ro-left-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 21px 0px 0 0;
+	background-color: #dadada;
+	background-position: center;
+}
+
+.cmsColWider{
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/in-right-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+
+.cmsColSettings{
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/in-active-icons/settings.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #dadada;
+	background-position: center;
+}
+
+.cmsColWider:hover{	
+	position: absolute;
+	top: 15px;
+	left: -31px;
+	display: block;
+	background: url('../images/roll-over-icons/ro-right-arrow.png') no-repeat;
+	width: 30px;
+	height: 27px;
+	margin: 15px 0px 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddRow{
+	position: absolute;
+	left: 103px;
+	top: -32px;
+	display: block;
+	background: url('../images/in-active-icons/horizontal-plus1.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-color: #fff;
+	background-position: center
+}
+.cmsAddRow:hover{
+	position: absolute;
+	left: 103px;
+	top: -32px;
+	display: block;
+	background: url('../images/roll-over-icons/oc-horizontal-plus.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-color: #fff;
+	background-position: center
+}
+
+.cmsAddRowActive{
+	position: absolute;
+	left: 103px;
+	top: -32px;
+	display: block;
+	background: url('../images/roll-over-icons/oc-horizontal-plus.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-color: #fff;
+	background-position: center
+}
+
+
+.cmsColRmv{
+	position: absolute;
+	top: -32px;
+	left: 68px;
+	display: block;
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-size: 18px 18px;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsColRmvActive{
+	position: absolute;
+	top: -32px;
+	left: 68px;
+	display: block;
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-size: 18px 18px;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsColRmv:hover{
+	position: absolute;
+	top: -32px;
+	left: 68px;
+	display: block;
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	width: 35px;
+	height: 31px;
+	background-size: 18px 18px;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddCol{
+	position: relative;
+	display: block;
+	background: url('../images/in-active-icons/vertical-plus1.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddCol:hover{
+	position: relative;
+	display: block;
+	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsAddColActive{
+	position: relative;
+	display: block;
+	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
+	width: 64px;
+	height: 27px;
+	margin: -23px 0 0 0;
+	background-color: #fff;
+	background-position: center;
+}
+.cmsMoveContent{
+	display: block;
+	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
+	width: 33px;
+	height: 30px;
+}
+
+.cmsMoveContent:hover{
+	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
+	cursor:move;
+}
+.cmsContentRmv{
+	display: inline;
+	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
+	width: 33px;
+	background-size:19px 20px;
+	cursor:pointer !important;
+}
+
+.cmsContentRmv:hover{
+	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
+	cursor:move;
+	background-size:19px 20px;
+}
+
 .hideButton{
 	display:none;
 }
@@ -131,414 +389,8 @@ a img.aligncenter {
     margin-left: auto;
     margin-right: auto
 }
-.cmsFeatureProduct{		
-	width: 100%;		
-	position:relative;		
-}		
-.cmsFeatureBrand{		
-	width: 100%;		
-	position:relative;		
-}		
-.cmsFeatureMfr{		
-	width: 100%;		
-	position:relative;		
-}		
-#gm-canvas p a,#gm-canvas p a:visited,#gm-canvas p a:link {		
-  text-decoration: underline;		
-}
-.column{
-	min-height:100px;
-}
-/* connexion beta css*/
-.gm-canvas .banner,#mycanvas .banner {
-    width: 100% !important;
-    position: relative !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: 0 !important;
-    margin-right:0 !important;
-}
-/* connexion beta css*/
 
-.gm-content span iframe{
-max-width:100%;
-}
-button[disabled]{
-	cursor: not-allowed !important;
-}
-
-/**** modified ****/
-.gm-rowSettings .fa{
-	font-size: large;
-	margin: 0px 3px;
-}
-.bgColor{
-	position:absolute;
-	top: 0px;
-	left: 60px;
-}
-.gm-rowSettingsID{
-	height: 30px;
-	width: 150px;
-}
-#gm-canvas {
-	height:auto;
-	margin: 0 1% 0 10px;
-	background-color:transparent;
-	position: relative;	
-}
-#gm-canvas .gm-tools a,
-#gm-canvas .gm-editable-region .gm-controls-element a {
-	color: #c7c7c7;
-	font-size: 15px;
-	padding: 0 10px 0 5px;
-	min-width: 38px;
-	text-align: center;
-	margin-right: 5px;
-	border-right: 1px solid #C7C7C7;
-}
-#gm-canvas .gm-tools a:last-child,
-#gm-canvas .gm-editable-region .gm-controls-element a:last-child {
-	border-right: none;
-	margin-right: 0;
-	padding: 0 5px;
-}
-#gm-canvas .gm-tools .cms_cont_title {
-	color: #FFF;
-	font-size: 15px;
-	padding: 0 12px 0 5px;
-	min-width: 38px;
-	text-align: center;
-	margin-right: 5px;
-	border-right: 1px solid #C7C7C7;
-}
-#gm-canvas .gm-tools a:hover {
-	color: #fff;
-	text-decoration: none;
-}
-#gm-canvas .gm-tools,
-#gm-canvas .gm-editable-region .gm-controls-element {
-	display: block;
-	clear: both;
-	margin: 0;
-	position: absolute;
-	top: 0;
-	background: #444343;
-	padding: 6px 8px;
-	left: -1px;
-	border-radius: 5px 5px 0 0;
-	transition: top 0.3s, opacity 0.3s ease-in-out;
-	z-index: -1;
-	opacity: 0;
-}
-#gm-canvas .container-fluid:hover > .gm-tools,
-#gm-canvas .container:hover > .gm-tools,
-#gm-canvas .row:hover > .gm-tools,
-#gm-canvas .column:hover > .gm-tools,
-#gm-canvas .gm-editable-region:hover > .gm-controls-element {
-    top: -33px;
-    z-index: 0;
-    opacity: 1;
-}
-#gm-canvas .container-fluid, #gm-canvas .container {
-	padding: 40px 8px 5px 8px;
-	position: relative;
-	background: #e2e2e2;
-	border: 1px solid #c8c8c8;
-	margin-bottom: 15px;
-	min-height: 20px;
-}
-#gm-canvas .container {
-	width: 1200px;
-}
-#gm-canvas .row.gm-editing,#gm-canvas .row-fluid.gm-editing {
-	background-color: #F5F5F5;
-	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.22);
-	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.22);
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.22);
-	border: 1px solid #c8c8c8;
-	margin: 0;
-	position: relative;
-	padding: 40px 8px 5px 8px;
-}
-#gm-canvas .gm-tools a.cmsAddColActive{
-	color: #FFF;
-}
-#gm-canvas .gm-tools a.cmsColNarrow,#gm-canvas .gm-tools a.cmsColWider {
-	position: absolute;
-	top: 63px;
-	left: -29px;
-	min-width: 30px;
-	margin: 0;
-	padding: 5px;
-	border: none;
-	background-color: #444343;
-}
-#gm-canvas .gm-tools a.cmsColWider{
-	top: 32px;
-}
-#gm-canvas .gm-tools a.cmsAddRowActive, #gm-canvas .gm-tools a.cmsColRmvActive{
-	color: #fff;
-}
-#gm-canvas > .row .gm-editing,
-#gm-canvas > .container > .row .gm-editing,
-#gm-canvas > .container-fluid .row > .gm-editing {
-	background-color: #FFFFFF;
-	border: 1px solid #DDDDDD;
-	padding: 40px 8px 5px 8px;
-}
-.column .gm-editable-region{
-	position: relative;
-}
-#gm-canvas .gm-tools .gm-moveCol,
-#gm-canvas .gm-tools .gm-moveRow,
-#gm-canvas .gm-move {
-	cursor: move;
-}
-#gm-canvas.gm-container .container-fluid, #gm-canvas.gm-container .container {
-	background: transparent;
-	border: none;
-}
-#gm-addnew a.resPreviewIcon{
-	padding : 1px 6px;
-	margin-right: 5px;
-	border-right: 1px solid #d5d6d6;
-	text-align: center;
-	width: 100px;
-	transform: scale(0);
-	-webkit-transform: scale(0);
-	-moz-transform: scale(0);
-	transition: transform 0.3s, width 0.3s ease-in-out;
-	-webkit-transition: transform 0.3s, width 0.3s ease-in-out;
-	-moz-transition: transform 0.3s, width 0.3s ease-in-out;
-}
-#gm-addnew a.resPreviewIcon.active{
-	transform: scale(1);
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-}
-/* .gm-editing{
-	border:none;
-}
-.row > .gm-editing{
-	border:1px solid #ccc;
-}
-.gm-controls-element > .gm-delete,.gm-controls-element > .gm-delete:hover{ 
-	position:relative;
-}
-#gm-canvas .gm-editable-region .gm-controls-element .gm-move {
-  -moz-background-clip: padding-box;
-	-webkit-background-clip: padding-box;
-	background-clip: padding-box;
-	float: right;
-	padding: 4px;
-	margin-right: 0;
-}
-#gm-canvas .gm-editable-region .gm-controls-element .gm-delete {
-	-moz-background-clip: padding-box;
-	-webkit-background-clip: padding-box;
-	background-clip: padding-box;
-	float: right;
-	padding: 2px;
-	margin-top: 5px;
-	margin-right: 0;
-	height: 20px;
-}
-.gm-controls-element > .gm-move{ 
-	position:absolute;
-	top:-16px;
-	left:16px;
-}
-#gm-canvas .gm-editable-region .gm-controls-element a {
-  color: #fff;
-  font-size: 8px;
-}
-#gm-canvas .row.gm-editing>.gm-tools a,#gm-canvas .row-fluid.gm-editing>.gm-tools a {
-  color: #666;
-  background-color: none;
-  font-size: 15px;
-}
-#gm-canvas .row.gm-editing>.gm-tools a:hover,#gm-canvas .row-fluid.gm-editing>.gm-tools a:hover {
-  color: #fff;
-}
-.gm-edit-mode,
-.gm-preview,
-.gm-layout-mode,.dropdown-toggle{
-	height:35px;
-}
-#gm-controls {
-  margin: 5px 0;
-}
-#gm-canvas{
-	margin-top:-5px;
-}
-.fa-cog:hover{
-	color:#000;
-}
-.gm-rowSettings{
-	position: absolute;
-    top: -20px;
-    left: 44px;
-    width: 20px;
-    height: 20px;
-    background:#fff;
-    box-shadow: 1px 1px 2px #565f65;
-}
-#gm-canvas .container-fluid:before, #gm-canvas .container:before,
-#gm-canvas .row.gm-editing:before ,#gm-canvas .row-fluid.gm-editing:before,
-#gm-canvas .container-fluid > .row  > .gm-editing:before, #gm-canvas .container > .row  > .gm-editing:before {
-	background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 3px;
-    margin:0;
-    padding: 0 3px;
-    position:absolute;
-    top:0;
-    right: 0;
-	font-size: 10px;
-	font-weight: bold;
-}
-#gm-canvas .row.gm-editing>.gm-tools,#gm-canvas .row-fluid.gm-editing>.gm-tools {
-	margin: 22px 0 0 0 ;
-}
-.cmsColNarrow{
-	position: absolute;
-	top: 36px;
-	left: -31px;
-	display: block;
-	background: url('../images/in-active-icons/in-left-arrow.png') no-repeat;
-	width: 30px;
-	height: 27px;
-	margin: 21px 0px 0 0;
-	background-color: #444343;
-}
-.cmsColNarrow:hover{
-	position: absolute;
-	top: 36px;
-	left: -31px;
-	display: block;
-	background: url('../images/roll-over-icons/ro-left-arrow.png') no-repeat;
-	width: 30px;
-	height: 27px;
-	margin: 21px 0px 0 0;
-	background-color: #dadada;
-	background-position: center;
-}.cmsColWider{
-	position: absolute;
-	top: 15px;
-	left: -31px;
-	display: block;
-	background: url('../images/in-active-icons/in-right-arrow.png') no-repeat;
-	width: 30px;
-	height: 27px;
-	margin: 15px 0px 0 0;
-	background-color: #fff;
-	background-position: center;
-}
-.cmsColWider:hover{	
-	position: absolute;
-	top: 15px;
-	left: -31px;
-	display: block;
-	background: url('../images/roll-over-icons/ro-right-arrow.png') no-repeat;
-	width: 30px;
-	height: 27px;
-	margin: 15px 0px 0 0;
-	background-color: #fff;
-	background-position: center;
-}
-.cmsAddRow{
-	position: absolute;
-	left: 103px;
-	top: -32px;
-	display: block;
-	background: url('../images/in-active-icons/horizontal-plus1.png') no-repeat;
-	width: 35px;
-	height: 31px;
-	background-color: #fff;
-	background-position: center
-}
-.cmsAddRow:hover{
-	position: absolute;
-	left: 103px;
-	top: -32px;
-	display: block;
-	background: url('../images/roll-over-icons/oc-horizontal-plus.png') no-repeat;
-	width: 35px;
-	height: 31px;
-	background-color: #fff;
-	background-position: center
-}
-.cmsColRmv{
-	position: absolute;
-	top: -32px;
-	left: 68px;
-	display: block;
-	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
-	width: 35px;
-	height: 31px;
-	background-size: 18px 18px;
-	background-color: #fff;
-	background-position: center;
-}
-.cmsColRmv:hover{
-	position: absolute;
-	top: -32px;
-	left: 68px;
-	display: block;
-	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
-	width: 35px;
-	height: 31px;
-	background-size: 18px 18px;
-	background-color: #fff;
-	background-position: center;
-}.cmsAddRowActive{
-	position: absolute;
-	left: 103px;
-	top: -32px;
-	display: block;
-	background: url('../images/roll-over-icons/oc-horizontal-plus.png') no-repeat;
-	width: 35px;
-	height: 31px;
-	background-color: #fff;
-	background-position: center
-}
-.cmsColRmvActive{
-	position: absolute;
-	top: -32px;
-	left: 68px;
-	display: block;
-	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
-	width: 35px;
-	height: 31px;
-	background-size: 18px 18px;
-	background-color: #fff;
-	background-position: center;
-}
-.cmsMoveContent{
-	display: block;
-	background: url('../images/roll-over-icons/oc-drag-icon-blue.png') no-repeat;
-	width: 33px;
-	height: 30px;
-}
-
-.cmsMoveContent:hover{
-	background: url('../images/roll-over-icons/oc-drag-icon.png') no-repeat;
-	cursor:move;
-}
-.cmsContentRmv{
-	display: inline;
-	background: url('../images/roll-over-icons/del-icon-blue.png') no-repeat;
-	width: 33px;
-	background-size:19px 20px;
-	cursor:pointer !important;
-}
-.cmsContentRmv:hover{
-	background: url('../images/roll-over-icons/oc-circle-with-delete.png') no-repeat;
-	cursor:move;
-	background-size:19px 20px;
-}
-img.centered, .aligncenter, div.aligncenter {
+/*img.centered, .aligncenter, div.aligncenter {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -562,7 +414,47 @@ img.alignleft {
 
 .alignleft {
 	float: left;
+	}*/
+.cmsFeatureProduct{		
+	width: 100%;		
+	position:relative;		
+}		
+.cmsFeatureBrand{		
+	width: 100%;		
+	position:relative;		
+}		
+.cmsFeatureMfr{		
+	width: 100%;		
+	position:relative;		
+}		
+#gm-canvas p a,#gm-canvas p a:visited,#gm-canvas p a:link {		
+  text-decoration: underline;		
 }
+.column{
+	min-height:100px;
+}
+	.fa-cog:hover{
+		color:#000;
+	}
+/* connexion beta css*/
+.gm-canvas .banner,#mycanvas .banner {
+    width: 100% !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    margin-right:0 !important;
+}
+/* connexion beta css*/
+
+.gm-content span iframe{
+max-width:100%;
+}
+button[disabled]{
+	cursor: not-allowed !important;
+}
+
+/**** modified ****/
 .cmsMoveCol{
 	position: absolute;
 	top: -21px;
@@ -624,36 +516,151 @@ img.alignleft {
 	background-size: 15px 15px;
 	background-position: center;
 }
-.cmsColSettings{
+.gm-rowSettings{
 	position: absolute;
-	top: 15px;
-	left: -31px;
-	display: block;
-	background: url('../images/in-active-icons/settings.png') no-repeat;
-	width: 30px;
-	height: 27px;
-	margin: 15px 0px 0 0;
-	background-color: #dadada;
-	background-position: center;
+    top: -20px;
+    left: 44px;
+    width: 20px;
+    height: 20px;
+    background:#fff;
+    box-shadow: 1px 1px 2px #565f65;
 }
-.cmsAddCol{
+.gm-rowSettings .fa{
+	font-size: large;
+	margin: 0px 3px;
+}
+#gm-canvas .container-fluid:before, #gm-canvas .container:before,
+#gm-canvas .row.gm-editing:before ,#gm-canvas .row-fluid.gm-editing:before,
+#gm-canvas .container-fluid > .row  > .gm-editing:before, #gm-canvas .container > .row  > .gm-editing:before {
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    margin:0;
+    padding: 0 3px;
+    position:absolute;
+    top:0;
+    right: 0;
+	font-size: 10px;
+	font-weight: bold;
+}
+#gm-canvas .row.gm-editing:before ,#gm-canvas .row-fluid.gm-editing:before{
+	content:'Row';
+}
+#gm-canvas .container-fluid > .row  > .gm-editing:before, #gm-canvas .container > .row  > .gm-editing:before {
+	content:'Column';
+}
+#gm-canvas .container-fluid:before, #gm-canvas .container:before {
+	content:'Container';
+}
+#gm-canvas .gm-tools {
+	display: block;
+	clear: both;
+	margin: 0;
+}
+#gm-canvas .row.gm-editing>.gm-tools,#gm-canvas .row-fluid.gm-editing>.gm-tools {
+	margin: 22px 0 0 0 ;
+}
+.gmControlsCustomClass{
+	top:-57px;
+}
+.cmsEditrBtn{
+	background: #fff !important;
+    box-shadow: 1px 1px 10px #565f65;
+    color: #8b8c8d !important;
+}
+#gm-canvas .row.gm-editing,#gm-canvas .row-fluid.gm-editing {
+	background-color: #F5F5F5;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.22);
+	-moz-box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.22);
+	box-shadow: inset 0 1px 13px rgba(0, 0, 0, 0.22);
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	margin: 24px 0 0 0;
 	position: relative;
-	display: block;
-	background: url('../images/in-active-icons/vertical-plus1.png') no-repeat;
-	width: 64px;
-	height: 27px;
-	margin: -23px 0 0 0;
-	background-color: #fff;
-	background-position: center;
+	padding: 5px;
 }
-.cmsAddCol:hover{
+.bgColor{
+	position:absolute;
+	top: 0px;
+	left: 60px;
+}
+#gm-controls button,#gm-controls a {
+	font-size: 12px;
+	color:#8b8c8d;
+	background: none;
+	text-transform: capitalize;
+}
+.prevBtn{
+	margin-left: 5px;
+}
+.gm-rowSettingsID{
+	height: 30px;
+	width: 150px;
+}
+#gm-canvas {
+	height:auto;
+	margin:0 1% 0 0;
+	background-color:transparent;
+	position: relative;	
+}
+#gm-canvas > .row > .gm-editing, #gm-canvas > .container > .row > .gm-editing, #gm-canvas > .container-fluid > .row > .gm-editing {
+  background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+}
+#mycanvas {
+	padding-left: 40px;
+}
+#gm-canvas .container-fluid, #gm-canvas .container {
+	padding: 0px 5px 5px 5px;
 	position: relative;
-	display: block;
-	background: url('../images/roll-over-icons/oc-verticalplus.png') no-repeat;
-	width: 64px;
-	height: 27px;
-	margin: -23px 0 0 0;
-	background-color: #fff;
-	background-position: center;
+	background: #f6f6f6;
+	border: 1px solid #CCC;
+	margin-bottom: 15px;
+	min-height: 20px;
 }
- */
+.deviseSelection{
+	float: left;
+	margin: 12px 0 10px 12px;
+}
+.deviseSelection label{
+	font-weight: 600;
+	font-size: 13px;
+	margin-right: 14px;
+}
+.deviseSelection label:nth-child(2) {
+	margin-right: 4px;
+}
+.cms_RadioBtn input[type=radio]+span i {
+	margin-left: 10px;
+}
+.cms_RadioBtn {
+    cursor: pointer;
+}
+.cms_RadioBtn input[type=radio] {
+    display: none;
+}
+.cms_RadioBtn input[type=radio]+span {
+	background: #bebebe;
+	color: #FFF;
+	padding: 4px 10px 5px 10px;
+}
+.cms_RadioBtn input[type=radio]:checked+span {
+	background: #59a152;
+}
+/**** modified ****/
+
+
+.gm-edit-mode,
+.gm-preview,
+.gm-layout-mode,.dropdown-toggle{
+	/* height:35px; */
+}
+#gm-controls {
+  /*margin: 5px 0;*/
+}
+#gm-canvas{
+	/* margin-top:-5px; */
+}

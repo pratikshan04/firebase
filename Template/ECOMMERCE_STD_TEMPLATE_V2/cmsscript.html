@@ -132,9 +132,8 @@ jQuery.ajax({
 	});
 } */
 
-function saveContent(){
-//generatePluginCode();
- 	var newText = "";
+ function saveContent(){
+ //generatePluginCode();
 	 jQuery("[data-select='bannerBlock']").each(function(i){
 		 jQuery(this).html("");
 	 });
@@ -144,19 +143,14 @@ function saveContent(){
 	 jQuery("[data-select='form']").each(function(i){
 		 jQuery(this).html("");
 	 });
-	if($('#selectStaticPageType').val() == "BLOG"){
-		newText = $('#gm-canvas').clone().find(".row").unwrap().end().html();
-	}else{
-		newText = $('#gm-canvas').html();
-	}
 	 $(".widgetEditOverlay").remove();
- 	newText = escapeHtmlEntities(newText.replace(/-clsstmp/g,''));
+ 	var newText = escapeHtmlEntities(jQuery("#gm-canvas").html().replace(/-clsstmp/g,''));
 	$("#pageContent").val(newText);
 	console.log(jQuery("#gm-canvas").text());
 	generateJson();
 	 showAllIcons();
 	jQuery('.gm-preview').trigger("click");
-}
+}	
 
 if(typeof escapeHtmlEntities == 'undefined') {
     escapeHtmlEntities = function (text) {
@@ -539,18 +533,7 @@ jQuery(document).ready(function(){
         window.onbeforeunload = null;
 	  }
 		},(autoSaveTime*60000));
-		chkForLeftMenu();
-	});
-	function chkForLeftMenu(){
-		if($(window).width() < 1370){
-			$('body').addClass('expand-nav');
-		}else{
-			$('body').removeClass('expand-nav');
-		}
-	}
-	$(window).resize(function() {
-		chkForLeftMenu();
-	});
+	});	
 //]]>
 </script>
 <script type="text/javascript">
@@ -611,7 +594,7 @@ function initLayoutButtons()
 	 $SlideDuration: 160,
 	 $SlideWidth: 50,
 	 $SlideSpacing: 10,
-	 $Cols: 6,
+	 $Cols: 8,
 	 $ArrowNavigatorOptions: {
 	   $Class: $JssorArrowNavigator$,
 	   $Steps: 1
@@ -629,7 +612,7 @@ function initLayoutButtons()
 	function ScaleSlider() {
 		var bodyWidth = document.body.clientWidth;
 		if (bodyWidth)
-			jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 460));
+			jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 600));
 		else
 			window.setTimeout(ScaleSlider, 30);
 	}
@@ -683,19 +666,12 @@ var refreshBanner = function(bannerId,index){
 			var dynamicProperties = data.dynamicProperties;
 			var bannerType = dynamicProperties.bannerType;
 			var transistion = "";
-			var transistionDelay = "";
-			var transistionAutoPlay = "";
 			var carouselSetting = "";
 			
 			if(typeof dynamicProperties.bannerTransistion!='undefined'){
 				transistion = dynamicProperties.bannerTransistion;
 			}
-			if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
-				transistionDelay = dynamicProperties.bannerTransistionDelay;
-			}
-			if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
-				transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
-			}
+			
 			if(typeof dynamicProperties.carouselSetting!='undefined'){
 				carouselSetting = dynamicProperties.carouselSetting;
 			}
@@ -712,7 +688,7 @@ var refreshBanner = function(bannerId,index){
 				jQuery(this).html(bannerData);
 				initContextMenu("#"+sliderId); 
 				if(bannerType=="slider"){
-					initJssorSlides(sliderId,transistion,transistionDelay,transistionAutoPlay);
+					initJssorSlides(sliderId,transistion);
 					}else if(bannerType=="carousel"){
 						initCarousel(sliderId,carouselSetting);
 					}
@@ -906,7 +882,7 @@ function initContextMenu(id){
 					  if(typeof bannerListId=="undefined" || bannerListId==null || jQuery.trim(bannerListId)==""){
 						connector = "/bannerListCms.action";
 					  }
-				      jQuery.colorbox({open:true,href:connector,iframe:true, width: iframeWidth(), height:"530px"});
+				      jQuery.colorbox({open:true,href:connector,iframe:true, width:"80%", height:"530px"});
 				   },
 		items: {
 				  "edit": {name: "Edit", icon: "edit"},    
@@ -925,9 +901,10 @@ jQuery("div[id$='_container']").each(function() {
 		
 jQuery(document).mouseup(function (e){
 	var container = jQuery("#mycanvas");
-	if (!container.is(e.target) && container.has(e.target).length === 0) {
-		//jQuery(".gm-controls-element").hide();
-		//jQuery("[data-tool1='editorTools']").hide();
+	if (!container.is(e.target) && container.has(e.target).length === 0) 
+	{
+		jQuery(".gm-controls-element").hide();
+		jQuery("[data-tool1='editorTools']").hide();
 	}
 });
 
@@ -1048,9 +1025,9 @@ jQuery(document).ready(function() {
 	jQuery('.slickSwipable').slick({
 		  slidesToShow: 8,
 		  slidesToScroll: 4
-	});
-	 $('[data-toggle="tooltip"]').tooltip(); 
+	}); 
 });
+				
 function closePopup(){
 	jQuery.unblockUI();
 	jQuery('.gm-preview').trigger("click");
@@ -1059,32 +1036,35 @@ function closePopup(){
 //]]>
 			
 function generateJson(){
-	var val = $('#cmsForm').serialize();
-	//val = encodeURIComponent(val);
-	console.log(val);
-	jQuery.ajax({
-		type: "POST",
-		url: "addUpdateStaticPageCms.action",
-		data: val,
-		success: function(msg){
-			var pageName = $("#pageName").val();
-			if(msg.indexOf("error")!=-1){
-				var errMsgList = msg.split("|");
-				if(errMsgList[1].indexOf("constraint")!=-1){
-					alert(pageName + " already exists, please try to save with a different name");
-				}else{
-					alert("Error occured while saving the file");
-				}
-			}else{
-				alert(pageName + " Saved Successfully");
-				$(window).off('beforeunload');
-				if(jQuery.trim(jQuery("#cmsPageId").val())=="0"){								 
-					window.location.href="/cmsStaticPageCms.action?pageId="+msg;
-				}
-			} 
-		}	
-	});
+var val = $('#cmsForm').serialize();
+//val = encodeURIComponent(val);
+console.log(val);
+  jQuery.ajax({
+	   type: "POST",
+	   url: "addUpdateStaticPageCms.action",
+	   data: val,
+	   success: function(msg){
+		  if(msg.indexOf("error")!=-1){
+			  var errMsgList = msg.split("|");
+			  if(errMsgList[1].indexOf("constraint")!=-1){
+				  var pageName = $("#pageName").val();
+				  alert(pageName + " already exists, please try to save with a different name");
+				  }else{
+						alert("Error occured while saving the file");
+					  }
+			  
+			  }else{
+				  alert("Saved Successfully");
+				  $(window).off('beforeunload');
+				  if(jQuery.trim(jQuery("#cmsPageId").val())=="0"){								 
+						window.location.href="/cmsStaticPageCms.action?pageId="+msg;
+					  }
+				  } 
+	  // window.location.reload();
+	   }	
+	  });
 }
+
 function switchPage(){
 	jQuery(".pageTab").show();
 	jQuery("#PageTabs").addClass("selected");
@@ -1095,25 +1075,24 @@ function switchPage(){
 function switchSEO(){
 	jQuery(".pageTab").hide();
 	jQuery(".seoTab").show();
+	
 	jQuery("#SeoTabs").addClass("selected");
 	jQuery("#PageTabs").removeClass("selected");				
 }
+
 function showIframeWindow(){
-	jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(), height:"80%"});
+  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
+  	   }); 
 }
+
 function showUploadIframeWindow(){
-	jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(),height:"88%"}); 
+	  jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"  
+   	   }); 
 }
 function editWidgetIframeWindow(){
-	jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(), height:"80%"});
+	jQuery(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 }
-function iframeWidth(){
-	if($(window).width() < 1370){
-		return '90%';
-	}else{
-		return '80%';
-	}
-}
+
 var iframeOrgHeight = 0;	  
 function changeresponsivefunct(e){
 	var previewType = $(e).attr("title");
@@ -1122,34 +1101,30 @@ function changeresponsivefunct(e){
 	// $( "#previewBtnId" ).prop( "disabled", true );
 	 
 	// Enable #x
-	var frameHeight = window.outerHeight;//window.parent.jQuery(".Cimm-MainContenthide").height() + 120;
+	var frameHeight = window.parent.jQuery(".Cimm-MainContenthide").height() + 120;
 	if(iframeOrgHeight == 0){
-		iframeOrgHeight = window.parent.document.getElementById("iframeId").style.height;
+	iframeOrgHeight = window.parent.document.getElementById("iframeId").style.height;
 	}
 	var frameWidth = "100%";
-	if(jQuery.trim(previewType)=="Tablet Landscape"){
+	if(jQuery.trim(previewType)=="iPad Landscape"){
 		frameHeight = "768px";
 		frameWidth = "1024px";
-		regulerVeiw();
-	}else if(jQuery.trim(previewType)=="Tablet Portrait"){
+	}else if(jQuery.trim(previewType)=="iPad Portrait"){
 		frameHeight = "1024px";
 		frameWidth = "768px";
-		regulerVeiw();
-	}else if(jQuery.trim(previewType)=="Mobile Landscape"){
+		
+	}else if(jQuery.trim(previewType)=="iPhone Landscape"){
 		frameHeight = "320px";
 		frameWidth = "480px";
-		mobileVeiw();
-	}else if(jQuery.trim(previewType)=="Mobile Portrait"){
+	}else if(jQuery.trim(previewType)=="iPhone Portrait"){
 		frameHeight = "480px";
 		frameWidth = "320px";
-		mobileVeiw();
 	}else{
-		frameHeight = window.outerHeight - 113 +'px';
-		frameWidth = "100%";
-		regulerVeiw();
-		// $( "#previewBtnId" ).prop( "disabled", false );
+	frameHeight = iframeOrgHeight;
+	frameWidth = "100%";
+	// $( "#previewBtnId" ).prop( "disabled", false );
 	}
-	
+	 
 	//window.parent.jQuery("#iframeId").height =;
 	//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
 	window.parent.document.getElementById("iframeId").style.margin = "0 auto";
@@ -1157,12 +1132,7 @@ function changeresponsivefunct(e){
 	window.parent.document.getElementById("iframeId").style.height = frameHeight;
 	window.parent.document.getElementById("iframeId").style.width = frameWidth;
 }
-function mobileVeiw(){
-	$(".button-group").addClass('mobile_View');
-}
-function regulerVeiw(){
-	$(".button-group").removeClass('mobile_View');
-}
+
 function initInitalWidget(){
 	jQuery("[data-select='widget']").each(function(i){
 		var widgetId = jQuery(this).data("widget");
@@ -1212,21 +1182,21 @@ jQuery("[data-react='toggle']").click(function(){
 jQuery(function() {
 	$(".cms_leftMenu li a.cms_SlideMenuBtn").click(function () {
 		var cms_leftMenuSlide = $(this).parent().find('.cms_leftMenuSlide');
-		$('.cms_leftMenuSlide').css({'left':'-400px'});
-		if(cms_leftMenuSlide.offset().left == -400){
-			cms_leftMenuSlide.css({'left':'0px'});
+		$('.cms_leftMenuSlide').css({'left':'-300px'});
+		if(cms_leftMenuSlide.offset().left == -300){
+			cms_leftMenuSlide.css({'left':'32px'});
 		}
 	});
 	$(".cms_leftMenuClose").click(function () {
-		$('.cms_leftMenuSlide').css({'left':'-400px'});
+		$('.cms_leftMenuSlide').css({'left':'-300px'});
 	});
 
-	/* $(window).scroll(function(){
+	$(window).scroll(function(){
 		var bodyScroll = $(this).scrollTop();
 		if(bodyScroll < 200){
 			$('.cms_leftMenu').css({'top':200 -bodyScroll+'px'});
 		}
-	}); */
+	});
 });
 </script>
 
@@ -1259,7 +1229,5 @@ jQuery(function() {
     margin: 0;
     padding: 20px 0 10px 0;
 }
-.tooltip-inner{
-	word-break: break-word;
-}
+
 </style>

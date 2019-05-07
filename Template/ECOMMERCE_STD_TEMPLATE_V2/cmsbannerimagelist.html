@@ -62,40 +62,50 @@ function paginationScriptBannerCms(n_pages,page_link,iindex,pgno){
 	document.getElementById("pagination").innerHTML = buildPagination;
 }
 </script>
-<ul>
+<ul class="grid cs-style-2 list-view0">
 #foreach($banner in $bannerImageList.resultSet)
 <li data-name="$banner.imageName" class="ff-item-type-2 file ui-draggable">
-	<figure data-name="$banner.imageName" data-bannerid="$banner.id" data-type="img">
-		<a href="javascript:void(0)" class="link" data-file="$banner.name"  data-field_id="" data-function="apply_none">
-			<div class="img-container">
-				<img  src="$bannerLogoPath$banner.imageName"  style="display: inline;" />
-			</div>
-			<!-- <div class="img-precontainer-mini original-thumb">
-				<div class="filetype jpg  hide">jpg</div>
-				<div class="img-container-mini">
-					<span></span>
-					<img src="$bannerLogoPath$banner.imageName" />
-				</div>
-			</div> -->
-		</a>
-		<h5 class="ellipsis">
-			<a href="javascript:void(0)" class="link" data-file="$banner.name" data-field_id="" data-function="apply_none">$banner.name</a>
-		</h5>
-	</figure>
-</li>
+ 						<figure data-name="$banner.imageName" data-bannerid="$banner.id" data-type="img">
+ 						<a href="javascript:void(0)" class="link" data-file="$banner.name"  data-field_id="" data-function="apply_none">
+ 							<div class="img-precontainer">
+ 								<div class="img-container">
+ 									<span></span>
+ 									<img  src="$bannerLogoPath$banner.imageName"  style="display: inline;" />
+ 								</div>
+ 							</div>
+ 							<div class="img-precontainer-mini original-thumb">
+ 								<div class="filetype jpg  hide">jpg</div>
+ 								<div class="img-container-mini">
+ 									<span></span>
+ 									<img src="$bannerLogoPath$banner.imageName" />
+ 								</div>
+ 							</div>
+ 						</a>
+ 						<div class="box">
+ 							<h4 class	="ellipsis">
+ 								<a href="javascript:void(0)"  class="link" data-file="$banner.name" data-field_id="" data-function="apply_none">$banner.name</a>
+ 							</h4>
+ 						</div>
+ 						</figure>
+ 					</li>
 #end
 </ul>
-<div class="cms_pgnation clearfix" id="pagination"></div> 
-#set($pageNo = ($bannerImageList.pageNo - 1))
-<script type="text/javascript">
-	paginationScriptBannerCms($bannerImageList.totalPages,"bannerImageCms.action?pageSize=12&dt="+new Date()+"&page=",$pageNo,1);
-	$(document).ready(function() {
-		try{
-			jQuery(".lazyLoad").lazyload({
-			event: 'scrollstop'
-			});
-		}catch(e){
-			console.log(e);
-		}
-	});
+ <div class="cms_pgnation" id="pagination">
+ 
+  </div> 
+  #set($pageNo = ($bannerImageList.pageNo - 1))
+ <script type="text/javascript">
+ paginationScriptBannerCms($bannerImageList.totalPages,"bannerImageCms.action?pageSize=12&dt="+new Date()+"&page=",$pageNo,1);
+ </script>
+
+<script>
+$(document).ready(function() {
+ try{
+  jQuery(".lazyLoad").lazyload({
+   event: 'scrollstop'
+  });
+ }catch(e){
+  console.log(e);
+ }
+});
 </script>
