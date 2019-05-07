@@ -53,11 +53,12 @@ jQuery(function () {
 		}else if(jQuery('#bannerSelect > li').length == 0){
 			jQuery("#errMsg").html("Please Select Banner To Save");
 		}else{
-			 $("#bannerSelect li").each(function(i, el){
-		           var obj = jQuery(this).find("input[name=tempBannerId]").val();
-		           jQuery("input[name=displaySeq_"+obj+"]").val($(el).index()+1);
-		           console.log("bannerId : " + obj);
-		        });
+			$("#bannerSelect li").each(function(i, el){
+				var obj = jQuery(this).find("input[name=tempBannerId]").val();
+				replaceUTFicons(obj);
+				jQuery("input[name=displaySeq_"+obj+"]").val($(el).index()+1);
+				console.log("bannerId : " + obj);
+			});
 			var str = jQuery("#bannerListForm").serialize();
 			  jQuery.ajax({
 				   type: "POST",
