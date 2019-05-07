@@ -147,6 +147,9 @@
 	                                	#break
                                 	#end
                                 #end
+                                #if($!CommonDBQuerySystemParameter.get("SavePriceInShoppingCart") == 'Y')
+                                 #set($available = $!itemData.availQty)
+                                #end
                                 #if($leadTime!="N" || $!available!="N")
                                 <li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
                                 	#if($leadTime!="N")
@@ -185,7 +188,7 @@
                         <strong>$!itemData.uom #if($itemData.uomQty && $!itemData.uomQty > 1) $!itemData.uomQty #else &nbsp; #end</strong>
                     </td>
                     <td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">
-                    	#cartHiddenFields($!itemData.partNumber, $!itemData.itemAvailability, $!itemData.productListId, $!itemData.qty, $!itemData.price, $!itemData.itemPriceId)
+                    	#cartHiddenFields($!itemData.partNumber, $!itemData.availQty, $!itemData.productListId, $!itemData.qty, $!itemData.price, $!itemData.itemPriceId)
                         <input type="text" id="textQty_$!itemData.partNumber" data-minorderqty="$!itemData.minOrderQty" data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity #if($!CommonDBQuerySystemParameter.get('EnableAddCartToGroup') == 'Y') cartElement #end" value="$!itemData.qty" /><!-- onblur="updateCart(this)"  -->
                         <!-- <input type="text" id="textQty_$!itemData.partNumber" data-itemId="$!itemData.itemPriceId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity" value="$!itemData.qty" onblur="updateCart(this)" /> -->
                         <input type="hidden" id="cartQtyForAvail$!itemData.partNumber$!itemData.productListId" name="cartQtyForAvail" value="$!itemData.qty">

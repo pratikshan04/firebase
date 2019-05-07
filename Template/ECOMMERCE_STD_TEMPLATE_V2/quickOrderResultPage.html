@@ -178,7 +178,7 @@
 									<input type="checkbox" onclick="BulkAction.addItemsToCookie(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems" id="selectItemCheckbox_$itemData.itemId" data-check="CHK_SALL_$keyValue$keyCountSelectAll" data-itemid="$itemData.itemId" data-partnumber="$itemData.partNumber"  data-itemPriceId="$itemData.itemPriceId"/>
 									<span>$!locale.get('product.label.selectItemToAddToCartGroup')</span>
 									</label>
-									 #itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+									 #itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.availQty, $itemData.srchTyp, $navigationType)
 								    <input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber" name="MinOrderQty_$itemData.partNumber"/>
 									<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 									<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="OrderQtyInterval_$itemData.partNumber"/>

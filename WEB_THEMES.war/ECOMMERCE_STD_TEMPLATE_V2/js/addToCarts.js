@@ -33,6 +33,7 @@
 							itemImagePrefix:"imageName",
 							quantityBreakFlagPrefix:"quantityBreakFlag_",
 							quantityBreakSpanPrefix:"quantityBreakPricingDetails_"
+							
 			},
 			designsBlock:{	
 							priceClass:"ATCprice",
@@ -118,6 +119,7 @@
 			}
 			//-- storing price in cart 23-04-2019
 			var priceToCartStr = document.getElementById(settings.functionalBlock.priceValuePrefix+partNumber).value;
+			var availabilityToCartStr = document.getElementById("itemTxtSXAvail"+partNumber).value;
 			var salesPriceQty = $("#"+settings.functionalBlock.salesPriceQtyPrefix+partNumber).val();
 			var quantityBreakFlag = "N";
 			if($("#quantityBreakFlag_"+partNumber).length>0){
@@ -139,12 +141,13 @@
 				}
 			}
 			var priceToCart = parseFloat(priceToCartStr);
+			var availabilityToCart = parseInt(availabilityToCartStr);
 			//-- storing price in cart 23-04-2019
 			
-			enqueue(settings.checkCartItemsURL+'?productIdList='+id+'&qty='+qty+'&itemPriceId='+itemPriceId+'&partNumber='+partNumber+'&uom='+uom+'&price='+priceToCart+'&dt='+new Date(),checkForDuplicateItems);
+			enqueue(settings.checkCartItemsURL+'?productIdList='+id+'&qty='+qty+'&itemPriceId='+itemPriceId+'&partNumber='+partNumber+'&uom='+uom+'&price='+priceToCart+'&availbility='+availabilityToCart+'&dt='+new Date(),checkForDuplicateItems);
 			function checkForDuplicateItems(s){
 				var result = s.split("|");
-				var requestURL = "?uom="+uom+'&productIdList='+id+'&qty='+qty+'&itemPriceId='+result[1]+'&partNumber='+result[4]+'&minOrdQty='+minOrderQty+'&ordQtyInter='+quantityInterval+'&price='+priceToCart+'&dt='+new Date();
+				var requestURL = "?uom="+uom+'&productIdList='+id+'&qty='+qty+'&itemPriceId='+result[1]+'&partNumber='+result[4]+'&minOrdQty='+minOrderQty+'&ordQtyInter='+quantityInterval+'&price='+priceToCart+'&availbility='+availabilityToCart+'&dt='+new Date();
 				if(result[0]==-1){
 					if(settings.combinCart=='N'){
 						var checkCart = bootbox.dialog({

@@ -12,7 +12,8 @@
 <input type="hidden" value="" id="group_name"/>
 <input type="hidden" id="itemName" value='$!brandName $!manufacturerPartNumber' />
 <input type="hidden" id="userId" value="$!userId" />-->
-<input type="hidden" id='packageQty_$!partNumber' value="$!packageQty" /> 
+<input type="hidden" id='packageQty_$!partNumber' value="$!packageQty" />
+<input type="hidden" id="itemTxtSXAvail$partNumber" name="itemTxtSXAvail$partNumber" value="$!itemAvailability"/> 
 <input type="hidden" id="itemTxtAvail$!ItemId" value="$!itemAvailability"/>
 <input type="hidden" value="$!partNumber" name="idListPrice" /> 
 <!--<input type="hidden" id='branch_' value="" />-->

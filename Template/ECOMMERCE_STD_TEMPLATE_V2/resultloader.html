@@ -174,7 +174,7 @@
 						<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
 						<!-- <form> -->
 						<span>Qty</span>
-						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" />
+						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"/>
 						<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
 						<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update"/>
 						<input type="button" class="button" value="cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" />
@@ -262,7 +262,7 @@
 											<div class="col-md-6 col-sm-12 col-xs-12">
 												<div class="mulAddtoCartStatus alignCenter">
 													<p class="alreadyExist"><i class="fa fa-question-circle"></i> Item already in the cart</p>
-													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachCartData.orderInterval" data-minorderqty="$!eachCartData.minOrderQty" data-price="$!eachCartData.price" data-uom="$!eachCartData.uom" data-itemindex="$!itemIndex"/>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachCartData.orderInterval" data-minorderqty="$!eachCartData.minOrderQty" data-price="$!eachCartData.price" data-uom="$!eachCartData.uom" data-availqty="$!eachData.availQty" data-itemindex="$!itemIndex"/>
 													<input type="button" class="button" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="Combine" />
 													<input type="button" class="button" data-requestype="SEPERATE"  data-itemid="$!eachData.itemId"  onclick="BulkAction.processSeperateOrCombine(this)" value="Seperate" />
 													<input type="button" class="button" value="Cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)"/>
@@ -304,7 +304,7 @@
 													<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
 													<!-- <form> -->
 													<span>Qty</span>
-													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom"  data-itemindex="$!itemIndex"/>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"  data-itemindex="$!itemIndex"/>
 													<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
 													<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update" disabled="disabled"/>
 													<input type="button" class="button" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" value="cancel" />
@@ -437,7 +437,7 @@
 					</span>
 					#if($productListData.price > 0)
 					<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!productListData.partNumber" data-itemId="$!productListData.itemId" data-itemPriceId="$!productListData.itemPriceId">$!locale.get("product.button.addtocart")</a>
-					#detailPageHiddenFields($!productListData.partNumber.replaceAll('\s+','_'),$!productListData.qty,$!productListData.price,$!productListData.salesUom,$!productListData.saleQty,$!productListData.ItemId,$!productListData.brandName,$!productListData.manufacturerPartNumber,$!itemAvailability)
+					#detailPageHiddenFields($!productListData.partNumber.replaceAll('\s+','_'),$!productListData.qty,$!productListData.price,$!productListData.salesUom,$!productListData.saleQty,$!productListData.ItemId,$!productListData.brandName,$!productListData.manufacturerPartNumber,$!productModeitemData.availQty)
 					#end
 				</div>
 			</div>
@@ -771,7 +771,7 @@
 				</li>
 			#end
 			<li style="display: none;">
-				#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.itemAvailability, $!itemData.srchTyp, $!navigationType)
+				#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.availQty, $!itemData.srchTyp, $!navigationType)
 				<span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span>
 				<!-- <input type="hidden" id="displayPrice_$!itemData.partNumber" value="$!itemData.displayPricing"/> -->
 			</li>
