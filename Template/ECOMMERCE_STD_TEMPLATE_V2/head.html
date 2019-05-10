@@ -19,11 +19,11 @@
 			<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
 		#end
 		#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
-			<meta name="metaKeywords" content="$!ststicMetaKey">
+			<meta name="keywords" content="$!ststicMetaKey">
 		#end
 	#elseif($LayoutName=="SubCategoryPage" && $!categoryDescription.shortDesc != "")	
 		<meta name="description" content="$!categoryDescription.shortDesc.trim()">
-		<meta name="metaKeywords" content="$!categoryDescription.shortDesc.trim()">
+		<meta name="keywords" content="$!categoryDescription.shortDesc.trim()">
 		<meta property="og:description" content="$!categoryDescription.shortDesc.trim()" />
 	#else
 		<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
