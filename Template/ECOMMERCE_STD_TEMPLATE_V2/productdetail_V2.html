@@ -363,8 +363,9 @@
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 									<strong>$!locale.get("product.label.availability"): </strong>
-									<strong><span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
-									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></strong>
+									<span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">
+									<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
+									</span>
 								</li>
 								<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimeLI" style="display:none;">
 									<strong>$!locale.get("product.label.leadTime"): </strong>
@@ -374,12 +375,14 @@
 									<li><span class="priceSpanFa"><a href="javascript:void(0);" id="clickforAllBranch" class="allBranchLink"  data-toggle="modal" data-target="#branchavail"><strong>$!locale.get("label.text.viewAllBranchAvailability")</strong></a></span></li>
 								##end
 							#else
+							<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 								#if($itemData.availQty>0)
 						    		<strong>$!locale.get("product.label.available"): </strong>
-									<span>$!itemData.availQty</span>
+									<span class="Avail_$!itemData.partNumber">$!itemData.availQty</span>
 						    	#else
-						    		<span class='text-danger'>Call for Availability</span>
+						    		<span class='text-danger Avail_$!itemData.partNumber'>Call for Availability</span>
 						    	#end
+						    </li>
 							#end
 						</ul>
 					</div>
