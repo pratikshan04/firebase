@@ -3988,6 +3988,9 @@ function validateCaptcha(obj){
 			console.log("Value set to: "+val)
 			if(val!=null && val!="" && $.trim(val)==jCaptchafromPage){
 				bootAlert("small","error","Error","Valid captcha");
+				
+				//-- Here you need to call Auth API from ESB to continue registration Process, make sure to comment above Valid captcha alert box
+				//.............................
 			}else{
 				bootAlert("small","error","Error","Invalid captcha value, try again");
 				refreshjcaptcha();
