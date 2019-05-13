@@ -1954,9 +1954,10 @@ function underDevelopment(){
 	return false;
 }
 function refreshjcaptcha() {
+	var jcaptchaType = $.trim($('#jcaptchaType').val());
 	var imageurl = $("base").attr("href") + "CaptchaServlet";
 	$("#captchaImg").attr("src", "");
-	$("#captchaImg").attr("src", "CaptchaServlet.slt?id=" + new Date());
+	$("#captchaImg").attr("src", "CaptchaServlet.slt?typ="+jcaptchaType+"&id=" + new Date());
 }
 
 function displayCreditCardDetails(){
@@ -3972,7 +3973,32 @@ function callCSPConfigurator(obj){
 		window.location.href="cspConfiguratorPage.action?"+paramString;
 	}
 }
-
+function validateCaptcha(obj){
+	var email = $(obj).data("emailid");
+	var authCode = $(obj).data("authcode");
+	var jcType = $(obj).data("jcaptchatype");
+	var key = $(obj).data("keycode");
+	var jCaplookUp = $(obj).data("jcaptchalookup");
+	var jCaptchafromPage = $.trim($("#"+jCaplookUp).val());
+	
+	if(jCaptchafromPage == null || jCaptchafromPage == ""){
+		bootAlert("small","error","Error","Please enter captcha value");
+	}else{
+		enqueue('sessionValueLink.action?keyValue='+key+'&dt='+new Date(),function(val){
+			console.log("Value set to: "+val)
+			if(val!=null && val!="" && $.trim(val)==jCaptchafromPage){
+				bootAlert("small","error","Error","Valid captcha");
+				
+				//-- Here you need to call Auth API from ESB to continue registration Process, make sure to comment above Valid captcha alert box
+				//.............................
+			}else{
+				bootAlert("small","error","Error","Invalid captcha value, try again");
+				refreshjcaptcha();
+				$("#"+jCaplookUp).val("");
+			}
+		});
+	}
+}
 /*$(window).unload(function(){
 	  localStorage.salesUserSelected=undefined;
 	  localStorage.currentCustomerSU=undefined;
