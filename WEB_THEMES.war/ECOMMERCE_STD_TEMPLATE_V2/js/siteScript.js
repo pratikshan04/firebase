@@ -1954,7 +1954,10 @@ function underDevelopment(){
 	return false;
 }
 function refreshjcaptcha() {
-	var jcaptchaType = $.trim($('#jcaptchaType').val());
+	var jcaptchaType = "";
+	if($('#jcaptchaType').length>0){
+		jcaptchaType = $.trim($('#jcaptchaType').val());
+	}
 	var imageurl = $("base").attr("href") + "CaptchaServlet";
 	$("#captchaImg").attr("src", "");
 	$("#captchaImg").attr("src", "CaptchaServlet.slt?typ="+jcaptchaType+"&id=" + new Date());
