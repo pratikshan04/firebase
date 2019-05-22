@@ -215,6 +215,11 @@ $("link[rel='stylesheet']").each(function(){
 					jQuery("[data-bannertype='slider']").each(function(){
 						var bannerId = $(this).attr('data-bannerid');
 						jQuery("[data-bannerid='"+bannerId+"']").each(function(){
+							var dateToday = new Date();
+							var activeBannerFlag = true;
+							var bannerStartDate = "";
+							var bannerEndDate =  "";
+							var bannerStatus = "";
 							var bannerData = "";
 							var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
 							var wrapperId = jQuery(this).attr("id");
@@ -223,14 +228,47 @@ $("link[rel='stylesheet']").each(function(){
 							var bannerTransistionDelay = jQuery(this).data("transistiondelay");
 							var bannerTransistionAutoPlay = jQuery(this).data("transistionautoplay");
 							
-							console.log("Wrapper id :"+sliderId);
-							bannerData = $(this).html().replace("slidercontainer",sliderId);
-							jQuery(this).html(bannerData);
-							 if(bannerType=="slider"){
-								initJssorSlides(sliderId, bannerTransistion, bannerTransistionDelay, bannerTransistionAutoPlay);
-							} else if(bannerType=="carousel"){
-								initCarousel(sliderId,carouselSetting);
-							}  
+							if(jQuery(this).data("liststartdate")){
+								bannerStartDate = jQuery(this).data("liststartdate");
+							}
+							
+							if(jQuery(this).data("listenddate")){
+								bannerEndDate =  new Date(jQuery(this).data("listenddate"));
+								bannerEndDate.setDate(bannerEndDate.getDate() + 1); //this is required as date compare consider the time as well
+							}
+							
+							if(jQuery(this).data("liststatus")){
+								bannerStatus = jQuery(this).data("liststatus");
+							}
+							//console.log("D:"+dateToday+"\nS:"+new Date(bannerStartDate)+"\nE:"+new Date(bannerEndDate));
+							if(jQuery.trim(bannerStartDate)!=""){
+								if(new Date(dateToday) >= new Date(bannerStartDate)){
+									activeBannerFlag = true;
+								}else{
+									activeBannerFlag = false;
+								}
+							}
+							//console.log("Start Flag :"+activeBannerFlag);
+							if(jQuery.trim(bannerEndDate)!=""){
+								if(new Date(dateToday) <= new Date(bannerEndDate)){//compare end <=, not >=
+									activeBannerFlag = true;
+								}else{
+									activeBannerFlag = false;
+								}
+							}
+							//console.log("End Flag :"+activeBannerFlag);//console.log("Wrapper id :"+sliderId);
+							if(!activeBannerFlag){
+								jQuery("#"+sliderId+"_Wrapper").hide();
+								console.log("Hidden :"+sliderId);
+							}else{
+								bannerData = $(this).html().replace("slidercontainer",sliderId);
+								jQuery(this).html(bannerData);
+								 if(bannerType=="slider"){
+									initJssorSlides(sliderId, bannerTransistion, bannerTransistionDelay, bannerTransistionAutoPlay);
+								} else if(bannerType=="carousel"){
+									initCarousel(sliderId,carouselSetting);
+								} 
+							}
 						});
 					});
 				}
