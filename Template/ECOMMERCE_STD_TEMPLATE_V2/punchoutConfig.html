@@ -30,14 +30,14 @@
 		</div>
 		<div id="Configure" class="punchoutContent">
 			<h1 class="configureHeading">Configure system login and password.</h1>
-			<p class="configureDetail">Use the setting below to configure intro connect to system</p>
+			<p class="configureDetail">Use the settings below to connect your procurement system to $!siteDisplayName ecommerce.</p>
 			<div class="configureLogin">
 				<div class="loginBlock">
 					<label id="userLableBlk"></label>
 					<div class="customBlock">       
 					<input type="hidden" name="punchoutUsername"   />  
 					<input type="text" name="punchoutUsername" id="punchoutUsername" value="$!punchoutConfig.username" autocomplete="off" class="customInput" />
-					<label id="userLabel">The system login can contain only letters and numbers must be from 4 to 64 charecters.</label>
+					<label id="userLabel">The system login can contain only letters and numbers, must be between 4 and 64 characters.</label>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -46,7 +46,7 @@
 					<div class="customBlock">
 						<input type="password" style="display:none;" name="punchoutPassword"/>
 						<input type="password" name="punchoutPassword" autocomplete="off" value="$!punchoutConfig.password" class="customPassword" id="punchoutPassword"/>
-						<label id="passwordLabel">The Password can contain only letters and numbers, must be between 6 and 30 charecter, and contain at least one letter and one number.</label>
+						<label id="passwordLabel">The Password can contain only letters and numbers, must be between 6 and 30 characters and contain at least one letter and one number.</label>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -68,7 +68,7 @@
 			<input type="hidden" value="punchOutValue" id="selectedValue" />
 			<input type="hidden" value="networkId" id="finalnetworkId"/>
 			<h1 class="configureHeading">Summary of connection settings.</h1>
-			<p class="configureDetail">Use the setting below to configure intro connect to system. <span></span></p>
+			<p class="configureDetail">Use the settings below to connect your procurement system to $!siteDisplayName ecommerce.<span></span></p>
 			<div class="configureLogin">
 				<div class="completeBodyBlk">
 					<label>System Login<span>"From identity" in cXML</span></label>
@@ -92,7 +92,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="clear"></div>
-				<p class="configureDetail">Configure intro with these settings to test connectivity and punchout.</p>
+				<p class="configureDetail">Configure your procurement system with these settings to test connectivity and punchout.</p>
 				<div class="summaryDetails">
 					#if($!punchoutConfig.punchoutType=="CXML" || $!punchoutConfig.punchoutType=="general")	
 					<div id="previewBlock">
