@@ -1,0 +1,47 @@
+<style>
+.refreshIcon {
+    margin: 7px 10px 6px 10px;
+    display: inline-block;
+}
+</style>
+<div class="row">
+	<div class="col-md-3 col-sm-12 col-xs-12"></div>
+	<div class="col-md-6 col-sm-12 col-xs-12">
+		<div id="notificationDiv"> </div>
+	</div>
+	<div class="col-md-3 col-sm-12 col-xs-12"></div>
+</div>
+<div class="row">
+	<div class="col-md-3 col-sm-2 col-xs-12"></div>
+	<div class="col-md-6 col-sm-8 col-xs-12">
+	#if(!$userLogin)
+		<input type="hidden" id="jcaptchaType" name="jcaptchaType" value="eauth" />
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>$locale.get("event.label.entertheTextInTheBox")<span class="required">*</span> : </label>
+					<img id="captchaImg" src="CaptchaServlet.slt?typ=eauth" alt="" width="220px" height="60px" alt='captcha'/> <br />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="cimm_regCapthaWrap clearAfter">
+					<input id="jcaptcha" name="jcaptcha" type="text" value=""/>
+					<a href="javascript:void(0);" onclick="refreshjcaptcha();" class="refreshIcon"/><i class="fa fa-lg fa-sync"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="cimm_regCapthaWrap clearAfter">
+				<a href="javascript:void(0);" class="btn btn-primary"  onclick="validateCaptcha(this);" data-jcaptchalookup="jcaptcha" data-jcaptchatype="eauth" data-keycode="eauthCaptcha" data-authcode="$!authenticationCode" data-emailid="$!emailAddress">
+					Validate 
+				</a>
+				</div>
+			</div>
+		</div>
+	#end
+	</div>
+	<div class="col-md-3 col-sm-2 col-xs-12"></div>
+</div>
