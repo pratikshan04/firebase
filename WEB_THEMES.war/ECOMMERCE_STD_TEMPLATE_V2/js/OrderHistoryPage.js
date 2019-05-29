@@ -125,7 +125,7 @@ function processForm(data) {
 			}
 		}
 		if (submitForm) {
-			block();
+			block('Please Wait');
 			$("#OrdersHistoryDetails").submit();
 		}else{
 			$('#orderHistorySearchBox').val(searchBtnVal);
