@@ -71,7 +71,7 @@
 					<div class="col-md-4">
 						<!-- <label>$!locale.get("product.label.orderNumber") </label>
 						<input type="text" id="orderNumber" name="orderNumber" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop ="return false;" value="$!orderNumber" /> -->
-						<select id="orderCategory" class="form-control selectpicker" onchange="updateSearchBtn(this)">
+						<select id="orderCategory" name="type" class="form-control selectpicker" onchange="updateSearchBtn(this)">
 							<option value="">- Select Category -</option>
 							<option value="customerPoNumber">$!locale.get('event.label.PONumber')</option>
 							<option value="orderNumber">$!locale.get('product.heading.Order')</option>

@@ -308,8 +308,14 @@
 				#end
 			</tbody>
 		</table>
-		<input type="hidden" value="$savedGroupId" name="savedGroupId"/>
-		<input type="hidden" value="$reqType" name="reqType" id="reqType"/>
+		<input type="hidden" value="$savedGroupId" name="savedGroupId" />
+		<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
+		<input type="hidden" name="resultPage" value="$resultPage" />
+		<input type="hidden" name="sortBy" value="$!sortBy"/>   
+		<input type="hidden" name="pageNo" value="$pageNo" />
+		<input type="hidden" value="$reqType" name="reqType"/>
+		<input type="hidden" value="$isShared" name="shared" />
+		<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" />
 	</form>
 <!-- <div class="cimm_salesBottomStrip">
 	<ul class="clearAfter">
