@@ -889,4 +889,192 @@ var BulkAction = {};
 		}
 		eachCheckBox(eachObj);
 	};
+	
+	BulkAction.addItemsToCookieV2 = function(eachObj){
+		var dataFromCookie = "";
+		var productGroupDataFromCookie = "";
+		var ErrorMsg = "";
+		var jsonObj = [];
+		var jsonObjPGroup = [];
+		var addItem = true;
+		if(typeof(Storage) !== "undefined") {
+			dataFromCookie = localStorage.getItem("selectedItemsAOP");
+			productGroupDataFromCookie  = localStorage.getItem("selectedItemsToGroup");
+		} else {
+			dataFromCookie = getCookie("selectedItemsAOP");
+			productGroupDataFromCookie  = getCookie("selectedItemsToGroup");
+		}
+		if(dataFromCookie!=null){
+			jsonObj = JSON.parse(dataFromCookie);
+		}
+		if(productGroupDataFromCookie!=null){
+			jsonObjPGroup = JSON.parse(productGroupDataFromCookie);
+		}
+		var itemID = $(eachObj).data("itemid");
+		var eachParentObj = $(eachObj).parents('li');
+		var qtyBox = eachParentObj.find('#itemTxtQty'+itemID);
+		
+		if($(eachObj).is(":checked")){
+			
+			qtyBox.attr("disabled",true);
+			
+			if($('.cimm_multiAddcart').length>0){
+				$('.cimm_multiAddcart.cimm_multiAddcartQC').show();
+			}
+			
+			var item = {};
+			var itemPriceID = $(eachObj).data("itempriceid");
+			var partNumber = $(eachObj).data("partnumber");
+			if (typeof(partNumber) == "string") {
+				partNumber = partNumber.replace(regex, '\\/');
+			}
+			var price = parseFloat($("#priceValue_" + partNumber).val());
+			var availQty = parseInt($("#itemTxtSXAvail" + partNumber).val());
+			var qty = $.trim(parseInt(qtyBox.val()));
+			var minOrderQty = (parseInt($("#MinOrderQty_" + partNumber).val())) != "NaN" || parseInt($("#MinOrderQty_" + partNumber).val()) != 0 ? parseInt($("#MinOrderQty_" + partNumber).val()) : 1;
+			var quantityInterval = (parseInt($("#OrderQtyInterval_" + partNumber).val())) != "NaN" || parseInt($("#OrderQtyInterval_" + partNumber).val()) != 0 ? parseInt($("#OrderQtyInterval_" + partNumber).val()) : 1;
+			if (qty == "NaN") {
+				ErrorMsg = ErrorMsg + "Invalid Qty. For "+locale("product.label.partNumber")+": " + $(eachObj).data("partnumber");
+				qtyBox.val(minOrderQty);
+				addItem = false;
+			} else if (qty < 1) {
+				ErrorMsg = "Quantity Cannot be less than or equal to 0. For "+locale("product.label.partNumber")+": " + $(eachObj).data("partnumber");
+				addItem = false;
+			}
+			if (qty < minOrderQty) {
+				ErrorMsg = "Min Order Quantity is " + minOrderQty + ". For "+locale("product.label.partNumber")+": " + $(eachObj).data("partnumber");
+				addItem = false;
+			} else if (qty > minOrderQty) {
+				var qtyDiff = qty - minOrderQty;
+				if (qtyDiff % quantityInterval != 0) {
+					ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For "+locale("product.label.partNumber")+": " + $(eachObj).data("partnumber");
+					addItem = false;
+				}
+			}
+			
+			if($('#multipleUom_'+partNumber).length>0){
+				$('#multipleUom_'+partNumber).attr('disabled', true);
+			}
+			item["partNumber"] = $(eachObj).data("partnumber");
+			item["itemId"] = itemID;
+			item["itemPriceId"] = itemPriceID;
+			item["uom"] = $("#uomValue_" + partNumber).val();
+			item["qty"] = qty;
+			item["orderInterval"] = quantityInterval;
+			item["MinimumOrderQuantity"] = minOrderQty;
+			item["price"] = price;
+			item["availQty"] = availQty;
+			var forCartFlag = false;
+			if($(eachObj).data("addtocartflag")=="Y"){
+				forCartFlag = true;
+			}
+			
+			if(addItem){
+				
+				if(forCartFlag){
+					jsonObj.push(item);
+				}
+				jsonObjPGroup.push(item);
+				
+				if(typeof(Storage) !== "undefined") {
+					
+					if(forCartFlag){
+						localStorage.setItem("selectedItemsAOP",JSON.stringify(jsonObj));
+					}
+					localStorage.setItem("selectedItemsToGroup",JSON.stringify(jsonObjPGroup));
+					
+				}else{
+					
+					if(forCartFlag){
+						setCookie("selectedItemsAOP",JSON.stringify(jsonObj),30);
+					}
+					setCookie("selectedItemsToGroup",JSON.stringify(jsonObjPGroup),30);
+					
+				}
+			}else{
+				var confirmMin = BulkAction.confirmMinOrder(ErrorMsg);
+				if (confirmMin) {
+					item["qty"] = minOrderQty;
+					qtyBox.val(minOrderQty);
+					
+					if(forCartFlag){
+						jsonObj.push(item);
+					}
+					jsonObjPGroup.push(item);
+					
+					if(typeof(Storage) !== "undefined") {
+						
+						if(forCartFlag){
+							localStorage.setItem("selectedItemsAOP",JSON.stringify(jsonObj));
+						}
+						localStorage.setItem("selectedItemsToGroup",JSON.stringify(jsonObjPGroup));
+						
+					}else{
+						
+						if(forCartFlag){
+							setCookie("selectedItemsAOP",JSON.stringify(jsonObj),30);
+						}
+						setCookie("selectedItemsToGroup",JSON.stringify(jsonObjPGroup),30);
+						
+						
+					}
+				} else {
+					$(eachObj).attr('checked', false);
+				}
+			}
+			
+		}else{
+			qtyBox.attr("disabled",false);
+			jQuery.each(jsonObj, function(i, val) {
+				var setVal = false;
+				if(val==null){
+					delete jsonObj[i];
+					setVal = true;
+				}
+				if(val!=null && val.itemId == itemID){
+					delete jsonObj[i];
+					setVal = true;
+					if($('#multipleUom_'+val.partNumber).length>0){
+						$('#multipleUom_'+val.partNumber).attr('disabled', false);
+					}
+				}
+				if(setVal){
+					jsonObj = jQuery.grep(jsonObj, function(n, i){return (n !== "" && n != null);});
+					if(typeof(Storage) !== "undefined") {
+						localStorage.setItem("selectedItemsAOP",JSON.stringify(jsonObj));
+					}else{
+						setCookie("selectedItemsAOP",JSON.stringify(jsonObj),30);
+					}
+				}
+			});
+			
+			jQuery.each(jsonObjPGroup, function(i, val) {
+				var setVal = false;
+				if(val==null){
+					delete jsonObjPGroup[i];
+					setVal = true;
+				}
+				if(val!=null && val.itemId == itemID){
+					delete jsonObjPGroup[i];
+					setVal = true;
+				}
+				if(setVal){
+					jsonObjPGroup = jQuery.grep(jsonObjPGroup, function(n, i){return (n !== "" && n != null);});
+					if(typeof(Storage) !== "undefined") {
+						localStorage.setItem("selectedItemsToGroup",JSON.stringify(jsonObjPGroup));
+					}else{
+						setCookie("selectedItemsToGroup",JSON.stringify(jsonObjPGroup),30);
+						
+					}
+				}
+			});
+		}
+		checkCookie = localStorage.getItem("selectedItemsToGroup");
+		if(checkCookie != "[]" && checkCookie != null){
+			$(".cimm_addcartSlider").addClass("cimm_addcartSliderShow");
+		}else{
+			$(".cimm_addcartSlider").removeClass("cimm_addcartSliderShow");
+		}
+	};
+	
 })();
