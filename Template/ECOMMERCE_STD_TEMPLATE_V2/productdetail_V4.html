@@ -935,7 +935,6 @@
 					 #foreach($linkItem in $!linkedItem)
 					        <li itemscope itemtype="http://schema.org/Product">
 					        #set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
-					        bharath3
 					        #itemListHiddenFields($!linkItem.partNumber, $!linkItem.itemPriceId, $!linkItem.qty, $!linkItem.uom, $!linkItem.price, $!linkItem.saleQty, $!linkItem.itemId, $!linkItem.displayFrieghtAlert, $!linkItem.packageQty, $!linkItem.itemAvailability, $!linkItem.srchTyp, $!navigationType,$!linkItem.brandId,$!linkItem.manfId, $!linkItem.altPartNumber1)
 					 			<input type="hidden" id='packageQty_$!linkItem.partNumber' value="1" />
 								<div class="cimm_slideItemImg">
