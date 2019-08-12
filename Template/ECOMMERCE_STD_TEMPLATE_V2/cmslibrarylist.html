@@ -1,5 +1,5 @@
 #foreach($libraries in $libraryList.resultSet)
-<dd>
+<li>
 	<a href="javascript:void(0);" >
 		$!libraries.userLibraryGroupName
 		<i class="fa fa-arrows-alt"></i>
@@ -7,5 +7,5 @@
 	<div class="hiddenContent">
 		<div data-type="library" data-widget="$libraries.id">Library Block</div>
 	</div>
-</dd>
+</li>
 #end
