@@ -26,11 +26,11 @@
 				<tr>
 					<th>Actions</th>
 					<th>Serial #</th>
-					<th>Form Name</th>
+					<th>Widget Name</th>
 				</tr>
 			</thead>
 			<tbody>
-				#set($count = 1)
+				#set($count = $serialNumber)
 				#foreach($widgets in $widgetList.resultSet)
 				<tr>
 					<td class="cms_actionIcons">
