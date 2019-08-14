@@ -30,7 +30,9 @@
 				</tr>
 			</thead>
 			<tbody>
-			#set($count = $serialNumber)
+			#set($pageNo = ($formList.pageNo - 1))
+			#set($counter = $pageNo * $formList.pageSize)
+			#set($count = $counter+1)
 				#foreach($forms in $formList.resultSet)
 				<tr>
 					<td class="cms_actionIcons">
