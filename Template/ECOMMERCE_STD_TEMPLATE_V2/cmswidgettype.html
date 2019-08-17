@@ -95,7 +95,8 @@ function updateWidget(){
 				window.location.reload();  	
 				alert("Widget Types Table data add/updated successfully.");			   			   
 			}else{
-				jQuery("#errMsg").html(msg);
+				//jQuery("#errMsg").html(msg);
+				alert(msg);
 			}
 			jQuery(".tabledit-input").prop('disabled', true);
 		}	
