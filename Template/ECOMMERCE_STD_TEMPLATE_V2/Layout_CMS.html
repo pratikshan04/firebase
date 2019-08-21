@@ -4,6 +4,25 @@
     #parse("head.html")
     <!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
     #parse("bootstrap-min-css.html")
+      <script type="text/javascript">
+      var parentUrl = ""+window.parent.location;
+      //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
+      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
+        //console.log("The page is in an iframe");
+        //console.log("location: "+ window.location);
+        //console.log("Parent Location: "+window.parent.location);
+      }else {
+        alert("Unauthorized Access...!");
+        if(parentUrl.indexOf("cmsPageCms.action") !== -1){
+          // console.log("The page is not in CIMM");
+          window.location.href = "/";
+          window.top.location.href = "/";
+        }else{
+          //console.log("The page is not in an iframe");
+          window.location.href = "/";
+        }
+      }
+	</script>
   </head>
   <body>
     <input type="hidden" id="siteName" name="siteName" value="$siteName" />
