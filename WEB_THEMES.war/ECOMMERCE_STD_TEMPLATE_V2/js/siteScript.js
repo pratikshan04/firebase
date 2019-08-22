@@ -3213,7 +3213,7 @@ $(function(){
 			$(this).attr("maxlength","12");
 		});
 
-		$(".formatPhoneNumber").keydown(function(e) {
+		$(".formatPhoneNumber").keyup(function(e) {
 			if (e.keyCode != 8) {
 				var curchr = this.value.length;
 				var curval = $(this).val();
@@ -3231,7 +3231,7 @@ $(function(){
 			$(this).attr("maxlength","10");
 		});
 
-		$(".formatZipCode").keydown(function(e) {
+		$(".formatZipCode").keyup(function(e) {
 			if (e.keyCode != 8) {
 				var curchr = this.value.length;
 				var curval = $(this).val();
