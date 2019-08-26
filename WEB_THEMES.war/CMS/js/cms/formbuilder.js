@@ -379,17 +379,17 @@ function buildEditForm(type, parentObj) {
    }else if(type=="text"){
 	   $('#textarea').val(parentObj.find(".text-content").html());
    }
-   if(parentObj.find("input").attr('data-required')=="Y"){
+   if(parentObj.find(type).attr('data-required')=="Y"){
 	   $('#required').attr('checked',true);
    }
-   if(parentObj.find("input").attr('data-error')!=""){
-	   $('#errortext').val(parentObj.find("input").attr('data-error'));
+   if(parentObj.find(type).attr('data-error')!=""){
+	   $('#errortext').val(parentObj.find(type).attr('data-error'));
    }
-   if(parentObj.find("input").attr('data-invalid')!=""){
-	   $('#helptext').val(parentObj.find("input").attr('data-invalid'));
+   if(parentObj.find(type).attr('data-invalid')!=""){
+	   $('#helptext').val(parentObj.find(type).attr('data-invalid'));
    }
-   if(parentObj.find("input").attr('data-type')!=""){
-	   $('#validationlist option[value='+parentObj.find("input").attr('data-type')+']').attr('selected','selected');
+   if(parentObj.find(type).attr('data-type')!=""){
+	   $('#validationlist option[value='+parentObj.find(type).attr('data-type')+']').attr('selected','selected');
    }
 }
 
