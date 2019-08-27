@@ -343,6 +343,8 @@ function buildEditForm(type, parentObj) {
             c = "\n";
 
         });
+        $('#radios').val(radios);
+        $('#radiovalues').val(radioValues);
     }else if(type=="radio"){
     	 c = "";
     	parentObj.find("label span").each(function(){
