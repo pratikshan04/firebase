@@ -2118,7 +2118,8 @@ console.log("Custom : "+curr_control.dataToolElement);
 		var iframeId = window.parent.document.getElementById("iframeId");
 		var frameHeight = parseInt(iframeId.style.height.replace('px',''));
 		if(frameHeight < window.parent.innerHeight){
-			window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+			//window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+			window.parent.document.getElementById("iframeId").style.height = '775px';
 		}
 		
 		window.parent.document.getElementById("iframeId").style.width = '100%';
