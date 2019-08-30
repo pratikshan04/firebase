@@ -2847,8 +2847,8 @@ select:focus {
 		font-size: 14px;
 	}
 	.create-newPage a, .cms_blueBtn{
-	    font-size: 14px;
-		height: 36px;
+	    font-size: 18px;
+		height: 42px;
 		padding: 8px 16px;
 	}
 	.custom-select select{
