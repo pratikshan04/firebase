@@ -1989,6 +1989,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 					"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 					"table contextmenu directionality emoticons template textcolor paste colorpicker textpattern fontawesome"
 				],
+				paste_data_images: true,
 				image_advtab: true,
 				file_browser_callback: function(field_name, url, type, win) {
 					console.log(field_name);
