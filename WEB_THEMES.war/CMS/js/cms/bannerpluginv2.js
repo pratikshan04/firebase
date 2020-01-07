@@ -265,7 +265,13 @@ var refreshBanner = function(bannerId){
 	});
 
 };
-
+function replaceUTFicons(obj){
+	if(jQuery("textarea[name=bannerCaption_"+obj+"]").val()==undefined){
+		jQuery("textarea[name=bannerCaptionNew_"+obj+"]").val(jQuery("textarea[name=bannerCaptionNew_"+obj+"]").val().replace(/®/g,"&reg;").replace(/©/g,"&copy;").replace(/™/g,"&trade;"));
+	}else{
+		jQuery("textarea[name=bannerCaption_"+obj+"]").val(jQuery("textarea[name=bannerCaption_"+obj+"]").val().replace(/®/g,"&reg;").replace(/©/g,"&copy;").replace(/™/g,"&trade;"));
+	}
+}
 var filterBanners =  function (input,id){
 	var valThis = jQuery(input).val().toLowerCase();
 	

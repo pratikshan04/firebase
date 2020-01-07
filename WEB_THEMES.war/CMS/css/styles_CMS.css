@@ -2828,7 +2828,7 @@ select:focus {
 		margin: 6px 0 0 0px;
 	}
 	.table>tbody>tr>td.cms_actionIcons {
-		width: 115px;
+		width: 118px;
 	}
 	#bannerWrapper .table>tbody>tr>td.cms_actionIcons {
 		width: 135px;
@@ -2847,8 +2847,8 @@ select:focus {
 		font-size: 14px;
 	}
 	.create-newPage a, .cms_blueBtn{
-	    font-size: 14px;
-		height: 36px;
+	    font-size: 18px;
+		height: 42px;
 		padding: 8px 16px;
 	}
 	.custom-select select{

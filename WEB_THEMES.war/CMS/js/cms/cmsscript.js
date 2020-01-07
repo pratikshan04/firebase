@@ -42,7 +42,7 @@ function deleteWidget(widgetId,widgetName){
 	        success: function (data) {
 	        	alert(widgetName + " - has been deleted successfully.");
 	        	window.parent.generateWidgetList();
-	        	window.parent.buildWidgetList();
+	        	//window.parent.buildWidgetList();
 	        	window.location.href="widgetListCms.action";
 	        }
 	    });

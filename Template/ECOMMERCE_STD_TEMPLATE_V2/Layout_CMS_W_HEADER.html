@@ -23,6 +23,25 @@
     <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
 	<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
 	<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
+	<script type="text/javascript">
+      var parentUrl = ""+window.parent.location;
+      //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
+      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
+        //console.log("The page is in an iframe");
+        //console.log("location: "+ window.location);
+        //console.log("Parent Location: "+window.parent.location);
+      }else {
+        alert("Unauthorized Access...!");
+        if(parentUrl.indexOf("cmsPageCms.action") !== -1){
+          // console.log("The page is not in CIMM");
+          window.location.href = "/";
+          window.top.location.href = "/";
+        }else{
+          //console.log("The page is not in an iframe");
+          window.location.href = "/";
+        }
+      }
+	</script>
   </head>
   <body>
     <div class="cms_staticTable">

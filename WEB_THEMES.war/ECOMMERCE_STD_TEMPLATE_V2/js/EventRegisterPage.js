@@ -130,7 +130,12 @@ function validateEventReg(userLogin){
 
 	if (result!=""){
 		showNotificationDiv("", result);
-		//$("#errMsg").html("<div id=\"custom-gen\"  style=\"color:red;\"><b>Required Field:</b><br>"+result+"</div>");
+		if($("#enableStickyHeader").val() == "Y" && $("#layoutName").val()!= "CMSStaticPage"){
+			let fixedHead = $("#fixedHead").height();
+			$('html, body').animate({scrollTop: $(".alert").offset().top - fixedHead}, 400);
+		}else{
+			$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
+		}
 		return false;
 
 	}else if(result==""){
@@ -197,3 +202,12 @@ function showPOText(){
 		$("#radioTrigger").hide();
 	}
 }*/
+
+$(document).ready(function(){
+	$("#additionalInfo").on("hide.bs.collapse", function(){
+		$("#checkStatus").attr('checked', false);
+	});
+	$("#additionalInfo").on("show.bs.collapse", function(){
+		$("#checkStatus").attr('checked', true);
+	});
+});

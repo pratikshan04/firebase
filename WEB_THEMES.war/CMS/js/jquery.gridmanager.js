@@ -363,9 +363,10 @@ gm.initControls = function(){
 	gm.$el.on("click", ".gm-preview", function(){
 		if(gm.status){
 			hideActionIcons('preview');
-			$(this).html("<span class='action-icon'><i class='fas fa-2x fa-undo-alt'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
+			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
 			gm.deinitCanvas();
 			$(this).parent().find(".gm-edit-mode").prop('disabled', true);
+			$(this).parent().find(".gm-edit-mode").toggle(false); 
 			gm.reBuildBanner(false);
 			gm.switchLayoutMode(gm.options.layoutDefaultMode);
 		} else {
@@ -373,6 +374,7 @@ gm.initControls = function(){
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span>").attr('title', 'Preview');
 			gm.initCanvas();
 			$(this).parent().find(".gm-edit-mode").prop('disabled', false);
+			$(this).parent().find(".gm-edit-mode").toggle(true);
 			regulerVeiw();
 		}
 		//$(this).toggleClass(gm.options.gmDangerClass);
@@ -382,7 +384,7 @@ gm.initControls = function(){
 		if(gm.mode === "visual"){
 			hideActionIcons('edit');
 			gm.deinitCanvas();
-			$(this).html("<span class='action-icon'><i class='fas fa-2x fa-undo-alt'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
+			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
 			canvas.html($('<textarea/>').attr("id","sourceEditor").attr("cols", 130).attr("rows", 25).val(canvas.html()));
 			gm.mode="html";
 			editor =  CodeMirror.fromTextArea(document.getElementById("sourceEditor"), {
@@ -407,6 +409,7 @@ gm.initControls = function(){
 			editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
 			CodeMirror.commands["goLineStart"](editor); 
 			$(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button").toggle(false);
 		} else {
 			showActionIcons('edit');
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span>").attr('title', 'Edit Source Code');
@@ -418,6 +421,7 @@ gm.initControls = function(){
 			gm.initCanvas();
 			gm.mode="visual";
 			$(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', false);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button").toggle(true);
 		}
 		
 	}).on("click", "." + gm.options.gmEditRegion + ' .'+gm.options.gmContentRegion, function(){
@@ -2016,7 +2020,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 					// window.open(connector, "tinyfck", "modal,width=600,height=400");
 				},
 				toolbar1: " bold italic underline strikethrough | removeformat |  styleselect formatselect fontselect fontsizeselect  ",
-				toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink image media |  table ",
+				toolbar2: "cut copy | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink image media |  table ",
 				toolbar3: "insertdatetime | subscript superscript | alignleft aligncenter alignright alignjustify | charmap emoticons | fullscreen |  forecolor backcolor | code | fontawesome | closeBtn",
 				setup: function(editor) {
 					editor.addButton('closeBtn', {
@@ -2114,7 +2118,8 @@ console.log("Custom : "+curr_control.dataToolElement);
 		var iframeId = window.parent.document.getElementById("iframeId");
 		var frameHeight = parseInt(iframeId.style.height.replace('px',''));
 		if(frameHeight < window.parent.innerHeight){
-			window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+			//window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+			window.parent.document.getElementById("iframeId").style.height = '775px';
 		}
 		
 		window.parent.document.getElementById("iframeId").style.width = '100%';
