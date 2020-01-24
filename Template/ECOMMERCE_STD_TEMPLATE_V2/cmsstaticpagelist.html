@@ -178,7 +178,7 @@
 					</td>
 					<td>
 						#if($pageList.pageTitle)
-							#if($pageList.pageName.length() > 20)
+							#if($pageList.pageTitle.length() > 20)
 							<a href="/$pageList.pageTitle.replaceAll(' ','-')" data-toggle="tooltip" title="$pageList.pageTitle.replaceAll(' ','-')">/$pageList.pageTitle.substring(0, 20)... </a>
 							#else
 							<a href="/$pageList.pageTitle.replaceAll(' ','-')" target="_blank">/$pageList.pageTitle.replaceAll(" ","-")</a>
@@ -187,7 +187,7 @@
 					</td>
 					<td>
 						#if($pageList.customUrl)
-							#if($pageList.pageName.length() > 30)
+							#if($pageList.customUrl.length() > 30)
 							<a href="/$pageList.customUrl" data-toggle="tooltip" title="$pageList.customUrl">/$pageList.customUrl.substring(0, 30)... </a>
 							#else
 							<a href="/$pageList.customUrl" target="_blank">/$pageList.customUrl</a>
