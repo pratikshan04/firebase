@@ -68,7 +68,7 @@ function paginationScriptBannerCms(n_pages,page_link,iindex,pgno){
 	<figure data-name="$banner.imageName" data-bannerid="$banner.id" data-type="img">
 		<a href="javascript:void(0)" class="link" data-file="$banner.name"  data-field_id="" data-function="apply_none">
 			<div class="img-container">
-				<img  src="$bannerLogoPath$banner.imageName"  style="display: inline;" />
+				<img  src="$bannerLogoPath$banner.imageName"  onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" style="display: inline;" />
 			</div>
 			<!-- <div class="img-precontainer-mini original-thumb">
 				<div class="filetype jpg  hide">jpg</div>

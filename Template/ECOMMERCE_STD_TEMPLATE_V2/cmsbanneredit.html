@@ -42,7 +42,7 @@
 								#foreach($bannerInfoList in $bannerListData.bannerInfo)
 								<li id="$bannerInfoList.id" class="clearfix">
 									<div class='bannerImgContainer'>
-										<img src="$bannerLogoPath$bannerInfoList.banner.imageName"/>
+										<img src="$bannerLogoPath$bannerInfoList.banner.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 										<a href='javascript:void(0);' onclick='removeBanner(this);' class='banner_delIcon' title='Remove From List'><i class="fa fa-lg fa-trash-alt"></i>  Delete Banner Image</a>
 									</div>
 									<div class='banner_leftWrap'>
@@ -60,15 +60,16 @@
 										</div>
 										<div class="captchaPosBlock">
 											<div class="captchaPos">
-												<label>Top Position(px):</label>
+												<label>Top Position:</label>
 												<input type='text' name='bannerTopPos_$bannerInfoList.banner.id' value='$bannerInfoList.captionTopPos' />
 											</div>
 											<div class="captchaPos">
-												<label>Left Position(px):</label>
+												<label>Left Position:</label>
 												<input type='text' name='bannerLeftPos_$bannerInfoList.banner.id' value='$bannerInfoList.captionLeftPos' />
 												<input type='hidden' name='bannerImageName' value='$bannerInfoList.banner.imageName' />
 											</div>
 										</div>
+										<div class="form-group">*Position in pixels</div>
 									</div>
 								</li>
 								#end
