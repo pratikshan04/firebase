@@ -302,7 +302,7 @@ function buildElement(type) {
         el = '<div class="form-group"><p>Checkbox</p><label class="customCheckBox" style="display:block;"><input type="checkbox" name="checkbox1" class="form-control" /><span>checkboxname</span><label></div>';
     }else if (type == "captcha") {
     	var webthemesval=document.getElementById('webthemesval').value+"/CMS/images/active-icons/captcha.png";
-        el = '<div class="form-group"><label>Captcha<span class="text-danger"> *</span></label><input type="text" class="form-control" name="jcaptcha" data-required="Y" data-type="text" data-error="Please enter Captcha." data-invalid="" /><div class="captchaWrap form-group"><img src="CaptchaServlet.slt" id="captchaImg" /><a href="javascript:void(0);" id="refreshbtn" onclick="refreshjcaptcha();" class="captchaButton"><i class="fa fa-sync" aria-hidden="true"></i></a></div></div>';
+        el = '<div class="form-group"><label>Captcha<span class="text-danger"> *</span></label><input type="text" class="form-control" name="jcaptcha" data-required="Y" data-type="text" data-error="Please enter Captcha." data-invalid="" /><div class="captchaWrap form-group"><img src="CaptchaServlet.slt" id="captchaImg" alt="captcha"/><a href="javascript:void(0);" id="refreshbtn" onclick="refreshjcaptcha();" class="captchaButton"><i class="fa fa-sync" aria-hidden="true"></i></a></div></div>';
     }
     var arrows = '<a title="Make Column Narrower" class="colDecrease"><i class="fa fa-lg fa-caret-left"></i></a> <a title="Make Column Wider" class="colIncrease"><i class="fa fa-lg fa-caret-right"></i></a>';
     if(type != "captcha"){
@@ -343,6 +343,8 @@ function buildEditForm(type, parentObj) {
             c = "\n";
 
         });
+        $('#radios').val(radios);
+        $('#radiovalues').val(radioValues);
     }else if(type=="radio"){
     	 c = "";
     	parentObj.find("label span").each(function(){
@@ -379,17 +381,17 @@ function buildEditForm(type, parentObj) {
    }else if(type=="text"){
 	   $('#textarea').val(parentObj.find(".text-content").html());
    }
-   if(parentObj.find("input").attr('data-required')=="Y"){
+   if(parentObj.find(type).attr('data-required')=="Y"){
 	   $('#required').attr('checked',true);
    }
-   if(parentObj.find("input").attr('data-error')!=""){
-	   $('#errortext').val(parentObj.find("input").attr('data-error'));
+   if(parentObj.find(type).attr('data-error')!=""){
+	   $('#errortext').val(parentObj.find(type).attr('data-error'));
    }
-   if(parentObj.find("input").attr('data-invalid')!=""){
-	   $('#helptext').val(parentObj.find("input").attr('data-invalid'));
+   if(parentObj.find(type).attr('data-invalid')!=""){
+	   $('#helptext').val(parentObj.find(type).attr('data-invalid'));
    }
-   if(parentObj.find("input").attr('data-type')!=""){
-	   $('#validationlist option[value='+parentObj.find("input").attr('data-type')+']').attr('selected','selected');
+   if(parentObj.find(type).attr('data-type')!=""){
+	   $('#validationlist option[value='+parentObj.find(type).attr('data-type')+']').attr('selected','selected');
    }
 }
 

@@ -400,7 +400,7 @@ function GetFoldersAndFilesCallBack( fckXml ) {
 		var extenstion = oNodes[i].attributes.getNamedItem('extension').value ;
 		var imgId="img"+i;
 		oListManager.AddFile( sFileName, sCurrentFolderUrl, sFileSize, sdimension, extenstion,imgId) ;
-		console.log("Adding files : " + i);
+		//console.log("Adding files : " + i);
 	}
 	jQuery(".lazyLoad").lazyload({
         event: 'scrollstop',
