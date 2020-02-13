@@ -1,0 +1,76 @@
+<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
+<link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
+<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
+<style>
+.listStaticSelect{
+	float:left;
+	margin-right:10px;
+}
+.listStaticSelect select{
+	width:200px;
+}
+.pagecontent {
+  overflow:hidden;
+  padding:10px;
+  font-size:14px;
+  display:block;
+  background-color: #ddd;
+  width: 500px;
+  border: none;
+  resize: none;
+}
+.table>tbody>tr>td {
+border: 1px solid #b3b3b3;
+}
+</style>
+
+<div style="overflow-x: auto;"> 
+	
+	<table class="table table-bordered table-striped display rwd-table" id="staticpageList">
+		<thead>
+			<tr>
+				<th class="text-center">SI No.</th>
+				<th class="text-center">Page ID</th>
+				<th class="text-center">Page Name</th>
+				<th class="text-center">Page Title</th>
+				<th class="text-center">Page Content</th>
+				<th class="text-center">Language Code</th>
+				<th class="text-center">User Edited Name</th>
+				<th class="text-center">UpdatedDateTime</th>
+				<th class="text-center">Record</th>
+			</tr>
+		</thead>
+		<tbody >
+		#if($pageHistoryList.size()>0)
+		#set($iindex = 1)
+			#foreach($pageHistory in $pageHistoryList)
+			<tr style='background-color: #ddd;'>
+				<td class="text-center">$iindex</td>
+				<td class="text-center">$pageHistory.id</td>
+				<td class="text-center">$pageHistory.pageName</td>
+				<td class="text-center">$!pageHistory.pageTitle</td>
+				<td class="text-center">
+				<textarea readonly class="pagecontent"> $pageHistory.pageContent </textarea>
+				</td>
+				<td class="text-center">$pageHistory.localeCode</td>
+				<td class="text-center">$pageHistory.userEdited</td>
+				<td class="text-center">$pageHistory.updatedDateTime</td>
+				<td class="text-center">$pageHistory.record</td>
+			</tr>
+			#set($iindex = $iindex + 1)
+			#end
+		#else
+		<tr><td colspan="9" align="center"> No data </td></tr>
+		#end
+		</tbody>
+	</table>
+	<script>
+	$(document).ready(function(){
+		$("textarea").each(function(i) {
+			$("textarea").height($("textarea")[0].scrollHeight-200);
+		});
+		});
+	</script>
+</div>
+
+
