@@ -99,17 +99,19 @@ $(".apply-changes").on("click", function() {
         requiredEl = '<span class="text-danger"> *</span>';
     }
     if (type == "radio" || type == "checkbox") {
+    	var editoption = obj.find(".cms_form-btn-block").html();
     	obj.empty();
         obj.append("<p>"+ ($("#label").val() + requiredEl)+"</p>");
         obj.append(buildArrayElement($("#radios").val(), $("#radiovalues").val(), $("#id").val(), type,obj));
+        obj.append('<div class="cms_form-btn-block">'+editoption+'</div>');
         obj.find('input').attr("data-error",$("#errortext").val());
         obj.find('input').attr("data-type", $("#validationlist").val() == "" ? "text" : $("#validationlist").val());
         obj.find('input').attr("data-invalid",$("#helptext").val());
         if ($("#required").is(":checked")) {
         	obj.find('input').attr("data-required","Y");
+        }else{
+        	obj.find('input').attr("data-required","N");
         }
-        //var el = '<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>';
-        //obj.append(el);
     } else if (type == "select") {
         obj.find("select").html("");
         obj.find("label").html($("#label").val() + requiredEl);
@@ -153,12 +155,6 @@ $(".apply-changes").on("click", function() {
         	obj.find(type).attr({'onkeypress':'return IsNumeric(event);','onpaste':'return false;','ondrop':'return false;'});
         }
     }
-    /*var $input = $("<input>", {
-        'type': 'hidden',
-        'name': $("#id").val()+"_Label",
-        'value': $("#label").val(),
-    });*/
-    //$(obj).append($input);
     alert("Changes applied Successfully.");
 });
 
@@ -384,6 +380,7 @@ function buildEditForm(type, parentObj) {
        	$('#label').val(parentObj.find("p").text().replace(/[^a-z0-9\s]/gi, '').replace(/[_]/g, ''));
        	$('#radios').val(radios);
         $('#radiovalues').val(radioValues);
+        type="input";
     }
     else if(type=="checkbox"){
    	 c = "";
@@ -402,6 +399,7 @@ function buildEditForm(type, parentObj) {
    	$('#label').val(parentObj.find("p").text().replace(/[^a-z0-9\s]/gi, '').replace(/[_]/g, ''));
    	$('#radios').val(radios);
     $('#radiovalues').val(radioValues);
+    type="input";
    }else if(type=="text"){
 	   $('#textarea').val(parentObj.find(".text-content").html());
    }else if(type=="date"){
@@ -415,9 +413,6 @@ function buildEditForm(type, parentObj) {
    }
    if(parentObj.find(type).attr('data-format')!=""){
 	   $('#dateFormatlist option').filter('[value='+parentObj.find(type).attr('data-format')+']').attr('selected', true)
-   }
-   if(parentObj.find(type).attr('data-error')!=""){
-	   $('#errortext').val(parentObj.find(type).attr('data-error'));
    }
    if(parentObj.find(type).attr('data-invalid')!=""){
 	   $('#helptext').val(parentObj.find(type).attr('data-invalid'));
