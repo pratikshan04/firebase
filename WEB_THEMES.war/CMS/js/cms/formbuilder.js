@@ -10,6 +10,14 @@ function generateValidationList() {
 }
 generateValidationList();
 
+function generateDateFormats() {
+    var dateFormatElement = '<select id="dateFormatlist">';
+    for (i = 0; i < dateFormatlist.length; i++) {
+    	dateFormatElement = dateFormatElement + '<option value="' + dateFormatlist[i].value + '">' + dateFormatlist[i].name + '</option>';
+    }
+   return dateFormatElement = dateFormatElement + '</select>';
+}
+
 $(".save-form").on("click", function() {
 	if($.trim($("#formNameMain").val())==""){
 		alert("Please enter form name");
@@ -81,7 +89,12 @@ $(".apply-changes").on("click", function() {
     var type = $(".editing").data("type");
     var requiredEl = "";
     var obj = $(".editing");
-    console.log($("#required").is(":checked"));
+    if(type == 'date'){
+    	type = 'input';
+    }
+    if($("#validationlist").val() != 'integer'){
+    	obj.find(type).removeAttr('onkeypress onpaste ondrop');
+    }
     if ($("#required").is(":checked")) {
         requiredEl = '<span class="text-danger"> *</span>';
     }
@@ -122,6 +135,7 @@ $(".apply-changes").on("click", function() {
         	return (css.match (/\btext-\S+/g) || []).join(' ');
     	}).addClass('text-'+className).attr('data-align', className);
     } else {
+    	obj.find(type).attr("data-format", $("#dateFormatlist").val());
         obj.find("label").html($("#label").val() + requiredEl);
         obj.find(type).removeAttr("data-type");
         if ($("#required").is(":checked")) {
@@ -137,6 +151,9 @@ $(".apply-changes").on("click", function() {
         obj.find(type).attr("placeholder", $("#placeholder").val());
         obj.find(type).attr("data-error",$("#errortext").val());
         obj.find(type).attr("data-invalid",$("#helptext").val());
+        if($("#validationlist").val()=='integer'){
+        	obj.find(type).attr({'onkeypress':'return IsNumeric(event);','onpaste':'return false;','ondrop':'return false;'});
+        }
     }
     alert("Changes applied Successfully.");
 });
@@ -288,7 +305,9 @@ function buildElement(type) {
         el = '<div class="form-group"><label>Text Input</label><input type="text" value="" class="form-control" placeholder="Input Text"/></div>';
     } else if (type == "text"){
     	el = '<div class="form-group"><div class="text-content">Type your text here.</div>';
-    } else if (type == "textarea") {
+    } else if (type == "date"){
+    	el = '<div class="form-group"><label>Text Input</label><input type="text" value="" class="form-control datePicker" placeholder="Input Date" data-format="mm/dd/yy" readonly /></div>';
+    }else if (type == "textarea") {
         el = '<div class="form-group"><label>Text area</label><textarea class="form-control" ></textarea></div>';
     } else if (type == "select") {
         el = '<div class="form-group"><label>Select</label><select name="select1"  class="form-control"><option value="option1">option1</option></select></div>';
@@ -326,6 +345,11 @@ function buildEditForm(type, parentObj) {
 
         }
     }
+    
+    if(type=="date"){
+    	list = list + '<li><div class="form-group"><label>Date formats</label>' + generateDateFormats() + '</li></div>';
+    }
+
     if(type!="text"){
     	list = list + '<li><div class="form-group"><label>Validate</label>' + validationListElement + '</div></li>';
     }
@@ -378,12 +402,17 @@ function buildEditForm(type, parentObj) {
     type="input";
    }else if(type=="text"){
 	   $('#textarea').val(parentObj.find(".text-content").html());
+   }else if(type=="date"){
+	   type="input";
    }
    if(parentObj.find(type).attr('data-required')=="Y"){
 	   $('#required').attr('checked',true);
    }
    if(parentObj.find(type).attr('data-error')!=""){
 	   $('#errortext').val(parentObj.find(type).attr('data-error'));
+   }
+   if(parentObj.find(type).attr('data-format')!=""){
+	   $('#dateFormatlist option').filter('[value='+parentObj.find(type).attr('data-format')+']').attr('selected', true)
    }
    if(parentObj.find(type).attr('data-invalid')!=""){
 	   $('#helptext').val(parentObj.find(type).attr('data-invalid'));

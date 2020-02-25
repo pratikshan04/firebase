@@ -1,10 +1,12 @@
 var validationList = [{
 	"name":"String",
 	"value":"text"
-},
-{
+},{
 	"name":"Number",
-	"value":"number"
+	"value":"integer"
+},{
+	"name":"Date",
+	"value":"date"
 },{
 	"name":"Email",
 	"value":"email"
@@ -21,8 +23,49 @@ var validationList = [{
 	"name":"Select",
 	"value":"select"
 }];
+var dateFormatlist = [{
+	"name":"mm/dd/yy",
+	"value":"mm/dd/yy"
+},{
+	"name":"mm-dd-yy",
+	"value":"mm-dd-yy"
+}];
 var editSetting = {"input":{
     "title": "Text Input",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "textinput"
+      },
+      "label": {
+        "label": "Label Text",
+        "type": "input",
+        "value": "Text Input"
+      },
+      "placeholder": {
+        "label": "Placeholder",
+        "type": "input",
+        "value": "placeholder"
+      },
+      "required": {
+        "label": "Required",
+        "type": "checkbox",
+        "value": false
+      },
+      "errortext": {
+          "label": "Error Message",
+          "type": "input",
+          "value": "error"
+        },
+      "helptext": {
+        "label": "Invalid Error Message",
+        "type": "input",
+        "value": "help"
+      }
+    }
+},"date":{
+    "title": "Date Input",
     "fields": {
       "id": {
         "label": "ID / Name",
