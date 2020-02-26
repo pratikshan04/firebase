@@ -306,7 +306,7 @@ function buildElement(type) {
     } else if (type == "text"){
     	el = '<div class="form-group"><div class="text-content">Type your text here.</div>';
     } else if (type == "date"){
-    	el = '<div class="form-group"><label>Text Input</label><input type="text" value="" class="form-control datePicker" placeholder="Input Date" data-format="mm/dd/yy" readonly /></div>';
+    	el = '<div class="form-group"><label>Text Input</label><input type="text" value="" class="form-control datePicker" placeholder="Input Date" data-format="mm/dd/yyyy" readonly /></div>';
     }else if (type == "textarea") {
         el = '<div class="form-group"><label>Text area</label><textarea class="form-control" ></textarea></div>';
     } else if (type == "select") {
