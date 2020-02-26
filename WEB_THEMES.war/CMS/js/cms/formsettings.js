@@ -24,11 +24,11 @@ var validationList = [{
 	"value":"select"
 }];
 var dateFormatlist = [{
-	"name":"mm/dd/yy",
-	"value":"mm/dd/yy"
+	"name":"mm/dd/yyyy",
+	"value":"mm/dd/yyyy"
 },{
-	"name":"mm-dd-yy",
-	"value":"mm-dd-yy"
+	"name":"mm-dd-yyyy",
+	"value":"mm-dd-yyyy"
 }];
 var editSetting = {"input":{
     "title": "Text Input",
