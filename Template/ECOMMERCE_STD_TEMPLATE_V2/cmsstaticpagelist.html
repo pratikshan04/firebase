@@ -248,7 +248,7 @@ function deletePage(id,pType,pName){
 		jQuery.ajax({
 			   type: "POST",
 			   url: "addUpdateStaticPageCms.action",
-			   data: "type=delete&pageData.id="+id+"&dt="+new Date()+"&pageData.pageType="+pType+"&pageData.pageName="+pName,
+			   data: "type=delete&pageData.startDate=''&pageData.endDate=''&pageData.id="+id+"&dt="+new Date()+"&pageData.pageType="+pType+"&pageData.pageName="+pName,
 			   success: function(msg){
 	  		  		 window.location.href="listStaticPageCms.action";
 				}	
