@@ -34,9 +34,9 @@
     #parse("cmsbannereditscript.html")
     #end
     #if($LayoutName == "CMSFormEdit")
-    <script src="$!webThemes/CMS/js/cms/formsettings.js">
+    <script src="$!webThemes/CMS/js/cms/formsettings.js?v=$!session.getLastAccessedTime()">
     </script>
-    <script src="$!webThemes/CMS/js/cms/formbuilder.js">
+    <script src="$!webThemes/CMS/js/cms/formbuilder.js?v=$!session.getLastAccessedTime()">
     </script>
     #end
   </body>
