@@ -894,7 +894,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			wrapEl = "<ul/>"
 		}
 		list = $(wrapEl).appendTo(element).mouseover( function(event) {
-			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
+			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI' && !target(event).classList.contains("ac_over") && !target(event).classList.contains("suggest")) {
 	            active = $("li", list).removeClass(CLASSES.ACTIVE).index(target(event));
 				console.log(active);
 			    $(target(event)).addClass(CLASSES.ACTIVE); 
@@ -918,7 +918,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			    }
 	        }	
 		}).click(function(event) {
-			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
+			if(event.target.nodeName && event.target.nodeName.toUpperCase() == 'LI') {
 				$(target(event)).addClass(CLASSES.ACTIVE);
 				select();
 				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus

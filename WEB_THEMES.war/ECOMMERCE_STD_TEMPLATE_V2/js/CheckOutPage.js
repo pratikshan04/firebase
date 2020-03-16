@@ -83,6 +83,13 @@ var checkoutWizard = {};
 			}
 			var billingInputs = $('#step-1 :input').serialize();
 			var shippingInputs = $('#step-2 :input').serialize();
+			
+			var shippingSelect;
+			var disabledSelect = $('#step-2 select:disabled, #step-1 select:disabled');
+			$(disabledSelect).attr('disabled', false);
+			var shippingSelect = $(disabledSelect).serialize();
+			$(disabledSelect).attr('disabled', true);
+			
 			var orderDetailInputs = $('#step-3 :input').serialize();
 			if(billingInputs!=null && $.trim(billingInputs)!=""){
 				str += billingInputs;
@@ -92,6 +99,9 @@ var checkoutWizard = {};
 			}
 			if(orderDetailInputs!=null && $.trim(orderDetailInputs)!=""){
 				str = str +"&"+ orderDetailInputs;
+			}
+			if(shippingSelect){
+				str = str +"&"+ shippingSelect;
 			}
 			str = str + "&dt="+new Date();
 			enqueue("/confirmOrderSale.action?"+str+"&dt="+new Date(),function(data){
@@ -251,6 +261,10 @@ var checkoutWizard = {};
 			errorMessage = errorMessage + locale("checkoutwiz.error.country") + lineBreak;
 			validation = false;
 		}
+		if($('#shipVia').length>0 && (typeof $('#shipVia').val()=="undefined" || $('#shipVia').val()==null || $('#shipVia').val().trim().length < 1)){
+			errorMessage = errorMessage + locale("checkoutwiz.error.shipvia") + lineBreak;
+			validation = false;
+		}
 		
 		if(!validation){
 			checkoutWizard.displayNotification(errorMessage,step);
@@ -280,10 +294,6 @@ var checkoutWizard = {};
 		}
 		if($('#poNumberTxt').length>0 && (typeof $('#poNumberTxt').val()=="undefined" || $('#poNumberTxt').val()==null || $('#poNumberTxt').val().trim().length < 1) && $('#orderType').val() != "checkoutWithCreditCard"){
 			errorMessage = errorMessage + locale("checkoutwiz.error.purchaseordernumber") + lineBreak;
-			validation = false;
-		}
-		if($('#shipVia').length>0 && (typeof $('#shipVia').val()=="undefined" || $('#shipVia').val()==null || $('#shipVia').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.shipvia") + lineBreak;
 			validation = false;
 		}
 		/*if($('#orderStatus').length>0 && (typeof $('#orderStatus').val()=="undefined" || $('#orderStatus').val()==null || $('#orderStatus').val().trim().length < 1)){
@@ -433,7 +443,11 @@ var checkoutWizard = {};
 	checkoutWizard.displayNotification = function(msg,step){
 		$("#step-"+step+" #notificationDiv").remove();
 		$("#step-"+step).prepend('<div id="notificationDiv"><div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>'+msg+'</div></div>');
-		$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
+		var headerHeight = 0;
+	    if($("#enableStickyHeader").val() == "Y"){
+	        headerHeight = $('#normalHead').height();
+	    }
+	    $('html, body').animate({scrollTop: $(".alert").offset().top - headerHeight}, 400);
 	};
 	checkoutWizard.hideNotificationDiv = function(step){
 		$("#step-"+step+" #notificationDiv").remove();
