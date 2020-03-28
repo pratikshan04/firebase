@@ -26,11 +26,11 @@ function initJssorSlides(sliderId, transistion, slideDelay, autoPlay) {
     }
     var dataSlideDelay = 2000;
     if (jQuery.trim(slideDelay) != "") {
-    	dataSlideDelay = slideDelay;
+    	dataSlideDelay = parseInt(slideDelay);
     }
     var dataAutoPlay = 1;
     if (jQuery.trim(autoPlay) != "") {
-    	dataAutoPlay = autoPlay;
+    	dataAutoPlay = parseInt(autoPlay);
     }
     var jssor_1_options = {
         $AutoPlay: dataAutoPlay,

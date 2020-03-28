@@ -170,9 +170,9 @@
 			#set($pageTitleBreadCrumbLast = $!LastSet )
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 			#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + " - " + $!pageTitleBreadCrumbLast)
-			<h1 class="cimm_page-title hideMe">$!breadCrumb.categoryName</h1>
 		#end
 	</ul>
+	<h1 class="cimm_page-title hideMe">$!pageTitleBreadCrumbLast</h1>
 	#end
 #elseif($!LayoutName=='ProductDetailPage')
 	<ul class="breadcrumb">

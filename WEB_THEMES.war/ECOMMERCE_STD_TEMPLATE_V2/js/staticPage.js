@@ -72,7 +72,6 @@ function loadWidgets(){
 		generateWidget(widgetId);
 	});
 	homeCarousels();
-	$('.cimm_formContent li').removeAttr('title');
 }
 function generateForm(formId){
 	jQuery.ajax({
@@ -82,6 +81,8 @@ function generateForm(formId){
 			jQuery("[data-widget='"+formId+"']").html(data);
 			var df = jQuery("[data-widget='"+formId+"']").find('.datePicker').attr('data-format');
 			initDatePicker(df);
+			$('.cimm_formContent li').removeAttr('title');
+			$('.col').removeAttr('title');
 		}
 	});
 }

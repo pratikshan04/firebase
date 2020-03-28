@@ -460,7 +460,8 @@
 									<li class="productAvail_$!itemData.partNumber">
 										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
 										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-											#if($itemData.availQty)
+											#set($Integer = 0)
+											#if($itemData.availQty && $Integer.parseInt($itemData.availQty) > 0)
 												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
 											#else
 												<span class='text-danger'>Call for Availability</span>
@@ -485,7 +486,7 @@
 									#end
 								</ul>
 								<ul>
-									#if($itemData.packDesc)<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
+									#if($!itemData.packDesc && $itemData.packDesc.trim() != "")<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 									<li class="cimm_priceWrap">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
