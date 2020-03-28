@@ -177,7 +177,9 @@ function submitFormToServer(that){
 						if(notified=="Password Updated Successfully"){
 							unblock();
 							bootAlert("medium","success","Success","Password Updated Successfully, Please login again to continue");
-							window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+							$("[data-bb-handler='ok']").click(function(){
+								window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+							});
 						}else if(hideThat && hideThat != "Y"){
 							if(hideThat != "N"){
 								$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');

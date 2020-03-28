@@ -238,6 +238,7 @@ function priceLoadMainFunction() {
 			$(document.getElementById("enableCart_" + partNumber)).removeClass('btns-disable');
 			$(document.getElementById("enableCart_" + partNumber)).addClass('addToCart');
 		}
+		$('[data-caddcartbtn="cloneAddtoCartbtn"]').removeClass('btns-disable');
 		if (document.querySelector("[data-partnumber='" + partNumber + "']") && document.querySelector("[data-partnumber='" + partNumber + "']").classList) {
 			document.querySelector("[data-partnumber='" + partNumber + "']").removeAttribute('disabled');
 			document.querySelector("[data-partnumber='" + partNumber + "']").classList.remove('btns-disable');
