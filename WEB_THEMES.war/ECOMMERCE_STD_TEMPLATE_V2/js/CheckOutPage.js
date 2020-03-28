@@ -397,12 +397,17 @@ var checkoutWizard = {};
 			    }
 		}
 	};
-	
+	checkoutWizard.insertDataToHiddenInfo = function(){
+		$('#quickCartHiddenInfo [name="reqDate"]').val($('#reqDate').val());
+		$('#quickCartHiddenInfo [name="shippingInstruction"]').val($('#shippingInstruction').val());
+		$('#quickCartHiddenInfo [name="orderNotes"]').val($('#orderNotes').val());
+	};
 	checkoutWizard.submitCheckoutRequest = function(){
 		if(checkoutWizard.stepThreeValidate("3")){
 			if($('#orderType').length>0 && typeof $('#orderType').val()!="undefined" && $('#orderType').val()!=null && $('#orderType').val().trim().length > 0){
+				checkoutWizard.insertDataToHiddenInfo();
 					if($('#orderType').val().trim() == "checkoutWithPo"){
-						var data = $("#quickCartHiddenInfo").serialize();
+						/*var data = $("#quickCartHiddenInfo").serialize();
 						block("Please Wait");
 						$.ajax({
 							type: "POST",
@@ -411,8 +416,10 @@ var checkoutWizard = {};
 							success: function(msg){
 								window.location.href = 'orderConfirmation.action?salesOrderId='+msg;
 							}
-						});
-						
+						});*/
+						block("Please Wait");
+						$("#quickCartHiddenInfo").attr("action","processOrder.action");
+	    				$("#quickCartHiddenInfo").submit();
 					}else if($('#orderType').val().trim() == "checkoutWithCreditCard"){
 						block("Please Wait");
 						setCookie("poNumber",$("#poNumber").val(),10);

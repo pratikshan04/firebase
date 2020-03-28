@@ -1079,11 +1079,11 @@ background:#42e300;
     opacity: 0.4;
 }
 .gm-content ul li{
-	list-style-type:inherit;
+	list-style-type: disc;
 	margin-left:20px;
 }
 .gm-content ol li{
-	list-style-type:inherit;
+	list-style-type: decimal;
 	margin-left:20px;
 }
 :focus {
@@ -2159,6 +2159,9 @@ select:focus {
 	overflow: auto;
 	height: calc(560px - 35px);
 	padding: 15px;
+}
+.previewSection #previewContainer a {
+    pointer-events: none;
 }
 .popupWraper{
 	padding: 10px;

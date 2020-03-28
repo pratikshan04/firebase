@@ -3016,16 +3016,18 @@ function commaSeparateNumber(val){
     return val;
 }
 var triggerToolTip = function(){
-	var options = {
-		    placement: function (context, element) {
-		        var position = $(element).position();
-		        if (position.top - $(window).scrollTop() < 110){
-		            return "bottom";
-		        }
-		        return "top";
-		    }, trigger: "hover"
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		var options = {
+				placement: function (context, element) {
+					var position = $(element).position();
+					if (position.top - $(window).scrollTop() < 110){
+						return "bottom";
+					}
+					return "top";
+				}, trigger: "hover"
 		};
-	$('[data-toggle="tooltip"]').tooltip(options);
+		$('[data-toggle="tooltip"]').tooltip(options);
+	}
 }
 function goBack(){
 	window.history.back()
