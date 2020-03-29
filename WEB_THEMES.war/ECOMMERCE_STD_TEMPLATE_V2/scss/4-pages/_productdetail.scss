@@ -232,6 +232,8 @@
                                     text-transform: capitalize;
                                     display: block;
                                     padding: 5px;
+                                    white-space: normal;
+                                    word-break: break-all;
                                     &:hover {
                                         background: $primary_color;
                                         color: $white;

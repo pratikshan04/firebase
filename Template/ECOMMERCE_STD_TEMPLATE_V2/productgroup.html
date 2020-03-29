@@ -41,7 +41,7 @@
 				<input type="hidden" name="savedGroupId" value="$savedGroupId" />
 				<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
 				<input type="hidden" name="sortBy" value="$!sortBy"/>
-				<input type="hidden" name="pageNo" value="$pageNo" />
+				<input type="hidden" name="pageNo" value="0" />##$pageNo
 				<select name="resultPage" id="resultPage" class="form-control selectpicker quantity" onchange="PageItemsChange();">
 					<!-- <option value="-1">Select</option> -->
 					<option value="12" #if($resultPage=='12') selected #end >12</option>
@@ -90,7 +90,7 @@
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
 					<input type="hidden" name="resultPage" value="$resultPage" />
 					<input type="hidden" name="sortBy" value="$!sortBy"/>   
-					<input type="hidden" name="pageNo" value="$pageNo" />
+					<input type="hidden" name="pageNo" value="0" />##$pageNo
 					<input type="hidden" value="$reqType" name="reqType"/>
 					<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" id="searchkeyWord"/>
 					<input type="text" class="form-control" placeholder="Search" id="searchKey" value="$!searchkeyWord" onkeypress="return runScript(event);"  maxlength="25" />
