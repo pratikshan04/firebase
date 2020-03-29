@@ -190,7 +190,9 @@ input[type='submit'] {
 				color: $default_font-color;
 				text-transform: capitalize;
 				display: block;
-				padding: 5px;
+                padding: 5px;
+                white-space: normal;
+                word-break: break-all;
 				&:hover {
 					background: $primary_color;
 					color: $white;
