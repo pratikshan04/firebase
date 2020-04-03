@@ -168,29 +168,29 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
-											<select name="shipVia" id="shipVia" class="form-control selectpicker">
-												<option value=" ">-Select-</option>
-												#if($shipViaList.size()>0)
-													#foreach($shipVia in $shipViaList)
-													<option value="$!shipVia.ShipViaID">$!shipVia.description</option> 
-													#end
-												#end 
-											</select>
-										</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
+										<select name="shipVia" id="shipVia" class="form-control selectpicker">
+											<option value=" ">-Select-</option>
+											#if($shipViaList.size()>0)
+												#foreach($shipVia in $shipViaList)
+												<option value="$!shipVia.ShipViaID">$!shipVia.description</option> 
+												#end
+											#end 
+										</select>
 									</div>
-									#if($!CommonDBQuerySystemParameter.get("IS_DISCOUNT_COUPONS_ENABLED") == "Y")
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>$locale.get("form.label.coupon")</label>
-											<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
-										</div>
-									</div>
-									#end
 								</div>
+								#if($!CommonDBQuerySystemParameter.get("IS_DISCOUNT_COUPONS_ENABLED") == "Y")
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>$locale.get("form.label.coupon")</label>
+										<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
+									</div>
+								</div>
+								#end
 							</div>
 							<!-- Shipping Address -->
 							<input type="hidden" name="overrideShip" id="overrideShip" value="Y"/>

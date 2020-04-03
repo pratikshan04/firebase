@@ -1,5 +1,12 @@
 var assets = "/ASSETS";mykeypass = "myPassword";
 var specialKeys = new Array();
+var unusualCode = 0;
+
+function validateStr(str){
+	if(str.toLowerCase().indexOf("<scrip") >-1 || str.toLowerCase().indexOf("<a hre") >-1){
+		return true;
+	}
+}
 specialKeys.push(8); //Backspace
 //---------------------- global char replace
 function javascriptReplaceAll(str, find, replace) {
@@ -3019,7 +3026,7 @@ function commaSeparateNumber(val){
     return val;
 }
 var triggerToolTip = function(){
-	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+	if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 		var options = {
 				placement: function (context, element) {
 					var position = $(element).position();
@@ -3487,7 +3494,7 @@ if($("#enableHeaderQuickOderLink").val() == "Y"){
 	
 	function unLoader(){				
 		$(".quickCartContainer").fadeOut();
-		$(".modalPopOverlay").hide();
+		//$(".modalPopOverlay").hide();
 		$(".cimm_navigationBar ul > li > a").removeClass("active");
 	}
 }

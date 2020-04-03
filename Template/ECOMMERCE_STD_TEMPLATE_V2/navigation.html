@@ -1,4 +1,11 @@
 <ul class="nav navbar-nav">
+	<li class="hidden-lg  nav_bar_close">
+		<div class="cimm_slideMobileNavIcon" id="slideIcon">
+			<h2  class="visible-sm-block dark-ripple visible-xs-block">$locale.get("product.heading.menu")</h2>
+			<a href="javascript:void(0);" onclick="closeSlide();"><span></span></a>
+		</div> 	
+	</li>
+	
 #if($!CommonDBQuerySystemParameter.get("EnableMultiLevelCategoryDisplay") == "Y")
     <li>
     	<span>
@@ -295,10 +302,10 @@
 			</div>
 		</li>
 		#else
-		<li class="hideForDevices"><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a></li>
+		<li class="hideForDevices"><span><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
 		#end
 	#else
-	<li class="hideForDevices"><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder") <em class="fa fa-angle-down" aria-hidden="true"></em></a></li>
+	<li class="hideForDevices"><span><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
 	#end
 	#end
 	
@@ -357,4 +364,30 @@
 			#end
 		</li>
 	#end
+		#if($userLogin)
+			<li class="hidden-lg">
+				<span>
+					<a href="javascript:void(0);" >$!locale.get("product.heading.accountDashBoard")</a><em class="fa hidden-lg"></em>
+				</span>
+				<ul class="dropdown-menu">
+					#parse("accountMenu.html")
+				</ul>
+			</li>
+			<li class="hidden-lg logout_btn">
+				<span>
+					<a href="javascript:void(0);" onclick="doLogOffScript();">$!locale.get("product.heading.signOut")</a>
+				</span>
+			</li>
+			#else
+			<li class="hidden-lg">
+				<span>
+					<a href="/Login">$!locale.get('register.label.login')</a>
+				</span>
+			</li>
+			<li class="hidden-lg">
+				<span>
+					<a href="/Register">$!locale.get('product.heading.register')</a>
+				</span>
+			</li>
+		#end
 </ul>
