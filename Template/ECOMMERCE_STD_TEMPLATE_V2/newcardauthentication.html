@@ -38,3 +38,8 @@
 <img src="$!cdnUrl$!webThemes/$siteName/images/brandloading.gif" alt='Brand Loading'/>
 <p>$locale.get("label.message.pleaseWaitWeAreProcesingYourRequest") </p><p>$locale.get("label.message.doNotPressRefreshOrBackButton")</p>
 </div>
+#if(!$userLogin)
+<script>
+window.location.href = "/"
+</script>
+#end

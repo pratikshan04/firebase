@@ -14,7 +14,7 @@ $("#editContactAddressForm").submit(function(){
 		$("#email").val($("#billAddressEmail").val());
 	}
 });
-var currentAddress;
+var currentAddress = {};
 $(document).ready(function(){
 	if ($("#email").val() != "") {
 		$("#email").attr('readonly', true);
@@ -63,8 +63,8 @@ function setCurrentContactAddress(){
 }
 function getContactEntityAddress(obj){
 	if(obj.checked){
-		if(!currentAddress){
-			currentAddress = {};
+		var objLenth = $.map(currentAddress, function(n, i) { return i; }).length;
+		if(objLenth==0){
 			getCurrentContactAddress();
 		}
 		$("#useEntityAddress").val("Yes");

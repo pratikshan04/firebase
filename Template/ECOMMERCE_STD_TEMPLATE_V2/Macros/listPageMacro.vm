@@ -36,19 +36,19 @@
 
 #macro(listAndGridSwap $navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
 #if($navigationType=="NAVIGATION")
-#set($gridURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=0&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
-#set($listURL="itemLevelFilterPage.action?codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=1&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($gridURL="itemLevelFilterPage.action?codeId=$codeIdSkip&srchTyp=$srchTyp&levelNo=$levelNoSkip&gallery=0&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
+#set($listURL="itemLevelFilterPage.action?codeId=$codeIdSkip&srchTyp=$srchTyp&levelNo=$levelNoSkip&gallery=1&resultPage=$resultPage&pageNo=$pageNo#if($sortBy)&sortBy=$sortBy#end#if($attrFilterList)&attrFilterList=$attrFilterList#end#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
 #set($paginationURL="itemLevelFilterPage.action?pageClick=Y&codeId=$codeIdSkip&srchTyp=$srchTyp&levelNo=$levelNoSkip&gallery=$gallery#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
 #end
 #if($navigationType=="SEARCH")
 #set($gridURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")
 #set($listURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=1#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")
-#set($paginationURL="searchPage.action?pageClick=Y&keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#set($paginationURL="searchPage.action?pageClick=Y&srchTyp=$srchTyp&keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
 #end
 #if($navigationType=="BRAND")
 #set($gridURL="shopByBrandPage.action?brandId=$brandId&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
 #set($listURL="shopByBrandPage.action?brandId=$brandId&gallery=1#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")
-#set($paginationURL="shopByBrandPage.action?pageClick=Y&brandId=$brandId#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#set($paginationURL="shopByBrandPage.action?pageClick=Y&brandId=$brandId&srchTyp=$srchTyp#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
 #end
 #if($navigationType=="MANF")
 #set($gridURL="shopByManufacturerPage.action?manfId=$manfId&gallery=0&srchTyp=$srchTyp#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")

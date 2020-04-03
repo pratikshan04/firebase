@@ -3,13 +3,24 @@
 <script type="text/javascript" src="$!webThemes/CMS/js/cms/cmsscript.js"></script>
 <script type="text/javascript" src="$!webThemes/CMS/js/jquery.colorbox.js" ></script>
 <link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" /> 
+<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" /> 
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/bootstrap.min.css" />
 <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
 <link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
 <link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
 #parse("head.html")
-<script type="text/javascript">
+ <script type="text/javascript">
+	var parentUrl = ""+window.parent.location;
+	if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
+	}else {
+		alert("Unauthorized Access...!");
+		if(parentUrl.indexOf("cmsPageCms.action") !== -1){
+			window.location.href = "/";
+			window.top.location.href = "/";
+		}else{
+			window.location.href = "/";
+		}
+	}
 	function paginationScriptCms(n_pages,page_link,iindex,pgno){
 	    var n_links = 1, returnString = '<div class="pagebarUTH">',n_index = (iindex/pgno)+1;
 	    var start=1;
