@@ -1,3 +1,6 @@
+
+@include custom-btns;
+
 button,
 input[type='submit'] {
     -moz-appearance: none;
@@ -336,3 +339,5 @@ input:checked+.slider.active:before {
         background-color: transparent;
     }
 }
+
+@include headings;

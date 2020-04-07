@@ -43,7 +43,7 @@
 #if($navigationType=="SEARCH")
 #set($gridURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")
 #set($listURL="searchPage.action?keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=1#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo")
-#set($paginationURL="searchPage.action?pageClick=Y&srchTyp=$srchTyp&keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#set($paginationURL="searchPage.action?pageClick=Y&keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp&gallery=$gallery#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end&pageNo=")
 #end
 #if($navigationType=="BRAND")
 #set($gridURL="shopByBrandPage.action?brandId=$brandId&gallery=0#if($narrowKeyword)&narrowKeyword=$narrowKeyword&vpsid=$varPsid#end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&pageNo=$pageNo#if($keyWordTxt)&keyWordTxt=$keyWordTxt#end")

@@ -2,20 +2,15 @@
 $black: #000 !default;
 $gray-darker: lighten($black, 13.5%) !default; // #222
 $gray-dark: lighten($black, 20%) !default;   // #333
-$gray: lighten($black, 33.5%) !default; // #555
+$gray: lighten($black, 33.5%) !default; // ##585858
 $gray-light: lighten($black, 46.7%) !default; // #777
 $gray-lighter: lighten($black, 93.5%) !default; // #eee
 $gray-lighten: lighten($black, 89.7%) !default; // #E5E5E5
 
 
-//** Global Temp Theme
 $primary_color      : #46acee;
 $secondary_color    : #404040; 
 $tertiary_color     : #f9f9f9;
-
-// $primary_color      : #8a8a8a;
-// $secondary_color    : #9e0c24;
-// $tertiary_color     : #f9f9f9;
 
 
 $white              : #FFF;
@@ -23,18 +18,19 @@ $red                : #ee3426;
 $blue               : #00a9e7;
 $green              : #37ff3b;
 $yellow             : #e4de33;
-$lightgray          : #EBEBEB;
+$lightgray          : #CCCCCC;
 $border-color       : #A1A1A1;
 $shadow-color : lighten($black, 68%) !default;
 
-$default_font-color     : $secondary_color; //** Global font color
-$heading_font-color		: $secondary_color; //** Global heading font color
+$default_font-color     : $secondary_color ; //** Global font color
+$heading_font-color		: $primary_color; //** Global heading font color
+
 
 //** Global Temp Fonts 
 $default_font-family    : 'RobotoRegular';
 $secondary_font-family  : 'RobotoBlack';
-$heading_font-family    : 'RobotoCondensedBold';
-
+$tertiary_font-family   : 'RobotoCondensedBold';
+$heading_font-family    : $tertiary_font-family;
 
 //** Global Font sizes
 $font_xs    : 10px;
@@ -67,10 +63,28 @@ $link-hover-color   : darken($link-color, 15%) !default;
 
 /*__________________________________Heading Setting_______________________________________*/
 //Header
-$header_bg      : $secondary_color;
-$header_top-bg  : $secondary_color;
-$header_mid-bg  : transparent;
-
+$header:(
+    header_top:(
+        bg: $white,
+        border-pos: bottom,
+        border-color: $white,
+        border-size: 2px,
+        f-color: inherit,
+        f-size: 14px,
+        tf-size: 16px,
+        tf-color: inherit,
+    ),
+    header_mid:(
+        bg: $white,
+        border-pos: top,
+        border-color: $secondary_color,
+        border-size: 0px,
+        f-color: inherit,
+        f-size: 14px,
+        tf-size: 16px,
+        tf-color: inherit,
+    )
+);
 
 /*__________________________________Navigation Setting_______________________________________*/
 //Navigation color and font declaration
@@ -85,7 +99,10 @@ $main_nav: (
         mnav_lf-dividers: false,                //Main navigation link dividers Ex: "|" 
         //on hover section
         mnav_lh-bg: $primary_color,             //Main navigation link hover background
-        mnav_lhf-color: $white,                 //Main navigation link hover font color
+        mnav_lh_border: true,
+        mnav_lhf-color: inherit,                 //Main navigation link hover font color
+        //Dropdown arrow
+        mnav_dropdown-icon: true,
         //Sub Navigation Section
         subnav-bg: $tertiary_color, 
         subnav-lf-size: $default_font-size,
@@ -106,9 +123,9 @@ $left_nav:(
         filter_block-bg: transparent, 
         filter_block-border: false,         //Options true, "top", "bottom" and "top-bottom"
         filter_block-padding: 0px,
-        filter_block-margin: 0px, 
+        filter_block-margin: 0px,  
         
-        //Left Nav Title 
+        //Left Nav Title   
         filter_block_tf-bg: transparent,
         filter_block_tf-border: bottom,       //Options true, "top", "bottom" and "top-bottom"
         filter_block_tf-margin: 0px 0px,
@@ -139,17 +156,40 @@ $left_nav:(
 
 /*___________________________________Footer Setting___________________________________________*/
 //Footer 
-$footer_bg      : transparent;
-$footer_top-bg  : $secondary_color;
-$footer_mid-bg  : $secondary_color; 
-$footer_btm-bg  : $primary_color;
+$footer:(
+    footer_top:(
+        bg: $secondary_color,
+        border-pos: bottom,
+        border-color: $white,
+        border-size: 2px,
+        f-color: inherit,
+        f-size: 14px,
+        tf-size: 16px,
+        tf-color: inherit,
+    ),
+    footer_mid:(
+        bg: $secondary_color,
+        border-pos: top,
+        border-color: $secondary_color,
+        border-size: 0px,
+        f-color: inherit,
+        f-size: 14px,
+        tf-size: 16px,
+        tf-color: inherit,
+    ),
+    footer_down:(
+        bg: $primary_color,
+        border-pos: top,
+        border-color: $secondary_color,
+        border-size: 2px,
+        f-color: inherit,
+        f-size: 14px,
+        tf-size: 16px,
+        tf-color: inherit,
+    )
+);
 
 //Footer a heading (hf = heading font)
-$fnav_hf-color  : $white;
-$fnav_pf-color  : $white;
-$fnav_lf-color  : $white;
-$fnav_lf-family : $default_font-family;
-$fnav_lf-size   : $font_md;
 
 $copyright_font-color   : $white;
 $copyright_font-Size    : $font_xs;
@@ -169,6 +209,7 @@ $btncolors: (
         btnhf-color : $white,   // Button hover font color
         abg-color   : $gray-dark,    //Button Active background color
         bg-icon     : false,
+        bg-icon-posintion: before,
         onlyborder  : false
     ), 
     secondary: (
@@ -178,6 +219,17 @@ $btncolors: (
         btnhf-color : $white, // Button hover font color
         abg-color   : $gray-dark, //Button Active background color
         bg-icon     : false,
+        bg-icon-posintion: before,
+        onlyborder  : false
+    ),
+    search:(
+        bg-color    : $primary_color,//Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $black, // Button hover backogrund color
+        btnhf-color : $white, // Button hover font color
+        abg-color   : $gray-dark, //Button Active background color
+        bg-icon     : false,
+        bg-icon-posintion: before,
         onlyborder  : false
     ),
     addtocart:(
@@ -186,7 +238,8 @@ $btncolors: (
         hbg-color   : $black, // Button hover backogrund color
         btnhf-color : $white, // Button hover font color
         abg-color   : $gray-dark, //Button Active background color
-        bg-icon     : true,
+        bg-icon     : false,
+        bg-icon-posintion: before,
         onlyborder  : false
     ),
     viewallchoice:(
@@ -195,8 +248,9 @@ $btncolors: (
         hbg-color   : $gray-dark, // Button hover backogrund color
         btnhf-color : $white,   // Button hover font color
         abg-color   : $gray-dark,    //Button Active background color
-        bg-icon     : true,
-        onlyborder  : flase
+        bg-icon     : false,
+        bg-icon-posintion: before,
+        onlyborder  : false
     ),
     continueshop:(
         bg-color    : transparent, //Button Background color
@@ -204,7 +258,18 @@ $btncolors: (
         hbg-color   : transparent, // Button hover backogrund color
         btnhf-color : $primary_color,   // Button hover font color
         abg-color   : $gray-dark,    //Button Active background color
-        bg-icon     : true,
+        bg-icon     : false,
+        bg-icon-posintion: before,
+        onlyborder  : flase
+    ),
+    ship:(
+        bg-color    : transparent, //Button Background color
+        btnf-color  : $primary_color, //Button Font Color
+        hbg-color   : transparent, // Button hover backogrund color
+        btnhf-color : $primary_color,   // Button hover font color
+        abg-color   : $gray-dark,    //Button Active background color
+        bg-icon     : false,
+        bg-icon-posintion: before,
         onlyborder  : flase
     )
 );
@@ -214,48 +279,39 @@ $btncolors: (
 $headings:(
     page-title:(
         fontfamily      : $heading_font-family,
+        fontcolor       : inherit,
+        fontsize        : 16px, 
         texttransform   : uppercase,
-        color           : $heading_font-color,
-        fontsize        : $heading_font-size,
-        marginvalue     : 0px 0px 20px 0px,
-        paddingvalue    : 15px 0px,
-        border          : false 
+        marginvalue     : 0 0 15px 0,
+        paddingvalue    : 15px 0, 
+        tborder         : false 
     ),
     block-title:(
         fontfamily      : $heading_font-family,
-        texttransform   : capitalize,
-        color           : $default_font-color,
+        fontcolor       : $default_font-color,
         fontsize        : $font_xlg,
+        texttransform   : capitalize,
         marginvalue     : 0px,
         paddingvalue    : 0px,
-        border          : false
-    ),
-    filter-block-title:(
-        fontfamily: $heading_font-family,
-        texttransform: uppercase,
-        color: $default_font-color,
-        fontsize: $font_xlg,
-        marginvalue: 0px 0px,
-        paddingvalue: 12px 0px,
-        border: true
-    ),
-    item-name:(
-        fontfamily: $heading_font-family,
-        texttransform: uppercase,
-        color: $default_font-color,
-        fontsize: $font_xlg,
-        marginvalue: 0px 0px,
-        paddingvalue: 12px 0px,
-        border: false
+        tborder         : false
     ),
     slider-title:(
-        fontfamily: $heading_font-family,
-        texttransform: uppercase,
-        color: $default_font-color,
-        fontsize: $font_xlg,
-        marginvalue: 0px 0px,
-        paddingvalue: 12px 0px,
-        border: false
+        fontfamily      : $default_font-family,
+        fontcolor       : $default_font-color,
+        fontsize        : $font_xlg,
+        texttransform   : capitalize,
+        marginvalue     : 15px 0px,
+        paddingvalue    : 0px,
+        tborder         : false
+    ),
+    CaroBlockTitle:(
+        fontfamily      : $default_font-family,
+        fontcolor       : $default_font-color,
+        fontsize        : $font_xlg,
+        texttransform   : capitalize,
+        marginvalue     : 10 0 15px 0,
+        paddingvalue    : 0px,
+        tborder         : false
     )
 );
 
@@ -289,7 +345,7 @@ $categories:(
     box_shadow      : false,
        
     title_bg        : false, // It it is true kidly update title background color in $category-item-bg
-    title_font-color    : $default_font-color,
+    title_font-color    : $secondary_color,  
     title_font-family   : $default_font-family
 ); 
 $category-item-bg: transparent;

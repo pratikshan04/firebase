@@ -138,7 +138,7 @@
 				<li class="active">$!locale.get("product.heading.productCategory")</li>              
 			</ul>
 		#end
-		<h1 class="cimm_page-title hidden">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h3> 
+		<!--h1 class="cimm_page-title hidden">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h1--> 
 #elseif($!LayoutName=="ProductList")
 	#if($!breadCrumbList)
 	<ul class="breadcrumb">
@@ -235,7 +235,7 @@
 	#end
 	<ul class="breadcrumb">
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
-	    <li><a href='$!locale.get("website.url.OrderHistory")'>$!locale.get("product.header.CompletedOrders")</a></li>
+	    <li><a href='$!locale.get("website.url.OrderHistory")'>$!locale.get("product.heading.orderHistory")</a></li>
 	    <li class="active">$!locale.get("product.button.printInvoices")</li>
 	</ul>
 #elseif($!LayoutName=="OrderDetailPage")
@@ -260,7 +260,7 @@
 				<li><a href="OpenOrderSale.action?reqType=webOrder&orderStatus=New">$!locale.get("product.heading.openOrders")</a></li>
 		    #end
 		    #if($!orderStatus && $!orderStatus=="History")
-				<li><a href="$!locale.get('website.url.OrderHistory')">$!locale.get("product.header.CompletedOrders")</a></li>
+				<li><a href="$!locale.get('website.url.OrderHistory')">$!locale.get("product.heading.orderHistory")</a></li>
 		    #end
 		    <li class="active">$!locale.get("product.heading.orderDetail")</li>
 		    <!-- <li class="active"><span class="landingLink">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum)  #if($!orderDetail && $!orderDetail.orderStatus.contains("Bid")) $!locale.get("product.label.eclipsebidNumber") #else $!locale.get("product.label.orderNumber") #end $!orderDetail.orderNum #end #end</span></li> -->

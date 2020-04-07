@@ -42,6 +42,7 @@
     }
 }
 .locationDataWrap{
+    margin-bottom: 20px;
     .store-list{
         li{
             &:first-child{
@@ -50,16 +51,21 @@
             div{
                 cursor: pointer;
 				color: $primary_color;
-				font-family: $default_font-family;
+                font-family: $default_font-family;
+                position: relative;
                 span.iconToggle{
                     float: left;
-                    width: 8%;
+                    margin-right: 10px;
                     font-size: 20px;
                 }
                 span.pull-left{
                     width:62%;
 					color: $primary_color;
 					font-family: $default_font-family;
+                }
+                span.productTitle {
+                    position: absolute;
+                    top: 2px;
                 }
                 span.pull-right{
                     width:26%;

@@ -7,13 +7,13 @@
 	#else
 	#set($numberToolFormat = "#0.00")
 	#end
-	<h3 class="cimm_blockHeading">$!locale.get("product.heading.completedOrders")</h3>
+	<h1 class="cimm_blockHeading">$!locale.get("product.heading.orderHistory")</h1>
 	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered display rwd-table">
 		<thead>
 			<tr>
 				<th class="left">$!locale.get("form.label.OrderNo")</th>
 				##if($searchBy=="partNumber")
-				<th class="left">Ship Date</th>
+				<th class="left">$!locale.get('product.label.shipDate')</th>
 				##else
 				<!-- <th class="left">$!locale.get("product.heading.PostDate")</th> -->
 				##end
@@ -30,7 +30,7 @@
 			<tr>
 				<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
 				##if($searchBy=="partNumber")
-				<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
+				<td class="alignLeft" data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
 				##else
 				<!-- <td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.postDate)$!orderList.postDate #else &nbsp; #end</td> -->
 				##end
@@ -101,7 +101,7 @@
 						<tr>
 							<th class="left">$!locale.get("form.label.OrderNo")</th>
 							##if($searchBy=="partNumber")
-							<th class="left">Ship Date</th>
+							<th class="left">$!locale.get('product.label.shipDate')</th>
 							##else
 							<!-- <th class="left">$!locale.get("product.heading.PostDate")</th> -->
 							##end
@@ -120,7 +120,7 @@
 						<tr>
 							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
 							##if($searchBy=="partNumber")
-							<td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
+							<td class="alignLeft" data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
 							##else
 							<!-- <td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.postDate)$!orderList.postDate #else &nbsp; #end</td> -->
 							##end

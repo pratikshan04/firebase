@@ -69,7 +69,7 @@
 	#else
 		#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-")+"/")
 	#end
-<h3 class="cimm_page-title">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $!locale.get("product.heading.productCategory") #end</h3>
+<h1 class="cimm_page-title">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $!locale.get("product.heading.productCategory") #end</h1>
 <div class="cimm_category">
 	#if($!categoryDescription.shortDesc)
 	<div class="row mBottom-4">
@@ -416,7 +416,7 @@
 								</div>
 								<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
 								<div class="itemCountList clickStream">
-									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
+									<button class="btn btn-viewallchoice" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
 									<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 										<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
 										<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
@@ -678,14 +678,14 @@
 			</div>
 		#else
 			#if($paginate>1)
-			<div id="loadingNextPage" style="text-align: center;margin:10px 0;color:#1d4288;font-size:16px;">
-				<a href="javascript:void(0);" onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</a>
+			<div id="loadingNextPage" class="loadMore">
+				<button onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</button>
 			</div>
 			#end
 			<script type="text/javascript">
 			 function loadMoreItems()
 			 {
-				 var checkmodevalue = $!("#productListBlock").find('li').attr('class');
+				 var checkmodevalue = $("#productListBlock").find('li').attr('class');
 				 $('#loadMoreBtn').html('Loading..');
 				 loadNextPageAsync("$!paginationURL",$!resultPage,checkmodevalue);
 			 }     
