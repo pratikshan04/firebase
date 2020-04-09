@@ -111,6 +111,9 @@
 			jQuery(".cartCountDisplayLi").addClass("ItemsInCart");
 			jQuery(".cartCountDisplayLi").html('<a href="$!locale.get("website.url.ShoppingCart")"><em class="fa fa-shopping-cart"></em><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount $!locale.get("product.label.items")</span></a>')
 		}
+		if($("#isWebview").val() == "WEBVIEW"){
+			getCartCount($!cartCount)
+		}
 	</script>
 	#if($!productListData.get(0).requestType=="SEPERATE" || $!productListData.get(0).requestType=="UPDATE")
 		#set($singleItem=$!productListData.get(0))
@@ -363,7 +366,7 @@
 							<a data-select="itemAnchor" href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span data-select="imageSpanToSetID">
 									#set($itemImg = $!item.imageName.replace('%26','&amp;') )
-									#if($itemData.imageName.toUpperCase().contains("HTTP"))
+									#if($!item.imageName.toUpperCase().contains("HTTP"))
 										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
 									#else
 										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImage$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>

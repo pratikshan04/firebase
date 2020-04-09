@@ -271,8 +271,10 @@ ul.slick-dots {
 		li{
 			float: left;
 			ul{
+                padding: 0;
 				li{
-					float: none;
+                    float: none;
+                    list-style-type: none;
 				}
 			}
 		}

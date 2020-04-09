@@ -564,7 +564,23 @@ $breakpoint-mobileView: 480px;
   }
   .toggle_content {
 		display: none;
-	}
+  }
+  .listGridContainer {
+    .listView{
+      ul{
+        li{
+          .sessionDesp{
+            width: 100%;
+            clear: both;
+            ul{
+              width: 100%;
+              clear: both;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
   .calendarFilter ul li {

@@ -97,12 +97,12 @@
 				 #end
 			</ul>
 		#else
-			<!-- <h1 class="cimm_page-title">$!pageTitle</h1> -->
 			<ul class="breadcrumb">
 			    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
 			    <li class="active">$!pageTitle</li>
 			</ul>
 		#end
+		<h1 class="cimm_page-title">$!pageTitle</h1>
 	#end
 #elseif($!LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
 	#set($listPageHeading = "")
@@ -241,11 +241,11 @@
 #elseif($!LayoutName=="OrderDetailPage")
 	<!-- <h1 class="cimm_page-title">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum) $!locale.get("product.label.orderNumber") $!orderDetail.orderNum #end #end</h1> -->
 	#if($orderDetail.orderStatus.contains("Bid"))
-    <h2 class="cimm_page-title">$!locale.get("product.heading.bidDetail")</h2>   
+    <h1 class="cimm_page-title">$!locale.get("product.heading.bidDetail")</h1>   
     #elseif($!requestType != "openQuote")
-    <h2 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h2>     
+    <h1 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h1>     
     #else
-    <h2 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h2>   
+    <h1 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h1>   
     #end  
 	<ul class="breadcrumb">
 	 ##if($!orderDetail && !$!orderDetail.orderStatus.toUpperCase().contains("INVOICE"))

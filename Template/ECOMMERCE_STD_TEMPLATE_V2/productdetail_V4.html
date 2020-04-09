@@ -226,7 +226,7 @@
 				#if($itemData.productDescription && $!itemData.productDescription.length() > 1)
 					#set($itemProductDescription = $!itemData.productDescription)
 				#end
-				<h2 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemProductTitle</h2>
+				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemProductTitle</h1>
 				<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemProductDescription</p>
 				<input type="hidden" id="titleText" name="titleText" value="$!itemProductTitle"/> 
 				<!-- Product Mode Attribute Drop Down Start -->
@@ -277,9 +277,9 @@
 			#else	
 				#set($customVal = $customFieldVal.get($itemData.itemId))
 				<!-- Single Item Without Product Mode -->
-				<h2 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
+				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
 					<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-				</h2>
+				</h1>
 				<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p> 
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">

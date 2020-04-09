@@ -845,10 +845,16 @@ $(document).ready(function () {
 							window.location.href = "/Login";
 						} else if (data.indexOf("/AFP/") != -1) {
 							window.location.href = data;
+							if ($("#isWebview").val() == "WEBVIEW") {
+								fingerPrint(un, ps);
+							}
 						} else if ($.trim(data) && $.trim(data).indexOf("{") == 0) {
 							var responseDetails = JSON.parse(data);
 							if (responseDetails && responseDetails['salesUser'] == 'Y') {
 								loadCustomForSalesUser(responseDetails);
+								if ($("#isWebview").val() == "WEBVIEW") {
+									fingerPrint(un, ps);
+								}
 							}
 						} else {
 							unblock();
@@ -2617,7 +2623,7 @@ function sendProduct() {
 		}
 
 		$("#mailLink").val(emailitemlink);
-		$(".cimm_itemdetail-imgcontainer img").width('100%');
+		//$(".cimm_itemdetail-imgcontainer img").width('100%');
 	} else if (emailitem == null) {
 		$("#SendItem").hide();
 		$("#ErrorField").append("Please <a onclick='history.go(-1);' href='javascript:void(0);'>Go Back</a> and select a Product to Send to your Friends/Associates");
