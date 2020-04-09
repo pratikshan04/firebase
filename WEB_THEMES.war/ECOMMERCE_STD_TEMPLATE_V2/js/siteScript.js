@@ -2790,12 +2790,12 @@ function loadNextPageAsync(pageLink, resultPerPage, checkmodevalue) {
 				priceLoadMainFunction();
 				processing = false;
 				if (checkmodevalue == "gridView") {
-					$('li.newPageScrolled').each(function () {
-						$(this).removeClass('newPageScrolled listView').addClass(checkmodevalue);
+					$('li.listView').each(function () {
+						$(this).removeClass('listView').addClass(checkmodevalue);
 					});
 				} else {
-					$('li.newPageScrolled').each(function () {
-						$(this).removeClass('newPageScrolled gridView').addClass(checkmodevalue);
+					$('li.gridView').each(function () {
+						$(this).removeClass('gridView').addClass(checkmodevalue);
 					});
 				}
 			});
