@@ -7,6 +7,9 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 		   accordion:true
 	});
 });
+enqueue('/getPromotedProductGroupsPage.action?reqType=GP&AjaxRequest=Y',function(data){	
+	$("#promotedProductsTable").html(data);	
+});
 enqueue('/OrderHistory?AjaxRequest=Y&dt='+new Date(),function(data){
 	$("#orderHistory").html(data);
 });

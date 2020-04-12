@@ -97,11 +97,9 @@ function priceLoadMainFunction() {
 		if (product.uom && product.uom.length > 0) {
 			uom = product.uom;
 			if (layoutName === "ProductDetailPage") {
-				pricestr = pricestr + " / <em id='prodUOM'>"
-						+ product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
+				pricestr = pricestr + " / <em id='prodUOM'>" + product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
 			} else {
-				pricestr = pricestr + " / <em>" + product.uom.toUpperCase()
-						+ "</em>";
+				pricestr = pricestr + " / <em>" + product.uom.toUpperCase()	+ "</em>";
 			}
 			
 			if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
@@ -206,9 +204,7 @@ function priceLoadMainFunction() {
 
 	function appendNewBranch(product, branch) {
 		//$(markUpPrefixes.ALL_BRANCH_AVAILABILITY + product.partNumber).append(branch);
-		$(
-				document.getElementById(markUpPrefixes.ALL_BRANCH_AVAILABILITY
-						+ product.partNumber)).append(branch);
+		$(document.getElementById(markUpPrefixes.ALL_BRANCH_AVAILABILITY + product.partNumber)).append(branch);
 	}
 
 	function createTableRow(branchName, branchAvailability) {
@@ -246,32 +242,25 @@ function priceLoadMainFunction() {
 			var itemId = productModeItem.getAttribute('data-itemid');
 			if (document.getElementById('selectItemCheckbox_' + itemId)) {
 				document.getElementById('selectItemCheckbox_' + itemId).setAttribute('data-addtocartflag', 'Y');
+				$('#selectItemCheckbox_' + itemId).parent().removeClass('btns-disable');
 			}
 			//productModeItem.setAttribute('data-addtocartflag','Y');			
 		} else {
-			$(document.getElementById("[data-partnumber='" + partNumber + "']"))
-					.removeAttr('disabled');
-			$(document.getElementById("enableCart_" + partNumber)).removeClass(
-					'btns-disable');
+			$(document.getElementById("[data-partnumber='" + partNumber + "']")).removeAttr('disabled');
+			$(document.getElementById("enableCart_" + partNumber)).removeClass('btns-disable');
 		}
 	}
 
 	function disableAddToCart(partNumber) {
-		if (document.getElementById('enableCart_' + partNumber)
-				&& document.getElementById('enableCart_' + partNumber).classList) {
-			document.getElementById('enableCart_' + partNumber).classList
-					.remove('addToCart');
-			document.getElementById('enableCart_' + partNumber).classList
-					.add('btns-disable');
+		if (document.getElementById('enableCart_' + partNumber)	&& document.getElementById('enableCart_' + partNumber).classList) {
+			document.getElementById('enableCart_' + partNumber).classList.remove('addToCart');
+			document.getElementById('enableCart_' + partNumber).classList.add('btns-disable');
 		} else {
-			$(document.getElementById("enableCart_" + partNumber)).removeClass(
-					'addToCart');
-			$(document.getElementById("enableCart_" + partNumber)).addClass(
-					'btns-disable');
+			$(document.getElementById("enableCart_" + partNumber)).removeClass('addToCart');
+			$(document.getElementById("enableCart_" + partNumber)).addClass('btns-disable');
 		}
 		if (document.querySelector("[data-partnumber='" + partNumber + "']")) {
-			document.querySelector("[data-partnumber='" + partNumber + "']")
-					.setAttribute('disabled', 'disabled');
+			document.querySelector("[data-partnumber='" + partNumber + "']").setAttribute('disabled', 'disabled');
 		}
 	}
 
@@ -404,14 +393,12 @@ function priceLoadMainFunction() {
 	}
 
 	function getUserHomeBranch() {
-		var userHomeBranch = document
-				.getElementById(markUpPrefixes.USER_HOME_BRANCH).value;
+		var userHomeBranch = document.getElementById(markUpPrefixes.USER_HOME_BRANCH).value;
 		return userHomeBranch;
 	}
 
 	function getDefaultWareHouse() {
-		var defaultBranch = document
-				.getElementById(markUpPrefixes.DEFAULT_BRANCH).value;
+		var defaultBranch = document.getElementById(markUpPrefixes.DEFAULT_BRANCH).value;
 		return defaultBranch;
 	}
 
@@ -423,8 +410,7 @@ function priceLoadMainFunction() {
 	function getPricePrecision() {
 		var pricePrecision = 2;
 		if (document.getElementById(markUpPrefixes.PRICE_PRECISION)) {
-			pricePrecision = document
-					.getElementById(markUpPrefixes.PRICE_PRECISION).value;
+			pricePrecision = document.getElementById(markUpPrefixes.PRICE_PRECISION).value;
 		}
 		return pricePrecision;
 	}

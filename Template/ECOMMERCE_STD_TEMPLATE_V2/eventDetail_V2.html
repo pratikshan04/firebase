@@ -1,7 +1,7 @@
 #if($!eventsList && $!eventsList.title && $!eventsList!="")
 <div class="eventsSidebarWrap">	
 	<div class="eventRightContent">
-		<h3 class="cimm_page-title">$!eventsList.title</h3>
+		<h1 class="cimm_page-title">$!eventsList.title</h1>
 		<ul class="eventInfoBlock pull-left">
 			<li>
 				<strong>$!locale.get("eventDetail.label.date"): </strong>
@@ -354,7 +354,7 @@
 								<option value="Credit Card" >$!locale.get("event.select.creditCard")</option>
 								<option value="Purchase Order">$!locale.get("event.select.purchaseOrder")</option>
 							</select>
-							 <strong class="blockElement mTop-2">$!locale.get("event.label.cost"): $!$!eventCost</strong>
+							 <strong class="blockElement mTop-2">$!locale.get("event.label.cost"): $$!eventCost</strong>
 						</div>		
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<label>$!locale.get("event.label.PONumber") <span class="text-danger">*</span></label>
