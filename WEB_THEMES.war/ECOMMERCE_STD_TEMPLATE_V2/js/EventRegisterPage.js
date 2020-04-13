@@ -157,7 +157,7 @@ function validateEventReg(userLogin){
 						success: function(msg){
 							var arrRes = msg.split("|");
 							if (arrRes[0]=="1"){
-								bootAlert("small","success","Information","Thank you for registering to this event.");
+								bootAlert("small","success","Success","Thank you for registering to this event.");
 								$("[data-bb-handler='ok']").click(function(){
 									 location.href="/EventCalendar";
 								 }); 

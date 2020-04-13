@@ -532,7 +532,7 @@
 									#end
 								</ul>
 								<ul>
-									#if($itemData.packDesc)<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
+									#if($itemData.packDesc && $itemData.packDesc.trim() != "")<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 									<li class="cimm_priceWrap">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">

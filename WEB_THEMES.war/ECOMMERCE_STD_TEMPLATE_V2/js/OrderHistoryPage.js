@@ -8,7 +8,7 @@ $(function() {
 	$('#orderHistoryShipTable').DataTable({
 		"language": {
 			"search":"_INPUT_",
-			"searchPlaceholder":"Search  Orders History",
+			"searchPlaceholder":"Search Orders History",
 			"sLengthMenu" :"Show _MENU_",
 			"oPaginate" : {
 				"sPrevious" :"Prev",

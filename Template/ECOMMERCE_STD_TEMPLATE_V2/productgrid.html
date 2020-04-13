@@ -376,7 +376,7 @@
 									</form>
 							 	</div>
 							 	<div class="itemCountGrid">
-							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+							 		<a class="btn btn-viewallchoice clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<!-- <span>
@@ -634,13 +634,13 @@
 			</div>
 		#else
 			#if($paginate>1)
-			<div id="loadingNextPage" style="text-align: center;margin:10px 0;color:#1d4288;font-size:16px;">
-				<a href="javascript:void(0);" onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</a>
+			<div id="loadingNextPage"  class="loadMore">
+				<button onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</button>
 			</div>
 			#end
 			<script type="text/javascript">
 			 function loadMoreItems(){
-				 var checkmodevalue = $!("#productListBlock").find('li').attr('class');
+				 var checkmodevalue = $("#productListBlock").find('li').attr('class');
 				 $('#loadMoreBtn').html('Loading..');
 				 loadNextPageAsync("$!paginationURL",$!resultPage,checkmodevalue);
 			 }     
