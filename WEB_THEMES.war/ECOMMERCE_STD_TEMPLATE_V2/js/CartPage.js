@@ -65,7 +65,7 @@ function submitSaveCart(title,groupId,obj,isReorder){
 		}
 	}
 	jQuery.get('saveCartPage.action?listId='+groupId+'&listName='+title+'&isReOrder='+isReorder,function(data,status){
-		$(toggleListID).toggle();
+		$(toggleListID).hide();
 		var result = data.split('|');
 		//$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
 		$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ groupName).attr("href","/"+result[1]+"/ProductGroup/Cart?savedGroupName="+groupName).fadeIn();

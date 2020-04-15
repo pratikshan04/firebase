@@ -7,44 +7,42 @@ function jssorSliderFunction() {
 var refreshBanner = function(bannerId,index){
 	console.log("bannerId : " + bannerId + "-" + index);
 	jQuery.getJSON("/bannerApi.action?bannerListId="+bannerId+"&reload=false", function(data) {
-		if(data!=null && data.trim()!=""){
-			if(data.hasOwnProperty('bannerTemplate')){
-				var bannerData = "";
-				var bannerTemplate = data.bannerTemplate;
-				var dynamicProperties = data.dynamicProperties;
-				var bannerType = dynamicProperties.bannerType;
-				var transistion = "";
-				var transistionDelay = "";
-				var transistionAutoPlay = "";
-				var carouselSetting = "";
-				if(typeof dynamicProperties.bannerTransistion!='undefined'){
-					transistion = dynamicProperties.bannerTransistion;
-				}
-				if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
-					transistionDelay = dynamicProperties.bannerTransistionDelay;
-				}
-				if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
-					transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
-				}
-				if(typeof dynamicProperties.carouselSetting!='undefined'){
-					carouselSetting = dynamicProperties.carouselSetting;
-				}
-				jQuery("[data-bannerid='"+bannerId+"']").each(function(){
-					var bannerData = "";
-					var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
-					var wrapperId = jQuery(this).attr("id");
-					var bannerType = jQuery(this).data("bannertype");
-					console.log("Wrapper id :"+sliderId);
-					bannerData = data.bannerTemplate.replace("slidercontainer",sliderId);
-					jQuery(this).html(bannerData);
-					
-					if(bannerType=="slider"){
-						initJssorSlides(sliderId, transistion, transistionDelay,transistionAutoPlay);
-					}else if(bannerType=="carousel"){
-						initCarousel(sliderId,carouselSetting);
-					}
-				});
+		if(data && data.hasOwnProperty('bannerTemplate')){
+			var bannerData = "";
+			var bannerTemplate = data.bannerTemplate;
+			var dynamicProperties = data.dynamicProperties;
+			var bannerType = dynamicProperties.bannerType;
+			var transistion = "";
+			var transistionDelay = "";
+			var transistionAutoPlay = "";
+			var carouselSetting = "";
+			if(typeof dynamicProperties.bannerTransistion!='undefined'){
+				transistion = dynamicProperties.bannerTransistion;
 			}
+			if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
+				transistionDelay = dynamicProperties.bannerTransistionDelay;
+			}
+			if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
+				transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
+			}
+			if(typeof dynamicProperties.carouselSetting!='undefined'){
+				carouselSetting = dynamicProperties.carouselSetting;
+			}
+			jQuery("[data-bannerid='"+bannerId+"']").each(function(){
+				var bannerData = "";
+				var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
+				var wrapperId = jQuery(this).attr("id");
+				var bannerType = jQuery(this).data("bannertype");
+				console.log("Wrapper id :"+sliderId);
+				bannerData = data.bannerTemplate.replace("slidercontainer",sliderId);
+				jQuery(this).html(bannerData);
+				
+				if(bannerType=="slider"){
+					initJssorSlides(sliderId, transistion, transistionDelay,transistionAutoPlay);
+				}else if(bannerType=="carousel"){
+					initCarousel(sliderId,carouselSetting);
+				}
+			});
 		}
 	});
 };
@@ -81,6 +79,7 @@ function generateForm(formId){
 			jQuery("[data-widget='"+formId+"']").html(data);
 			var df = jQuery("[data-widget='"+formId+"']").find('.datePicker').attr('data-format');
 			initDatePicker(df);
+			removeCaption();
 			$('.cimm_formContent li').removeAttr('title');
 			$('.col').removeAttr('title');
 		}
@@ -100,4 +99,10 @@ function initDatePicker(dateFormat){
 			startDate: '0',
 		});
 	});
+}
+function removeCaption(){
+	var userLogin = $("#userLogin").val();
+	if (userLogin=="true" ) {
+	    $('[name="jcaptcha"]').parent().remove();
+	}
 }

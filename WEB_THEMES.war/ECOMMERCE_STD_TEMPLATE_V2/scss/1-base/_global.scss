@@ -144,8 +144,7 @@ header ol,
 :not(.cimm_staticPageWrap) ol,
 footer ol li,
 header ol li,
-:not(.cimm_staticPageWrap) ol li,
-#mycanvas ul:not(.slick-slider) li {
+:not(.cimm_staticPageWrap) ol li{
   list-style-type: none;
   padding: 0;
   margin: 0;

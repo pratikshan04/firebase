@@ -73,15 +73,6 @@
 .hideButton{
 	display:none;
 }
-
-#unorderListId li {
-	list-style: disc inside !important;
-}
-
-#orderListId li{
-	list-style: decimal inside !important;
-}
-
 .left-arrow1{
 	display:block !important;
 	background:url('../images/cms_images/left-arrow.png') no-repeat;

@@ -272,9 +272,13 @@ ul.slick-dots {
 			float: left;
 			ul{
                 padding: 0;
+                .sliderDescrip{
+                    min-height: 34px;
+                }
 				li{
                     float: none;
                     list-style-type: none;
+                    margin: 0;
 				}
 			}
 		}
@@ -364,9 +368,14 @@ ul.slick-dots {
     padding: 10px;
     /*background: $gray-lighten;*/
 	.productTitle {
-		height: 40px;
-		display: inline-block;
 		line-height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        min-height: 40px;
+        height: 40px;
     }
     ul {
         li {

@@ -714,7 +714,7 @@ function scynInitiate() {
 	});
 }
 //------------ ship sync New
-function scynInitiateV2() {
+function scynInitiateV2(page) {
 	block("Please Wait");
 	$.get("getAddressesAddressSync.action?frPage=popLogin&showpopUp=Y", function (data, status) {
 		// $('#generalModel .modal-body').html(data);
@@ -730,7 +730,7 @@ function scynInitiateV2() {
 		}
 		//  $('#generalModel').modal({backdrop: 'static', keyboard: false});
 		var flag = getCookie("isShipToSelected");
-		if (flag != undefined && flag != null && flag != "") {
+		if (flag != undefined && flag != null && flag != "" && !page) {
 			setCookie("isShipToSelected", false);
 		}
 	});
@@ -1189,7 +1189,7 @@ $(document).delegate('[data-function="productGroupDropDown"]', 'click', function
 function addToProductList(_this) {
 	var id = $("#hidden_id").val(),
 		partNumber = $("#itmId_" + id).val(),
-		uomValue = $("#uomValue_" + partNumber).val(),
+		uomValue = $("#uomValue_" + id).val(),
 		qty = $("#itemTxtQty" + id).val(),
 		toggleListID = $("#group_id").val();
 	qty = qty.trim();

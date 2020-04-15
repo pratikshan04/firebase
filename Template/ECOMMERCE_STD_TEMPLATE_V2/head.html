@@ -6,6 +6,11 @@
 #else
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 #end
+#if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage"))
+<script>
+window.location.href = "/"
+</script>
+#end
 #if($LayoutName!="ProductDetailPage")
 	<meta property="og:image" content="$!cdnUrl$!webThemes/$!siteName/images/logo.png" />
 	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
