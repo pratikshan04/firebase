@@ -992,7 +992,7 @@
 	<tbody>
 		#foreach($user in $users)
 		<tr>
-			<td data-th="$!locale.get('label.salesuser.username')">$!user.userName.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.username')">#if($!user.userName.getAsString()) $!user.userName.getAsString() #else <br/> #end</td>
 			<td data-th="$!locale.get('label.salesuser.firstName')">$!user.firstName.getAsString()</td>
 			<td data-th="$!locale.get('label.salesuser.address1')">$!user.address1.getAsString()</td>
 			<td data-th="$!locale.get('label.salesuser.location')">$!user.city.getAsString(), $!user.state.getAsString(), $!user.country.getAsString(), $!user.zipCode.getAsString()</td>
