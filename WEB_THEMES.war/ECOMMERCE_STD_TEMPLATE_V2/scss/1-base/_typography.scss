@@ -3,114 +3,20 @@
 @include font-face(RobotoBlack, 'https://cdn.cimm2.com/fonts/Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
 @include font-face(RobotoCondensedBold, 'https://cdn.cimm2.com/fonts/RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
 
+@include font-face(Glyphicons Halflings, 'https://cdn.cimm2.com/fonts/glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
+
 /*@include font-face(RobotoCondenseRegular, './fonts/robotocondensed-regular-webfont', normal, normal, eot woff ttf svg, robotocondensedregular);
 @include font-face(Robotocondensed-bolditalic, './fonts/robotocondensed-bolditalic-webfont', bold, italic, eot woff ttf svg, robotocondensedbolditalic);
 @include font-face(Robotocondensed-italic, './fonts/robotocondensed-italic', normal, italic, eot woff ttf svg, robotocondenseditalic);
 @include font-face(Robotocondensed-light, './fonts/robotocondensed-light-webfont', normal, normal, eot woff ttf svg, robotocondensedlight);
 @include font-face(Robotocondensed-lightitalic, './fonts/robotocondensed-lightitalic-webfont', normal, italic, eot woff ttf svg, robotocondensed-lightitalic);*/
 
-@include font-face(Glyphicons Halflings, 'https://cdn.cimm2.com/fonts/glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
-
-
-$default_hedingf-size: $font_lg;
-
-/*________________Global A link_____________________*/
-//a link (f=font)
-$alink_f-color: $primary_font-color;
-$alink_f-family: $default_font-family;
-$alink_f-size: $default_font-size;
-
-// (hf = hover font)
-$alink_hf-color: color(secondary);
-$alink_hf-family: font(secondary);
-
-// (af = active font)
-$alink_af-color: color(secondary); 
-$alink_af-family: font(secondary);
-
-
-/*________________Main navigation link_____________________*/
-//Main a link (lf=link font)
-
-$mnav_lf-family: $default_font-family;
-$mnav_lf-size: $font_md;
-
-// (lhf = link hover font)
-//$mnav_lhf-color: color(secondary);
-$mnav_lhf-family: font(secondary);
-$mnav_lhf-size: $default_font-size;
-
-// (laf = link active font)
-$mnav_laf-color: color(secondary); 
-$mnav_laf-family: font(secondary);
-$mnav_laf-size: $default_font-size;
-
-$msnav_lhf-family: $default_font-family;
-$msnav_lhf-size: $default_font-size;
-
-/*________________Body_____________________*/
-$body_font-color: $default_font-color;
-$body_font-size: $default_font-size;
-$body_font-family: $default_font-family;
-
-/*________________Left navigation link_____________________*/
-
-//Left nav (hf = heading font)
-$lnav_hf-color: $default_font-color;
-$lnav_hf-family: $secondary_font-family;
-$lnav_hf-size: $font_lg;
-
-//Left nav a link (lf=link font)
-$lnav_lf-color: $default_font-color;
-$lnav_lf-family: $default_font-family;
-$lnav_lf-size: $font_md;
-
-//Left nav (lhf = link hover font)
-$lnav_lhf-color: $primary_color;
-$lnav_lhf-family: font(secondary);
-
-//Left nav (laf = link active font)
-$lnav_laf-color: color(secondary); 
-$lnav_laf-family: font(secondary);
-
-
-/*________________Footer navigation link_____________________*/
-//Footer a heading (hf=heading font)
-$fnav_hf-family: $default_font-family;
-$fnav_hf-size: $font_sm;
-
-//Footer a link (lf=link font)
-$fnav_lf-color: $default_font-color;
-$fnav_lf-family: $default_font-family;
-$fnav_lf-size: $font_sm;
-
-// (lhf = link hover font)
-$fnav_lhf-color: color(secondary);
-$fnav_lhf-family: font(secondary);
-
-// (laf = link active font)
-$fnav_laf-color: color(secondary); 
-$fnav_laf-family: font(secondary);
-
 /*________________Categories_____________________*/
 //Categories
 $category_hf-family: $default_font-family;
 $category_hf-size: $font_md;
 
-/*________________Block Title_____________________*/
-//Block Title 
-$block_titlef-color: $default_font-color;
-$block_titlef-family: $default_font-family;
-$block_titlef-size: $font-lg;
-
-/*________________//Page Title_____________________*/
-//Page Title 
-$page_titlef-color: $default_font-color;
-$page_titlef-family: $default_font-family;
-$page_titlef-size: $font-lg;
-
-/*________________//Breadcrumb_____________________*/
-//Breadcrumb
-$breadcrumb_lf-color: $gray-light;
-$breadcrumb_lf-family: $default_font-family;
-$breadcrumb_lf-size: $font-lg;
+/*________________Footer navigation link_____________________*/
+$fnav_lf-color: $default_font-color;
+$fnav_lf-family: $default_font-family;
+$fnav_lf-size: $font_sm;

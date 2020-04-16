@@ -110,6 +110,10 @@
 			#end
 		#end
 	#end
+#elseif($LayoutName=='PromotedProductGroupsPage')
+	#set($pageTitleVelo = $!locale.get("product.heading.PromotedProducts") + $!pageTitleseparator + $!pageTitleVelo)
+#elseif ($LayoutName=='PromotedProductsListPage')
+	#set($pageTitleVelo = $!locale.get("product.label.PromotedProductsList") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="ProductList")
 #set($finalPageTitle = "" )
 	#if($breadCrumbList)

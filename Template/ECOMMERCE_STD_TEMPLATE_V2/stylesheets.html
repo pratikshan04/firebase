@@ -1,5 +1,10 @@
 <link rel="shortcut icon" href="$!cdnUrl$!webThemes/$siteName/images/favicon.ico">
-#parse("font-awesomeV5.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
+##if($LayoutName=="CMSStaticPageList" || $LayoutName=="CMSStaticPage" || $LayoutName=="CMSFormList" || $LayoutName=="CMSFormEdit" || $LayoutName=="CMSBannerEdit" || $LayoutName=="CMSBannerList")
+#parse("font-awesomeV5.html")
+##else
+##parse("font-awesome.html")
+##end
+<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
 #if($LayoutName != "HomePage" && $!isStaticHomePage != "Y" && $LayoutName != 'CMSStaticPageList')
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/datatables.min.css" media="all">
@@ -21,7 +26,7 @@
 #elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
-<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?v=$!session.getLastAccessedTime()" media="all" />
 <style id="cssSelector">.demo{color:red;}</style> 
 #if($LayoutName=="QuickOrderStdPage")
 <link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">

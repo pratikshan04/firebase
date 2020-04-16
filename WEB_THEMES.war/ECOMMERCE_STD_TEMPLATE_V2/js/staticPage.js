@@ -72,7 +72,6 @@ function loadWidgets(){
 		generateWidget(widgetId);
 	});
 	homeCarousels();
-	$('.cimm_formContent li').removeAttr('title');
 }
 function generateForm(formId){
 	jQuery.ajax({
@@ -80,6 +79,10 @@ function generateForm(formId){
 		async: false,
 		success: function (data) {
 			jQuery("[data-widget='"+formId+"']").html(data);
+			var df = jQuery("[data-widget='"+formId+"']").find('.datePicker').attr('data-format');
+			initDatePicker(df);
+			$('.cimm_formContent li').removeAttr('title');
+			$('.col').removeAttr('title');
 		}
 	});
 }
@@ -88,4 +91,13 @@ function loadStaticForms(){
 	var formId = jQuery(this).data("widget");
 		generateForm(formId);
 	});  
+}
+function initDatePicker(dateFormat){
+	$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+		$('.datePicker').datepicker({
+			format: dateFormat,
+			autoclose: true,
+			startDate: '0',
+		});
+	});
 }

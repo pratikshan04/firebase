@@ -11,7 +11,7 @@
     font-weight: 400;
     src: url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.eot?#iefix) format("embedded-opentype"),url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.woff) format("woff"),url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.ttf) format("truetype"),url(https://cdn.cimm2.com/fonts/Roboto-Black-webfont.svg#robotoblack) format("svg")
 }
-body{
+body, .table>thead>tr>th, input[type=email], input[type=number], input[type=password], input[type=text]{
 	font-family: RobotoRegular, RobotoBlack;
 }
 /* New CMS CSS */
@@ -1079,11 +1079,11 @@ background:#42e300;
     opacity: 0.4;
 }
 .gm-content ul li{
-	list-style-type:inherit;
+	list-style-type: disc;
 	margin-left:20px;
 }
 .gm-content ol li{
-	list-style-type:inherit;
+	list-style-type: decimal;
 	margin-left:20px;
 }
 :focus {
@@ -2159,6 +2159,9 @@ select:focus {
 	overflow: auto;
 	height: calc(560px - 35px);
 	padding: 15px;
+}
+.previewSection #previewContainer a {
+    pointer-events: none;
 }
 .popupWraper{
 	padding: 10px;

@@ -1,4 +1,5 @@
 function submitThisForm(formId){
+	unusualCode = 0;
 	var currentForm , submitForm, formElements;
 	if($(formId).prop("tagName") != "FORM"){
 		currentForm = $(formId);
@@ -25,6 +26,9 @@ function submitThisForm(formId){
 	var eachElement, formElements = formEle.elements, errorMessages = [];
 	for(i = 0; i < formElements.length; i++){
 		eachElement = formElements[i];
+		if(validateStr(eachElement.value)){
+			unusualCode++;
+		}
 		if(eachElement.dataset.required == "Y"){
 			if(eachElement.dataset.type != 'radio' && eachElement.dataset.type != 'checkbox')
 				validateFormElementsByClassName(eachElement.dataset.type, eachElement, errorMessages);
@@ -40,11 +44,10 @@ function submitThisForm(formId){
 	}
 	if(errorMessages.length > 0){
 		notifyValidation(currentForm, errorMessages.join("<br>"));
-		if(curSubmit[0]){
-			$(curSubmit[0]).val(btnVal).attr("disabled", false);
-		}else if(curSubmitBtn[0]){
-			$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
-		}
+		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+	}else if(unusualCode > 0){
+		bootAlert("medium","error","Error","ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
+		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
 	}else{
 		if($(formId).prop("tagName") != "FORM" || $(formId).attr("data-ajaxSubmit") == "N"){
 			return true;
@@ -117,7 +120,7 @@ function isElementChecked(formElement){
 	return $("[name="+ formElement.name +"]:checked").length > 0; 
 }
 function notifyValidation(form, notifiedErrors){
-	$(form).prepend('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>'+notifiedErrors+'</div>');
+	$(form).prepend('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>'+notifiedErrors+'</div>');
 	$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 }
 
@@ -177,7 +180,9 @@ function submitFormToServer(that){
 						if(notified=="Password Updated Successfully"){
 							unblock();
 							bootAlert("medium","success","Success","Password Updated Successfully, Please login again to continue");
-							window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+							$("[data-bb-handler='ok']").click(function(){
+								window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+							});
 						}else if(hideThat && hideThat != "Y"){
 							if(hideThat != "N"){
 								$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
@@ -198,23 +203,24 @@ function submitFormToServer(that){
 				$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 			}
 			var curSubmit = $(that).find("input[type='submit']"), curSubmitBtn = $(that).find("button[type='submit']"), btnVal = localStorage.getItem("btnVal");
-			if(curSubmit[0]){
-				$(curSubmit[0]).val(btnVal).attr("disabled", false);
-			}else if(curSubmitBtn[0]){
-				$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
-			}
+			enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
 			localStorage.removeItem("btnVal");
 			unblock();
 		},
 		error: function(){
 			unblock();
 			var curSubmit = $(that).find("input[type='submit']"), curSubmitBtn = $(that).find("button[type='submit']"), btnVal = localStorage.getItem("btnVal");
-			if(curSubmit[0]){
-				$(curSubmit[0]).val(btnVal).attr("disabled", false);
-			}else if(curSubmitBtn[0]){
-				$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
-			}
+			enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+			localStorage.removeItem("btnVal");
 			bootAlert("small","error","Error","Something went wrong");
 		}
 	});
+}
+
+function enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal){
+	if(curSubmit[0]){
+		$(curSubmit[0]).val(btnVal).attr("disabled", false);
+	}else if(curSubmitBtn[0]){
+		$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
+	}
 }

@@ -253,6 +253,7 @@ var QuickOrder = {};
     };
     
 	QuickOrder.validateOrderPad = function(){
+		var qtyAlert = locale("label.quickOrder.enterValidQuantity");
 		var isAllRowEmpty = true;
 		var isInvalidQty = false;
 		var validationMessage = "";
@@ -281,9 +282,9 @@ var QuickOrder = {};
 							  isInvalidQty = true;
 							  tdQty.removeClass("htInvalid"); 
 							  tdQty.addClass('tdValidate');
-				   			  var qtyValmessage = "Enter Valid Quantity to row# : "+(tr.index()+1);
+				   			  var qtyValmessage = qtyAlert + " : "+(tr.index()+1);
 				   			  qtyValidate = qtyValidate+separatorQty+qtyValmessage;
-				   			  separatorQty = "\n";
+				   			  separatorQty = "<br />";
 						  }
 					  });
 				   }
@@ -351,6 +352,7 @@ var QuickOrder = {};
 	};
 
 	QuickOrder.quickOrderCopyPaste = function(){
+		var qtyAlert = locale("label.quickOrder.enterValidQuantity"), keywordAlert = locale("label.quickOrder.enterValidKeyword");
 		var invalidQtyFlag = false;
 		var invalidKeyWordFlag = false;
 		var rowNumber = 1;
@@ -375,13 +377,13 @@ var QuickOrder = {};
 							var valuesComaSeparate = lines[ln].split(",");
 							if(valuesComaSeparate!=null && valuesComaSeparate.length>0){
 								if(valuesComaSeparate[1]==null || valuesComaSeparate[1]==""){
-									valuesComaSeparate[1] = "1";
+									valuesComaSeparate[1] = "0";
 								}
 								var qtyInput = valuesComaSeparate[1];
 								var keywordInput = valuesComaSeparate[0];
 								var keywordInputTrim = jQuery.trim(keywordInput);
 								if(keywordInputTrim != "" && keywordInput!=null){
-									if(QuickOrder.isInt(qtyInput)){
+									if(QuickOrder.isInt(qtyInput) && parseInt(qtyInput) > 0){
 										var item = {}
 										item ["keyword"] = valuesComaSeparate[0];
 										item ["qty"] = qtyInput;
@@ -390,11 +392,11 @@ var QuickOrder = {};
 										submitFlag = true;
 									}else{
 										invalidQtyFlag = true;
-										rowNumberString = rowNumberString+stringSeparator+rowNumber;
+										rowNumberString += stringSeparator + qtyAlert + ' : '+rowNumber;
 									}
 								}else{
 									invalidKeyWordFlag = true;
-									rowNumberString = rowNumberString+stringSeparator+rowNumber;
+									rowNumberString += stringSeparator + keywordAlert + ' : '+rowNumber;
 								}
 							}
 							
@@ -402,12 +404,12 @@ var QuickOrder = {};
 							var valuesTabSeparate = lines[ln].split("\t");
 							if(valuesTabSeparate!=null && valuesTabSeparate.length>0){
 								if(valuesTabSeparate[1]==null || valuesTabSeparate[1]==""){
-									valuesTabSeparate[1] = "1";
+									valuesTabSeparate[1] = "0";
 								}
 								var qtyInput = valuesTabSeparate[1];
 								var keywordInput = valuesTabSeparate[0];
 								if(keywordInput!="" & keywordInput!=null){
-									if(QuickOrder.isInt(qtyInput)){
+									if(QuickOrder.isInt(qtyInput) && parseInt(qtyInput) > 0){
 										var item = {}
 										item ["keyword"] = valuesTabSeparate[0];
 										item ["qty"] = qtyInput;
@@ -431,7 +433,7 @@ var QuickOrder = {};
 						}
 					}
 					rowNumber = rowNumber+1;
-					stringSeparator = "\n";
+					stringSeparator = "<br />";
 				}
 			}else{
 				unblock();
@@ -444,18 +446,10 @@ var QuickOrder = {};
 			bootAlert("small","error","Error","Please enter valid values");
 			submitFlag = false;
 		}
-		if(invalidQtyFlag){
+		if(invalidQtyFlag || invalidKeyWordFlag){
 			unblock();
 			setTimeout(function(){
-				bootAlert("small","error","Error","Enter Valid Keyword to row# : <br/>"+rowNumberString);
-			}, 500);
-			submitFlag = false;
-			return false;
-		}
-		if(invalidKeyWordFlag){
-			unblock();
-			setTimeout(function(){
-				bootAlert("small","error","Error","Enter Valid Keyword to row# : <br/>"+rowNumberString);
+				bootAlert("small","error","Error",rowNumberString);
 			}, 500);
 			submitFlag = false;
 			return false;
@@ -656,7 +650,7 @@ if($("#quickOrderRecordLimit").length>0){
 var textarea = document.getElementById("copyPasteText");
 var spaces = textarea.getAttribute("cols");
 textarea.onkeyup = function() {
-   var lines = textarea.value.split("\n");
+   var lines = textarea.value.split("<br />");
     
    for (var i = 0; i < lines.length; i++) {
          if (lines[i].length <= spaces) continue;
@@ -684,5 +678,5 @@ textarea.onkeyup = function() {
             $("#copyPasteInstruction").css("text-decoration", "")
         },2000);
     }    
-   textarea.value = lines.slice(0, limit).join("\n");
+   textarea.value = lines.slice(0, limit).join("<br />");
 };

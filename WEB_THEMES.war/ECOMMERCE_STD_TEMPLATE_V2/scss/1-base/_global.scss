@@ -144,10 +144,27 @@ header ol,
 :not(.cimm_staticPageWrap) ol,
 footer ol li,
 header ol li,
-:not(.cimm_staticPageWrap) ol li {
+:not(.cimm_staticPageWrap) ol li,
+#mycanvas ul:not(.slick-slider) li {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+.cimm_bodyContentWrap {
+  .cimm_staticPageWrap {
+    ul {
+      padding: 0 0 0 30px;
+      li {
+        list-style-type: disc;
+      }
+    }
+    ol {
+      padding: 0 0 0 30px;
+      li {
+        list-style-type: decimal;
+      }
+    }
+  }
 }
 .row-space {
   margin: 15px 0px;

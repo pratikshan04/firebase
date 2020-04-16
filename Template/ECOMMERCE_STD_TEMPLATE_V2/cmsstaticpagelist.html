@@ -3,7 +3,7 @@
 <script type="text/javascript" src="$!webThemes/CMS/js/jquery.colorbox.js" ></script>
 #end
 <link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
+<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
 <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
 <link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
 <link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
@@ -248,7 +248,7 @@ function deletePage(id,pType,pName){
 		jQuery.ajax({
 			   type: "POST",
 			   url: "addUpdateStaticPageCms.action",
-			   data: "type=delete&pageData.id="+id+"&dt="+new Date()+"&pageData.pageType="+pType+"&pageData.pageName="+pName,
+			   data: "type=delete&pageData.startDate=''&pageData.endDate=''&pageData.id="+id+"&dt="+new Date()+"&pageData.pageType="+pType+"&pageData.pageName="+pName,
 			   success: function(msg){
 	  		  		 window.location.href="listStaticPageCms.action";
 				}	

@@ -287,7 +287,7 @@
 				#end
 			</ul>
 			<ul>
-				#if($itemData.packDesc)
+				#if($!itemData.packDesc && $itemData.packDesc.trim() != "")
 					<li id="packDescs" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$itemData.packDesc</span></li>
 				#end
 			</ul>

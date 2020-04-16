@@ -1,4 +1,4 @@
-<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
+<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
 <style>
 .tool-edit, .tool-delete {
 	padding: 3px 10px;
@@ -67,6 +67,10 @@
 		<div class="dragelement dragFormElement" data-type="input" title="Input Text">
 			<span class="input-text">Abc</span>
 			Input Text
+		</div>
+		<div class="dragelement dragFormElement" data-type="date" title="Input Date">
+			<span class="input-text">mm/dd/yy</span>
+			Input Date
 		</div>
 		<div class="dragelement dragFormElement" data-type="textarea" title="Text Area">
 			<span class="text-area">Abc</span>
