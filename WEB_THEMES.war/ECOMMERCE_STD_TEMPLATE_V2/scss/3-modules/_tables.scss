@@ -122,7 +122,7 @@
 	overflow-y: auto;
 }
 
-@media only screen and (max-width: 992px) {    
+@media only screen and (max-width: 992px) {
    /* Force table to not be like tables anymore */
   table.rwd-table, 
 	.rwd-table thead, 
@@ -162,5 +162,22 @@
 		text-align:left;
 		font-weight: bold;
 	}
-	.rwd-table td:before { content: attr( data-th); }
+    .rwd-table td:before { content: attr( data-th); }
+    #salesrepModal, #ShipDiv{
+        .col-sm-6, .col-sm-5, .col-sm-7 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .dataTables_filter, .dataTables_paginate{
+            text-align: center;
+        }
+        .form-inline {
+            .form-control {
+                display: inline-block;
+                width: auto;
+                vertical-align: middle;
+            }
+        }
+    }
 }

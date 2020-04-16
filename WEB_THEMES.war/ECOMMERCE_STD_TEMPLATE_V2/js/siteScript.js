@@ -3838,16 +3838,18 @@ $(document).ready(function () {
 	function loadUserByCustomer(attributes) {
 		localStorage.removeItem("currentCustomerSU");
 		localStorage.setItem("currentCustomerSU", JSON.stringify(attributes));
-		block('Please wait');
+		//block('Please wait');
+		var loadData = '<div class="text-center"><h3 class="cimm_block-title"><em class="fa fa-spin fa-spinner"></em> Please wait...</h3></div>';
+		$("#salesrepModal .modal-body").html(loadData);
 		$.get("getUsersByCustomerUnit.action",
 			{ "customerId": attributes['customerid'], "accountNumber": attributes['accountnumber'] },
 			function (data, status, xhr) {
 				//$("#salesrepModal").modal('hide');
 				$("#salesrepModal .modal-body").html(data);
-				$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+				/*$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 				$('#salesrepModal').on('shown.bs.modal', function () {
 					$('body').addClass('modal-open');
-				});
+				});*/
 				unblock();
 				//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 				//$('#salesrepModal').on('shown.bs.modal', function () {
