@@ -138,7 +138,7 @@
 									<tbody>
 										#foreach($shipAddress in $shipAddressList)
 										<tr>
-											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.customerName</td>
+											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.firstName $!shipAddress.lastName ##$!shipAddress.customerName</td>
 											<td class="alignLeft" data-th="$locale.get('form.label.address')">$shipAddress.address1<br />$!shipAddress.address2</td>		
 											<td data-th="$locale.get('form.label.city')">$shipAddress.city</td>
 											<td data-th="$locale.get('form.label.state')">$shipAddress.state</td>
