@@ -117,7 +117,7 @@ function isValidPassword(formElement){
 	}
 }
 function isElementChecked(formElement){
-	return $("[name="+ formElement.name +"]:checked").length > 0; 
+	return $("[name='"+ formElement.name +"']:checked").length > 0; 
 }
 function notifyValidation(form, notifiedErrors){
 	$(form).prepend('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>'+notifiedErrors+'</div>');

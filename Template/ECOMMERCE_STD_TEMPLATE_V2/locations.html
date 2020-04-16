@@ -1,26 +1,26 @@
 <input type="hidden" id="siteDisplayName" value="$siteDisplayName" />
 <div class="row locationDetails">
 	<div class="col-md-3 col-sm-12 col-xs-12">
-		<h4 class="searchHeading">$!locale.get('location.heading.searchYourNearestLocation')</h4>
 		#if($!CommonDBQuerySystemParameter.get("EnableZipCodeSearchInLocations")=="Y")
-			<div class="locationZipcode clearAfter">
-				<div class='labelWrap'>$!locale.get('product.label.enterZipCode')</div>
-				<div class='inputWrap'><input type="text" id="selectedZipCode" placeholder="$!locale.get('product.label.enterZipCode')" name="selectedZipCode" value="$!selectedZipCode" ></div>
+		<h4 class="searchHeading">$!locale.get('location.heading.searchYourNearestLocation')</h4>
+		<div class="locationZipcode clearAfter">
+			<div class='labelWrap'>$!locale.get('product.label.enterZipCode')</div>
+			<div class='inputWrap'><input type="text" id="selectedZipCode" placeholder="$!locale.get('product.label.enterZipCode')" name="selectedZipCode" value="$!selectedZipCode" ></div>
+		</div>
+		<div class="locationSearch clearAfter">
+			<div class='labelWrap'>$!locale.get('product.label.within')</div>
+			<div class='inputWrap'>
+				<select class="selectpicker" id="selectedMiles" name="selectedMiles">
+					<option value="50" #if($selectedMiles && $selectedMiles=="50") selected #end>50 miles</option>
+					<option value="10" #if($selectedMiles && $selectedMiles=="10") selected #end>10 miles</option>
+					<option value="20" #if($selectedMiles && $selectedMiles=="20") selected #end>20 miles</option>
+					<option value="30" #if($selectedMiles && $selectedMiles=="30") selected #end>30 miles</option>
+					<option value="40" #if($selectedMiles && $selectedMiles=="40") selected #end>40 miles</option>
+					<option value="100" #if($selectedMiles && $selectedMiles=="100") selected #end>100 miles</option>
+				</select>
 			</div>
-			<div class="locationSearch clearAfter">
-				<div class='labelWrap'>$!locale.get('product.label.within')</div>
-				<div class='inputWrap'>
-					<select class="selectpicker" id="selectedMiles" name="selectedMiles">
-						<option value="50" #if($selectedMiles && $selectedMiles=="50") selected #end>50 miles</option>
-						<option value="10" #if($selectedMiles && $selectedMiles=="10") selected #end>10 miles</option>
-						<option value="20" #if($selectedMiles && $selectedMiles=="20") selected #end>20 miles</option>
-						<option value="30" #if($selectedMiles && $selectedMiles=="30") selected #end>30 miles</option>
-						<option value="40" #if($selectedMiles && $selectedMiles=="40") selected #end>40 miles</option>
-						<option value="100" #if($selectedMiles && $selectedMiles=="100") selected #end>100 miles</option>
-					</select>
-				</div>
-			</div>
-			<a id="findNowButton">$!locale.get('product.label.findNow')</a>
+		</div>
+		<a id="findNowButton">$!locale.get('product.label.findNow')</a>
 		#end
 		<div id="googleMapPanel" class="locationDetailWrap">
 			<div class="feature-filter"></div>

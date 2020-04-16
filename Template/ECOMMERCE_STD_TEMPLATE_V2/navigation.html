@@ -316,6 +316,15 @@
 		#elseif($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
 			#set($subMenu = 1)
 		#end
+		#set($firstLevelMenu = 'javascript:void(0);')
+		#if($topMenu.itemUrl)
+			#if($topMenu.staticPageUrl)
+				#set($firstLevelMenu = $topMenu.staticPageUrl)
+			#else
+				#set($firstLevelMenu = '/'+$topMenu.itemUrl)
+			#end
+		#end
+		
 		<li>
 			#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
 				<span><a href="$topMenu.level1Menu">$topMenu.level1Menu</a>#if($!CommonDBQueryWareHouseList.size()>0)<!-- <em class="fa"></em> -->#end</span>
@@ -328,7 +337,7 @@
 				#end
 			#else
 				<span>
-					<a href="#if($topMenu.itemUrl) #if($topMenu.staticPageUrl) $topMenu.staticPageUrl #else /$topMenu.itemUrl #end #else javascript:void(0); #end" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
+					<a href="$firstLevelMenu" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
 					#if($topMenu.menuList.size()>0)<em class="fa"></em>#end
 				</span>
 			#end
@@ -336,9 +345,17 @@
 			#if($topMenu.menuList && $topMenu.menuList.size()>0)
 			<ul class="dropdown-menu">
 				#foreach($subStaticMenu in $topMenu.menuList)
+				#set($secLevelMenu = 'javascript:void(0);')
+				#if($subStaticMenu.itemUrl)
+					#if($subStaticMenu.staticPageUrl)
+						#set($secLevelMenu = $subStaticMenu.staticPageUrl)
+					#else
+						#set($secLevelMenu = '/'+$subStaticMenu.itemUrl)
+					#end
+				#end
 					<li class="sec">
 						<span>
-							<a href="#if($subStaticMenu.itemUrl) #if($subStaticMenu.staticPageUrl) $subStaticMenu.staticPageUrl #else /$subStaticMenu.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
+							<a href="$secLevelMenu" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
 								$subStaticMenu.level2Menu
 							</a>
 							#if($subStaticMenu.menuList.size()>0)
