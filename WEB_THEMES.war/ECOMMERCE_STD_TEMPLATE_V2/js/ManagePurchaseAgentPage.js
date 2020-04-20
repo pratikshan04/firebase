@@ -18,6 +18,8 @@ function disableUser(userID) {
 						setTimeout(function () { window.location.reload(); }, 1000);
 					}
 				})
+			}else{
+				$('#status_' + userID).parent().find("input[type!='hidden']").attr('checked', false);
 			}
 		}
 	});
@@ -37,9 +39,13 @@ function enableUser(userID) {
 						window.location.href = "doLogOff.action";
 					} else {
 						showNotificationDiv("Success", data);
+						$('#status_' + userID).addClass('active text-right').html('Disable');
+						$('#status_' + userID).parent().attr("data-original-title", "Disable User");
 						setTimeout(function () { window.location.reload(); }, 1000);
 					}
 				});
+			}else{
+				$('#status_' + userID).parent().find("input[type!='hidden']").attr('checked', true);
 			}
 		}
 	});

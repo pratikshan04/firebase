@@ -1152,5 +1152,24 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         }
     }
 }
+#openOrderTable_wrapper{
+    .tabFooter{
+        #openOrderTable_paginate{
+            width: 50%;
+            float: right;
+        }
+    }
+    .dataTables_filter{
+        display: none;
+    }
+}
+#OrdersHistoryDetails {
+    #endDate, #startDate{
+        background: url(../images/calIcon.png) 96%/20px no-repeat;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: -5px;
+    }
+}
 
 @import "3-modules/modules";

@@ -569,7 +569,7 @@ $breakpoint-mobileView: 480px;
     .listView{
       ul{
         li{
-          .sessionDesp{
+          &.sessionDesp{
             width: 100%;
             clear: both;
             ul{
@@ -794,7 +794,7 @@ $breakpoint-mobileView: 480px;
     font-size: 10px;
     padding: 8px 2px;
   }
-  .marketingMaterial label {
+  .marketingMaterial label,#orderPoSearchBtn,.clearform {
     margin-top: 8px;
   }
   #productSearchForm .cimm_inlineButton {
