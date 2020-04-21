@@ -959,9 +959,9 @@
 	<tbody>
 		#foreach($customer in $customers)
 		<tr>
-			<td>$!customer.accountNumber.getAsString()</td>
-			<td>$!customer.customerName.getAsString()<br/> $!customer.address1.getAsString()</td>
-			<td>$!customer.city.getAsString(), $!customer.state.getAsString(), $!customer.country.getAsString(), $!customer.zipCode.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.customer.account.number')">$!customer.accountNumber.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.address1')">$!customer.customerName.getAsString()<br/> $!customer.address1.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.location')">$!customer.city.getAsString(), $!customer.state.getAsString(), $!customer.country.getAsString(), $!customer.zipCode.getAsString()</td>
 			<td><button class="usersForCustomer button" data-customerid="$!customer.customerId.getAsString()" data-accountnumber="$!customer.accountNumber.getAsString()">Select</button></td>
 		</tr>
 		#end
@@ -992,10 +992,10 @@
 	<tbody>
 		#foreach($user in $users)
 		<tr>
-			<td>$!user.userName.getAsString()</td>
-			<td>$!user.firstName.getAsString()</td>
-			<td>$!user.address1.getAsString()</td>
-			<td>$!user.city.getAsString(), $!user.state.getAsString(), $!user.country.getAsString(), $!user.zipCode.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.username')">#if($!user.userName.getAsString()) $!user.userName.getAsString() #else <br/> #end</td>
+			<td data-th="$!locale.get('label.salesuser.firstName')">$!user.firstName.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.address1')">$!user.address1.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.location')">$!user.city.getAsString(), $!user.state.getAsString(), $!user.country.getAsString(), $!user.zipCode.getAsString()</td>
 			<td><button class="persistUserDetails button" data-username="$!user.userName.getAsString()">Select</button></td>
 		</tr>
 		#end

@@ -183,7 +183,7 @@ var QuickOrder = {};
     	}else{
     		cartCountString = "0";
     	}
-    	$('.cartCountrefresh').html(cartCountString);
+    	$('.cartCountrefresh').html("(" + cartCountString + ") " + locale('product.label.items'));
     	if($('#countInCart').length>0){
     		$('#countInCart').val(cartCountString);
     	}

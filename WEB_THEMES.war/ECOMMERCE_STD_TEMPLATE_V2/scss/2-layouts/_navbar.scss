@@ -6,9 +6,9 @@ nav.navbar {
     .cimm_nav{
         >ul{
             >li{
-                &:last-child{
+                &:nth-last-child(3) {
 					> .dropdown-menu{
-					    left: -143px;
+					    left: -165px;
 					    li{
 						    >.dropdown-menu {
 								top: 0;

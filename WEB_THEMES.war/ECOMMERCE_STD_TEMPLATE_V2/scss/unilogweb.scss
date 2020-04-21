@@ -406,6 +406,7 @@ $modal_closebtn-color: $default_font-color;
     font-size: 14px;
     color: #fff !important;
     z-index: 10;
+    right:0;
 }
 
 .cimm_instructions {
@@ -1144,4 +1145,12 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
   margin: 15px 0 15px 0;
   font-size:16px;
 }
+.pagination{
+    >li{
+        >a, >span{
+            padding: 6px 8px;
+        }
+    }
+}
+
 @import "3-modules/modules";
