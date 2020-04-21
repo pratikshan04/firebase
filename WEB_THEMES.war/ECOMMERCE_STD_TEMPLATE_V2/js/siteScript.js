@@ -3917,6 +3917,7 @@ $(document).ready(function () {
 	});
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function (src) {
+		$('#salesrepModal').css({'padding-right':'0'});
 		block('Please wait');
 		localStorage.removeItem("salesUserSelected");
 		localStorage.setItem("salesUserSelected", "Y");
