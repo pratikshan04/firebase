@@ -16,7 +16,8 @@
 				<h3>
 				$!locale.get('product.label.yourOrderCanceled') - <span class="text-danger">$!locale.get('product.label.orderFailed')</span>
 				</h3>
-				<p class="customerServiceNo">$!locale.get('product.label.contactCustomerService'): <a class="orangeClr" href='tel:$!CommonDBQuerySystemParameter.get("CUSTOMER_SERVICE_NUMBER")'>$!CommonDBQuerySystemParameter.get("CUSTOMER_SERVICE_NUMBER")</a></p>
+				#set($customerServiceNo = $commonUtility.validateString($!CommonDBQuerySystemParameter.get("CUSTOMER_SERVICE_NUMBER")))
+				<p class="customerServiceNo">$!locale.get('product.label.contactCustomerService'): <a class="orangeClr" href="tel:$!customerServiceNo.replaceAll('&[#0-9]+;','')">$!customerServiceNo</a></p>
 			#end
         #end
 	</div>
