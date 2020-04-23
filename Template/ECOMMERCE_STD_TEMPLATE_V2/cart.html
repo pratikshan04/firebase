@@ -178,12 +178,39 @@
                             </ul>
                         </div>
                     </td>
-                    <td data-th="$!locale.get('product.heading.perUnitPrice')">
-                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice) / $!itemData.qtyUOM ($!itemData.packageQty)</strong>
+                    
+                     #if(($!session.getAttribute("isSalesUser").equals("Y") || $!session.getAttribute("isSalesAdmin").equals("Y")) && $!CommonDBQuerySystemParameter.get('ENABLE_OVERRIDE_PRICE_FROM_SALE_ADMIN')=='Y' )
+                   <td data-th="$!locale.get('product.heading.perUnitPrice')" >
+                    <span id="editunitprice_$!itemData.productListId">
+                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)  $!itemData.uom</strong></br>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	#end
+				     	<a href="javascript:void(0);" class="text-underline" title='$!locale.get("product.button.update")' onclick="editPrice('$!itemData.productListId');">$!locale.get("product.label.Editunitprice")</a>
+				     </span>
+				     <span class="editpricesales_$!itemData.productListId hideMe">
+				     	  $<input type="text" id='updatedUnitPrice_$!itemData.productListId' class="editCustomerPrice text-center" name='updatedUnitPrice_$!itemData.productListId' value="$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)"><span> /$!itemData.uom</span>
+                        #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
+				     		#set($checkout="Y")    
+				     	#end
+				     	<ul class="updateCustomerPrice">
+				     	 <li> <a href="javascript:void(0);" class="updateLink" title='$!locale.get("product.button.update")' onclick='updatePrice($!itemData.productListId, "$!itemData.partNumber");'> $!locale.get("product.button.update") </a> </li>
+				     	 <li> <a href="javascript:void(0);" class="cancelLink" title='$!locale.get("product.button.cancel")' onclick="cancelUpdatePrice($!itemData.productListId);"><i class="fa fa-times" aria-hidden="true"></i></a> </li>
+				     	 </ul>
+				     </span>
                     </td>
+                        <input type="hidden" id="unitPrice_$!itemData.productListId" name="unitPrice_$!itemData.productListId" value="$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)"/>
+						<input type="hidden" id="uom_$!itemData.productListId" name="uom_$!itemData.productListId" value="$!itemData.uom"/>
+                    #else
+                   <td data-th="$!locale.get('product.heading.perUnitPrice')">
+                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
+                        #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
+				     		#set($checkout="Y")    
+				     	 #end
+                    </td>
+                	
+                    #end
+                   
                     <td data-th="$!locale.get('product.label.uom')">
                         <strong>$!itemData.uom #if($itemData.uomQty && $!itemData.uomQty > 1) $!itemData.uomQty #else &nbsp; #end</strong>
                     </td>

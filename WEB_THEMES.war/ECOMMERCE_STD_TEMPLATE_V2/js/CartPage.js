@@ -845,3 +845,64 @@ function sendApproval() {
 	
 	setItemsToLocalStorage(myCart.storeName, []);
 })();
+
+function editevent(partNum){
+	var itempartnumber=partNum
+	$('.editpricesales_'+itempartnumber).css('display','block');
+    $('#editunitprice_'+itempartnumber).css('display' , 'none');
+	
+}
+function editPrice(productListId){
+	$('.editpricesales_'+productListId).removeClass('hideMe');
+	$('#editunitprice_'+productListId).addClass('hideMe');	
+}
+
+function cancelUpdatePrice(productListId){
+    $('#editunitprice_'+productListId).removeClass('hideMe');
+    $('.editpricesales_'+productListId).addClass('hideMe');
+}
+
+function updatePrice(productListId, partNum){
+	var unitPrice = $('#unitPrice_'+productListId).val();
+	var updatedUnitPrice = $('#updatedUnitPrice_'+productListId).val();
+	var uom = $('#uom_'+productListId).val();
+	var getPriceFrom = 'SALESREP';
+	var itemQty=$("#textQty_"+partNum).val();
+	if(updatedUnitPrice <= 0){
+		bootAlert("small","error","Error","Cannot update item with zero or less than zero price.");
+	}else if(unitPrice != updatedUnitPrice){
+		var cartId = productListId;
+		if(productListId != ""){
+			$("#refreshCartId").val(productListId);
+			if(typeof cartId!="undefined" && cartId!=null && cartId!=""){
+				$("#refreshQty").val($(".textQty_"+cartId).val());
+			}
+			else{$("#refreshQty").val($("#textQty_"+partNum).val());}
+			
+			$("#lineItemCommentRef").val($("#lineItemComment_"+productListId).val());
+			if($("#requiredByDateRef").length > 0){
+				$("#requiredByDateRef").val($("#reqDate_"+productListId).val());
+			}
+		}
+		
+		var str = "&updateId="+productListId+"&unitPrice="+unitPrice+"&updatedUnitPrice="+updatedUnitPrice+"&uom="+uom+"&getPriceFrom="+getPriceFrom+"&itemQty="+itemQty;
+		block("Please Wait");
+		$.ajax({
+			type: "POST",
+			url:"updateCustomerPricePage.action",
+			data: str,
+			success: function(response){
+				unblock();
+				if(response){
+					bootAlert("small","success","Success","Cart Updated");
+					window.location.href = "shoppingCartPage.action";
+				}else{
+					bootAlert("small","error","Error","Cart Rejected Failed. Please try again");
+				}
+			}
+		});
+	}else{
+		unblock();
+		cancelUpdatePrice(productListId);
+	}
+}

@@ -834,49 +834,47 @@
 	  #foreach($customerbought in $!customerAlsoBought)
 	  #set($itemcustomerbought=$!customerbought.brandName+" "+$!customerbought.manufacturerPartNumber) 
 	  <li itemscope itemtype="http://schema.org/Product">
-		<div class="cimm_linkItemImg">
+		<div class="cimm_slideItemImg">
 			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span> 
 			 #if($customerbought.imageName.contains("http") || $linkItem.imageType=="URL")
-				 <img image="image" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+				 <img image="image" id="imageName$!itemData.itemId" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 			 #else
-				 <img image="image" src="$!itemImage$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+				 <img image="image" id="imageName$!itemData.itemId" src="$!itemImage$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 			 #end
 			</span>
 			</a>
 		</div>
-		<div class="cimm_linkItemDesp">
+		<div class="cimm_slideItemDesp">
 			<ul>
 			   	<li>
-			   		<h4 itemprop="name">
-			   			#set($itemTitle = $!customerbought.brandName)
-			   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
-			   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
-			   			#end
-			   			<a class="cimm_linkProdTitle" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
-					 		#if($linkItemTitle.length()>18)
-					 			$!itemTitle.substring(0, 18)...
-					 		#else
-					 			$!itemTitle
-					 		#end
-			   			</a>
-			   		</h4>
+	   			#set($itemTitle = $!customerbought.brandName)
+	   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
+	   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
+	   			#end
+	   			<a class="productTitle" itemprop="name" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			 		#if($linkItemTitle.length()>18)
+			 			$!itemTitle.substring(0, 18)...
+			 		#else
+			 			$!itemTitle
+			 		#end
+	   			</a>
 			   	</li>
-			   	<li class="customerboughtDescrip">
+			   	<li class="sliderDescrip">
 			   		#if($customerbought.shortDesc.length()>40)
-			   				<p itemprop="description">$!customerbought.shortDesc.substring(0, 40)...</p>
-			   			#else
-			        		<p itemprop="description"> $!customerbought.shortDesc</p>
-			   			#end
+	   				<p itemprop="description">$!customerbought.shortDesc.substring(0, 40)...</p>
+		   			#else
+	        		<p itemprop="description"> $!customerbought.shortDesc</p>
+		   			#end
 			   	</li>
-				<li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!customerbought.partNumber</span></li>
+				<li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!customerbought.itemId">$!customerbought.partNumber</span></li>
 			    #if($customerbought.manufacturerPartNumber)
 				<li itemprop="mpn"><strong>$!locale.get("product.label.mpn"):</strong> <span>$!customerbought.manufacturerPartNumber</span></li>
 				#end
-			    #if($!customerbought.upc)
+				#if($!customerbought.upc)
 			    <li itemprop="sku"><strong>$!locale.get("product.label.upc"): </strong><span> $!customerbought.upc</span></li>
 			    #end
-			   <!-- 	#if($customerbought.minOrderQty>0 && $!customerbought.orderInterval>0)
+			   <!-- #if($customerbought.minOrderQty>0 && $!customerbought.orderInterval>0)
 				<li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!customerbought.minOrderQty</spaN></li>
 				<li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!customerbought.orderInterval</span></li>
 				#end -->
@@ -888,8 +886,8 @@
 					</span>
 				</li> -->
 			</ul>
-			<!--  Add to cart 
-			<span class="addToCartFloat" data-select='addtoCartbtn_$!customerbought.partNumber'>
+			<!--  Add to cart -->
+			<!--  <span class="addToCartFloat" data-select='addtoCartbtn_$!customerbought.partNumber'>
 			#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 				#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 					#if($itemData.price>0)
@@ -913,7 +911,7 @@
 				<input type="hidden" value="$!customerbought.manufacturerPartNumber" id="MPNValue_$!customerbought.partNumber" />
 			</span>
 			##itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
-			Add to cart -->
+			<!-- Add to cart -->
 		</div>	
 	  </li>
 	  #end
