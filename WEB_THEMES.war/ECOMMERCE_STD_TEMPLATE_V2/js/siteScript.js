@@ -3835,7 +3835,7 @@ $(document).ready(function () {
 		loadUserByCustomer(selectedCustomer);
 	}
 
-	function loadUserByCustomer(attributes) {
+	function loadUserByCustomer(attributes, from) {
 		localStorage.removeItem("currentCustomerSU");
 		localStorage.setItem("currentCustomerSU", JSON.stringify(attributes));
 		//block('Please wait');
@@ -3844,12 +3844,15 @@ $(document).ready(function () {
 		$.get("getUsersByCustomerUnit.action",
 			{ "customerId": attributes['customerid'], "accountNumber": attributes['accountnumber'] },
 			function (data, status, xhr) {
-				//$("#salesrepModal").modal('hide');
-				$("#salesrepModal .modal-body").html(data);
-				/*$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
-				$('#salesrepModal').on('shown.bs.modal', function () {
-					$('body').addClass('modal-open');
-				});*/
+				if(from == 'customer'){
+					$("#salesrepModal .modal-body").html(data);
+					$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+					$('#salesrepModal').on('shown.bs.modal', function () {
+						$('body').addClass('modal-open');
+					});
+				}else{
+					$("#salesrepModal .modal-body").html(data);
+				}
 				unblock();
 				//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 				//$('#salesrepModal').on('shown.bs.modal', function () {
@@ -3897,7 +3900,7 @@ $(document).ready(function () {
 				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result) {
-						loadUserByCustomer(selectedCustomer);
+						loadUserByCustomer(selectedCustomer, 'customer');
 					} else {
 						unblock();
 						return true;

@@ -1181,7 +1181,7 @@ background:#42e300;
 	padding: 4px 0 2px 0;
 	display: inline-block;
 }
-.staticPageSave .cms_leftMenuClose {
+.staticPageSave .cms_leftMenuClose, .staticPageSave .cms_rightMenuClose {
 	position: absolute;
 	border: none;
 	background: #456078;
@@ -1217,6 +1217,13 @@ iframe#iframeId {
 	border: none;
 	padding: 10px;
 	width: 340px;
+}
+.cms_leftMenuSlide.staticPageSave.rightSlide {
+	right: -400px;
+    left: inherit;
+    transition: right 0.3s ease-in-out;
+    -webkit-transition: right 0.3s ease-in-out;
+    -moz-transition: right 0.3s ease-in-out;
 }
 .expand-nav .cms_leftMenu {
 	width: 75px;
@@ -1311,7 +1318,7 @@ iframe#iframeId {
 	font-size: 13px;
 	right: 2px;
 }
-.cms_leftMenuClose{
+.cms_leftMenuClose, .cms_rightMenuClose{
 	cursor: pointer;
 	color: #fff;
 	text-align: right;
@@ -2010,7 +2017,7 @@ select:focus {
 	font-size: 24px;
 	opacity: 1;
 }
-.sorceBtn{
+.sorceBtn, .gm_cmsSaveBtn{
 	width: 100px;
 }
 .prevBtn{
@@ -2040,7 +2047,7 @@ select:focus {
 	position: absolute;
 	width: 100%;
 }
-.cmsEditrBtn .action-icon, .resPreviewIcon .action-icon{
+.cmsEditrBtn .action-icon, .resPreviewIcon .action-icon, .gm_cmsSaveBtn .action-icon{
 	display: block;
 }
 #gm-controls button,#gm-controls a {
@@ -2064,7 +2071,7 @@ select:focus {
 .mobile_View span.action-text {
     display: none;
 }
-.prevBtn{
+.prevBtn, .gm_cmsSaveBtn{
 	margin-right: 5px;
 	border-right: 1px solid #d5d6d6;
 	padding-right: 10px;

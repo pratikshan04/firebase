@@ -728,6 +728,9 @@ $breakpoint-mobileView: 480px;
       width: 100%;
     }
   }
+  .bulkActionBtn{
+    margin: 0 auto;
+  }
   .calendarFilterWrap .tableHeader h2 {
     float: none !important;
     width: 100%;
@@ -778,14 +781,24 @@ $breakpoint-mobileView: 480px;
       }
     }
   }
-  .cimm_listGridTopControls .cimm_listGridTopRightCtrls,
-  .cimm_listGridTopControls .cimm_listGridTopRightCtrls form {
-    width: 100%;
-    float: none;
-    text-align: center;
-    display: block;
-    margin: 10px 0;
+  .cimm_listGridTopControls {
+    .cimm_listGridTopRightCtrls{
+      display: block;
+      margin: 0;
+      text-align: center;
+      form{
+        width: 100%;
+        float: none;
+        text-align: center;
+        display: block;
+        margin: 10px 0;
+      }
+      + .row{
+        text-align: center;
+      }
+    }
   }
+ 
   .cimm_itemdetail .cimm_itemdetail-imgcontainer .cimm_itemdetail-image img {
     max-height: 300px !important;
   }
