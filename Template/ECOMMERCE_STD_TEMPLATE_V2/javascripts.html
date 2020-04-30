@@ -389,8 +389,8 @@ $(document).ready(function () {
 		});
 		var value = getCookie("afterLoginUrl");
 		if(value!="" && value!=null && typeof  value != 'undefined'){
-			window.location.href=value;
 			setCookie('afterLoginUrl',"",-1);
+			window.location.href=value;
 		}
 		#if($paginate>1 && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y")
 			#set($paginationURL = $paginationURL.replace("itemLevelFilterPage","taxonomyLevelFilterPage"))

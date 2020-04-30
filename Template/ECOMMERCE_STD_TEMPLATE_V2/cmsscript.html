@@ -1215,7 +1215,7 @@ jQuery(function() {
 		//$('.cms_leftMenuSlide').css({'left':'-400px'});
 		$('.staticPageSave.rightSlide').css({'right':'-400px'});
 		$('.cms_leftMenuSlide').css({'left':'-400px'});
-		if(cms_leftMenuSlide.offset().left == -400){
+		if(parseInt(cms_leftMenuSlide.offset().left) == -400){
 			cms_leftMenuSlide.css({'left':'0px'});
 		}
 	});

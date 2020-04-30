@@ -182,22 +182,22 @@ function refreshShoppingCart(id,partNum){
 	var originalPartNumber = partNum;
 	//partNum = partNum.replace(/ +/g,"_");
 	partNum = partNum.replace(/[#;&,.+*~':"!^$[\]()=>|\/ ]/g, "\\$&");
-	var curQty = $("#textQtyCur_"+partNum).val();
+	var curQty = $("#textQty_"+partNum).val();
 	var mpnDisplay = "";
 	var mpn="";
 	var valu ="";
 	var lessThanMinOrder = true;
 	if(id != ""){
 		$("#refreshCartId").val(id);
-		//$("#refreshQty").val($("#textQty_"+partNum).val());
-		$("#refreshQty").val($.trim($("[data-cartitemid='"+id+"']").val()));
+		$("#refreshQty").val($("#textQty_"+partNum).val());
+		//$("#refreshQty").val($.trim($("[data-cartitemid='"+id+"']").val()));
 		$("#lineItemCommentRef").val($("#lineItemComment_"+id).val());
 		if($("#requiredByDateRef").length > 0){
 			$("#requiredByDateRef").val($("#reqDate_"+id).val());
 		}
 	}
-	//var qtyEntered = parseInt($.trim($("#textQty_"+partNum).val()));
-	var qtyEntered = parseInt($.trim($("[data-cartitemid='"+id+"']").val()));
+	var qtyEntered = parseInt($.trim($("#textQty_"+partNum).val()));
+	//var qtyEntered = parseInt($.trim($("[data-cartitemid='"+id+"']").val()));
 	if($("#mpn_"+partNum).length > 0 && $("#mpnDisplay"+partNum).length > 0){
 		mpn = $("#mpn_"+partNum).val();
 		mpnDisplay = $("#mpnDisplay"+partNum).val();
@@ -528,6 +528,7 @@ function sendApproval() {
 		this.qtyInterval = attributes.qtyinterval;
 		this.uom = attributes.uom;
 		this.itemPriceId = attributes.itempriceid;
+		this.value = attributes.value;
 	}
 	
 	function extractItemDetails(element){
@@ -622,7 +623,7 @@ function sendApproval() {
 				persistItem(myCart.storeName, item);
 			}else{
 				if(element.type == "TEXT" || element.type == "text"){
-					element.value = item.minOrderQty;
+					element.value = item.value != 0 ? item.value : item.minOrderQty;
 				}
 				bootAlert("medium","warning","warning",status.description);
 			}
@@ -845,7 +846,6 @@ function sendApproval() {
 	
 	setItemsToLocalStorage(myCart.storeName, []);
 })();
-
 function editevent(partNum){
 	var itempartnumber=partNum
 	$('.editpricesales_'+itempartnumber).css('display','block');
