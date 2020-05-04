@@ -17,6 +17,10 @@ $(document).ready(function(){
 		$("#approveCart, #updateSelectedItems").attr("disabled", true).addClass("btns-disable");
 		showNotificationDiv("error","You cannot add any item to cart from your product group. Please call for availability");
 	}
+	$(".cartElement").on('change',function(src){
+		checkBoxEventHander(src.target);
+	});
+
 });
 
 function checkSelectAll(chk){
@@ -63,3 +67,58 @@ function checkBtns(status){
 		$("#rejectCart, #approveCart").removeClass('slideBtns-hide');
 	}
 }
+function checkBoxEventHander(element){
+	var status, item = extractItemDetails(element);
+	if(element.type == "TEXT" || element.type == "text"){
+		status = validateCartItem(item);
+		if(!status.valid){
+			if(element.type == "TEXT" || element.type == "text"){
+				element.value = item.minOrderQty;
+			}
+			bootAlert("medium","warning","warning",status.description);
+		}
+	}
+}
+function extractItemDetails(element){
+	var qty = 0;
+	var attributes = element.dataset;
+	if(element.type != "TEXT" || element.type != "text"){
+		qty = $("input[type=text][data-cartitemid="+attributes.cartitemid+"]").val();
+	}else{
+		qty = element.value;
+	}
+	return new Item(qty, attributes);
+}
+
+function Item(qty, attributes){
+	this.itemId = attributes.itemid;
+	this.cartItemId = attributes.cartitemid;
+	this.partNumber = attributes.partnumber;
+	this.qty = qty;
+	this.minOrderQty = attributes.minorderqty;
+	this.MinimumOrderQuantity = attributes.minorderqty;
+	this.qtyInterval = attributes.qtyinterval;
+	this.uom = attributes.uom;
+	this.itemPriceId = attributes.itempriceid;
+}
+
+function validateCartItem(item){
+	var status = true, description = "";
+	if(item.qty <= 0) {
+		status = false;
+		description = "Quantity cannot be less than or Equal to Zero";
+	}
+	else if(item.qty < parseInt(item.minOrderQty)){
+		status = false;
+		description = "Quantity cannot be less than Minimum Order Quantity(" + item.minOrderQty +")";
+	}
+	else if(item.qty % item.qtyInterval != 0) {
+		description = "Item Can only be Ordered in multiples of " + item.qtyInterval;
+		status = false;
+	}
+	return {
+		"valid" : status,
+		"description" : description 
+	};
+}
+

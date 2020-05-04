@@ -245,7 +245,7 @@
 		var cms_leftMenuSlide = $('.staticPageSave.rightSlide');
 		var rightSlidePos = cms_leftMenuSlide.offset().left;
 		$('.staticPageSave.rightSlide').css({'right':'-400px'});
-		if( rightSlidePos != rightSlidePos - 400){
+		if( parseInt(rightSlidePos) != rightSlidePos - 400){
 			cms_leftMenuSlide.css({'right':'0px'});
 		}
 	});
