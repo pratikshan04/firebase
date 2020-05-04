@@ -99,19 +99,12 @@ $.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId, function(data
 		var dynamicProperties = data.dynamicProperties;
 		var bannerType = dynamicProperties.bannerType;
 		var transistion = "";
-		var transistionDelay = "";
-		var transistionAutoPlay = "";
 		var carouselSetting = "";
 		
 		if(typeof dynamicProperties.bannerTransistion!='undefined'){
 			transistion = dynamicProperties.bannerTransistion;
 		}
-		if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
-			transistionDelay =  parseInt(dynamicProperties.bannerTransistionDelay);
-		}
-		if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
-			transistionAutoPlay =  parseInt(dynamicProperties.bannerTransistionAutoPlay);
-		}
+		
 		if(typeof dynamicProperties.carouselSetting!='undefined'){
 			carouselSetting = dynamicProperties.carouselSetting;
 		}
@@ -120,7 +113,7 @@ $.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId, function(data
 			bannerType="slider";
 		}
 		if(bannerType=="slider"){
-			initJssorSlides("slidercontainer",transistion, transistionDelay, transistionAutoPlay);
+			initJssorSlides("slidercontainer",transistion);
 			}else if(bannerType=="carousel"){
 				initCarousel("slidercontainer",carouselSetting);
 			}
@@ -132,10 +125,11 @@ $.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId, function(data
 };
 
 var scrollToSelected = function(){
-var radioInput = $("input[name=bannerGroup]:checked") ;
+	
+	var radioInput = $("input[name=bannerGroup]:checked") ;
 	$('#bannerSelectList').animate({
-        scrollTop: radioInput.offset().top
-    }, 100);
+	            scrollTop: radioInput.offset().top
+	        }, 100);
 };
 
 
@@ -161,19 +155,12 @@ var useThisBanner = function(){
 				var dynamicProperties = data.dynamicProperties;
 				var bannerType = dynamicProperties.bannerType;
 				var transistion = "";
-				var transistionDelay = "";
-				var transistionAutoPlay = "";
 				var carouselSetting = "";
 				
 				if(typeof dynamicProperties.bannerTransistion!='undefined'){
 					transistion = dynamicProperties.bannerTransistion;
 				}
-				if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
-					transistionDelay = dynamicProperties.bannerTransistionDelay;
-				}
-				if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
-					transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
-				}
+				
 				if(typeof dynamicProperties.carouselSetting!='undefined'){
 					carouselSetting = dynamicProperties.carouselSetting;
 				}
@@ -188,7 +175,7 @@ var useThisBanner = function(){
 					
 				}
 				if(bannerType=="slider"){
-				window.parent.initJssorSlides(bannerBlockId,transistion,transistionDelay,transistionAutoPlay);
+				window.parent.initJssorSlides(bannerBlockId,transistion);
 				}else if(bannerType=="carousel"){
 					window.parent.jQuery.colorbox.close();
 					window.parent.initCarousel(bannerBlockId,carouselSetting);
@@ -225,19 +212,12 @@ var refreshBanner = function(bannerId){
 			var dynamicProperties = data.dynamicProperties;
 			var bannerType = dynamicProperties.bannerType;
 			var transistion = "";
-			var transistionDelay = "";
-			var transistionAutoPlay = "";
 			var carouselSetting = "";
 			
 			if(typeof dynamicProperties.bannerTransistion!='undefined'){
 				transistion = dynamicProperties.bannerTransistion;
 			}
-			if(typeof dynamicProperties.bannerTransistionDelay!='undefined'){
-				transistionDelay = dynamicProperties.bannerTransistionDelay;
-			}
-			if(typeof dynamicProperties.bannerTransistionAutoPlay!='undefined'){
-				transistionAutoPlay = dynamicProperties.bannerTransistionAutoPlay;
-			}
+			
 			if(typeof dynamicProperties.carouselSetting!='undefined'){
 				carouselSetting = dynamicProperties.carouselSetting;
 			}
@@ -250,7 +230,7 @@ var refreshBanner = function(bannerId){
 				 bannerData = bannerData.replace("slidercontainer",sliderId);
 				 window.parent.jQuery(this).html(bannerData);
 				 if(bannerType=="slider"){
-					 window.parent.initJssorSlides(sliderId,transistion,transistionDelay,transistionAutoPlay);
+					 window.parent.initJssorSlides(sliderId,transistion);
 						}else if(bannerType=="carousel"){
 							 window.parent.initCarousel(sliderId,carouselSetting);
 						}
@@ -265,13 +245,71 @@ var refreshBanner = function(bannerId){
 	});
 
 };
-function replaceUTFicons(obj){
-	if(jQuery("textarea[name=bannerCaption_"+obj+"]").val()==undefined){
-		jQuery("textarea[name=bannerCaptionNew_"+obj+"]").val(jQuery("textarea[name=bannerCaptionNew_"+obj+"]").val().replace(/®/g,"&reg;").replace(/©/g,"&copy;").replace(/™/g,"&trade;"));
-	}else{
-		jQuery("textarea[name=bannerCaption_"+obj+"]").val(jQuery("textarea[name=bannerCaption_"+obj+"]").val().replace(/®/g,"&reg;").replace(/©/g,"&copy;").replace(/™/g,"&trade;"));
-	}
-}
+
+var useThisBannerOld = function(){
+	var bannerId = jQuery("#bannerList").val();
+	//$('div[data-divNumber="' + number + '"]');
+	var selectedBanner = jQuery("input[name=bannerGroup]:checked").val();
+	var bannerBlockId = window.parent.bannerBlockId;
+	console.log("BlockId + "+bannerBlockId + " - " + selectedBanner);
+	var left = 20;
+	var top = 30;
+	if(typeof selectedBanner!='undefined' && selectedBanner!=""){
+		var sliderContent = '';
+		var imgName = '';
+		var bannerCaption ='';
+		var silderContainer = window.parent.jQuery("#"+bannerBlockId);
+		silderContainer.html(window.parent.jQuery("#slidercontainer").html());
+
+		silderContainer.css("width", bannerWidth+"px");
+silderContainer.css("height", bannerHeight+"px");
+
+	
+		silderContainer.find('div[u="slides"]').html("");
+			
+			 // initJssorSlides(jQuery(this).attr("id"));
+		 
+		var bannersDetails = getBannerImageList(selectedBanner);
+		console.log("Banners Length : " + bannersDetails.length);
+		for(i=0;i<bannersDetails.length;i++){
+			var bannerUrl = bannersDetails[i].bannerUrl;
+			if(bannerUrl=="")
+				bannerUrl = "javascript:void(0)";
+			if(bannersDetails[i].bannerCaptionTopPos>0)
+				top = bannersDetails[i].bannerCaptionTopPos;
+				if(bannersDetails[i].bannerCaptionLeftPos>0)
+					left = bannersDetails[i].bannerCaptionLeftPos;
+			imgName = bannersDetails[i].bannerImageName;
+			if(typeof bannersDetails[i].bannerCaptionText!='undefined')
+				bannerCaption = bannersDetails[i].bannerCaptionText;
+			sliderContent = '<div>'+
+			'<a u="image" href="'+bannerUrl+'"><img src="'+window.parent.bannerLogoPath+imgName+'" class="img-responsive"></a>'+
+			'<div u="caption" t="*" class="captionOrange" style="position:absolute; left:'+left+'px; top: '+top+'px; width:300px; height:30px;"> '+
+			bannerCaption+
+			'</div>'+
+			'</div>'+
+		'</div>';
+			silderContainer.find('div[u="slides"]').append(sliderContent);
+			var tempDivId = bannerBlockId+"_temp";
+			
+			if(window.parent.jQuery('#'+tempDivId).length){
+				console.log("Div exist : " + tempDivId);
+				window.parent.jQuery('#'+tempDivId).html(silderContainer.html());
+			}else{
+				var tempContainer = jQuery("<div/>").attr("id",tempDivId).html(silderContainer.html());
+				window.parent.jQuery("#tempSliderConatiner").append(tempContainer);
+			}
+			
+			
+			console.log("Image Name :" +bannersDetails[i].bannerImageName);
+		}
+			  
+			window.parent.initJssorSlides(bannerBlockId);
+			window.parent.jQuery.colorbox.close();
+	}else{alert("Please select banner to use.");}
+
+};
+
 var filterBanners =  function (input,id){
 	var valThis = jQuery(input).val().toLowerCase();
 	
@@ -318,8 +356,16 @@ var deleteBanner = function(bannerListId,bannerListName){
     } else {
     	console.log("Delete Cancelled!");
     }
+    
+    
+	
+		
+	
 	 return false;
 }
+
+
+
 
 /*var deleteBanner = function(bannerListName,siteId){
 	
@@ -346,7 +392,9 @@ var deleteBanner = function(bannerListId,bannerListName){
  		 });
 	
 	 return false;
-}
+}*/
+
+
 
 function paginationScript(n_pages,page_link,iindex,pgno){
 	
@@ -408,4 +456,4 @@ function paginationScript(n_pages,page_link,iindex,pgno){
 		document.write('<a href="'+page_link+nexpage+'">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
 
 	document.write('  </div>');
-}*/
+}

@@ -1,259 +1,234 @@
+
 <link rel="stylesheet"  href="$!webThemes/CMS/css/codemirror.css" /> 	 
-<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.css"/>
-<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.css" />
-<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.css"/>
-<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/lint/lint.css"/>
-<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
+			<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.css"/>
+			<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.css" />
+			<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.css"/>
+			<link rel="stylesheet"  href="$!webThemes/CMS/js/codemirror/addon/lint/lint.css"/>	
 <style>
-.cboxClose_ghost {
-	position: absolute;
-	top: 11px;
-	right: 11px;
-	background: none;
-	width: auto;
-	height: auto;
-	font-size: 18px;
-    color: #FFF;
-	border: 0;
-	padding: 0;
-	margin: 0;
-	overflow: visible;
-	pointer-events: none;
+			.CodeMirror {
+    font-family: monospace;
+    height: 300px;
+    width: 95%;
 }
+.widgetBlock {padding: 20px 10px 20px 20px;}
+.widgetBlock h4 {    
+	background: #f7f7f7;
+    padding: 15px;
+    color: #000;
+    margin-top: 10PX;
+    font-size: 22px;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 10px;
+    margin-bottom:10px;}
+.editformBlock {width: 22%;float: left;margin-bottom: 30px;}
+.editformBlock input[type="text"] {padding: 5px;}
+.editFormLabel {display: block; width: 100%;float: left;text-transform: uppercase;}
+.widget_saveBtn {width: 100%;text-align: center;}
+.widgetBlock .banners_saveListBtn{
+	background-color: #1b63ab;
+    padding: 8px 10px;
+    color: #fff;
+    border: 1px solid #1b63ab;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Trebuchet MS';
+    line-height: 1.5;
+}
+
 </style>
-<button type="button" class="cboxClose_ghost"><i class="far fa-lg fa-times-circle"></i></button>
+
+
 <div class="widgetBlock">
-	#if($!widgetData.id > 0)
-	<h4>Edit Widget</h4>
-	#else
-	<h4>Add Widget</h4>
-	#end
-	<div class="widgetBlockWrap">
-		<form id="widgetForm">
-			<input type="hidden" name="widget.id" id="widgetId" value="$!widgetData.id" />
-			<div class="editformBlock">
-				Widget Name<span style="color:red;">*</span> : 
-				<input type="text" value="$!widgetData.name" name="widget.name" id="widgetName" />
-			</div>
-			<div class="editformBlock">
-				Description :
-				<input type="text" value="$!widgetData.description" name="widget.description" id="description" />
-			</div>
-			<div class="editformBlock">
-				<label>Type :</label>
-				<div class="custom-select">
-					<select name="widgetType"><option value="custom" #if($widgetType=="custom")  selected #end>Custom</option>
-						#foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
-						<option value="$widgetKey" #if($widgetType==$widgetKey) selected #end>$widgetKey</option>
-						#end
-					</select>
-					<span>
-						<i class="fas fa-chevron-down"></i>
-					</span>
-				</div>
-			</div>
-			<div class="clear-both codeBlock">
-				<label class="editFormLabel">
-					Template Code<span style="color:red;">*</span> :
-				</label> 
-				<textarea style="width:200px;" name="widget.templateCode" id="templateCode">
-					$!widgetData.templateCode.replaceAll('</textarea>','&lt;/textarea&gt;')
-				</textarea>
-			</div>
-			<div class="widget_saveBtn text-right">
-				<a class="outLineBtn_left" href="widgetListCms.action"><i class="fa fa-times-circle"></i> Cancel</a>
-				#if($!widgetData.id > 0)
-				<button onclick="return updateWidget();" class="cms_blueBtn">
-					Update Widget
-					<span class="action-icon">
-						<i class="fa fa-lgfa-th-large"></i>
-						<sup class="fas fa-sync-alt"></sup>
-					</span>
-				</button>
-				#else
-				<button onclick="return saveWidget();" class="cms_blueBtn">
-					Add Widget
-					<span class="action-icon">
-						<i class="fa fa-lg fa-th-large"></i>
-						<sup class="fas fa-plus"></sup>
-					</span>
-				</button>
-				#end
-			</div>
-			<input type="hidden" id="actionType" name="type" value="" />
-		</form>
-	</div>
+#if($!widgetData.id > 0)
+<h4>Edit Widget</h4>
+#else
+<h4>Add Widget</h4>
+#end
+<form id="widgetForm">
+<input type="hidden" name="widget.id" id="widgetId" value="$!widgetData.id" />
+<div class="editformBlock">Widget Name<span style="color:red;">*</span> : <input type="text" value="$!widgetData.name" name="widget.name" id="widgetName" /></div>
+<div class="editformBlock">Description <span></span> : <input type="text" value="$!widgetData.description" name="widget.description" id="description" /></div>
+<div class="editformBlock">Type <span></span> : <select name="widgetType" style="font-size: 15px; width: 200px;padding:5px;"><option value="custom" #if($widgetType=="custom")  selected #end>Custom</option>
+#foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
+<option value="$widgetKey" #if($widgetType==$widgetKey) selected #end>$widgetKey</option>
+#end
+</select></div>
+<br />
+<label class="editFormLabel">Template Code<span style="color:red;">*</span> :</label> <textarea style="width:200px;" name="widget.templateCode" id="templateCode">$!widgetData.templateCode.replaceAll('</textarea>','&lt;/textarea&gt;')</textarea>
+<br />
+
+<br />
+<div class="widget_saveBtn">
+#if($!widgetData.id > 0)
+<button onclick="return updateWidget();" class="banners_saveListBtn">Update Widget</button> #else <button onclick="return saveWidget();" class="banners_saveListBtn">Add Widget</button> #end <a class="banners_saveListBtn" href="widgetListCms.action">CANCEL</a>
+
+</div>
+<input type="hidden" id="actionType" name="type" value="" />
+</form>
 </div>
 <input type="hidden" id="siteId" value="$siteId" />
 
+
 <script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/codemirror.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/jshint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/jsonlint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/csslint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/csshint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/showhint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/xmlhint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/htmlhint.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/xml/xml.js"></script> 
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/javascript/javascript.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/css/css.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/velocity/velocity.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/htmlembedded/htmlembedded.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/edit/matchbrackets.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/edit/matchtags.js"></script>			
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/search/search.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/search/searchcursor.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.js"></script>			
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/foldcode.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/brace-fold.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/xml-fold.js"></script>
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/comment-fold.js"></script> 
-<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/formatting.js"></script> 
-<script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/lint.js"></script>
-<script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/javascript-lint.js"></script>
-<script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/json-lint.js"></script>
-<script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/css-lint.js"></script>
-<script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/html-lint.js"></script>
-<script>
-var editor = CodeMirror.fromTextArea(document.getElementById("templateCode"), {
-        lineNumbers: true,
-	mode: "text/html",
-	matchBrackets: true ,
-	lineWrapping: true,
-	matchtags:true, 
-	foldGutter: true,    
-	lint: true,       
-	gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter" ,"CodeMirror-lint-markers"],
-	extraKeys: {
-		"F11": function(cm) {
-		  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-		},
-		"Esc": function(cm) {
-		  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-		}
-	  },
-	  value: document.documentElement.innerHTML,
-	  onBlur: function () { 
-	         editor.save();             
-	    }
-  });
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/jshint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/jsonlint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/csslint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/csshint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/showhint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/xmlhint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/htmlhint.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/xml/xml.js"></script> 
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/javascript/javascript.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/css/css.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/velocity/velocity.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/mode/htmlembedded/htmlembedded.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/edit/matchbrackets.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/edit/matchtags.js"></script>			
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/search/search.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/search/searchcursor.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.js"></script>			
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/foldcode.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/brace-fold.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/xml-fold.js"></script>
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/addon/fold/comment-fold.js"></script> 
+			<script type="text/javascript"  src="$!webThemes/CMS/js/codemirror/formatting.js"></script> 
+			
+			 <script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/lint.js"></script>
+			 <script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/javascript-lint.js"></script>
+			 <script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/json-lint.js"></script>
+			 <script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/css-lint.js"></script>
+			 <script  type="text/javascript"   src="$!webThemes/CMS/js/codemirror/addon/lint/html-lint.js"></script>
+			 
+			 
+			 <script>
+			 var editor = CodeMirror.fromTextArea(document.getElementById("templateCode"), {
+		          lineNumbers: true,
+					mode: "text/html",
+					matchBrackets: true ,
+					lineWrapping: true,
+					matchtags:true, 
+					foldGutter: true,    
+					lint: true,       
+					gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter" ,"CodeMirror-lint-markers"],
+					extraKeys: {
+						"F11": function(cm) {
+						  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+						},
+						"Esc": function(cm) {
+						  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+						}
+					  },
+					  value: document.documentElement.innerHTML,
+					  onBlur: function () { 
+					         editor.save();             
+					    }
+				  });
 
-    
-    
-    var totalLines = editor.lineCount();
-          var totalChars = editor.getTextArea().value.length;
-          editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
-          CodeMirror.commands["goLineStart"](editor);
+		      
+		      
+		      var totalLines = editor.lineCount();
+              var totalChars = editor.getTextArea().value.length;
+              editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
+              CodeMirror.commands["goLineStart"](editor);
 
 
-          function updateWidget(){
-      		jQuery("#errMsg").html("");
-      		var widgetName = jQuery("#widgetName").val();
-      		//var widgetName = jQuery("#widgetName").val();
-      		if(jQuery.trim(widgetName)==""){
-		alert("Please enter widget name");
-		return false;
+              function updateWidget(){
+          		jQuery("#errMsg").html("");
+          		var widgetName = jQuery("#widgetName").val();
+          		//var widgetName = jQuery("#widgetName").val();
+          		if(jQuery.trim(widgetName)==""){
+						alert("Please enter widget name");
+						return false;
+                  	}
+              	jQuery("#actionType").val("update");
+          		var templateCode = getData();
+          		if(jQuery.trim(templateCode)==""){
+					alert("Please enter template code");
+					return false;
               	}
-          	jQuery("#actionType").val("update");
-      		var templateCode = getData();
-      		if(jQuery.trim(templateCode)==""){
-	alert("Please enter template code");
-	return false;
-          	}
 
-      			var str = jQuery("#widgetForm").serialize();
-      			  jQuery.ajax({
-      				   type: "POST",
-      				   url: "updateWidgetCms.action",
-      				   data: str,
-      				   success: function(msg){
-      		   
-      				   if(msg.indexOf("success")!=-1){
-      					 alert(jQuery("#widgetName").val() + " updated successfully.");
-          				   window.parent.refreshWidget(jQuery("#widgetId").val());
-      					   var siteId = jQuery("#siteId").val();
-      					   if(jQuery("#isEdit").val()=="Y"){
-      					   refreshBanner(jQuery("#bannerListId").val());
-      					   closeBannerPopup();
-      					   }else{
-      						 window.location.href="widgetListCms.action";
-      					   }
-      			  		}else{
-      			  			alert("Error occured while updating widget");
-      				   }
-      	   			}	
-      	 		 });
-      
-      		 return false;
-      		}
+          			var str = jQuery("#widgetForm").serialize();
+          			  jQuery.ajax({
+          				   type: "POST",
+          				   url: "updateWidgetCms.action",
+          				   data: str,
+          				   success: function(msg){
+          		   
+          				   if(msg.indexOf("success")!=-1){
+          					 alert(jQuery("#widgetName").val() + " updated successfully.");
+              				   window.parent.refreshWidget(jQuery("#widgetId").val());
+          					   var siteId = jQuery("#siteId").val();
+          					   if(jQuery("#isEdit").val()=="Y"){
+          					   refreshBanner(jQuery("#bannerListId").val());
+          					   closeBannerPopup();
+          					   }else{
+          						 window.location.href="widgetListCms.action";
+          					   }
+          			  		}else{
+          			  			alert("Error occured while updating widget");
+          				   }
+          	   			}	
+          	 		 });
+          
+          		 return false;
+          		}
 
 
-          function saveWidget(){
-        		jQuery("#errMsg").html("");
-        		var widgetName = jQuery("#widgetName").val();
-        		//var widgetName = jQuery("#widgetName").val();
-        		if(jQuery.trim(widgetName)==""){
-				alert("Please enter widget name");
-				return false;
+              function saveWidget(){
+            		jQuery("#errMsg").html("");
+            		var widgetName = jQuery("#widgetName").val();
+            		//var widgetName = jQuery("#widgetName").val();
+            		if(jQuery.trim(widgetName)==""){
+  						alert("Please enter widget name");
+  						return false;
+                    	}
+            		var templateCode = getData();
+            		if(jQuery.trim(templateCode)==""){
+  					alert("Please enter template code");
+  					return false;
                 	}
-        		var templateCode = getData();
-        		if(jQuery.trim(templateCode)==""){
-			alert("Please enter template code");
-			return false;
-            	}
-        		jQuery("#actionType").val("create");
-        			var str = jQuery("#widgetForm").serialize();
-        			  jQuery.ajax({
-        				   type: "POST",
-        				   url: "updateWidgetCms.action",
-        				   data: str,
-        				   success: function(msg){
-        		  
-        				   if(msg.indexOf("success")!=-1){
-            				   alert(jQuery("#widgetName").val() + " saved successfully.");
-            				   window.parent.generateWidgetList();
-            				   //window.parent.buildWidgetList();
-            				   window.parent.initDraggable();
-        					   var siteId = jQuery("#siteId").val();
-        					   if(jQuery("#isEdit").val()=="Y"){
-         					   refreshBanner(jQuery("#bannerListId").val());
-         					   closeBannerPopup();
-        					   }else{
-        					   		window.location.href="widgetListCms.action";
-        					   }
-        			  		}else if(msg.indexOf("unique constraint") != -1){
-        			  			alert("Widget With Same Name Already Exists");
-            			  	}else{
-        			  			alert("Error occured while saving widget");
-        				   }
-        	   			}	
-        	 		 });
-        		 return false;
-        		}
-  		
+            		jQuery("#actionType").val("create");
+            			var str = jQuery("#widgetForm").serialize();
+            			  jQuery.ajax({
+            				   type: "POST",
+            				   url: "updateWidgetCms.action",
+            				   data: str,
+            				   success: function(msg){
+            		  
+            				   if(msg.indexOf("success")!=-1){
+                				   alert(jQuery("#widgetName").val() + " saved successfully.");
+                				   window.parent.generateWidgetList();
+                				   //window.parent.buildWidgetList();
+                				   window.parent.initDraggable();
+            					   var siteId = jQuery("#siteId").val();
+            					   if(jQuery("#isEdit").val()=="Y"){
+	            					   refreshBanner(jQuery("#bannerListId").val());
+	            					   closeBannerPopup();
+            					   }else{
+            					   		window.location.href="widgetListCms.action";
+            					   }
+            			  		}else if(msg.indexOf("unique constraint") != -1){
+            			  			alert("Widget With Same Name Already Exists");
+                			  	}else{
+            			  			alert("Error occured while saving widget");
+            				   }
+            	   			}	
+            	 		 });
+            		 return false;
+            		}
+      		
 
-function getData() {
-	var text =editor.getValue();
-	document.getElementById("templateCode").innerHTML=text; 
-	return text;
-}
+              function getData()
+			  {
+				  var text =editor.getValue();
+				  document.getElementById("templateCode").innerHTML=text; 
+return text;
+			  }
 
-$(document).ready(function(){
-	$('.CodeMirror-scroll').slimScroll({
-		height: '450px',
-		railVisible: false,
-		alwaysVisible: true,
-		size:'10px',
-		railColor:'#ccc',
-		color:'#e0e0e0',
-		railOpacity: '0.5',
-		opacity:'0.5',
-		borderRadius : '5px',
-		railBorderRadius: '0px',
-		top: '10px'
-	});
-});
-</script>
+			 </script>
+
+

@@ -253,6 +253,11 @@
 	    #end
 	 ##end
 	</ul>
+#elseif($LayoutName=="EmailAuthenticationPage")
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+    <li class="active">$!locale.get("label.authenticate.useraccount")</li>				
+</ul>	
 #elseif($LayoutName!="ShipEntityPage")
 <h1 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
 	<ul class="breadcrumb">
