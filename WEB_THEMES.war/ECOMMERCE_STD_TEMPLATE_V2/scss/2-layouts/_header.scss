@@ -1,26 +1,21 @@
 header {
     .cimm_header {
-        font-family: $secondary_font-family;
+        position: relative;
+        @include main_header;
 
         .cimm_header_top {
-            position: relative;
-            height: 40px;
-            background: $header_top-bg;
-            @include font($family: $default_font-family, $size: 12px, $color: $white, $weight: normal);
-            @include border-position(bottom, 4px, solid, $red);
+            // height: 40px;
             .cimm_header_top-phone {
                 float: left;
                 ul {
                     li {
-                        color: $white;
+                        // color: $white;
                         padding: 10px;
                     }
                 }
             }
             .cimm_header_top-menu {
-                float: right;
                 text-align: right;
-
                 ul{
                     li{
                         text-transform: capitalize;
@@ -51,7 +46,6 @@ header {
             }
         }
         .cimm_header_mid {
-            background: $header_mid-bg;
             
             .cimm_logo {
                 width: 250px;
@@ -73,105 +67,52 @@ header {
                 }
             }
             
-            .cimm_signWrap {
-                text-align: right;
-                margin: 10px 0px;
+        }
+    }
+}
 
-                li {
-                    display: inline-block;
+.cimm_signWrap {
+    text-align: right;
+    padding: 10px 0px;
+
+    > li {
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        width: 100px;
+        > a {
+            display: block;
+            //color: $default_font-color;
+            font-weight: bold;
+            span {
+                font-weight: normal;
+                font-family: $default_font-family;
+                text-transform: uppercase;
+                margin-top: 4px;
+                &.imgBox {
+                    display: block;
+                    width: 50px;
+                    height: 50px;
+                    background: $primary_color;
                     position: relative;
-                    text-align: center;
-                    width: 100px;
-                    a {
-                        display: block;
-                        //color: $default_font-color;
-                        font-weight: bold;
+                    margin: 0 auto 8px auto;
+                    overflow: hidden;
+                    em {
+                        position: absolute;
+                        left: 10px;
+                        color: $white;
+                        top: 10px;
+                        font-size: 32px;
                     }
-                    span {
-                        font-weight: normal;
-                        font-family: $default_font-family;
-                        text-transform: uppercase;
-                        margin-top: 4px;
-                    }
-                    span.imgBox {
-                        display: block;
-                        width: 50px;
-                        height: 50px;
-                        background: $primary_color;
-                        position: relative;
-                        margin: 0 auto 8px auto;
-                        overflow: hidden;
-                        em {
-                            position: absolute;
-                            left: 10px;
-                            color: $white;
-                            top: 10px;
-                            font-size: 32px;
-                        }
-                    }
-                    .myAccountMenu {
-                        top: 48px;
-                        background: $myaccount_menu-bg;
-                        right: 38px;
-                        width: 275px;
-                        left: auto;
-                        border: 1px solid $border-color;
-                        border-radius: 2px;
-                        padding: 0;
-                        li {
-                            width: 100%;
-                            text-transform: none;
-                            font-family: $default_font-family;
-                            text-align: left;
-                            a {
-                                font-weight: normal;
-                                color: $default_font-color;
-                                font-size: 16px;
-                                padding: 3px 10px;
-                                em {
-                                    margin-right: 10px;
-                                    font-size: 16px;
-                                }
-                            }
-                            &.loginLink{
-                                margin-top: 15px;
-                                padding: 15px 0;
-                                background: $white;
-                                text-align: center;
-                                a{
-                                    background: $default_font-color;
-                                    color: $white;
-                                    display: inline-block;
-                                    padding: 10px;
-                                }
-                            }
-                            &:last-child {
-                                border-bottom: none;
-                            }
-                            &.logoutBtn{
-                                background: $white;
-                                text-align: center;
-                                a{
-                                    background: $default_font-color;
-                                    color: $white;
-                                    display: inline-block;
-                                    padding: 12px;
-                                    margin: 25px 0;
-                                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-                                }
-                            }
-                        }
-
-                    }
-                }
-                >li:first-child {
-                    width: 125px;
                 }
             }
-            .cimm_signWrap li.cartCountDisplayLi a span.cartCountrefresh {
+        }
+
+        &.cartCountDisplayLi a {
+            span.cartCountrefresh {
                 display: block;
             }
-            .cimm_signWrap li.cartCountDisplayLi a svg {
+            svg {
                 width: 35px;
                 fill: $white;
                 position: absolute;
@@ -180,8 +121,74 @@ header {
             }
         }
     }
+    >li:first-child {
+        width: 125px;
+    }
 }
 
+.slideDropMenu, .myAccountMenu {
+    li {
+        a {
+            em {
+                margin-right: 10px;
+                font-size: 16px;
+                width: 20px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.myAccountMenu {
+    top: 48px;
+    background: $myaccount_menu-bg;
+    right: 38px;
+    width: 275px;
+    left: auto;
+    border: 1px solid $border-color;
+    border-radius: 2px;
+    padding: 0;
+    li {
+        width: 100%;
+        text-transform: none;
+        font-family: $default_font-family;
+        text-align: left;
+        a {
+            font-weight: normal;
+            color: $default_font-color;
+            font-size: 16px;
+            padding: 3px 10px;
+        }
+        &.loginLink{
+            margin-top: 15px;
+            padding: 15px 0;
+            background: $white;
+            text-align: center;
+            a{
+                background: $default_font-color;
+                color: $white;
+                display: inline-block;
+                padding: 10px;
+            }
+        }
+        &:last-child {
+            border-bottom: none;
+        }
+        &.logoutBtn{
+            background: $white;
+            text-align: center;
+            a{
+                background: $default_font-color;
+                color: $white;
+                display: inline-block;
+                padding: 12px;
+                margin: 25px 0;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+            }
+        }
+    }
+
+}
 
 .loginWindow {
     position: absolute;

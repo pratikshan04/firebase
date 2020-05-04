@@ -65,7 +65,7 @@ function submitSaveCart(title,groupId,obj,isReorder){
 		}
 	}
 	jQuery.get('saveCartPage.action?listId='+groupId+'&listName='+title+'&isReOrder='+isReorder,function(data,status){
-		$(toggleListID).toggle();
+		$(toggleListID).hide();
 		var result = data.split('|');
 		//$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
 		$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ groupName).attr("href","/"+result[1]+"/ProductGroup/Cart?savedGroupName="+groupName).fadeIn();
@@ -182,22 +182,22 @@ function refreshShoppingCart(id,partNum){
 	var originalPartNumber = partNum;
 	//partNum = partNum.replace(/ +/g,"_");
 	partNum = partNum.replace(/[#;&,.+*~':"!^$[\]()=>|\/ ]/g, "\\$&");
-	var curQty = $("#textQtyCur_"+partNum).val();
+	var curQty = $("#textQty_"+partNum).val();
 	var mpnDisplay = "";
 	var mpn="";
 	var valu ="";
 	var lessThanMinOrder = true;
 	if(id != ""){
 		$("#refreshCartId").val(id);
-		//$("#refreshQty").val($("#textQty_"+partNum).val());
-		$("#refreshQty").val($.trim($("[data-cartitemid='"+id+"']").val()));
+		$("#refreshQty").val($("#textQty_"+partNum).val());
+		//$("#refreshQty").val($.trim($("[data-cartitemid='"+id+"']").val()));
 		$("#lineItemCommentRef").val($("#lineItemComment_"+id).val());
 		if($("#requiredByDateRef").length > 0){
 			$("#requiredByDateRef").val($("#reqDate_"+id).val());
 		}
 	}
-	//var qtyEntered = parseInt($.trim($("#textQty_"+partNum).val()));
-	var qtyEntered = parseInt($.trim($("[data-cartitemid='"+id+"']").val()));
+	var qtyEntered = parseInt($.trim($("#textQty_"+partNum).val()));
+	//var qtyEntered = parseInt($.trim($("[data-cartitemid='"+id+"']").val()));
 	if($("#mpn_"+partNum).length > 0 && $("#mpnDisplay"+partNum).length > 0){
 		mpn = $("#mpn_"+partNum).val();
 		mpnDisplay = $("#mpnDisplay"+partNum).val();
@@ -528,6 +528,7 @@ function sendApproval() {
 		this.qtyInterval = attributes.qtyinterval;
 		this.uom = attributes.uom;
 		this.itemPriceId = attributes.itempriceid;
+		this.value = attributes.value;
 	}
 	
 	function extractItemDetails(element){
@@ -622,7 +623,7 @@ function sendApproval() {
 				persistItem(myCart.storeName, item);
 			}else{
 				if(element.type == "TEXT" || element.type == "text"){
-					element.value = item.minOrderQty;
+					element.value = item.value != 0 ? item.value : item.minOrderQty;
 				}
 				bootAlert("medium","warning","warning",status.description);
 			}
@@ -845,3 +846,63 @@ function sendApproval() {
 	
 	setItemsToLocalStorage(myCart.storeName, []);
 })();
+function editevent(partNum){
+	var itempartnumber=partNum
+	$('.editpricesales_'+itempartnumber).css('display','block');
+    $('#editunitprice_'+itempartnumber).css('display' , 'none');
+	
+}
+function editPrice(productListId){
+	$('.editpricesales_'+productListId).removeClass('hideMe');
+	$('#editunitprice_'+productListId).addClass('hideMe');	
+}
+
+function cancelUpdatePrice(productListId){
+    $('#editunitprice_'+productListId).removeClass('hideMe');
+    $('.editpricesales_'+productListId).addClass('hideMe');
+}
+
+function updatePrice(productListId, partNum){
+	var unitPrice = $('#unitPrice_'+productListId).val();
+	var updatedUnitPrice = $('#updatedUnitPrice_'+productListId).val();
+	var uom = $('#uom_'+productListId).val();
+	var getPriceFrom = 'SALESREP';
+	var itemQty=$("#textQty_"+partNum).val();
+	if(updatedUnitPrice <= 0){
+		bootAlert("small","error","Error","Cannot update item with zero or less than zero price.");
+	}else if(unitPrice != updatedUnitPrice){
+		var cartId = productListId;
+		if(productListId != ""){
+			$("#refreshCartId").val(productListId);
+			if(typeof cartId!="undefined" && cartId!=null && cartId!=""){
+				$("#refreshQty").val($(".textQty_"+cartId).val());
+			}
+			else{$("#refreshQty").val($("#textQty_"+partNum).val());}
+			
+			$("#lineItemCommentRef").val($("#lineItemComment_"+productListId).val());
+			if($("#requiredByDateRef").length > 0){
+				$("#requiredByDateRef").val($("#reqDate_"+productListId).val());
+			}
+		}
+		
+		var str = "&updateId="+productListId+"&unitPrice="+unitPrice+"&updatedUnitPrice="+updatedUnitPrice+"&uom="+uom+"&getPriceFrom="+getPriceFrom+"&itemQty="+itemQty;
+		block("Please Wait");
+		$.ajax({
+			type: "POST",
+			url:"updateCustomerPricePage.action",
+			data: str,
+			success: function(response){
+				unblock();
+				if(response){
+					bootAlert("small","success","Success","Cart Updated");
+					window.location.href = "shoppingCartPage.action";
+				}else{
+					bootAlert("small","error","Error","Cart Rejected Failed. Please try again");
+				}
+			}
+		});
+	}else{
+		unblock();
+		cancelUpdatePrice(productListId);
+	}
+}

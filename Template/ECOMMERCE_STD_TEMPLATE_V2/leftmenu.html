@@ -1,4 +1,4 @@
-#if($LayoutName=="SubCategoryPage" && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y")
+#if($LayoutName=="SubCategoryPage" && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y" && $!resultCount && $resultCount > 0)
 	<!-- Leftmenu attribute start -->
 	#parse("leftmenuattribute.html")
  	<!-- Leftmenu attribute end -->

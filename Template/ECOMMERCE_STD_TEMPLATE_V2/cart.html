@@ -100,7 +100,7 @@
                             <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
                                 <span id="imageName$!itemData.itemId">
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			                            <img itemprop="image" src="$!escapeTool.url($!itemData.imageName)" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #else
 			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #end
@@ -178,18 +178,45 @@
                             </ul>
                         </div>
                     </td>
-                    <td data-th="$!locale.get('product.heading.perUnitPrice')">
-                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice) / $!itemData.qtyUOM ($!itemData.packageQty)</strong>
+                    
+                     #if(($!session.getAttribute("isSalesUser").equals("Y") || $!session.getAttribute("isSalesAdmin").equals("Y")) && $!CommonDBQuerySystemParameter.get('ENABLE_OVERRIDE_PRICE_FROM_SALE_ADMIN')=='Y' )
+                   <td data-th="$!locale.get('product.heading.perUnitPrice')" >
+                    <span id="editunitprice_$!itemData.productListId">
+                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)  $!itemData.uom</strong></br>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	#end
+				     	<a href="javascript:void(0);" class="text-underline" title='$!locale.get("product.button.update")' onclick="editPrice('$!itemData.productListId');">$!locale.get("product.label.Editunitprice")</a>
+				     </span>
+				     <span class="editpricesales_$!itemData.productListId hideMe">
+				     	  $<input type="text" id='updatedUnitPrice_$!itemData.productListId' class="editCustomerPrice text-center" name='updatedUnitPrice_$!itemData.productListId' value="$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)"><span> /$!itemData.uom</span>
+                        #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
+				     		#set($checkout="Y")    
+				     	#end
+				     	<ul class="updateCustomerPrice">
+				     	 <li> <a href="javascript:void(0);" class="updateLink" title='$!locale.get("product.button.update")' onclick='updatePrice($!itemData.productListId, "$!itemData.partNumber");'> $!locale.get("product.button.update") </a> </li>
+				     	 <li> <a href="javascript:void(0);" class="cancelLink" title='$!locale.get("product.button.cancel")' onclick="cancelUpdatePrice($!itemData.productListId);"><i class="fa fa-times" aria-hidden="true"></i></a> </li>
+				     	 </ul>
+				     </span>
                     </td>
+                        <input type="hidden" id="unitPrice_$!itemData.productListId" name="unitPrice_$!itemData.productListId" value="$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)"/>
+						<input type="hidden" id="uom_$!itemData.productListId" name="uom_$!itemData.productListId" value="$!itemData.uom"/>
+                    #else
+                   <td data-th="$!locale.get('product.heading.perUnitPrice')">
+                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
+                        #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
+				     		#set($checkout="Y")    
+				     	 #end
+                    </td>
+                	
+                    #end
+                   
                     <td data-th="$!locale.get('product.label.uom')">
                         <strong>$!itemData.uom #if($itemData.uomQty && $!itemData.uomQty > 1) $!itemData.uomQty #else &nbsp; #end</strong>
                     </td>
                     <td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">
                     	#cartHiddenFields($!itemData.partNumber, $!itemData.availQty, $!itemData.productListId, $!itemData.qty, $!itemData.price, $!itemData.itemPriceId)
-                        <input type="text" id="textQty_$!itemData.partNumber" data-minorderqty="$!itemData.minOrderQty" data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity #if($!CommonDBQuerySystemParameter.get('EnableAddCartToGroup') == 'Y') cartElement #end" value="$!itemData.qty" /><!-- onblur="updateCart(this)"  -->
+                        <input type="text" id="textQty_$!itemData.partNumber" data-minorderqty="$!itemData.minOrderQty" data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity #if($!CommonDBQuerySystemParameter.get('EnableAddCartToGroup') == 'Y') cartElement #end" data-value="$!itemData.qty" value="$!itemData.qty" /><!-- onblur="updateCart(this)"  -->
                         <!-- <input type="text" id="textQty_$!itemData.partNumber" data-itemId="$!itemData.itemPriceId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="quantity" value="$!itemData.qty" onblur="updateCart(this)" /> -->
                         <input type="hidden" id="cartQtyForAvail$!itemData.partNumber$!itemData.productListId" name="cartQtyForAvail" value="$!itemData.qty">
                         <input type="hidden" value="$!itemData.partNumber" id="PartNumber_$!itemData.partNumber" name="partnumberStrArray" />
@@ -301,9 +328,9 @@
 			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			<img itemprop="image" src="$!escapeTool.url($!itemData.imageName)" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" />
 			#else
-			<img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!hostName$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" />
 			#end
 			</span>
 			</a>

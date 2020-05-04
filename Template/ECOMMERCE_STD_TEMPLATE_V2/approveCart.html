@@ -98,7 +98,7 @@
 							</ul>
 						</td>
 						<td data-th="$locale.get('product.label.qty')">
-							<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="4" class="quantity" title="Quantity"/>
+							<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" value="$itemData.qty" maxlength="4" data-minorderqty="$!itemData.minOrderQty"  data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" class="quantity cartElement" title="Quantity"/>
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 							<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>

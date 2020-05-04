@@ -34,7 +34,7 @@
 					<div class="col-xs-12">
 						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 						<div class="cloneImg"> 
-							<img src="$!escapeTool.url($!itemData.imageName)" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 						</div>
 						#else
 						<div class="cloneImg"> 
@@ -64,14 +64,14 @@
 								    	#if($itemData.price>0)
 								    		<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
 									    #else
-							     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+							     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart btns-disable">$!locale.get("product.button.addtocart")</a>
 										#end
 								    #else
 							    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 									#end
 								#else
 									#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-						     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart">$!locale.get("product.button.addtocart")</a>
+						     			<a href="javascript:void(0);" data-cAddCartBtn='cloneAddtoCartbtn' class="btn btn-addtocart btns-disable">$!locale.get("product.button.addtocart")</a>
 									#else
 							    		<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 									#end
@@ -90,6 +90,7 @@
 										<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 											<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 										</ul>
+										<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 									</div>
 									<!-- My Product Group -->
 								</li>
@@ -109,12 +110,12 @@
 	<input type="hidden" id="currentSelectedItemId" value="$itemData.itemId" />
 		<div class="cimm_itemdetail-imgcontainer verticalThumblist clearAfter">
 			<div class="cimm_itemdetail-image">
+			<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
 			#if(($!productAttrFilterData && $!productAttrFilterData.size()>0) && $!productCount>0 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length()>0)
 				<!-- Product Mode -->
 					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
-					<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
 					<span class="imgForSend">
-						<img itemprop="image" src="$!itemData.productCategoryImageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+						<img itemprop="image" id="imageName$!itemData.itemId" src="$!itemData.productCategoryImageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 					</span>
 					#else
 					<span class="imgForSend">
@@ -129,9 +130,8 @@
 				<!-- Product Mode -->
 			#else
 				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-				<input type="hidden" id="detailImageId" value="imageName$!itemData.itemId"/>
 				<span class="imgForSend">
-					<img itemprop="image" src="$!escapeTool.url($!itemData.imageName)" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+					<img itemprop="image" id="imageName$!itemData.itemId" src="$!itemData.imageName" class="initZoom" title="$!itemData.brandName $!itemData.manufacturerPartNumber" data-zoom-image="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 				</span>
 				#else
 				<span class="imgForSend">
@@ -139,7 +139,7 @@
 				</span>
 				#end
 				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!escapeTool.url($!itemData.imageName)"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
+					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 				#else
 					<a class="imgEnlargeIcon" rel="prettyPhoto"  href="$!enlargedImage$!itemData.imageName"  title="$!itemData.brandName $!itemData.manufacturerPartNumber"><em class="fa fa-search fa-2" aria-hidden="true"></em></a>
 				#end
@@ -163,7 +163,7 @@
 						<li>
 							<div class="cimm_slideItemImg">
 							#if($itemData.imageName.contains("http") || $imageList.imageType=="URL")
-								<a href="#" data-image="$!escapeTool.url($!itemData.imageName)" data-zoom-image="$!escapeTool.url($!itemData.imageName)">
+								<a href="#" data-image="$!itemData.imageName" data-zoom-image="$!itemData.imageName">
 									<img id="img_$!count" itemprop="image" src="$!imageList.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" />
 								</a>
 							#else
@@ -225,9 +225,9 @@
 				</div>
 			</div>
 				<!-- Single Item Without Product Mode -->
-				<h2 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
+				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
 					<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
-				</h2>
+				</h1>
 				<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p> 
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
@@ -335,7 +335,7 @@
 							</div>
 							#end
 							#end
-							#if($itemData.packDesc && $!itemData.packDesc !="")<li itemprop="sku" class='packDesc'><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
+							#if($itemData.packDesc && $itemData.packDesc.trim() != "")<li itemprop="sku" class='packDesc'><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 							#if($userLogin)
 								#set($shipID = $!session.getAttribute("shipBranchId"))
 								#if($shipID && $!shipID!="")
@@ -530,7 +530,7 @@
 						 #end
 						#if($itemDocument.docName.contains('.pdf'))
 						<li>
-							<a onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
+							<a class="removeForSend" onclick="window.open('$!documentLinkPath','mywindow','width=1100,height=500');"><img src="$!cdnUrl$!webThemes/$!siteName/images/pdf.png" alt="pdf"/><strong>$!itemDocument.docDesc</strong></a>
 							<span class="cimm_pdfLink hideMe">$hostNameLink$!documentLinkPath</span>
 						</li>
 						#elseif($!itemDocument.docName.contains('.doc'))
@@ -606,50 +606,47 @@
 	  #foreach($customerbought in $!customerAlsoBought)
 	  #set($itemcustomerbought=$!customerbought.brandName+" "+$!customerbought.manufacturerPartNumber) 
 	  <li itemscope itemtype="http://schema.org/Product">
-		<div class="cimm_linkItemImg">
+		<div class="cimm_slideItemImg">
 			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 			<span> 
 			 #if($customerbought.imageName.contains("http") || $linkItem.imageType=="URL")
-				 <img image="image" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+				 <img image="image" id="imageName$!itemData.itemId" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 			 #else
-				 <img image="image" src="$!itemImage$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+				 <img image="image" id="imageName$!itemData.itemId" src="$!itemImage$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
 			 #end
 			</span>
 			</a>
 		</div>
-		<div class="cimm_linkItemDesp">
+		<div class="cimm_slideItemDesp">
 			<ul>
 			   	<li>
-			   		<h4 itemprop="name">
-			   			#set($itemTitle = $!customerbought.brandName)
-			   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
-			   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
-			   			#end
-			   			<a class="cimm_linkProdTitle" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
-			   				
-					 		#if($linkItemTitle.length()>18)
-					 			$!itemTitle.substring(0, 18)...
-					 		#else
-					 			$!itemTitle
-					 		#end
-			   			</a>
-			   		</h4>
+	   			#set($itemTitle = $!customerbought.brandName)
+	   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
+	   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
+	   			#end
+	   			<a class="productTitle" itemprop="name" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			 		#if($linkItemTitle.length()>18)
+			 			$!itemTitle.substring(0, 18)...
+			 		#else
+			 			$!itemTitle
+			 		#end
+	   			</a>
 			   	</li>
-			   	<li class="customerboughtDescrip">
+			   	<li class="sliderDescrip">
 			   		#if($customerbought.shortDesc.length()>40)
-			   				<p itemprop="description">$!customerbought.shortDesc.substring(0, 40)...</p>
-			   			#else
-			        		<p itemprop="description"> $!customerbought.shortDesc</p>
-			   			#end
+	   				<p itemprop="description">$!customerbought.shortDesc.substring(0, 40)...</p>
+		   			#else
+	        		<p itemprop="description"> $!customerbought.shortDesc</p>
+		   			#end
 			   	</li>
 				<li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!customerbought.itemId">$!customerbought.partNumber</span></li>
 			    #if($customerbought.manufacturerPartNumber)
 				<li itemprop="mpn"><strong>$!locale.get("product.label.mpn"):</strong> <span>$!customerbought.manufacturerPartNumber</span></li>
 				#end
-			    #if($!customerbought.upc)
+				#if($!customerbought.upc)
 			    <li itemprop="sku"><strong>$!locale.get("product.label.upc"): </strong><span> $!customerbought.upc</span></li>
 			    #end
-			   <!-- 	#if($customerbought.minOrderQty>0 && $!customerbought.orderInterval>0)
+			   <!-- #if($customerbought.minOrderQty>0 && $!customerbought.orderInterval>0)
 				<li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!customerbought.minOrderQty</spaN></li>
 				<li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!customerbought.orderInterval</span></li>
 				#end -->
@@ -661,8 +658,8 @@
 					</span>
 				</li> -->
 			</ul>
-			<!--  Add to cart 
-			<span class="addToCartFloat" data-select='addtoCartbtn_$!customerbought.partNumber'>
+			<!--  Add to cart -->
+			<!--  <span class="addToCartFloat" data-select='addtoCartbtn_$!customerbought.partNumber'>
 			#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 				#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 					#if($itemData.price>0)
@@ -685,8 +682,8 @@
 				<input type="hidden" value="$!customerbought.orderInterval" id="OrderQtyInterval_$!customerbought.partNumber" name="OrderQtyInterval_$!customerbought.partNumber"/>
 				<input type="hidden" value="$!customerbought.manufacturerPartNumber" id="MPNValue_$!customerbought.partNumber" />
 			</span>
-			#itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
-			Add to cart -->
+			##itemListHiddenFields($!customerbought.partNumber,$!customerbought.itemPriceId,$!customerbought.qty,$!customerbought.uom,$!customerbought.price,$!customerbought.saleQty,$!customerbought.itemId,$!customerbought.displayFrieghtAlert,$!customerbought.packageQty,$!customerbought.itemAvailability,$!customerbought.srchTyp,$!navigationType,$!customerbought.brandId,$!customerbought.manfId,$!customerbought.altPartNumber1,$!customerbought.manufacturerPartNumber,$!customerbought.brandName,$!customerbought.ItemId)
+			<!-- Add to cart -->
 		</div>	
 	  </li>
 	  #end
@@ -818,8 +815,8 @@
 				 </ul>
 			 </div>
 			 <script type="text/javascript">
-				$!(document).ready(function(){
-					  $!('#logLinkItems_$!idloop').slick({
+				$(document).ready(function(){
+					  $('#logLinkItems_$!idloop').slick({
 						  infinite: true,
 						  slidesToShow: 5,
 						  slidesToScroll: 1,

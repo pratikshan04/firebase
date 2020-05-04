@@ -193,6 +193,9 @@
 				}
 			}
 			function processAddToCart(s){
+				if($("#isWebview").val() == "WEBVIEW"){
+					settings.flyToCart='N';
+				}
 				if(settings.flyToCart=="Y"){
 					var cart = $("#"+settings.cartCountRefreshId);
 					var imgtodrag = $("#"+settings.functionalBlock.itemImagePrefix+id);
@@ -250,8 +253,6 @@
 						if($('#'+settings.blockPageID)){
 							$("#cartPopModel").modal();
 			        	}
-						
-
 					}
 					if($(".cartCountDisplayLi").hasClass("ItemsInCart")){
 						$("#"+settings.cartCountRefreshId).each(function(){
@@ -259,6 +260,9 @@
 							if($('#countInCart').length>0){
 					    		$('#countInCart').val(result[0]);
 					    	}
+							if($("#isWebview").val() == "WEBVIEW"){
+								getCartCount(result[0])
+							}
 							//$(".cartCountrefresh").html(result[0]);
 						});
 					}else{
@@ -268,6 +272,9 @@
 						if($('#countInCart').length>0){
 				    		$('#countInCart').val(result[0]);
 				    	}
+						if($("#isWebview").val() == "WEBVIEW"){
+							getCartCount(result[0])
+						}
 					}
 					
 					/*if($(".cartTotalDisplayLi").hasClass("ItemsInCart")){

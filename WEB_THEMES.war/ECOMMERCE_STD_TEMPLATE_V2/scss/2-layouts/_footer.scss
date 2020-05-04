@@ -1,36 +1,33 @@
 footer {
     color: $white;
+    @include main_footer;
+
     .cimm_footer_mid {
-        background: $footer_mid-bg;
         height: 300px;
+        overflow-x: overlay;
         .footerCol {
             h3 {
                 position: relative;
-				font-size: $fnav_hf-size;
                 margin: 15px 0;
                 font-weight: normal;
                 
                 a {
-                    color: $fnav_hf-color;
                     text-transform: uppercase;
                     letter-spacing: 1px;
                 }
                 em {
-                    display: none;
                     position: absolute;
                     top: 2px;
                     right: 10px;
                     width: 10px;
                     height: 10px;
+                    display: none;
                 }
             }
 
             ul {
                 li {
-                    font-size: $fnav_lf-size;
                     a {
-                        font-size: $fnav_lf-size;
-                        color: $white;
                         padding: 3px 0;
                         display: block;
                     }
@@ -39,21 +36,15 @@ footer {
                         font-size: 16px;
                         margin-top: 18px;
                     }
-                    p{
-                        color: $fnav_pf-color;
-                    }
                 }
             }
         }
         
     }
     .cimm_footer_down {
-        background: $footer_btm-bg;
         padding: 20px 10px;
         .cimm_footer-copyright {
             margin: 0;
-            color: $copyright_font-color;
-            font-size: $copyright_font-Size;
             letter-spacing: 1px;
         }
     }

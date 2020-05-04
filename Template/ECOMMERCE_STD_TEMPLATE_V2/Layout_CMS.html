@@ -4,41 +4,40 @@
     #parse("head.html")
     <!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
     #parse("bootstrap-min-css.html")
-    <script type="text/javascript">
-      var parentUrl = "" + window.parent.location;
+      <script type="text/javascript">
+      var parentUrl = ""+window.parent.location;
       //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
-      if (
-        parentUrl.indexOf("cmsPageCms.action") === -1 &&
-        window.location !== window.parent.location
-      ) {
+      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
         //console.log("The page is in an iframe");
         //console.log("location: "+ window.location);
         //console.log("Parent Location: "+window.parent.location);
-      } else {
+      }else {
         alert("Unauthorized Access...!");
-        if (parentUrl.indexOf("cmsPageCms.action") !== -1) {
+        if(parentUrl.indexOf("cmsPageCms.action") !== -1){
           // console.log("The page is not in CIMM");
           window.location.href = "/";
           window.top.location.href = "/";
-        } else {
+        }else{
           //console.log("The page is not in an iframe");
           window.location.href = "/";
         }
       }
-    </script>
+	</script>
   </head>
-  <body class="cimm_bodyBackground" id="top">
+  <body>
     <input type="hidden" id="siteName" name="siteName" value="$siteName" />
-    <input type="hidden" id="moodname" name="moodname" value="$moodname" />
+    <input type="hidden" id="moodname" name="moodname" value="$moodname">
     #parse($bodyContent)
-    <script
-      type="text/javascript"
-      src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"
-    ></script>
-    #parse("javascripts.html") #if($LayoutName == "CMSBannerEdit")
-    #parse("cmsbannereditscript.html") #end #if($LayoutName == "CMSFormEdit")
-    <script src="$!webThemes/CMS/js/cms/formsettings.js"></script>
-    <script src="$!webThemes/CMS/js/cms/formbuilder.js"></script>
+    <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
+    #parse("javascripts.html")
+    #if($LayoutName == "CMSBannerEdit")
+    #parse("cmsbannereditscript.html")
+    #end
+    #if($LayoutName == "CMSFormEdit")
+    <script src="$!webThemes/CMS/js/cms/formsettings.js?v=$!session.getLastAccessedTime()">
+    </script>
+    <script src="$!webThemes/CMS/js/cms/formbuilder.js?v=$!session.getLastAccessedTime()">
+    </script>
     #end
   </body>
 </html>

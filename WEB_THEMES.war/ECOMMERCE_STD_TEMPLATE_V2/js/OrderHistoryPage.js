@@ -1,3 +1,14 @@
+var table = $('#openOrderTable').DataTable({
+	"language": {
+		"search":"_INPUT_",
+		"searchPlaceholder":"Search Orders History",
+		"sLengthMenu" :"Show _MENU_",
+		"oPaginate" : {
+			"sPrevious" :"Prev",
+			"sNext" :"Next"
+		}
+	}
+});
 $(function() {
 	$('#searchbutton').click(function() {
 		$("#searchbutton").val("Please wait...");
@@ -5,18 +16,25 @@ $(function() {
 		$("#searchbutton1").attr("disabled","disabled");
 		$('#OrdersHistoryDetails').submit();
 	});
-	$('#orderHistoryShipTable').DataTable({
-		"language": {
-			"search":"_INPUT_",
-			"searchPlaceholder":"Search Completed Orders",
-			"sLengthMenu" :"Show _MENU_",
-			"oPaginate" : {
-				"sPrevious" :"Prev",
-				"sNext" :"Next"
-			}
-		}
-	});
 });
+
+var poList = table.column(1).data().unique();
+
+$('#orderPoSearchBtn').on('click', function () {
+	var searchTerm = $('#orderPoSearch').val().toLowerCase();
+	$.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+		//search only in column 1 and 2
+		if (~data[0].toLowerCase().indexOf(searchTerm)) return true;
+		if (~data[2].toLowerCase().indexOf(searchTerm)) return true;
+		return false;
+	})
+	table.draw(); 
+	$.fn.dataTable.ext.search.pop();
+});
+$('#resetBtn').click( function() {
+	window.location.href= '/OrderHistory';
+});
+
 var webThemes = $("#webThemePath").val();
 $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	var today = new Date();
@@ -148,3 +166,8 @@ function ARPasswordPrompt(ARShipPasswordType){
 		}
 	});
 }
+$('#orderPoSearch').keypress(function(e) {
+	if (e.keyCode == 13) {
+		$('#orderPoSearchBtn').click();
+	}
+});

@@ -299,13 +299,13 @@
 									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
 										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!escapeTool.url($!itemData.productCategoryImageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 								#else
 									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag"></span>
@@ -376,7 +376,7 @@
 									</form>
 							 	</div>
 							 	<div class="itemCountGrid">
-							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+							 		<a class="btn btn-viewallchoice clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<!-- <span>
@@ -460,7 +460,8 @@
 									<li class="productAvail_$!itemData.partNumber">
 										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
 										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-											#if($itemData.availQty)
+											#set($Integer = 0)
+											#if($itemData.availQty && $Integer.parseInt($itemData.availQty) > 0)
 												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
 											#else
 												<span class='text-danger'>Call for Availability</span>
@@ -485,7 +486,7 @@
 									#end
 								</ul>
 								<ul>
-									#if($itemData.packDesc)<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
+									#if($!itemData.packDesc && $itemData.packDesc.trim() != "")<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 									<li class="cimm_priceWrap">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
@@ -552,6 +553,7 @@
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 												<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 											</ul>
+											<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 										</div>
 										<!--My Product Group-->
 									</li>
@@ -633,13 +635,13 @@
 			</div>
 		#else
 			#if($paginate>1)
-			<div id="loadingNextPage" style="text-align: center;margin:10px 0;color:#1d4288;font-size:16px;">
-				<a href="javascript:void(0);" onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</a>
+			<div id="loadingNextPage"  class="loadMore">
+				<button onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</button>
 			</div>
 			#end
 			<script type="text/javascript">
 			 function loadMoreItems(){
-				 var checkmodevalue = $!("#productListBlock").find('li').attr('class');
+				 var checkmodevalue = $("#productListBlock").find('li').attr('class');
 				 $('#loadMoreBtn').html('Loading..');
 				 loadNextPageAsync("$!paginationURL",$!resultPage,checkmodevalue);
 			 }     

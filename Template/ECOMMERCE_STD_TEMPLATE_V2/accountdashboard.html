@@ -118,14 +118,14 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="cimm_moduleHeadEnclosure mTop-3">
 								<h3 class="cimm_blockHeading mBottom-3">$locale.get("product.heading.shipAddressList")
-									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiateV2();"><em class="fa fa-lg fa-sync-alt"></em></a>
+									<a href="javascript:void(0);" data-toggle="tooltip" title="$locale.get('product.label.refreshShippingInformation')" onclick="scynInitiateV2('dashboard');"><em class="fa fa-lg fa-sync-alt"></em></a>
 									<span class="pull-right" id="progressBar">
 										#if($session.getAttribute("scynEntityStatus")!="Completed" && $session.getAttribute("scynEntityStatus")!="Synchronization Process Started")
 										$!session.getAttribute("scynEntityStatus")
 										#end
 									</span>
 								</h3>
-								<table class="table table-bordered table-striped display rwd-table">
+								<table class="table table-bordered table-striped display rwd-table" id="ship_table">
 									<thead>
 										<tr>
 											<th class="left">$locale.get("form.label.name")</th>
@@ -138,7 +138,7 @@
 									<tbody>
 										#foreach($shipAddress in $shipAddressList)
 										<tr>
-											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.customerName</td>
+											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.firstName $!shipAddress.lastName ##$!shipAddress.customerName</td>
 											<td class="alignLeft" data-th="$locale.get('form.label.address')">$shipAddress.address1<br />$!shipAddress.address2</td>		
 											<td data-th="$locale.get('form.label.city')">$shipAddress.city</td>
 											<td data-th="$locale.get('form.label.state')">$shipAddress.state</td>
@@ -154,13 +154,17 @@
 				</div>
 				<div id="groups">
 					<div class="row">
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<h3 class="cimm_blockHeading mBottom-2">$locale.get("product.heading.PromotedProducts")</h3>
+							<div id="promotedProductsTable"> Loading please wait...</div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
 							#if($groupListData.size()>0)
 								#set($countProductGroup = 0)
 								<div class="row">
 									#foreach($groupData in $groupListData)
-									<div class="col-md-6 col-sm-6 col-xs-12 mBottom-2">
+									<div class="col-xs-12 mBottom-2">
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
@@ -178,7 +182,7 @@
 								</div>
 								#if($groupListData.size() > 8)
 								<div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12 mBottom-2">
+									<div class="col-xs-12 mBottom-2">
 										<a href='$locale.get("website.url.SavedGroup.Product")' class="cimm_inlineButton">$locale.get("product.label.viewMore")</a>
 									</div>
 								</div>
@@ -187,13 +191,13 @@
 								<p>$locale.get("product.label.noProductGroupAvailable")</p>
 							#end
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-4 col-sm-4 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
 							#if($savedCartData.size()>0)
 								#set($countSavedGroup = 0)
 								<div class="row">
 									#foreach($groupData in $savedCartData)
-									<div class="col-md-6 col-sm-6 col-xs-12 mBottom-2">
+									<div class="col-xs-12 mBottom-2">
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
@@ -211,7 +215,7 @@
 								</div>
 								#if($savedCartData.size() > 8)
 								<div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="col-xs-12">
 										<a href='$locale.get("website.url.SavedGroup.Cart")' class="cimm_inlineButton"> $locale.get("product.label.viewMore")</a>
 									</div>
 								</div>
@@ -251,7 +255,7 @@
 					</div>
 					<div class="cimm_slideItemDesp text-center">
 						<ul>
-							<li><h5><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")$!resentItemTitle.replace(" ","-")' class="cimm_slideProdTitle">$resentItemTitle</a></h5>
+							<li><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")$!resentItemTitle.replace(" ","-")' class="productTitle">$resentItemTitle</a>
 							</li>
 							<li>
 								<strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span>

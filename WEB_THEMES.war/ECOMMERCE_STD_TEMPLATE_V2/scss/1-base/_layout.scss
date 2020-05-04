@@ -1,0 +1,120 @@
+$black: #000 !default;
+$gray-darker: lighten($black, 13.5%) !default; // #222
+$gray-dark: lighten($black, 20%) !default;   // #333
+$gray: lighten($black, 33.5%) !default; // #555
+$gray-light: lighten($black, 46.7%) !default; // #777
+$gray-lighter: lighten($black, 93.5%) !default; // #eee
+$gray-lighten: lighten($black, 89.7%) !default; // #E5E5E5
+
+
+
+
+// $primary_color      : #8a8a8a;
+// $secondary_color    : #9e0c24;
+// $tertiary_color     : #f9f9f9;
+
+
+$white              : #FFF;
+$red                : #ee3426;
+$blue               : #00a9e7;
+$green              : #37ff3b;
+$yellow             : #e4de33;
+$lightgray          : #EBEBEB;
+$border-color       : #A1A1A1;
+$shadow-color : lighten($black, 68%) !default;
+
+$default_font-color     : $secondary_color; //** Global font color
+$heading_font-color		: $secondary_color; //** Global heading font color
+
+
+
+//** Global Font sizes
+$font_xs    : 10px;
+$font_sm    : 12px;
+$font_md    : 14px;
+$font_lg    : 16px;
+$font_xlg   : 18px;
+$font_xxlg  : 20px;
+
+$default_font-size		: $font_md;
+$heading_font-size		: $font_lg; //** Global heading font size
+
+
+//** Background color for `<body>`.
+$body-bg    : $white !default;
+
+//Font Colors
+$primary_font-color     : $primary_color;
+$secondary_font-color   : $secondary_color;
+
+//** body font style declaration
+$body_font-family		: $default_font-family;
+$body_font-color		: $default_font-color;
+$body_font-size			: $default_font-size;
+
+//** Global textual link color.
+$link-color         : $gray-dark !default;
+$link-hover-color   : darken($link-color, 15%) !default;
+
+
+/*__________________________________Heading Setting_______________________________________*/
+//Header
+$header_bg      : $secondary_color;
+// $header_top-bg  : $secondary_color;
+$header_mid-bg  : transparent;
+
+
+/*__________________________________Navigation Setting_______________________________________*/
+//Navigation color and font declaration
+$mnav-bg			: $secondary_color;
+$mnav_lf-family		: $default_font-family; // Main navigation link font family
+$mnav_lf-color		: $tertiary_color;  //Main navigation link font color
+$mnav_lf-size		: $default_font-size;   //Main navigation link font size
+
+$mnav_lh-bg			: $primary_color;       //Main navigation link hover background
+$mnav_lhf-color		: $white;               //Main navigation link hover font color
+
+$mnav_la-bg         : $primary_color;       //Main navigation (la = link active) bg 
+$mnav_laf-color     : $white;               //Main navigation (la = link active font) color
+
+//Main sub navigation
+$msnav_bg			: $tertiary_color;
+
+$mnav_primary-bg	: $primary-color;
+$mnav_secondary-bg	: $secondary-color;
+
+$msnav_lf-color     : $secondary-font_color;
+$msnav_lh-bg        : $secondary-font_color;
+$msnav_la-color     : $secondary-font_color;
+
+
+/*______________________________Left Navigation Setting_______________________________________*/
+//Left Navigation
+$cimm_leftmenu          : transparent;
+$lnav_title-bg          : $white;
+$lnav_title_text-color  : $black;
+$lnav_icon-color        : $primary_color;
+
+$lnav_filter-bg         : transparent;
+$lnav_filter-title-bg   : transparent;
+
+$lnav_filter-title-font-family  : $heading_font-family;
+$lnav_filter-title-font-color   : $heading_font-color;
+$lnav_filter-title-font-size    : $heading_font-size;
+
+/*___________________________________Footer Setting___________________________________________*/
+//Footer 
+$footer_bg      : transparent;
+$footer_top-bg  : $secondary_color;
+$footer_mid-bg  : $secondary_color; 
+$footer_btm-bg  : $primary_color;
+
+//Footer a heading (hf = heading font)
+$fnav_hf-color  : $white;
+$fnav_pf-color  : $white;
+$fnav_lf-color  : $white;
+$fnav_lf-family : $default_font-family;
+$fnav_lf-size   : $font_md;
+
+$copyright_font-color   : $white;
+$copyright_font-Size    : $font_xs;

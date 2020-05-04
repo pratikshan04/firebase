@@ -2,124 +2,68 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    #parse("head.html") #parse("stylesheets.html")
+    #parse("head.html")
     <!-- <link href="$!webThemes/CMS/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
-    <link
-      href="$!webThemes/CMS/css/gridmanagerv2.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="$!webThemes/CMS/css/styles_CMS.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="$!webThemes/CMS/css/slick.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="$!webThemes/CMS/js/contextmenu/jquery.contextMenu.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link href="$!webThemes/CMS/css/gridmanagerv2.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
+    <link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css"/>
+    <link href="$!webThemes/CMS/css/slick.css" rel="stylesheet" type="text/css"/>
+    <link href="$!webThemes/CMS/js/contextmenu/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="$!webThemes/CMS/css/codemirror.css" />
-    <link
-      rel="stylesheet"
-      href="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.css"
-    />
-    <link
-      rel="stylesheet"
-      href="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.css"
-    />
-    <link
-      rel="stylesheet"
-      href="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.css"
-    />
-    <link
-      rel="stylesheet"
-      href="$!webThemes/CMS/js/codemirror/addon/lint/lint.css"
-    />
+    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.css"/>
+    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.css" />
+    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.css"/>
+    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/lint/lint.css"/>
     <link rel="stylesheet" href="$!webThemes/CMS/css/arrowskin.css" />
-    <link
-      href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/skin.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.inline.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/plugins/fontawesome/css/fontawesome.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/ASSETS/CSS_FILES/EcommereceCustomCss.css"
-    />
-    <link
-      href="$!webThemes/CMS/css/colorbox.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet" />
-    <link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet" />
-    <link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet" />
-    <script type="text/javascript">
-      var parentUrl = "" + window.parent.location;
+    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/skin.min.css" rel="stylesheet" type="text/css" />
+    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.min.css" rel="stylesheet" type="text/css" />
+    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.inline.min.css" rel="stylesheet" type="text/css" />
+    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/EcommereceCustomCss.css?v=$!session.getLastAccessedTime()" />
+    <link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
+    <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
+	<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
+	<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
+	<script type="text/javascript">
+      var parentUrl = ""+window.parent.location;
       //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
-      if (
-        parentUrl.indexOf("cmsPageCms.action") === -1 &&
-        window.location !== window.parent.location
-      ) {
+      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
         //console.log("The page is in an iframe");
         //console.log("location: "+ window.location);
         //console.log("Parent Location: "+window.parent.location);
-      } else {
+      }else {
         alert("Unauthorized Access...!");
-        if (parentUrl.indexOf("cmsPageCms.action") !== -1) {
+        if(parentUrl.indexOf("cmsPageCms.action") !== -1){
           // console.log("The page is not in CIMM");
           window.location.href = "/";
           window.top.location.href = "/";
-        } else {
+        }else{
           //console.log("The page is not in an iframe");
           window.location.href = "/";
         }
       }
-    </script>
+	</script>
   </head>
   <body>
-    <div class="site-overlay" id="site-overlay"></div>
-    <div class="modalPopOverlay" id="overlay"></div>
+    <div class="cms_staticTable">
     <div id="fixedHead"></div>
     <div class="cimm_stickyPageWrap">
-      #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
+    #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
       <div id="normalHead">
         <header>
           <div class="cimm_header">
-            #parse("header.html")
+            #parse("header.html") 
           </div>
         </header>
-        <nav class="navbar navbar-default hideForIpad">
-          <div class="container cimm_nav">
-            #parse("navigation.html")
-          </div>
-        </nav>
+       <nav class="navbar navbar-default hideForIpad">
+			<div class="container cimm_nav">
+				#parse("navigation.html")
+			</div>
+		</nav>
       </div>
       #else
       <div id="normalHead">
         <div class="cimm_header">
-          #parse("header.html")
+          #parse("header.html") 
         </div>
         <div class="cimm_navigationBar">
           <div class="cimm_siteWidth">
@@ -131,18 +75,20 @@
       <div class="cimm_bodyContentWrap">
         #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") != "Y")
         <div class="cimm_siteWidth">
-          #end #if($leftContent) #if($LayoutName == "ProductList")
+        #end
+          #if($leftContent)
+          #if($LayoutName == "ProductList")
           #if($resultCount > 0)
           <div class="cimm_leftMenuEnclosure">
             #parse($leftContent)
           </div>
-          #end #else
-          <div
-            class="cimm_leftMenuEnclosure #if($LayoutName != 'ProductList')hideForDevices#end #if($LayoutName == 'HomePage' || $!isStaticHomePage =='Y')cimm_homeLeftMenu#end"
-          >
+          #end
+          #else
+          <div class="cimm_leftMenuEnclosure #if($LayoutName != 'ProductList')hideForDevices#end #if($LayoutName == 'HomePage' || $!isStaticHomePage =='Y')cimm_homeLeftMenu#end">
             #parse($leftContent)
           </div>
-          #end #end
+          #end
+          #end
           <div class="cimm_mainContentEnclosure cms_mainContentEnclosure">
             #parse($bodyContent)
           </div>
@@ -150,121 +96,35 @@
           <div class="cimm_rightMenuEnclosure">
             #parse($rightContent)
           </div>
-          #end #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") !=
-          "Y")
+          #end
+        #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") != "Y")
         </div>
         #end
       </div>
     </div>
-    #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
-    <footer>
-      <div class="cimm_footerEnclosure">
-        #parse("footer.html")
-      </div>
-    </footer>
-    #else
-    <div class="cimm_footerEnclosure">
-      #parse("footer.html")
-    </div>
-    #end
-    <p id="backToTop">
-      <a href="#top"></a>
-    </p>
+	#if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
+	<footer>
+		<div class="cimm_footerEnclosure">
+			#parse("footer.html") 
+		</div>
+	</footer>
+	#else
+	<div class="cimm_footerEnclosure">
+		#parse("footer.html")         
+	</div>
+	#end
+	</div>
     <div class="cms_leftMenu hideMe">
-      <ul>
-        <li>
-          <a
-            href="listStaticPageCms.action"
-            title="List Static Pages"
-            class="cms_uploadBannerBtn"
-          >
-            <i class="fa fa-file" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li>
-          <a class="cms_SlideMenuBtn" style="cursor: pointer;">
-            <img
-              title="HTML Elements"
-              src="$!webThemes/CMS/images/small/tools.png"
-            />
-          </a>
-          #parse("cmsmenu.html")
-        </li>
-        <li>
-          <a class="cms_SlideMenuBtn" style="cursor: pointer;">
-            <i class="fa fa-save" title="Save Page" aria-hidden="true"></i>
-          </a>
-          #parse("cmsStaticPageForm.html")
-        </li>
-        <li>
-          <a
-            href="javascript:openBannerList();"
-            class="cms_uploadBannerBtn"
-            title="Banner List"
-          >
-            <img src="$!webThemes/CMS/images/small/listBrand.png" />
-          </a>
-        </li>
-        <li>
-          <a
-            class="iframe cms_uploadBannerBtn"
-            href="bannerUploadCms.action"
-            title="Upload Images/Documents"
-            onclick="javascript:showUploadIframeWindow();"
-          >
-            <img src="$!webThemes/CMS/images/small/upload.png" />
-          </a>
-        </li>
-        <li>
-          <a
-            class="iframe cms_uploadBannerBtn"
-            href="widgetListCms.action"
-            title="Widgets"
-            onclick="javascript:showIframeWindow();"
-          >
-            <i class="fa fa-cog" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            class="iframe cms_uploadBannerBtn"
-            href="javascript:cmsbannersmenubuilderList();"
-            title="Menubuilder"
-            class="cms_uploadBannerBtn"
-          >
-            <img src="$!webThemes/CMS/images/small/manageTaxonomy.png" />
-          </a>
-        </li>
-        <li>
-          <a
-            class="iframe cms_uploadBannerBtn"
-            href="javascript:cmsbannersmenubuilderList1();"
-            title="CSS"
-          >
-            CSS
-          </a>
-        </li>
-        <li>
-          <a
-            class="iframe cms_uploadBannerBtn"
-            href="formListCms.action"
-            title="Form Builder"
-            onclick="javascript:showIframeWindow();"
-          >
-            <img src="$!webThemes/CMS/images/small/formBuilder.png" />
-          </a>
-        </li>
-      </ul>
-    </div>
-    <script
-      type="text/javascript"
-      src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"
-    ></script>
-    #parse("javascripts.html") #parse("cimmhead.html") #parse("cmsscript.html")
+    	#parse("cmsLeftmenu.html")
+	</div>
+    <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
+    #parse("javascripts.html")
+    #parse("cimmhead.html")
+    #parse("cmsscript.html")
     <script>
-      if (self == top) {
-        var theBody = document.getElementsByTagName("body")[0];
-        theBody.style.display = "none";
+      if(self == top) {
+        var theBody = document.getElementsByTagName('body')[0];
+        theBody.style.display = 'none';
       }
     </script>
   </body>

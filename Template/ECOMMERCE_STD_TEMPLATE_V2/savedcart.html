@@ -42,7 +42,7 @@
 					<input type="hidden" name="savedGroupId" value="$savedGroupId" />
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" /> 
 					<input type="hidden" name="sortBy" value="$!sortBy"/>
-					<input type="hidden" name="pageNo" value="$pageNo" />
+					<input type="hidden" name="pageNo" value="0" />##$pageNo
 					<input type="hidden" value="C" name="reqType"/>
 					<input type="hidden" value="$isShared" name="shared" id="isShared2"/>
 					<select name="resultPage" class="form-control selectpicker quantity" id="resultPage" onchange="PageItemsChange();">
@@ -94,7 +94,7 @@
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
 					<input type="hidden" name="resultPage" value="$resultPage" />
 					<input type="hidden" name="sortBy" value="$!sortBy"/>   
-					<input type="hidden" name="pageNo" value="$pageNo" />
+					<input type="hidden" name="pageNo" value="0" />##$pageNo
 					<input type="hidden" value="$reqType" name="reqType"/>
 					<input type="hidden" value="$isShared" name="shared" id="isShared"/>
 					<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" id="searchkeyWord"/>
@@ -232,7 +232,7 @@
 					</ul>
 					</td> -->
 					<td data-th="$locale.get('form.label.tableQty')">
-						<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" value="$itemData.qty" maxlength="6" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
+						<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" value="$itemData.qty" maxlength="4" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" data-minorderqty="$!itemData.minOrderQty"  data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" class="quantity" />
 						<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 						<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 						<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/> 

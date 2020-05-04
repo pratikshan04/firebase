@@ -1,10 +1,8 @@
- function initJssorSlides(sliderId,transistion){
+/* function initJssorSlides(sliderId, transistion, slideDelay, autoPlay) {
             //Reference http://www.jssor.com/development/slider-with-slideshow-jquery.html
             //Reference http://www.jssor.com/development/tool-slideshow-transition-viewer.html
 
-	 var jssor_1_SlideoTransitions = [
-	                                  {$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$JssorEasing$.$EaseInCubic,$Opacity:$JssorEasing$.$EaseLinear},$Opacity:2}
- ];
+	 var jssor_1_SlideoTransitions = [{$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$JssorEasing$.$EaseInCubic,$Opacity:$JssorEasing$.$EaseLinear},$Opacity:2}];
 	 
 	                                  var _CaptionTransitions = [];
 	  _CaptionTransitions["CLIP|LR"] = {$Duration: 900, $Clip: 3, $Easing: $JssorEasing$.$EaseInOutCubic };
@@ -17,11 +15,20 @@
 		 jssor_1_SlideoTransitions = obj;
 		
 	}
+	 var dataSlideDelay = 2000;
+	    if (jQuery.trim(slideDelay) != "") {
+	    	dataSlideDelay = slideDelay;
+	    }
+	   var dataAutoPlay = 1;
+	    if (jQuery.trim(autoPlay) != "") {
+	    	dataAutoPlay = autoPlay;
+	    }
+	    
 	 console.log($JssorBulletNavigator$);
 	
 	                                var jssor_1_options = {
-	                                  $AutoPlay: true,
-	                                  $Idle: 2000,
+	                                  $AutoPlay: dataAutoPlay,
+	                                  $Idle: dataSlideDelay,
 	                                  $SlideshowOptions: {
 	                                      $Class: $JssorSlideshowRunner$,
 	                                      $Transitions: jssor_1_SlideoTransitions,
@@ -68,8 +75,79 @@
             //    $(window).bind("orientationchange", ScaleSlider);
             //}
             //responsive code end
-            }
- 
+            }*/
+ function initJssorSlides(sliderId, transistion, slideDelay, autoPlay) {
+    var jssor_1_SlideoTransitions = [{
+        $Duration: 1200,
+        x: 0.3,
+        $During: {
+            $Left: [0.3, 0.7]
+        },
+        $Easing: {
+            $Left: $JssorEasing$.$EaseInCubic,
+            $Opacity: $JssorEasing$.$EaseLinear
+        },
+        $Opacity: 2
+    }];
+    var _CaptionTransitions = [];
+    _CaptionTransitions["CLIP|LR"] = {
+        $Duration: 900,
+        $Clip: 3,
+        $Easing: $JssorEasing$.$EaseInOutCubic
+    };
+    var data = "";
+    if (jQuery.trim(transistion) != "") {
+        data = transistion;
+        var obj = eval("([" + data + "])");
+        console.log(obj);
+        jssor_1_SlideoTransitions = obj;
+    }
+    var dataSlideDelay = 2000;
+    if (jQuery.trim(slideDelay) != "") {
+    	dataSlideDelay = slideDelay;
+    }
+    var dataAutoPlay = 1;
+    if (jQuery.trim(autoPlay) != "") {
+    	dataAutoPlay = autoPlay;
+    }
+    var jssor_1_options = {
+        $AutoPlay: dataAutoPlay,
+        $Idle: dataSlideDelay,
+        $FillMode: 5,
+        $SlideshowOptions: {
+            $Class: $JssorSlideshowRunner$,
+            $Transitions: jssor_1_SlideoTransitions,
+            $TransitionsOrder: 1,
+            $ShowLink: true
+        },
+        $CaptionSliderOptions: {
+            $Class: $JssorCaptionSlideo$,
+            $CaptionTransitions: _CaptionTransitions,
+            $PlayInMode: 1,
+            $PlayOutMode: 3
+        },
+        $ArrowNavigatorOptions: {
+            $Class: $JssorArrowNavigator$
+        },
+        $BulletNavigatorOptions: {
+            $Class: $JssorBulletNavigator$
+        }
+    };
+    var jssor_slider1 = new $JssorSlider$(sliderId, jssor_1_options);
+
+    function ScaleSlider() {
+        try {
+            var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+            if (parentWidth) jssor_slider1.$ScaleWidth(Math.min(parentWidth));
+            else
+                window.setTimeout(ScaleSlider, 30);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    ScaleSlider();
+    jQuery(window).bind('resize', ScaleSlider);
+}
  
  
  function initCarousel(sliderId,settings){

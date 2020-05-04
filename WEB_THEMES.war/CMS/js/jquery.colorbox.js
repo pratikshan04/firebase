@@ -423,6 +423,7 @@
 			
 			if (settings.get('closeButton')) {
 				$close.html(settings.get('close')).appendTo($content);
+				$close.html('<i class="fa fa-lg fa-times-circle"></i>');
 			} else {
 				$close.appendTo('<div/>'); // replace with .detach() when dropping jQuery < 1.4
 			}

@@ -1,131 +1,65 @@
-<link href="$!webThemes/CMS/css/styles_CMS.css" rel="stylesheet" type="text/css" />
+<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
 <style>
-.fa-wpforms:before {
-    content: "\f298";
-}
-.dropelement{
-width:49%;
-float:left;
-min-height:300px;
-border: 1px dashed #b1b1b1;
-}
-.cimm_formContent{
-width:100% !important;
-}
-
-ul.cimm_formContent li>label, ul.cimm_formContent li>span>label{
-width:30% !important;
-}
-.editing{
-background-color : #fffdca;
-}
-.editelement{
-width:49%;
-float:left;
-min-height:300px;
-border: 1px solid #b1b1b1;
-padding:20px;
-}
-
-.dropelement form{
-min-height:200px;
-}
-.dropelement form ul{
-min-height:200px;
-}
-
-.dropelement form ul li{
-padding:10px;
-}
-ul.cimm_formContent a.tool-edit, ul.cimm_formContent a.tool-delete {
+.tool-edit, .tool-delete {
 	padding: 3px 10px;
-    background: #1B63AB;
-    color: #fff;
+	color: #456078;
 }
-.editelement ul li, .formTitle ul li {margin-bottom: 10px;}
-.editelement ul li label, .formTitle ul li label {
-	color: #003b4d;
-}
-.editelement ul li input[type="text"], .editelement ul li input[type="password"], .editelement ul li select, .formTitle ul li input[type="text"], .formTitle ul li select {
-	padding: 5px;
-    height: 34px;
-	border: none;
-    background: #e1e1e1;
-    width: 100%;
-}
-.editelement ul li textarea {
-	padding: 5px;
-    min-height: 34px;
-	border: none;
-    background: #e1e1e1;
-    width: 100%;
-}
-.dropelement input[type="submit"] {
-	padding: 5px 10px;
-    color: #fff;
-	margin: 0 0 10px 10px;
-}
-a.apply-changes {
-    padding: 4px 10px;
-    background: #007655;
-    color: #fff;
-	float: right;
-    margin-right: 23px;
-}
-a.save-form {
-	text-align: center;
-    padding: 5px 25px;
-    background: #007580;
-    color: #fff;
-    margin: 10px 0 0 10px;
-}
-.save-btnBlock {clear: both;}
-ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.customCheckBox, ul.cimm_formContent li label.customLabel, ul.cimm_formContent li input[type="text"], ul.cimm_formContent li input[type="password"], ul.cimm_formContent li select, ul.cimm_formContent li textarea {
+.dropelement form > .row{
+	min-height:200px;
 	margin-bottom: 10px;
 }
-.dragelementWrap {padding: 10px;margin-bottom: 20px;}
-.dragelementWrap .dragelement {
-	width: auto;
-    display: inline-block;
-    background: #00696C;
-    padding: 5px 20px;
-    color: #FDF3E7;
-    text-transform: uppercase;
-    cursor:move;
+.dropelement .placeholder{
+	background: #f5f5f5;
 }
-.formTitle {
-	width: 30%;
-	float: right;
-	padding: 0 20px 20px 20px;
+.dropelement .col{
+	cursor: move;
 }
-.formBuilderWrap {
-	width: 68%;
-	float: right;
+.dropelement .col select, .dropelement .col textarea, .dropelement .col input,.btnBlock button{
+	pointer-events: none;
 }
-.cimm_formContent .customRadioBtn input[type="radio"] {
-    display: block;
-    opacity: 1;
-    float: left;
-    width: 18px;
-    height: 18px;
-    margin-left:-20px;
-    margin-top:-1px;
-    background: #fff;
-    -webkit-appearance: none;
+.dropelement .col:hover .cms_form-btn-block,.btnBlock:hover .cms_form-btn-block {
+	opacity: 1;
+	bottom: 0;
 }
-.cimm_formContent .customCheckBox input[type="checkbox"] {
-    display: block;
-    opacity: 1;
-    width: 18px;
-    float: left;
-    height: 18px;
-    margin-left: -22px;
-    margin-top: -1px;
-    background: #fff;
-    -webkit-appearance: none;
+.dropelement .form-group{
+	margin-bottom: 8px;
 }
-:focus {
-  outline: -webkit-focus-ring-color auto 5px !important;
+.cms_form-btn-block {
+	opacity: 0;
+	position: relative;
+	bottom: -16px;
+	text-align: right;
+	transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+}
+.btnBlock .cms_form-btn-block {
+	text-align: left;
+}
+.editing{
+	background-color : #fffdca;
+}
+.cms_form-btn-block .colDecrease, .cms_form-btn-block .colIncrease {
+	background: #456078;
+	color: #FFF;
+	padding: 6px 10px 3px 10px;
+	float: left;
+}
+.ui-draggable-dragging{
+	z-index: 99;
+}
+.editelement li span i {
+	margin: 0 5px;
+	padding: 8px;
+	background: #c7c7c7;
+	color: #FFF;
+	cursor: pointer;
+}
+.editelement label.cms_formBtnRadio input[type=radio] {
+    display: none;
+}
+.editelement label.cms_formBtnRadio input[type=radio]:checked + i {
+	background: #456078;
 }
 </style>
 <div class="formEditWrap clearfix">
@@ -133,6 +67,10 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 		<div class="dragelement dragFormElement" data-type="input" title="Input Text">
 			<span class="input-text">Abc</span>
 			Input Text
+		</div>
+		<div class="dragelement dragFormElement" data-type="date" title="Input Date">
+			<span class="input-text">mm/dd/yy</span>
+			Input Date
 		</div>
 		<div class="dragelement dragFormElement" data-type="textarea" title="Text Area">
 			<span class="text-area">Abc</span>
@@ -244,12 +182,44 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
 		</div>
 	</div>
 </div>
-
 <script>
-$(".dropelement ul li").append('<div><a href="javascirpt:void(0);" class="tool-edit">Edit</a> <a href="javascirpt:void(0);" class="tool-delete">Delete</a></div>');
+var arrows = '<a title="Make Column Narrower" class="colDecrease"><i class="fa fa-lg fa-caret-left"></i></a> <a title="Make Column Wider" class="colIncrease"><i class="fa fa-lg fa-caret-right"></i></a>';
+$(".dropelement .col").append('<div class="cms_form-btn-block">'+arrows+'<a href="javascirpt:void(0);" class="tool-edit"><i class="fa fa-lg fa-pencil-alt"></i></a> <a href="javascirpt:void(0);" class="tool-delete"><i class="fa fa-lg fa-trash-alt"></i></a></div>');
+$(".btnBlock").append('<div class="cms_form-btn-block"><a href="javascirpt:void(0);" class="editBtnStyle"><i class="fa fa-lg fa-pencil-alt"></i></a></div>');
 var frmName=document.getElementById('formName').value;
 //alert(document.getElementById('formName').length);
 if(frmName==='' || frmName==='undefined'){
 	document.getElementById('formExportBtn').style.visibility = "hidden";
 }
+var dropForm = document.getElementsByClassName('dropelement')[0];
+var dropFormArr = dropForm.children[0].classList;
+document.getElementById('formClass').value = dropFormArr.value;
+$(document).ready(function(){
+	$('.editelement,.cms_sectionHeading > form').slimScroll({
+		height: '486px',
+		railVisible: false,
+		alwaysVisible: true,
+		size:'10px',
+		railColor:'#ccc',
+		color:'#e0e0e0',
+		railOpacity: '0.5',
+		opacity:'0.5',
+		borderRadius : '5px',
+		railBorderRadius: '0px',
+		top: '10px'
+	});
+	$('.dropelement').slimScroll({
+		height: '548px',
+		railVisible: false,
+		alwaysVisible: true,
+		size:'10px',
+		railColor:'#ccc',
+		color:'#e0e0e0',
+		railOpacity: '0.5',
+		opacity:'0.5',
+		borderRadius : '5px',
+		railBorderRadius: '0px',
+		top: '10px'
+	});
+});
 </script>

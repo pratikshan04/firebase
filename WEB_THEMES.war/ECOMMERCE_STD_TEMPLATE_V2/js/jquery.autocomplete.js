@@ -894,7 +894,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			wrapEl = "<ul/>"
 		}
 		list = $(wrapEl).appendTo(element).mouseover( function(event) {
-			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
+			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI' && !target(event).classList.contains("ac_over") && !target(event).classList.contains("suggest")) {
 	            active = $("li", list).removeClass(CLASSES.ACTIVE).index(target(event));
 				console.log(active);
 			    $(target(event)).addClass(CLASSES.ACTIVE); 
@@ -918,7 +918,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			    }
 	        }	
 		}).click(function(event) {
-			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
+			if(event.target.nodeName && event.target.nodeName.toUpperCase() == 'LI') {
 				$(target(event)).addClass(CLASSES.ACTIVE);
 				select();
 				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
@@ -1158,8 +1158,20 @@ $.Autocompleter.Select = function (options, input, select, config) {
 					li = $("<li/>").html( options.highlight(data[i].lable, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("id",data[i].dataId).attr("data-value",data[i].value).attr("data-reqtype",reqType).attr("data-codeId",data[i].codeId).attr("data-type",data[i].category).attr("data-original",data[i].originalval).appendTo(mfgWrap)[0];
 				}else{
 					if(count<4){
-						li = $("<li/>").html('<img src="'+assets+'/IMAGES/ITEMS/DETAIL_PAGE/'+data[i].image+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+data[i].image+'"/><span>'+options.highlight(data[i].lable, term) +'</span>').addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("id",data[i].dataId).attr("data-value",data[i].value).attr("data-reqtype",reqType).attr("data-codeId",data[i].codeId).attr("data-type",data[i].category).attr("data-original",data[i].originalval).appendTo(prodWrap)[0];
-						count++;
+						var imageData = '';
+						if(data[i].image){
+							var catImage = data[i].image.substring(0,4);
+							if(catImage === "http"){
+								imageData = '<img src="'+data[i].image+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+data[i].image+'"/>';
+							}else{
+								imageData = '<img src="'+assets+'/IMAGES/ITEMS/DETAIL_PAGE/'+data[i].image+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+data[i].image+'"/>';
+							}
+						}else{
+							imageData = '<img src="'+webThemes+'images/NoImage.png" alt="'+data[i].lable+'"/>';
+						}
+                        
+                        li = $("<li/>").html(imageData + '<span>'+options.highlight(data[i].lable, term) +'</span>').addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("id",data[i].dataId).attr("data-value",data[i].value).attr("data-reqtype",reqType).attr("data-codeId",data[i].codeId).attr("data-type",data[i].category).attr("data-original",data[i].originalval).appendTo(prodWrap)[0];
+                        count++;
 					}
 				}
 			}else{

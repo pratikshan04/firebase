@@ -76,7 +76,7 @@ var QuickOrder = {};
     		cartCountString = "0";
     		total = "";
     	}
-    	$('.cartCountrefresh').html(cartCountString);
+    	$('.cartCountrefresh').html("(" + cartCountString + ") " + locale('product.label.items'));
     	$('.cartTotal').html(total);
     	if($('#countInCart').length>0){
     		$('#countInCart').val(cartCountString);

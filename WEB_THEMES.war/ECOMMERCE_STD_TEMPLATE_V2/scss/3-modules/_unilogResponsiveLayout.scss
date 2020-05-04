@@ -2,6 +2,7 @@ $breakpoint-tablet: 1024px;
 $breakpoint-largeDevice: 980px;
 $breakpoint-tabletPortrait: 768px;
 $breakpoint-mobileView: 480px;
+
 @media all and (max-width: 1200px) {
   .container {
     width: 100%;
@@ -321,6 +322,10 @@ $breakpoint-mobileView: 480px;
   }
 }
 @media all and (max-width: $breakpoint-largeDevice) {
+  footer .cimm_footer_mid .footerCol h3 em {
+    display: block;
+    font-size: 16px;
+  }
   .documentStack li {
     width: 24%;
   }
@@ -557,6 +562,25 @@ $breakpoint-mobileView: 480px;
     content: "\f105";
     top: -1px;
   }
+  .toggle_content {
+		display: none;
+  }
+  .listGridContainer {
+    .listView{
+      ul{
+        li{
+          &.sessionDesp{
+            width: 100%;
+            clear: both;
+            ul{
+              width: 100%;
+              clear: both;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
   .calendarFilter ul li {
@@ -608,9 +632,10 @@ $breakpoint-mobileView: 480px;
   }
   .listGridContainer .gridView {
     width: 48%;
+    width: calc((100% / 2) - 2%);
   }
   .listGridContainer .gridView:nth-child(3n + 2) {
-    margin: 25px 0.5% 0 0;
+    margin: 25px 0.5% 0 0.5%;
   }
   .listGridContainer .gridView:nth-child(2n + 2) {
     margin: 25px 0.5% 0 2.5%;
@@ -697,6 +722,15 @@ $breakpoint-mobileView: 480px;
   }
 }
 @media all and (max-width: $breakpoint-mobileView) {
+  .compareTableWrap .pushbtnGroup li {
+    width: 100%;
+    a.cimm_inlineButton {
+      width: 100%;
+    }
+  }
+  .bulkActionBtn{
+    margin: 0 auto;
+  }
   .calendarFilterWrap .tableHeader h2 {
     float: none !important;
     width: 100%;
@@ -729,20 +763,42 @@ $breakpoint-mobileView: 480px;
   .listGridContainer .gridView,
   .listGridContainer .gridView:nth-child(3n + 3),
   .listGridContainer .gridView:nth-child(2n + 2),
-  .listGridContainer .gridView:nth-child(3n + 1) {
+  .listGridContainer .gridView:nth-child(3n + 1),
+  .listGridContainer .gridView:nth-child(3n + 2) {
     width: 100%;
     float: none;
     height: auto;
-    min-height: 450px;
+    min-height: 350px;
+    margin: 25px 0 0 0;
+    .gridFixHeight  {
+      height: auto;
+    }
+    ul li.sessionDesp {
+      .itemCountGrid {
+        position: inherit;
+        text-align: center;
+        width: 100%;
+      }
+    }
   }
-  .cimm_listGridTopControls .cimm_listGridTopRightCtrls,
-  .cimm_listGridTopControls .cimm_listGridTopRightCtrls form {
-    width: 100%;
-    float: none;
-    text-align: center;
-    display: block;
-    margin: 10px 0;
+  .cimm_listGridTopControls {
+    .cimm_listGridTopRightCtrls{
+      display: block;
+      margin: 0;
+      text-align: center;
+      form{
+        width: 100%;
+        float: none;
+        text-align: center;
+        display: block;
+        margin: 10px 0;
+      }
+      + .row{
+        text-align: center;
+      }
+    }
   }
+ 
   .cimm_itemdetail .cimm_itemdetail-imgcontainer .cimm_itemdetail-image img {
     max-height: 300px !important;
   }
@@ -751,7 +807,7 @@ $breakpoint-mobileView: 480px;
     font-size: 10px;
     padding: 8px 2px;
   }
-  .marketingMaterial label {
+  .marketingMaterial label,#orderPoSearchBtn,.clearform {
     margin-top: 8px;
   }
   #productSearchForm .cimm_inlineButton {

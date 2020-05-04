@@ -60,7 +60,7 @@
 			#foreach($shaipData in $shipAddressList)
 			<tr class="odd">
 				<td style="text-align: left;"  data-th='$locale.get("form.label.address")'>
-					<span>$!shaipData.customerName</span><br />
+					<span>$!shaipData.firstName $!shaipData.lastName ##$!shaipData.customerName</span><br />
 					<span>$!shaipData.address1</span><br />
 					#if($shaipData.address2)<span>$!shaipData.address2</span><br />#end
 					<span>$!shaipData.city, $!shaipData.state</span><br />

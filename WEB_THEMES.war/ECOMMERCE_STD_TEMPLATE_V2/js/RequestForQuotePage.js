@@ -101,7 +101,11 @@ function validateRFQ(){
 
 	for(i=0;i<=pn.length-1;i++){
 		var checkResult = 0;
-		if($.trim(pn[i].value)=="" && $.trim(brandName[i].value) =="" && $.trim(shortDesc[i].value)==""){
+		
+		if(parseFloat(ITEMQTYARR[i].value) == 0 ){
+			emailVal = emailVal + "Quantity Cannot be less than or equal to 0<br/>";
+		}
+		if($.trim(pn[i].value)=="" || $.trim(parseFloat(ITEMQTYARR[i].value)) == 0 || $.trim(shortDesc[i].value)==""){
 			count++;
 		}else{
 			if(ITEMQTYARR[i].value==""){

@@ -162,14 +162,14 @@
     }
   }
   .gridView {
-    width: 30.5%;
+    width: calc((100% / 3) - 1.5%);
     float: left;
     margin: 25px 0.5% 0 0.5%;
     position: relative;
-    height: 690px;
+    height: 725px;
     .gridFixHeight {
       padding: 15px;
-      height: 690px;
+      height: 725px;
       border: 1px solid $border-color;
       outline: 5px solid lighten($black, 95%);
       width: 100%;
@@ -188,7 +188,7 @@
 			}
 		}*/
     &:nth-child(3n + 2) {
-      margin: 25px 3.2% 0 3.2%;
+      margin: 25px 1.2% 0 1.2%;
     }
     .skuStyle {
       //	height: 170px;
@@ -262,7 +262,7 @@
             font-size: 14px;
             border-radius: 2px;
             em {
-              margin-right: 12%;
+              margin-right: 5%;
             }
           }
         }
@@ -310,6 +310,9 @@
       width: 100%;
     }
   }
+}
+.bulkActionBtn{
+  max-width: 200px;
 }
 .assignedStaticPageWrap {
   height: 210px;

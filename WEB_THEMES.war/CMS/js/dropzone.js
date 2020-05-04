@@ -1020,16 +1020,30 @@
       })(this));
     };
 
-    Dropzone.prototype.removeFile = function(file) {
-      if (file.status === Dropzone.UPLOADING) {
-        this.cancelUpload(file);
-      }
-      this.files = without(this.files, file);
-      this.emit("removedfile", file);
-      if (this.files.length === 0) {
-        return this.emit("reset");
-      }
-    };
+	Dropzone.prototype.removeFile = function(file) {
+		var  imageList=[];
+		var fileRemove="fileRemoveFromServer";
+		var selectedType=document.getElementById("fileTypeSelect").value;  
+		imageList.push(file.name);
+		jQuery.ajax({
+			type: "POST",
+			url:contextPath+"/connector.slt",
+			enctype : "multipart/form-data",
+			data:{imageList:imageList,selectedType:selectedType,fileRemove:fileRemove},
+			success:function(response){
+				var spDeletedList=response;
+				var strsplit=spDeletedList.split(",");   
+			}, 
+		}); 
+    	if (file.status === Dropzone.UPLOADING) {
+    		this.cancelUpload(file);
+    	}
+    	this.files = without(this.files, file);
+    	this.emit("removedfile", file);
+    	if (this.files.length === 0) {
+    		return this.emit("reset");
+    	}
+	};
 
     Dropzone.prototype.removeAllFiles = function(cancelIfNecessary) {
       var file, _i, _len, _ref;

@@ -7,6 +7,9 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 		   accordion:true
 	});
 });
+enqueue('/getPromotedProductGroupsPage.action?reqType=GP&AjaxRequest=Y',function(data){
+	$("#promotedProductsTable").html(data);
+});
 enqueue('/OrderHistory?AjaxRequest=Y&dt='+new Date(),function(data){
 	$("#orderHistory").html(data);
 });
@@ -64,7 +67,7 @@ function clearImage(){
 	});
 }
 $(document).ready(function() {
-	$('.table').DataTable({
+	$('#ship_table').DataTable({
 		"language": {
 			"search":"_INPUT_",
 	        "searchPlaceholder":"Search Ship Address",
@@ -86,13 +89,13 @@ $(document).ready(function() {
 		complete: function(response){
 			var userProfileImagePath = $('#userProfileImagePath').val();
 			var pathNew = userProfileImagePath+response.responseText;
-		    console.log(pathNew);
+			var chooseProfilePicture = locale('product.heading.chooseProfilePicture');
 		    unblock();
 		    $('#profilePicture').attr("src",pathNew+"?dt="+new Date());
 		    $('#profilePictureThumbnail').attr("src",pathNew+"?dt="+new Date());
 		    enqueue('sessionValueLink.action?crud=s&keyValue=userProfileImage&insertValue='+response.responseText+'&dt='+new Date())
 		    $('#profileImage').attr({ value: ""});
-		    $('#cimm_customImageUpload > span').text("Choose File");
+		    $('#cimm_customImageUpload > span').text(chooseProfilePicture);
 		},
 		error: function(){
 	        bootAlert("small","error","Error","Not able to upload image.");
