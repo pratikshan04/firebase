@@ -40,32 +40,66 @@
 
 
 <div class="widgetBlock">
-#if($!widgetData.id > 0)
-<h4>Edit Widget</h4>
-#else
-<h4>Add Widget</h4>
-#end
-<form id="widgetForm">
-<input type="hidden" name="widget.id" id="widgetId" value="$!widgetData.id" />
-<div class="editformBlock">Widget Name<span style="color:red;">*</span> : <input type="text" value="$!widgetData.name" name="widget.name" id="widgetName" /></div>
-<div class="editformBlock">Description <span></span> : <input type="text" value="$!widgetData.description" name="widget.description" id="description" /></div>
-<div class="editformBlock">Type <span></span> : <select name="widgetType" style="font-size: 15px; width: 200px;padding:5px;"><option value="custom" #if($widgetType=="custom")  selected #end>Custom</option>
-#foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
-<option value="$widgetKey" #if($widgetType==$widgetKey) selected #end>$widgetKey</option>
-#end
-</select></div>
-<br />
-<label class="editFormLabel">Template Code<span style="color:red;">*</span> :</label> <textarea style="width:200px;" name="widget.templateCode" id="templateCode">$!widgetData.templateCode.replaceAll('</textarea>','&lt;/textarea&gt;')</textarea>
-<br />
-
-<br />
-<div class="widget_saveBtn">
-#if($!widgetData.id > 0)
-<button onclick="return updateWidget();" class="banners_saveListBtn">Update Widget</button> #else <button onclick="return saveWidget();" class="banners_saveListBtn">Add Widget</button> #end <a class="banners_saveListBtn" href="widgetListCms.action">CANCEL</a>
-
-</div>
-<input type="hidden" id="actionType" name="type" value="" />
-</form>
+	#if($!widgetData.id > 0)
+	<h4>Edit Widget</h4>
+	#else
+	<h4>Add Widget</h4>
+	#end
+	<div class="widgetBlockWrap">
+		<form id="widgetForm">
+			<input type="hidden" name="widget.id" id="widgetId" value="$!widgetData.id" />
+			<div class="editformBlock">
+				<label>Widget Name<span style="color:red;">*</span> :</label> 
+				<input type="text" value="$!widgetData.name" name="widget.name" id="widgetName" />
+			</div>
+			<div class="editformBlock">
+				<label>Description :</label>
+				<input type="text" value="$!widgetData.description" name="widget.description" id="description" />
+			</div>
+			<div class="editformBlock">
+				<label>Type :</label>
+				<div class="custom-select">
+					<select name="widgetType"><option value="custom" #if($widgetType=="custom")  selected #end>Custom</option>
+						#foreach ($widgetKey in $widgetTypeList.stringPropertyNames()) 
+						<option value="$widgetKey" #if($widgetType==$widgetKey) selected #end>$widgetKey</option>
+						#end
+					</select>
+					<span>
+						<i class="fas fa-chevron-down"></i>
+					</span>
+				</div>
+			</div>
+			<div class="clear-both codeBlock">
+				<label class="editFormLabel">
+					Template Code<span style="color:red;">*</span> :
+				</label> 
+				<textarea style="width:200px;" name="widget.templateCode" id="templateCode">
+					$!widgetData.templateCode.replaceAll('</textarea>','&lt;/textarea&gt;')
+				</textarea>
+			</div>
+			<div class="widget_saveBtn text-right">
+				<a class="outLineBtn_left" href="widgetListCms.action"><i class="fa fa-times-circle"></i> Cancel</a>
+				#if($!widgetData.id > 0)
+				<button onclick="return updateWidget();" class="cms_blueBtn">
+					Update Widget
+					<span class="action-icon">
+						<i class="fa fa-lgfa-th-large"></i>
+						<sup class="fas fa-sync-alt"></sup>
+					</span>
+				</button>
+				#else
+				<button onclick="return saveWidget();" class="cms_blueBtn">
+					Add Widget
+					<span class="action-icon">
+						<i class="fa fa-lg fa-th-large"></i>
+						<sup class="fas fa-plus"></sup>
+					</span>
+				</button>
+				#end
+			</div>
+			<input type="hidden" id="actionType" name="type" value="" />
+		</form>
+	</div>
 </div>
 <input type="hidden" id="siteId" value="$siteId" />
 

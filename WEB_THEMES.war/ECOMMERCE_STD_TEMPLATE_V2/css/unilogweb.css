@@ -319,14 +319,6 @@ dl,
 p {
   margin: 0;
 }
-ol,
-ol li,
-ul,
-ul li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 a {
   cursor: pointer;
 }
@@ -362,6 +354,22 @@ h5 {
 }
 h6 {
   font-size: 16px;
+}
+:not(.cimm_staticPageWrap) ol,
+:not(.cimm_staticPageWrap) ol li,
+:not(.cimm_staticPageWrap) ul,
+:not(.cimm_staticPageWrap) ul li,
+footer ol,
+footer ol li,
+footer ul,
+footer ul li,
+header ol,
+header ol li,
+header ul,
+header ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 .row-space {
   margin: 15px 0;
@@ -5439,7 +5447,6 @@ ul.cimm_formContent li label.customCheckBox2 span {
 }
 .slick-prev {
   left: 20px;
-  box-shadow: 1px 2px 10px -1px #adadad;
 }
 .slick-list {
   position: relative;
@@ -5484,7 +5491,6 @@ ul.cimm_formContent li label.customCheckBox2 span {
 }
 .slick-next {
   right: 5px;
-  box-shadow: 1px 2px 10px -1px #adadad;
 }
 ul.slick-dots {
   position: absolute;
@@ -5690,7 +5696,6 @@ ul.slick-dots li.slick-active button:before {
 }
 .cimm_sliderWrap .cimm_caroWrap .slick-slide {
   margin: 0 0 0 15px;
-  box-shadow: 0 0 6px #adadad;
   border-radius: 3px;
 }
 .cimm_sliderWrap .cimm_caroWrap li {

@@ -189,10 +189,10 @@ var QuickOrder = {};
     	}
     };
     
+    var hot;
     QuickOrder.initHandsontable = function(){
     	$('#example1').html("");
     	var example1 = document.getElementById('example1'),limit = $("#quickOrderRecordLimit").val();
-    	var hot;
     	if(hot){
     		hot.clear();
     		hot.destroy();

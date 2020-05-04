@@ -2,83 +2,43 @@
 <html>
   <head>
     #parse("head.html")
-    #parse("stylesheets.html")
-    <script>
-      function paginationScriptCms(n_pages,page_link,iindex,pgno){
-        var n_links=5;
-        //page_link = page_link.replace(/[%]/g,"%25");
-        var s_fileName=page_link;
-        pageno=pgno;
-        n_index=(iindex/pageno)+1;
-        var jump=n_pages/5;
-        var mod=n_pages%5;
-        var skipstep=parseInt(jump);
-        if(mod>0){
-          skipstep=skipstep+1;
+    <!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
+    #parse("bootstrap-min-css.html")
+    <script type="text/javascript">
+      var parentUrl = "" + window.parent.location;
+      //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
+      if (
+        parentUrl.indexOf("cmsPageCms.action") === -1 &&
+        window.location !== window.parent.location
+      ) {
+        //console.log("The page is in an iframe");
+        //console.log("location: "+ window.location);
+        //console.log("Parent Location: "+window.parent.location);
+      } else {
+        alert("Unauthorized Access...!");
+        if (parentUrl.indexOf("cmsPageCms.action") !== -1) {
+          // console.log("The page is not in CIMM");
+          window.location.href = "/";
+          window.top.location.href = "/";
+        } else {
+          //console.log("The page is not in an iframe");
+          window.location.href = "/";
         }
-        var start=1;
-        var ss=n_index/n_links;
-        var change=parseInt(ss);
-        if((n_index%n_links)>0){
-          change=change+1;
-        }
-        n_links=n_links*change;
-        start=(n_links-5)+1;
-        var prevpage=pageno*5*(change-2);
-        var pagenumber=0;
-        document.write('<div class="pagebarUTH">');
-        if((n_index)>=6)
-          document.write('<a href="'+page_link+prevpage+'">Previous</a>\n');
-        if(n_links){
-          var n_sideLinks=1,n_firstLink,n_lastLink;
-          if(n_index>=n_pages){
-            n_firstLink=start;
-            n_lastLink=n_pages;
-          }
-          else if(n_index<=0)
-          {
-            n_firstLink=start;
-            n_lastLink=5;
-          }
-            else
-            {
-              n_firstLink=start;
-              if(n_links>n_pages)
-                n_lastLink=n_pages;
-              else
-                n_lastLink=n_firstLink+5-1;
-            }
-          for(var i=n_firstLink;i<=n_lastLink;i++)
-          {
-            pagenumber=(i*pageno)-pageno;
-            if(i==(n_index))
-            {
-              var nexpage=pagenumber+pageno;
-              nexpage=pageno*n_lastLink;
-            }
-            document.write(i==(n_index)?'<span class="this-page">'+i+'</span>\n':'<a href="'+page_link+pagenumber+'" title="Go to page '+i+'">'+i+'</a>\n');
-          }
-        }
-        if((n_lastLink)!=n_pages)
-          document.write('<a href="'+page_link+nexpage+'">Next</a><span class="total" style="background:none;margin-left:2px;border-radius: 3px 3px 0px 0px;padding: 2px 2px 2px 0px;"> of '+n_pages+'</span>');
-        document.write(' </div>');
       }
     </script>
   </head>
   <body class="cimm_bodyBackground" id="top">
     <input type="hidden" id="siteName" name="siteName" value="$siteName" />
-    <input type="hidden" id="moodname" name="moodname" value="$moodname">
+    <input type="hidden" id="moodname" name="moodname" value="$moodname" />
     #parse($bodyContent)
-    <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
-    #parse("javascripts.html")
-    #if($LayoutName == "CMSBannerEdit")
-    #parse("cmsbannereditscript.html")
-    #end
-    #if($LayoutName == "CMSFormEdit")
-    <script src="$!webThemes/CMS/js/cms/formsettings.js">
-    </script>
-    <script src="$!webThemes/CMS/js/cms/formbuilder.js">
-    </script>
+    <script
+      type="text/javascript"
+      src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"
+    ></script>
+    #parse("javascripts.html") #if($LayoutName == "CMSBannerEdit")
+    #parse("cmsbannereditscript.html") #end #if($LayoutName == "CMSFormEdit")
+    <script src="$!webThemes/CMS/js/cms/formsettings.js"></script>
+    <script src="$!webThemes/CMS/js/cms/formbuilder.js"></script>
     #end
   </body>
 </html>

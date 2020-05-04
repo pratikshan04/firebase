@@ -128,75 +128,121 @@ ul.cimm_formContent li label.customRadioBtn, ul.cimm_formContent li label.custom
   outline: -webkit-focus-ring-color auto 5px !important;
 }
 </style>
-</head>
-<body>
-
-<div class="dragelementWrap">
-<div class="dragelement" data-type="input">Input Text</div>
-<div class="dragelement" data-type="textarea">Text Area</div>
-<div class="dragelement" data-type="select">Select</div>
-<div class="dragelement" data-type="radio">Radio</div>
-<div class="dragelement" data-type="checkbox">Check Box</div>
-<div class="dragelement" data-type="text">Text Field</div>
-<div class="dragelement" data-type="captcha" title="Drag & Drop">Captcha</div>
-</div>
-<div class="formTitle">
-<form id="mainFormBuilder">
-<ul>
-<li>
-<label>Form Name :</label> <input type="text" value="$!formData.formName" maxlength="20" name="formData.formName" id="formNameMain" />
-</li>
-<li>
-<label>Notification :</label> <select id="formNotification" name="formData.formNotification">
-<option value=""></option>
-#foreach($notification in $notificationList)
-<option  vlaue="$notification" #if($!formData.formNotification == $notification) selected #end>$notification</option>
-#end
-</select>
-</li>
-<li>
-<label>Save User Entered Form Data to DB :</label> <input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox'  checked/>
-</li>
-<li>
-<label>Email Subject :</label> <input type="text" value="$!formData.emailSubject" name="formData.emailSubject" id="emailSubject" />
-</li>
-<li>
-<label>Send Email after User Submits Form :</label> <input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"  checked/>
-</li>
-</ul>
-<input type="hidden" name="formData.htmlCode" id="htmlCode" />
-#if($formData.id)
-<input type="hidden" name="formData.id" value="$formData.id" id="formDataId" /> 
-#end
-</form>
-<div class="save-btnBlock">
-<a href="javascript:void(0)" class="save-form">Save</a>
-<a href="javascript:void(0)" class="export-form"  id="formExportBtn">Export</a>
-</div>
-</div>
-
-<div class="formBuilderWrap">
-<div class="dropelement">
-#if($formData.htmlCode)
-$formData.htmlCode
-#else
-<form class="sp-form" action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
-<ul class="cimm_formContent fullWidthForm">
-</ul>
-<input type="submit" value="Submit" class="button" />
-<input type="hidden" name="NotificationName" id="notificationName" value=''/>
-<input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
-<input type="hidden" name="SendMail" id="sendMail" value=''/>
-<input type="hidden" name="Subject" id="subject" value=''/>
-<input type="hidden" name="formName" id="formName" value=''/>
-<input  type="hidden"   id="webthemesval" value='$!webThemes/'/>
-</form>
-#end
-</div>
-<div class="editelement">
-
-</div>
-<a href="javascript:void(0)" class="apply-changes">Apply <i class="fa fa-wpforms"></i></a>
+<div class="formEditWrap clearfix">
+	<div class="dragelementWrap">
+		<div class="dragelement dragFormElement" data-type="input" title="Input Text">
+			<span class="input-text">Abc</span>
+			Input Text
+		</div>
+		<div class="dragelement dragFormElement" data-type="textarea" title="Text Area">
+			<span class="text-area">Abc</span>
+			Text Area
+		</div>
+		<div class="dragelement dragFormElement" data-type="select" title="Dropdown">
+			<span class="input-select">Select</span>
+			Dropdown
+		</div>
+		<div class="dragelement dragFormElement" data-type="radio" title="Radio Button">
+			<span class="input-radio">
+				<i></i>
+			</span>
+			Radio Button
+		</div>
+		<div class="dragelement dragFormElement" data-type="checkbox" title="Check Box">
+			<span class="input-checkBox">
+				<i class="fa fa-check-square"></i>
+			</span>
+			Check Box
+		</div>
+		<div class="dragelement dragFormElement" data-type="text" title="Display Text">
+			<span class="display-text">
+				<b>Abc</b>
+			</span>
+			Display Text
+		</div>
+		<div class="dragelement dragFormElement" data-type="captcha" title="Captcha">
+			<span class="input-captcha">
+				<i>A</i> <b>i</b> 6
+			</span>
+			Captcha
+		</div>
+	</div>
+	<div class="formBuilderWrap">
+		<div class="dropelementWrap">
+			<h5 class="cms_sectionHeading">Form Layout Section</h5>
+			<div class="dropelement">
+				#if($formData.htmlCode)
+					$formData.htmlCode
+				#else
+				<form action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
+					<div class="row"></div>
+					<div class="text-left btnBlock" data-type='submitBtn' data-align="left">
+						<button type="submit" class="button">Submit</button>
+					</div>
+					<input type="hidden" name="NotificationName" id="notificationName" value=''/>
+					<input type="hidden" name="SaveToDb" id="saveToDB" value=''/>
+					<input type="hidden" name="SendMail" id="sendMail" value=''/>
+					<input type="hidden" name="Subject" id="subject" value=''/>
+					<input type="hidden" name="formName" id="formName" value=''/>
+					<input type="hidden" id="webthemesval" value='$!webThemes/'/>
+				</form>
+				#end
+			</div>
+		</div>
+		<div class="editelementWrap">
+			<h5 class="cms_sectionHeading">Form Element Details</h5>
+			<div class="editelement"></div>
+			<div class="cms_footerSection clearfix">
+				<a href="javascript:void(0)" class="cancel-apply outLineBtn_left pull-left"><i class="fa fa-times-circle"></i> Cancel</a>
+				<a href="javascript:void(0)" class="apply-changes cms_greenBtn pull-right">Apply <i class="fa fa-check-circle"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="formTitle">
+		<h5 class="cms_sectionHeading">Form Details</h5>
+		<form id="mainFormBuilder">
+			<ul>
+				<li>
+					<label>Form Name <span class="text-danger">*</span> :</label> <input type="text" value="$!formData.formName" maxlength="20" name="formData.formName" id="formNameMain" />
+				</li>
+				<li>
+					<label>Notification :</label> <select id="formNotification" name="formData.formNotification">
+					<option value=""></option>
+					#foreach($notification in $notificationList)
+					<option  vlaue="$notification" #if($!formData.formNotification == $notification) selected #end>$notification</option>
+					#end
+					</select>
+				</li>
+				<li>
+					<label>Email Subject :</label> <input type="text" value="$!formData.emailSubject" name="formData.emailSubject" id="emailSubject" />
+				</li>
+				<li>
+					<label>Form ClassName :</label> <input type="text" value="" id="formClass" />
+				</li>
+				<li>
+					<label class="cms_customCheckBox cms_customCheckBoxRight">
+						<input name="formData.saveToDB" #if($!formData.saveToDB=="Y") checked #end id="saveToDBMain" type='checkbox'/>
+						<span>Save User Entered Form Data to DB :</span>
+					</label>
+				</li>
+				<li>
+					<label class="cms_customCheckBox cms_customCheckBoxRight">
+						<input type="checkbox" id="emailSent" #if($!formData.emailSent=="Y") checked #end name="formData.emailSent"/>
+						<span>Send Email after User Submits Form :</span>
+					</label>
+				</li>
+			</ul>
+			<input type="hidden" name="formData.htmlCode" id="htmlCode" />
+			#if($formData.id)
+			<input type="hidden" name="formData.id" value="$formData.id" id="formDataId" /> 
+			#end
+		</form>
+		<div class="save-btnBlock clearfix text-right">
+			<!-- <a href="formListCms.action" class="outLineBtn_left pull-left"> <i class="fa fa-times-circle"></i> Cancel</a> -->
+			<a href="javascript:void(0)" class="export-form cms_greenBtn" id="formExportBtn">Download <i class="fa fa-download"></i></a>
+			<a href="javascript:void(0)" class="save-form cms_blueBtn">Save <i class="fa fa-save"></i></a>
+		</div>
+	</div>
 </div>
 
 <script>

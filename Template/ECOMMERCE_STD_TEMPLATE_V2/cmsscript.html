@@ -799,7 +799,7 @@ function initTableDrag(){
 }
 
 function initComponentDrag(id){
-	jQuery('#library_'+id+' dd').draggable({
+	jQuery('#library_'+id+' li').draggable({
 		helper : 'clone',
 		revert : 'invalid',
 		start: function( event, ui ) {
