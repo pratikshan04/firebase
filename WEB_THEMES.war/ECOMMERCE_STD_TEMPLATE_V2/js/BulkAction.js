@@ -787,34 +787,21 @@ var BulkAction = {};
 				ErrorMsg = ErrorMsg + "Invalid Qty. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				$("#itemTxtQty" + itemID).val(minOrderQty);
 				addItem = false;
-			}
-//			else if (qty < 1) {
-//				ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
-//				addItem = false;
-//			}			
-			if(qty <= 0) {
-				ErrorMsg = "Quantity cannot be less than or Equal to Zero";
-				addItem = false;
-			}
-			if(qty < parseInt(minOrderQty)){
-				ErrorMsg = "Quantity cannot be less than Minimum Order Quantity(" + minOrderQty +")";
-				addItem = false;
-			}
-			else if(qty % qtyInterval != 0) {
-				ErrorMsg = "Item Can only be Ordered in multiples of " + qtyInterval;
+			} else if (qty < 1) {
+				ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			}			
-//			if (qty < minOrderQty) {
-//				ErrorMsg = "Min Order Quantity is " + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
-//				addItem = false;
-//			} 
-//			else if (qty > minOrderQty) {
-//				var qtyDiff = qty - minOrderQty;
-//				if (qtyDiff % quantityInterval != 0) {
-//					ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
-//					addItem = false;
-//				}
-//			}
+
+			if (qty < parseInt(minOrderQty)) {
+				ErrorMsg = "Min Order Quantity is " + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				addItem = false;
+			} else if (qty > parseInt(minOrderQty)) {
+				var qtyDiff = qty - minOrderQty;
+				if (qtyDiff % quantityInterval != 0) {
+					ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					addItem = false;
+				}
+			}
 			item["partNumber"] = $(eachObj).data("partnumber");
 			item["itemId"] = itemID;
 			item["itemPriceId"] = itemPriceID;

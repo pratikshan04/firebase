@@ -43,7 +43,6 @@ $(function(){
 
 function setPoNumberToSession(value){
 	var value = $('#poNumberTxt').val();
-	console.log("setPoNumberToSession: "+value);
 	if($('#poNumber').length>0){
 		$('#poNumber').val(value);
 	}
@@ -53,14 +52,16 @@ function setPoNumberToSession(value){
 var checkoutWizard = {};
 (function() {
 	
+	var checkOutStep = 3;
+	
 	checkoutWizard.leaveAStepCallback = function(obj,context){
 		var step_num= obj.attr('index');
-		return checkoutWizard.validateSteps(step_num,context);
+		return (context.fromStep < context.toStep) ? submitThisForm("#step-"+step_num) : true;
 	};
 	
 	checkoutWizard.showAStepCallback = function(obj){
 		var step_num= obj.attr('index');
-		if(step_num==3){
+		if(step_num==checkOutStep){
 			block("Please Wait");
 			if($('#wizFinishButtonId').length>0){
 				$('#wizFinishButtonId').addClass("buttonDisabled");
@@ -112,9 +113,8 @@ var checkoutWizard = {};
 					if($(data).filter("#orderDetailTotalPriceWrap").length>0){
 						$('.cimm_salesBottomStrip').html($(data).filter("#orderDetailTotalPriceWrap").html());
 					}*/
-					$('#confirmOrderPageDiv').html(data);
+					$('#confirmOrderPageDiv').html(data)
 					var value = $('#poNumberTxt').val();
-					console.log("setPoNumberToSession: "+value);
 					if($('#poNumber').length>0){
 					 $('#poNumber').val(value);
 					}
@@ -131,279 +131,45 @@ var checkoutWizard = {};
 		}
 	};
 	
-	checkoutWizard.validateSteps = function(step,context){
-		var isStepValid = true;
-		if(step == 1){
-			checkoutWizard.hideNotificationDiv(step);
-			isStepValid = checkoutWizard.stepOneValidate(step);
-		}else if(step==2){
-			checkoutWizard.hideNotificationDiv(step);
-			if(context.toStep!=1){
-				isStepValid = checkoutWizard.stepTwoValidate(step);
-			}
-		}else if(step==3){
-			checkoutWizard.hideNotificationDiv(step);
-			if(context.toStep==4){
-				isStepValid = checkoutWizard.stepThreeValidate(step);
-			}
-		}
-		return isStepValid; 
-	};
-	
-	checkoutWizard.stepOneValidate = function(step){
-		
-		var errorMessage = "";
-		var validation = true;
-		var lineBreak = "<br/>";
-		
-		if($('#fname').length>0 && (typeof $('#fname').val()=="undefined" || $('#fname').val()==null || $('#fname').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.name") + lineBreak;
-			validation = false;
-		}
-		if($('#billAddress1').length>0 && (typeof $('#billAddress1').val()=="undefined" || $('#billAddress1').val()==null || $('#billAddress1').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.address1") + lineBreak;
-			validation = false;
-		}
-		/*if($('#billAddress2').length>0 && (typeof $('#billAddress2').val()=="undefined" || $('#billAddress2').val()==null || $('#billAddress2').val().trim().length < 1)){
-			address2 = $('#billAddress2').val();
-		}*/
-		if($('#billPhoneNo').length>0 && (typeof $('#billPhoneNo').val()=="undefined" || $('#billPhoneNo').val()==null || $('#billPhoneNo').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.phone") + lineBreak;
-			validation = false;
-		}else{
-			if(!isPhoneNumberValid($('#billPhoneNo').val().trim())){
-				errorMessage = errorMessage + locale("checkoutwiz.error.phoneinvalid") + lineBreak;
-				validation = false;
-			}
-		}
-		if($('#billEmail').length>0 && (typeof $('#billEmail').val()=="undefined" || $('#billEmail').val()==null || $('#billEmail').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.emailaddress") + lineBreak;
-			validation = false;
-		}else{
-			if(!validateEmail($('#billEmail').val().trim())){
-				errorMessage = errorMessage + locale("checkoutwiz.error.emailaddressinvalid") + lineBreak;
-				validation = false;
-			}
-		}
-		if($('#billCity').length>0 && (typeof $('#billCity').val()=="undefined" || $('#billCity').val()==null || $('#billCity').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.city") + lineBreak;
-			validation = false;
-		}
-		if($('#stateSelect').length>0 && (typeof $('#stateSelect').val()=="undefined" || $('#stateSelect').val()==null || $('#stateSelect').val().trim().length < 1 || $('#stateSelect').val()=="Select State")){
-			errorMessage = errorMessage + locale("checkoutwiz.error.state") + lineBreak;
-			validation = false;
-		}
-		if($('#billZipcode').length>0 && (typeof $('#billZipcode').val()=="undefined" || $('#billZipcode').val()==null || $('#billZipcode').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.zipcode") + lineBreak;
-			validation = false;
-		}
-		if($('#countrySelect').length>0 && (typeof $('#countrySelect').val()=="undefined" || $('#countrySelect').val()==null || $('#countrySelect').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.country") + lineBreak;
-			validation = false;
-		}
-		
-		if(!validation){
-			checkoutWizard.displayNotification(errorMessage,step);
-			return false;
-		}else{
-			return true;
-		}
-	};
-	
-	checkoutWizard.stepTwoValidate = function(step){
-		
-		var errorMessage = "";
-		var validation = true;
-		var lineBreak = "<br/>";
-		
-		if($('#shipCompanyName').length>0 && (typeof $('#shipCompanyName').val()=="undefined" || $('#shipCompanyName').val()==null || $('#shipCompanyName').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.name") + lineBreak;
-			validation = false;
-		}
-		if($('#shipAddress1').length>0 && (typeof $('#shipAddress1').val()=="undefined" || $('#shipAddress1').val()==null || $('#shipAddress1').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.address1") + lineBreak;
-			validation = false;
-		}
-		/*if($('#shipAddress2').length>0 && (typeof $('#shipAddress2').val()=="undefined" || $('#shipAddress2').val()==null || $('#shipAddress2').val().trim().length < 1)){
-			address2 = $('#billAddress2').val();
-		}*/
-		if($('#shipPhoneNo').length>0 && (typeof $('#shipPhoneNo').val()=="undefined" || $('#shipPhoneNo').val()==null || $('#shipPhoneNo').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.phone") + lineBreak;
-			validation = false;
-		}else{
-			if(!isPhoneNumberValid($('#shipPhoneNo').val().trim())){
-				errorMessage = errorMessage + locale("checkoutwiz.error.phoneinvalid") + lineBreak;
-				validation = false;
-			}
-		}
-		if($('#shipEmail').length>0 && (typeof $('#shipEmail').val()=="undefined" || $('#shipEmail').val()==null || $('#shipEmail').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.emailaddress") + lineBreak;
-			validation = false;
-		}else{
-			if(!validateEmail($('#shipEmail').val().trim())){
-				errorMessage = errorMessage + locale("checkoutwiz.error.emailaddressinvalid") + lineBreak;
-				validation = false;
-			}
-		}
-		if($('#shipCity').length>0 && (typeof $('#shipCity').val()=="undefined" || $('#shipCity').val()==null || $('#shipCity').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.city") + lineBreak;
-			validation = false;
-		}
-		if($('#stateSelectShip').length>0 && (typeof $('#stateSelectShip').val()=="undefined" || $('#stateSelectShip').val()==null || $('#stateSelectShip').val().trim().length < 1 || $('#stateSelectShip').val()=="Select State")){
-			errorMessage = errorMessage + locale("checkoutwiz.error.state") + lineBreak;
-			validation = false;
-		}
-		if($('#shipZipcode').length>0 && (typeof $('#shipZipcode').val()=="undefined" || $('#shipZipcode').val()==null || $('#shipZipcode').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.zipcode") + lineBreak;
-			validation = false;
-		}
-		if($('#countrySelectShip').length>0 && (typeof $('#countrySelectShip').val()=="undefined" || $('#countrySelectShip').val()==null || $('#countrySelectShip').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.country") + lineBreak;
-			validation = false;
-		}
-		if($('#shipVia').length>0 && (typeof $('#shipVia').val()=="undefined" || $('#shipVia').val()==null || $('#shipVia').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.shipvia") + lineBreak;
-			validation = false;
-		}
-		
-		if(!validation){
-			checkoutWizard.displayNotification(errorMessage,step);
-			return false;
-		}else{
-			return true;
-		}
-	};
-	
-	checkoutWizard.stepThreeValidate = function(step){
-		
-		var errorMessage = "";
-		var validation = true;
-		var lineBreak = "<br/>";
-		
-		if($('#orderType').length>0 && (typeof $('#orderType').val()=="undefined" || $('#orderType').val()==null || $('#orderType').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.ordertype") + lineBreak;
-			validation = false;
-		}
-		if($('#reqDate').length>0 && (typeof $('#reqDate').val()=="undefined" || $('#reqDate').val()==null || $('#reqDate').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.requireddate") + lineBreak;
-			validation = false;
-		}
-		if($('#orderedBy').length>0 && (typeof $('#orderedBy').val()=="undefined" || $('#orderedBy').val()==null || $('#orderedBy').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.orderby") + lineBreak;
-			validation = false;
-		}
-		if($('#poNumberTxt').length>0 && (typeof $('#poNumberTxt').val()=="undefined" || $('#poNumberTxt').val()==null || $('#poNumberTxt').val().trim().length < 1) && $('#orderType').val() != "checkoutWithCreditCard"){
-			errorMessage = errorMessage + locale("checkoutwiz.error.purchaseordernumber") + lineBreak;
-			validation = false;
-		}
-		/*if($('#orderStatus').length>0 && (typeof $('#orderStatus').val()=="undefined" || $('#orderStatus').val()==null || $('#orderStatus').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.orderstatus") + lineBreak;
-			validation = false;
-		}*/
-		/*if($('#shippingInstruction').length>0 && (typeof $('#shippingInstruction').val()=="undefined" || $('#shippingInstruction').val()==null || $('#shippingInstruction').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.shippinginstruction") + lineBreak;
-			validation = false;
-		}*/
-		/*if($('#orderNotes').length>0 && (typeof $('#orderNotes').val()=="undefined" || $('#orderNotes').val()==null || $('#orderNotes').val().trim().length < 1)){
-			errorMessage = errorMessage + locale("checkoutwiz.error.ordernote") + lineBreak;
-			validation = false;
-		}*/
-		
-		if(!validation){
-			checkoutWizard.displayNotification(errorMessage,step);
-			return false;
-		}else{
-			return true;
-		}
-	};
-	
 	checkoutWizard.changeShippingAddress = function(obj){
 		var addressBookId = $(obj).val();
 		if(typeof addressBookId!="undefined" && addressBookId!=null && addressBookId.trim().length > 0 && shippingListjson!=null && shippingListjson.length > 0){
-			for (var i=0; i<shippingListjson.length; i++)
+			for (var i=0; i<shippingListjson.length; i++){
 			    if(shippingListjson[i].addressBookId == addressBookId) {
-			        console.log(shippingListjson[i].addressBookId+" : "+addressBookId);
-			        if($('#shipCompanyName').length>0){
-						if(shippingListjson[i].customerName!=null && $.trim(shippingListjson[i].customerName)!=""){
-							$('#shipCompanyName').val($.trim(shippingListjson[i].customerName));
-						}else{
-							$('#shipCompanyName').val("");
-						}
-					}
-					if($('#shipAddress1').length>0){
-						if(shippingListjson[i].address1!=null && $.trim(shippingListjson[i].address1)!=""){
-							$('#shipAddress1').val($.trim(shippingListjson[i].address1));
-						}else{
-							$('#shipAddress1').val("");
-						}
-					}
-					if($('#shipAddress2').length>0){
-						if(shippingListjson[i].address2!=null && $.trim(shippingListjson[i].address2)!=""){
-							$('#shipAddress2').val($.trim(shippingListjson[i].address2));
-						}else{
-							$('#shipAddress2').val("");
-						}
-					}
-					if($('#shipCity').length>0){
-						if(shippingListjson[i].city!=null && $.trim(shippingListjson[i].city)!=""){
-							$('#shipCity').val($.trim(shippingListjson[i].city));
-						}else{
-							$('#shipCity').val("");
-						}
-					}
-					if($('#stateSelectShip').length>0){
-						if(shippingListjson[i].state!=null && $.trim(shippingListjson[i].state)!=""){
-							$('#stateSelectShip').val($.trim(shippingListjson[i].state));
-							$('#stateSelectShip').trigger("chosen:updated");
-						}else{
-							$('#stateSelectShip').val("");
-							$('#stateSelectShip').trigger("chosen:updated");
-						}
-					}
-					if($('#shipZipcode').length>0){
-						if(shippingListjson[i].zipCodeStringFormat!=null && $.trim(shippingListjson[i].zipCodeStringFormat)!=""){
-							$('#shipZipcode').val($.trim(shippingListjson[i].zipCodeStringFormat));
-						}else{
-							$('#shipZipcode').val("");
-						}
-					}
-					if($('#countrySelectShip').length>0){
-						if(shippingListjson[i].country!=null && $.trim(shippingListjson[i].country)!=""){
-							/*var countryToSelect = $.trim(shippingListjson[i].country);
-							if($.trim(shippingListjson[i].state)=="US"){
-								countryToSelect = "USA";
-							}*/
-							$('#countrySelectShip').val($.trim(shippingListjson[i].country));
-							$('#countrySelectShip').trigger("chosen:updated");
-						}else{
-							$('#countrySelectShip').val("USA");
-							$('#countrySelectShip').trigger("chosen:updated");
-						}
-					}
-					if($('#shipPhoneNo').length>0){
-						if(shippingListjson[i].phoneNo!=null && $.trim(shippingListjson[i].phoneNo)!=""){
-							$('#shipPhoneNo').val($.trim(shippingListjson[i].phoneNo));
-						}else{
-							$('#shipPhoneNo').val("");
-						}
-					}
-					if($('#shipEmail').length>0){
-						if(shippingListjson[i].emailAddress!=null && $.trim(shippingListjson[i].emailAddress)!=""){
-							$('#shipEmail').val($.trim(shippingListjson[i].emailAddress));
-						}else{
-							$('#shipEmail').val("");
-						}
-					}
+					(shippingListjson[i].customerName && $.trim(shippingListjson[i].customerName)) ? $('#shipCompanyName').val($.trim(shippingListjson[i].customerName)) : $('#shipCompanyName').val("");
+					(shippingListjson[i].address1 && $.trim(shippingListjson[i].address1)) ? $('#shipAddress1').val($.trim(shippingListjson[i].address1)) : $('#shipAddress1').val("");
+					(shippingListjson[i].address2 && $.trim(shippingListjson[i].address2)) ? $('#shipAddress2').val($.trim(shippingListjson[i].address2)) : $('#shipAddress2').val("");
+					(shippingListjson[i].city && $.trim(shippingListjson[i].city)) ? $('#shipCity').val($.trim(shippingListjson[i].city)) : $('#shipCity').val("");
+					(shippingListjson[i].zipCodeStringFormat && $.trim(shippingListjson[i].zipCodeStringFormat)) ? $('#shipZipcode').val($.trim(shippingListjson[i].zipCodeStringFormat)) : $('#shipZipcode').val("");
+					(shippingListjson[i].phoneNo && $.trim(shippingListjson[i].phoneNo)) ? $('#shipPhoneNo').val($.trim(shippingListjson[i].phoneNo)) : $('#shipPhoneNo').val("");
+					(shippingListjson[i].emailAddress && $.trim(shippingListjson[i].emailAddress)) ? $('#shipEmail').val($.trim(shippingListjson[i].emailAddress)) : $('#shipEmail').val("");
+					
+					(shippingListjson[i].country && $.trim(shippingListjson[i].country)) ? (
+						$("#countrySelectShip option[value='"+shippingListjson[i].country+"']").attr('selected','selected')
+					) : (
+						$('#countrySelectShip').val("US")
+					);
+					(shippingListjson[i].state && $.trim(shippingListjson[i].state)) ? (
+						stateId = document.getElementById('countrySelectShip'),
+						populateStatesOnchange(!shippingListjson[i].country ? "US" : shippingListjson[i].country, stateId, shippingListjson[i].state, true),
+						$("#stateSelectShip option[value='"+shippingListjson[i].state+"']").attr('selected','selected')
+					) : (
+						$('#stateSelectShip').val("")
+					);
+					$('#countrySelectShip, #stateSelectShip').selectpicker('refresh');
 			    }
+			}
 		}
 	};
 	checkoutWizard.insertDataToHiddenInfo = function(){
 		$('#quickCartHiddenInfo [name="reqDate"]').val($('#reqDate').val());
 		$('#quickCartHiddenInfo [name="shippingInstruction"]').val($('#shippingInstruction').val());
 		$('#quickCartHiddenInfo [name="orderNotes"]').val($('#orderNotes').val());
+		$("#quickCartHiddenInfo input[name='shipVia']").val($("#shipVia").val());
+		$("#quickCartHiddenInfo input[name='orderedBy']").val($("#orderedBy").val());
 	};
 	checkoutWizard.submitCheckoutRequest = function(){
-		if(checkoutWizard.stepThreeValidate("3")){
+		if(submitThisForm("#step-"+checkOutStep)){
 			if($('#orderType').length>0 && typeof $('#orderType').val()!="undefined" && $('#orderType').val()!=null && $('#orderType').val().trim().length > 0){
 				checkoutWizard.insertDataToHiddenInfo();
 					if($('#orderType').val().trim() == "checkoutWithPo"){
@@ -445,46 +211,28 @@ var checkoutWizard = {};
 		}
 	};
 	
-	
-	
-	checkoutWizard.displayNotification = function(msg,step){
-		$("#step-"+step+" #notificationDiv").remove();
-		$("#step-"+step).prepend('<div id="notificationDiv"><div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>'+msg+'</div></div>');
-		var headerHeight = 0;
-	    if($("#enableStickyHeader").val() == "Y"){
-	        headerHeight = $('#normalHead').height();
-	    }
-	    $('html, body').animate({scrollTop: $(".alert").offset().top - headerHeight}, 400);
-	};
-	checkoutWizard.hideNotificationDiv = function(step){
-		$("#step-"+step+" #notificationDiv").remove();
-	}
 	checkoutWizard.orderTypeOnchange = function(obj){
-		console.log();
 		if($('#wizFinishButtonId').length>0){
 			$('#wizFinishButtonId').addClass("buttonDisabled");
 			if($(obj).val().trim() == "checkoutWithPo"){
 				$('#wizFinishButtonId').html("Submit Order");
-				$("#chkMandatory").find("span").remove();
-				$("#chkMandatory").append("<span class='text-danger'>*</span>");
+				$("#poNumberTxt").attr("data-required", "Y");
 			}else if($(obj).val().trim() == "checkoutWithCreditCard"){
 				$('#wizFinishButtonId').html("Continue with Credit Card");
-				$("#chkMandatory").find("span").remove();
+				$("#poNumberTxt").attr("data-required", "N");
 			}
 		}
 	};
 	checkoutWizard.orderTypeOnWizchange = function(obj){
 		var paymentType = obj.data().type;
-		
 		$("#orderType").val(paymentType);
 		if($('#wizFinishButtonId').length>0){
 			if(paymentType == "checkoutWithPo"){
 				$('#wizFinishButtonId').html("Submit Order");
-				$("#chkMandatory").find("span").remove();
-				$("#chkMandatory").append("<span class='text-danger'>*</span>");
+				$("#poNumberTxt").attr("data-required", "Y");
 			}else if(paymentType == "checkoutWithCreditCard"){
 				$('#wizFinishButtonId').html("Continue with Credit Card");
-				$("#chkMandatory").find("span").remove();
+				$("#poNumberTxt").attr("data-required", "N");
 				if($("#creditCard").html().trim() == ""){
 					var data = $("#quickCartHiddenInfo").serialize();
 					block("Please Wait");
@@ -562,8 +310,4 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 	   onShowStep: checkoutWizard.orderTypeOnWizchange
 	});
 
-});
-
-$("#shipVia").change(function(){
-	$("#quickCartHiddenInfo input[name='shipVia']").val($(this).val());
 });
