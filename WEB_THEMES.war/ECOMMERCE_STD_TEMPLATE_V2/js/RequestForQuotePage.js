@@ -48,24 +48,30 @@ function validateRFQ(){
 	var pn = $("input[name='PARTNUMARR']");
 	var cpn = $("input[name='CPN']");
 	var ITEMQTYARR = $("input[name='ITEMQTYARR']");
-	var emailMsg = 0;
+	var emailMsg = 0, count = 0, qtyCount = 0, unusualCode = 0;
 	var emailVal = "";
-	var count=0;
 	var orderBy = "";
+	var rfnpName = $("#rfnpName").val(),
+		rfnpName2 = $("#rfnpName2").val(),
+		checkValidState = $("#checkValidState").val(),
+		rfnpPhone = $("#rfnpPhone").val(),
+		rfnpEmail = $("#rfnpEmail").val(),
+		comments = $('#comments').val(),
+		unusualCodeErrorStr = $("#dataErrors").attr('data-unusualError');
 
-	if($.trim($("#rfnpName").val())==""){
+	if($.trim(rfnpName)==""){
 		emailVal = emailVal + "Please Enter First Name.<br/>";
 		emailMsg = 1;
 	}else{
-		orderBy = $.trim($("#rfnpName").val())+" ";
+		orderBy = $.trim(rfnpName)+" ";
 	}
-	if($.trim($("#rfnpName2").val())==""){
+	if($.trim(rfnpName2)==""){
 		emailVal = emailVal + "Please Enter Last Name.<br/>";
 		emailMsg = 1;
 	}else{
-		orderBy = orderBy+$.trim($("#rfnpName2").val());
+		orderBy = orderBy+$.trim(rfnpName2);
 	}
-	if($("#checkValidState").val()>0){
+	if(checkValidState){
 		if($.trim($("#rfnpCity").val())==""){
 			emailVal = emailVal + "Please Enter Shipto City<br/>";
 			emailMsg = 1;
@@ -75,51 +81,57 @@ function validateRFQ(){
 			emailMsg = 1;
 		}
 	}
-	if($.trim($("#rfnpPhone").val())==""){
+	if($.trim(rfnpPhone)==""){
 		emailVal = emailVal + "Please Enter Phone Number.<br/>";
 		emailMsg = 1;
 	}else{
-		if(isPhoneNumberValid($.trim($("#rfnpPhone").val()))==false){
+		if(isPhoneNumberValid($.trim(rfnpPhone).val()))==false){
 			emailVal = emailVal + "Please Enter Valid Phone Number<br/>";
 			emailMsg = 1;
 		}
 	}
-	if($("#rfnpEmail").val()!=undefined){
-		if($.trim($("#rfnpEmail").val())==""){
-			emailVal = emailVal + "Please Enter Contact Email Address.<br />";
+	if($.trim(rfnpEmail)==""){
+		emailVal = emailVal + "Please Enter Contact Email Address.<br />";
+		emailMsg = 1;
+	}else{
+		var email = $.trim(rfnpEmail.toLowerCase());
+		var reg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+		if (reg.test(email)){}
+		else{
+			emailVal = emailVal + "Please Enter Valid Email Address.<br />";
 			emailMsg = 1;
-		}else{
-			var email = $.trim($("#rfnpEmail").val().toLowerCase());
-			var reg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
-			if (reg.test(email)){}
-			else{
-				emailVal = emailVal + "Please Enter Valid Email Address.<br />";
-				emailMsg = 1;
-			}
 		}
 	}
 
 	for(i=0;i<=pn.length-1;i++){
-		var checkResult = 0;
-		
-		if(parseFloat(ITEMQTYARR[i].value) == 0 ){
-			emailVal = emailVal + "Quantity Cannot be less than or equal to 0<br/>";
+		var checkResult = 0, itemQtyVal = ITEMQTYARR[i].value, pnVal = pn[i].value, shortDescVal = shortDesc[i].value, brandNameVal = brandName[i].value;
+		if(parseFloat(itemQty) == 0 ){
+			qtyCount++
 		}
-		if($.trim(pn[i].value)=="" || $.trim(parseFloat(ITEMQTYARR[i].value)) == 0 || $.trim(shortDesc[i].value)==""){
+		if($.trim(pnVal)=="" || $.trim(parseFloat(itemQtyVal)) <= 0 || $.trim(shortDescVal)==""){
 			count++;
-		}else{
-			if(ITEMQTYARR[i].value==""){
-				ITEMQTYARR[i].value=1;
-			}
+		}
+		if(validateStr(pnVal) || validateStr(itemQtyVal) || validateStr(shortDescVal)){
+			unusualCode++;
 		}
 	}
+	
+	if(validateStr(comments) || validateStr(rfnpName) || validateStr(rfnpName2) || validateStr(rfnpPhone) || validateStr(rfnpEmail) ){
+		unusualCode++;
+	}
 
-	if(pn.length==count){
+	if(pn.length == count){
 		emailVal = emailVal+"Please Enter Atleast One Product Information To Submit.";
-		emailMsg = 1;		
+		emailMsg = 1;
+	}
+	if(pn.length == qtyCount){
+		emailVal = emailVal + "Quantity Cannot be less than or equal to 0<br/>";
+		emailMsg = 1;
 	}
 	if(emailMsg>0){
 		showNotificationDiv("error", emailVal);
+	}else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 	}else{
 		$('#orderedBy').val(orderBy);
 		block("Please Wait");

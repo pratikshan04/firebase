@@ -18,13 +18,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
-											<input type="text" name="billCompanyName" id="fname" value="$!billAddress.customerName" readonly class="btns-disable form-control"/> 
+											<input type="text" name="billCompanyName" id="fname" value="$!billAddress.customerName" readonly class="btns-disable form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/> 
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
-											<input type="text" name="billAddress1" id="billAddress1" value="$!billAddress.address1" readonly class="btns-disable form-control"/> 
+											<input type="text" name="billAddress1" id="billAddress1" value="$!billAddress.address1" readonly class="btns-disable form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')"/> 
 										</div>
 									</div>
 								</div>
@@ -38,7 +38,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
-											<input type="text" name="billCity" id="billCity" value="$!billAddress.city" readonly class="btns-disable form-control" maxlength='50'/>
+											<input type="text" name="billCity" id="billCity" value="$!billAddress.city" readonly class="btns-disable form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
 										</div>
 									</div>
 								</div>
@@ -46,13 +46,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											 <label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
-											<select name="billState" id="stateSelect" class="form-control selectpicker"></select>
+											<select name="billState" id="stateSelect" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
-											<input type="text" name="billZipcode" id="billZipcode" value="$!billAddress.zipCodeStringFormat" readonly class="btns-disable form-control formatZipCode"/>
+											<input type="text" name="billZipcode" id="billZipcode" value="$!billAddress.zipCodeStringFormat" readonly class="btns-disable form-control formatZipCode" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.zipcode')"/>
 										</div>
 									</div>
 								</div>
@@ -60,13 +60,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label> 
-											<select name="billCountry" id="countrySelect" class="selectpicker" data-state="stateSelect"></select>
+											<select name="billCountry" id="countrySelect" class="selectpicker" data-state="stateSelect" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber"/> 
+											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/> 
 										</div>
 									</div>
 								</div>
@@ -74,7 +74,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											 <label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
-											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control"/>
+											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control" data-type="email" data-required="Y" data-error="$locale.get('checkoutwiz.error.emailaddress')" data-invalid="$locale.get('checkoutwiz.error.emailaddressinvalid')"/>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -106,7 +106,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
-											<input type="text" name="shipCompanyName" id="shipCompanyName" value="$!shipAddress.customerName" class="form-control"/>
+											<input type="text" name="shipCompanyName" id="shipCompanyName" value="$!shipAddress.customerName" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/>
 										</div>
 									</div>
 								</div>
@@ -114,13 +114,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
-											<input type="text" name="shipAddress1" id="shipAddress1" value="$!shipAddress.address1" class="form-control" />
+											<input type="text" name="shipAddress1" id="shipAddress1" value="$!shipAddress.address1" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')" />
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address2") </label>
-											<input type="text" name="shipAddress2" id="shipAddress2" value="$!shipAddress.address2" class="form-control"/> 
+											<input type="text" name="shipAddress2" id="shipAddress2" value="$!shipAddress.address2" class="form-control" /> 
 										</div>
 									</div>
 								</div>
@@ -128,13 +128,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
-											<input type="text" name="shipCity" id="shipCity" value="$!shipAddress.city" class="form-control" maxlength='50'/>
+											<input type="text" name="shipCity" id="shipCity" value="$!shipAddress.city" class="form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
-											<select name="shipState" id="stateSelectShip" class="form-control selectpicker"></select>
+											<select name="shipState" id="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
 								</div>
@@ -142,13 +142,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
-											<input type="text" name="shipZipcode" id="shipZipcode" value="$!shipAddress.zipCodeStringFormat" class="formatZipCode form-control"/>
+											<input type="text" name="shipZipcode" id="shipZipcode" value="$!shipAddress.zipCodeStringFormat" class="formatZipCode form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.zipcode')"/>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label>
-											<select name="shipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control selectpicker"></select>
+											<select name="shipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 											<input type="hidden" id="shipAddressState" value="$!shipAddress.state" />
 											<input type="hidden" id="shipAddressCountry" value="$!shipAddress.country" />
 										</div>
@@ -158,13 +158,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" />
+											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
-											<input type="text" name="shipEmail" id="shipEmail" value="$!shipAddress.emailAddress" class="form-control"/>
+											<input type="text" name="shipEmail" id="shipEmail" value="$!shipAddress.emailAddress" class="form-control" data-error="$locale.get('checkoutwiz.error.emailaddress')" data-invalid="$locale.get('checkoutwiz.error.emailaddressinvalid')"/>
 										</div>
 									</div>
 								</div>
@@ -173,7 +173,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
-										<select name="shipVia" id="shipVia" class="form-control selectpicker">
+										<select name="shipVia" id="shipVia" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.shipvia')">
 											<option value=" ">-Select-</option>
 											#if($shipViaList.size()>0)
 												#foreach($shipVia in $shipViaList)
@@ -210,7 +210,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label id="chkMandatory">$locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
-														<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control"/> 
+														<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.purchaseordernumber')" /> 
 													</div>
 												</div>
 											</div>
@@ -239,13 +239,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
-											<input type="text" name="orderedBy" id="orderedBy" value="$!orderedBy" class="form-control"/> 
+											<input type="text" name="orderedBy" id="orderedBy" value="$!orderedBy" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.orderby')" /> 
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly/>
+											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.requireddate')"/>
 										</div>
 									</div>
 								</div>
@@ -278,7 +278,11 @@
 									<div class="col-md-6">
 										<input type="hidden" name="orderStatus" id="orderStatus" value="$!orderStatus.orderStatus"/>
 										<input type="hidden" name="orderingType" value="SO"/>
+										#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 										<input type="hidden" name="orderType" id="orderType" value="checkoutWithPo"/>
+										#else
+										<input type="hidden" name="orderType" id="orderType" value="checkoutWithCreditCard"/>
+										#end
 									</div>
 								</div>			
 							</div>

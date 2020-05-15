@@ -485,9 +485,16 @@ $(window).resize(function(){
 	chkLeftMenu();
 });
 function validateSearchWithIn(){
-	var s = $('#keyWordTxt').val();
+	unusualCode = 0;
+	var s = $('#keyWordTxt').val(), unusualCodeErrorStr = $("#dataErrors").attr('data-unusualError');
+	if(validateStr(s)){
+		unusualCode++;
+	}
 	if(s == "" || s=="Search Within" || s=="Search%20With%20In" || s.indexOf("Search Within") > -1){
 		bootAlert("small","error","Error","Enter a keyword to Search Within the list.");
+		return false;
+	} else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	}else{
 		$('#keyWord').val($.trim(s));

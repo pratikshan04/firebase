@@ -472,7 +472,28 @@
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									 <li id="allBranchAvail_$!itemData.partNumber">
+									#if($!itemData.customFieldVal.get("custom_P65_WARNING_MESSAGE") && $!itemData.customFieldVal.get("custom_P65_WARNING_MESSAGE").length()>0)
+									<li class="clearFix">
+										<div class="warning_MSG">
+											<p>
+												Prop 65: <strong><a href="javascript:void(0);" data-id="warning_$itemData.itemId" onclick="warningPopUp(this);">WARNING</a></strong>
+											</p>
+											<div id="warning_$itemData.itemId" class="hideMe">
+												<div class="exitWarning">
+													<span class="warningPopExit" data-exitid="warning_$itemData.itemId">
+														<i class="fa fa-times"></i>
+													</span>
+												</div>
+												<div class="warningContent">
+													<img src="$webThemes/$siteName/images/warning.png" style="vertical-align: sub;"/>
+													<span>WARNING: </span>
+													$!itemData.customFieldVal.get('custom_P65_WARNING_MESSAGE') For more information, go to <a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov</a>.
+												</div>
+											</div>
+										</div>
+									</li>
+									#end
+									<li id="allBranchAvail_$!itemData.partNumber">
 										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
 									</li> 
 										
