@@ -111,10 +111,18 @@ $(window).load(function(){
 	}
 });
 
+var fixHeadHeight = $(".cimm_brandAtoZletters").height();
+var stickyHeadHeight = $(".cimm_header").height() + $(".navbar").height();
+if($( window ).width() > 768) {
+	var fixBlockHeadHeight = fixHeadHeight + stickyHeadHeight;
+}
+else {
+	var fixBlockHeadHeight = fixHeadHeight;
+}
 function manufacturerListScroll(val){
 	var fixHeight = $('.cimm_brandAtoZletters').height();
 	$('html, body').animate({
-           scrollTop: $("#displayBrand_"+val).offset().top-fixHeight
+           scrollTop: $("#displayBrand_"+val).offset().top-fixBlockHeadHeight
        }, 1000);
 }
 var fixHeight = $(".cimm_brandAtoZletters").offset().top;
@@ -122,9 +130,10 @@ var fixBlockHeight = $(".cimm_brandAtoZletters").height();
 $(window).scroll(function() {
     var currentScroll = $(window).scrollTop(); 
     if (currentScroll >= fixHeight) {
-    	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){
-			$(".cimm_brandAtoZletters").addClass("fixIt");
-			$(".hiddenDiv").height(fixBlockHeight);
+    		var stickyHeadHeightA = $("#fixedHead .cimm_header").height() + $("#fixedHead .navbar-default").height();
+        	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){
+    			$(".cimm_brandAtoZletters").addClass("fixIt").css({'top': stickyHeadHeightA });
+    			$(".hiddenDiv").height(fixBlockHeadHeight- stickyHeadHeightA);
 		}
     } else {
     	if($(".cimm_brandAtoZletters").hasClass("fixIt")){

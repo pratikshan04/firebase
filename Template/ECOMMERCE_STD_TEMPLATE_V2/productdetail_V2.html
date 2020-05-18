@@ -213,8 +213,15 @@
 							<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
 							<script type="IN/Share" id="linkedInShare" data-url="" data-counter="right"></script>
 						</li>
-						<li>
+						<!-- <li>
 							<a id="TweetShare" href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
+						</li> -->
+						<li class="custom-twitter-share-button">
+							<!-- <a id="TweetShare" href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a> -->
+							<a id="TweetShareBtn" href="javascript:void(0);" data-url="">
+									<i class="btn-icon"></i>
+									<span class="btn-text">Tweet</span>
+							</a>
 						</li>
 					</ol>
 				</div>
@@ -943,14 +950,13 @@
 									 		</a>
 								 		</h4>
 								 	</li>
-								    <!-- <li class="linkItemDescrip">
+								    <li class="linkItemDescrip">
 								    #if($linkItem.shortDesc.length()>40)
 								       <p id="itemShortDesc$!linkItem.itemId"> $!linkItem.shortDesc.substring(0, 40)</p>
 								    #else
 										<p> $!linkItem.shortDesc</p>
 									#end
-									</li> -->
-								   
+									</li> 
 								   <li itemprop="sku">
 								      <strong>$!locale.get("product.label.partNumber"): </strong>
 								      <span id="partNumber$!linkItem.itemId">$!linkItem.partNumber</span>
@@ -960,72 +966,10 @@
 									<li itemprop="mpn"><strong>$!locale.get("product.label.mpn"):</strong> <span>$!linkItem.manufacturerPartNumber</span></li>
 									#end
 									
-								<!-- 	<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
-										 <strong>$!locale.get("product.label.leadTime"): </strong>
-										 <span class="leadTime_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
-									</li>
-									
-									<li class="gridLeadWrap productAvail_$!linkItem.partNumber" style="display:none;">
-										 <strong>$!locale.get("product.label.available") : </strong>
-										 <span class="orangeClr Avail_$!linkItem.partNumber"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span>
-									</li>
-									
-									#if($linkItem.minOrderQty>0 && $!linkItem.orderInterval>0)
-								    <li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!linkItem.minOrderQty</spaN></li>
-								    <li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!linkItem.orderInterval</span></li>
-								  	#end -->
-								  	
-								  	#set($customValue = $!linkItem.manufacturerId+"_SHOW_LIST_PRICE")
-								 	#if($manfCustomField.get($!customValue)=="Y" && $!session.getAttribute("customerCustomFieldValue").get("SHOW_LIST_PRICE_CUSTOMER_LEVEL")=="Y")
-								 	<!-- <li>
-								 		<h4>$!locale.get('product.label.listPrice'): </h4>
-										 <span id="listPriceSpan_$!linkItem.partNumber" class="priceSpan" data-select='priceData'>
-											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
-										 </span>
-									</li> -->
-									#end
-									#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->#end
-									#if($userLogin)
-								 	<li class="price">  
-										<strong>$!locale.get('product.label.price'): </strong>
-										#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-											#if($!linkItem.price>0)
-											<span id="span_$!linkItem.partNumber" data-select='priceData'>
-												$$!numberTool.format($!pricePrecisionFormate,$!linkItem.price)
-											</span>
-											#else
-												<span class='reqired'>$!locale.get('product.label.callforprice')</span>
-											#end
-										#else
-										<span id="span_$!linkItem.partNumber" data-select='priceData'>
-											<img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" />
-										</span>
-										#end
-									</li>
-									#end
-									<li class="cimm_itemDespQty">
-										<strong>$!locale.get("product.label.qty"): </strong>  
-										<span><input type="text" title="$!locale.get('product.label.quantity')" name="itemTxtQty$!linkItem.itemId" maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
-									</li>
-									<li data-select='addtoCartbtn_$!linkItem.partNumber'>
-						            #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-											#if($!linkItem.price>0)
-												<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
-											#else
-												<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
-											#end
-										#else
-											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-										#end
-									#else
-										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-											<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
-										#else
-											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
-										#end
-									#end
-									</li>
+									#if($!linkItem.upc)
+			   							 <li itemprop="sku"><strong>$!locale.get("product.label.upc"): </strong><span> $!linkItem.upc</span></li>
+			    					#end
+
 									<input type="hidden" value="$!linkItem.minOrderQty" id="MinOrderQty_$!linkItem.partNumber" name="MinOrderQty_$!linkItem.partNumber"/>
 									<input type="hidden" value="$!linkItem.minOrderQty" id="minOrderQty_$!linkItem.itemId"/>
 									<input type="hidden" value="$!linkItem.orderInterval" id="OrderQtyInterval_$!linkItem.partNumber" name="OrderQtyInterval_$!linkItem.partNumber"/>

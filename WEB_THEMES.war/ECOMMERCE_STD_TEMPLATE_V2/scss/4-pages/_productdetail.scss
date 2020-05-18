@@ -129,6 +129,33 @@
                             -moz-transition: scale .1s ease-in-out;
                             -o-transition: scale .1s ease-in-out;
                             transition: scale .1s ease-in-out;
+                            .custom-twitter-share-button a {
+                                display: inline-block;
+                                position: relative;
+                                height: 20px;
+                                padding: 1px 8px 1px 6px;
+                                background-color: $blue;
+                                color: $white;
+                                overflow: hidden;
+                                .btn-icon {
+                                    position: absolute;
+                                    width: 16px;
+                                    height: 13px;
+                                    top: 50%;
+                                    left: 6px;
+                                    margin-top: -6px;
+                                    background: url(../images/twitter-share.png) 1px center no-repeat;
+                                    background-size: 13px;
+                                }
+                                .btn-text {
+                                    display: inline-block;
+                                    padding: 2px 3px 0 20px;
+                                    position: relative;
+                                    font-family: "arial";
+                                    top: -2px;
+                                    font-weight: bold;
+                                }
+                            }
                         }
                     }
                     li {
