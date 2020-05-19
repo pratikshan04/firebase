@@ -218,8 +218,11 @@
 							<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
 							<script type="IN/Share" id="linkedInShare" data-url="" data-counter="right"></script>
 						</li>
-						<li>
-							<a id="TweetShare" href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
+						<li class="custom-twitter-share-button">
+							<a id="TweetShareBtn" href="javascript:void(0);" data-url="">
+									<i class="btn-icon"></i>
+									<span class="btn-text">Tweet</span>
+							</a>
 						</li>
 					</ol>
 				</div>
@@ -292,6 +295,17 @@
 							<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
 							<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
 							<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
+							</li>
+							#end
+							#if($!customVal.get("custom_P65_WARNING_MESSAGE") && $!customVal.get("custom_P65_WARNING_MESSAGE").length()>0)
+							<li>
+								<div class="warning_MSG">
+									<p>Prop 65: <strong><a href="javascript:void(0);" data-id="warning_$itemData.itemId" onclick="warningPopUp(this);">WARNING</a></strong></p>
+									<div id="warning_$itemData.itemId" class="hideMe">
+										<div class="exitWarning"><span class="warningPopExit" data-exitid="warning_$itemData.itemId"><i class="fa fa-times"></i></span></div>
+										<div class="warningContent"><img src="$webThemes/$siteName/images/warning.png" style="vertical-align: sub;"/><span>WARNING:</span> $customVal.get('custom_P65_WARNING_MESSAGE') For more information, go to <a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov</a>.</div>
+									</div>
+								</div>
 							</li>
 							#end
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
@@ -700,7 +714,7 @@
 			#foreach($linkedItem in $!linkedItemGroup)
 			#foreach($linkItem in $!linkedItem) #set($linkedItemGroupName = $!linkItem.linkTypeName)  #set($linkedItemCount = 1+$!linkedItemCount) #end
 			<div class="cimm_sliderWrap">
-				<h3 class="cimm_sliderTitile"><label>$!linkedItemGroupName</label></h3>
+				<h3 class="cimm_productHead"><label>$!linkedItemGroupName</label></h3>
 				<ul id="logLinkItems_$!idloop" class="cimm_caroWrap clearAfter"> 
 					 #foreach($linkItem in $!linkedItem)
 					        <li itemscope itemtype="http://schema.org/Product">
@@ -709,26 +723,34 @@
 					 			<input type="hidden" id='packageQty_$!linkItem.partNumber' value="1" />
 								<div class="cimm_slideItemImg">
 					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+									<span>
 										 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
 										 #else
-										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
+										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!itemImage$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
 										 #end
+									</span>
 					 				</a>
 					  			</div>
 								<div class="cimm_slideItemDesp">
 								<ul>
 								 	<li>
-								 		<h4 itemprop="name">
-									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
-										 		##if($linkItemTitle.length()>30)
-										 			##$!linkItemTitle.substring(0, 30)...
-										 		##else
-										 			$!linkItemTitle
-										 		##end
-									 		</a>
-								 		</h4>
+										<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+											##if($linkItemTitle.length()>30)
+												##$!linkItemTitle.substring(0, 30)...
+											##else
+												$!linkItemTitle
+											##end
+										</a>
 								 	</li>
+								    <!-- <li class="linkItemDescrip">
+								    #if($linkItem.shortDesc.length()>40)
+								       <p id="itemShortDesc$!linkItem.itemId"> $!linkItem.shortDesc.substring(0, 40)</p>
+								    #else
+										<p> $!linkItem.shortDesc</p>
+									#end
+									</li> -->
+								   
 								   <li itemprop="sku">
 								      <strong>$!locale.get("product.label.partNumber"): </strong>
 								      <span id="partNumber$!linkItem.itemId">$!linkItem.partNumber</span>
@@ -762,7 +784,7 @@
 										 </span>
 									</li> -->
 									#end
-									##if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->##end
+									#if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->#end
 									#if($userLogin)
 								 	<li class="price">  
 										<strong>$!locale.get('product.label.price'): </strong>
@@ -781,12 +803,12 @@
 										#end
 									</li>
 									#end
-									<li class="cimm_itemDespQty">
+									<li class="cimm_itemDespQty mBottom-1">
 										<strong>$!locale.get("product.label.qty"): </strong>  
-										<span><input type="text" title="$!locale.get('product.label.quantity')" name="itemTxtQty$!linkItem.itemId"  maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
+										<span><input type="text" title="$!locale.get('product.label.quantity')" name="itemTxtQty$!linkItem.itemId" maxlength="4" value="$!linkItem.minOrderQty" id="itemTxtQty$!linkItem.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" /></span>
 									</li>
-									<li data-select='addtoCartbtn_$!linkItem.partNumber'>
-									#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+									<li class="addToCartFloat" data-select='addtoCartbtn_$!linkItem.partNumber'>
+						            #if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										#if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 											#if($!linkItem.price>0)
 												<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!linkItem.partNumber" data-itemId="$!linkItem.itemId" data-itemPriceId="$!linkItem.itemPriceId">$!locale.get("product.button.addtocart")</a>
@@ -854,6 +876,7 @@
 	</div>
 	<!-- Linked ItemsBlock End -->
 	#end
+#end
 
 <input type="hidden" value="Y" id="enableRecentlyViewed"/>
 <div class="recentlyhide hideForPrint detailPageRecent" id="recentitembox">

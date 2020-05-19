@@ -35,6 +35,7 @@
 <input type="hidden" id="wareHouseCode" name="wareHouseCode" value='$!session.getAttribute("wareHouseCode")'/>
 <input type="hidden" id="shipAddressForPunchoutUser" name="shipAddressForPunchoutUser" value='$!CommonDBQuerySystemParameter.get("SHIPADDRESS_FOR_PUNCHOUT_USER")'/>
 <input type="hidden" id="isPunchoutUser" value="$!session.getAttribute('isPunchoutUser')" />
+<input type="hidden" id="dataErrors" data-unusualError="$!locale.get('form.lable.unusualError')" />
 #if($userAgent == "WEBVIEW")<input type="hidden" id="isWebview" value="$!userAgent" />#end
 <input type="hidden" id="isSalesUser" value='$!session.getAttribute("isSalesUser")' />
 <input type="hidden" id="trendingSearch" name="trendingSearch" value='$!CommonDBQuerySystemParameter.get("ENABLE_TRENDING_SEARCH")'/>

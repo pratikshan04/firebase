@@ -35,7 +35,7 @@ function submitShippingAddress(obj){
 			url: "assignShipEntity.action",
 			data: str,
 			success: function(msg){
-				unblock();
+				// unblock();
 				setCookie("isShipToSelected", true);
 				if(msg==noEmailTxt){
 					setCookie("validEmailAddress", false);
