@@ -2,124 +2,163 @@
 // Font Face
 // =============================================================================
 
-@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff ttf svg, $svgFont: null) {
-	$src: null;
+@mixin font-face(
+  $name,
+  $path,
+  $weight: null,
+  $style: null,
+  $exts: eot woff ttf svg,
+  $svgFont: null
+) {
+  $src: null;
 
-	$extmods: (
-		eot: '?#iefix',
-		woff: '',
-		ttf: '',
-		svg: '#' + $svgFont,
-	);
+  $extmods: (
+    eot: "?#iefix",
+    woff: "",
+    ttf: "",
+    svg: "#" + $svgFont,
+  );
 
-	$formats: (
-		eot: 'embedded-opentype',
-		woff: 'woff',
-		ttf: 'truetype',
-		svg: 'svg'
-	);
+  $formats: (
+    eot: "embedded-opentype",
+    woff: "woff",
+    ttf: "truetype",
+    svg: "svg",
+  );
 
-	@each $ext in $exts {
-		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
-		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
-	}
+  @each $ext in $exts {
+    $extmod: if(
+      map-has-key($extmods, $ext),
+      $ext + map-get($extmods, $ext),
+      $ext
+    );
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append(
+      $src,
+      url(quote($path + "." + $extmod)) format(quote($format)),
+      comma
+    );
+  }
 
-	@font-face {
-		font-family: quote($name);
-		font-display: auto;
-		font-style: $style;
-		font-weight: $weight;
-		src: $src;
-	}
+  @font-face {
+    font-family: quote($name);
+    font-display: auto;
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
 }
 
 @mixin body-bg {
-	@if (map-get($body-bg, bg-image) == "none"){
-		background: map-get($body-bg, bg-color);
-	} 
-	@if (map-get($body-bg, bg-image) != "none") {
-		background: transparent map-get($body-bg, bg-image) map-get($body-bg, bg-repeat) map-get($body-bg, bg-position);
-	}
-	@if (map-get($body-bg, bg-size) != "inherit" ) {
-		background-size: map-get($body-bg, bg-size);
-	}
+  @if (map-get($body-bg, bg-image) == "none") {
+    background: map-get($body-bg, bg-color);
+  }
+  @if (map-get($body-bg, bg-image) != "none") {
+    background: transparent
+      map-get($body-bg, bg-image)
+      map-get($body-bg, bg-repeat)
+      map-get($body-bg, bg-position);
+  }
+  @if (map-get($body-bg, bg-size) != "inherit") {
+    background-size: map-get($body-bg, bg-size);
+  }
 }
 
 @mixin fontColor {
-    @if (map-get($defFontcolor, bodyFontColor) != "inherit"){
-			color: map-get($defFontcolor, bodyFontColor);
-    } @else {
-			color: set-font-color($body-bg);
-    }
+  @if (map-get($defFontcolor, bodyFontColor) != "inherit") {
+    color: map-get($defFontcolor, bodyFontColor);
+  } @else {
+    color: set-font-color($body-bg);
+  }
 }
-
 
 @mixin clearfix() {
-    &:before,
-    &:after {
-        content: "";
-        display: table;
-    }
-    &:after {
-        clear: both;
-    }
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
 }
 
-
-@mixin font($family: false, $size: false, $color: false, $weight: false, $lineheight: false){
-	@if $family {font-family: $family;}
-	@if $size { font-size: $size; }
-	@if $color { color: $color; }
-	@if $weight { font-weight: $weight; }
-	@if $lineheight { line-height: $lineheight; }
+@mixin font(
+  $family: false,
+  $size: false,
+  $color: false,
+  $weight: false,
+  $lineheight: false
+) {
+  @if $family {
+    font-family: $family;
+  }
+  @if $size {
+    font-size: $size;
+  }
+  @if $color {
+    color: $color;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $lineheight {
+    line-height: $lineheight;
+  }
 }
-
 
 $icons: (
-	eye			: "\f06e",	// Used in View All Button
-	caret-right	: "\f0da",	// Used in Main Navigation
-	caret-down	: "\f0d7",	// Used in Main Navigation for hover
-	arrow-down	: "\f078",	// Used in detail page image thumb list
-	arrow-up	: '\f077',	// Used in detail page image thumb list
-	arrow-left	: "\f053", 
-	arrow-right	: "\f054",
-	nav-seperater: "\007c",	// Navigation Separeter |
-	
-	continueshop: "\f290",	// Used in continue shopping button
-	cart		: "\f07a",	// Usend Cart Buttons
-	savecart	: "\f218",	// Used in save cart button
-
-	home		: "\f015",	
-    newspaper	: "\f001",
-    search		: "\f002",	// Used in all search button
-    email		: "\f003",	// Email Icon
-	plus		: "\f067",
-	plus-square	: "\f0fe",
-	navigater	: "\f041",	// Navigation icon
-	 
-	checkmark	: "\f00c",	
-	tachometer	: "\f0e4",
-	user		: "\f007",
-	user-cercle	: "\f2be",
-	info-circle	: "\f05a",
-	address-book: "\f2ba",
-	file-text	: "\f15c",
-	list		: "\f03a",
-	cog			: "\f013",
-	remove		: "\f00d",	// Cross Icon X
-	download	: "\f019",
-	filetexto	:"\f0f6",
-	credit-card	: "\f09d",
-	truck		: "\f0d1",
-
-	minus-circle: "\f056",
-	plus-circle : "\f055",
-	
-	slick_arrow-prev	: "\f104",  
-	slick_arrow-next	: "\f105",
-	slick_arrow-up		: "\f106",
-	slick_arrow-down	: "\f107"
+  eye: "\f06e",
+  // Used in View All Button
+    caret-right: "\f0da",
+  // Used in Main Navigation
+    caret-down: "\f0d7",
+  // Used in Main Navigation for hover
+    arrow-down: "\f078",
+  // Used in detail page image thumb list
+    arrow-up: "\f077",
+  // Used in detail page image thumb list
+    arrow-left: "\f053",
+  arrow-right: "\f054",
+  nav-seperater: "\007c",
+  // Navigation Separeter |
+    continueshop: "\f290",
+  // Used in continue shopping button
+    cart: "\f07a",
+  // Usend Cart Buttons
+    savecart: "\f218",
+  // Used in save cart button
+    home: "\f015",
+  newspaper: "\f001",
+  search: "\f002",
+  // Used in all search button
+    email: "\f003",
+  // Email Icon
+    plus: "\f067",
+  plus-square: "\f0fe",
+  navigater: "\f041",
+  // Navigation icon
+    checkmark: "\f00c",
+  tachometer: "\f0e4",
+  user: "\f007",
+  user-cercle: "\f2be",
+  info-circle: "\f05a",
+  address-book: "\f2ba",
+  file-text: "\f15c",
+  list: "\f03a",
+  cog: "\f013",
+  remove: "\f00d",
+  // Cross Icon X
+    download: "\f019",
+  filetexto: "\f0f6",
+  credit-card: "\f09d",
+  truck: "\f0d1",
+  minus-circle: "\f056",
+  plus-circle: "\f055",
+  slick_arrow-prev: "\f104",
+  slick_arrow-next: "\f105",
+  slick_arrow-up: "\f106",
+  slick_arrow-down: "\f107",
 );
 
 // @mixin variable-icon-font($icon-code) {
@@ -127,379 +166,379 @@ $icons: (
 // }
 
 @mixin icon(
-		$position: before, 
-		$icon: false, 
-		$styles: true, 
-		$color: $default_font-color,
-		$top: null, 
-		$left: null, 
-		$right:null, 
-		$bottom: null,
-		$size: $primary_font-size,
-		$font-faily: "Font Awesome 5 Free"
-	) {
-    @if $position == both {
-        $position: "before, &:after";
+  $position: before,
+  $icon: false,
+  $styles: true,
+  $color: $default_font-color,
+  $top: null,
+  $left: null,
+  $right: null,
+  $bottom: null,
+  $size: $primary_font-size,
+  $font-faily: "Font Awesome 5 Free"
+) {
+  @if $position == both {
+    $position: "before, &:after";
+  }
+  &:#{$position} {
+    @if $icon {
+      content: "#{map-get($icons, $icon)}";
     }
-    &:#{$position} {
-        @if $icon {
-			content: "#{map-get($icons, $icon)}";
-		}
-        @if $styles {
-            speak: none;
-			position: absolute;
-			z-index: 11;
-			
-            font: {
-				weight: 900;
-				size: $size;
-				family: $font-faily; 
-			}
-			top: $top;
-			left: $left;
-			right: $right;
-			bottom: $bottom;
-			color: $color; 
-        }
-        @content;
+    @if $styles {
+      speak: none;
+      position: absolute;
+      z-index: 11;
+
+      font: {
+        weight: 900;
+        size: $size;
+        family: $font-faily;
+      }
+      top: $top;
+      left: $left;
+      right: $right;
+      bottom: $bottom;
+      color: $color;
     }
+    @content;
+  }
 }
 
 /*__________________________________Main Header Mixin ______________________________*/
 
-@mixin main_header{
-	@each $header_type, $header_style in $header {
-		$bg: map-get($header_style, bg);
-		$brdr-pos: map-get($header_style, border-pos);
-		$brdr-color: map-get($header_style, border-color);
-		$brdr-size: map-get($header_style, border-size);
-		$f-color: map-get($header_style, f-color);
+@mixin main_header {
+  @each $header_type, $header_style in $header {
+    $bg: map-get($header_style, bg);
+    $brdr-pos: map-get($header_style, border-pos);
+    $brdr-color: map-get($header_style, border-color);
+    $brdr-size: map-get($header_style, border-size);
+    $f-color: map-get($header_style, f-color);
 
-		.cimm_#{$header_type}{
-			background: $bg;
-			@if $f-color != "inherit"{
-				color: $f-color;
-			} @else {
-				color: set-font-color($bg)
-			}
+    .cimm_#{$header_type} {
+      background: $bg;
+      @if $f-color != "inherit" {
+        color: $f-color;
+      } @else {
+        color: set-font-color($bg);
+      }
 
-			@include font(
-				$family: $default_font-family, 
-				$size: 12px,
-				$weight: normal
-				);
-			@include border-position($brdr-pos, $brdr-size, solid, $brdr-color);
-		}
-	}
+      @include font(
+        $family: $default_font-family,
+        $size: 12px,
+        $weight: normal
+      );
+      @include border-position($brdr-pos, $brdr-size, solid, $brdr-color);
+    }
+  }
 }
 
-@mixin  main_footer{
-	@each $footer_type, $footer_style in $footer {
-		$bg: map-get($footer_style, bg);
-		$brdr-pos: map-get($footer_style, border-pos);
-		$brdr-color: map-get($footer_style, border-color);
-		$brdr-size: map-get($footer_style, border-size);
-		$f-size: map-get($footer_style, f-size);
-		$f-color: map-get($footer_style, f-color);
-		$tf-size: map-get($footer_style, tf-size);
-		$tf-color: map-get($footer_style, tf-color);
+@mixin main_footer {
+  @each $footer_type, $footer_style in $footer {
+    $bg: map-get($footer_style, bg);
+    $brdr-pos: map-get($footer_style, border-pos);
+    $brdr-color: map-get($footer_style, border-color);
+    $brdr-size: map-get($footer_style, border-size);
+    $f-size: map-get($footer_style, f-size);
+    $f-color: map-get($footer_style, f-color);
+    $tf-size: map-get($footer_style, tf-size);
+    $tf-color: map-get($footer_style, tf-color);
 
-		.cimm_#{$footer_type}{
-			background: $bg;
-			@if $f-color != "inherit" {
-				color: $f-color;
-			} @else {
-				color: set-font-color($bg)
-			}
+    .cimm_#{$footer_type} {
+      background: $bg;
+      @if $f-color != "inherit" {
+        color: $f-color;
+      } @else {
+        color: set-font-color($bg);
+      }
 
-			@include font(
-				$family: $default_font-family, 
-				$size: $f-size,
-				$weight: normal
-				);
-			a{
-				@if $f-color != "inherit" {
-					color: $f-color;
-				} @else {
-					color: set-font-color($bg)
-				}
-				@include font(
-				$family: $default_font-family, 
-				$size: 14px,
-				$weight: normal
-				);
-			}
-			@include border-position($brdr-pos, $brdr-size, solid, $brdr-color);
+      @include font(
+        $family: $default_font-family,
+        $size: $f-size,
+        $weight: normal
+      );
+      a {
+        @if $f-color != "inherit" {
+          color: $f-color;
+        } @else {
+          color: set-font-color($bg);
+        }
+        @include font(
+          $family: $default_font-family,
+          $size: 14px,
+          $weight: normal
+        );
+      }
+      @include border-position($brdr-pos, $brdr-size, solid, $brdr-color);
 
-
-			.footerCol {
-				h5 {
-					position: relative;
-					a {
-						@if $tf-color != "inherit" {
-							color: $tf-color;
-						} @else {
-							color: set-font-color($bg);
-						}
-						font-size: $tf-size;
-						text-transform: uppercase;
-						letter-spacing: 1px;
-					}
-					em  {
-						display: none;
-						position: absolute;
-						top: 2px;
-						right: 10px;
-						width: 35px;
-						height: 35px;
-						padding: 5px;
-						text-align: center;
-					}
-				}
-			}
-			ul li {
-				a {
-					// font-size: $fnav_lf-size;
-					// color: $white;
-					@if $f-color != "inherit"{
-						color: $f-color
-					} @else {
-						color: set-font-color($bg);
-					}
-					padding: 3px 0;
-					display: block;
-				}
-				a.cimm_button {
-					padding: 10px;
-					font-size: 16px;
-					width: 220px;
-					margin: 10px 0;
-				}
-			}
-		}
-	}
+      .footerCol {
+        h5 {
+          position: relative;
+          a {
+            @if $tf-color != "inherit" {
+              color: $tf-color;
+            } @else {
+              color: set-font-color($bg);
+            }
+            font-size: $tf-size;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+          em {
+            display: none;
+            position: absolute;
+            top: 2px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            padding: 5px;
+            text-align: center;
+          }
+        }
+      }
+      ul li {
+        a {
+          // font-size: $fnav_lf-size;
+          // color: $white;
+          @if $f-color != "inherit" {
+            color: $f-color;
+          } @else {
+            color: set-font-color($bg);
+          }
+          padding: 3px 0;
+          display: block;
+        }
+        a.cimm_button {
+          padding: 10px;
+          font-size: 16px;
+          width: 220px;
+          margin: 10px 0;
+        }
+      }
+    }
+  }
 }
 
 /*__________________________________Main Navigation Mixin ______________________________*/
 
 @mixin main_nav {
+  @each $nav_type, $nav_style in $main_nav {
+    $nav_bg: map-get($nav_style, mnav-bg);
+    $lf-family: map-get($nav_style, mnav_lf-family);
+    $lf-size: map-get($nav_style, mnav_lf-size);
+    $lf-color: map-get($nav_style, mnav_lf-color);
 
-    @each $nav_type, $nav_style in $main_nav {
-        $nav_bg: map-get($nav_style, mnav-bg);
-        $lf-family: map-get($nav_style, mnav_lf-family);
-        $lf-size: map-get($nav_style, mnav_lf-size);
-		$lf-color: map-get($nav_style, mnav_lf-color);
-		
-		$lh_bg: map-get($nav_style, mnav_lh-bg);
-		$lh_border: map-get($nav_style, mnav_lh_border);
-		$lfh-color: map-get($nav_style, mnav_lhf-color);
+    $lh_bg: map-get($nav_style, mnav_lh-bg);
+    $lh_border: map-get($nav_style, mnav_lh_border);
+    $lfh-color: map-get($nav_style, mnav_lhf-color);
 
-        $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
-		$lf-dividers: map-get($nav_style, mnav_lf-dividers);
-		
-        $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
-		$subnav-bg: map-get($nav_style, subnav-bg);  
-		$subnav-lf-size: map-get($nav_style, subnav-lf-size);
-		$subnav-lf-color: map-get($nav_style, subnav-lf-color);
-		$subnav-lf-family: map-get($nav_style, subnav-lf-family);
+    $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
+    $lf-dividers: map-get($nav_style, mnav_lf-dividers);
 
-        nav.#{$nav_type}{ 
-            background: $nav_bg;
-            border-radius: 0px;
-            border: 0px;
-            margin: 0;
-            .cimm_nav{
-                position: relative;
-                >ul{
-                    >li{
-						@if($lh_border != false){
-							border-bottom: 2px solid transparent;
-						}
-						>span{
-							display: inline-block;
-							position: relative;
-							>a{
-								white-space: normal;
-								letter-spacing: 1px;
-								padding: 15px 20px 15px 15px;
-								display: block;
+    $subnav_onhover: map-get($nav_style, display_subnav_onhover);
+    $subnav-bg: map-get($nav_style, subnav-bg);
+    $subnav-lf-size: map-get($nav_style, subnav-lf-size);
+    $subnav-lf-color: map-get($nav_style, subnav-lf-color);
+    $subnav-lf-family: map-get($nav_style, subnav-lf-family);
 
-								@if $lf-color != "inherit"{
-									color: $lf-color;
-								} @else {
-									color: set-font-color($nav_bg);
-								}
-
-								@if $lf-uppercase != false {
-									text-transform: uppercase;
-								} @else {
-									text-transform: capitalize;
-								}
-
-								@include font($family: $lf-family, $size: $lf-size);
-								
-								@if $lf-dividers != false {
-									@include icon(after, nav-seperater, $size: 20px, $top: 8px, $right: 0px);
-									&:after{
-										@if $lf-color != "inherit"{
-											color: $lf-color;
-										} @else {
-											color: set-font-color($nav_bg);
-										}
-									}
-								}
-							}
-							em{
-								position: absolute;
-								right: 0;
-								top: 5px;
-								display: inline-block;
-								padding: 20px 14px;
-								@include icon(
-									after, caret-right, 
-									$right: 4px, 
-									$top: 10px, 
-									$size: 20px
-								);
-								&:after{
-									@if $lf-color != "inherit"{
-										color: $lf-color;
-									} @else {
-										color: set-font-color($nav_bg);
-									}
-								}
-							}
-						}
-                        .dropdown-menu{
-                            background: $subnav-bg;
-                            padding: 10px 0px;
-							min-width: 275px;
-							
-                            ul{
-                                width: 282px;
-                                vertical-align: top;
-								display: inline-block;
-							}
-
-							li{
-								position: relative;
-								padding: 5px 0px; 
-								&:hover{
-									background: transparent;
-									text-decoration: underline;
-								
-									> span {
-										em:after{
-											@if $subnav-lf-color != "inherit" {
-												color: $subnav-lf-color;
-											} @else {
-												color: set-font-color($subnav-bg);
-											}	
-										}
-									}
-									> .dropdown-menu{
-										display: block;
-									}
-								}
-								>span{
-									display: block;
-									>a{
-										text-transform: capitalize;
-										padding: 4px 10px;
-										font-size: $subnav-lf-size;
-										font-family: $subnav-lf-family;
-										
-										@if $subnav-lf-color != "inherit" {
-											color: $subnav-lf-color;
-										} @else {
-											color: set-font-color($subnav-bg);
-										}
-										&:hover{
-											@if $subnav-lf-color != "inherit" {
-												color: $subnav-lf-color;
-											} @else {
-												color: set-font-color($subnav-bg);
-											}	
-										}
-									}
-									>em{
-										top: 0;
-										padding: 14px 14px;
-										&:after{
-											top: 4px;
-											color: #444;
-										}
-									}
-								}
-								> .dropdown-menu{
-									left: 100%;
-									top: 0;
-									border-radius: 0;
-									border: none;
-									display: none;
-								}
-								
-							}
-						}
-						&:hover{
-							@if($lh_border != false){
-								border-bottom: 2px solid;
-
-								@if $lf-color != "inherit"{
-									border-color: $lf-color;
-								} @else {
-									border-color: set-font-color($nav_bg);
-								}
-								
-							}
-							@if($lh_bg == "inherit"){ 
-								background: darken($nav_bg, 10%)
-							} @else {
-								background: $lh_bg;
-							}
-							>span{
-								>a{
-									@if $lfh-color != "inherit"{
-										color: $lfh-color;
-									} @else if($lh_bg == "inherit"){
-										color: set-font-color($nav_bg);
-									} @else {
-										color: set-font-color($lh_bg);
-									}
-								}
-								em{
-									@include icon(
-										after, caret-down,
-										$size: 20px
-									);
-									&:after{
-										@if $lfh-color != "inherit"{
-											color: $lfh-color;
-										} @else {
-											color: set-font-color($lh_bg);
-										}
-									}
-								}
-							}
-							> .dropdown-menu{
-                                display: block;
-							}
-						}
-						
-						&:last-child{
-							>span{
-								>a{
-									&:after{
-										content: "";
-									}
-								}
-							}
-						}
-                    }
-                }
+    nav.#{$nav_type} {
+      background: $nav_bg;
+      border-radius: 0px;
+      border: 0px;
+      margin: 0;
+      .cimm_nav {
+        position: relative;
+        > ul {
+          > li {
+            @if ($lh_border != false) {
+              border-bottom: 2px solid transparent;
             }
+            > span {
+              display: inline-block;
+              position: relative;
+              > a {
+                white-space: normal;
+                letter-spacing: 1px;
+                padding: 15px 20px 15px 15px;
+                display: block;
+
+                @if $lf-color != "inherit" {
+                  color: $lf-color;
+                } @else {
+                  color: set-font-color($nav_bg);
+                }
+
+                @if $lf-uppercase != false {
+                  text-transform: uppercase;
+                } @else {
+                  text-transform: capitalize;
+                }
+
+                @include font($family: $lf-family, $size: $lf-size);
+
+                @if $lf-dividers != false {
+                  @include icon(
+                    after,
+                    nav-seperater,
+                    $size: 20px,
+                    $top: 8px,
+                    $right: 0px
+                  );
+                  &:after {
+                    @if $lf-color != "inherit" {
+                      color: $lf-color;
+                    } @else {
+                      color: set-font-color($nav_bg);
+                    }
+                  }
+                }
+              }
+              em {
+                position: absolute;
+                right: 0;
+                top: 5px;
+                display: inline-block;
+                padding: 20px 14px;
+                @include icon(
+                  after,
+                  caret-right,
+                  $right: 4px,
+                  $top: 10px,
+                  $size: 20px
+                );
+                &:after {
+                  @if $lf-color != "inherit" {
+                    color: $lf-color;
+                  } @else {
+                    color: set-font-color($nav_bg);
+                  }
+                }
+              }
+            }
+            .dropdown-menu {
+              background: $subnav-bg;
+              padding: 10px 0px;
+              min-width: 275px;
+
+              ul {
+                width: 282px;
+                vertical-align: top;
+                display: inline-block;
+              }
+
+              li {
+                position: relative;
+                padding: 5px 0px;
+                &:hover {
+                  background: transparent;
+                  text-decoration: underline;
+
+                  > span {
+                    em:after {
+                      @if $subnav-lf-color != "inherit" {
+                        color: $subnav-lf-color;
+                      } @else {
+                        color: set-font-color($subnav-bg);
+                      }
+                    }
+                  }
+                  > .dropdown-menu {
+                    display: block;
+                  }
+                }
+                > span {
+                  display: block;
+                  > a {
+                    text-transform: capitalize;
+                    padding: 4px 10px;
+                    font-size: $subnav-lf-size;
+                    font-family: $subnav-lf-family;
+                    display: block;
+                    @if $subnav-lf-color != "inherit" {
+                      color: $subnav-lf-color;
+                    } @else {
+                      color: set-font-color($subnav-bg);
+                    }
+                    &:hover {
+                      @if $subnav-lf-color != "inherit" {
+                        color: $subnav-lf-color;
+                      } @else {
+                        color: set-font-color($subnav-bg);
+                      }
+                    }
+                  }
+                  > em {
+                    top: 0;
+                    padding: 14px 14px;
+                    &:after {
+                      top: 4px;
+                      color: #444;
+                    }
+                  }
+                }
+                > .dropdown-menu {
+                  left: 100%;
+                  top: 0;
+                  border-radius: 0;
+                  border: none;
+                  display: none;
+                }
+              }
+            }
+            &:hover {
+              @if ($lh_border != false) {
+                border-bottom: 2px solid;
+
+                @if $lf-color != "inherit" {
+                  border-color: $lf-color;
+                } @else {
+                  border-color: set-font-color($nav_bg);
+                }
+              }
+              @if ($lh_bg == "inherit") {
+                background: darken($nav_bg, 10%);
+              } @else {
+                background: $lh_bg;
+              }
+              > span {
+                > a {
+                  @if $lfh-color != "inherit" {
+                    color: $lfh-color;
+                  } @else if($lh_bg == "inherit") {
+                    color: set-font-color($nav_bg);
+                  } @else {
+                    color: set-font-color($lh_bg);
+                  }
+                }
+                em {
+                  @include icon(after, caret-down, $size: 20px);
+                  &:after {
+                    @if $lfh-color != "inherit" {
+                      color: $lfh-color;
+                    } @else {
+                      color: set-font-color($lh_bg);
+                    }
+                  }
+                }
+              }
+              > .dropdown-menu {
+                display: block;
+              }
+            }
+
+            &:last-child {
+              > span {
+                > a {
+                  &:after {
+                    content: "";
+                  }
+                }
+              }
+            }
+          }
         }
-    } 
+      }
+    }
+  }
 }
 
 /*__________________________________End Main Navigation Mixin ______________________________*/
@@ -507,511 +546,559 @@ $icons: (
 /*_________________________________Left Navigation _________________________________________*/
 
 @mixin leftnav {
-    
-    @each $leftnav_type, $leftnav_style in $left_nav {
-        
-        $filter-bg: map-get($leftnav_style, filter-bg);
-        $filter-padding: map-get($leftnav_style, filter-padding);
-        $filter-border: map-get($leftnav_style, filter-border);
+  @each $leftnav_type, $leftnav_style in $left_nav {
+    $filter-bg: map-get($leftnav_style, filter-bg);
+    $filter-padding: map-get($leftnav_style, filter-padding);
+    $filter-border: map-get($leftnav_style, filter-border);
 
-        $filter_block-bg: map-get($leftnav_style, filter_block-bg);
-        $filter_block-border: map-get($leftnav_style, filter_block-border);
-        $filter_block-padding: map-get($leftnav_style, filter_block-padding);
-        $filter_block-margin: map-get($leftnav_style, filter_block-margin);
-        
-        $title-bg: map-get($leftnav_style, filter_block_tf-bg);
-        $title-border: map-get($leftnav_style, filter_block_tf-border);
-        $title-margin: map-get($leftnav_style, filter_block_tf-margin);
-		$title-padding: map-get($leftnav_style, filter_block_tf-padding);
-		
-        $title_icon-open: map-get($leftnav_style,  filter_block_ticon-open);
-		$title_icon-close: map-get($leftnav_style, filter_block_ticon-close);
-		$title_icon-size: map-get($leftnav_style, filter_block_ticon-size);
-		$title_icon-color: map-get($leftnav_style, filter_block_ticon-color);
-		$title_icon_pos-top: map-get($leftnav_style, filter_block_ticon_pos-top);
-		$title_icon_pos-right: map-get($leftnav_style, filter_block_ticon_pos-right);
+    $filter_block-bg: map-get($leftnav_style, filter_block-bg);
+    $filter_block-border: map-get($leftnav_style, filter_block-border);
+    $filter_block-padding: map-get($leftnav_style, filter_block-padding);
+    $filter_block-margin: map-get($leftnav_style, filter_block-margin);
 
-        $tf-faimly: map-get($leftnav_style, filter_block_tf-fontfamily);
-        $tf-color: map-get($leftnav_style, filter_block_tf-color);
-        $tf-size: map-get($leftnav_style, filter_block_tf-fontsize); 
-        $tf-uppercase: map-get($leftnav_style, filter_block_tf-uppercase);
+    $title-bg: map-get($leftnav_style, filter_block_tf-bg);
+    $title-border: map-get($leftnav_style, filter_block_tf-border);
+    $title-margin: map-get($leftnav_style, filter_block_tf-margin);
+    $title-padding: map-get($leftnav_style, filter_block_tf-padding);
 
-        
-        .cimm_#{$leftnav_type}{
-            //background: $nav-bg; 
-            .cimm_filter{ 
+    $title_icon-open: map-get($leftnav_style, filter_block_ticon-open);
+    $title_icon-close: map-get($leftnav_style, filter_block_ticon-close);
+    $title_icon-size: map-get($leftnav_style, filter_block_ticon-size);
+    $title_icon-color: map-get($leftnav_style, filter_block_ticon-color);
+    $title_icon_pos-top: map-get($leftnav_style, filter_block_ticon_pos-top);
+    $title_icon_pos-right: map-get(
+      $leftnav_style,
+      filter_block_ticon_pos-right
+    );
 
-                @if ($filter-bg != transparent){
-                    background: $filter-bg;
-                    padding: 10px; 
-                }
-                padding: $filter-padding;
+    $tf-faimly: map-get($leftnav_style, filter_block_tf-fontfamily);
+    $tf-color: map-get($leftnav_style, filter_block_tf-color);
+    $tf-size: map-get($leftnav_style, filter_block_tf-fontsize);
+    $tf-uppercase: map-get($leftnav_style, filter_block_tf-uppercase);
 
-                @if $filter-border == true {
-                    @include add_border(all);
-                } @else if $filter-border == "bottom"{
-                    @include add_border(bottom);
-                } @else if $filter_border == "top"{
-                    @include add_border(top);
-                } @else if $filter_border == "top-bottom"{
-                    @include add_border(top);
-                    @include add_border(bottom);
-                } @else {
-                    border: 0px;
-                } 
+    .cimm_#{$leftnav_type} {
+      //background: $nav-bg;
+      .cimm_filter {
+        @if ($filter-bg != transparent) {
+          background: $filter-bg;
+          padding: 10px;
+        }
+        padding: $filter-padding;
 
-                .cimm_filter-block{
-                    background: $filter_block-bg;
-                    padding: $filter_block-padding;
-                    margin-bottom:  $filter_block-margin;
-                    
-                    @if $filter_block-border == true {
-                        @include add_border(all);
-                    } @else if $filter_block-border == "bottom"{
-                        @include add_border(bottom);
-                    } @else if $filter_block-border == "top"{
-                        @include add_border(top);
-                    } @else if $filter_block-border == "top-bottom"{
-                        @include add_border(top);
-                        @include add_border(bottom);
-                    } @else {
-                        border: 0px;
-                    }
-
-                    .cimm_filter-block-title{
-                        cursor: pointer;
-                        position: relative;
-                        background: $title-bg;
-                        padding: $title-padding; 
-                        margin: $title-margin; 
-                        &.cleatBtn{
-                        	&:after{
-                        		content: "";
-                        	}
-                        }
-						@include icon(after, 
-							$title_icon-close, 
-							$color: $title_icon-color, 
-							$size: $title_icon-size, 
-							$right: $title_icon_pos-right, 
-							$top: $title_icon_pos-top);
- 
-                        &.collapsed{
-							@include icon(after, 
-							$title_icon-open, 
-							$color:$title_icon-color, 
-							$size: $title_icon-size, 
-							$right: $title_icon_pos-right, 
-							$top: $title_icon_pos-top);
-                        } 
-
-
-                        @if ($tf-uppercase != false){
-                            text-transform: uppercase; 
-                        } @else {
-                            text-transform: capitalize;
-                        }
-
-                        @include font(
-                            $family: $tf-faimly,
-                            $size: $tf-size, 
-                            $color: $tf-color
-                        );
-
-                        @if $title-border == true {
-                            @include add_border(all);
-                        } @else if $title-border == "bottom"{
-                            @include add_border(bottom);
-                        } @else if $title-border == "top"{
-                            @include add_border(top);
-                        } @else if $title-border == "top-bottom"{
-                            @include add_border(top);
-                            @include add_border(bottom);
-                        } @else {
-                            border: 0px;
-                        }
-                    }
-                    
-                    $lf-color: map-get($leftnav_style, filter_block_lf-color);
-                    $lhf-color: map-get($leftnav_style, filter_block_lhf-color);
-                    $lf-family: map-get($leftnav_style, filter_block_lf-family);
-                    $lf-size: map-get($leftnav_style, filter_block_lf-size);
-					$lf-uppercase: map-get($leftnav_style, filter_block_lf-uppercase);
-					
-                    .cimm_filter_block-container{
-						.filterTextBox{
-							margin-top:10px;
-						}
-						.slimScrollDiv{
-							margin-top: 10px;
-						}
-						
-                        ul{
-                            li{
-								padding: 5px 0px;
-                                a, label span{
-                                    @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
-                                    @if ($lf-uppercase != false){
-                                        text-transform: uppercase; 
-                                    } @else {
-                                        text-transform: capitalize;
-                                    }
-                                }
-                            }
-                        }
-					}	
-
-					.cimm_myaccount-block-title{
-						@extend .cimm_filter-block-title;
-						&:after{
-							content: "";
-						}
-					}
-					
-				}
-				.cimm_search-block{ 
-					@extend .cimm_filter-block; 
-					.cimm_search-block-title{
-						@extend .cimm_filter-block-title;
-						&:after{
-							content: ""; 
-						}
-					}
-				}
-
-            }
+        @if $filter-border == true {
+          @include add_border(all);
+        } @else if $filter-border == "bottom" {
+          @include add_border(bottom);
+        } @else if $filter_border == "top" {
+          @include add_border(top);
+        } @else if $filter_border == "top-bottom" {
+          @include add_border(top);
+          @include add_border(bottom);
+        } @else {
+          border: 0px;
         }
 
+        .cimm_filter-block {
+          background: $filter_block-bg;
+          padding: $filter_block-padding;
+          margin-bottom: $filter_block-margin;
+
+          @if $filter_block-border == true {
+            @include add_border(all);
+          } @else if $filter_block-border == "bottom" {
+            @include add_border(bottom);
+          } @else if $filter_block-border == "top" {
+            @include add_border(top);
+          } @else if $filter_block-border == "top-bottom" {
+            @include add_border(top);
+            @include add_border(bottom);
+          } @else {
+            border: 0px;
+          }
+
+          .cimm_filter-block-title {
+            cursor: pointer;
+            position: relative;
+            background: $title-bg;
+            padding: $title-padding;
+            margin: $title-margin;
+            &.cleatBtn {
+              &:after {
+                content: "";
+              }
+            }
+            @include icon(
+              after,
+              $title_icon-close,
+              $color: $title_icon-color,
+              $size: $title_icon-size,
+              $right: $title_icon_pos-right,
+              $top: $title_icon_pos-top
+            );
+
+            &.collapsed {
+              @include icon(
+                after,
+                $title_icon-open,
+                $color: $title_icon-color,
+                $size: $title_icon-size,
+                $right: $title_icon_pos-right,
+                $top: $title_icon_pos-top
+              );
+            }
+
+            @if ($tf-uppercase != false) {
+              text-transform: uppercase;
+            } @else {
+              text-transform: capitalize;
+            }
+
+            @include font(
+              $family: $tf-faimly,
+              $size: $tf-size,
+              $color: $tf-color
+            );
+
+            @if $title-border == true {
+              @include add_border(all);
+            } @else if $title-border == "bottom" {
+              @include add_border(bottom);
+            } @else if $title-border == "top" {
+              @include add_border(top);
+            } @else if $title-border == "top-bottom" {
+              @include add_border(top);
+              @include add_border(bottom);
+            } @else {
+              border: 0px;
+            }
+          }
+
+          $lf-color: map-get($leftnav_style, filter_block_lf-color);
+          $lhf-color: map-get($leftnav_style, filter_block_lhf-color);
+          $lf-family: map-get($leftnav_style, filter_block_lf-family);
+          $lf-size: map-get($leftnav_style, filter_block_lf-size);
+          $lf-uppercase: map-get($leftnav_style, filter_block_lf-uppercase);
+
+          .cimm_filter_block-container {
+            .filterTextBox {
+              margin-top: 10px;
+            }
+            .slimScrollDiv {
+              margin-top: 10px;
+            }
+
+            ul {
+              li {
+                padding: 5px 0px;
+                a,
+                label span {
+                  @include font(
+                    $family: $lf-family,
+                    $size: $lf-size,
+                    $color: $lf-color
+                  );
+                  @if ($lf-uppercase != false) {
+                    text-transform: uppercase;
+                  } @else {
+                    text-transform: capitalize;
+                  }
+                }
+              }
+            }
+          }
+
+          .cimm_myaccount-block-title {
+            @extend .cimm_filter-block-title;
+            &:after {
+              content: "";
+            }
+          }
+        }
+        .cimm_search-block {
+          @extend .cimm_filter-block;
+          .cimm_search-block-title {
+            @extend .cimm_filter-block-title;
+            &:after {
+              content: "";
+            }
+          }
+        }
+      }
     }
+  }
 }
 
 /*_________________________________End Left Navigation__________________________*/
 
-
 /*______________________________________ Custom Buttons ___________________________________*/
 @mixin custom-btns {
-    @each $class_name, $bgcolors in $btncolors {
-        .btn-#{$class_name} {
-			$btn_bg: map-get($bgcolors, bg-color);
-			$btn_f-color: map-get($bgcolors, btnf-color);
-			$btn_hbg: map-get($bgcolors, hbg-color);
-			$btn_hf-color: map-get($bgcolors, btnhf-color);
-			$bgicon: map-get($bgcolors, bg-icon);
-			$onlyborder: map-get($bgcolors, onlyborder);
-			$iconposition: map-get($bgcolors, bg-icon-posintion);
+  @each $class_name, $bgcolors in $btncolors {
+    .btn-#{$class_name} {
+      $btn_bg: map-get($bgcolors, bg-color);
+      $btn_f-color: map-get($bgcolors, btnf-color);
+      $btn_hbg: map-get($bgcolors, hbg-color);
+      $btn_hf-color: map-get($bgcolors, btnhf-color);
+      $bgicon: map-get($bgcolors, bg-icon);
+      $onlyborder: map-get($bgcolors, onlyborder);
+      $iconposition: map-get($bgcolors, bg-icon-posintion);
 
-			background: $btn_bg;
-			@if $btn_f-color != "inherit" {
-				color: $btn_f-color !important;
-			} @else {
-				color: set-font-color($bg) !important;
-			}
-			position: relative;
-			border-color: darken($btn_bg, 5%);
+      background: $btn_bg;
+      @if $btn_f-color != "inherit" {
+        color: $btn_f-color !important;
+      } @else {
+        color: set-font-color($bg) !important;
+      }
+      position: relative;
+      border-color: darken($btn_bg, 5%);
 
-			@if ($onlyborder != false) {
-				border: 1px solid $btn_bg;
-				background: transparent;
-			}
+      @if ($onlyborder != false) {
+        border: 1px solid $btn_bg;
+        background: transparent;
+      }
 
-			@if $bgicon != false{
-				@if($class_name == "addtocart"){
-					padding: 10px;
-					@include icon(before, cart, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
-				} 
-				@if($class_name == "viewallchoice"){
-					padding-left: 25px; 
-					@include icon(before, eye, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
-				}
-				@if($class_name == "continueshop"){
-					padding-left: 35;
-					@include icon(before, continueshop, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);
-				}
-			}
-            &:hover {
-				background: darken( $btn_bg, 10% );
-				color: $btn_hf-color; 
-				border-color: darken( $btn_bg, 10% );
-			}
-			&:active{
-				background: $btn_bg;
-				&:hover{
-					background: lighten( $btn_bg, 10% );
-					border-color: darken($btn_bg, 5%);
-				}
-			}
-			&:focus{
-				background: lighten( $btn_bg, 10% );
-				border-color: darken($btn_bg, 5%);
-			}
+      @if $bgicon != false {
+        @if ($class_name == "addtocart") {
+          padding: 10px;
+          @include icon(
+            before,
+            cart,
+            $color: $btn_f-color,
+            $left: 10px,
+            $top: 5px,
+            $size: 18px
+          );
         }
+        @if ($class_name == "viewallchoice") {
+          padding-left: 25px;
+          @include icon(
+            before,
+            eye,
+            $color: $btn_f-color,
+            $left: 5px,
+            $top: 5px,
+            $size: 16px
+          );
+        }
+        @if ($class_name == "continueshop") {
+          padding-left: 35;
+          @include icon(
+            before,
+            continueshop,
+            $color: $btn_f-color,
+            $left: 5px,
+            $top: 5px,
+            $size: 16px
+          );
+        }
+      }
+      &:hover {
+        background: darken($btn_bg, 10%);
+        color: $btn_hf-color;
+        border-color: darken($btn_bg, 10%);
+      }
+      &:active {
+        background: $btn_bg;
+        &:hover {
+          background: lighten($btn_bg, 10%);
+          border-color: darken($btn_bg, 5%);
+        }
+      }
+      &:focus {
+        background: lighten($btn_bg, 10%);
+        border-color: darken($btn_bg, 5%);
+      }
     }
-    //Button Sizes
-    .btn {
-        &-lg {
-            //Any Size Customizations here
-        }
-        &-sm {
-            //Any Size Customizations here
-        }
-        &-link {
-            //Any Customizations here
-        }
+  }
+  //Button Sizes
+  .btn {
+    &-lg {
+      //Any Size Customizations here
     }
+    &-sm {
+      //Any Size Customizations here
+    }
+    &-link {
+      //Any Customizations here
+    }
+  }
 }
 /*______________________________________ End Custom Buttons ___________________________________*/
 
-
 @mixin border-position($direction, $width, $style, $color) {
-	border-#{$direction}: $width $style $color;
+  border-#{$direction}: $width $style $color;
 }
 
 @mixin add_border(
-	$border-position: all,  
-	$border-size: 1px, 
-	$border-type:solid, 
-	$border_color: $border_color){
-		$border-position-all: all;
+  $border-position: all,
+  $border-size: 1px,
+  $border-type: solid,
+  $border_color: $border_color
+) {
+  $border-position-all: all;
 
-		@if $border-position == $border-position-all{
-			border: $border-size $border-type $border_color;
-		}@else{
-			border-#{$border-position}: $border-size  $border-type $border_color;
-		}
-};
-
-@mixin headings{
-	@each $heading_name, $heading_value in $headings{
-		$fontcolor: map-get($heading_value, fontcolor);
-		$fontsize: map-get($heading_value, fontsize);
-		$fontfamily: map-get($heading_value, fontfamily);
-		$ttransform: map-get($heading_value, texttransform);
-		$marginval: map-get($heading_value, marginvalue);
-		$paddingvalue: map-get($heading_value, paddingvalue);
-		$border: map-get($heading_value, tborder);
-
-		.cimm_#{$heading_name}{
-			@if $fontcolor != "inherit"{
-				color: $fontcolor;
-			} @else {
-				color: set-font-color($body-bg);
-			}
-			font-size: $fontsize;
-			font-family: $fontfamily; 
-			margin: $marginval;
-			padding: $paddingvalue;
-			position: relative;
-			@if $ttransform != false {
-				text-transform: uppercase;
-			} @else {
-				text-transform: capitalize;
-			}
-			@if $border != false {
-				//@include border(1px, solid, $border-color);
-				@include add_border(bottom);
-			}
-			@include clearfix();
-		}
-	}
+  @if $border-position == $border-position-all {
+    border: $border-size $border-type $border_color;
+  } @else {
+    border-#{$border-position}: $border-size $border-type $border_color;
+  }
 }
 
+@mixin headings {
+  @each $heading_name, $heading_value in $headings {
+    $fontcolor: map-get($heading_value, fontcolor);
+    $fontsize: map-get($heading_value, fontsize);
+    $fontfamily: map-get($heading_value, fontfamily);
+    $ttransform: map-get($heading_value, texttransform);
+    $marginval: map-get($heading_value, marginvalue);
+    $paddingvalue: map-get($heading_value, paddingvalue);
+    $border: map-get($heading_value, tborder);
 
-@mixin border($width, $style, $color){
-	border: $width $style $color;
+    .cimm_#{$heading_name} {
+      @if $fontcolor != "inherit" {
+        color: $fontcolor;
+      } @else {
+        color: set-font-color($body-bg);
+      }
+      font-size: $fontsize;
+      font-family: $fontfamily;
+      margin: $marginval;
+      padding: $paddingvalue;
+      position: relative;
+      @if $ttransform != false {
+        text-transform: uppercase;
+      } @else {
+        text-transform: capitalize;
+      }
+      @if $border != false {
+        //@include border(1px, solid, $border-color);
+        @include add_border(bottom);
+      }
+      @include clearfix();
+    }
+  }
+}
+
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
 }
 
 @mixin box-shadow($left, $top, $radius, $color) {
-	box-shadow: $left $top $radius $color;
-	-webkit-box-shadow: $left $top $radius $color;
-	-moz-box-shadow: $left $top $radius $color;
+  box-shadow: $left $top $radius $color;
+  -webkit-box-shadow: $left $top $radius $color;
+  -moz-box-shadow: $left $top $radius $color;
 }
 
 @mixin transition($property, $duration, $easing: linear) {
-	transition: $property $duration $easing;
-	-webkit-transition: $property $duration $easing;
-	-moz-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
 }
 
 @mixin border-radius($radius) {
-	border-radius: $radius;
-	-webkit-border-radius: $radius;
-	-moz-border-radius: $radius;
-	-ms-border-radius: $radius;
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
 }
 
 @mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
-	border-top-left-radius: $topleft;
-	border-top-right-radius: $topright;
-	border-bottom-right-radius: $bottomright;
-	border-bottom-left-radius: $bottomleft;
-	-webkit-border-top-left-radius: $topleft;
-	-webkit-border-top-right-radius: $topright;
-	-webkit-border-bottom-right-radius: $bottomright;
-	-webkit-border-bottom-left-radius: $bottomleft;
-	-moz-border-radius-topleft: $topleft;
-	-moz-border-radius-topright: $topright;
-	-moz-border-radius-bottomright: $bottomright;
-	-moz-border-radius-bottomleft: $bottomleft;
+  border-top-left-radius: $topleft;
+  border-top-right-radius: $topright;
+  border-bottom-right-radius: $bottomright;
+  border-bottom-left-radius: $bottomleft;
+  -webkit-border-top-left-radius: $topleft;
+  -webkit-border-top-right-radius: $topright;
+  -webkit-border-bottom-right-radius: $bottomright;
+  -webkit-border-bottom-left-radius: $bottomleft;
+  -moz-border-radius-topleft: $topleft;
+  -moz-border-radius-topright: $topright;
+  -moz-border-radius-bottomright: $bottomright;
+  -moz-border-radius-bottomleft: $bottomleft;
 }
 
 @mixin gradient($color1, $color2) {
-	background-color: $color1;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$color1}, endColorstr=#{$color2});
-	background-image: -moz-linear-gradient(center top, $color1, $color2);
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to($color2));
+  background-color: $color1;
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$color1}, endColorstr=#{$color2});
+  background-image: -moz-linear-gradient(center top, $color1, $color2);
+  background-image: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from($color1),
+    to($color2)
+  );
 }
 
-@mixin category_item-border{
-	// @include box-shadow(0px, 0px, 5px, $border-color);
-	// @include border-radius(4px);
-	// @include border-position(bottom, 1px, solid, $red);
-	outline: $gray-lighten solid 5px;
+@mixin category_item-border {
+  // @include box-shadow(0px, 0px, 5px, $border-color);
+  // @include border-radius(4px);
+  // @include border-position(bottom, 1px, solid, $red);
+  outline: $gray-lighten solid 5px;
 }
-
 
 /* Mixin for Category page */
 
-@mixin category_border{
-
-    .cimm_category-itemimage{ 
-		@if (map-get($categories, border) == true){
-			@include add_border(all); 
-		} @else if (map-get($categories, border) == "top" ){
-			@include add_border(top);
-		} @else if (map-get($categories, border) == "bottom"){
-			@include add_border(bottom);
-		} @else if (map-get($categories, border) == "top-bottom"){
-			@include add_border(top);
-			@include add_border(bottom);
-		} @else {
-			border: 0px; 
-		}
-		
-        @if map-get($categories, box_radius) != false{
-            @include border-radius(5px);
-        }
-        @if map-get($categories, box_shadow) != false {
-            @include box-shadow(0px, 0px, 4px, $secondary-color);
-		}
+@mixin category_border {
+  .cimm_category-itemimage {
+    @if (map-get($categories, border) == true) {
+      @include add_border(all);
+    } @else if (map-get($categories, border) == "top") {
+      @include add_border(top);
+    } @else if (map-get($categories, border) == "bottom") {
+      @include add_border(bottom);
+    } @else if (map-get($categories, border) == "top-bottom") {
+      @include add_border(top);
+      @include add_border(bottom);
+    } @else {
+      border: 0px;
     }
-    .cimm_category-itemname{
 
-		$itemname_bg: map-get($categories, title_bg); 
-
-		@if ($itemname_bg != false) and ($category-itemname-bg == transparent){
-			background: $secondary-color;
-			a{
-				color: $white;
-			}
-		} @else if($itemname_bg == true) and ($category-itemname-bg != transparent) { 
-			background: $category-itemname-bg; 
-		} @else {
-			background: transparent;  
-		}
- 
+    @if map-get($categories, box_radius) != false {
+      @include border-radius(5px);
     }
-};
+    @if map-get($categories, box_shadow) != false {
+      @include box-shadow(0px, 0px, 4px, $secondary-color);
+    }
+  }
+  .cimm_category-itemname {
+    $itemname_bg: map-get($categories, title_bg);
+
+    @if ($itemname_bg != false) and ($category-itemname-bg == transparent) {
+      background: $secondary-color;
+      a {
+        color: $white;
+      }
+    } @else if($itemname_bg == true) and ($category-itemname-bg != transparent)
+    {
+      background: $category-itemname-bg;
+    } @else {
+      background: transparent;
+    }
+  }
+}
 
 /* End Mixin for Category page */
 
 /* Mixin for Detail Page */
-@mixin itemdetail_image{
-	.cimm_itemdetail-imgcontainer{
-		li{
-			.cimm_itemdetail_image{
-				@include border-radius(2px);
-				border: 1px solid map-get($itemdetail_image, mainimage_border-color);
+@mixin itemdetail_image {
+  .cimm_itemdetail-imgcontainer {
+    li {
+      .cimm_itemdetail_image {
+        @include border-radius(2px);
+        border: 1px solid map-get($itemdetail_image, mainimage_border-color);
 
-				a.imgEnlargeIcon{
-					position: absolute;
-					z-index:2;
+        a.imgEnlargeIcon {
+          position: absolute;
+          z-index: 2;
 
-					@if map-get($itemdetail_image, enlarge_icon-posi) == "top-left" {
-						top: 0px;
-						left: 6px;
-
-					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "top-right"{
-						top: 0px;
-						right: 6px;
-					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "bottom-left"{
-						bottom: 0px;
-						left: 6px;
-					} @else if map-get($itemdetail_image, enlarge_icon-posi) == "bottom-right"{
-						bottom: 0px;
-						right: 6px;
-					}
-				}
-			}
-			.cimm_itemdetail_thumblist{
-				.cimm_itemdetail_thumblist-img{
-					border: 1px solid map-get($itemdetail_image, thumbimage_border-color);
-				}
-			}
-
-		}
-	}
+          @if map-get($itemdetail_image, enlarge_icon-posi) == "top-left" {
+            top: 0px;
+            left: 6px;
+          } @else if
+            map-get($itemdetail_image, enlarge_icon-posi) ==
+            "top-right"
+          {
+            top: 0px;
+            right: 6px;
+          } @else if
+            map-get($itemdetail_image, enlarge_icon-posi) ==
+            "bottom-left"
+          {
+            bottom: 0px;
+            left: 6px;
+          } @else if
+            map-get($itemdetail_image, enlarge_icon-posi) ==
+            "bottom-right"
+          {
+            bottom: 0px;
+            right: 6px;
+          }
+        }
+      }
+      .cimm_itemdetail_thumblist {
+        .cimm_itemdetail_thumblist-img {
+          border: 1px solid map-get($itemdetail_image, thumbimage_border-color);
+        }
+      }
+    }
+  }
 }
 /* Mixin for Detail Page */
 
 /* Mixin for slick slider */
-@mixin slider-item-container{
-	.cimm_slider-item-container{
-		@if map-get($slider-item-container, border) == true{
-			border: 1px solid $border-color;
-		}
-		@if map-get($slider-item-container, border-radius) == true{
-			@include border-radius(3px);
-		}
-		@if map-get($slider-item-container, box-shadow) == true{
-			box-shadow: 0 0 6px $shadow-color;
-		}  
+@mixin slider-item-container {
+  .cimm_slider-item-container {
+    @if map-get($slider-item-container, border) == true {
+      border: 1px solid $border-color;
+    }
+    @if map-get($slider-item-container, border-radius) == true {
+      @include border-radius(3px);
+    }
+    @if map-get($slider-item-container, box-shadow) == true {
+      box-shadow: 0 0 6px $shadow-color;
+    }
 
-		.cimm_slider_item-image{
-			@if map-get($slider-item-container, image-border) == true{
-				border: 1px solid $border-color;
-			}
-			@if map-get($slider-item-container, image-border-radius) == true{
-				@include border-radius(3px);
-			}
-		}
-		.cimm_slider_item-desc{
-
-		}
-	}
+    .cimm_slider_item-image {
+      @if map-get($slider-item-container, image-border) == true {
+        border: 1px solid $border-color;
+      }
+      @if map-get($slider-item-container, image-border-radius) == true {
+        @include border-radius(3px);
+      }
+    }
+    .cimm_slider_item-desc {
+    }
+  }
 }
 
-@mixin slick-arrows{
-	.slick-prev{
-		@include icon(before, slick_arrow-prev, $top: 18px, $left: 0px,
-		$color: map-get($slider-item-container, icon-color), 
-		$size: map-get($slider-item-container, icon-size), 
-		$font-faily: map-get($slider-item-container, icon-family));
-	}
-	.slick-next{
-		@include icon(before, slick_arrow-next, $top: 18px, $right: 0px,
-		$color: map-get($slider-item-container, icon-color), 
-		$size: map-get($slider-item-container, icon-size), 
-		$font-faily: map-get($slider-item-container, icon-family)); 
-	} 
+@mixin slick-arrows {
+  .slick-prev {
+    @include icon(
+      before,
+      slick_arrow-prev,
+      $top: 18px,
+      $left: 0px,
+      $color: map-get($slider-item-container, icon-color),
+      $size: map-get($slider-item-container, icon-size),
+      $font-faily: map-get($slider-item-container, icon-family)
+    );
+  }
+  .slick-next {
+    @include icon(
+      before,
+      slick_arrow-next,
+      $top: 18px,
+      $right: 0px,
+      $color: map-get($slider-item-container, icon-color),
+      $size: map-get($slider-item-container, icon-size),
+      $font-faily: map-get($slider-item-container, icon-family)
+    );
+  }
 }
 /* Mixin for slick slider */
 
 /* Mixin for Responsive Breakpoint */
-@mixin breakpoint($point) { 
-	@if $point == lg {
-		@media only screen and (min-width: 980px) and (max-width: 1024px)  { @content ; }
-   	}
-	@else if $point == md {
-		@media only screen and (min-width: 768px) and (max-width: 980px) { @content ; }
-   	}
-	@else if $point == sm {
-		@media only screen and (min-width: 480px) and (max-width: 768px) { @content ; }
-   	}
-	@else if $point == xs {
-		@media only screen and (min-width: 320px) and (max-width: 480px)  { @content ; }
-   	} 
-   	@else if $point == xsonly {
-		@media (max-width: 37.5em)  { @content ; }
-	}
+@mixin breakpoint($point) {
+  @if $point == lg {
+    @media only screen and (min-width: 980px) and (max-width: 1024px) {
+      @content;
+    }
+  } @else if $point == md {
+    @media only screen and (min-width: 768px) and (max-width: 980px) {
+      @content;
+    }
+  } @else if $point == sm {
+    @media only screen and (min-width: 480px) and (max-width: 768px) {
+      @content;
+    }
+  } @else if $point == xs {
+    @media only screen and (min-width: 320px) and (max-width: 480px) {
+      @content;
+    }
+  } @else if $point == xsonly {
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
 }
 /* End Mixin for Responsive Breakpoint */
