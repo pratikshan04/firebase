@@ -427,36 +427,190 @@ $icons: (
 
               li {
                 position: relative;
-                padding: 5px 0px;
-                &:hover {
-                  background: transparent;
-                  text-decoration: underline;
+                >ul{
+                    >li{
+						@if($lh_border != false){
+							border-bottom: 2px solid transparent;
+						}
+						span{
+							display: inline-block;
+							position: relative;
+							>a{
+								white-space: normal;
+								letter-spacing: 1px;
+								padding: 15px 20px 15px 15px;
+								display: block;
 
-                  > span {
-                    em:after {
-                      @if $subnav-lf-color != "inherit" {
-                        color: $subnav-lf-color;
-                      } @else {
-                        color: set-font-color($subnav-bg);
-                      }
-                    }
-                  }
-                  > .dropdown-menu {
-                    display: block;
-                  }
-                }
-                > span {
-                  display: block;
-                  > a {
-                    text-transform: capitalize;
-                    padding: 4px 10px;
-                    font-size: $subnav-lf-size;
-                    font-family: $subnav-lf-family;
-                    display: block;
-                    @if $subnav-lf-color != "inherit" {
-                      color: $subnav-lf-color;
-                    } @else {
-                      color: set-font-color($subnav-bg);
+								@if $lf-color != "inherit"{
+									color: $lf-color;
+								} @else {
+									color: set-font-color($nav_bg);
+								}
+
+								@if $lf-uppercase != false {
+									text-transform: uppercase;
+								} @else {
+									text-transform: capitalize;
+								}
+
+								@include font($family: $lf-family, $size: $lf-size);
+								
+								@if $lf-dividers != false {
+									@include icon(after, nav-seperater, $size: 20px, $top: 8px, $right: 0px);
+									&:after{
+										@if $lf-color != "inherit"{
+											color: $lf-color;
+										} @else {
+											color: set-font-color($nav_bg);
+										}
+									}
+								}
+							}
+							em{
+								position: absolute;
+								right: 0;
+								top: 5px;
+								display: inline-block;
+								padding: 20px 14px;
+								@include icon(
+									after, caret-right, 
+									$right: 4px, 
+									$top: 10px, 
+									$size: 20px
+								);
+								&:after{
+									@if $lf-color != "inherit"{
+										color: $lf-color;
+									} @else {
+										color: set-font-color($nav_bg);
+									}
+								}
+							}
+						}
+                        .dropdown-menu{
+                            background: $subnav-bg;
+                            padding: 10px 0px;
+							min-width: 275px;
+							
+                            ul{
+                                width: 282px;
+                                vertical-align: top;
+								display: inline-block;
+							}
+
+							li{
+								position: relative;
+								padding: 2px 0px; 
+								&:hover{
+									background: transparent;
+									text-decoration: underline;
+								
+									> span {
+										em:after{
+											@if $subnav-lf-color != "inherit" {
+												color: $subnav-lf-color;
+											} @else {
+												color: set-font-color($subnav-bg);
+											}	
+										}
+									}
+									> .dropdown-menu{
+										display: block;
+									}
+								}
+								>span{
+									display: block;
+									>a{
+										text-transform: capitalize;
+										padding: 4px 10px;
+										font-size: $subnav-lf-size;
+										font-family: $subnav-lf-family;
+										display: block;
+										@if $subnav-lf-color != "inherit" {
+											color: $subnav-lf-color;
+										} @else {
+											color: set-font-color($subnav-bg);
+										}
+										&:hover{
+											@if $subnav-lf-color != "inherit" {
+												color: $subnav-lf-color;
+											} @else {
+												color: set-font-color($subnav-bg);
+											}	
+										}
+									}
+									>em{
+										padding: 14px 14px;
+										&:after{
+											top: 4px;
+											color: #444;
+										}
+									}
+								}
+								> .dropdown-menu{
+									left: 100%;
+									top: 0;
+									border-radius: 0;
+									border: none;
+									display: none;
+								}
+								
+							}
+						}
+						&:hover{
+							@if($lh_border != false){
+								border-bottom: 2px solid;
+
+								@if $lf-color != "inherit"{
+									border-color: $lf-color;
+								} @else {
+									border-color: set-font-color($nav_bg);
+								}
+								
+							}
+							@if($lh_bg == "inherit"){ 
+								background: darken($nav_bg, 10%)
+							} @else {
+								background: $lh_bg;
+							}
+							>span{
+								>a{
+									@if $lfh-color != "inherit"{
+										color: $lfh-color;
+									} @else if($lh_bg == "inherit"){
+										color: set-font-color($nav_bg);
+									} @else {
+										color: set-font-color($lh_bg);
+									}
+								}
+								em{
+									@include icon(
+										after, caret-down,
+										$size: 20px
+									);
+									&:after{
+										@if $lfh-color != "inherit"{
+											color: $lfh-color;
+										} @else {
+											color: set-font-color($lh_bg);
+										}
+									}
+								}
+							}
+							> .dropdown-menu{
+                                display: block;
+							}
+						}
+						
+						&:last-child{
+							>span{
+								>a{
+									&:after{
+										content: "";
+									}
+								}
+							}
+						}
                     }
                     &:hover {
                       @if $subnav-lf-color != "inherit" {
