@@ -315,7 +315,7 @@ $icons: (
 						@if($lh_border != false){
 							border-bottom: 2px solid transparent;
 						}
-						>span{
+						span{
 							display: inline-block;
 							position: relative;
 							>a{
@@ -383,7 +383,7 @@ $icons: (
 
 							li{
 								position: relative;
-								padding: 5px 0px; 
+								padding: 2px 0px; 
 								&:hover{
 									background: transparent;
 									text-decoration: underline;
@@ -408,7 +408,7 @@ $icons: (
 										padding: 4px 10px;
 										font-size: $subnav-lf-size;
 										font-family: $subnav-lf-family;
-										
+										display: block;
 										@if $subnav-lf-color != "inherit" {
 											color: $subnav-lf-color;
 										} @else {
@@ -423,7 +423,6 @@ $icons: (
 										}
 									}
 									>em{
-										top: 0;
 										padding: 14px 14px;
 										&:after{
 											top: 4px;
