@@ -463,7 +463,7 @@ function priceLoadMainFunction() {
 			"bSort" : false,
 			"bLengthChange" : false,
 			"pageLength" : 5,
-			"sDom" : 'T<"tabHeader"l><"tablesWrap"t><"tabFooter"ip>',
+			"sDom" : 'T<"tabHeader"l><"tablesWrap"t><"tabFooter"<"row" <"col-sm-6"i><"col-sm-6"p>>>',
 			"dom" : '<"top"i>rt<"bottom"flp><"clear">',
 			"language" : {
 				"search" : "_INPUT_",
