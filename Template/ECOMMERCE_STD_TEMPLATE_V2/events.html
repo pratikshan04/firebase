@@ -42,12 +42,16 @@
 					<div class="cimm_eventsListContainer clearAfter">
 						<h6><a href="eventDetailsUnit.action?eventID=$category.id">$category.title</a></h6>
 						<div class="eventShortDesp">
+						
 						#if($category.description.length() > 0)
-							#if($category.description.length() > 200)
-							#set($description = $category.description.substring(0, 199))
-							$description.substring(0, $math.min($description.length(),$description.lastIndexOf(" ")))... <a class="red" href="eventDetailsUnit.action?eventID=$category.id">Read More</a>
+							#set($content = $category.description)
+							#set ($index = $content.indexOf('/'))
+							#set ($val= $content.substring(0, $index))			
+							#if($val.length() > 200)
+							#set($description = $val.substring(0 , 199))
+						    $description.substring(0, $math.min($description.length(),$description.lastIndexOf("")))...  <a class="red" href="eventDetailsUnit.action?eventID=$category.id">Read More</a>
 							#else
-							$category.description
+							$category.description 
 							#end
 						#end
 						<span class='mRight-3'><strong>Category: </strong>$category.eventCategory</span>
