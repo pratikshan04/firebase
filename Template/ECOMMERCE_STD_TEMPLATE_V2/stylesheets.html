@@ -1,4 +1,6 @@
-<link rel="shortcut icon" href="$!cdnUrl$!webThemes/$siteName/images/favicon.ico">
+<link rel="shortcut icon" href="$!hostName$!webThemes/$siteName/images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="$!hostName$!webThemes/$siteName/images/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="$!hostName$!webThemes/$siteName/images/favicon.ico" />
 ##if($LayoutName=="CMSStaticPageList" || $LayoutName=="CMSStaticPage" || $LayoutName=="CMSFormList" || $LayoutName=="CMSFormEdit" || $LayoutName=="CMSBannerEdit" || $LayoutName=="CMSBannerList")
 #parse("font-awesomeV5.html")
 ##else
@@ -26,7 +28,7 @@
 #elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
-<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?v=$!session.getLastAccessedTime()" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
 <style id="cssSelector">.demo{color:red;}</style> 
 #if($LayoutName=="QuickOrderStdPage")
 <link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
