@@ -28,7 +28,7 @@
 #elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
-<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?v=$!session.getLastAccessedTime()" media="all" />
 <style id="cssSelector">.demo{color:red;}</style> 
 #if($LayoutName=="QuickOrderStdPage")
 <link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
