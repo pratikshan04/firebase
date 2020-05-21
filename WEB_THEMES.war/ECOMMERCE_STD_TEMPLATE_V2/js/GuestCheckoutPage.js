@@ -659,6 +659,7 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 			wizard:true,
 			transitionEffect:'fade',
 			disableAllSteps: true,
+			accordion:true,
 			onLeaveStep:guestCheckoutWizard.leaveAStepCallback,
 			onShowStep:guestCheckoutWizard.showAStepCallback,
 			FinishLabel:'submit Order',
