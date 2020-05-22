@@ -41,7 +41,10 @@
 				<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
 				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 			</tr>
-			#if($countOrderList == 5) #break #end #end #end
+			#if($countOrderList == 5) #break #end #end 
+			#else
+        		<td colspan=7 class="text-center">$!locale.get('product.label.noDataAvailable')</td>
+			#end
 		</tbody>
 	</table>
 	#if($orderList.size() > 5)
