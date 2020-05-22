@@ -370,7 +370,8 @@ function standardCheckout(){
 							if(typeof userLogin!="undefined" && userLogin=="true"){
 								$("#updateCartForm").attr("action","checkout.action");
 							}else{
-								$("#updateCartForm").attr("action","Login");
+								//$("#updateCartForm").attr("action","Login");
+								  $("#updateCartForm").attr("action","guestcheckout.action");
 							}
 						}
 						$("#updateCartForm").submit();

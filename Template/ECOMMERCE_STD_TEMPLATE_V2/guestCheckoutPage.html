@@ -1,6 +1,6 @@
 #set( $shipViaListTemp = $session.getAttribute("customerShipViaList"))
 ##set( $shipViaListTemp = $session.getAttribute("shipViaList")) ## Load from entity inquiry for Eclipse Direct ERP 
-	<div id="wizardGuestCheckout" class=multiTab>
+	<div id="wizardGuestCheckout" class="multiTab">
 		<ul class="multiTabHeading clearAfter">
 			<li><a href="#step-1"><span class="stepDesc">$!locale.get("product.heading.billingAddress")</span></a></li>
 			<li><a href="#step-2"><span class="stepDesc">$!locale.get("product.heading.shippingAddress")</span></a></li>
@@ -175,33 +175,7 @@
 		                       	</div>
 							</div>
 							</div>
-						</div>
-						<!-- Shipping Address -->
-					</div>
-					<div id="step-3">
-						<div class="cimm_formContent" id="guestOrderDetails">
 							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<div class="form-group">
-										<label>$!locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
-										<input type="hidden"  id="shipToCountry" name="shipToCountry"  value=""/>
-										<input type="text" name="orderedBy" id="orderedBy" value="" class="form-control"/> 
-									</div>									
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<div class="form-group">
-										<label>$!locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
-										<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control"/>
-									</div> 
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<div class="form-group">
-										<label>$!locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
-										<input type="text" id="reqDate" name="reqDate" class="datePicIcon"  readonly class="form-control"/>
-									</div>
-								</div>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<div class="form-group">
 									<label>$!locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
@@ -216,30 +190,99 @@
 									</select> 
 									</div> 
 								</div>
+								#if($!CommonDBQuerySystemParameter.get("IS_DISCOUNT_COUPONS_ENABLED") == "Y")
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>$locale.get("form.label.coupon")</label>
+										<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
+									</div>
+								</div>
+								#end
+							</div>
+						</div>
+						<!-- Shipping Address -->
+						<input type="hidden" name="overrideShip" id="overrideShip" value="Y"/>
+					</div>
+					<div id="step-3">
+						<div class="cimm_formContent" id="guestOrderDetails">
+						<!-- <div id="paymentOptBlock" class="multiTab">
+									<ul class="multiTabHeading2 clearAfter">
+										#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
+										<li><a href="#checkoutPO" data-type="checkoutWithPo"><span class="stepDesc">By PO#</span></a></li>
+										#end
+										<li><a href="#creditCard" data-type="checkoutWithCreditCard"><span class="stepDesc">$locale.get("product.heading.creditCardDetails")</span></a></li>
+									</ul>
+									<div class="multiTabContent2">
+										<div id="checkoutPO">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label id="chkMandatory">$locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
+														<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.purchaseordernumber')" /> 
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="creditCard"></div>
+									</div>
+								</div>	 -->
+							<div class="row">
+								<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
+											<input type="text" name="orderedBy" id="orderedBy" value="$!orderedBy" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.orderby')" /> 
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.requireddate')"/>
+										</div>
+									</div>
 							</div>
 							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<div class="form-group">
-										<label>$!locale.get("form.label.shippingInstructions") </label>
-										<textarea id="shippingInstruction" name="shippingInstruction" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
+								<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.shippingInstructions") </label>
+											<textarea cols="35" rows="5" id="shippingInstruction" name="shippingInstruction" class="form-control">$!session.getAttribute("orderNotes")</textarea>
+										</div>
 									</div>
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<div class="form-group">
-									<label>$!locale.get("form.label.orderNote") </label>
-									<textarea name="orderNotes" id="orderNotes" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
-									<input type="hidden" id="taxInfoId" value='$taxId'/>
-									<input type="hidden" name="guestRegistrationFlag" id="guestRegistrationFlag" value='N'/>
-									<input type="hidden" name="guestRegistrationErrorMessage" id="guestRegistrationErrorMessage" value=""/>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.orderNote") </label>
+											<textarea name="orderNotes" id="orderNotes" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
+										</div>
 									</div>
-								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+										<!-- <div class="form-group">
+											<label>$locale.get("product.label.ordrStatus") </label>
+											<select name="orderStatus" id="orderStatus" class="form-control selectpicker">
+												<option value=" "> - Select - </option> 
+								             	#foreach($orderStatus in $orderStatusList)
+													<option value="$!orderStatus.orderStatusCode"> $!orderStatus.orderStatus </option> 
+												#end
+											</select>
+										</div> -->
+									</div>
+								 <div class="col-md-6">
+										<input type="hidden" name="orderStatus" id="orderStatus" value="$!orderStatus.orderStatus"/>
+										<input type="hidden" name="orderingType" value="SO"/>
+										#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
+										<input type="hidden" name="orderType" id="orderType" value="checkoutWithPo"/>
+										#else
+										<input type="hidden" name="orderType" id="orderType" value="checkoutWithCreditCard"/>
+										#end
+									</div> 
 							</div>					
 						</div>
 					    <!-- Order Info  End -->
 					    
 					</div>
-					<div id="step-4" id="orderItemDetails">
-						<!-- Confirm Order Section -->	
+					
+					<!-- <div id="step-4" id="orderItemDetails">
+						Confirm Order Section	
 							<div id="confirmOrderPageDiv" style="width: 100%;">
 								<div class="row">
 									<center>
@@ -249,8 +292,118 @@
 									</center>
 								</div>
 							</div>
-							<!-- Confirm Order Section -->	
-					</div>
+							Confirm Order Section	
+					</div> -->
 			</div>
 			<!-- </form> -->
 	</div>
+		<div class="col-md-4 col-sm-4 col-xs-12">
+		#if($productListData.size()>0)
+			<div class="orderSummaryWrap">
+				<h3 class="pull-left">$!locale.get("product.label.orderSummary")</h3>
+				<a class="pull-right" href="$!locale.get('website.url.ShoppingCart')">$!locale.get("product.button.editCart")</a>
+				<div class="clear"></div>
+				<div id="confirmOrderPageDiv">
+					<table class="table cimm_siteTable display rwd-table" id="cartWrap">
+			            <thead>
+			                <tr>
+			                    <th>$!locale.get("header.label.items")</th>
+			                    <th>$!locale.get("product.label.quantity")</th>
+			                    <th>$!locale.get("product.label.price")</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                #foreach($itemData in $productListData)
+			                #set($itemTitle= $!itemData.shortDesc) #set($savedCartItemId = $!itemData.itemId)
+			                <tr itemscope itemtype="http://schema.org/Product">
+			                    <td class="alignLeft" data-th="$!locale.get('product.label.description')">
+			                    <ul>
+									<li itemprop="name">
+										<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
+									</li>
+									<li>
+					                 	<p itemprop="description">$!itemData.shortDesc</p>
+					                	<div id="minErr_$!itemData.itemPriceId"></div>
+									</li>
+									<li>
+										<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
+										#if($itemData.manufacturerPartNumber)
+										<p itemprop="mpn"><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>
+										#end
+									</li>
+									#if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
+				                    <li>
+				                        <strong>$!locale.get("product.label.cpn"): </strong>
+				                        #set($seperator = "")
+				                        #set($partList = "")
+				                           #foreach($!customerPart in $!itemData.customerPartNumberList)
+				                               #set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end
+				                               #if($customerPart.partNumber)$!customerPart.partNumber#end")
+				                               	#set($seperator = ",")
+				                          		#end
+				                       	$!partList
+				                   	</li>
+					                #end
+									 #set($leadTime = "N")
+									#set($available = "N")
+									#set($allBranch = $!itemData.branchAvail)
+									#foreach($!eachBranch in $!allBranch)
+									#if($eachBranch.branchID==$!session.getAttribute("shipBranchId"))
+										#if($eachBranch.branchAvailability=="0")
+											#if($eachBranch.earliestMoreDays>0)
+												#set($leadTime = $!eachBranch.earliestMoreDays)
+											#else
+												#set($leadTime = $!eachBranch.plentyDays)
+											#end
+										#else
+											#set($available = $!eachBranch.branchAvailability)
+										#end
+										#break
+									#end
+									#end
+									<li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
+									#if($leadTime!="N")
+										<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
+									#elseif($!available!="N")
+										<strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
+									#end
+									</li>
+								</ul>
+			                   	</td>
+			                    <td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">$!itemData.qty</td>
+			                    <td data-th="$!locale.get('product.label.extPrice')"><strong class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</strong></td>
+			                </tr>
+			                #end
+			            </tbody>
+			        </table>
+			        <div class="cimm_salesBottomStrip cimm_cartSalesBottomStrip clearAfter">
+				        <ul>
+				            <li class="clearAfter">
+				                <span class="priceLabel">$!locale.get("product.label.total")</span>
+				                <span class="priceValue">#if($cartTotal>0)$$!numberTool.format("$numberToolFormat",$cartTotal) #end</span>
+				            </li>
+				        </ul>
+				    </div>
+			    </div>
+			</div>
+		#end
+	</div>
+	<div id="triggerOrderButtonDiv" class="col-md-4 col-sm-4 col-xs-12"></div>
+	<div id="loginModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<form id="modalLoginForm" method="post" data-form="login">
+				<div class="modal-header">
+					  <span class="errMsg" id="errorMsg1"></span>
+			    </div>
+			    <div class="modal-body">
+					<div class="clearAfter">
+						<a class="pull-right btn btn-primary"  href="/Login?type=au">$!locale.get('product.heading.signIn')</a>
+						<a  class="pull-left btn btn-primary" type="button"  data-dismiss="modal">$!locale.get("product.heading.continueAsGuest")</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
