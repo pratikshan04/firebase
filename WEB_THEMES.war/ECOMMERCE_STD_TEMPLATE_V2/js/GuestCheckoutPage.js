@@ -14,7 +14,7 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 	if($.trim(shipAddressCountry) ==""){
 		shipAddressCountry = "US";
 	}
-	$("#stateSelect").attr('disabled',true);
+	//$("#stateSelect").attr('disabled',true);
 	$("#countrySelect").attr('disabled',true);
 	if($('#countrySelect').length> 0){
 		var countrySelect = new initCountry({
@@ -129,12 +129,14 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 		};
 		
 		guestCheckoutWizard.leaveAStepCallback = function(obj,context){
-			var step_num= obj.attr('rel');
+			//var step_num= obj.attr('rel');
+			var step_num= obj.attr('index');
 			return guestCheckoutWizard.validateSteps(step_num,context);
 		};
 		
 		guestCheckoutWizard.showAStepCallback = function(obj){
-			var step_num= obj.attr('rel');
+			//var step_num= obj.attr('rel');
+			var step_num= obj.attr('index');
 			if(step_num==1){
 				hideNotificationDiv();
 				$('#guestBillAddress').show();
@@ -147,43 +149,55 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 				$('#guestShipAddress').show();
 				$('#guestOrderDetails').hide();
 				$('#guestOrderItemDetails').hide();
+				if($('#guestRegistrationFlag').val()!="Y"){
+					block('Please Wait');
+					guestCheckoutWizard.guestUserRegistrationAndSetSession();
+				}
 				triggerText();
 			}else if(step_num==3){
 				hideNotificationDiv();
 				$('#guestOrderDetails').show();
 				$('#guestOrderItemDetails').hide();
-				if($('#guestRegistrationFlag').val()!="Y"){
-					block('Please Wait');
-					guestCheckoutWizard.guestUserRegistrationAndSetSession();
-				}
 				guestCheckoutWizard.setOrderDetailsFromBillingAddress();
 				triggerText();
-			}else if(step_num==4){
+//			}else if(step_num==4){
 				$('#guestOrderItemDetails').show();
 				var str = "";
 				var poNumber = $('#poNumberTxt').val();
-				/*var billingInputs = $('#step-1 :input').serialize();
-				var shippingInputs = $('#step-2 :input').serialize();*/
+				var billingInputs = $('#step-1 :input').serialize();
+				var shippingInputs = $('#step-2 :input').serialize();
 				var orderDetailInputs = $('#step-3 :input').serialize();
+				var shippingSelect;
+				var disabledSelect = $('#step-2 select:disabled, #step-1 select:disabled');
+				$(disabledSelect).attr('disabled', false);
+				var shippingSelect = $(disabledSelect).serialize();
 				
-				/*if(billingInputs!=null && $.trim(billingInputs)!=""){
+				if(billingInputs!=null && $.trim(billingInputs)!=""){
 					str = billingInputs +"&";
 				}
 				if(shippingInputs!=null && $.trim(shippingInputs)!=""){
 					str = str + shippingInputs +"&";			
-				}*/
+				}
 				if(orderDetailInputs!=null && $.trim(orderDetailInputs)!=""){
 					str = str + orderDetailInputs;
 				}
+				if(shippingSelect){
+					str = str +"&"+ shippingSelect;
+				}
+				
 				str = str + "&dt="+new Date();
 				block('Please Wait');
 				enqueue("/guestConfirmOrderSale.action?"+str+"&dt="+new Date(),function(data){
 					if(data!=null && data!=""){
-						$('#confirmOrderPageDiv').html(data);
+						$('#confirmOrderPageDiv').html(data)
 						var value = $('#poNumberTxt').val();
 						if($('#poNumber').length>0){
 						 $('#poNumber').val(value);
 						}
+						if($('#wizFinishButtonId').length>0){
+							$('#wizFinishButtonId').removeClass("buttonDisabled");
+						}
+						$(".buttonNext").removeClass("buttonDisabled");
 						unblock();
 					}else{
 						unblock();
@@ -341,6 +355,10 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 					validation = false;
 				}
 			}
+			if($('#selectedShipViaWL').length>0 && (typeof $('#selectedShipViaWL').val()=="undefined" || $('#selectedShipViaWL').val()==null || $('#selectedShipViaWL').val().trim().length < 1)){
+				errorMessage = errorMessage + locale("guestcheckoutwiz.error.shipvia") + lineBreak;
+				validation = false;
+			}
 			/*if($('#auShipEmail').length>0 && (typeof $('#auShipEmail').val()=="undefined" || $('#auShipEmail').val()==null || $('#auShipEmail').val().trim().length < 1)){
 				errorMessage = errorMessage + locale("guestcheckoutwiz.error.emailaddress") + lineBreak;
 				validation = false;
@@ -376,10 +394,10 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 				errorMessage = errorMessage + locale("guestcheckoutwiz.error.requireddate") + lineBreak;
 				validation = false;
 			}
-			if($('#selectedShipViaWL').length>0 && (typeof $('#selectedShipViaWL').val()=="undefined" || $('#selectedShipViaWL').val()==null || $('#selectedShipViaWL').val().trim().length < 1)){
+/*			if($('#selectedShipViaWL').length>0 && (typeof $('#selectedShipViaWL').val()=="undefined" || $('#selectedShipViaWL').val()==null || $('#selectedShipViaWL').val().trim().length < 1)){
 				errorMessage = errorMessage + locale("guestcheckoutwiz.error.shipvia") + lineBreak;
 				validation = false;
-			}
+			}*/
 			/*if($('#shippingInstruction').length>0 && (typeof $('#shippingInstruction').val()=="undefined" || $('#shippingInstruction').val()==null || $('#shippingInstruction').val().trim().length < 1)){
 				errorMessage = errorMessage + locale("guestcheckoutwiz.error.shippinginstruction") + lineBreak;
 				validation = false;
@@ -396,7 +414,7 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 			var nickName = $.trim($("#nickNameNewID").val());
 			var email = $.trim($("#emailNewID").val());
 			var isValid = 1;
-			if(nickName==""){
+			/*if(nickName==""){
 				errorMessage = errorMessage +"Please Enter Nick Name." + lineBreak;
 				validation = false;
 			}
@@ -411,7 +429,7 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 			if(postalCode==""){
 				errorMessage = errorMessage +"Please Enter Postal Code." + lineBreak;
 				validation = false;
-			}
+			}*/
 			//Card Details Validation
 			
 			if($('#orderedBy').length>0 && typeof $('#orderedBy').val()!="undefined" && $('#guestRegistrationFlag').val()!=null && $('#guestRegistrationFlag').val().trim()=="N"){
