@@ -285,23 +285,22 @@ $icons: (
 @mixin main_nav {
 
     @each $nav_type, $nav_style in $main_nav {
-        $nav_bg: map-get($nav_style, mnav-bg);
-        $lf-family: map-get($nav_style, mnav_lf-family);
-        $lf-size: map-get($nav_style, mnav_lf-size);
-		$lf-color: map-get($nav_style, mnav_lf-color);
+      $nav_bg: map-get($nav_style, mnav-bg);
+      $lf-family: map-get($nav_style, mnav_lf-family);
+      $lf-size: map-get($nav_style, mnav_lf-size);
+		  $lf-color: map-get($nav_style, mnav_lf-color);
 		
-		$lh_bg: map-get($nav_style, mnav_lh-bg);
-		$lh_border: map-get($nav_style, mnav_lh_border);
-		$lfh-color: map-get($nav_style, mnav_lhf-color);
-
-        $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
-		$lf-dividers: map-get($nav_style, mnav_lf-dividers);
+      $lh_bg: map-get($nav_style, mnav_lh-bg);
+      $lh_border: map-get($nav_style, mnav_lh_border);
+      $lfh-color: map-get($nav_style, mnav_lhf-color);
+      $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
+		  $lf-dividers: map-get($nav_style, mnav_lf-dividers);
 		
-        $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
-		$subnav-bg: map-get($nav_style, subnav-bg);  
-		$subnav-lf-size: map-get($nav_style, subnav-lf-size);
-		$subnav-lf-color: map-get($nav_style, subnav-lf-color);
-		$subnav-lf-family: map-get($nav_style, subnav-lf-family);
+      $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
+      $subnav-bg: map-get($nav_style, subnav-bg);  
+      $subnav-lf-size: map-get($nav_style, subnav-lf-size);
+      $subnav-lf-color: map-get($nav_style, subnav-lf-color);
+      $subnav-lf-family: map-get($nav_style, subnav-lf-family);
 
         nav.#{$nav_type}{ 
             background: $nav_bg;
@@ -370,17 +369,15 @@ $icons: (
 								}
 							}
 						}
-                        .dropdown-menu{
-                            background: $subnav-bg;
-                            padding: 10px 0px;
-							min-width: 275px;
-							
-                            ul{
-                                width: 282px;
-                                vertical-align: top;
-								display: inline-block;
-							}
-
+            .dropdown-menu{
+              background: $subnav-bg;
+              padding: 10px 0px;
+              min-width: 275px;
+              ul{
+                width: 282px;
+                vertical-align: top;
+                display: inline-block;
+              }
 							li{
 								position: relative;
 								padding: 2px 0px; 
@@ -443,7 +440,6 @@ $icons: (
 						&:hover{
 							@if($lh_border != false){
 								border-bottom: 2px solid;
-
 								@if $lf-color != "inherit"{
 									border-color: $lf-color;
 								} @else {
@@ -481,7 +477,7 @@ $icons: (
 								}
 							}
 							> .dropdown-menu{
-                                display: block;
+                display: block;
 							}
 						}
 						
@@ -494,11 +490,11 @@ $icons: (
 								}
 							}
 						}
-                    }
-                }
-            }
+          }
         }
-    } 
+      }
+    }
+  } 
 }
 
 /*__________________________________End Main Navigation Mixin ______________________________*/
