@@ -14,7 +14,7 @@ $(document).ready(function() {
 				}
 			}
 		}, 1000);
-		$('#list li a div').live('click', function(e) {
+		$('#list li a div').on('click', function(e) {
 			var $clicked = $(e.target);
 			var id = $($clicked).attr("id");
 			if(id == "viweAll"){

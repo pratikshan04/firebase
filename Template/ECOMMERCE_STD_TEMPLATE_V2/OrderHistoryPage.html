@@ -51,6 +51,12 @@
 		<a class="cimm_inlineButton" href="/OrderHistory">$!locale.get("event.label.viewAll")</a>
 	#end
 #else
+#if($!orderNumber && $orderNumber.contains("<") || $orderNumber.contains(">"))
+	#set($orderNumber = "") 
+#end
+#if($!entityIDType && $entityIDType.contains("<") || $entityIDType.contains(">"))
+	#set($entityIDType = "") 
+#end
 	<div class="row">
 		<div class="col-md-12 cd-sm-12 cd-xs-12">
 			<input type="hidden" id="startDateVal" value="$!startDate"/>

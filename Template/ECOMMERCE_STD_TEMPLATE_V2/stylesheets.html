@@ -20,15 +20,15 @@
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css?$!refreshVersion" media="all" />
 #end
-<!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
-#parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/bootstrap.min.css" /> -->
+##parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/bootstrap.min.css" /> -->
+#parse("bootstrap-3.4.1-min-css.html")
 #set($currentWebTheme = "unilogweb.css")
 #if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ScheduledThemeFileName"))
 #elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
-<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?v=$!session.getLastAccessedTime()" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
 <style id="cssSelector">.demo{color:red;}</style> 
 #if($LayoutName=="QuickOrderStdPage")
 <link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">

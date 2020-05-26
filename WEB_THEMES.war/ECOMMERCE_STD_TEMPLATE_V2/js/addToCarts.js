@@ -209,20 +209,19 @@
 		                    'height': '150px',
 		                    'width': '150px',
 		                    'z-index': '100'
-						})/*.appendTo($("#"+settings.cartCountRefreshId)).animate({
+						}).appendTo($("#"+settings.cartCountRefreshId)).animate({
 							'top': cart.offset().top + 10,
 		                    'left': cart.offset().left + 10,
 		                    'width': 75,
 		                    'height': 75
-						}, 2000);*/
+						}, 2000);
 					imgclone.animate({
 		                'width': 0,
 		                    'height': 0
 		            }, function () {
 		                $(this).detach();
 		            });
-					} 
-						
+					}
 				}
 				var result = s.split("|");
 				var cartHtml = "";

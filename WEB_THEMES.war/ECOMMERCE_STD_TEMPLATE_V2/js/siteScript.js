@@ -2371,7 +2371,7 @@ jQuery(document).bind('click', function (e) {
 	var $clicked = $(e.target);
 	if ($clicked.hasClass("addToCart")) {
 		$clicked.addToCart({
-			flyToCart: "Y",
+			flyToCart: "N",
 			quickCartView: "N",
 			pickupSupport: "Y",
 			functionalBlock: {

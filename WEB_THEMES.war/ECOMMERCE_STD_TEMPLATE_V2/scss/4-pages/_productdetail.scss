@@ -70,7 +70,7 @@
             position: absolute;
             top: 0;
             right: 6px;
-            color: #d5d5d5;
+            color: $gray-lighter;
             font-size: 24px;
 			z-index:12;
         }
@@ -310,8 +310,8 @@
 }
 .review_block {
   margin: 20px 0;
-  background-color: #fafafa;
-  border: 1px solid #efefef;
+  background-color: $gray-lighten;
+  border: 1px solid $border-color;
   padding: 15px;
   border-radius: 3px;
   h3 {
@@ -319,7 +319,7 @@
   }
   > ul {
     > li {
-      border-bottom: 1px solid #efefef;
+      border-bottom: 1px solid $border-color;
       padding: 10px 0px;
       &:nth-last-child(2) {
         border-bottom: 0px;
