@@ -2371,7 +2371,7 @@ jQuery(document).bind('click', function (e) {
 	var $clicked = $(e.target);
 	if ($clicked.hasClass("addToCart")) {
 		$clicked.addToCart({
-			flyToCart: "Y",
+			flyToCart: "N",
 			quickCartView: "N",
 			pickupSupport: "Y",
 			functionalBlock: {
@@ -3089,6 +3089,7 @@ function accordionFooter(status) {
 		})
 		$('.modules').addClass('accordion').find('.toggle_content').slideUp('fast');
 	} else {
+		$(".toggle_content").css("display", "block");
 		$('.footerCol h3').removeClass('active').off().parent().find('.toggle_content').removeAttr('style').slideDown('fast');
 		$('.footerCol h3 em').removeClass(footer_icon_minus).addClass(footer_icon_plus);
 		$('.footerCol').removeClass('accordion');

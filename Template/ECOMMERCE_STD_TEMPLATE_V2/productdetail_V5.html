@@ -31,7 +31,7 @@
 		<div id="detailClone">
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-12 mTop-2">
 						#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 						<div class="cloneImg"> 
 							<img src="$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" width="80" height="80" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
@@ -995,33 +995,31 @@ function LoadRecentViewedItem(){
 	#end
 #end
 #if($reviewList && $!reviewList.size()>0)
-<div id="reviewSection" class="reviewsBlock" itemscope itemtype="http://schema.org/Product">
+<div id="reviewSection" class="review_block" itemscope itemtype="http://schema.org/Product">
 	<p class="hideMe" id="prodName" itemprop="name">$!productTitleForUse</p>
 	<h3 class="cimm_block-title">User Reviews</h3>
 	<ul class="clearAfter" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-	#set($breadCrumbIdx = 1 )
-	#foreach($itemReview in $reviewList)
-	<li class="clearAfter pBottom-3 mBottom-3">
-		<ul class="userReviewWrap">
-			<li class="clearAfter">
-				<span class="voteitReview_$!breadCrumbIdx pull-left"></span>
-				<span class="pull-left">by $!itemReview.userAdded</span>
-				<span class="pull-right"><abbr class="timeago" title="$!itemReview.date T$!itemReview.reviewTime"></abbr></span>
-			</li>
-			<li>
-				<h5>$!itemReview.title</h5>
-			</li>
-			<li>
-				$!itemReview.comments
-				<p class="hideMe"><span itemprop="ratingValue">$!itemReview.rating</span></p>
-				<input type="hidden" id="Review_$!breadCrumbIdx" name="voteit3" value='$!itemReview.rating'/>
-			</li>
-		</ul>
-	</li>
-	#set($breadCrumbIdx = $!breadCrumbIdx+1)
-	#end
-	#set($breadCrumbIdx = $!breadCrumbIdx - 1)
-	<li class="hideMe" itemprop="reviewCount">$!breadCrumbIdx</li>
+		#set($breadCrumbIdx = 1 )
+		#foreach($itemReview in $reviewList)
+		<li class="clearAfter pBottom-3 mBottom-3">
+			<div class="row userReviewWrap">
+				<div class="col-md-3">
+					<p class="voteitReview_$!breadCrumbIdx"></p><br />
+					<p>$!itemReview.userAdded</p><br />
+					<p><abbr class="timeago" title="$!itemReview.date T$!itemReview.reviewTime"></abbr></p>
+				</div>
+				<div class="col-md-9">
+					<p class="hideMe"><span itemprop="ratingValue">$!itemReview.rating</span></p>
+					<input type="hidden" id="Review_$!breadCrumbIdx" name="voteit3" value='$!itemReview.rating'/>
+					<h5>$!itemReview.title</h5>
+					<p>$!itemReview.comments</p>
+				</div>
+			</div>
+		</li>
+		#set($breadCrumbIdx = $!breadCrumbIdx+1)
+		#end
+		#set($breadCrumbIdx = $!breadCrumbIdx - 1)
+		<li class="hideMe" itemprop="reviewCount">$!breadCrumbIdx</li>
 	</ul>
 </div>  
 #end

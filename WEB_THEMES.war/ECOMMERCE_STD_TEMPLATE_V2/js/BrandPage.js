@@ -102,14 +102,6 @@ function initMasonry(){
 		});
 	}
 }
-/*var fixHeadHeight = $(".cimm_brandAtoZletters").height();
-var stickyHeadHeight = $(".cimm_header").height() + $(".navbar").height();
-if($( window ).width() > 768) {
-	var fixBlockHeadHeight = fixHeadHeight + stickyHeadHeight;
-}
-else {
-	var fixBlockHeadHeight = fixHeadHeight;
-}*/
 
 var fixHeight = $(".cimm_brandAtoZletters").height();
 var headerHeight = 0;
@@ -119,7 +111,6 @@ if ($("#enableStickyHeader").val() == "Y") {
 if($( window ).width() > 768) {
     var fixHeadHeight = fixHeight + headerHeight;
 }
-
 
 function brandListScroll(val){
 	$('html, body').animate({
@@ -142,12 +133,12 @@ $(window).scroll(function() {
     }
 });
 
-
 function brandList(val){
 	var siteName = $("#siteName").val();
 	$("#displayBrand").html("<img class='log-shopBrand-loader' src='"+assets+"/WEB_THEMES/"+siteName+"/images/brandloading.gif' />");
 	enqueue('BrandListPage.action?idx='+val+'&dt='+new Date(), processBrand);
 }
+
 function processBrand(val){
 	var result = "";
 	var strAry = val.split("~");
