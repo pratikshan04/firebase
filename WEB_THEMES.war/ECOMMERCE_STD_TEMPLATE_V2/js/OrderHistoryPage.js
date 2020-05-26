@@ -13,6 +13,7 @@ var table = $('#openOrderTable').DataTable({
 var poList = table.column(1).data().unique();
 
 $('#orderPoSearchBtn').on('click', function () {
+	unusualCode = 0;
 	var searchTerm = $('#orderPoSearch').val().toLowerCase(), unusualCodeErrorStr = $("#dataErrors").attr('data-unusualError');
 	if(validateStr(searchTerm)){
 		unusualCode++;

@@ -221,8 +221,7 @@
 		            }, function () {
 		                $(this).detach();
 		            });
-					} 
-						
+					}
 				}
 				var result = s.split("|");
 				var cartHtml = "";
