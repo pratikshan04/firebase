@@ -2,12 +2,12 @@ var priceLoading = {};
 function priceLoadMainFunction() {
 	var loadPrice = true;
 	if($("#userLogin").length>0 && $("#userLogin").val()=="false" && $('#enablePriceBeforeLogin').length>0 && $('#enablePriceBeforeLogin').val()!="Y") {
-		loadPrice = false;
+		loadPrice = true;
 	}
 	if(loadPrice){
 		priceLoading.beginPriceLoading();
 	}else{
-		priceLoading.productModeCustomFunc();
+		cleanLoading();
 	}	
 }
 /*some comments*/
