@@ -75,7 +75,7 @@
 	
 	<!-- Shipping Address -->  
 	<input type="hidden" name="shipEntityId" value="$!shipEntityId"/>
-	<input type="hidden" name="overrideShip" value='$session.getAttribute("overrideShipAddress")'/>
+	<input type="hidden" name="overrideShip" value='$!session.getAttribute("overrideShipAddress")'/>
 	<input type="hidden" name="defaultShipToId" id="defaultShipToId" value="$!defaultShipToId"/>
 	<input type="hidden" name="address1" value="$!address1"/> 
 	<input type="hidden" name="address2" value="$!address2"/> 
@@ -162,7 +162,7 @@
 			
 			<!-- Shipping Address -->  
 			<input type="hidden" name="shipEntityId" value="$!shipEntityId"/>
-			<input type="hidden" name="overrideShip" value='$session.getAttribute("overrideShipAddress")'/>
+			<input type="hidden" name="overrideShip" value='$!session.getAttribute("overrideShipAddress")'/>
 			<input type="hidden" name="address1" value="$!address1"/> 
 			<input type="hidden" name="address2" value="$!address2"/> 
 			<input type="hidden" name="city" value="$!city"/> 

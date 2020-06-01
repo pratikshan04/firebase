@@ -44,7 +44,7 @@
 			</div>
 			<div class="form-group">
 				<label for="auEmail"> $!locale.get("form.guestcheckout.emailaddress")</label>
-				<input type="text" name="auEmail" id="auEmail" value="" onkeypress="return guestCheckoutWizard.runScript(event);" class="form-control" placeholder="$!locale.get('form.guestcheckout.emailaddress')"/>
+				<input type="text" name="auEmail" id="auEmail" value="" onkeypress="runScript(event); return false;" class="form-control" placeholder="$!locale.get('form.guestcheckout.emailaddress')"/>
 			</div>
 			<div class="form-group">
 				<input class="center button" type="button" id="guestCheckoutContinue" value='Continue' onclick="return guestCheckoutWizard.checkUserNameExist();"/>

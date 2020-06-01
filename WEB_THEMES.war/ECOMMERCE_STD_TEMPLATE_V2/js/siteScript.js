@@ -3060,6 +3060,8 @@ function runScript(e) {
 			$('#nSearchBtn').click();
 		} else if (e.target.id == "popkeyword") {
 			$('#popLoginBtn').click();
+		} else if (e.target.id == "auEmail") {
+			$('#guestCheckoutContinue').click();
 		}
 		return false;
 	}

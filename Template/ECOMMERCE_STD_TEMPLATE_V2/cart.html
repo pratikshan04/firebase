@@ -39,10 +39,9 @@
 			#else
 				<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
 			#end 
-			#else
+		#else
 			#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-				<!-- <a class="btn btn-lg btn-primary marginX-3" href="/Login?type=au">$!locale.get("product.heading.checkout")</a> -->
-				  <a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+				<a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 			#else
 				<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
 			#end
@@ -287,8 +286,7 @@
 					#end 
 	            #else
 	            	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-	            	 <!-- <a class="btn btn-lg btn-primary marginX-3" href="/Login?type=au">$!locale.get("product.heading.checkout")</a> -->
-				     <a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+	            	<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 	            	#else
 	            	<a class="btn btn-primary btn-lg" href="/Login">$!locale.get("product.heading.checkout")</a>
 	            	#end

@@ -176,7 +176,7 @@
 		<div class="cimm_formTbx"><input type="password" value="" /></div>-->
 	    <div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
-				<button type="button" id="addPcard" class="button" onclick="return checkoutWizard.validatePcardFormWithNewIds();">$locale.get("product.heading.addNewCreditCard")</button><!-- onclick="return validatePcardForm();" -->
+				<button type="button" id="addPcard" class="button" onclick="return validatePcardFormWithNewIds();">$locale.get("product.heading.addNewCreditCard")</button><!-- onclick="return validatePcardForm();" -->
 			</div>
 		</div>
 	</div>
@@ -197,7 +197,7 @@
 		
 		<!-- Shipping Address -->  
 		<input type="hidden" name="shipEntityId" value="$!shipEntityId"/>
-		<input type="hidden" name="overrideShip" value='$session.getAttribute("overrideShipAddress")'/>
+		<input type="hidden" name="overrideShip" value='$!session.getAttribute("overrideShipAddress")'/>
 		<input type="hidden" name="defaultShipToId" id="defaultShipToId" value="$!defaultShipToId"/>
 		<input type="hidden" name="address1" value="$!shipAddress.address1"/> 
 		<input type="hidden" name="address2" value="$!shipAddress.address2"/> 
