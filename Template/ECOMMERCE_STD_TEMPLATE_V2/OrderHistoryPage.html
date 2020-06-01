@@ -71,17 +71,17 @@
 				<div class="row">
 				<div class="col-md-4 form-inline">
 						<input type="text" id="orderPoSearch" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('label.order.searchbar')" >
-						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md" value="Search"/>
+						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md order_btn" value="Search"/>
 					</div>
-					<div class="col-md-8 form-inline text-right">
-					<label for="datepicker_from" class="mRight-2">From </label>
+					<div class="col-md-8 form-inline text-right mTop-2">
+					<label for="datepicker_from" class="mRight-2 date_from">From </label>
 						<div class='input-group date'>
 							<input type="text" name="startDate" id="startDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
 						<!-- 	<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span> -->
 						</div>
-						<label class="mRight-2">$!locale.get("product.label.to")</label>
+						<label class="mRight-2 date_from">$!locale.get("product.label.to")</label>
 						<div class='input-group date'>
 							<input type="text" name="endDate" id="endDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
 						<!-- 	<span class="input-group-addon">
@@ -89,8 +89,8 @@
 							</span> -->
 						</div>
 						   <div class="input-group form-group clearform">
-							    <button type="button" class="btn btn-tertiary btn-md mRight-2" id="searchBtn" data-hasPassCode="N" data-id="applybutton" data-value="#if($entityIDType) $entityIDType.replace('','')To #else ShipTo #end" data-invoicNum="$!orderList.orderNum" onclick="processForm(this)">Apply</button>
-							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md">Clear</button>
+							    <button type="button" class="btn btn-tertiary btn-md mRight-2 order_btn" id="searchBtn" data-hasPassCode="N" data-id="applybutton" data-value="#if($entityIDType) $entityIDType.replace('','')To #else ShipTo #end" data-invoicNum="$!orderList.orderNum" onclick="processForm(this)">Apply</button>
+							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md order_btn">Clear</button>
 						    </div>
 					</div>
 					<!-- <div class="col-md-4">
