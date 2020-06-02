@@ -7,7 +7,7 @@ function priceLoadMainFunction() {
 	if(loadPrice){
 		priceLoading.beginPriceLoading();
 	}else{
-		priceLoading.productModeCustomFunc();
+		cleanLoading();
 	}	
 }
 /*some comments*/
@@ -104,6 +104,11 @@ function priceLoadMainFunction() {
 			
 			if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
 				document.getElementById('uomValue_' + product.partNumber).value = uom;
+			}
+			
+			if (document.getElementById('uomSpan_' + product.partNumber) && document.getElementById('uomSpan_' + product.partNumber) != null && document.getElementById('uomSpan_' + product.partNumber) != undefined) {
+				document.getElementById('uomSpan_' + product.partNumber).innerHTML = uom;
+				pricestr = "$" + Number(price).toFixed(pricePrecision);
 			}
 		}
 		return pricestr;
