@@ -372,7 +372,7 @@
 							<a data-select="itemAnchor" href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 								<span data-select="imageSpanToSetID">
 									#set($itemImg = $!item.imageName.replace('%26','&amp;') )
-									#if($!itemData.imageName.toUpperCase().contains("HTTP"))
+									#if($itemImg.toUpperCase().contains("HTTP"))
 										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>
 									#else
 										<img itemprop="image" data-select="imageSpanToSetSrc" src="$!itemImage$!itemImg.replace('&','&amp;')" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!item.brandName $!item.manufacturerPartNumber"/>

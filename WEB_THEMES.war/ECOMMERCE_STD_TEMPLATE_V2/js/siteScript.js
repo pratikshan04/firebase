@@ -3,7 +3,7 @@ var specialKeys = new Array();
 var unusualCode = 0;
 
 function validateStr(str) {
-	if (str.toLowerCase().indexOf("<scrip") > -1 || str.toLowerCase().indexOf("<a hre") > -1) {
+	if (str.indexOf('<') >-1 || str.indexOf('>') >-1 || str.indexOf('=') >-1 || str.indexOf('(') >-1 || str.indexOf(')') >-1) {
 		return true;
 	}
 }
@@ -42,6 +42,35 @@ function IsNumeric(e) {
 		return false;
 	}
 	return true;
+}
+function IsDecimal(evt, _this) {
+	var $txtBox = $(_this);
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+		return false;
+	else {
+		var len = $txtBox.val().length;
+		var index = $txtBox.val().indexOf('.');
+		if (index > 0 && charCode == 46) {
+			return false;
+		}
+		if (index > 0) {
+			var charAfterdot = (len + 1) - index;
+			if (charAfterdot > 3) {
+				return false;
+			}
+		}
+	}
+	return $txtBox;
+}
+function char_count(str, letter){
+	var letter_Count = 0;
+	for (var position = 0; position < str.length; position++){
+		if (str.charAt(position) == letter){
+			letter_Count += 1;
+		}
+	}
+	return letter_Count;
 }
 function isAlfaNumericOnly(val) {
 	var Exp = /^[A-Za-z0-9]+$/i;
@@ -527,6 +556,23 @@ function performSearch() {
 	var keywordText = $.trim($("#keyWordTxtMulti").val());
 	var filteredAttr = $.trim($("#attrFilterList").text());
 	var conti = true;
+	var unusualCodeErrorStr = $("#dataErrors").attr('data-unusualerror');
+	unusualCode = 0;
+	
+	if(s != "" && nSearch  != undefined ){
+		if(validateStr($('#txtSearch').val()) ){
+			unusualCode++;
+			}else{
+			if(validateStr($('#narrowText').val()) ){
+				unusualCode++;		
+			}
+		}
+	}else if(nSearch == undefined){
+		if(validateStr($('#txtSearch').val()) ){
+			unusualCode++;
+		}
+	}
+	
 	if (s != undefined && s != "") {
 		s = $.trim(s);
 		s = s.replace(/</g, "<&nbsp;");
@@ -557,8 +603,8 @@ function performSearch() {
 	if (s == "" || s == "Search" || s.toLowerCase().indexOf("search") > -1 || s.toLowerCase().indexOf("enter keyword") > -1 || s.toLowerCase().indexOf("enter%20keyword") > -1 || $.trim(s) == "Product Search" || $.trim(s) == "Product%20Search" || $.trim(s.toUpperCase()) == "ENTER KEYWORD OR PART NUMBER" || $.trim(s.toUpperCase()) == "ENTER%20KEYWORD%20OR%20PART%20NUMBER" || $.trim(s.toUpperCase()) == "SEARCH") {
 		bootAlert("small", "error", "Error", "Enter Search Keyword.");
 		return false;
-	} else if (s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") > -1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") > -1) {
-		bootAlert("medium", "error", "Error", "ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
+	} else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	} else if (typeof keywordText != "undefined" && keywordText != "") {
 		var conti = false;
@@ -2325,7 +2371,7 @@ jQuery(document).bind('click', function (e) {
 	var $clicked = $(e.target);
 	if ($clicked.hasClass("addToCart")) {
 		$clicked.addToCart({
-			flyToCart: "Y",
+			flyToCart: "N",
 			quickCartView: "N",
 			pickupSupport: "Y",
 			functionalBlock: {
@@ -3043,6 +3089,7 @@ function accordionFooter(status) {
 		})
 		$('.modules').addClass('accordion').find('.toggle_content').slideUp('fast');
 	} else {
+		$(".toggle_content").css("display", "block");
 		$('.footerCol h3').removeClass('active').off().parent().find('.toggle_content').removeAttr('style').slideDown('fast');
 		$('.footerCol h3 em').removeClass(footer_icon_minus).addClass(footer_icon_plus);
 		$('.footerCol').removeClass('accordion');
@@ -3971,6 +4018,45 @@ function callCSPConfigurator(obj) {
 		window.location.href = "cspConfiguratorPage.action?" + paramString;
 	}
 }
+function warningPopUp(id){
+	var ad = $(id).attr("data-id");
+	$("#"+ad).toggle();
+}
+$(".warningPopExit").on("click",function(){
+	var exitId = $(this).attr("data-exitid");
+	$("#"+exitId).hide();
+}
+);
+jQuery.fn.clickOff = function(callback, selfDestroy) {
+	var clicked = false;
+	var parent = this;
+	var destroy = selfDestroy || true;
+	parent.click(function() {
+		clicked = true;
+	});
+	$(document).click(function(event) {
+		if (!clicked) {
+			callback(parent, event);
+		}
+		if (destroy) {
+			//parent.clickOff = function() {};
+			//parent.off("click");
+			//$(document).off("click");
+			//parent.off("clickOff");
+		};
+		clicked = false;
+	});
+};
+$(".warning_MSG").click(function() {
+	//alert('clickOn');
+}
+);
+$(".warning_MSG").clickOff(function() {
+	//alert('clickOff');
+	$("div[id^='warning_']").hide();
+}
+);
+
 function validateCaptcha(obj) {
 	var email = $(obj).data("emailid");
 	var authCode = $(obj).data("authcode");

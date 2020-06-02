@@ -91,7 +91,7 @@ function getContactEntityAddress(obj){
 				
 				if(msgArr[3]!=null && msgArr[3]!="null"){
 					var stateId = document.getElementById('countrySelectShip');
-					var country = msgArr[5] ? msgArr[5] : 'US' ;
+					var country = msgArr[5] ? msgArr[5] : 'US';
 					populateStatesOnchange(country, stateId, msgArr[3], true);
 					$("#stateSelectShip option[value='"+msgArr[3]+"']").attr('selected','selected');
 				}else{

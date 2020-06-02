@@ -790,11 +790,12 @@ var BulkAction = {};
 			} else if (qty < 1) {
 				ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
-			}
-			if (qty < minOrderQty) {
+			}			
+
+			if (qty < parseInt(minOrderQty)) {
 				ErrorMsg = "Min Order Quantity is " + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
-			} else if (qty > minOrderQty) {
+			} else if (qty > parseInt(minOrderQty)) {
 				var qtyDiff = qty - minOrderQty;
 				if (qtyDiff % quantityInterval != 0) {
 					ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");

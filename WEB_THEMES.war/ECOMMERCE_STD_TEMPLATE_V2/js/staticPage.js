@@ -1,11 +1,9 @@
 function jssorSliderFunction() {
 	jQuery("div[id$='_container']").each(function(){
 		initJssorSlides(jQuery(this).attr("id"))
-		console.log("generated : " + jQuery(this).attr("id"));
 	});
 }
 var refreshBanner = function(bannerId,index){
-	console.log("bannerId : " + bannerId + "-" + index);
 	jQuery.getJSON("/bannerApi.action?bannerListId="+bannerId+"&reload=false", function(data) {
 		if(data && data.hasOwnProperty('bannerTemplate')){
 			var bannerData = "";
@@ -33,7 +31,6 @@ var refreshBanner = function(bannerId,index){
 				var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
 				var wrapperId = jQuery(this).attr("id");
 				var bannerType = jQuery(this).data("bannertype");
-				console.log("Wrapper id :"+sliderId);
 				bannerData = data.bannerTemplate.replace("slidercontainer",sliderId);
 				jQuery(this).html(bannerData);
 				

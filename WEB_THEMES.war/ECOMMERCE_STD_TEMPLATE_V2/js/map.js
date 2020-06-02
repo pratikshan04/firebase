@@ -552,6 +552,8 @@ function directionsEventFunction(idVal) {
         }
     };
     var isMobile = window.matchMedia("only screen and (max-width: 1024px)");
+    Lat = $(idVal).attr('Lat');
+    Lon = $(idVal).attr('Long');
     if (isMobile.matches) {
         var fulladdress;
         var locIn = $(idVal).parent().parent().find('.locationHead').text();
@@ -590,8 +592,6 @@ function directionsEventFunction(idVal) {
         var fromName = $(idVal).attr('id');
         document.getElementById("directions-panel").style.display = "block";
         document.getElementById("directions-panel").setAttribute("class", "crpanel");
-        Lat = $(idVal).attr('Lat');
-        Lon = $(idVal).attr('Long');
         document.getElementById("directions-to").value = fromName;
         document.getElementById("directions-to").name = Lat + "/" + Lon;
     }
