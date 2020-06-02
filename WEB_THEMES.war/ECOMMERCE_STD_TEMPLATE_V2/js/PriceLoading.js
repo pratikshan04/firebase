@@ -2,7 +2,7 @@ var priceLoading = {};
 function priceLoadMainFunction() {
 	var loadPrice = true;
 	if($("#userLogin").length>0 && $("#userLogin").val()=="false" && $('#enablePriceBeforeLogin').length>0 && $('#enablePriceBeforeLogin').val()!="Y") {
-		loadPrice = true;
+		loadPrice = false;
 	}
 	if(loadPrice){
 		priceLoading.beginPriceLoading();
@@ -104,6 +104,11 @@ function priceLoadMainFunction() {
 			
 			if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
 				document.getElementById('uomValue_' + product.partNumber).value = uom;
+			}
+			
+			if (document.getElementById('uomSpan_' + product.partNumber) && document.getElementById('uomSpan_' + product.partNumber) != null && document.getElementById('uomSpan_' + product.partNumber) != undefined) {
+				document.getElementById('uomSpan_' + product.partNumber).innerHTML = uom;
+				pricestr = "$" + Number(price).toFixed(pricePrecision);
 			}
 		}
 		return pricestr;
