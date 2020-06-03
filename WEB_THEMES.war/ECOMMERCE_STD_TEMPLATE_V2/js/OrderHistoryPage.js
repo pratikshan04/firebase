@@ -49,14 +49,18 @@ $.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
 		year -= 1;
 	}
 	var oneMonthAgo = new Date(year, month, today.getDate());
+	
+	var todayDate = today.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' });
+	var oneMonthDate = oneMonthAgo.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' });
+	
 	if($startDate!="")
 		$('#startDate').val($startDate);
 	else
-		$('#startDate').val(jQuery.datepicker.formatDate('mm/dd/yy', oneMonthAgo));
+		$('#startDate').val(oneMonthDate);
 	if($endDate!="")
 		$('#endDate').val($endDate);
 	else
-		$('#endDate').val(jQuery.datepicker.formatDate('mm/dd/yy', today));
+		$('#endDate').val(todayDate);
 	
 	$('#startDate').datepicker({
 		autoclose: true

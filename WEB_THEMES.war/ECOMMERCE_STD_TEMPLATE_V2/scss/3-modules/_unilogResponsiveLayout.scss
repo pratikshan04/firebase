@@ -79,7 +79,7 @@ $breakpoint-mobileView: 480px;
     }
     width: 300px;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     bottom: 0;
     top: 0;
     left: -450px;
@@ -396,6 +396,15 @@ $breakpoint-mobileView: 480px;
     /*top: 80px;
 		width: 100%;*/
   }
+  .cimm_brandAtoZletters.fixIt{
+    left: 0;
+  }
+  .dropdownFixedWidth{
+    max-width: 220px;
+  }
+  .orderSummaryWrap {
+    margin-top: 30px;
+  }
   .cimm_itemdetail
     .cimm_itemdetail-imgcontainer.verticalThumblist
     .cimm_itemdetail_thumblist
@@ -593,6 +602,21 @@ $breakpoint-mobileView: 480px;
     ul {
       width: 100%;
     }
+  }
+  .custom_lineform{
+    margin-bottom: 14px;
+    text-align: left;
+    &.form-inline {
+      .form-group, .form-control {
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+        width: auto;
+      }
+    }
+  }
+  .grpNameEditWrap{
+    text-align: left;
   }
   .compareTableWrap .pushbtnGroup li {
     text-align: right;
@@ -807,7 +831,7 @@ $breakpoint-mobileView: 480px;
     font-size: 10px;
     padding: 8px 2px;
   }
-  .marketingMaterial label,#orderPoSearchBtn,.clearform {
+  .marketingMaterial label, .clearform {
     margin-top: 8px;
   }
   #productSearchForm .cimm_inlineButton {
@@ -815,6 +839,7 @@ $breakpoint-mobileView: 480px;
   }
   #productSearchForm input[type="text"] {
     width: 100%;
+    margin-bottom: 12px;
   }
   .multiTab.detailPage .multiTabContent div {
     padding: 10px;
@@ -839,5 +864,12 @@ $breakpoint-mobileView: 480px;
   .actionBtnWrap {
     text-align: left !important;
     margin-top: 10px;
+  }
+  .date_from {
+  	position: relative;
+  	display: table;
+  }
+  .order_btn {
+  	margin-top: 5px;
   }
 }

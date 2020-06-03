@@ -39,10 +39,9 @@
 			#else
 				<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
 			#end 
-			#else
+		#else
 			#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-				<!-- <a class="btn btn-lg btn-primary marginX-3" href="/Login?type=au">$!locale.get("product.heading.checkout")</a> -->
-				  <a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+				<a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 			#else
 				<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
 			#end
@@ -131,6 +130,12 @@
                                	</li>
                                 #end
                                 <li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></li>
+                                #if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf($!locale.get("california.restriction.string")) != -1))
+								<li itemprop="Prop65">
+									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+									<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+								</li>
+								#end
                                 #set($leadTime = "N")
                                 #set($available = "N")
                                 #set($allBranch = $!itemData.branchAvail)
@@ -264,7 +269,7 @@
 			#if($userLogin)
 				##if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 					<li>
-					<div class="dropdown margin-auto">
+					<div class="dropdown margin-auto dropdownFixedWidth">
 						#set($groupPop = "ulg"+$!savedCartItemId+"_custPop")
 						<a id="$!groupPop" class="popMsg hideMe"></a>
 						<a id='linkg$!savedCartItemId' class="dropdown-toggle" data-toggle="dropdown" data-itemId="$!savedCartItemId" data-listTarget="ulg$!savedCartItemId" data-function="saveCartFunction">
@@ -287,8 +292,7 @@
 					#end 
 	            #else
 	            	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-	            	 <!-- <a class="btn btn-lg btn-primary marginX-3" href="/Login?type=au">$!locale.get("product.heading.checkout")</a> -->
-				     <a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+	            	<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 	            	#else
 	            	<a class="btn btn-primary btn-lg" href="/Login">$!locale.get("product.heading.checkout")</a>
 	            	#end
