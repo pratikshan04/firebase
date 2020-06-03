@@ -119,24 +119,35 @@ $(document).ready(function(){
 		});
 	}
 	$('#customerAlsoBought').slick({
-		infinite: true,
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		responsive: [
-		           {
-		             breakpoint: 768,
-		             settings: {
-		               slidesToShow: 3,
-		             }
-		           },
-		           {
-		             breakpoint: 480,
-		             settings: {
-		               slidesToShow: 2,
-		             }
-		           }
-		         ]
-		});
+		  infinite: true,
+		  slidesToShow: 5,
+		  slidesToScroll: 1,
+		  pauseOnHover:true,
+		  responsive: [
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 4,
+							}
+						},{
+							breakpoint: 600,
+							settings: {
+								slidesToShow: 3,
+							}
+						},{
+							breakpoint: 500,
+							settings: {
+								slidesToShow: 2,
+							}
+						},
+						{
+							breakpoint: 400,
+							settings: {
+								slidesToShow: 1,
+							}
+						}
+					]
+	  });
 	$('.allBranchWrap .cimm_siteTableEnclosure').slimScroll({
 		color: '#565F65',
 		size: '7px',

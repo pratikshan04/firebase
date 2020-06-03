@@ -56,7 +56,7 @@ var checkoutWizard = {};
 	
 	checkoutWizard.leaveAStepCallback = function(obj,context){
 		var step_num= obj.attr('index');
-		return (context.fromStep < context.toStep) ? submitThisForm("#step-"+step_num) : true;
+		return (context.fromStep < context.toStep) ? (submitThisForm("#step-"+step_num)) ? validateCheckoutShipTo() : false : true;
 	};
 	
 	checkoutWizard.showAStepCallback = function(obj){
@@ -123,6 +123,7 @@ var checkoutWizard = {};
 					}
 					formatPrice();
 					unblock();
+					checkoutWizard.submitOrder();
 				}else{
 					bootAlert("small","error","Error","Your cart is empty!");
 					window.location.href = '/Cart';
@@ -162,49 +163,73 @@ var checkoutWizard = {};
 		}
 	};
 	checkoutWizard.insertDataToHiddenInfo = function(){
-		$('#quickCartHiddenInfo [name="reqDate"]').val($('#reqDate').val());
-		$('#quickCartHiddenInfo [name="shippingInstruction"]').val($('#shippingInstruction').val());
-		$('#quickCartHiddenInfo [name="orderNotes"]').val($('#orderNotes').val());
+		$('#quickCartHiddenInfo input[name="reqDate"]').val($('#reqDate').val());
+		$('#quickCartHiddenInfo input[name="shippingInstruction"]').val($('#shippingInstruction').val());
+		$('#quickCartHiddenInfo input[name="orderNotes"]').val($('#orderNotes').val());
 		$("#quickCartHiddenInfo input[name='shipVia']").val($("#shipVia").val());
 		$("#quickCartHiddenInfo input[name='orderedBy']").val($("#orderedBy").val());
 	};
+	
+	checkoutWizard.submitOrder = function (oType){
+		$("#quickCartHiddenInfo").submit( function(){
+			var isValid = submitThisForm("#step-"+checkOutStep);
+			var erpType = document.getElementById('erpType').value;
+			var orderType = $('#orderType').val().trim();
+			if(erpType && erpType.toUpperCase()=="DEFAULTS" && isValid){
+				var data = $("#quickCartHiddenInfo").serialize();
+				block("Please Wait");
+				$.ajax({
+					type: "POST",
+					url: "processCheckout.action",
+					data: data,
+					success: function(msg){
+						window.location.href = 'orderConfirmation.action?salesOrderId='+msg;
+					}
+				});
+			}else if(isValid && orderType == 'checkoutWithPo'){
+				block("Please Wait");
+				$(this).attr("action","processOrder.action");
+				return true;
+			}else if(orderType == 'checkoutWithPo'){
+				return false;
+			}
+			if(!oType){
+				return false;
+			}
+		});
+		if(oType == 'checkoutWithPo'){
+			$("#quickCartHiddenInfo").submit(oType);
+		}else if(oType == 'checkoutWithPo'){
+			$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
+			$("#quickCartHiddenInfo").submit(oType);
+		}
+	};
+	
 	checkoutWizard.submitCheckoutRequest = function(){
 		if(submitThisForm("#step-"+checkOutStep)){
+			var payType = $('#orderType').val().trim();
 			if($('#orderType').length>0 && typeof $('#orderType').val()!="undefined" && $('#orderType').val()!=null && $('#orderType').val().trim().length > 0){
 				checkoutWizard.insertDataToHiddenInfo();
-					if($('#orderType').val().trim() == "checkoutWithPo"){
-						/*var data = $("#quickCartHiddenInfo").serialize();
-						block("Please Wait");
-						$.ajax({
-							type: "POST",
-							url: "processCheckout.action",
-							data: data,
-							success: function(msg){
-								window.location.href = 'orderConfirmation.action?salesOrderId='+msg;
-							}
-						});*/
-						block("Please Wait");
-						$("#quickCartHiddenInfo").attr("action","processOrder.action");
-	    				$("#quickCartHiddenInfo").submit();
-					}else if($('#orderType').val().trim() == "checkoutWithCreditCard"){
-						block("Please Wait");
-						setCookie("poNumber",$("#poNumber").val(),10);
-						setCookie("orderedBy",$("#orderedBy").val(),10);
-						setCookie("reqDate",$("#reqDate").val(),10);
-						if($("textarea#shippingInstruction").val()!=null && $("textarea#shippingInstruction").val()!=""){
-							setCookie("shippingInstruction",$("textarea#shippingInstruction").val(),10);
-						}else{
-							setCookie("shippingInstruction","",10);
-						}
-						setCookie("defaultShipToId",$("#defaultShipToId").val(),10);
-						setCookie("shipVia",$("#shipVia").val(),10);
-						$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
-						$("#quickCartHiddenInfo").submit();
-					}else if($('#orderType').val().trim() == "checkoutWithQuote"){
-						bootAlert("small","error","Error","Submit Quote Order");
+				if(payType == "checkoutWithPo"){
+					checkoutWizard.submitOrder(payType);
+				}else if(payType == "checkoutWithCreditCard"){
+					block("Please Wait");
+					setCookie("poNumber",$("#poNumber").val(),10);
+					setCookie("orderedBy",$("#orderedBy").val(),10);
+					setCookie("reqDate",$("#reqDate").val(),10);
+					if($("textarea#shippingInstruction").val()!=null && $("textarea#shippingInstruction").val()!=""){
+						setCookie("shippingInstruction",$("textarea#shippingInstruction").val(),10);
 					}else{
-						bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
+						setCookie("shippingInstruction","",10);
 					}
+					setCookie("defaultShipToId",$("#defaultShipToId").val(),10);
+					setCookie("shipVia",$("#shipVia").val(),10);
+					checkoutWizard.submitOrder(payType);
+				}else if($('#orderType').val().trim() == "checkoutWithQuote"){
+					bootAlert("small","error","Error","Submit Quote Order");
+				}else{
+					bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
+				}
 			}else{
 				bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
 			}
@@ -307,7 +332,85 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 	   tabHeading: '.multiTabHeading2',
 	   contentWrap: '.multiTabContent2',
 	   transitionEffect: "fade",
+	   accordionBrake: 300,
 	   onShowStep: checkoutWizard.orderTypeOnWizchange
 	});
-
 });
+
+function validateCheckoutShipTo(){
+    var message = "";
+    if($('#disableShipToCalifornia').val() == 'Y' && ($('#stateSelectShip').val() == 'CA' || $('#shipZipcode').val().length>3)){
+        if($('#stateSelectShip').val() == 'CA'){
+          message = "No shipping to california State <br/>";
+          $('#stateSelectShip').val("");
+        }
+        if($('#shipZipcode').val().length>3){
+          zipCode=$('#shipZipcode').val().toString().substring(0, 3);
+            if(zipCode >= 900 && zipCode <= 961 ){
+                if(message.length>0){
+                      message += "or <br/>";
+                  }
+             message += "No shipping to california Zipcode ";
+             $('#shipZipcode').val("");
+            }
+        }
+    }else {   
+        $('#californiaWarning').find('.modal-body tbody').empty();
+        $('#californiaRestriction').find('.modal-body tbody').empty();
+        var warningItems = [];
+        var itemId;
+        warningItems = $("input:hidden[name='prop65']");
+        var californiaZipCodeFalg = false;
+        var restrictionFlag = false;
+        var warningFlag = false;
+        if($('#shipZipcode').val().length>3){
+              var zipCode=$('#shipZipcode').val().toString().substring(0, 3);
+                if(zipCode >= 900 && zipCode <= 961 ){
+                    californiaZipCodeFalg = true;
+                }
+           }
+       
+        if (warningItems && warningItems.length > 0) {
+            for (i = 0; i < warningItems.length; i++) {
+                itemId = warningItems[i].value;
+                var warningValue = $( '#'+itemId).data("warning");
+                var warningMessage = $( '#'+itemId).data("message");
+                var proptype = $( '#'+itemId).data("proptype");
+                var description = $( '#'+itemId).data("description");
+                var siteName=$("#siteName").val();
+                var shipType = $( '#'+itemId).data("shiptype");
+                var warehouseState = $( '#'+itemId).data("warehousestate");
+                if(proptype == "R"){
+                    if(shipType == "SHIPTOME" && ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaRestriction').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        restrictionFlag = true;
+                    }
+                    else if(warehouseState == "CA" || ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaRestriction').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        restrictionFlag = true;
+                    }
+                }else{
+                    if(shipType == "SHIPTOME" && ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaWarning').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        warningFlag = true;
+                    }else if(warehouseState == "CA"  || ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaWarning').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li></li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        warningFlag = true;
+                    }
+                }
+            }
+        }
+    }
+	if(restrictionFlag){
+		$('#californiaRestriction').modal();
+		return false;
+	}else if(warningFlag){
+		$('#californiaWarning').modal();
+		return true;
+	}else if(message.length>0){
+		bootAlert("medium","error","Error",message);
+		return false;
+	}else {
+		return true;
+	}
+}

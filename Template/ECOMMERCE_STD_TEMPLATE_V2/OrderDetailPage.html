@@ -3,10 +3,10 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		#if($requestType != "openQuote")
 		#if($orderDetail.orderStatus.contains("Bid"))
-		<h3 class="cimm_subheading">$!locale.get("product.label.bidStatus") - <span>#if($session.getAttribute("erpType") == "eclipse") #if($orderDetail.orderStatus)$!orderDetail.orderStatus #end #else #if($orderInformation.stage) $!orderInformation.stage #end #end</span></h3>
+			#if($orderDetail.orderStatus)<h3 class="cimm_subheading">$!locale.get("product.label.bidStatus") - <span>$!orderDetail.orderStatus</span></h3>#end
 		##elseif($!orderDetail.orderStatus.toUpperCase().contains("INVOICE"))
 		#else
-		<h3 class="cimm_subheading">$!locale.get("product.label.ordrStatus") - <span>#if($session.getAttribute("erpType") == "eclipse") #if($orderDetail.orderStatus)$!orderDetail.orderStatus #end #else #if($orderInformation.stage) $!orderInformation.stage #end #end</span></h3>
+			#if($orderDetail.orderStatus)<h3 class="cimm_subheading">$!locale.get("product.label.ordrStatus") - <span>$!orderDetail.orderStatus</span></h3>#end
 		#end
 		#end
 	</div>
@@ -121,6 +121,12 @@
                 </thead>
                 <tbody class="text-center">
                     #foreach($orderItem in $orderItemList)
+                    #set($avilForReOrder = false)
+					#foreach($dbItem in $itemList)
+						#if($!dbItem.partNumber==$!orderItem.partNumber)
+							#set($avilForReOrder = true)
+						#end
+					#end
                     <tr>
                         <td class="text-left" data-th="$!locale.get('product.label.productDescription')">
                         #if($requestType == "openQuote")
@@ -166,13 +172,16 @@
                         <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td> 
                         ##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                         <td data-th="select">
-	                    	<label class="customCheckBox2">
-								<input type="checkbox" name="quotePartNumberSelected" value="$!orderItem.partNumber" id="chkSelect1$!orderItem.partNumber" onclick="eachCheckBox(this)" />
-								<span></span>
+							#if($avilForReOrder && $!orderItem.itemPriceId>0)
+							<label class="customCheckBox2">
+							<input type="checkbox" name="quotePartNumberSelected" value="$!orderItem.partNumber" id="chkSelect1$!orderItem.partNumber" onclick="eachCheckBox(this)" />
+							<span></span>
 							</label>
+							#else
+							Not available for reorder
+							#end
 						</td>
 						##end
-						 
                     </tr>
                     #end                    
                 <input type="hidden" name="defaultBillToId" value="$!defaultBillToId" />

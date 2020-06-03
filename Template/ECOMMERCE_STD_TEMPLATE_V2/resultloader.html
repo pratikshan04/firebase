@@ -29,7 +29,7 @@
 			        			#set($eachItemData = $!allItemData.get($!itemData.itemId))
 			        			#set($idText = $!itemIndex+"_"+$!itemData.itemId)
 				        		<div class="row" id="multipleItemCart_$!idText">
-				        			<div class="col-md-2 col-sm-12 col-xs-12">
+				        			<div class="col-md-2 col-sm-12 col-xs-6">
 				        				<div class="selectedItemImg alignCenter">
 					        			#if($!eachItemData.imageType=="URL")
 					                        <img src="$!eachItemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
@@ -38,7 +38,7 @@
 					                    #end
 				        				</div>
 				        			</div>
-				        			<div class="col-md-8 col-sm-12 col-xs-12">
+				        			<div class="col-md-8 col-sm-12 col-xs-6">
 				        				<div class="selectedItemDesc">
 						        			#if($!eachItemData.partNumber && $!eachItemData.partNumber!="")
 							        			<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachItemData.partNumber</p>
@@ -131,14 +131,14 @@
 		#end
 		#if($singleItem.status=="Y")
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-12">
+				<div class="col-md-2 col-sm-6 col-xs-6">
 					#if($eachData.imageType=="URL")
 						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#else
 						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#end										
 				</div>
-				<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="mulAddtoCartDesp">
 						<p class="mulBrandTitle">$!itemTitle</p>
 						#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -157,14 +157,14 @@
 			</div>
 		#else
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-12">
+				<div class="col-md-2 col-sm-6 col-xs-6">
 					#if($!eachData.imageType=="URL")
 						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#else
 						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 					#end										
 				</div>
-				<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="mulAddtoCartDesp">
 						<p class="mulBrandTitle">$!itemTitle</p>
 						#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -217,14 +217,14 @@
 									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
 									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
 										<div class="row">
-											<div class="col-md-2 col-sm-6 col-xs-12">
+											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
 													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#else
 													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#end											
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
+											<div class="col-md-4 col-sm-6 col-xs-6">
 												<div class="mulAddtoCartDesp">
 													<p class="mulBrandTitle">$!itemTitle</p>
 													#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -250,14 +250,14 @@
 									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
 									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
 										<div class="row">
-											<div class="col-md-2 col-sm-6 col-xs-12">
+											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
 													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#else
 													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#end											
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
+											<div class="col-md-4 col-sm-6 col-xs-6">
 												<div class="mulAddtoCartDesp">
 													<p class="mulBrandTitle">$!itemTitle</p>
 													#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -287,14 +287,14 @@
 									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
 									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
 										<div class="row">
-											<div class="col-md-2 col-sm-6 col-xs-12">
+											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
 													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#else
 													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
 												#end											
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
+											<div class="col-md-4 col-sm-6 col-xs-6">
 												<div class="mulAddtoCartDesp">
 													<p class="mulBrandTitle">$!itemTitle</p>
 													#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -307,7 +307,7 @@
 													<p><strong>$!locale.get("product.label.qtyinterval"): </strong>$!eachData.orderInterval</p>
 												</div>
 											</div>
-											<div class="col-md-6 col-sm-12 col-xs-12">
+											<div class="col-md-6 col-sm-12 col-xs-6">
 												<div class="mulAddtoCartStatus alignCenter">
 													<p class="error"><i class="fa fa-exclamation-triangle"></i> Min Order / Qty Interval Error</p>
 													<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>

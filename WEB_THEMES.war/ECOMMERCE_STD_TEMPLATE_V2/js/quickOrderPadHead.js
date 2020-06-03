@@ -403,6 +403,7 @@ var QuickOrder = {};
 	        	},500);
 				QuickOrder.updateCartCount();
 				unblock();
+				$('#bulkAction').selectpicker('refresh');
 	        },
 	        error:function(xhr, ajaxOptions, thrownError){bootAlert("small","error","Error",xhr.responseText); ShowMessage("??? ?? ?????? ??????? ????","fail");}
 	    });

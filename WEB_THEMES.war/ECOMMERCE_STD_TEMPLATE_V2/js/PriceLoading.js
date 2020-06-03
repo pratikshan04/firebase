@@ -504,15 +504,10 @@ function priceLoadMainFunction() {
 								trHide.removeClass('shown');
 							}
 						});
-				$("#linkedItemContentDiv_" + $(this).attr('id'))
-						.show();
-				$("#linkedItemAvailable_" + $(this).attr('id'))
-						.show();
-				$('td.details-control em').removeClass(
-						'fa-minus-circle').addClass(
-						'fa-plus-circle');
-				$(this).closest('tr').find('em').toggleClass(
-						'fa-minus-circle');
+				$("#linkedItemContentDiv_" + $(this).attr('id')).show();
+				$("#linkedItemAvailable_" + $(this).attr('id')).show();
+				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+				$(this).find('em').removeClass('fa-plus-circle').addClass('fa-minus-circle');
 				row.child.show();
 				tr.addClass('shown');
 				$("html, body").animate({
@@ -533,7 +528,7 @@ function priceLoadMainFunction() {
 				var domTabsExistFlag = false;
 				//$(".focusItemTabs").hide();
 				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
-				$(this).closest('tr').find('em').toggleClass('fa-minus-circle');
+				$(this).find('em').removeClass('fa-plus-circle').addClass('fa-minus-circle');
 				$(tr).attr("data-detailsload", "Y");
 				$.ajax({
 					type : "POST",
