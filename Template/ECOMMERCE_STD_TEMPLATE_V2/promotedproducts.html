@@ -8,9 +8,9 @@
 #if($!savedGroupName && $!savedGroupName!="" && $!savedGroupId)
 	<div id="notificationDiv"></div>
 	<div class="row mBottom-3">
-		<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="col-xs-6">
 			<h3 class="cimm_pageTitle mBottom-0" id="groupName">$savedGroupName</h3>					
-			<div class="form-inline" id="editBox" style="display: none;">
+			<div class="custom_lineform form-inline" id="editBox" style="display: none;">
 				<input type="hidden" value="$savedGroupName" id="oldGroupName" />
 				<input type="hidden" value="$savedGroupId" id="GroupId" />
 				<input type="hidden" value="GP" id="GroupType" />
@@ -28,7 +28,7 @@
 			</select>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right mBottom-3">
-			<form action="myProductGroupPage.action" id="myProductGroup" class="form-inline">
+			<form action="myProductGroupPage.action" id="myProductGroup" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.itemsperpage'): </label>
 				<div class="form-group">
 				<input type="hidden" name="savedGroupId" value="$savedGroupId" />
@@ -45,7 +45,7 @@
 			</form>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right mBottom-3">
-			<form action="myProductGroupPage.action" id="sortByForm" class="form-inline">
+			<form action="myProductGroupPage.action" id="sortByForm" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.sortBy'): </label>
 				<div class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
@@ -69,7 +69,7 @@
 	</div>
 	<div class="row mBottom-3">
 		<div class="col-md-9 col-sm-6 col-xs-12">
-			<div class="form-inline">
+			<div class="custom_lineform form-inline">
 				<form action="myProductGroupPage.action" id="productSearchForm" class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
@@ -85,7 +85,7 @@
 		</div>
 	</div>
 	#if($paginate>1)
-	<div class="pgnation sitePaginationBlock hideForPrint groupPgnation mBottom-2"></div>
+	<!-- div class="pgnation sitePaginationBlock hideForPrint groupPgnation mBottom-2"></div -->
 	#end
 	<div class="hidden-lg hidden-md mBottom-3">
 		<label class="customCheckBox2">

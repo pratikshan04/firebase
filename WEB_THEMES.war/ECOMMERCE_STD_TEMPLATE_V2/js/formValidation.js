@@ -49,9 +49,11 @@ function submitThisForm(formId){
 	if(errorMessages.length > 0){
 		notifyValidation(currentForm, errorMessages.join("<br>"));
 		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+		return false;
 	}else if(unusualCode > 0){
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+		return false;
 	}else{
 		if($(formId).prop("tagName") != "FORM" || $(formId).attr("data-ajaxSubmit") == "N"){
 			return true;

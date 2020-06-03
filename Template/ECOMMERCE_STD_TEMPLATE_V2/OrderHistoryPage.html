@@ -57,6 +57,12 @@
 #if($!entityIDType && $entityIDType.contains("<") || $entityIDType.contains(">"))
 	#set($entityIDType = "") 
 #end
+#if($!startDate && $startDate.contains("<") || $startDate.contains(">"))
+	#set($startDate = "") 
+#end
+#if($!endDate && $endDate.contains("<") || $endDate.contains(">"))
+	#set($endDate = "") 
+#end
 	<div class="row">
 		<div class="col-md-12 cd-sm-12 cd-xs-12">
 			<input type="hidden" id="startDateVal" value="$!startDate"/>
@@ -69,11 +75,11 @@
 				<input type="hidden" name="partNumberToERP" id="partNumberToERP"/>
 				<input type="hidden" name="orderNumber" id="orderNumber"/>
 				<div class="row">
-				<div class="col-md-4 form-inline">
+					<div class="col-md-4 custom_lineform form-inline">
 						<input type="text" id="orderPoSearch" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('label.order.searchbar')" >
-						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md order_btn" value="Search"/>
+						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md" value="Search"/>
 					</div>
-					<div class="col-md-8 form-inline text-right mTop-2">
+					<div class="col-md-8 custom_lineform form-inline text-right mTop-2">
 					<label for="datepicker_from" class="mRight-2 date_from">From </label>
 						<div class='input-group date'>
 							<input type="text" name="startDate" id="startDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
@@ -114,7 +120,7 @@
 					<thead>
 						<tr>
 							<th class="left">$!locale.get("form.label.OrderNo")</th>
-							<th class="left">$!locale.get("product.heading.PostDate")</th> 
+							<th class="left">$!locale.get('product.label.shipDate')</th>
 							<th class="left">$!locale.get("product.label.description")</th>
 							<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
 							<th>$!locale.get("product.label.processingStatus")</th>
