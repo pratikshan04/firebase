@@ -1,7 +1,7 @@
 #if($eventsList && $eventsList.title)
 <div class="row">
 	<div class="col-md-4-sm-12 col-xs-12">
-			<form id="eventForm">    
+			<form id="eventForm" method="post">    
 				<input TYPE="hidden" NAME="NotificationName" VALUE='EventsMail'/>
 				<input TYPE="hidden" NAME="SaveToDb" VALUE='Y'/>
 				<input TYPE="hidden" NAME="SendMail" VALUE='N'/>
@@ -144,12 +144,13 @@
 				</div>
 				<div class="row">	
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						$!locale.get("event.label.ifContactInfoDifferentFromRegistrantInfo") <span><strong><a data-toggle="collapse" data-target="#test">$!locale.get('product.label.clickHere')</a></strong> $!locale.get('product.label.toAddContactInfo')</span>
+						$!locale.get("event.label.ifContactInfoDifferentFromRegistrantInfo") <span><strong><a data-toggle="collapse" data-target="#additionalInfo">$!locale.get('product.label.clickHere')</a></strong> $!locale.get('product.label.toAddContactInfo')</span>
+						<div class="hidden"><input type="checkbox" id="checkStatus" /></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="collapse marginY-4" id="test">
+						<div class="collapse marginY-4" id="additionalInfo">
 							<h3 class="cimm_page-title">$!locale.get("event.label.additionalInformation")</h3>  
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-12">
@@ -263,7 +264,7 @@
 							<option value="Credit Card" >$!locale.get("event.select.creditCard")</option>
 							<option value="Purchase Order">$!locale.get("event.select.purchaseOrder")</option>
 						</select>
-						 <strong class="blockElement mTop-2">$!locale.get("event.label.cost"): $!$!eventCost</strong>
+						 <strong class="blockElement mTop-2">$!locale.get("event.label.cost"): $$!eventCost</strong>
 					</div>		
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<label>$!locale.get("event.label.PONumber") <span class="text-danger">*</span></label>

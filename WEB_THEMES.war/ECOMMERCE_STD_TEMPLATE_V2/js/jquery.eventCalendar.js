@@ -24,14 +24,14 @@
 			dateSlider("current", getCookie("year"), getCookie("month"));
 			getEvents(eventsOpts.eventsLimit, false, false, false, false);
 			changeMonth();
-			flags.wrap.find('.eventsCalendar-day a').live('click', function(e) {
+			flags.wrap.find('.eventsCalendar-day a').on('click', function(e) {
 				e.preventDefault();
 				var year = flags.wrap.attr('data-current-year'),
 					month = flags.wrap.attr('data-current-month'),
 					day = $(this).parent().attr('rel');
 				getEvents(false, year, month, day, "day");
 			});
-			$("#day").live("click",function(e){
+			$("#day").on("click",function(e){
 				 e.preventDefault();
 				 var eventDate = new Date(),
 				 date = eventDate.getDate(),
@@ -41,20 +41,20 @@
 				 getEvents(false, year, month, day, "day");
 				 $("#monthNameDisplay").html(eventsOpts.monthNames[month] +" "+date+ ", " + year);
 			});
-			$('#month').live("click",function(e){
+			$('#month').on("click",function(e){
 				 e.preventDefault();
 				 var year = flags.wrap.attr('data-current-year'),
 					 month = flags.wrap.attr('data-current-month');
 				 getEvents(eventsOpts.eventsLimit, year, month, false, "month");
 				 $("#monthNameDisplay").html("Month Of "+ eventsOpts.monthNames[month] + " - " + year);
 			});
-			flags.wrap.find('.monthTitle').live('click', function(e) {
+			flags.wrap.find('.monthTitle').on('click', function(e) {
 				e.preventDefault();
 				var year = flags.wrap.attr('data-current-year'),
 					month = flags.wrap.attr('data-current-month');
 				getEvents(eventsOpts.eventsLimit, year, month, false, "month");
 			});
-			$('.category').live('click', function(e) {
+			$('.category').on('click', function(e) {
 				e.preventDefault();
 				var year = flags.wrap.attr('data-current-year'),
 					month = flags.wrap.attr('data-current-month');
@@ -62,12 +62,12 @@
 				flags.wrap.find('.dayWithEvents').removeClass('dayWithEvents');
 				getEvents(eventsOpts.eventsLimit, year, month, false, "month");
 			});
-			$('.eventsCalendar-day').live('click', function(e) {
+			$('.eventsCalendar-day').on('click', function(e) {
 				e.preventDefault();
 				$("ul.calendarFilterHead li").removeClass('active');
 				$("#day").parent().addClass('active');
 			});
-			$('.thiWeekEvents').live('click', function(e) {
+			$('.thiWeekEvents').on('click', function(e) {
 				e.preventDefault();
 				var eventDate = new Date(),
 				date = eventDate.getDate(),
@@ -83,7 +83,7 @@
 		if (!loading) {
 			desc.slideDown();
 		}
-		flags.wrap.find('.eventsCalendar-list .eventTitle').live('click', function(e) {
+		flags.wrap.find('.eventsCalendar-list .eventTitle').on('click', function(e) {
 			if (!eventsOpts.showDescription) {
 				e.preventDefault();
 				var desc = $(this).parent().find('.eventDesc');
@@ -137,7 +137,7 @@
 				$eventsCalendarTitle = $("<div class='eventsCalendar-currentTitle'><a href='#' class='monthTitle'></a></div>"),
 				$eventsCalendarArrows = $("<a href='#' class='arrow prev'><span>" + eventsOpts.txt_prev + "</span></a><a href='#' class='arrow next'><span>" + eventsOpts.txt_next + "</span></a>");
 			$eventsCalendarDaysList = $("<ul class='eventsCalendar-daysList'></ul>"), date = new Date();
-			if (!flags.wrap.find('.eventsCalendar-slider').size()) {
+			if (!flags.wrap.find('.eventsCalendar-slider').length) {
 				flags.wrap.prepend($eventsCalendarSlider);
 				$eventsCalendarSlider.append($eventsCalendarMonthWrap);
 			} else {

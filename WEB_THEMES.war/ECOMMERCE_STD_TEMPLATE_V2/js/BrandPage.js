@@ -102,20 +102,29 @@ function initMasonry(){
 		});
 	}
 }
+
+var brandSticky = $(".cimm_brandAtoZletters").height();
+var headerHeight = $('#normalHead').height();
+var fixHeadHeight = headerHeight;
+
 function brandListScroll(val){
-	var fixHeight = $('.cimm_brandAtoZletters').height();
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y") {
+		fixHeadHeight = 0
+	}
 	$('html, body').animate({
-           scrollTop: $("#displayBrand_"+val).offset().top-fixHeight
-       }, 1000);
+           scrollTop: $("#displayBrand_"+val).offset().top-fixHeadHeight-brandSticky
+       }, 400);
 }
-var fixHeight = $(".cimm_brandAtoZletters").offset().top;
-var fixBlockHeight = $(".cimm_brandAtoZletters").height();
+
 $(window).scroll(function() {
-    var currentScroll = $(window).scrollTop(); 
-    if (currentScroll >= fixHeight) {
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y") {
+		fixHeadHeight = 0
+	}
+    var currentScroll = $(this).scrollTop(); 
+    if (currentScroll >= headerHeight) {
     	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){
-			$(".cimm_brandAtoZletters").addClass("fixIt");
-			$(".hiddenDiv").height(fixBlockHeight);
+			$(".cimm_brandAtoZletters").addClass("fixIt").css({'top': fixHeadHeight });
+			$(".hiddenDiv").height(fixHeight - headerHeight);
 		}
     } else {
     	if($(".cimm_brandAtoZletters").hasClass("fixIt")){
@@ -124,11 +133,13 @@ $(window).scroll(function() {
 		}
     }
 });
+
 function brandList(val){
 	var siteName = $("#siteName").val();
 	$("#displayBrand").html("<img class='log-shopBrand-loader' src='"+assets+"/WEB_THEMES/"+siteName+"/images/brandloading.gif' />");
 	enqueue('BrandListPage.action?idx='+val+'&dt='+new Date(), processBrand);
 }
+
 function processBrand(val){
 	var result = "";
 	var strAry = val.split("~");

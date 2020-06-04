@@ -1,5 +1,6 @@
 #macro (cartHiddenFields $partNumber, $itemAvailability, $productListId, $qty, $price, $itemPriceId)
-<input type="hidden" id="itemTxtAvail_$partNumber" value="$itemAvailability"/> 
+<input type="hidden" id="itemTxtAvail_$partNumber" value="$itemAvailability"/>
+<input type="hidden" id="itemTxtSXAvail$partNumber" name="itemTxtSXAvail$partNumber" value="$!itemAvailability"/> 
 <input type="hidden" value="$productListId" name="shoppingCartId" /> 
 <input type="hidden" value="$qty" id="textQtyCur_$partNumber"/> 
 <input type="hidden" value="$qty" id="qty_$productListId" name="singleCartQty" /> 

@@ -441,87 +441,110 @@ var allCountry = [
 			this.options = extendDefaults(settings, arguments[0]);
 		}
 	}
-	function populateCountry(parameters){
-		var countrySelector = document.getElementById(parameters.selectorID);
-		var countryList = parameters.country.split(",");
-		countrySelector.options.length=null;
-		if(!parameters.defaultSelect){
-			countrySelector.options[0] = new Option('Select Country','');
-		}
-		if(countryList == ""){
-			for(i=0; i < allCountry.length;i++){
-				var cc = countrySelector.options.length;
-				countrySelector.options[cc] = new Option(allCountry[i][1], allCountry[i][0]);
+}());
+
+function populateCountry(parameters){
+	var countrySelector = document.getElementById(parameters.selectorID);
+	var countryList = parameters.country.split(",");
+	var dc = parameters.defaultCountry;
+	countrySelector.options.length=null;
+	if(!parameters.defaultSelect){
+		countrySelector.options[0] = new Option('Select Country','');
+	}
+	if(countryList == ""){
+		for(i=0; i < allCountry.length;i++){
+			var cc = countrySelector.options.length;
+			selectThis = false;
+			if(dc && (dc.trim() == allCountry[i][0]) && parameters.defaultSelect){
+				selectThis = true;
 			}
-		}else{
-			for(cL=0; cL < countryList.length; cL++){
-				for(i=0; i < allCountry.length;i++){
-					var countryName = countryList[cL].trim().toUpperCase();
-					if(countryList[cL].trim().toUpperCase() === "USA"){
-						countryName = "US";
-					}
-					if(countryName === allCountry[i][0]){
-						var cc = countrySelector.options.length;
-						countrySelector.options[cc] = new Option(allCountry[i][1], allCountry[i][0]);
-						populateStates(countryName, countrySelector, parameters.selectState,parameters.defaultSelect);
-					}
+			countrySelector.options[cc] = new Option(allCountry[i][1], allCountry[i][0],false, selectThis);
+		}
+		populateStates(dc, countrySelector, (parameters.selectState || allCountry[0][0]),parameters.defaultSelect);
+	}else{
+		for(cL=0; cL < countryList.length; cL++){
+			for(i=0; i < allCountry.length;i++){
+				var countryName = countryList[cL].trim().toUpperCase();
+				if(countryList[cL].trim().toUpperCase() === "USA"){
+					countryName = "US";
+				}
+				if(countryName === allCountry[i][0]){
+					var cc = countrySelector.options.length;
+					countrySelector.options[cc] = new Option(allCountry[i][1], allCountry[i][0]);
+					populateStates(countryName, countrySelector, parameters.selectState,parameters.defaultSelect);
 				}
 			}
 		}
-		countrySelector.onchange = function(){
-			populateStatesOnchange(this.value, this, parameters.selectState, parameters.defaultSelect)
+	}
+	countrySelector.onchange = function(){
+		populateStatesOnchange(this.value, this, parameters.selectState, parameters.defaultSelect)
+	}
+}
+function populateStates(country, stateElemnet, selectState,defaultSelect){
+	var stateLoop = selectState.split(",");
+	var selectedState = states[country || stateLoop];
+	var stateEle = stateElemnet.dataset.state;
+	var stateSelector = document.getElementById(stateEle);
+	for(var i=0;i<selectedState.length;i++){
+		var stateOrder=selectedState.sort(sortFunction);
+	}
+	if(stateSelector.options.length < 1){
+		stateSelector.options.length=null;
+		//if(!defaultSelect){
+			stateSelector.options[0] = new Option('Select State','');
+		//}
+		for(sc=0; sc < selectedState.length; sc++){
+			selectThis = false;
+			if((stateLoop[0].trim() == selectedState[sc][0]) && defaultSelect){
+				selectThis = true;
+			}
+			stateSelector.options[sc+1] = new Option(stateOrder[sc][1], stateOrder[sc][0],false, selectThis);
 		}
 	}
-	function populateStates(country, stateElemnet, selectState,defaultSelect){
-		var stateLoop = selectState.split(",");
-		var selectedState = states[country];
-		var stateEle = stateElemnet.dataset.state;
-		var stateSelector = document.getElementById(stateEle);
-		if(stateSelector.options.length < 1){
-			stateSelector.options.length=null;
-			//if(!defaultSelect){
-				stateSelector.options[0] = new Option('Select State','');
-			//}
-			for(sc=0; sc < selectedState.length; sc++){
-				selectThis = false;
-				if((stateLoop[0].trim() == selectedState[sc][0]) && defaultSelect){
+}
+function sortFunction(a, b) {
+    if (a[1] === b[1]) {
+        return 0;
+    }
+    else {
+        return (a[1] < b[1]) ? -1 : 1;
+    }
+}
+function populateStatesOnchange(country, stateElemnet, selectState, defaultSelect){
+	var selectCCount = stateElemnet.options.selectedIndex;
+	if(!defaultSelect && selectCCount >0){
+		selectCCount = selectCCount - 1;
+	}
+	var stateLoop = selectState.split(",");
+	var selectedState = states[country];
+	var stateEle = stateElemnet.dataset.state;
+	var stateSelector = document.getElementById(stateEle);
+	for(var i=0;i<selectedState.length;i++){
+		var stateOrder=selectedState.sort(sortFunction);
+	}
+	var getState = stateLoop[0].length > 2 ? 1 : 0 ;
+	stateSelector.options.length=null;
+	stateSelector.options[0] = new Option('Select State','');
+	selectThis = false;
+	if(selectedState){
+		for(sc=0; sc < selectedState.length; sc++){
+			selectThis = false;
+			if(selectState && stateLoop[0] != null && stateLoop[0] != undefined){
+				if(stateLoop[0].trim() == selectedState[sc][getState]){
 					selectThis = true;
 				}
-				stateSelector.options[sc+1] = new Option(selectedState[sc][1], selectedState[sc][0],false, selectThis);
 			}
+			stateSelector.options[sc+1] = new Option(stateOrder[sc][1], stateOrder[sc][0],false, selectThis);
+		}
+		$(stateSelector).selectpicker('refresh');
+	}
+}
+function extendDefaults(source, extendSettings) {
+	var property;
+	for (property in extendSettings){
+		if (extendSettings.hasOwnProperty(property)) {
+			source[property] = extendSettings[property];
 		}
 	}
-	function populateStatesOnchange(country, stateElemnet, selectState, defaultSelect){
-		var selectCCount = stateElemnet.options.selectedIndex;
-		if(!defaultSelect && selectCCount >0){
-			selectCCount = selectCCount - 1;
-		}
-		var stateLoop = selectState.split(",");
-		var selectedState = states[country];
-		var stateEle = stateElemnet.dataset.state;
-		var stateSelector = document.getElementById(stateEle);
-		stateSelector.options.length=null;
-		stateSelector.options[0] = new Option('Select State','');
-		selectThis = false;
-		if(selectedState){
-			for(sc=0; sc < selectedState.length; sc++){
-				selectThis = false;
-				if(selectState){
-					if(stateLoop[selectCCount].trim() == selectedState[sc][0]){
-						selectThis = true;
-					}
-				}
-				stateSelector.options[sc+1] = new Option(selectedState[sc][1], selectedState[sc][0],false, selectThis);
-			}
-		}
-	}
-	function extendDefaults(source, extendSettings) {
-		var property;
-		for (property in extendSettings){
-			if (extendSettings.hasOwnProperty(property)) {
-				source[property] = extendSettings[property];
-			}
-		}
-		populateCountry(source);
-	}
-}());
+	populateCountry(source);
+}

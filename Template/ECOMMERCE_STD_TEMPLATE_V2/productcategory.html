@@ -69,7 +69,7 @@
 	#else
 		#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-")+"/")
 	#end
-<h3 class="cimm_page-title">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $!locale.get("product.heading.productCategory") #end</h3>
+<h1 class="cimm_page-title">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $!locale.get("product.heading.productCategory") #end</h1>
 <div class="cimm_category">
 	#if($!categoryDescription.shortDesc)
 	<div class="row mBottom-4">
@@ -206,7 +206,8 @@
 							<input type="hidden" name="pageNo" value="$!pageNo">
 							<input type="hidden" name="resultPage" value="#if($resultPage)$!resultPage#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
-					
+							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
+							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							#if($navigationType=="SEARCH")
 							<input type="hidden" name="keyWord" value="#if($keyWord)$!escapeTool.html($!keyWord)#end" /> 
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
@@ -243,6 +244,8 @@
 							#if($pageNo)<input type="hidden" name="pageNo" value="$!pageNo">#end
 							<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
+							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
+							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							#if($navigationType=="SEARCH")
 							#if($keyWord) <input type="hidden" name="keyWord" value='$!escapeTool.html($!keyWord)' /> #end
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
@@ -413,7 +416,7 @@
 								</div>
 								<!-- <div id="attrFilterContent_$!itemData.itemPriceId" class='cimm_attrFilterContent'></div> -->
 								<div class="itemCountList clickStream">
-									<button class="btn btn-primary" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
+									<button class="btn btn-viewallchoice" onclick="ProductMode.submitProductModeFilterForm($!itemData.itemPriceId);"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</button>
 									<form method="get" class="multiSelectForm" id="multiFilterAttributeForm$!itemData.itemPriceId">
 										<input type="hidden" name="productId" id="productId_$!itemData.itemPriceId" value="$!itemData.productId" />
 										<input type="hidden" name="codeId" id="codeId_$!itemData.itemPriceId" value="$!itemData.categoryCode" />
@@ -529,7 +532,7 @@
 									#end
 								</ul>
 								<ul>
-									#if($itemData.packDesc)<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
+									#if($itemData.packDesc && $itemData.packDesc.trim() != "")<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 									<li class="cimm_priceWrap">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
@@ -594,6 +597,7 @@
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 												<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 											</ul>
+											<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 										</div>
 										<!--My Product Group-->
 									</li>
@@ -627,37 +631,37 @@
 							</li>
 						#end
 						<li style="display: none;">
-							#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.itemAvailability, $!itemData.srchTyp, $!navigationType)
+							#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.availQty, $!itemData.srchTyp, $!navigationType)
 							<span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span>
 							<!-- <input type="hidden" id="displayPrice_$!itemData.partNumber" value="$!itemData.displayPricing"/> -->
 						</li>
 					</ul>
+					<!--Branch Availabiltiy List Section -->
+					<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content yellowTheme bold">
+								<div class="modal-header">
+							      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+							    </div>
+							    <div class="modal-body size-13">
+							    	<table class="table">
+							    		<thead>
+											<tr>
+												<th>$!locale.get("product.label.branchName")</th>
+												<th class="center">$!locale.get("product.label.available")</th>
+											</tr>
+										</thead>
+							    		<tbody id="allBranchHTML$!itemData.partNumber">
+							    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
+							    		</tbody>
+							    	</table>
+							    </div>
+							</div>
+						</div>
+					</div>
+					<!--Branch Availabiltiy List Section-->
 				</li>
-				<!--Branch Availabiltiy List Section -->
-									<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
-										<div class="modal-dialog">
-											<!-- Modal content-->
-											<div class="modal-content yellowTheme bold">
-												<div class="modal-header">
-											      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-											    </div>
-											    <div class="modal-body size-13">
-											    	<table class="table">
-											    		<thead>
-															<tr>
-																<th>$!locale.get("product.label.branchName")</th>
-																<th class="center">$!locale.get("product.label.available")</th>
-															</tr>
-														</thead>
-											    		<tbody id="allBranchHTML$!itemData.partNumber">
-											    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
-											    		</tbody>
-											    	</table>
-											    </div>
-											</div>
-										</div>
-									</div>
-									<!--Branch Availabiltiy List Section-->
 			#end
 		</ul>
 	</div>
@@ -675,14 +679,14 @@
 			</div>
 		#else
 			#if($paginate>1)
-			<div id="loadingNextPage" style="text-align: center;margin:10px 0;color:#1d4288;font-size:16px;">
-				<a href="javascript:void(0);" onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</a>
+			<div id="loadingNextPage" class="loadMore">
+				<button onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</button>
 			</div>
 			#end
 			<script type="text/javascript">
 			 function loadMoreItems()
 			 {
-				 var checkmodevalue = $!("#productListBlock").find('li').attr('class');
+				 var checkmodevalue = $("#productListBlock").find('li').attr('class');
 				 $('#loadMoreBtn').html('Loading..');
 				 loadNextPageAsync("$!paginationURL",$!resultPage,checkmodevalue);
 			 }     

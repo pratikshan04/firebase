@@ -1,68 +1,120 @@
-<div class="cms_leftMenuSlide">
-	<div id="pageTab" class="TabSwitch clearAfter">
-		<a href="javascript:void(0);" onclick="switchPage();" id="PageTabs" class="cms_pageTabBtn selected">Page</a>
-		<a href="javascript:void(0);" onclick="switchSEO();" id="SeoTabs" class="cms_pageTabBtn">SEO</a> 
+<div class="cms_leftMenuSlide staticPageSave rightSlide">
+	<!-- <div class="cms_leftMenuClose">
+		<i class="fa fa-lg fa-angle-double-left"></i>
+	</div> -->
+	<div class="cms_rightMenuClose">
+		<i class="fa fa-lg fa-angle-double-right"></i>
 	</div>
-	<div class="cms_leftMenuClose">
-		<i class="fa fa-lg fa-chevron-left"></i>
+	<div id="pageTab" class="TabSwitch clearfix">
+		<a href="javascript:void(0);" onclick="switchPage();" id="PageTabs" class="cms_pageTabBtn selected">Page Details</a>
+		<a href="javascript:void(0);" onclick="switchSEO();" id="SeoTabs" class="cms_pageTabBtn">SEO Details</a>
+		<a href="pageHistoryCms.action?pageId=$!staticPageData.id" target="_blank" id="HistoryTabs" onclick="javascript:showIframeWindow();" class="iframe cms_pageTabBtn"><i class="fa fa-history" aria-hidden="true"></i></a> 
 	</div>
 	<div class="pageTab">
 		<form id="cmsForm">
-		#if($staticPageData.id>0)
-		Page Link : /staticPages.action?ID=$!staticPageData.id
-		<div id="clonediv"><label class="cms_StaticLabel">For Cloning the Page</label>  <input type="checkbox" name="pageData.clonePage"   id="clonePage" onchange="getValueForCLone();" /></div>
-		#end
-		<div class="clear-both"></div>
-			<label class="cms_StaticLabel">Page Name</label> <input type="text" name="pageData.pageName" onKeypress="return IsSpecialCharacter(event);" id="pageName" value="$!staticPageData.pageName" /> 
-			<label class="cms_StaticLabel">Page Type</label>  
-			<select id="selectStaticPageType" name="pageData.pageType" onchange="getNextLevelForPageType(this);">
-				<option #if($!staticPageData.pageType=="BODY") selected #end value="BODY">BODY</option>
-				<option #if($!staticPageData.pageType=="TEMPLATE") selected #end value="TEMPLATE">TEMPLATE</option>
-				<option #if($!staticPageData.pageType=="BLOG") selected #end value="BLOG">BLOG</option>
-				<option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">CATEGORY</option>
-				<option #if($!staticPageData.pageType=="BRAND") selected #end value="BRAND">BRAND</option>
-				<option #if($!staticPageData.pageType=="MANUFACTURER") selected #end value="MANUFACTURER">MANUFACTURER</option> 
-			</select>
-			<div class="linkWraper">
-				<span id="brandListSpan" class="hideMe blockElement">
-					<a class="iframe" href="bandDetailListCms.action" title="Brand List" onclick="javascript:showIframeWindow();">Select Brand</a> 
-					<input type="hidden" id="selectBrand" name="pageData.brandId" value="$!selectedPageTypeValueId"/>
-					<span id="brandListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
-				</span> 
-				<span id="manuFacturerListSpan" class="hideMe blockElement">
-					<a class="iframe" href="manufacturerDetailListCms.action" title="Manufacturer List" onclick="javascript:showIframeWindow();">Select Manufacturer</a> 
-					<input type="hidden" id="selectManufacturer" name="pageData.manufacturerId" value="$!selectedPageTypeValueId"/>
-					<span id="manuFacturerListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
-				</span> 
-				<span id="categoryListSpan" class="hideMe blockElement">
-					<a class="iframe" href="categoryDetailListCms.action" title="Category List" onclick="javascript:showIframeWindow();">Select Category</a> 
-					<input type="hidden" id="selectCategory" name="pageData.taxonomyTreeId" value="$!selectedPageTypeValueId"/>
-					<span id="categoryListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
-				</span> 
+			#if($staticPageData.id>0)
+			<p class="cms_pageUrl">Page Link : /staticPages.action?ID=$!staticPageData.id</p>
+			<div id="clonediv">
+				<label class="cms_customCheckBox">
+					<input type="checkbox" name="pageData.clonePage" id="clonePage" onchange="getValueForCLone();" />
+					<span>For Cloning the Page</span>
+				</label>
 			</div>
-			<label class="cms_StaticLabel">Page Title</label>  <input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" onKeypress="return IsSpecialCharacter(event);" id="pageTitleId"   /> 
-			<label class="cms_StaticLabel">Website</label>  
-			<select name="selectedSiteId" id="selectedWebsite">
-				<option value>- Select Website -</option>
-				#if($!websiteList && $websiteList.size()>0)
+			#end
+			<div class="form-group">
+				<label>Page Name:</label>
+				<input type="text" name="pageData.pageName" onKeypress="return IsSpecialCharacter(event);" id="pageName" value="$!staticPageData.pageName" />
+			</div>
+			<div class="form-group custom-select">
+				<label>Page Type:</label>  
+				<select id="selectStaticPageType" name="pageData.pageType" onchange="getNextLevelForPageType(this);">
+					<option #if($!staticPageData.pageType=="BODY") selected #end value="BODY">Body</option>
+					<option #if($!staticPageData.pageType=="BLOG") selected #end value="BLOG">Blog</option>
+					<option #if($!staticPageData.pageType=="BRAND") selected #end value="BRAND">Brand</option>
+					<option #if($!staticPageData.pageType=="CATEGORY") selected #end value="CATEGORY">Category</option>
+					<option #if($!staticPageData.pageType=="MANUFACTURER") selected #end value="MANUFACTURER">Manufacturer</option> 
+					<option #if($!staticPageData.pageType=="TEMPLATE") selected #end value="TEMPLATE">Template</option>
+				</select>
+				<span>
+					<i class="fas fa-chevron-down"></i>
+				</span>
+			</div>
+			<div class="form-group">
+				<div class="linkWraper">
+					<span id="brandListSpan" class="hideMe blockElement">
+						<a class="iframe" href="bandDetailListCms.action" title="Brand List" onclick="javascript:showIframeWindow();">Select Brand</a> 
+						<input type="hidden" id="selectBrand" name="pageData.brandId" value="$!selectedPageTypeValueId"/>
+						<span id="brandListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
+					</span> 
+					<span id="manuFacturerListSpan" class="hideMe blockElement">
+						<a class="iframe" href="manufacturerDetailListCms.action" title="Manufacturer List" onclick="javascript:showIframeWindow();">Select Manufacturer</a> 
+						<input type="hidden" id="selectManufacturer" name="pageData.manufacturerId" value="$!selectedPageTypeValueId"/>
+						<span id="manuFacturerListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
+					</span> 
+					<span id="categoryListSpan" class="hideMe blockElement">
+						<a class="iframe" href="categoryDetailListCms.action" title="Category List" onclick="javascript:showIframeWindow();">Select Category</a> 
+						<input type="hidden" id="selectCategory" name="pageData.taxonomyTreeId" value="$!selectedPageTypeValueId"/>
+						<span id="categoryListSpanTxt">: <strong>$!selectedPageTypeValueName</strong></span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Page Title:</label>
+				<input type="text" name="pageData.pageTitle" value="$!staticPageData.pageTitle" onKeypress="return IsSpecialCharacter(event);" id="pageTitleId" /> 
+			</div>
+			<div class="form-group custom-select">
+				<label>Web Site:</label>  
+				<select name="selectedSiteId" id="selectedWebsite">
+					<option value>- Select Website -</option>
+					#if($!websiteList && $websiteList.size()>0)
 					#foreach($website in $websiteList)
-						<option  #if($selectedSiteId==$website.siteId) selected #end value="$website.siteId">$website.siteName</option>
+					<option  #if($selectedSiteId==$website.siteId) selected #end value="$website.siteId">$website.siteName</option>
 					#end
+					#end
+				</select>
+				<span>
+					<i class="fas fa-chevron-down"></i>
+				</span>
+			</div>
+			<div class="form-group custom-select">
+				<label>Select Language:</label>  
+				<select name="pageData.localeId" id="lang">
+					<option value>- Select Language -</option>
+					#foreach($localeList in $localeListData)
+					<option  value="$localeList.localeId" #if($staticPageData.localeId==$localeList.localeId) selected #end  >$localeList.languageName</option>
+					#end
+				</select>
+				<span>
+					<i class="fas fa-chevron-down"></i>
+				</span>
+			</div>
+			<div class="form-group">
+				<label>Meta Data:</label>
+				<input type="text" name="pageData.metaDescription" value="$!staticPageData.metaDescription"  id="metaDescId"/> 
+			</div>
+			<div class="form-group">
+				<label>Custom Url:</label>
+				<input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" onKeypress="return IsSpecialCharacterAllowSlash(event);" id="customURLId" /> 
+			</div>
+			<div class="form-group">
+				<label>Canonical Url:</label>
+				<input type="text" name="pageData.canonicalUrl" value="$!staticPageData.canonicalUrl" id="canonicalURLId" /> 
+			</div>
+			<div class="form-group">
+				<label class="cms_customCheckBox">
+					<input type="checkbox" name="fullPageLayout" #if($staticPageData.fullPageLayout) checked #end  />
+					<span>Full Page Layout</span>
+				</label>
+				<label class="cms_customCheckBox">
+					<input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end />
+					<span>Active</span>
+				</label>
+				#if($!staticPageData.homePageIcon)
+				<label title="Home page">
+					<i class="fa fa-lg fa-home"></i>
+				</label>
 				#end
-			</select>
-			<label class="cms_StaticLabel">List Locale</label>  
-			<select name="pageData.localeId" id="lang">
-				<option value>- Select Language -</option>
-				#foreach($localeList in $localeListData)
-				<option  value="$localeList.localeId" #if($staticPageData.localeId==$localeList.localeId) selected #end  >$localeList.languageName</option>
-				#end
-			</select>
-			<label class="cms_StaticLabel">Meta Data</label>  <input type="text" name="pageData.metaDescription" value="$!staticPageData.metaDescription"  id="metaDescId"/> 
-			<label class="cms_StaticLabel">Custom Url</label>  <input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" onKeypress="return IsSpecialCharacter(event);" id="customURLId" /> 
-			<label class="cms_StaticLabel">Canonical Url</label>  <input type="text" name="pageData.canonicalUrl" value="$!staticPageData.canonicalUrl" id="canonicalURLId" /> 
-			<label class="cms_StaticLabel">Full Page Layout</label><input type="checkbox" name="fullPageLayout" #if($staticPageData.fullPageLayout) checked #end  /><div class="clear-both"></div>
-			<label class="cms_StaticLabel">Active</label><input type="checkbox"  id="pagestatus" name="pageData.status" value="A" #if($staticPageData.status=="A") checked #end /><div class="clear-both"></div>
-			#if($!staticPageData.homePageIcon)<label class="cms_StaticLabel"><img src="$!webThemes/CMS/images/small/homeIcon.png" title="Home page" class="actionIcon"></label><div class="clear-both"></div>#end
+			</div>
 			<input type="hidden" name="tempImgVal" value=''  id="tempImageId" />
 			<input type="hidden" name="pageData.pageContent" id="pageContent" value="" />
 			<input type="hidden" name="pageData.id" id="cmsPageId" value="$!staticPageData.id" />
@@ -70,370 +122,341 @@
 			<input type="hidden" name="pageData.metaKeywords" value="$!staticPageData.metaKeywords" id="metaKeywordsId"/>
 			<input type="hidden" name="pageData.homePageIcon" value='$!staticPageData.homePageIcon'/>
 			<input type="hidden" name="pageData.userEdited" id="userEditedId" value='0'/>
-		<div class="clear-both"></div>	
+			<input type="hidden" name="pageData.startDate" value='' id="startDate" />
+      		<input type="hidden" name="pageData.endDate" value='' id="endDate" />
 		</form>
-		<a href="javascript:void(0);" onclick="saveStaticPage()" class="cmsSaveBtn">Save</a><div class="clear-both"></div>
+		<div class="cmsSaveBtn">
+			<a href="javascript:void(0);" onclick="saveStaticPage()">
+				Save <i class="fa fa-save"></i>
+			</a>
+		</div>
+		
 		<input type="hidden" value="$!staticPageData.pageType" id="staticPageType" />
 	</div>
 	<div id="seoTab" class="seoTab" style="display:none;">
 		<meta name="description" content="This is an example of a meta data. This will often show up in search results."></meta>	
-		<div id="SEOPreview" style="background:white;padding-bottom:12px;">
-				Preview
-				<ul style="list-style-type: none;border:1px solid #bbb !important;">
-				    <li>
-				        <div id="previewTitle">
-				              <h3 style="font-size: 18px;"><a href="#" style="font-size: 18px;" onclick="return false;"><span id="out_title" style="color:#1a0dab"></span></a></h3>
-				       </div>
-				    </li>
-				    <li>
-				        <div id="previewURL">
-				          <cite style="color:#006621;font-size: 14px;">
-				              <span id="out_url"></span><span id="out_dash1" style="display: inline;"></span>
-				            <span id="out_dash1" style="display: inline;"></span>         
-				          </cite>
-				       </div> 
-				    </li>   
-				    <li>
-				        <div id="previewSnippet">
-				         <span id="out_snippet"></span>
-				         <span id="out_dash1" style="display: inline;"></span>   
-				       </div>
-				    </li>
-				</ul>    
-			</div>
-			<div id="errDiv"></div> <br />
-		<div id="SEOPageTitle" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_title">SEO Title</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="titleCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			   <textarea id="in_title" name="in_title" rows="2" cols="35" style="color: #585858; border: 1px solid #bbb !important;">$!staticPageData.pageTitle</textarea>
-			</div>
+		<div id="SEOPreview" class="form-group">
+			<label>Preview:</label>
+			<ul style="list-style-type: none;border:1px solid #bbb !important;">
+				<li>
+					<div id="previewTitle">
+						<h3><a href="#" onclick="return false;"><span id="out_title" style="color:#1a0dab"></span></a></h3>
+					</div>
+				</li>
+				<li>
+					<div id="previewURL">
+						<cite style="color:#006621;font-size: 14px;">
+							<span id="out_url"></span><span id="out_dash1" style="display: inline;"></span>
+							<span id="out_dash1" style="display: inline;"></span>         
+						</cite>
+					</div>
+				</li>
+				<li>
+					<div id="previewSnippet">
+						<span id="out_snippet"></span>
+						<span id="out_dash1" style="display: inline;"></span>   
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="errDiv"></div> <br />
+		
+		<div id="SEOPageTitle" class="form-group">
+			<label for="in_title"><strong>SEO Title:</strong> <span id="titleCharsLeft"></span></label>
+			<textarea id="in_title" name="in_title" rows="2" cols="35" maxlength="70">$!staticPageData.pageTitle</textarea>
+		</div>
 
-			<div id="SEOdescription" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_snippet">Meta Data</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="snippetCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			     <textarea id="in_snippet" name="in_snippet" rows="3" cols="47" style="color: #585858; border: 1px solid #bbb !important;">$!staticPageData.metaDescription</textarea>
-			</div>
+		<div id="SEOdescription" class="form-group">
+			<label for="in_snippet"><strong>Meta Data:</strong> <span id="snippetCharsLeft"></span></label>
+			<textarea id="in_snippet" name="in_snippet" rows="3" cols="47">$!staticPageData.metaDescription</textarea>
+		</div>
 
-			<div id="SEOURL" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_snippet">URL</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="snippetCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			   <textarea id="in_url" name="in_url" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
-			</div>
+		<div id="SEOURL" class="form-group">
+			<label for="in_snippet"><strong>URL:</strong></label>
+			<textarea id="in_url" name="in_url" rows="1" cols="47"></textarea>
+		</div>
 
-			<div id="SEOKeywords" style="padding-bottom:10px;">
-			   <div id="sub-left">
-			         <label for="in_keyword">Keywords</label>
-			   </div>
-			   <div id="sub-right">
-			      <span id="snippetCharsLeft"/>
-			   </div>
-			   <div class="clear-both"></div>
-			   <textarea id="in_keyword" name="in_keyword" rows="1" cols="47" style="color: #585858; border: 1px solid #bbb !important;"></textarea>
-			   <div style="margin:10px 3px 10px 0;">
-			  	 	<a href="javascript:void(0);" onclick="javascript: SEOAnalyzer();" id="seoValidatorButton" class="cmsSaveBtn float-left" style="margin-left:0;">SEO Validator</a>		
-		<a href="javascript:void(0);" onclick="javascript: checkKeywordExist();" id="keywordChecker" class="cmsSaveBtn float-right">Keyword Validator</a>
-		<div class="clear-both"></div>
-			  </div>
-			</div>
-			
-			
-<style>
-	.linkWraper a{
-		color: #666;
-		font-size: 10px;
-		text-decoration: underline;
-		padding: 10px 0 2px 0;
-		display: inline-block;
-	}
-</style>	
+		<div id="SEOKeywords" class="form-group">
+			<label for="in_keyword">Keywords</label>
+			<textarea id="in_keyword" name="in_keyword" rows="1" cols="47"></textarea>
+		</div>
+		
+		<div class="clearfix cmsSaveBtn">
+			<a href="javascript:void(0);" onclick="javascript: SEOAnalyzer();" id="seoValidatorButton" class="pull-left">SEO Validator</a>		
+			<a href="javascript:void(0);" onclick="javascript: checkKeywordExist();" id="keywordChecker">Keyword Validator</a>
+		</div>
+	</div>
 <script>	
 	if(document.getElementById('cmsPageId').value=='0'){
 		document.getElementById('pagestatus').checked = true;
 	}
-			var title = "";
-			/* if(jQuery.trim(jQuery("#staticPageType").val())!=""){
-				jQuery("#selectStaticPageType").val(jQuery.trim(jQuery("#staticPageType").val()));
-			}else{
-				jQuery("#selectStaticPageType").val("BODY");
-			} */
-			function enableSEOValidator(){
-			    jQuery('#seoValidatorButton').bind('click', function(ev) {
-			    	 resetTag('#errDiv');
-			         SEOAnalyzer();
-			    });
-			    
-			    jQuery('#keywordChecker').bind('click', function(ev) {
-			    	checkKeywordExist();
-			   }); 
-			}
+	var title = "";
+	/* if(jQuery.trim(jQuery("#staticPageType").val())!=""){
+	jQuery("#selectStaticPageType").val(jQuery.trim(jQuery("#staticPageType").val()));
+	}else{
+	jQuery("#selectStaticPageType").val("BODY");
+	} */
+	function enableSEOValidator(){
+		jQuery('#seoValidatorButton').bind('click', function(ev) {
+			resetTag('#errDiv');
+			SEOAnalyzer();
+		});
 
-			function SEOAnalyzer(){
-				  checkPageTitleLength();
-				  checkMetaDescriptionLength();
-			      checkElementsExist();//in artcile heading,page title,page url,content
-			      checkImages();
-			}
+		jQuery('#keywordChecker').bind('click', function(ev) {
+			checkKeywordExist();
+		});
+	}
 
-			function checkLength(tag,maxlength){
-				//alert("length" + jQuery(tag).val().length);
-			    return (jQuery(tag).val().length > maxlength) ? true : false;
-			}
-			
-			function resetTag(tag){
-			    jQuery(tag).html('');
-			}
+	function SEOAnalyzer(){
+		checkPageTitleLength();
+		checkMetaDescriptionLength();
+		checkElementsExist();//in artcile heading,page title,page url,content
+		checkImages();
+	}
 
-			function checkPageTitleLength(){
-				 if(checkLength('#in_title',70) > 70)
-			     log("title page character count has gone over the recommended value");
-			}
+	function checkLength(tag,maxlength){
+		//alert("length" + jQuery(tag).val().length);
+		return (jQuery(tag).val().length > maxlength) ? true : false;
+	}
 
-			function checkMetaDescriptionLength(){
-				 if (checkLength('#in_snippet',156) > 156)
-				 log("Meta data character count has gone over the recommended value!");
-			}
+	function resetTag(tag){
+		jQuery(tag).html('');
+	}
 
-			function checkElementsExist(){ 
-				var text= "";
-			    var titleTag= jQuery("#in_title").val();
-			    var headerTag ="H1";
-			    jQuery("meta[name='description']").attr("content",jQuery("#in_snippet").val());
-			    var metadescriptionTag=jQuery("meta[name='description']").attr("content");
-			    var url=jQuery(location).attr('href');
-			   
-			    alert("Title Tag: " + titleTag + "\n Size: " + titleTag.length);
-			    if(titleTag.length == 0){
-			        text = text + "Title Tag does not exist";
-					log(text);
-			    }
-			    if ( jQuery(headerTag).length == 0){
-			    	 text = text + "Header Tag does not exist";
-			    	log(text);
-			    }
-			    
-			    if ( typeof (metadescriptionTag) === 'undefined'){
-			      	 text = text + "Meta Data Tag does not exist";
-			   	  log(text);
-			   } 
-			   log(text);
-			}
+	function checkPageTitleLength(){
+		if(checkLength('#in_title',70) > 70)
+			log("title page character count has gone over the recommended value");
+	}
 
-			function checkImages(){
-			    var imageTag   = jQuery("#gm-canvas").find('img');
-			    var imageCount = jQuery("img").length;
-		
-			    var imgAltTag		= "";
-			    var imgTitle		= "";
-			    var imageSrc        = "";
-			    var SEOSuggestions  = "";
-		
-			    var imageAttributeTag = ["alt","title"];
-		
-			    if(imageCount){// implies *not* zero
-			        imageTag.each(function() {
-			            // check whether alt_text/title are present
-			            imageSrc  = jQuery(this).attr("src");
-			            imgAltTag = jQuery(this).attr("alt");
-			            imgTitle  = jQuery(this).attr("title");
-			           
-			            var imageElements = [imgAltTag,imgTitle];
-			          
-			            for (index = 0; index < imageElements.length; index++) {
-			        	    //alert("imageElements[index]"+ imageElements[index]);
-			                if(typeof (imageElements[index]) === 'undefined'){
-			                    SEOSuggestions = SEOSuggestions +  imageSrc + ' does not have the [' + imageAttributeTag[index]  + '] attribute defined ' ;
-			                    log(SEOSuggestions);
-			                }
-			        	}
-	      			 });
-	   		 }else {
-	        log('No img elements found');
-	   		 }
-			}
+	function checkMetaDescriptionLength(){
+		if (checkLength('#in_snippet',156) > 156)
+			log("Meta data character count has gone over the recommended value!");
+	}
 
-			function checkKeywordExist(){		
-				var metadescriptionTag=jQuery("meta[name='description']").attr("content");
-			       //unhighlight
-			       jQuery("#SEOPreview").find("H1").unhighlight();
-			       jQuery("#gm-canvas").unhighlight();
-			   	   //check title
-			   	   jQuery("out_title").unhighlight();
-			   	   jQuery("out_url").unhighlight();
-			   	   jQuery("out_snippet").unhighlight();
-			   	 
-			   	   //check in body
-			   	   jQuery("body").unhighlight();
-			
-					var keywordList = jQuery('textarea#in_keyword').val().split(/(\s|\n|\t)+/g);
-			   		//alert("keywords:"+keywordList.length);
-			   		var keyword="";
-			   	    for (index = 0; index < keywordList.length; index++) {
-			   	      	if(keywordList[index].length != 0){
-			   	      		keyword = keywordList[index].trim();
-			   	      		//check header
-			   	      		jQuery("#SEOPreview").find("H1").highlight(keyword);
-			   	      		
-			   	      		//check title
-			   	      		jQuery("title").highlight(keyword);
-			   	      	
-			   	      		//check description
-			   	      		//metadescriptionTag.highlight(keyword);
-			   	      				   	      		
-			   	      		//check in body
-			   	      		jQuery("#gm-canvas").highlight(keyword);
-			   	        } 
-			   	    }
-			   	    
-			}
-	   
-			function isEmpty(tag,src,identifier){
-			    if(typeof (tag) === 'undefined') {
-			        log( src + ' does not have the ['+ identifier + '] attribute defined') ;   
-			    }
-			}
-	
-			function log(text){
-			     jQuery('#errDiv').html(text);
+	function checkElementsExist(){
+		var text= "";
+		var titleTag= jQuery("#in_title").val();
+		var headerTag ="H1";
+		jQuery("meta[name='description']").attr("content",jQuery("#in_snippet").val());
+		var metadescriptionTag=jQuery("meta[name='description']").attr("content");
+		var url=jQuery(location).attr('href');
+
+		alert("Title Tag: " + titleTag + "\n Size: " + titleTag.length);
+		if(titleTag.length == 0){
+			text = text + "Title Tag does not exist";
+			log(text);
+		}
+		if ( jQuery(headerTag).length == 0){
+			text = text + "Header Tag does not exist";
+			log(text);
+		}
+
+		if ( typeof (metadescriptionTag) === 'undefined'){
+			text = text + "Meta Data Tag does not exist";
+			log(text);
+		} 
+		log(text);
+	}
+
+	function checkImages(){
+		var imageTag   = jQuery("#gm-canvas").find('img');
+		var imageCount = jQuery("img").length;
+		var imgAltTag		= "";
+		var imgTitle		= "";
+		var imageSrc        = "";
+		var SEOSuggestions  = "";
+		var imageAttributeTag = ["alt","title"];
+		if(imageCount){// implies *not* zero
+			imageTag.each(function() {
+				// check whether alt_text/title are present
+				imageSrc  = jQuery(this).attr("src");
+				imgAltTag = jQuery(this).attr("alt");
+				//imgTitle  = jQuery(this).attr("title");
+				var imageElements = [imgAltTag,imgTitle];
+				for (index = 0; index < imageElements.length; index++) {
+					//alert("imageElements[index]"+ imageElements[index]);
+					if(typeof (imageElements[index]) === 'undefined'){
+						SEOSuggestions = SEOSuggestions +  imageSrc + ' does not have the [' + imageAttributeTag[index]  + '] attribute defined ' ;
+						log(SEOSuggestions);
+					}
+				}
+			});
+		}else {
+			log('No img elements found');
+		}
+	}
+
+	function checkKeywordExist(){
+		var metadescriptionTag=jQuery("meta[name='description']").attr("content");
+		//unhighlight
+		jQuery("#SEOPreview").find("H1").unhighlight();
+		jQuery("#gm-canvas").unhighlight();
+		//check title
+		jQuery("out_title").unhighlight();
+		jQuery("out_url").unhighlight();
+		jQuery("out_snippet").unhighlight();
+
+		//check in body
+		jQuery("body").unhighlight();
+
+		var keywordList = jQuery('textarea#in_keyword').val().split(/(\s|\n|\t)+/g);
+		//alert("keywords:"+keywordList.length);
+		var keyword="";
+		for (index = 0; index < keywordList.length; index++) {
+			if(keywordList[index].length != 0){
+				keyword = keywordList[index].trim();
+				//check header
+				jQuery("#SEOPreview").find("H1").highlight(keyword);
+				//check title
+				jQuery("title").highlight(keyword);
+				//check description
+				//metadescriptionTag.highlight(keyword);
+				//check in body
+				jQuery("#gm-canvas").highlight(keyword);
 			} 
-			
-			function charactersRemainings(){
-			    var maxCharactersTitleLimit = 70;
-			    var maxCharactersDescLimit = 156;
-			    jQuery('#titleCharsLeft').html(maxCharactersTitleLimit + ' characters');
-			    jQuery('#snippetCharsLeft').html(maxCharactersDescLimit + ' characters');
-		
-			    jQuery('#in_title').keyup(function() {
-			    	 var myTxtArea2 = document.getElementById('in_title'); 
-			    	   // myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
-			        var text_length = jQuery('#in_title').val().length;
-			        var text_remaining = maxCharactersTitleLimit - text_length;
-					
-					if(text_length < 35)
-					jQuery(this).attr("style","color: #585858; border: 1px solid red !important");
-					else if(text_length >= 35 && text_length < 70)
-					jQuery(this).attr("style","color: #585858; border: 1px solid orange !important");
-					else if(text_length >= 70)
-					jQuery(this).attr("style","color: #585858; border: 1px solid green !important");
-		
-			        jQuery('#titleCharsLeft').html(text_remaining + ' characters');
-			        if(text_length < 71)
-			        jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
-			        document.getElementById("pageTitleId").value = jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,"");
-			    });  
-	
-			    jQuery('#in_url').keyup(function() {
-			        var text_length = jQuery('#in_url').val().length;
-			        jQuery('#out_url').html(jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,""));
-			        document.getElementById("customURLId").value = jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,"");
-			    });
-		   
-			    jQuery('#in_snippet').keyup(function() {
-			    	 var myTxtArea2 = document.getElementById('in_snippet'); 
-			    	    myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
-			        var text_length = jQuery('#in_snippet').val().length;
-			        var text_remaining = maxCharactersDescLimit - text_length;
-			        jQuery('#snippetCharsLeft').html(text_remaining + ' characters');
-			        jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
-			        document.getElementById("metaDescId").value = jQuery('#in_snippet').val().replace(/^\s+|\s+jQuery/g,"");
-			    });
-			    jQuery('#in_keyword').keyup(function() {
-			        var text_length = jQuery('#in_keyword').val().length;
-			        document.getElementById("metaKeywordsId").value = jQuery('#in_keyword').val().replace(/^\s+|\s+jQuery/g,"");
-			    });
-			}	
-			
+		}
+	}
 
-			function populatePreview(inelement,outelement){
-			       $('#'+inelement).keyup(function(){
-			           $('#'+outelement).html($('#'+inelement).val());
-			       });
-			}
-			function rebuildPreview(){
+	function isEmpty(tag,src,identifier){
+		if(typeof (tag) === 'undefined') {
+			log( src + ' does not have the ['+ identifier + '] attribute defined') ;   
+		}
+	}
+
+	function log(text){
+		jQuery('#errDiv').html(text);
+	} 
+
+	function charactersRemainings(){
+		var maxCharactersTitleLimit = 70;
+		var maxCharactersDescLimit = 156;
+		jQuery('#titleCharsLeft').html(maxCharactersTitleLimit + ' characters');
+		jQuery('#snippetCharsLeft').html(maxCharactersDescLimit + ' characters');
+
+		jQuery('#in_title').keyup(function() {
+			var myTxtArea2 = document.getElementById('in_title'); 
+			// myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
+			var text_length = jQuery('#in_title').val().length;
+			var text_remaining = maxCharactersTitleLimit - text_length;
+
+			if(text_length < 35)
+				jQuery(this).attr("style","color: #585858; border: 1px solid red !important");
+			else if(text_length >= 35 && text_length < 70)
+				jQuery(this).attr("style","color: #585858; border: 1px solid orange !important");
+			else if(text_length >= 70)
+				jQuery(this).attr("style","color: #585858; border: 1px solid green !important");
+
+			jQuery('#titleCharsLeft').html(text_remaining + ' characters');
+			if(text_length < 71)
 				jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
-				jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
-			}
-			var temp =document.getElementById('pageName').value;
-			function getValueForCLone(){
+			document.getElementById("pageTitleId").value = jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,"");
+		});
 
-				document.getElementById('pageName').value="";
-				if(jQuery('#clonePage').is(":checked")){
-					alert("Clone Has Been Selected");
-					document.getElementById("clonePage").setAttribute("value","true");
-				}else{	
-					document.getElementById('pageName').value=temp;
-					document.getElementById("clonePage").setAttribute("value","false");
-					
-				}
-			}
+		jQuery('#in_url').keyup(function() {
+			var text_length = jQuery('#in_url').val().length;
+			jQuery('#out_url').html(jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,""));
+			document.getElementById("customURLId").value = jQuery('#in_url').val().replace(/^\s+|\s+jQuery/g,"");
+		});
 
-		charactersRemainings();		
+		jQuery('#in_snippet').keyup(function() {
+			var myTxtArea2 = document.getElementById('in_snippet'); 
+			myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
+			var text_length = jQuery('#in_snippet').val().length;
+			var text_remaining = maxCharactersDescLimit - text_length;
+			jQuery('#snippetCharsLeft').html(text_remaining + ' characters');
+			jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
+			document.getElementById("metaDescId").value = jQuery('#in_snippet').val().replace(/^\s+|\s+jQuery/g,"");
+		});
 		
-		jQuery("#seoTab").hide();
-		
-		function IsSpecialCharacter(e)
-		{
-			var regex = new RegExp("^[a-zA-Z0-9 ]+$");
-		    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-		    if (!regex.test(key)) {
-		       event.preventDefault();
-		       return false;
-		    }
+		jQuery('#in_keyword').keyup(function() {
+			var text_length = jQuery('#in_keyword').val().length;
+			document.getElementById("metaKeywordsId").value = jQuery('#in_keyword').val().replace(/^\s+|\s+jQuery/g,"");
+		});
+	}	
+
+
+	function populatePreview(inelement,outelement){
+		$('#'+inelement).keyup(function(){
+			$('#'+outelement).html($('#'+inelement).val());
+		});
+	}
+	
+	function rebuildPreview(){
+		jQuery('#out_title').html(jQuery('#in_title').val().replace(/^\s+|\s+jQuery/g,""));
+		jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
+	}
+	
+	var temp =document.getElementById('pageName').value;
+	function getValueForCLone(){
+		document.getElementById('pageName').value="";
+		if(jQuery('#clonePage').is(":checked")){
+			alert("Clone Has Been Selected");
+			document.getElementById("clonePage").setAttribute("value","true");
+		}else{
+			document.getElementById('pageName').value=temp;
+			document.getElementById("clonePage").setAttribute("value","false");
 		}
-		if($("#selectStaticPageType").length>0){
-			getNextLevelForPageType($("#selectStaticPageType"))
+	}
+
+	charactersRemainings();		
+	jQuery("#seoTab").hide();
+	function IsSpecialCharacter(e){
+		var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+		var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+		if (!regex.test(key)) {
+			event.preventDefault();
+			return false;
 		}
-		function getNextLevelForPageType(obj){
-			console.log($(obj).val());
-			if(obj!=null){
-				if($(obj).val()=="BRAND" && $("#brandListSpan").length>0){
-					$("#brandListSpan").show();
+	}
+
+	function IsSpecialCharacterAllowSlash(e){
+		var regex = new RegExp("^[a-zA-Z0-9 \/-]+$");
+		var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+		if (!regex.test(key)) {
+			event.preventDefault();
+			return false;
+		}
+	}
+	
+	if($("#selectStaticPageType").length>0){
+		getNextLevelForPageType($("#selectStaticPageType"))
+	}
+	function getNextLevelForPageType(obj){
+		console.log($(obj).val());
+		if(obj!=null){
+			if($(obj).val()=="BRAND" && $("#brandListSpan").length>0){
+				$("#brandListSpan").show();
+				$("#manuFacturerListSpan").hide();
+				$("#selectManufacturer").val("");
+				$("#categoryListSpan").hide();
+				$("#selectCategory").val("");
+			}else if($(obj).val()=="MANUFACTURER" && $("#manuFacturerListSpan").length>0){
+				$("#manuFacturerListSpan").show();
+				$("#brandListSpan").hide();
+				$("#selectBrand").val("");
+				$("#categoryListSpan").hide();
+				$("#selectCategory").val("");
+			}else if($(obj).val()=="CATEGORY" && $("#categoryListSpan").length>0){
+				$("#categoryListSpan").show();
+				$("#brandListSpan").hide();
+				$("#selectBrand").val("");
+				$("#manuFacturerListSpan").hide();
+				$("#selectManufacturer").val("");
+			}else{
+				if($("#manuFacturerListSpan").length>0){
 					$("#manuFacturerListSpan").hide();
 					$("#selectManufacturer").val("");
-					$("#categoryListSpan").hide();
-					$("#selectCategory").val("");
-				}else if($(obj).val()=="MANUFACTURER" && $("#manuFacturerListSpan").length>0){
-					$("#manuFacturerListSpan").show();
+				}
+				if($("#brandListSpan").length>0){
 					$("#brandListSpan").hide();
 					$("#selectBrand").val("");
+				}
+				if($("#categoryListSpan").length>0){
 					$("#categoryListSpan").hide();
 					$("#selectCategory").val("");
-				}else if($(obj).val()=="CATEGORY" && $("#categoryListSpan").length>0){
-					$("#categoryListSpan").show();
-					$("#brandListSpan").hide();
-					$("#selectBrand").val("");
-					$("#manuFacturerListSpan").hide();
-					$("#selectManufacturer").val("");
-				}else{
-					if($("#manuFacturerListSpan").length>0){
-						$("#manuFacturerListSpan").hide();
-						$("#selectManufacturer").val("");
-					}
-					if($("#brandListSpan").length>0){
-						$("#brandListSpan").hide();
-						$("#selectBrand").val("");
-					}
-					if($("#categoryListSpan").length>0){
-						$("#categoryListSpan").hide();
-						$("#selectCategory").val("");
-					}
 				}
 			}
 		}
-		</script>
-	</div>
+	}
+</script>
 </div>

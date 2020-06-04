@@ -1,12 +1,13 @@
 function submitThisForm(formId){
-	var currentForm , submitForm, formElements;
+	unusualCode = 0;
+	var currentForm , submitForm, formElements, unusualCodeErrorStr = $("#dataErrors").attr('data-unusualError');
 	if($(formId).prop("tagName") != "FORM"){
 		currentForm = $(formId);
 		submitForm = $(formId);
-		formEle = $(submitForm).find('input, select, textarea');
+		formElements = $(submitForm).find('input, select, textarea');
 	}else{
 		currentForm = $(formId);
-		formEle = formId
+		formElements = formId.elements;
 	}
 	$('.alert').remove();
 	$(currentForm).find('.requiredField span.required').remove();
@@ -22,29 +23,37 @@ function submitThisForm(formId){
 		$(curSubmitBtn[0]).text("Please Wait").attr("disabled",true);
 	}
 	var i, j, k, submitForm = this;
-	var eachElement, formElements = formEle.elements, errorMessages = [];
+	var eachElement, errorMessages = [];
 	for(i = 0; i < formElements.length; i++){
 		eachElement = formElements[i];
-		if(eachElement.dataset.required == "Y"){
-			if(eachElement.dataset.type != 'radio' && eachElement.dataset.type != 'checkbox')
-				validateFormElementsByClassName(eachElement.dataset.type, eachElement, errorMessages);
-			else if(eachElement.dataset.type == 'radio' || eachElement.dataset.type == 'checkbox'){
-				if(!isElementChecked(eachElement)){
-					if(!(errorMessages.indexOf(eachElement.attributes['data-error'].value) >= 0)){
-						errorMessages.push(eachElement.attributes['data-error'].value);
-						//$(eachElement).parent().parent().parent().parent().addClass('requiredField').append("<span class='required'>ERROR: "+eachElement.attributes['data-error'].value+"</span>");
+		if(validateStr(eachElement.value)){
+			unusualCode++;
+		}
+		try{
+			if(eachElement.dataset.required == "Y"){
+				if(eachElement.dataset.type != 'radio' && eachElement.dataset.type != 'checkbox')
+					validateFormElementsByClassName(eachElement.dataset.type, eachElement, errorMessages);
+				else if(eachElement.dataset.type == 'radio' || eachElement.dataset.type == 'checkbox'){
+					if(!isElementChecked(eachElement)){
+						if(!(errorMessages.indexOf(eachElement.attributes['data-error'].value) >= 0)){
+							errorMessages.push(eachElement.attributes['data-error'].value);
+							//$(eachElement).parent().parent().parent().parent().addClass('requiredField').append("<span class='required'>ERROR: "+eachElement.attributes['data-error'].value+"</span>");
+						}
 					}
 				}
 			}
-	   }
+		}catch(e){
+			console.log(e);
+		}
 	}
 	if(errorMessages.length > 0){
 		notifyValidation(currentForm, errorMessages.join("<br>"));
-		if(curSubmit[0]){
-			$(curSubmit[0]).val(btnVal).attr("disabled", false);
-		}else if(curSubmitBtn[0]){
-			$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
-		}
+		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+		return false;
+	}else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
+		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+		return false;
 	}else{
 		if($(formId).prop("tagName") != "FORM" || $(formId).attr("data-ajaxSubmit") == "N"){
 			return true;
@@ -62,45 +71,46 @@ function validateFormElementsByClassName(elementType, formElement, errorMessages
 		//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-error'].value+"</span>");
 	}else{
 		switch(elementType.toUpperCase()){
-			case "EMAIL" :   
-					if(!isValidEmailId(formElement)){
-						errorMessages.push(formElement.attributes['data-invalid'].value);
-						//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-invalid-mobile'].value+"</span>");
-					}
-				break;
-			case "NUMBER" :
-					if(!isValidPhoneNumber(formElement)){
-						errorMessages.push(formElement.attributes['data-invalid'].value);
-						//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-invalid-mobile'].value+"</span>");
-					}
-				break;
-			case "PASSWORD" :
-					if(!isValidPassword(formElement)){
-						errorMessages.push(formElement.attributes['data-invalid'].value);
-						//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-invalid-mobile'].value+"</span>");
-					}
-				break;
+		case "EMAIL" :   
+			if(!isValidEmailId(formElement)){
+				errorMessages.push(formElement.attributes['data-invalid'].value);
+				//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-invalid-mobile'].value+"</span>");
+			}
+			break;
+		case "NUMBER" :
+			if(!isValidPhoneNumber(formElement)){
+				errorMessages.push(formElement.attributes['data-invalid'].value);
+				//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-invalid-mobile'].value+"</span>");
+			}
+			break;
+		case "PASSWORD" :
+			if(!isValidPassword(formElement)){
+				errorMessages.push(formElement.attributes['data-invalid'].value);
+				//$(formElement).parent().addClass('requiredField').append("<span class='required'>ERROR: "+formElement.attributes['data-invalid-mobile'].value+"</span>");
+			}
+			break;
 		}
 	}
 }
 
 function isEmpty(formElement){
 	var status = true;
-	if(formElement.value || formElement.value.trim().length > 0){
+	if(formElement.value.trim() || formElement.value.trim().length > 0){
 		status = false;
 	}
 	return status;
 }
 function isValidEmailId(formElement){
-	 var emailRegEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-	 return emailRegEx.test(formElement.value);
+	var emailRegEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	return emailRegEx.test(formElement.value);
 }
 function isValidPhoneNumber(formElement){
-	 var phonenoRegEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-	 return phonenoRegEx.test(formElement.value);
+	var phonenoRegEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+	return phonenoRegEx.test(formElement.value);
 }
 function isValidPassword(formElement){
-	var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+	//var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+	var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 	if(formElement.dataset.password){
 		var mainPasswordID = $("#"+formElement.dataset.password).val();
 		if(mainPasswordID != formElement.value && mainPasswordID!=""){
@@ -113,11 +123,15 @@ function isValidPassword(formElement){
 	}
 }
 function isElementChecked(formElement){
-	return $("[name="+ formElement.name +"]:checked").length > 0; 
+	return $("[name='"+ formElement.name +"']:checked").length > 0; 
 }
 function notifyValidation(form, notifiedErrors){
-	$(form).prepend('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>'+notifiedErrors+'</div>');
-	$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
+	$(form).prepend('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>'+notifiedErrors+'</div>');
+	var headerHeight = 0;
+	if ($("#enableStickyHeader").val() == "Y") {
+		headerHeight = $('#normalHead').height();
+	}
+	$('html, body').animate({ scrollTop: $(".alert").offset().top - headerHeight }, 400);
 }
 
 function submitFormToServer(that){
@@ -137,7 +151,7 @@ function submitFormToServer(that){
 		data: formData,
 		success:function(response){
 			if(response=="sessionexpired" || response == "SESSIONEXPIRED"){
-			    window.location.href="doLogOff.action";
+				window.location.href="doLogOff.action";
 			}
 			var hideThat = "Y";
 			if($(that).attr('data-hideBlock')){
@@ -163,7 +177,7 @@ function submitFormToServer(that){
 				}else if(hideThat == "Y"){
 					$(that).slideUp(100);
 				}
-				
+
 				var alertId = document.getElementById(responseCont.sourceFormId);
 				if(alertId){
 					$("#"+alertId).slideDown();
@@ -176,7 +190,9 @@ function submitFormToServer(that){
 						if(notified=="Password Updated Successfully"){
 							unblock();
 							bootAlert("medium","success","Success","Password Updated Successfully, Please login again to continue");
-							window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+							$("[data-bb-handler='ok']").click(function(){
+								window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
+							});
 						}else if(hideThat && hideThat != "Y"){
 							if(hideThat != "N"){
 								$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
@@ -197,23 +213,24 @@ function submitFormToServer(that){
 				$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
 			}
 			var curSubmit = $(that).find("input[type='submit']"), curSubmitBtn = $(that).find("button[type='submit']"), btnVal = localStorage.getItem("btnVal");
-			if(curSubmit[0]){
-				$(curSubmit[0]).val(btnVal).attr("disabled", false);
-			}else if(curSubmitBtn[0]){
-				$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
-			}
+			enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
 			localStorage.removeItem("btnVal");
 			unblock();
 		},
 		error: function(){
 			unblock();
 			var curSubmit = $(that).find("input[type='submit']"), curSubmitBtn = $(that).find("button[type='submit']"), btnVal = localStorage.getItem("btnVal");
-			if(curSubmit[0]){
-				$(curSubmit[0]).val(btnVal).attr("disabled", false);
-			}else if(curSubmitBtn[0]){
-				$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
-			}
+			enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+			localStorage.removeItem("btnVal");
 			bootAlert("small","error","Error","Something went wrong");
 		}
 	});
+}
+
+function enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal){
+	if(curSubmit[0]){
+		$(curSubmit[0]).val(btnVal).attr("disabled", false);
+	}else if(curSubmitBtn[0]){
+		$(curSubmitBtn[0]).text(btnVal).attr("disabled",false);
+	}
 }

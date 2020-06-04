@@ -1,7 +1,7 @@
 #if($!eventsList && $!eventsList.title && $!eventsList!="")
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-sx-12 eventInfoBlock">
-		<h3 class="cimm_page-title">$!eventsList.title</h3>
+		<h1 class="cimm_page-title">$!eventsList.title</h1>
 		<table cellspacing="5" cellpadding="5">
 			 <tr>
 				<td><strong>$!locale.get("eventDetail.label.date") :</strong></td>
@@ -26,12 +26,19 @@
 			#if($eventsList.isCostRequired ==  "Y")
 			<tr>            		
 				<td><strong>$!locale.get("event.label.eventFee"): </strong></td>
-				<td>$! $!eventCost</td>
+				<td>$$!eventCost</td>
 			</tr>
 			#end
 			<tr>            		
-				<td colspan="2">$!eventsList.description</td>
+				<td colspan="2" class="event_desc">$!eventsList.description</td>
 			</tr>
+			#if($!eventsList.additionalInformation)
+			<tr>
+				<td colspan="2"class="event_desc">
+					$!eventsList.additionalInformation
+				</td>
+			</tr>
+			#end
 			#if($eventsList.phoneNumber!= "")
 			<tr>
 				<td colspan="2">

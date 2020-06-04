@@ -89,7 +89,7 @@
  #set($productModeItemtitle = $productModeitemData.brandName+"-"+$productModeitemData.manufacturerPartNumber)
 	<tr id="selectableItem_$productModeitemData.itemId" data-priceloading="N" data-partnumber="$productModeitemData.partNumber.replaceAll('\s+','_')"  data-rowid="identification" data-detailsload="N" itemscope itemtype="http://schema.org/Product">
 		 <td class="tabelImage" style="cursor: pointer;"><!-- id="$!productModeitemData.itemPriceId"  -->
-		 	#detailPageHiddenFields($productModeitemData.partNumber.replaceAll('\s+','_'),$productModeitemData.qty,$productModeitemData.price,$productModeitemData.salesUom,$productModeitemData.saleQty,$productModeitemData.ItemId,$productModeitemData.brandName,$productModeitemData.manufacturerPartNumber,$itemAvailability)
+		 	#detailPageHiddenFields($productModeitemData.partNumber.replaceAll('\s+','_'),$productModeitemData.qty,$productModeitemData.price,$productModeitemData.salesUom,$productModeitemData.saleQty,$productModeitemData.ItemId,$productModeitemData.brandName,$productModeitemData.manufacturerPartNumber,$!productModeitemData.availQty)
 			<input type="hidden" value="$productModeitemData.minOrderQty" id="MinOrderQty_$productModeitemData.partNumber" name="MinOrderQty_$productModeitemData.partNumber"/>
 			<input type="hidden" value="$productModeitemData.minOrderQty" id="minOrderQty_$productModeitemData.itemId"/>
 			<input type="hidden" value="$productModeitemData.orderInterval" id="OrderQtyInterval_$productModeitemData.partNumber" name="OrderQtyInterval_$productModeitemData.partNumber"/>
@@ -105,9 +105,9 @@
 				#end
 				</span>
 				#if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-				<img itemprop="image" src="$productModeitemData.imageName" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+				<img itemprop="image" src="$productModeitemData.imageName" id="imageName$!productModeitemData.itemId" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 				#else
-				<img itemprop="image" src="$!thumbNail$productModeitemData.imageName" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+				<img itemprop="image" src="$!thumbNail$productModeitemData.imageName" id="imageName$!productModeitemData.itemId" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 				#end
 				#if($!productModeitemData.clearance=="Y")
 				<span class="clearenceTag clearenceTagSmall"></span>
@@ -124,6 +124,9 @@
 					 #end
 				#end
 			 #end
+			 #set($itemProductTitle = $!productModeitemData.brandName+" "+$!productModeitemData.manufacturerPartNumber)
+			<span class="hidden" id="itemTitle$!productModeitemData.ItemId" itemprop="name">$!itemProductTitle</span>
+			 <span id="itemShortDesc$!productModeitemData.itemId" class="hideMe">$!productModeitemData.shortDesc</span>
 		 </td>
 		 <td class="removeForSend">
 			#set($minQty = 1)
@@ -248,7 +251,7 @@
 				#end
 			</ul>
 			<ul>
-				#if($itemData.packDesc)
+				#if($!itemData.packDesc && $itemData.packDesc.trim() != "")
 					<li id="packDescs" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$itemData.packDesc</span></li>
 				#end
 			</ul>

@@ -65,9 +65,15 @@ FCKXml.prototype.LoadUrl = function( urlToCall, asyncFunctionPointer )
 	
 	if ( ! bAsync )
 	{
-		if ( oXmlHttp.status == 200 || oXmlHttp.status == 304 )
+		if ( oXmlHttp.status == 200 || oXmlHttp.status == 304 ){
+			//console.log("oXmlHttp.responseXML : "+ oXmlHttp.response);
+			//console.log(xmlToJson(oXmlHttp.responseXML).Connector.Error["@attributes"].number);
+			if(xmlToJson(oXmlHttp.responseXML).Connector.Error["@attributes"].number === "101"){
+				alert("Folder Name Exist...!");
+			}
+			//console.log("xmlToJson:\n "+xmlToJson(oXmlHttp.response));
 			this.DOMDocument = oXmlHttp.responseXML ;
-		else
+		}else
 		{
 			alert( 'XML request error: ' + oXmlHttp.statusText + ' (' + oXmlHttp.status + ')' ) ;
 		}
@@ -112,3 +118,41 @@ FCKXml.prototype.SelectSingleNode = function( xpath )
 			return null ;
 	}
 }
+
+function xmlToJson(xml) {
+	
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};

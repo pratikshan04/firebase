@@ -1,155 +1,159 @@
 .multiTab {
-    width: 100%;
-    ul.multiTabHeading {
-        position: relative;
-        li {
-            float: left;
-            a {
-                padding: 10px 15px;
-                display: block;
-                &.active {
-                    color: $default_font-color;
-                }
-            }
-        }
-        slide {
-            content: "";
-            position: absolute;
-            height: 2px;
-            left: 0;
-            background: $primary_color;
-            bottom: 0;
-            transition: left .25s cubic-bezier(.5, 0, .25, 1);
-            -webkit-transition: left .25s cubic-bezier(.5, 0, .25, 1);
-        }
-    }
-    .multiTabContent  {
-        position: relative;
-        width: 100%;
-        z-index: 9;
-        overflow: hidden;
-        >h3 {
-            margin: 0;
-            text-transform: uppercase;
-            font-weight: bold;
-            background: $tabHeadingBackgroundColor;
-            color: $tabHeadingFontColor;
-            padding: 10px 15px;
-            position: relative;
-            font-size: $tabHeadingFontSize;
-            cursor: pointer;
-            height: 36px;
-            border-bottom: 1px solid $gray;
-            &:after {
-                position: absolute;
-                top: 12px;
-                right: 10px;
-                font-size: 12px;
-            }
-            &.active {
-                background: $tabHeadingActiveBackgroundColor;
-                color: $tabHeadingActiveFontColor;
-                &:after {
-                    content: $tabHeadingActiveIconContent;
-                    font-family: $tabHeadingIconFontFamily;
-                }
-            }
-            &:after {
-                content: $tabHeadingIconContent;
-                font-family: $tabHeadingIconFontFamily;
-            }
-        }
-        >div {
-            padding: 20px;
-            background: $white;
-            border: 2px solid $gray-lighten;
-        }
-        .buttonWrap {
-            text-align: right;
-            margin-top: 15px;
-            .btnPrevious,
-            .btnNext {
-                @extend .button;
-                margin-right: 10px;
-                display: inline;
-            }
-        }
-    }
-	ul.multiTabHeading2 {
-        position: relative;
-		border-bottom: 2px solid $tabHeadingActiveBackgroundColor;
-        li {
-            float: left;
-            a {
-                padding: 10px 15px;
-                display: block;
-				background: $tabHeadingBackgroundColor;
-                &.active {
-                    background: $tabHeadingActiveBackgroundColor;
-					color: $tabHeadingActiveFontColor;
-                }
-            }
-        }
-        slide {
-            content: "";
-            position: absolute;
-            height: 2px;
-            left: 0;
-            background: $primary_color;
-            bottom: 0;
-            transition: left .25s cubic-bezier(.5, 0, .25, 1);
-            -webkit-transition: left .25s cubic-bezier(.5, 0, .25, 1);
-			display: none;
-        }
-    }
-    .multiTabContent2  {
-        position: relative;
-        width: 100%;
-        z-index: 9;
-        overflow: hidden;
-		padding-top: 15px;
-        >h3 {
-            margin: 0;
-            text-transform: uppercase;
-            font-weight: bold;
-            background: $tabHeadingBackgroundColor;
-            color: $tabHeadingFontColor;
-            padding: 10px 15px;
-            position: relative;
-            font-size: $tabHeadingFontSize;
-            cursor: pointer;
-            height: 36px;
-            border-bottom: 1px solid $gray;
-            &:after {
-                position: absolute;
-                top: 12px;
-                right: 10px;
-                font-size: 12px;
-            }
-            &.active {
-                background: $tabHeadingActiveBackgroundColor;
-                color: $tabHeadingActiveFontColor;
-                &:after {
-                    content: $tabHeadingActiveIconContent;
-                    font-family: $tabHeadingIconFontFamily;
-                }
-            }
-            &:after {
-                content: $tabHeadingIconContent;
-                font-family: $tabHeadingIconFontFamily;
-            }
-        }
-    }
+  width: 100%;
+  ul.multiTabHeading {
+      position: relative;
+      li {
+          float: left;
+          a {
+              padding: 10px 15px;
+              display: block;
+              &.active {
+                  color: $default_font-color;
+              }
+          }
+      }
+      slide {
+          content: "";
+          position: absolute;
+          height: 2px;
+          left: 0;
+          background: $primary_color;
+          bottom: 0;
+          transition: left 0.25s cubic-bezier(0.5, 0, 0.25, 1);
+          -webkit-transition: left 0.25s cubic-bezier(0.5, 0, 0.25, 1);
+      }
+  }
+  .multiTabContent {
+      position: relative;
+      width: 100%;
+      z-index: 9;
+      overflow: hidden;
+      > h3 {
+          margin: 0;
+          text-transform: uppercase;
+          font-weight: bold;
+          background: $tabHeadingBackgroundColor;
+          color: $tabHeadingFontColor;
+          padding: 10px 20px 10px 15px;
+          position: relative;
+          font-size: $tabHeadingFontSize;
+          cursor: pointer;
+          min-height: 36px;
+          border-bottom: 1px solid $gray;
+          &:after {
+              position: absolute;
+              top: 12px;
+              right: 6px;
+              font-size: 12px;
+          }
+          &.active {
+              background: $tabHeadingActiveBackgroundColor;
+              color: $tabHeadingActiveFontColor;
+              &:after {
+                  content: $tabHeadingActiveIconContent;
+                  font-family: $tabHeadingIconFontFamily;
+              }
+          }
+          &:after {
+              content: $tabHeadingIconContent;
+              font-family: $tabHeadingIconFontFamily;
+          }
+      }
+      > div {
+          padding: 20px;
+          background: $white;
+          border: 2px solid $gray-lighten;
+      }
+      .buttonWrap {
+          text-align: right;
+          margin-top: 15px;
+          .btnPrevious,
+          .btnNext {
+          @extend .button;
+          margin-right: 10px;
+          display: inline;
+          }
+      }
+  }
+  ul.multiTabHeading2 {
+      position: relative;
+      border-bottom: 2px solid $tabHeadingActiveBackgroundColor;
+      li {
+          float: left;
+          a {
+              padding: 10px 15px;
+              display: block;
+              background: $tabHeadingBackgroundColor;
+              &.active {
+                  background: $tabHeadingActiveBackgroundColor;
+                  color: $tabHeadingActiveFontColor;
+              }
+          }
+      }
+      slide {
+          content: "";
+          position: absolute;
+          height: 2px;
+          left: 0;
+          background: $primary_color;
+          bottom: 0;
+          transition: left 0.25s cubic-bezier(0.5, 0, 0.25, 1);
+          -webkit-transition: left 0.25s cubic-bezier(0.5, 0, 0.25, 1);
+          display: none;
+      }
+  }
+  .multiTabContent2 {
+      position: relative;
+      width: 100%;
+      z-index: 9;
+      overflow: hidden;
+      padding-top: 15px;
+      > h3 {
+          margin: 0;
+          text-transform: uppercase;
+          font-weight: bold;
+          background: $tabHeadingBackgroundColor;
+          color: $tabHeadingFontColor;
+          padding: 10px 15px;
+          position: relative;
+          font-size: $tabHeadingFontSize;
+          cursor: pointer;
+          height: 36px;
+          border-bottom: 1px solid $gray;
+          &:after {
+              position: absolute;
+              top: 12px;
+              right: 10px;
+              font-size: 12px;
+          }
+          &.active {
+              background: $tabHeadingActiveBackgroundColor;
+              color: $tabHeadingActiveFontColor;
+              &:after {
+                  content: $tabHeadingActiveIconContent;
+                  font-family: $tabHeadingIconFontFamily;
+              }
+          }
+          &:after {
+              content: $tabHeadingIconContent;
+              font-family: $tabHeadingIconFontFamily;
+          }
+      }
+  }
 }
 .btnFinish {
-	@extend .button;
-	margin-right: 0;
-	display: inline-block;
+  @extend .button;
+  margin-right: 0;
+  display: inline-block;
 }
 
-.multiTabContent .hideBlock{
- position: absolute;
+.multiTabContent .hideBlock {
+  position: absolute;
 }
-.multiTabContent .showBlock{
- position: relative;
+.multiTabContent .showBlock {
+  position: relative;
+}
+
+#wizardCheckout .multiTabContent, #wizardGuestCheckout .multiTabContent {
+  overflow: visible;
 }

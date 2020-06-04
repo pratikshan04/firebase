@@ -34,6 +34,27 @@
 	}
 }
 
+@mixin body-bg {
+	@if (map-get($body-bg, bg-image) == "none"){
+		background: map-get($body-bg, bg-color);
+	} 
+	@if (map-get($body-bg, bg-image) != "none") {
+		background: transparent map-get($body-bg, bg-image) map-get($body-bg, bg-repeat) map-get($body-bg, bg-position);
+	}
+	@if (map-get($body-bg, bg-size) != "inherit" ) {
+		background-size: map-get($body-bg, bg-size);
+	}
+}
+
+@mixin fontColor {
+    @if (map-get($defFontcolor, bodyFontColor) != "inherit"){
+			color: map-get($defFontcolor, bodyFontColor);
+    } @else {
+			color: set-font-color($body-bg);
+    }
+}
+
+
 @mixin clearfix() {
     &:before,
     &:after {
@@ -99,7 +120,11 @@ $icons: (
 	slick_arrow-next	: "\f105",
 	slick_arrow-up		: "\f106",
 	slick_arrow-down	: "\f107"
-); 
+);
+
+// @mixin variable-icon-font($icon-code) {
+// 	content: #{"\"\\"}#{$icon-code + "\""};
+// }
 
 @mixin icon(
 		$position: before, 
@@ -118,8 +143,8 @@ $icons: (
     }
     &:#{$position} {
         @if $icon {
-            content: "#{map-get($icons, $icon)}";
-        }
+			content: "#{map-get($icons, $icon)}";
+		}
         @if $styles {
             speak: none;
 			position: absolute;
@@ -140,21 +165,142 @@ $icons: (
     }
 }
 
+/*__________________________________Main Header Mixin ______________________________*/
+
+@mixin main_header{
+	@each $header_type, $header_style in $header {
+		$bg: map-get($header_style, bg);
+		$brdr-pos: map-get($header_style, border-pos);
+		$brdr-color: map-get($header_style, border-color);
+		$brdr-size: map-get($header_style, border-size);
+		$f-color: map-get($header_style, f-color);
+
+		.cimm_#{$header_type}{
+			background: $bg;
+			@if $f-color != "inherit"{
+				color: $f-color;
+			} @else {
+				color: set-font-color($bg)
+			}
+
+			@include font(
+				$family: $default_font-family, 
+				$size: 12px,
+				$weight: normal
+				);
+			@include border-position($brdr-pos, $brdr-size, solid, $brdr-color);
+		}
+	}
+}
+
+@mixin  main_footer{
+	@each $footer_type, $footer_style in $footer {
+		$bg: map-get($footer_style, bg);
+		$brdr-pos: map-get($footer_style, border-pos);
+		$brdr-color: map-get($footer_style, border-color);
+		$brdr-size: map-get($footer_style, border-size);
+		$f-size: map-get($footer_style, f-size);
+		$f-color: map-get($footer_style, f-color);
+		$tf-size: map-get($footer_style, tf-size);
+		$tf-color: map-get($footer_style, tf-color);
+
+		.cimm_#{$footer_type}{
+			background: $bg;
+			@if $f-color != "inherit" {
+				color: $f-color;
+			} @else {
+				color: set-font-color($bg)
+			}
+
+			@include font(
+				$family: $default_font-family, 
+				$size: $f-size,
+				$weight: normal
+				);
+			a{
+				@if $f-color != "inherit" {
+					color: $f-color;
+				} @else {
+					color: set-font-color($bg)
+				}
+				@include font(
+				$family: $default_font-family, 
+				$size: 14px,
+				$weight: normal
+				);
+			}
+			@include border-position($brdr-pos, $brdr-size, solid, $brdr-color);
+
+
+			.footerCol {
+				h5 {
+					position: relative;
+					a {
+						@if $tf-color != "inherit" {
+							color: $tf-color;
+						} @else {
+							color: set-font-color($bg);
+						}
+						font-size: $tf-size;
+						text-transform: uppercase;
+						letter-spacing: 1px;
+					}
+					em  {
+						display: none;
+						position: absolute;
+						top: 2px;
+						right: 10px;
+						width: 35px;
+						height: 35px;
+						padding: 5px;
+						text-align: center;
+					}
+				}
+			}
+			ul li {
+				a {
+					// font-size: $fnav_lf-size;
+					// color: $white;
+					@if $f-color != "inherit"{
+						color: $f-color
+					} @else {
+						color: set-font-color($bg);
+					}
+					padding: 3px 0;
+					display: block;
+				}
+				a.cimm_button {
+					padding: 10px;
+					font-size: 16px;
+					width: 220px;
+					margin: 10px 0;
+				}
+			}
+		}
+	}
+}
+
 /*__________________________________Main Navigation Mixin ______________________________*/
 
 @mixin main_nav {
 
     @each $nav_type, $nav_style in $main_nav {
-        $nav_bg: map-get($nav_style, mnav-bg);
-        $lf-family: map-get($nav_style, mnav_lf-family);
-        $lf-size: map-get($nav_style, mnav_lf-size);
-        $lf-color: map-get($nav_style, mnav_lf-color);
-        $lh_bg: map-get($nav_style, mnav_lh-bg);
-        $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
-        $lf-dividers: map-get($nav_style, mnav_lf-dividers);
-        $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
-        $subnav-bg: map-get($nav_style, subnav-bg);  
-        $subnav-lf-color: map-get($nav_style, subnav-lf-color);
+      $nav_bg: map-get($nav_style, mnav-bg);
+      $lf-family: map-get($nav_style, mnav_lf-family);
+      $lf-size: map-get($nav_style, mnav_lf-size);
+		  $lf-color: map-get($nav_style, mnav_lf-color);
+		
+      $lh_bg: map-get($nav_style, mnav_lh-bg);
+      $lh_border: map-get($nav_style, mnav_lh_border);
+      $lfh-color: map-get($nav_style, mnav_lhf-color);
+      $lf-uppercase: map-get($nav_style, mnav_lf-uppercase);
+		  $lf-dividers: map-get($nav_style, mnav_lf-dividers);
+		
+      $subnav_onhover: map-get($nav_style, display_subnav_onhover); 
+      $subnav-bg: map-get($nav_style, subnav-bg);  
+      $subnav-lf-size: map-get($nav_style, subnav-lf-size);
+      $subnav-lf-color: map-get($nav_style, subnav-lf-color);
+      $subnav-lf-family: map-get($nav_style, subnav-lf-family);
 
         nav.#{$nav_type}{ 
             background: $nav_bg;
@@ -165,19 +311,41 @@ $icons: (
                 position: relative;
                 >ul{
                     >li{
+						@if($lh_border != false){
+							border-bottom: 2px solid transparent;
+						}
 						span{
 							display: inline-block;
 							position: relative;
-							a{
+							>a{
+								white-space: normal;
 								letter-spacing: 1px;
-								padding: 15px 30px 15px 15px;
+								padding: 15px 20px 15px 15px;
 								display: block;
+
+								@if $lf-color != "inherit"{
+									color: $lf-color;
+								} @else {
+									color: set-font-color($nav_bg);
+								}
+
 								@if $lf-uppercase != false {
 									text-transform: uppercase;
+								} @else {
+									text-transform: capitalize;
 								}
-								@include font($family: $lf-family, $size: $lf-size, $color:$lf-color);
+
+								@include font($family: $lf-family, $size: $lf-size);
+								
 								@if $lf-dividers != false {
-									@include icon(after, nav-seperater, $color: $white, $size: 20px, $top: 13px, $right: 0px);
+									@include icon(after, nav-seperater, $size: 20px, $top: 8px, $right: 0px);
+									&:after{
+										@if $lf-color != "inherit"{
+											color: $lf-color;
+										} @else {
+											color: set-font-color($nav_bg);
+										}
+									}
 								}
 							}
 							em{
@@ -188,29 +356,70 @@ $icons: (
 								padding: 20px 14px;
 								@include icon(
 									after, caret-right, 
-									$color: $white, 
-									$right: 8px, 
+									$right: 4px, 
 									$top: 10px, 
 									$size: 20px
 								);
+								&:after{
+									@if $lf-color != "inherit"{
+										color: $lf-color;
+									} @else {
+										color: set-font-color($nav_bg);
+									}
+								}
 							}
 						}
-                        .dropdown-menu{
-                            background: $subnav-bg;
-                            padding: 10px 0px;
-                            min-width: 275px;
-                            
-                            li{
+            .dropdown-menu{
+              background: $subnav-bg;
+              padding: 10px 0px;
+              min-width: 275px;
+              ul{
+                width: 282px;
+                vertical-align: top;
+                display: inline-block;
+              }
+							li{
 								position: relative;
-								span{
-									display: block;
-									a{
-										text-transform: capitalize;
-										color: $subnav-lf-color;    
-										padding: 4px 10px;
+								padding: 2px 0px; 
+								&:hover{
+									background: transparent;
+									text-decoration: underline;
+								
+									> span {
+										em:after{
+											@if $subnav-lf-color != "inherit" {
+												color: $subnav-lf-color;
+											} @else {
+												color: set-font-color($subnav-bg);
+											}	
+										}
 									}
-									em{
-										top: 0;
+									> .dropdown-menu{
+										display: block;
+									}
+								}
+								>span{
+									display: block;
+									>a{
+										text-transform: capitalize;
+										padding: 4px 10px;
+										font-size: $subnav-lf-size;
+										font-family: $subnav-lf-family;
+										display: block;
+										@if $subnav-lf-color != "inherit" {
+											color: $subnav-lf-color;
+										} @else {
+											color: set-font-color($subnav-bg);
+										}
+										&:hover{
+											@if $subnav-lf-color != "inherit" {
+												color: $subnav-lf-color;
+											} @else {
+												color: set-font-color($subnav-bg);
+											}	
+										}
+									}
+									>em{
 										padding: 14px 14px;
 										&:after{
 											top: 4px;
@@ -223,49 +432,70 @@ $icons: (
 									top: 0;
 									border-radius: 0;
 									border: none;
+									display: none;
 								}
-								&:hover{
-									background: $lh_bg;
-									> span {
-										a,em:after{
-											color: $white;
-										}
-									}
-									> .dropdown-menu{
-										display: block;
-									}
-								}
-                            }
-                            > ul{
-                                width: 282px;
-                                vertical-align: top;
-                                display: inline-block;
-                            }
+								
+							}
 						}
 						&:hover{
-							background: $lh_bg;
+							@if($lh_border != false){
+								border-bottom: 2px solid;
+								@if $lf-color != "inherit"{
+									border-color: $lf-color;
+								} @else {
+									border-color: set-font-color($nav_bg);
+								}
+								
+							}
+							@if($lh_bg == "inherit"){ 
+								background: darken($nav_bg, 10%)
+							} @else {
+								background: $lh_bg;
+							}
 							>span{
-								a{
-									color: $white;
+								>a{
+									@if $lfh-color != "inherit"{
+										color: $lfh-color;
+									} @else if($lh_bg == "inherit"){
+										color: set-font-color($nav_bg);
+									} @else {
+										color: set-font-color($lh_bg);
+									}
 								}
 								em{
 									@include icon(
 										after, caret-down,
-										$color: $white,
 										$size: 20px
 									);
+									&:after{
+										@if $lfh-color != "inherit"{
+											color: $lfh-color;
+										} @else {
+											color: set-font-color($lh_bg);
+										}
+									}
 								}
 							}
 							> .dropdown-menu{
-                                display: block;
+                display: block;
 							}
-                        }
-                    }
-                }
-            }
+						}
+						
+						&:last-child{
+							>span{
+								>a{
+									&:after{
+										content: "";
+									}
+								}
+							}
+						}
+          }
         }
-    } 
-};
+      }
+    }
+  } 
+}
 
 /*__________________________________End Main Navigation Mixin ______________________________*/
 
@@ -413,6 +643,7 @@ $icons: (
 						
                         ul{
                             li{
+								padding: 5px 0px;
                                 a, label span{
                                     @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
                                     @if ($lf-uppercase != false){
@@ -462,21 +693,25 @@ $icons: (
 			$btn_hf-color: map-get($bgcolors, btnhf-color);
 			$bgicon: map-get($bgcolors, bg-icon);
 			$onlyborder: map-get($bgcolors, onlyborder);
+			$iconposition: map-get($bgcolors, bg-icon-posintion);
 
 			background: $btn_bg;
-			color: $btn_f-color;
-			border-radius: 2px;
+			@if $btn_f-color != "inherit" {
+				color: $btn_f-color !important;
+			} @else {
+				color: set-font-color($bg) !important;
+			}
 			position: relative;
 			border-color: darken($btn_bg, 5%);
 
-			@if $onlyborder != false{
+			@if ($onlyborder != false) {
 				border: 1px solid $btn_bg;
 				background: transparent;
 			}
 
 			@if $bgicon != false{
 				@if($class_name == "addtocart"){
-					padding-left: 35px;
+					padding: 10px;
 					@include icon(before, cart, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
 				} 
 				@if($class_name == "viewallchoice"){
@@ -489,9 +724,9 @@ $icons: (
 				}
 			}
             &:hover {
-				background: $btn_hbg;
+				background: darken( $btn_bg, 10% );
 				color: $btn_hf-color; 
-				border-color: darken($btn_hbg, 5%);
+				border-color: darken( $btn_bg, 10% );
 			}
 			&:active{
 				background: $btn_bg;
@@ -520,7 +755,6 @@ $icons: (
     }
 }
 /*______________________________________ End Custom Buttons ___________________________________*/
-@include custom-btns;
 
 
 @mixin border-position($direction, $width, $style, $color) {
@@ -543,23 +777,30 @@ $icons: (
 
 @mixin headings{
 	@each $heading_name, $heading_value in $headings{
-		$color: map-get($heading_value, color);
-		$fsize: map-get($heading_value, fontsize);
-		$ffamily: map-get($heading_value, fontfamily);
+		$fontcolor: map-get($heading_value, fontcolor);
+		$fontsize: map-get($heading_value, fontsize);
+		$fontfamily: map-get($heading_value, fontfamily);
 		$ttransform: map-get($heading_value, texttransform);
 		$marginval: map-get($heading_value, marginvalue);
 		$paddingvalue: map-get($heading_value, paddingvalue);
-		$border: map-get($heading_value, border);
+		$border: map-get($heading_value, tborder);
 
 		.cimm_#{$heading_name}{
-			color: $color;
-			font-size: $fsize;
-			font-family: $ffamily; 
-			text-transform: $ttransform;
+			@if $fontcolor != "inherit"{
+				color: $fontcolor;
+			} @else {
+				color: set-font-color($body-bg);
+			}
+			font-size: $fontsize;
+			font-family: $fontfamily; 
 			margin: $marginval;
 			padding: $paddingvalue;
 			position: relative;
-			
+			@if $ttransform != false {
+				text-transform: uppercase;
+			} @else {
+				text-transform: capitalize;
+			}
 			@if $border != false {
 				//@include border(1px, solid, $border-color);
 				@include add_border(bottom);
@@ -569,7 +810,6 @@ $icons: (
 	}
 }
 
-@include headings;
 
 @mixin border($width, $style, $color){
 	border: $width $style $color;

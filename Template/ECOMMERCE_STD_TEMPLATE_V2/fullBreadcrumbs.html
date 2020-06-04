@@ -30,6 +30,13 @@
     <li><a href="/SavedGroups/Products"> $!locale.get("product.heading.myProductGroups")</a></li>
     <li class="active"><span>$!savedGroupName</span></li>
 </ul>
+#elseif($!LayoutName=="PromotedProductsListPage")
+<ul class="breadcrumb">
+	<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	<li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+	<li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"> $!locale.get("product.heading.PromotedProducts")</a></li>
+	<li><span>$!savedGroupName</span></li>
+</ul>
 #elseif($!LayoutName=="ApproveCart")
 <h1 class="cimm_page-title">#if($!savedGroupName)$!savedGroupName #end</h1>
 <ul class="breadcrumb">
@@ -60,6 +67,12 @@
 			<li class="active">$!locale.get("breadcrumbs.label.responseType.$!responseType")</li>
 		#end
 	</ul>
+#elseif($!LayoutName=="PromotedProductGroupsPage")	
+<ul class="breadcrumb">
+	<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	<li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+	<li>$!locale.get("product.heading.PromotedProducts")</li>
+</ul>
 #elseif($!LayoutName=='SendThisPage')
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
@@ -83,12 +96,12 @@
 				 #end
 			</ul>
 		#else
-			<!-- <h1 class="cimm_page-title">$!pageTitle</h1> -->
 			<ul class="breadcrumb">
 			    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
 			    <li class="active">$!pageTitle</li>
 			</ul>
 		#end
+		<h1 class="cimm_page-title">$!pageTitle</h1>
 	#end
 #elseif($!LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
 	#set($listPageHeading = "")
@@ -124,7 +137,7 @@
 				<li class="active">$!locale.get("product.heading.productCategory")</li>              
 			</ul>
 		#end
-		<h1 class="cimm_page-title hidden">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h3> 
+		<!--h1 class="cimm_page-title hidden">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h1 --> 
 #elseif($!LayoutName=="ProductList")
 	#if($!breadCrumbList)
 	<ul class="breadcrumb">
@@ -170,9 +183,9 @@
 			#set($pageTitleBreadCrumbLast = $!LastSet )
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 			#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + " - " + $!pageTitleBreadCrumbLast)
-			<h1 class="cimm_page-title hideMe">$!breadCrumb.categoryName</h1>
 		#end
 	</ul>
+	<h1 class="cimm_page-title hideMe">$!pageTitleBreadCrumbLast</h1>
 	#end
 #elseif($!LayoutName=='ProductDetailPage')
 	<ul class="breadcrumb">
@@ -188,7 +201,7 @@
 							$!breadCrumb.categoryName
 						#else
 							$!itemData.manufacturerPartNumber
-						#end                                                           
+						#end
 						</li>
 					#else
 						<li>
@@ -221,17 +234,17 @@
 	#end
 	<ul class="breadcrumb">
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
-	    <li><a href='$!locale.get("website.url.OrderHistory")'>$!locale.get("product.header.CompletedOrders")</a></li>
+	    <li><a href='$!locale.get("website.url.OrderHistory")'>$!locale.get("product.heading.orderHistory")</a></li>
 	    <li class="active">$!locale.get("product.button.printInvoices")</li>
 	</ul>
 #elseif($!LayoutName=="OrderDetailPage")
 	<!-- <h1 class="cimm_page-title">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum) $!locale.get("product.label.orderNumber") $!orderDetail.orderNum #end #end</h1> -->
 	#if($orderDetail.orderStatus.contains("Bid"))
-    <h2 class="cimm_page-title">$!locale.get("product.heading.bidDetail")</h2>   
+    <h1 class="cimm_page-title">$!locale.get("product.heading.bidDetail")</h1>   
     #elseif($!requestType != "openQuote")
-    <h2 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h2>     
+    <h1 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h1>     
     #else
-    <h2 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h2>   
+    <h1 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h1>   
     #end  
 	<ul class="breadcrumb">
 	 ##if($!orderDetail && !$!orderDetail.orderStatus.toUpperCase().contains("INVOICE"))
@@ -246,13 +259,18 @@
 				<li><a href="OpenOrderSale.action?reqType=webOrder&orderStatus=New">$!locale.get("product.heading.openOrders")</a></li>
 		    #end
 		    #if($!orderStatus && $!orderStatus=="History")
-				<li><a href="$!locale.get('website.url.OrderHistory')">$!locale.get("product.header.CompletedOrders")</a></li>
+				<li><a href="$!locale.get('website.url.OrderHistory')">$!locale.get("product.heading.orderHistory")</a></li>
 		    #end
 		    <li class="active">$!locale.get("product.heading.orderDetail")</li>
 		    <!-- <li class="active"><span class="landingLink">#if($!session.getAttribute("erpType") == "eclipse") #if($!orderDetail.orderNum)  #if($!orderDetail && $!orderDetail.orderStatus.contains("Bid")) $!locale.get("product.label.eclipsebidNumber") #else $!locale.get("product.label.orderNumber") #end $!orderDetail.orderNum #end #end</span></li> -->
 	    #end
 	 ##end
 	</ul>
+#elseif($LayoutName=="EmailAuthenticationPage")
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+    <li class="active">$!locale.get("label.authenticate.useraccount")</li>				
+</ul>	
 #elseif($LayoutName!="ShipEntityPage")
 <h1 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
 	<ul class="breadcrumb">

@@ -147,7 +147,7 @@
             gm.options.customControls.global_col.push({callback: gm.selectColClick, loc: 'top', iconClass: 'fa fa-square-o', title: 'Select Column'});
           }*/
           if(gm.options.editableRegionEnabled) {
-            gm.options.customControls.global_col.push({callback: gm.addEditableAreaClick,iconClass: 'cmsEditable', title: 'Add Editable Region', btnClass: 'cmsEditRegion'});
+            gm.options.customControls.global_col.push({callback: gm.addEditableAreaClick,iconClass: 'cmsEditable', title: 'Add Editable Region', btnClass: 'cmsEditRegion',iconClass: "fa fa-lg fa-edit"});
           }
         };
 
@@ -201,7 +201,8 @@
             
 		   var buttons=[];
             // Dynamically generated row template buttons
-			buttons.push('<div class="row"><div id="layoutCarousel" class="col-sm-6 col-xs-12" style="position: relative; top: 0px; left: 0px; width:575px; height: 40px; overflow: hidden;">');
+		   var deviseSelection = '<div class="deviseSelection active"><label>Modify Layout For :</label><label for="sel_desktop" class="cms_RadioBtn"><input type="radio" name="deviceCol" id="sel_desktop" value="desktop" checked /><span>Desktop <i class="fa fa-lg fa-desktop" aria-hidden="true"></i></span></label> <label for="sel_tablet" class="cms_RadioBtn"><input type="radio" id="sel_tablet" name="deviceCol" value="tablet" /><span>Tablet <i class="fa fa-lg fa-tablet" aria-hidden="true"></i></span></label> <label for="sel_mobile" class="cms_RadioBtn"><input type="radio" id="sel_mobile" name="deviceCol" value="mobile" /><span>Mobile <i class="fa fa-lg fa-mobile" aria-hidden="true"></i></span></label> </div>';
+			buttons.push(deviseSelection + '<div class="layoutSelectionBlock active clearfix"><div class="layoutCarousel-wrap"><label>Select a container:</label><div id="layoutCarousel" class="layoutCarousel-block">');
 			buttons.push('<span u="arrowleft" class="layout03l" style="width: 55px; height: 55px; top: 123px; left: 8px;"></span>'); 
 			//buttons.push('<div u="arrowleft" class="left-arrow1" style="position:relative;top:14px !important;left:0px !important;display:block;"></div>'); 
 			//buttons.push('<img u="arrowleft" src="../ASSETS/WEB_THEMES/CMS/images/cms_images/left-arrow.png" style="position:relative;top:14px !important;left:0px !important;"></img>');
@@ -215,39 +216,43 @@
 			buttons.push('</div>');
 			buttons.push('<span u="arrowright" class="layout03r" style="width: 55px; height: 55px; top: 123px; right: 8px"></span>');	
 			//buttons.push('<img u="arrowright" src="../ASSETS/WEB_THEMES/CMS/images/cms_images/right-arrow.png" style="position:relative;top:10px;left:100px;"></img>');
-			buttons.push('</div></div>');
+			buttons.push('</div>'+selectFullWidthContainer+'</div></div>');
 
          /*
           Generate the control bar markup
         */
-         gm.$el.prepend(
-              $('<div/>',
-                  {'id': gm.options.controlId, 'class': gm.options.gmClearClass + " " + "gmControlsCustomClass"}
-              ).prepend(
-            		$('<div/>', {"style": 'max-width:1170px;margin: 0 auto;'}).html(
-	                    $('<div/>', {"class": gm.options.rowClass}).html(
-	                       $('<div/>', {"class": gm.options.colDesktopClass + gm.options.colMax}).addClass(gm.options.colAdditionalClass).html(
-	                          $('<div/>', {'id': 'gm-addnew'})
-	                          .addClass(gm.options.gmBtnGroup).html(
-	                            buttons.join("")
-	                          )
-	                        ).append(gm.options.controlAppend)
-	                     )
-                     )
-                  )
-              );
-         	$('.readyTemplatesForm').detach().appendTo("#gm-addnew .row");
-         	$("input[type=radio][name='deviceCol']").change(function(){
-	        	var selectedDevice = $(this).val();
-	        	if(selectedDevice === "tablet"){
-	        		 gm.switchLayoutMode(768, 'reInit')
-	        	 }else if(selectedDevice === "mobile"){
-	        		 gm.switchLayoutMode(640, 'reInit')
-	        	 }else{
-	        		 gm.switchLayoutMode('auto', 'reInit')
-	        	 }
-	         });
-            };
+	gm.$el.prepend(
+		$('<div/>', {'id': gm.options.controlId, 'class': gm.options.gmClearClass + " " + "gmControlsCustomClass"}).prepend(
+			$('<div/>', {'id': 'gm-addnew'}).addClass(gm.options.gmBtnGroup+' clearfix').html(
+				buttons.join("")
+			).append(gm.options.controlAppend)
+		)
+	);
+	$("#mycanvas").prepend('<div class="gmControlsPlaceholder"></div>');
+	$('.readyTemplatesForm').detach().appendTo("#gm-addnew .layoutSelectionBlock");
+	$("input[type=radio][name='deviceCol']").change(function(){
+		var selectedDevice = $(this).val();
+		if(selectedDevice === "tablet"){
+			gm.switchLayoutMode(768, 'reInit')
+		}else if(selectedDevice === "mobile"){
+			gm.switchLayoutMode(640, 'reInit')
+		}else{
+			gm.switchLayoutMode('auto', 'reInit')
+		}
+	});
+	
+	$("#saveBtnId").click(function () {
+		var cms_leftMenuSlide = $('.staticPageSave.rightSlide');
+		var rightSlidePos = cms_leftMenuSlide.offset().left;
+		$('.staticPageSave.rightSlide').css({'right':'-400px'});
+		if( parseInt(rightSlidePos) != rightSlidePos - 400){
+			cms_leftMenuSlide.css({'right':'0px'});
+		}
+	});
+	$(".cms_rightMenuClose").click(function () {
+		$('.staticPageSave.rightSlide').css({'right':'-400px'});
+	});
+};
 
         /**
          * Adds a CSS file or CSS Framework required for specific customizations
@@ -363,311 +368,277 @@
 			 	  
 
 		 };
-        gm.initControls = function(){
-          var canvas=gm.$el.find("#" + gm.options.canvasId);
-           gm.log("+ InitControls Running");
+gm.initControls = function(){
+	var canvas=gm.$el.find("#" + gm.options.canvasId);
+	gm.log("+ InitControls Running");
+	// Turn editing on or off
+	gm.$el.on("click", ".gm-preview", function(){
+		if(gm.status){
+			hideActionIcons('preview');
+			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
+			gm.deinitCanvas();
+			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").prop('disabled', true);
+			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").toggle(false);
+			gm.reBuildBanner(false);
+			gm.switchLayoutMode(gm.options.layoutDefaultMode);
+		} else {
+			showActionIcons('preview');
+			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span>").attr('title', 'Preview');
+			gm.initCanvas();
+			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").prop('disabled', false);
+			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").toggle(true);
+			regulerVeiw();
+		}
+		//$(this).toggleClass(gm.options.gmDangerClass);
+		
+	}).on("click", ".gm-edit-mode", function(){
+		
+		if(gm.mode === "visual"){
+			hideActionIcons('edit');
+			gm.deinitCanvas();
+			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
+			canvas.html($('<textarea/>').attr("id","sourceEditor").attr("cols", 130).attr("rows", 25).val(canvas.html()));
+			gm.mode="html";
+			editor =  CodeMirror.fromTextArea(document.getElementById("sourceEditor"), {
+				lineNumbers: true,
+				mode: "text/html",
+				matchBrackets: true	,
+				lineWrapping: true,
+				matchtags:true,
+				foldGutter: true, 
+				gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+				extraKeys: {
+					"F11": function(cm) {
+						cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+					},
+					"Esc": function(cm) {
+						if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+					}
+				}
+			});
+			var totalLines = editor.lineCount();
+			var totalChars = editor.getTextArea().value.length;
+			editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
+			CodeMirror.commands["goLineStart"](editor); 
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").prop('disabled', true);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").toggle(false);
+		} else {
+			showActionIcons('edit');
+			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span>").attr('title', 'Edit Source Code');
+			//CodeMirror.toTextArea();
+			document.getElementById("sourceEditor").value = editor.getValue();
+			var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
+			canvas.html(editedSource);
+			canvas.find('[data-type="widget"]').html("");
+			gm.initCanvas();
+			gm.mode="visual";
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").prop('disabled', false);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").toggle(true);
+		}
+		
+	}).on("click", "." + gm.options.gmEditRegion + ' .'+gm.options.gmContentRegion, function(){
+		//$(".gm-controls-element").hide();
+		$(this).prev("div").show();
+		if(!$(this).attr("contenteditable")){
+			$(this).attr("contenteditable", true);
+			gm.rteControl("attach", $(this) );
+		}
+// Save Function
+}).on("click", "a.gm-save", function(){
+console.log("save function called");
+ var pageName = $("#pageName").val();
+ var lang = "1";
+var errMsg = "";
+var isValid = true;
+ if(pageName == '' || pageName == null){
+   errMsg = "Page Name Required\n";
+   isValid = false;
+ }
+ if(typeof lang == undefined ||lang == '' || lang == null || lang == -1){
+ errMsg = errMsg + "Language Required\n";
+ isValid = false;
+ }
+ if(!isValid)
+ {
+ alert(errMsg);
+ jQuery(".common-box-design-wrap").show();
+ return false;
+ }
+ 
+ 
+ gm.deinitCanvas();
 
-           // Turn editing on or off
-           gm.$el.on("click", ".gm-preview", function(){
-               if(gm.status){
-            	   $(".cms_leftMenu, .containFluidEl").hide();
-            	   $(".readyTemplatesForm").hide();
-				   $(".resPreviewIcon").show();
-				   jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');	
-					jQuery(".header-wrap").hide();
-					jQuery(".Cimm-Footer").hide();
-					$(this).html("Back").attr('title', 'Back');
-					var frameHeight = jQuery(".Cimm-MainContenthide").height() + 120;
-					//window.parent.jQuery("#iframeId").height =;
-					//$('#iframeId', window.parent.document).height(parent.document.body.clientHeight+'px');
-					window.parent.document.getElementById("iframeId").style.height ="920px";
-                gm.deinitCanvas();
-                 $(this).parent().find(".gm-edit-mode").prop('disabled', true);
-				 gm.reBuildBanner(false);
-				 gm.switchLayoutMode(gm.options.layoutDefaultMode);
-              } else {
-            	  $(".cms_leftMenu, .containFluidEl").show();
-            	  $(".readyTemplatesForm").show();
-            	  //$("#template-slider").trigger("click");
-				  $(".resPreviewIcon").hide();
-				 jQuery('.Cimm-MainContenthide').addClass('Cimm-MainContent').removeClass('Cimm-MainContenthide');	
-					jQuery(".header-wrap").show();
-					jQuery(".Cimm-Footer").show();
-					var frameHeight = jQuery(".Cimm-MainContent").height();
-					$(this).html('<span class="fa fa-eye"></span> Preview').attr('title', 'Preview');
-					window.parent.document.getElementById("iframeId").style.height ="920px";
-					window.parent.document.getElementById("iframeId").style.width = "100%";
-					//$("#template-slider").trigger("click");
-                gm.initCanvas();
-               
-                 $(this).parent().find(".gm-edit-mode").prop('disabled', false);
-				 
-	          }
-              // gm.switchLayoutMode('auto');
-              
-              $(this).toggleClass(gm.options.gmDangerClass);
-             
-             // $("#template-slider").trigger("click");
+ jQuery("[data-select='bannerBlock']").each(function(i){
+ jQuery(this).html("");
+ });
+ jQuery("[data-select='widget']").each(function(i){
+ jQuery(this).html("");
+ });
+ jQuery("[data-select='form']").each(function(i){
+ jQuery(this).html("");
+ });
+// $(this).parent().find(".gm-edit-mode").prop('disabled', true);
+ 
+//$(this).parent().find(".gm-edit-mode").prop('disabled', true);
+//document.getElementById("previewBtnId").click();
+ //jQuery("#previewBtnId").trigger("click");
+//responsivefunct();
 
-           // Switch editing mode
-            }).on("click", ".gm-edit-mode", function(){
-              if(gm.mode === "visual"){
-            	  $(".cms_leftMenu, .containFluidEl").hide();
-                 gm.deinitCanvas();
-				 		jQuery(".readyTemplatesForm").hide();
-			 			$(this).html("Back").attr('title', 'Back');
-							 canvas.html($('<textarea/>').attr("id","sourceEditor").attr("cols", 130).attr("rows", 25).val(canvas.html()));
-			                 gm.mode="html";
-			                // $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
-			               editor =  CodeMirror.fromTextArea(document.getElementById("sourceEditor"), {
-							        lineNumbers: true,
-							        mode: "text/html",
-							        matchBrackets: true	,
-							        lineWrapping: true,
-							        matchtags:true,
-							        foldGutter: true, 
-							        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-							        extraKeys: {
-							            "F11": function(cm) {
-							              cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-							            },
-							            "Esc": function(cm) {
-							              if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-							            }
-							          }
-							     
-							      });
-			               var totalLines = editor.lineCount();
-			               var totalChars = editor.getTextArea().value.length;
-			               editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
-			               CodeMirror.commands["goLineStart"](editor); 
-						   $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
-						   hideActionIcons();
-						  } else {
-							  $(".cms_leftMenu, .containFluidEl").show();
-							  showActionIcons();
-							  $(this).html("<span class='fa fa-code'></span> Source").attr('title', 'Edit Source Code');
-							  //CodeMirror.toTextArea();
-							  document.getElementById("sourceEditor").value = editor.getValue();
-							var editedSource=canvas.find("textarea").val().replace(/\n/g, "").replace(/  /g, '');
-							jQuery(".readyTemplatesForm").show();
-							 canvas.html(editedSource);
-							 canvas.find('[data-type="widget"]').html("");
-							 gm.initCanvas();
-							 gm.mode="visual";
-							 $(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', false);
-						  }
-						  $(this).toggleClass(gm.options.gmDangerClass);
+ saveContent();
+// $(this).parent().find(".gm-edit-mode").prop('disabled', true);
 
-						// Make region editable
-						}).on("click", "." + gm.options.gmEditRegion + ' .'+gm.options.gmContentRegion, function(){
-				              //gm.log("clicked editable");
+gm.saveremote();
 
-							  $(".gm-controls-element").hide();
-							  $(this).prev("div").show();
-							
-				                if(!$(this).attr("contenteditable")){
-				                    $(this).attr("contenteditable", true);
-				                    gm.rteControl("attach", $(this) );
-				                }
-				                
+/* Row settings */
+}).on("click", "a.gm-rowSettings", function(){
+ var row=$(this).closest(gm.options.rowSelector);
+ var drawer=row.find(".gm-rowSettingsDrawer");
+if(drawer.length > 0){
+  drawer.remove();
+// jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","35px 0 0 0");
+} else {
+  row.prepend(gm.generateRowSettings(row));
+  //jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","25px 0 0 0");
+}
 
-				            // Save Function
-				            }).on("click", "a.gm-save", function(){
-				console.log("save function called");
-            	 var pageName = $("#pageName").val();
-				 var lang = "1";
-				var errMsg = "";
-				var isValid = true;
-                 if(pageName == '' || pageName == null){
-				   errMsg = "Page Name Required\n";
-                   isValid = false;
-                 }
-				 if(typeof lang == undefined ||lang == '' || lang == null || lang == -1){
-				 errMsg = errMsg + "Language Required\n";
-				 isValid = false;
-				 }
-				 if(!isValid)
-				 {
-				 alert(errMsg);
-				 jQuery(".common-box-design-wrap").show();
-				 return false;
-				 }
-				 
-				 
-				 gm.deinitCanvas();
-				
-				 jQuery("[data-select='bannerBlock']").each(function(i){
-					 jQuery(this).html("");
-				 });
-				 jQuery("[data-select='widget']").each(function(i){
-					 jQuery(this).html("");
-				 });
-				 jQuery("[data-select='form']").each(function(i){
-					 jQuery(this).html("");
-				 });
-				// $(this).parent().find(".gm-edit-mode").prop('disabled', true);
-				 
-				//$(this).parent().find(".gm-edit-mode").prop('disabled', true);
-				//document.getElementById("previewBtnId").click();
-				 //jQuery("#previewBtnId").trigger("click");
-				//responsivefunct();
+// Change Row ID via rowsettings
+}).on("blur", "input.gm-rowSettingsID", function(){
+var row=$(this).closest(gm.options.rowSelector);
+    row.css("background", $(this).val());
 
-				 saveContent();
-				// $(this).parent().find(".gm-edit-mode").prop('disabled', true);
+// Remove a class from a row via rowsettings
+}).on("click", ".gm-toggleRowClass", function(){
+    var row=$(this).closest(gm.options.rowSelector);
+    var theClass=$(this).text().trim();
+        row.toggleClass(theClass);
+        if(row.hasClass(theClass)){
+            $(this).addClass(gm.options.gmDangerClass);
+        } else {
+            $(this).removeClass(gm.options.gmDangerClass);
+        }
 
-                gm.saveremote();
+ /* Col settings */
+}).on("click", "a.gm-colSettings", function(){
+ var col=$(this).closest(gm.options.colSelector);
+ var drawer=col.find(".gm-colSettingsDrawer");
+        if(drawer.length > 0){
+          drawer.remove();
+        } else {
+          col.prepend(gm.generateColSettings(col));
+        }
 
-            /* Row settings */
-            }).on("click", "a.gm-rowSettings", function(){
-                 var row=$(this).closest(gm.options.rowSelector);
-                 var drawer=row.find(".gm-rowSettingsDrawer");
-                    if(drawer.length > 0){
-                      drawer.remove();
-					// jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","35px 0 0 0");
-                    } else {
-                      row.prepend(gm.generateRowSettings(row));
-                      //jQuery("#gm-canvas .row.gm-editing>.gm-tools").css("margin","25px 0 0 0");
-                    }
+  // Change Col ID via colsettings
+}).on("blur", "input.gm-colSettingsID", function(){
+ var col=$(this).closest(gm.options.colSelector);
+    col.attr("id", $(this).val());
 
-            // Change Row ID via rowsettings
-            }).on("blur", "input.gm-rowSettingsID", function(){
-                var row=$(this).closest(gm.options.rowSelector);
-                    row.css("background", $(this).val());
+// Remove a class from a row via rowsettings
+}).on("click", ".gm-togglecolClass", function(){
+ var col=$(this).closest(gm.options.colSelector);
+var theClass=$(this).text().trim();
+    col.toggleClass(theClass);
+    if(col.hasClass(theClass)){
+        $(this).addClass(gm.options.gmDangerClass);
+    } else {
+        $(this).removeClass(gm.options.gmDangerClass);
+    }
 
-            // Remove a class from a row via rowsettings
-            }).on("click", ".gm-toggleRowClass", function(){
-                var row=$(this).closest(gm.options.rowSelector);
-                var theClass=$(this).text().trim();
-                    row.toggleClass(theClass);
-                    if(row.hasClass(theClass)){
-                        $(this).addClass(gm.options.gmDangerClass);
-                    } else {
-                        $(this).removeClass(gm.options.gmDangerClass);
-                    }
+// Add new column to existing row
+}).on("click", "a.gm-addColumn", function(){
+//$("a.gm-addColumn").style.background = "url('')";
+$(this).parent().after(gm.createCol(3));
+gm.switchLayoutMode(gm.options.layoutDefaultMode);
+$("a.gm-addColumn").removeClass("cmsAddCol");
+gm.reset();
+$("a.gm-addColumn").addClass("cmsAddColActive");
 
-             /* Col settings */
-            }).on("click", "a.gm-colSettings", function(){
-                 var col=$(this).closest(gm.options.colSelector);
-                 var drawer=col.find(".gm-colSettingsDrawer");
-                    if(drawer.length > 0){
-                      drawer.remove();
-                    } else {
-                      col.prepend(gm.generateColSettings(col));
-                    }
+// Add a nested row
+}).on("click", "a.gm-addRow", function(){
+   gm.log("Adding nested row");
+   $(this).closest("." +gm.options.gmEditClass).append(
+  $("<div>").addClass(gm.options.rowClass)
+            .html(gm.createCol(6))
+            .append(gm.createCol(6)));
+$("a.gm-addRow").removeClass("cmsAddRow");
+   gm.reset();
+   $("a.gm-addRow").addClass("cmsAddRowActive");
 
-              // Change Col ID via colsettings
-            }).on("blur", "input.gm-colSettingsID", function(){
-                 var col=$(this).closest(gm.options.colSelector);
-                    col.attr("id", $(this).val());
+// Decrease Column Size
+}).on("click", "a.gm-colDecrease", function(){	
+  var col = $(this).closest("." +gm.options.gmEditClass);
+  var t=gm.getColClass(col);
+  if(t.colWidth > parseInt(gm.options.colResizeStep, 10)){
+           t.colWidth=(parseInt(t.colWidth, 10) - parseInt(gm.options.colResizeStep, 10));
+		   //col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize); //comment for device resize changes
+   col.removeClass(t.colClass).addClass(gm.options.currentClassMode + t.colWidth);
+   canvas.find(gm.options.colSelector)
+      .find("img")
+  .addClass("img-responsive");
+       }
+ 
+// Increase Column Size
+}).on("click", "a.gm-colIncrease", function(){
+   var col = $(this).closest("." +gm.options.gmEditClass);
+   var t=gm.getColClass(col);
+    if(t.colWidth < gm.options.colMax){
+        t.colWidth=(parseInt(t.colWidth, 10) + parseInt(gm.options.colResizeStep, 10));
+		//col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize); //comment for device resize changes
+col.removeClass(t.colClass).addClass(gm.options.currentClassMode + t.colWidth);
+// $("a.gm-colIncrease").removeClass("cmsColWider");
+// $("a.gm-colIncrease").addClass("cmsColWiderActive");
+}
 
-            // Remove a class from a row via rowsettings
-            }).on("click", ".gm-togglecolClass", function(){
-                 var col=$(this).closest(gm.options.colSelector);
-                var theClass=$(this).text().trim();
-                    col.toggleClass(theClass);
-                    if(col.hasClass(theClass)){
-                        $(this).addClass(gm.options.gmDangerClass);
-                    } else {
-                        $(this).removeClass(gm.options.gmDangerClass);
-                    }
+// Reset all teh things
+}).on("click", "a.gm-moveRow", function(){
+   console.log("wow Move clicked");
+/*  $("[data-tool='editorTools']").each(function(i){
+        $(this).toggle();
+});*/
 
-            // Add new column to existing row
-            }).on("click", "a.gm-addColumn", function(){
-				//$("a.gm-addColumn").style.background = "url('')";
-                $(this).parent().after(gm.createCol(2));
-                gm.switchLayoutMode(gm.options.layoutDefaultMode);
-				$("a.gm-addColumn").removeClass("cmsAddCol");
-                gm.reset();
-				$("a.gm-addColumn").addClass("cmsAddColActive");
+// Remove a col or row
+}).on("click", ".gm-moveCol", function(){
 
-            // Add a nested row
-            }).on("click", "a.gm-addRow", function(){
-               gm.log("Adding nested row");
-               $(this).closest("." +gm.options.gmEditClass).append(
-                  $("<div>").addClass(gm.options.rowClass)
-                            .html(gm.createCol(6))
-                            .append(gm.createCol(6)));
-				$("a.gm-addRow").removeClass("cmsAddRow");
-               gm.reset();
-			   $("a.gm-addRow").addClass("cmsAddRowActive");
+   console.log("wow Move clicked");
+   var idx = $(this).closest(".gm-editing");
+   console.log($(idx).children("div.gm-tools").find("a[data-tool1='editorTools']").length);
+   console.log("Length : " + $(this).closest(".gm-editing").children("div.gm-tools").find("a[data-tool1='editorTools']").length);
+   // var prevElem = $(idx).prevAll('.gm-tools').last();
+//console.log("visible Length : " + $("[data-tool1='editorTools']:visible").length);
+//$("[data-tool1='editorTools']:visible").hide();
+//console.log($(prevElem).attr("class"));
+//$(prevElem).find("a[data-tool1='editorTools']").toggle();
+ /* $(this).closest(".gm-editing").children("div.gm-tools").find("a[data-tool1='editorTools']").each(function(i){
+                $(this).toggle();
+        });*/
+   
+    }).on("click", "a.gm-resetgrid", function(){
+canvas.html("");
+gm.reset();
 
-            // Decrease Column Size
-            }).on("click", "a.gm-colDecrease", function(){	
-              var col = $(this).closest("." +gm.options.gmEditClass);
-              var t=gm.getColClass(col);
-              if(t.colWidth > parseInt(gm.options.colResizeStep, 10)){
-                       t.colWidth=(parseInt(t.colWidth, 10) - parseInt(gm.options.colResizeStep, 10));
-					   //col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize); //comment for device resize changes
-                       col.removeClass(t.colClass).addClass(gm.options.currentClassMode + t.colWidth);
-					   canvas.find(gm.options.colSelector)
-		                  .find("img")
-		                  .addClass("img-responsive");
-                   }
-             
-            // Increase Column Size
-            }).on("click", "a.gm-colIncrease", function(){
-               var col = $(this).closest("." +gm.options.gmEditClass);
-               var t=gm.getColClass(col);
-                if(t.colWidth < gm.options.colMax){
-                    t.colWidth=(parseInt(t.colWidth, 10) + parseInt(gm.options.colResizeStep, 10));
-					//col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200,triggerRize); //comment for device resize changes
-					col.removeClass(t.colClass).addClass(gm.options.currentClassMode + t.colWidth);
-					// $("a.gm-colIncrease").removeClass("cmsColWider");
-					// $("a.gm-colIncrease").addClass("cmsColWiderActive");
-                }
+// Remove a col or row
+}).on("click", "a.gm-removeCol", function(){
+   $("a.gm-removeCol").removeClass("cmsColRmv");
+$("a.gm-removeCol").addClass("cmsColRmvActive");
+   $(this).closest("." +gm.options.gmEditClass).animate({opacity: 'hide', width: 'hide', height: 'hide'}, 400, function(){$(this).remove();});
+ gm.log("Column Removed");
+}).on("click", "a.gm-removeRow", function(){
+   gm.log($(this).closest("." +gm.options.colSelector));
+   $(this).closest("." +gm.options.gmEditClass).animate({opacity: 'hide', height: 'hide'}, 400, function(){
+   $(this).remove();
+   checkForContent();
+ // Check for multiple editable regions and merge?
+});
+ gm.log("Row Removed");
 
-            // Reset all teh things
-            }).on("click", "a.gm-moveRow", function(){
-               console.log("wow Move clicked");
-			      $("[data-tool='editorTools']").each(function(i){
-                        $(this).toggle();
-                });
-				
-            // Remove a col or row
-            }).on("click", ".gm-moveCol", function(){
-			
-               console.log("wow Move clicked");
-			   var idx = $(this).closest(".gm-editing");
-			   console.log($(idx).children("div.gm-tools").find("a[data-tool1='editorTools']").length);
-			   console.log("Length : " + $(this).closest(".gm-editing").children("div.gm-tools").find("a[data-tool1='editorTools']").length);
-			   // var prevElem = $(idx).prevAll('.gm-tools').last();
-				//console.log("visible Length : " + $("[data-tool1='editorTools']:visible").length);
-				$("[data-tool1='editorTools']:visible").hide();
-				//console.log($(prevElem).attr("class"));
-				//$(prevElem).find("a[data-tool1='editorTools']").toggle();
-			      $(this).closest(".gm-editing").children("div.gm-tools").find("a[data-tool1='editorTools']").each(function(i){
-                        $(this).toggle();
-                });
-           
-            }).on("click", "a.gm-resetgrid", function(){
-                canvas.html("");
-                gm.reset();
+// For all the above, prevent default.
+}).on("click", "a.gm-resetgrid, a.gm-remove, a.gm-removeRow, a.gm-save, button.gm-preview, a.gm-viewsource, a.gm-addColumn, a.gm-colDecrease, a.gm-colIncrease", function(e){
+   gm.log("Clicked: "   + $.grep((this).className.split(" "), function(v){
+ return v.indexOf('gm-') === 0;
+   }).join());
+   e.preventDefault();
+});
 
-            // Remove a col or row
-            }).on("click", "a.gm-removeCol", function(){
-			   $("a.gm-removeCol").removeClass("cmsColRmv");
-			    $("a.gm-removeCol").addClass("cmsColRmvActive");
-               $(this).closest("." +gm.options.gmEditClass).animate({opacity: 'hide', width: 'hide', height: 'hide'}, 400, function(){$(this).remove();});
-                 gm.log("Column Removed");
-            }).on("click", "a.gm-removeRow", function(){
-               gm.log($(this).closest("." +gm.options.colSelector));
-               $(this).closest("." +gm.options.gmEditClass).animate({opacity: 'hide', height: 'hide'}, 400, function(){
-            	   $(this).remove();
-            	   checkForContent();
-                 // Check for multiple editable regions and merge?
-                });
-                 gm.log("Row Removed");
-
-            // For all the above, prevent default.
-            }).on("click", "a.gm-resetgrid, a.gm-remove, a.gm-removeRow, a.gm-save, button.gm-preview, a.gm-viewsource, a.gm-addColumn, a.gm-colDecrease, a.gm-colIncrease", function(e){
-               gm.log("Clicked: "   + $.grep((this).className.split(" "), function(v){
-                 return v.indexOf('gm-') === 0;
-               }).join());
-               e.preventDefault();
-            });
-
-        };
+};
 
         /**
          * Add any custom buttons globally on all rows / cols
@@ -896,8 +867,9 @@ console.log("Custom : "+curr_control.dataToolElement);
           var rows=canvas.find(gm.options.rowSelector);
            gm.log("+ InitCanvas Running");
               // Show the template controls
-              gm.$el.find("#gm-addnew").show();
-              $(".deviseSelection").show();
+             // gm.$el.find("#gm-addnew").show();
+              $(".deviseSelection").addClass('active');
+            $(".layoutSelectionBlock").addClass('active');
               // Sort Rows First
 			  gm.activateContainer();
               gm.activateRows(rows);
@@ -994,8 +966,9 @@ console.log("Custom : "+curr_control.dataToolElement);
 
            gm.log("- deInitCanvas Running");
               // Hide template control
-              gm.$el.find("#gm-addnew").hide();
-              $(".deviseSelection").hide();
+              //gm.$el.find("#gm-addnew").hide();
+             $(".deviseSelection").removeClass('active');
+           	 $(".layoutSelectionBlock").removeClass('active');
               // Sort Rows First
               gm.deactivateRows(rows);
               // Now Columns
@@ -1066,10 +1039,10 @@ console.log("Custom : "+curr_control.dataToolElement);
 			$.each(colWidths, function(i, val){
 				row.append(gm.createCol(val));
 			});
-			if($('#containFluid').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container-fluid')){
+			if($('#containFluid').is(':checked') && !$(canvas[0].lastElementChild).hasClass('container-fluid')){
 				containerFluid = $("<div/>", {"class": 'container-fluid'});
 				row = containerFluid.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
-			}else if(!$('#containFluid').is(':checked') && !$(canvas[0].firstElementChild).hasClass('container')){
+			}else if(!$('#containFluid').is(':checked') && !$(canvas[0].lastElementChild).hasClass('container')){
 				container = $("<div/>", {"class": 'container'});
 				row = container.append(row).prepend(gm.toolFactory(gm.options.containerButtonsPrepend));
 			}
@@ -1518,17 +1491,22 @@ console.log("Custom : "+curr_control.dataToolElement);
           var canvas=gm.$el.find("#" + gm.options.canvasId);
               gm.$el.on("click", string, function(e){
                 gm.log("Clicked " + string);
-				if($('#containFluid').is(':checked') && $(canvas[0].firstElementChild).hasClass('container-fluid')){
-					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
-				}else if(!$('#containFluid').is(':checked') && $(canvas[0].firstElementChild).hasClass('container')){
-					$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+                var rowObj = gm.createRow(colWidths);
+				if($('#containFluid').is(':checked') && $(canvas[0].lastElementChild).hasClass('container-fluid')){
+					$(canvas[0].lastElementChild).append(rowObj);
+				}else if(!$('#containFluid').is(':checked') && $(canvas[0].lastElementChild).hasClass('container')){
+					$(canvas[0].lastElementChild).append(rowObj);
 				}else{
-					canvas.prepend(gm.createRow(colWidths));
+					canvas.append(rowObj);
 				}
-			//$(canvas[0].firstElementChild).prepend(gm.createRow(colWidths));
+			//$(canvas[0].firstElementChild).prepend(rowObj);
+				$('html, body').animate({
+			        scrollTop: $(rowObj).offset().top - 155
+			    }, 2000);
 				canvas.find('[data-type="widget"]').html("");
                 gm.reset();
                 e.preventDefault();
+               
             });
         };
 
@@ -1729,365 +1707,349 @@ console.log("Custom : "+curr_control.dataToolElement);
      Options which can be overridden by the .gridmanager() call on the requesting page------------------------------------------------------
     */
     
-    var deviseSelection = '<div class="deviseSelection"> <label class="customCheckBox"><input type="checkbox" id="containFluid"/><span> Create full width container</span></label> <label>Modify Layout For :</label><label for="sel_desktop" class="cms_RadioBtn"><input type="radio" name="deviceCol" id="sel_desktop" value="desktop" checked /><span>Desktop <i class="fa fa-lg fa-desktop" aria-hidden="true"></i></span></label> <label for="sel_tablet" class="cms_RadioBtn"><input type="radio" id="sel_tablet" name="deviceCol" value="tablet" /><span>Tablet <i class="fa fa-lg fa-tablet" aria-hidden="true"></i></span></label> <label for="sel_mobile" class="cms_RadioBtn"><input type="radio" id="sel_mobile" name="deviceCol" value="mobile" /><span>Mobile <i class="fa fa-lg fa-mobile" aria-hidden="true"></i></span></label> </div>';
+    var selectFullWidthContainer = '<div class="select-fullwidth"><label class="cms_customCheckBox"><input type="checkbox" id="containFluid"/><span> Create full width container</span></label></div>';
+    //var previewDevices = "<a style='display:none;' class='gm-save button tiny' title='Save' href='#'><span class='fa fa-save'></span></a>";
+    var previewDevices = "<a title='Mobile Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-mobile'></i></span><span class='action-text'>Mobile Portrait</span></a>";
+    previewDevices += "<a title='Mobile Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-mobile fa-rotate-270'></i></span><span class='action-text'>Mobile Landscape</span></a>";
+    previewDevices += "<a title='Tablet Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-tablet'></i></span><span class='action-text'>Tablet Portrait</span></a>";
+    previewDevices += "<a title='Tablet Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-tablet fa-rotate-270'></i></span><span class='action-text'>Tablet Landscape</span></a>";
+    previewDevices += "<a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-desktop'></i></span><span class='action-text'>Desktop</span></a>";
+	
     $.gridmanager.defaultOptions = {
-     /*
-     General Options---------------
-    */
-        debug: 0,
-
-        // Are you columns selectable
-        colSelectEnabled: true,
-
-        // Can add editable regions?
-        editableRegionEnabled: true,
-
-        // Should we try and automatically create editable regions?
-        autoEdit: true,
-
-        // URL to save to
-        remoteURL: "/replace-with-your-url",
-
-        // Custom CSS to load
-        //cssInclude: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
-
-        // Filter callback. Callback receives two params: the template grid element and whether is called from the init or deinit method
-        filterCallback: null,
-  /*
-     Canvas---------------
-    */
-        // Canvas ID
-        canvasId: "gm-canvas",
-
-  /*
-     Control Bar---------------
-  */
-        // Top Control Row ID
-        controlId:  "gm-controls",
-
-        // Move handle class
-        controlMove: 'gm-move',
-
-        // Editable element toolbar class
-        controlNestedEditable: 'gm-controls-element',
-
-        // Array of buttons for row templates
-        controlButtons: [[12], [6,6], [4,4,4], [3,3,3,3], [2,2,2,2,2,2], [2,8,2], [4,8], [8,4], [12,6,6], [12,4,4,4], [12,3,3,3,3], [12,2,2,2,2,2,2]],
-
-        // Custom Global Controls for rows & cols - available props: global_row, global_col
-        customControls: { global_row: [], global_col: [] },
-
-        // Default control button class
-        controlButtonClass: "btn  btn-xs  btn-primary",
-
-        // Default control button icon
-        controlButtonSpanClass: "fa fa-plus-circle",
-
-        // Control bar RH dropdown markup
+		/*General Options---------------*/
+		debug: 0,
+		// Are you columns selectable
+		colSelectEnabled: true,
+		
+		// Can add editable regions?
+		editableRegionEnabled: true,
+		
+		// Should we try and automatically create editable regions?
+		autoEdit: true,
+		
+		// URL to save to
+		remoteURL: "/replace-with-your-url",
+		
+		// Custom CSS to load
+		//cssInclude: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
+		
+		// Filter callback. Callback receives two params: the template grid element and whether is called from the init or deinit method
+		filterCallback: null,
+		/* Canvas---------------*/
+		// Canvas ID
+		canvasId: "gm-canvas",
+		
+		/*Control Bar---------------*/
+		// Top Control Row ID
+		controlId:  "gm-controls",
+		
+		// Move handle class
+		controlMove: 'gm-move',
+		
+		// Editable element toolbar class
+		controlNestedEditable: 'gm-controls-element',
+		
+		// Array of buttons for row templates
+		controlButtons: [[12], [6,6], [4,4,4], [3,3,3,3], [2,2,2,2,2,2], [2,8,2], [4,8], [8,4], [12,6,6], [12,4,4,4], [12,3,3,3,3], [12,2,2,2,2,2,2]],
+		
+		// Custom Global Controls for rows & cols - available props: global_row, global_col
+		customControls: { global_row: [], global_col: [] },
+		
+		// Default control button class
+		controlButtonClass: "btn  btn-xs  btn-primary",
+		
+		// Default control button icon
+		controlButtonSpanClass: "fa fa-plus-circle",
+		
+		// Control bar RH dropdown markup
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a class='button tiny' data-width='auto' title='Desktop'><span class='fa fa-desktop'></span></a><a class='button tiny'  title='Tablet' data-width='768'><span class='fa fa-tablet'></span></a><a title='Phone' class='button tiny' data-width='640'><span class='fa fa-mobile-phone'></span></a><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a></div>",*/
-		 
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a><a title='iPhone' class='button tiny active' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPhone landscape' class='button tiny iPhone-l' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad landscape' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone iPhone-l'></span></a><a title='Desktop' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-laptop'></span></a></div>",*/
-       
-        controlAppend: "<div class='button-group clearfix mBottom-4 text-right'>"+deviseSelection+"<button title='Edit Source Code' type='button' class='btn-xs tiny gm-edit-mode cmsEditrBtn '><span class='fa fa-code'></span> Source</button><button id='previewBtnId' title='Preview' type='button' class='btn-xs tiny gm-preview cmsEditrBtn prevBtn'><span class='fa fa-eye'></span> Preview</button><a  style='display:none;' class='gm-save button tiny '  title='Save'  href='#'><span class='fa fa-save'></span></a><a title='iPhone Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'> <img src='../ASSETS/WEB_THEMES/CMS/images/small/vertical-iphone.png'></a><a title='iPhone Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../ASSETS/WEB_THEMES/CMS/images/small/horizontal-iphone.png'></a><a title='iPad Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../ASSETS/WEB_THEMES/CMS/images/small/vertical-tab.png'></a><a title='iPad Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><img src='../ASSETS/WEB_THEMES/CMS/images/small/horizontal-tab.png'></a><a title='Desktop' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);' style='padding-right:20px;'><img src='../ASSETS/WEB_THEMES/CMS/images/small/desktopIcon.png'></a></div>",
+		controlAppend: "<div class='button-group clearfix '>"+previewDevices+"<button id='saveBtnId' title='Save' type='button' class='gm_cmsSaveBtn'><span class='action-icon'><span class='fa fa-2x fa-save'></span></span><span class='action-text'>Save Page</span></button><button id='previewBtnId' title='Preview' type='button' class='tiny gm-preview cmsEditrBtn prevBtn'><span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span></button><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn sorceBtn'><span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span></button></div>",
 		
+		// Controls for content elements
+		controlContentElem: '<div class="gm-controls-element"> <a class="gm-move" title="Move" onclick="javascript:showDelIcon();"><span class="fa fa-lg fa-arrows-alt"></span></a> <a class="gm-delete " href="#" title="Delete"><span class="fa fa-lg fa-times-circle"></span></a> </div>',
+		/* General editing classes---------------*/
+		// Standard edit class, applied to active elements
+		gmEditClass: "gm-editing",
 		
-        // Controls for content elements
-        controlContentElem: '<div class="gm-controls-element hideButton pull-left"> <a class="gm-move cmsMoveContent" title="Move" onclick="javascript:showDelIcon();"></a> <a class="gm-delete cmsContentRmv" href="#" title="Delete"></a> </div>',
-   /*
-     General editing classes--------------- 
-  */
-        // Standard edit class, applied to active elements
-        gmEditClass: "gm-editing",
-
-        // Applied to the currently selected element
-        gmEditClassSelected: "gm-editing-selected",
-
-        // Editable region class
-        gmEditRegion: "gm-editable-region",
-
-        // Editable container class
-        gmContentRegion: "gm-content",
-
-        // Tool bar class which are inserted dynamically
-        gmToolClass: "gm-tools",
-
-        // Clearing class, used on most toolbars
-        gmClearClass: "clearfix",
-
-        // generic float left and right
-        gmFloatLeft: "pull-left",
-        gmFloatRight: "pull-right",
-        gmBtnGroup:  "btn-group",
-        gmDangerClass: "btn-danger",
-
-
-  /*
-     Rows---------------
-  */
-        // Generic row class. change to row--fluid for fluid width in Bootstrap
-        rowClass:    "row",
-
-        // Used to find rows - change to div.row-fluid for fluid width
-        rowSelector: "div.row",
-
-        // class of background element when sorting rows
-        rowSortingClass: "alert-warning",
-
-        // Buttons at the top of each row
-        rowButtonsPrepend: [
-                {
-                                title:"Row - Background color",
-                                element: "a",
-                                btnClass: "pull-right gm-rowSettings",
-                                iconClass: "fa fa-cog"
-                             },
-				{
-                 title:"Move Row",
-                 element: "a",
-                 btnClass: "gm-moveRow pull-right cmsMoveRow"
-                /* iconClass: "fa fa-arrows "*/
-              },
-			  {
-                 title:"Remove row",
-                 element: "a",
-                 btnClass: "pull-right gm-removeRow cmsRowRmv",
-				  /*dataToolElement:"data-tool",
-				   dataToolVal:"editorTools"*/
-                 /*iconClass: "fa fa-trash-o"*/
-                },
-                {
-                   title:"New Column",
-                   element: "a",
-                   btnClass: "gm-addColumn pull-right  cmsAddCol hideButton",
-				   dataToolElement:"data-tool",
-				   dataToolVal:"editorTools"
-                   /*iconClass: "fa fa-plus"*/
-                }
-                 
-
-            // ],
-
-        // Buttons at the bottom of each row
-        // rowButtonsAppend: [
-                
-            ],
-			containerButtonsPrepend: [
-                {
-                 title:"Move Container",
-                 element: "a",
-                 btnClass: "gm-moveRow cmsMoveRow",
-                 iconClass: ""
-              },
-                {
-                 title:"Remove Container",
-                 element: "a",
-                 btnClass: "gm-removeRow cmsRowRmv",
-                iconClass: ""
-                }
-
-            ],
-
-        // CUstom row classes - add your own to make them available in the row settings
-        rowCustomClasses: ["example-class","test-class"],
-
-  /*
-     Columns--------------
-  */
-        // Column Class
-        colClass: "column",
-
-        // Class to allow content to be draggable
-        contentDraggableClass: 'gm-content-draggable',
-
-        // Adds any missing classes in columns for muti-device support.
-        addResponsiveClasses: true,
-
-        // Adds "colClass" to columns if missing: addResponsiveClasses must be true for this to activate
-        addDefaultColumnClass: true,
-
-       // Generic desktop size layout class
-        colDesktopClass: "col-md-",
-
-        // Generic tablet size layout class
-        colTabletClass: "col-sm-",
-
-        // Generic phone size layout class
-        colPhoneClass: "col-xs-",
-
-        // Wild card column desktop selector
-        colDesktopSelector: "div[class*=col-md-]",
-
-        // Wildcard column tablet selector
-        colTabletSelector: "div[class*=col-sm-]",
-
-        // Wildcard column phone selector
-        colPhoneSelector: "div[class*=col-xs-]",
-
-        // String used to temporarily rename column classes not in use
-        classRenameSuffix: "-clsstmp",
-
-        // Default layout mode loaded after init
-        layoutDefaultMode: "auto",
-
-        // Current layout column mode
-        currentClassMode: "",
-
-        // Additional column class to add (foundation needs columns, bs3 doesn't)
-        colAdditionalClass: "",
-
-        // Buttons to prepend to each column
-        colButtonsPrepend: [
-              {
-                 title:"Move Within Column",
-                 element: "a",
-                 btnClass: "gm-moveCol pull-left cmsMoveCol"
-				  /*dataToolElement:"data-tool",
-				   dataToolVal:"editorTools"
-                 iconClass: "fa fa-arrows "*/
-              },
-              /*{
-                   title:"Column Settings",
-                   element: "a",
-                   btnClass: "pull-right gm-colSettings",
-                   iconClass: "fa fa-cog"
-                },*/
-               {
-                 title:"Make Column Narrower",
-                 element: "a",
-                 btnClass: "gm-colDecrease pull-left cmsColNarrow hideButton",
-				  dataToolElement:"data-tool1",
-				   dataToolVal:"editorTools"
-                 /*iconClass: "fa fa-minus"*/
-              },
-              {
-               title:"Make Column Wider",
-               element: "a",
-               btnClass: "gm-colIncrease pull-left cmsColWider hideButton",
-				  dataToolElement:"data-tool1",
-				   dataToolVal:"editorTools"
-               /*iconClass: "fa fa-plus"*/
-              }
-            ],
-
-        // Buttons to append to each column
-        colButtonsAppend: [
-                {
-                 title:"Add Nested Row",
-                 element: "a",
-                 btnClass: "pull-left gm-addRow cmsAddRow hideButton",
-				  dataToolElement:"data-tool1",
-				   dataToolVal:"editorTools"
-                 /*iconClass: "fa fa-plus-square"*/
-                },
-                {
-                 title:"Remove Column",
-                 element: "a",
-                 btnClass: "pull-left gm-removeCol cmsColRmv hideButton",
-				  dataToolElement:"data-tool1",
-				   dataToolVal:"editorTools"
-                 /*iconClass: "fa fa-trash-o"*/
-                }
-            ],
-
-        // CUstom col classes - add your own to make them available in the col settings
-        colCustomClasses: ["example-col-class","test-class"],
-
-        // Maximum column span value: if you've got a 24 column grid via customised bootstrap, you could set this to 24.
-        colMax: 12,
-        
-
-        // Column resizing +- value: this is also the colMin value, as columns won't be able to go smaller than this number (otherwise you hit zero and all hell breaks loose)
-        colResizeStep: 1,
-
-  /*
-     Rich Text Editors---------------
-  */	
-        tinymce: {
-            config: {
-              inline: true,
-			   menubar: false,
-			   table_default_attributes:{
-				   class: 'table table-striped table-bordered display',
-				   width: '100%',
-				   table_tab_navigation: true
-			   },
-			   formats : {
-				   alignleft: [
-								{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'left'}},
-								{selector: 'img,table', classes: 'alignleft'}
-							],
-							aligncenter: [
-								{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'center'}},
-								{selector: 'img,table', classes: 'aligncenter'}
-							],
-							alignright: [
-								{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'right'}},
-								{selector: 'img,table', classes: 'alignright'}
-							]},
-                                        image_class_list: [
-    {title: 'None', value: ''},
-    {title: 'Push Image To Left', value: 'pushImgLeft'},
-    {title: 'Push Image To Right', value: 'pushImgRight'}
-  ],
-			   browser_spellcheck : true,
-			  
-			   toolbar_items_size: 'medium',
-			   extended_valid_elements:"i[class],iframe[*],img[*]", 
-			   valid_elements : '*[*]',
-			   
-			   //content_css: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
-			   autosave_ask_before_unload:true,
-             plugins: [
-						 "advlist autolink link image lists charmap print hr anchor pagebreak spellchecker autosave",
-						  "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-						 "table contextmenu directionality emoticons template textcolor paste colorpicker textpattern fontawesome"
-				        ],image_advtab: true,file_browser_callback: function(field_name, url, type, win) { 
-			   console.log(field_name);
-			   var connector = "bannerUploadCms.action?Connector=/connector.slt";
-				  var enableAutoTypeSelection = true;
-
-				  var cType;
-				  tinyfck_field = field_name;
-				  tinyfck = win;
-			type = "image";
-				  switch (type) {
-					  case "image":
-						  cType = "STATIC_IMAGES";
-						  break;
-					  case "flash":
-						  cType = "Flash";
-						  break;
-					  case "file":
-						  cType = "STATIC_DOCUME";
-						  break;
-				  }
-			
-			var frameSrc = connector;
-			jQuery.colorbox({open:true,href:connector,iframe:true, width:"80%", height:"80%"});
-				 // $('#testFrame').attr("src",frameSrc);
-					
-				 // window.open(connector, "tinyfck", "modal,width=600,height=400");
-				 },
-             toolbar1: " bold italic underline strikethrough | removeformat |  styleselect formatselect fontselect fontsizeselect  ",
-			toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink image media |  table ",
-			toolbar3: "insertdatetime | subscript superscript | alignleft aligncenter alignright alignjustify | charmap emoticons | fullscreen |  forecolor backcolor | code | fontawesome | closeBtn",
-							setup: function(editor) {
-							editor.addButton('closeBtn', {
-								text: 'Close',
-								icon: 'close',
-								onclick: function() {
-									window.tinymce.remove();
-								}
-							});	
-							}
-            }
-        },
-
-        // Path to CK custom comfiguration
-        ckeditor: {
-              customConfig: ""
-        }
-    };
+		// Applied to the currently selected element
+		gmEditClassSelected: "gm-editing-selected",
+		
+		// Editable region class
+		gmEditRegion: "gm-editable-region",
+		
+		// Editable container class
+		gmContentRegion: "gm-content",
+		
+		// Tool bar class which are inserted dynamically
+		gmToolClass: "gm-tools",
+		
+		// Clearing class, used on most toolbars
+		gmClearClass: "clearfix",
+		
+		// generic float left and right
+		gmFloatLeft: "pull-left",
+		gmFloatRight: "pull-right",
+		gmBtnGroup:  "btn-group",
+		gmDangerClass: "btn-danger",
+		
+		/*Rows---------------*/
+		// Generic row class. change to row--fluid for fluid width in Bootstrap
+		rowClass:    "row",
+		
+		// Used to find rows - change to div.row-fluid for fluid width
+		rowSelector: "div.row",
+		
+		// class of background element when sorting rows
+		rowSortingClass: "alert-warning",
+		
+		// Buttons at the top of each row
+		rowButtonsPrepend: [{
+			title:"Row",
+			element: "span",
+			btnClass: "cms_cont_title",
+			btnLabel: "Row"
+		},{
+			title:"Move Row",
+			element: "a",
+			btnClass: "gm-moveRow",
+			iconClass: "fa fa-lg fa-arrows-alt"
+		},{
+		   title:"New Column",
+		   element: "a",
+		   btnClass: "gm-addColumn",
+		   iconClass: "fa fa-lg fa-plus-square",
+		   dataToolElement:"data-tool",
+		   dataToolVal:"editorTools"
+		},{
+			title:"Remove row",
+			element: "a",
+			btnClass: "gm-removeRow",
+			iconClass: "fa fa-lg fa-times-circle"
+		},{
+			title:"Row - Background color",
+			element: "a",
+			btnClass: "gm-rowSettings",
+			iconClass: "fa fa-lg fa-cog"
+		}],
+		
+		containerButtonsPrepend: [{
+			title:"Container",
+			element: "span",
+			btnClass: "cms_cont_title",
+			btnLabel: "Container"
+		},{
+			title:"Move Container",
+			element: "a",
+			btnClass: "gm-moveRow",
+			iconClass: "fa fa-lg fa-arrows-alt"
+		}, {
+			title:"Remove Container",
+			element: "a",
+			btnClass: "gm-removeRow",
+			iconClass: "fa fa-lg fa-times-circle"
+		}],
+		
+		// Buttons to prepend to each column
+		colButtonsPrepend: [{
+			title:"Column",
+			element: "span",
+			btnClass: "cms_cont_title",
+			iconClass: "",
+			btnLabel: "Column"
+		},{
+			title:"Move Within Column",
+			element: "a",
+			btnClass: "gm-moveCol",
+			iconClass: "fa fa-lg fa-arrows-alt"
+		},/*{
+		   title:"Column Settings",
+		   element: "a",
+		   btnClass: "gm-colSettings",
+		   iconClass: "fa fa-lg fa-cog"
+		},*/{
+			title:"Make Column Narrower",
+			element: "a",
+			btnClass: "gm-colDecrease cmsColNarrow",
+			dataToolElement:"data-tool1",
+			dataToolVal:"editorTools",
+			iconClass: "fa fa-lg fa-caret-left"
+		},{
+			title:"Make Column Wider",
+			element: "a",
+			btnClass: "gm-colIncrease cmsColWider",
+			dataToolElement:"data-tool1",
+			dataToolVal:"editorTools",
+			iconClass: "fa fa-lg fa-caret-right"
+		},{
+			title:"Add Nested Row",
+			element: "a",
+			btnClass: "gm-addRow",// pull-left cmsAddRow hideButton
+			dataToolElement:"data-tool1",
+			dataToolVal:"editorTools",
+			iconClass: "fa fa-lg fa-plus-square"
+		},{
+			title:"Remove Column",
+			element: "a",
+			btnClass: "gm-removeCol",// pull-left cmsColRmv hideButton
+			dataToolElement:"data-tool1",
+			dataToolVal:"editorTools",
+			iconClass: "fa fa-lg fa-times-circle"
+		}],
+	
+		// Buttons to append to each column
+		/*colButtonsAppend: [{
+			title:"Add Nested Row",
+			element: "a",
+			btnClass: "pull-left gm-addRow cmsAddRow hideButton",
+			dataToolElement:"data-tool1",
+			dataToolVal:"editorTools"
+		},{
+			title:"Remove Column",
+			element: "a",
+			btnClass: "pull-left gm-removeCol cmsColRmv hideButton",
+			dataToolElement:"data-tool1",
+			dataToolVal:"editorTools"
+		}],*////this code moved into colButtonsPrepend
+		
+		// CUstom row classes - add your own to make them available in the row settings
+		rowCustomClasses: ["example-class","test-class"],
+		/*Columns--------------*/
+		// Column Class
+		colClass: "column",
+		
+		// Class to allow content to be draggable
+		contentDraggableClass: 'gm-content-draggable',
+		
+		// Adds any missing classes in columns for muti-device support.
+		addResponsiveClasses: true,
+		
+		// Adds "colClass" to columns if missing: addResponsiveClasses must be true for this to activate
+		addDefaultColumnClass: true,
+		
+		// Generic desktop size layout class
+		colDesktopClass: "col-md-",
+		
+		// Generic tablet size layout class
+		colTabletClass: "col-sm-",
+		
+		// Generic phone size layout class
+		colPhoneClass: "col-xs-",
+		
+		// Wild card column desktop selector
+		colDesktopSelector: "div[class*=col-md-]",
+		
+		// Wildcard column tablet selector
+		colTabletSelector: "div[class*=col-sm-]",
+		
+		// Wildcard column phone selector
+		colPhoneSelector: "div[class*=col-xs-]",
+		
+		// String used to temporarily rename column classes not in use
+		classRenameSuffix: "-clsstmp",
+		
+		// Default layout mode loaded after init
+		layoutDefaultMode: "auto",
+		
+		// Current layout column mode
+		currentClassMode: "",
+		
+		// Additional column class to add (foundation needs columns, bs3 doesn't)
+		colAdditionalClass: "",
+	
+		// CUstom col classes - add your own to make them available in the col settings
+		colCustomClasses: ["example-col-class","test-class"],
+	
+		// Maximum column span value: if you've got a 24 column grid via customised bootstrap, you could set this to 24.
+		colMax: 12,
+	
+		// Column resizing +- value: this is also the colMin value, as columns won't be able to go smaller than this number (otherwise you hit zero and all hell breaks loose)
+		colResizeStep: 1,
+	
+		/* Rich Text Editors--------------- */	
+		tinymce: {
+			config: {
+				inline: true,
+				menubar: false,
+				table_default_attributes:{
+					class: 'table table-striped table-bordered display',
+					width: '100%',
+					table_tab_navigation: true
+				},
+				formats : {
+					alignleft: [
+						{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'left'}},
+						{selector: 'img,table', classes: 'alignleft'}
+					],
+					aligncenter: [
+						{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'center'}},
+						{selector: 'img,table', classes: 'aligncenter'}
+					],
+					alignright: [
+						{selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li', styles: {textAlign:'right'}},
+						{selector: 'img,table', classes: 'alignright'}
+				]},
+				image_class_list: [
+					{title: 'None', value: ''},
+					{title: 'Push Image To Left', value: 'pushImgLeft'},
+					{title: 'Push Image To Right', value: 'pushImgRight'}
+				],
+				browser_spellcheck : true,
+				toolbar_items_size: 'medium',
+				extended_valid_elements:"i[class],iframe[*],img[*]", 
+				valid_elements : '*[*]',
+				//content_css: "../WEB_THEMES/"+siteName+"/css/unilogWebLayouts.css",
+				autosave_ask_before_unload:true,
+				plugins: [
+					"advlist autolink link image lists charmap print hr anchor pagebreak spellchecker autosave",
+					"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+					"table contextmenu directionality emoticons template textcolor paste colorpicker textpattern fontawesome"
+				],
+				image_advtab: true,
+				file_browser_callback: function(field_name, url, type, win) {
+					console.log(field_name);
+					var connector = "bannerUploadCms.action?Connector=/connector.slt";
+					var enableAutoTypeSelection = true;
+				
+					var cType;
+					tinyfck_field = field_name;
+					tinyfck = win;
+					type = "image";
+					switch (type) {
+						case "image":
+						cType = "STATIC_IMAGES";
+						break;
+						case "flash":
+						cType = "Flash";
+						break;
+						case "file":
+						cType = "STATIC_DOCUME";
+						break;
+					}
+					var frameSrc = connector;
+					jQuery.colorbox({open:true,href:connector,iframe:true, width:"80%", height:"80%"});
+					// $('#testFrame').attr("src",frameSrc);
+					// window.open(connector, "tinyfck", "modal,width=600,height=400");
+				},
+				toolbar1: " bold italic underline strikethrough | removeformat |  styleselect formatselect fontselect fontsizeselect  ",
+				toolbar2: "cut copy | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink image media |  table ",
+				toolbar3: "insertdatetime | subscript superscript | alignleft aligncenter alignright alignjustify | charmap emoticons | fullscreen |  forecolor backcolor | code | fontawesome | closeBtn",
+				setup: function(editor) {
+					editor.addButton('closeBtn', {
+						text: 'Close',
+						icon: 'close',
+						onclick: function() {
+							window.tinymce.remove();
+						}
+					});	
+				}
+			}
+		},
+		// Path to CK custom comfiguration
+		ckeditor: {
+			customConfig: ""
+		}
+	};
 
     /**
      * Exposes gridmanager as jquery function
@@ -2128,27 +2090,87 @@ console.log("Custom : "+curr_control.dataToolElement);
 		jQuery(".gm-delete").show();
 	};
 	
-	 hideActionIcons = function(){
-			jQuery('#pageTab,#addNewStaticFormId').hide();
-			jQuery("#SeoTabs").css('pointer-events', 'none');
-			jQuery('#seoTab,.addStaticPage_innerWrap,.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon').css({'pointer-events':'none','opacity':'0.5'});
-			jQuery(".cimm_srcCodeIcon").attr('title','Content View');
-	 };
-	 showActionIcons = function(){
-			jQuery('#pageTab,#addNewStaticFormId').show();
-			jQuery("#SeoTabs").css('pointer-events', 'visible');
-			jQuery('#seoTab,.addStaticPage_innerWrap,.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon').css({'pointer-events':'visible','opacity':'1'});
-			jQuery(".cimm_srcCodeIcon").attr('title','Source Code');
-	 };
-	 
-	 checkForContent = function(){
-		 var canvasContent = jQuery("#gm-canvas").text().trim();
-		 console.log("canvas content length:"+ canvasContent.length);
-		 if(canvasContent.length == 0){
-			 hideAllIcons();
-		 }
-		 else{
-			 showAllIcons();
-		 }
-	 };
+	 hideActionIcons = function(clickType){
+		//$(".readyTemplatesForm").hide();
+		$(".cms_leftMenu").css({'left':'-280px'});
+		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
+			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'none';
+			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'none';
+			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '0px';
+		}
+		
+		var iframeId = window.parent.document.getElementById("iframeId");
+		var frameHeight = parseInt(iframeId.style.height.replace('px',''));
+		if(frameHeight < window.parent.innerHeight){
+			iframeId.style.height = window.parent.innerHeight+'px';
+		}
+		
+		window.parent.document.getElementById("iframeId").style.width = '100%';
+		if(clickType == 'preview'){
+			$(".resPreviewIcon").addClass('active');
+			jQuery('.Cimm-MainContent').addClass('Cimm-MainContenthide').removeClass('Cimm-MainContent');
+			$("#gm-canvas").addClass('gm-container');
+		}
+		$(".cms_staticTable").css({'padding':'0'});
+		$(".gmControlsCustomClass").addClass('doNotFix');
+		/*jQuery('#pageTab,#addNewStaticFormId').hide();
+		jQuery("#SeoTabs").css('pointer-events', 'none');
+		jQuery('#seoTab,.addStaticPage_innerWrap,.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon').css({'pointer-events':'none','opacity':'0.5'});
+		jQuery(".cimm_srcCodeIcon").attr('title','Content View');*/
+	};
+	showActionIcons = function(clickType){
+		//$(".readyTemplatesForm").show();
+		$(".cms_leftMenu").css({'left':'0'});
+		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
+			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'block';
+			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
+			window.parent.document.getElementsByClassName('Cimm-MainContent')[0].style.marginTop = '72px';
+		}
+		
+		var iframeId = window.parent.document.getElementById("iframeId");
+		var frameHeight = parseInt(iframeId.style.height.replace('px',''));
+		if(frameHeight < window.parent.innerHeight){
+			//window.parent.document.getElementById("iframeId").style.height = window.parent.innerHeight - 110 +'px';
+			window.parent.document.getElementById("iframeId").style.height = '775px';
+		}
+		
+		window.parent.document.getElementById("iframeId").style.width = '100%';
+		if(clickType == 'preview'){
+			$(".resPreviewIcon").removeClass('active');
+			jQuery('.Cimm-MainContenthide').addClass('Cimm-MainContent').removeClass('Cimm-MainContenthide');
+			$("#gm-canvas").removeClass('gm-container');
+		}
+		if($('body').hasClass('expand-nav')){
+			$(".cms_staticTable").css({'padding':'0 0 0 60px'});
+		}else{
+			$(".cms_staticTable").css({'padding':'0 0 0 270px'});
+		}
+		$(".gmControlsCustomClass").removeClass('doNotFix');
+		/*jQuery('#pageTab,#addNewStaticFormId').show();
+		jQuery("#SeoTabs").css('pointer-events', 'visible');
+		jQuery('#seoTab,.addStaticPage_innerWrap,.cimm_saveIcon,.cimm_publishIcon,.cimm_addNewIcon,.cimm_cmsResetIcon,.cimm_previewIcon').css({'pointer-events':'visible','opacity':'1'});
+		jQuery(".cimm_srcCodeIcon").attr('title','Source Code');*/
+	};
+		 
+	checkForContent = function(){
+		var canvasContent = jQuery("#gm-canvas").text().trim();
+		console.log("canvas content length:"+ canvasContent.length);
+		if(canvasContent.length == 0){
+			hideAllIcons();
+		}
+		else{
+			showAllIcons();
+		}
+	};
 })(jQuery );
+
+
+$(window).scroll(function(){
+	var bodyScroll = $(this).scrollTop();
+	var toScroll = $("#gm-canvas").offset().top;
+	if(bodyScroll >= toScroll && !$("#gm-controls").hasClass('fixConrtroles')){
+		$("#gm-controls").addClass('fixConrtroles');
+	}else if(bodyScroll < toScroll && $("#gm-controls").hasClass('fixConrtroles')){
+		$("#gm-controls").removeClass('fixConrtroles');
+	}
+});

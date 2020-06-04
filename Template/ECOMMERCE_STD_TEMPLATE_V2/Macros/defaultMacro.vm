@@ -8,7 +8,7 @@
 #end
 #macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId)
 #if($navigationType=="NAVIGATION")
-#set($navURL = "itemLevelFilterPage.action?codeId=$codeIdSkip&gallery=$gallery&levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#set($navURL = "itemLevelFilterPage.action?codeId=$codeIdSkip&gallery=$gallery&levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&srchTyp=$srchTyp")
 #end
 #if($navigationType=="SEARCH")
 #set($navURL = "searchPage.action?keyWord=$keyWord&srchTyp=$srchTyp&gallery=$gallery&#if($narrowKeyword)&narrowKeyword=$narrowKeyword#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
@@ -87,7 +87,7 @@ $(document).ready(function(){
 #set($featuredProducts = $CIMMUtility.featureProductsListCimmVelocity($generalSubset,$subsetId))
 #if($featuredProducts.size()>0)	 	
 	<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredProducts")</label></h3>
+	<h3 class="cimm_slider-title"><label>$locale.get("product.label.featuredProducts")</label></h3>
 	<ul id="featuredProductList" class="cimm_caroWrap">
 		#foreach($itemData in $featuredProducts)
 		#set($itemTitle= $itemData.shortDesc)
@@ -137,7 +137,7 @@ $(document).ready(function(){
 ##-------------------------  Recently Viewed
 #macro(recentlyViewedItems)
 <div class="cimm_sliderWrap" >
-	<h3 class="cimm_CaroBlockTitle"><label>$!locale.get("product.heading.recentlyviewedproducts")</label></h3>
+	<h3 class="cimm_slider-title"><label>$!locale.get("product.heading.recentlyviewedproducts")</label></h3>
 	<ul id="recentlyViewedContent" class="cimm_caroWrap "></ul>
 </div>	
 <script type="text/javascript">
@@ -152,7 +152,7 @@ $(document).ready(function(){
 #macro(eventsSection)
 #set($eventsList = $CIMMUtility.eventListCimmVelocity())
 	<div class="upcomingEvent">
-		<h3 class="cimm_CaroBlockTitle"><label>Upcoming Events</label></h3>
+		<h3 class="cimm_slider-title"><label>Upcoming Events</label></h3>
 		<!-- <h2>UPCOMING EVENTS <a href="/eventsUnit.action"><i class="fa fa-calendar"></i></a></h2> -->
 		<ul id="upcomingEvents" class="customScroll">
 		#foreach($eventsDetails in $eventsList)
@@ -184,7 +184,7 @@ $(document).ready(function(){
 ##-------------------------  News Section
 #macro(recentNewsSection $pageName)
 <div class="recentNews">
-	<h3 class="cimm_CaroBlockTitle"><label>Recent News</label></h3>
+	<h3 class="cimm_slider-title"><label>Recent News</label></h3>
 	<div id="news-scroller" class="newsList customScroll">
 		<div class="center"><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
 	</div>
@@ -202,7 +202,7 @@ $('#newsSection').val("$pageName");
 #set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
 #if($!featuredBrands && $featuredBrands.size()>0)	 	
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredBrands")</label></h3>
+	<h3 class="cimm_slider-title"><label>$locale.get("product.label.featuredBrands")</label></h3>
 	<ul id="featuredBrands" class="cimm_caroWrap">
 		#foreach($brandset in $featuredBrands.entrySet())
 		#set($keyValue = $brandset.getKey())
@@ -226,7 +226,7 @@ $('#newsSection').val("$pageName");
 #set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
 #if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
+	<h3 class="cimm_slider-title"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
 	<ul id="featuredManufacturers" class="cimm_caroWrap">
 		#foreach($manufacturerset in $featuredManufacturers.entrySet())
 		#set($keyValue = $manufacturerset.getKey())
@@ -250,7 +250,7 @@ $('#newsSection').val("$pageName");
 #macro(shopBycategorySection)
 #if($categMenu.size()>0)
 <div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_CaroBlockTitle"><label>$locale.get("product.heading.shopByCategory")</label></h3>
+	<h3 class="cimm_slider-title"><label>$locale.get("product.heading.shopByCategory")</label></h3>
 	<ul id="shopByCategory" class="cimm_caroWrap">
 	#foreach($categoryMenu in $categMenu)
 		<li>

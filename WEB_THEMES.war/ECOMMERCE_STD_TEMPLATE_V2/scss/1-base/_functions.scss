@@ -38,6 +38,13 @@
     }
 };
 
+@function set-font-color($color) {
+    @if (lightness($color) > 40) {
+        @return #000000; // Lighter backgorund, return dark color
+    } @else {
+        @return #ffffff; // Darker background, return light color
+    }
+  }
 
 @function set-fhf-color($color){
     @if(lightness($color) > 40){
@@ -49,3 +56,13 @@
 
 /* _________________________________________________________________ */
 
+@function fontColor($fcolor, $bgColor) {
+    @if type-of($fcolor) != "inherit" {
+        @return $fcolor;
+    } @else {
+        @return set-font-color($bgColor);
+    }
+}
+
+
+// $default_font-color: fontColor($default_font-color, $body-bg);

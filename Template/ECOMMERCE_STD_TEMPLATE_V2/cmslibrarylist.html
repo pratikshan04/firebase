@@ -1,8 +1,11 @@
 #foreach($libraries in $libraryList.resultSet)
-<dd><a href="javascript:void(0);" >$!libraries.userLibraryGroupName
-									<span class="float-right dragClass"><i class="fa fa-arrows"></i></span>
-								</a>
-								<div class="hiddenContent">
-									<div data-type="library" data-widget="$libraries.id">Library Block</div>
-								</div></dd>
+<li>
+	<a href="javascript:void(0);" >
+		$!libraries.userLibraryGroupName
+		<i class="fa fa-arrows-alt"></i>
+	</a>
+	<div class="hiddenContent">
+		<div data-type="library" data-widget="$libraries.id">Library Block</div>
+	</div>
+</li>
 #end

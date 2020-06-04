@@ -152,6 +152,7 @@
 							<input type="hidden" name="pageNo" value="$!pageNo">
 							<input type="hidden" name="resultPage" value="#if($resultPage)$!resultPage#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
+							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
 							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							#if($navigationType=="SEARCH")
 							<input type="hidden" name="keyWord" value="#if($keyWord)$!escapeTool.html($!keyWord)#end" /> 
@@ -190,6 +191,8 @@
 							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
+							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
+							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
 							#if($navigationType=="SEARCH")
 							#if($keyWord) <input type="hidden" name="keyWord" value='$!escapeTool.html($!keyWord)' /> #end
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
@@ -296,13 +299,13 @@
 									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
 										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!escapeTool.url($!itemData.productCategoryImageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 								#else
 									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250" src="$!itemImage$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag"></span>
@@ -373,7 +376,7 @@
 									</form>
 							 	</div>
 							 	<div class="itemCountGrid">
-							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+							 		<a class="btn btn-viewallchoice clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<!-- <span>
@@ -457,7 +460,8 @@
 									<li class="productAvail_$!itemData.partNumber">
 										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
 										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-											#if($itemData.availQty)
+											#set($Integer = 0)
+											#if($itemData.availQty && $Integer.parseInt($itemData.availQty) > 0)
 												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
 											#else
 												<span class='text-danger'>Call for Availability</span>
@@ -468,7 +472,16 @@
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									 <li id="allBranchAvail_$!itemData.partNumber">
+									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf($!locale.get("california.restriction.string")) != -1))
+									<li>
+										<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+										<p class="propwarningmsg">
+											<i class="fas fa-exclamation-triangle"></i>
+											<span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span>
+										</p>
+									</li>
+									#end
+									<li id="allBranchAvail_$!itemData.partNumber">
 										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
 									</li> 
 										
@@ -482,7 +495,7 @@
 									#end
 								</ul>
 								<ul>
-									#if($itemData.packDesc)<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
+									#if($!itemData.packDesc && $itemData.packDesc.trim() != "")<li itemprop="sku" class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 									<li class="cimm_priceWrap">
 									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
@@ -549,6 +562,7 @@
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 												<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 											</ul>
+											<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 										</div>
 										<!--My Product Group-->
 									</li>
@@ -556,11 +570,11 @@
 										<label class="customCheckBox">
 											#set($addToCartCheckFlag = "N")
 											#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-										    	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+										    	##if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 										    		#if($itemData.price>0)
 										    			#set($addToCartCheckFlag = "Y")
 											   		#end
-										    	#end
+										    	##end
 										    #else
 											   	#set($addToCartCheckFlag = "Y")
 										    #end
@@ -582,37 +596,37 @@
 							</li>
 						#end
 						<li style="display: none;">
-							#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.itemAvailability, $!itemData.srchTyp, $!navigationType)
+							#itemListHiddenFields($!itemData.partNumber, $!itemData.itemPriceId, $!itemData.qty, $!itemData.uom, $!itemData.price, $!itemData.saleQty, $!itemData.itemId, $!itemData.displayFrieghtAlert, $!itemData.packageQty, $!itemData.availQty, $!itemData.srchTyp, $!navigationType)
 							<span id="quantityBreakPricingDetails_$!itemData.partNumber" style="display: none;"></span>
 							<!-- <input type="hidden" id="displayPrice_$!itemData.partNumber" value="$!itemData.displayPricing"/> -->
 						</li>
 					</ul>
+					<!--Branch Availabiltiy List Section -->
+					<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content yellowTheme bold">
+								<div class="modal-header">
+							      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+							    </div>
+							    <div class="modal-body size-13">
+							    	<table class="table">
+							    		<thead>
+											<tr>
+												<th>$!locale.get("product.label.branchName")</th>
+												<th class="center">$!locale.get("product.label.available")</th>
+											</tr>
+										</thead>
+							    		<tbody id="allBranchHTML$!itemData.partNumber">
+							    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
+							    		</tbody>
+							    	</table>
+							    </div>
+							</div>
+						</div>
+					</div>
+					<!--Branch Availabiltiy List Section-->
 				</li>
-				<!--Branch Availabiltiy List Section -->
-									<div id="branchavail_$!itemData.partNumber.replaceAll(' ','_')" class="modal fade" role="dialog">
-										<div class="modal-dialog">
-											<!-- Modal content-->
-											<div class="modal-content yellowTheme bold">
-												<div class="modal-header">
-											      	<h4 class="modal-title">Branch Availability<button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-											    </div>
-											    <div class="modal-body size-13">
-											    	<table class="table">
-											    		<thead>
-															<tr>
-																<th>$!locale.get("product.label.branchName")</th>
-																<th class="center">$!locale.get("product.label.available")</th>
-															</tr>
-														</thead>
-											    		<tbody id="allBranchHTML$!itemData.partNumber">
-											    			<tr id="allBranchHTML_NoRec_$!itemData.partNumber"><td colspan="2"> No Records Found</td></tr>
-											    		</tbody>
-											    	</table>
-											    </div>
-											</div>
-										</div>
-									</div>
-									<!--Branch Availabiltiy List Section-->
 			#end
 		</ul>
 	</div>
@@ -630,13 +644,13 @@
 			</div>
 		#else
 			#if($paginate>1)
-			<div id="loadingNextPage" style="text-align: center;margin:10px 0;color:#1d4288;font-size:16px;">
-				<a href="javascript:void(0);" onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</a>
+			<div id="loadingNextPage"  class="loadMore">
+				<button onclick="loadMoreItems();" id="loadMoreBtn" class="button">Load More</button>
 			</div>
 			#end
 			<script type="text/javascript">
 			 function loadMoreItems(){
-				 var checkmodevalue = $!("#productListBlock").find('li').attr('class');
+				 var checkmodevalue = $("#productListBlock").find('li').attr('class');
 				 $('#loadMoreBtn').html('Loading..');
 				 loadNextPageAsync("$!paginationURL",$!resultPage,checkmodevalue);
 			 }     

@@ -208,23 +208,12 @@ ul.slick-dots {
    /*___________________Carosal Block Title (Eg: slick sliders in home page)____________________*/
 
     .cimm_CaroBlockTitle{
-        color: $block_titlef-color;
-        font-family: $block_titlef-family;
-        font-size: $block_titlef-size;
         letter-spacing: 1px;
-        text-transform: capitalize;
-
-        margin: 15px 0;
-        position: relative;
-        text-align: left;
         
         label{
             background: #FFF;
             position: relative;
             z-index: 1;
-            font-size: 22px;
-            text-transform: uppercase;
-            margin: 5px 0;
         }
         /*&:after {
             content: "";
@@ -240,10 +229,10 @@ ul.slick-dots {
 
     .cimm_caroWrap {
         margin: 0 0 0 -15px;
-        padding: 0;
+        padding: 0 !important;
         &.slick-vertical{
 			margin: -15px 0 0 0;
-			padding: 20px 0 30px 0;
+			padding: 20px 0 30px 0 !important;
 			.slick-slide {
 				margin: 15px 0 0 0;
 				&[aria-hidden="true"] {
@@ -282,8 +271,14 @@ ul.slick-dots {
 		li{
 			float: left;
 			ul{
+                padding: 0;
+                .sliderDescrip{
+                    min-height: 64px;
+                }
 				li{
-					float: none;
+                    float: none;
+                    list-style-type: none;
+                    margin: 0;
 				}
 			}
 		}
@@ -373,9 +368,14 @@ ul.slick-dots {
     padding: 10px;
     /*background: $gray-lighten;*/
 	.productTitle {
-		height: 40px;
-		display: inline-block;
 		line-height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        min-height: 40px;
+        height: 40px;
     }
     ul {
         li {

@@ -54,7 +54,7 @@
 			</form>
 		</div>
 		#end
-		
+	</div>
 		#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!attrFilterData && $attrFilterData.size()>0))
 			#if(($!attrFilteredList && $attrFilteredList.size()>0) || ($!keyWordTxt && $keyWordTxt!=""))
 			<div class="cimm_filter-block-title cleatBtn">$!locale.get("leftmenu.label.filters")<!-- <span class="pull-right fa"></span> -->
@@ -86,8 +86,6 @@
 			</div>
 			<!--End of Refined By-->
 		#end 
-	</div>
-		 
 	#set($iVal = 0)
 	#set($filterCount = 0)
 	#foreach($!attrList in $!attrFilterData)
@@ -170,8 +168,8 @@
 
 #if($CommonDBQuerySystemParameter.get("EnableLeftMenuSingleFilter")=="Y")
 <script>
-	$!(function(){
-		$!('.cimm_filter-block input:checkbox').removeAttr('checked');
+	$(function(){
+		$('.cimm_filter-block input:checkbox').removeAttr('checked');
 	});
 </script>
 #end

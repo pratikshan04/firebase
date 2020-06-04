@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	jQuery('#example').DataTable({
-	    "order": [[ 0, "asc" ]]
+	    "order": [[ 0, "asc" ]],
+	    pageLength : 5,
+	    lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]]
 	});
 });
 function useThisAddress(obj){
@@ -10,13 +12,21 @@ function useThisAddress(obj){
 	jQuery("#custName").val(obj.dataset.customername);
 	jQuery("#homeBranchZipCode").val(obj.dataset.zipcode);
 }
-function submitShippingAddress(){
+function submitShippingAddress(obj){
+	jQuery("#shipId").val(obj.dataset.addressbookid);
+	jQuery("#bcId").val(obj.dataset.buyingcompanyid);
+	jQuery("#entityId").val(obj.dataset.entityid);
+	jQuery("#custName").val(obj.dataset.customername);
+	jQuery("#homeBranchZipCode").val(obj.dataset.zipcode);
+	console.log(jQuery("#shipId").val()+" : "+jQuery("#bcId").val()+" : "+jQuery("#custName").val());
 	if($("input[name=useThisAddress]:checked").length>0){
+		console.log("Radio On");
 		var noEmailTxt = locale('checkemailaddress.status.noemailaddress');
 		var value = getCookie("afterLoginUrl");
 		var itemId=getCookie('itemId');
 		var itemPriceID=getCookie('itemPriceId');
 		var str=jQuery("#selectShipAddress").serialize();
+		console.log("str : "+str);
 		setCookie("afterLoginUrl", '');
 		block("Please Wait");
 		setCookie("afterLoginUrl", '');
@@ -25,7 +35,7 @@ function submitShippingAddress(){
 			url: "assignShipEntity.action",
 			data: str,
 			success: function(msg){
-				unblock();
+				// unblock();
 				setCookie("isShipToSelected", true);
 				if(msg==noEmailTxt){
 					setCookie("validEmailAddress", false);
@@ -46,6 +56,7 @@ function submitShippingAddress(){
 			}
 		});
 	}else{
+		console.log("Radio Off");
 		bootAlert("small","error","Error","Please select at least one ship address.");
 	}
 }

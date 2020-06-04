@@ -130,7 +130,12 @@ function validateEventReg(userLogin){
 
 	if (result!=""){
 		showNotificationDiv("", result);
-		//$("#errMsg").html("<div id=\"custom-gen\"  style=\"color:red;\"><b>Required Field:</b><br>"+result+"</div>");
+		if($("#enableStickyHeader").val() == "Y" && $("#layoutName").val()!= "CMSStaticPage"){
+			let fixedHead = $("#fixedHead").height();
+			$('html, body').animate({scrollTop: $(".alert").offset().top - fixedHead}, 400);
+		}else{
+			$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);
+		}
 		return false;
 
 	}else if(result==""){
@@ -152,7 +157,7 @@ function validateEventReg(userLogin){
 						success: function(msg){
 							var arrRes = msg.split("|");
 							if (arrRes[0]=="1"){
-								bootAlert("small","error","Information","Thank you for registering to this event.");
+								bootAlert("small","success","Success","Thank you for registering to this event.");
 								$("[data-bb-handler='ok']").click(function(){
 									 location.href="/EventCalendar";
 								 }); 
@@ -197,3 +202,12 @@ function showPOText(){
 		$("#radioTrigger").hide();
 	}
 }*/
+
+$(document).ready(function(){
+	$("#additionalInfo").on("hide.bs.collapse", function(){
+		$("#checkStatus").attr('checked', false);
+	});
+	$("#additionalInfo").on("show.bs.collapse", function(){
+		$("#checkStatus").attr('checked', true);
+	});
+});

@@ -7,9 +7,9 @@
 #if($!savedGroupName && $!savedGroupName!="" && $!savedGroupId)
 	<div id="notificationDiv"></div>
 	<div class="row mBottom-3">
-		<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="col-md-6 col-xs-12">
 			<h1 class="cimm_page-title mBottom-0" id="groupName">$savedGroupName</h1>					
-			<div class="form-inline" id="editBox" style="display: none;">
+			<div class="custom_lineform form-inline" id="editBox" style="display: none;">
 				<input type="hidden" value="$savedGroupName" id="oldGroupName" />
 				<input type="hidden" value="$savedGroupId" id="GroupId" />
 				<input type="hidden" value="C" id="GroupType" />
@@ -18,7 +18,7 @@
 				<button class="cimm_inlineButton" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
+		<div class="col-md-6 col-xs-12 text-right grpNameEditWrap">
 			#if($isShared!="Y")
 			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('savedCart.button.editCartName')"><em class="glyphicon glyphicon-edit"></em> $!locale.get('savedCart.button.cartName')</button>
 			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=C');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><em class="glyphicon glyphicon-trash"></em>  $!locale.get('header.label.cart')</button>
@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<div class="row mBottom-3">
-		<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="col-md-4 col-sm-4 col-xs-12 custom_lineform">
 			<select class="form-control selectpicker" onchange="bulkActions(this);" id="bulkActionSelect">
 				<option value="">$!locale.get("product.option.select")</option>
 				<option value="deleteOption">$!locale.get("product.button.deleteSelected")</option>
@@ -36,13 +36,13 @@
 			</select>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="form-inline">
+			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.itemsperpage'): </label>
 				<div class="form-group">
 					<input type="hidden" name="savedGroupId" value="$savedGroupId" />
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" /> 
 					<input type="hidden" name="sortBy" value="$!sortBy"/>
-					<input type="hidden" name="pageNo" value="$pageNo" />
+					<input type="hidden" name="pageNo" value="0" />##$pageNo
 					<input type="hidden" value="C" name="reqType"/>
 					<input type="hidden" value="$isShared" name="shared" id="isShared2"/>
 					<select name="resultPage" class="form-control selectpicker quantity" id="resultPage" onchange="PageItemsChange();">
@@ -55,7 +55,7 @@
 			</form>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-			<form action="myProductGroupPage.action" id="sortByForm" class="form-inline">
+			<form action="myProductGroupPage.action" id="sortByForm" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.sortBy'): </label>
 				<div class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
@@ -88,13 +88,13 @@
 	</div>
 		<div class="row mBottom-3">
 		<div class="col-md-9 col-sm-6 col-xs-12">
-			<div class="form-inline">
+			<div class="custom_lineform form-inline">
 				<form action="myProductGroupPage.action" id="productSearchForm" class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
 					<input type="hidden" name="resultPage" value="$resultPage" />
 					<input type="hidden" name="sortBy" value="$!sortBy"/>   
-					<input type="hidden" name="pageNo" value="$pageNo" />
+					<input type="hidden" name="pageNo" value="0" />##$pageNo
 					<input type="hidden" value="$reqType" name="reqType"/>
 					<input type="hidden" value="$isShared" name="shared" id="isShared"/>
 					<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" id="searchkeyWord"/>
@@ -192,12 +192,6 @@
 					    	#else
 					    		<span class='text-danger'>Call for Availability</span>
 					    	#end
-							<!-- #if($itemData.itemAvailability && $!itemData.itemAvailability>0)
-							<li>
-								<strong>$!locale.get("product.label.available"): </strong>
-								<span>$!itemData.itemAvailability</span>
-							</li>
-								#end -->
 							#set($leadTime = "N")
 							#set($available = "N")
 							#set($allBranch = $itemData.branchAvail)
@@ -238,12 +232,12 @@
 					</ul>
 					</td> -->
 					<td data-th="$locale.get('form.label.tableQty')">
-						<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" value="$itemData.qty" maxlength="6" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
+						<input type="text" id="itemTxtQty$itemData.itemId" name="shoppingCartQty" value="$itemData.qty" maxlength="4" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" data-minorderqty="$!itemData.minOrderQty"  data-qtyinterval="$!itemData.orderInterval" data-uom ="$!itemData.uom" data-itempriceid="$!itemData.itemPriceId" data-addtocartflag="$addToCartCheckFlag" data-partnumber="$itemData.partNumber"  data-itemId="$itemData.itemId" data-cartitemid="$!itemData.productListId" class="quantity" />
 						<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 						<input type="hidden" value="$itemData.minOrderQty" id="minOrderQty_$itemData.itemId"/>
 						<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/> 
-						<input type="hidden" id="itemTxtAvail$itemData.itemId" value="$itemData.itemAvailability"/>
-						<input type="hidden" id="itemPriceTxtAvail$itemData.itemPriceId" value="$itemData.itemAvailability"/>
+						<input type="hidden" id="itemTxtSXAvail$itemData.partNumber" name="itemTxtSXAvail$itemData.partNumber" value="$itemData.availQty"/>
+						<input type="hidden" id="itemTxtAvail$itemData.itemId" name="itemTxtAvail$itemData.itemId" value="$itemData.availQty"/>
 						<input type="hidden" name="shoppingCartId" value="$itemData.productListId"/>
 						<input type="hidden" name="lineItemIdList" id="tempItemId_$itemData.partNumber" value="$itemData.itemId"/>
 						<input type="hidden" name="idListItem" value="$itemData.partNumber"/>
@@ -305,7 +299,7 @@
 						</label>
 					</td>
 				</tr>
-				##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
+				##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.availQty, $itemData.srchTyp, $navigationType)
 				#end
 				#else
 				<tr>
@@ -314,8 +308,14 @@
 				#end
 			</tbody>
 		</table>
-		<input type="hidden" value="$savedGroupId" name="savedGroupId"/>
-		<input type="hidden" value="$reqType" name="reqType" id="reqType"/>
+		<input type="hidden" value="$savedGroupId" name="savedGroupId" />
+		<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
+		<input type="hidden" name="resultPage" value="$resultPage" />
+		<input type="hidden" name="sortBy" value="$!sortBy"/>   
+		<input type="hidden" name="pageNo" value="$pageNo" />
+		<input type="hidden" value="$reqType" name="reqType"/>
+		<input type="hidden" value="$isShared" name="shared" />
+		<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" />
 	</form>
 <!-- <div class="cimm_salesBottomStrip">
 	<ul class="clearAfter">

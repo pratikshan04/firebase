@@ -1,13 +1,11 @@
 function jssorSliderFunction() {
 	jQuery("div[id$='_container']").each(function(){
 		initJssorSlides(jQuery(this).attr("id"))
-		console.log("generated : " + jQuery(this).attr("id"));
 	});
 }
 var refreshBanner = function(bannerId,index){
-	console.log("bannerId : " + bannerId + "-" + index);
 	jQuery.getJSON("/bannerApi.action?bannerListId="+bannerId+"&reload=false", function(data) {
-		if(data.hasOwnProperty('bannerTemplate')){
+		if(data && data.hasOwnProperty('bannerTemplate')){
 			var bannerData = "";
 			var bannerTemplate = data.bannerTemplate;
 			var dynamicProperties = data.dynamicProperties;
@@ -33,7 +31,6 @@ var refreshBanner = function(bannerId,index){
 				var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
 				var wrapperId = jQuery(this).attr("id");
 				var bannerType = jQuery(this).data("bannertype");
-				console.log("Wrapper id :"+sliderId);
 				bannerData = data.bannerTemplate.replace("slidercontainer",sliderId);
 				jQuery(this).html(bannerData);
 				
@@ -70,7 +67,6 @@ function loadWidgets(){
 		generateWidget(widgetId);
 	});
 	homeCarousels();
-	$('.cimm_formContent li').removeAttr('title');
 }
 function generateForm(formId){
 	jQuery.ajax({
@@ -78,6 +74,11 @@ function generateForm(formId){
 		async: false,
 		success: function (data) {
 			jQuery("[data-widget='"+formId+"']").html(data);
+			var df = jQuery("[data-widget='"+formId+"']").find('.datePicker').attr('data-format');
+			initDatePicker(df);
+			removeCaption();
+			$('.cimm_formContent li').removeAttr('title');
+			$('.col').removeAttr('title');
 		}
 	});
 }
@@ -86,4 +87,19 @@ function loadStaticForms(){
 	var formId = jQuery(this).data("widget");
 		generateForm(formId);
 	});  
+}
+function initDatePicker(dateFormat){
+	$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+		$('.datePicker').datepicker({
+			format: dateFormat,
+			autoclose: true,
+			startDate: '0',
+		});
+	});
+}
+function removeCaption(){
+	var userLogin = $("#userLogin").val();
+	if (userLogin=="true" ) {
+	    $('[name="jcaptcha"]').parent().remove();
+	}
 }

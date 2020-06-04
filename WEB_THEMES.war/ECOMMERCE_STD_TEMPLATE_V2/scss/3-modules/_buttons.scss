@@ -1,3 +1,6 @@
+
+@include custom-btns;
+
 button,
 input[type='submit'] {
     -moz-appearance: none;
@@ -183,14 +186,16 @@ input[type='submit'] {
 			}
 			input {
 				height: 35px;
-				padding: 10px;
+				padding: 10px 6px;
 				width: 100%;
 			}
 			a {
 				color: $default_font-color;
 				text-transform: capitalize;
 				display: block;
-				padding: 5px;
+                padding: 5px;
+                white-space: normal;
+                word-break: break-all;
 				&:hover {
 					background: $primary_color;
 					color: $white;
@@ -334,3 +339,5 @@ input:checked+.slider.active:before {
         background-color: transparent;
     }
 }
+
+@include headings;
