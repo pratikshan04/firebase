@@ -91,7 +91,7 @@
 	<p class="mBottom-2"> $!locale.get("event.note.attendTheEvent") </p>
 	<div align="center" id="chkDate">
 		#if($eventsList.blockOnlineReg == "N")
-			#if($eventsList.totalSeats == "-1")
+		#if($eventsList.totalSeats == "-1")
 				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerNow")</a>
 			#elseif($eventsList.availableSeats >= $!eventsList.totalSeats)
 				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerrForWaitingList")</a>
