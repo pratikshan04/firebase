@@ -232,7 +232,9 @@ var BulkAction = {};
 	};
 	BulkAction.processAddToCart = function (obj) {
 		if (typeof obj[0].requestType == "undefined" || obj[0].requestType == "") {
-			block('Please Wait');
+			if($("#layoutName").val() != "SavedGroupsPage"){
+				block('Please Wait');
+			}
 		} else {
 			if ($("#multipleItemCart_" + obj[0].itemId).length > 0) {
 				$("#multipleItemCart_" + obj[0].itemId).find(".mulAddtoCartStatus").html("Loading...");
