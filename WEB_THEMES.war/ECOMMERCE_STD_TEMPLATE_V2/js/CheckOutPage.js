@@ -173,7 +173,14 @@ var checkoutWizard = {};
 	checkoutWizard.submitOrder = function (oType){
 		$("#quickCartHiddenInfo").submit( function(){
 			var isValid = submitThisForm("#step-"+checkOutStep);
+			var createOrderInDb = document.getElementById('createOrderInDb').value;
+			if(createOrderInDb == 'Y' || $.trim(createOrderInDb)=="Y")
+				{
+			var erpType = "cimmesb";
+		        }
+			else{
 			var erpType = document.getElementById('erpType').value;
+		        }
 			var orderType = $('#orderType').val().trim();
 			if(erpType && erpType.toUpperCase()=="DEFAULTS" && isValid){
 				var data = $("#quickCartHiddenInfo").serialize();
@@ -198,10 +205,10 @@ var checkoutWizard = {};
 			}
 		});
 		if(oType == 'checkoutWithPo'){
-			$("#quickCartHiddenInfo").submit(oType);
+			$("#quickCartHiddenInfo").submit();
 		}else if(oType == 'checkoutWithPo'){
 			$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
-			$("#quickCartHiddenInfo").submit(oType);
+			$("#quickCartHiddenInfo").submit();
 		}
 	};
 	
