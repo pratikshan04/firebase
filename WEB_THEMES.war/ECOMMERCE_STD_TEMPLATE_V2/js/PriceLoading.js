@@ -7,7 +7,7 @@ function priceLoadMainFunction() {
 	if(loadPrice){
 		priceLoading.beginPriceLoading();
 	}else{
-		priceLoading.productModeCustomFunc();
+		cleanLoading();
 	}	
 }
 /*some comments*/
@@ -104,6 +104,11 @@ function priceLoadMainFunction() {
 			
 			if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
 				document.getElementById('uomValue_' + product.partNumber).value = uom;
+			}
+			
+			if (document.getElementById('uomSpan_' + product.partNumber) && document.getElementById('uomSpan_' + product.partNumber) != null && document.getElementById('uomSpan_' + product.partNumber) != undefined) {
+				document.getElementById('uomSpan_' + product.partNumber).innerHTML = uom;
+				pricestr = "$" + Number(price).toFixed(pricePrecision);
 			}
 		}
 		return pricestr;
@@ -463,7 +468,7 @@ function priceLoadMainFunction() {
 			"bSort" : false,
 			"bLengthChange" : false,
 			"pageLength" : 5,
-			"sDom" : 'T<"tabHeader"l><"tablesWrap"t><"tabFooter"ip>',
+			"sDom" : 'T<"tabHeader"l><"tablesWrap"t><"tabFooter"<"row" <"col-sm-6"i><"col-sm-6"p>>>',
 			"dom" : '<"top"i>rt<"bottom"flp><"clear">',
 			"language" : {
 				"search" : "_INPUT_",
@@ -504,15 +509,10 @@ function priceLoadMainFunction() {
 								trHide.removeClass('shown');
 							}
 						});
-				$("#linkedItemContentDiv_" + $(this).attr('id'))
-						.show();
-				$("#linkedItemAvailable_" + $(this).attr('id'))
-						.show();
-				$('td.details-control em').removeClass(
-						'fa-minus-circle').addClass(
-						'fa-plus-circle');
-				$(this).closest('tr').find('em').toggleClass(
-						'fa-minus-circle');
+				$("#linkedItemContentDiv_" + $(this).attr('id')).show();
+				$("#linkedItemAvailable_" + $(this).attr('id')).show();
+				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+				$(this).find('em').removeClass('fa-plus-circle').addClass('fa-minus-circle');
 				row.child.show();
 				tr.addClass('shown');
 				$("html, body").animate({
@@ -533,7 +533,7 @@ function priceLoadMainFunction() {
 				var domTabsExistFlag = false;
 				//$(".focusItemTabs").hide();
 				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
-				$(this).closest('tr').find('em').toggleClass('fa-minus-circle');
+				$(this).find('em').removeClass('fa-plus-circle').addClass('fa-minus-circle');
 				$(tr).attr("data-detailsload", "Y");
 				$.ajax({
 					type : "POST",

@@ -6,44 +6,37 @@
 #else
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 #end
-#if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage"))
-<script>
-window.location.href = "/"
-</script>
+
+#set($share_img = $!hostName + $!webThemes + "/" + $!siteName + "/images/logo.png")
+#if($!siteLogo)
+#set($share_img = $!hostName + "/ASSETS/IMAGES/LOGOS/CLIENT/" + $!siteLogo)
 #end
-#if($LayoutName!="ProductDetailPage")
-	<meta property="og:image" content="$!cdnUrl$!webThemes/$!siteName/images/logo.png" />
-	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
-		#set($ststicMetaDesc = $!metaDesc.trim())
-		#set($ststicMetaKey = $!metaTagString.trim())
-		#if($!ststicMetaDesc && $!ststicMetaDesc != "")
-			<meta name="description" content="$!ststicMetaDesc">
-			<meta property="og:description" content="$!ststicMetaDesc" />
-		#else
-			<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
-			<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
-		#end
-		#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
-			<meta name="keywords" content="$!ststicMetaKey">
-		#end
-	#elseif($LayoutName=="SubCategoryPage" && $!categoryDescription.shortDesc != "")	
-		<meta name="description" content="$!categoryDescription.shortDesc.trim()">
-		<meta name="keywords" content="$!categoryDescription.shortDesc.trim()">
-		<meta property="og:description" content="$!categoryDescription.shortDesc.trim()" />
-	#else
-		<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
-		<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
-	#end
-#end
+
+#set($share_desc = $!locale.get('all.Pages.Default.Meta.Description'))
+#set($ststicMetaDesc = $!metaDesc.trim())
+#set($ststicMetaKey = $!metaTagString.trim())
 #set($pageTitleVelo = $!siteDisplayName.trim())
 #set($pageTitleseparator = " | ")
+#set($canonical_url = $!hostName)
+#set($share_imgAlt = $!siteDisplayName)
+#set($seo_keywords = $!siteDisplayName)
+
+#if($LayoutName!="ProductDetailPage")
+	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
+		#if($!ststicMetaDesc && $!ststicMetaDesc != "")
+			#set($share_desc = $!ststicMetaDesc)
+		#end
+		#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
+			#set($seo_keywords = $!ststicMetaKey)
+		#end
+	#end
+#end
 #if($!LayoutName=="SavedGroupsPage")
 	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.responseType.$!responseType") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($!LayoutName=="ProductGroupPage" || $!LayoutName=="ApproveCart" || $!LayoutName=="SavedCartPage")
 	#set($pageTitleVelo = $!savedGroupName + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="HomePage")
 	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
-	<link rel="canonical" href="$!hostName" />
 #elseif($!LayoutName=="OrderDetailPage")
 	#if($orderDetail.orderStatus.contains("Bid"))
 		#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
@@ -58,8 +51,12 @@ window.location.href = "/"
 		#set($breadCrumbIdx = 1)
 		#set($categoryNameIndex = $!breadCrumbSize - 1)
 		#foreach($!breadCrumb in $!breadCrumbList)
-			#if($breadCrumbIdx == $!categoryNameIndex)
-				#set($pageTitleVelo = $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
+			#if($!breadCrumbIdx == $!categoryNameIndex)
+				#if($!breadCrumb.categoryName)
+					#set($pageTitleVelo = $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
+				#else
+					#set($pageTitleVelo = $!itemData.manufacturerPartNumber + $!pageTitleseparator + $!pageTitleVelo)
+				#end
 			#end
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 		#end
@@ -99,19 +96,14 @@ window.location.href = "/"
 			#set($itmPriceId = $!itemData.itemPriceId)
 			#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 			#set($BCTCat1 = $!itemProductTitle.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$!hostName$!itmPriceId/p/n/$!BCTCat1" />
-			<meta property="og:image" content="$!imgSrc" />
-			<meta property="og:image:width" content="500" /> 
-			<meta property="og:image:height" content="500" />
-			#if($itemData.metaDesc)
-				<meta name="description" content="$!itemData.metaDesc">
-				<meta property="og:description" content="$itemData.metaDesc" />
-			#elseif($itemData.shortDesc)
-				<meta name="description" content="$!itemData.shortDesc">
-				<meta property="og:description" content="$!itemData.shortDesc" />
-			#else
-				<meta name="description" content="$!locale.get('all.Pages.Default.Meta.Description')">
-				<meta property="og:description" content="$!locale.get('all.Pages.Default.Meta.Description')" />
+			#set($canonical_url = $!hostName+""+$!itmPriceId+"/product/"+$!BCTCat1)
+			<meta property="og:url" content="$!hostName$!itmPriceId/product/$!BCTCat1" />
+			#set($share_imgAlt = $BCTCat1)
+			#set($share_img = $!imgSrc)
+			#if($itemData.metaDesc && $itemData.metaDesc.trim()!="")
+				#set($share_desc = $!itemData.metaDesc)
+			#elseif($itemData.shortDesc && $itemData.shortDesc.trim()!="")
+				#set($share_desc = $!itemData.shortDesc)
 			#end
 		#end
 	#end
@@ -159,14 +151,11 @@ window.location.href = "/"
 	#set($BCTCat1 = $finalPageTitle.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
 	#if($navigationType=='MANF')
 		#if($!metaDescriptions)
-			<meta name="description" content="$!metaDescriptions"/>
-		#else
-			<meta name="description" content="$!pageTitleVelo"/>
+			#set($share_desc = $!metaDescriptions)
 		#end
-		<link rel="canonical" href="$!hostName$manfId/manufacturer/$BCTCat1" />
+		#set($canonical_url = $!hostName+""+$!manfId+"/category/"+$!BCTCat1)
 	#else
-		<meta name="description" content="$!pageTitleVelo"/>
-		<link rel="canonical" href="$!hostName$codeId/category/$BCTCat1" />
+		#set($canonical_url = $!hostName+""+$!codeId+"/category/"+$!BCTCat1)
 	#end
 #elseif($LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
 #set($listPageHeading = "")
@@ -195,18 +184,21 @@ window.location.href = "/"
 		#if($finalPageTitle)
 			#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
 			#set($BCTCat1 = $pageTitleBreadCrumbLast.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$!hostName$codeId/category/$BCTCat1" />
 		#else
 			#set($pageTitleVelo = $!listPageHeading + $!pageTitleseparator + $!pageTitleVelo)
 			#set($BCTCat1 = $listPageHeading.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
-			<link rel="canonical" href="$!hostName$codeId/category/$BCTCat1" />
 		#end
+		#set($canonical_url = $!hostName+""+$codeId+"/category/"+$BCTCat1)
 	#else
 		#set($pageTitleVelo = "Products"+ $!pageTitleseparator + $!pageTitleVelo)
-		<link rel="canonical" href="$!hostName/products" />
+		#set($canonical_url = $!hostName+"/products")
 	#end
-	#if($!categoryDescription && $!categoryDescription.marketingText)
-		<meta name="description" content="$!categoryDescription.marketingText">
+	##if($!categoryDescription && $!categoryDescription.marketingText)
+		##set($share_marketingText = $!categoryDescription.marketingText)
+	##end
+	#if($!categoryDescription.shortDesc != "")
+		#set($share_desc = $!categoryDescription.shortDesc.trim())
+		#set($seo_keywords = $!share_desc)
 	#end
 #elseif($LayoutName=="cspConfiguratorPage")
 	#set($pageTitleVelo = "CSP Configurator" + $!pageTitleseparator + $!siteDisplayName.trim())
@@ -215,7 +207,6 @@ window.location.href = "/"
 #else
 	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.$!LayoutName") + $!pageTitleseparator + $!pageTitleVelo.trim())
 #end
-
 #if($navigationType=='SEARCH')
 	#set($pageTitleVelo = "Search Results " + $!pageTitleVelo.trim())
 #end
@@ -253,33 +244,51 @@ window.location.href = "/"
 #end
 #if($LayoutName!='ProductDetailPage' && $LayoutName!="ProductList" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage")
 	#if($!canonicalUrl && $canonicalUrl.trim()!="")
-		<link rel="canonical" href="$!canonicalUrl" />
-	#else
-		<link rel="canonical" href="$!hostName" />
+		#set($canonical_url = $!canonicalUrl)
 	#end
 #end
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
+
+#set($pageTitleVelo = $!pageTitleVelo.replace("Page","").trim())
+<meta property="og:title" content="$!pageTitleVelo" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="$share_img" />
+<meta property="og:image:alt" content="$share_imgAlt"/>
+<meta property="og:image:width" content="500" /> 
+<meta property="og:image:height" content="500" />
+<meta property="og:site_name" content="$!siteDisplayName" />
+<meta property="og:description" content="$share_desc" name="description" />
+<meta name="keywords" content="$!seo_keywords">
+<!-- meta property="twitter:description" content="$share_desc" />
+<meta name="twitter:image" content="$share_img" / -->
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="$!canonical_url" />
+
+#if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage"))
+<script>
+window.location.href = "/"
+</script>
+#end
+<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-3.4.1.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <!-- Piwik -->
+#set($piwikSiteID = 2)
 <script type="text/javascript">
   var _paq = _paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="//973ecb.cimm2.com/piwik/";
+    var u="//analyticsbeta.cimm2.com/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
+    _paq.push(['setSiteId', '$piwikSiteID']);
     _paq.push(['setUserId', '$!session.getAttribute("com.common.username")']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//973ecb.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
+<noscript><p><img src="https://analyticsbeta.cimm2.com/piwik/piwik.php?idsite=$piwikSiteID&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
 <!-- End Piwik Code -->
 #end
 #if($LayoutName != 'CMSStaticPageList')
 	#parse("stylesheets.html")
 #end
 <title>$!pageTitleVelo.replace("Page","").trim()</title>
-#set($pageTitleVelo = $!pageTitleVelo.replace("Page","").trim())
-<meta property="og:title" content="$!pageTitleVelo" />

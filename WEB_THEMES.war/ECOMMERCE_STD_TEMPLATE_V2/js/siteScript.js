@@ -3,7 +3,7 @@ var specialKeys = new Array();
 var unusualCode = 0;
 
 function validateStr(str) {
-	if (str.toLowerCase().indexOf("<scrip") > -1 || str.toLowerCase().indexOf("<a hre") > -1) {
+	if (str.indexOf('<') >-1 || str.indexOf('>') >-1 || str.indexOf('=') >-1 || str.indexOf('(') >-1 || str.indexOf(')') >-1) {
 		return true;
 	}
 }
@@ -42,6 +42,35 @@ function IsNumeric(e) {
 		return false;
 	}
 	return true;
+}
+function IsDecimal(evt, _this) {
+	var $txtBox = $(_this);
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+		return false;
+	else {
+		var len = $txtBox.val().length;
+		var index = $txtBox.val().indexOf('.');
+		if (index > 0 && charCode == 46) {
+			return false;
+		}
+		if (index > 0) {
+			var charAfterdot = (len + 1) - index;
+			if (charAfterdot > 3) {
+				return false;
+			}
+		}
+	}
+	return $txtBox;
+}
+function char_count(str, letter){
+	var letter_Count = 0;
+	for (var position = 0; position < str.length; position++){
+		if (str.charAt(position) == letter){
+			letter_Count += 1;
+		}
+	}
+	return letter_Count;
 }
 function isAlfaNumericOnly(val) {
 	var Exp = /^[A-Za-z0-9]+$/i;
@@ -527,6 +556,23 @@ function performSearch() {
 	var keywordText = $.trim($("#keyWordTxtMulti").val());
 	var filteredAttr = $.trim($("#attrFilterList").text());
 	var conti = true;
+	var unusualCodeErrorStr = $("#dataErrors").attr('data-unusualerror');
+	unusualCode = 0;
+	
+	if(s != "" && nSearch  != undefined ){
+		if(validateStr($('#txtSearch').val()) ){
+			unusualCode++;
+			}else{
+			if(validateStr($('#narrowText').val()) ){
+				unusualCode++;		
+			}
+		}
+	}else if(nSearch == undefined){
+		if(validateStr($('#txtSearch').val()) ){
+			unusualCode++;
+		}
+	}
+	
 	if (s != undefined && s != "") {
 		s = $.trim(s);
 		s = s.replace(/</g, "<&nbsp;");
@@ -557,8 +603,8 @@ function performSearch() {
 	if (s == "" || s == "Search" || s.toLowerCase().indexOf("search") > -1 || s.toLowerCase().indexOf("enter keyword") > -1 || s.toLowerCase().indexOf("enter%20keyword") > -1 || $.trim(s) == "Product Search" || $.trim(s) == "Product%20Search" || $.trim(s.toUpperCase()) == "ENTER KEYWORD OR PART NUMBER" || $.trim(s.toUpperCase()) == "ENTER%20KEYWORD%20OR%20PART%20NUMBER" || $.trim(s.toUpperCase()) == "SEARCH") {
 		bootAlert("small", "error", "Error", "Enter Search Keyword.");
 		return false;
-	} else if (s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") > -1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") > -1) {
-		bootAlert("medium", "error", "Error", "ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
+	} else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	} else if (typeof keywordText != "undefined" && keywordText != "") {
 		var conti = false;
@@ -2325,7 +2371,7 @@ jQuery(document).bind('click', function (e) {
 	var $clicked = $(e.target);
 	if ($clicked.hasClass("addToCart")) {
 		$clicked.addToCart({
-			flyToCart: "Y",
+			flyToCart: "N",
 			quickCartView: "N",
 			pickupSupport: "Y",
 			functionalBlock: {
@@ -2847,7 +2893,7 @@ var piwik = {
 		console.log(" Inside trackEcommerceCartUpdatePiwik()");
 		console.log("cart total : " + cartTotal);
 		_paq.push(['trackEcommerceCartUpdate', cartTotal]); // (required) Cart amount
-		_paq.push(['trackPageView']);
+		//_paq.push(['trackPageView']);
 	},
 	/*   trackEcommerceOrderPiwik() method will keep track of the order Details collected from Order Confirmation and submit to the PIWIK   */
 	trackEcommerceOrderPiwik: function (orderId, orderGrandTotal, orderSubTotal, taxAmount, shippingCharge, discountOffered) {
@@ -2877,7 +2923,7 @@ var piwik = {
 			categoryName, 							// (optional) Product category, or array of up to 5 categories
 			unitPrice 								// (optional) Product Price as displayed on the page
 		]);
-		_paq.push(['trackPageView']);
+		//_paq.push(['trackPageView']);
 	},
 	/*   setEcommerceCategoryViewPiwik() method will keep track of viewed category Details collected from category  page and submit to the PIWIK   */
 	setEcommerceCategoryViewPiwik: function (categoryName) {
@@ -2889,7 +2935,7 @@ var piwik = {
 			productName = false, 			// No product on Category page
 			category = categoryName 		// Category Page, or array of up to 5 categories
 		]);
-		_paq.push(['trackPageView']);
+		//_paq.push(['trackPageView']);
 	},
 	/*   populateOnCategoryPage() fetches current category and submit it to setEcommerceCategoryViewPiwik() further to the PIWIK   */
 	populateOnCategoryPage: function () {
@@ -3014,6 +3060,8 @@ function runScript(e) {
 			$('#nSearchBtn').click();
 		} else if (e.target.id == "popkeyword") {
 			$('#popLoginBtn').click();
+		} else if (e.target.id == "auEmail") {
+			$('#guestCheckoutContinue').click();
 		}
 		return false;
 	}
@@ -3043,6 +3091,7 @@ function accordionFooter(status) {
 		})
 		$('.modules').addClass('accordion').find('.toggle_content').slideUp('fast');
 	} else {
+		$(".toggle_content").css("display", "block");
 		$('.footerCol h3').removeClass('active').off().parent().find('.toggle_content').removeAttr('style').slideDown('fast');
 		$('.footerCol h3 em').removeClass(footer_icon_minus).addClass(footer_icon_plus);
 		$('.footerCol').removeClass('accordion');
@@ -3614,7 +3663,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3652,7 +3701,7 @@ function homeCarousels() {
 							}
 						},
 						{
-							breakpoint: 400,
+							breakpoint: 420,
 							settings: {
 								slidesToShow: 1,
 							}
@@ -3690,7 +3739,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3725,7 +3774,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3760,7 +3809,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3795,7 +3844,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3835,7 +3884,7 @@ $(document).ready(function () {
 		loadUserByCustomer(selectedCustomer);
 	}
 
-	function loadUserByCustomer(attributes) {
+	function loadUserByCustomer(attributes, from) {
 		localStorage.removeItem("currentCustomerSU");
 		localStorage.setItem("currentCustomerSU", JSON.stringify(attributes));
 		//block('Please wait');
@@ -3844,12 +3893,15 @@ $(document).ready(function () {
 		$.get("getUsersByCustomerUnit.action",
 			{ "customerId": attributes['customerid'], "accountNumber": attributes['accountnumber'] },
 			function (data, status, xhr) {
-				//$("#salesrepModal").modal('hide');
-				$("#salesrepModal .modal-body").html(data);
-				/*$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
-				$('#salesrepModal').on('shown.bs.modal', function () {
-					$('body').addClass('modal-open');
-				});*/
+				if(from == 'customer'){
+					$("#salesrepModal .modal-body").html(data);
+					$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
+					$('#salesrepModal').on('shown.bs.modal', function () {
+						$('body').addClass('modal-open');
+					});
+				}else{
+					$("#salesrepModal .modal-body").html(data);
+				}
 				unblock();
 				//$("#salesrepModal").modal({ backdrop: "static", keyboard: false });
 				//$('#salesrepModal').on('shown.bs.modal', function () {
@@ -3897,7 +3949,7 @@ $(document).ready(function () {
 				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result) {
-						loadUserByCustomer(selectedCustomer);
+						loadUserByCustomer(selectedCustomer, 'customer');
 					} else {
 						unblock();
 						return true;
@@ -3917,6 +3969,7 @@ $(document).ready(function () {
 	});
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function (src) {
+		$('#salesrepModal').css({'padding-right':'0'});
 		block('Please wait');
 		localStorage.removeItem("salesUserSelected");
 		localStorage.setItem("salesUserSelected", "Y");
@@ -3967,6 +4020,45 @@ function callCSPConfigurator(obj) {
 		window.location.href = "cspConfiguratorPage.action?" + paramString;
 	}
 }
+function warningPopUp(id){
+	var ad = $(id).attr("data-id");
+	$("#"+ad).toggle();
+}
+$(".warningPopExit").on("click",function(){
+	var exitId = $(this).attr("data-exitid");
+	$("#"+exitId).hide();
+}
+);
+jQuery.fn.clickOff = function(callback, selfDestroy) {
+	var clicked = false;
+	var parent = this;
+	var destroy = selfDestroy || true;
+	parent.click(function() {
+		clicked = true;
+	});
+	$(document).click(function(event) {
+		if (!clicked) {
+			callback(parent, event);
+		}
+		if (destroy) {
+			//parent.clickOff = function() {};
+			//parent.off("click");
+			//$(document).off("click");
+			//parent.off("clickOff");
+		};
+		clicked = false;
+	});
+};
+$(".warning_MSG").click(function() {
+	//alert('clickOn');
+}
+);
+$(".warning_MSG").clickOff(function() {
+	//alert('clickOff');
+	$("div[id^='warning_']").hide();
+}
+);
+
 function validateCaptcha(obj) {
 	var email = $(obj).data("emailid");
 	var authCode = $(obj).data("authcode");
@@ -3992,6 +4084,13 @@ function validateCaptcha(obj) {
 			}
 		});
 	}
+}
+function showProp65Message(){
+    var messgae = $('#californiaWarningMessage').val();
+    bootAlert("small","warning","Warning",messgae);
+}
+if(location.href.indexOf('cimm2') > 0){
+	window.console.log = function(){}
 }
 /*$(window).unload(function(){
 	  localStorage.salesUserSelected=undefined;

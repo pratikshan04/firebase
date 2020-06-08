@@ -99,13 +99,13 @@
 			 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 			<img itemprop="image" height="250" width="250" src="$productModeitemData.imageName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 			#else
-			<img height="250" width="250" src="$detailImage$escapeTool.url($productModeitemData.imageName)" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+			<img itemprop="image" height="250" width="250" src="$detailImage$productModeitemData.imageName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 			#end
 			</span>
 			#if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-			<img itemprop="image" src="$productModeitemData.imageName" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$productModeitemData.imageName" id="imageName$!productModeitemData.itemId" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 			#else
-			<img itemprop="image" src="$!thumbNail$productModeitemData.imageName" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+			<img itemprop="image" src="$!thumbNail$productModeitemData.imageName" id="imageName$!productModeitemData.itemId" height="75" width="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 			#end
 			#if($!productModeitemData.clearance=="Y")
 			<span class="clearenceTag clearenceTagSmall"></span>
@@ -122,6 +122,9 @@
 					 #end
 				#end
 			 #end
+			 #set($itemProductTitle = $!productModeitemData.brandName+" "+$!productModeitemData.manufacturerPartNumber)
+			<span class="hidden" id="itemTitle$!productModeitemData.ItemId" itemprop="name">$!itemProductTitle</span>
+			 <span id="itemShortDesc$!productModeitemData.itemId" class="hideMe">$!productModeitemData.shortDesc</span>
 		 </td>
 		 <td class="removeForSend">
 		 	#set($minQty = 1)

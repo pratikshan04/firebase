@@ -1,7 +1,9 @@
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min.js" defer></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/lazysizes.min.js" defer></script>
+<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min.js" defer></script> -->
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min-3.4.1.js" defer></script>
 <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootbox.min.js" defer></script>
 <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/masonry.pkgd.min.js" defer></script>
-#parse("jquery-migrate-1-2-1-min.html")<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script> -->
+#parse("jquery-migrate-3-1-0-min.html")<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script> -->
 #parse("ajaxscript.html")
 <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/Encoder.js" defer></script>
 <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/hashtable.js" defer></script>
@@ -46,7 +48,6 @@ getCartCount($!cartCount);
 <script>
 jQuery(".clickStream").click(function() {
     var pageNum = parseInt(jQuery("#clickStreamPageNum").val())+1;
-    //console.log(jQuery(this).data("itemid"));
     var str="";
     str = str+"SearchQuery="+jQuery("#txtSearch").val().toLowerCase();
     str = str+"&searchResultID="+jQuery(this).data("itemid");
@@ -65,7 +66,7 @@ jQuery(".clickStream").click(function() {
 });
 </script>
 #end
-#elseif($LayoutName=='SavedCartPage' || $LayoutName=='ProductGroupPage')
+#elseif($LayoutName=='SavedCartPage' || $LayoutName=='ProductGroupPage' || $LayoutName=='PromotedProductsListPage')
 	#if($paginate>1)
 	<script type="text/javascript">
 		#set($paginationURL="myProductGroupPage.action?savedGroupId=$savedGroupId#if($sortBy)&sortBy=$sortBy#end&shared=$!isShared&resultPage=$resultPage#if($reqType)&reqType=$reqType#end#if($searchkeyWord)&searchkeyWord=$escapeTool.url($!searchkeyWord)#end&pageNo=")
@@ -126,7 +127,7 @@ function deviceSelectAll(){
 }
 </script>
 #end
-#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
+#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
 #set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js?'+$refreshVersion)
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
@@ -265,7 +266,6 @@ $("link[rel='stylesheet']").each(function(){
 							//console.log("End Flag :"+activeBannerFlag);//console.log("Wrapper id :"+sliderId);
 							if(!activeBannerFlag){
 								jQuery("#"+sliderId+"_Wrapper").hide();
-								console.log("Hidden :"+sliderId);
 							}else{
 								bannerData = $(this).html().replace("slidercontainer",sliderId);
 								jQuery(this).html(bannerData);
@@ -389,8 +389,8 @@ $(document).ready(function () {
 		});
 		var value = getCookie("afterLoginUrl");
 		if(value!="" && value!=null && typeof  value != 'undefined'){
-			window.location.href=value;
 			setCookie('afterLoginUrl',"",-1);
+			window.location.href=value;
 		}
 		#if($paginate>1 && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y")
 			#set($paginationURL = $paginationURL.replace("itemLevelFilterPage","taxonomyLevelFilterPage"))
@@ -536,7 +536,6 @@ $(document).ready(function () {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var fromPage = $("#fromPage").val();
-			console.log("fromPage : "+fromPage);
 			var content = "";
 			if (fromPage == "payWithNewCC") {
 				content = "<center>New Credit Card Added Successfully. Please wait..</center>";

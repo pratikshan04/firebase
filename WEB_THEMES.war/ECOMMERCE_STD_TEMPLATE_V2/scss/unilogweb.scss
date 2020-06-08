@@ -549,7 +549,6 @@ $modal_closebtn-color: $default_font-color;
     top: 0;
     max-width: 1170px;
     z-index: 2;
-    left: 0;
 }
 
 #sharePop {
@@ -1079,7 +1078,8 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 .dropdown-menu.customDropDown{
 	padding: 5px;
 	background: $white;
-	border: 1px solid $border-color;
+    border: 1px solid $border-color;
+    min-width: 220px;
 	li{
 		width: 100%;
 		border-bottom: 1px solid $border-color;
@@ -1150,6 +1150,22 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         >a, >span{
             padding: 6px 8px;
         }
+    }
+}
+#openOrderTable_wrapper{
+    .tabFooter{
+        #openOrderTable_paginate{
+            width: 50%;
+            float: right;
+        }
+    }
+}
+#OrdersHistoryDetails {
+    #endDate, #startDate{
+        background: url(../images/calIcon.png) 96%/20px no-repeat;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: -5px;
     }
 }
 

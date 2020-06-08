@@ -30,8 +30,15 @@
 			</tr>
 			#end
 			<tr>            		
-				<td colspan="2">$!eventsList.description</td>
+				<td colspan="2" class="event_desc">$!eventsList.description</td>
 			</tr>
+			#if($!eventsList.additionalInformation)
+			<tr>
+				<td colspan="2"class="event_desc">
+					$!eventsList.additionalInformation
+				</td>
+			</tr>
+			#end
 			#if($eventsList.phoneNumber!= "")
 			<tr>
 				<td colspan="2">

@@ -472,7 +472,16 @@
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
-									 <li id="allBranchAvail_$!itemData.partNumber">
+									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf($!locale.get("california.restriction.string")) != -1))
+									<li>
+										<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+										<p class="propwarningmsg">
+											<i class="fas fa-exclamation-triangle"></i>
+											<span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span>
+										</p>
+									</li>
+									#end
+									<li id="allBranchAvail_$!itemData.partNumber">
 										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
 									</li> 
 										

@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-8 col-sm-8 col-xs-12">
+	<div class="col-md-8 col-xs-12">
 		<div id="wizardCheckout" class="multiTab">
 			<ul class="multiTabHeading clearAfter">
 				<li><a href="#step-1"><span class="stepDesc">$locale.get("product.heading.billingAddress")</span></a></li>
@@ -15,69 +15,69 @@
 							<input type="hidden" id="defaultBillToId" value="$!defaultBillToId"/>
 							<div id="billAddress">
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
-											<input type="text" name="billCompanyName" id="fname" value="$!billAddress.customerName" readonly class="btns-disable form-control"/> 
+											<input type="text" name="billCompanyName" id="fname" value="$!billAddress.customerName" readonly class="btns-disable form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/> 
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
-											<input type="text" name="billAddress1" id="billAddress1" value="$!billAddress.address1" readonly class="btns-disable form-control"/> 
+											<input type="text" name="billAddress1" id="billAddress1" value="$!billAddress.address1" readonly class="btns-disable form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')"/> 
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address2")  </label>
 											<input type="text" name="billAddress2" id="billAddress2" value="$!billAddress.address2" readonly class="btns-disable form-control"/> 
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
-											<input type="text" name="billCity" id="billCity" value="$!billAddress.city" readonly class="btns-disable form-control" maxlength='50'/>
+											<input type="text" name="billCity" id="billCity" value="$!billAddress.city" readonly class="btns-disable form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											 <label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
-											<select name="billState" id="stateSelect" class="form-control selectpicker"></select>
+											<select name="billState" id="stateSelect" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
-											<input type="text" name="billZipcode" id="billZipcode" value="$!billAddress.zipCodeStringFormat" readonly class="btns-disable form-control formatZipCode"/>
+											<input type="text" name="billZipcode" id="billZipcode" value="$!billAddress.zipCodeStringFormat" readonly class="btns-disable form-control formatZipCode" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.zipcode')"/>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label> 
-											<select name="billCountry" id="countrySelect" class="selectpicker" data-state="stateSelect"></select>
+											<select name="billCountry" id="countrySelect" class="selectpicker" data-state="stateSelect" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber"/> 
+											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/> 
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											 <label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
-											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control"/>
+											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control" data-type="email" data-required="Y" data-error="$locale.get('checkoutwiz.error.emailaddress')" data-invalid="$locale.get('checkoutwiz.error.emailaddressinvalid')"/>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<input type="hidden" id="billAddressState" value="$!billAddress.state" />
 										<input type="hidden" id="billAddressCountry" value="$!billAddress.country" />
 									</div>
@@ -91,89 +91,89 @@
 							<!-- Shipping Address -->
 							<div class="cimm_formContent" id="shipAddress">
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.shipToName") </label>
 											<select id="defaultShipToId" name="defaultShipToId" onchange="checkoutWizard.changeShippingAddress(this);" class="form-control selectpicker">
 						                       #if($!shipAddressList)
 						                            #foreach($shipList in $shipAddressList)
-						                            <option value="$shipList.addressBookId">$!shipList.address1</option>## $!shipList.customerName #if($shipList.addressBookId==$defaultShipToId)selected#end
+						                            <option value="$!shipList.addressBookId">$!shipList.address1</option>## $!shipList.customerName #if($shipList.addressBookId==$defaultShipToId)selected#end
 						                           #end
 						                        #end
 						                    </select>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
-											<input type="text" name="shipCompanyName" id="shipCompanyName" value="$!shipAddress.customerName" class="form-control"/>
+											<input type="text" name="shipCompanyName" id="shipCompanyName" value="$!shipAddress.customerName" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
-											<input type="text" name="shipAddress1" id="shipAddress1" value="$!shipAddress.address1" class="form-control" />
+											<input type="text" name="shipAddress1" id="shipAddress1" value="$!shipAddress.address1" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')" />
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address2") </label>
-											<input type="text" name="shipAddress2" id="shipAddress2" value="$!shipAddress.address2" class="form-control"/> 
+											<input type="text" name="shipAddress2" id="shipAddress2" value="$!shipAddress.address2" class="form-control" /> 
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
-											<input type="text" name="shipCity" id="shipCity" value="$!shipAddress.city" class="form-control" maxlength='50'/>
+											<input type="text" name="shipCity" id="shipCity" value="$!shipAddress.city" class="form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
-											<select name="shipState" id="stateSelectShip" class="form-control selectpicker"></select>
+											<select name="shipState" id="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
-											<input type="text" name="shipZipcode" id="shipZipcode" value="$!shipAddress.zipCodeStringFormat" class="formatZipCode form-control"/>
+											<input type="text" name="shipZipcode" id="shipZipcode" value="$!shipAddress.zipCodeStringFormat" class="formatZipCode form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.zipcode')"/>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label>
-											<select name="shipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control selectpicker"></select>
+											<select name="shipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 											<input type="hidden" id="shipAddressState" value="$!shipAddress.state" />
 											<input type="hidden" id="shipAddressCountry" value="$!shipAddress.country" />
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" />
+											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
-											<input type="text" name="shipEmail" id="shipEmail" value="$!shipAddress.emailAddress" class="form-control"/>
+											<input type="text" name="shipEmail" id="shipEmail" value="$!shipAddress.emailAddress" class="form-control" data-error="$locale.get('checkoutwiz.error.emailaddress')" data-invalid="$locale.get('checkoutwiz.error.emailaddressinvalid')"/>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-sm-6">
 									<div class="form-group">
 										<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
-										<select name="shipVia" id="shipVia" class="form-control selectpicker">
+										<select name="shipVia" id="shipVia" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.shipvia')">
 											<option value=" ">-Select-</option>
 											#if($shipViaList.size()>0)
 												#foreach($shipVia in $shipViaList)
@@ -184,7 +184,7 @@
 									</div>
 								</div>
 								#if($!CommonDBQuerySystemParameter.get("IS_DISCOUNT_COUPONS_ENABLED") == "Y")
-								<div class="col-md-6">
+								<div class="col-sm-6">
 									<div class="form-group">
 										<label>$locale.get("form.label.coupon")</label>
 										<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
@@ -200,17 +200,17 @@
 								<div id="paymentOptBlock" class="multiTab">
 									<ul class="multiTabHeading2 clearAfter">
 										#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-										<li><a href="#checkoutPO" data-type="checkoutWithPo"><span class="stepDesc">By PO#</span></a></li>
+										<li><a href="#checkoutPO" data-type="checkoutWithPo"><span class="stepDesc">$!locale.get("product.heading.poNumber")#</span></a></li>
 										#end
 										<li><a href="#creditCard" data-type="checkoutWithCreditCard"><span class="stepDesc">$locale.get("product.heading.creditCardDetails")</span></a></li>
 									</ul>
 									<div class="multiTabContent2">
 										<div id="checkoutPO">
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label id="chkMandatory">$locale.get("form.label.purchaseOrder") <span class="text-danger">*</span></label>
-														<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control"/> 
+														<input type="text" name="poNumberTxt" id="poNumberTxt" value='' onblur="setPoNumberToSession();" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.purchaseordernumber')" /> 
 													</div>
 												</div>
 											</div>
@@ -219,7 +219,7 @@
 									</div>
 								</div>	
 								<div class="row">
-									<!-- <div class="col-md-6">
+									<!-- <div class="col-sm-6">
 										<div class="form-group">
 											<label>Order Type <span class="text-danger">*</span></label>
 											<select name="orderType" id="orderType" class="form-control selectpicker" onchange="checkoutWizard.orderTypeOnchange(this);">
@@ -236,27 +236,27 @@
 											</select>
 										</div>
 									</div> -->
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
-											<input type="text" name="orderedBy" id="orderedBy" value="$!orderedBy" class="form-control"/> 
+											<input type="text" name="orderedBy" id="orderedBy" value="$!orderedBy" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.orderby')" /> 
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.requiredByDate") <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly/>
+											<input type="text" class="form-control" name="reqDate" id="reqDate" readonly data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.requireddate')"/>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.shippingInstructions") </label>
 											<textarea cols="35" rows="5" id="shippingInstruction" name="shippingInstruction" class="form-control">$!session.getAttribute("orderNotes")</textarea>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.orderNote") </label>
 											<textarea name="orderNotes" id="orderNotes" rows="5" cols="35" class="form-control">$!session.getAttribute("orderNotes")</textarea>
@@ -264,7 +264,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<!-- <div class="form-group">
 											<label>$locale.get("product.label.ordrStatus") </label>
 											<select name="orderStatus" id="orderStatus" class="form-control selectpicker">
@@ -275,10 +275,14 @@
 											</select>
 										</div> -->
 									</div>
-									<div class="col-md-6">
-										<input type="hidden" name="orderStatus" id="orderStatus" value="$!orderStatus.orderStatus"/>
-										<input type="hidden" name="orderingType" value="SO"/>
+									<div class="col-sm-6">
+										<input type="hidden" name="orderStatus" id="orderStatus" value="$!locale.get('orderStatus.labels')"/>
+										<!-- <input type="hidden" name="orderingType" value="SO"/> -->
+										#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 										<input type="hidden" name="orderType" id="orderType" value="checkoutWithPo"/>
+										#else
+										<input type="hidden" name="orderType" id="orderType" value="checkoutWithCreditCard"/>
+										#end
 									</div>
 								</div>			
 							</div>
@@ -305,8 +309,9 @@
 		<input type="hidden" id="savedGroupId" name="savedGroupId" value="$savedGroupId"/>
 		<input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!session.getAttribute('emailAddressExits')">			
 	</div>
-	<div class="col-md-4 col-sm-4 col-xs-12">
+	<div class="col-md-4 col-xs-12">
 		#if($productListData.size()>0)
+		#set($warninItemData = $!productListData)
 			<div class="orderSummaryWrap">
 				<h3 class="pull-left">$!locale.get("product.label.orderSummary")</h3>
 				<a class="pull-right" href="$!locale.get('website.url.ShoppingCart')">$!locale.get("product.button.editCart")</a>
@@ -339,6 +344,12 @@
 										<p itemprop="mpn"><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>
 										#end
 									</li>
+									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf($!locale.get("california.restriction.string")) != -1))
+									<li itemprop="Prop65">
+										<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+										<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+									</li>
+									#end
 									#if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 				                    <li>
 				                        <strong>$!locale.get("product.label.cpn"): </strong>
@@ -397,4 +408,92 @@
 		#end
 	</div>
 	<div id="triggerOrderButtonDiv" class="col-md-4 col-sm-4 col-xs-12"></div>
+</div>
+#if($warninItemData.size()>0)
+#foreach($itemData in $warninItemData)
+#set($shipType= "")
+#if($!itemData.multipleShipVia=="SHIPTOME")
+#set($shipType = "SHIPTOME")
+#elseif($!itemData.multipleShipVia=="SHIPTOSTORE")
+#set($shipType= "SHIPTOSTORE")
+#elseif($!itemData.multipleShipVia=="STOREPICKUP")
+#set($shipType= "STOREPICKUP")
+#end
+#if($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1)
+<input type="hidden" name="prop65" id="$!itemData.partNumber" value="$!itemData.partNumber" data-proptype="R" data-message="$!itemData.standardApprovals" data-description="$!itemData.shortDesc" data-shiptype="$!shipType" data-warehousestate="$!itemData.branchState"/>
+#elseif($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1)
+<input type="hidden" name="prop65" id="$!itemData.partNumber" value="$!itemData.partNumber" data-proptype="W" data-message="$!itemData.standardApprovals" data-description="$!itemData.shortDesc" data-shiptype="$!shipType" data-warehousestate="$!itemData.branchState"/>
+#end
+#end
+#end
+<div id="californiaRestriction" class="modal fade californiaRestrictionModal" role="dialog" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="californiaRestrictionWarning">
+					Warning <i class="fas fa-exclamation-triangle"></i>
+				</h3>
+				$!locale.get("california.warning.message") 
+				<a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov.</a>
+			</div>
+			<div class="modal-body">
+				<table class="table cimm_siteTable display rwd-table">
+					<thead>
+						<tr>
+							<th> Product </th>
+							<th> Concerning Chemicals Include </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> </td>
+							<td> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href="/cart">
+					Adjust Order
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="californiaWarning" class="modal fade californiaRestrictionModal" role="dialog" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="californiaRestrictionWarning">
+					Warning <i class="fas fa-exclamation-triangle"></i>
+				</h3>
+				$!locale.get("california.warning.message") 
+				<a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov.</a>
+			</div>
+			<div class="modal-body">
+				<table class="table cimm_siteTable display rwd-table">
+					<thead>
+						<tr>
+							<th> Product </th>
+							<th> Concerning Chemicals Include </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href='/cart'>
+					Adjust Order
+				</a>
+				<button class="btn btn-primary" data-dismiss="modal">
+					Continue & pay
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
