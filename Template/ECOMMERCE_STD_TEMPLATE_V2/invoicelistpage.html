@@ -1,62 +1,45 @@
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/site_jui.css" /> 
-<!-- <div class="dummyHeight"></div> -->
-<ul class="cimm_breadcrumbs">
-		 <li><a href="$locale.get("website.url.Welcome")">$locale.get("product.heading.home")</a></li>
-		 <li><span class="breadcrumbArrows"><em class="fa fa-chevron-right" aria-hidden="true"></em></span>$locale.get("product.heading.InvoiceList")</li>         
-	 </ul>
-	<div class="clear"></div>	 
-		<h2 class="cimm_page-title">$locale.get("product.heading.InvoiceList")</h2>
-		<div class="clear"></div>
-    
-     <div class="clear"></div>
-      <div class="cimm_siteTableEnclosure rwd-tableWrap">
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable display rwd-table rwd-Tab" id="invoiceListTable">
-            <thead>
-              <tr>
-              <!-- 	<th></th> -->
-                <th align="center">$locale.get("product.label.invoicNumber")</th>
-                 <th align="center">$locale.get("product.label.orderNumber")</th>
-                 <!-- <th>$locale.get("form.label.orderDate")</th> -->
-                 <th align="center">$locale.get("form.label.invoicedate")</th>
-                 <th align="center">Total Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              #if($customerArInvoiceList && $customerArInvoiceList.size()>0)
-                  #foreach($customerArInvoiceObj in $customerArInvoiceList)
-                  	   #set($orderNumAndSuffix = "")
-                      <tr class="odd">
-                      	<td data-th="$locale.get("product.label.invoicNumber")" class="center"><strong>$!customerArInvoiceObj.invoiceNumber</strong></td> 
-                        <!-- <td class="center"><strong>$!customerArInvoiceObj.invoiceNumber</strong></td> -->
-                        <td data-th="$locale.get("product.label.orderNumber")" class="center"><strong>$!customerArInvoiceObj.orderNum</strong></td>
-                        <!-- <td class="center">$!customerArInvoiceObj.orderDate</td> -->
-                        <td data-th="$locale.get("form.label.invoicedate")" class="center">$!customerArInvoiceObj.invoiceDate</td> 
-                        
-                        
-                        #if($!customerArInvoiceObj.total<0)
-	              		#set($negVal = $!customerArInvoiceObj.total * -1)
-	              		<td data-th="Total Amount" class="center">($$numberTool.format("#0.00",$negVal))</td>
-	              	#else
-	              		<td data-th="Total Amount" class="center">$$numberTool.format("#0.00",$!customerArInvoiceObj.total)</td>
-	              	#end
-                       </tr>
-                  #end
-              #end
-            </tbody>
-        </table>
-        <div class="clear"></div>
-        <br/>
-<!--         <form id="invoiceListForm" name="invoiceListForm" method="get" action="OutStandingPaymentSale.action">
-        	<input type="hidden" class="selectedInvoiceNumbersForDetail" name="selectedInvoiceNumber" id="selectedInvoiceNumber" value=""/>
-        	<div align="center">
-           	<input type="submit" id="invoicePayBtn" class="buttonGrad" value="$locale.get('product.button.submitforpayment')"  /> onclick="validateInvoiceForm();"
-         	</div>
-        </form> -->
-        <div id="invoiceListDiv"></div>
-        
-        
-		<div class="clear"></div>
-   </div>
+<div class="cimm_siteTableEnclosure rwd-tableWrap">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable display rwd-table rwd-Tab" id="invoiceListTable">
+	<thead>
+		<tr>
+			<th align="center">$locale.get("product.label.invoicNumber")</th>
+			<th align="center">$locale.get("product.label.orderNumber")</th>
+			<!-- <th>$locale.get("form.label.orderDate")</th> -->
+			<th align="center">$locale.get("form.label.invoicedate")</th>
+			<th align="center">Total Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		#if($customerArInvoiceList && $customerArInvoiceList.size()>0)
+		#foreach($customerArInvoiceObj in $customerArInvoiceList)
+		#set($orderNumAndSuffix = "")
+		<tr class="odd">
+			<td data-th="$locale.get("product.label.invoicNumber")" class="center"><strong><a href="OutStandingPaymentSale.action?selectedInvoiceNumber=$!customerArInvoiceObj.invoiceNumber" target="_blank">$!customerArInvoiceObj.invoiceNumber</a></strong></td> 
+			<td data-th="$locale.get("product.label.orderNumber")" class="center"><strong>$!customerArInvoiceObj.orderNum</strong></td>
+			<!-- <td class="center">$!customerArInvoiceObj.orderDate</td> -->
+			<td data-th="$locale.get("form.label.invoicedate")" class="center">$!customerArInvoiceObj.invoiceDate</td> 
+			#if($!customerArInvoiceObj.total<0)
+			#set($negVal = $!customerArInvoiceObj.total * -1)
+			<td data-th="Total Amount" class="center">($$numberTool.format("#0.00",$negVal))</td>
+			#else
+			<td data-th="Total Amount" class="center">$$numberTool.format("#0.00",$!customerArInvoiceObj.total)</td>
+			#end
+		</tr>
+		#end
+		#end
+	</tbody>
+</table>
+<br/>
+<!-- <form id="invoiceListForm" name="invoiceListForm" method="get" action="OutStandingPaymentSale.action">
+	<input type="hidden" class="selectedInvoiceNumbersForDetail" name="selectedInvoiceNumber" id="selectedInvoiceNumber" value=""/>
+	<div align="center">
+		<input type="submit" id="invoicePayBtn" class="buttonGrad" value="$locale.get('product.button.submitforpayment')"  /> onclick="validateInvoiceForm();"
+	</div>
+</form> -->
+	<div id="invoiceListDiv"></div>
+	<div class="clear"></div>
+</div>
    
 <!------------------------------------------Invoice dependent sources------------------------------------------->
 <script type="text/javascript">
@@ -375,7 +358,7 @@ text1</td>
 </td> -->
 <td>
 <table style="height:100px;width:100%;margin:10px auto;text-align:right;font-style: italic;" cellpadding="0" cellspacing="0">
-<tr><td style="width:70%;"><strong>SUB TOTAL:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.total</td></tr>
+<tr><td style="width:70%;"><strong>SUBTOTAL:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.total</td></tr>
 <!-- <tr><td style="width:70%;"><strong>COUNTRY TAX:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">0.00</td></tr> -->
 <tr><td style="width:70%;"><strong>STATE TAX:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.tax</td></tr>
 <tr><td style="width:70%;"><strong>AMOUNT DUE:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width:30%;">$!customerArInvoiceObj.total</td></tr>

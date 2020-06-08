@@ -8,6 +8,7 @@ $(document).ready(function(){
 				"sPrevious" :"Prev",
 				"sNext" :"Next"
 			}
-		}
+		},
+		"order": [[ 0, "desc" ]]
 	});
 });
