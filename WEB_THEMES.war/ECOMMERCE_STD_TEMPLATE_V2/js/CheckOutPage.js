@@ -173,7 +173,11 @@ var checkoutWizard = {};
 	checkoutWizard.submitOrder = function (oType){
 		$("#quickCartHiddenInfo").submit( function(){
 			var isValid = submitThisForm("#step-"+checkOutStep);
+			var createOrderInDb = document.getElementById('createOrderInDb').value;
 			var erpType = document.getElementById('erpType').value;
+			if(createOrderInDb == 'Y' || $.trim(createOrderInDb)=="Y") {
+				erpType = "cimmesb";
+			}
 			var orderType = $('#orderType').val().trim();
 			if(erpType && erpType.toUpperCase()=="DEFAULTS" && isValid){
 				var data = $("#quickCartHiddenInfo").serialize();
