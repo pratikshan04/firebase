@@ -9,6 +9,7 @@
               display: block;
               &.active {
                   color: $default_font-color;
+                  text-transform: uppercase;
               }
           }
       }

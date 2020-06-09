@@ -38,13 +38,13 @@
 	<li><span>$!savedGroupName</span></li>
 </ul>
 #elseif($!LayoutName=="ApproveCart")
-<h1 class="cimm_page-title">#if($!savedGroupName)$!savedGroupName #end</h1>
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
     <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
     <li><a href="/SavedGroups/ApproveCart"> $!locale.get("breadcrumbs.label.responseType.ApprovedCart")</a></li>
     <li class="active"><span>$!savedGroupName</span></li>
 </ul>
+<h1 class="cimm_page-title">#if($!savedGroupName)$!savedGroupName #end</h1>
 #elseif($!LayoutName=="SavedCartPage")
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>

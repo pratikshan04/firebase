@@ -265,7 +265,7 @@ var BulkAction = {};
 					$('#generalModel').modal();
 					triggerToolTip();
 					$.each(obj, function (i, value) {
-						$("#selectItemCheckbox_" + obj[i].itemId).attr('checked', false);
+						$("#selectItemCheckbox_" + obj[i].itemId).prop('checked', false);
 						$('#itemTxtQty' + obj[i].itemId).attr("disabled", false);
 						if ($('#multipleUom_' + obj[i].partNumber).length > 0) {
 							$('#multipleUom_' + obj[i].partNumber).attr('disabled', false);
