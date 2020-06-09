@@ -156,7 +156,8 @@ var BulkAction = {};
 							setCookie("selectedItemsToGroup", "", -1);
 						}
 						$.each(jsonObj, function (key, value) {
-							$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
+							//$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
+							$("#selectItemCheckbox_" + value.itemId).prop('checked', false);
 							$('#itemTxtQty' + value.itemId).attr("disabled", false);
 							if ($('#multipleUom_' + value.partNumber).length > 0) {
 								$('#multipleUom_' + value.partNumber).attr('disabled', false);
