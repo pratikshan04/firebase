@@ -177,6 +177,7 @@ function changeAction(s, selectId) {
 			return false;
 		} else {
 			bootAlert("small", "error", "Error", "Please select at least one item to delete.");
+			$(selectId).val("").selectpicker('refresh');
 			return false;
 		}
 	} else if (s == 5) {
@@ -308,7 +309,7 @@ function deleteSelectedItem(answer, selectId) {
 		$("#productGroupForm").attr("action", "deleteGroupItemPage.action");
 		$("#productGroupForm").submit();
 	} else {
-		$(selectId).val("");
+		$(selectId).val("").selectpicker('refresh');
 		return false;
 	}
 }

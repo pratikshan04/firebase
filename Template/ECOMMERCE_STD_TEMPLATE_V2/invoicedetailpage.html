@@ -1,0 +1,147 @@
+<input type="hidden" value="$customerArInvoiceList.size()">
+#foreach($customerArInvoiceObj in $customerArInvoiceList)
+<div class="container">
+	<div id="SendPage_$!customerArInvoiceObj.invoiceNumber" class="invDetPrintPage  mTop-4">
+		<div class="row mTop-4">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<img src="$webThemes/$siteName/images/mailTemplateLogo.png?refreshversion=$!session.getLastAccessedTime()" alt=""/>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<ul class="invNumDet pull-right">
+					<li>Invoice Number</li>
+					<li>$!customerArInvoiceObj.invoiceNumber</li>
+					#if($!customerArInvoiceObj.orderNum.length() > 0)
+					<li>Order Number</li>
+					<li>$!customerArInvoiceObj.orderNum</li>
+					#end
+				</ul>
+			</div>
+		</div>
+		<div class="row  mTop-4">
+			<div class="col-md-4 col-sm-4 col-xs-4">
+				<ul class="addrSection">
+					<li class="addrHeading">Bill To:</li>
+					<li>$!customerArInvoiceObj.billToName</li>
+					<li>$!customerArInvoiceObj.billAddress1</li>
+					<li>
+					#if($!customerArInvoiceObj.billAddress2.length() > 0) 
+					$!customerArInvoiceObj.billAddress2
+					#end
+					</li>
+					<li>$!customerArInvoiceObj.billCity, $!customerArInvoiceObj.billState</li>
+					<li>$!customerArInvoiceObj.billZipCode</li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-4">
+				<ul class="addrSection">
+					<li class="addrHeading">Ship To:</li>
+					<li>$!customerArInvoiceObj.shipToName</li>
+					<li> $!customerArInvoiceObj.shipAddress1</li>
+					<li>
+					#if($!customerArInvoiceObj.shipAddress2.length() > 0)
+					$!customerArInvoiceObj.shipAddress2
+					#end
+					</li>
+					<li> $!customerArInvoiceObj.shipCity,$!customerArInvoiceObj.shipState</li>
+					<li> $!customerArInvoiceObj.shipZipCode</li>
+				</ul>
+			</div>
+			#if($!customerArInvoiceObj.poNumber.length() > 0)
+			<div class="col-md-4 col-sm-4 col-xs-4">
+				<ul class="invNumDet pull-right">
+					<li>$!locale.get("product.label.poNumber")</li>
+					<li>$!customerArInvoiceObj.poNumber</li>
+				</ul>
+			</div>
+			#end
+		</div>
+		<div class="row invTableMobile">
+			<h4>Order Description</h4>
+			<table class="invDetTable" id="invoiceOrderDesc">
+				<thead>
+					<tr>
+						<th>Order Date</th>
+						<th>Customer Id</th>
+						<th>Primary Sales Representative Name</th>
+						<th>Taker</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>$!customerArInvoiceObj.orderDate</td>
+						<td>$!customerArInvoiceObj.customerNumber</td>
+						<td>$!customerArInvoiceObj.salesPersonCode</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row invTableMobile">
+			<h4>Item Description</h4>
+			<table class="invDetTable table rwd-table" id="invoiceOrderDesc">
+				<thead>
+					<tr>
+						<th>Quantity Ordered</th>
+						<th>Quantity Shipped</th>
+						<th>Quantity Remaining</th>
+						<th>Item Id</th>
+						<th>Item Description</th>
+						<th>UOM</th>
+						<th>Extended Price</th>
+						<th>Unit Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($invoiceObj in $customerArInvoiceObj.orderList)
+					<tr>
+						<td data-th="Quantity Ordered">$!invoiceObj.qtyordered</td>
+						<td data-th="Quantity Shipped">$!invoiceObj.quantityShipped</td>
+						<td data-th="Quantity Remaining">$!invoiceObj.quantityRemaining</td>
+						<td data-th="Item Id">$!invoiceObj.partNumber</td>
+						<td data-th="Item Description">$!invoiceObj.shortDesc</td>
+						<td data-th="UOM">$!invoiceObj.uom</td>
+						<td data-th="Extended Price">$!invoiceObj.extPrice</td>
+						<td data-th="Unit Price">$$numberTool.format("#0.00",$!invoiceObj.unitPrice)</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+		<div class="row  mTop-4 ">
+			<div class="col-md-8 col-sm-8 col-xs-3"></div>
+			<div class="col-md-4 col-sm-4 col-xs-9 ">
+				<ul class="tblbtm">
+					#if($!customerArInvoiceObj.subtotal>0)
+					<li>
+						<span class="priceLabel"><strong>$!locale.get("product.label.subTotal") : </strong></span>
+						<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!customerArInvoiceObj.subtotal) </span>
+					</li>
+					#end
+					#if($customerArInvoiceObj.tax>0)
+					<li>
+						<span class="priceLabel"><strong>$!locale.get("product.label.tax") : </strong></span>
+						<span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!customerArInvoiceObj.tax) </span>
+					</li>
+					#end
+					#if($customerArInvoiceObj.discount>0)
+					<li>
+						<span class="priceLabel"><strong>$!locale.get("product.label.discount") :</strong></span>
+						<span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!customerArInvoiceObj.discount)</span>
+					</li>
+					#end
+					#if($customerArInvoiceObj.freight>0)
+					<li>
+						<span class="priceLabel"><strong>$!locale.get("product.label.shipping") : </strong></span>
+						<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!customerArInvoiceObj.freight)</span>
+					</li>
+					#end
+					<li>
+						<span class="priceLabel"><strong>$!locale.get("product.label.orderTotal") : </strong></span>
+						<span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!customerArInvoiceObj.total) </span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+#end

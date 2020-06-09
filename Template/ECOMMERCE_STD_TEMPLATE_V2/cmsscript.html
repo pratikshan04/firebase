@@ -1212,15 +1212,13 @@ jQuery("[data-react='toggle']").click(function(){
 jQuery(function() {
 	$(".cms_leftMenu li a.cms_SlideMenuBtn").click(function () {
 		var cms_leftMenuSlide = $(this).parent().find('.cms_leftMenuSlide');
-		//$('.cms_leftMenuSlide').css({'left':'-400px'});
-		$('.staticPageSave.rightSlide').css({'right':'-400px'});
 		$('.cms_leftMenuSlide').css({'left':'-400px'});
 		if(parseInt(cms_leftMenuSlide.offset().left) == -400){
 			cms_leftMenuSlide.css({'left':'0px'});
 		}
 	});
 	$(".cms_leftMenuClose").click(function () {
-		$(this).parents('.cms_leftMenuSlide').css({'left':'-400px'});
+		$('.cms_leftMenuSlide').css({'left':'-400px'});
 	});
 
 	/* $(window).scroll(function(){
