@@ -429,6 +429,8 @@ function submitReview(){
 		}else{
 			result = result + "<p>  Atleast 10 Characters in Review Field  </p>";
 		}
+	} else if (count > 4000){
+		result = result + "<p>Maximum 4000 characters</p>";
 	}
 	if (result == "") {
 		var str = $("#reviewForm").serialize();
