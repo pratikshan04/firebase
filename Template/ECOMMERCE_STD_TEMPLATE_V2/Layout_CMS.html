@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    #parse("head.html")
+    #parse("cms_head.html")
     <!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
     #parse("bootstrap-min-css.html")
       <script type="text/javascript">
@@ -29,7 +29,6 @@
     <input type="hidden" id="moodname" name="moodname" value="$moodname">
     #parse($bodyContent)
     <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
-    #parse("javascripts.html")
     #if($LayoutName == "CMSBannerEdit")
     #parse("cmsbannereditscript.html")
     #end
