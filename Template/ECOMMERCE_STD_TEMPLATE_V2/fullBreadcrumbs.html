@@ -270,6 +270,11 @@
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
     <li class="active">$!locale.get("label.authenticate.useraccount")</li>				
+</ul>
+#elseif($LayoutName=="RequestForQuoteV2Page")
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')" title='$!home'>$!home</a></li>
+    <li class="active">$!locale.get("breadcrumbs.label.$!LayoutName")</li>
 </ul>	
 #elseif($LayoutName!="ShipEntityPage")
 <h1 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>

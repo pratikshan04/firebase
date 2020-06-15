@@ -2233,6 +2233,7 @@ $('[data-function="quickCartView"]').click(function () {
 			}
 			triggerToolTip();
 			formatPrice();
+			formatNumbers();
 		}
 	});
 });
@@ -3131,6 +3132,23 @@ var formatPrice = function () {
 		});
 	}
 }
+var formatNumbers = function(){
+	if($(".formatNumbers").length>0){
+		$(".formatNumbers").each(function(){
+			var e=$(this).text().trim();
+			var result = e.match(/\d+/g);
+			var finalResult = e;
+			if(result!=null && result.length>0){
+				finalResult = result[0];
+				finalResult = commaSeparateNumber(finalResult);
+				if(result.length>1){
+					finalResult = finalResult+"."+result[1];
+				}
+				$(this).text(finalResult);
+			}
+		});
+	}
+}
 function hideForDevice() {
 	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 		$(".hideForDevice").hide();
@@ -3208,6 +3226,7 @@ function formatPhoneVal() {
 $(function () {
 	toDoFooter();
 	formatPrice();
+	formatNumbers();
 	formatPhoneVal();
 	triggerToolTip();
 	hideBulkAction();
