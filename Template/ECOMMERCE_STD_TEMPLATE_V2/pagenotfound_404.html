@@ -1,0 +1,48 @@
+<style>
+	.line-head{
+		border: 5px solid #00337f;
+	}
+	.header-logo,
+	.content-errorcode,
+	.content-errormsg{
+		text-align: center;
+	} 
+	.content-errorcode{ 
+		font-size: 185px;
+		color: #00337f;
+	}
+	.content-errormsg-title{
+		font-size: 30px;
+		padding: 0px;
+		color: #00337f;
+	}
+	.content-errormsg{
+		font-size: 22px;
+		text-align: left;
+	}
+	.content_devider{
+		border-left: 4px solid #cc2d30;
+	}
+</style>
+<div class="cimm_staticPageWrap">
+	<hr class="line-head" />
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<h3 class="content-errorcode">404</h3>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 content_devider pBottom-3">
+			<h3 class="content-errormsg-title">This page cannot be found.</h3>
+			<p class="content-errormsg">
+				We apologize for the inconvenience but this page has either expired or has moved. Please 
+				#if($userLogin) 
+					go to <a href="/" class="btn btn-link"  title="$!locale.get('product.heading.home')">$!locale.get('product.heading.home')</a> 
+				#else 
+					<a href="/login" class="btn btn-link" title="$!locale.get('header.label.logIn')">$!locale.get('header.label.logIn')</a> for more options
+				#end
+				 	or please select a category to continue shopping. 
+			</p>
+		</div>
+	</div>        
+	<hr class="line-head" />
+</div>
+##<!-- <script>if($('link[rel="canonical"]').length>0){ $('link[rel="canonical"]').remove(); }</script> -->
