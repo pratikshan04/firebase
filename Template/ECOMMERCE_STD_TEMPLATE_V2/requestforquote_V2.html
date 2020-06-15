@@ -1,0 +1,315 @@
+<!-- <div class="cimm_instructions"><i class="fa fa-2x fa-file-text"></i> &nbsp;$locale.get("reqestforQuote.text.UseTheFormToRequestMore")</div> -->
+<div id="notificationDiv"></div>
+<div id="iFrameContent" style="display:none;"></div>
+<input type="hidden" id="addNewRowCount" value="$!numberOfRecords" />
+<input type="hidden" id="numberOfRecords" value="$!numberOfRecords" />
+<input type="hidden" id="savedReqDate" value="$!REQUIRED_BY_DATE"/> 
+<input type="hidden" id="savedOverrideShip" value="$!OVERRIDE_ADDRESS"/> 
+<input type="hidden" id="savedState" value="$!STATE"/> 
+<form id="rfqFormV2" method="post">
+	<input type="hidden" id="rfqId" name="rfqId" value="$!RFQ_ID" />
+	<input type="hidden" id="checkValidState" value="$session.getAttribute('isPunchoutUser')" />
+	<div class="row">
+		<div class="col-md-2"></div>	
+			<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+					 <label >$!locale.get("form.label.name") <span class="text-danger">*</span> </label>
+					 <input type="text" value="$!NAME" name="firstName" id="rfnpName" class="form-control"/>	##$!LAST_NAME
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+					 <label >$!locale.get("product.heading.shippingAddress") <span class="text-danger">*</span> </label>
+					 <label class="customCheckBox2 pull-right">
+		       			<input type="checkbox" name="overrideShip" id="overrideShip" value="N" onclick="shipToLocationNotAvailable(this);">
+		       			<span>$!locale.get("form.label.shipToLocationNotAvailable")</span>
+		   			</label>
+					 <select id="shipToAddress" name="shipToAddress" data-live-search="true" data-size="10" class="form-control selectpicker">
+					   #set($ecommShipToId = "")
+                       #if($!shipAddressList)
+                            #foreach($shipList in $shipAddressList)
+	                            #if($shipList.shipToId.toLowerCase()!="ecomm")
+		                            	#set($shipAddressTwo = "") 
+			                            #if($!shipList.address2.length()>0)
+			                            	#set($shipAddressTwo = $!shipList.address2+", ") 
+			                            #end
+			                            #if($!SHIP_TO_ID.length() > 0)
+			                            	<option value="$shipList.addressBookId" #if($!SHIP_TO_ID.toLowerCase() == $!shipList.shipToId.toLowerCase()) selected="selected" #end 
+			                            			data-address1="$!shipList.address1" data-address2="$!shipList.address2" data-city="$!shipList.city" 
+			                            			data-state="$!shipList.state" data-country="$!shipList.country" data-zipcode="$!shipList.ZipCodeStringFormat" 
+			                            			data-shiptoid="$!shipList.shipToId" data-selectedbranch="$!shipList.wareHouseCodeStr">
+			                            	$!shipList.address1, $!shipAddressTwo $!shipList.city, $!shipList.state, $!shipList.ZipCodeStringFormat
+			                           		</option>
+			                            #else
+				                            <option value="$shipList.addressBookId" #if($defaultShipToId==$shipList.addressBookId) selected="selected" #end 
+				                            			data-address1="$!shipList.address1" data-address2="$!shipList.address2" data-city="$!shipList.city" 
+				                            			data-state="$!shipList.state" data-country="$!shipList.country" data-zipcode="$!shipList.ZipCodeStringFormat" 
+				                            			data-shiptoid="$!shipList.shipToId" data-selectedbranch="$!shipList.wareHouseCodeStr">
+				                            	$!shipList.address1, $!shipAddressTwo $!shipList.city, $!shipList.state, $!shipList.ZipCodeStringFormat
+				                            </option>
+			                            #end
+	                            #else
+	                            	#set($ecommShipToId = $!shipList.wareHouseCodeStr)
+	                            #end
+                           #end
+                        #end
+                     </select>
+                      <input type="hidden" id="ecommShipToId" value="$!ecommShipToId"/> 
+					</div>
+				</div>	
+			</div>
+			<div class="row hide shipToElementRow">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+						<label for="shipAddress1">$!locale.get("form.label.address1") <span class="text-danger">*</span> </label>
+						<input type="text" value="$!ADDRESS1" name="shipAddress1" id="shipAddress1" placeholder="$locale.get('form.label.address1')" maxlength="30" class="form-control"/>
+					</div>				
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+						<div class="form-group">
+							<label for="shipAddress2">$!locale.get("form.label.address2") </label>
+							<input type="text" value="$!ADDRESS2" name="shipAddress2" id="shipAddress2" maxlength="30" placeholder="$locale.get('form.label.address2')" class="form-control"/>
+						</div>
+					</div>
+			</div>
+			<div class="row hide shipToElementRow">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+						<label for="rfnpPhone">$!locale.get("form.label.city") <span class="text-danger">*</span> </label>
+						<input type="text" value="$!CITY" name="shipCity" id="shipCity" placeholder="$locale.get('form.label.city')" class="form-control" maxlength='20'/>
+					</div>				
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+						<div class="form-group">
+							<label for="shipState">$!locale.get("form.label.state") <span class="text-danger">*</span> </label>
+							<select name="shipState" id="shipState" data-live-search="true" data-size="5"  class="form-control selectpicker"></select>
+						</div>
+					</div>
+			</div>
+			<div class="row hide shipToElementRow">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+						<label for="shipZipcode">$!locale.get("form.label.zipCodes") <span class="text-danger">*</span> </label>
+						<input type="text" value="$!ZIPCODE" name="shipZipcode" id="shipZipcode" class="formatZipCode form-control" placeholder="$locale.get('form.label.zipCodes')" />
+					</div>				
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+						<div class="form-group">
+							<label for="shipCountry">$!locale.get("form.label.country") <span class="text-danger">*</span></label>
+							<select name="shipCountry" id="shipCountry"  data-state="shipState" class="form-control selectpicker"><option value="US">United States</option></select>
+						</div>
+					</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-sx-12">
+					<div class="form-group">
+						<label for="rfnpPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span> </label>
+						<input type="text" value="$!PHONE" name="phoneNumber" id="rfnpPhone" maxlength="12" class="formatPhoneNumber form-control formatPhoneVal"/>
+					</div>				
+				</div>
+				<div class="col-md-6 col-sm-6 col-sx-12">
+						<div class="form-group">
+							<label for="rfnpEmail">$!locale.get("form.label.email") <span class="text-danger">*</span> </label>
+							<input type="text" value="$!EMAIL" name="email" id="rfnpEmail" class="form-control"/>
+						</div>
+					</div>
+			</div>
+		</div>	
+		<div class="col-md-2"></div>
+	</div>
+	<div class="row"> 
+	<div class="col-md-12">
+		<table  class="table rwd-table table-striped table-bordered display table_quoterequest" id="reqForQuoteTableId">
+			<thead>
+				<tr>
+					<th class="text-center">$!locale.get("product.label.lineNo")</th>
+					<th class="text-center">$!locale.get("product.label.qty")<span class="text-danger">*</span></th>
+					<th class="text-center">$!locale.get("product.label.partNumber")</th>
+					<th class="text-center">$!locale.get("product.label.custParNo")</th>	
+					<th class="text-center">$!locale.get("product.label.manufacturerPartNumber")</th>				
+					<th class="text-center">$!locale.get("product.label.productDescription")<span class="text-danger">*</span></th>
+					<th class="text-center">$!locale.get("product.label.unitOfMeasure")<span class="text-danger">*</span></th>
+					<th class="text-center">$!locale.get("form.label.comment")</th>
+					<th class="text-center">Clear</th>
+				</tr>
+			</thead>
+			<tbody>
+				#set($start = 1)
+				#set($end = $!numberOfRecords)
+				#set($range = [$start..$end])
+				#set($count = 0)
+				#set($lineNo = 1)
+				#foreach($end in $range)
+					#set($savedItems = "")
+					#set($lockPn = "N")
+					#set($lockCpn = "N")
+					#set($lockMpn = "N")
+					#set($lockDesc = "N")
+					#set($lockUom = "N")
+					#if($!rfqItemList && $!rfqItemList.size()>$count && $!rfqItemList.get($count))
+						#set($savedItems = $!rfqItemList.get($count))
+						#if($!savedItems.partNumber.trim().length()>0 || $!savedItems.customerPartNumber.trim().length()>0 || $!savedItems.manufacturerPartNumber.trim().length()>0)
+							#if($!savedItems.partNumber.trim().length()>0)
+								#set($lockPn = "Y")
+							#end
+							#if($!savedItems.customerPartNumber.trim().length()>0)
+								#set($lockCpn = "Y")
+							#end
+							#if($!savedItems.manufacturerPartNumber.trim().length()>0)
+								#set($lockMpn = "Y")
+							#end
+							#if($!savedItems.shortDesc.trim().length()>0)
+								#set($lockDesc = "Y")
+							#end
+							#if($!savedItems.uom.trim().length()>0)
+								#set($lockUom = "Y")
+							#end
+						#end
+					#end
+				<tr data-rowindex="$count">
+					<td class="text-center" valign='top' data-th="$!locale.get('product.label.lineNo')">$lineNo</td>##$!numberTool.format('#0.00', $!savedItems.qtyDouble)
+					<td class="text-center" valign='top' data-th="$!locale.get('product.label.qty')"><input type="text" id="QTY$count" size="6" maxlength="7" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"  value="$!savedItems.qty" name="ITEMQTYARR" class="form-control quantity7" /></td>
+					<td data-th="$!locale.get('product.label.partNumber')">
+						<input type='text' class='requestGC form-control' onkeyup="return autoCompleteCall(this);" id='PN$count' name='PARTNUMARR' maxlength='24' data-searchtype="PN" autocomplete="off" value="$!savedItems.partNumber" #if($!lockPn=="Y") readonly #end/>
+						<div id="auto$count" class="autosuggestspan" data-autofilled="N"></div>
+					</td>
+					<td data-th="$!locale.get('label.customerpartnumber')">
+						<input type="text" id="CPN$count" name="CPN" class="form-control" onkeyup="return autoCompleteCall(this);" maxlength='24' data-searchtype="CPN" value="$!savedItems.customerPartNumber" autocomplete="off" #if($!lockCpn=="Y") readonly #end/>
+					</td>	
+					<td data-th="$!locale.get('product.label.manufacturerPartNumber')">
+						<input type="text" id="MPN$count" name="MPN" class="form-control" onkeyup="return autoCompleteCall(this);" maxlength='24' data-searchtype="MPN" value="$!savedItems.manufacturerPartNumber" autocomplete="off" #if($!lockMpn=="Y") readonly #end/>
+					</td>			
+					<td data-th="$!locale.get('product.label.productDescription')"> <input type="text" id="DESC$count" name="DESCARR" class="form-control" maxlength='200' value="$!savedItems.shortDesc" autocomplete="off" #if($!lockDesc=="Y") readonly #end/></td>
+					<td data-th="$!locale.get('product.label.unitOfMeasure')" id="UOMTD_$count">
+						<input type="text" id="UOM$count" name="UOM" class="form-control" maxlength='4' data-upmpn=""  value="$!savedItems.uom" #if($!lockUom=="Y") readonly #end/>
+					</td>
+					<td data-th="$!locale.get('form.label.comment')"><input type="text" id="LINEITEMCMTARR$count"  value="$!savedItems.lineItemComment" name="LINEITEMCMTARR" class="form-control" maxlength='150' autocomplete="off"/> </td>
+					<td class="text-center" onclick="return clearRow(this);"><i class="fas fa-sync"></i></td>  
+				</tr>
+				#set($count = $count + 1)
+				#set($lineNo = $lineNo + 1)
+				#end	
+				<tr class='more' id="idOfRowToInsertBefore">
+					<td colspan='9'>
+					    <button type="submit" class="btn btn-danger mBottom-2" value="$locale.get('product.button.saveQuoteRequest')" onclick="return validateRFQV2('save');"><i class="fas fa-save"></i> $!locale.get('product.button.saveQuoteRequest')</button>
+						#if($!rfqItemList.size()>0) 
+							<button type="submit" class="btn btn-danger mBottom-2" value="$locale.get('product.button.deleteQuoteRequest')" onclick="return deleteRfqCartV2();"><i class="fa fa-trash"></i> $!locale.get('product.button.deleteQuoteRequest')</button>
+						#end
+						<button type="submit" class="btn btn-success mBottom-2" value="$locale.get('product.button.addRowQuoteRequest')" onclick="return addRow();"><i class="fa fa-plus-square"></i> $!locale.get('product.button.addRowQuoteRequest')</button>
+						<button type="submit" class="btn btn-danger mBottom-2" id="removeRowBtn" style="display: none;" value="$!locale.get('product.button.removeRowQuoteRequest')" onclick="return removeRow();"><i class="fa fa-minus-square"></i> $!locale.get('product.button.removeRowQuoteRequest')</button>	
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+	<div class="row">
+			<div class="col-md-6 col-sm-6 col-sx-12">
+				<div class="form-group">
+					<label class="label-select">$!locale.get("form.label.requiredByDate")</label>
+					<input type="text" name="reqDate" id="reqDate" class="datePicIcon datepicker form-control" readonly/>
+				</div>
+				<div class="form-group">
+					<label class="label-select">$!locale.get("form.label.reference")</label>
+					<input type="text" name="reference" id="reference" class="form-control" maxlength='20' value="$!REFERENCE_PO"/>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6 col-sx-12">
+				<div class="form-group">
+					<label for='comments'>$!locale.get("form.label.comments")</label>
+					<textarea name='orderNotes' id='orderNotes' rows="10" cols="40" class="form-control">$!ORDER_NOTES</textarea>
+				</div>
+			</div>		
+	</div>
+	<div class="row" align="center">
+		<div class="col-md-12 col-sm-12 col-sx-12">
+			<input type="submit" class="button" id="submitBtn" value="$!locale.get('product.button.submitQuoteRequest')" onclick="return validateRFQV2('submit');">
+		</div> 
+	</div>
+	<!-- Billing Address -->                
+	<input type="hidden" name="defaultBillToId" value="$!defaultBillToId"/> 
+	<input type="hidden" name="billEntityId" value="$!userToken"/>
+	<input type="hidden" name="billAddress1" value="$!billAddress.address1"/> 
+	<input type="hidden" name="billAddress2" value="$!billAddress.address2"/> 
+	<input type="hidden" name="billCity" value="$!billAddress.city"/> 
+	<input type="hidden" name="billState" value="$!billAddress.state"/> 
+	<input type="hidden" name="billPhoneNo" value="$!billAddress.phoneNo"/> 
+	<input type="hidden" name="billEmail" value="$!billAddress.emailAddress"/> 
+	<input type="hidden" name="billCountry" value="$!billAddress.country"/> 
+	<input type="hidden" name="billZipcode" value="$!billAddress.ZipCodeStringFormat"/> 
+	<!-- Billing Address -->
+	<!-- Shipping Address -->  
+	<input type="hidden" id="defaultShipToId" name="defaultShipToId" value="$!shipAddress.addressBookId"/>
+	<input type="hidden" id="shipEntityId" name="shipEntityId" value="$!shipAddress.shipToId"/>
+	<input type="hidden" id="address1" name="address1" value="$!shipAddress.address1"/> 
+	<input type="hidden" id="address2" name="address2" value="$!shipAddress.address2"/> 
+	<input type="hidden" id="city" name="city" value="$!shipAddress.city"/> 
+	<input type="hidden" id="state" name="state" value="$!shipAddress.state"/> 
+	<input type="hidden" id="country" name="country" value="$!shipAddress.country"/> 
+	<input type="hidden" id="zipCode"name="zipCode" value="$!shipAddress.ZipCodeStringFormat"/>
+	<input type="hidden" id="selectedBranch"name="selectedBranch" value="$!shipAddress.wareHouseCodeStr"/> 
+	<!-- Shipping Address -->
+	<!-- Order Details -->
+	<input type="hidden" name="orderStatus" id="orderStatus" value="NEW"/>
+	<input type="hidden" name="orderingType" value="QU"/>
+	<input type="hidden" name="poNumber"id="poNumber" value="" /> 
+	<input type="hidden" name="shipVia" value="BEST WAY"/> 
+	<input type="hidden" name="shipViaDescription" value="BEST WAY"/>
+	<input type="hidden" name="isReOrder" value="N"/>
+	<!-- Order Details -->
+</form>
+
+<script>
+function addRow(){
+	var index = parseInt($("#addNewRowCount").val());
+	var lineNo = index+1;
+	var newRow = "<tr data-rowindex='"+index+"'>";
+	newRow = newRow + "<td class='text-center' align='left' valign='top' data-th='$locale.get('product.label.lineNo')'>" + lineNo +"</td>";
+
+	newRow = newRow + "<td class='text-center' align='left' valign='top' data-th='$locale.get('product.label.qty')'>";
+	newRow = newRow + "<input type='text' id='QTY"+index+"' size='6' maxlength='7' onkeypress='return IsNumeric(event)' onpaste='return false' ondrop = 'return false'  value='' name='ITEMQTYARR' class='form-control' />";
+	newRow = newRow + "</td>";
+	
+	newRow = newRow + "<td align='left' valign='top' data-th='$!locale.get('product.label.partNumber')'>";
+	newRow = newRow + "<input type='text' id='PN"+index+"' maxlength='24' value='' name='PARTNUMARR' class='input-part form-control' onkeyup='return autoCompleteCall(this);' data-searchtype='PN' autocomplete='off' />";
+	newRow = newRow + "<div id='auto"+index+"' class='autosuggestspan' data-autofilled='N'></div>";
+	newRow = newRow + "</td>";
+
+	newRow = newRow + "<td align='left' valign='top' data-th='$!locale.get('label.customerpartnumber')'>";
+	newRow = newRow + "<input type='text' id='CPN"+index+"' maxlength='24' value='' name='CPN' class='input-part form-control' onkeyup='return autoCompleteCall(this);' data-searchtype='CPN' autocomplete='off'/>";
+	newRow = newRow + "</td>";
+		
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.manufacturerPartNumber')'>";
+	newRow = newRow + "<input type='text' id='MPN"+index+"' maxlength='24' value='' name='MPN' class='input-part form-control' onkeyup='return autoCompleteCall(this);' data-searchtype='MPN' autocomplete='off'/>";
+	newRow = newRow + "</td>";
+	
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.productDescription')'>";
+	newRow = newRow + "<input type='text' id='DESC"+index+"' maxlength='200' value='' name='DESCARR' class='form-control' autocomplete='off'/>";
+	newRow = newRow + "</td>";
+	
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('product.label.unitOfMeasure')' id='UOMTD_"+$count+"'>";
+	newRow = newRow + "<input type='text' id='UOM"+index+"' maxlength='4' value='' name='UOM' class='form-control' data-upmpn=''/>";
+	newRow = newRow + "</td>";
+
+	newRow = newRow + "<td align='left' valign='top' data-th='$locale.get('form.label.comment')'>";
+	newRow = newRow + "<input type='text' id='LINEITEMCMTARR"+index+"' maxlength='150' value='' name='LINEITEMCMTARR' class='form-control' autocomplete='off'/>";
+	newRow = newRow + "</td>";
+
+	newRow = newRow + "<td class='text-center' onclick='return clearRow(this);'><i class='fas fa-sync'></i></td>";
+	newRow = newRow + "</tr>";
+
+	
+	
+	$("#idOfRowToInsertBefore").before(newRow);
+	index++;
+	var numberOfRecords = 10;
+	if($("#numberOfRecords").length>0 && $("#numberOfRecords").val().length>0 && parseInt($("#numberOfRecords").val())>0){
+		numberOfRecords = parseInt($("#numberOfRecords").val());
+	}
+	if(index>=(numberOfRecords+1) && $('#removeRowBtn').is(":hidden")){ $('#removeRowBtn').show(); }
+	$("#addNewRowCount").val(index);
+	return false;
+}
+</script>
