@@ -76,7 +76,7 @@
 		</table>
 	</div>
 	<div class="col-md-6 col-sm-6 col-sx-12 text-right">
-		<img src="$!eventsList.imageUrl" alt="$!eventsList.title" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+		<img src="$!eventsList.imageName" alt="$!eventsList.title" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 	</div>
 </div>
 <div class="row eventInfoBlock">
@@ -91,7 +91,7 @@
 	<p class="mBottom-2"> $!locale.get("event.note.attendTheEvent") </p>
 	<div align="center" id="chkDate">
 		#if($eventsList.blockOnlineReg == "N")
-			#if($eventsList.totalSeats == "-1")
+		#if($eventsList.totalSeats == "-1")
 				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerNow")</a>
 			#elseif($eventsList.availableSeats >= $!eventsList.totalSeats)
 				<a href="eventRegisterUnit.action?eventID=$!eventsList.id" class="btn button">$!locale.get("event.label.registerrForWaitingList")</a>

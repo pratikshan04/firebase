@@ -740,7 +740,7 @@
 					#if($itemLongDesc && $!itemLongDesc.trim() != "")
 						<p>$!itemLongDesc</p>
 					#end
-					#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf($!locale.get("california.restriction.string")) != -1))
+					#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
 						<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
 						<p class="propwarningmsg"><i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
 					#end
@@ -1209,7 +1209,7 @@ function LoadRecentViewedItem(){
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="$!locale.get('product.label.review')">$!locale.get("product.label.review")<span class="text-danger"> * </span></label>
-								<textarea class="form-control" title="comments" rows="7" cols="36" name="comments" id="comments" style="resize: vertical;" onKeyDown="limitText(this.form.comments,10,1000);" onKeyUp="limitText(this.form.comments,10,1000);"></textarea>
+								<textarea class="form-control" title="comments" rows="7" cols="36" name="comments" id="comments" style="resize: vertical;" onKeyDown="limitText(this.form.comments,10,4001);" onKeyUp="limitText(this.form.comments,10,4001);"></textarea>
 							</div>
 						</div>
 					</div>

@@ -15,26 +15,26 @@
 	<div class="col-md-4 col-sm-6 col-xs-12">
 		<h4>$!locale.get('product.heading.orderDetail')</h4>
 		<p>
-            #if($orderDetail.orderNum)
+            #if($orderDetail.orderNum.length() > 0)
             	#if($orderDetail.orderStatus.contains("Bid"))
             		<strong>$!locale.get("product.label.eclipsebidNumber"): </strong> $!orderDetail.orderNum<br />
             	#else
             		<strong>$!locale.get("product.label.eclipseOrderNumber"): </strong> $!orderDetail.orderNum<br />
             	#end
             #end
-            #if($orderDetail.orderDate)
+            #if($orderDetail.orderDate.length() > 0)
             <strong>$!locale.get("form.label.orderDate"): </strong> $!orderDetail.orderDate<br />
             #end
-            #if($orderDetail.orderedBy )
+            #if($orderDetail.orderedBy.length() > 0)
             <strong>$!locale.get("form.label.orderedBy"): </strong> $!orderDetail.orderedBy<br />
             #end 
-            #if($orderDetail.poNumber)
+            #if($orderDetail.poNumber.length() > 0)
             <strong>$!locale.get("product.label.poNumber"): </strong> $!orderDetail.poNumber<br />
             #end
-            #if($orderDetail.shipViaID)
+            #if($orderDetail.shipViaID.length() > 0)
             <strong>$!locale.get("form.label.shipVia"): </strong> $!orderDetail.shipViaID<br />
             #end  
-            #if($orderDetail.shipDate)
+            #if($orderDetail.shipDate.length() > 0)
             <strong>$!locale.get("product.label.shipDate"): </strong> $!orderDetail.shipDate
             #end   
         </p>
@@ -42,40 +42,32 @@
 	<div class="col-md-4 col-sm-6 col-xs-12">
 		<h4>$!locale.get("product.heading.billingAddress")</h4>
 		<p> 
-            #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
+            #if($orderDetail.orderedBy.length() > 0)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
             #if($requestType == "openQuote")<strong><span> $!orderDetail.billToName </span></strong><br />#end
-            <span>$!orderDetail.billAddress.address1 </span><br />
-            #if($!orderDetail.billAddress.address2!="")<span>$!orderDetail.billAddress.address2</span><br />#end
-            <span> $!orderDetail.billAddress.city, $!orderDetail.billAddress.state</span>
-            <br />
-            <span> #if($!orderDetail.billAddress.country)$!orderDetail.billAddress.country,#end $!orderDetail.billAddress.zipCode</span>
-            <br />
-            #if($orderDetail.billPhone)
-            <span>$!orderDetail.billPhone</span>
-            #end
+            #if($orderDetail.billAddress.address1.length() > 0)<span>$!orderDetail.billAddress.address1 </span><br />#end
+            #if($!orderDetail.billAddress.address2.length() > 0)<span>$!orderDetail.billAddress.address2</span><br />#end
+            <span>$!orderDetail.billAddress.city, $!orderDetail.billAddress.state</span><br />
+            #if($!orderDetail.billAddress.country.length() > 0)<span>$!orderDetail.billAddress.country, $!orderDetail.billAddress.zipCode</span><br />#end
+            #if($!orderDetail.billPhone.length() > 0)<span>$!orderDetail.billPhone</span>#end
         </p>
 	</div>
 	<div class="col-md-4 col-sm-6 col-xs-12">
 		<h4>$!locale.get("product.heading.shippingAddress")</h4>
 		   <p>
-	            #if($orderDetail.orderedBy)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
-	            #if($requestType == "openQuote")<strong><span> $!orderDetail.shipToName </span></strong><br />#end
-	            <span>$!orderDetail.shipAddress.address1</span><br />
-	            #if($!orderDetail.shipAddress.address2!="")<span>$!orderDetail.shipAddress.address2 </span><br />#end
-	            <span>$!orderDetail.shipAddress.city, $!orderDetail.shipAddress.state</span>
-	            <br />
-	            <span>#if($!orderDetail.shipAddress.country)$!orderDetail.shipAddress.country,#end $!orderDetail.shipAddress.zipCode</span>
-	            <br />
-	            #if($orderDetail.shipPhone)
-	            <span>$!orderDetail.shipPhone</span>
-	            #end
+	            #if($orderDetail.orderedBy.length() > 0)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
+	            #if($requestType == "openQuote" && $!orderDetail.shipToName.length() > 0)<strong><span> $!orderDetail.shipToName </span></strong><br />#end
+	            #if($orderDetail.shipAddress.address1.length() > 0)<span>$!orderDetail.shipAddress.address1</span><br />#end
+	            #if($!orderDetail.shipAddress.address2.length() > 0)<span>$!orderDetail.shipAddress.address2 </span><br />#end
+	            <span>$!orderDetail.shipAddress.city, $!orderDetail.shipAddress.state</span> <br />
+	            #if($!orderDetail.shipAddress.country.length() > 0)<span>$!orderDetail.shipAddress.country, $!orderDetail.shipAddress.zipCode</span> <br />#end
+	            #if($orderDetail.shipPhone.length() > 0) <span>$!orderDetail.shipPhone</span> #end
 	        </p>
 	</div>
 </div>
 #if($requestType != "openQuote")
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-xs-12">
-			#if($orderDetail.shippingInstruction)
+			#if($orderDetail.shippingInstruction.length() > 0)
 			<div>
 				<h4>$!locale.get("form.label.shippingInstructions")</h4>
 				<p>$!orderDetail.shippingInstruction </p>
@@ -83,7 +75,7 @@
 			#end
 	</div>
 	<div class="col-md-6 col-sm-6 col-xs-12">
-			#if($orderDetail.trackingInfo)
+			#if($orderDetail.trackingInfo.length() > 0)
 			<div>
 				<h4>Shipping Links:</h4>
 				<!-- <p><a class="orangeClr" href='http://www.mapquest.com/maps?address=$!orderDetail.shippedAddress.Address1&country=$!orderDetail.shippedAddress.Country&city=$!orderDetail.shippedAddress.City&state=$!orderDetail.shippedAddress.State&zipcode=$!orderDetail.shippedAddress.ZipCode&redirect=true' target="_blank">Mapquest</a></p> -->

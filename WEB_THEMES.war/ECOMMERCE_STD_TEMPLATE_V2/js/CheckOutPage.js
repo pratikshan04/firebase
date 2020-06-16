@@ -174,13 +174,10 @@ var checkoutWizard = {};
 		$("#quickCartHiddenInfo").submit( function(){
 			var isValid = submitThisForm("#step-"+checkOutStep);
 			var createOrderInDb = document.getElementById('createOrderInDb').value;
-			if(createOrderInDb == 'Y' || $.trim(createOrderInDb)=="Y")
-				{
-			var erpType = "cimmesb";
-		        }
-			else{
 			var erpType = document.getElementById('erpType').value;
-		        }
+			if(createOrderInDb == 'Y' || $.trim(createOrderInDb)=="Y") {
+				erpType = "cimmesb";
+			}
 			var orderType = $('#orderType').val().trim();
 			if(erpType && erpType.toUpperCase()=="DEFAULTS" && isValid){
 				var data = $("#quickCartHiddenInfo").serialize();
@@ -204,12 +201,6 @@ var checkoutWizard = {};
 				return false;
 			}
 		});
-		if(oType == 'checkoutWithPo'){
-			$("#quickCartHiddenInfo").submit();
-		}else if(oType == 'checkoutWithPo'){
-			$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
-			$("#quickCartHiddenInfo").submit();
-		}
 	};
 	
 	checkoutWizard.submitCheckoutRequest = function(){
@@ -218,7 +209,7 @@ var checkoutWizard = {};
 			if($('#orderType').length>0 && typeof $('#orderType').val()!="undefined" && $('#orderType').val()!=null && $('#orderType').val().trim().length > 0){
 				checkoutWizard.insertDataToHiddenInfo();
 				if(payType == "checkoutWithPo"){
-					checkoutWizard.submitOrder(payType);
+					$("#quickCartHiddenInfo").submit();
 				}else if(payType == "checkoutWithCreditCard"){
 					block("Please Wait");
 					setCookie("poNumber",$("#poNumber").val(),10);
@@ -231,7 +222,8 @@ var checkoutWizard = {};
 					}
 					setCookie("defaultShipToId",$("#defaultShipToId").val(),10);
 					setCookie("shipVia",$("#shipVia").val(),10);
-					checkoutWizard.submitOrder(payType);
+					$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
+					$("#quickCartHiddenInfo").submit();
 				}else if($('#orderType').val().trim() == "checkoutWithQuote"){
 					bootAlert("small","error","Error","Submit Quote Order");
 				}else{

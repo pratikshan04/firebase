@@ -42,14 +42,22 @@
 					<div class="cimm_eventsListContainer clearAfter">
 						<h6><a href="eventDetailsUnit.action?eventID=$category.id">$category.title</a></h6>
 						<div class="eventShortDesp">
+						
 						#if($category.description.length() > 0)
-							#if($category.description.length() > 200)
-							#set($description = $category.description.substring(0, 199))
-							$description.substring(0, $math.min($description.length(),$description.lastIndexOf(" ")))... <a class="red" href="eventDetailsUnit.action?eventID=$category.id">Read More</a>
-							#else
-							$category.description
-							#end
-						#end
+                            #if($category.description.length() > 200)
+                                #if($category.description.indexOf("img") > -1)
+                                <div class="imgDesc" data-cateid=$category.id id="imgDesc_$category.id">
+                                    $category.description
+                                </div>
+                                #else
+                                #set($description = $category.description.substring(0, 199))
+                                $description.substring(0, $math.min($description.length(),$description.lastIndexOf(" ")))... <a class="red" href="eventDetailsUnit.action?eventID=$category.id">Read More</a>
+                                #end
+                            #else
+                            $category.description
+                            #end
+                        #end
+						
 						<span class='mRight-3'><strong>Category: </strong>$category.eventCategory</span>
 						#if($category.location)<span class='mRight-3'><strong>Location: </strong>$category.location</span>#end
 						<span class='mRight-3'><strong>Date:</strong>
@@ -200,6 +208,20 @@ table.dataTable tr.group td {
 	width: 150px;
 	padding: 0 0 10px 10px;
 	border-left: 1px solid #000;
+}
+.eventShortDesp p,.imgDesc p {
+    margin-bottom: 20px;
+    word-break: break-all;
+    padding-right: 10px;
+}
+.eventShortDesp p > a {
+	color: #46acee;	
+}
+.eventShortDesp +ul, .imgDesc +ul {
+    float: left;
+    width: 150px;
+    padding: 0 0 10px 10px;
+    border-left: 1px solid #000;
 }
 .pagination>li>a, .pagination>li>span{
 	padding: 2px 4px;

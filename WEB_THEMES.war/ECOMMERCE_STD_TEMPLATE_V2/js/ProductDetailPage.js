@@ -423,12 +423,17 @@ function submitReview(){
 	if(title==""||title==null){
 		result = result + "<p> Title is required </p>";
 	}
+	if(title.length > 200){
+		result = result + "<p>Title Must be Maximu 200 Characters";
+	}
 	if(count<=10){
 		if(comments==""||comments==null){
 			result = result + "<p> Review Comment is required </p>";
 		}else{
 			result = result + "<p>  Atleast 10 Characters in Review Field  </p>";
 		}
+	} else if (count > 4000){
+		result = result + "<p>Review Comment Must be Maximum 4000 characters</p>";
 	}
 	if (result == "") {
 		var str = $("#reviewForm").serialize();
@@ -442,6 +447,8 @@ function submitReview(){
 					var arrRes = result.split("|");
 					if($.trim(arrRes[0])=="0"){
 						bootAlert('small','success','Success','Review Added Successfully.');
+						$("#savebtn").attr('disabled', 'disabled');
+						$("#savebtn").addClass("disabled")
 						window.location.reload();
 					}else{
 						bootAlert('small','error','Error',"Review Adding Failed");
