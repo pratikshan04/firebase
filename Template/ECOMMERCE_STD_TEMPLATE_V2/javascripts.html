@@ -127,7 +127,7 @@ function deviceSelectAll(){
 }
 </script>
 #end
-#if($LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
+#if($LayoutName != "404Page" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
 #set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js?'+$refreshVersion)
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
