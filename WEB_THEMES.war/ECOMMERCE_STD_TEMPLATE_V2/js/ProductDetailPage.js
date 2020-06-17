@@ -424,7 +424,7 @@ function submitReview(){
 		result = result + "<p> Title is required </p>";
 	}
 	if(title.length > 200){
-		result = result + "<p>Title Must be Maximu 200 Characters";
+		result = result + "<p>Title must not exceed 200 characters";
 	}
 	if(count<=10){
 		if(comments==""||comments==null){
@@ -433,7 +433,7 @@ function submitReview(){
 			result = result + "<p>  Atleast 10 Characters in Review Field  </p>";
 		}
 	} else if (count > 4000){
-		result = result + "<p>Review Comment Must be Maximum 4000 characters</p>";
+		result = result + "<p>Review must not exceed 4000 characters</p>";
 	}
 	if (result == "") {
 		var str = $("#reviewForm").serialize();
