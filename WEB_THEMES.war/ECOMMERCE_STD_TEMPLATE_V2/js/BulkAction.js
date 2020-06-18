@@ -147,6 +147,26 @@ var BulkAction = {};
 						myObject.itemDataList = jsonObj;
 						BulkAction.submitMultipleProductGroup(myObject);
 					}
+					if (allCheckBoxlength == $(".multipleProuctGroupCheckbox").length) {
+						if (typeof (Storage) !== "undefined") {
+							localStorage.removeItem("selectedItemsAOP");
+							localStorage.removeItem("selectedItemsToGroup");
+						} else {
+							setCookie("selectedItemsAOP", "", -1);
+							setCookie("selectedItemsToGroup", "", -1);
+						}
+						$.each(jsonObj, function (key, value) {
+							//$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
+							$("#selectItemCheckbox_" + value.itemId).prop('checked', false);
+							$('#itemTxtQty' + value.itemId).attr("disabled", false);
+							if ($('#multipleUom_' + value.partNumber).length > 0) {
+								$('#multipleUom_' + value.partNumber).attr('disabled', false);
+							}
+						});
+						$("[data-selectall='CheckBox']").each(function (i) {
+							this.checked = false;
+						});
+					}
 				});
 				$("#addToCartHeaderContent").html("<h4>Added Successfully To:</h4>");
 				$("#multipleProductGroupContent").html('<div class="addNewPgResponse"><ul class="msg"></ul></div>');
@@ -230,7 +250,9 @@ var BulkAction = {};
 	};
 	BulkAction.processAddToCart = function (obj) {
 		if (typeof obj[0].requestType == "undefined" || obj[0].requestType == "") {
-			block('Please Wait');
+			if($("#layoutName").val() != "SavedGroupsPage"){
+				block('Please Wait');
+			}
 		} else {
 			if ($("#multipleItemCart_" + obj[0].itemId).length > 0) {
 				$("#multipleItemCart_" + obj[0].itemId).find(".mulAddtoCartStatus").html("Loading...");
