@@ -79,6 +79,8 @@ function generateForm(formId){
 			removeCaption();
 			$('.cimm_formContent li').removeAttr('title');
 			$('.col').removeAttr('title');
+			$("[data-widget='"+formId+"']").find('form').attr({'action':'SaveAndSendMail.action', 'onsubmit':'submitThisForm(this); return false;'});
+			$("[data-widget='"+formId+"']").find('[type="submit"]').attr('disabled', false).removeClass('btns-disable');
 		}
 	});
 }

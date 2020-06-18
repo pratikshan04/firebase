@@ -912,13 +912,13 @@ $.Autocompleter.Select = function (options, input, select, config) {
 				   	   
 				    $('input#q').keyup(function(e){
 					    if(e.keyCode == 8 && $(this).val().length == 0){
-					    		 $(this).parent(".cimm_searchWrapper").find(".ac_results ul").removeClass("ac_resultCat");
+					    	$(this).parent(".cimm_searchWrapper").find(".ac_results ul").removeClass("ac_resultCat");
 					    }
 				    });
 			    }
 	        }	
 		}).click(function(event) {
-			if(event.target.nodeName && event.target.nodeName.toUpperCase() == 'LI') {
+			if(event.target.nodeName && event.target.nodeName.toUpperCase() == 'LI' || event.target.nodeName.toUpperCase() == 'IMG' || event.target.nodeName.toUpperCase() == 'SPAN') {
 				$(target(event)).addClass(CLASSES.ACTIVE);
 				select();
 				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
