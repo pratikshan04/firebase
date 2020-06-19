@@ -271,20 +271,21 @@ window.location.href = "/"
 <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-3.4.1.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
 <!-- Piwik -->
+#set($piwikSiteID = 2)
 <script type="text/javascript">
   var _paq = _paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="//973ecb.cimm2.com/piwik/";
+    var u="//analyticsbeta.cimm2.com/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
+    _paq.push(['setSiteId', '$piwikSiteID']);
     _paq.push(['setUserId', '$!session.getAttribute("com.common.username")']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//973ecb.cimm2.com/piwik/piwik.php?idsite=2&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
+<noscript><p><img src="https://analyticsbeta.cimm2.com/piwik/piwik.php?idsite=$piwikSiteID&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
 <!-- End Piwik Code -->
 #end
 #if($LayoutName != 'CMSStaticPageList')

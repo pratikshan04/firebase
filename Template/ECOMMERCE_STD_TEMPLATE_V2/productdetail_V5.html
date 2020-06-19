@@ -135,7 +135,7 @@
 				</span>
 				#else
 				<span class="imgForSend">
-					<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!detailImage$!itemData.imageName" data-zoom-image="$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
+					<img itemprop="image" class="initZoom" id="imageName$!itemData.itemId" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'" alt="$!itemData.brandName $!itemData.manufacturerPartNumber">
 				</span>
 				#end
 				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
@@ -295,17 +295,6 @@
 							<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
 							<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
 							<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
-							</li>
-							#end
-							#if($!customVal.get("custom_P65_WARNING_MESSAGE") && $!customVal.get("custom_P65_WARNING_MESSAGE").length()>0)
-							<li>
-								<div class="warning_MSG">
-									<p>Prop 65: <strong><a href="javascript:void(0);" data-id="warning_$itemData.itemId" onclick="warningPopUp(this);">WARNING</a></strong></p>
-									<div id="warning_$itemData.itemId" class="hideMe">
-										<div class="exitWarning"><span class="warningPopExit" data-exitid="warning_$itemData.itemId"><i class="fa fa-times"></i></span></div>
-										<div class="warningContent"><img src="$webThemes/$siteName/images/warning.png" style="vertical-align: sub;"/><span>WARNING:</span> $customVal.get('custom_P65_WARNING_MESSAGE') For more information, go to <a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov</a>.</div>
-									</div>
-								</div>
 							</li>
 							#end
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
@@ -509,6 +498,10 @@
 					#end 
 					#if($itemLongDesc && $!itemLongDesc.trim() != "")
 						<p>$!itemLongDesc</p>
+					#end
+					#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+						<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+						<p class="propwarningmsg"><i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
 					#end
 					</div>
 				#end 
@@ -974,7 +967,7 @@ function LoadRecentViewedItem(){
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="$!locale.get('product.label.review')">$!locale.get("product.label.review")<span class="text-danger"> * </span></label>
-								<textarea class="form-control" title="comments" rows="7" cols="36" name="comments" id="comments" style="resize: vertical;" onKeyDown="limitText(this.form.comments,10,1000);" onKeyUp="limitText(this.form.comments,10,1000);"></textarea>
+								<textarea class="form-control" title="comments" rows="7" cols="36" name="comments" id="comments" style="resize: vertical;" onKeyDown="limitText(this.form.comments,10,4001);" onKeyUp="limitText(this.form.comments,10,4001);"></textarea>
 							</div>
 						</div>
 					</div>

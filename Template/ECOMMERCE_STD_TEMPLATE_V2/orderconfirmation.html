@@ -26,54 +26,54 @@
 		<div class="col-md-4 col-sm-4 col-xs-12">
 		<h4>$!locale.get("product.heading.orderDetail")</h4>
 			<ul class="cimm_orderInfo">
-			#if($orderDetail.orderStatusDesc)
+			#if($!orderDetail.orderStatusDesc.length() > 0)
 			<li>
 				<strong>$!locale.get("product.heading.Status"): </strong><span>$!orderDetail.orderStatusDesc</span>
 			</li>
 			#end
-			#if($orderDetail.invoiceNumber)
+			#if($!orderDetail.invoiceNumber.length() > 0)
 			<li>
 				<strong> $!locale.get("product.label.invoicNumber"): </strong><span>$!orderDetail.invoiceNumber</span>
 			</li>
 			#end
-			#if($orderDetail.erpOrderNumber)
+			#if($!orderDetail.erpOrderNumber.length() > 0)
 			<li>
-				#if($orderDetail.erpOrderNumber)
+				#if($!orderDetail.erpOrderNumber.length() > 0)
 				<strong>$!locale.get("product.label.eclipseOrderNumber"): </strong><span>$!orderDetail.erpOrderNumber</span>
 				#end
 			</li>
-			#elseif($orderDetail.orderNum)
+			#elseif($!orderDetail.orderNum.length() > 0)
 			<li>
 				<strong>$!locale.get("product.label.orderNumber"): </strong><span>$!orderDetail.orderNum</span>
 			</li>
 			#end
-			#if($orderDetail.orderDate)
+			#if($!orderDetail.orderDate.length() > 0)
 			<li>
 				<strong>$!locale.get("product.label.orderedDate"): </strong><span>$!orderDetail.orderDate</span>
 			</li>
 			#end
-			#if($orderDetail.orderedBy)
+			#if($!orderDetail.orderedBy.length() > 0)
 			<li>
 				<strong>$!locale.get("form.label.orderedBy"): </strong><span>$!orderDetail.orderedBy</span>        
 			</li>
 			#end
-			#if($orderDetail.poNumber)
+			#if($!orderDetail.poNumber.length() > 0)
 			<li>
 				<strong>$!locale.get("product.label.poNumber"): </strong><span>$!orderDetail.poNumber</span>
 			</li>
 			#end
-			#if($orderDetail.ShipViaMethod)
+			#if($!orderDetail.ShipViaMethod.length() > 0)
 			<li>
 				<strong>$!locale.get("form.label.shipVia"): </strong><span>$!orderDetail.ShipViaMethod</span>
 			</li>
 			#end
-			#if($orderDetail.shipDate)
+			#if($!orderDetail.shipDate.length() > 0)
 			<!-- <li>
 				<strong>$!locale.get("product.label.shipDate"): </strong><span>$!orderDetail.shipDate</span>
 				<input type="hidden" value="$!orderDetail.trackingInfo" >
 			</li> -->
 			#end
-			#if($orderDetail.trackingInfo)
+			#if($!orderDetail.trackingInfo.length() > 0)
 			<!-- <li>
 				<strong>$!locale.get("product.label.trackInfo"): </strong>
 				<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=$!orderDetail.trackingInfo' target="_blank">$!orderDetail.trackingInfo</a>
@@ -86,15 +86,15 @@
        <h4>$!locale.get("product.heading.billingAddress")</h4>
 		<p>
 			<span> 
-				#if($billEntityName)$!billEntityName <br/> #end
-				#if($orderDetail.billAddress1)$!orderDetail.billAddress1<br /> #end
-				#if($orderDetail.billAddress2)$!orderDetail.billAddress2<br />#end  
-				#if($orderDetail.billCity)$!orderDetail.billCity#end
-				#if($orderDetail.billState), $!orderDetail.billState<br />#end 
-				#if($orderDetail.billZipCode)$!orderDetail.billZipCode#end
-				#if($orderDetail.billCountry), $!orderDetail.billCountry<br />#end
-				#if($orderDetail.billPhone) $!orderDetail.billPhone, #end
-				#if($orderDetail.billEmailAddress)$!orderDetail.billEmailAddress<br />#end
+				#if($billEntityName.length()>0)$!billEntityName <br/> #end
+				#if($orderDetail.billAddress.address1.length()>0)$!orderDetail.billAddress.address1<br /> #end
+				#if($orderDetail.billAddress.address2.length()>0)$!orderDetail.billAddress.address2<br />#end  
+				#if($orderDetail.billAddress.city.length()>0)$!orderDetail.billAddress.city#end
+				#if($orderDetail.billAddress.state.length()>0), $!orderDetail.billAddress.state<br />#end 
+				#if($orderDetail.billAddress.zipCode.length()>0)$!orderDetail.billAddress.zipCode#end
+				#if($orderDetail.billAddress.country.length()>0), $!orderDetail.billAddress.country<br />#end
+				#if($orderDetail.billAddress.phoneNo.length()>0) $!orderDetail.billAddress.phoneNo,<br />#end
+				#if($orderDetail.billAddress.emailAddress.length()>0)$!orderDetail.billAddress.emailAddress<br />#end
 			</span>
 		</p>
        </div>
@@ -102,15 +102,18 @@
 		<h4>$!locale.get("product.heading.shippingAddress")</h4>
 		<p>
 			<span>
-				#if($shipEntityName)$!shipEntityName#end <br/>
-				#if($orderDetail.shipAddress1)$!orderDetail.shipAddress1<br />#end 
-				#if($orderDetail.shipAddress2)$!orderDetail.shipAddress2<br />#end
-				#if($orderDetail.shipCity)$!orderDetail.shipCity#end
-				#if($orderDetail.shipState), $!orderDetail.shipState<br /> #end 
-				#if($orderDetail.shipZipCode)$!orderDetail.shipZipCode#end
-				#if($orderDetail.shipCountry ), $!orderDetail.shipCountry<br />#end
-				#if($orderDetail.shipPhone) $!orderDetail.shipPhone, #end
-				#if($orderDetail.shipEmailAddress)$!orderDetail.shipEmailAddress<br />#end
+				#if($shipEntityName.length()>0)$!shipEntityName#end <br/>
+				#if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/>
+				#if($orderDetail.shipAddress.address1.length()>0)$!orderDetail.shipAddress.address1<br />#end 
+				#if($orderDetail.shipAddress.address2.length()>0)$!orderDetail.shipAddress.address2<br />#end
+				#if($orderDetail.shipAddress.city.length()>0)$!orderDetail.shipAddress.city#end
+				#if($orderDetail.shipAddress.state.length()>0), $!orderDetail.shipAddress.state #end 
+				#if($orderDetail.shipAddress.zipCode.length()>0)$!orderDetail.shipAddress.zipCode#end
+				#if($orderDetail.shipAddress.country.length()>0) $!orderDetail.shipAddress.country<br />#end
+				#if($orderDetail.shipAddress.phoneNo.length()>0) $!orderDetail.shipAddress.phoneNo,<br /> #end
+				<span class="mulEmail">
+				#if($orderDetail.shipAddress.emailAddress.length()>0)$!orderDetail.shipAddress.emailAddress<br />#end
+				</span>
 			</span>
 		</p>
 	 </div>
@@ -156,7 +159,7 @@
 							</li>
 						</ul>
 						#end
-						#if($itemList.lineItemComment)
+						#if($!itemList.lineItemComment.length()>0)
 							<ul><li><strong>Line Item Comment: </strong>$!itemList.lineItemComment </li></ul>
 						#end
 					</td>
@@ -228,57 +231,57 @@
 </div>
 <!--Order Confiramtion for Send-->
 <div id="SendOrderConfirmationPage" style="display:none;">
-	<table cellpadding="5" cellspacing="0" class="cimm_siteTable">    	
-        #if($orderDetail.invoiceNumber)
+	<table cellpadding="5" cellspacing="0" class="cimm_siteTable">
+        #if($!orderDetail.invoiceNumber.length() > 0)
          <tr>
             <td><strong> $!locale.get("product.label.invoicNumber"): </strong></td>
             <td> <span>$!orderDetail.invoiceNumber</span></td>
         </tr>
         #end
-        #if($orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))        
-            #if($orderDetail.erpOrderNumber)
+        #if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
+            #if($!orderDetail.erpOrderNumber.length() > 0)
             <tr>
                 <td><strong>$!locale.get("product.label.OrderNumber"): </strong></td>
                 <td><span>$!orderDetail.erpOrderNumber</span></td>
             </tr>
             #end
         #else
-            #if($orderDetail.orderNum)
+            #if($!orderDetail.orderNum.length() > 0)
             <tr>
                 <td><strong>$!locale.get("product.label.OrderNumber"): </strong></td>
                 <td><span>$!orderDetail.orderNum</span></td>
-            </tr>            
+            </tr>
             #end
         #end
         
-        #if($orderDetail.orderDate)
+        #if($!orderDetail.orderDate.length() > 0)
         <tr>
         	<td><strong>$!locale.get("product.label.orderedDate"): </strong></td>
             <td> <span>$!orderDetail.orderDate</span></td>
         </tr>
          #end
          
-        #if($orderDetail.orderedBy)
+        #if($!orderDetail.orderedBy.length() > 0)
         <tr>
         	<td><strong>$!locale.get("form.label.orderedBy"): </strong></td>
             <td><span>$!orderDetail.orderedBy</span></td>
         </tr>
         #end        
-        #if($orderDetail.poNumber)
+        #if($!orderDetail.poNumber.length() > 0)
         <tr>
         	<td><strong>$!locale.get("product.label.poNumber"): </strong></td>
             <td><span>$!orderDetail.poNumber</span></td>
         </tr>
         #end
 
-        #if($orderDetail.shipDate)
+        #if($!orderDetail.shipDate.length() > 0)
         <tr>
         	<td><strong>$!locale.get("product.label.shipDate"): </strong></td>
             <td><span>$!orderDetail.shipDate</span>    	
             <input type="hidden" value="$!orderDetail.trackingInfo" /></td>
         </tr>
         #end        
-        #if($orderDetail.trackingInfo)
+        #if($!orderDetail.trackingInfo.length() > 0)
         <tr>
         	<td><strong>$!locale.get("product.label.trackInfo"): </strong></td>
             <td><a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=$!orderDetail.trackingInfo' target="_blank">$!orderDetail.trackingInfo</a></td>
@@ -294,29 +297,34 @@
         <tr>
             <td style="border-right:1px solid #CCC;"><p>
                 <span> 
-                    $!orderDetail.billAddress1 #if($orderDetail.billAddress2), $!orderDetail.billAddress2 #end  <br />
-                    $!orderDetail.billCity<br />
-                    $!orderDetail.billState $!orderDetail.billZipCode<br />
-                    $!orderDetail.billCountry<br />
-					#if($orderDetail.billEmailAddress)
-					$!orderDetail.billEmailAddress<br />
-					#end
-					<strong>$!locale.get("form.label.phone"): </strong> $!orderDetail.billPhone
+                    #if($billEntityName.length()>0)$!billEntityName <br/> #end
+					#if($orderDetail.billAddress.address1.length()>0)$!orderDetail.billAddress.address1<br /> #end
+					#if($orderDetail.billAddress.address2.length()>0)$!orderDetail.billAddress.address2<br />#end  
+					#if($orderDetail.billAddress.city.length()>0)$!orderDetail.billAddress.city#end
+					#if($orderDetail.billAddress.state.length()>0), $!orderDetail.billAddress.state<br />#end 
+					#if($orderDetail.billAddress.zipCode.length()>0)$!orderDetail.billAddress.zipCode#end
+					#if($orderDetail.billAddress.country.length()>0), $!orderDetail.billAddress.country<br />#end
+					#if($orderDetail.billAddress.phoneNo.length()>0) $!orderDetail.billAddress.phoneNo,<br />#end
+					#if($orderDetail.billAddress.emailAddress.length()>0)$!orderDetail.billAddress.emailAddress<br />#end
                 </span>
             </p>
             </td>
             <td>
                  <p>
-                    <span>
-                        $!orderDetail.shipAddress1 #if($orderDetail.shipAddress2), $!orderDetail.shipAddress2 #end <br />
-                        $!orderDetail.shipCity<br />
-                        $!orderDetail.shipState $!orderDetail.shipZipCode<br />
-                        $!orderDetail.shipCountry <br />
-                         #if($orderDetail.shipEmailAddress)
-                        $!orderDetail.shipEmailAddress<br />
-                        #end
-                       #if($orderDetail.shipPhone) <strong>$!locale.get("form.label.phone"): </strong> $!orderDetail.shipPhone#end
-                    </span>
+                   <span>
+						#if($shipEntityName.length()>0)$!shipEntityName#end <br/>
+						#if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/>
+						#if($orderDetail.shipAddress.address1.length()>0)$!orderDetail.shipAddress.address1<br />#end 
+						#if($orderDetail.shipAddress.address2.length()>0)$!orderDetail.shipAddress.address2<br />#end
+						#if($orderDetail.shipAddress.city.length()>0)$!orderDetail.shipAddress.city#end
+						#if($orderDetail.shipAddress.state.length()>0), $!orderDetail.shipAddress.state #end 
+						#if($orderDetail.shipAddress.zipCode.length()>0)$!orderDetail.shipAddress.zipCode#end
+						#if($orderDetail.shipAddress.country.length()>0) $!orderDetail.shipAddress.country<br />#end
+						#if($orderDetail.shipAddress.phoneNo.length()>0) $!orderDetail.shipAddress.phoneNo,<br /> #end
+						<span class="mulEmail">
+						#if($orderDetail.shipAddress.emailAddress.length()>0)$!orderDetail.shipAddress.emailAddress<br />#end
+						</span>
+					</span>
                 </p>
             </td>
         </tr>

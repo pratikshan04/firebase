@@ -8,9 +8,9 @@
 #if($!savedGroupName && $!savedGroupName!="" && $!savedGroupId)
 	<div id="notificationDiv"></div>
 	<div class="row mBottom-3">
-		<div class="col-md-6 col-sm-6 col-xs-12">
-			<h1 class="cimm_page-title mBottom-0" id="groupName">$savedGroupName</h1>					
-			<div class="form-inline" id="editBox" style="display: none;">
+		<div class="col-md-6 col-xs-12">
+			<h1 class="cimm_page-title mBottom-0" id="groupName">$savedGroupName</h1>
+			<div class="custom_lineform form-inline" id="editBox" style="display: none;">
 				<input type="hidden" value="$savedGroupName" id="oldGroupName" />
 				<input type="hidden" value="$savedGroupId" id="GroupId" />
 				<input type="hidden" value="P" id="GroupType" />
@@ -19,14 +19,14 @@
 				<button class="btn btn-primary" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
+		<div class="col-md-6 col-xs-12 text-right grpNameEditWrap">
 			<button class="btn btn-primary" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('group.button.editGroupName')"><em class="glyphicon glyphicon-edit"></em> $!locale.get('group.button.groupName')</button>
 			<button class="btn btn-primary" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=P');" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')"><em class="glyphicon glyphicon-trash"></em>  $!locale.get('product.listOrgroup.name')</button>
 			<!-- <a href="javascript:void(0);" class="hideForDevice hideForPrint btn btn-primary" onclick="window.print();" data-toggle="tooltip" title="$!locale.get('product.button.printthispage')"><em class="fa fa-lg fa-print"></em> <strong>$locale.get("product.button.print")</strong> </a> -->
 		</div>
 	</div>
 	<div class="row mBottom-3">
-		<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="col-md-4 col-sm-4 col-xs-12 custom_lineform">
 			<select class="form-control selectpicker" onchange="bulkActions(this);" id="bulkActionSelect">
 				<option value="">$!locale.get("product.option.select")</option>
 				<option value="deleteOption">$!locale.get("product.button.deleteSelected")</option>
@@ -35,7 +35,7 @@
 			</select>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="form-inline">
+			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.itemsperpage'): </label>
 				<div class="form-group">
 				<input type="hidden" name="savedGroupId" value="$savedGroupId" />
@@ -52,7 +52,7 @@
 			</form>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-			<form action="myProductGroupPage.action" id="sortByForm" class="form-inline">
+			<form action="myProductGroupPage.action" id="sortByForm" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.sortBy'): </label>
 				<div class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
@@ -84,7 +84,7 @@
 	</div>
 	<div class="row mBottom-3">
 		<div class="col-md-9 col-sm-6 col-xs-12">
-			<div class="form-inline">
+			<div class="custom_lineform form-inline">
 				<form action="myProductGroupPage.action" id="productSearchForm" class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />

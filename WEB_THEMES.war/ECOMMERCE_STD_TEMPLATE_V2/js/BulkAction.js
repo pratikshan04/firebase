@@ -147,28 +147,26 @@ var BulkAction = {};
 						myObject.itemDataList = jsonObj;
 						BulkAction.submitMultipleProductGroup(myObject);
 					}
-					if (allCheckBoxlength == $(".multipleProuctGroupCheckbox").length) {
-						if (typeof (Storage) !== "undefined") {
-							localStorage.removeItem("selectedItemsAOP");
-							localStorage.removeItem("selectedItemsToGroup");
-						} else {
-							setCookie("selectedItemsAOP", "", -1);
-							setCookie("selectedItemsToGroup", "", -1);
-						}
-						$.each(jsonObj, function (key, value) {
-							$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
-							$('#itemTxtQty' + value.itemId).attr("disabled", false);
-							if ($('#multipleUom_' + value.partNumber).length > 0) {
-								$('#multipleUom_' + value.partNumber).attr('disabled', false);
-							}
-						});
-						$("[data-selectall='CheckBox']").each(function (i) {
-							this.checked = false;
-						});
-					}
 				});
 				$("#addToCartHeaderContent").html("<h4>Added Successfully To:</h4>");
 				$("#multipleProductGroupContent").html('<div class="addNewPgResponse"><ul class="msg"></ul></div>');
+				if (typeof (Storage) !== "undefined") {
+					localStorage.removeItem("selectedItemsAOP");
+					localStorage.removeItem("selectedItemsToGroup");
+				} else {
+					setCookie("selectedItemsAOP", "", -1);
+					setCookie("selectedItemsToGroup", "", -1);
+				}
+				$.each(jsonObj, function (key, value) {
+					$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
+					$('#itemTxtQty' + value.itemId).attr("disabled", false);
+					if ($('#multipleUom_' + value.partNumber).length > 0) {
+						$('#multipleUom_' + value.partNumber).attr('disabled', false);
+					}
+				});
+				$("[data-selectall='CheckBox']").each(function (i) {
+					this.checked = false;
+				});
 			} else {
 				bootAlert("small", "error", "Error", "No Items Selected.");
 				BulkAction.refreshBulkSelect();
@@ -265,7 +263,7 @@ var BulkAction = {};
 					$('#generalModel').modal();
 					triggerToolTip();
 					$.each(obj, function (i, value) {
-						$("#selectItemCheckbox_" + obj[i].itemId).attr('checked', false);
+						$("#selectItemCheckbox_" + obj[i].itemId).prop('checked', false);
 						$('#itemTxtQty' + obj[i].itemId).attr("disabled", false);
 						if ($('#multipleUom_' + obj[i].partNumber).length > 0) {
 							$('#multipleUom_' + obj[i].partNumber).attr('disabled', false);

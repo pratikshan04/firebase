@@ -133,30 +133,31 @@ jQuery.ajax({
 } */
 
 function saveContent(){
-//generatePluginCode();
- 	var newText = "";
-	 jQuery("[data-select='bannerBlock']").each(function(i){
-		 jQuery(this).html("");
-	 });
-	 jQuery("[data-select='widget']").each(function(i){
-		 jQuery(this).html("");
-	 });
-	 jQuery("[data-select='form']").each(function(i){
-		 jQuery(this).html("");
-	 });
+	//generatePluginCode();
+	jQuery("[data-select='bannerBlock']").each(function(i){
+		jQuery(this).html("");
+	});
+	jQuery("[data-select='widget']").each(function(i){
+		jQuery(this).html("");
+	});
+	jQuery("[data-select='form']").each(function(i){
+		jQuery(this).html("");
+	});
+	$(".widgetEditOverlay").remove();
+	var newText = escapeHtmlEntities(jQuery("#gm-canvas").html().replace(/-clsstmp/g,''));
+
 	if($('#selectStaticPageType').val() == "BLOG"){
 		newText = $('#gm-canvas').clone().find(".row").unwrap().end().html();
-	}else{
-		newText = $('#gm-canvas').html();
 	}
-	 $(".widgetEditOverlay").remove();
- 	newText = escapeHtmlEntities(newText.replace(/-clsstmp/g,''));
+	else {
+		newText = convertHtmlEntities();
+	}
 	$("#pageContent").val(newText);
 	console.log(jQuery("#gm-canvas").text());
 	generateJson();
-	 showAllIcons();
+	showAllIcons();
 	jQuery('.gm-preview').trigger("click");
-}
+}  
 
 if(typeof escapeHtmlEntities == 'undefined') {
     escapeHtmlEntities = function (text) {
@@ -424,106 +425,6 @@ if(typeof escapeHtmlEntities == 'undefined') {
          8250 : 'rsaquo', 
          8364 : 'euro'
      };
-}
-
-function convertHtmlEntities(){
-	var content = jQuery("#gm-canvas").html();
-	content = content.replace(/™/g, "&trade;");
-	content = content.replace(/¡/,"&iexcl;");
-	content = content.replace(/¢/,"&cent;");
-	content = content.replace(/£/,"&pound;");
-	content = content.replace(/¤/,"&curren;");
-	content = content.replace(/¥/,"&yen;");
-	content = content.replace(/¦/,"&brvbar;");
-	content = content.replace(/§/,"&sect;");
-	content = content.replace(/¨/,"&uml;");
-	content = content.replace(/©/,"&copy;");
-	content = content.replace(/ª/,"&ordf;");
-	content = content.replace(/«/,"&laquo;");
-	content = content.replace(/¬/,"&not;");
-	content = content.replace(/®/,"&reg;");
-	content = content.replace(/¯/,"&macr;");
-	content = content.replace(/°/,"&deg;");
-	content = content.replace(/±/,"&plusmn;");
-	content = content.replace(/²/,"&sup2;");
-	content = content.replace(/³/,"&sup3;");
-	content = content.replace(/´/,"&acute;");
-	content = content.replace(/µ/,"&micro;");
-	content = content.replace(/¶/,"&para;");
-	content = content.replace(/·/,"&middot;");
-	content = content.replace(/¸/,"&cedil;");
-	content = content.replace(/¹/,"&sup1;");
-	content = content.replace(/º/,"&ordm;");
-	content = content.replace(/»/,"&raquo;");
-	content = content.replace(/¼/,"&frac14;");
-	content = content.replace(/½/,"&frac12;");
-	content = content.replace(/¾/,"&frac34;");
-	content = content.replace(/¿/,"&iquest;");
-	content = content.replace(/×/,"&times;");
-	content = content.replace(/÷/,"&divide;");
-	content = content.replace(/À/,"&Agrave;");
-	content = content.replace(/Á/,"&Aacute;");
-	content = content.replace(/Â/,"&Acirc;");
-	content = content.replace(/Ã/,"&Atilde;");
-	content = content.replace(/Ä/,"&Auml;");
-	content = content.replace(/Å/,"&Aring;");
-	content = content.replace(/Æ/,"&AElig;");
-	content = content.replace(/Ç/,"&Ccedil;");
-	content = content.replace(/È/,"&Egrave;");
-	content = content.replace(/É/,"&Eacute;");
-	content = content.replace(/Ê/,"&Ecirc;");
-	content = content.replace(/Ë/,"&Euml;");
-	content = content.replace(/Ì/,"&Igrave;");
-	content = content.replace(/Í/,"&Iacute;");
-	content = content.replace(/Î/,"&Icirc;");
-	content = content.replace(/Ï/,"&Iuml;");
-	content = content.replace(/Ð/,"&ETH;");
-	content = content.replace(/Ñ/,"&Ntilde;");
-	content = content.replace(/Ò/,"&Ograve;");
-	content = content.replace(/Ó/,"&Oacute;");
-	content = content.replace(/Ô/,"&Ocirc;");
-	content = content.replace(/Õ/,"&Otilde;");
-	content = content.replace(/Ö/,"&Ouml;");
-	content = content.replace(/Ø/,"&Oslash;");
-	content = content.replace(/Ù/,"&Ugrave;");
-	content = content.replace(/Ú/,"&Uacute;");
-	content = content.replace(/Û/,"&Ucirc;");
-	content = content.replace(/Ü/,"&Uuml;");
-	content = content.replace(/Ý/,"&Yacute;");
-	content = content.replace(/Þ/,"&THORN;");
-	content = content.replace(/ß/,"&szlig;");
-	content = content.replace(/à/,"&agrave;");
-	content = content.replace(/á/,"&aacute;");
-	content = content.replace(/â/,"&acirc;");
-	content = content.replace(/ã/,"&atilde;");
-	content = content.replace(/ä/,"&auml;");
-	content = content.replace(/å/,"&aring;");
-	content = content.replace(/æ/,"&aelig;");
-	content = content.replace(/ç/,"&ccedil;");
-	content = content.replace(/è/,"&egrave;");
-	content = content.replace(/é/,"&eacute;");
-	content = content.replace(/ê/,"&ecirc;");
-	content = content.replace(/ë/,"&euml;");
-	content = content.replace(/ì/,"&igrave;");
-	content = content.replace(/í/,"&iacute;");
-	content = content.replace(/î/,"&icirc;");
-	content = content.replace(/ï/,"&iuml;");
-	content = content.replace(/ð/,"&eth;");
-	content = content.replace(/ñ/,"&ntilde;");
-	content = content.replace(/ò/,"&ograve;");
-	content = content.replace(/ó/,"&oacute;");
-	content = content.replace(/ô/,"&ocirc;");
-	content = content.replace(/õ/,"&otilde;");
-	content = content.replace(/ö/,"&ouml;");
-	content = content.replace(/ø/,"&oslash;");
-	content = content.replace(/ù/,"&ugrave;");
-	content = content.replace(/ú/,"&uacute;");
-	content = content.replace(/û/,"&ucirc;");
-	content = content.replace(/ü/,"&uuml;");
-	content = content.replace(/ý/,"&yacute;");
-	content = content.replace(/þ/,"&thorn;");
-	content = content.replace(/ÿ/,"&yuml;");
-	return content;
 }
 
 jQuery(document).ready(function(){
@@ -1212,15 +1113,13 @@ jQuery("[data-react='toggle']").click(function(){
 jQuery(function() {
 	$(".cms_leftMenu li a.cms_SlideMenuBtn").click(function () {
 		var cms_leftMenuSlide = $(this).parent().find('.cms_leftMenuSlide');
-		//$('.cms_leftMenuSlide').css({'left':'-400px'});
-		$('.staticPageSave.rightSlide').css({'right':'-400px'});
 		$('.cms_leftMenuSlide').css({'left':'-400px'});
 		if(parseInt(cms_leftMenuSlide.offset().left) == -400){
 			cms_leftMenuSlide.css({'left':'0px'});
 		}
 	});
 	$(".cms_leftMenuClose").click(function () {
-		$(this).parents('.cms_leftMenuSlide').css({'left':'-400px'});
+		$('.cms_leftMenuSlide').css({'left':'-400px'});
 	});
 
 	/* $(window).scroll(function(){

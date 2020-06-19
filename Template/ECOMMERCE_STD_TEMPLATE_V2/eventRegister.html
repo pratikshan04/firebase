@@ -1,7 +1,7 @@
 #if($eventsList && $eventsList.title)
 <div class="row">
 	<div class="col-md-4-sm-12 col-xs-12">
-			<form id="eventForm">    
+			<form id="eventForm" method="post">
 				<input TYPE="hidden" NAME="NotificationName" VALUE='EventsMail'/>
 				<input TYPE="hidden" NAME="SaveToDb" VALUE='Y'/>
 				<input TYPE="hidden" NAME="SendMail" VALUE='N'/>
@@ -31,7 +31,7 @@
 									$!eventsList.date.substring(0,16).replaceAll('-','/') - $!eventsList.end.substring(0,16).replaceAll('-','/')
 									#end
 									<!-- <div id="tm">  -->
-									 / ;$!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/') 
+									 / $!eventsList.date.substring(16,25).replaceAll('-','/') - $!eventsList.end.substring(16,25).replaceAll('-','/') 
 									<!-- </div> -->
 								</span></li>
 								<li><strong>$!locale.get("event.label.location"): </strong><span>$!eventsList.location</span></li>
@@ -254,7 +254,7 @@
 					</div>
 				</div>
 				<!-- Hidden form -->
-				#if($eventCost!=0)       
+				#if($eventCost != 0 && $!eventsList.isCostRequired == 'Y')       
 				<h3 class="cimm_page-title mTop-4">$!locale.get("event.label.billingInformation")</h3>
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">

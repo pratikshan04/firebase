@@ -111,27 +111,28 @@ $(window).load(function(){
 	}
 });
 
-var fixHeight = $(".cimm_brandAtoZletters").height();
-var headerHeight = 0;
-if ($("#enableStickyHeader").val() == "Y") {
-    headerHeight = $('#normalHead').height();
-}
-if($( window ).width() > 768) {
-    var fixHeadHeight = fixHeight + headerHeight;
-}
+var brandSticky = $(".cimm_brandAtoZletters").height();
+var headerHeight = $('#normalHead').height();
+var fixHeadHeight = headerHeight;
 
 function manufacturerListScroll(val){
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y") {
+		fixHeadHeight = 0
+	}
 	$('html, body').animate({
-           scrollTop: $("#displayBrand_"+val).offset().top-fixHeadHeight
-       }, 1000);
+           scrollTop: $("#displayBrand_"+val).offset().top-fixHeadHeight-brandSticky
+       }, 400);
 }
 
 $(window).scroll(function() {
-    var currentScroll = $(window).scrollTop(); 
-    if (currentScroll >= fixHeight) {
-        	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){
-    			$(".cimm_brandAtoZletters").addClass("fixIt").css({'top': headerHeight });
-    			$(".hiddenDiv").height(fixHeight - headerHeight);
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y") {
+		fixHeadHeight = 0
+	}
+    var currentScroll = $(this).scrollTop(); 
+    if (currentScroll >= headerHeight) {
+    	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){
+			$(".cimm_brandAtoZletters").addClass("fixIt").css({'top': fixHeadHeight });
+			$(".hiddenDiv").height(fixHeight - headerHeight);
 		}
     } else {
     	if($(".cimm_brandAtoZletters").hasClass("fixIt")){

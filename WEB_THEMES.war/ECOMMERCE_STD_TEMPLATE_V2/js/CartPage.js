@@ -308,11 +308,13 @@ function expressCheckout(){
 	return false;
 }
 function standardCheckout(){
+	block("Please Wait");
 	var checkout="N";
 	if($("#checkoutpriceValue").length>0){
 		checkout = $("#checkoutpriceValue").val();
 	}
 	if(checkout=="Y"){
+		unblock();
 		bootAlert("small","error","Error","Cannot checkout item(s) with zero price.");
 		return false;
 		
@@ -340,6 +342,7 @@ function standardCheckout(){
 					if($("#selectedShipVia").length > 0){
 						var selectedShipVia = $("#selectedShipVia").val();
 						if(selectedShipVia==""){
+							unblock();
 							bootAlert("small","error","Please Select Shipping Method.");
 						}else{
 							var selectedShipVia = $("#selectedShipVia").val();
@@ -358,7 +361,7 @@ function standardCheckout(){
 								if(typeof userLogin!="undefined" && userLogin=="true"){
 									$("#updateCartForm").attr("action","checkout.action");
 								}else{
-									$("#updateCartForm").attr("action","Login");
+									$("#updateCartForm").attr("action","Login?type=au");
 								}
 							}
 							$("#updateCartForm").submit();
@@ -370,14 +373,13 @@ function standardCheckout(){
 							if(typeof userLogin!="undefined" && userLogin=="true"){
 								$("#updateCartForm").attr("action","checkout.action");
 							}else{
-								//$("#updateCartForm").attr("action","Login");
-								  $("#updateCartForm").attr("action","guestcheckout.action");
+								$("#updateCartForm").attr("action","Login?type=au");
 							}
 						}
 						$("#updateCartForm").submit();
 					}
 				}else{
-	
+					unblock();
 					var valu = msg.replace(/\|/g,"<br/>");
 					$("#notificationDiv").show();
 					$("#message").hide();

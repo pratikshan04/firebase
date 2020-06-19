@@ -112,7 +112,7 @@
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" id="imageName$!itemData.itemId" class="initZoom" src="$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
+						<img itemprop="image" id="imageName$!itemData.itemId" class="initZoom" src="$!hostName$!productDetailImage$!itemData.productCategoryImageName" data-zoom-image="$!productEnlargedImage$!itemData.productCategoryImageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
 					</span>
 					#end
 					#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
@@ -128,7 +128,7 @@
 					</span>
 					#else
 					<span class="imgForSend">
-						<img itemprop="image" id="imageName$!itemData.itemId" class="initZoom" src="$!detailImage$!itemData.imageName" data-zoom-image="$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
+						<img itemprop="image" id="imageName$!itemData.itemId" class="initZoom" src="$!hostName$!detailImage$!itemData.imageName" data-zoom-image="$!enlargedImage$!itemData.imageName" title="$!itemData.brandName $!itemData.manufacturerPartNumber" alt="$!itemData.brandName $!itemData.manufacturerPartNumber" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png'">
 					</span>
 					#end
 					#if($!itemData.imageName.contains("http") || $itemData.imageType=="URL")
@@ -361,17 +361,6 @@
 							<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
 							</li>
 							#end
-							#if($!customVal.get("custom_P65_WARNING_MESSAGE") && $!customVal.get("custom_P65_WARNING_MESSAGE").length()>0)
-							<li>
-								<div class="warning_MSG">
-									<p>Prop 65: <strong><a href="javascript:void(0);" data-id="warning_$itemData.itemId" onclick="warningPopUp(this);">WARNING</a></strong></p>
-									<div id="warning_$itemData.itemId" class="hideMe">
-										<div class="exitWarning"><span class="warningPopExit" data-exitid="warning_$itemData.itemId"><i class="fa fa-times"></i></span></div>
-										<div class="warningContent"><img src="$webThemes/$siteName/images/warning.png" style="vertical-align: sub;"/><span>WARNING:</span> $customVal.get('custom_P65_WARNING_MESSAGE') For more information, go to <a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov</a>.</div>
-									</div>
-								</div>
-							</li>
-							#end
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")
 								<li id="itemAvailable" class="productAvail_$!itemData.partNumber">
 									<strong>$!locale.get("product.label.availability"): </strong>
@@ -591,9 +580,9 @@
 									<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
 									 <span class="imgForSend" style="display:none !important;">
 									 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
-									 <img itemprop="image"  height="250" width="250" src="$!productModeitemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+									 <img itemprop="image"  height="250" width="250" id="imageName$!productModeitemData.itemId" src="$!productModeitemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 									 #else
-									 <img itemprop="image" height="250" width="250" src="$!detailImage$!productModeitemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
+									 <img itemprop="image" height="250" width="250" id="imageName$!productModeitemData.itemId" src="$!hostName$!detailImage$!productModeitemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"  />
 									 #end
 									 </span>
 									 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
@@ -616,6 +605,9 @@
 											 #end
 										#end
 									 #end
+									 #set($itemProductTitle = $!productModeitemData.brandName+" "+$!productModeitemData.manufacturerPartNumber)
+									<span class="hidden" id="itemTitle$!productModeitemData.ItemId" itemprop="name">$!itemProductTitle</span>
+									 <span id="itemShortDesc$!productModeitemData.itemId" class="hideMe">$!productModeitemData.shortDesc</span>
 								 </td>
 								 <td class="removeForSend">
 								 	#set($minQty = 1)
@@ -720,6 +712,10 @@
 					#end 
 					#if($itemLongDesc && $!itemLongDesc.trim() != "")
 						<p>$!itemLongDesc</p>
+					#end
+					#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+						<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+						<p class="propwarningmsg"><i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
 					#end
 					</div>
 				#end 
@@ -954,14 +950,14 @@
 											##end
 										</a>
 								 	</li>
-								    <!-- <li class="linkItemDescrip">
-								    #if($linkItem.shortDesc.length()>40)
-								       <p id="itemShortDesc$!linkItem.itemId"> $!linkItem.shortDesc.substring(0, 40)</p>
-								    #else
-										<p> $!linkItem.shortDesc</p>
-									#end
-									</li> -->
-								   
+								    <li class="linkItemDescrip">
+								    	<span id="itemShortDesc$!linkItemTitle.itemId" class="hideMe">$!linkItemTitle.shortDesc</span>
+								    	#if($linkItem.shortDesc.length()>40)
+								       <p itemprop="description">$!linkItem.shortDesc.substring(0, 40)</p>
+								    	#else
+										<p itemprop="description">$!linkItem.shortDesc</p>
+										#end
+									</li>
 								   <li itemprop="sku">
 								      <strong>$!locale.get("product.label.partNumber"): </strong>
 								      <span id="partNumber$!linkItem.itemId">$!linkItem.partNumber</span>
@@ -1186,7 +1182,7 @@ function LoadRecentViewedItem(){
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="$!locale.get('product.label.review')">$!locale.get("product.label.review")<span class="text-danger"> * </span></label>
-								<textarea class="form-control" title="comments" rows="7" cols="36" name="comments" id="comments" style="resize: vertical;" onKeyDown="limitText(this.form.comments,10,1000);" onKeyUp="limitText(this.form.comments,10,1000);"></textarea>
+								<textarea class="form-control" title="comments" rows="7" cols="36" name="comments" id="comments" style="resize: vertical;" onKeyDown="limitText(this.form.comments,10,4001);" onKeyUp="limitText(this.form.comments,10,4001);"></textarea>
 							</div>
 						</div>
 					</div>

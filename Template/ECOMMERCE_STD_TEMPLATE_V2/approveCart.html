@@ -5,7 +5,7 @@
 #if($message)
 <div class="alert alert-danger">$message</div>
 #end
-<form id="productGroupForm">
+<form id="productGroupForm" method="post">
 	<input type="hidden" id="rejectReason" name="rejectReason"/>
 	<!-- <div id="selectedShipInfo"> </div> -->
 	<div class="hidden-lg hidden-md mBottom-3">
@@ -95,6 +95,12 @@
 								<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" />
 								</span> -->
 								</li>
+								#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+								<li>
+									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+									<p class="propwarningmsg"><i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+								</li>
+								#end
 							</ul>
 						</td>
 						<td data-th="$locale.get('product.label.qty')">
@@ -112,7 +118,7 @@
 						<td class="tabelPrice" data-th="$locale.get('product.label.yourprice')">
 							<span>
 								#if($itemData.price>0)
-								$$numberTool.format($numberToolFormat,$itemData.price)#if($itemData.saleQty>0) per $itemData.saleQty #end #if($itemData.uom)/ $itemData.uom #end
+									$$numberTool.format($numberToolFormat,$itemData.price)#if($!itemData.saleQty>0 || $!itemData.uom) / #end #if($itemData.saleQty>0) $!itemData.saleQty #end #if($itemData.uom) $!itemData.uom #end
 								#else
 								<strong class="required">$locale.get("product.label.callforprice")</strong>
 								#end

@@ -7,7 +7,8 @@
 #set($checkout="N")
 #set($displayPriceHelp = "N")
 <div id="notificationDiv"></div>
-#set($savedCartItemId = 0) #if($productListData.size()>0)
+#set($savedCartItemId = 0)
+#if($productListData.size()>0)
 #if($userLogin)
 <input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!validEmailAddress">
 #end
@@ -39,10 +40,9 @@
 			#else
 				<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
 			#end 
-			#else
+		#else
 			#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-				<!-- <a class="btn btn-lg btn-primary marginX-3" href="/Login?type=au">$!locale.get("product.heading.checkout")</a> -->
-				  <a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+				<a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 			#else
 				<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
 			#end
@@ -131,6 +131,12 @@
                                	</li>
                                 #end
                                 <li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></li>
+                                #if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+								<li itemprop="Prop65">
+									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+									<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+								</li>
+								#end
                                 #set($leadTime = "N")
                                 #set($available = "N")
                                 #set($allBranch = $!itemData.branchAvail)
@@ -176,17 +182,6 @@
 			                	<li>
 			                		<input type="text" class="lineItemComments" name="lineItemComment_$!itemData.productListId" id="lineItemComment_$!itemData.productListId" value="#if($itemData.lineItemComment)$!itemData.lineItemComment#end" placeholder='$!locale.get("product.label.lineItemComment")' />
 			                	</li>
-			                	#if($!customVal.get("custom_P65_WARNING_MESSAGE") && $!customVal.get("custom_P65_WARNING_MESSAGE").length()>0)
-								<li>
-									<div class="warning_MSG">
-										<p>Prop 65: <span style="font-weight:bold;"><a href="javascript:void(0);" data-id="warning_$itemData.itemId" onclick="warningPopUp(this);">WARNING</a></span></p>
-										<div id="warning_$itemData.itemId" style="display:none;">
-											<div class="exitWarning"><span class="warningPopExit" data-exitid="warning_$itemData.itemId"><i class="fa fa-times"></i></span></div>
-											<div class="warningContent"><img src="$webThemes/$siteName/images/warning.png" style="vertical-align: sub;"/><span>WARNING:</span> $customVal.get('custom_P65_WARNING_MESSAGE') For more information, go to <a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov</a>.</div>
-										</div>
-									</div>
-								</li>
-								#end
                             </ul>
                         </div>
                     </td>
@@ -259,12 +254,12 @@
             #if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "Y")
             <li><a class="addSelected">$!locale.get("product.label.addSelectedToProductList")</a></li>
             #end
-            <li><a href="$!locale.get('website.url.ProductCategory')"><em class="fa fa-shopping-bag" aria-hidden="true"></em>$!locale.get("product.button.continueShopping")</a></li>
+            <li><a href="$!locale.get('website.url.ProductCategory')" class="btn btn-continueShop">$!locale.get("product.button.continueShopping")</a></li>
             <li><a href="javascript:void(0);" onclick="updateShoppingCart(); return false;"><span class="glyphicon glyphicon-history"></span>$!locale.get("product.button.updateCart")</a></li>
 			#if($userLogin)
 				##if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 					<li>
-					<div class="dropdown margin-auto">
+					<div class="dropdown margin-auto dropdownFixedWidth">
 						#set($groupPop = "ulg"+$!savedCartItemId+"_custPop")
 						<a id="$!groupPop" class="popMsg hideMe"></a>
 						<a id='linkg$!savedCartItemId' class="dropdown-toggle" data-toggle="dropdown" data-itemId="$!savedCartItemId" data-listTarget="ulg$!savedCartItemId" data-function="saveCartFunction">
@@ -287,8 +282,7 @@
 					#end 
 	            #else
 	            	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-	            	 <!-- <a class="btn btn-lg btn-primary marginX-3" href="/Login?type=au">$!locale.get("product.heading.checkout")</a> -->
-				     <a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+	            	<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 	            	#else
 	            	<a class="btn btn-primary btn-lg" href="/Login">$!locale.get("product.heading.checkout")</a>
 	            	#end
@@ -416,7 +410,7 @@
 #else
 <div class="elseCondition">
     <h4 align="center">$!locale.get("product.label.noCrtItms")</h4>
-    <p class="marginY-5 text-center"><a class="button" href="$!locale.get('website.url.ProductCategory')">$!locale.get("product.button.continueShopping")</a></p>
+    <p class="marginY-5 text-center"><a href="$!locale.get('website.url.ProductCategory')" class="btn btn-continueShop">$!locale.get("product.button.continueShopping")</a></p>
 </div>
 #end
 
