@@ -437,7 +437,7 @@ $modal_closebtn-color: $default_font-color;
 
 .uploadImage_wrap {
     .uploadImage {
-        width: calc(100% - 150px);
+        width: calc(100% - 160px);
         float: left;
         border: 2px solid $default_font-color;
         height: 35px;
@@ -1157,6 +1157,9 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     }
 }
 #openOrderTable_wrapper{
+    .dataTables_filter{
+        display: none;
+    }
     .tabFooter{
         #openOrderTable_paginate{
             width: 50%;

@@ -1,3 +1,4 @@
+var webThemes = $("#webThemePath").val();
 function jssorSliderFunction() {
 	jQuery("div[id$='_container']").each(function(){
 		initJssorSlides(jQuery(this).attr("id"))

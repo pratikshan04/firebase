@@ -32,7 +32,7 @@
 	<div class="cartTotal_Top col-md-8 col-sm-8 col-xs-12">
 		<span class="btn btn-lg">
 			<strong class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</strong>
-			<strong>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</strong>
+			<strong>$!locale.get("product.label.orderTotal"): <span class="formatPrice">$ $numberTool.format("$numberToolFormat",$!cartTotal)</span></strong>
 		</span>
 		#if($userLogin) 
 			#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -189,7 +189,7 @@
                      #if(($!session.getAttribute("isSalesUser").equals("Y") || $!session.getAttribute("isSalesAdmin").equals("Y")) && $!CommonDBQuerySystemParameter.get('ENABLE_OVERRIDE_PRICE_FROM_SALE_ADMIN')=='Y' )
                    <td data-th="$!locale.get('product.heading.perUnitPrice')" >
                     <span id="editunitprice_$!itemData.productListId">
-                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)  $!itemData.uom</strong></br>
+                        <strong><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</span>  $!itemData.uom</strong></br>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	#end
@@ -210,7 +210,7 @@
 						<input type="hidden" id="uom_$!itemData.productListId" name="uom_$!itemData.productListId" value="$!itemData.uom"/>
                     #else
                    <td data-th="$!locale.get('product.heading.perUnitPrice')">
-                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
+                        <strong class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	 #end
@@ -246,7 +246,7 @@
             </tbody>
         </table>
 	<p id="copyPrice" class='hideMe'>
-		<span class="priceLabel">$!locale.get("product.label.total"): </span><span class="priceValue">&nbsp;&nbsp;&nbsp;$ $numberTool.format("$numberToolFormat",$!cartTotal)</span>
+		<span class="priceLabel">$!locale.get("product.label.total"): </span><span class="priceValue formatPrice">&nbsp;&nbsp;&nbsp;$ $numberTool.format("$numberToolFormat",$!cartTotal)</span>
 	</p>
     <div class="cimm_btnGroupEnclosure">
         <ul class="clearAfter">
