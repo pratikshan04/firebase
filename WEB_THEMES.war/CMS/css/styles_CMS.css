@@ -1168,10 +1168,10 @@ background:#42e300;
 	color: #456078;
 	text-decoration: none;
 	background-color: #e4e7e9;
-	padding: 6px 10px;
+	padding: 6px 10px !important;
 	border-radius: 5px 5px 0 0;
 	margin-right: 5px;
-	font-size: 18px;
+	font-size: 18px !important;
 	display: inline-block;
 }
 .linkWraper a{
@@ -1242,7 +1242,7 @@ iframe#iframeId {
 	display: none;
 }
 .expand-nav .cms_staticTable{
-	padding: 0 0 0 60px;
+	padding: 0 0 0 75px;
 }
 .expand-nav .cms_backToList > i {
 	margin: 0 10px 0 4px;
@@ -1296,7 +1296,7 @@ iframe#iframeId {
 	margin-bottom: 5px;
 	display: inline-block;
 }
-.cms_leftMenu > ul > li > a{
+.cms_leftMenu > ul > li a{
 	padding: 16px 5px;
     color: #c7c7c7;
     font-size: 16px;
@@ -1305,6 +1305,30 @@ iframe#iframeId {
 }
 .cms_leftMenu > ul > li > a i{
 	font-size: 24px;
+}
+.childToggleMenu {
+    width: 280px;
+    display: none;
+    background: #e4e7e9;
+}
+.cms_leftMenu > ul > li > a span + i {
+    position: absolute;
+    right: 14px;
+}
+.cms_leftMenu > ul > li .childToggleMenu a {
+    padding-left: 70px;
+}
+.cms_leftMenu ul li.toggleActive{
+	height: auto;
+}
+.expand-nav .cms_leftMenu ul li.toggleActive{
+	height: 60px;
+}
+.expand-nav .cms_leftMenu > ul > li:hover .childToggleMenu {
+    position: absolute;
+    top: 58px;
+    background: #e4e7e9;
+    z-index: 1;
 }
 .cms_leftMenu .action-icon{
 	width: 62px;
@@ -2132,7 +2156,7 @@ select:focus {
 	margin: 0 10px 0 15px;
 }
 .cms_componentBtn{
-	padding: 3px 18px;
+	padding: 3px 18px !important;
 	color: #c7c7c7;
 	font-size: 19px;
 	display: block;
