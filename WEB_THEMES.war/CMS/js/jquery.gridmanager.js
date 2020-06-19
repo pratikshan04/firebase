@@ -378,16 +378,14 @@ gm.initControls = function(){
 			hideActionIcons('preview');
 			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
 			gm.deinitCanvas();
-			$(this).parent().find(".gm-edit-mode").prop('disabled', true);
-			$(this).parent().find(".gm-edit-mode").toggle(false); 
+			$(this).parent().find(".gm-edit-mode, #saveBtnId").prop('disabled', true).fadeOut();
 			gm.reBuildBanner(false);
 			gm.switchLayoutMode(gm.options.layoutDefaultMode);
 		} else {
 			showActionIcons('preview');
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span>").attr('title', 'Preview');
 			gm.initCanvas();
-			$(this).parent().find(".gm-edit-mode").prop('disabled', false);
-			$(this).parent().find(".gm-edit-mode").toggle(true);
+			$(this).parent().find(".gm-edit-mode, #saveBtnId").prop('disabled', false).fadeIn();
 			regulerVeiw();
 		}
 		//$(this).toggleClass(gm.options.gmDangerClass);
