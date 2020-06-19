@@ -55,7 +55,7 @@
             &.catheader, &.catheader.ac_over {
                 font-size: 14px;
                 background-color: $primary_color;
-                color: #fff;
+                color: $white;
                 cursor: default;
                 text-align: left;
             }
@@ -203,14 +203,22 @@
 					width: 100%;
 					display: block;
 				}
+				&.ac_over{
+					background: $white;
+				}
 			}
 		}
 		.mfgWrap{
 			padding-bottom: 5px;
+			li {
+				&.ac_over{
+					background: $white;
+				}
+			}
 		}
 		> a{
-			background: #46acee;
-			color: #FFF;
+			background: $primary_color;
+			color: $white;
 			padding: 6px 25px;
 			display: inline-block;
 			margin-bottom: 10px;
