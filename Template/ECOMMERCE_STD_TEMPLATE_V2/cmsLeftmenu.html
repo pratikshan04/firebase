@@ -1,7 +1,7 @@
-<div class="pageDesignLogo">
+<!-- <div class="pageDesignLogo">
 	<i class="fa fa-lg fa-pencil-ruler"></i>
 	<strong>page</strong><span>designer</span>
-</div>
+</div> -->
 #if($LayoutName == "CMSStaticPage")
 <a href="listStaticPageCms.action" title="List Static Pages" class="cms_backToList">
 	<i class="fas fa-arrow-circle-left"></i>
@@ -10,6 +10,7 @@
 	</span>
 </a>
 #end
+#parse("cmsStaticPageForm.html")
 <ul>
 	<!-- <li class="selectWebsite">
 		<span>Select Website:</span>
@@ -43,7 +44,7 @@
 		</a>
 		#parse("cmsmenu.html") 
 	</li>
-	<li>
+	<!-- <li>
 		<a class="cms_SlideMenuBtn" style="cursor: pointer;" title="Save Page">
 			<span class="action-icon">
 				<i class="fas fa-save"></i>
@@ -52,8 +53,7 @@
 				Save Page
 			</span>
 		</a>
-		#parse("cmsStaticPageForm.html")
-	</li>
+	</li> -->
 	#end
 	<li>
 		<a href="javascript:openBannerList();" title="Banner List">
@@ -121,4 +121,68 @@
 			</span>
 		</a>
 	</li>
+	<!-- <li>
+		<a href="javascript:void(0);" data-toggleID="event_contents" class="eventToggleLabel">
+			<span class="action-icon">
+				<i class="fas fa-calendar-alt"></i>
+			</span>
+			<span class="action-text">
+				Events
+			</span>
+			<i class="fa fa-chevron-down"></i>
+		</a>
+		<ul id="event_contents" class="childToggleMenu">
+			<li>
+				<a href="javascript:eventList();">
+					Event List
+				</a>
+			</li>
+			<li>
+				<a href="javascript:addEvent();">
+					Add Event
+				</a>
+			</li>
+			<li>
+				<a href="javascript:archivedEvent();">
+					Archived Event List
+				</a>
+			</li>
+			<li>
+				<a href="javascript:eventBilling();">
+					Event Billing Reports
+				</a>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a href="javascript:cmsSecurePortal();" title="Secure Portal">
+			<span class="action-icon">
+				<i class="fa fa-edit"></i>
+			</span>
+			<span class="action-text">
+				Secure Portal
+			</span>
+		</a>
+	</li>
+	<li>
+		<a href="javascript:cmsThemeEditor();" title="Theme Editor">
+			<span class="action-icon">
+				<i class="fa fa-edit"></i>
+			</span>
+			<span class="action-text">
+				Theme Editor
+			</span>
+		</a>
+	</li>
+	<li>
+		<a href="javascript:cmsImportExport();" title="Import / Export">
+			<span class="action-icon">
+				<i class="fa fa-cloud-download-alt"></i>
+				<sup class="fa fa-cloud-upload-alt"></sup>
+			</span>
+			<span class="action-text">
+				Import / Export
+			</span>
+		</a>
+	</li> -->
 </ul>

@@ -202,6 +202,8 @@
 	#end
 #elseif($LayoutName=="cspConfiguratorPage")
 	#set($pageTitleVelo = "CSP Configurator" + $!pageTitleseparator + $!siteDisplayName.trim())
+#elseif($LayoutName=="EventDetailPage")
+	#set($pageTitleVelo = $!eventsList.title + " " + $!locale.get("breadcrumbs.label.$!LayoutName") + $!pageTitleseparator + $!siteDisplayName.trim())
 #elseif($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
 	#set($pageTitleVelo = $!pageTitle.trim() + $!pageTitleseparator + $!siteDisplayName.trim())
 #else

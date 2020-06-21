@@ -240,6 +240,19 @@
 			gm.switchLayoutMode('auto', 'reInit')
 		}
 	});
+	
+	$("#saveBtnId").click(function () {
+		$('.staticPageSave.rightSlide').removeAttr('style');
+		var cms_leftMenuSlide = $('.staticPageSave.rightSlide');
+		var rightSlidePos = cms_leftMenuSlide.offset().left;
+		$('.staticPageSave.rightSlide').css({'right':'-400px'});
+		if( parseInt(rightSlidePos) != rightSlidePos - 400){
+			cms_leftMenuSlide.css({'right':'0px'});
+		}
+	});
+	$(".cms_rightMenuClose").click(function () {
+		$('.staticPageSave.rightSlide').css({'right':'-400px'});
+	});
 };
 
         /**
@@ -365,16 +378,14 @@ gm.initControls = function(){
 			hideActionIcons('preview');
 			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
 			gm.deinitCanvas();
-			$(this).parent().find(".gm-edit-mode").prop('disabled', true);
-			$(this).parent().find(".gm-edit-mode").toggle(false); 
+			$(this).parent().find(".gm-edit-mode, #saveBtnId").prop('disabled', true).fadeOut();
 			gm.reBuildBanner(false);
 			gm.switchLayoutMode(gm.options.layoutDefaultMode);
 		} else {
 			showActionIcons('preview');
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span>").attr('title', 'Preview');
 			gm.initCanvas();
-			$(this).parent().find(".gm-edit-mode").prop('disabled', false);
-			$(this).parent().find(".gm-edit-mode").toggle(true);
+			$(this).parent().find(".gm-edit-mode, #saveBtnId").prop('disabled', false).fadeIn();
 			regulerVeiw();
 		}
 		//$(this).toggleClass(gm.options.gmDangerClass);
@@ -408,8 +419,7 @@ gm.initControls = function(){
 			var totalChars = editor.getTextArea().value.length;
 			editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
 			CodeMirror.commands["goLineStart"](editor); 
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', true);
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button").toggle(false);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, #saveBtnId").prop('disabled', true).fadeOut();
 		} else {
 			showActionIcons('edit');
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span>").attr('title', 'Edit Source Code');
@@ -420,8 +430,7 @@ gm.initControls = function(){
 			canvas.find('[data-type="widget"]').html("");
 			gm.initCanvas();
 			gm.mode="visual";
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button").prop('disabled', false);
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button").toggle(true);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, #saveBtnId").prop('disabled', false).fadeIn();
 		}
 		
 	}).on("click", "." + gm.options.gmEditRegion + ' .'+gm.options.gmContentRegion, function(){
@@ -1752,7 +1761,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 		// Control bar RH dropdown markup
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a class='button tiny' data-width='auto' title='Desktop'><span class='fa fa-desktop'></span></a><a class='button tiny'  title='Tablet' data-width='768'><span class='fa fa-tablet'></span></a><a title='Phone' class='button tiny' data-width='640'><span class='fa fa-mobile-phone'></span></a><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a></div>",*/
 		/* controlAppend: "<div class='button-group right'><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn'><span class='fa fa-code'></span></button><button id='previewBtnId' title='Preview' type='button' class='button tiny gm-preview cmsEditrBtn'><span class='fa fa-eye'></span></button><div class='button-group right gm-layout-mode'><a  class='gm-save button tiny'  title='Save'  href='#'><span class='fa fa-save'></span></a><a  class='button tiny gm-resetgrid'  title='Reset Grid' href='#'><span class='fa fa-trash-o'></span></a><a title='iPhone' class='button tiny active' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPhone landscape' class='button tiny iPhone-l' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone'></span></a><a title='iPad landscape' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-mobile-phone iPhone-l'></span></a><a title='Desktop' class='button tiny' data-width='640' onclick='javascript:responsivefunct(this);'><span class='fa fa-laptop'></span></a></div>",*/
-		controlAppend: "<div class='button-group clearfix '>"+previewDevices+"<button id='previewBtnId' title='Preview' type='button' class='tiny gm-preview cmsEditrBtn prevBtn'><span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span></button><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn sorceBtn'><span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span></button></div>",
+		controlAppend: "<div class='button-group clearfix '>"+previewDevices+"<button id='saveBtnId' title='Save' type='button' class='gm_cmsSaveBtn'><span class='action-icon'><span class='fa fa-2x fa-save'></span></span><span class='action-text'>Save Page</span></button><button id='previewBtnId' title='Preview' type='button' class='tiny gm-preview cmsEditrBtn prevBtn'><span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span></button><button title='Edit Source Code' type='button' class='tiny gm-edit-mode cmsEditrBtn sorceBtn'><span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span></button></div>",
 		
 		// Controls for content elements
 		controlContentElem: '<div class="gm-controls-element"> <a class="gm-move" title="Move" onclick="javascript:showDelIcon();"><span class="fa fa-lg fa-arrows-alt"></span></a> <a class="gm-delete " href="#" title="Delete"><span class="fa fa-lg fa-times-circle"></span></a> </div>',
@@ -2080,7 +2089,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 	
 	 hideActionIcons = function(clickType){
 		//$(".readyTemplatesForm").hide();
-		$(".cms_leftMenu").css({'left':'-280px'});
+		$(".cms_leftMenu").css({'left':'-400px'});
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'none';
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'none';
@@ -2108,7 +2117,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 	};
 	showActionIcons = function(clickType){
 		//$(".readyTemplatesForm").show();
-		$(".cms_leftMenu").css({'left':'0'});
+		$(".cms_leftMenu").removeAttr('style').show();
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'block';
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
@@ -2128,11 +2137,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			jQuery('.Cimm-MainContenthide').addClass('Cimm-MainContent').removeClass('Cimm-MainContenthide');
 			$("#gm-canvas").removeClass('gm-container');
 		}
-		if($('body').hasClass('expand-nav')){
-			$(".cms_staticTable").css({'padding':'0 0 0 60px'});
-		}else{
-			$(".cms_staticTable").css({'padding':'0 0 0 270px'});
-		}
+		$(".cms_staticTable").removeAttr('style');
 		$(".gmControlsCustomClass").removeClass('doNotFix');
 		/*jQuery('#pageTab,#addNewStaticFormId').show();
 		jQuery("#SeoTabs").css('pointer-events', 'visible');

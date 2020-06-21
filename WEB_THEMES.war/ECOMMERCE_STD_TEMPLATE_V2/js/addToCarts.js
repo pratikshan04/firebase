@@ -372,6 +372,7 @@
 					$(".ATCLeadTime").parent().show();
 				}
 				var cartHtml = $("#"+settings.CartBox).html();
+				formatPrice();
 				return cartHtml;
 			}
 		});
