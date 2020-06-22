@@ -98,7 +98,7 @@
 								<span></span>
 							</label>
 							#end
-                            <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+                            <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)">
                                 <span id="imageName$!itemData.itemId">
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
@@ -111,12 +111,12 @@
                     </td>
                     <td class="alignLeft" data-th="$!locale.get('product.label.description')">
                         <div class="cimm_cartProdDescription">
-                        	<p itemprop="name"><strong><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
+                        	<p itemprop="name"><strong><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
                             <ul>
                                 <li>
                                     #if($itemData.shortDesc.length()>75)
 	                                    <p itemprop="description"> $!itemData.shortDesc.substring(0, 75)
-	                                        <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"> $!locale.get("product.label.more")</a>
+	                                        <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"> $!locale.get("product.label.more")</a>
 	                                    </p>
                                     #else
                                     	<p itemprop="description"> $!itemData.shortDesc </p>
@@ -332,7 +332,7 @@
 	<tr>
 		<td style="border:1px solid #CCC;text-align: center;padding: 5px;" data-th="$!locale.get('product.label.Image')">
 			<div class="cimm_cartProdImg alignCenter">
-			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)">
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" />
@@ -345,7 +345,7 @@
 		</td>
 		<td style="border:1px solid #CCC;text-align: left;padding: 5px;" data-th="$!locale.get('product.label.description')">
 			<div class="cimm_cartProdDescription">
-			<strong><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
+			<strong><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
 			<p itemprop="description"> $!itemData.shortDesc </p>
 			#if($itemData.manufacturerPartNumber)
 			<p>

@@ -33,7 +33,7 @@
 					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					<tr>
 						<td data-th="$locale.get('product.label.Image')">    
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
@@ -46,7 +46,7 @@
 						<td class="alignLeft" data-th="$locale.get('product.label.productDescription')">
 							<ul>
 								<li>
-								<strong><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong>
+								<strong><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong>
 								</li>
 								#if($itemData.manufacturerPartNumber)
 								<li>

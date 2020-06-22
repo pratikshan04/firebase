@@ -50,16 +50,16 @@
 							#set($itemTitle=$compareItem.brandName+" "+$!compareItem.manufacturerPartNumber)
 							<td>
 								#if($compareItem.imageName.contains("http"))
-								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
+								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 									<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#else
-								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
+								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#end
 								<strong>
-									<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')" id="itemTitle$compareItem.itemId">
+									<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" id="itemTitle$compareItem.itemId">
 										<span  id="itemTitle$compareItem.itemId">$compareItem.brandName $!compareItem.manufacturerPartNumber</span>
 									</a>
 								</strong>

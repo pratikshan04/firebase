@@ -94,7 +94,7 @@
 			<input type="hidden" value="$productModeitemData.displayPricing" id="displayPrice_$productModeitemData.partNumber" />
 		 	<span id="quantityBreakPricingDetails_$productModeitemData.partNumber" style="display: none;"></span>
 		 	<span itemprop="name">$productModeitemData.partNumber.replaceAll('\s+','_')</span><br/>
-			<a href="$!hostName$!productModeitemData.itemPriceId$locale.get('website.url.ProductDetail')n/$productModeItemtitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!hostName$!productModeitemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!productModeItemtitle)">
 			<span class="imgForSend" style="display:none !important;">
 			 #if($productModeitemData.imageName.contains("http") || $productModeitemData.imageType=="URL")
 			<img itemprop="image" height="250" width="250" src="$productModeitemData.imageName" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
@@ -431,7 +431,7 @@
 					        #itemListHiddenFields($!linkItem.partNumber, $!linkItem.itemPriceId, $!linkItem.qty, $!linkItem.uom, $!linkItem.price, $!linkItem.saleQty, $!linkItem.itemId, $!linkItem.displayFrieghtAlert, $!linkItem.packageQty, $!linkItem.itemAvailability, $!linkItem.srchTyp, $!navigationType,$!linkItem.brandId,$!linkItem.manfId, $!linkItem.altPartNumber1)
 					 			<input type="hidden" id='packageQty_$!linkItem.partNumber' value="1" />
 								<div class="cimm_slideItemImg">
-					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">
 										 #if($linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!linkItem.imageName"/>
 										 #else
@@ -444,7 +444,7 @@
 								 	<li>
 								 		<h4 itemprop="name">
 								 			#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
-									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!linkItemTitle)" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 										 		#if($linkItemTitle.length()>30)
 										 			#$!linkItemTitle.substring(0, 30)...
 										 		#else

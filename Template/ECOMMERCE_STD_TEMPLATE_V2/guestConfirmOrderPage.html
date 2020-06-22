@@ -28,7 +28,7 @@
 		    #set($savedCartItemId = $itemData.itemId) <!--CartlistData Iterator -->
 		    <tr>
 		  <!--   <td data-th="$locale.get('product.label.Image')">
-		    	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">
+		    	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 					#if($itemData.imageType=="URL")
 						<img src="$itemData.imageName" width="150" height="150" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" title="$itemTitle"/>
 					#else
@@ -43,7 +43,7 @@
 				<!-- <div class="cimm_tableDescSection left"> -->
 					<ul>
 						<li  itemprop="name">
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
 						</li>
 						<li>
 		                 	<p>$!itemData.shortDesc</p>

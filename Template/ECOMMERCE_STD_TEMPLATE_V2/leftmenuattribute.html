@@ -1,7 +1,7 @@
 #parse("Macros/defaultMacro.vm")
 #parse("Macros/listPageMacro.vm")
 #urlType($!navigationType,$!codeIdSkip,$!gallery,$!levelNo,$!sortBy,$!resultPage,$!keyWord,$!srchTyp,$!narrowKeyword,$!brandId)
-#listPageFormUrls($!navigationType)
+#listPageFormUrls($!navigationType, $!codeIdSkip, $!forPageSeoUrl, $!manfId, $!brandId )
 <h2 onclick="closeLeftSlide();" class="visible-sm-block dark-ripple visible-xs-block"><em class="fa fa-chevron-left" aria-hidden="true"></em> $!locale.get("product.label.back")</h2>
 <!-- <div id="filterBar" class="cimm_advancedSearchFilter">
 	<form>
@@ -177,7 +177,7 @@
 #if($resultCount > 0 )
 	<div style="display:none;" id="keyWordTxtTrail">$!keyWordTxt</div> 
 	<div id="attrFilterList" style="display:none;">$!attrFilterList</div>
-	<form action="Category.action" method="get" id="categoryForm">
+	<form action="$!codeIdSkip/category/$!forPageSeoUrl" method="get" id="categoryForm">
 		#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip">#end
 		<input type="hidden" name="levelNo" value="0">
 	</form>
@@ -198,8 +198,7 @@
 			<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
 			<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
 		#end
-		#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
-		#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
+		
 		<input type="hidden" id="multiFilterAttrList" name="attrFilterList" value='$!attrFilterList' />
 		<input type="hidden" name="resultPage" value='$!resultPage' /> 
 	</form> 

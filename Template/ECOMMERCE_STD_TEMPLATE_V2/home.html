@@ -148,7 +148,7 @@
 		#set($itemTitle= $itemData.shortDesc)
 		<li itemscope itemtype="http://schema.org/Product">				
 			<div class="cimm_linkItemImg">
-				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')">                    
+				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">                    
 					#if($itemData.imageName.contains("http"))
 					<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#else
@@ -159,7 +159,7 @@
 			<div class="cimm_linkItemDesp">
 				<ul>
 					<li>
-						<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','_')" itemprop="name">
+						<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" itemprop="name">
 							#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
 					 		#if($linkItemTitle.length()>17)
 					 			$linkItemTitle.substring(0, 17)...
@@ -171,7 +171,7 @@
 					<li itemprop="sku"><strong>$locale.get("product.label.partNumber"):</strong> $itemData.partNumber</li>
 					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
 					<p itemprop="description" id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
-					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>
+					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)"> $locale.get("product.label.more")</a>
 					#else
 					<p itemprop="description"> $!itemData.shortDesc</p>
 					#end

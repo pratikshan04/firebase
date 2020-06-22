@@ -141,7 +141,7 @@
 				<tr itemscop itemtype="http://schema.org/Product">
 					##if($session.getAttribute("userCustomFieldValue").get("PRODUCT_GROUP_IMAGE_DISPLAY")=="Y")
 					<td data-th="$locale.get('product.label.Image')">                         
-						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 							<span id="imageName$itemData.itemId">
 							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
@@ -155,7 +155,7 @@
 					<td data-th="$locale.get('product.label.productDescription')">
 						<ul class="text-left">
 							<li itemprop="name">
-								<h5 class="cimm_itemTitle"><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5>
+								<h5 class="cimm_itemTitle"><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5>
 							</li>
 							<li class="hideForCollapse hideMe">
 								<p itemprop="description">$!itemData.shortDesc </p>
@@ -226,7 +226,7 @@
 					#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 					#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 					<li>
-					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemTitle</a>
 					</li>
 					#end
 					</ul>

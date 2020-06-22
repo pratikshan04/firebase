@@ -134,7 +134,7 @@
 					#set($itemTitle= $itemData.brandName+" "+ $itemData.manufacturerPartNumber)
 					<tr itemscope itemtype="http://schema.org/Product">
 						<td data-th="$locale.get('product.label.Image')">							
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageType=="URL")
 								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
@@ -147,7 +147,7 @@
 						<td data-th="$locale.get('product.label.productDescription')">
 							<ul class="text-left">
 								<li itemprop="name">
-									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a>
+									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a>
 								</li>
 								<li class="hideForCollapse hideMe">
 									<p itemprop="description">$!itemData.shortDesc </p>
@@ -222,7 +222,7 @@
 							#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 							#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 							<li>
-							<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+							<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemTitle</a>
 							</li>
 							#end
 							</ul>
