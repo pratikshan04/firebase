@@ -260,7 +260,7 @@ $btncolors: (
         abg-color   : $gray-dark,    //Button Active background color
         bg-icon     : false,
         bg-icon-posintion: before,
-        onlyborder  : flase
+        onlyborder  : false
     ),
     ship:(
         bg-color    : transparent, //Button Background color
@@ -270,7 +270,7 @@ $btncolors: (
         abg-color   : $gray-dark,    //Button Active background color
         bg-icon     : false,
         bg-icon-posintion: before,
-        onlyborder  : flase
+        onlyborder  : false
     )
 );
 
