@@ -239,7 +239,11 @@ var guestCheckoutWizard = {};
 	guestCheckoutWizard.submitOrder = function (oType){
 		$("#quickCartHiddenInfo").submit( function(){
 			var isValid = submitThisForm("#step-"+checkOutStep);
+			var createOrderInDb = document.getElementById('createOrderInDb').value;
 			var erpType = document.getElementById('erpType').value;
+			if(createOrderInDb == 'Y' || $.trim(createOrderInDb)=="Y") {
+				erpType = "cimmesb";
+			}
 			var orderType = $('#orderType').val().trim();
 			if(erpType && erpType.toUpperCase()=="DEFAULTS" && isValid){
 				var data = $("#quickCartHiddenInfo").serialize();
@@ -263,14 +267,6 @@ var guestCheckoutWizard = {};
 				return false;
 			}
 		});
-		if(oType == 'checkoutWithPo'){
-			$("#quickCartHiddenInfo").submit();
-		}else if(oType == 'checkoutWithPo'){
-			$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
-			$("#quickCartHiddenInfo").submit();
-		}else{
-			return false;
-		}
 	};
 	
 	guestCheckoutWizard.submitCheckoutRequest = function(){
@@ -279,7 +275,7 @@ var guestCheckoutWizard = {};
 		if(payType == "checkoutWithPo" && isValid){
 			guestCheckoutWizard.submitOrder(payType);
 		}else if(payType == "checkoutWithCreditCard" && isValid){
-			block('Please Wait');
+			block("Please Wait");
 			setCookie("poNumber",$("#poNumber").val(),10);
 			setCookie("orderedBy",$("#orderedBy").val(),10);
 			setCookie("reqDate",$("#reqDate").val(),10);
@@ -290,8 +286,8 @@ var guestCheckoutWizard = {};
 			}
 			setCookie("defaultShipToId",$("#defaultShipToId").val(),10);
 			setCookie("shipVia",$("#shipVia").val(),10);
-			guestCheckoutWizard.submitOrder(payType);
-			//$("#quickCartHiddenInfo").attr("action", "submitNewCreditCardSale.action");
+			$("#quickCartHiddenInfo").attr("action", "displayCreditCardSale.action");
+			$("#quickCartHiddenInfo").submit();
 		}else{
 			bootAlert("small","error","Error","Cannot proceed, please contact our customer support");
 		}
