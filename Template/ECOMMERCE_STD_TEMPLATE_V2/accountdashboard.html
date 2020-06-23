@@ -245,7 +245,7 @@
 				<li>
 					<div class="cimm_slideItemImg">
 					#set($resentItemTitle = $!recentOrders.brandName+" "+$!recentOrders.manufacturerPartNumber)
-						<a href="$!hostName$!recentOrders.itemPriceId$locale.get('website.url.ProductDetail')n/$resentItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+						<a href="$!hostName$!recentOrders.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($resentItemTitle)">
 							#if($recentOrders.imageType=="URL")
 							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 							#else
@@ -255,7 +255,7 @@
 					</div>
 					<div class="cimm_slideItemDesp text-center">
 						<ul>
-							<li><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")$!resentItemTitle.replace(" ","-")' class="productTitle">$resentItemTitle</a>
+							<li><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($!resentItemTitle)' class="productTitle">$resentItemTitle</a>
 							</li>
 							<li>
 								<strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span>

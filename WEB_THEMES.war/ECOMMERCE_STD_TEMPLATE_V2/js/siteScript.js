@@ -92,9 +92,9 @@ function additionalFreightCharges(val) {
 function showNotificationDiv(type, message) {
 	$("#notificationDiv").html("");
 	if (type != "" && (type.toLowerCase() == "success")) {
-		$("#notificationDiv").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>' + message + '</div>');
+		$("#notificationDiv").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>' + message + '</div>');
 	} else {
-		$("#notificationDiv").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>' + message + '</div>');
+		$("#notificationDiv").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>' + message + '</div>');
 	}
 	var headerHeight = 0;
 	if ($("#enableStickyHeader").val() == "Y") {
@@ -2504,7 +2504,7 @@ function sendSiteDetailPagePart(a) {
 	var itemAvailable = $("#itemAvailable").html();
 	var leadTimeLI = $("#leadTimeLI").html();
 
-	var productModeList = $('#childItemTable_wrapper #childItemTable').clone().find("tr .removeForSend").remove().end().html();
+	var productModeList = $('#childItemTable').clone().find("tr .removeForSend").remove().end().html();
 	//var titleDesc = "<div>";
 	var titleDesc = "";
 	var skuList = "<div style='font-size: 14px;'>";

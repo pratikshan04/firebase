@@ -30,7 +30,7 @@
 			<h2>$key</h2>
 			<div class="row">
 				#foreach($brand in $branListByIndex)
-					<div class="col-md-3 col-sm-6 col-xs-12"><a href="/$!brand.brandId/brand/$!brand.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="sBlack">$!brand.brandName</a></div>
+					<div class="col-md-3 col-sm-6 col-xs-12"><a href="/$!brand.brandId/brand/$slugUrl.makeSlug($!brand.brandName)" class="sBlack">$!brand.brandName</a></div>
 				#end
 			</div>
 			

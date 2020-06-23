@@ -8,7 +8,7 @@
 #end
 #macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId)
 #if($navigationType=="NAVIGATION")
-#set($navURL = "itemLevelFilterPage.action?codeId=$codeIdSkip&gallery=$gallery&levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&srchTyp=$srchTyp")
+#set($navURL = "$codeIdSkip/products/$!forPageSeoUrl?levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&srchTyp=$srchTyp")
 #end
 #if($navigationType=="SEARCH")
 #set($navURL = "searchPage.action?keyWord=$keyWord&srchTyp=$srchTyp&gallery=$gallery&#if($narrowKeyword)&narrowKeyword=$narrowKeyword#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")

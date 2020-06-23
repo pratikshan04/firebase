@@ -332,7 +332,7 @@
 			                    <td class="alignLeft" data-th="$!locale.get('product.label.description')">
 			                    <ul>
 									<li itemprop="name">
-										<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
+										<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
 									</li>
 									<li>
 					                 	<p itemprop="description">$!itemData.shortDesc</p>

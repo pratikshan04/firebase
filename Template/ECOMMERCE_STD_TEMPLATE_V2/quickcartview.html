@@ -27,7 +27,7 @@
         #set($itemTitle=$!itemData.shortDesc)
         <tr>
     		<td> 
-             <a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')">
+             <a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
                <span id="imageName$itemData.itemId">          
             #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
                 <img class="ATCimageName" src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"  alt='$itemData.brandName $!itemData.manufacturerPartNumbee'/>
@@ -39,7 +39,7 @@
             </td>
             <td>
                 <h3 class="ATCProductHeading productTitle marginY-0">
-                <a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-')" id="itemTitle$itemData.itemId">
+                <a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" id="itemTitle$itemData.itemId">
                 $itemData.brandName $!itemData.manufacturerPartNumber</a>
             </h3>
              <ul>

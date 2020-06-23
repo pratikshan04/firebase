@@ -614,7 +614,7 @@
 	  #set($itemcustomerbought=$!customerbought.brandName+" "+$!customerbought.manufacturerPartNumber) 
 	  <li itemscope itemtype="http://schema.org/Product">
 		<div class="cimm_slideItemImg">
-			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemcustomerbought.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemcustomerbought)">
 			<span> 
 			 #if($customerbought.imageName.contains("http") || $linkItem.imageType=="URL")
 				 <img image="image" id="imageName$!itemData.itemId" src="$!customerbought.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="NoImage"/>
@@ -631,7 +631,7 @@
 	   			#if($customerbought.manufacturerPartNumber && $!customerbought.manufacturerPartNumber!="")
 	   				#set($itemTitle = $!itemTitle+ " "+$!customerbought.manufacturerPartNumber)
 	   			#end
-	   			<a class="productTitle" itemprop="name" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+	   			<a class="productTitle" itemprop="name" href="$!customerbought.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">
 			 		#if($linkItemTitle.length()>18)
 			 			$!itemTitle.substring(0, 18)...
 			 		#else
@@ -715,7 +715,7 @@
 					        #itemListHiddenFields($!linkItem.partNumber, $!linkItem.itemPriceId, $!linkItem.qty, $!linkItem.uom, $!linkItem.price, $!linkItem.saleQty, $!linkItem.itemId, $!linkItem.displayFrieghtAlert, $!linkItem.packageQty, $!linkItem.itemAvailability, $!linkItem.srchTyp, $!navigationType,$!linkItem.brandId,$!linkItem.manfId, $!linkItem.altPartNumber1)
 					 			<input type="hidden" id='packageQty_$!linkItem.partNumber' value="1" />
 								<div class="cimm_slideItemImg">
-					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					 				<a href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!linkItemTitle)">
 									<span>
 										 #if($linkItem.imageName.contains("http") || $linkItem.imageType=="URL")
 										 <img itemprop="image" id="imageName$!linkItem.itemId" src="$!linkItem.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$linkItemTitle"/>
@@ -728,7 +728,7 @@
 								<div class="cimm_slideItemDesp">
 								<ul>
 								 	<li>
-										<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$!linkItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
+										<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!linkItemTitle)" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 											##if($linkItemTitle.length()>30)
 												##$!linkItemTitle.substring(0, 30)...
 											##else

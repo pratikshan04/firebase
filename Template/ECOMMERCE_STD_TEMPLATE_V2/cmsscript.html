@@ -25,6 +25,32 @@ function cmsbannersmenubuilderList1(){
 function componentCreationRedirect(){
 	window.parent.document.getElementById("componentForm:componentRedirectBtn").click();
 }
+function componentCreationRedirect(){
+	window.parent.document.getElementById("cmsEventlistForm:componentRedirectBtn").click();
+}
+
+function eventList(){
+	window.parent.document.getElementById("cmsEventlistForm:eventList").click();
+}
+function addEvent(){
+	window.parent.document.getElementById("cmsAddEventForm:addEvent").click();
+}
+function archivedEvent(){
+	window.parent.document.getElementById("cmsArchivedEventForm:archivedEventList").click();
+}
+function eventBilling(){
+	window.parent.document.getElementById("cmsEventBillingReportsForm:billingReports").click();
+}
+function cmsSecurePortal(){
+	window.parent.document.getElementById("cmsSecurePortalForm:cmsSecurePortal").click();
+}
+function cmsThemeEditor(){
+	window.parent.document.getElementById("cmsThemeEditorForm:cmsThemeEditor").click();
+}
+function cmsImportExport(){
+	window.parent.document.getElementById("cmsImportExportForm:cmsImportExport").click();
+}
+
 function showPageProperty(){
 	jQuery("#addNewStaticFormId").toggle();
 	jQuery("#pageTab").toggle();
@@ -1110,6 +1136,20 @@ jQuery("[data-react='toggle']").click(function(){
 	}
 	$(this).find('i').toggleClass('fa-chevron-down fa-chevron-right');
 });
+
+jQuery(".eventToggleLabel").click(function(){
+	var toggleId = $(this).attr("data-toggleID");
+	if($(this).parent().hasClass('toggleActive')){
+		jQuery("#"+toggleId).slideUp();
+		$(this).find('.fa-chevron-right').addClass('fa-chevron-down').removeClass('fa-chevron-right');
+		$(this).parent().removeClass('toggleActive');
+	}else{
+		jQuery("#"+toggleId).slideDown();
+		$(this).find('.fa-chevron-down').addClass('fa-chevron-right').removeClass('fa-chevron-down');
+		$(this).parent().addClass('toggleActive');
+	}
+});
+
 jQuery(function() {
 	$(".cms_leftMenu li a.cms_SlideMenuBtn").click(function () {
 		var cms_leftMenuSlide = $(this).parent().find('.cms_leftMenuSlide');

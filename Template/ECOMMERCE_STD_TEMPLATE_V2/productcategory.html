@@ -2,7 +2,9 @@
 #parse("Macros/listPageMacro.vm")
 #listAndGridSwap($navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$escapeTool.url($attrFilterList),$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
 #listPageHeading($navigationType,$keyWord,$heading)
-#listPageFormUrls($navigationType)
+#listPageFormUrls($navigationType, $!codeIdSkip, $!forPageSeoUrl , $!manfId, $!brandId)
+#set($itemsPerPageURL = "$!codeId/category/"+$!forPageSeoUrl)
+#set($searchWithInFormURL="$!codeId/category/"+$!forPageSeoUrl)
 
 #if($assignedStaticPageId && $assignedStaticPageId>0 && $!assignedStaticPageContent!="")
 <div class="assignedStaticPageWrap">
@@ -17,8 +19,6 @@
 #end
 
 #if($LayoutName=="SubCategoryPage")
-#set($itemsPerPageURL="taxonomyLevelFilterPage.action")
-#set($searchWithInFormURL="taxonomyLevelFilterPage.action")
 #if($topBanners && $topBanners != [])
 <div class="cimm_category_bannercont">
 	<ul class="cimm_category-banners">
@@ -114,7 +114,7 @@
 		<div class="col-md-4 col-sm-4 col-xs-6 col-xs-6" itemscope itemtype="http://schema.org/Product"> <!-- cimm_categoryItemBlock -->
 			<div class="cimm_category-item">
 				<div class="cimm_category-itemimage">
-					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl$slugUrl.makeSlug($!categoryList.categoryName)">
 					#if($categoryList.imageName.contains("http") || $categoryList.imageType.equalsIgnoreCase("URL"))
 				 		<img itemprop="Image" src="$!categoryList.imageName" alt="$!categoryList.categoryName" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#else
@@ -123,7 +123,7 @@
 					</a>
 				</div> 
 				<h4 class="cimm_category-itemname" itemprop="Name" title="$!categoryList.categoryName">
-					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\/\s]+','').replaceAll('--','-')$!categoryList.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+					<a href="$!categoryList.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl$slugUrl.makeSlug($!categoryList.categoryName)">
 					#if($categoryList.categoryName.length()>22)
 						<span  data-toggle="tooltip"> $!categoryList.categoryName.substring(0, 22)...</span>
 					#else
@@ -207,14 +207,14 @@
 							<input type="hidden" name="resultPage" value="#if($resultPage)$!resultPage#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
 							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
-							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
+							
 							#if($navigationType=="SEARCH")
 							<input type="hidden" name="keyWord" value="#if($keyWord)$!escapeTool.html($!keyWord)#end" /> 
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
 							<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
 							#end
 							<input type="hidden" name="srchTyp" value="CATNAV">
-							#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
+							
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							<select name="sortBy" id="sortBy" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
 								<!-- <option value=""> - $!locale.get("form.label.select") -</option> -->
@@ -223,7 +223,7 @@
 								<option value="score|desc" #if($sortBy=="score|desc") selected #end>Relevance</option>
 								#end
 								<option value="externalHitSort_desc" #if($sortBy=="externalHitSort_desc" || $sortBy=="externalhitsort_desc") selected #end>Best Seller</option>
-								<option value="brand_asc" #if($sortBy=="brand_asc") selected #end>Brand (Asc)</option>
+								<option value="brand_asc" #if($sortBy=="brand_asc" || $navigationType=="BRAND") selected #end>Brand (Asc)</option>
 								<option value="brand_desc" #if($sortBy=="brand_desc") selected #end>Brand (Desc)</option>
 								<option value="mpn_asc" #if($sortBy=="mpn_asc") selected #end>MPN (Asc)</option>
 								<option value="mpn_desc" #if($sortBy=="mpn_desc") selected #end>MPN (Desc)</option>
@@ -245,14 +245,14 @@
 							<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
 							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
-							#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
+							
 							#if($navigationType=="SEARCH")
 							#if($keyWord) <input type="hidden" name="keyWord" value='$!escapeTool.html($!keyWord)' /> #end
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
 							<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
 							#end
 							<input type="hidden" name="srchTyp" value="CATNAV">
-							#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
+							
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							$!locale.get("product.label.show")&nbsp; 
 							<select class="quantity selectpicker" name="resultPage" id="resultPerPage" style='display:none;' title="$!locale.get('product.label.show')">
@@ -346,7 +346,11 @@
 				<li class="listView" data-getchangemode='getchangemode' itemscope itemtype="http://schema.org/Product">
 					<ul class="gridFixHeight clearAfter">
 						<li class="sessionImg">
-							<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+							#set($itemRedirectUrl = $!itemData.itemPriceId+$!locale.get("website.url.ProductDetail")+"n/"+$slugUrl.makeSlug($!itemTitle))
+							#if($itemData.productItemCount>1)
+								#set($itemRedirectUrl = $!itemData.itemPriceId+$!locale.get("website.url.ProductDetail")+$slugUrl.makeSlug($!itemTitle))
+							#end
+							<a href="$itemRedirectUrl">
 								<div class="prodImage">
 								#if($itemData.productItemCount>1 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length() > 1)
 									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
@@ -390,7 +394,7 @@
 							<!-- Product Mode -->
 							<li class="sessionDesp">
 								<h3 class="productTitle" itemprop="name">
-									<a class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
+									<a class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$slugUrl.makeSlug($!itemTitle)" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
 									#if($itemData.productName && $!itemData.productName.length() > 1) #if($itemData.productName.length() > 22) title="$!itemData.productName" #end #else #if($itemTitle.length() > 22) title="$!itemTitle" #end #end>
 										#if($itemData.productName && $!itemData.productName.length() > 1)
 											#if($itemData.productName.length() > 22)
@@ -425,7 +429,7 @@
 									</form>
 							 	</div>
 							 	<div class="itemCountGrid">
-							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+							 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 							 	</div>
 							 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 								<!-- <span>
@@ -449,7 +453,7 @@
 						#else
 							<li class="sessionDesp">
 								<h3 class="productTitle" itemprop="name">
-									<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
+									<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
 										#if($itemTitle.length() > 22)
 											$!itemTitle.substring(0, 22)... 
 										#else
@@ -458,7 +462,7 @@
 									</a>
 								</h3>
 								#if($itemData.shortDesc.length()>65)
-									<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
+									<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">$!locale.get("product.label.more")</a></span></p>
 								#else
 									<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc</p>
 								#end

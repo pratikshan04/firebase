@@ -36,7 +36,7 @@
       <ul>
          #foreach($categoryMenu in $categMenu)
          <li>
-            #set($test = "$!categoryMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!categoryMenu.categoryName.replaceAll(' ','-')")
+            #set($test = "$!categoryMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')n/$slugUrl.makeSlug($!categoryMenu.categoryName)")
             #foreach($key in $secondLevelMenu.keySet())
             #if($categoryMenu.categoryCode==$!key)
             #set($test = "javascript:void(0);")
@@ -61,7 +61,7 @@
          #if($categoryMenu.categoryCode==$!key)
          #foreach($secondLvlMenu in $secondLevelMenu.get($!key))
          <li>
-            #set($test = "$!secondLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!secondLvlMenu.categoryName.replaceAll(' ','-')")
+            #set($test = "$!secondLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')n/$slugUrl.makeSlug($!secondLvlMenu)")
             #foreach($key3 in $secondLevelMenu.keySet())
             #if($secondLvlMenu.categoryCode==$!key3)
             #set($test = "javascript:void(0);")
@@ -91,7 +91,7 @@
       <ul>
          #foreach($thirdLvlMenu in $secondLevelMenu.get($!key3))
          <li>
-            <a href="$!thirdLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!thirdLvlMenu.categoryName.replaceAll(' ','-')" class="ripple-btn">$!thirdLvlMenu.categoryName</a>
+            <a href="$!thirdLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')n/$slugUrl.makeSlug($!thirdLvlMenu.categoryName)" class="ripple-btn">$!thirdLvlMenu.categoryName</a>
          </li>
          #end
       </ul>

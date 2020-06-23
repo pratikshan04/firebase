@@ -63,8 +63,8 @@
 		#set($breadCrumbIdx = 2 )
 		#foreach($!breadCrumb in $!breadCrumbList)
 			#if($breadCrumbIdx == $!breadCrumbSize)
-				#set($BCTCat = $!breadCrumb.categoryName.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase())
-			#end
+				#set($BCTCat = $slugUrl.makeSlug($!breadCrumb.categoryName))
+			#end 
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 		#end
 	#else
@@ -95,7 +95,8 @@
 			#end
 			#set($itmPriceId = $!itemData.itemPriceId)
 			#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
-			#set($BCTCat1 = $!itemProductTitle.replaceAll('®','-').replaceAll('™','-').replaceAll('trade;','-').replaceAll('reg;','-').replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+			#set($BCTCat1 = $slugUrl.makeSlug($!itemProductTitle))
+			#if($fromProductMode.trim().length()>0) #set($BCTCat1 = $fromProductMode.trim().toLowerCase()+"/"+$!BCTCat1) #end
 			#set($canonical_url = $!hostName+""+$!itmPriceId+"/product/"+$!BCTCat1)
 			<meta property="og:url" content="$!hostName$!itmPriceId/product/$!BCTCat1" />
 			#set($share_imgAlt = $BCTCat1)
@@ -112,6 +113,7 @@
 #elseif ($LayoutName=='PromotedProductsListPage')
 	#set($pageTitleVelo = $!locale.get("product.label.PromotedProductsList") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="ProductList")
+#set($itemParentCategoryName = "")
 #set($finalPageTitle = "" )
 	#if($breadCrumbList)
 		#set($breadCrumbSize = $!breadCrumbList.size() )
@@ -122,7 +124,17 @@
 		#set($pageTitleBreadCrumbLast = "" )
 		#set($pageTitleBreadCrumbFirst = "" )
 		#set($shopByBrand = "" )
+		#set($forPageSeoUrl = "" )
+		#set($forPageSeoUrlSeparator = "" )
+		#set($forSeoDesc = "" )
+		#set($forSeoDescSeparator = "" )
 		#foreach($breadCrumb in $breadCrumbList)
+			#if($!breadCrumb.categoryName.length()>1)
+				#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName))
+				#set($forPageSeoUrlSeparator = "/" )
+				#set($forSeoDesc = $!forSeoDesc+ $!forSeoDescSeparator + $!breadCrumb.categoryName)
+			    #set($forSeoDescSeparator = " | " )
+			#end
 			#if($navigationType=='BRAND')
 	    		#if($breadCrumbIdx == $!breadCrumbSize)
 					#set($LastSet = $!breadCrumb.categoryName )
@@ -131,6 +143,8 @@
 	    		#if($breadCrumbIdx == $!breadCrumbSize)
 					#set($LastSet = $!breadCrumb.categoryName )
 				#end
+			#elseif($navigationType=='SEARCH')
+			
 			#else
 				#if($breadCrumbIdx == $!breadCrumbSize)
 					#set($LastSet = $!breadCrumb.categoryName )
@@ -145,10 +159,12 @@
 			#set($pageTitleBreadCrumbLast = $!LastSet )			
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 			#set ($finalPageTitle = $!pageTitleBreadCrumbLast)
+			#set($itemParentCategoryName = $!pageTitleBreadCrumbLast)
 		#end           
 	#end
 	#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
-	#set($BCTCat1 = $finalPageTitle.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+	#set($BCTCat1 = $slugUrl.makeSlug($!finalPageTitle))
+	
 	#if($navigationType=='MANF')
 		#if($!metaDescriptions)
 			#set($share_desc = $!metaDescriptions)
@@ -162,10 +178,15 @@
 	#set($pageTitleBreadCrumbFirst = "" )
 	#set($pageTitleBreadCrumbLast = "" )
 	#set($finalPageTitle = "" )
+	#set($forPageSeoUrl = "" )
+	#set($forPageSeoUrlSeparator = "" )
+	#set($finalPageTitle = "" )
 	#if($breadCrumbList)
 		#set($breadCrumbSize = $!breadCrumbList.size() )
 		#set($breadCrumbIdx = 1 )
 		#foreach($!breadCrumb in $!breadCrumbList)
+			#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName) )
+			#set($forPageSeoUrlSeparator = "/" )
 			#if($breadCrumbIdx == $!breadCrumbSize)
 				#set($listPageHeading = $!breadCrumb.categoryName)
 			#else
@@ -183,10 +204,11 @@
 		#end
 		#if($finalPageTitle)
 			#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
-			#set($BCTCat1 = $pageTitleBreadCrumbLast.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+			#set($BCTCat1 = $slugUrl.makeSlug($!pageTitleBreadCrumbLast))
+			
 		#else
 			#set($pageTitleVelo = $!listPageHeading + $!pageTitleseparator + $!pageTitleVelo)
-			#set($BCTCat1 = $listPageHeading.replaceAll(',','-').replaceAll(' ','-').replaceAll('&','-').replaceAll('---','-').replaceAll('--','-').toLowerCase().replaceAll('[^a-zA-Z0-9\-\s]+',''))
+			#set($BCTCat1 = $slugUrl.makeSlug($!listPageHeading))
 		#end
 		#set($canonical_url = $!hostName+""+$codeId+"/category/"+$BCTCat1)
 	#else
@@ -202,6 +224,8 @@
 	#end
 #elseif($LayoutName=="cspConfiguratorPage")
 	#set($pageTitleVelo = "CSP Configurator" + $!pageTitleseparator + $!siteDisplayName.trim())
+#elseif($LayoutName=="EventDetailPage")
+	#set($pageTitleVelo = $!eventsList.title + " " + $!locale.get("breadcrumbs.label.$!LayoutName") + $!pageTitleseparator + $!siteDisplayName.trim())
 #elseif($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
 	#set($pageTitleVelo = $!pageTitle.trim() + $!pageTitleseparator + $!siteDisplayName.trim())
 #else

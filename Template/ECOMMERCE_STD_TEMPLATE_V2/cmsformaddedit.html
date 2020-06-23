@@ -112,7 +112,7 @@
 				#if($formData.htmlCode)
 					$formData.htmlCode
 				#else
-				<form action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;">
+				<form>
 					<div class="row"></div>
 					<div class="text-left btnBlock" data-type='submitBtn' data-align="left">
 						<button type="submit" class="button">Submit</button>
@@ -221,5 +221,7 @@ $(document).ready(function(){
 		railBorderRadius: '0px',
 		top: '10px'
 	});
+	$('.formBuilderWrap').find('form').removeAttr('action onsubmit');
+	$('.formBuilderWrap').find('[type="submit"]').attr('disabled', true).addClass('btns-disable');
 });
 </script>
