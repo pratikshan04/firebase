@@ -6,15 +6,15 @@
 #end</table>
 #end
 #end
-#macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId)
+#macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId,$!forPageSeoUrl)
 #if($navigationType=="NAVIGATION")
 #set($navURL = "$codeIdSkip/products/$!forPageSeoUrl?levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&srchTyp=$srchTyp")
 #end
 #if($navigationType=="SEARCH")
-#set($navURL = "searchPage.action?keyWord=$keyWord&srchTyp=$srchTyp&gallery=$gallery&#if($narrowKeyword)&narrowKeyword=$narrowKeyword#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#set($navURL = "searchPage.action?keyWord=$keyWord&srchTyp=$srchTyp#if($narrowKeyword)&narrowKeyword=$narrowKeyword#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
 #end
 #if($navigationType=="BRAND")
-#set($navURL = "shopByBrandPage.action?brandId=$brandId&gallery=$gallery#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#set($navURL = "shopByBrandPage.action?brandId=$brandId#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
 #end
 #end
 
