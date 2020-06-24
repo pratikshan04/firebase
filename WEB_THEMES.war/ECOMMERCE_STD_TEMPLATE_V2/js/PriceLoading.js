@@ -349,21 +349,39 @@ function priceLoadMainFunction() {
 			}
 			
 				//if (!priceDispalyed && (warehouseCode == wareHouseDetails.wareHouseCode || warehouseCode == product.cimm2BCentralPricingWarehouse.warehouseCode)) {
+			
+			if($("#erpType").val()=="cimmesb"){
+				if (product != undefined && product.customerPrice != undefined && product.customerPrice > 0 && !priceDispalyed) {
+					product.partNumber=partNumber;
+						populatePrice(product);
+						priceDispalyed = true;
+					}
+			}else{
 			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
 				product.cimm2BCentralPricingWarehouse.partNumber=partNumber;
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
 				}
+			}
 			//if (wareHouseDetails.branchAvailability > 0) {
 				populateAllBranchAvailability(wareHouseDetails);
 			//}
 		}
 		}else{
+			
+			if($("#erpType").val()=="cimmesb"){
+				if (product != undefined && product.customerPrice != undefined && product.customerPrice > 0 && !priceDispalyed) {
+					product.partNumber=partNumber;
+						populatePrice(product);
+						priceDispalyed = true;
+					}
+			}else{
 			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
 				product.cimm2BCentralPricingWarehouse.partNumber=partNumber;
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
 				}
+			}
 		}
 		if(!priceDispalyed){
 			populateCallForPrice(partNumber, 0);
