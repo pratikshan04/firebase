@@ -350,7 +350,7 @@ function priceLoadMainFunction() {
 			
 				//if (!priceDispalyed && (warehouseCode == wareHouseDetails.wareHouseCode || warehouseCode == product.cimm2BCentralPricingWarehouse.warehouseCode)) {
 			
-			if($("#erpType").val()=="cimmesb"){
+			if($("#erpType").val()!= undefined && $("#erpType").val()=="cimmesb"){
 				if (product != undefined && product.customerPrice != undefined && product.customerPrice > 0 && !priceDispalyed) {
 					product.partNumber=partNumber;
 						populatePrice(product);
@@ -369,7 +369,7 @@ function priceLoadMainFunction() {
 		}
 		}else{
 			
-			if($("#erpType").val()=="cimmesb"){
+			if($("#erpType").val()!= undefined &&  $("#erpType").val()=="cimmesb"){
 				if (product != undefined && product.customerPrice != undefined && product.customerPrice > 0 && !priceDispalyed) {
 					product.partNumber=partNumber;
 						populatePrice(product);
