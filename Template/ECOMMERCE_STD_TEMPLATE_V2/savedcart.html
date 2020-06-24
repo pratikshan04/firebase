@@ -264,13 +264,13 @@
 						<span>
 							#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 								#if($itemData.price>0)
-								<span class="priceSpan">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
+								<span class="priceSpan formatPrice">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							#else
 								#if($itemData.price>0)
-								<span class="priceSpan">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
+								<span class="priceSpan formatPrice">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
@@ -281,8 +281,12 @@
 						</span>
 					</td>
 					<td data-th='$locale.get("product.label.extPrice")' class="priceSpan">
-						<span class='priceSpan'>
-							#if($itemData.total>0) $$numberTool.format("$numberToolFormat",$itemData.total) #else N/A #end
+						<span class='priceSpan formatPrice'>
+							##if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) ##else N/A ##end
+							#if($itemData.price > 0)
+								#set($totalPrice = $itemData.price * $itemData.qty)
+								$totalPrice
+							#end
 						</span>
 						<!-- <span class="productGrpRightAlign"><span id="spanEx_$itemData.partNumber" data-select='extPriceData'>
 						<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span></span> -->
