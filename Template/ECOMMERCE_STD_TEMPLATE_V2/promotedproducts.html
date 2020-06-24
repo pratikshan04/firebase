@@ -186,7 +186,7 @@
 						</td>
 						<td data-th="$locale.get('product.label.price')" class="tabelPrice">
 							#if($itemData.unitPrice > 0)
-							<span data-select='extPriceData' class='priceSpan'> $$numberTool.format($numberToolFormat,$itemData.unitPrice) </span>
+							<span data-select='extPriceData' class='priceSpan formatPrice'> $$numberTool.format($numberToolFormat,$itemData.unitPrice) </span>
 							#else
 							<span class='priceSpanFa'>call for Price </span>
 							#end
