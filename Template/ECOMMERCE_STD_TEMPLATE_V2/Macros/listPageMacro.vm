@@ -1,14 +1,10 @@
 #macro(listHiddenSearchWithIn $codeIdSkip,$levelNoSkip,$gallery,$resultPage,$pageNo,$sortBy,$attrFilterList,$brandId,$keyWord)
-<input type="hidden" name="codeId" value="$codeIdSkip" /> 
-<input type="hidden" name="levelNo" value="$levelNoSkip" /> 
-<input type="hidden" name="gallery" value="$gallery" />
-<input type="hidden" name="resultPage" value="$resultPage" /> 
-<input type="hidden" name="keyWord" value="$!keyWord" />
-<input type="hidden" name="pageNo" value="$pageNo" />
-#if($manfId)<input type="hidden" name="manfId" value="$manfId"/>#end
-#if($brandId)<input type="hidden" name="brandId" value="$brandId"/>#end
-#if($sortBy)<input type="hidden" name="sortBy" value="$sortBy" />#end
-#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$attrFilterList'/>#end
+#if($!levelNoSkip.trim().length() > 0) <input type="hidden" name="levelNo" value="$levelNoSkip" /> #end
+#if($!resultPage.trim().length() > 0) <input type="hidden" name="resultPage" value="$resultPage" />  #end
+#if($!keyWord.trim().length() > 0) <input type="hidden" name="keyWord" value="$!keyWord" /> #end
+#if($!pageNo.trim().length() > 0) <input type="hidden" name="pageNo" value="$pageNo" /> #end
+#if($sortBy.trim().length() > 0)<input type="hidden" name="sortBy" value="$sortBy" />#end 
+#if($attrFilterList.trim().length() > 0)<input type="hidden" name="attrFilterList" value='$attrFilterList'/>#end
 #end
 
 #macro(itemListHiddenFields $partNumber, $itemPriceId, $qty, $!uom, $price, $saleQty, $itemId, $displayFrieghtAlert, $packageQty, $itemAvailability, $srchTyp, $navigationType)
