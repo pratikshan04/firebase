@@ -133,9 +133,9 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-6 col-xs-6">
 					#if($eachData.imageType=="URL")
-						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachData.manufacturerPartNumber"/>
 					#else
-						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 					#end										
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-6">
@@ -159,9 +159,9 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-6 col-xs-6">
 					#if($!eachData.imageType=="URL")
-						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 					#else
-						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 					#end										
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-6">
@@ -183,7 +183,7 @@
 						<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
 						<!-- <form> -->
 						<span>Qty</span>
-						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"/>
+						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachCartData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"/>
 						<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
 						<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update"/>
 						<input type="button" class="button" value="cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" />
@@ -219,9 +219,9 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#end											
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-6">
@@ -252,9 +252,9 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#end											
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-6">
@@ -271,7 +271,7 @@
 											<div class="col-md-6 col-sm-12 col-xs-12">
 												<div class="mulAddtoCartStatus alignCenter">
 													<p class="alreadyExist"><i class="fa fa-question-circle"></i> Item already in the cart</p>
-													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachCartData.orderInterval" data-minorderqty="$!eachCartData.minOrderQty" data-price="$!eachCartData.price" data-uom="$!eachCartData.uom" data-availqty="$!eachData.availQty" data-itemindex="$!itemIndex"/>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty" data-itemindex="$!itemIndex"/>
 													<input type="button" class="button" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="Combine" />
 													<input type="button" class="button" data-requestype="SEPERATE"  data-itemid="$!eachData.itemId"  onclick="BulkAction.processSeperateOrCombine(this)" value="Seperate" />
 													<input type="button" class="button" value="Cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)"/>
@@ -289,9 +289,9 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemeseachDataimages/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#end											
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-6">
@@ -313,7 +313,7 @@
 													<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
 													<!-- <form> -->
 													<span>Qty</span>
-													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"  data-itemindex="$!itemIndex"/>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"  data-itemindex="$!itemIndex"/>
 													<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
 													<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update" disabled="disabled"/>
 													<input type="button" class="button" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" value="cancel" />

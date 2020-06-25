@@ -18,7 +18,7 @@
 <li><a href='$!locale.get("website.url.SavedGroup.Cart")'><em class="fa fa-cart-arrow-down" aria-hidden="true"></em>$!locale.get("product.heading.mySavedCart")</a></li>
 <li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li>
 #if($!session.getAttribute("isPunchoutUser")!="Y")
-<li><a href='$!locale.get("website.url.RequestForQuote")'><em class="glyphicon glyphicon-copy" aria-hidden="true"></em>$!locale.get("product.heading.requestForQuote")</a></li>
+<li class="visible-lg"><a href='$!locale.get("website.url.RequestForQuote")'><em class="glyphicon glyphicon-copy" aria-hidden="true"></em>$!locale.get("product.heading.requestForQuote")</a></li>
 <li class="visible-lg"><a href='$!locale.get("website.url.QuickOrder")'><em class="glyphicon glyphicon-list-alt" aria-hidden="true"></em>$!locale.get("product.heading.quickOrderPad")</a></li>
 #if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N" && $session.getAttribute("erpType")!="defaults")
 <li><a href="$!locale.get('website.url.AddNewPCard')"><em class="fa fa-credit-card" aria-hidden="true"></em>$!locale.get("product.label.addNewCreditCard")</a></li>
