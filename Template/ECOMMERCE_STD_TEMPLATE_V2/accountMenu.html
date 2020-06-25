@@ -14,7 +14,7 @@
 <li><a href='$!locale.get("website.url.OrderHistory")'><em class="fa fa-history" aria-hidden="true"></em>$!locale.get("product.heading.orderHistory")</a></li>
 <li><a href="/OutStandingList?sortDirection=dsc"><em class="fas fa-receipt" aria-hidden="true"></em>$!locale.get('dashboard.label.viewInvoices')</a></li>
 #end
-<li><a href="$!locale.get('website.url.SavedGroup.Product')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get("product.heading.myProductGroups")</a></li>
+<li><a href="$!locale.get('website.url.SavedGroup.Product')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get("product.heading.myProductGroup")</a></li>
 <li><a href='$!locale.get("website.url.SavedGroup.Cart")'><em class="fa fa-cart-arrow-down" aria-hidden="true"></em>$!locale.get("product.heading.mySavedCart")</a></li>
 <li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li>
 #if($!session.getAttribute("isPunchoutUser")!="Y")
@@ -44,6 +44,6 @@
 <li class='logoutBtn'><a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em>$!locale.get("product.heading.signOut")</a></li>
 #end
 #else
-<li><a href="/Login"><em class="fa fa-lg fa-lock" aria-hidden="true"></em>$!locale.get('register.label.login')</a></li>
+<li><a href="/Login"><em class="fa fa-lg fa-lock" aria-hidden="true"></em>$!locale.get('form.label.login')</a></li>
 <li><a href="$!locale.get('website.url.Register')" aria-hidden="true"><em class="fa fa-lg fa-list-alt"></em>$!locale.get('product.heading.register')</a></li>
 #end

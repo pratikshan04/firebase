@@ -85,7 +85,7 @@ function validateRFQ(){
 		emailVal = emailVal + "Please Enter Phone Number.<br/>";
 		emailMsg = 1;
 	}else{
-		if(isPhoneNumberValid($.trim(rfnpPhone).val()))==false){
+		if(isPhoneNumberValid($.trim(rfnpPhone).val())==false){
 			emailVal = emailVal + "Please Enter Valid Phone Number<br/>";
 			emailMsg = 1;
 		}
