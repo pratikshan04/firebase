@@ -108,6 +108,8 @@
 	#set($pageTitleBreadCrumbFirst = "" )
 	#set($pageTitleBreadCrumbLast = "" )
 	#set($finalPageTitle = "" )
+	#set($forPageSeoUrl = "" )
+	#set($forPageSeoUrlSeparator = "" )
 		#if($!breadCrumbList)
 			<ul class="breadcrumb">
 				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
@@ -134,10 +136,17 @@
 				#end
 			</ul>
 		#else
+			#set($forPageSeoUrl = "" )
+			#set($forPageSeoUrlSeparator = "" )
 			<ul class="breadcrumb">
 				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
 				<li class="active">$!locale.get("product.heading.productCategory")</li>              
 			</ul>
+		#end
+		#if($!forPageSeoUrl=="")
+			#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-").toLowerCase())
+		#else
+			#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-").toLowerCase()+"/")
 		#end
 		<!--h1 class="cimm_page-title hidden">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h1 --> 
 #elseif($!LayoutName=="ProductList")
@@ -192,6 +201,7 @@
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 			#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + " - " + $!pageTitleBreadCrumbLast)
 		#end
+		#set($forPageSeoUrl =$forPageSeoUrl+"/")
 	</ul>
 	<h1 class="cimm_page-title hideMe">$!pageTitleBreadCrumbLast</h1>
 	#end
