@@ -52,6 +52,7 @@
             line-height: 16px;
             overflow: hidden;
 			width: 100%;
+			vertical-align: top;
             &.catheader, &.catheader.ac_over {
                 font-size: 14px;
                 background-color: $primary_color;

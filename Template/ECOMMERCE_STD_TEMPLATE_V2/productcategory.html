@@ -374,7 +374,7 @@
 								#if($itemData.productItemCount<1)
 								<label class="customCheckBox">
 									<input type="checkbox" value="$!itemData.itemPriceId" name="compareId" id="check_$!itemData.itemPriceId" onclick="compareItemList(this);"/>
-									<span><a href="javascript:void(0);" onclick="compareItems();">$!locale.get("product.heading.compare")</a></span>
+									<span><a href="javascript:void(0);" onclick="compareItems();">$!locale.get("product.button.compare")</a></span>
 									<input type="hidden" value="imageName$!itemData.itemId" id="imgId_$!itemData.itemPriceId" />
 									<input type="hidden" value="itemTitle$!itemData.itemId" id="titleId_$!itemData.itemPriceId" /> 
 									<input type="hidden" value="$!itemData.manufacturerPartNumber" id="partNumber_$!itemData.itemPriceId" /> 
