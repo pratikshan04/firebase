@@ -107,8 +107,12 @@ var brandSticky = $(".cimm_brandAtoZletters").height();
 var headerHeight = $('#normalHead').height();
 var fixHeadHeight = headerHeight;
 
+if($("#isWebview").val() == "WEBVIEW"){
+	fixHeadHeight += 10;
+}
+
 function brandListScroll(val){
-	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y") {
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y" && $("#isWebview").val() != "WEBVIEW") {
 		fixHeadHeight = 0
 	}
 	$('html, body').animate({
@@ -117,14 +121,14 @@ function brandListScroll(val){
 }
 
 $(window).scroll(function() {
-	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y") {
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y" && $("#isWebview").val() != "WEBVIEW") {
 		fixHeadHeight = 0
 	}
     var currentScroll = $(this).scrollTop(); 
     if (currentScroll >= headerHeight) {
     	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){
 			$(".cimm_brandAtoZletters").addClass("fixIt").css({'top': fixHeadHeight });
-			$(".hiddenDiv").height(fixHeight - headerHeight);
+			$(".hiddenDiv").height(fixHeadHeight - headerHeight);
 		}
     } else {
     	if($(".cimm_brandAtoZletters").hasClass("fixIt")){

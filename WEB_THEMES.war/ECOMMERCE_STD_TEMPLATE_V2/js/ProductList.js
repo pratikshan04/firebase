@@ -505,7 +505,7 @@ function validateSearchWithIn(){
 function chkLeftMenu(){
 	var width = $(window).innerWidth();
 	var leftMenu = '';
-	if(width > 980){
+	if(width > 1199){
 		if($("#leftMenu").html().trim() == ""){
 			leftMenu = $(".cimm_leftnav").detach();
 			leftMenu.appendTo("#leftMenu");
