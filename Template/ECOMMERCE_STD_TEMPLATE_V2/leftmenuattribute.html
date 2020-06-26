@@ -1,7 +1,7 @@
 #parse("Macros/defaultMacro.vm")
 #parse("Macros/listPageMacro.vm")
-#urlType($!navigationType,$!codeIdSkip,$!gallery,$!levelNo,$!sortBy,$!resultPage,$!keyWord,$!srchTyp,$!narrowKeyword,$!brandId)
-#listPageFormUrls($!navigationType)
+#urlType($!navigationType,$!codeIdSkip,$!gallery,$!levelNo,$!sortBy,$!resultPage,$!keyWord,$!srchTyp,$!narrowKeyword,$!brandId,$!forPageSeoUrl)
+#listPageFormUrls($!navigationType, $!codeIdSkip, $!forPageSeoUrl, $!manfId, $!brandId )
 <h2 onclick="closeLeftSlide();" class="visible-sm-block dark-ripple visible-xs-block"><em class="fa fa-chevron-left" aria-hidden="true"></em> $!locale.get("product.label.back")</h2>
 <!-- <div id="filterBar" class="cimm_advancedSearchFilter">
 	<form>
@@ -42,7 +42,7 @@
 				<div class="input-group">
 					<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
 					#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
-					#if($srchTyp)
+					#if($!srchTyp!="")
 					<input type="hidden" name="srchTyp" value="$!srchTyp" />
 					#else
 					<input type="hidden" name="srchTyp" value="CATNAV" />
@@ -177,30 +177,27 @@
 #if($resultCount > 0 )
 	<div style="display:none;" id="keyWordTxtTrail">$!keyWordTxt</div> 
 	<div id="attrFilterList" style="display:none;">$!attrFilterList</div>
-	<form action="Category.action" method="get" id="categoryForm">
-		#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip">#end
+	<form action="$!codeIdSkip/category/$!forPageSeoUrl" method="get" id="categoryForm">
+		##if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip">#end
 		<input type="hidden" name="levelNo" value="0">
 	</form>
 	
 	<form action="$!itemsPerPageURL" method="get" id="multiFilterAttr">
-		#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip" />#end
-		#if($levelNoSkip)<input type="hidden" name="levelNo" value="$!levelNoSkip" />#end
-		#if($gallery)<input type="hidden" name="gallery" value="$!gallery" />#end
-		<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end" />
-		<input type="hidden" name="keyWordTxt" id="keyWordTxtMulti" value="#if($keyWordTxt)$!keyWordTxt#end" />
+		#if($levelNoSkip.trim().length() > 0)<input type="hidden" name="levelNo" value="$!levelNoSkip" />#end
+		#if($!sortBy.trim().length() > 0) <input type="hidden" name="sortBy" value="$!sortBy" />#end
+		#if($!keyWordTxt.trim().length() > 0) <input type="hidden" name="keyWordTxt" id="keyWordTxtMulti" value="$!keyWordTxt" />#end
 		#if($srchTyp)
 			<input type="hidden" id="srchTyp" name="srchTyp" value="$!srchTyp" />
 		#else
 			<input type="hidden" id="srchTyp" name="srchTyp" value="CATNAV" />
 		#end
 		#if($navigationType=="SEARCH")
-			<input type="hidden" name="keyWord" value="#if($keyWord)$!keyWord#end" /> 
-			<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
-			<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
+			#if($!keyWord.trim().length() > 0) <input type="hidden" name="keyWord" value="$!keyWord" />#end
+			#if($!narrowKeyword.trim().length() > 0) <input type="hidden" name="narrowKeyword" value="$!narrowKeyword" />#end
+			#if($!varPsid.trim().length() > 0) <input type="hidden" name="vpsid" value="$!varPsid" />#end
 		#end
-		#if($manfId)<input type="hidden" name="manfId" value="$!manfId"/>#end
-		#if($brandId)<input type="hidden" name="brandId" value="$!brandId"/>#end
 		<input type="hidden" id="multiFilterAttrList" name="attrFilterList" value='$!attrFilterList' />
-		<input type="hidden" name="resultPage" value='$!resultPage' /> 
+		#if($!resultPage.trim().length() > 0) <input type="hidden" name="resultPage" value='$!resultPage' />#end
+		 
 	</form> 
  #end

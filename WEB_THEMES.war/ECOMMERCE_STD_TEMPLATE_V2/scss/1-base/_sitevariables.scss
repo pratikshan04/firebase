@@ -253,14 +253,14 @@ $btncolors: (
         onlyborder  : false
     ),
     continueshop:(
-        bg-color    : transparent, //Button Background color
-        btnf-color  : $primary_color, //Button Font Color
-        hbg-color   : transparent, // Button hover backogrund color
-        btnhf-color : $primary_color,   // Button hover font color
+        bg-color    : $primary_color, //Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $primary_color, // Button hover backogrund color
+        btnhf-color : $white,   // Button hover font color
         abg-color   : $gray-dark,    //Button Active background color
         bg-icon     : false,
         bg-icon-posintion: before,
-        onlyborder  : flase
+        onlyborder  : false
     ),
     ship:(
         bg-color    : transparent, //Button Background color
@@ -270,7 +270,7 @@ $btncolors: (
         abg-color   : $gray-dark,    //Button Active background color
         bg-icon     : false,
         bg-icon-posintion: before,
-        onlyborder  : flase
+        onlyborder  : false
     )
 );
 

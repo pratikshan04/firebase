@@ -24,7 +24,7 @@
 		</div>
 		<div class="cimm_bodyContentWrap">
 		    <div class="container #if($LayoutName == 'ProductList' && $resultCount > 0 && $!navigationType=='SEARCH')mTop-3 #end">
-		    #if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $userAgent != "WEBVIEW")
+		    #if($LayoutName!="HomePage" &&  $!isStaticHomePage !="Y" && $LayoutName!="MobileHomePage") ## && $userAgent != "WEBVIEW"
 		    	<div class="row">
 			    	<div class="col-md-12">
 						<div class="cimm_BreadCrumbs">
@@ -34,7 +34,7 @@
 		    	</div>
 		    	#end
 			    <div class="row">
-			    	<div class="col-md-3 hidden-sm hidden-xs" id="leftMenu">
+			    	<div class="col-lg-3 visible-lg" id="leftMenu">
 			    		#if($leftContent)
 						#if($layoutName == "ProductList")
 							#if($resultCount > 0)
@@ -49,7 +49,7 @@
 						#end
 					#end
 			    	</div>
-			    	<div class="col-md-9">
+			    	<div class="col-lg-9">
 			    		<div class="cimm_mainContentEnclosure">
 							#parse($bodyContent)
 						</div>

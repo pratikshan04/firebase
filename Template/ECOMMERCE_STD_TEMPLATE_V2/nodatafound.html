@@ -1,3 +1,4 @@
+<script> $(function () { block('Please wait'); }); </script>
 <!-- MArketing And Event Results -->
 #if($eventSearchData.size()>0)	
 <br/>
@@ -19,8 +20,9 @@
 		</div>
 	</div>
 </div>
+<script> $(function () { unblock(); }); </script>
 #end
-			    
+
 #if($staticContentData.size()>0)
 #set($resCount = 0)  
 #foreach($staticData in $staticContentData)	
@@ -53,19 +55,32 @@
 		</div>
 	</div>
 </div>
+<script> $(function () { unblock(); }); </script>
 #end
 <!-- MArketing And Event Results -->
+#if($resultCount==0)
 <div class="row">
 	<div class="col-md-12">
-		#if($resultCount==0)
-			<div class="searchZero"> 
-				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
-				<p>$!locale.get("search.result.zeroResult")&nbsp;<span><strong>#if($!narrowKeyword && $!narrowKeyword.length()>0) <em>$!narrowKeyword</em> within #end $!keyWord</strong></span></p>
-				<p>
-					$!locale.get("search.result.tryOtherSearch") $locale.get("label.text.or") 
-					$locale.get("label.text.goToOur") <a href="$locale.get('website.url.Welcome')" class="cimm_inlineButton">$locale.get("site.label.homePage")</a>   
-					$locale.get("label.text.or") <a href="$locale.get('website.url.ProductCategory')" class="cimm_inlineButton">$locale.get("product.button.continueShopping")</a>
-				</p>
+		<div class="searchZero"> 
+			<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
+			<p>
+				$!locale.get("search.result.zeroResult")&nbsp;
+				#if($!navigationType=="NAVIGATION" && $!keyWordTxt.trim().length()>0)
+				<span><strong><em>"$!keyWordTxt"</em></strong></span>
+				#else
+					#if($!keyWordTxt.trim().length()>0)
+					<span><strong><em>"$!keyWordTxt"</em></strong></span> 
+					#else
+					<span><strong>#if($!narrowKeyword && $!narrowKeyword.length()>0) <em>"$!narrowKeyword"</em> within #end "$!keyWord"</strong></span>
+					#end
+					
+				#end
+			</p>
+			<p>
+				$!locale.get("search.result.tryOtherSearch") $locale.get("label.text.or") 
+				$locale.get("label.text.goToOur") <a href="$locale.get('website.url.Welcome')" class="cimm_inlineButton">$locale.get("site.label.homePage")</a>   
+				$locale.get("label.text.or") <a href="$locale.get('website.url.ProductCategory')" class="cimm_inlineButton">$locale.get("product.button.continueShopping")</a>
+			</p>
 			#if($itemSuggest)
 			 <div class="pageTitle">
 				 <h2> 
@@ -73,22 +88,23 @@
 				 	<a class="linkText" href="/searchPage.action?keyWord=$!itemSuggest.toUpperCase()" title="Search for this"> <u>$!itemSuggest.toUpperCase()</u></a>
 				 </h2>
 			 </div>
-			 ##elseif($!itemSuggestList && $!itemSuggestList.size()>0)
-			 <!-- <div class="pageTitle">
-			 	<h4> $!locale.get("product.label.didyoumean") 
-			 		#set($commaSeparate = "")
-			 		#foreach($!suggestionString in $!itemSuggestList)
-				 		#if($suggestionString && $!suggestionString!="")
-				 		$!commaSeparate<a class="linkText" href="/searchPage.action?keyWord=$!suggestionString.toUpperCase()" title="Search for this">$!suggestionString.toUpperCase()</a>
-				 		#set($commaSeparate = ", ") 
-				 		#end
-			 		#end
-			 	</h4>
-			 </div> -->
 			 #end
-			 <!-- <br/> -->
-					<p> Not finding what you want, try our <a class="linkText" href="/advancedSearch">Advanced Search</a></p>
-			 </div>
-		#end
+		  	 <br/> 
+			 <p> Not finding what you want, try our <a class="linkText" href="/advancedSearch">Advanced Search</a></p>
+		 </div>
 	</div>
 </div>
+<script> $(function () { unblock(); }); </script>
+#else
+<script> $(function () { window.location.href = "/_404"; }); </script>
+<!-- <div class="searchZero"> 
+	<h2 class="cimm_page-title">$!locale.get("product.label.productnotavailable")</h2>
+	<p>
+		$!locale.get("search.result.tryOurSearch") $locale.get("label.text.or") 
+		$locale.get("label.text.goToOur") <a href="$locale.get('website.url.Welcome')" class="cimm_inlineButton">$locale.get("site.label.homePage")</a>   
+		$locale.get("label.text.or") <a href="$locale.get('website.url.ProductCategory')" class="cimm_inlineButton">$locale.get("product.button.continueShopping")</a>
+	</p>
+ 	<br/> 
+	<p> Not finding what you want, try our <a class="linkText" href="/advancedSearch">Advanced Search</a></p>
+ </div> -->
+#end

@@ -7,13 +7,15 @@ $.getScript(webThemes+'js/multiTab.min.js', function(){
 		   accordion:true
 	});
 });
+var date = new Date();
+var milliSec = date.getMilliseconds();
 enqueue('/getPromotedProductGroupsPage.action?reqType=GP&AjaxRequest=Y',function(data){
 	$("#promotedProductsTable").html(data);
 });
-enqueue('/OrderHistory?AjaxRequest=Y&dt='+new Date(),function(data){
+enqueue('/OrderHistory?AjaxRequest=Y&dt='+milliSec,function(data){
 	$("#orderHistory").html(data);
 });
-enqueue('/OpenOrderSale.action?reqType=webOrder&orderStatus=New&AjaxRequest=Y&dt='+new Date(),function(data){
+enqueue('/OpenOrderSale.action?reqType=webOrder&orderStatus=New&AjaxRequest=Y&dt='+milliSec,function(data){
 	$("#openOrderTable").html(data);
 });
 
@@ -91,9 +93,9 @@ $(document).ready(function() {
 			var pathNew = userProfileImagePath+response.responseText;
 			var chooseProfilePicture = locale('product.heading.chooseProfilePicture');
 		    unblock();
-		    $('#profilePicture').attr("src",pathNew+"?dt="+new Date());
-		    $('#profilePictureThumbnail').attr("src",pathNew+"?dt="+new Date());
-		    enqueue('sessionValueLink.action?crud=s&keyValue=userProfileImage&insertValue='+response.responseText+'&dt='+new Date())
+		    $('#profilePicture').attr("src",pathNew+"?dt="+milliSec);
+		    $('#profilePictureThumbnail').attr("src",pathNew+"?dt="+milliSec);
+		    enqueue('sessionValueLink.action?crud=s&keyValue=userProfileImage&insertValue='+response.responseText+'&dt='+milliSec)
 		    $('#profileImage').attr({ value: ""});
 		    $('#cimm_customImageUpload > span').text(chooseProfilePicture);
 		},

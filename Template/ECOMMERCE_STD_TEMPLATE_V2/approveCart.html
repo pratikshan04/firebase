@@ -5,7 +5,7 @@
 #if($message)
 <div class="alert alert-danger">$message</div>
 #end
-<form id="productGroupForm">
+<form id="productGroupForm" method="post">
 	<input type="hidden" id="rejectReason" name="rejectReason"/>
 	<!-- <div id="selectedShipInfo"> </div> -->
 	<div class="hidden-lg hidden-md mBottom-3">
@@ -33,7 +33,7 @@
 					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					<tr>
 						<td data-th="$locale.get('product.label.Image')">    
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
@@ -46,7 +46,7 @@
 						<td class="alignLeft" data-th="$locale.get('product.label.productDescription')">
 							<ul>
 								<li>
-								<strong><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong>
+								<strong><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong>
 								</li>
 								#if($itemData.manufacturerPartNumber)
 								<li>
@@ -95,6 +95,12 @@
 								<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" />
 								</span> -->
 								</li>
+								#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+								<li>
+									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+									<p class="propwarningmsg"><i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+								</li>
+								#end
 							</ul>
 						</td>
 						<td data-th="$locale.get('product.label.qty')">
@@ -112,7 +118,7 @@
 						<td class="tabelPrice" data-th="$locale.get('product.label.yourprice')">
 							<span>
 								#if($itemData.price>0)
-								$$numberTool.format($numberToolFormat,$itemData.price)#if($itemData.saleQty>0) per $itemData.saleQty #end #if($itemData.uom)/ $itemData.uom #end
+									$$numberTool.format($numberToolFormat,$itemData.price)#if($!itemData.saleQty>0 || $!itemData.uom) / #end #if($itemData.saleQty>0) $!itemData.saleQty #end #if($itemData.uom) $!itemData.uom #end
 								#else
 								<strong class="required">$locale.get("product.label.callforprice")</strong>
 								#end
@@ -131,7 +137,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-8 col-sm-8 col-xs-12 hideOverflow">
+		<div class="col-md-8 col-sm-8 col-xs-12 overflowHidden">
 			<button type="button" class="button slideBtns" data-toggle="modal" data-target="#ReasonPopDiv" id="rejectCart">
 				$locale.get("product.label.rejectCart")
 			</button>

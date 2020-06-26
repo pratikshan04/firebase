@@ -36,7 +36,7 @@
 		#if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
             <td valign="top" data-th="$locale.get('product.label.Image')">                        
             	<div class="cimm_cartProdImg">
-	            	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ',"_")">
+	            	<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 	                    <span id="imageName$itemData.itemId">
 	                        #if($itemData.imageType=="URL")
 	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
@@ -54,12 +54,12 @@
             	<div class="cimm_cartProdDescription">
                     <ul>
                         <li>
-                        	<a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle.replace(" ","_")'><strong>$itemData.brandName $!itemData.manufacturerPartNumber</strong></a>
+                        	<a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($itemTitle)'><strong>$itemData.brandName $!itemData.manufacturerPartNumber</strong></a>
                         </li>
                         <li>
                             #if($!itemData.shortDesc.length()>100)
                             <p> $!itemData.shortDesc.substring(0, 100)
-                                <a href="$itemData.itemPriceId$locale.get("website.url.ProductDetail")$itemTitle"> $locale.get("product.label.more")</a>
+                                <a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($itemTitle)'> $locale.get("product.label.more")</a>
                             </p>
                             #else
                             <p> $!itemData.shortDesc </p>
@@ -147,7 +147,7 @@
 		 <div class="elseCondition">
         	<h4 align="center">$locale.get("product.label.noCrtItms")</h4>
             <div></div>
-            <p align="center"><a class="button" href="$locale.get("website.url.ProductCategory")">$locale.get("product.button.continueShopping")</a></p>
+            <p align="center"><a href="$!locale.get('website.url.ProductCategory')" class="btn btn-continueshop">$!locale.get("product.button.continueShopping")</a></p>
         </div>
 		#end				
 <input type="hidden" value="$!disableShipCheck" id="disableShipCheck" />

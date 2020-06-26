@@ -326,6 +326,9 @@
       }
     }
   }
+  p{
+    word-break: break-word;
+  }
 }
 .filterSelOptions .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
 	width: 200px;
@@ -359,6 +362,26 @@
             float: none;
         }
     }
+}
+#documentsSection{
+    ul{
+        li{
+            max-width: 100px;
+            margin-right: 10px;
+            a{
+                display: inline-block;
+                label{
+                    display: block;
+                    text-align: center;
+                    margin: 10px 0 0 0;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+.cimm_pdfLink{
+    display: none;
 }
 .cloneImg{
     float: left;

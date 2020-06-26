@@ -28,18 +28,26 @@
 		<tbody>
 		#set($countOrderList = 0) #if($orderList.size()>0) #foreach($orderList in $orderList) #set($countOrderList = $!countOrderList + 1)
 			<tr>
-				<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+			     #if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")			 
+			    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+				#else
+			    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+			    #end
 				##if($searchBy=="partNumber")
-				<td class="alignLeft" data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else &nbsp; #end</td>
+				<td class="alignLeft" data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else $!orderList.orderDate #end</td>
 				##else
 				<!-- <td class="alignLeft" data-th="$!locale.get('product.heading.PostDate')">#if($!orderList.postDate)$!orderList.postDate #else &nbsp; #end</td> -->
 				##end
 				<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
 				<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
-				<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
+				<td data-th="$!locale.get('product.label.processingStatus')">$!orderList.orderStatus</td>
 				<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 				<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
+				#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")	
+				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+				#else
 				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+			    #end
 			</tr>
 			#if($countOrderList == 5) #break #end #end 
 			#else
@@ -57,6 +65,12 @@
 #if($!entityIDType && $entityIDType.contains("<") || $entityIDType.contains(">"))
 	#set($entityIDType = "") 
 #end
+#if($!startDate && $startDate.contains("<") || $startDate.contains(">"))
+	#set($startDate = "") 
+#end
+#if($!endDate && $endDate.contains("<") || $endDate.contains(">"))
+	#set($endDate = "") 
+#end
 	<div class="row">
 		<div class="col-md-12 cd-sm-12 cd-xs-12">
 			<input type="hidden" id="startDateVal" value="$!startDate"/>
@@ -69,19 +83,19 @@
 				<input type="hidden" name="partNumberToERP" id="partNumberToERP"/>
 				<input type="hidden" name="orderNumber" id="orderNumber"/>
 				<div class="row">
-				<div class="col-md-4 form-inline">
+					<div class="col-md-4 custom_lineform form-inline">
 						<input type="text" id="orderPoSearch" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('label.order.searchbar')" >
 						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md" value="Search"/>
 					</div>
-					<div class="col-md-8 form-inline text-right">
-					<label for="datepicker_from" class="mRight-2">From </label>
+					<div class="col-md-8 custom_lineform form-inline text-right mTop-2">
+					<label for="datepicker_from" class="mRight-2 date_from">From </label>
 						<div class='input-group date'>
 							<input type="text" name="startDate" id="startDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
 						<!-- 	<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span> -->
 						</div>
-						<label class="mRight-2">$!locale.get("product.label.to")</label>
+						<label class="mRight-2 date_from">$!locale.get("product.label.to")</label>
 						<div class='input-group date'>
 							<input type="text" name="endDate" id="endDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
 						<!-- 	<span class="input-group-addon">
@@ -89,8 +103,8 @@
 							</span> -->
 						</div>
 						   <div class="input-group form-group clearform">
-							    <button type="button" class="btn btn-tertiary btn-md mRight-2" id="searchBtn" data-hasPassCode="N" data-id="applybutton" data-value="#if($entityIDType) $entityIDType.replace('','')To #else ShipTo #end" data-invoicNum="$!orderList.orderNum" onclick="processForm(this)">Apply</button>
-							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md">Clear</button>
+							    <button type="button" class="btn btn-tertiary btn-md mRight-2 order_btn" id="searchBtn" data-hasPassCode="N" data-id="applybutton" data-value="#if($entityIDType) $entityIDType.replace('','')To #else ShipTo #end" data-invoicNum="$!orderList.orderNum" onclick="processForm(this)">Apply</button>
+							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md order_btn">Clear</button>
 						    </div>
 					</div>
 					<!-- <div class="col-md-4">
@@ -114,7 +128,7 @@
 					<thead>
 						<tr>
 							<th class="left">$!locale.get("form.label.OrderNo")</th>
-							<th class="left">$!locale.get("product.heading.PostDate")</th> 
+							<th class="left">$!locale.get('product.label.shipDate')</th>
 							<th class="left">$!locale.get("product.label.description")</th>
 							<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
 							<th>$!locale.get("product.label.processingStatus")</th>
@@ -127,16 +141,24 @@
 						#if($orderList.size()>0)
 						#foreach($orderList in $orderList)
 						#if(!$!orderList.accountRegId.contains("C"))
-						<tr>
+						<tr>		
+						    #if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")					
+						    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+							#else
 							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
-							<td data-th="$!locale.get('product.heading.PostDate')">#if($orderList.postDate!="")$!orderList.postDate#end</td>
+							#end
+							<td data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else $!orderList.orderDate #end</td>
 							<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
 							<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
-							<td data-th="$!locale.get('product.label.processingStatus')">#if($orderList.printStatus!="N") Under Process #else Completed #end</td>
+							<td data-th="$!locale.get('product.label.processingStatus')">$!orderList.orderStatus</td>
 							<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 							<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
-							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
-						</tr>
+							#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")
+							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+							#else							
+						    <td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+						    #end
+						 </tr>
 						#end
 						#end
 						#end

@@ -38,13 +38,13 @@
 	<li><span>$!savedGroupName</span></li>
 </ul>
 #elseif($!LayoutName=="ApproveCart")
-<h1 class="cimm_page-title">#if($!savedGroupName)$!savedGroupName #end</h1>
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
     <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
     <li><a href="/SavedGroups/ApproveCart"> $!locale.get("breadcrumbs.label.responseType.ApprovedCart")</a></li>
     <li class="active"><span>$!savedGroupName</span></li>
 </ul>
+<h1 class="cimm_page-title">#if($!savedGroupName)$!savedGroupName #end</h1>
 #elseif($!LayoutName=="SavedCartPage")
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
@@ -108,6 +108,8 @@
 	#set($pageTitleBreadCrumbFirst = "" )
 	#set($pageTitleBreadCrumbLast = "" )
 	#set($finalPageTitle = "" )
+	#set($forPageSeoUrl = "" )
+	#set($forPageSeoUrlSeparator = "" )
 		#if($!breadCrumbList)
 			<ul class="breadcrumb">
 				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
@@ -115,11 +117,13 @@
 				#set($breadCrumbSize = $!breadCrumbList.size() )
 				#set($breadCrumbIdx = 1 )
 				#foreach($!breadCrumb in $!breadCrumbList)
+					#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName) )
+					#set($forPageSeoUrlSeparator = "/" )
 					#if($!breadCrumbIdx == $!breadCrumbSize)
 						#set($listPageHeading = $!breadCrumb.categoryName)
 						<li class="active">$!breadCrumb.categoryName</li>
 					#else
-						<li><a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!breadCrumb.categoryName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!breadCrumb.categoryName</a></li>
+						<li><a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl">$!breadCrumb.categoryName</a></li>
 						#set($pageTitleBreadCrumbFirst = $!pageTitleBreadCrumbFirst+" "+ $!breadCrumb.categoryName)
 					#end
 					#set($pageTitleBreadCrumbLast = $!listPageHeading )
@@ -132,10 +136,17 @@
 				#end
 			</ul>
 		#else
+			#set($forPageSeoUrl = "" )
+			#set($forPageSeoUrlSeparator = "" )
 			<ul class="breadcrumb">
 				<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
 				<li class="active">$!locale.get("product.heading.productCategory")</li>              
 			</ul>
+		#end
+		#if($!forPageSeoUrl=="")
+			#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-").toLowerCase())
+		#else
+			#set($forPageSeoUrl =$forPageSeoUrl.replaceAll(" ","-").toLowerCase()+"/")
 		#end
 		<!--h1 class="cimm_page-title hidden">#if($!listPageHeading && $!listPageHeading.trim().length()>0) $!listPageHeading #else $locale.get("navigation.label.shopProducts") #end</h1 --> 
 #elseif($!LayoutName=="ProductList")
@@ -158,7 +169,13 @@
 		#set($pageTitleBreadCrumbFirst = "" )
 		#set($finalPageTitle = "" )
 		#set($shopByBrand = "" )
+		#set($forPageSeoUrl = "" )
+		#set($forPageSeoUrlSeparator = "" )
 		#foreach($!breadCrumb in $!breadCrumbList)
+		#if($!breadCrumb.categoryName.length()>1)
+				#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName) )
+				#set($forPageSeoUrlSeparator = "/" )
+			#end
 			#if($!navigationType=='BRAND')
 	    		#if($!breadCrumbIdx == $!breadCrumbSize)
 					<li class="active"> $!breadCrumb.categoryName</li>
@@ -174,7 +191,7 @@
 					<li class="active">$!breadCrumb.categoryName</li>
 					#set($LastSet = $!breadCrumb.categoryName )
 				#else
-					<li><a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!breadCrumb.categoryName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!breadCrumb.categoryName</a></li>
+					<li><a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$forPageSeoUrl">$!breadCrumb.categoryName</a></li>
 					#set($FirstSet = $!breadCrumb.categoryName)
 					#set($FirstSetCode = $!breadCrumb.categoryCode )
 					#set($pageTitleBreadCrumbFirst = $!pageTitleBreadCrumbFirst+" "+ $!breadCrumb.categoryName)
@@ -184,6 +201,7 @@
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 			#set ( $!finalPageTitle =  $!pageTitleBreadCrumbFirst + " - " + $!pageTitleBreadCrumbLast)
 		#end
+		#set($forPageSeoUrl =$forPageSeoUrl+"/")
 	</ul>
 	<h1 class="cimm_page-title hideMe">$!pageTitleBreadCrumbLast</h1>
 	#end
@@ -194,7 +212,11 @@
 		#if($!breadCrumbList && $!breadCrumbList.size()>0)
 			#set($breadCrumbSize = $!breadCrumbList.size() )
 			#set($breadCrumbIdx = 1 )
+			#set($forPageSeoUrl = "" )
+			#set($forPageSeoUrlSeparator = "" )
 				#foreach($!breadCrumb in $!breadCrumbList)
+				#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName) )
+				#set($forPageSeoUrlSeparator = "/" )
 					#if($!breadCrumbIdx == $!breadCrumbSize)
 						<li>
 						#if($!breadCrumb.categoryName)
@@ -205,7 +227,7 @@
 						</li>
 					#else
 						<li>
-							<a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!breadCrumb.categoryName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"> 
+							<a href="$!breadCrumb.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!forPageSeoUrl"> 
 								$!breadCrumb.categoryName
 							</a>
 						</li>
@@ -271,6 +293,11 @@
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
     <li class="active">$!locale.get("label.authenticate.useraccount")</li>				
 </ul>	
+#elseif($LayoutName=="RequestForQuoteV2Page")
+<ul class="breadcrumb">
+    <li><a href="$!locale.get('website.url.Welcome')" title='$!home'>$!home</a></li>
+    <li class="active">$!locale.get("breadcrumbs.label.$!LayoutName")</li>
+</ul>
 #elseif($LayoutName!="ShipEntityPage")
 <h1 class="cimm_page-title">$!locale.get("breadcrumbs.label.$!LayoutName")</h1>
 	<ul class="breadcrumb">

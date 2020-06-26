@@ -119,24 +119,35 @@ $(document).ready(function(){
 		});
 	}
 	$('#customerAlsoBought').slick({
-		infinite: true,
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		responsive: [
-		           {
-		             breakpoint: 768,
-		             settings: {
-		               slidesToShow: 3,
-		             }
-		           },
-		           {
-		             breakpoint: 480,
-		             settings: {
-		               slidesToShow: 2,
-		             }
-		           }
-		         ]
-		});
+		  infinite: true,
+		  slidesToShow: 5,
+		  slidesToScroll: 1,
+		  pauseOnHover:true,
+		  responsive: [
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 4,
+							}
+						},{
+							breakpoint: 600,
+							settings: {
+								slidesToShow: 3,
+							}
+						},{
+							breakpoint: 500,
+							settings: {
+								slidesToShow: 2,
+							}
+						},
+						{
+							breakpoint: 400,
+							settings: {
+								slidesToShow: 1,
+							}
+						}
+					]
+	  });
 	$('.allBranchWrap .cimm_siteTableEnclosure').slimScroll({
 		color: '#565F65',
 		size: '7px',
@@ -412,12 +423,17 @@ function submitReview(){
 	if(title==""||title==null){
 		result = result + "<p> Title is required </p>";
 	}
+	if(title.length > 200){
+		result = result + "<p>Title must not exceed 200 characters";
+	}
 	if(count<=10){
 		if(comments==""||comments==null){
 			result = result + "<p> Review Comment is required </p>";
 		}else{
 			result = result + "<p>  Atleast 10 Characters in Review Field  </p>";
 		}
+	} else if (count > 4000){
+		result = result + "<p>Review must not exceed 4000 characters</p>";
 	}
 	if (result == "") {
 		var str = $("#reviewForm").serialize();
@@ -431,6 +447,8 @@ function submitReview(){
 					var arrRes = result.split("|");
 					if($.trim(arrRes[0])=="0"){
 						bootAlert('small','success','Success','Review Added Successfully.');
+						$("#savebtn").attr('disabled', 'disabled');
+						$("#savebtn").addClass("disabled")
 						window.location.reload();
 					}else{
 						bootAlert('small','error','Error',"Review Adding Failed");

@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav">
-	<li class="hidden-lg  nav_bar_close">
+	<li class="hidden-lg nav_bar_close">
 		<div class="cimm_slideMobileNavIcon" id="slideIcon">
-			<h2  class="visible-sm-block dark-ripple visible-xs-block">$locale.get("product.heading.menu")</h2>
+			<h2  class="dark-ripple">$locale.get("product.heading.menu")</h2>
 			<a href="javascript:void(0);" onclick="closeSlide();"><span></span></a>
 		</div> 	
 	</li>
@@ -181,7 +181,7 @@
    #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
     #if($userLogin)
 		#if($LayoutName != "QuickOrderStdPage")
-		<li class="hideForDevices">
+		<li class="visible-lg">
 			<span>
 				<a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder")</a>
 				<em class="fa"></em>
@@ -302,10 +302,10 @@
 			</div>
 		</li>
 		#else
-		<li class="hideForDevices"><span><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
+		<li class="visible-lg"><span><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
 		#end
 	#else
-	<li class="hideForDevices"><span><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
+	<li class="visible-lg"><span><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
 	#end
 	#end
 	
@@ -398,7 +398,7 @@
 			#else
 			<li class="hidden-lg">
 				<span>
-					<a href="/Login">$!locale.get('register.label.login')</a>
+					<a href="/Login">$!locale.get('form.label.login')</a>
 				</span>
 			</li>
 			<li class="hidden-lg">

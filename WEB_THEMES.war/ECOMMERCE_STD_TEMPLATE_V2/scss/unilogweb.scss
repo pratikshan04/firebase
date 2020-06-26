@@ -437,7 +437,7 @@ $modal_closebtn-color: $default_font-color;
 
 .uploadImage_wrap {
     .uploadImage {
-        width: calc(100% - 150px);
+        width: calc(100% - 160px);
         float: left;
         border: 2px solid $default_font-color;
         height: 35px;
@@ -1078,7 +1078,8 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 .dropdown-menu.customDropDown{
 	padding: 5px;
 	background: $white;
-	border: 1px solid $border-color;
+    border: 1px solid $border-color;
+    min-width: 220px;
 	li{
 		width: 100%;
 		border-bottom: 1px solid $border-color;
@@ -1093,7 +1094,11 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 			color: $default_font-color !important;
 			text-transform: capitalize;
 			display: block;
-			padding: 5px;
+            padding: 5px;
+            &:hover{
+                background: $primary_color;
+                color: $white !important;
+            }
 		}
 		&.text-center{
 			text-align: center;
@@ -1144,6 +1149,10 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
   margin: 15px 0 15px 0;
   font-size:16px;
 }
+.overflowHidden{
+    overflow: hidden;
+    white-space: nowrap;
+}
 .pagination{
     >li{
         >a, >span{
@@ -1152,14 +1161,14 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     }
 }
 #openOrderTable_wrapper{
+    .dataTables_filter{
+        display: none;
+    }
     .tabFooter{
         #openOrderTable_paginate{
             width: 50%;
             float: right;
         }
-    }
-    .dataTables_filter{
-        display: none;
     }
 }
 #OrdersHistoryDetails {

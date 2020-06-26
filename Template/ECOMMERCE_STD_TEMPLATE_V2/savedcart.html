@@ -7,9 +7,9 @@
 #if($!savedGroupName && $!savedGroupName!="" && $!savedGroupId)
 	<div id="notificationDiv"></div>
 	<div class="row mBottom-3">
-		<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="col-md-6 col-xs-12">
 			<h1 class="cimm_page-title mBottom-0" id="groupName">$savedGroupName</h1>					
-			<div class="form-inline" id="editBox" style="display: none;">
+			<div class="custom_lineform form-inline" id="editBox" style="display: none;">
 				<input type="hidden" value="$savedGroupName" id="oldGroupName" />
 				<input type="hidden" value="$savedGroupId" id="GroupId" />
 				<input type="hidden" value="C" id="GroupType" />
@@ -18,7 +18,7 @@
 				<button class="cimm_inlineButton" onclick="cancelEditGroup();">$!locale.get('savedCart.button.cancel')</button>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-6 col-xs-12 text-right grpNameEditWrap">
+		<div class="col-md-6 col-xs-12 text-right grpNameEditWrap">
 			#if($isShared!="Y")
 			<button class="cimm_inlineButton" onclick="editGroup();" data-toggle="tooltip" title="$!locale.get('savedCart.button.editCartName')"><em class="glyphicon glyphicon-edit"></em> $!locale.get('savedCart.button.cartName')</button>
 			<button class="cimm_inlineButton" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$savedGroupId&reqType=C');" data-toggle="tooltip" title="$!locale.get('savedCart.button.deleteCart')"><em class="glyphicon glyphicon-trash"></em>  $!locale.get('header.label.cart')</button>
@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<div class="row mBottom-3">
-		<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="col-md-4 col-sm-4 col-xs-12 custom_lineform">
 			<select class="form-control selectpicker" onchange="bulkActions(this);" id="bulkActionSelect">
 				<option value="">$!locale.get("product.option.select")</option>
 				<option value="deleteOption">$!locale.get("product.button.deleteSelected")</option>
@@ -36,7 +36,7 @@
 			</select>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="form-inline">
+			<form action="myProductGroupPage.action" method="get" id="myProductGroup" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.itemsperpage'): </label>
 				<div class="form-group">
 					<input type="hidden" name="savedGroupId" value="$savedGroupId" />
@@ -55,7 +55,7 @@
 			</form>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 text-right">
-			<form action="myProductGroupPage.action" id="sortByForm" class="form-inline">
+			<form action="myProductGroupPage.action" id="sortByForm" class="custom_lineform form-inline">
 				<label>$!locale.get('product.label.sortBy'): </label>
 				<div class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
@@ -88,7 +88,7 @@
 	</div>
 		<div class="row mBottom-3">
 		<div class="col-md-9 col-sm-6 col-xs-12">
-			<div class="form-inline">
+			<div class="custom_lineform form-inline">
 				<form action="myProductGroupPage.action" id="productSearchForm" class="form-group">
 					<input type="hidden" value="$savedGroupId" name="savedGroupId" />
 					<input type="hidden" value="$!savedGroupName" name="savedGroupName" />
@@ -141,7 +141,7 @@
 				<tr itemscop itemtype="http://schema.org/Product">
 					##if($session.getAttribute("userCustomFieldValue").get("PRODUCT_GROUP_IMAGE_DISPLAY")=="Y")
 					<td data-th="$locale.get('product.label.Image')">                         
-						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
 							<span id="imageName$itemData.itemId">
 							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
@@ -155,7 +155,7 @@
 					<td data-th="$locale.get('product.label.productDescription')">
 						<ul class="text-left">
 							<li itemprop="name">
-								<h5 class="cimm_itemTitle"><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5>
+								<h5 class="cimm_itemTitle"><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5>
 							</li>
 							<li class="hideForCollapse hideMe">
 								<p itemprop="description">$!itemData.shortDesc </p>
@@ -226,7 +226,7 @@
 					#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 					#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 					<li>
-					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$itemTitle</a>
+					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemTitle</a>
 					</li>
 					#end
 					</ul>
@@ -264,13 +264,13 @@
 						<span>
 							#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 								#if($itemData.price>0)
-								<span class="priceSpan">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
+								<span class="priceSpan formatPrice">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							#else
 								#if($itemData.price>0)
-								<span class="priceSpan">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
+								<span class="priceSpan formatPrice">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
@@ -281,8 +281,12 @@
 						</span>
 					</td>
 					<td data-th='$locale.get("product.label.extPrice")' class="priceSpan">
-						<span class='priceSpan'>
-							#if($itemData.total>0) $$numberTool.format("$numberToolFormat",$itemData.total) #else N/A #end
+						<span class='priceSpan formatPrice'>
+							##if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) ##else N/A ##end
+							#if($itemData.price > 0)
+								#set($totalPrice = $itemData.price * $itemData.qty)
+								$totalPrice
+							#end
 						</span>
 						<!-- <span class="productGrpRightAlign"><span id="spanEx_$itemData.partNumber" data-select='extPriceData'>
 						<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span></span> -->

@@ -242,6 +242,7 @@
 	});
 	
 	$("#saveBtnId").click(function () {
+		$('.staticPageSave.rightSlide').removeAttr('style');
 		var cms_leftMenuSlide = $('.staticPageSave.rightSlide');
 		var rightSlidePos = cms_leftMenuSlide.offset().left;
 		$('.staticPageSave.rightSlide').css({'right':'-400px'});
@@ -377,16 +378,14 @@ gm.initControls = function(){
 			hideActionIcons('preview');
 			$(this).html("<span class='action-icon'><i class='fas fa-arrow-left fa-2x'></i></span><span class='action-text'>Back</span>").attr('title', 'Back');
 			gm.deinitCanvas();
-			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").prop('disabled', true);
-			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").toggle(false);
+			$(this).parent().find(".gm-edit-mode, #saveBtnId").prop('disabled', true).fadeOut();
 			gm.reBuildBanner(false);
 			gm.switchLayoutMode(gm.options.layoutDefaultMode);
 		} else {
 			showActionIcons('preview');
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file'></i><sup class='fas fa fa-eye'></sup></span><span class='action-text'>Page Preview</span>").attr('title', 'Preview');
 			gm.initCanvas();
-			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").prop('disabled', false);
-			$(this).parent().find(".gm-edit-mode, .gm_cmsSaveBtn").toggle(true);
+			$(this).parent().find(".gm-edit-mode, #saveBtnId").prop('disabled', false).fadeIn();
 			regulerVeiw();
 		}
 		//$(this).toggleClass(gm.options.gmDangerClass);
@@ -420,8 +419,7 @@ gm.initControls = function(){
 			var totalChars = editor.getTextArea().value.length;
 			editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
 			CodeMirror.commands["goLineStart"](editor); 
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").prop('disabled', true);
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").toggle(false);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, #saveBtnId").prop('disabled', true).fadeOut();
 		} else {
 			showActionIcons('edit');
 			$(this).html("<span class='action-icon'><i class='fa fa-2x fa-file-code'></i></span><span class='action-text'>Source Code</span>").attr('title', 'Edit Source Code');
@@ -432,8 +430,7 @@ gm.initControls = function(){
 			canvas.find('[data-type="widget"]').html("");
 			gm.initCanvas();
 			gm.mode="visual";
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").prop('disabled', false);
-			$(this).parent().find(".gm-preview, .gm-layout-mode > button, .gm_cmsSaveBtn").toggle(true);
+			$(this).parent().find(".gm-preview, .gm-layout-mode > button, #saveBtnId").prop('disabled', false).fadeIn();
 		}
 		
 	}).on("click", "." + gm.options.gmEditRegion + ' .'+gm.options.gmContentRegion, function(){
@@ -1708,8 +1705,8 @@ console.log("Custom : "+curr_control.dataToolElement);
     */
     
     var selectFullWidthContainer = '<div class="select-fullwidth"><label class="cms_customCheckBox"><input type="checkbox" id="containFluid"/><span> Create full width container</span></label></div>';
-    //var previewDevices = "<a style='display:none;' class='gm-save button tiny' title='Save' href='#'><span class='fa fa-save'></span></a>";
-    var previewDevices = "<a title='Mobile Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-mobile'></i></span><span class='action-text'>Mobile Portrait</span></a>";
+    var previewDevices = "<a style='display:none;' class='gm-save button tiny' title='Save' href='#'><span class='fa fa-save'></span></a>";
+    previewDevices += "<a title='Mobile Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-mobile'></i></span><span class='action-text'>Mobile Portrait</span></a>";
     previewDevices += "<a title='Mobile Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-mobile fa-rotate-270'></i></span><span class='action-text'>Mobile Landscape</span></a>";
     previewDevices += "<a title='Tablet Portrait' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-tablet'></i></span><span class='action-text'>Tablet Portrait</span></a>";
     previewDevices += "<a title='Tablet Landscape' class='iconbutton tiny resPreviewIcon' data-width='640' onclick='changeresponsivefunct(this);'><span class='action-icon'><i class='fa fa-2x fa-tablet fa-rotate-270'></i></span><span class='action-text'>Tablet Landscape</span></a>";
@@ -2092,7 +2089,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 	
 	 hideActionIcons = function(clickType){
 		//$(".readyTemplatesForm").hide();
-		$(".cms_leftMenu").css({'left':'-280px'});
+		$(".cms_leftMenu").css({'left':'-400px'});
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'none';
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'none';
@@ -2120,7 +2117,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 	};
 	showActionIcons = function(clickType){
 		//$(".readyTemplatesForm").show();
-		$(".cms_leftMenu").css({'left':'0'});
+		$(".cms_leftMenu").removeAttr('style').show();
 		if(window.parent.document.getElementsByClassName('Cimm-Header')[0]){
 			window.parent.document.getElementsByClassName('Cimm-Header')[0].style.display = 'block';
 			window.parent.document.getElementsByClassName('Cimm-Footer')[0].style.display = 'block';
@@ -2140,11 +2137,7 @@ console.log("Custom : "+curr_control.dataToolElement);
 			jQuery('.Cimm-MainContenthide').addClass('Cimm-MainContent').removeClass('Cimm-MainContenthide');
 			$("#gm-canvas").removeClass('gm-container');
 		}
-		if($('body').hasClass('expand-nav')){
-			$(".cms_staticTable").css({'padding':'0 0 0 60px'});
-		}else{
-			$(".cms_staticTable").css({'padding':'0 0 0 270px'});
-		}
+		$(".cms_staticTable").removeAttr('style');
 		$(".gmControlsCustomClass").removeClass('doNotFix');
 		/*jQuery('#pageTab,#addNewStaticFormId').show();
 		jQuery("#SeoTabs").css('pointer-events', 'visible');

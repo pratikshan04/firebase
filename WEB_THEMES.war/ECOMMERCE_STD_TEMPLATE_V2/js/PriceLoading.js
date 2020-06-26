@@ -349,21 +349,39 @@ function priceLoadMainFunction() {
 			}
 			
 				//if (!priceDispalyed && (warehouseCode == wareHouseDetails.wareHouseCode || warehouseCode == product.cimm2BCentralPricingWarehouse.warehouseCode)) {
+			
+			if($("#erpType").val()!= undefined && $("#erpType").val()=="cimmesb"){
+				if (product != undefined && product.customerPrice != undefined && product.customerPrice > 0 && !priceDispalyed) {
+					product.partNumber=partNumber;
+						populatePrice(product);
+						priceDispalyed = true;
+					}
+			}else{
 			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
 				product.cimm2BCentralPricingWarehouse.partNumber=partNumber;
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
 				}
+			}
 			//if (wareHouseDetails.branchAvailability > 0) {
 				populateAllBranchAvailability(wareHouseDetails);
 			//}
 		}
 		}else{
+			
+			if($("#erpType").val()!= undefined &&  $("#erpType").val()=="cimmesb"){
+				if (product != undefined && product.customerPrice != undefined && product.customerPrice > 0 && !priceDispalyed) {
+					product.partNumber=partNumber;
+						populatePrice(product);
+						priceDispalyed = true;
+					}
+			}else{
 			if (product.cimm2BCentralPricingWarehouse != undefined && product.cimm2BCentralPricingWarehouse.customerPrice != undefined && product.cimm2BCentralPricingWarehouse.customerPrice > 0 && !priceDispalyed) {
 				product.cimm2BCentralPricingWarehouse.partNumber=partNumber;
 					populatePrice(product.cimm2BCentralPricingWarehouse);
 					priceDispalyed = true;
 				}
+			}
 		}
 		if(!priceDispalyed){
 			populateCallForPrice(partNumber, 0);
@@ -509,15 +527,10 @@ function priceLoadMainFunction() {
 								trHide.removeClass('shown');
 							}
 						});
-				$("#linkedItemContentDiv_" + $(this).attr('id'))
-						.show();
-				$("#linkedItemAvailable_" + $(this).attr('id'))
-						.show();
-				$('td.details-control em').removeClass(
-						'fa-minus-circle').addClass(
-						'fa-plus-circle');
-				$(this).closest('tr').find('em').toggleClass(
-						'fa-minus-circle');
+				$("#linkedItemContentDiv_" + $(this).attr('id')).show();
+				$("#linkedItemAvailable_" + $(this).attr('id')).show();
+				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+				$(this).find('em').removeClass('fa-plus-circle').addClass('fa-minus-circle');
 				row.child.show();
 				tr.addClass('shown');
 				$("html, body").animate({
@@ -538,7 +551,7 @@ function priceLoadMainFunction() {
 				var domTabsExistFlag = false;
 				//$(".focusItemTabs").hide();
 				$('td.details-control em').removeClass('fa-minus-circle').addClass('fa-plus-circle');
-				$(this).closest('tr').find('em').toggleClass('fa-minus-circle');
+				$(this).find('em').removeClass('fa-plus-circle').addClass('fa-minus-circle');
 				$(tr).attr("data-detailsload", "Y");
 				$.ajax({
 					type : "POST",

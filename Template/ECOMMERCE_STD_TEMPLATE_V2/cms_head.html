@@ -1,0 +1,25 @@
+<BASE href="$!hostName">
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+#parse("font-awesomeV5.html")
+#parse("bootstrap-min-css.html")
+#set($currentWebTheme = "unilogweb.css")
+#if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
+	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ScheduledThemeFileName"))
+#elseif($!CommonDBQuerySystemParameter.get("ThemeFileName").toLowerCase().contains(".css"))
+	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
+#end
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
+<link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css?$!refreshVersion" media="all" />
+
+<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/lazysizes.min.js"></script>
+#parse("jquery-migrate-1-2-1-min.html")
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/siteScript.js?v=$!session.getLastAccessedTime()"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/slick.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/recentlyViewed.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jsaes.js"></script>
+<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootbox.min.js"></script>

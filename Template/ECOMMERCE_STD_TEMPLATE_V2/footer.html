@@ -1,4 +1,5 @@
 ##parse("sleekNavigationMenu.html")
+<!-- v8.5.1 -->
 #if($!userAgent == "WEBVIEW")
 <!-- <div id="navbar" class="footerBgColor">
 	<a id='navbar_home' href="#homePage"><img src="$!cdnUrl$!webThemes/$!siteName/images/App/FooterHome.png" alt=""/><p class="footerTextColor">Home</p></a>
@@ -159,7 +160,7 @@
 							<p><strong>$!locale.get('product.label.mpn'): </strong><span class="ATCMPartNumber"></span></p>
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-6">
-							<p class="addedItemPrice priceSpan"><span class="ATCprice"></span></p>
+							<p class="addedItemPrice priceSpan"><span class="ATCprice formatPrice"></span></p>
 							<p><strong>$!locale.get('product.label.qty'): </strong><span class="ATCQuantity"></span></p>
 							<p style="display: none;"><strong class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </strong><span class="ATCLeadTime"><img src="$!cdnUrl$!webThemes/$!siteName/images/loading.gif" alt="loading" /></span></p>
 						</div>

@@ -7,7 +7,8 @@
 #set($checkout="N")
 #set($displayPriceHelp = "N")
 <div id="notificationDiv"></div>
-#set($savedCartItemId = 0) #if($productListData.size()>0)
+#set($savedCartItemId = 0)
+#if($productListData.size()>0)
 #if($userLogin)
 <input type="hidden" id="validEmailAddress" name="validEmailAddress" value="$!validEmailAddress">
 #end
@@ -31,7 +32,7 @@
 	<div class="cartTotal_Top col-md-8 col-sm-8 col-xs-12">
 		<span class="btn btn-lg">
 			<strong class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</strong>
-			<strong>$!locale.get("product.label.orderTotal"): $ $numberTool.format("$numberToolFormat",$!cartTotal)</strong>
+			<strong>$!locale.get("product.label.orderTotal"): <span class="formatPrice">$ $numberTool.format("$numberToolFormat",$!cartTotal)</span></strong>
 		</span>
 		#if($userLogin) 
 			#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -97,7 +98,7 @@
 								<span></span>
 							</label>
 							#end
-                            <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+                            <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)">
                                 <span id="imageName$!itemData.itemId">
 			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
@@ -110,12 +111,12 @@
                     </td>
                     <td class="alignLeft" data-th="$!locale.get('product.label.description')">
                         <div class="cimm_cartProdDescription">
-                        	<p itemprop="name"><strong><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
+                        	<p itemprop="name"><strong><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
                             <ul>
                                 <li>
                                     #if($itemData.shortDesc.length()>75)
 	                                    <p itemprop="description"> $!itemData.shortDesc.substring(0, 75)
-	                                        <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"> $!locale.get("product.label.more")</a>
+	                                        <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"> $!locale.get("product.label.more")</a>
 	                                    </p>
                                     #else
                                     	<p itemprop="description"> $!itemData.shortDesc </p>
@@ -130,6 +131,12 @@
                                	</li>
                                 #end
                                 <li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></li>
+                                #if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+								<li itemprop="Prop65">
+									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+									<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+								</li>
+								#end
                                 #set($leadTime = "N")
                                 #set($available = "N")
                                 #set($allBranch = $!itemData.branchAvail)
@@ -175,17 +182,6 @@
 			                	<li>
 			                		<input type="text" class="lineItemComments" name="lineItemComment_$!itemData.productListId" id="lineItemComment_$!itemData.productListId" value="#if($itemData.lineItemComment)$!itemData.lineItemComment#end" placeholder='$!locale.get("product.label.lineItemComment")' />
 			                	</li>
-			                	#if($!customVal.get("custom_P65_WARNING_MESSAGE") && $!customVal.get("custom_P65_WARNING_MESSAGE").length()>0)
-								<li>
-									<div class="warning_MSG">
-										<p>Prop 65: <span style="font-weight:bold;"><a href="javascript:void(0);" data-id="warning_$itemData.itemId" onclick="warningPopUp(this);">WARNING</a></span></p>
-										<div id="warning_$itemData.itemId" style="display:none;">
-											<div class="exitWarning"><span class="warningPopExit" data-exitid="warning_$itemData.itemId"><i class="fa fa-times"></i></span></div>
-											<div class="warningContent"><img src="$webThemes/$siteName/images/warning.png" style="vertical-align: sub;"/><span>WARNING:</span> $customVal.get('custom_P65_WARNING_MESSAGE') For more information, go to <a href="https://www.p65warnings.ca.gov/" target="_blank">www.P65Warnings.ca.gov</a>.</div>
-										</div>
-									</div>
-								</li>
-								#end
                             </ul>
                         </div>
                     </td>
@@ -193,7 +189,7 @@
                      #if(($!session.getAttribute("isSalesUser").equals("Y") || $!session.getAttribute("isSalesAdmin").equals("Y")) && $!CommonDBQuerySystemParameter.get('ENABLE_OVERRIDE_PRICE_FROM_SALE_ADMIN')=='Y' )
                    <td data-th="$!locale.get('product.heading.perUnitPrice')" >
                     <span id="editunitprice_$!itemData.productListId">
-                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)  $!itemData.uom</strong></br>
+                        <strong><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</span>  $!itemData.uom</strong></br>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	#end
@@ -214,7 +210,7 @@
 						<input type="hidden" id="uom_$!itemData.productListId" name="uom_$!itemData.productListId" value="$!itemData.uom"/>
                     #else
                    <td data-th="$!locale.get('product.heading.perUnitPrice')">
-                        <strong>$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
+                        <strong class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	 #end
@@ -250,24 +246,24 @@
             </tbody>
         </table>
 	<p id="copyPrice" class='hideMe'>
-		<span class="priceLabel">$!locale.get("product.label.total"): </span><span class="priceValue">&nbsp;&nbsp;&nbsp;$ $numberTool.format("$numberToolFormat",$!cartTotal)</span>
+		<span class="priceLabel">$!locale.get("product.label.total"): </span><span class="priceValue formatPrice">&nbsp;&nbsp;&nbsp;$ $numberTool.format("$numberToolFormat",$!cartTotal)</span>
 	</p>
     <div class="cimm_btnGroupEnclosure">
         <ul class="clearAfter">
         	<!-- <li><a class="removeSelected">$!locale.get("product.label.removeSelected")</a></li> -->
             #if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "Y")
-            <li><a class="addSelected">$!locale.get("product.label.addSelectedToProductList")</a></li>
+            <li><a class="addSelected"><em class="fas fa-plus"></em>$!locale.get("product.label.addSelectedToProductList")</a></li>
             #end
-            <li><a href="$!locale.get('website.url.ProductCategory')"><em class="fa fa-shopping-bag" aria-hidden="true"></em>$!locale.get("product.button.continueShopping")</a></li>
-            <li><a href="javascript:void(0);" onclick="updateShoppingCart(); return false;"><span class="glyphicon glyphicon-history"></span>$!locale.get("product.button.updateCart")</a></li>
+            <li><a href="$!locale.get('website.url.ProductCategory')"><em class="fas fa-shopping-bag"></em>$!locale.get("product.button.continueShopping")</a></li>
+            <li><a href="javascript:void(0);" onclick="updateShoppingCart(); return false;"><em class="fas fa-history"></em>$!locale.get("product.button.updateCart")</a></li>
 			#if($userLogin)
 				##if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 					<li>
-					<div class="dropdown margin-auto">
+					<div class="dropdown margin-auto dropdownFixedWidth">
 						#set($groupPop = "ulg"+$!savedCartItemId+"_custPop")
 						<a id="$!groupPop" class="popMsg hideMe"></a>
 						<a id='linkg$!savedCartItemId' class="dropdown-toggle" data-toggle="dropdown" data-itemId="$!savedCartItemId" data-listTarget="ulg$!savedCartItemId" data-function="saveCartFunction">
-							<em class="fa fa-shopping-cart" aria-hidden="true"></em>$!locale.get("product.button.saveCart")
+							<em class="fas fa-cart-arrow-down"></em>$!locale.get("product.button.saveCart")
 						</a>
 						<ul id="ulg$!savedCartItemId" class="dropdown-menu customDropDown">
 							<li class="text-center"><em class="fa fa-spin fa-spinner"></em></li>
@@ -276,7 +272,7 @@
 					</li>
 				##end
 			#end
-			<li><a class="" href="javascript:void(0);" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteFlag=Y','1','')"><em class="glyphicon glyphicon-shopping-cart"></em>$!locale.get("product.button.emptyCart")</a></li>
+			<li><a class="" href="javascript:void(0);" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteFlag=Y','1','')"><em class="fa fa-shopping-cart"></em>$!locale.get("product.button.emptyCart")</a></li>
             <li>
             	#if($userLogin) 
 	            	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
@@ -336,7 +332,7 @@
 	<tr>
 		<td style="border:1px solid #CCC;text-align: center;padding: 5px;" data-th="$!locale.get('product.label.Image')">
 			<div class="cimm_cartProdImg alignCenter">
-			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)">
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" />
@@ -349,7 +345,7 @@
 		</td>
 		<td style="border:1px solid #CCC;text-align: left;padding: 5px;" data-th="$!locale.get('product.label.description')">
 			<div class="cimm_cartProdDescription">
-			<strong><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
+			<strong><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
 			<p itemprop="description"> $!itemData.shortDesc </p>
 			#if($itemData.manufacturerPartNumber)
 			<p>
@@ -414,7 +410,7 @@
 #else
 <div class="elseCondition">
     <h4 align="center">$!locale.get("product.label.noCrtItms")</h4>
-    <p class="marginY-5 text-center"><a class="button" href="$!locale.get('website.url.ProductCategory')">$!locale.get("product.button.continueShopping")</a></p>
+    <p class="marginY-5 text-center"><a href="$!locale.get('website.url.ProductCategory')" class="btn btn-continueshop">$!locale.get("product.button.continueShopping")</a></p>
 </div>
 #end
 

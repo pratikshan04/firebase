@@ -41,6 +41,26 @@ jQuery(document).ready(function() {
 		jQuery(".perPage_"+this.id).addClass("selected");
 		redrawWithNewCount(t, this.id);
 	});
+	if($(".imgDesc").length > 0){
+        var paraAccumulator = '';
+        for(var i=0;i<$(".imgDesc").length;i++){
+            var id = $($(".imgDesc")[i]).attr('data-cateid');
+            for(var j=0;j<$($(".imgDesc")[i]).children().length;j++){
+                var childObj = $($($(".imgDesc")[i]).children()[j]);
+                //if(childObj.children("img").length !== 0){
+                    //childObj.remove();
+                //}
+            if(childObj.text().length > 200 ){
+                    var subStr = childObj.text().substring(0, 199);
+                    childObj.text("");
+                   childObj.html(subStr + " ... <a class='red' href='eventDetailsUnit.action?eventID="+ id + "'>Read More</a>");
+                }
+            }
+        }
+    }
+	 $(".imgDesc p:has(img)").each(function() {
+	        $(this).find("img").remove();
+	    });
 });
 function redrawWithNewCount(t, row_count){
 	//Lifted more or less right out of the DataTables source

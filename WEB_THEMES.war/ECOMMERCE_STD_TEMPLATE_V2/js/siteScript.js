@@ -92,9 +92,9 @@ function additionalFreightCharges(val) {
 function showNotificationDiv(type, message) {
 	$("#notificationDiv").html("");
 	if (type != "" && (type.toLowerCase() == "success")) {
-		$("#notificationDiv").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>' + message + '</div>');
+		$("#notificationDiv").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>' + message + '</div>');
 	} else {
-		$("#notificationDiv").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>' + message + '</div>');
+		$("#notificationDiv").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>' + message + '</div>');
 	}
 	var headerHeight = 0;
 	if ($("#enableStickyHeader").val() == "Y") {
@@ -177,6 +177,7 @@ function changeAction(s, selectId) {
 			return false;
 		} else {
 			bootAlert("small", "error", "Error", "Please select at least one item to delete.");
+			$(selectId).val("").selectpicker('refresh');
 			return false;
 		}
 	} else if (s == 5) {
@@ -308,7 +309,7 @@ function deleteSelectedItem(answer, selectId) {
 		$("#productGroupForm").attr("action", "deleteGroupItemPage.action");
 		$("#productGroupForm").submit();
 	} else {
-		$(selectId).val("");
+		$(selectId).val("").selectpicker('refresh');
 		return false;
 	}
 }
@@ -2232,6 +2233,7 @@ $('[data-function="quickCartView"]').click(function () {
 			}
 			triggerToolTip();
 			formatPrice();
+			formatNumbers();
 		}
 	});
 });
@@ -2502,7 +2504,7 @@ function sendSiteDetailPagePart(a) {
 	var itemAvailable = $("#itemAvailable").html();
 	var leadTimeLI = $("#leadTimeLI").html();
 
-	var productModeList = $('#childItemTable_wrapper #childItemTable').clone().find("tr .removeForSend").remove().end().html();
+	var productModeList = $('#childItemTable').clone().find("tr .removeForSend").remove().end().html();
 	//var titleDesc = "<div>";
 	var titleDesc = "";
 	var skuList = "<div style='font-size: 14px;'>";
@@ -2893,7 +2895,7 @@ var piwik = {
 		console.log(" Inside trackEcommerceCartUpdatePiwik()");
 		console.log("cart total : " + cartTotal);
 		_paq.push(['trackEcommerceCartUpdate', cartTotal]); // (required) Cart amount
-		_paq.push(['trackPageView']);
+		//_paq.push(['trackPageView']);
 	},
 	/*   trackEcommerceOrderPiwik() method will keep track of the order Details collected from Order Confirmation and submit to the PIWIK   */
 	trackEcommerceOrderPiwik: function (orderId, orderGrandTotal, orderSubTotal, taxAmount, shippingCharge, discountOffered) {
@@ -2923,7 +2925,7 @@ var piwik = {
 			categoryName, 							// (optional) Product category, or array of up to 5 categories
 			unitPrice 								// (optional) Product Price as displayed on the page
 		]);
-		_paq.push(['trackPageView']);
+		//_paq.push(['trackPageView']);
 	},
 	/*   setEcommerceCategoryViewPiwik() method will keep track of viewed category Details collected from category  page and submit to the PIWIK   */
 	setEcommerceCategoryViewPiwik: function (categoryName) {
@@ -2935,7 +2937,7 @@ var piwik = {
 			productName = false, 			// No product on Category page
 			category = categoryName 		// Category Page, or array of up to 5 categories
 		]);
-		_paq.push(['trackPageView']);
+		//_paq.push(['trackPageView']);
 	},
 	/*   populateOnCategoryPage() fetches current category and submit it to setEcommerceCategoryViewPiwik() further to the PIWIK   */
 	populateOnCategoryPage: function () {
@@ -3130,6 +3132,23 @@ var formatPrice = function () {
 		});
 	}
 }
+var formatNumbers = function(){
+	if($(".formatNumbers").length>0){
+		$(".formatNumbers").each(function(){
+			var e=$(this).text().trim();
+			var result = e.match(/\d+/g);
+			var finalResult = e;
+			if(result!=null && result.length>0){
+				finalResult = result[0];
+				finalResult = commaSeparateNumber(finalResult);
+				if(result.length>1){
+					finalResult = finalResult+"."+result[1];
+				}
+				$(this).text(finalResult);
+			}
+		});
+	}
+}
 function hideForDevice() {
 	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 		$(".hideForDevice").hide();
@@ -3207,6 +3226,7 @@ function formatPhoneVal() {
 $(function () {
 	toDoFooter();
 	formatPrice();
+	formatNumbers();
 	formatPhoneVal();
 	triggerToolTip();
 	hideBulkAction();
@@ -3503,7 +3523,7 @@ if ($("#enableHeaderQuickOderLink").val() == "Y") {
 		$(".cimm_navigationBar ul > li > a").removeClass("active");
 	}
 }
-if ($("#enableStickyHeader").val() == "Y" && $("#layoutName").val() != "CMSStaticPage") {
+if ($("#enableStickyHeader").val() == "Y" && $("#layoutName").val() != "CMSStaticPage" && $("#isWebview").val() != "WEBVIEW") {
 	$(window).resize(function () {
 		var width = $(window).innerWidth();
 		if (width < 980) {
@@ -3663,7 +3683,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3701,7 +3721,7 @@ function homeCarousels() {
 							}
 						},
 						{
-							breakpoint: 400,
+							breakpoint: 420,
 							settings: {
 								slidesToShow: 1,
 							}
@@ -3739,7 +3759,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3774,7 +3794,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3809,7 +3829,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -3844,7 +3864,7 @@ function homeCarousels() {
 					}
 				},
 				{
-					breakpoint: 400,
+					breakpoint: 420,
 					settings: {
 						slidesToShow: 1,
 					}
@@ -4084,6 +4104,13 @@ function validateCaptcha(obj) {
 			}
 		});
 	}
+}
+function showProp65Message(){
+    var messgae = $('#californiaWarningMessage').val();
+    bootAlert("small","warning","Warning",messgae);
+}
+if(location.href.indexOf('cimm2') > 0){
+	window.console.log = function(){}
 }
 /*$(window).unload(function(){
 	  localStorage.salesUserSelected=undefined;

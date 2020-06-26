@@ -29,7 +29,7 @@
 			        			#set($eachItemData = $!allItemData.get($!itemData.itemId))
 			        			#set($idText = $!itemIndex+"_"+$!itemData.itemId)
 				        		<div class="row" id="multipleItemCart_$!idText">
-				        			<div class="col-md-2 col-sm-12 col-xs-12">
+				        			<div class="col-md-2 col-sm-12 col-xs-6">
 				        				<div class="selectedItemImg alignCenter">
 					        			#if($!eachItemData.imageType=="URL")
 					                        <img src="$!eachItemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="50" height="50" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
@@ -38,7 +38,7 @@
 					                    #end
 				        				</div>
 				        			</div>
-				        			<div class="col-md-8 col-sm-12 col-xs-12">
+				        			<div class="col-md-8 col-sm-12 col-xs-6">
 				        				<div class="selectedItemDesc">
 						        			#if($!eachItemData.partNumber && $!eachItemData.partNumber!="")
 							        			<p><strong>$!locale.get("product.label.partNumber"): </strong>$!eachItemData.partNumber</p>
@@ -131,14 +131,14 @@
 		#end
 		#if($singleItem.status=="Y")
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-12">
+				<div class="col-md-2 col-sm-6 col-xs-6">
 					#if($eachData.imageType=="URL")
-						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachData.manufacturerPartNumber"/>
 					#else
-						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 					#end										
 				</div>
-				<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="mulAddtoCartDesp">
 						<p class="mulBrandTitle">$!itemTitle</p>
 						#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -157,14 +157,14 @@
 			</div>
 		#else
 			<div class="row">
-				<div class="col-md-2 col-sm-6 col-xs-12">
+				<div class="col-md-2 col-sm-6 col-xs-6">
 					#if($!eachData.imageType=="URL")
-						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 					#else
-						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+						<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 					#end										
 				</div>
-				<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="mulAddtoCartDesp">
 						<p class="mulBrandTitle">$!itemTitle</p>
 						#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -183,7 +183,7 @@
 						<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
 						<!-- <form> -->
 						<span>Qty</span>
-						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"/>
+						<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachCartData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"/>
 						<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
 						<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update"/>
 						<input type="button" class="button" value="cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" />
@@ -217,14 +217,14 @@
 									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
 									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
 										<div class="row">
-											<div class="col-md-2 col-sm-6 col-xs-12">
+											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#end											
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
+											<div class="col-md-4 col-sm-6 col-xs-6">
 												<div class="mulAddtoCartDesp">
 													<p class="mulBrandTitle">$!itemTitle</p>
 													#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -250,14 +250,14 @@
 									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
 									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
 										<div class="row">
-											<div class="col-md-2 col-sm-6 col-xs-12">
+											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#end											
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
+											<div class="col-md-4 col-sm-6 col-xs-6">
 												<div class="mulAddtoCartDesp">
 													<p class="mulBrandTitle">$!itemTitle</p>
 													#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -271,7 +271,7 @@
 											<div class="col-md-6 col-sm-12 col-xs-12">
 												<div class="mulAddtoCartStatus alignCenter">
 													<p class="alreadyExist"><i class="fa fa-question-circle"></i> Item already in the cart</p>
-													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachCartData.orderInterval" data-minorderqty="$!eachCartData.minOrderQty" data-price="$!eachCartData.price" data-uom="$!eachCartData.uom" data-availqty="$!eachData.availQty" data-itemindex="$!itemIndex"/>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty" data-itemindex="$!itemIndex"/>
 													<input type="button" class="button" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="Combine" />
 													<input type="button" class="button" data-requestype="SEPERATE"  data-itemid="$!eachData.itemId"  onclick="BulkAction.processSeperateOrCombine(this)" value="Seperate" />
 													<input type="button" class="button" value="Cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)"/>
@@ -287,14 +287,14 @@
 									#set($idText = $!itemIndex+"_"+$!eachData.itemId)
 									<div class="muladdtoCartItems" id="multipleItemCart_$!idText">
 										<div class="row">
-											<div class="col-md-2 col-sm-6 col-xs-12">
+											<div class="col-md-2 col-sm-6 col-xs-6">
 												#if($!eachData.imageType=="URL")
-													<img src="$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!eachData.imageName" onerror="this.src='$!webThemeseachDataimages/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#else
-													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachItemData.brandName $!eachItemData.manufacturerPartNumber"/>
+													<img src="$!thumbNail$!eachData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="75" height="75" alt="$!eachData.brandName $!eachData.manufacturerPartNumber"/>
 												#end											
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
+											<div class="col-md-4 col-sm-6 col-xs-6">
 												<div class="mulAddtoCartDesp">
 													<p class="mulBrandTitle">$!itemTitle</p>
 													#if($!eachData.partNumber && $!eachData.partNumber!="")
@@ -307,13 +307,13 @@
 													<p><strong>$!locale.get("product.label.qtyinterval"): </strong>$!eachData.orderInterval</p>
 												</div>
 											</div>
-											<div class="col-md-6 col-sm-12 col-xs-12">
+											<div class="col-md-6 col-sm-12 col-xs-6">
 												<div class="mulAddtoCartStatus alignCenter">
 													<p class="error"><i class="fa fa-exclamation-triangle"></i> Min Order / Qty Interval Error</p>
 													<p class="error" id="errorPtag_$!eachData.itemId" style="display: none;"></p>
 													<!-- <form> -->
 													<span>Qty</span>
-													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"  data-itemindex="$!itemIndex"/>
+													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="$!eachCartData.qty" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty"  data-itemindex="$!itemIndex"/>
 													<input type="text" class="quantity" maxlength="4" data-itemidrefrence="$!eachData.itemId" data-minorderqty="$!eachData.minOrderQty" data-orderinterval="$!eachData.orderInterval" onkeyup="BulkAction.checkMinorderAndOrderInterval(this)"/>
 													<input type="submit" class="button btns-disable" disabled="disabled" id="Update_$!eachData.itemId" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="update" disabled="disabled"/>
 													<input type="button" class="button" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)" value="cancel" />
@@ -369,7 +369,7 @@
 				<li itemscope itemtype="http://schema.org/Product">
 					<div class="cimm_caroImgDespWrap">
 						<div class="cimm_slideItemImg">
-							<a data-select="itemAnchor" href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+							<a data-select="itemAnchor" href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemProductTitle)">
 								<span data-select="imageSpanToSetID">
 									#set($itemImg = $!item.imageName.replace('%26','&amp;') )
 									#if($itemImg.toUpperCase().contains("HTTP"))
@@ -384,7 +384,7 @@
 							<ul>
 								<li>
 									<h4 itemprop="name">
-										<a class="productTitle" data-select="itemAnchor" data-selectName="setItemName" title="$!itemProductTitle"  href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemProductTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+										<a class="productTitle" data-select="itemAnchor" data-selectName="setItemName" title="$!itemProductTitle"  href="$!item.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemProductTitle)">
 											$!itemProductTitle
 										</a>
 									</h4>
@@ -411,14 +411,14 @@
 		<div class="cat-product clearAfter">
 			<div class="cat_img">
 				#if($productListData.imageType=="URL")
-				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!productListData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
+				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!productListData.itemUrl)"><img id="imageName$!productListData.itemId" src="$!productListData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
 				#else
-				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><img id="imageName$!productListData.itemId" src="$!thumbNail$!productListData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
+				<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!productListData.itemUrl)"><img id="imageName$!productListData.itemId" src="$!thumbNail$!productListData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" /></a>
 				#end
 			</div>
 			<div class="info">
 				<div class="ac_titleWrap">
-					<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!productListData.itemUrl.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!productListData.itemId"> $!itemTitle</a>
+					<a href="$!productListData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!productListData.itemUrl)" id="itemTitle$!productListData.itemId"> $!itemTitle</a>
 					#if($!productListData.shortDesc.length()>55)
 					<p id="itemShortDesc$!productListData.itemId">$!productListData.shortDesc.substring(0, 55) ...</p>
 					#else
@@ -462,7 +462,7 @@
 	   #set($customerViewedItemTitle = $!customerViewed.brandName+" "+$!customerViewed.manufacturerPartNumber) 
 		<li itemscope itemtype="http://schema.org/Product">
 			<div class="cimm_linkItemImg">
-			<a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!customerViewedItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+			<a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!customerViewedItemTitle)">
 				<img itemprop="image" id="imageName$!customerViewed.itemId" src="$!customerViewed.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 			</a>
 			</div>
@@ -470,7 +470,7 @@
 				<ul>
 					<li>
 						<h4 itemprop="name">
-					 	 <a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$!customerViewedItemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!customerViewedItemTitle</a>
+					 	 <a class="cimm_linkProdTitle" href="$!customerViewed.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!customerViewedItemTitle)">$!customerViewedItemTitle</a>
 						</h4>
 					</li>
 				</ul>
@@ -490,14 +490,14 @@
 	#parse("Macros/listPageMacro.vm")
 	#listAndGridSwap($!navigationType,$!hostName,$!keyWord,$!srchTyp,$!narrowKeyword,$!varPsid,$!escapeTool.url($!attrFilterList),$!filterList,$!sortBy,$!resultPage,$!pageNo,$!codeIdSkip,$!levelNoSkip,$!brandId,$!keyWordTxt,$!pageViewMode)
 	#listPageHeading($!navigationType,$!keyWord,$!heading)
-	#listPageFormUrls($!navigationType)
+	#listPageFormUrls($!navigationType, $!codeIdSkip, $!forPageSeoUrl, $!manfId, $!brandId)
 	#foreach($!itemData in $!itemListData) 
 	#set($itemTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 	#set($itemTitleForURL = $!itemData.brandName+"-"+$!itemData.manufacturerPartNumber)
 	<li class="listView" data-getchangemode='getchangemode' itemscope itemtype="http://schema.org/Product">
 		<ul class="gridFixHeight clearAfter">
 			<li class="sessionImg">
-				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">
+				<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$slugUrl.makeSlug($!itemTitle)">
 					<div class="prodImage">
 					#if($itemData.productItemCount>1 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length() > 1)
 						#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
@@ -542,7 +542,7 @@
 				<!-- Product Mode -->
 				<li class="sessionDesp">
 					<h3 class="productTitle" itemprop="name">
-						<a class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
+						<a class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$slugUrl.makeSlug($!itemTitle)" id="itemTitle$!itemData.itemId" data-toggle="tooltip"
 						#if($itemData.productName && $!itemData.productName.length() > 1) #if($itemData.productName.length() > 22) title="$!itemData.productName" #end #else #if($itemTitle.length() > 22) title="$!itemTitle" #end #end>
 							#if($itemData.productName && $!itemData.productName.length() > 1)
 								#if($itemData.productName.length() > 22)
@@ -577,7 +577,7 @@
 						</form>
 				 	</div>
 				 	<div class="itemCountGrid">
-				 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
+				 		<a class="btn btn-primary clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$slugUrl.makeSlug($!itemTitle)"><em class="fa fa-lg fa-eye"></em> $!locale.get("event.label.viewAll") $!itemData.productItemCount $!locale.get("product.label.choices")</a>
 				 	</div>
 				 	#if($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableCSPConfigurator")=="Y" && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM") && $!itemData.customFieldVal.get("custom_CSP_CONFIGURATOR_ITEM")=="Y")
 					<!-- <span>
@@ -601,7 +601,7 @@
 			#else
 				<li class="sessionDesp">
 					<h3 class="productTitle" itemprop="name">
-						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
+						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
 							#if($itemTitle.length() > 22)
 								$!itemTitle.substring(0, 22)... 
 							#else
@@ -611,7 +611,7 @@
 					</h3>
 					#if($itemData.shortDesc.length()>65)
 						<span id="itemShortDesc$!itemData.itemId" class="hideMe">$!itemData.shortDesc</span>
-						<p class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')$!itemTitle.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!locale.get("product.label.more")</a></span></p>
+						<p class='listGridItemDesc' itemprop="description">$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">$!locale.get("product.label.more")</a></span></p>
 					#else
 						<p id="itemShortDesc$!itemData.itemId" class='listGridItemDesc' itemprop="description">$!itemData.shortDesc</p>
 					#end
