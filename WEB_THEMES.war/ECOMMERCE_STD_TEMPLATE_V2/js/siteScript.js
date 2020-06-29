@@ -3999,7 +3999,9 @@ $(document).ready(function () {
 			function (data, status, xhr) {
 				if (data && data == "SUCCESS") {
 					//setCookie("isShipToSelected", true);
-					window.location.href = "/Products";
+					//window.location.href = "/Products";
+					$("#salesrepModal").modal('hide');
+					loadShippingInfo();
 				} else {
 					unblock();
 					bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");

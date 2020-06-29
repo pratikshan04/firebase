@@ -288,9 +288,10 @@
 <link rel="canonical" href="$!canonical_url" />
 
 #if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage"))
-<script>
-window.location.href = "/"
-</script>
+<script>window.location.href = "/";</script>
+#end
+#if($userLogin && $!session.getAttribute('isGeneralUser')=="Y" && $responseType=="ApprovedCart" && $!LayoutName=="PunchoutConfig")
+<script>window.location.href = "/";</script>
 #end
 <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-3.4.1.min.js"></script>
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')

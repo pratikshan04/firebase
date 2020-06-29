@@ -85,7 +85,7 @@ function validateRFQ(){
 		emailVal = emailVal + "Please Enter Phone Number.<br/>";
 		emailMsg = 1;
 	}else{
-		if(isPhoneNumberValid($.trim(rfnpPhone).val())==false){
+		if(isPhoneNumberValid($.trim(rfnpPhone))==false){
 			emailVal = emailVal + "Please Enter Valid Phone Number<br/>";
 			emailMsg = 1;
 		}
@@ -105,7 +105,7 @@ function validateRFQ(){
 
 	for(i=0;i<=pn.length-1;i++){
 		var checkResult = 0, itemQtyVal = ITEMQTYARR[i].value, pnVal = pn[i].value, shortDescVal = shortDesc[i].value, brandNameVal = brandName[i].value;
-		if(parseFloat(itemQty) == 0 ){
+		if(parseFloat(itemQtyVal) == 0 || $.trim(itemQtyVal)==""){
 			qtyCount++
 		}
 		if($.trim(pnVal)=="" || $.trim(parseFloat(itemQtyVal)) <= 0 || $.trim(shortDescVal)==""){
