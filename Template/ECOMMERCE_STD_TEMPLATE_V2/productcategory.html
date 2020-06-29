@@ -199,22 +199,17 @@
 					<div class="col-md-7 col-sm-12 col-xs-12">
 						<form action="$!itemsPerPageURL">            
 							<strong>$!locale.get("product.label.sortBy")&nbsp; </strong>
-							<input type="hidden" name="pageViewMode" value="$!pageViewMode"/>
-							<input type="hidden" name="codeId" value="$!codeIdSkip">
 							<input type="hidden" name="levelNo" value="$!levelNoSkip">
 							<input type="hidden" name="gallery" value="$!gallery">
 							<input type="hidden" name="pageNo" value="$!pageNo">
 							<input type="hidden" name="resultPage" value="#if($resultPage)$!resultPage#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
-							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
-							
 							#if($navigationType=="SEARCH")
 							<input type="hidden" name="keyWord" value="#if($keyWord)$!escapeTool.html($!keyWord)#end" /> 
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
 							<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
 							#end
 							<input type="hidden" name="srchTyp" value="CATNAV">
-							
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							<select name="sortBy" id="sortBy" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
 								<!-- <option value=""> - $!locale.get("form.label.select") -</option> -->
@@ -237,22 +232,17 @@
 						</form> 
 						<!-- ****************End of Sort By**************** -->
 						<form action="$!itemsPerPageURL" method="get" id="ItemsperPageForm">
-							<input type="hidden" name="pageViewMode" value="$!pageViewMode"/>
-							#if($codeIdSkip)<input type="hidden" name="codeId" value="$!codeIdSkip">#end
 							#if($levelNoSkip)<input type="hidden" name="levelNo" value="$!levelNoSkip">#end
 							#if($gallery)<input type="hidden" name="gallery" value="$!gallery">#end
 							#if($pageNo)<input type="hidden" name="pageNo" value="$!pageNo">#end
 							<input type="hidden" name="sortBy" value="#if($sortBy)$!sortBy#end">
 							<input type="hidden" name="keyWordTxt" value="#if($keyWordTxt)$!escapeTool.html($!keyWordTxt)#end">
-							#if($navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
-							
 							#if($navigationType=="SEARCH")
 							#if($keyWord) <input type="hidden" name="keyWord" value='$!escapeTool.html($!keyWord)' /> #end
 							<input type="hidden" name="narrowKeyword" value="#if($narrowKeyword)$!narrowKeyword#end" />
 							<input type="hidden" name="vpsid" value="#if($varPsid)$!varPsid#end" />
 							#end
 							<input type="hidden" name="srchTyp" value="CATNAV">
-							
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							$!locale.get("product.label.show")&nbsp; 
 							<select class="quantity selectpicker" name="resultPage" id="resultPerPage" style='display:none;' title="$!locale.get('product.label.show')">
