@@ -75,10 +75,10 @@ function priceLoadMainFunction() {
 		if (product.qty > 0) {
 			qty = product.qty;
 		}
-		var spanPriceLabels = document.getElementById("span_"+ product.partNumber);
-		if (spanPriceLabels) {
-			spanPriceLabels.innerHTML = priceLabel;
-		}
+		
+		$.each( $("[id='span_"+product.partNumber+"']"), function( key, value ) {
+             this.innerHTML = priceLabel;
+		});
 
 		var spanLinkedItems = document.getElementById("spanLinkItem_"+ product.partNumber);
 		if (spanLinkedItems) {
