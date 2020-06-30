@@ -49,6 +49,10 @@ function submitThisForm(formId){
 	if(errorMessages.length > 0){
 		notifyValidation(currentForm, errorMessages.join("<br>"));
 		enabeSubmitBtn(curSubmit, curSubmitBtn, btnVal);
+		if(errorMessages.indexOf("Please enter Captcha")=== -1){
+			$("#jcaptcha").val("");
+			refreshjcaptcha();
+		}
 		return false;
 	}else if(unusualCode > 0){
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
