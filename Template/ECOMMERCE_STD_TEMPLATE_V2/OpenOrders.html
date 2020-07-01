@@ -65,7 +65,7 @@
 	</tbody>
 </table>
 #if($!orderList.size() > 5)
-<a class="cimm_inlineButton" href="/OpenOrderSale.action?reqType=webOrder&orderStatus=New">$!locale.get("event.label.viewAll")</a>
+<a class="cimm_inlineButton" href="/OpenOrderSale.action?reqType=webOrder&orderStatus=Open">$!locale.get("event.label.viewAll")</a>
 #end
 #else
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
@@ -98,7 +98,7 @@
 				</td>
 				<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
 				<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
-				<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate.substring(0,10) </td>
+				<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
 				#if($session.getAttribute("erpType") == "eclipse")
 				<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.openOrderAmount)</td>
 				#else

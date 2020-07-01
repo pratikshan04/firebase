@@ -15,7 +15,7 @@ enqueue('/getPromotedProductGroupsPage.action?reqType=GP&AjaxRequest=Y',function
 enqueue('/OrderHistory?AjaxRequest=Y&dt='+milliSec,function(data){
 	$("#orderHistory").html(data);
 });
-enqueue('/OpenOrderSale.action?reqType=webOrder&orderStatus=New&AjaxRequest=Y&dt='+milliSec,function(data){
+enqueue('/OpenOrderSale.action?reqType=webOrder&orderStatus=Open&AjaxRequest=Y&dt='+milliSec,function(data){
 	$("#openOrderTable").html(data);
 });
 
