@@ -29,9 +29,9 @@
 		#set($countOrderList = 0) #if($orderList.size()>0) #foreach($orderList in $orderList) #set($countOrderList = $!countOrderList + 1)
 			<tr>
 			     #if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")			 
-			    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+			    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderID&genId=$!orderList.geneId&orderStatus=Billed">$!orderList.orderNum</a></td>
 				#else
-			    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+			    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=Billed">$!orderList.orderNum</a></td>
 			    #end
 				##if($searchBy=="partNumber")
 				<td class="alignLeft" data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else $!orderList.orderDate #end</td>
@@ -44,9 +44,9 @@
 				<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 				<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
 				#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")	
-				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 				#else
-				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 			    #end
 			</tr>
 			#if($countOrderList == 5) #break #end #end 
@@ -143,9 +143,9 @@
 						#if(!$!orderList.accountRegId.contains("C"))
 						<tr>		
 						    #if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")					
-						    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+						    <td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=Billed">$!orderList.orderNum</a></td>
 							#else
-							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History">$!orderList.orderNum</a></td>
+							<td class="alignLeft" data-th="$!locale.get('form.label.OrderNo')"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=Billed">$!orderList.orderNum</a></td>
 							#end
 							<td data-th="$!locale.get('product.label.shipDate')">#if($!orderList.shipDate)$!orderList.shipDate #else $!orderList.orderDate #end</td>
 							<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
@@ -154,9 +154,9 @@
 							<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
 							<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
 							#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")
-							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 							#else							
-						    <td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=History" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
+						    <td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderNum&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 						    #end
 						 </tr>
 						#end

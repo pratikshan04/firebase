@@ -78,6 +78,7 @@ function generateForm(formId){
 			var df = jQuery("[data-widget='"+formId+"']").find('.datePicker').attr('data-format');
 			initDatePicker(df);
 			removeCaption();
+			refreshjcaptcha();
 			$('.cimm_formContent li').removeAttr('title');
 			$('.col').removeAttr('title');
 			$("[data-widget='"+formId+"']").find('form').attr({'action':'SaveAndSendMail.action', 'onsubmit':'submitThisForm(this); return false;'});
