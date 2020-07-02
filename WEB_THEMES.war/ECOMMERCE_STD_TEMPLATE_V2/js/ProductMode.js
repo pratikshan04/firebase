@@ -592,6 +592,11 @@ var ProductMode = {};
 })(); //----------------------------------------------------------------  Product Mode Object
 
 $(function(){
+	initSubmitForm();
+});
+
+
+function initSubmitForm(){
 	$(".multiSelectForm").submit(function(){
 		var str = $(this).serialize();
 		var itemPriceId = "";
@@ -653,7 +658,7 @@ $(function(){
 		});
 		return false;
 	});
-});
+}
 
 function disableCustomCheckbox(){
 	$("input[type=checkbox]").each(function () {

@@ -650,7 +650,7 @@ if($("#quickOrderRecordLimit").length>0){
 var textarea = document.getElementById("copyPasteText");
 var spaces = textarea.getAttribute("cols");
 textarea.onkeyup = function() {
-   var lines = textarea.value.split("<br />");
+   var lines = textarea.value.split("\n");
     
    for (var i = 0; i < lines.length; i++) {
          if (lines[i].length <= spaces) continue;
@@ -678,5 +678,5 @@ textarea.onkeyup = function() {
             $("#copyPasteInstruction").css("text-decoration", "")
         },2000);
     }    
-   textarea.value = lines.slice(0, limit).join("<br />");
+   textarea.value = lines.slice(0, limit).join("\n");
 };

@@ -598,7 +598,7 @@ var Headtextarea = document.getElementById("copyPasteTextHead");
 if(Headtextarea!= null){
 	var spaces = Headtextarea.getAttribute("cols");
 	Headtextarea.onkeyup = function() {
-	   var lines = Headtextarea.value.split("<br/>");
+	   var lines = Headtextarea.value.split("\n");
 	    
 	   for (var i = 0; i < lines.length; i++) 
 	   {
@@ -627,7 +627,7 @@ if(Headtextarea!= null){
 	            $("#copyPasteInstruction").css("text-decoration", "")
 	        },2000);
 	    }    
-	   Headtextarea.value = lines.slice(0, limit).join("<br/>");
+	   Headtextarea.value = lines.slice(0, limit).join("\n");
 	};
 }
 
