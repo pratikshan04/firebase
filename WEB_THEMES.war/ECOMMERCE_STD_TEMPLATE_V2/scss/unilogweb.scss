@@ -448,7 +448,7 @@ $modal_closebtn-color: $default_font-color;
             display: block;
             padding: 6px;
             color: $default_font-color;
-            position: absolute;
+            position: absolute !important;
             width: 100%;
         }
         input {
@@ -1160,15 +1160,9 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         }
     }
 }
-#openOrderTable_wrapper{
+#OrdersHistoryTable_wrapper{
     .dataTables_filter{
         display: none;
-    }
-    .tabFooter{
-        #openOrderTable_paginate{
-            width: 50%;
-            float: right;
-        }
     }
 }
 #OrdersHistoryDetails {

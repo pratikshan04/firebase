@@ -1,4 +1,4 @@
-var table = $('#openOrderTable').DataTable({
+var table = $('#OrdersHistoryTable').DataTable({
 	"language": {
 		"search":"_INPUT_",
 		"searchPlaceholder":"Search Orders History",

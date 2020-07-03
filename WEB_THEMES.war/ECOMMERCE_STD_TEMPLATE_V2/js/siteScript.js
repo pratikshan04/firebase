@@ -1486,6 +1486,8 @@ function sendThisPageScript() {
 }
 //send this page
 function validateSendMail() {
+	unusualCode = 0;
+	var unusualCodeErrorStr = $("#dataErrors").attr('data-unusualerror');
 	var toname = $.trim($("#toName").val());
 	var toEmail = $.trim($("#toEmail").val());
 	var fromname = $.trim($("#fromName").val());
@@ -1505,8 +1507,15 @@ function validateSendMail() {
 	if (userLogin == "false") {
 		if (jcaptcha == "" || jcaptcha == null && userLogin == "false") { Error = Error + "<p>Please Enter Captcha</p>"; }
 	}
+	if(validateStr(toname) || validateStr(toEmail) || validateStr(fromname) || validateStr(fromEmail) || validateStr(mailSubject)){
+		unusualCode++;
+	}
+
 	if (Error != "") {
 		showNotificationDiv("Error", Error);
+		return false;
+	} else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	} else if (Error == "") {
 		$("#sendBtn").val("Sending mail... Please wait...");
@@ -1517,6 +1526,8 @@ function validateSendMail() {
 }
 
 function validateSendMailForAll() {
+	unusualCode = 0;
+	var unusualCodeErrorStr = $("#dataErrors").attr('data-unusualerror');
 	var toname = $.trim($("#toName").val());
 	var toEmail = $.trim($("#toEmail").val());
 	var fromname = $.trim($("#fromName").val());
@@ -1536,8 +1547,16 @@ function validateSendMailForAll() {
 	if (userLogin == "false") {
 		if (jcaptcha == "" || jcaptcha == null && userLogin == "false") { Error = Error + "Please Enter Captcha"; }
 	}
+	
+	if(validateStr(toname) || validateStr(toEmail) || validateStr(fromname) || validateStr(fromEmail) || validateStr(mailSubject)){
+		unusualCode++;
+	}
+
 	if (Error != "") {
 		showNotificationDiv("Error", Error);
+		return false;
+	} else if(unusualCode > 0){
+		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	} else if (Error == "") {
 		$("#sendBtn").html("Sending mail... Please wait...");
@@ -2521,10 +2540,10 @@ function sendSiteDetailPagePart(a) {
 	if (mPartNo != "" && mPartNo != undefined) {
 		skuList = skuList + "<p>" + mPartNo + "</p>";
 	}
-	if (custPartBlock != "" && custPartBlock != undefined) {
+	/*if (custPartBlock != "" && custPartBlock != undefined) {
 		var cpn = locale("product.label.customerpartnumber");
 		skuList = skuList + "<p>" + cpn + ": <span>" + custPartBlock + "</span></p>";
-	}
+	}*/
 	if (upcNo != "" && upcNo != undefined) {
 		skuList = skuList + "<p>" + upcNo + "</p>";
 	}
@@ -2537,7 +2556,7 @@ function sendSiteDetailPagePart(a) {
 	if (minOrdQty != "" && minOrdQty != undefined) {
 		skuList = skuList + "<p>" + minOrdQty + "</p>";
 	}
-	if (qtyInt != "" && qtyInt != undefined) {
+	/*if (qtyInt != "" && qtyInt != undefined) {
 		skuList = skuList + "<p>" + qtyInt + "</p>";
 	}
 	if (listPrices != "" && listPrices != undefined) {
@@ -2554,7 +2573,7 @@ function sendSiteDetailPagePart(a) {
 	}
 	if (leadTimeLI != "" && leadTimeLI != undefined) {
 		skuList = skuList + "<p>" + leadTimeLI + "</p>";
-	}
+	}*/
 	if (productModeList == "" || productModeList == undefined) {
 		productModeList = "";
 	}
@@ -2846,6 +2865,7 @@ function loadNextPageAsync(pageLink, resultPerPage, checkmodevalue) {
 						$(this).removeClass('gridView').addClass(checkmodevalue);
 					});
 				}
+				initSubmitForm();
 			});
 		} else {
 			$("#loadingNextPage").html("That's it! No more items to display.");
@@ -3999,7 +4019,9 @@ $(document).ready(function () {
 			function (data, status, xhr) {
 				if (data && data == "SUCCESS") {
 					//setCookie("isShipToSelected", true);
-					window.location.href = "/Products";
+					//window.location.href = "/Products";
+					$("#salesrepModal").modal('hide');
+					loadShippingInfo();
 				} else {
 					unblock();
 					bootAlert("medium", "error", "Error", "Unable To Proceed With Selected User");
