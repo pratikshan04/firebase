@@ -245,6 +245,7 @@
 						<h6>WANT TO SAVE TIME AND ORDER FASTER?</h6>
 						<p>Simply copy & paste Items from your file into the field below using the following format:</p>
 						<h5>$!locale.get("product.heading.enterOrCopyPaste")</h5>
+						<div id="copyPasteInstruction"></div>
 						<textarea id="headerCopyPasteText" name="copyPasteText" rows='#if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT"))$!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")#else 50 #end' cols="60"></textarea>
 						<h4>If Duplicates in input:</h4>
 						<div class="mBottom-2">

@@ -2607,7 +2607,7 @@ function sendSiteDetailPagePart(a) {
 	if (content != "" && content != undefined) {
 		content = content;
 	} else if (productModeList != "" && productModeList != undefined) {
-		var content = "<table style='width:100%;text-align: center;' cellspacing='0' cellpadding='0' class='table-bordered'>" + productModeList + "</table>";
+		var content = "<table style='width:100%;text-align: center;' cellspacing='5' cellpadding='5' class='table-bordered'>" + productModeList + "</table>";
 	} else {
 		content = "";
 	}
