@@ -555,8 +555,10 @@ $(document).ready(function () {
 	</script>
 #end
 <!-- Update email id popup -->
+#set($salt = $CIMM2VelocityTool.generateSalt())
 <script defer>
- $(function(){
+$(function(){
+	var salt = "$!salt";
 	var userLogin = $("#userLogin").val();
 	if (userLogin=="true"){
 		var validEmailFlag = getCookie("validEmailAddress");
@@ -570,10 +572,18 @@ $(document).ready(function () {
 			}
 		}
 	}
- });
- $(".loadAfter").fadeOut(800);
+	#if($!CommonDBQuerySystemParameter.get("ENABLE_CSRF_TOKEN")=="Y")
+	$("<input>").attr({
+	    name: "csrftoken",
+	    id: "csrftoken",
+	    type: "hidden",
+	    value: salt
+	}).appendTo("form");
+	#end
+});
+$(".loadAfter").fadeOut(800);
 </script>
-#if($!CommonDBQuerySystemParameter.get("CHECK_EMAIL_ID")=="Y")	
+#if($!CommonDBQuerySystemParameter.get("ENABLE_CSRF_TOKEN")=="Y")
 <div id="emailAddressPrompt" class="modal fade" role="dialog">
 <div class="modal-dialog">
 <!-- Modal content-->
