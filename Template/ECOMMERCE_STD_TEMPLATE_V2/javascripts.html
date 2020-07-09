@@ -127,7 +127,7 @@ function deviceSelectAll(){
 }
 </script>
 #end
-#if($LayoutName != "404Page" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
+#if($LayoutName != "404Page" && $LayoutName != "InvoiceListPage" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
 #set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js?'+$!session.getLastAccessedTime())
 <script type="text/javascript" src="$!jsPath" defer></script>
 #end
@@ -557,7 +557,6 @@ $(document).ready(function () {
 <!-- Update email id popup -->
 <script defer>
  $(function(){
-	var salt = "$!salt";
 	var userLogin = $("#userLogin").val();
 	if (userLogin=="true"){
 		var validEmailFlag = getCookie("validEmailAddress");
@@ -571,12 +570,6 @@ $(document).ready(function () {
 			}
 		}
 	}
-	$("<input>").attr({
-        name: "csrftoken", 
-        id: "csrftoken", 
-        type: "hidden", 
-        value: salt 
-    }).appendTo("form"); 
  });
  $(".loadAfter").fadeOut(800);
 </script>

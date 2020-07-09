@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/site_jui.css" /> 
 <div class="cimm_siteTableEnclosure rwd-tableWrap">
-<table cellpadding="0" cellspacing="0" border="0" width="100%" class="cimm_siteTable display rwd-table rwd-Tab" id="invoiceListTable">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered display rwd-table" id="invoiceListTable">
 	<thead>
 		<tr>
 			<th align="center">$locale.get("product.label.invoicNumber")</th>
@@ -78,7 +78,7 @@ $(document).ready( function () {
 	$('#invoiceListTable').dataTable( {
 	"sPaginationType": "simple_numbers",
 	//"sDom": 'T<"clear"><"H"lf>t<"F"ip>',
-	"sDom": '<"tabHeader"lf>t<"tabFooter"ip>',
+	//"sDom": '<"tabHeader"lf>t<"tabFooter"ip>',
 	"bJQueryUI": false,
 	"bAutoWidth": false,
 	aaSorting : [[1, 'desc']],
@@ -91,24 +91,15 @@ $(document).ready( function () {
         	sPrevious : "Prev",
             sNext : "Next"
         }
-    },
-    "fnInitComplete": function (oSettings, json) {
-        $('.dataTables_filter input').attr('type', 'text');
     }
 	});
-	$('#invoiceListTable_filter input').addClass('SearchRecords');
 } );
 </script>
-<style>
-#SendPage{
-visibility:hidden;
-}
-</style>
 
 <!-- <a title="Print this page" onclick="printSiteDetailPagePart();">
  <em class="fa fa-lg fa-print fa-lg"></em> Print this Page
  </a> -->
- <table id="SendPage" style="width:1200px;border:2px solid #000;height:1310px;" align="center">
+<table id="SendPage" class="hidden">
 <tbody>
 <tr>
 <td>
