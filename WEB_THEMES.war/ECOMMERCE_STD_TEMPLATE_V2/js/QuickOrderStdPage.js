@@ -668,14 +668,11 @@ textarea.onkeyup = function() {
     if(lines.length>limit){
         textarea.style.color = 'red';
         if($("#copyPasteInstruction").length>0){
-        	$("#copyPasteInstruction").css("font-weight", "bold")
-        	$("#copyPasteInstruction").css("text-decoration", "underline")
-        	bootAlert("medium","error","Error",'Max. '+limit+' items are allowed. Rest of the items will be omitted');
+        	$("#copyPasteInstruction").html('<b class="text-danger">Max. '+limit+' items are allowed. Rest of the items will be omitted</b>');
         }
         setTimeout(function(){
             textarea.style.color = '';
-            $("#copyPasteInstruction").css("font-weight", "")
-            $("#copyPasteInstruction").css("text-decoration", "")
+            $("#copyPasteInstruction").html("");
         },2000);
     }    
    textarea.value = lines.slice(0, limit).join("\n");

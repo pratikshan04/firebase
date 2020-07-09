@@ -594,7 +594,7 @@ if($("#quickOrderRecordLimit").length>0){
 	limit = $("#quickOrderRecordLimit").val();
 }
 
-var Headtextarea = document.getElementById("copyPasteTextHead");
+var Headtextarea = document.getElementById("headerCopyPasteText");
 if(Headtextarea!= null){
 	var spaces = Headtextarea.getAttribute("cols");
 	Headtextarea.onkeyup = function() {
@@ -618,13 +618,11 @@ if(Headtextarea!= null){
 	    {
 	        Headtextarea.style.color = 'red';
 	        if($("#copyPasteInstruction").length>0){
-	        	$("#copyPasteInstruction").css("font-weight", "bold")
-	        	$("#copyPasteInstruction").css("text-decoration", "underline")
+	        	$("#copyPasteInstruction").html('<b class="text-danger">Max. '+limit+' items are allowed. Rest of the items will be omitted</b>');
 	        }
 	        setTimeout(function(){
 	            Headtextarea.style.color = '';
-	            $("#copyPasteInstruction").css("font-weight", "")
-	            $("#copyPasteInstruction").css("text-decoration", "")
+	            $("#copyPasteInstruction").html("");
 	        },2000);
 	    }    
 	   Headtextarea.value = lines.slice(0, limit).join("\n");

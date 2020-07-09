@@ -558,9 +558,9 @@
 								<th class="text-center">$locale.get('product.heading.compare') / $locale.get('product.label.item') #</th>
 								<th class="text-left">$locale.get('product.heading.properties')</th>
 								<th class="text-center removeForSend">$locale.get('product.label.quantity')</th>
-								<th class="text-center">$locale.get('product.label.uom')</th>
-								<th class="text-center">$locale.get('product.label.price')</th>
-								<th class="text-center">$locale.get('product.label.availability')</th>
+								<th class="text-center removeForSend">$locale.get('product.label.uom')</th>
+								<th class="text-center removeForSend">$locale.get('product.label.price')</th>
+								<th class="text-center removeForSend">$locale.get('product.label.availability')</th>
 								<th class="text-center removeForSend hideForPrint" title="$!locale.get('product.button.addtocart')"><em class="fa fa-lg fa-shopping-cart" aria-hidden="true"></em></th>
 								<th class="text-center removeForSend hideForDevice hideForPrint" title="$!locale.get('product.label.addToGroupOrCart')">$!locale.get('product.label.addToGroupOrCart')</th>
 								<th class="text-center removeForSend hideForPrint" title="Item Information"><em class="fa fa-info-circle fa-lg"></em></th>
@@ -619,14 +619,14 @@
 								 	<input type="text" title="$!locale.get('product.label.quantity')" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 								 </td>
 							     <td itemprop="sku">
-								<span id="uomSpan_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+								<span id="uomSpan_$!productModeitemData.partNumber.replaceAll('\s+','_')" class="removeForSend">
 							    	#if($productModeitemData.salesUom)
 							     		$!productModeitemData.salesUom
 							     	#end
 							     	<!-- <select id='productMultipleUOMSelect_$!productModeitemData.partNumber.replaceAll(" ","_")'  data-partnumber = '$!productModeitemData.partNumber.replaceAll(" ","_")' style="display:none;" class="appendChosen"></select> -->
 								</span>
 							     </td>
-								 <td class="tabelPrice" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+								 <td class="tabelPrice removeForSend" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
 								 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan">
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.price>0)
@@ -639,7 +639,7 @@
 									    #end
 								    </span>
 								 </td>
-								 <td class="tableAvail">
+								 <td class="tableAvail removeForSend">
 								 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.availQty>0)

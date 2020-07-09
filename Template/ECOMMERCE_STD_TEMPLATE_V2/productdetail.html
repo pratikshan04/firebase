@@ -557,9 +557,9 @@
 								<th class="text-center">Item #</th>
 								<th class="text-left">Properties</th>
 								<th class="text-center removeForSend">Quantity</th>
-								<th class="text-center">UOM</th>
+								<th class="text-center removeForSend">UOM</th>
 								<th class="text-center removeForSend">Price</th>
-								<th class="text-center">Availability</th>
+								<th class="text-center removeForSend">Availability</th>
 								<th class="text-center removeForSend hideForPrint" title="Add to Cart / Add to Group"><em class="fa fa-lg fa-shopping-cart" aria-hidden="true"></em></th>
 								<!-- <th title="Add to Group"><em class="fa fa-lg fa-shopping-bag" aria-hidden="true"></em></th> -->
 								<th class="text-center removeForSend hideForDevice hideForPrint" title="Compare"><em class="fa fa-lg fa-bar-chart" aria-hidden="true"></em></th>
@@ -614,11 +614,11 @@
 								 	#if($productModeitemData.minOrderQty) #set($minQty = $!productModeitemData.minOrderQty) #end
 								 	<input type="text" title="$!locale.get('product.label.quantity')" id="itemTxtQty$!productModeitemData.itemId" value='$minQty' maxlength="4" class="quantity" data-itemid="$!productModeitemData.itemId"  onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;"/>
 								 </td>
-							     <td itemprop="sku">
+							     <td itemprop="sku" class="removeForSend">
 							     	$!productModeitemData.salesUom
 							     	<!-- <select id='productMultipleUOMSelect_$!productModeitemData.partNumber.replaceAll(" ","_")'  data-partnumber = '$!productModeitemData.partNumber.replaceAll(" ","_")' style="display:none;" class="appendChosen"></select> -->
 							     </td>
-								 <td class="tabelPrice" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+								 <td class="tabelPrice removeForSend" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
 								 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan">
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.price>0)
@@ -631,7 +631,7 @@
 									    #end
 								    </span>
 								 </td>
-								 <td class="tableAvail">
+								 <td class="tableAvail removeForSend">
 								 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.availQty>0)

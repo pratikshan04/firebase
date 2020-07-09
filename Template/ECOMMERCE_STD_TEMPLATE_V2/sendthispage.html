@@ -1,6 +1,5 @@
 <style type="text/css">
 .contentPart{
-	padding:0 5px;
 	background-color: #FFF;
 	}
 .descBody ul li{
@@ -24,6 +23,9 @@
 table.detail{
 	width: 98%;
 	}
+table th, table td{
+	padding: 5px 10px;
+}
 .zoomPreload,.hideForPrint{
 	display:none;
 	}
@@ -37,9 +39,9 @@ table.detail{
 	position:relative !important;
 	width: 300px;
 }
-#mailContentDisplay .cimm_itemDescription {
-    float: left;
+.cimm_itemdetail .cimm_itemDescription {
     width: calc(100% - 380px);
+    float: left;
 }
 .cimm_itemDescription ul li b{
 	color:#000;
@@ -48,7 +50,8 @@ table.detail{
 	color: #bf1e2e;
 }
 .cimm_pdfLink {
-    display: inline-block;
+	display: inline;
+	word-break: break-all;
 }
 @media (max-width: 767px) {
 	#mailContent{
@@ -57,6 +60,11 @@ table.detail{
 	.descBody ul li img{
 		width:auto !important;
 	}
+}
+#mailContentDisplay .contentPart .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, 
+#mailContentDisplay .contentPart .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, 
+#mailContentDisplay .contentPart .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    padding: 5px;
 }
 </style>
 
