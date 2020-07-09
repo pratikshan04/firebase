@@ -236,7 +236,7 @@ var QuickOrder = {};
 		if(jQuery('#headerCopyPasteText').length>0 && jQuery('#headerCopyPasteText').val()!=null && jQuery('#headerCopyPasteText').val().trim()!=""){
 			block("Please Wait");
 			var  copyText = jQuery('#headerCopyPasteText').val();
-			var lines = copyText.split("<br/>");
+			var lines = copyText.split("\n");
 			var quickOrderRecordLimit = 50;
 			if($('#quickOrderRecordLimit').length>0 && $('#quickOrderRecordLimit').val()!=null && $('#quickOrderRecordLimit').val()!="" && QuickOrder.isInt($('#quickOrderRecordLimit').val())){
 				quickOrderRecordLimit = parseInt($('#quickOrderRecordLimit').val());
@@ -247,8 +247,8 @@ var QuickOrder = {};
 						if(lines[ln].indexOf(",") > -1){
 							var valuesComaSeparate = lines[ln].split(",");
 							if(valuesComaSeparate!=null && valuesComaSeparate.length>0){
-								if(valuesComaSeparate[0]==null || valuesComaSeparate[0]==""){
-									valuesComaSeparate[0] = "1";
+								if(valuesComaSeparate[1]==null || valuesComaSeparate[1]==""){
+									valuesComaSeparate[1] = "1";
 								}
 								var qtyInput = valuesComaSeparate[0];
 								var keywordInput = valuesComaSeparate[1];
@@ -256,7 +256,7 @@ var QuickOrder = {};
 								if(keywordInputTrim != "" && keywordInput!=null){
 									if(QuickOrder.isInt(qtyInput)){
 										var item = {}
-										item ["keyword"] = valuesComaSeparate[1];
+										item ["keyword"] = valuesComaSeparate[0];
 										item ["qty"] = qtyInput;
 										/*item ["searchTyp"] = "1";*/
 								        jsonObjQuick.push(item);
