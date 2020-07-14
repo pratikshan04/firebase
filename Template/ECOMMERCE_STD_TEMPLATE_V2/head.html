@@ -287,9 +287,10 @@
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="$!canonical_url" />
 
-#if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage"))
+#if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage" || $!LayoutName=="PromotedProductsListPage" || $!LayoutName=="ProductGroupPage"))
 <script>window.location.href = "/";</script>
 #end
+
 #if($userLogin && $!session.getAttribute('isGeneralUser')=="Y" && ($responseType=="ApprovedCart" || $!LayoutName=="PunchoutConfig"))
 <script>window.location.href = "/";</script>
 #end

@@ -157,8 +157,8 @@ var BulkAction = {};
 						}
 						$.each(jsonObj, function (key, value) {
 							//$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
-							$("#selectItemCheckbox_" + value.itemId).prop('checked', false);
-							$('#itemTxtQty' + value.itemId).attr("disabled", false);
+							$.each( $("[id='selectItemCheckbox_"+value.itemId+"']"), function( key, value ) { $(this).attr('checked', false); });
+							$.each( $("[id='itemTxtQty"+value.itemId+"']"), function( key, value ) { $(this).attr('disabled', false); });
 							if ($('#multipleUom_' + value.partNumber).length > 0) {
 								$('#multipleUom_' + value.partNumber).attr('disabled', false);
 							}

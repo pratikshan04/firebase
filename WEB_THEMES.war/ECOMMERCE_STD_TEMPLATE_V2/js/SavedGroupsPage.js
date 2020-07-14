@@ -17,6 +17,7 @@ $(document).ready(function(){
 	});
 });
 function addAllItemsToCart(linkUrl){
+	var	callForPriceCounter = 0, pricePresent = 0;
 	block("Please Wait");
 	jQuery.ajax({
 		type: "POST",
@@ -28,18 +29,25 @@ function addAllItemsToCart(linkUrl){
 				if(jsonObjList.length>0){
 					jQuery.each(jsonObjList, function(i, val) {
 						if(val!=null && val.price > 0){
+							pricePresent++;
 							console.log(val.price);
 						}else{
+							callForPriceCounter++;
 							delete jsonObjList[i];
 						}
 					});
 					jsonObjList = jQuery.grep(jsonObjList, function(n, i){return (n !== "" && n != null);});
 					unblock();
-					if(jsonObjList != []){
-					     BulkAction.processAddToCart(jsonObjList);
-					}else{
-					     bootAlert("small","error","Error","Cannot add Call for Price item to cart");
-					}
+					if(callForPriceCounter>0 && pricePresent && jsonObjList != []){
+						bootAlert("small","info","Info","Call for Price items will be dropped from selection");
+	                    $("[data-bb-handler='ok']").click(function () {
+	                        BulkAction.processAddToCart(jsonObjList);
+	                    });
+                    }else if(pricePresent && jsonObjList != []){
+                    	BulkAction.processAddToCart(jsonObjList);
+                    }else{
+						bootAlert("small","error","Error","Cannot add Call for Price item to cart");
+                    }
 				}
 			}
 		}
