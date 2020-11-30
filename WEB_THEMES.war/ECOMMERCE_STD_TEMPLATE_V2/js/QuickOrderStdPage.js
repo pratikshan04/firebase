@@ -1,10 +1,13 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 	$('#quickOrderTab').multiTab({
 		transitionEffect:"fade"
 	});
 });
-$.getScript(webThemes+'js/handsontable.full.js', function(){
+$.getScript(cdnPluginJsPath+'/handsontable.full.js', function(){
 	QuickOrder.initHandsontable();
 });
 $(document).ready(function() {
@@ -45,9 +48,9 @@ $(document).ready(function() {
 					});
 					//var json = JSON.stringify(jsonObjQuick);
 					var radioValue = $("input[name='QuickOrderFileUpload']:checked").val();
-		            if(radioValue){
-		                radioValue;
-		            }
+		            //if(radioValue){
+		            //    radioValue;
+		            //}
 					if(radioValue!=null && radioValue=="Combine"){
 						jsonObjQuick = QuickOrder.findDuplicateAndAddvalues(jsonObjQuick)
 					}else if(radioValue!=null && radioValue=="Separate"){
@@ -325,9 +328,9 @@ var QuickOrder = {};
 				//var json = JSON.stringify(jsonObjQuick);
 				
 				var radioValue = $("input[name='QuickOrderPad']:checked").val();
-	            if(radioValue){
-	                radioValue;
-	            }
+	            //if(radioValue){
+	            //    radioValue;
+	            //}
 	            if(radioValue!=null && radioValue=="Combine"){
 					jsonObjQuick = QuickOrder.findDuplicateAndAddvalues(jsonObjQuick)
 				}else if(radioValue!=null && radioValue=="Separate"){
@@ -458,9 +461,9 @@ var QuickOrder = {};
 		if(submitFlag){
 			//var json = JSON.stringify(jsonObjQuick);
 			var radioValue = $("input[name='QuickOrderCopyPaste']:checked").val();
-            if(radioValue){
-                radioValue;
-            }
+            //if(radioValue){
+            //    radioValue;
+            //}
             if(radioValue!=null && radioValue=="Combine"){
 				jsonObjQuick = QuickOrder.findDuplicateAndAddvalues(jsonObjQuick)
 			}else if(radioValue!=null && radioValue=="Separate"){

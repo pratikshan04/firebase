@@ -20,8 +20,7 @@
 				<th class="left">$!locale.get("product.label.description")</th>
 				<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
 				<th>$!locale.get("product.label.processingStatus")</th>
-				<th>$!locale.get("product.label.debit")</th>
-				<th>$!locale.get("product.label.balance")</th>
+				<th>$!locale.get("form.label.invoicevalue")</th>
 				<th width="90px">&nbsp;</th>
 			</tr>
 		</thead>
@@ -41,8 +40,7 @@
 				<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
 				<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
 				<td data-th="$!locale.get('product.label.processingStatus')">$!orderList.orderStatus</td>
-				<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
-				<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
+				<td data-th="$!locale.get('form.label.invoicevalue')">$$!numberTool.format($!numberToolFormat,$!orderList.invoiceValue)</td>
 				#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")	
 				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 				#else
@@ -132,8 +130,7 @@
 							<th class="left">$!locale.get("product.label.description")</th>
 							<!--  <th align="left">$!locale.get("form.label.CustomerRelease")</th> -->
 							<th>$!locale.get("product.label.processingStatus")</th>
-							<th>$!locale.get("product.label.debit")</th>
-							<th>$!locale.get("product.label.balance")</th>
+							<th>$!locale.get("form.label.invoicevalue")</th>
 							<th width="90px">&nbsp;</th>
 						</tr>
 					</thead>
@@ -151,8 +148,7 @@
 							<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
 							<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
 							<td data-th="$!locale.get('product.label.processingStatus')">$!orderList.orderStatus</td>
-							<td data-th="$!locale.get('product.label.debit')">$$!numberTool.format($!numberToolFormat,$!orderList.total)</td>
-							<td data-th="$!locale.get('product.label.balance')">$$!numberTool.format($!numberToolFormat,$!orderList.orderPrice)</td>
+							<td data-th="$!locale.get('form.label.invoicevalue')">$$!numberTool.format($!numberToolFormat,$!orderList.invoiceValue)</td>
 							#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")
 							<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 							#else							

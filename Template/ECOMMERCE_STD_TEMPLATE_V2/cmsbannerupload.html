@@ -1,18 +1,18 @@
-<link href="$!webThemes/CMS/css/style.css" rel="stylesheet" type="text/css" />
-<link href="$!webThemes/CMS/css/dropzone.min.css" type="text/css" rel="stylesheet" />
-<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" type="text/css" rel="stylesheet" />
+<link href="$!cmsArtifactsPath/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!cmsArtifactsPath/css/dropzone.min.css" type="text/css" rel="stylesheet" />
+<link href="$!cmsArtifactsPath/css/styles_CMS.css?$!refreshVersion" type="text/css" rel="stylesheet" />
 #parse("font-awesomeV5.html")
-<script type="text/javascript" src="$!webThemes/CMS/js/fckxml.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/common.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/dropzone.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/jquery.scrollstop.min.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/fckxml.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/common.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/dropzone.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery.scrollstop.min.js"></script>
 <script language="javascript">
 var contextPath='';
 if(contextPath=="/"){
 	contextPath = "";
 }
-var acceptedType = ".png,.jpg,.gif";
+var acceptedType = ".png,.jpg,.gif,.webp";
 function DeleteImages(){
 	var  imageList=[];
 	var fileRemove="fileRemoveFromServer";
@@ -87,7 +87,6 @@ function DeleteImages(){
 function GetUrlParam( paramName )
 {
 	var oRegex = new RegExp( '[\?&]' + paramName + '=([^&]+)', 'i' ) ;
-	console.log("Location : " + window.location.search);
 	var oMatch = oRegex.exec( window.location.search ) ;
 	
 	if ( oMatch && oMatch.length > 1 )
@@ -105,7 +104,6 @@ var sCurrentFolder = GetUrlParam( 'CurrentFolder' ) ;
 if(sCurrentFolder!="")
 	oConnector.CurrentFolder= sCurrentFolder ;
 
-console.log("COnnector param : -" + sConnUrl+"-")
 if(sConnUrl=="")
 	sConnUrl = "/connector.slt";
 
@@ -136,7 +134,7 @@ if ( oConnector.ShowAllTypes ){
 			 }
 }
 if(oConnector.ResourceType.toUpperCase().indexOf("IMAGE") != -1){
-	acceptedType = ".png,.jpg,.gif";
+	acceptedType = ".png,.jpg,.gif,.webp";
 }else if(oConnector.ResourceType.toUpperCase().indexOf("DOCUMENT") != -1){
 	acceptedType = ".pdf,.doc,.docx,.xls,.xlsx,.txt,.swf";
 }
@@ -233,7 +231,7 @@ oListManager.AddFolder = function( folderName, folderPath, folderId ){
 	var row = $('#main-item-container');
 	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+folderId+'" value="'+oConnector.CurrentFolder +escape(folderName)+'"><span></span></label>';
 	var imgName = '<div class="box"><h4 class="ellipsis"><a class="folder-link" data-file="'+folderName+'" href="'+connectorUrl+'">'+folderName+'</a></h4></div>';
-	var imgBlock = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><img class="directory-img" src="$!webThemes/CMS/images/img/ico/folder.png"></div><div class="img-precontainer-mini"><img class="directory-img" src="$!webThemes/CMS/filemanager/img/ico/folder.png"></div></a>';
+	var imgBlock = '<a class="folder-link" href="'+connectorUrl+'"><div class="img-precontainer"><img class="directory-img" src="$!cmsArtifactsPath/images/img/ico/folder.png"></div><div class="img-precontainer-mini"><img class="directory-img" src="$!cmsArtifactsPath/filemanager/img/ico/folder.png"></div></a>';
 	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
 	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">File Folder</div>';
 	var liVal = $('<li/>').attr({"data-name": folderName, class: "dir ui-draggable ui-droppable clearfix"}).html(fileNameBlock).append(dummy1)
@@ -246,7 +244,7 @@ oListManager.AddFolder = function( folderName, folderPath, folderId ){
 	// Add the folder icon cell.
 	var oCell = oRow.insertCell(-1) ;
 	oCell.width = 16 ;
-	oCell.innerHTML = sLink + '<img alt="" src="images/Folder.gif" width="16" height="16" border="0"></a>' ;
+	oCell.innerHTML = sLink + '<img alt="" src="$!cmsArtifactsPath/filemanager/images/Folder.gif" width="16" height="16" border="0"></a>' ;
 
 	// Add the folder name cell.
 	oCell = oRow.insertCell(-1) ;
@@ -261,11 +259,8 @@ oListManager.AddBreadCrumb = function (){
 	if(oConnector.CurrentFolder!="/" && oConnector.CurrentFolder.length > 1){
 		var myString = oConnector.CurrentFolder.substring(0);
 		myString = unescape(myString);
-		console.log(myString);
 		myString = myString.substring(0,myString.length-1);
 		var pathArr = myString.split("/");
-		console.log("pathArr : "+ pathArr);
-		console.log(pathArr.length);
 		var row = $('.breadcrumb');
 		var linkVal = '';
 		var liVal = '';
@@ -291,7 +286,7 @@ oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, ext
 	var openFileUrl = fileUrl;
 	if(extenstion.toUpperCase()!="JPG" && extenstion.toUpperCase()!="PNG" && extenstion.toUpperCase()!="GIF" && extenstion.toUpperCase()!="JPEG"){
 		filename = extenstion+".jpg";
-		fileUrl = "$!webThemes/CMS/images/img/ico/";
+		fileUrl = "$!cmsArtifactsPath/images/img/ico/";
 	}else{
 		fileUrl = fileUrl+"thumbnail/";
 		filename = fileName;
@@ -302,7 +297,7 @@ oListManager.AddFile = function( fileName, fileUrl, fileSize,imageDimension, ext
 	var imageId="img";
 	var row = $('#main-item-container');
 	var chk_Box = '<label class="cms_customCheckBox2"><input type="checkbox" id="'+imgId+'" value="'+oConnector.CurrentFolder+fileName+'"><span></span></label>';
-	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/images/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!webThemes/CMS/images/img/ico/png.jpg'"+';"/></div></a>'; 
+	var imgBlock = '<a href="javascript:void(0)" class="link" data-file="'+fileName+'" onclick="OpenFile(\''+openFileUrl+fileName+ '\');return false;" data-field_id="" data-function="apply_none"><div class="img-precontainer"><img class="lazyLoad" data-original="'+fileUrl + filename + '?dt='+new Date()+'" src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!cmsArtifactsPath/images/img/ico/png.jpg'"+';" /></div><div class="img-precontainer-mini original-thumb"><img class="lazyLoad" data-original="'+fileUrl+ filename + '"  src="'+fileUrl+ filename + '?dt='+new Date()+'" onerror="this.src='+"'$!cmsArtifactsPath/images/img/ico/png.jpg'"+';"/></div></a>'; 
 	var imgName = '<div class="box"><h4 class="ellipsis"><a href="javascript:void(0)" onclick="OpenFile(\''+openFileUrl+fileName+ '?dt='+new Date()+');return false;" class="link" data-file="'+fileName+'" data-field_id="" data-function="apply_none" title="'+fileName+'">'+fileName+'</a></h4></div>';
 	var fileNameBlock = $('<div/>').attr({class: "imgWithName"}).html(chk_Box+imgBlock+imgName);
 	var dummy1='<div class="file_date">&nbsp;</div><div class="file_type">'+typeSplit[1]+'</div><div class="file_size">'+fsize+'KB</div>';
@@ -344,22 +339,18 @@ function OpenFolder( folderPath ) {
 	// Load the resources list for this folder.
 	window.parent.frames['frmFolders'].LoadFolders( folderPath ) ;
 }
-
 function OpenFile( fileUrl ) {
-	 //parent.window.document.getElementById("mceu_38-inp").value = fileUrl;
-	var fieldId =  window.parent.tinyfck_field;
-	 console.log("tinyfck_field : " + fieldId)
-	 console.log(window.parent.jQuery("#"+fieldId).val());
-	 window.parent.jQuery("#"+fieldId).val(fileUrl);
-	
-	if ( window.parent.document.getElementById(fieldId).onchange != null) {
-		 window.parent.document.getElementById(fieldId).onchange();
-	}
-	window.parent.jQuery.colorbox.close();
-	//window.close();
-	//window.parent.opener.tinyfck.focus();
+    var fieldId = window.parent.tinyfck_field;
+    window.parent.jQuery("#"+fieldId).val(fileUrl);
+    if (fieldId.length>0 && window.parent.document.getElementById(fieldId) != null && window.parent.document.getElementById(fieldId).onchange != null) {
+      window.parent.document.getElementById(fieldId).onchange();
+    }
+    window.parent.jQuery.colorbox.close();
+    if(window.parent.document.getElementById("metaImage").value=="true"){
+    	window.parent.document.getElementById("imageUrl").value=fileUrl;
+    }
+    window.parent.document.getElementById("metaImage").value=false;
 }
-
 function LoadResources( resourceType, folderPath ) {
 	oListManager.Clear() ;
 	oConnector.ResourceType = resourceType ;
@@ -400,7 +391,6 @@ function GetFoldersAndFilesCallBack( fckXml ) {
 		var extenstion = oNodes[i].attributes.getNamedItem('extension').value ;
 		var imgId="img"+i;
 		oListManager.AddFile( sFileName, sCurrentFolderUrl, sFileSize, sdimension, extenstion,imgId) ;
-		//console.log("Adding files : " + i);
 	}
 	jQuery(".lazyLoad").lazyload({
         event: 'scrollstop',
@@ -579,14 +569,12 @@ $(document).ready(function(){
 });
 var filterImages =  function (input,id){
 	var valThis = jQuery(input).val().toLowerCase();
-	//console.log("search text" + valThis);
 	jQuery('.'+id+' > li').each(function(){
 		var text = jQuery(this).find('a').text().toLowerCase();
 		(text.indexOf(valThis) == 0) ? jQuery(this).show() : jQuery(this).hide(); 
 	});
 	jQuery('.'+id+' > li.ff-item-type-2').each(function(){
 		var text1 = jQuery(this).find('a').attr('data-file').toLowerCase();
-		//console.log("search" + text);
 		(text1.indexOf(valThis) == 0) ? jQuery(this).show() : jQuery(this).hide();        
 	});
 };
@@ -630,7 +618,6 @@ Dropzone.options.myAwesomeDropzone = {
 		//this.on( 'removedfile', removedFileCallback );
 	},
 	success: function(file, response){
-		console.log(response);
 		return file.previewElement.classList.add("dz-success");
 	}
 };
@@ -667,7 +654,6 @@ $('.new-folder').on('click',function(){
 	        if(result){
 	        	if(result!=null && jQuery.trim(result)!=null){
 	    			if(validateFileName(result)){
-	    				console.log("folder name" + result);
 	    				oConnector.SendCommand( 'CreateFolder', 'NewFolderName=' + escape( result) , RefreshCallBack(result) ) ;
 	    			}else{
 						bootbox.alert("Error: Invalid folder name!, folder name should contain only alphanu meric with '_' allowed.'");
@@ -725,9 +711,7 @@ function changeUploadType(id){
 	var type=id.value;
 	document.cookie = id.value;
 	var urlVal = window.location.search;
-	console.log("URl beof" + urlVal + "-" + $("#oldUrlType").val());
 	urlVal = urlVal.replace("&Type="+$("#oldUrlType").val(), "");
-	console.log("URl after" + urlVal);
 	// window.location.href = "/bannerUploadCms.action"+urlVal+"&Type="+type;
 	window.location.href = "/bannerUploadCms.action?Connector=/connector.slt&Type="+type;
 }
@@ -743,7 +727,7 @@ function changeUploadType(id){
 	color:red;
 } */
 .dropzone.dz-started .dz-message {
-	opacity: 0.5;
+	opacity: 0;
 	-ms-filter: "alpha(Opacity=0.5)";
 	filter: alpha(opacity=0.5);
 }

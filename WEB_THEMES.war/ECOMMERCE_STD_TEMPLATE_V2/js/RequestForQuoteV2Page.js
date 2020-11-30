@@ -1,6 +1,9 @@
 var webThemes = $("#webThemePath").val();
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
 var wasMetaKeyPressed = false;
-$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+$.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 	var savedOverrideShip = $('#savedOverrideShip').val();
 	var savedState = $('#savedState').val(); 
 	var date = new Date();
@@ -178,7 +181,7 @@ function validateRFQV2(actinType){
 		if($.trim(pn[i].value)=="" && $.trim(cpn[i].value) =="" && $.trim(mpn[i].value)=="" && $.trim(shortDesc[i].value)==""){
 			count++;
 		}else{
-			if(ITEMQTYARR[i].value==""){
+			if(ITEMQTYARR[i].value=="" || parseInt(ITEMQTYARR[i].value) <= 0){
 				//ITEMQTYARR[i].value=1;
 				var lineNo = i+1;
 				qtyErrorLineNumber = qtyErrorLineNumber+qtyErrorLineNumberSep+lineNo;
@@ -206,7 +209,7 @@ function validateRFQV2(actinType){
 		}
 	}
 	var eitherOfOneError = "Please Enter Either Part# or Customer Part # or Manufacturer Part # for Item(s) from Line# "+eitherOfOneErrorLineNumber+".<br />";
-	var quantityError = "Please Enter Quantity for Item(s) from Line# "+qtyErrorLineNumber+".<br />";
+	var quantityError = "Please Enter Valid Quantity for Item(s) from Line# "+qtyErrorLineNumber+".<br />";
 	var descriptionError = "Please Enter Description for Item(s) from Line# "+descErrorLineNumber+".<br />";
 	var uomError = "Please Enter Unit of Measure for Item(s) from Line# "+uomErrorLineNumber+".<br />";
 

@@ -1,5 +1,8 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
 	var currentMonth = date.getMonth();
 	var currentDate = date.getDate();
@@ -52,12 +55,12 @@ function validateRFQ(){
 	var emailVal = "";
 	var orderBy = "";
 	var rfnpName = $("#rfnpName").val(),
-		rfnpName2 = $("#rfnpName2").val(),
-		checkValidState = $("#checkValidState").val(),
-		rfnpPhone = $("#rfnpPhone").val(),
-		rfnpEmail = $("#rfnpEmail").val(),
-		comments = $('#comments').val(),
-		unusualCodeErrorStr = $("#dataErrors").attr('data-unusualError');
+	rfnpName2 = $("#rfnpName2").val(),
+	checkValidState = $("#checkValidState").val(),
+	rfnpPhone = $("#rfnpPhone").val(),
+	rfnpEmail = $("#rfnpEmail").val(),
+	comments = $('#comments').val(),
+	unusualCodeErrorStr = $("#dataErrors").attr('data-unusualError');
 
 	if($.trim(rfnpName)==""){
 		emailVal = emailVal + "Please Enter First Name.<br/>";
@@ -85,7 +88,7 @@ function validateRFQ(){
 		emailVal = emailVal + "Please Enter Phone Number.<br/>";
 		emailMsg = 1;
 	}else{
-		if(isPhoneNumberValid($.trim(rfnpPhone))==false){
+		if(isPhoneNumberValid($.trim(rfnpPhone)) == false){
 			emailVal = emailVal + "Please Enter Valid Phone Number<br/>";
 			emailMsg = 1;
 		}

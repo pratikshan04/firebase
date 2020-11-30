@@ -1,12 +1,12 @@
 #if($LayoutName=="CMSStaticPageList")
-<script type="text/javascript" src="$!webThemes/CMS/js/cms/cmsscript.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/jquery.colorbox.js" ></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/cms/cmsscript.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery.colorbox.js" ></script>
 #end
-<link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
-<link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
-<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
-<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
+<link href="$!cmsArtifactsPath/css/colorbox.css" rel="stylesheet" type="text/css"/>
+<link href="$!cmsArtifactsPath/css/styles_CMS.css?$!refreshVersion" rel="stylesheet" type="text/css" />
+<link href="$!cmsArtifactsPath/css/fontawesome.min.css" rel="stylesheet">
+<link href="$!cmsArtifactsPath/css/brands.min.css" rel="stylesheet">
+<link href="$!cmsArtifactsPath/css/solid.min.css" rel="stylesheet">
 <div class="cms_leftMenu">
 	#parse("cmsLeftmenu.html")
 </div>
@@ -186,11 +186,12 @@
 						#end
 					</td>
 					<td>
-						#if($pageList.customUrl)
-							#if($pageList.customUrl.length() > 30)
-							<a href="/$pageList.customUrl" data-toggle="tooltip" title="$pageList.customUrl">/$pageList.customUrl.substring(0, 30)... </a>
+						#if($pageList.customUrl.trim().length()>0)
+							#set($customUrl = $commonUtility.removeFirstCharacter($pageList.customUrl.trim(), "/"))
+							#if($customUrl.length() > 30)
+							<a href="/$!customUrl" data-toggle="tooltip" title="$pageList.customUrl">/$!customUrl.substring(0, 30)... </a>
 							#else
-							<a href="/$pageList.customUrl" target="_blank">/$pageList.customUrl</a>
+							<a href="/$!customUrl" target="_blank">/$!customUrl</a>
 							#end
 						#end
 					</td>

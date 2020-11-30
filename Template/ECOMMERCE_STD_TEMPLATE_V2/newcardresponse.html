@@ -1,4 +1,4 @@
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery-3.4.1.min.js"></script>
 <input type="hidden" id="cCardHolder" value="$creditCardValue.cardHolder" />
 <input type="hidden" id="cCardType" value="$creditCardValue.creditCardType" />
 <input type="hidden" id="cCardExpDate" value="$creditCardValue.date" />
@@ -9,7 +9,7 @@
 <input type="hidden" id="cardResponse" value="$creditCardValue.statusDescription" />
 <input type="hidden" id="fromPage" value='$!session.getAttribute("fromPage")' />
 <div id="cardStatus" class="center">
-<center><img src="$!cdnUrl$!webThemes/$siteName/images/brandloading.gif" alt='Loading'/></center>
+<center><img src="$!webThemes/$siteName/images/brandloading.gif" alt='Loading'/></center>
 <div class="cimm_instructions">
 <p>$locale.get("label.message.pleaseWaitWeAreProcesingYourRequest") </p>
 <p>$locale.get("label.message.doNotPressRefreshOrBackButton")</p>
@@ -18,7 +18,6 @@
 <script type="text/javascript">
 		$(document).ready(function() {
 			var fromPage = $("#fromPage").val();
-			console.log("fromPage : "+fromPage);
 			var content = "";
 			if (fromPage == "payWithNewCC") {
 				//content = "<center>New Credit Card Added Successfully. Please wait..</center>";

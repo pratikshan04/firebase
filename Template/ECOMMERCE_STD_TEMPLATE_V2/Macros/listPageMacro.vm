@@ -1,16 +1,15 @@
 #macro(listHiddenSearchWithIn $codeIdSkip,$levelNoSkip,$gallery,$resultPage,$pageNo,$sortBy,$attrFilterList,$brandId,$keyWord)
-#if($!levelNoSkip.trim().length() > 0) <input type="hidden" name="levelNo" value="$levelNoSkip" /> #end
-#if($!resultPage.trim().length() > 0) <input type="hidden" name="resultPage" value="$resultPage" />  #end
-#if($!keyWord.trim().length() > 0) <input type="hidden" name="keyWord" value="$!keyWord" /> #end
-#if($!pageNo.trim().length() > 0) <input type="hidden" name="pageNo" value="$pageNo" /> #end
-#if($sortBy.trim().length() > 0)<input type="hidden" name="sortBy" value="$sortBy" />#end 
-#if($attrFilterList.trim().length() > 0)<input type="hidden" name="attrFilterList" value='$attrFilterList'/>#end
+#if($keyWord.trim().length() > 0)<input type="hidden" name="keyWord" value="$!keyWord" />#end
+#if($sortBy.trim().length() > 0)<input type="hidden" name="sortBy" value="$sortBy" />#end
+#if($resultPage.trim().length() > 0)<input type="hidden" name="resultPage" value="$resultPage" /> #end
+#if($pageNo.trim().length() > 0)<input type="hidden" name="pageNo" value="$pageNo" />#end
+#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$attrFilterList'/>#end
 #end
 
 #macro(itemListHiddenFields $partNumber, $itemPriceId, $qty, $!uom, $price, $saleQty, $itemId, $displayFrieghtAlert, $packageQty, $itemAvailability, $srchTyp, $navigationType)
 <input type="hidden" value="$partNumber" name="idListPrice"/> 
 <input type="hidden" value="" name="test"/> 
-<!--<input type="hidden" id="priceSaleQty_$partNumber" value="$qty"/>--> 
+##<!--<input type="hidden" id="priceSaleQty_$partNumber" value="$qty"/>--> 
 <input type="hidden" id="uomValue_$partNumber" value="$!uom"/> 
 <input type="hidden" id="displayFrieghtAlert_$itemId" name="displayFrieghtAlert_$itemId" value="#if($displayFrieghtAlert)$displayFrieghtAlert#end" />
 <input type="hidden" id="priceValue_$partNumber" value="$price"/>
@@ -30,51 +29,32 @@
 <input type="hidden" id="priceForCart_$itemId" value=""/>
 #end
 
-#macro(listAndGridSwap $navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt)
+#macro(listAndGridSwap $navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt,$pageViewMode,$urlContext)
 #if($navigationType=="NAVIGATION")
-#set($paginationURL="$!codeIdSkip/category/$!forPageSeoUrl?pageClick=Y#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($levelNoSkip.trim().length() > 0)&levelNo=$levelNoSkip#end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
+	#set($paginationURL= "$urlContext?pageClick=Y#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end&pageNo=")
 #end
-#if($navigationType=="SEARCH")
-#set($paginationURL="searchPage.action?pageClick=Y&keyWord=$escapeTool.url($!keyWord)&srchTyp=$srchTyp#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#if($navigationType=="SEARCH" || $!keyWord.trim().length() > 0)
+	#set($paginationURL="searchPage.action?pageClick=Y#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($varPsid.trim().length() > 0)&vpsid=$varPsid #end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
 #end
-#if($navigationType=="BRAND")
-#set($paginationURL="$!brandId/brand/$!forPageSeoUrl?pageClick=Y#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$keyWordTxt#end&pageNo=")
-#end
-#if($navigationType=="MANF")
-#set($paginationURL="$!manfId/manufacturer/$!forPageSeoUrl?pageClick=Y&srchTyp=$srchTyp#if($keyWord.trim().length() > 0)&keyWord=$keyWord#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$keyWordTxt#end&pageNo=")
+#if($navigationType=="BRAND" || $navigationType=="MANF")
+	#set($paginationURL="$urlContext?pageClick=Y#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($varPsid.trim().length() > 0)&vpsid=$varPsid #end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end&pageNo=")
 #end
 #end
 
 #macro(listPageHeading $navigationType,$keyWord,$heading)
-#if($navigationType=="NAVIGATION")
-#set($listPageHeading="$heading")
-#end
 #if($navigationType=="SEARCH")
-#set($listPageHeading="$keyWord")
-#end
-#if($navigationType=="BRAND")
-#set($listPageHeading="$heading")
-#end
-#if($navigationType=="MANF")
-#set($listPageHeading="$heading")
+	#set($listPageHeading="$!keyWord")
+#else
+	#set($listPageHeading="$!heading")
 #end
 #end
 
-#macro(listPageFormUrls $navigationType, $!codeIdSkip, $!forPageSeoUrl, $!manfId, $!brandId)
-#if($navigationType=="NAVIGATION")
-#set($itemsPerPageURL="$!codeIdSkip/category/$!forPageSeoUrl")
-#set($searchWithInFormURL="$!codeIdSkip/category/$!forPageSeoUrl")
-#end
+#macro(listPageFormUrls $navigationType, $urlContext)
 #if($navigationType=="SEARCH")
-#set($itemsPerPageURL="searchPage.action")
-#set($searchWithInFormURL="")
-#end
-#if($navigationType=="BRAND")
-#set($itemsPerPageURL="$!brandId/brand/$!forPageSeoUrl")
-#set($searchWithInFormURL="$!brandId/brand/$!forPageSeoUrl")
-#end
-#if($navigationType=="MANF")
-#set($itemsPerPageURL="$!manfId/manufacturer/$!forPageSeoUrl")
-#set($searchWithInFormURL="$!manfId/manufacturer/$!forPageSeoUrl")
+	#set($itemsPerPageURL="searchPage.action")
+	#set($searchWithInFormURL="")
+#else
+	#set($itemsPerPageURL= $urlContext )
+	#set($searchWithInFormURL= $urlContext)
 #end
 #end

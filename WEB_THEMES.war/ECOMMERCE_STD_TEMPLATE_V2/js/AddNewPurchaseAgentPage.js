@@ -42,9 +42,9 @@ function RefreshPageForInternationalUser(){
 	if($('#chkInternationalUser').is(':checked')){
 		$("#locUser").val("Y");
 		if($('#getentityAddress').is(':checked')){
-			$('#getentityAddress').attr('checked', false);
+			$('#getentityAddress').prop('checked', false);
 		}
-		$("#getentityAddress").attr("disabled", true);
+		$("#getentityAddress").prop("disabled", true);
 	}else{
 		$("#locUser").val("N");
 		$("#getentityAddress").removeAttr("disabled");

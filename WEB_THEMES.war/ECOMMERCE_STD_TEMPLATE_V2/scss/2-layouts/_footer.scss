@@ -46,6 +46,9 @@ footer {
         .cimm_footer-copyright {
             margin: 0;
             letter-spacing: 1px;
+            a{
+                text-decoration: underline;
+            }
         }
     }
 }

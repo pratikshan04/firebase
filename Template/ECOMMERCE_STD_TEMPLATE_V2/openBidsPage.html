@@ -69,11 +69,7 @@
 					<td data-th="$locale.get('form.label.customerPOnumber')">#if($!orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
 					<!-- <td data-th="$locale.get('form.label.CustomerRelease')">#if($!orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
 					<td data-th="$locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
-					#if($session.getAttribute("erpType") == "eclipse")
-					<td data-th="$locale.get('product.label.amount')">$$!numberTool.format($numberToolFormat,$!orderDetail.openOrderAmount)</td>
-					#else
 					<td data-th="$locale.get('product.label.amount')">$$!numberTool.format($numberToolFormat,$!orderDetail.total)</td>
-					#end
 					<td data-th="$locale.get('product.label.shipDate')">$!orderDetail.shipDate</td>
 					<!-- <td data-th="$locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
 					<td data-th="$locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>

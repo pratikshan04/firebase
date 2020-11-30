@@ -1,5 +1,8 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
 	$('#reqDate').datepicker({autoclose: true, startDate : (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear()});
 });
@@ -50,6 +53,7 @@ function setPoNumberToSession(value){
 }
 
 var checkoutWizard = {};
+var warningMsg = true;
 (function() {
 	
 	var checkOutStep = 3;
@@ -62,7 +66,9 @@ var checkoutWizard = {};
 	checkoutWizard.showAStepCallback = function(obj){
 		var step_num= obj.attr('index');
 		if(step_num==checkOutStep){
-			block("Please Wait");
+			if(warningMsg){
+				block("Please Wait");
+			}
 			if($('#wizFinishButtonId').length>0){
 				$('#wizFinishButtonId').addClass("buttonDisabled");
 				if($('#orderType').val().trim() == "checkoutWithPo"){
@@ -314,7 +320,7 @@ var checkoutWizard = {};
 	}
 	
 })();
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+$.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 	$('#wizardCheckout').multiTab({
 		wizard:true,
 		transitionEffect:'fade',
@@ -402,9 +408,11 @@ function validateCheckoutShipTo(){
     }
 	if(restrictionFlag){
 		$('#californiaRestriction').modal();
+		warningMsg = false;
 		return false;
 	}else if(warningFlag){
 		$('#californiaWarning').modal();
+		warningMsg = false;
 		return true;
 	}else if(message.length>0){
 		bootAlert("medium","error","Error",message);

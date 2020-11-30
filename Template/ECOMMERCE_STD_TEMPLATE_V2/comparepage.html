@@ -21,6 +21,7 @@
 			<li class="mBottom-2"><a id="showDifferent" class="cimm_inlineButton compareSimDiffBtns">$locale.get("product.button.showDifferent")</a></li>
 			<li class="mBottom-2"><a class="cimm_inlineButton active">$locale.get("product.button.off")</a></li>
 			<li class="mBottom-2"><a href="javascript:void(0);" onclick="removeItems();" class="cimm_inlineButton">$locale.get("product.label.removeItem")</a></li>
+			<li class="mBottom-2"><a href="javascript:void(0);" onclick="clearAllCompareItems();" class="cimm_inlineButton">$locale.get("product.label.clearAll")</a></li>
 		</ul>
 		<div class="tableWrapper">
 			<table class="table table-bordered">
@@ -50,16 +51,16 @@
 							#set($itemTitle=$compareItem.brandName+" "+$!compareItem.manufacturerPartNumber)
 							<td>
 								#if($compareItem.imageName.contains("http"))
-								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
+								<a href="$compareItem.seoUrl">
 									<img id="imageName$compareItem.itemId" src="$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#else
-								<a href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
+								<a href="$compareItem.seoUrl">
 									<img id="imageName$compareItem.itemId" src="$itemImage$compareItem.imageName" alt='$itemTitle' width="120" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 								</a>
 								#end
 								<strong>
-									<a class="comprProdTitle" href="$compareItem.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" id="itemTitle$compareItem.itemId">
+									<a class="comprProdTitle" href="$compareItem.seoUrl" id="itemTitle$compareItem.itemId">
 										<span  id="itemTitle$compareItem.itemId">$compareItem.brandName $!compareItem.manufacturerPartNumber</span>
 									</a>
 								</strong>
@@ -118,7 +119,7 @@
 								
 		                    #end
 		                </tr>                   
-		            #if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+		            #if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 		            <tr>
 		                <td>
 		                <strong>$locale.get("product.label.price") </strong> </td>
@@ -140,7 +141,7 @@
 		                                    #else
 		                                         <span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
 		                                    #end	
-		                                    <!-- <img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /> -->
+		                                    <!-- <img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/> -->
 		                                
 		                               </strong>
 		                               <input type="hidden" value="$mainPrice.minOrderQty" id="itemTxtQty$mainPrice.itemId" name="itemTxtQty$mainPrice.itemId"/>
@@ -153,7 +154,7 @@
 		                                    #else
 		                                        <span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
 		                                    #end
-		                                    <!-- <img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /> -->
+		                                    <!-- <img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/> -->
 		                                </span>
 		                                <input type="hidden" value="$mainPrice.minOrderQty" id="itemTxtQty$mainPrice.itemId" name="itemTxtQty$mainPrice.itemId"/>
 		                            </td>
@@ -255,7 +256,7 @@
 		
 		<td>
 		                    <span id="Avail_$mainAvailability.partNumber" data-select='availability'>
-		                    	<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" />
+		                    	<img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>
 		                    </span>
 		                    <input id="HomePlentyDate_$mainAvailability.partNumber" type="hidden" >
 		    </td>                
@@ -348,7 +349,7 @@
 		                #end
 		            </tr>
 		            
-		            #if($userLogin || ($!CommonDBQuerySystemParameter &&  $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
+		            #if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 		             <tr>
 		                <td>&nbsp;
 		                    
@@ -364,7 +365,7 @@
 		                    </span>                   
 		                </td>
 		                <!-- <td>
-		                	<a href="javascript:void(0);" class="btn-addtocart addToCart" onclick="loginPop(); return false;">$locale.get("product.button.addtocart")</a>
+		                	<a href="javascript:void(0);" class="btn-addtocart addToCart" data-toggle="modal" data-target="#loginModal">$locale.get("product.button.addtocart")</a>
 		                </td> -->
 		                #end  
 		                
@@ -412,15 +413,5 @@
 		    </table>
 		 </div>
     </div>
-    <form name="removeProduct" action="itemComparePage.action">
-        <input type="hidden" name="compareId" id="CompareProducts" />
-    </form>
-<div class="clear"></div>    
-	 <!--
-			=====================================
-			#foreach( $key in $compareList.keySet() )
-			<tr><td>$key</td><td>$compareList.get($key)</td></tr>
-			#end
-			=====================================
-	-->
-	
+    <form name="removeProduct" action="itemComparePage.action"><input type="hidden" name="compareId" id="CompareProducts" /></form>
+<div class="clear"></div>

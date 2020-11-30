@@ -1,26 +1,18 @@
 <link rel="shortcut icon" href="$!hostName$!webThemes/$siteName/images/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="$!hostName$!webThemes/$siteName/images/favicon.ico" type="image/vnd.microsoft.icon" />
 <link rel="icon" href="$!hostName$!webThemes/$siteName/images/favicon.ico" />
-##if($LayoutName=="CMSStaticPageList" || $LayoutName=="CMSStaticPage" || $LayoutName=="CMSFormList" || $LayoutName=="CMSFormEdit" || $LayoutName=="CMSBannerEdit" || $LayoutName=="CMSBannerList")
 #parse("font-awesomeV5.html")
-##else
-##parse("font-awesome.html")
-##end
-<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/font-awesome.min.css" /> -->
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/bootstrap-select.min.css" media="all" />
 #if($LayoutName != "HomePage" && $!isStaticHomePage != "Y" && $LayoutName != 'CMSStaticPageList')
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/datatables.min.css" media="all">
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/dataTables.bootstrap.min.css" media="all">
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/bootstrap-datepicker.standalone.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/datatables.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/dataTables.bootstrap.min.css" media="all">
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/bootstrap-datepicker.standalone.min.css" media="all">
 #end
 #if($LayoutName=="ProductDetailPage")
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/plugins/prettyPhoto.css" media="all"/>
-#elseif($LayoutName=="CalendarEventsPage" || $LayoutName=="EventDetailPage")
-<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/unilogEventCss.css" media="all" /> -->
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/prettyPhoto.css" media="all"/>
 #elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css?$!refreshVersion" media="all" />
 #end
-##parse("bootstrap-min-css.html")<!-- <link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/bootstrap.min.css" /> -->
 #parse("bootstrap-3.4.1-min-css.html")
 #set($currentWebTheme = "unilogweb.css")
 #if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
@@ -29,67 +21,26 @@
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
-<style id="cssSelector">.demo{color:red;}</style> 
-#if($LayoutName=="QuickOrderStdPage")
-<link rel="stylesheet" href="$!cdnUrl$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">
+#if($!CommonDBQuerySystemParameter.get("ENABLE_MENUS_FROM_WP")=="Y")
+<link rel="stylesheet" type="text/css" href="$!CommonDBQuerySystemParameter.get('WP_CDN_URL')wp-content/themes/unilog-ecom/assets/css/gutenberg-editor.css?ver=5.4.2" media="all" />
+<link rel="stylesheet" type="text/css" href="$!CommonDBQuerySystemParameter.get('WP_CDN_URL')wp-includes/css/dist/block-library/style.min.css" media="all" />
 #end
-#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$!cdnUrl$!webThemes/$siteName/css/unilogweb_app.css?$!refreshVersion">#end
+<style id="cssSelector">.demo{color:red;}</style> 
+#if($LayoutName=="QuickOrderStdPage")<link rel="stylesheet" href="$!webThemes/$siteName/css/plugins/handsontable.full.css" media="screen">#end
+#if($userAgent == "WEBVIEW")<link rel="stylesheet" media="screen" href="$!webThemes/$siteName/css/unilogweb_app.css?$!refreshVersion">#end
 <!--[if IE 9]>
-	<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/IE9.css">
+	<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/IE9.css">
 <![endif]-->
 #if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
 <style type="text/css">
 .jssorb01 {float: right;}
-.jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
- filter: alpha(opacity=70);
- opacity: .7;
- overflow:hidden;
- cursor: pointer;
-}
-.jssora05ldn, .jssora05rdn{
-	position: absolute;
-	cursor: pointer;
-	display: block;
-	background: url(../images/a17.png) no-repeat;
-	overflow:hidden;
-}
-.jssora05l {
-	display: block !important;
-	background: #FFF;
-	top: 48% !important;
-	position: absolute;
-	left: 0 !important;
-	width: 30px !important;
-	cursor: pointer;
-	box-shadow: 1px 2px 10px -1px #ABABAB;
-}
-.jssora05r {
-	display: block !important;
-	background: #FFF;
-	top: 48% !important;
-	position: absolute;
-	right: 0 !important;
-	width: 30px !important;
-	cursor: pointer;
-	box-shadow: 1px 2px 10px -1px #ABABAB;
-}
-.jssora05l:before, .jssora05r:before {
-    font-family: "Font Awesome 5 Free";
-    font-size: 20px;
-    line-height: 1;
-    opacity: .75;
-    color: #46acee;
-    position: absolute;
-    top: 10px;
-    left: 12px;
-    font-weight: 900;
-}
-.jssora05l::before {
-    content: "\f0d9";
-}
-.jssora05r:before {
-	content: "\f0da";
-}
+.jssorb01 div, .jssorb01 div:hover, .jssorb01 .av { filter: alpha(opacity=70); opacity: .7; overflow:hidden; cursor: pointer; }
+.jssora05ldn, .jssora05rdn{ position: absolute; cursor: pointer; display: block; background: url(../images/a17.png) no-repeat; overflow:hidden;}
+.jssora05l {display: block !important;background: #FFF;top: 48% !important;position: absolute;left: 0 !important;width: 30px !important;cursor: pointer;box-shadow: 1px 2px 10px -1px #ABABAB;}
+.jssora05r {display: block !important;background: #FFF;top: 48% !important;position: absolute;right: 0 !important;width: 30px !important;cursor: pointer;box-shadow: 1px 2px 10px -1px #ABABAB;}
+.jssora05l:before, .jssora05r:before {font-family: "Font Awesome 5 Free";font-size: 20px;line-height: 1;opacity: .75;color: #46acee;position: absolute;top: 10px;left: 12px;font-weight: 900;}
+.jssora05l::before {content: "\f0d9";}
+.jssora05r:before {content: "\f0da";}
 .jssora05l:hover,.jssora05r:hover { background: #FFF; }
 .jssora05l:hover:before,.jssora05r:hover:before{ color: #797d82; }
 .jssora05ldn { background-position: -250px -40px; }
@@ -97,28 +48,22 @@
 </style>
 #elseif($LayoutName=="ProductDetailPage")
 <style type="text/css">
-.popProduct {
-	position: absolute;
-	padding: 10px;
-	margin: 5px 0px;
-	display:none;
-	background: #3468d6;
-	opacity: 0.8;
-	border-radius: 5px;
-	background: linear-gradient(top, #f9d835, #f3961c);
-	top: -35px;
-}
-.popProductClone{
-	position: absolute;
-	padding: 10px;
-	margin: 5px 0px;
-	display:none;
-	background: #3468d6;
-	opacity: 0.8;
-	border-radius: 5px;
-	top: 40px;
-	width: 320px;
-	right: 0;
-}
- </style>
+.popProduct {position: absolute;padding: 10px;margin: 5px 0px;display:none;background: #3468d6;opacity: 0.8;border-radius: 5px;background: linear-gradient(top, #f9d835, #f3961c);top: -35px;}
+.popProductClone{position: absolute;padding: 10px;margin: 5px 0px;display:none;background: #3468d6;opacity: 0.8;border-radius: 5px;top: 40px;width: 320px;right: 0;}
+</style>
+#end
+#if($!CommonDBQuerySystemParameter.get("ENABLE_MENUS_FROM_WP")=="Y")
+<style>
+.navigation-main {margin: 0;padding: 0;list-style: none;width: 100%;}
+.navigation-main ul {min-width: 150px;margin: 0;padding: 0;list-style: none;position: absolute;top: -999em;left: -999em;z-index:999999;}
+.navigation-main li {display: inline-block;position: relative;text-align: left;padding: 15px 20px;text-transform: uppercase;font-family: RobotoRegular;font-size: 14px;color: #f9f9f9}
+.navigation-main li.focus > ul, .navigation-main li:hover > ul {top: auto;left: auto;}
+.navigation-main li li {display: block;text-transform:none;color:#404040;padding:4px 10px;background:none;}
+.navigation-main li li.focus > ul, .navigation-main li li:hover > ul {left: 100%;top: 0;}
+.navigation-main a {color: #fff;text-decoration: none; display: block;white-space: nowrap;padding: 15px 30px 15px 15px;}
+.navigation-main a:hover, .navigation-main li:hover > a, .navigation-main .focus > a, .navigation-main .current-menu-item > a, .navigation-main .current-menu-ancestor > a {color: #ffcc03;}
+.navigation-main .menu-item-has-children > a::before {content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%); border: 4px solid transparent; border-top-color: currentColor;}
+.navigation-main ul .menu-item-has-children > a::before {right: 2px; border-top-color: transparent; border-left-color: currentColor;}
+.navigation-main ul {background-color: #145474;}
+</style>
 #end

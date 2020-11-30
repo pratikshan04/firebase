@@ -109,31 +109,27 @@
 					#set($itemTitle= $itemData.brandName+" "+ $itemData.manufacturerPartNumber)
 					<tr itemscope itemtype="http://schema.org/Product">
 						<td data-th="$locale.get('product.label.Image')">							
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
+							<a href="$itemData.seoUrl">
 								<span id="imageName$itemData.itemId">
 								#if($itemData.imageType=="URL")
-								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								<img src="$itemData.imageName" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								#else
-								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
+								<img src="$detailImage$itemData.imageName" class="PgImg" width="75" height="75" onerror="this.src='$webThemes/$siteName/images/NoImage.png';" />
 								#end
 								</span>
 							</a>
 						</td>
 						<td data-th="$locale.get('product.label.productDescription')">
 							<ul class="text-left">
-								<li itemprop="name">
-									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a>
-								</li>
-								<li class="hideForCollapse hideMe">
-									<p itemprop="description">$!itemData.shortDesc </p>
-								</li>
+								<li><a href="$itemData.seoUrl" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a></li>
+								<li class="hideForCollapse hideMe"><p>$!itemData.shortDesc</p></li>
 								<li>
-									#if($itemData.manufacturerPartNumber)
-									<p itemprop="mpn"><b>$!locale.get("product.label.mpn"): </b> $!itemData.manufacturerPartNumber</p>
+									#if($itemData.manufacturerPartNumber.trim().length()>0)
+									<p><b>$!locale.get("product.label.mpn"): </b> $!itemData.manufacturerPartNumber</p>
 									#end
-									<p itemprop="sku"><b>$!locale.get("product.label.partNumber"): </b> $!itemData.partNumber</p>
-									#if($itemData.upc)
-									<p itemprop="sku"><b>$!locale.get("product.label.upc"): </b> $!itemData.upc</p>
+									<p><b>$!locale.get("product.label.partNumber"): </b> $!itemData.partNumber</p>
+									#if($itemData.upc.trim().length()>0)
+									<p><b>$!locale.get("product.label.upc"): </b> $!itemData.upc</p>
 									#end
 								</li>
 								#set($leadTime = "N")
@@ -191,7 +187,6 @@
 							<span class='priceSpanFa'>call for Price </span>
 							#end
 							<em>#if($!itemData.qtyUOM && $itemData.qtyUOM.length() > 0 && $itemData.price > 0) / $!itemData.qtyUOM #end</em>
-							##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.itemAvailability, $itemData.srchTyp, $navigationType)
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 							<input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber"/>
 							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>

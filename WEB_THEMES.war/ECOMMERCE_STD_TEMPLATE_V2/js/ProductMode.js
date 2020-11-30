@@ -1,5 +1,20 @@
+var refreshVersion =  $("#refreshVersion").val();
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/multiTab.min.js', function(){});
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+var currentLayout  = "";if($("#layoutName").length > 0){ currentLayout  = $("#layoutName").val(); }
+if( $.trim(currentLayout) != "ProductDetailPage"){
+	$.getScript(cdnPluginJsPath+'/multiTab.min.js?'+refreshVersion, function(){
+		$('#searchResultsStatic').multiTab({
+			   tabHeading: '.multiTabHeading',
+			   contentWrap: '.multiTabContent',
+			   transitionEffect: "fade",
+			   accordion: false,
+			   showAllTab: false
+		});
+	});
+}
 var ProductMode = {};
 (function() {
 	//------------------------------------------------- Product Mode Filters Start
@@ -9,7 +24,6 @@ var ProductMode = {};
 		if(jQuery.trim(attrList)!="" ){
 			jQuery("#multiFilterAttrList").val(attrList);
 		}
-
 		if(jQuery.trim(keyText)!="") {
 			var keyArr = keyText.split("|");
 			if(keyArr.length>0){
@@ -24,7 +38,6 @@ var ProductMode = {};
 		}
 	};
 	//function removeKeyword(index){}
-
 	ProductMode.buildSearchTrail = function(id){
 		jQuery("#mulitFilterTrailDetailPage").html("");
 		if(jQuery("#mulitFilterTrailDetailPage").length>0){
@@ -37,16 +50,13 @@ var ProductMode = {};
 				attrList = jQuery("#attrFilterList").text();
 			}
 
-			if(jQuery.trim(attrList)!="")
-			{
+			if(jQuery.trim(attrList)!=""){
 				buildString = '<ol>';
 			}
-			if(jQuery.trim(attrList)!="")
-			{
+			if(jQuery.trim(attrList)!=""){
 				var attrArr = attrList.split("~");
 				console.log("Inside build");
-				for(i=0;i<attrArr.length;i++)
-				{
+				for(i=0;i<attrArr.length;i++){
 					var valArr = attrArr[i].split(":");
 					console.log("val arr : "+valArr);
 					console.log(valArr[0].replace("attr_",""));
@@ -59,9 +69,7 @@ var ProductMode = {};
 					buildString = buildString + '</span>';
 
 					var c = "";
-
-					for(j=0;j<valListArr.length;j++)
-					{
+					for(j=0;j<valListArr.length;j++){
 						var attrValueTxt = valListArr[j].substring(1, valListArr[j].length-1);
 						if(dispVal.toUpperCase()=="COLOR"){
 							var splitAttrValue = attrValueTxt.split("`");
@@ -75,14 +83,12 @@ var ProductMode = {};
 				console.log("build finished + " + buildString);
 			}	
 
-			if(jQuery.trim(attrList)!="" || jQuery.trim(keyText)!="")
-			{
+			if(jQuery.trim(attrList)!="" || jQuery.trim(keyText)!=""){
 				buildString = buildString+'</ol>';
 				jQuery("#mulitFilterTrailDetailPage").html(buildString);
 			}
 			$('.productSearch').val("");
 		}
-
 	};
 	//function buildSearchTrail(){}
 	
@@ -90,7 +96,6 @@ var ProductMode = {};
 		var priceId = $(id).attr('data-priceId');
 		var key = jQuery(id).find("div").html();
 		var val = unescape(jQuery(id).find("span").text());
-
 		if(key=="BRAND")
 			key = "brand";
 		if(key=="CATEGORY")
@@ -101,7 +106,6 @@ var ProductMode = {};
 		}else{
 			attrList = jQuery("#attrFilterList").text();
 		}
-
 		if(jQuery.trim(attrList)=="") {
 			if(priceId){
 				$("#attrFilterContent_"+priceId).parent().find('.multiSelectForm [name="attrFilterList"]').val(key+":"+val);
@@ -115,24 +119,16 @@ var ProductMode = {};
 			var buildAttr = "";
 			var c = "";
 			var isBuild = false;
-			for(i=0;i<attrArr.length;i++)
-			{
-				if(buildAttr=="")
-					c = "";
+			for(i=0;i<attrArr.length;i++){
+				if(buildAttr==""){ c = ""; }
 				var valArr = attrArr[i].split(":");
-
-				if(valArr[0] == key)
-				{
+				if(valArr[0] == key){
 					var valListArr = valArr[1].split("|");
-					if(valListArr.length>1)
-					{
+					if(valListArr.length>1){
 						var k = "";
 						var newVal = valArr[0]+":";
-
-						for(j=0;j<valListArr.length;j++)
-						{
-							if(valListArr[j]!=val)
-							{
+						for(j=0;j<valListArr.length;j++){
+							if(valListArr[j]!=val){
 								newVal = newVal + k + valListArr[j];
 								k = "|";
 							}
@@ -142,12 +138,9 @@ var ProductMode = {};
 					}else{
 						isBuild = true;
 					}
-
-
 				}else{
 					buildAttr = buildAttr + c + attrArr[i];
 				}
-
 				c = "~";
 			}
 			// buildAttr = Encoder.htmlEncode(buildAttr).replace(/\&quot;/g,'"');
@@ -158,7 +151,6 @@ var ProductMode = {};
 			}
 			console.log("the Filtered list to append and buid : " + jQuery("#attrFilterList").text());
 		}
-
 		var navigationType = jQuery("#navigationType").val();
 		var srchKeyword = jQuery("#srchKeyword").val();
 		var srchTyp = jQuery("#srchTyp").val();
@@ -169,7 +161,6 @@ var ProductMode = {};
 		}
 	};
 	//function removeMultiAttr(id){}
-
 
 	ProductMode.removeAllMultiAttr = function(){
 		try{
@@ -184,17 +175,14 @@ var ProductMode = {};
 				return false;
 			}
 		}catch(e){
-			e.message
+			console.log(e);
 		}
 	};
 	//function removeAllMultiAttr(){}
-	 
 	ProductMode.appendSearchByCheckBox = function(id){
-
 		$("[name='keyWord']").each(function(){
 			$(this).val(Encoder.htmlEncode($(this).val()).replace(/\&quot;/g,'"'));
 		});
-
 		var chks = jQuery("input:checkbox[name='"+id+"']:checked");
 		var key = "";
 		var val = ""
@@ -215,14 +203,12 @@ var ProductMode = {};
 	//function appendSearchByCheckBox(id){}
 
 	ProductMode.appendSearch = function(key,val,chksEl){
-
 		if(typeof val!='undefined' && val!=null && val!=""){
 			val = val.replace(/\+/g," ");
 		}
 		$("[name='keyWord']").each(function(){
 			$(this).val(Encoder.htmlEncode($(this).val()).replace(/\&quot;/g,'"'));
 		});
-
 		if(key=="Brands")
 			key = "brand";
 		if(key=="Category")
@@ -250,18 +236,14 @@ var ProductMode = {};
 			var buildAttr = "";
 			var c = "";
 			var isBuild = false;
-			for(i=0;i<attrArr.length;i++)
-			{
+			for(i=0;i<attrArr.length;i++){
 				var valArr = attrArr[i].split(":");
-
-				if(valArr[0] == key)
-				{
+				if(valArr[0] == key){
 					buildAttr = buildAttr + c + attrArr[i] +"|"+val;
 					isBuild = true;
 				}else{
 					buildAttr = buildAttr + c + attrArr[i];
 				}
-
 				c = "~";
 			}
 
@@ -311,7 +293,6 @@ var ProductMode = {};
 	}
 	//function submitProductModeFilterForm(itemPriceId){}
 	//------------------------------------------------- Product Mode Filters END
-	
 	//--------------------------------- ProductModer Detail Page datatable price Load Start
 	/*ProductMode.loadPriceInDataTable = function(){
 		try{
@@ -550,7 +531,7 @@ var ProductMode = {};
 			////--------------------------------- load item Spec &  Linked item Detail in productMode End
 			
 		}catch(e){
-			e.message;
+			console.log(e);
 		}
 	};*/
 	//function loadPriceInDataTable() {}
@@ -560,7 +541,6 @@ var ProductMode = {};
 	}
 	//function showlinkedItemSection(id){}
 	//--------------------------------- ProductModer Detail Page datatable price End
-
 	//------------- custom Dom tab script
 	ProductMode.customDomTabLoad = function(){
 		$('#multiTab').multiTab({
@@ -571,7 +551,6 @@ var ProductMode = {};
 	};
 	//function customDomTabLoad(){}
 	//------------- custom Dom tab script
-	
 	ProductMode.checkCookieToCheck = function (){
 		checkCookie = localStorage.getItem("selectedItemsToGroup");
 		if(checkCookie!=null  && checkCookie!="[]"){
@@ -588,15 +567,16 @@ var ProductMode = {};
 			$(".cimm_addcartSlider").removeClass("cimm_addcartSliderShow");
 		}
 	}
-	
 })(); //----------------------------------------------------------------  Product Mode Object
 
 $(function(){
 	initSubmitForm();
 });
 
-
 function initSubmitForm(){
+	if ($("#layoutName").val() == "ProductDetailPage") {
+		priceLoading.productModeCustomFunc();
+	}
 	$(".multiSelectForm").submit(function(){
 		var str = $(this).serialize();
 		var itemPriceId = "";
@@ -636,7 +616,6 @@ function initSubmitForm(){
 					}
 					ProductMode.buildSearchTrail(itemPriceId);
 					hideBulkAction();
-					
 					priceLoading.beginProductModePriceLoading(itemPriceId);
 					//ProductMode.loadPriceInDataTable();
 					//priceLoading.productModeCustomFunc();
@@ -691,7 +670,6 @@ function multipleUomOnChange(obj){
 			}else{
 				priceForUom = parseFloat(unitPrice)*parseFloat(uomQty);
 			}
-			
 		}
 		if(parseFloat(priceForUom)>0){
 			if($('#tdPrice_'+partNumber).length>0){
@@ -704,7 +682,6 @@ function multipleUomOnChange(obj){
 			}
 			$('#priceValue_'+partNumber).val(priceForUom);
 		}
-		
 		$('#uomValue_'+partNumber).val(selectedUom);
 	}
 }

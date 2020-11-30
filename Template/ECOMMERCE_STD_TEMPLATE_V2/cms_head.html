@@ -3,7 +3,6 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 #parse("font-awesomeV5.html")
-<!-- /*! * Bootstrap v3.3.7 (http://getbootstrap.com) * Copyright 2011-2016 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ -->
 #parse("bootstrap-min-css.html")
 #set($currentWebTheme = "unilogweb.css")
 #if($!CommonDBQuerySystemParameter.get("ScheduledThemeFileName").toLowerCase().contains(".css"))
@@ -13,14 +12,14 @@
 #end
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css?$!refreshVersion" media="all" />
-
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/lazysizes.min.js"></script>
-#parse("jquery-migrate-1-2-1-min.html")
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/siteScript.js?v=$!session.getLastAccessedTime()"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/slick.js"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.slimscroll.min.js"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/recentlyViewed.js"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jsaes.js"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootbox.min.js"></script>
+<input type="hidden" id="cmsArtifactsPath" value="$!cmsArtifactsPath"/>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/lazysizes.min.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/bootstrap.min.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/slick.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jsaes.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/bootbox.min.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/siteScript.js?$!refreshVersion"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/recentlyViewed.js"></script>

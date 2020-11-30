@@ -25,7 +25,6 @@ function cmsbannersmenubuilderList1(){
 function componentCreationRedirect(){
 	window.parent.document.getElementById("componentForm:componentRedirectBtn").click();
 }
-
 function eventList(){
 	window.parent.document.getElementById("cmsEventlistForm:eventList").click();
 }
@@ -47,6 +46,9 @@ function cmsThemeEditor(){
 function cmsImportExport(){
 	window.parent.document.getElementById("cmsImportExportForm:cmsImportExport").click();
 }
+function cmsSeoPortal(){
+	window.parent.document.getElementById("cmsSeoPortalForm:cmsSeoPortal").click();
+}
 
 function showPageProperty(){
 	jQuery("#addNewStaticFormId").toggle();
@@ -61,12 +63,15 @@ function showPageProperty(){
 	}
 }
 
+ function showUploadedImages(){
+    $('#metaImage').val(true);
+    jQuery(".iframe").colorbox({iframe:true, width: iframeWidth(),height:"88%"});
+  }
 function saveStaticPage(){
 	jQuery("#gm-canvas").unhighlight();
 	jQuery("#pageTab").show();
 	//switchPage();
 	jQuery("#addNewStaticFormId").show();
-	console.log("save function called");
 	var pageName = $("#pageName").val();
 	$(".bgColor").remove();
 	var lang = "1";
@@ -150,7 +155,6 @@ jQuery.ajax({
   	success: function(msg){
 			jQuery("#mycanvas").html(msg);
 			initGridManager();
-			console.log(msg);
 		 }	
 	});
 } */
@@ -172,11 +176,8 @@ function saveContent(){
 	if($('#selectStaticPageType').val() == "BLOG"){
 		newText = $('#gm-canvas').clone().find(".row").unwrap().end().html();
 	}
-	else {
-		newText = convertHtmlEntities();
-	}
-	$("#pageContent").val(newText);
-	console.log(jQuery("#gm-canvas").text());
+	
+	$("#pageContent").val(convertHtmlEntities(newText));
 	generateJson();
 	showAllIcons();
 	jQuery('.gm-preview').trigger("click");
@@ -504,7 +505,6 @@ jQuery('.gm-preview').trigger("click");
          jQuery("#templateImage").attr("src",data);
 		 jQuery("#canvasImage").html("<img src='"+data+"' style='width:150px;height:150px;' />");
         // document.getElementById("tempImageId").value = data ;	 
-		 console.log("Inside html canvas +: "+ data);
 		saveThumbnail();
 		
 		
@@ -519,7 +519,6 @@ html2canvas([document.getElementById('canvasImage')], {
          jQuery("#templateImage").attr("src",data);
 		 jQuery("#canvasImage").html("");
          document.getElementById("tempImageId").value = data ;	 
-		 console.log("Inside html canvas thumbnail +: "+ data);
 		//saveThumbnail();
 		saveContent();
 		
@@ -572,10 +571,8 @@ var gm;
 jQuery(document).ready(function() {
 	jQuery("#addNewStaticFormId").hide();
 	 if(jQuery("#loggedInCIMMUserId", window.parent.document).length>0){
-		 console.log("loggedInCIMMUserId : "+jQuery("#loggedInCIMMUserId", window.parent.document).val());
 		 if(jQuery("#userEditedId").length>0){
 			 jQuery("#userEditedId").val(jQuery("#loggedInCIMMUserId", window.parent.document).val());
-			 console.log("userEditedId : "+jQuery("#userEditedId").val());
 		 }
 	 }
 		try{
@@ -599,7 +596,6 @@ function initInitalBanner(){
 }
 
 var refreshBanner = function(bannerId,index){
-	console.log("bannerId : " + bannerId + "-" + index);
 	jQuery.getJSON("bannerDataTemplateCms.action?bannerListId=" + bannerId+"&reload=false", function(data) {
 		var bannerData = "";
 		if(data.hasOwnProperty('bannerTemplate')){
@@ -627,7 +623,6 @@ var refreshBanner = function(bannerId,index){
 			jQuery("[data-bannerid='"+bannerId+"']").each(function(){
 				bannerData = data.bannerTemplate;
 				var sliderId = jQuery(this).attr("id").replace("_Wrapper","");
-				console.log("Wrapper id :"+sliderId);
 				
 				 bannerData = bannerData.replace("slidercontainer",sliderId);
 				 if(typeof bannerType=="undefined"){
@@ -698,7 +693,6 @@ function initGridManager(){
 	*Initilaize elements to be sortable 
  */
 function initSortable(){
-	console.log("sortable called");
 	jQuery('#main-menu ul').sortable({
 		helper:"clone",    //makes a copy 
 		revert: "invalid", // if true will dissaosiate the smart menu
@@ -843,7 +837,6 @@ var bannerLogoPath = '$bannerLogoPath';
 jQuery(document).ready(function(){
 jQuery("div[id$='_container']").each(function() {							
 	 initJssorSlides(jQuery(this).attr("id"))
-	console.log("generated : "+jQuery(this).attr("id"));
 });
 });
 		
@@ -868,7 +861,6 @@ responsivefunct = function(e) {
 	var previewType = jQuery(e).attr("title");
 	resTitle = previewType;
 	jQuery('#previewFrame').removeClass();
-	console.log("Res Type at parent : " + resTitle);
 	//jQuery('#responsiveModel').html("");
 	jQuery('#responsiveModel').removeClass();
 	//jQuery.trim(previewType)=="iPhone"
@@ -919,7 +911,7 @@ responsivefunctold = function(e) {
 	var previewType = jQuery(e).attr("title");
 	resTitle = previewType;
 	jQuery('#previewFrame').removeClass();
-	console.log("Res Type at parent : " + resTitle);				//jQuery('#responsiveModel').html("");
+	//jQuery('#responsiveModel').html("");
 	jQuery('#responsiveModel').removeClass();
 	//jQuery.trim(previewType)=="iPhone"
 	if(jQuery.trim(previewType)=="iPad Portrait"){
@@ -985,7 +977,6 @@ function closePopup(){
 function generateJson(){
 	var val = $('#cmsForm').serialize();
 	//val = encodeURIComponent(val);
-	console.log(val);
 	jQuery.ajax({
 		type: "POST",
 		url: "addUpdateStaticPageCms.action",
@@ -1091,7 +1082,6 @@ function initInitalWidget(){
 	jQuery("[data-select='widget']").each(function(i){
 		var widgetId = jQuery(this).data("widget");
 		if(typeof widgetId!="undefined" && widgetId!=""){
-			console.log("initInitalWidget count in page: "+i+" :widget ID: "+widgetId);
 			generateWidget(widgetId);
 		}
 	 });
@@ -1154,8 +1144,10 @@ jQuery(function() {
 		if(parseInt(cms_leftMenuSlide.offset().left) == -400){
 			cms_leftMenuSlide.css({'left':'0px'});
 		}
+		$('body').removeClass("expand-nav");
 	});
 	$(".cms_leftMenuClose").click(function () {
+		 $('body').addClass("expand-nav");
 		$('.cms_leftMenuSlide').css({'left':'-400px'});
 	});
 
@@ -1199,5 +1191,15 @@ jQuery(function() {
 }
 .tooltip-inner{
 	word-break: break-word;
+}
+ #metaimageIcon{
+    left: 290px;
+    bottom: 227px;
+    position: absolute;
+    color: #456078;
+    font-size: 25px
+  }
+.mobile_View{
+	float: none;
 }
 </style>

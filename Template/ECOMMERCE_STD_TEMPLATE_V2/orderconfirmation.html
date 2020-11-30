@@ -13,11 +13,13 @@
 			#if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
 				<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
 			#else
-				<h3>
-				$!locale.get('product.label.yourOrderCanceled') - <span class="text-danger">$!locale.get('product.label.orderFailed')</span>
-				</h3>
-				#set($customerServiceNo = $commonUtility.validateString($!CommonDBQuerySystemParameter.get("CUSTOMER_SERVICE_NUMBER")))
-				<p class="customerServiceNo">$!locale.get('product.label.contactCustomerService'): <a class="orangeClr" href="tel:$!customerServiceNo.replaceAll('&[#0-9]+;','')">$!customerServiceNo</a></p>
+				#if($orderItemList.size()==0)
+					<h3>$!locale.get('product.label.yourOrdernotavailable')</h3>
+				#else
+					<h3>$!locale.get('product.label.yourOrderCanceled') - <span class="text-danger">$!locale.get('product.label.orderFailed')</span></h3>
+				#end
+					#set($customerServiceNo = $commonUtility.validateString($!CommonDBQuerySystemParameter.get("CUSTOMER_SERVICE_NUMBER")))
+					<p class="customerServiceNo">$!locale.get('product.label.contactCustomerService'): <a class="orangeClr" href="tel:$!customerServiceNo.replaceAll('&[#0-9]+;','')">$!customerServiceNo</a></p>
 			#end
         #end
 	</div>
@@ -28,7 +30,7 @@
 			<ul class="cimm_orderInfo">
 			#if($!orderDetail.orderStatusDesc.length() > 0)
 			<li>
-				<strong>$!locale.get("product.heading.Status"): </strong><span>$!orderDetail.orderStatusDesc</span>
+				<strong>$!locale.get("product.heading.Status"): </strong><span class="text-capitalize">$!orderDetail.orderStatusDesc</span>
 			</li>
 			#end
 			#if($!orderDetail.invoiceNumber.length() > 0)
@@ -136,19 +138,25 @@
 				#set($delimiterOrderDetail = "")
 				#set($subTotal = 0)
 				#foreach($itemList in $orderItemList)
-				#set($eachItem = $!fullItemDetails.get($!itemList.itemId))
-				<tr itemscope itemtype="http://schema.org/Product">
+				##set($eachItem = $!fullItemDetails.get($!itemList.itemId))
+				<tr>
 					<td data-th="$!locale.get('product.label.Image')">
-						#if($itemList.imageName.contains("http") || $itemList.imageType=="URL")
-						<img class="OrderConfImg" itemprop="image" src="$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+						#if($itemList.imageName.contains("http") || $itemList.imageType=="URL" || $itemList.imageType=="360_URL")
+							#if($itemList.imageType=="360_URL")
+								<span class="threesixtydegreeimg">
+									<img class="OrderConfImg" src="$!itemList.imageName?thumb&w=110" alt='$!itemList.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+								</span>
+							#else
+								<img class="OrderConfImg" src="$!itemList.imageName" alt='$!itemList.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+							#end
 						#else
-						<img class="OrderConfImg" itemprop="image" src="$!thumbNail$!itemList.imageName" alt='$!eachItem.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
+						<img class="OrderConfImg" src="$!thumbNail$!itemList.imageName" alt='$!itemList.brandName $!itemList.manufacturerPartNumber' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" width="110" height="110" />
 						#end                     
 					</td>
 					<td class="alignLeft" data-th="$!locale.get('product.label.description')">
-						<p class="orderConfTitle" itemprop="name"><strong>$!eachItem.brandName $!itemList.manufacturerPartNumber</strong></p>
-						<p itemprop="description">$!itemList.shortDesc</p>
-						<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong>$!itemList.partNumber</p>
+						<p class="orderConfTitle"><strong>$!itemList.brandName $!itemList.manufacturerPartNumber</strong></p>
+						<p>$!itemList.shortDesc</p>
+						<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemList.partNumber</p>
 						<!-- $!itemList.productKeywords -->
 						#if($itemList.customerPartNumberList.size()>0)
 						<ul>
@@ -192,10 +200,12 @@
 					#end
 				</div>
 				<ul>
+					#if($orderDetail.subtotal>0)
 					<li>
 						<span class="priceLabel"><strong>$!locale.get("product.label.subTotal") : </strong></span>
 						<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
 					</li>
+					#end
 					#if($orderDetail.tax>0)
 					<li>
 					     <span class="priceLabel"><strong>$!locale.get("product.label.tax") : </strong></span>
@@ -214,10 +224,12 @@
 						<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</span>
 					</li>
 					#end
+					#if($orderDetail.total>0)
 					<li>
 						<span class="priceLabel"><strong>$!locale.get("product.label.orderTotal") : </strong></span>
 						<span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
 					</li>
+					#end
 				</ul>   
 				<div class="clear"></div>         
 			</div>

@@ -45,7 +45,7 @@ input[type='submit'] {
 .cimm_inlineButton {
     @extend .button;
     padding: 7px 12px;
-    vertical-align: bottom;
+    vertical-align: middle;
     height: auto;
     display: inline-block;
     &:hover {

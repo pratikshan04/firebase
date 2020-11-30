@@ -30,26 +30,36 @@
 <input type="hidden" id="enableStickyHeader" name="enableStickyHeader" value='$!CommonDBQuerySystemParameter.get("ENABLE_STICKY_HEADER")'/>
 <input type="hidden" id="enablePiwik" name="enablePiwik" value='$!CommonDBQuerySystemParameter.get("EnablePiwik")'/>
 <input type="hidden" id="enableAnonymousCheckout" name="enableAnonymousCheckout" value='$!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")'/>
+<input type="hidden" id="enableEcomPasswordPolicy" name="enableEcomPasswordPolicy" value='$!CommonDBQuerySystemParameter.get("ENABLE_ECOMM_PASSWORD_POLICY")'/>
 <input type="hidden" id="autoCompleteDesignVersion" name="autoCompleteDesignVersion" value='$!CommonDBQuerySystemParameter.get("AUTO_COMPLETE_DESIGN_VERSION")'/>
 <input type="hidden" id="webThemePath" value='$!webThemes/$siteName/'/>
+<input type="hidden" id="cmsArtifactsPath" value="$!cmsArtifactsPath"/>
+<input type="hidden" id="cdnSiteJsPath" value='$!webArtifactsJsPath$!cdnSiteJs'/>
+<input type="hidden" id="cdnModuleJsPath" value='$!webArtifactsJsPath$!cdnModuleJs'/>
+<input type="hidden" id="cdnPluginJsPath" value='$!webArtifactsJsPath$!cdnPluginJs'/>
 <input type="hidden" id="wareHouseCode" name="wareHouseCode" value='$!session.getAttribute("wareHouseCode")'/>
 <input type="hidden" id="createOrderInDb" name="createOrderInDb" value='$!CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")'/>
+<input type="hidden" id="recaptchaSiteKey" name="recaptchaSiteKey" value='$!CommonDBQuerySystemParameter.get("RECAPTCHA_SITE_KEY")'/>
+<input type="hidden" id="recaptchaStaticPages" name="recaptchaStaticPages" value='$!CommonDBQuerySystemParameter.get("RECAPTCHAV3_STATICPAGES")'/>
 <input type="hidden" id="shipAddressForPunchoutUser" name="shipAddressForPunchoutUser" value='$!CommonDBQuerySystemParameter.get("SHIPADDRESS_FOR_PUNCHOUT_USER")'/>
 <input type="hidden" id="isPunchoutUser" value="$!session.getAttribute('isPunchoutUser')" />
 <input type="hidden" id="dataErrors" data-unusualError="$!locale.get('form.lable.unusualError')" />
-#if($userAgent == "WEBVIEW")<input type="hidden" id="isWebview" value="$!userAgent" />#end
 <input type="hidden" id="isSalesUser" value='$!session.getAttribute("isSalesUser")' />
 <input type="hidden" id="trendingSearch" name="trendingSearch" value='$!CommonDBQuerySystemParameter.get("ENABLE_TRENDING_SEARCH")'/>
-#if($userAgent == "WEBVIEW")<input type="hidden" id="appID" value='$!session.getId()' />#end
+<input type="hidden" id="refreshVersion" value='$!refreshVersion' />
+<input type="hidden" id="enablePrebuiltCmsHomepageScript" value='$!enablePrebuiltCmsHomepageScript' />
+<input type="hidden" id="isPrebuiltCmsHomepage" value='$!isPrebuiltCmsHomepage' />
+<input type="hidden" id="enablePrebuiltCmsHomepage" value='$!CommonDBQuerySystemParameter.get("ENABLE_PREBUILT_CMS_HOMEPAGE")' />
+#if($!userAgent == "WEBVIEW")<input type="hidden" id="isWebview" value="$!userAgent"/><input type="hidden" id="appID" value='$!session.getId()' />#end
 #if($!userLogin)
 <input type="hidden" id="HomeTer" name="HomeTer" value='$!session.getAttribute("homeBranchId")'/>
 #else
 <input type="hidden" id="HomeTer" name="HomeTer" value='$!CommonDBQuerySystemParameter.get("DEFAULT_INVENTORY_BRANCH")'/>
 #end
 #if($!session.getAttribute("pricePrecision")=="4")
-#set($numberToolFormat = "#0.0000")
+	#set($numberToolFormat = "#0.0000")
 #elseif($!session.getAttribute("pricePrecision")=="3")
-#set($numberToolFormat = "#0.000")
+	#set($numberToolFormat = "#0.000")
 #else
-#set($numberToolFormat = "#0.00")
+	#set($numberToolFormat = "#0.00")
 #end

@@ -1,4 +1,6 @@
-#parse("globalhiddeninput.html")
+#if($!isCdnCmsTemplates == "Y") $globalhiddeninputWriter #else #parse("globalhiddeninput.html") #end
+#set($headerStaticMenuFlag = "N")
+#if($!headerStaticMenuFlag == "Y") ##Remove $headerStaticMenuFlag refrence and if ststment to enable the block
 <!-- <div class="cimm_header_top">
 		<div class="container">
 			<div class="row">
@@ -33,17 +35,20 @@
 		</div>
 	</div>
 </div> -->
+#end
 <div class="cimm_header_mid">
 <div class="container">
 <div class="row">
 	#if($userAgent != "WEBVIEW")
 	<div class="col-lg-3 col-md-12">
-		<div itemscope itemtype="http://schema.org/Organization" class="cimm_logo">
-				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="/ASSETS/IMAGES/LOGOS/CLIENT/$!siteId/$!siteLogo" onerror="this.src='$!webThemes/$!siteName/images/logo.png'" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
+		<div class="cimm_logo" itemtype="http://schema.org/Organization" itemscope>
+			<a itemprop="url" href='$!hostName'>
+				<img itemprop="logo" src="/ASSETS/IMAGES/LOGOS/CLIENT/$!siteId/$!siteLogo" width="150px" height="50px" onerror="this.src='$!webThemes/$!siteName/images/logo.png'" alt="$!siteDisplayName" />
+			</a>
 		</div>
 	</div>
 	#end
-	<div class="col-lg-6 col-md-12 clearfix#if($!userAgent == "WEBVIEW") webViewSearchWrap #end">
+	<div class='col-lg-6 col-md-12 clearfix #if($!userAgent == "WEBVIEW")webViewSearchWrap #end'>
 		<div class="cimm_mobileNavIconWrap hidden-lg">
 			<button type="button" class="navbar-toggle" id="mobileNavigationTrigger">
 		        <span class="sr-only">Toggle navigation</span>
@@ -71,7 +76,7 @@
 		    	$!session.getAttribute("salesUserDetails").get("firstName") $!session.getAttribute("salesUserDetails").get("lastName")
 		    </span>
 	    	#end
-	    	#if($userLogin)<span class="mRight-3"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>#end
+	    	<span class="mRight-3"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>
 			<a href="$!locale.get('website.url.ShoppingCart')" class="mobileCartCount"><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount</span></a>
 			#if($userLogin)
 			<a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em></a>
@@ -84,7 +89,7 @@
 	<div class="cimm_searchWrapper">
 	    <form class="cimm_searchForm" id="search_Form">
 	    	<div class="input-group">
-				<input type="text" onkeypress="return runScript(event);" id="txtSearch" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" name="keyWord" value="#if($keyWord && $resultCount>0)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  class="form-control"/>
+				<input type="text" onkeypress="return runScript(event);" id="txtSearch" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" name="keyWord" value="#if(($keyWord || $kwdForCatOverrideSearch ) && $resultCount>0)#if($!kwdForCatOverrideSearch.trim().length()>0) $!kwdForCatOverrideSearch #else$!keyWord#end#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  class="form-control"/>
 				<div class="input-group-btn">
 					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-search"></em></button>
 				</div>

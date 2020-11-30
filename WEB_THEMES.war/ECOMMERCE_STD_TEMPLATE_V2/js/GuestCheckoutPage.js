@@ -1,5 +1,8 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 	var date = new Date();
 	$('#reqDate').datepicker({autoclose: true, startDate : (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear()});
 });
@@ -378,7 +381,6 @@ var guestCheckoutWizard = {};
 					guestCheckoutWizard.displayNotification(ms);
 					return false;
 				}
-				return false;
 			}
 		});
 	};
@@ -410,7 +412,7 @@ var guestCheckoutWizard = {};
 	});
 }*/
 	
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+$.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 	$('#wizardGuestCheckout').multiTab({
 		wizard:true,
 		transitionEffect:'fade',

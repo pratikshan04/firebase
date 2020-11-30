@@ -1,18 +1,18 @@
 #if($!responseType)
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/cms/cmsscript.js"></script>
-<script type="text/javascript" src="$!webThemes/CMS/js/jquery.colorbox.js" ></script>
-<link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/cms/cmsscript.js"></script>
+<script type="text/javascript" src="$!cmsArtifactsPath/js/jquery.colorbox.js" ></script>
+<link href="$!cmsArtifactsPath/css/colorbox.css" rel="stylesheet" type="text/css"/>
+<link href="$!cmsArtifactsPath/css/styles_CMS.css?$!refreshVersion" rel="stylesheet" type="text/css" /> 
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/bootstrap.min.css" />
-<link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
-<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
-<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
+<link href="$!cmsArtifactsPath/css/fontawesome.min.css" rel="stylesheet">
+<link href="$!cmsArtifactsPath/css/brands.min.css" rel="stylesheet">
+<link href="$!cmsArtifactsPath/css/solid.min.css" rel="stylesheet">
 #parse("head.html")
  <script type="text/javascript">
 	var parentUrl = ""+window.parent.location;
-	if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
-	}else {
+	if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ){}else {
 		alert("Unauthorized Access...!");
 		if(parentUrl.indexOf("cmsPageCms.action") !== -1){
 			window.location.href = "/";
@@ -24,14 +24,13 @@
 	function paginationScriptCms(n_pages,page_link,iindex,pgno){
 	    var n_links = 1, returnString = '<div class="pagebarUTH">',n_index = (iindex/pgno)+1;
 	    var start=1;
-	    
-	   /*  if(iindex == 1){
+	   /*if(iindex == 1){
 	    	returnString+='<a href="javascript:void(0);" class="btns-disable"><i class="fa fa-angle-double-left fa-lg fontIconArrow"></i></a><a href="'+page_link+(iindex-pgno)+'"><i class="fa fa-angle-left fa-lg fontIconArrow"></i></a>';
 		}else if(iindex < 1) {
 	    	returnString += '<a href="javascript:void(0);" class="btns-disable"><i class="fa fa-angle-double-left fa-lg fontIconArrow"></i></a><a href="javascript:void(0);" class="btns-disable"><i class="fa fa-angle-left fa-lg fontIconArrow"></i></a>';
 		}else {
 	    	returnString+='<a href="'+page_link+'0"><i class="fa fa-angle-double-left fa-lg fontIconArrow"></i></a><a href="'+page_link+(iindex-pgno)+'"><i class="fa fa-angle-left fa-lg"></i></a>';
-		} */
+		}*/
 		if(iindex > 0) {
 			returnString+='<a href="'+page_link+'0"><i class="fa fa-angle-double-left fa-lg fontIconArrow"></i></a><a href="'+page_link+(iindex-pgno)+'"><i class="fa fa-angle-left fa-lg"></i></a>';
 		}
@@ -65,13 +64,10 @@
 		return returnString;
 	}
     function setThisValueToInput(obj){
-	  	console.log($(obj).val());
-	  	console.log($(obj).data("listtype"));
 		if($(obj).data("listtype")=="BRAND"){
 			alert("Selected Brand is: "+$(obj).data("name")+"\nPlease close the popup and click on Save button to update the changes");
 			$("#selectBrand", parent.document.body).val($(obj).val());
 			$("#brandListSpanTxt", parent.document.body).html(": <strong>"+$(obj).data("name")+"</strong>");
-			//console.log("Parent : "+$("#selectBrand", parent.document.body).val());
 		}else if($(obj).data("listtype")=="MANUFACTURER"){
 			alert("Selected Manufacturer is: "+$(obj).data("name")+"\nPlease close the popup and click on Save button to update the changes");
 			$("#selectManufacturer", parent.document.body).val($(obj).val());

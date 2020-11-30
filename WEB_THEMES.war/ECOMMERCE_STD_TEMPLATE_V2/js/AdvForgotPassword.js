@@ -7,10 +7,30 @@ function forgotPasswordAdvanced(){
 		msg = msg + "Password Cannot Be Empty</br>";
 		isValid = 0;
 	}else{
-		var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-		if (!passwordRegEx.test(password)){
-			msg = msg + "Invalid Password, Minimum 8 character required with at least one Number, one lower case and one upper case letter</br>";
-			isValid = 0;
+		var enablePasswordPolicy = "N";
+		if($('#enableEcomPasswordPolicy').length > 0){ enablePasswordPolicy = $('#enableEcomPasswordPolicy').val();}
+		if(enablePasswordPolicy == "Y"){
+			var validatePassword = validatePasswordPolicyFP(password,"Password");
+			var validateConfirmPassword = validatePasswordPolicyFP(confirmPassword,"Confirm Password");
+			var validateMessage = changePasswordPolicy($('#advancePassword'));
+			var pwdValidation= validateMessage.split("|")
+			if(!validatePassword || !validateConfirmPassword){
+				isValid = 2;
+			}else if($.trim($("#password").val()) != $.trim($("#confirmPassword").val())){
+				errorMessages.push("Password mismatch");
+				isValid = 2;
+			}else if(pwdValidation[0]=="false"){
+				isValid = 2;
+				errorMessages.push(pwdValidation[1]);
+			}else{
+				isValid = 1;
+			}
+		}else{
+			var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+			if (!passwordRegEx.test(password)){
+				msg = msg + "Invalid Password, Minimum 8 character required with at least one Number, one lower case and one upper case letter</br>";
+				isValid = 0;
+			}
 		}
 	}
 	if(confirmPassword==""){

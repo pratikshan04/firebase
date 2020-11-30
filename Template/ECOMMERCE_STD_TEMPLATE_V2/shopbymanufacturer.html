@@ -1,37 +1,30 @@
 <div class="hiddenDiv"></div>
 <div class="row cimm_brandAtoZletters">
-	<div class="col-md-3 col-xs-12 pTop-2">
-		<input id="searchGrid" class="form-control" type="text" name="filterContent"  maxlength="100" placeholder="Search By Manufacturers"/>
-	</div>
-	<div class="col-md-9 col-xs-12">
-		<ul>
-			#set($!idxCnt = 1)
-			#foreach($manufactureIdx in $manufacturerIndex)
-			#if($idxCnt == $manufacturerIndex.size())
-			<li>
-				<a href="javascript:void(0);" class="ln-last" onclick="manufacturerListScroll('$manufactureIdx');">$!manufactureIdx</a>
-			</li>
-			#else
-			<li>
-				<a href="javascript:void(0);" onclick="manufacturerListScroll('$manufactureIdx');">$!manufactureIdx</a>
-			</li>
-			#end
-			#set($!idxCnt = $!idxCnt+1)
-			#end
-		</ul>
-	</div>
-</div>
-
-<div class="grid">
-	#foreach($key in $manufacturersAsMap.keySet())
-	#set($manfListByIndex = $manufacturersAsMap.get($key))
-	<div class="grid-item mfgListRow" id="displayBrand_$key">
-		<h2>$key</h2>	
-		<ul>
-		#foreach($manf in $manfListByIndex)
-			<li><a href="/$!manf.manufacturerId/manufacturer/$slugUrl.makeSlug($!manf.manufacturerName)" class="sBlack">$!manf.manufacturerName</a></li>
+<div class="col-md-3 col-xs-12 pTop-2"><input id="searchGrid" class="form-control" type="text" name="filterContent"  maxlength="100" placeholder="Search By Manufacturers"/></div>
+<div class="col-md-9 col-xs-12">
+<ul>
+	#set($!idxCnt = 1)
+	#foreach($manufactureIdx in $manufacturerIndex)
+		#if($idxCnt == $manufacturerIndex.size())
+			<li><a href="javascript:void(0);" class="ln-last" onclick="manufacturerListScroll('$manufactureIdx');">$!manufactureIdx</a></li>
+		#else
+			<li><a href="javascript:void(0);" onclick="manufacturerListScroll('$manufactureIdx');">$!manufactureIdx</a></li>
 		#end
-		</ul>
-	</div>
-	#end	
+		#set($!idxCnt = $!idxCnt+1)
+	#end
+</ul>
+</div>
+</div>
+<div class="grid">
+#foreach($key in $manufacturersAsMap.keySet())
+#set($manfListByIndex = $manufacturersAsMap.get($key))
+<div class="grid-item mfgListRow" id="displayBrand_$key">
+	<h2>$key</h2>	
+	<ul>
+	#foreach($manf in $manfListByIndex)
+		<li><a href="$!manf.seoUrl" class="sBlack">$!manf.manufacturerName</a></li>
+	#end
+	</ul>
+</div>
+#end	
 </div>

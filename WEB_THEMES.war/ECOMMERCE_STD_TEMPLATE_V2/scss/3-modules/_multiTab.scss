@@ -158,3 +158,17 @@
 #wizardCheckout .multiTabContent, #wizardGuestCheckout .multiTabContent {
   overflow: visible;
 }
+#cimm_regBlock, #searchResultsStatic{
+    ul.multiTabHeading{
+        li{
+            a.active {
+                background-color: $primary_color;
+                color: $white;
+            }
+            a{
+               background-color: $tertiary_color;
+               color: $black;
+            }
+        }
+    } 
+}

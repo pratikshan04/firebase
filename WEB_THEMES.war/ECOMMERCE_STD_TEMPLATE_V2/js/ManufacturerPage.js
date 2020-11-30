@@ -129,9 +129,8 @@ function manufacturerListScroll(val){
 }
 
 $(window).scroll(function() {
-	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y" && $("#isWebview").val() != "WEBVIEW") {
-		fixHeadHeight = 0
-	}
+	if($( window ).width() < 980 && $("#enableStickyHeader").val() == "Y" && $("#isWebview").val() != "WEBVIEW") { fixHeadHeight = 0 }
+	else if($("#enableStickyHeader").length > 0 && $("#enableStickyHeader").val() == "N"){ fixHeadHeight = 0 }
     var currentScroll = $(this).scrollTop(); 
     if (currentScroll >= headerHeight) {
     	if(!$(".cimm_brandAtoZletters").hasClass("fixIt")){

@@ -1,11 +1,5 @@
-#if($pageContent)
-<div id="cimm_static_block" class="cimm_staticPageWrap">
-	$!pageContent
-	<div class="clear"></div>
-</div>
+#if($pageContent && $pageContent.trim().length()>0)
+<div id="cimm_static_block" class="cimm_staticPageWrap"> #if($wordpress) <div class="container"> $pageContent </div> #else $!pageContent #end </div>
 #else
-<div id="cimm_static_block" class="cimm_staticPageWrap">
-	$locale.get("staticpage.text.noContentAvailable")
-	<div class="clear"></div>             
-</div>
+ #parse("pagenotfound_404.html")
 #end

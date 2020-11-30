@@ -1,4 +1,7 @@
 var webThemes = $("#webThemePath").val();
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
 function jssorSliderFunction() {
 	jQuery("div[id$='_container']").each(function(){
 		initJssorSlides(jQuery(this).attr("id"))
@@ -83,6 +86,17 @@ function generateForm(formId){
 			$('.col').removeAttr('title');
 			$("[data-widget='"+formId+"']").find('form').attr({'action':'SaveAndSendMail.action', 'onsubmit':'submitThisForm(this); return false;'});
 			$("[data-widget='"+formId+"']").find('[type="submit"]').attr('disabled', false).removeClass('btns-disable');
+			if($('#recaptchaStaticPages').val() == "Y") { 
+				if($("[data-widget='"+formId+"']").find('form').attr('data-recaptcha') && $('#g-recaptcha-uni').length == 0 && $("#isWebview").val() != "WEBVIEW" ){
+				    renderRecaptcha();
+				}
+				if($("[data-widget='"+formId+"']").find('form').attr('data-recaptcha')){
+					$("[data-widget='"+formId+"']").find('div[data-type="captcha"]').remove();
+					$("[data-widget='"+formId+"']").find('form').append('<input type="hidden" name="recaptcha_staticPage" value="Y" />');
+				}
+			}else {
+				$("[data-widget='"+formId+"']").find('form').removeAttr('data-recaptcha');
+			}
 		}
 	});
 }
@@ -93,7 +107,7 @@ function loadStaticForms(){
 	});  
 }
 function initDatePicker(dateFormat){
-	$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+	$.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 		$('.datePicker').datepicker({
 			format: dateFormat,
 			autoclose: true,

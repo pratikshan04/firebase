@@ -9,6 +9,7 @@ $(document).ready(function(){
 				"sNext" :"Next"
 			}
 		},
+		'aoColumnDefs': [{ targets: -1, orderable: false }],
 		"order": [[ 0, "desc" ]]
 	});
 });

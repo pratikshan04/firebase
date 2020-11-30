@@ -6,15 +6,11 @@
 #end</table>
 #end
 #end
-#macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId,$!forPageSeoUrl)
-#if($navigationType=="NAVIGATION")
-#set($navURL = "$codeIdSkip/products/$!forPageSeoUrl?levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage&srchTyp=$srchTyp")
-#end
-#if($navigationType=="SEARCH")
-#set($navURL = "searchPage.action?keyWord=$keyWord&srchTyp=$srchTyp#if($narrowKeyword)&narrowKeyword=$narrowKeyword#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
-#end
-#if($navigationType=="BRAND")
-#set($navURL = "shopByBrandPage.action?brandId=$brandId#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId,$urlContext)
+#if($navigationType=="SEARCH" || $!keyWord.trim().length() > 0)
+#set($navURL = "searchPage.action?keyWord=$escapeTool.url($!keyWord)#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end&resultPage=$resultPage")
+#else
+#set($navURL = "$urlContext?#if($sortBy.trim().length() > 0)sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end")
 #end
 #end
 
@@ -82,57 +78,7 @@ $(document).ready(function(){
 </script>
 	
 #end
-##------------------------- Featured Products
-#macro(featuredProductListBlock $generalSubset,$subsetId)
-#set($featuredProducts = $CIMMUtility.featureProductsListCimmVelocity($generalSubset,$subsetId))
-#if($featuredProducts.size()>0)	 	
-	<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_slider-title"><label>$locale.get("product.label.featuredProducts")</label></h3>
-	<ul id="featuredProductList" class="cimm_caroWrap">
-		#foreach($itemData in $featuredProducts)
-		#set($itemTitle= $itemData.shortDesc)
-		<li>				
-			<div class="cimm_linkItemImg">
-				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">                    
-					#if($itemData.imageName.contains("http"))
-					<img id="imageName$itemData.itemId" src="$itemData.imageName" width="100" alt='$itemData.imageName' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
-					#else
-					<img id="imageName$itemData.itemId" src="$detailImage$itemData.imageName" alt='$itemData.imageName' width="100" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
-					#end
-				</a>
-			</div>
-			<div class="cimm_linkItemDesp">
-				<ul>
-					<li>
-						<h4>
-							<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")">
-								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
-						 		#if($linkItemTitle.length()>18)
-						 			$linkItemTitle.substring(0, 18)...
-						 		#else
-						 			$linkItemTitle
-						 		#end
-							</a>
-						</h4>
-					</li>
-					<li><b>$locale.get("product.label.partNumber"):</b> $itemData.partNumber</li>
-					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
-					<p id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
-					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$itemTitle.replace(" ","_")"> $locale.get("product.label.more")</a>
-					#else
-					<p> $!itemData.shortDesc</p>
-					#end
-					</li>
-				</ul>
-				</div>
-			<div class="clear"></div>
-		</li>
-		#end
-	</ul>
-</div>
-#end
-#end
-##------------------------- Featured Products
+
 
 ##-------------------------  Recently Viewed
 #macro(recentlyViewedItems)
@@ -186,7 +132,7 @@ $(document).ready(function(){
 <div class="recentNews">
 	<h3 class="cimm_slider-title"><label>Recent News</label></h3>
 	<div id="news-scroller" class="newsList customScroll">
-		<div class="center"><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+		<div class="center"><img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/></div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -195,89 +141,121 @@ $('#newsSection').val("$pageName");
 </script>
 #end
 ##-------------------------  News Section
+##------------WordPress- Start--------
+#macro(generateWpNavMenu $menuData)
+#foreach($menu in $menuData.items)
+#generateNavMenu ($menu)
+#end
+#end
+ 
 
+#macro(generateNavMenu $menuObj)
+#set($menu_class="menu-item-has-children")
+ <li #if($menuObj.children)class="$menu_class"#end>
+        <span>#if($menuObj.type=="custom")<a href="$menuObj.url">#else<a href="/wp/$menuObj.object_slug">#end
+            $menuObj.title
+      #if($menuObj.children) <span class='pullRight'><i class="fa fa-lg fa-angle-down" aria-hidden="true"></i></span>#end </a></span>
+        #if($menuObj.children)
+        #generateSubNavMenu($menuObj.children)
+        #end
+</li>
+#end
 
-##-------------------------  Featured Brands
-#macro(featuredBrandsSection)
-#set($featuredBrands = $CIMMUtility.featuredBrandsVelocity())
-#if($!featuredBrands && $featuredBrands.size()>0)	 	
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_slider-title"><label>$locale.get("product.label.featuredBrands")</label></h3>
-	<ul id="featuredBrands" class="cimm_caroWrap">
-		#foreach($brandset in $featuredBrands.entrySet())
-		#set($keyValue = $brandset.getKey())
-		#set($brandModel = $brandset.getValue())
-		<li>				
-			<div class="cimm_linkItemImg">
-				<a href="$brandModel.brandId$locale.get('website.url.ShopByBrand')$brandModel.brandName">                    
-					<img src="$brandLogoPath$brandModel.brandImage" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$brandModel.brandName"/>
-				</a>
-			</div>
-		</li>
+#macro(generateSubNavMenu $menuObj)
+#set($menu_class="menu-item-has-children")
+        <ul>
+        #foreach($menu in $menuObj)
+        <li #if($menu.children)class="$menu_class"#end>
+		#if($menu.type=="custom")
+			<a href="$menu.url">$menu.title</a>
+		#else
+			<a href="/wp/$menu.object_slug">$menu.title</a>
 		#end
-	</ul>
-</div>
+        #if($menu.children)
+        #generateSubNavMenu($menu.children)
+        #end
+        </li>
+        
+        #end
+        </ul>
+ 
 #end
-#end
-##-------------------------  Featured Brands
 
-##-------------------------  Featured Manufacturers
-#macro(featuredManufacturerSection)
-#set($featuredManufacturers = $CIMMUtility.featuredManufacturersCimmVelocity())
-#if($!featuredManufacturers && $featuredManufacturers.size()>0)	 	
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_slider-title"><label>$locale.get("product.label.featuredManufacturers")</label></h3>
-	<ul id="featuredManufacturers" class="cimm_caroWrap">
-		#foreach($manufacturerset in $featuredManufacturers.entrySet())
-		#set($keyValue = $manufacturerset.getKey())
-		#set($manufacturerModel = $manufacturerset.getValue())
-		<li>				
-			<div class="cimm_linkItemImg">
-				<a href="$manufacturerModel.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturerModel.manufacturerName">                    
-					<img src="$manufacturerLogoPath$manufacturerModel.manufacturerLogo" onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';" alt="$manufacturerModel.manufacturerName"/>
-				</a>
-			</div>
-		</li>
+#macro(generateWpHeaderMenu $menuData)
+#foreach($menu in $menuData.items)
+#generateHeaderMenu ($menu)
+#end
+#end
+
+#macro(generateHeaderMenu $menuObj)
+#set($menu_class="menu-item-has-children")
+ <li class="seperator #if($menuObj.children)$menu_class#end">
+        #if($menuObj.type=="custom")<a href="$menuObj.url">#else<a href="/wp/$menuObj.object_slug">#end
+            $menuObj.title</a>
+        #if($menuObj.children)
+        #generateSubHeaderMenu($menuObj.children)
+        #end
+</li>
+#end
+
+#macro(generateSubHeaderMenu $menuObj)
+#set($menu_class="menu-item-has-children")
+        <ul>
+        #foreach($menu in $menuObj)
+		<li #if($menu.children)class="$menu_class"#end>
+		#if($menu.type=="custom")
+			<a href="$menu.url">$menu.title</a>
+		#else
+			<a href="/wp/$menu.object_slug">$menu.title</a>
 		#end
-	</ul>
-</div>
+        #if($menu.children)
+        #generateSubHeaderMenu($menu.children)
+        #end
+        </li>
+        
+        #end
+        </ul>
+ 
 #end
-#end
-##-------------------------  Featured Manufacturers
 
+#macro(generateWpFooterMenu $menuData)
 
-##-------------------------  shop By category
-#macro(shopBycategorySection)
-#if($categMenu.size()>0)
-<div class="cimm_sliderWrap clearAfter">
-	<h3 class="cimm_slider-title"><label>$locale.get("product.heading.shopByCategory")</label></h3>
-	<ul id="shopByCategory" class="cimm_caroWrap">
-	#foreach($categoryMenu in $categMenu)
-		<li>
-			<div class="cimm_linkItemImg">
-				<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
-					<img src="$taxonomyImage/$categoryMenu.imageName" alt='$categoryMenu.imageName' onerror="this.src='$!cdnUrl$!webThemes/$siteName/images/NoImage.png';"/>
-				</a>
-			</div>
-			<div class="cimm_linkItemDesp">
-				<ul>
-					<li>
-						<h4>
-							<a class="productTitle" href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">
-						 		#if($categoryMenu.categoryName.length()>18)
-						 			$linkItemTitle.substring(0, 18)...
-						 		#else
-						 			$categoryMenu.categoryName
-						 		#end
-							</a>
-						</h4>
-					</li>
-				</ul>
-			</div>
-		</li>
-	#end
-	</ul>
-</div>
+#foreach($menu in $menuData.items)
+#generateFooterMenu ($menu)
 #end
 #end
-##-------------------------  shop By category
+
+#macro(generateFooterMenu $menuObj)
+#set($menu_class="menu-item-has-children")
+<div class="col-md-2">
+						<div class="footerCol">
+						<h3><a href="javascript:void(0);">$menuObj.title</a><em class="fa fa-plus"></em></h3>
+							
+							
+	
+	   #if($menuObj.children)
+	   <ul id="footerMenu1" class="toggle_content">
+        #generateSubFooterMenu($menuObj.children)
+		</ul>
+        #end
+ </div>
+ </div>
+#end
+
+#macro(generateSubFooterMenu $menuObj)
+#set($menu_class="menu-item-has-children")
+        #foreach($menu in $menuObj)
+        <li #if($menu.children)class="$menu_class"#end> 
+      #if($menu.type=="custom")
+			<a href="$menu.url">$menu.title</a>
+		#else
+			<a href="/wp/$menu.object_slug">$menu.title</a>
+		#end 
+      
+        #if($menu.children)
+        #generateSubFooterMenu($menu.children)
+        #end
+        </li>
+        #end
+#end
+##------------WordPress- End--------

@@ -1,3 +1,8 @@
+#set ($captchaVal = "N")
+#if($!CommonDBQuerySystemParameter.get('RECAPTCHAV3_REGISTRATIONS') == "Y")
+#set ($captchaVal = "Y")
+#end
+
 <div class="multiTab" id="cimm_regBlock">
 	<ul class="multiTabHeading clearAfter">
 		<li><a href="#firstTimeOrder" class="dark-ripple"><span>I am a current Customer but need an online account</span></a></li>
@@ -7,7 +12,7 @@
 	</ul>
 	<div class="multiTabContent">
 		<div id="firstTimeOrder">
-			<form id="form1B" action="OnAccountReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock" method="post">
+			<form id="form1B" action="OnAccountReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock" data-recaptcha="$captchaVal" method="post">
 				<h6>$locale.get("register.text.newOnAccountWebStoreAccessRequest")<div class="pull-right"><span class="required">*</span> $locale.get("form.label.required")</div></h6>
 				<div class="row">
 					<div class="col-md-6">
@@ -67,7 +72,7 @@
 			</form>
 		</div>
 		<div id="newCommertialCustomer">
-			<form id="form2A" method="post" action="CommercialReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock">
+			<form id="form2A" method="post" action="CommercialReg.action" onsubmit="submitThisForm(this); return false;" data-recaptcha="$captchaVal" data-hideBlock="cimm_regBlock">
 				<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required") </div>
 				<div class="row">
 					<div class="col-md-6">
@@ -192,7 +197,7 @@
 			</form>
 		</div>
 		<div id="newRetailCustomer">
-			<form id="form2B" method="post" action="RetailReg.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="cimm_regBlock">
+			<form id="form2B" method="post" action="RetailReg.action" onsubmit="submitThisForm(this); return false;" data-recaptcha="$captchaVal" data-hideBlock="cimm_regBlock">
 				<div class="cimm_caption"><span class="required">*</span> $locale.get("form.label.required") </div>
 				<div class="row">
 					<div class="col-md-6">

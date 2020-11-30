@@ -1,14 +1,18 @@
-/*jQuery.getScript('/WEB_THEMES/ECOMMERCE_STD_TEMPLATE_V2/js/BulkAction.js', function(){
+var webThemes = $("#webThemePath").val();
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+/*jQuery.getScript(cdnSiteJsPath+'/BulkAction.js', function(){
 	BulkAction.enableCheckBoxOnLoad();
 	var allChecked = $("input:checkbox[name='idList']:checked").length === $("input:checkbox[name='idList']").length;
 	$('#chkSelectall').prop('checked', allChecked);
 });*/
 function deviceSelectAll(){
 	if($("#chkSelectall").is(':checked')){
-		$("#chkSelectall").attr("checked",false);
+		$("#chkSelectall").prop("checked",false);
 	}
 	else{
-		$("#chkSelectall").attr("checked",true);
+		$("#chkSelectall").prop("checked",true);
 	}
 	var checked_status = $("#chkSelectall").is(':checked');
 	$("input:checkbox[name='idList']").each(function(){
@@ -33,10 +37,10 @@ function sortByManuPartNo(){
 }
 function checkSelectAll(chk){
 	if($(".deviceSelectAllChkBox").is(':checked')){
-		$(".deviceSelectAllChkBox").attr("checked",false);
+		$(".deviceSelectAllChkBox").prop("checked",false);
 	}
 	else{
-		$(".deviceSelectAllChkBox").attr("checked",true);
+		$(".deviceSelectAllChkBox").prop("checked",true);
 	}
 	var checked_status = chk.checked;
 	$("input:checkbox[name='idList']").each(function(){
@@ -60,7 +64,7 @@ function bulkActions(that) {
 			if(jQuery(this).data("addtocartflag")=="N"){
 				jQuery("#"+this.id).click();
                 this.checked = false;
-                $('#chkSelectall').attr('checked', false);
+                $('#chkSelectall').prop('checked', false);
                 unCheckedCount= unCheckedCount+1;
 			}
 		});
@@ -104,11 +108,11 @@ function disbleItemWithZeroPrice(){
 				count++;
 			}
 		}
-		if(count>0){
-			//$("#chkSelectall").attr("disabled", true);
-		}	
+		//if(count>0){
+			//$("#chkSelectall").prop("disabled", true);
+		//}	
 		if(itemCnt!=null && count!=null && count==itemCnt){
-			$("#addSelectedItemstoCart, #updateSelectedItems, #deleteSelectedItems").attr("disabled", true);
+			$("#addSelectedItemstoCart, #updateSelectedItems, #deleteSelectedItems").prop("disabled", true);
 			$("#addSelectedItemstoCart, #updateSelectedItems, #deleteSelectedItems").addClass("btns-disable");
 			document.getElementById('addSelectedItemstoCart').title = 'Disabled';
 			document.getElementById('updateSelectedItems').title = 'Disabled';

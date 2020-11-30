@@ -1,0 +1,123 @@
+<script> $(function () { block('Please wait'); }); </script>
+<!-- MArketing And Event Results -->
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="multiTab detailPage" id="searchResultsStatic">
+			<ul class="clearAfter btntab">
+				<li class="active"><a class="dark-ripple" data-toggle="tab" onclick="searchresult('prodResult')">$!locale.get("product.label.productResults")</a></li>
+				#if($eventSearchData && $!eventSearchData.size()>0)
+					<li><a class="dark-ripple " data-toggle="tab" onclick="searchresult('eventsList')">$!locale.get("product.label.eventResults")</a></li>
+				#end 
+				#if($staticContentData &&  $!staticContentData.size()> 0)
+					<li><a class="dark-ripple " data-toggle="tab" onclick="searchresult('siteResults')">$!locale.get("product.label.siteResultss")</a>></li>
+				#end
+			</ul>
+
+#if($eventSearchData.size()>0)	
+<br/>
+<div class="row">
+	<div class="col-md-12">
+		<div id="eventsList" class="staticresultpage eventsiteresult">
+			<div class="CategoryEventBlk clearAfter">
+				<h3 class="cimm_page-title">$!locale.get("product.heading.events")</h3>	
+				#foreach($!eventData in $!eventSearchData)
+				<p class="staticContent">
+					<span><strong>$!eventData.staticPageTitle</strong></span>- $!eventData.staticContent
+			 	</p>
+			  	<a href="/eventDetailsUnit.action?eventID=$!eventData.staticPageId" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")</a>
+			  	<br />
+			   	#end
+			 	<div align="right">
+				  	<a href="staticSearchPage.action?keyWord=$!keyWord&srchTyp=Event" class="cimm_inlineButton">$!locale.get("product.label.moreEvents")</a>
+			  	</div>
+				<div class="CategoryEventBlkBar"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script> $(function () { unblock(); }); </script>
+#end
+
+#if($staticContentData.size()>0)
+#set($resCount = 0)  
+#foreach($staticData in $staticContentData)	
+	#if(!$staticData.staticPageTitle.contains('Home') && $!staticData.staticPageTitle)
+		#set($resCount = $resCount+1)
+	#end
+#end
+<br/>
+<div class="row">
+	<div class="col-md-12">
+		<div id="siteResults" class="staticresultpage eventsiteresult">
+			<div class="CategoryEventBlk clearAfter">	
+			#if($resCount > 0)
+			   	<h3 class="cimm_page-title">$!locale.get("product.label.siteResults")</h3>
+			#end
+			#foreach($staticData in $staticContentData)	
+				#if(!$staticData.staticPageTitle.contains('Home') && $!staticData.staticPageTitle)
+					<p class="staticContent">
+						<span><strong>$!staticData.staticPageTitle</strong></span>- $!staticData.staticContent
+					</p>
+				 	<a href="SP/$!staticData.pageName" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")</a>
+				  	<br />
+				  	<div class="CategoryEventBlkBar"></div><br /><hr />
+			  	#end
+			#end
+		  	#if($resCount > 0)
+			  	<div align="right">
+					<a href="staticSearchPage.action?keyWord=$!keyWord" class="cimm_inlineButton">$!locale.get("product.label.moreResults")</a> 
+				</div>
+			#end
+			</div>
+		</div>
+	</div>
+</div>
+<script> $(function () { unblock(); }); </script>
+#end
+<!-- MArketing And Event Results -->
+#if($resultCount==0)
+<div class="row">
+	<div class="col-md-12">
+		<div id="prodResult" class="staticresultpage">
+			<div class="searchZero"> 
+				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
+				<p>
+					$!locale.get("search.result.zeroResult")&nbsp;
+					#if($!navigationType=="NAVIGATION" && $!keyWordTxt.trim().length()>0)
+					<span><strong><em>"$!keyWordTxt"</em></strong></span>
+					#else
+						#if($!keyWordTxt.trim().length()>0)
+						<span><strong><em>"$!keyWordTxt"</em></strong></span> 
+						#else
+						<span><strong>#if($!narrowKeyword && $!narrowKeyword.length()>0) <em>"$!narrowKeyword"</em> within #end "$!keyWord"</strong></span>
+						#end
+						
+					#end
+				</p>
+				<p>
+					$!locale.get("search.result.tryOtherSearch") $locale.get("label.text.or") 
+					$locale.get("label.text.goToOur") <a href="$locale.get('website.url.Welcome')" class="cimm_inlineButton">$locale.get("site.label.homePage")</a>   
+					$locale.get("label.text.or") <a href="$locale.get('website.url.ProductCategory')" class="cimm_inlineButton">$locale.get("product.button.continueShopping")</a>
+				</p>
+				#if($itemSuggest)
+				 <div class="pageTitle">
+					 <h2> 
+					 	$!locale.get("product.label.didyoumean") 
+					 	<a class="linkText" href="/searchPage.action?keyWord=$!itemSuggest.toUpperCase()" title="Search for this"> <u>$!itemSuggest.toUpperCase()</u></a>
+					 </h2>
+				 </div>
+				 #end
+			  	 <br/> 
+				 <p> Not finding what you want, try our <a class="linkText" href="/advancedSearch">Advanced Search</a></p>
+			 </div>
+		</div>
+	</div>
+</div>
+<script> $(function () { unblock(); }); </script>
+#else
+<script> $(function () { window.location.href = "/404Page"; }); </script>
+#end
+</div>
+</div>
+</div>

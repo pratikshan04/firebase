@@ -138,15 +138,21 @@
 				#if($productListData && $productListData.size()>0)
 				#foreach($itemData in $productListData)
 				#set($itemTitle= $itemData.brandName+" "+ $itemData.manufacturerPartNumber)
-				<tr itemscop itemtype="http://schema.org/Product">
+				<tr>
 					##if($session.getAttribute("userCustomFieldValue").get("PRODUCT_GROUP_IMAGE_DISPLAY")=="Y")
 					<td data-th="$locale.get('product.label.Image')">                         
-						<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
+						<a href="$itemData.seoUrl">
 							<span id="imageName$itemData.itemId">
-							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-							<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+							#if($itemData.imageName.contains("http") || $itemData.imageType=="URL" || $itemData.imageType=="360_URL")
+								#if($itemData.imageType=="360_URL")
+								<span class="threesixtydegreeimg">
+									<img src="$itemData.imageName?thumb&w=75" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+								</span>
+								#else
+									<img src="$itemData.imageName" class="PgImg" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+								#end
 							#else
-							<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
+							<img src="$detailImage$itemData.imageName" class="PgImg" width="75" height="75" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemTitle'/>
 							#end
 							</span>
 						</a>
@@ -154,19 +160,15 @@
 					##end
 					<td data-th="$locale.get('product.label.productDescription')">
 						<ul class="text-left">
-							<li itemprop="name">
-								<h5 class="cimm_itemTitle"><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5>
-							</li>
-							<li class="hideForCollapse hideMe">
-								<p itemprop="description">$!itemData.shortDesc </p>
-							</li>
+							<li><h5 class="cimm_itemTitle"><a href="$itemData.seoUrl">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5></li>
+							<li class="hideForCollapse hideMe"><p>$!itemData.shortDesc</p></li>
 							<li>
-								<p itemprop="sku"><strong>$locale.get("product.label.partNumber"): </strong><span>$itemData.partNumber</span></p>
-								#if($!itemData.manufacturerPartNumber)<p itemprop="mpn"><strong>$locale.get("product.label.mpn"): </strong><span>$itemData.manufacturerPartNumber</span></p>#end
-								#if($itemData.upc)<p itemprop="sku"><strong>$locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></p>#end
+								<p><strong>$locale.get("product.label.partNumber"): </strong><span>$itemData.partNumber</span></p>
+								#if($!itemData.manufacturerPartNumber.trim().length()>0)<p><strong>$locale.get("product.label.mpn"): </strong><span>$itemData.manufacturerPartNumber</span></p>#end
+								#if($itemData.upc.trim().length()>0)<p><strong>$locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></p>#end
 							</li>
 							#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
-							<li itemprop="sku" class="hideToHover">
+							<li class="hideToHover">
 								<strong>$!locale.get("product.label.cpn"): </strong>
 								<span>
 								#if($itemData.customerPartNumber)$!itemData.customerPartNumber, #end
@@ -226,7 +228,7 @@
 					#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 					#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
 					<li>
-					<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemTitle</a>
+					<a href="$!hostName$LinkedItemData.seoUrl">$itemTitle</a>
 					</li>
 					#end
 					</ul>
@@ -275,30 +277,30 @@
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price</span>
 								#end
 							<!-- <span id="span_$itemData.partNumber" data-select='priceData'>
-							<img src="$!hostName$webThemes/$siteName/images/loading.gif" />
+							<img src="$!hostName$webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>
 							</span> -->
 							#end
 						</span>
 					</td>
 					<td data-th='$locale.get("product.label.extPrice")' class="priceSpan">
-						<span class='priceSpan formatPrice'>
-							##if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) ##else N/A ##end
-							#if($itemData.price > 0)
-								#set($totalPrice = $itemData.price * $itemData.qty)
-								$totalPrice
-							#end
-						</span>
+						#set($totalPrice = 0)
+						#if($itemData.price > 0) #set($totalPrice = $itemData.price * $itemData.qty) #end
+						#if($totalPrice)
+							<span class='priceSpan formatPrice'>$totalPrice</span>
+						#else
+							<span class='priceSpan'>N/A</span>
+						#end
 						<!-- <span class="productGrpRightAlign"><span id="spanEx_$itemData.partNumber" data-select='extPriceData'>
-						<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span></span> -->
+						<img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span></span> -->
 					</td>
-					<td data-th="select">
+					<td data-th="$locale.get('form.label.select')">
 						<label class="customCheckBox2">
 							#set($addToCartCheckFlag = "N")
 							#if($itemData.price>0)
 							#set($addToCartCheckFlag = "Y")
 							#end
 							<!-- <input type="checkbox" name="idList" value="$itemData.productListId" id="chkSelect1$itemData.partNumber" data-addtocartflag="$addToCartCheckFlag" onclick="eachCheckBox(this)/> -->
-							<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId"/>
+							<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId" data-uom="$!itemData.qtyUOM"/>
 							<span></span>
 						</label>
 					</td>
@@ -367,4 +369,4 @@
 $locale.get("product.label.noDataAvailable")
 #end
 
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/BulkAction.js"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/BulkAction.js?$!refreshVersion"></script>

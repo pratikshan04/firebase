@@ -134,35 +134,37 @@
 					#set($itemTitle= $itemData.brandName+" "+ $itemData.manufacturerPartNumber)
 					<tr itemscope itemtype="http://schema.org/Product">
 						<td data-th="$locale.get('product.label.Image')">							
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
+							<a href="$itemData.seoUrl">
 								<span id="imageName$itemData.itemId">
-								#if($itemData.imageType=="URL")
-								<img src="$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+								#if($itemData.imageType=="URL" || $itemData.imageType=="360_URL")
+									#if($itemData.imageType=="360_URL")
+										<span class="threesixtydegreeimg">
+											<img src="$itemData.imageName?thumb&w=75" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+										</span> 
+									#else
+										<img src="$itemData.imageName" class="PgImg" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+									#end
 								#else
-								<img src="$detailImage$itemData.imageName" itemprop="image" class="PgImg" width="75" height="75" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+									<img src="$detailImage$itemData.imageName" class="PgImg" width="75" height="75" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 								#end
 								</span>
 							</a>
 						</td>
 						<td data-th="$locale.get('product.label.productDescription')">
 							<ul class="text-left">
-								<li itemprop="name">
-									<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a>
-								</li>
-								<li class="hideForCollapse hideMe">
-									<p itemprop="description">$!itemData.shortDesc </p>
-								</li>
+								<li><a href="$itemData.seoUrl" class="productTitle">$itemData.brandName $!itemData.manufacturerPartNumber</a></li>
+								<li class="hideForCollapse hideMe"><p>$!itemData.shortDesc </p></li>
 								<li>
-									#if($itemData.manufacturerPartNumber)
-									<p itemprop="mpn"><strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span></p>
+									#if($itemData.manufacturerPartNumber.trim().length()>0)
+									<p><strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span></p>
 									#end
-									<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></p>
-									#if($itemData.upc)
-									<p itemprop="sku"><strong>$!locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></p>
+									<p><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></p>
+									#if($itemData.upc.trim().length()>0)
+									<p><strong>$!locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></p>
 									#end
 								</li>
 								#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
-									<li itemprop="sku" class="hideToHover">
+									<li class="hideToHover">
 										<strong>$!locale.get("product.label.cpn"): </strong>
 										<span>
 										#if($itemData.customerPartNumber)$!itemData.customerPartNumber, #end
@@ -221,9 +223,7 @@
 							#set($linkedItems = $itemData.linkedItemsList)
 							#foreach($LinkedItemData in $linkedItems.get("Substitute"))
 							#set($itemTitle = $LinkedItemData.brandName + " " + $!LinkedItemData.manufacturerPartNumber)
-							<li>
-							<a href="$!hostName/$LinkedItemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemTitle</a>
-							</li>
+							<li><a href="$LinkedItemData.seoUrl">$itemTitle</a></li>
 							#end
 							</ul>
 						</td> -->
@@ -235,14 +235,13 @@
 							#end
 						</td>
 						<td data-th="$locale.get('product.label.yourprice')" class="tabelPrice">
-							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" /></span> -->
+							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span> -->
 							#if($itemData.price > 0)
 							<span data-select='extPriceData' class='priceSpan formatPrice'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else
 							<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
 							#end
 							<em>#if($!itemData.qtyUOM && $itemData.qtyUOM.length() > 0 && $itemData.price > 0) / $!itemData.qtyUOM #end</em>
-							##itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.availQty, $itemData.srchTyp, $navigationType)
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
 							<input type="hidden" value="$itemData.minOrderQty" id="MinOrderQty_$itemData.partNumber"/>
 							<input type="hidden" value="$itemData.orderInterval" id="OrderQtyInterval_$itemData.partNumber" name="orderQuantityInterval"/>
@@ -260,13 +259,14 @@
 							<input type="hidden" id="itemTxtAvail$itemData.itemId" name="itemTxtAvail$itemData.itemId" value="$itemData.availQty"/>
 						</td>
 						<td data-th="$locale.get('product.label.extPrice')">
-							<span class='priceSpan formatPrice'>
-								##if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) ##else N/A ##end
-								#if($itemData.price > 0)
-									#set($totalPrice = $itemData.price * $itemData.qty)
-									$$numberTool.format($numberToolFormat,$totalPrice)
-								#end
-							</span>
+						#set($totalPrice = 0)
+						#if($itemData.price > 0) #set($totalPrice = $itemData.price * $itemData.qty) #end
+						#if($totalPrice > 0)
+							<span class='priceSpan formatPrice'>$$numberTool.format($numberToolFormat,$totalPrice)</span>
+						#else
+							<span class='priceSpan'>N/A</span>
+						#end
+							
 						</td>
 						<td data-th="$locale.get('form.label.select')">
 							<label class="customCheckBox2">
@@ -275,7 +275,7 @@
 									#set($addToCartCheckFlag = "Y")
 								#end
 								<!-- <input type="checkbox" name="idList" value="$itemData.productListId" id="chkSelect1$itemData.partNumber" data-addtocartflag="$addToCartCheckFlag" onclick="eachCheckBox(this)"/> -->
-								<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId"/>
+								<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId" data-uom="$!itemData.qtyUOM"/>
 								<span></span>
 							</label>
 						</td>

@@ -293,7 +293,7 @@
 							<div id="confirmOrderPageDiv" style="width: 100%;">
 								<center>
 									<span>
-										<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt='loading'/>
+										<img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>
 									</span>
 								</center>
 							</div>
@@ -331,21 +331,14 @@
 			                <tr itemscope itemtype="http://schema.org/Product">
 			                    <td class="alignLeft" data-th="$!locale.get('product.label.description')">
 			                    <ul>
-									<li itemprop="name">
-										<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
-									</li>
+									<li><a href="$!itemData.seoUrl">$!itemData.brandName $!itemData.manufacturerPartNumber</a></li>
+									<li><p>$!itemData.shortDesc</p><div id="minErr_$!itemData.itemPriceId"></div></li>
 									<li>
-					                 	<p itemprop="description">$!itemData.shortDesc</p>
-					                	<div id="minErr_$!itemData.itemPriceId"></div>
+										<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
+										#if($itemData.manufacturerPartNumber)<p><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>#end
 									</li>
+									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
 									<li>
-										<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
-										#if($itemData.manufacturerPartNumber)
-										<p itemprop="mpn"><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>
-										#end
-									</li>
-									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
-									<li itemprop="Prop65">
 										<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
 										<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
 									</li>

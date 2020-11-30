@@ -156,9 +156,8 @@ var BulkAction = {};
 							setCookie("selectedItemsToGroup", "", -1);
 						}
 						$.each(jsonObj, function (key, value) {
-							//$("#selectItemCheckbox_" + value.itemId).attr('checked', false);
-							$.each( $("[id='selectItemCheckbox_"+value.itemId+"']"), function( key, value ) { $(this).attr('checked', false); });
-							$.each( $("[id='itemTxtQty"+value.itemId+"']"), function( key, value ) { $(this).attr('disabled', false); });
+							$.each( $("[id='selectItemCheckbox_"+value.itemId+"']"), function( key, value ) { $(this).prop('checked', false); });
+							$.each( $("[id='itemTxtQty"+value.itemId+"']"), function( key, value ) { $(this).prop('disabled', false); });
 							if ($('#multipleUom_' + value.partNumber).length > 0) {
 								$('#multipleUom_' + value.partNumber).attr('disabled', false);
 							}
@@ -203,6 +202,7 @@ var BulkAction = {};
 			data: dataStr,
 			success: function (msg) {
 				var result = msg.split("|");
+				console.log(result);
 				$(".addNewPgResponse ul").append('<li class="hintCorrect"><a class="orangeClr" href="/myProductGroupPage.action?savedGroupId=' + result[1] + '">' + myObject.groupName + '</a></li>');
 			}
 		});
@@ -416,7 +416,8 @@ var BulkAction = {};
 		if (jsonObj != null) {
 			jQuery.each(jsonObj, function (i, val) {
 				if (val != null) {
-					$("#selectItemCheckbox_" + val.itemId).attr("checked", true);
+					$("#selectItemCheckbox_" + val.itemId).prop("checked", true);
+					$("#itemTxtQty" + val.itemId).prop("disabled", true);
 				}
 			});
 		}
@@ -424,6 +425,7 @@ var BulkAction = {};
 			jQuery.each(jsonObjPGroup, function (i, val) {
 				if (val != null) {
 					$("#selectItemCheckbox_" + val.itemId).attr("checked", true);
+					$("#itemTxtQty" + val.itemId).prop("disabled", true);
 				}
 			});
 		}
@@ -431,6 +433,7 @@ var BulkAction = {};
 			jQuery.each(jsonObjGList, function (i, val) {
 				if (val != null) {
 					$("#selectItemCheckbox_" + val.itemId).attr("checked", true);
+					$("#itemTxtQty" + val.itemId).prop("disabled", true);
 				}
 			});
 		}
