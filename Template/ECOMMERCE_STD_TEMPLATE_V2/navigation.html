@@ -7,7 +7,7 @@
 	</li>
 #if($!CommonDBQuerySystemParameter.get("EnableMultiLevelCategoryDisplay") == "Y")
     <li>
-    	<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a><em class="fa"></em></span>
+    	<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
 		<ul class="dropdown-menu">
 			#foreach($categoryMenu in $categMenu)
 			<li class="sec">
@@ -77,7 +77,7 @@
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
 	<li>
-		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands")</a>#if($brandList.size()>0)<em class="fa"></em>#end</span>
+		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a></span>
 		<div class="shopbybrand dropdown-menu clearAfter">
 		#set($brandListSize = 0)
 		#set($brandIndex = 0)
@@ -104,7 +104,7 @@
 		</div>
 	</li>
 	#end
-	#if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
+	<!-- #if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
     <li>
     	<span><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a>#if($manufacturerList.size() > 0)<em class="fa"></em>#end</span>
 		<div class="shopbymanuf dropdown-menu clearAfter">
@@ -134,7 +134,7 @@
 		#end
 		</div>    
 	</li>
-	#end
+	#end -->
    #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
     #if($userLogin)
 		#if($LayoutName != "QuickOrderStdPage")

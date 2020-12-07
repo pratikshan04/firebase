@@ -32,7 +32,7 @@
 					#else
 						#set($count = 1)
 						#foreach($!footMenu in $!footerStaticMenu)
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="footerCol">
 									<h3><a href="#if($!footMenu.itemUrl) #if($!footMenu.staticPageUrl) $!footMenu.staticPageUrl #else $!footMenu.itemUrl #end #else javascript:void(0); #end">$!footMenu.level1Menu</a><em class="fa fa-plus"></em></h3>
 									<ul id="footerMenu$!count" class="toggle_content">
@@ -55,33 +55,66 @@
 							#set($count = $!count + 1)
 						#end
 					#end
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="footerCol">
 							<h3><a href="javascript:void(0);">$!locale.get('sentmailconfig.contactusform.subject')</a><em class="fa fa-plus"></em></h3>
 							<ul id="footerMenu$!count" class="toggle_content">
-								<li><a>Your Company Address</a></li>
-								<li><a>#000, Lorem </a></li>
-								<li><a>Lorem, IL 0000</a></li>
-								<li><a>Phone: (000)000-0000</a></li>
+								<li><a>27 Calle 41-55 Z-5 </a></li>
+								<li><a>Guatemala, Guatemala</a></li>
+								<li><a>info@hp.com.gt</a></li>
+								<li><a>+(502) 2499 5000</a></li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						#set($count = $!count + 1)
-						<div class="footerCol">
-							<h3><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><em class="fa fa-plus"></em></h3>
+						<div class="alignCenter">
+							<!-- <h3><a href="javascript:void(0);">$!locale.get('footer.label.emailSignUp')</a><em class="fa fa-plus"></em></h3>
 							<ul id="footerMenu$!count" class="toggle_content">
 								<li><p>$!locale.get('footer.label.signupFor')</p></li>
 								<li><a data-toggle="modal" data-target="#newsLetter" class="btn btn-primary btn-lg btn-signup">$!locale.get('footer.label.signMeUp')</a></li>
-							</ul>
+							</ul> -->
+							<img itemprop="logo" src="$!hostName/$webThemes/$siteName/images/logo-footer.png" width="320px" height="100px" alt="$!siteDisplayName" />
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="socialMediaWrap">
+							<ul>
+							<!-- <li>
+								<a href="" target="_blank">
+								  <img src="" alt="facebook">
+								</a>
+							  </li>
+							  <li>
+								<a href="" target="_blank">
+								  <img src="" alt="instgram">
+								</a>
+							  </li>
+							  <li>
+								<a href="" target="_blank">
+								  <img src="" alt="whatsapp">
+								</a>
+							  </li> -->
+							</ul>
+						  </div>
+					</div>
+					<div class="col-md-3">
+	
+					</div>
+					<div class="col-md-2">
+	
+					</div>
+					<div class="col-md-4">
+						<p class="cimm_footer-copyright">$!locale.get('website.label.copyRight') <span class="year"></span> $siteDisplayName. $!locale.get('website.label.allRightsReserved') </p>
 					</div>
 				</div>
 			</div>
 		</div> 
 	</div>
 </div>
-<div class="row no-gutters">
+<!-- <div class="row no-gutters">
 	<div class="col-md-12">
 		<div class="cimm_footer_down">
 			<div class="container alignCenter">
@@ -89,7 +122,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 #end
 <div id="loginModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">

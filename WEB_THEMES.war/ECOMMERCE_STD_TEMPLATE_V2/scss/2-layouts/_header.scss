@@ -46,10 +46,10 @@ header {
             }
         }
         .cimm_header_mid {
-            
+                height: 100px;
             .cimm_logo {
                 width: 250px;
-                height: 120px;
+                height: 100px;
                 position: relative;
 
                 img {
@@ -72,45 +72,49 @@ header {
 }
 
 .cimm_signWrap {
-    text-align: right;
-    padding: 10px 0px !important;
+   // padding: 10px !important;
+    //text-align: right !important;
+    height: 100px;
 
     > li {
         display: inline-block;
         position: relative;
         text-align: center;
-        width: 100px;
-        > a {
+        padding: 10px !important;
+        > a { 
             display: block;
-            //color: $default_font-color;
+            color: $white;
             font-weight: bold;
-            span {
+              >span {
                 font-weight: normal;
-                font-family: $default_font-family;
                 text-transform: uppercase;
                 margin-top: 4px;
                 &.imgBox {
                     display: block;
-                    width: 50px;
-                    height: 50px;
-                    background: $primary_color;
+                    width: 32px;
+                    height: 32px;
+                    background: $white;
                     position: relative;
                     margin: 0 auto 8px auto;
                     overflow: hidden;
+                    border-radius: 50%;
+                    top: 24px;
                     em {
                         position: absolute;
-                        left: 10px;
-                        color: $white;
-                        top: 10px;
-                        font-size: 32px;
+                        left: 5px;
+                        color: $primary_color;
+                        top: 4px;
+                        font-size: $font_xxlg + 4;
                     }
                 }
             }
         }
 
         &.cartCountDisplayLi a {
+            position: relative;
+            top: 4px;
             span.cartCountrefresh {
-                display: block;
+                display: inline-block;
             }
             svg {
                 width: 35px;
@@ -120,10 +124,24 @@ header {
                 left: 5px;
             }
         }
+        
+        ul.cimm_contactWrap li{
+                position: relative;
+                top: 10px;
+                padding: 4px 0px;
+                a{
+                    margin: 10px 0px;
+                    font-size: $font_md;
+                    color: $white;
+                    i{
+                        font-size: $font_lg;
+                    }
+                }
+             }
     }
-    >li:first-child {
-        width: 125px;
-    }
+    // >li:first-child {
+    //     width: 80px;
+    // }
 }
 
 .slideDropMenu, .myAccountMenu {
@@ -258,18 +276,20 @@ header {
 
 .cimm_searchWrapper { 
     text-align: center;
-    margin: 55px 0 18px;
+    margin: 34px 0px;
     position: relative;
 
     input[type='text'] {
-        border: 1px solid $border-color;
         border-radius: 0px;
         font-family: $default_font-family;
+        font-size: $font_sm;
+        height: 42px;
     }
     .cimm_searchIcon {
         border: 1px solid $border-color;
         border-radius: 0px;
-        width: 47px;
+        width: 46px;
+        height: 42px;
         color: $white;
     }
 }
