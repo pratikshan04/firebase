@@ -70,16 +70,12 @@
 			partNumber = partNumber.replace(regex, '\\/');
 			var minOrderQty = 1;
 			var quantityInterval = 1;
-			//var uom = $("#"+settings.functionalBlock.uomValuePrefix+partNumber).val();
 			var uom = document.getElementById(settings.functionalBlock.uomValuePrefix + partNumber).value;
 			if(settings.qtyIntervalRefrence=="Y"){
-				//minOrderQty = parseInt($("#"+settings.functionalBlock.minOrderQtyPrefix+partNumber).val());
-				//quantityInterval = parseInt($("#"+settings.functionalBlock.qtyIntervalPrefix+partNumber).val());
 				minOrderQty = parseInt(document.getElementById(settings.functionalBlock.minOrderQtyPrefix + partNumber).value);
 				quantityInterval = parseInt(document.getElementById(settings.functionalBlock.qtyIntervalPrefix + partNumber).value);
 			}
-			if(qty=="NaN")
-			{
+			if(qty=="NaN"){
 				bootAlert("small","error","Error","Invalid Qty.");
 				$("#itemTxtQty"+id).val(minOrderQty);
 				$("[data-cloneqty='cloneQty']").val(minOrderQty);
@@ -261,8 +257,7 @@
 					    	}
 							if($("#isWebview").val() == "WEBVIEW"){
 								getCartCount(result[0])
-							}
-							//$(".cartCountrefresh").html(result[0]);
+							}//$(".cartCountrefresh").html(result[0]);
 						});
 					}else{
 						//$(".cartCountDisplayLi").addClass("ItemsInCart");
@@ -275,7 +270,6 @@
 							getCartCount(result[0])
 						}
 					}
-					
 					/*if($(".cartTotalDisplayLi").hasClass("ItemsInCart")){
 						$("#"+settings.cartTotalRefreshId).each(function(){
 							$(this).html(Number(result[4]).toFixed(pricePrecision));
@@ -295,11 +289,9 @@
 				var salesPriceQty = $("#"+settings.functionalBlock.salesPriceQtyPrefix+partNumber).val();
 				var quantityBreakFlag = "N";
 				//var salesQty = $("#"+settings.functionalBlock.salesQtyPrefix+id).val();
-				
 				if($("#quantityBreakFlag_"+partNumber).length>0){
 					quantityBreakFlag = $("#quantityBreakFlag_"+partNumber).val();
 				}
-				
 				price = price.replace(",","");
 				if(quantityBreakFlag=="Y" && $("#quantityBreakPricingDetails_"+partNumber).length>0){
 					var quantityBreak = $("#quantityBreakPricingDetails_"+partNumber).html();
@@ -322,9 +314,7 @@
 				}else{
 					tempPrice = price;
 				}
-				/*if(shortDesc.length>97){
-					shortDesc=shortDesc.substring(0,97)+"...";
-				}*/
+				/*if(shortDesc.length>97){ shortDesc=shortDesc.substring(0,97)+"...";}*/
 				var displayPrice = (tempPrice) * parseInt(qty);
 				if(displayPrice==0){
 					displayPrice="Call for Price";
@@ -340,8 +330,7 @@
 					var categoryNameFrPiwik = $("#CategoryName_"+partNumber).val();
 					piwik.addEcommerceItemPiwik(partNumber, shortDesc, "", parseFloat(displayPrice),itemCount);
 				}
-				
-				$("."+settings.designsBlock.imageClass).attr("src",$("#"+settings.functionalBlock.itemImagePrefix+id).attr("src"));
+				$("."+settings.designsBlock.imageClass).attr("src",document.getElementById(settings.functionalBlock.itemImagePrefix+id).nodeName == "DIV" ? $("#"+settings.functionalBlock.itemImagePrefix+id).find('img').attr('src') : $("#"+settings.functionalBlock.itemImagePrefix+id).attr("src"));
 				$("."+settings.designsBlock.imageClass).height("100%");
 				$("."+settings.designsBlock.imageClass).width("100%");
 				$("."+settings.designsBlock.itemNameClass).html($("#"+settings.functionalBlock.itemTitlePrefix+id).text());
@@ -350,9 +339,7 @@
 				$("."+settings.designsBlock.itemShortDescClass).html(shortDesc);
 				$("."+settings.designsBlock.priceClass).html(displayPrice);
 				$("."+settings.designsBlock.cartCountClass).html(cartCount);
-				//$(".ATCMPartNumber").html($("#MPNValue_"+partNumber).val());
 				$(".ATCMPartNumber").html($("[id='MPNValue_"+partNumber+"']").val());
-				
 				if($(".productLeadTime_"+partNumber).is(":visible")){
 					$(".ATCavailableorLeadTime").html("Lead Time: ");
 					var leadTime = "";
@@ -394,18 +381,13 @@
 			var itemPriceId = $(this).attr("data-itemPriceId");
 			var partNumber = $("#"+settings.functionalBlock.partNumberNotificationPrefix+id).val();
 			partNumber = partNumber.replace(regex, '\\/');
-			/*if($('#'+settings.blockPageID)){
-        		$('#'+settings.blockPageID).show();
-        	}*/
+			/*if($('#'+settings.blockPageID)){ $('#'+settings.blockPageID).show(); }*/
 			jAlert("Please contact "+$('#'+settings.siteDisplayName).val()+" on this item","Alert");
 			enqueue(settings.sendNotificationURL+'?partNumber='+partNumber+'&userName='+$('#'+settings.loggedInUserName).val()+'&dt='+new Date(),function(){
-				/*if($('#'+settings.blockPageID)){
-	        		$('#'+settings.blockPageID).hide();	
-	        	}*/
+				/*if($('#'+settings.blockPageID)){ $('#'+settings.blockPageID).hide(); }*/
 				unblock();
 				return false;
 			});
 		});
     };
-    
 }(jQuery));

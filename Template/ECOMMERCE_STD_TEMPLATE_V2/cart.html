@@ -36,15 +36,15 @@
 		</span>
 		#if($userLogin) 
 			#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-				<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
+				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 			#else
-				<a class="btn btn-lg btn-primary marginX-3" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
+				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
 			#end 
 		#else
 			#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-				<a class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+				<a class="btn btn-primary btn-md mRight-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 			#else
-				<a class="btn btn-lg btn-primary marginX-3" href="/Login">$!locale.get("product.heading.checkout")</a>
+				<a class="btn btn-md btn-primary marginX-3 mRight-3" href="/Login">$!locale.get("product.heading.checkout")</a>
 			#end
 		#end
 		<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sharethis')" onclick="sendPageContent('sendPageContent');">
@@ -98,12 +98,18 @@
 								<span></span>
 							</label>
 							#end
-                            <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)">
+                            <a href="$!itemData.seoUrl">
                                 <span id="imageName$!itemData.itemId">
-			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-			                            <img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                        #if($itemData.imageName.contains("http") || $itemData.imageType=="URL" || $itemData.imageType=="360_URL")
+			                        	#if($itemData.imageType=="360_URL")
+			                        	<span class="threesixtydegreeimg">
+			                        		<img itemprop="image" src="$!itemData.imageName?thumb&w=80" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                        	</span>
+			                        	#else
+			                        		<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                            #end
 			                        #else
-			                            <img itemprop="image" src="$!itemImage$!itemData.imageName"  width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
+			                        	<img itemprop="image" src="$!itemImage$!itemData.imageName" width="80" height="80" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" />
 			                        #end
                     			</span>
                             </a>
@@ -111,12 +117,12 @@
                     </td>
                     <td class="alignLeft" data-th="$!locale.get('product.label.description')">
                         <div class="cimm_cartProdDescription">
-                        	<p itemprop="name"><strong><a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
+                        	<p itemprop="name"><strong><a href="$!itemData.seoUrl"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
                             <ul>
                                 <li>
                                     #if($itemData.shortDesc.length()>75)
 	                                    <p itemprop="description"> $!itemData.shortDesc.substring(0, 75)
-	                                        <a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)"> $!locale.get("product.label.more")</a>
+	                                        <a href="$!itemData.seoUrl"> $!locale.get("product.label.more")</a>
 	                                    </p>
                                     #else
                                     	<p itemprop="description"> $!itemData.shortDesc </p>
@@ -131,10 +137,10 @@
                                	</li>
                                 #end
                                 <li itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong><span>$!itemData.partNumber</span></li>
-                                #if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+                                 #if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
 								<li itemprop="Prop65">
 									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
-									<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+									<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message(this)">see Prop 65 WARNINGS</a></span></p>
 								</li>
 								#end
                                 #set($leadTime = "N")
@@ -196,7 +202,7 @@
 				     	<a href="javascript:void(0);" class="text-underline" title='$!locale.get("product.button.update")' onclick="editPrice('$!itemData.productListId');">$!locale.get("product.label.Editunitprice")</a>
 				     </span>
 				     <span class="editpricesales_$!itemData.productListId hideMe">
-				     	  $<input type="text" id='updatedUnitPrice_$!itemData.productListId' class="editCustomerPrice text-center" name='updatedUnitPrice_$!itemData.productListId' value="$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)"><span> /$!itemData.uom</span>
+				     	  $<input type="number" id='updatedUnitPrice_$!itemData.productListId' class="editCustomerPrice quantity text-center" name='updatedUnitPrice_$!itemData.productListId' value="$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)" onkeypress="return IsNumeric(event);"><span> /$!itemData.uom</span>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	#end
@@ -212,10 +218,9 @@
                    <td data-th="$!locale.get('product.heading.perUnitPrice')">
                         <strong class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
-				     		#set($checkout="Y")    
+				     		#set($checkout="Y")
 				     	 #end
                     </td>
-                	
                     #end
                    
                     <td data-th="$!locale.get('product.label.uom')">
@@ -276,15 +281,15 @@
             <li>
             	#if($userLogin) 
 	            	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
-						<a class="btn btn-primary btn-lg" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
+						<a class="btn btn-primary btn-md mRight-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 					#else
-						<a class="btn btn-primary btn-lg" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
+						<a class="btn btn-primary btn-md" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
 					#end 
 	            #else
 	            	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
-	            	<a class="btn btn-lg btn-primary marginX-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
+	            	<a class="btn btn--md btn-primary marginX-3 mRight-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
 	            	#else
-	            	<a class="btn btn-primary btn-lg" href="/Login">$!locale.get("product.heading.checkout")</a>
+	            	<a class="btn btn-primary btn-md" href="/Login">$!locale.get("product.heading.checkout")</a>
 	            	#end
 	            #end
             </li>
@@ -332,7 +337,7 @@
 	<tr>
 		<td style="border:1px solid #CCC;text-align: center;padding: 5px;" data-th="$!locale.get('product.label.Image')">
 			<div class="cimm_cartProdImg alignCenter">
-			<a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)">
+			<a href='$commonUtility.removeLastCharacter($!hostName, "/")$!itemData.seoUrl'>
 			<span id="imageName$!itemData.itemId">
 			#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 			<img itemprop="image" src="$!itemData.imageName" width="80" height="80" id="mainImage" alt='$itemTitle' onerror="this.src='$!hostName$!webThemes/$!siteName/images/NoImage.png';" />
@@ -345,7 +350,7 @@
 		</td>
 		<td style="border:1px solid #CCC;text-align: left;padding: 5px;" data-th="$!locale.get('product.label.description')">
 			<div class="cimm_cartProdDescription">
-			<strong><a href="$!hostName$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)" title="$slugUrl.makeSlug($!itemTitle)"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
+			<strong><a href='$commonUtility.removeLastCharacter($!hostName, "/")$!itemData.seoUrl'><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
 			<p itemprop="description"> $!itemData.shortDesc </p>
 			#if($itemData.manufacturerPartNumber)
 			<p>

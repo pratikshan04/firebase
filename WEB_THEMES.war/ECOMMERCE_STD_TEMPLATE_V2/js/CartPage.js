@@ -1,5 +1,8 @@
 var webThemes = $("#webThemePath").val();
-jQuery.getScript(webThemes+'js/BulkAction.js', function(){});
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+jQuery.getScript(cdnSiteJsPath+'/BulkAction.js', function(){});
 $(document).ready(function(){
 	$('#cartWrap').DataTable({
 		"ordering": false,
@@ -870,10 +873,14 @@ function updatePrice(productListId, partNum){
 	var updatedUnitPrice = $('#updatedUnitPrice_'+productListId).val();
 	var uom = $('#uom_'+productListId).val();
 	var getPriceFrom = 'SALESREP';
-	var itemQty=$("#textQty_"+partNum).val();
+	var itemQty = document.getElementById("textQty_"+partNum).value;
 	if(updatedUnitPrice <= 0){
 		bootAlert("small","error","Error","Cannot update item with zero or less than zero price.");
-	}else if(unitPrice != updatedUnitPrice){
+	}else if(isNaN(updatedUnitPrice)){
+		bootAlert("small","error","Error","Cannot update item with String or special characters in price.");
+		$('#updatedUnitPrice_'+productListId).val(unitPrice);
+	    editPrice(partNum);
+    }else if(unitPrice != updatedUnitPrice){
 		var cartId = productListId;
 		if(productListId != ""){
 			$("#refreshCartId").val(productListId);

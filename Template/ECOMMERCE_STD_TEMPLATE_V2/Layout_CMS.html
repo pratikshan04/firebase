@@ -1,40 +1,55 @@
+#set($disableInspect = $!CommonDBQuerySystemParameter.get("CMS_DISABLE_INSPECT"))
 <!DOCTYPE html>
 <html>
   <head>
     #parse("cms_head.html")
       <script type="text/javascript">
       var parentUrl = ""+window.parent.location;
-      //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
-      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
-        //console.log("The page is in an iframe");
-        //console.log("location: "+ window.location);
-        //console.log("Parent Location: "+window.parent.location);
-      }else {
+      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {}else {
         alert("Unauthorized Access...!");
         if(parentUrl.indexOf("cmsPageCms.action") !== -1){
-          // console.log("The page is not in CIMM");
           window.location.href = "/";
           window.top.location.href = "/";
         }else{
-          //console.log("The page is not in an iframe");
           window.location.href = "/";
         }
       }
 	</script>
   </head>
-  <body>
+  <body #if($!disableInspect=="Y") oncontextmenu="return false;" #end>
     <input type="hidden" id="siteName" name="siteName" value="$siteName" />
     <input type="hidden" id="moodname" name="moodname" value="$moodname">
     #parse($bodyContent)
-    <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery-ui-1.10.3.custom.min.js"></script>
     #if($LayoutName == "CMSBannerEdit")
     #parse("cmsbannereditscript.html")
     #end
     #if($LayoutName == "CMSFormEdit")
-    <script src="$!webThemes/CMS/js/cms/formsettings.js?v=$!session.getLastAccessedTime()">
+    <script src="$!cmsArtifactsPath/js/cms/formsettings.js?$!refreshVersion">
     </script>
-    <script src="$!webThemes/CMS/js/cms/formbuilder.js?v=$!session.getLastAccessedTime()">
+    <script src="$!cmsArtifactsPath/js/cms/formbuilder.js?$!refreshVersion">
     </script>
+    #end
+    #if($!disableInspect=="Y")
+	    <script type="text/javascript">
+	   	document.onkeydown = function(e) {
+	   	  if(event.keyCode == 123) {
+	   	     return false;
+	   	  }
+	   	  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+	   	     return false;
+	   	  }
+	   	  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+	   	     return false;
+	   	  }
+	   	  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+	   	     return false;
+	   	  }
+	   	  /* if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+	   	     return false;
+	   	  } */
+	   	}
+	    </script>
     #end
   </body>
 </html>

@@ -1,5 +1,8 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/BulkAction.js', function(){});
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnSiteJsPath+'/BulkAction.js', function(){});
 $(document).ready(function(){
 	$('#groupCart').DataTable({
 		"sPaginationType":"simple_numbers",
@@ -29,8 +32,7 @@ function addAllItemsToCart(linkUrl){
 				if(jsonObjList.length>0){
 					jQuery.each(jsonObjList, function(i, val) {
 						if(val!=null && val.price > 0){
-							pricePresent++;
-							console.log(val.price);
+							pricePresent++;//console.log(val.price);
 						}else{
 							callForPriceCounter++;
 							delete jsonObjList[i];
@@ -40,9 +42,7 @@ function addAllItemsToCart(linkUrl){
 					unblock();
 					if(callForPriceCounter>0 && pricePresent && jsonObjList != []){
 						bootAlert("small","info","Info","Call for Price items will be dropped from selection");
-	                    $("[data-bb-handler='ok']").click(function () {
-	                        BulkAction.processAddToCart(jsonObjList);
-	                    });
+	                    $("[data-bb-handler='ok']").click(function () { BulkAction.processAddToCart(jsonObjList); });
                     }else if(pricePresent && jsonObjList != []){
                     	BulkAction.processAddToCart(jsonObjList);
                     }else{

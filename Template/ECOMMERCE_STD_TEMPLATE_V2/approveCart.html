@@ -33,10 +33,16 @@
 					#set($itemTitle=$itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 					<tr>
 						<td data-th="$locale.get('product.label.Image')">    
-							<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">
+							<a href="$itemData.seoUrl">
 								<span id="imageName$itemData.itemId">
-								#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-									<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+									#if($itemData.imageName.contains("http") || $itemData.imageType=="URL" || $itemData.imageType=="360_URL")
+										#if($itemData.imageType=="360_URL")
+										<span class="threesixtydegreeimg">
+										<img src="$itemData.imageName?thumb&w=75" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+										</span>
+										#else
+										<img src="$itemData.imageName" width="75" height="75" id="mainImage" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
+										#end
 									#else
 									<img src="$detailImage$itemData.imageName"  width="75" height="75" alt='$itemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" />
 									#end
@@ -45,17 +51,9 @@
 						</td>
 						<td class="alignLeft" data-th="$locale.get('product.label.productDescription')">
 							<ul>
-								<li>
-								<strong><a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong>
-								</li>
-								#if($itemData.manufacturerPartNumber)
-								<li>
-								<strong>$locale.get("product.label.mpn"): </strong> $itemData.manufacturerPartNumber
-								</li>
-								#end
-								<li>
-								<strong>$locale.get("product.label.partNumber"): </strong> $itemData.partNumber
-								</li>
+								<li><strong><a href="$itemData.seoUrl">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong></li>
+								#if($itemData.manufacturerPartNumber.trim().length()>0)<li><strong>$locale.get("product.label.mpn"): </strong> $itemData.manufacturerPartNumber</li>#end
+								<li><strong>$locale.get("product.label.partNumber"): </strong> $itemData.partNumber</li>
 								#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 								<li>
 								<strong>$locale.get("product.label.cpn"): </strong>
@@ -69,12 +67,8 @@
 								</li>
 								#end
 								#if($itemData.minOrderQty>0 && $itemData.orderInterval>0)
-								<li>
-								<strong>$locale.get("product.label.minorderqty"): $itemData.minOrderQty</strong>
-								</li>
-								<li>
-								<strong>$locale.get("product.label.qtyinterval"): $itemData.orderInterval</strong>
-								</li>
+								<li><strong>$locale.get("product.label.minorderqty"): $itemData.minOrderQty</strong></li>
+								<li><strong>$locale.get("product.label.qtyinterval"): $itemData.orderInterval</strong></li>
 								#end
 								<li>
 								$!itemData.shortDesc
@@ -92,10 +86,10 @@
 								#end -->
 								<!-- <span id="Avail_$itemData.partNumber" data-select='availability'>
 								<strong>$locale.get("product.label.availableQuantity")</strong> : 
-								<img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" />
+								<img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>
 								</span> -->
 								</li>
-								#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+								#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
 								<li>
 									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
 									<p class="propwarningmsg"><i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
@@ -118,7 +112,8 @@
 						<td class="tabelPrice" data-th="$locale.get('product.label.yourprice')">
 							<span>
 								#if($itemData.price>0)
-									$$numberTool.format($numberToolFormat,$itemData.price)#if($!itemData.saleQty>0 || $!itemData.uom) / #end #if($itemData.saleQty>0) $!itemData.saleQty #end #if($itemData.uom) $!itemData.uom #end
+									##$$numberTool.format($numberToolFormat,$itemData.price)#if($!itemData.saleQty>0 || $!itemData.uom) / #end #if($itemData.saleQty>0) $!itemData.saleQty #end #if($itemData.uom) $!itemData.uom #end
+									$$numberTool.format($numberToolFormat,$itemData.price) #if($itemData.uom) / $!itemData.uom #end
 								#else
 								<strong class="required">$locale.get("product.label.callforprice")</strong>
 								#end
@@ -138,9 +133,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-8 col-sm-8 col-xs-12 overflowHidden">
-			<button type="button" class="button slideBtns" data-toggle="modal" data-target="#ReasonPopDiv" id="rejectCart">
-				$locale.get("product.label.rejectCart")
-			</button>
+			<button type="button" class="button slideBtns" data-toggle="modal" data-target="#ReasonPopDiv" id="rejectCart">$locale.get("product.label.rejectCart")</button>
 			<button type="button" class="button slideBtns" onclick="return changeAction(6);" id="approveCart">$locale.get('product.button.approveCart') </button>
 			<button type="button" class="button slideBtns slideBtns-hide" onclick="return updateMyProductGroup();" id="updateSelectedItems">$locale.get('product.button.updateSelected')</button>
 		</div>

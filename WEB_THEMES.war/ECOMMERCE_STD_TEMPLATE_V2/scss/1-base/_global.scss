@@ -63,11 +63,24 @@ abbr[title] {
   border-bottom: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .modal-body {
   color: $default_font-color;
 }
 .required {
   color: #f00;
+}
+
+.requiblack{
+  color: $black;
 }
 
 /* no-gutters Class Rules */

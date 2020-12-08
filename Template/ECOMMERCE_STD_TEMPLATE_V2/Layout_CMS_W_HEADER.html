@@ -1,49 +1,42 @@
 #if($ajaxCall=="Y" || $ajaxCall=="quickOrderResult") #parse($bodyContent) #else
+#set($disableInspect = $!CommonDBQuerySystemParameter.get("CMS_DISABLE_INSPECT"))
 <!DOCTYPE html>
 <html lang="en">
   <head>
     #parse("cms_head.html")
-    <!-- <link href="$!webThemes/CMS/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
-    <link href="$!webThemes/CMS/css/gridmanagerv2.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
-    <link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css"/>
-    <link href="$!webThemes/CMS/css/slick.css" rel="stylesheet" type="text/css"/>
-    <link href="$!webThemes/CMS/js/contextmenu/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="$!webThemes/CMS/css/codemirror.css" />
-    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/dialog/dialog.css"/>
-    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/fold/foldgutter.css" />
-    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/display/fullscreen.css"/>
-    <link rel="stylesheet" href="$!webThemes/CMS/js/codemirror/addon/lint/lint.css"/>
-    <link rel="stylesheet" href="$!webThemes/CMS/css/arrowskin.css" />
-    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/skin.min.css" rel="stylesheet" type="text/css" />
-    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.min.css" rel="stylesheet" type="text/css" />
-    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.inline.min.css" rel="stylesheet" type="text/css" />
-    <link href="$!webThemes/CMS/js/tinyMCE_CMS-4.5.3/4.16/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/EcommereceCustomCss.css?v=$!session.getLastAccessedTime()" />
-    <link href="$!webThemes/CMS/css/colorbox.css" rel="stylesheet" type="text/css"/>
-    <link href="$!webThemes/CMS/css/fontawesome.min.css" rel="stylesheet">
-	<link href="$!webThemes/CMS/css/brands.min.css" rel="stylesheet">
-	<link href="$!webThemes/CMS/css/solid.min.css" rel="stylesheet">
+    <link href="$!cmsArtifactsPath/css/gridmanagerv2.css?$!refreshVersion" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/css/styles_CMS.css?$!refreshVersion" rel="stylesheet" type="text/css"/>
+    <link href="$!cmsArtifactsPath/css/slick.css" rel="stylesheet" type="text/css"/>
+    <link href="$!cmsArtifactsPath/js/contextmenu/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="$!cmsArtifactsPath/css/codemirror.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/js/codemirror/addon/dialog/dialog.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/js/codemirror/addon/fold/foldgutter.css" rel="stylesheet" type="text/css"  />
+    <link href="$!cmsArtifactsPath/js/codemirror/addon/display/fullscreen.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/js/codemirror/addon/lint/lint.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/css/arrowskin.css" rel="stylesheet" type="text/css"  />
+    <link href="$!cmsArtifactsPath/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/skin.min.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.min.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/js/tinyMCE_CMS-4.5.3/4.16/skins/lightgray/content.inline.min.css" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/js/tinyMCE_CMS-4.5.3/4.16/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/ASSETS/CSS_FILES/EcommereceCustomCss.css?$!refreshVersion" rel="stylesheet" type="text/css" />
+    <link href="$!cmsArtifactsPath/css/colorbox.css" rel="stylesheet" type="text/css"/>
+    <link href="$!cmsArtifactsPath/css/fontawesome.min.css" rel="stylesheet">
+	<link href="$!cmsArtifactsPath/css/brands.min.css" rel="stylesheet">
+	<link href="$!cmsArtifactsPath/css/solid.min.css" rel="stylesheet">
 	<script type="text/javascript">
       var parentUrl = ""+window.parent.location;
-      //console.log("index URL: "+parentUrl.indexOf("cmsPageCms.action") );
-      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
-        //console.log("The page is in an iframe");
-        //console.log("location: "+ window.location);
-        //console.log("Parent Location: "+window.parent.location);
-      }else {
+      if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ){}else {
         alert("Unauthorized Access...!");
         if(parentUrl.indexOf("cmsPageCms.action") !== -1){
-          // console.log("The page is not in CIMM");
           window.location.href = "/";
           window.top.location.href = "/";
         }else{
-          //console.log("The page is not in an iframe");
           window.location.href = "/";
         }
       }
 	</script>
   </head>
-  <body>
+  <body #if($!disableInspect=="Y") oncontextmenu="return false;" #end>
     <div class="cms_staticTable">
     <div id="fixedHead"></div>
     <div class="cimm_stickyPageWrap">
@@ -51,23 +44,39 @@
       <div id="normalHead">
         <header>
           <div class="cimm_header">
-            #parse("header.html") 
+            #if($!isCdnCmsTemplates == "Y" && $!headerWriter && $!headerWriter.trim().length()>1) 
+           		$!headerWriter
+			#else 
+				#parse("header.html") 
+			#end
           </div>
         </header>
        <nav class="navbar navbar-default hideForIpad">
 			<div class="container cimm_nav">
-				#parse("navigation.html")
+				 #if($!isCdnCmsTemplates == "Y" && $!navigationWriter && $!navigationWriter.trim().length()>1) 
+				 	$!navigationWriter 
+				 #else 
+				 	#parse("navigation.html") 
+				 #end
 			</div>
 		</nav>
       </div>
       #else
       <div id="normalHead">
         <div class="cimm_header">
-          #parse("header.html") 
+           #if($!isCdnCmsTemplates == "Y" && $!headerWriter && $!headerWriter.trim().length()>1) 
+           		$!headerWriter 
+           #else 
+           		#parse("header.html")
+           #end
         </div>
         <div class="cimm_navigationBar">
           <div class="cimm_siteWidth">
-            #parse("navigation.html")
+             #if($!isCdnCmsTemplates == "Y" && $!navigationWriter && $!navigationWriter.trim().length()>1) 
+				 $!navigationWriter 
+			 #else 
+			 	#parse("navigation.html")
+			 #end
           </div>
         </div>
       </div>
@@ -76,27 +85,27 @@
         #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") != "Y")
         <div class="cimm_siteWidth">
         #end
-          #if($leftContent)
-          #if($LayoutName == "ProductList")
-          #if($resultCount > 0)
-          <div class="cimm_leftMenuEnclosure">
-            #parse($leftContent)
-          </div>
-          #end
-          #else
-          <div class="cimm_leftMenuEnclosure #if($LayoutName != 'ProductList')hideForDevices#end #if($LayoutName == 'HomePage' || $!isStaticHomePage =='Y')cimm_homeLeftMenu#end">
-            #parse($leftContent)
-          </div>
-          #end
-          #end
-          <div class="cimm_mainContentEnclosure cms_mainContentEnclosure">
-            #parse($bodyContent)
-          </div>
-          #if($rightContent)
-          <div class="cimm_rightMenuEnclosure">
-            #parse($rightContent)
-          </div>
-          #end
+	          #if($leftContent)
+	          #if($LayoutName == "ProductList")
+	          #if($resultCount > 0)
+	          <div class="cimm_leftMenuEnclosure">
+	            #parse($leftContent)
+	          </div>
+	          #end
+	          #else
+	          <div class="cimm_leftMenuEnclosure #if($LayoutName != 'ProductList')hideForDevices#end #if($LayoutName == 'HomePage' || $!isStaticHomePage =='Y')cimm_homeLeftMenu#end">
+	            #parse($leftContent)
+	          </div>
+	          #end
+	          #end
+	          <div class="cimm_mainContentEnclosure cms_mainContentEnclosure">
+	            #parse($bodyContent)
+	          </div>
+	          #if($rightContent)
+	          <div class="cimm_rightMenuEnclosure">
+	            #parse($rightContent)
+	          </div>
+	          #end
         #if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT") != "Y")
         </div>
         #end
@@ -105,19 +114,27 @@
 	#if($!CommonDBQuerySystemParameter.get("CMS_V2_BOND_LAYOUT")=="Y")
 	<footer>
 		<div class="cimm_footerEnclosure">
-			#parse("footer.html") 
+			 #if($!isCdnCmsTemplates == "Y" && $!footerWriter && $!footerWriter.trim().length()>1)
+			 	$!footerWriter 
+			 #else 
+			 	#parse("footer.html") 
+			 #end
 		</div>
 	</footer>
 	#else
 	<div class="cimm_footerEnclosure">
-		#parse("footer.html")         
+		#if($!isCdnCmsTemplates == "Y" && $!footerWriter && $!footerWriter.trim().length()>1)
+		 	$!footerWriter 
+		#else 
+			#parse("footer.html")
+		#end       
 	</div>
 	#end
 	</div>
     <div class="cms_leftMenu hideMe">
     	#parse("cmsLeftmenu.html")
 	</div>
-    <script type="text/javascript" src="$!webThemes/$siteName/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery-ui-1.10.3.custom.min.js"></script>
     #parse("cimmhead.html")
     #parse("cmsscript.html")
     <script>
@@ -126,6 +143,27 @@
         theBody.style.display = 'none';
       }
     </script>
+    #if($!disableInspect=="Y")
+	    <script type="text/javascript">
+	   	document.onkeydown = function(e) {
+	   	  if(event.keyCode == 123) {
+	   	     return false;
+	   	  }
+	   	  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+	   	     return false;
+	   	  }
+	   	  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+	   	     return false;
+	   	  }
+	   	  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+	   	     return false;
+	   	  }
+	   	  /* if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+	   	     return false;
+	   	  } */
+	   	}
+	    </script>
+    #end
   </body>
 </html>
 #end

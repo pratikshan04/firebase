@@ -39,13 +39,26 @@ footer {
                 }
             }
         }
-        
+        .cimm_footer-copyright {
+            margin: 0;
+            font-size: $font_sm;
+            text-align: right;
+            a{
+                text-decoration: underline;
+            }
+        }
+        .socialMediaWrap{
+            padding: 35px 0;
+            
+            ul{
+                li{
+                    display: inline-block;
+                    margin-left: 10%;
+                }
+            }
+        } 
     }
     .cimm_footer_down {
         padding: 20px 10px;
-        .cimm_footer-copyright {
-            margin: 0;
-            letter-spacing: 1px;
-        }
     }
 }

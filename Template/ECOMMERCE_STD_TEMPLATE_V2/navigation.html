@@ -1,28 +1,20 @@
+#parse("Macros/defaultMacro.vm")
 <ul class="nav navbar-nav">
-	<li class="hidden-lg nav_bar_close">
+	<li class="hidden-lg  nav_bar_close">
 		<div class="cimm_slideMobileNavIcon" id="slideIcon">
-			<h2  class="dark-ripple">$locale.get("product.heading.menu")</h2>
-			<a href="javascript:void(0);" onclick="closeSlide();"><span></span></a>
+			<h2  class="dark-ripple">$locale.get("product.heading.menu")</h2><a href="javascript:void(0);" onclick="closeSlide();"><span></span></a>
 		</div> 	
 	</li>
-	
 #if($!CommonDBQuerySystemParameter.get("EnableMultiLevelCategoryDisplay") == "Y")
     <li>
-    	<span>
-			<a href="$locale.get('website.url.ProductCategory')">
-				$locale.get("navigation.label.shopProducts")
-			</a>
-			<em class="fa"></em>
-		</span>
+    	<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
 		<ul class="dropdown-menu">
 			#foreach($categoryMenu in $categMenu)
 			<li class="sec">
 				<span>
-					<a href="$!categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$!categoryMenu.categoryName.replaceAll(' ','-')">$!categoryMenu.categoryName</a>
+					<a href="$!categoryMenu.seoUrl">$!categoryMenu.categoryName</a>
 					#foreach($key in $secondLevelMenu.keySet())
-					#if($categoryMenu.categoryCode==$key)
-					<em class="fa"></em>
-					#end
+						#if($categoryMenu.categoryCode==$key) <em class="fa"></em> #end
 					#end
 				</span>
 				#foreach($key in $secondLevelMenu.keySet())
@@ -31,22 +23,16 @@
 					#foreach($secondLvlMenu in $secondLevelMenu.get($key))
 					<li class="third">
 						<span>
-							<a href="$!secondLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!secondLvlMenu.categoryName.replaceAll(' ','-')">$!secondLvlMenu.categoryName</a>
+							<a href="$!secondLvlMenu.seoUrl">$!secondLvlMenu.categoryName</a>
 							#foreach($key3 in $secondLevelMenu.keySet())
-							#if($secondLvlMenu.categoryCode==$key3)
-							<em class="fa"></em>
-							#end
+							#if($secondLvlMenu.categoryCode==$key3) <em class="fa"></em> #end
 							#end
 						</span>
 						#foreach($key3 in $secondLevelMenu.keySet())
 						#if($secondLvlMenu.categoryCode==$key3)
 						<ul class="dropdown-menu">
 							#foreach($thirdLvlMenu in $secondLevelMenu.get($key3))
-								<li>
-									<span>
-										<a href="$!thirdLvlMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!thirdLvlMenu.categoryName.replaceAll(' ','-')">$!thirdLvlMenu.categoryName</a>
-									</span>
-								</li>
+								<li><span><a href="$!thirdLvlMenu.seoUrl">$!thirdLvlMenu.categoryName</a></span></li>
 							#end
 						</ul>
 						#end
@@ -62,32 +48,21 @@
 	</li>
 	#else
 	<li>
-		<span>
-			<a href="$locale.get('website.url.ProductCategory')">
-				$locale.get("navigation.label.shopProducts")
-			</a>
-			<em class="fa"></em>
-		</span>
+		<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts")</a><em class="fa"></em></span>
         <div class="dropdown-menu shopbyprod">
 		#set($count=0)
 		#set($categoryListSize = 0)
 		#foreach($categoryMenu in $categMenu)
 			#if($categoryListSize < 26)
-			#if($count == 0)
-			<ul>
-			#end
-			#set($count=$count+1)
-			<li>
-				<span>
-					<a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" title="$categoryMenu.categoryName">
-						$categoryMenu.categoryName
-					</a>
-				</span>
-			</li>
-			#if($count==9 && $count<=9)
-			#set($count=0)
-			</ul>
-			#end
+				#if($count == 0)
+					<ul>
+				#end
+				#set($count=$count+1)
+				<li><span><a href="$categoryMenu.seoUrl" title="$categoryMenu.categoryName">$categoryMenu.categoryName</a></span></li>
+				#if($count==9 && $count<=9)
+					#set($count=0)
+					</ul>
+				#end
 			#end
 			#set($categoryListSize = $categoryListSize+1)
 		#end
@@ -102,48 +77,36 @@
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
 	<li>
-		<span>
-			<a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands")</a>
-			#if($brandList.size()>0)<em class="fa"></em>#end
-		</span>
+		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a></span>
 		<div class="shopbybrand dropdown-menu clearAfter">
 		#set($brandListSize = 0)
 		#set($brandIndex = 0)
 		#foreach($brands in $brandList)
 			#if($brandIndex < 27)
-			#if($brandListSize == 0)
-			<ul>
-			#end
-			#set($brandListSize = $brandListSize+1)
-			<li class="sec">
-				<span>
-					<a href="$brands.brandId$locale.get('website.url.ShopByBrand')$brands.brandName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">
-						$brands.brandName
-					</a>
-				</span>
-			</li>
-			#if($brandListSize==9 && $brandListSize<=9)
-			#set($brandListSize=0)
-			</ul>
-			#end
+				#if($brandListSize == 0)
+					<ul>
+				#end
+				#set($brandListSize = $brandListSize+1)
+				<li class="sec"><span><a href="$brands.seoUrl">$brands.brandName</a></span></li>
+				#if($brandListSize==9 && $brandListSize<=9)
+					#set($brandListSize=0)
+					</ul>
+				#end
 			#end
 			#set($brandIndex = $brandIndex+1)
 		#end
 		#if($brandListSize>0)
-		</ul>
+			</ul>
 		#end
 		#if($brandList.size() > 27)
-		<p class="text-right pTop-2 clear mRight-3"><a href='$locale.get("website.url.Brands")' class="cimm_inlineButton">$locale.get('product.label.viewAllBrands')</a></p>
+			<p class="text-right pTop-2 clear mRight-3"><a href='$locale.get("website.url.Brands")' class="cimm_inlineButton">$locale.get('product.label.viewAllBrands')</a></p>
 		#end
 		</div>
 	</li>
 	#end
-	#if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
+	<!-- #if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
     <li>
-    	<span>
-    		<a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a>
-			#if($manufacturerList.size() > 0)<em class="fa"></em>#end
-		</span>
+    	<span><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a>#if($manufacturerList.size() > 0)<em class="fa"></em>#end</span>
 		<div class="shopbymanuf dropdown-menu clearAfter">
 		#set($manufacturerListSize = 0)
 		#set($mfgIndex = 0)
@@ -151,16 +114,10 @@
 			#foreach($manufacturers in $manufacturerList)
 				#if($mfgIndex < 3)
 					#if($manufacturerListSize == 0)
-					<ul>
+						<ul>
 					#end
 					#set($manufacturerListSize = $manufacturerListSize+1)
-					<li class="sec">
-						<span>
-							<a href="$manufacturers.manufacturerId$locale.get('website.url.ShopByManufacturer')$manufacturers.manufacturerName.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll(' ','-').replaceAll('--','-')">
-								$manufacturers.manufacturerName
-							</a>
-						</span>
-					</li>
+					<li class="sec"><span><a href="$manufacturers.seoUrl">$manufacturers.manufacturerName</a></span></li>
 					#if($manufacturerListSize==9 && $manufacturerListSize<=9)
 						#set($manufacturerListSize=0)
 						#set($mfgIndex = $mfgIndex+1)
@@ -169,7 +126,7 @@
 				#end
 			#end
 			#if($manufacturerListSize>0)
-			</ul>
+				</ul>
 			#end
 		#end
 		#if($manufacturerList.size() > 26)
@@ -177,7 +134,7 @@
 		#end
 		</div>    
 	</li>
-	#end
+	#end -->
    #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")
     #if($userLogin)
 		#if($LayoutName != "QuickOrderStdPage")
@@ -195,46 +152,26 @@
 				<div class="cartBody clearAfter">
 					<div id="speedEntry" class="text-center">
 						<table class="table table-striped table-bordered display rwd-table">
-							<thead>
-								<tr><th class="heading">KEYWORD</th><th class="heading">QUANTITY</th></tr>
-							</thead>
+							<thead><tr><th class="heading">KEYWORD</th><th class="heading">QUANTITY</th></tr></thead>
 							<tbody>
-								<tr>
-								    <td><input type="text"></td>
-								    <td><input type="text" class="quantity"></td>
-							    </tr>
-							    <tr>
-								    <td><input type="text"></td>
-								    <td><input type="text" class="quantity"></td>
-							    </tr>
-							    <tr>
-								    <td><input type="text"></td>
-								    <td><input type="text" class="quantity"></td>
-							    </tr>
-							    <tr>
-								    <td><input type="text"></td>
-								    <td><input type="text" class="quantity"></td>
-							    </tr>
-							     <tr>
-								    <td><input type="text"></td>
-								    <td><input type="text" class="quantity"></td>
-							    </tr>
+								<tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
 						    </tbody>
 						</table>
 						<a href='javascript:void(0);' class="showMoreEntryFieldsLink button" onclick="QuickOrder.showMoreOrderPad();">Show More Entry Fields</a>
 						<h4>If Duplicates in input:</h4>
 						<div class="mBottom-2">
 							<label for="CombineHead1"  class="customRadioBtn">
-								<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked>
-								<span>Combine</span>
+								<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked><span>Combine</span>
 							</label>
 							<label for="SeparateHead1" class="customRadioBtn">
-								<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1">
-								<span>Separate</span>
+								<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1"><span>Separate</span>
 							</label>
 							<label for="RemoveHead1" class="customRadioBtn">
-								<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1">
-								<span>Remove</span>
+								<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1"><span>Remove</span>
 							</label>
 						</div> 
 						<div class="quickOrdeAddtoCart center">
@@ -250,16 +187,13 @@
 						<h4>If Duplicates in input:</h4>
 						<div class="mBottom-2">
 							<label for="CombineHead2" class="customRadioBtn">
-								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Combine" id="CombineHead2" checked>
-								<span>Combine</span>
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Combine" id="CombineHead2" checked><span>Combine</span>
 							</label>
 							<label for="SeparateHead2" class="customRadioBtn">
-								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Separate" id="SeparateHead2">
-								<span>Separate</span>
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Separate" id="SeparateHead2"><span>Separate</span>
 							</label>
 							<label for="RemoveHead2" class="customRadioBtn">
-								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Remove" id="RemoveHead2">
-								<span>Remove</span>
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Remove" id="RemoveHead2"><span>Remove</span>
 							</label>
 						</div>
 						<div class="quickOrdeAddtoCart center">
@@ -268,7 +202,7 @@
 					</div>
 					<div id="fileUopload" class="hideMe">
 						<div class="fileUploadDescription">				
-							<p class="mBottom-3">File Upload is supported by .xlsx <a href="$!cdnUrl$!webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</p>
+							<p class="mBottom-3">File Upload is supported by .xlsx <a href="$!webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</p>
 							<p class="mBottom-3">Use Speed Entry to manually enter keyword to upload it to quickly create a cart.</p>
 							<p class="mBottom-3">File upload feature supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 400 #end records</p>
 						</div>
@@ -309,78 +243,78 @@
 	<li class="visible-lg"><span><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
 	#end
 	#end
-	
-	#foreach($topMenu in $topStaticMenu)
-		#set($subMenu = 0)
-		#if($topMenu.level1Menu && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
-			#set($subMenu = 1)
-		#elseif($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
-			#set($subMenu = 1)
-		#end
-		#set($firstLevelMenu = 'javascript:void(0);')
-		#if($topMenu.itemUrl)
-			#if($topMenu.staticPageUrl)
-				#set($firstLevelMenu = $topMenu.staticPageUrl)
-			#else
-				#set($firstLevelMenu = '/'+$topMenu.itemUrl)
+	#if($!CommonDBQuerySystemParameter.get("ENABLE_MENUS_FROM_WP")=="Y")
+		<li>#generateWpNavMenu($CIMMUtility.getWordPressMenu("WP_NAV_MENU"))</li>
+	#else
+		#foreach($topMenu in $topStaticMenu)
+			#set($subMenu = 0)
+			#if($topMenu.level1Menu && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
+				#set($subMenu = 1)
+			#elseif($topMenu.menuList && $topMenu.menuList.size()>0 && $topMenu.level1Menu !="Locations" && $topMenu.level1Menu !="Events")
+				#set($subMenu = 1)
 			#end
-		#end
-		
-		<li>
-			#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
-				<span><a href="$topMenu.level1Menu">$topMenu.level1Menu</a>#if($!CommonDBQueryWareHouseList.size()>0)<!-- <em class="fa"></em> -->#end</span>
-				#if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
-				<!-- <ul class="dropdown-menu">
-					#foreach($wareHouseModel in $CommonDBQueryWareHouseList.entrySet())
-						<li class="locationLink"><a href="javascript:void(0);">$!wareHouseModel.getValue()</a></li>
-					#end
-				</ul> -->
+			#set($firstLevelMenu = 'javascript:void(0);')
+			#if($topMenu.itemUrl)
+				#if($topMenu.staticPageUrl)
+					#set($firstLevelMenu = $topMenu.staticPageUrl)
+				#else
+					#set($firstLevelMenu = '/'+$topMenu.itemUrl)
 				#end
-			#else
-				<span>
-					<a href="$firstLevelMenu" #if($topMenu.level1Menu && $topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>
-					#if($topMenu.menuList.size()>0)<em class="fa"></em>#end
-				</span>
 			#end
-		
-			#if($topMenu.menuList && $topMenu.menuList.size()>0)
-			<ul class="dropdown-menu">
-				#foreach($subStaticMenu in $topMenu.menuList)
-				#set($secLevelMenu = 'javascript:void(0);')
-				#if($subStaticMenu.itemUrl)
-					#if($subStaticMenu.staticPageUrl)
-						#set($secLevelMenu = $subStaticMenu.staticPageUrl)
-					#else
-						#set($secLevelMenu = '/'+$subStaticMenu.itemUrl)
-					#end
+			
+			<li>
+				#if($topMenu.level1Menu && $topMenu.level1Menu =="Locations")
+					<span><a href="$topMenu.level1Menu">$topMenu.level1Menu</a></span>
+					##if($!CommonDBQueryWareHouseList.size()>0)<!-- <em class="fa"></em> -->#end
+					##if($!CommonDBQueryWareHouseList && $!CommonDBQueryWareHouseList.size()>0)
+					##<!-- <ul class="dropdown-menu"> #foreach($wareHouseModel in $CommonDBQueryWareHouseList.entrySet()) <li class="locationLink"><a href="javascript:void(0);">$!wareHouseModel.getValue()</a></li> #end </ul> -->
+					##end
+				#else
+					<span>
+						<a href="$firstLevelMenu" #if($topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>#if($topMenu.menuList.size()>0)<em class="fa"></em>#end
+					</span>
 				#end
-					<li class="sec">
-						<span>
-							<a href="$secLevelMenu" #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='ST') #end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT')target="_blank"#end #if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
-								$subStaticMenu.level2Menu
-							</a>
-							#if($subStaticMenu.menuList.size()>0)
-							<em class="fa"></em>
-							#end
-						</span>
-						#if($subStaticMenu.menuList && $subStaticMenu.menuList.size()>0)
-						<ul class="dropdown-menu">
-							#foreach($subStaticMenuL3 in $subStaticMenu.menuList)
-								<li class="third">
-									<span>
-										<a href="#if($subStaticMenuL3.itemUrl) #if($subStaticMenuL3.staticPageUrl) $subStaticMenuL3.staticPageUrl #else /$subStaticMenuL3.itemUrl #end #else javascript:void(0); #end" #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='ST') #end #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NT')target="_blank"#end #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
-											$subStaticMenuL3.level3Menu
-										</a>
-									</span>
-								</li>
-							#end
-						</ul>
+				#if($topMenu.menuList && $topMenu.menuList.size()>0)
+				<ul class="dropdown-menu">
+					#foreach($subStaticMenu in $topMenu.menuList)
+					#set($secLevelMenu = 'javascript:void(0);')
+					#if($subStaticMenu.itemUrl)
+						#if($subStaticMenu.staticPageUrl)
+							#set($secLevelMenu = $subStaticMenu.staticPageUrl)
+						#else
+							#set($secLevelMenu = '/'+$subStaticMenu.itemUrl)
 						#end
-					</li>
+					#end
+						<li class="sec">
+							<span>
+								<a href="$secLevelMenu" 
+									#if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NT') target="_blank"#end
+									#if($subStaticMenu.openPageIn && $subStaticMenu.openPageIn=='NW') onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
+									$subStaticMenu.level2Menu
+								</a>
+								#if($subStaticMenu.menuList.size()>0)<em class="fa"></em>#end
+							</span>
+							#if($subStaticMenu.menuList && $subStaticMenu.menuList.size()>0)
+							<ul class="dropdown-menu">
+								#foreach($subStaticMenuL3 in $subStaticMenu.menuList)
+									<li class="third">
+										<span>
+											<a href="#if($subStaticMenuL3.itemUrl) #if($subStaticMenuL3.staticPageUrl) $subStaticMenuL3.staticPageUrl #else /$subStaticMenuL3.itemUrl #end #else javascript:void(0); #end" 
+													 #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NT')target="_blank"#end 
+													 #if($subStaticMenuL3.openPageIn && $subStaticMenuL3.openPageIn=='NW')onclick="window.open(this.href, 'newwindow', 'width=1350, height=1000, scrollbars=yes, menubar=yes, toolbar=yes');return false;"#end>
+												$subStaticMenuL3.level3Menu
+											</a>
+										</span>
+									</li>
+								#end
+							</ul>
+							#end
+						</li>
+					#end
+				</ul>
 				#end
-			</ul>
-			#end
-		</li>
+			</li>
+		#end
 	#end
 		#if($userLogin)
 			<li class="hidden-lg">
@@ -399,7 +333,7 @@
 			#else
 			<li class="hidden-lg">
 				<span>
-					<a href="/Login">$!locale.get('form.label.login')</a>
+					<a href="/Login">$!locale.get('register.label.login')</a>
 				</span>
 			</li>
 			<li class="hidden-lg">

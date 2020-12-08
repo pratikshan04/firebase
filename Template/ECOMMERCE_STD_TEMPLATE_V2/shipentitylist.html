@@ -1,5 +1,5 @@
 <div class="shippingAddres" id="ShipDiv">
-#set($jsPath = $!webThemes+"/"+$siteName+"/js/"+$LayoutName+".js")
+#set($jsPath = $!webArtifactsJsPath+$!cdnModuleJs+"/"+$LayoutName+".js?"+$!refreshVersion)
 <script type="text/javascript" src="$jsPath"></script>
 
 #if($shipEntity.size()>0)

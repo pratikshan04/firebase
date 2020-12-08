@@ -1,4 +1,6 @@
-#parse("globalhiddeninput.html")
+#if($!isCdnCmsTemplates == "Y") $globalhiddeninputWriter #else #parse("globalhiddeninput.html") #end
+#set($headerStaticMenuFlag = "N")
+#if($!headerStaticMenuFlag == "Y") ##Remove $headerStaticMenuFlag refrence and if ststment to enable the block
 <!-- <div class="cimm_header_top">
 		<div class="container">
 			<div class="row">
@@ -33,17 +35,20 @@
 		</div>
 	</div>
 </div> -->
+#end
 <div class="cimm_header_mid">
 <div class="container">
 <div class="row">
 	#if($userAgent != "WEBVIEW")
 	<div class="col-lg-3 col-md-12">
-		<div itemscope itemtype="http://schema.org/Organization" class="cimm_logo">
-				<a itemprop="url" href='$!hostName'><img itemprop="logo" src="/ASSETS/IMAGES/LOGOS/CLIENT/$!siteId/$!siteLogo" onerror="this.src='$!webThemes/$!siteName/images/logo.png'" alt="$!siteDisplayName" /></a> ##$!session.getAttribute("buyingCompanyLogo")
+		<div class="cimm_logo" itemtype="http://schema.org/Organization" itemscope>
+			<a itemprop="url" href='$!hostName'>
+				<img itemprop="logo" src="/ASSETS/IMAGES/LOGOS/CLIENT/$!siteId/$!siteLogo" width="150px" height="50px" onerror="this.src='$!webThemes/$!siteName/images/logo.png'" alt="$!siteDisplayName" />
+			</a>
 		</div>
 	</div>
 	#end
-	<div class="col-lg-6 col-md-12 clearfix#if($!userAgent == "WEBVIEW") webViewSearchWrap #end">
+	<div class='col-lg-4 col-md-12 clearfix #if($!userAgent == "WEBVIEW")webViewSearchWrap #end'>
 		<div class="cimm_mobileNavIconWrap hidden-lg">
 			<button type="button" class="navbar-toggle" id="mobileNavigationTrigger">
 		        <span class="sr-only">Toggle navigation</span>
@@ -71,7 +76,7 @@
 		    	$!session.getAttribute("salesUserDetails").get("firstName") $!session.getAttribute("salesUserDetails").get("lastName")
 		    </span>
 	    	#end
-	    	#if($userLogin)<span class="mRight-3"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>#end
+	    	<span class="mRight-3"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>
 			<a href="$!locale.get('website.url.ShoppingCart')" class="mobileCartCount"><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount</span></a>
 			#if($userLogin)
 			<a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em></a>
@@ -84,9 +89,9 @@
 	<div class="cimm_searchWrapper">
 	    <form class="cimm_searchForm" id="search_Form">
 	    	<div class="input-group">
-				<input type="text" onkeypress="return runScript(event);" id="txtSearch" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" name="keyWord" value="#if($keyWord && $resultCount>0)$!keyWord#else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"  class="form-control"/>
+				<input type="text" onkeypress="return runScript(event);" id="txtSearch" title="$!locale.get('product.button.placeSearch')" name="keyWord" value="#if(($keyWord || $kwdForCatOverrideSearch ) && $resultCount>0)#if($!kwdForCatOverrideSearch.trim().length()>0) $!kwdForCatOverrideSearch #else$!keyWord#end#else $!locale.get('product.button.placeSearch') #end" onfocus="if(this.value==' $!locale.get('product.button.placeSearch')'){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('product.button.placeSearch') ';}"  class="form-control"/>
 				<div class="input-group-btn">
-					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-search"></em></button>
+					<button type="submit" id="performSearchBtn" class="btn btn-primary cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-lg fa-search"></em></button>
 				</div>
 			</div>
 		</form>
@@ -109,8 +114,19 @@
 	</div>
 	#end
 	</div>
-	<div class="col-lg-3 col-md-12 visible-lg">
+	<div class="col-lg-5 col-md-12 visible-lg">
 		<ul class="cimm_signWrap">
+		<li>
+			<a>
+			<img itemprop="logo" src="$!hostName/$webThemes/$siteName/images/logo-truper.png" width="130px" height="50px" alt="$!siteDisplayName" />
+			</a>
+		</li>
+		<li>
+			<ul class="cimm_contactWrap">
+				<li><a><i class="fab fa-whatsapp"></i>&nbsp;&nbsp;<span>+(502) 2499-5000</span></a></li>
+				<li><a><i class="fas fa-phone"></i>&nbsp;&nbsp; <span>+(502) 2499-5000</span></a></li>
+			</ul>
+		</li>
 		#if($userLogin)
 			<li class="dropdown">
 			<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="myAccountMenu">
@@ -118,7 +134,7 @@
 					<p>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p> ##$!session.getAttribute("custName")
 					<img src='$!userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" id="profilePictureThumbnail" onerror="this.src='$!webThemes/$!siteName/images/default-profile.png'"/>
 				</span> -->
-				<span class="imgBox"><em class="fa fa-user-circle"></em></span>$!locale.get("product.heading.accountDashBoard")
+				<span class="imgBox"><em class="fa fa-user-circle"></em></span>
 				<span class="blockElement">&nbsp;<!-- $!locale.get("product.heading.welcome") --></span>
 			</a>
 			<ul class="myAccountMenu dropdown-menu">
@@ -128,8 +144,8 @@
 		#else
 			<li class="hideForDevices dropdown">
 				<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="loginDropDown">
-					<span class="imgBox"><em class="fa fa-user-circle"></em></span>$!locale.get("product.heading.accountDashBoard")
-					<span class="blockElement">$!locale.get('product.heading.signInRegister')</span>
+					<span class="imgBox"><em class="fa fa-user-circle"></em></span>
+					<span class="blockElement">$!locale.get("breadcrumbs.label.LoginPage")</span>
 				</a>
 				<div class="loginWindow dropdown-menu">
 					<form id="popLoginForm" method="post" data-form="login">
@@ -165,12 +181,15 @@
         #end
         <li class='cartCountDisplayLi dropdown'>
 				<a href="$!locale.get('website.url.ShoppingCart')" data-target="quickCartViewBlock"><!-- data-toggle="modal" class="dropdown-toggle" data-function="quickCartView"-->
-					<span class="imgBox" title="$!locale.get('product.heading.viewCart')" data-toggle="tooltip">
+					<!-- <span class="imgBox" title="$!locale.get('product.heading.viewCart')" data-toggle="tooltip">
 						<em class="fa fa-shopping-cart"></em>
+					</span> -->
+					<span>
+						<img itemprop="logo" src="$!hostName/$webThemes/$siteName/images/cartIcon.png" width="40px" height="24px" alt="$!siteDisplayName" />
 					</span>
-					 $!locale.get('header.label.cart') <span class="cartCountrefresh blockElement">($!cartCount) $!locale.get("product.label.items")</span>
+					<span class="cartCountrefresh blockElement"> $!cartCount</span>
 				</a>
-			</li>
+		</li>
 		</ul>
 	</div>
 </div>

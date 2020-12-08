@@ -43,7 +43,7 @@ $modal_closebtn-color: $default_font-color;
     border-radius: 25px;
     display: none;
     position: fixed;
-    bottom: 30px;
+    bottom: 75px;
     right: 30px;
     opacity: 0.6;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
@@ -80,9 +80,6 @@ $modal_closebtn-color: $default_font-color;
     } 
 }
 
-.cimm_stickyPageWrap:after {
-    height: 355px;
-}
 .cimm_bodyContentWrap {
     margin-bottom: 30px;
     height: 100%;
@@ -1043,6 +1040,7 @@ $modal_closebtn-color: $default_font-color;
 	left: auto;
 	right: 0;
 	width: 300px;
+    z-index: 99;
 }
 div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	text-align: left;
@@ -1072,6 +1070,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 #sortByForm {
 	.dropdown-menu {
 		left: -60px;
+        z-index: 99;
 	}
 }
 
@@ -1104,6 +1103,9 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 			text-align: center;
 		}
 	}
+}
+.dropdown-menu{
+    z-index: 998;
 }
 .searchZero {
     p {
@@ -1171,6 +1173,78 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         border-radius: 4px;
         cursor: pointer;
         margin-left: -5px;
+    }
+}
+.propwarningmsg {
+    margin: 5px 0;
+    i {
+        color: #bdaf00;
+        margin-right: 5px;
+    }
+}
+.borderLine {
+    border-left: 1px solid $primary_color;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+}
+.eventsiteresult{
+    display: none;
+}
+#searchResultsStatic .btntab li.active a{
+    background-color: $primary_color;
+    color: $white;
+}
+#searchResultsStatic .btntab li a{
+    background-color: $tertiary_color;
+    color: $black;
+}
+.multiTab {
+    width: 100%
+}
+.multiTab ul.btntab {
+    position: relative
+}
+.multiTab ul.btntab li {
+    float: left
+}
+.multiTab ul.btntab li a {
+    padding: 10px 15px;
+    display: block
+}
+
+
+.invDetPrintPage   {
+    .printInvoice{
+        font-size: $font_lg;
+        padding: 4px;
+        em {
+            margin-right: 3px;
+        }
+    }
+    .table-bordered {
+        border-color: $secondary_color !important;
+        >thead>tr>th,>tbody>tr>td{
+            border-color: $secondary_color !important;
+        }
+    }
+    .addrSection {
+        border: 1px solid $secondary_color;
+        padding: 4px;
+        .addrHeading {
+            font-weight: 900;
+            font-size: $font_md;
+        }
+    }
+    .invNumDet {    
+        border: 1px solid $secondary_color;
+        li{
+            padding: 4px;
+            &:not(:last-child) {
+                border-bottom: 1px solid $secondary_color;
+            }
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-<link href="$!webThemes/CMS/css/styles_CMS.css?v=$!session.getLastAccessedTime()" rel="stylesheet" type="text/css" />
+<link href="$!cmsArtifactsPath/css/styles_CMS.css?$!refreshVersion" rel="stylesheet" type="text/css" />
 <style>
 .tool-edit, .tool-delete {
 	padding: 3px 10px;
@@ -63,6 +63,7 @@
 }
 </style>
 <div class="formEditWrap clearfix">
+	<input type="hidden" id="CMS_recaptchaV3" value='$!CommonDBQuerySystemParameter.get("RECAPTCHAV3_STATICPAGES")'/>
 	<div class="dragelementWrap">
 		<div class="dragelement dragFormElement" data-type="input" title="Input Text">
 			<span class="input-text">Abc</span>
@@ -169,6 +170,12 @@
 						<span>Send Email after User Submits Form :</span>
 					</label>
 				</li>
+				<li class="cmsreCaptcha">
+					<label class="cms_customCheckBox cms_customCheckBoxRight">
+						<input type="checkbox" id="reCaptcha" />
+						<span> Google reCaptcha : </span>
+					</label>
+				</li>
 			</ul>
 			<input type="hidden" name="formData.htmlCode" id="htmlCode" />
 			#if($formData.id)
@@ -195,6 +202,20 @@ var dropForm = document.getElementsByClassName('dropelement')[0];
 var dropFormArr = dropForm.children[0].classList;
 document.getElementById('formClass').value = dropFormArr.value;
 $(document).ready(function(){
+	if($("#CMS_recaptchaV3").val()=="Y"){
+		if($(".dropelementWrap form").attr("data-recaptcha")){
+			$('[data-type="captcha"]').addClass('disable_drag');
+			$("#reCaptcha"). prop("checked", true);
+			$(".dropelementWrap form").find('div').remove('[data-type="captcha"]');
+		}else if($(".dropelementWrap form div[data-type=captcha]").length>0){
+			$("#reCaptcha").attr("disabled",true);
+			$('[title="Captcha"]').addClass('disable_drag');
+			$(".dropelementWrap form").removeAttr("data-recaptcha");
+		}
+	}else{
+		$("#reCaptcha"). prop("checked", false);
+		$("li.cmsreCaptcha").hide();
+	}
 	$('.editelement,.cms_sectionHeading > form').slimScroll({
 		height: '486px',
 		railVisible: false,

@@ -15,13 +15,13 @@
 #end
 #end
 <li>
-<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/$siteName/images/slide1.png" alt="No image" /></a>
+<a href="javascript:void(0);"><img src="$!webThemes/$siteName/images/slide1.png" alt="No image" /></a>
 </li>
 <li>
-<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/$siteName/images/slide2.png" alt="No image" /></a>
+<a href="javascript:void(0);"><img src="$!webThemes/$siteName/images/slide2.png" alt="No image" /></a>
 </li>
 <li>
-<a href="javascript:void(0);"><img src="$!cdnUrl$!webThemes/$siteName/images/slide3.png" alt="No image" /></a>
+<a href="javascript:void(0);"><img src="$!webThemes/$siteName/images/slide3.png" alt="No image" /></a>
 </li>
 </ul>
 #if($categMenu.size()>0)
@@ -113,7 +113,7 @@
 		<div class="recentNews">
 			<h3 class="cimm_block-title"><label>Recent News</label></h3>
 			<div id="news-scroller" class="newsList customScroll">
-				<div class="center"><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></div>
+				<div class="center"><img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/></div>
 			</div>
 		</div>
 	</div>
@@ -148,7 +148,7 @@
 		#set($itemTitle= $itemData.shortDesc)
 		<li itemscope itemtype="http://schema.org/Product">				
 			<div class="cimm_linkItemImg">
-				<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)">                    
+				<a href="$itemData.seoUrl">                    
 					#if($itemData.imageName.contains("http"))
 					<img itemprop="image" id="imageName$itemData.itemId" src="$itemData.imageName" alt='$itemData.imageName' width="150" height="150" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 					#else
@@ -159,7 +159,7 @@
 			<div class="cimm_linkItemDesp">
 				<ul>
 					<li>
-						<a class="productTitle" href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)" itemprop="name">
+						<a class="productTitle" href="$itemData.seoUrl" itemprop="name">
 							#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
 					 		#if($linkItemTitle.length()>17)
 					 			$linkItemTitle.substring(0, 17)...
@@ -171,7 +171,7 @@
 					<li itemprop="sku"><strong>$locale.get("product.label.partNumber"):</strong> $itemData.partNumber</li>
 					<li class="sliderDescrip"> #if($!itemData.shortDesc.length()>48)
 					<p itemprop="description" id="itemShortDesc$itemData.itemId"> $!itemData.shortDesc.substring(0, 48) &nbsp;</p>
-					<a href="$itemData.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($itemTitle)"> $locale.get("product.label.more")</a>
+					<a href="$itemData.seoUrl"> $locale.get("product.label.more")</a>
 					#else
 					<p itemprop="description"> $!itemData.shortDesc</p>
 					#end
@@ -191,6 +191,6 @@
 	<h3 class="cimm_block-title"><label>$locale.get("product.heading.recentlyviewedproducts")</label></h3>
 	#set($itemTitle=$itemData.brandName+" "+$itemData.partNumber)
 	<div class="cimm_sliderWrap" >
-		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$!cdnUrl$!webThemes/$siteName/images/loading.gif" alt="Loading.."/></ul>
+		<ul id="recentlyViewedContent" class="cimm_caroWrap "><img src="$!webThemes/$siteName/images/loading.gif" alt="Loading.." width="24px" height="12px"/></ul>
 	</div>
 </div>

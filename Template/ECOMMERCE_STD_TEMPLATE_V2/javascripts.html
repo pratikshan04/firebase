@@ -1,71 +1,73 @@
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/lazysizes.min.js" defer></script>
-<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min.js" defer></script> -->
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap.min-3.4.1.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootbox.min.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/masonry.pkgd.min.js" defer></script>
-#parse("jquery-migrate-3-1-0-min.html")<!-- <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery-migrate-1.2.1.min.js"></script> -->
+#parse("jquery-migrate-3-1-0-min.html")
 #parse("ajaxscript.html")
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/Encoder.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/hashtable.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/respond.min.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jqueryNumber.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.i18n.properties-1.0.9.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/slick.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/nprogress.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.slimscroll.min.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.autocomplete.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jsaes.js" defer></script>
 #parse("cookiesscript.html")
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/addToCarts.js?v=$!session.getLastAccessedTime()" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/PriceLoading.js?v=$!session.getLastAccessedTime()" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/datatables.min.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/dataTables.bootstrap.min.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/countryState.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/formValidation.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.form.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/jquery.ajaxfileupload.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/siteScript.js?v=$!session.getLastAccessedTime()"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/recentlyViewed.js" defer></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/BulkAction.js" defer></script>
-#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK") == "Y")<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/quickOrderPadHead.js"></script>#end
-#if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/handsontable.full.js"></script>#end
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/lazysizes.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/bootstrap.min-3.4.1.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/bootbox.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/respond.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/slick.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery.slimscroll.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jsaes.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/datatables.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/dataTables.bootstrap.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery.form.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/hashtable.js" defer></script>
+#if($LayoutName=="PhotoInquiryPage")<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery.ajaxfileupload.js" defer></script>#end
+##<!-- <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery.i18n.properties-1.0.9.js" defer></script> -->
+##<!-- <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/nprogress.js" defer></script> -->
+##<!-- <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jqueryNumber.js" defer></script> -->
+#if($LayoutName=="BrandPage" || $LayoutName=="ManufacturerPage")
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/masonry.pkgd.min.js" defer></script>
+#end
+#if($LayoutName=="ProductDetailPage" || $LayoutName=="ProductList" || $LayoutName=="ProductPage" || $LayoutName=="SubCategoryPage")
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/Encoder.js" defer></script>
+<script type="text/javascript" src="https://scripts.sirv.com/sirv.js"></script>
+#end
+#if($LayoutName=="QuickOrderStdPage")<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/handsontable.full.js"></script>#end
+#if($LayoutName=="AddNewPurchaseAgentPage" || $LayoutName=="CheckOutPage" || $LayoutName=="EditAddressPage" || $LayoutName=="EditContactPage" || $LayoutName=="EventDetailPage" || $LayoutName=="EventRegisterPage" || $LayoutName=="GuestCheckoutPage" || $LayoutName=="ManagePurchaseAgentPage" || $LayoutName=="NewShippingAddressPage" || $LayoutName=="RegisterPage" || $LayoutName=="RequestForQuoteV2Page")
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/countryState.js?$!refreshVersion" defer></script>
+#end
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/jquery.autocomplete.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/formValidation.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/addToCarts.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/PriceLoading.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/siteScript.js?$!refreshVersion"></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/recentlyViewed.js?$!refreshVersion" defer></script>
+#if($!isPrebuiltCmsHomepage!="Y" && $LayoutName !="ProductDetailPage" && $LayoutName !="CartPage")<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/BulkAction.js?$!refreshVersion" defer></script>#end
+#if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK")=="Y")<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/quickOrderPadHead.js?$!refreshVersion"></script>#end
 #if($userAgent == "WEBVIEW")
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/mobileApp.js?v=$!session.getLastAccessedTime()"></script>
-<script type="text/javascript">
-userLoggedInStatus($("#userLogin").val());
-getCartCount($!cartCount);
-</script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/mobileApp.js?$!refreshVersion"></script>
+<script type="text/javascript">userLoggedInStatus($("#userLogin").val()); getCartCount($!cartCount);</script>
 #end
 #if($LayoutName=="ProductList")
-	<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductMode.js?v=$!session.getLastAccessedTime()"></script>
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/ProductMode.js?$!refreshVersion" defer></script>
 	#if($paginate>1)
 	<script type="text/javascript">
-		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
-		$(".pgnation").html(pagination);
+		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage); $(".pgnation").html(pagination);
 	</script>
 	#end
-#if($!CommonDBQuerySystemParameter.get("CLICK_STREAM_BOOST") == "Y" && $navigationType=="SEARCH")
-<script>
-jQuery(".clickStream").click(function() {
-    var pageNum = parseInt(jQuery("#clickStreamPageNum").val())+1;
-    var str="";
-    str = str+"SearchQuery="+jQuery("#txtSearch").val().toLowerCase();
-    str = str+"&searchResultID="+jQuery(this).data("itemid");
-    str = str+"&eventType="+jQuery(this).data("clicktype");
-    str = str+"&pageNumber="+pageNum;
-    str = str+"&clientName=unilog";
-    str = str+"&clientId=1";
-	str = str+"&actionType=search";
-    jQuery.ajax({
-		type: "POST",
-		url: "/ClickStream/saveClickStream",
-		data: str,
-		success: function(msg){
-		}
+	#if($!CommonDBQuerySystemParameter.get("CLICK_STREAM_BOOST") == "Y" && $navigationType=="SEARCH")
+	<script>
+	jQuery(".clickStream").click(function() {
+	    var pageNum = parseInt(jQuery("#clickStreamPageNum").val())+1;
+	    var str="";
+	    str = str+"SearchQuery="+jQuery("#txtSearch").val().toLowerCase();
+	    str = str+"&searchResultID="+jQuery(this).data("itemid");
+	    str = str+"&eventType="+jQuery(this).data("clicktype");
+	    str = str+"&pageNumber="+pageNum;
+	    str = str+"&clientName=unilog";
+	    str = str+"&clientId=1";
+		str = str+"&actionType=search";
+	    jQuery.ajax({
+			type: "POST",
+			url: "/ClickStream/saveClickStream",
+			data: str,
+			success: function(msg){
+			}
+		});
 	});
-});
-</script>
-#end
+	</script>
+	#end
 #elseif($LayoutName=='SavedCartPage' || $LayoutName=='ProductGroupPage' || $LayoutName=='PromotedProductsListPage')
 	#if($paginate>1)
 	<script type="text/javascript">
@@ -75,22 +77,20 @@ jQuery(".clickStream").click(function() {
 	</script>
 	#end
 #elseif($LayoutName=='CartPage')
-<!-- Tracking Add to Cart & Items Added to the Cart -->
-#if($productListData.size()>0 && $!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<script>
-#foreach($itemData in $productListData)
-	piwik.addEcommerceItemPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemData.categoryName", "$!itemData.unitPrice", "$!itemData.qty");
-#end
-	piwik.trackEcommerceCartUpdatePiwik("$!cartTotal");
- 	</script>
- #end
-<!-- Tracking Add to Cart & Items Added to the Cart -->
+	#if($productListData.size()>0 && $!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+	<script><!-- Tracking Add to Cart & Items Added to the Cart -->
+	#foreach($itemData in $productListData)
+		piwik.addEcommerceItemPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemData.categoryName", "$!itemData.unitPrice", "$!itemData.qty");
+	#end
+		piwik.trackEcommerceCartUpdatePiwik("$!cartTotal");
+	 	</script><!-- Tracking Add to Cart & Items Added to the Cart -->
+	 #end 
 #elseif($LayoutName=="ApproveCart")
-<script type="text/javascript">
-	#set($paginationURL="myProductGroupPage.action?savedGroupId=$savedGroupId#if($sortBy)&sortBy=$sortBy#end&shared=$!isShared&resultPage=$resultPage#if($reqType)&reqType=$reqType#end#if($searchkeyWord)&searchkeyWord=$escapeTool.url($!searchkeyWord)#end&pageNo=")
-	var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
-	$(".pgnation").html(pagination);
-</script>
+	<script type="text/javascript">
+		#set($paginationURL="myProductGroupPage.action?savedGroupId=$savedGroupId#if($sortBy)&sortBy=$sortBy#end&shared=$!isShared&resultPage=$resultPage#if($reqType)&reqType=$reqType#end#if($searchkeyWord)&searchkeyWord=$escapeTool.url($!searchkeyWord)#end&pageNo=")
+		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+		$(".pgnation").html(pagination);
+	</script>
 #elseif($LayoutName=="CheckOutPage")
 	<script type="text/javascript">
 		#if($!shipAddressListAsJson && $!shipAddressListAsJson!="")
@@ -100,57 +100,52 @@ jQuery(".clickStream").click(function() {
 		#end
 	</script>
 #elseif($LayoutName=="OrderDetailPage")
-<script>
-function checkSelectAll(chk){
-	if($(".deviceSelectAllChkBox").is(':checked')){
-		$(".deviceSelectAllChkBox").attr("checked",false);
+	<script>
+	function checkSelectAll(chk){
+		if($(".deviceSelectAllChkBox").is(':checked')){
+			$(".deviceSelectAllChkBox").attr("checked",false);
+		}else{
+			$(".deviceSelectAllChkBox").attr("checked",true);
+		}
+		var checked_status = chk.checked;
+		$("input:checkbox[name='quotePartNumberSelected']").each(function(){
+			this.checked = checked_status; 
+		});
 	}
-	else{
-		$(".deviceSelectAllChkBox").attr("checked",true);
+	function deviceSelectAll(){
+		if($("#chkSelectall").is(':checked')){
+			$("#chkSelectall").attr("checked",false);
+		}else{
+			$("#chkSelectall").attr("checked",true);
+		}
+		var checked_status = $("#chkSelectall").is(':checked');
+		$("input:checkbox[name='quotePartNumberSelected']").each(function(){
+			this.checked = checked_status;
+		});
 	}
-	var checked_status = chk.checked;
-	$("input:checkbox[name='quotePartNumberSelected']").each(function(){
-		this.checked = checked_status; 
-	});
-}
-function deviceSelectAll(){
-	if($("#chkSelectall").is(':checked')){
-		$("#chkSelectall").attr("checked",false);
-	}
-	else{
-		$("#chkSelectall").attr("checked",true);
-	}
-	var checked_status = $("#chkSelectall").is(':checked');
-	$("input:checkbox[name='quotePartNumberSelected']").each(function(){
-		this.checked = checked_status;
-	});
-}
-</script>
+	</script>
 #end
-#if($LayoutName != "404Page" && $LayoutName != "InvoiceListPage" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage")
-#set($jsPath = $!webThemes+'/'+$siteName+'/'+'js/'+$LayoutName+'.js?'+$!session.getLastAccessedTime())
-<script type="text/javascript" src="$!jsPath" defer></script>
+#if($LayoutName != "404Page" && $LayoutName != "InvoiceListPage" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage" && $LayoutName !="PromotedProductGroupsPage.js")
+	#set($jsPath = $!webArtifactsJsPath+$!cdnModuleJs+'/'+$LayoutName+'.js?'+$!refreshVersion)
+	<script type="text/javascript" src="$!jsPath" defer></script>
 #end
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/bootstrap-select.min.js" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/bootstrap-select.min.js" defer></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
-  <script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/selectivizr-min.js"></script>
+  <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/selectivizr-min.js"></script>
 <![endif]-->
 #if($LayoutName != "CMSStaticPage")
-<script type="text/javascript" defer>
-$(document).ready(function () {
-$("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
-		if (e.keyCode === 13){
-			$("#query-form").trigger('submit');
-		}
+	<script type="text/javascript" defer>
+	$(document).ready(function () {
+		$("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
+			if (e.keyCode === 13){ $("#query-form").trigger('submit'); } 
+		});
 	});
-});
-	// http://localhost:8983/solr/collection1/terms?terms.fl=name&terms.prefix=i&terms.sort=count&wt=velocity&v.template=suggest
-</script>
+	</script>
 #end
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<script type="text/javascript">
-_paq.push(['trackPageView']);
-</script>
+	<script type="text/javascript">
+	_paq.push(['trackPageView']);
+	</script>
 #end
 <script type="text/javascript">
 /*********************Header Script***********************/
@@ -211,10 +206,10 @@ $("link[rel='stylesheet']").each(function(){
 	</script>
 #end
 #if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
-<script src="$!cdnUrl$!webThemes/$siteName/js/jssor.js" defer></script>
-<script src="$!cdnUrl$!webThemes/$siteName/js/jssor.slider.js" defer></script>
-<script src="$!cdnUrl$!webThemes/$siteName/js/jsor.customJs.js" defer></script>
-<script src="$!cdnUrl$!webThemes/$siteName/js/staticPage.js" defer></script>
+<script src="$!webArtifactsJsPath$!cdnPluginJs/jssor.js" defer></script>
+<script src="$!webArtifactsJsPath$!cdnPluginJs/jssor.slider.js" defer></script>
+<script src="$!webArtifactsJsPath$!cdnSiteJs/jsor.customJs.js" defer></script>
+<script src="$!webArtifactsJsPath$!cdnModuleJs/staticPage.js" defer></script>
 	#if($!enablePrebuiltCmsHomepageScript=="Y")
 		<script>
 			$(function(){
@@ -234,28 +229,15 @@ $("link[rel='stylesheet']").each(function(){
 							var bannerTransistion = jQuery(this).data("transistion");
 							var bannerTransistionDelay = jQuery(this).data("transistiondelay");
 							var bannerTransistionAutoPlay = jQuery(this).data("transistionautoplay");
-							
-							if(jQuery(this).data("liststartdate")){
-								bannerStartDate = jQuery(this).data("liststartdate");
-							}
-							
+							if(jQuery(this).data("liststartdate")){ bannerStartDate = jQuery(this).data("liststartdate"); }
 							if(jQuery(this).data("listenddate")){
 								bannerEndDate =  new Date(jQuery(this).data("listenddate"));
 								bannerEndDate.setDate(bannerEndDate.getDate() + 1); //this is required as date compare consider the time as well
 							}
-							
-							if(jQuery(this).data("liststatus")){
-								bannerStatus = jQuery(this).data("liststatus");
-							}
-							//console.log("D:"+dateToday+"\nS:"+new Date(bannerStartDate)+"\nE:"+new Date(bannerEndDate));
+							if(jQuery(this).data("liststatus")){ bannerStatus = jQuery(this).data("liststatus"); }
 							if(jQuery.trim(bannerStartDate)!=""){
-								if(new Date(dateToday) >= new Date(bannerStartDate)){
-									activeBannerFlag = true;
-								}else{
-									activeBannerFlag = false;
-								}
+								if(new Date(dateToday) >= new Date(bannerStartDate)){ activeBannerFlag = true; }else{ activeBannerFlag = false; }
 							}
-							//console.log("Start Flag :"+activeBannerFlag);
 							if(jQuery.trim(bannerEndDate)!=""){
 								if(new Date(dateToday) <= new Date(bannerEndDate)){//compare end <=, not >=
 									activeBannerFlag = true;
@@ -263,10 +245,7 @@ $("link[rel='stylesheet']").each(function(){
 									activeBannerFlag = false;
 								}
 							}
-							//console.log("End Flag :"+activeBannerFlag);//console.log("Wrapper id :"+sliderId);
-							if(!activeBannerFlag){
-								jQuery("#"+sliderId+"_Wrapper").hide();
-							}else{
+							if(!activeBannerFlag){ jQuery("#"+sliderId+"_Wrapper").hide(); }else{
 								bannerData = $(this).html().replace("slidercontainer",sliderId);
 								jQuery(this).html(bannerData);
 								 if(bannerType=="slider"){
@@ -278,10 +257,8 @@ $("link[rel='stylesheet']").each(function(){
 						});
 					});
 				}
-
 				homeCarousels();
 			});
-			
 		</script>
 	#else
 		<script>
@@ -296,75 +273,42 @@ $("link[rel='stylesheet']").each(function(){
 #end
 
 #if($LayoutName=="HomePage" || $!isStaticHomePage =="Y")
-<script type="text/javascript">
-/**********************homepage********************/
-	$(document).ready(function(){
-		if($('.bxslider')){
-			$('.bxslider').slick({
-			 infinite: true,
-			 slidesToShow: 1,
-			 slidesToScroll: 1,
-			 dots: true,
-			 autoplay: true
-			});
-		}
-	});
-	/* jQuery(function(){
-		priceLoadMainFunction();
-	}); */
-</script>
+	<script type="text/javascript">$(document).ready(function(){ if($('.bxslider').length>0){ $('.bxslider').slick({ infinite: true, slidesToShow: 1, slidesToScroll: 1, dots: true, autoplay: true }); }});</script>
+	<!-- <script type="text/javascript">jQuery(function(){ priceLoadMainFunction(); });</script> -->
 #end
-
 #if($LayoutName=="ProductDetailPage")
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductMode.js?v=$!session.getLastAccessedTime()"></script>
-#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<!-- PIWIK Tracking Product Page Views -->
-<script type="text/javascript">
-#foreach($itemData in $!itemLevelFilterData)
-	piwik.setEcommercePageViewPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')",  "$!itemData.categoryName", "$!itemData.unitPrice");
-#end
-</script>
-<!-- PIWIK Tracking Product Page Views -->
-#end
-#if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)
-<script defer>
-/********* V5 **********/
-var selData = $selecatableJson.replaceAll("&#39;","'");
-var itemIdFilter =jQuery("#itemIdTemp").val();
-var itemMapFilter = $itemMap;
-$(document).ready(function () {
-	$('.filterSelClass').selectpicker('refresh');
-});
-/********* V5 **********/
-</script>
-#else
-#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS" )
-<!-- <script>
-	jQuery(document).ready(function(){
-		priceLoadMainFunction();
-	});
-	jQuery(function(){
-	   //getCpnFromErp();
-	});
-</script> -->
-#end
-#end
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/ProductMode.js?$!refreshVersion" defer></script>
+	#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+		<script type="text/javascript"><!-- PIWIK Tracking Product Page Views -->
+		#foreach($itemData in $!itemLevelFilterData)
+			piwik.setEcommercePageViewPiwik("$!itemData.partNumber", "$!itemData.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')",  "$!itemData.categoryName", "$!itemData.unitPrice");
+		#end
+		</script><!-- PIWIK Tracking Product Page Views -->
+	#end
+	#if($productAttrFilterData && $productAttrFilterData.size()>0 && $productCount>0)
+		<script defer> /********* V5 **********/
+		var selData = $selecatableJson.replaceAll("&#39;","'");
+		var itemIdFilter =jQuery("#itemIdTemp").val();
+		var itemMapFilter = $itemMap;
+		$(document).ready(function () { $('.filterSelClass').selectpicker('refresh'); });/********* V5 **********/
+		</script>
+	#end
 #elseif($LayoutName=="BranchLocationPage")	
-<script src='//maps.googleapis.com/maps/api/js?key=$!CommonDBQuerySystemParameter.get("GEO_API_KEY")&sensor=false&libraries=places'></script><!-- key need to change based on project -->
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/map.js?v=$!session.getLastAccessedTime()"></script>
-<script type="text/javascript" defer>
-$(document).ready(function () {
-	var data = '$!locationResponseList';
-	var dataFrom = '$!locationDataFrom';
-	var sheetUrl = '$!googleSpreadSheetUrl';
-	var mapCenterCord = '$mapCenterCord';
-	var zoomValue = '$zoomVal';
-	var currLatLong;
-	test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
-});
-</script>
+	<script src='//maps.googleapis.com/maps/api/js?key=$!CommonDBQuerySystemParameter.get("GEO_API_KEY")&sensor=false&libraries=places'></script><!-- key need to change based on project -->
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/map.js?$!refreshVersion"></script>
+	<script type="text/javascript" defer>
+	$(document).ready(function () {
+		var data = '$!locationResponseList';
+		var dataFrom = '$!locationDataFrom';
+		var sheetUrl = '$!googleSpreadSheetUrl';
+		var mapCenterCord = '$mapCenterCord';
+		var zoomValue = '$zoomVal';
+		var currLatLong;
+		test(data,dataFrom,sheetUrl,mapCenterCord,zoomValue);
+	});
+	</script>
 #elseif($LayoutName=="LoginPage")	
-	<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/GuestCheckoutPage.js?v=$!session.getLastAccessedTime()"></script>
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/GuestCheckoutPage.js?$!refreshVersion"></script>
 	<script type="text/javascript">
 	var userLogin = $("#userLogin").val();
 	var path = window.location.hostname;
@@ -373,19 +317,21 @@ $(document).ready(function () {
 	}
 	</script>
 #elseif($LayoutName=="ProductPage" || $LayoutName=="SubCategoryPage")
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductMode.js?v=$!session.getLastAccessedTime()"></script>
-<script type="text/javascript" src="$!cdnUrl$!webThemes/$siteName/js/ProductList.js?v=$!session.getLastAccessedTime()"></script>
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/ProductMode.js?$!refreshVersion" defer></script>
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/ProductList.js?$!refreshVersion" defer></script>
 	<script>
 		$(document).ready(function(){
-			$('.cimm_category-banners').slick({
-				infinite: true,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				dots: false,
-				autoplay: true,
-				prevArrow: false,
-				nextArrow: false
-			});
+			if($('.cimm_category-banners').length>0){
+				$('.cimm_category-banners').slick({
+					infinite: true,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					dots: false,
+					autoplay: true,
+					prevArrow: false,
+					nextArrow: false
+				});
+			}
 		});
 		var value = getCookie("afterLoginUrl");
 		if(value!="" && value!=null && typeof  value != 'undefined'){
@@ -397,12 +343,8 @@ $(document).ready(function () {
 			var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
 			$(".pgnation").html(pagination);
 		#end
-		#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-		/*  PIWIK Category Page Views */
-		window.onload = function(){
-			piwik.populateOnCategoryPage();
-		}
-		/*  PIWIK Category Page Views */
+		#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y') /*  PIWIK Category Page Views */
+			window.onload = function(){ piwik.populateOnCategoryPage(); }
 		#end
 	</script>
 #elseif($LayoutName=="SendThisPage")
@@ -414,43 +356,33 @@ $(document).ready(function () {
 		});
 	</script>
 #elseif($LayoutName=="SendThisPageForAll")
-	<script type="text/javascript">
-		jQuery(function(){
-			sendThisPageScript();
-		});
-	</script>
+	<script type="text/javascript"> jQuery(function(){ sendThisPageScript(); }); </script>
 #elseif($LayoutName=="OrderConfirmation")
-#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
-<script>
-	#foreach($!itemList in $!orderItemList)
-		piwik.addEcommerceItemPiwik("$!itemList.partNumber", "$!itemList.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemList.categoryName", "$!itemList.unitPrice", "$!itemList.qty");
+	#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
+	<script><!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
+		#foreach($!itemList in $!orderItemList)
+			piwik.addEcommerceItemPiwik("$!itemList.partNumber", "$!itemList.shortDesc.replaceAll('[^a-zA-Z0-9\-\s]+','')","$!itemList.categoryName", "$!itemList.unitPrice", "$!itemList.qty");
+		#end
+		#set($orderNumber = "")
+		#if($!orderDetail.erpOrderNumber)
+			#set($orderNumber = $!orderDetail.erpOrderNumber)
+		#else
+			#set($orderNumber = $!orderDetail.orderNum)
+		#end
+		piwik.trackEcommerceOrderPiwik("$orderNumber", "$!orderDetail.total" ,"$!orderDetail.subtotal", "$!orderDetail.tax", "$!orderDetail.freight" ,("#if($orderDetail.discount > 0)true#elsefalse#end"));
+	</script><!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
 	#end
-	#set($orderNumber = "")
-	#if($!orderDetail.erpOrderNumber)
-		#set($orderNumber = $!orderDetail.erpOrderNumber)
-	#else
-		#set($orderNumber = $!orderDetail.orderNum)
-	#end
-	piwik.trackEcommerceOrderPiwik("$orderNumber", "$!orderDetail.total" ,"$!orderDetail.subtotal", "$!orderDetail.tax", "$!orderDetail.freight" ,("#if($orderDetail.discount > 0)true#elsefalse#end"));
-</script>
-<!-- PIWIK Tracking Ecommerce Orders & Items Purchased (required) -->
-#end
-<!--------------------------------------------Order Confirmation dependent sources---------------------------------------->
-	<script type="text/javascript">
-		/*Send Order Confirmation*/
+	<script type="text/javascript">/*Send Order Confirmation*/
 		function sendOrderConfirmation() {
 			var content="";
-			    	var siteName=$("#siteName").val();
-			    	var sendSavedProducts = $("#SendOrderConfirmationPage").html();
-			    	
-			    	var html ='<style type="text/css">.hideForPrint {display:none !important;}table.cimm_siteTable{font-family:Verdana;font-size:12px;}table.cimm_siteTable td,table.cimm_siteTable th{border:1px solid #CCC;}table.cimm_siteTable th{color:#FFF;background:#000;}</style><div style="padding: 10px 0;"><h4 style="color: #D03C0F;;font-size: 16px;font-family: Roboto-Regular; font-weight:bold;margin: 5px 0;text-align: center;">Order Confirmation</h4></div><div>'+sendSavedProducts+'</div>';
-			    localStorage.setItem("emailFriendItem", html);
-			    localStorage.setItem("emailFriendlink", location.href);
-				localStorage.setItem("mailTemplateName", "OrderConfirmationMail");
-			    //localStorage.setItem("itemID",a);
-			    //localStorage.setItem("itemName",'<a href="/itemDetailPage.action?codeId='+a+'">'+'</a>');
-			    location.href="/SendPageLink.action";
+	    	var siteName=$("#siteName").val();
+	    	var sendSavedProducts = $("#SendOrderConfirmationPage").html();
+	    	var html ='<style type="text/css">.hideForPrint {display:none !important;}table.cimm_siteTable{font-family:Verdana;font-size:12px;}table.cimm_siteTable td,table.cimm_siteTable th{border:1px solid #CCC;}table.cimm_siteTable th{color:#FFF;background:#000;}</style><div style="padding: 10px 0;"><h4 style="color: #D03C0F;;font-size: 16px;font-family: Roboto-Regular; font-weight:bold;margin: 5px 0;text-align: center;">Order Confirmation</h4></div><div>'+sendSavedProducts+'</div>';
+		    localStorage.setItem("emailFriendItem", html);
+		    localStorage.setItem("emailFriendlink", location.href);
+			localStorage.setItem("mailTemplateName", "OrderConfirmationMail");
+		    //localStorage.setItem("itemID",a); //localStorage.setItem("itemName",'<a href="/itemDetailPage.action?codeId='+a+'">'+'</a>');
+		    location.href="/SendPageLink.action";
 		}
 		try{
 			ga('require', 'ecommerce');
@@ -497,11 +429,9 @@ $(document).ready(function () {
 			$(".dropdown dt a span").not(toggleId+"item").html('$locale.get("cart.label.savecart")');
 			$(".dropdown dd ul").not(toggleId).hide();
 			$("#popSelector div").not(toggleId+"pop").fadeOut();
-						
 			//Only toggles the menu we want since the menu could be showing and we want to hide it.
 			$(toggleId).toggle();
-					
-			 //Change the css class on the menu header to show the selected class.
+			//Change the css class on the menu header to show the selected class.
 			if($(toggleId).css("display") == "none"){
 				$(this).removeClass("selected");
 			}else{
@@ -511,7 +441,6 @@ $(document).ready(function () {
 				saveCart();
 			}
 			});
-			
 			$(document).bind('click', function(e) {
 			// Lets hide the menu when the page is clicked anywhere but the menu.
 			var $clicked = $(e.target);
@@ -525,13 +454,9 @@ $(document).ready(function () {
 		disableShipCheck();
 	</script>
 #elseif($LayoutName=="CreditCardDetail")
-<script>
-	displayCreditCardDetails();
-</script>
+	<script>displayCreditCardDetails();</script>
 #elseif($LayoutName=="NewCardAuthentication")
-	<script type="text/javascript">
-		$("#frameCont").load(function() { $("#loading").hide();$("#frameCont").attr("height","600");});
-	</script>
+	<script type="text/javascript">$("#frameCont").load(function() { $("#loading").hide();$("#frameCont").attr("height","600");});</script>
 #elseif($LayoutName=="NewCardResponse")
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -555,9 +480,11 @@ $(document).ready(function () {
 	</script>
 #end
 <!-- Update email id popup -->
+#if($!CommonDBQuerySystemParameter.get("ENABLE_CSRF_TOKEN")=="Y")
 #set($salt = $CIMM2VelocityTool.generateSalt())
+#end
 <script defer>
-$(function(){
+ $(function(){
 	var salt = "$!salt";
 	var userLogin = $("#userLogin").val();
 	if (userLogin=="true"){
@@ -573,24 +500,19 @@ $(function(){
 		}
 	}
 	#if($!CommonDBQuerySystemParameter.get("ENABLE_CSRF_TOKEN")=="Y")
-	$("<input>").attr({
-	    name: "csrftoken",
-	    id: "csrftoken",
-	    type: "hidden",
-	    value: salt
-	}).appendTo("form");
-	#end
-});
-$(".loadAfter").fadeOut(800);
+		$("<input>").attr({
+	        name: "csrftoken", 
+	        type: "hidden", 
+	        value: salt 
+	    }).appendTo("form"); //id: "csrftoken",  id is not required
+    #end
+ });
+ $(".loadAfter").fadeOut(800);
 </script>
 #if($!CommonDBQuerySystemParameter.get("CHECK_EMAIL_ID")=="Y")
 <div id="emailAddressPrompt" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
+<div class="modal-dialog"><!-- Modal content-->
 	<div class="modal-content">
-		<!-- <div class="modal-header noBorder">
-	      	<h4 class="modal-title"><button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-	    </div> -->
 	    <div class="modal-body">
 	    <h6 class="text-center">Contact email address is missing from your account.<br/>Please enter your email address and click update.</h6>
 			<div id="popErr" class="red" style="display: none;"></div>
@@ -605,12 +527,10 @@ $(".loadAfter").fadeOut(800);
 				</div>
 				<div class="text-center">
 					<input type="submit" value="Update" id="popOrderHistoryBtn" class="button" onclick="updateEmailAddress($('#emailAddressPromptId').val());return false; "> 
-					<!-- <input type="button" value="Cancel"  class="button" onclick="$('#emailAddressPrompt').modal('hide');"> -->
 				</div>
 			</form>
 	    </div>
 	</div>
 </div>
-</div>
-<!-- End of Update email id popup -->
+</div><!-- End of Update email id popup -->
 #end

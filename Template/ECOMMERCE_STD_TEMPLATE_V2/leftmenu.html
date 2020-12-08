@@ -1,182 +1,157 @@
 #if($LayoutName=="SubCategoryPage" && $!CommonDBQuerySystemParameter.get('ENABLE_CATEGORY_LEVEL_ITEMS') == "Y" && $!resultCount && $resultCount > 0)
-	<!-- Leftmenu attribute start -->
-	#parse("leftmenuattribute.html")
- 	<!-- Leftmenu attribute end -->
+<!-- Leftmenu attribute start -->#parse("leftmenuattribute.html")<!-- Leftmenu attribute end -->
 #else
-#if($!listPageHeading && $!listPageHeading.trim().length()>0)
-		<!-- <div class="cimm_searchWithin mBottom-3">
-			<form id="searchForm" action="itemLevelFilterPage.action" method="get">
-				<div class="cimm_searchWithinWrap clearAfter">
-				#set($search = "Search Within")
-				#if($!keyWordTxt)
-					<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search" placeholder="$!keyWordTxt" onkeypress="return runScriptSearchWithIn(event);">
-				#else
-					<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!search $!listPageHeading" placeholder="$!search $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);">
-				#end
-				<input type="hidden" name="codeId" value="$!codeId" /> 
-				<input type="hidden" name="levelNo" value="$!levelNo" /> 
-				<input type="hidden" name="gallery" value="$!gallery" />
-				<input type="hidden" name="resultPage" value="12" /> 
-				<input type="hidden" name="pageNo" value="$!pageNo" />   
-				<input type="hidden" id="keyWord" name="keyWord" value="$!keyWordTxt" /> 
-				<input type="hidden" name="srchTyp" value="CATNAV"> 
-				<button type="submit" id="searchWithInBtn" onclick="validateSearchWithIn(); return false;" class="button"><em class="fa fa-lg fa-search"></em></button>
-				</div>
-			</form>
-		</div> -->
-	#end
-	<div class="cimm_filter">
-	#if($!LayoutName!="EventsPage")
-		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts")</div>
-			#if($categMenu.size()>5)
+<div class="cimm_filter">
+#if($!LayoutName!="EventsPage")
+	<div class="cimm_filter-block"><div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts")</div>
+		#if($categMenu.size()>5)
 			<div class="cimm_filter_block-container collapse in" id="categoryMenu">
 			<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 			<ul class="pRight-3">
-			#else
+		#else
 			<ul id="categoryMenu" class="collapse in pRight-3">
-			#end
-			 	#foreach($categoryMenu in $categMenu)
-		           	<li><a href="$!categoryMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')$!categoryMenu.categoryName.replaceAll(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')" class="active">$!categoryMenu.categoryName</a></li>
-		       	#end
-			</ul>
-			#if($categMenu.size()>5)
-				</div>
-				</div>
-			#end
+		#end
+		 	#foreach($categoryMenu in $categMenu)
+	           	<li><a href="$!categoryMenu.seoUrl" class="active">$!categoryMenu.categoryName</a></li>
+	       	#end
+		</ul>
+		#if($categMenu.size()>5)
 			</div>
-		
-		#if($!CommonDBQuerySystemParameter.get("EnableSideMenuBrand")=="Y")
-		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#brandsMenu">$!locale.get("product.label.brands")</div>
-			#set($count = 0)
-			#if($brandList.size()>0) 
-				#set($countBrandList = 0)
-				#set($brands = 0) 
-				#foreach($bndName in $brandList) 
-					#set($brands = $brands+1)
-					#set($count = $count+1)
-				#end
-				#if($count>5)
+			</div>
+		#end
+	</div>
+	
+	#if($!CommonDBQuerySystemParameter.get("EnableSideMenuBrand")=="Y")
+	<div class="cimm_filter-block">
+		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#brandsMenu">$!locale.get("product.label.brands")</div>
+		#set($count = 0)
+		#if($brandList.size()>0) 
+			#set($countBrandList = 0)
+			#set($brands = 0) 
+			#foreach($bndName in $brandList) 
+				#set($brands = $brands+1)
+				#set($count = $count+1)
+			#end
+			#if($count>5)
 				<div class="cimm_filter_block-container collapse in" id="brandsMenu">
 				<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'brandsMenu');"value="Search Brands"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
 				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
 				<ul class="navList_brandsMenu pRight-3">
-				#else
+			#else
 				<ul class="collapse in pRight-3 navList_brandsMenu" id="brandsMenu">
-				#end
-					#foreach($bndName in $brandList) #set($countBrandList = $!countBrandList + 1)
-						<li><a href="$!bndName.brandId$!locale.get('website.url.ShopByBrand')$!bndName.brandName.replace(' ','-').toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','').replaceAll('--','-')">$!bndName.brandName</a><label><span class="hideMe">$!bndName.brandName</span></label></li>
-					#end
-				</ul>
-				#if($count>5)
-					</div>
-					</div>
-				#end
 			#end
-		</div>
-		#end
-	
-		#if($!CommonDBQuerySystemParameter.get("EnableSideMenuManufacturer")=="Y")
-		<div class="cimm_filter-block">
-		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#manufacturersMenu">$!locale.get("product.label.manufacturers")</div>
-			#set($count = 0)
-			#if($!manufacturerList.size()>0) 
-				#set($countManufacturerList = 0)
-				#set($mfg = 0) 
-				#foreach($!manufacturers in $!manufacturerList)
-					#set($mfg = $!mfg+1)
-					#set($count = $count+1)
-				#end
-				#if($count>5)
-				<div class="cimm_filter_block-container collapse in" id="manufacturersMenu">
-				<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'manufacturersMenu');"value="Search Manufacturers"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
-				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
-				<ul class="navList_manufacturersMenu pRight-3">
-				#else
-				<ul class="collapse in pRight-3 navList_manufacturersMenu" id="manufacturersMenu">
-				#end
-				#foreach($!manufacturers in $!manufacturerList)
-					#set($countManufacturerList = $!countManufacturerList + 1)
-					<li><a href="$!manufacturers.manufacturerId$!locale.get('website.url.ShopByManufacturer')$!manufacturers.itemUrl.toLowerCase().replaceAll('&[#0-9a-z]+;','').replaceAll('[^a-zA-Z0-9\-\s]+','')">$!manufacturers.manufacturerName</a></li>
-				#end
-				</ul>
-				</ul>
-				#if($count>5)
-					</div>
-					</div>
-				#end
-			#end
-		</div>
-		#end
-		#if($leftStaticMenu.size > 0)
-		<div class="cimm_filter-block">
-			<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#leftUtilityMenu">$!locale.get("product.heading.quickLinks")</div>
-			<ul class="collapse in" id="leftUtilityMenu">
-				#foreach($headerMenu in $leftStaticMenu)
-					<li>
-						<a href="#if($headerMenu.itemUrl) #if($headerMenu.staticPageUrl) $headerMenu.staticPageUrl #else /$headerMenu.itemUrl #end #else javascript:void(0); #end" #if($headerMenu.level1Menu && $headerMenu.level1Menu=='Blog')target="_blank"#end>$headerMenu.level1Menu</a>
-					</li>
+				#foreach($bndName in $brandList) #set($countBrandList = $!countBrandList + 1)
+					<li><a href="$!bndName.seoUrl">$!bndName.brandName</a><label><span class="hideMe">$!bndName.brandName</span></label></li>
 				#end
 			</ul>
-		</div>
-		#end
-		<div class="cimm_filter-block">
-			<div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div>
-			<ul class='myAccountLeftMenu'>
-				#parse("accountMenu.html")
-			</ul>
-		</div>
-		#else
-			#if($eventsLocations.size()>0)
-			<div class="cimm_filter-block">
-				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventsLocations">$locale.get("event.label.location") </div>
-					#if($eventsLocations.size()>5)
-					<div class="cimm_filter_block-container collapse in" id="eventsLocations">
-					<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
-					<ul class="pRight-3">
-					#else
-					<ul id="eventsLocations" class="collapse in pRight-3">
-					#end
-				 	#foreach($locFilter in $eventsLocations)
-					<li>
-					<label class="cimm_customCheckBoxWrap">
-					<input type="checkbox" value="$locFilter.location" onclick='filter("$locFilter.location","$!selectedCategoryFilter",this);' name ="eventsLocationFilter" class="catEvent hideDefaultCheckbox" #if($!selectedLocationFilter==$locFilter.location) checked="checked" #end> <span class="checkBoxLabel">$locFilter.location</span></label>
-					</li>
-					#end
-					</ul>
-					#if($eventsLocations.size()>5)
-					</div>
-					</div>
-					#end
-			</div>
-			#end
-			
-			#if($eventCatList.size()>0)
-			<div class="cimm_filter-block">
-				<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventCategoryList">$locale.get("product.label.category")</div>
-				#if($eventCatList.size()>5)
-				<div class="cimm_filter_block-container collapse in" id="eventCategoryList">
-				<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
-				<ul class="pRight-3">
-				#else
-				<ul id="eventCategoryList" class="collapse in pRight-3">
-				#end
-			 	#foreach($catFilter in $eventCatList)
-				<li>
-				<label class="cimm_customCheckBoxWrap"><input type="checkbox" value="$catFilter.eventCategory" onclick='filterCat("$catFilter.eventCategory","$!selectedLocationFilter",this);' name ="eventsCategoryFilter" class="catEvent hideDefaultCheckbox" #if($!selectedCategoryFilter==$catFilter.eventCategory) checked="checked" #end> <span class="checkBoxLabel">$catFilter.eventCategory</span></label>
-				</li>
-				#end
-				</ul>
-				#if($eventCatList.size()>5)
+			#if($count>5)
 				</div>
 				</div>
-				#end
-				<input type="hidden" id="eventCat" value=""/>
-				<input type="hidden" id="FirstLoadEvent" name="FirstLoadEvent" value="Y"/>
-			</div>
 			#end
 		#end
 	</div>
-	<!-- Leftmenu end -->
+	#end
+
+	#if($!CommonDBQuerySystemParameter.get("EnableSideMenuManufacturer")=="Y")
+	<div class="cimm_filter-block">
+	<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#manufacturersMenu">$!locale.get("product.label.manufacturers")</div>
+		#set($count = 0)
+		#if($!manufacturerList.size()>0) 
+			#set($countManufacturerList = 0)
+			#set($mfg = 0) 
+			#foreach($!manufacturers in $!manufacturerList)
+				#set($mfg = $!mfg+1)
+				#set($count = $count+1)
+			#end
+			#if($count>5)
+			<div class="cimm_filter_block-container collapse in" id="manufacturersMenu">
+			<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'manufacturersMenu');"value="Search Manufacturers"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
+			<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
+			<ul class="navList_manufacturersMenu pRight-3">
+			#else
+			<ul class="collapse in pRight-3 navList_manufacturersMenu" id="manufacturersMenu">
+			#end
+			#foreach($!manufacturers in $!manufacturerList)
+				#set($countManufacturerList = $!countManufacturerList + 1)
+				<li><a href="$!manufacturers.seoUrl">$!manufacturers.manufacturerName</a></li>
+			#end
+			</ul>
+			</ul>
+			#if($count>5)
+				</div>
+				</div>
+			#end
+		#end
+	</div>
+	#end
+
+	#if($leftStaticMenu.size > 0)
+	<div class="cimm_filter-block">
+		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#leftUtilityMenu">$!locale.get("product.heading.quickLinks")</div>
+		<ul class="collapse in" id="leftUtilityMenu">
+			#foreach($headerMenu in $leftStaticMenu)
+				<li>
+					<a href="#if($headerMenu.itemUrl) #if($headerMenu.staticPageUrl) $headerMenu.staticPageUrl #else /$headerMenu.itemUrl #end #else javascript:void(0); #end" #if($headerMenu.level1Menu && $headerMenu.level1Menu=='Blog')target="_blank"#end>$headerMenu.level1Menu</a>
+				</li>
+			#end
+		</ul>
+	</div>
+	#end
+	<div class="cimm_filter-block">
+		<div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div>
+		<ul class='myAccountLeftMenu'>
+			#parse("accountMenu.html")
+		</ul>
+	</div>
+#else
+	#if($eventsLocations.size()>0)
+	<div class="cimm_filter-block">
+		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventsLocations">$locale.get("event.label.location") </div>
+			#if($eventsLocations.size()>5)
+			<div class="cimm_filter_block-container collapse in" id="eventsLocations">
+			<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
+			<ul class="pRight-3">
+			#else
+			<ul id="eventsLocations" class="collapse in pRight-3">
+			#end
+		 	#foreach($locFilter in $eventsLocations)
+			<li>
+			<label class="cimm_customCheckBoxWrap">
+			<input type="checkbox" value="$locFilter.location" onclick='filter("$locFilter.location","$!selectedCategoryFilter",this);' name ="eventsLocationFilter" class="catEvent hideDefaultCheckbox" #if($!selectedLocationFilter==$locFilter.location) checked="checked" #end> <span class="checkBoxLabel">$locFilter.location</span></label>
+			</li>
+			#end
+			</ul>
+			#if($eventsLocations.size()>5)
+			</div>
+			</div>
+			#end
+	</div>
+	#end	
+			
+	#if($eventCatList.size()>0)
+	<div class="cimm_filter-block">
+		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#eventCategoryList">$locale.get("product.label.category")</div>
+		#if($eventCatList.size()>5)
+		<div class="cimm_filter_block-container collapse in" id="eventCategoryList">
+		<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
+		<ul class="pRight-3">
+		#else
+		<ul id="eventCategoryList" class="collapse in pRight-3">
+		#end
+	 	#foreach($catFilter in $eventCatList)
+		<li>
+		<label class="cimm_customCheckBoxWrap"><input type="checkbox" value="$catFilter.eventCategory" onclick='filterCat("$catFilter.eventCategory","$!selectedLocationFilter",this);' name ="eventsCategoryFilter" class="catEvent hideDefaultCheckbox" #if($!selectedCategoryFilter==$catFilter.eventCategory) checked="checked" #end> <span class="checkBoxLabel">$catFilter.eventCategory</span></label>
+		</li>
+		#end
+		</ul>
+		#if($eventCatList.size()>5)
+		</div>
+		</div>
+		#end
+		<input type="hidden" id="eventCat" value=""/>
+		<input type="hidden" id="FirstLoadEvent" name="FirstLoadEvent" value="Y"/>
+	</div>
+	#end
+#end
+</div><!-- Leftmenu end -->
  #end

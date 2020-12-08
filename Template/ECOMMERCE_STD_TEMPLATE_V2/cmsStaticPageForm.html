@@ -89,6 +89,13 @@
 				<label>Meta Data:</label>
 				<input type="text" name="pageData.metaDescription" value="$!staticPageData.metaDescription"  id="metaDescId"/> 
 			</div>
+			<!-- <div class="form-group">
+			<label>Meta Image:</label>
+			<input name="pageData.imageUrl" value="$!staticPageData.imageUrl" id="imageUrl" style="padding-right: 25px;" type="text">
+			<input type="hidden" value="" id="metaImage">
+			<a class="iframe cboxElement" href="bannerUploadCms.action" title="Upload Images/Documents" onclick="javascript:showUploadedImages();">
+			<i class="mce-ico mce-i-browse" id="metaimageIcon" ></i></a>
+			</div> -->
 			<div class="form-group">
 				<label>Custom Url:</label>
 				<input type="text" name="pageData.customUrl" value="$!staticPageData.customUrl" onKeypress="return IsSpecialCharacterAllowSlash(event);" id="customURLId" /> 
@@ -167,15 +174,15 @@
 			<label for="in_snippet"><strong>Meta Data:</strong> <span id="snippetCharsLeft"></span></label>
 			<textarea id="in_snippet" name="in_snippet" rows="3" cols="47">$!staticPageData.metaDescription</textarea>
 		</div>
-
+		
 		<div id="SEOURL" class="form-group">
 			<label for="in_snippet"><strong>URL:</strong></label>
-			<textarea id="in_url" name="in_url" rows="1" cols="47"></textarea>
+			<textarea id="in_url" name="in_url" rows="1" cols="47">$!staticPageData.customUrl</textarea>
 		</div>
 
 		<div id="SEOKeywords" class="form-group">
 			<label for="in_keyword">Keywords</label>
-			<textarea id="in_keyword" name="in_keyword" rows="1" cols="47"></textarea>
+			<textarea id="in_keyword" name="in_keyword" rows="1" cols="47">$!staticPageData.metaKeywords</textarea>
 		</div>
 		
 		<div class="clearfix cmsSaveBtn">
@@ -357,17 +364,17 @@
 
 		jQuery('#in_snippet').keyup(function() {
 			var myTxtArea2 = document.getElementById('in_snippet'); 
-			myTxtArea2.value = myTxtArea2.value.replace(/^\s*|\s*$/g,'');
+			myTxtArea2.value = myTxtArea2.value;//.replace(/^\s*|\s*$/g,'');
 			var text_length = jQuery('#in_snippet').val().length;
 			var text_remaining = maxCharactersDescLimit - text_length;
 			jQuery('#snippetCharsLeft').html(text_remaining + ' characters');
-			jQuery('#out_snippet').html(jQuery('#in_snippet').val().replace(/^\s+|\s+$/g,""));
-			document.getElementById("metaDescId").value = jQuery('#in_snippet').val().replace(/^\s+|\s+jQuery/g,"");
+			jQuery('#out_snippet').html(jQuery('#in_snippet').val());//.replace(/^\s+|\s+$/g,""));
+			document.getElementById("metaDescId").value = jQuery('#in_snippet').val();//.replace(/^\s+|\s+jQuery/g,"");
 		});
 		
 		jQuery('#in_keyword').keyup(function() {
 			var text_length = jQuery('#in_keyword').val().length;
-			document.getElementById("metaKeywordsId").value = jQuery('#in_keyword').val().replace(/^\s+|\s+jQuery/g,"");
+			document.getElementById("metaKeywordsId").value = jQuery('#in_keyword').val();//replace(/^\s+|\s+jQuery/g,"");
 		});
 	}	
 
@@ -419,7 +426,6 @@
 		getNextLevelForPageType($("#selectStaticPageType"))
 	}
 	function getNextLevelForPageType(obj){
-		console.log($(obj).val());
 		if(obj!=null){
 			if($(obj).val()=="BRAND" && $("#brandListSpan").length>0){
 				$("#brandListSpan").show();

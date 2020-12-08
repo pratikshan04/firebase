@@ -35,9 +35,9 @@
 			<p class="content-errormsg">
 				We apologize for the inconvenience but this page has either expired or has moved. Please 
 				#if($userLogin) 
-					go to <a href="/" class="btn btn-link"  title="$!locale.get('product.heading.home')">$!locale.get('product.heading.home')</a> 
+					go to <a href="/" class="btn-link"  title="$!locale.get('product.heading.home')">$!locale.get('product.heading.home')</a> 
 				#else 
-					<a href="/login" class="btn btn-link" title="$!locale.get('header.label.logIn')">$!locale.get('header.label.logIn')</a> for more options
+					<a href="/login" class="btn-link" title="$!locale.get('form.label.login')">$!locale.get('form.label.login')</a> for more options
 				#end
 				 	or please select a category to continue shopping. 
 			</p>
@@ -45,4 +45,3 @@
 	</div>        
 	<hr class="line-head" />
 </div>
-##<!-- <script>if($('link[rel="canonical"]').length>0){ $('link[rel="canonical"]').remove(); }</script> -->

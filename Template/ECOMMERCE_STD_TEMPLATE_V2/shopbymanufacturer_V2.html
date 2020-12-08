@@ -24,13 +24,13 @@
 
 <div class="row brandListCont">
 	<div class="col-md-12 col-xs-12">
-		#foreach($key in $manfListAsMap.keySet())
-		#set($manfListByIndex = $manfListAsMap.get($key))
+		#foreach($key in $manufacturersAsMap.keySet())
+		#set($manfListByIndex = $manufacturersAsMap.get($key))
 		<div class="pBottom-2 mfgListRow" id="displayBrand_$key">
 			<h2>$key</h2>
 			<div class="row">
 				#foreach($manf in $manfListByIndex)
-					<div class="col-md-3 col-sm-6 col-xs-12"><a href="/$!manf.manufacturerId/manufacturer/$slugUrl.makeSlug($!manf.manufacturerName)" class="sBlack">$!manf.manufacturerName</a></div>
+					<div class="col-md-3 col-sm-6 col-xs-12"><a href="$!manf.seoUrl" class="sBlack">$!manf.manufacturerName</a></div>
 				#end
 			</div>
 			

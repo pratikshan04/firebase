@@ -372,19 +372,19 @@ $icons: (
             .dropdown-menu{
               background: $subnav-bg;
               padding: 10px 0px;
-              min-width: 275px;
+			  min-width: 275px;
+			  box-shadow: none;
               ul{
                 width: 282px;
                 vertical-align: top;
                 display: inline-block;
               }
 							li{
-								position: relative;
+								//position: relative;
+								height: auto;
 								padding: 2px 0px; 
 								&:hover{
-									background: transparent;
-									text-decoration: underline;
-								
+									background: $tertiary_color;
 									> span {
 										em:after{
 											@if $subnav-lf-color != "inherit" {
@@ -412,18 +412,14 @@ $icons: (
 											color: set-font-color($subnav-bg);
 										}
 										&:hover{
-											@if $subnav-lf-color != "inherit" {
-												color: $subnav-lf-color;
-											} @else {
-												color: set-font-color($subnav-bg);
-											}	
+											color: $primary_color;	
 										}
 									}
 									>em{
 										padding: 14px 14px;
 										&:after{
 											top: 4px;
-											color: #444;
+											color: $white;
 										}
 									}
 								}
@@ -433,6 +429,8 @@ $icons: (
 									border-radius: 0;
 									border: none;
 									display: none;
+									height: 100%;
+									background: $tertiary_color;
 								}
 								
 							}

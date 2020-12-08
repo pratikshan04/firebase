@@ -44,10 +44,10 @@
 		<p> 
             #if($orderDetail.orderedBy.length() > 0)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
             #if($requestType == "openQuote")<strong><span> $!orderDetail.billToName </span></strong><br />#end
-            #if($orderDetail.billAddress.address1.length() > 0)<span>$!orderDetail.billAddress.address1 </span><br />#end
-            #if($!orderDetail.billAddress.address2.length() > 0)<span>$!orderDetail.billAddress.address2</span><br />#end
-            <span>$!orderDetail.billAddress.city, $!orderDetail.billAddress.state</span><br />
-            #if($!orderDetail.billAddress.country.length() > 0)<span>$!orderDetail.billAddress.country, $!orderDetail.billAddress.zipCode</span><br />#end
+            #if($orderDetail.billAddress1.length() > 0)<span>$!orderDetail.billAddress1 </span><br />#end
+            #if($!orderDetail.billAddress2.length() > 0)<span>$!orderDetail.billAddress2</span><br />#end
+            <span>$!orderDetail.billCity, $!orderDetail.billState</span><br />
+            #if($!orderDetail.billCountry.length() > 0)<span>$!orderDetail.billCountry, $!orderDetail.billZipCode</span><br />#end
             #if($!orderDetail.billPhone.length() > 0)<span>$!orderDetail.billPhone</span>#end
         </p>
 	</div>
@@ -56,10 +56,10 @@
 		   <p>
 	            #if($orderDetail.orderedBy.length() > 0)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
 	            #if($requestType == "openQuote" && $!orderDetail.shipToName.length() > 0)<strong><span> $!orderDetail.shipToName </span></strong><br />#end
-	            #if($orderDetail.shipAddress.address1.length() > 0)<span>$!orderDetail.shipAddress.address1</span><br />#end
-	            #if($!orderDetail.shipAddress.address2.length() > 0)<span>$!orderDetail.shipAddress.address2 </span><br />#end
-	            <span>$!orderDetail.shipAddress.city, $!orderDetail.shipAddress.state</span> <br />
-	            #if($!orderDetail.shipAddress.country.length() > 0)<span>$!orderDetail.shipAddress.country, $!orderDetail.shipAddress.zipCode</span> <br />#end
+	            #if($orderDetail.shipAddress1.length() > 0)<span>$!orderDetail.shipAddress1</span><br />#end
+	            #if($!orderDetail.shipAddress2.length() > 0)<span>$!orderDetail.shipAddress2 </span><br />#end
+	            <span>$!orderDetail.shipCity, $!orderDetail.shipState</span> <br />
+	            #if($!orderDetail.shipCountry.length() > 0)<span>$!orderDetail.shipCountry, $!orderDetail.shipZipCode</span> <br />#end
 	            #if($orderDetail.shipPhone.length() > 0) <span>$!orderDetail.shipPhone</span> #end
 	        </p>
 	</div>

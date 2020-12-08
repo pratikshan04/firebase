@@ -154,12 +154,12 @@
 				</div>
 				<div id="groups">
 					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
 							<h3 class="cimm_blockHeading mBottom-2">$locale.get("product.heading.PromotedProducts")</h3>
 							<div id="promotedProductsTable"> Loading please wait...</div>
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroups")</h3>          
+						<div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
 							#if($groupListData.size()>0)
 								#set($countProductGroup = 0)
 								<div class="row">
@@ -168,7 +168,7 @@
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
-											<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+											<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
 										</a>
 										#else
 										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName">$groupData.productListName </a>
@@ -183,7 +183,7 @@
 								#if($groupListData.size() > 8)
 								<div class="row">
 									<div class="col-xs-12 mBottom-2">
-										<a href='$locale.get("website.url.SavedGroup.Product")' class="cimm_inlineButton">$locale.get("product.label.viewMore")</a>
+										<a href='$locale.get("website.url.SavedGroup.Product")' class="cimm_inlineButton mTop-3">$locale.get("product.label.viewMore")</a>
 									</div>
 								</div>
 								#end
@@ -191,7 +191,7 @@
 								<p>$locale.get("product.label.noProductGroupAvailable")</p>
 							#end
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
 							#if($savedCartData.size()>0)
 								#set($countSavedGroup = 0)
@@ -201,7 +201,7 @@
 										#if($groupData.isSharedCart && $groupData.isSharedCart=='Y')
 										<a href="$groupData.productListId$locale.get('website.url.SharedCart')?&savedGroupName=$groupData.productListName">
 											$groupData.productListName
-											<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
+											<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>
 										</a>
 										#else
 										<a href="$groupData.productListId$locale.get('website.url.SavedCart')?&savedGroupName=$groupData.productListName"> $groupData.productListName </a>                                       
@@ -216,7 +216,7 @@
 								#if($savedCartData.size() > 8)
 								<div class="row">
 									<div class="col-xs-12">
-										<a href='$locale.get("website.url.SavedGroup.Cart")' class="cimm_inlineButton"> $locale.get("product.label.viewMore")</a>
+										<a href='$locale.get("website.url.SavedGroup.Cart")' class="cimm_inlineButton mTop-3"> $locale.get("product.label.viewMore")</a>
 									</div>
 								</div>
 								#end
@@ -245,7 +245,7 @@
 				<li>
 					<div class="cimm_slideItemImg">
 					#set($resentItemTitle = $!recentOrders.brandName+" "+$!recentOrders.manufacturerPartNumber)
-						<a href="$!hostName$!recentOrders.itemPriceId$locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($resentItemTitle)">
+						<a href="$!recentOrders.seoUrl">
 							#if($recentOrders.imageType=="URL")
 							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
 							#else
@@ -255,11 +255,8 @@
 					</div>
 					<div class="cimm_slideItemDesp text-center">
 						<ul>
-							<li><a href='$recentOrders.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($!resentItemTitle)' class="productTitle">$resentItemTitle</a>
-							</li>
-							<li>
-								<strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span>
-							</li>
+							<li><a href='$recentOrders.seoUrl' class="productTitle">$resentItemTitle</a></li>
+							<li><strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span></li>
 						</ul>
 					</div>
 				</li>

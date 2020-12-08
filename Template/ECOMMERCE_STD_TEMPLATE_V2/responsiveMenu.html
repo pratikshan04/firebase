@@ -33,7 +33,7 @@ $subStaticMenu.level2Menu
 
 	<ul>
 	#foreach($categoryMenu in $categMenu)
-	<li><a href="$!categoryMenu.categoryCode$!locale.get('website.url.ProductCategoryLevel')n/$slugUrl.makeSlug($categoryMenu.categoryName)">$categoryMenu.categoryName</a></li>
+	<li><a href="$categoryMenu.categoryCode$locale.get('website.url.ProductCategoryLevel')$categoryMenu.categoryName.replaceAll(' ','-')">$categoryMenu.categoryName</a></li>
 	#end
 	</ul>
 

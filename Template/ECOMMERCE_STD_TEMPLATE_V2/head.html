@@ -1,51 +1,66 @@
 <BASE href="$!hostName">
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-#if($userAgent != "WEBVIEW")
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+#if($wordpress)
+	$!wp_meta_data
 #else
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	#if($!pageRobotsConfigContext)
+	#set($metaString = "")
+	#set($metaSeparator = "")
+	#if($!pageRobotsConfigContext.noIndex) #set($metaString = "noindex") #set($metaSeparator = ",") #end
+	#if($!pageRobotsConfigContext.noFollow) #set($metaString = $!metaString + $!metaSeparator + "nofollow") #set($metaSeparator = ",") #end
+	#if($!pageRobotsConfigContext.noImageIndex) #set($metaString = $!metaString + $!metaSeparator + "noimageindex") #set($metaSeparator = ",") #end
+	#if($!pageRobotsConfigContext.noArchive) #set($metaString = $!metaString + $!metaSeparator + "noarchive") #set($metaSeparator = ",") #end
+	#if($!pageRobotsConfigContext.noSnippet) #set($metaString = $!metaString + $!metaSeparator + "nosnippet") #set($metaSeparator = ",") #end
+	#if($!pageRobotsConfigContext.noCache)
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	#end
+	#if($!metaString.trim().length()>0)
+	<meta name="robots" content="$!metaString">
+	#end
+	#end
+	#if($userAgent != "WEBVIEW") 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	#else 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+	#end
 #end
-
 #set($share_img = $!hostName + $!webThemes + "/" + $!siteName + "/images/logo.png")
-#if($!siteLogo)
-#set($share_img = $!hostName + "/ASSETS/IMAGES/LOGOS/CLIENT/" + $!siteLogo)
-#end
-
+#if($!siteLogo) #set($share_img = $!hostName + "ASSETS/IMAGES/LOGOS/CLIENT/" + $!siteLogo) #end
+#set($share_img_width = "250px")
+#set($share_img_height = "200px")
+##<!-- ------------------------------------------------------------------------------------ -->
 #set($share_desc = $!locale.get('all.Pages.Default.Meta.Description'))
-#set($ststicMetaDesc = $!metaDesc.trim())
-#set($ststicMetaKey = $!metaTagString.trim())
+#set($staticMetaDesc = $!metaDesc.trim())
+#set($staticMetaKey = $!metaTagString.trim())
 #set($pageTitleVelo = $!siteDisplayName.trim())
 #set($pageTitleseparator = " | ")
 #set($canonical_url = $!hostName)
 #set($share_imgAlt = $!siteDisplayName)
-#set($seo_keywords = $!siteDisplayName)
-
+#set($seo_keywords = $!siteDisplayName +" "+$share_desc)
+##<!-- ------------------------------------------------------------------------------------ -->
 #if($LayoutName!="ProductDetailPage")
 	#if($LayoutName=="StaticPage" || $!LayoutName=="StaticPageFullPageLayout")
-		#if($!ststicMetaDesc && $!ststicMetaDesc != "")
-			#set($share_desc = $!ststicMetaDesc)
+		#if($!staticMetaDesc && $!staticMetaDesc.trim().length()>0)
+			#set($share_desc = $!staticMetaDesc)
 		#end
-		#if($!ststicMetaKey && $!ststicMetaKey.trim()!="")
-			#set($seo_keywords = $!ststicMetaKey)
+		#if($!staticMetaKey && $!staticMetaKey.trim().length()>0)
+			#set($seo_keywords = $!staticMetaKey)
+		#end
+		#if($!canonicalUrlContext.trim().length()>0)
+				#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $commonUtility.validateString($!canonicalUrlContext))
+		#else
+			#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $commonUtility.validateString($canonicalUrl))
+		#end
+		#if($!metaImageUrl.trim().length()>0)
+			#set($share_img = $!metaImageUrl)
 		#end
 	#end
 #end
-#if($!LayoutName=="SavedGroupsPage")
-	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.responseType.$!responseType") + $!pageTitleseparator + $!pageTitleVelo)
-#elseif($!LayoutName=="ProductGroupPage" || $!LayoutName=="ApproveCart" || $!LayoutName=="SavedCartPage")
-	#set($pageTitleVelo = $!savedGroupName + $!pageTitleseparator + $!pageTitleVelo)
-#elseif($LayoutName=="HomePage")
-	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
-#elseif($!LayoutName=="OrderDetailPage")
-	#if($orderDetail.orderStatus.contains("Bid"))
-		#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
-    #elseif($!requestType != "openQuote")
-    	#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
-    #else
-   		#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
-    #end
-#elseif($LayoutName=='ProductDetailPage')
+##<!-- ------------------------------------------------------------------------------------ -->
+#if($LayoutName=='ProductDetailPage')
 	#if($breadCrumbList && $!breadCrumbList.size()>0)
 		#set($breadCrumbSize = $!breadCrumbList.size() )
 		#set($breadCrumbIdx = 1)
@@ -60,61 +75,49 @@
 			#end
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 		#end
-		#set($breadCrumbIdx = 2 )
-		#foreach($!breadCrumb in $!breadCrumbList)
-			#if($breadCrumbIdx == $!breadCrumbSize)
-				#set($BCTCat = $slugUrl.makeSlug($!breadCrumb.categoryName))
-			#end 
-			#set($breadCrumbIdx = $!breadCrumbIdx+1)
-		#end
 	#else
 		#set($pageTitleVelo =  $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
 	#end
+	
 	#if($itemLevelFilterData)
 		#foreach($!itemData in $!itemLevelFilterData)
 			#set($imgSrc = '')
-			#if($productDataList && $!productDataList.size() > 0)
-				#foreach($!productData in $!productDataList)
-					#if($productData.imageType=="URL")
-						#set($imgSrc = $!productModeImage+$!productData.imageName)
-					#else
-						#if($productData.imageName != "" && $!hostURI.contains("/Y/"))
-							#set($imgSrc = $!hostName+$!productModeImage+$!productData.imageName)
-						#else
-							#set($imgSrc = $!hostName+$!detailImage+$!itemData.imageName)
-						#end
-						
-					#end
+			#if($!productAttrFilterData && $!productAttrFilterData.size()>0 && $!productCount>0 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length()>0)
+				#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
+					#set($imgSrc = $!itemData.productCategoryImageName)
+				#else
+					#set($imgSrc = $commonUtility.removeLastCharacter($!hostName, "/") + $!productDetailImage + $!itemData.productCategoryImageName)
 				#end
 			#else
-				#if($itemData.imageType=="URL")
+				#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
 					#set($imgSrc = $!itemData.imageName)
 				#else
-					#set($imgSrc = $!hostName+$!detailImage+$!itemData.imageName)
+					#set($imgSrc = $commonUtility.removeLastCharacter($!hostName, "/")+$!detailImage + $!itemData.imageName)
 				#end
 			#end
-			#set($itmPriceId = $!itemData.itemPriceId)
-			#set($itemProductTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
-			#set($BCTCat1 = $slugUrl.makeSlug($!itemProductTitle))
-			#if($fromProductMode.trim().length()>0) #set($BCTCat1 = $fromProductMode.trim().toLowerCase()+"/"+$!BCTCat1) #end
-			#set($canonical_url = $!hostName+""+$!itmPriceId+"/product/"+$!BCTCat1)
-			<meta property="og:url" content="$!hostName$!itmPriceId/product/$!BCTCat1" />
-			#set($share_imgAlt = $BCTCat1)
+			
+			#set($share_imgAlt = $commonUtility.removeFirstCharacter($!itemData.seoUrl, "/"))
 			#set($share_img = $!imgSrc)
-			#if($itemData.metaDesc && $itemData.metaDesc.trim()!="")
-				#set($share_desc = $!itemData.metaDesc)
-			#elseif($itemData.shortDesc && $itemData.shortDesc.trim()!="")
-				#set($share_desc = $!itemData.shortDesc)
+			#set($share_img_width = "300px")
+			#set($share_img_height = "300px")
+			
+			#if($itemData.metaDesc && $itemData.metaDesc.trim().length()>0)
+				#set($share_desc = $!itemData.metaDesc.trim().replaceAll('"',""))
+			#elseif($itemData.shortDesc && $itemData.shortDesc.trim().length()>0)
+				#set($share_desc = $!itemData.shortDesc.trim().replaceAll('"',""))
+			#end
+			#set($share_desc = $!itemData.manufacturerPartNumber + $!pageTitleseparator + $!itemData.partNumber + $!pageTitleseparator + $!itemData.brandName + $!pageTitleseparator + $share_desc)
+			
+			#if($!canonicalUrlContext.trim().length()>0)
+				#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $!canonicalUrlContext)
+			#else
+				#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $!itemData.canonicalUrl)
 			#end
 		#end
+		#set($seo_keywords = $share_desc)
 	#end
-#elseif($LayoutName=='PromotedProductGroupsPage')
-	#set($pageTitleVelo = $!locale.get("product.heading.PromotedProducts") + $!pageTitleseparator + $!pageTitleVelo)
-#elseif ($LayoutName=='PromotedProductsListPage')
-	#set($pageTitleVelo = $!locale.get("product.label.PromotedProductsList") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="ProductList")
-#set($itemParentCategoryName = "")
-#set($finalPageTitle = "" )
+	#set($finalPageTitle = "" )
 	#if($breadCrumbList)
 		#set($breadCrumbSize = $!breadCrumbList.size() )
 		#set($breadCrumbIdx = 1 )
@@ -124,17 +127,7 @@
 		#set($pageTitleBreadCrumbLast = "" )
 		#set($pageTitleBreadCrumbFirst = "" )
 		#set($shopByBrand = "" )
-		#set($forPageSeoUrl = "" )
-		#set($forPageSeoUrlSeparator = "" )
-		#set($forSeoDesc = "" )
-		#set($forSeoDescSeparator = "" )
 		#foreach($breadCrumb in $breadCrumbList)
-			#if($!breadCrumb.categoryName.length()>1)
-				#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName))
-				#set($forPageSeoUrlSeparator = "/" )
-				#set($forSeoDesc = $!forSeoDesc+ $!forSeoDescSeparator + $!breadCrumb.categoryName)
-			    #set($forSeoDescSeparator = " | " )
-			#end
 			#if($navigationType=='BRAND')
 	    		#if($breadCrumbIdx == $!breadCrumbSize)
 					#set($LastSet = $!breadCrumb.categoryName )
@@ -143,8 +136,6 @@
 	    		#if($breadCrumbIdx == $!breadCrumbSize)
 					#set($LastSet = $!breadCrumb.categoryName )
 				#end
-			#elseif($navigationType=='SEARCH')
-			
 			#else
 				#if($breadCrumbIdx == $!breadCrumbSize)
 					#set($LastSet = $!breadCrumb.categoryName )
@@ -159,34 +150,27 @@
 			#set($pageTitleBreadCrumbLast = $!LastSet )			
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)
 			#set ($finalPageTitle = $!pageTitleBreadCrumbLast)
-			#set($itemParentCategoryName = $!pageTitleBreadCrumbLast)
 		#end           
 	#end
 	#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
-	#set($BCTCat1 = $slugUrl.makeSlug($!finalPageTitle))
-	
-	#if($navigationType=='MANF')
-		#if($!metaDescriptions)
-			#set($share_desc = $!metaDescriptions)
-		#end
-		#set($canonical_url = $!hostName+""+$!manfId+"/category/"+$!BCTCat1)
+	#if($!categoryDescription.canonicalUrl.trim().length()>0)
+		#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $!categoryDescription.canonicalUrl)
 	#else
-		#set($canonical_url = $!hostName+""+$!codeId+"/category/"+$!BCTCat1)
+		#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $!canonicalUrlContext)
+	#end
+	#set($seo_keywords = $!metaTagString)
+	#if($metaDescription && $metaDescription.shortDesc.trim().length()>0)
+		#set($share_desc = $metaDescription.shortDesc.trim())
 	#end
 #elseif($LayoutName=="ProductPage" || $!LayoutName=="SubCategoryPage")
-#set($listPageHeading = "")
+	#set($listPageHeading = "")
 	#set($pageTitleBreadCrumbFirst = "" )
 	#set($pageTitleBreadCrumbLast = "" )
 	#set($finalPageTitle = "" )
-	#set($forPageSeoUrl = "" )
-	#set($forPageSeoUrlSeparator = "" )
-	#set($finalPageTitle = "" )
-	#if($breadCrumbList)
+	#if($breadCrumbList && $!breadCrumbList.size()>0)
 		#set($breadCrumbSize = $!breadCrumbList.size() )
 		#set($breadCrumbIdx = 1 )
 		#foreach($!breadCrumb in $!breadCrumbList)
-			#set($forPageSeoUrl = $forPageSeoUrl+$forPageSeoUrlSeparator+$slugUrl.makeSlug($!breadCrumb.categoryName) )
-			#set($forPageSeoUrlSeparator = "/" )
 			#if($breadCrumbIdx == $!breadCrumbSize)
 				#set($listPageHeading = $!breadCrumb.categoryName)
 			#else
@@ -204,24 +188,40 @@
 		#end
 		#if($finalPageTitle)
 			#set($pageTitleVelo = $!finalPageTitle + $!pageTitleseparator + $!pageTitleVelo)
-			#set($BCTCat1 = $slugUrl.makeSlug($!pageTitleBreadCrumbLast))
-			
 		#else
 			#set($pageTitleVelo = $!listPageHeading + $!pageTitleseparator + $!pageTitleVelo)
-			#set($BCTCat1 = $slugUrl.makeSlug($!listPageHeading))
 		#end
-		#set($canonical_url = $!hostName+""+$codeId+"/category/"+$BCTCat1)
+		#if($!categoryDescription.canonicalUrl.trim().length()>0)
+			#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $!categoryDescription.canonicalUrl)
+		#else
+			#set($canonical_url = $commonUtility.removeLastCharacter($!hostName, "/") + $!canonicalUrlContext)
+		#end
 	#else
 		#set($pageTitleVelo = "Products"+ $!pageTitleseparator + $!pageTitleVelo)
-		#set($canonical_url = $!hostName+"/products")
+		#set($canonical_url = $!hostName+"products")
 	#end
-	##if($!categoryDescription && $!categoryDescription.marketingText)
-		##set($share_marketingText = $!categoryDescription.marketingText)
-	##end
-	#if($!categoryDescription.shortDesc != "")
+	#if($!categoryDescription.shortDesc.trim().length()>0)
 		#set($share_desc = $!categoryDescription.shortDesc.trim())
-		#set($seo_keywords = $!share_desc)
+		#set($seo_keywords = $!share_desc +" "+ $pageTitleVelo)
 	#end
+#elseif($!LayoutName=="SavedGroupsPage")
+	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.responseType.$!responseType") + $!pageTitleseparator + $!pageTitleVelo)
+#elseif($!LayoutName=="ProductGroupPage" || $!LayoutName=="ApproveCart" || $!LayoutName=="SavedCartPage")
+	#set($pageTitleVelo = $!savedGroupName + $!pageTitleseparator + $!pageTitleVelo)
+#elseif($LayoutName=="HomePage")
+	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
+#elseif($!LayoutName=="OrderDetailPage")
+	#if($orderDetail.orderStatus.contains("Bid"))
+		#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    #elseif($!requestType != "openQuote")
+    	#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    #else
+   		#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
+    #end
+#elseif($LayoutName=='PromotedProductGroupsPage')
+	#set($pageTitleVelo = $!locale.get("product.heading.PromotedProducts") + $!pageTitleseparator + $!pageTitleVelo)
+#elseif ($LayoutName=='PromotedProductsListPage')
+	#set($pageTitleVelo = $!locale.get("product.label.PromotedProductsList") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="cspConfiguratorPage")
 	#set($pageTitleVelo = "CSP Configurator" + $!pageTitleseparator + $!siteDisplayName.trim())
 #elseif($LayoutName=="EventDetailPage")
@@ -231,89 +231,84 @@
 #else
 	#set($pageTitleVelo = $!locale.get("breadcrumbs.label.$!LayoutName") + $!pageTitleseparator + $!pageTitleVelo.trim())
 #end
+##<!-- ------------------------------------------------------------------------------------ -->
 #if($navigationType=='SEARCH')
 	#set($pageTitleVelo = "Search Results " + $!pageTitleVelo.trim())
 #end
-#set($BCTCat = "")
-#if($navigationType=="NAVIGATION") 
-	#set($BCTBrand = "")
-	#set($BCTType = "")
-	#set($breadCrumbSize = $!breadCrumbList.size() )
-	#set($breadCrumbIdx = 1 )
-	#foreach($!breadCrumb in $!breadCrumbList)
-		#if($breadCrumbIdx == $!breadCrumbSize)
-			#set($BCTCat = $!breadCrumb.categoryName)
-		#end
-		#set($breadCrumbIdx = $!breadCrumbIdx+1)
-	#end
-	 #if($attrFilteredList && $!attrFilteredList.size()>0)
-		#foreach($!attributeFiltered in $!attrFilteredList)
-		 #if($attributeFiltered.attrName=="brand")
-			#set($BCTBrand = $!attributeFiltered.attrValue.replaceAll('\"',''))
-		 #end
-		 #if($attributeFiltered.attrName.replaceAll("attr_","")=="Type")
-			#set($BCTType = $!attributeFiltered.attrValue.replaceAll('\"',''))
-		 #end
-		#end
-	#end
-	#if($BCTCat=="")
-		#set($BCTCat =$!listPageHeading)
-	#end
-	#if($seoUrl!="Y")
-		#set($canonicalUrl = $!hostName+"C/"+$!codeId+"/"+$!BCTCat.replaceAll(" ","-"))
-	#end
-	#if($seoUrl!="Y")
-		#set($canonicalUrl = $!hostName+"BCT/"+$!BCTBrand.replaceAll(" ","+")+"-"+$!BCTCat.replaceAll(" ","-")+"-"+$!BCTType.replaceAll(" ","+"))
-	#end
-#end
+##<!-- ------------------------------------------------------------------------------------ -->
 #if($LayoutName!='ProductDetailPage' && $LayoutName!="ProductList" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage")
-	#if($!canonicalUrl && $canonicalUrl.trim()!="")
+	#if($LayoutName=="404Page" || $LayoutName=="NoDataPage")
+		#set($canonical_url = "")
+	#elseif($!canonicalUrl && $canonicalUrl.trim().length()>0)
 		#set($canonical_url = $!canonicalUrl)
 	#end
 #end
-
+##<!-- ------------------------------------------------------------------------------------ -->
+<meta name="description" content="$!share_desc" />
+<meta name="keywords" content="$!seo_keywords">
 #set($pageTitleVelo = $!pageTitleVelo.replace("Page","").trim())
 <meta property="og:title" content="$!pageTitleVelo" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="$share_img" />
-<meta property="og:image:alt" content="$share_imgAlt"/>
-<meta property="og:image:width" content="500" /> 
-<meta property="og:image:height" content="500" />
 <meta property="og:site_name" content="$!siteDisplayName" />
-<meta property="og:description" content="$share_desc" name="description" />
-<meta name="keywords" content="$!seo_keywords">
-<!-- meta property="twitter:description" content="$share_desc" />
-<meta name="twitter:image" content="$share_img" / -->
-<meta name="twitter:card" content="summary">
+#if($metaImageUrl && $!metaImageUrl.trim().length()>0)
+	#if($!metaImageUrl.contains("http"))
+		#set($share_img = $!metaImageUrl.trim())
+	#else
+	    #set($share_img = $!hostName.trim()+$!metaImageUrl.trim())
+	#end
+#end
+#if($!share_img.trim().length()>0)
+<meta property="og:image" content="$!share_img" />
+<meta property="og:image:alt" content="$!share_imgAlt"/>
+<meta property="og:image:width" content="$!share_img_width" /> 
+<meta property="og:image:height" content="$!share_img_height" />
+#end
+<meta property="og:description" content="$!share_desc" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="$!pageTitleVelo"/>
+<meta name="twitter:description" content="$!share_desc" />
+<meta name="twitter:image" content="$!share_img" />
+#if($canonical_url.trim().length()>0)
+<meta property="og:url" content="$canonical_url" />
 <link rel="canonical" href="$!canonical_url" />
-
-#if(!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage" || $!LayoutName=="PromotedProductsListPage" || $!LayoutName=="ProductGroupPage"))
-<script>window.location.href = "/";</script>
 #end
-
-#if($userLogin && $!session.getAttribute('isGeneralUser')=="Y" && ($responseType=="ApprovedCart" || $!LayoutName=="PunchoutConfig"))
-<script>window.location.href = "/";</script>
+##<!-- ------------------------------------------------------------------------------------ -->
+#if( 
+ (!$userLogin && ($!LayoutName=="RequestForQuotePage" || $!LayoutName=="QuickOrderStdPage" || $!LayoutName=="QuickOrderResultPage" || $!LayoutName=="PromotedProductsListPage" || $!LayoutName=="ProductGroupPage")) 
+ || ($userLogin && $!session.getAttribute('isGeneralUser')=="Y" && ($responseType=="ApprovedCart" || $!LayoutName=="PunchoutConfig"))
+ )
+<script>window.location.href = "/"</script>
 #end
-<script type="text/javascript" src="$!webThemes/$siteName/js/jquery-3.4.1.min.js"></script>
-#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == 'Y')
-<!-- Piwik -->
+##<!-- ------------------------------------------------------------------------------------ -->
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery-3.5.1.min.js"></script>
+#if($!CommonDBQuerySystemParameter.get("EnablePiwik") == "Y")<!-- Piwik -->
+<!-- Site Analytics Pro -->
 <script type="text/javascript">
-  var _paq = _paq || [];
+  var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
+  var analyticProUser = '$!session.getAttribute("com.common.username")';
   (function() {
-    var u="//analyticsbeta.cimm2.com/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    var u="//analytics.unilogcorp.com/";
+    _paq.push(['setTrackerUrl', u+'js/tracker.php']);
     _paq.push(['setSiteId', '$!CommonDBQuerySystemParameter.get("piwikSiteID")']);
     _paq.push(['setUserId', '$!session.getAttribute("com.common.username")']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    g.type='text/javascript'; g.async=true; g.src=u+'js/tracker.php'; s.parentNode.insertBefore(g,s);
+	if(analyticProUser!="web"){ 
+		_paq.push(['setUserId', '$!session.getAttribute("com.common.username")']); 
+		_paq.push(['setCustomVariable', 1, 'Customer Id', '$!session.getAttribute("customerId")', 'visit']);
+		_paq.push(['setCustomVariable', 2, 'Customer Name', '$!session.getAttribute("loginCustomerName")', 'visit']);
+	}
   })();
 </script>
-<noscript><p><img src="https://analyticsbeta.cimm2.com/piwik/piwik.php?idsite=$piwikSiteID&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
-<!-- End Piwik Code -->
+<noscript><p><img src="https://analyticsbeta.cimm2.com/piwik/piwik.php?idsite=$!CommonDBQuerySystemParameter.get('piwikSiteID')&rec=1" style="border:0;" alt="piwik image" /></p></noscript>
+<!-- End Site Analytics Pro Code -->
 #end
-#if($LayoutName != 'CMSStaticPageList')
-	#parse("stylesheets.html")
-#end
+##<!-- ------------------------------------------------------------------------------------ -->
+#if($LayoutName != 'CMSStaticPageList') #parse("stylesheets.html") #end
+##<!-- ------------------------------------------------------------------------------------ -->
+#if(!$wordpress)
 <title>$!pageTitleVelo.replace("Page","").trim()</title>
+#end

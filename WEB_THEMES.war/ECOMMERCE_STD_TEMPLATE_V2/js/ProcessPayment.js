@@ -132,11 +132,7 @@ var paymentProcessor = {};
             success: function (msg) {
                 $("#cardDetailsNew").html(msg);
                 $("#creditCardForm")[0].reset();
-                if (this.selectedCard == "") {
-
-                } else {
-
-                }
+                //if (this.selectedCard == "") { } else { }
             }
         });
     };

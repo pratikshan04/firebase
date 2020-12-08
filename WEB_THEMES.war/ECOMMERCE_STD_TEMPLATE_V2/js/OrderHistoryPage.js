@@ -7,7 +7,8 @@ var table = $('#OrdersHistoryTable').DataTable({
 			"sPrevious" :"Prev",
 			"sNext" :"Next"
 		}
-	}
+	},
+	'aoColumnDefs': [{ targets: -1, orderable: false }]
 });
 
 var poList = table.column(1).data().unique();
@@ -38,7 +39,10 @@ $('#resetBtn').click( function() {
 });
 
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/bootstrap-datepicker.min.js', function(){
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 	var today = new Date();
 	var month = today.getMonth() - 1,
 		year = today.getFullYear(),

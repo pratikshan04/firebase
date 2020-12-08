@@ -28,11 +28,11 @@
 		    #set($savedCartItemId = $!itemData.itemId) <!--CartlistData Iterator -->
 		    <tr itemscope itemtype="http://schema.org/Product">
 		    <!-- <td data-th="$!locale.get('product.label.Image')">
-		    	<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$!itemTitle.replace(' ','-')">
+		    	<a href="$!itemData.seoUrl">
 					#if($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-						<img src="$!escapeTool.url($!itemData.imageName)" itemprop="image" width="100" height="100" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+						<img src="$!escapeTool.url($!itemData.imageName)" width="100" height="100" alt='$itemTitle' onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 					#else
-						<img src="$!thumbNail$!itemData.imageName" itemprop="image" width="100" alt='$itemTitle' height="100" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
+						<img src="$!thumbNail$!itemData.imageName" width="100" alt='$itemTitle' height="100" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';"/>
 					#end
 				</a>
 				<input type="hidden" name="idList" value="$!itemData.partNumber" /> 
@@ -41,17 +41,12 @@
 		    </td> -->
 		    <td class="alignLeft" data-th="$!locale.get('header.label.items')">
 				<ul>
-					<li itemprop="name">
-						<a href="$!itemData.itemPriceId$!locale.get('website.url.ProductDetail')n/$slugUrl.makeSlug($!itemTitle)">$!itemData.brandName $!itemData.manufacturerPartNumber</a>		
-					</li>
+					<li ><a href="$!itemData.seoUrl">$!itemData.brandName $!itemData.manufacturerPartNumber</a></li>
+					<li><p>$!itemData.shortDesc</p><div id="minErr_$!itemData.itemPriceId"></div></li>
 					<li>
-	                 	<p itemprop="description">$!itemData.shortDesc</p>
-	                	<div id="minErr_$!itemData.itemPriceId"></div>
-					</li>
-					<li>
-						<p itemprop="sku"><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
+						<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
 						#if($itemData.manufacturerPartNumber)
-						<p itemprop="mpn"><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>
+						<p><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>
 						#end
 					</li>
 					#if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
@@ -235,7 +230,7 @@
 		<div class="clear"></div>
 		</form>
 		
-		<div id="processOrderWait" style="display: none;"><h1><img src="$!cdnUrl$!webThemes/$!siteName/images/pleasewait.gif" alt='pleasewait' style="vertical-align:middle;"/>&nbsp; $!locale.get("label.message.processignOrderPleaseWait")</h1></div>
+		<div id="processOrderWait" style="display: none;"><h1><img src="$!webThemes/$!siteName/images/pleasewait.gif" alt='pleasewait' style="vertical-align:middle;"/>&nbsp; $!locale.get("label.message.processignOrderPleaseWait")</h1></div>
 		</div>
 		
 <div id="orderDetailTotalPriceWrap" class="orderDetailTotalPriceWrap cimm_salesBottomStrip ">

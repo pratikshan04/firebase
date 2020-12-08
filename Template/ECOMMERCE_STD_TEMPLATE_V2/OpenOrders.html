@@ -16,8 +16,8 @@
 			<!-- <th>$!locale.get("form.label.CustomerRelease")</th> -->
 			<th>$!locale.get("form.label.orderDate")</th>
 			<th>$!locale.get("product.label.amount")</th>
-			<th>$!locale.get("form.label.requiredByDate")</th>
-			<!-- <th>$!locale.get("form.label.shipTo")</th> -->
+			<!-- <th>$!locale.get("form.label.requiredByDate")</th>
+			<th>$!locale.get("form.label.shipTo")</th> -->
 			<th>$!locale.get("product.label.ordrStatus")</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -37,14 +37,10 @@
 			</td>
 			<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
 			<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
-			<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate.substring(0,10) </td>
-			#if($session.getAttribute("erpType") == "eclipse")
-			<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.openOrderAmount)</td>
-			#else
+			<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
 			<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
-			#end
-			<td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
-			<!-- <td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
+			<!-- <td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
+			<td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
 			<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
 			<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
 			<td data-th="">
@@ -77,8 +73,8 @@
 			<!-- <th>$!locale.get("form.label.CustomerRelease")</th> -->
 			<th>$!locale.get("form.label.orderDate")</th>
 			<th>$!locale.get("product.label.amount")</th>
-			<th>$!locale.get("form.label.requiredByDate")</th>
-			<!-- <th>$!locale.get("form.label.shipTo")</th> -->
+			<!-- <th>$!locale.get("form.label.requiredByDate")</th>
+			<th>$!locale.get("form.label.shipTo")</th> -->
 			<th>$!locale.get("product.label.ordrStatus")</th>
 			<!-- <th>$!locale.get("form.label.orderedBy")</th> -->
 			<th></th>
@@ -99,13 +95,9 @@
 				<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
 				<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
 				<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
-				#if($session.getAttribute("erpType") == "eclipse")
-				<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.openOrderAmount)</td>
-				#else
 				<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
-				#end
-				<td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
-				<!-- <td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
+				<!-- <td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
+				<td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
 				<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
 				<!-- <td valign="top">$!orderDetail.orderedBy</td> -->  
 				<td data-th="">

@@ -1,7 +1,3 @@
-var webThemes = $("#webThemePath").val();
-/*jQuery.getScript(webThemes+'js/BulkAction.js', function(){
-	BulkAction.enableCheckBoxOnLoad();
-});*/
 function validateSearchWithInMulti(a){
 	var s = jQuery('#keyWordTxt').val();
 	if(s == "" || s=="Search Within" || s=="Search%20With%20In" || s==a){
@@ -25,33 +21,29 @@ function validateSearchWithInMulti(a){
 function removeKeyword(index){
 	var keyText = jQuery("#keyWordTxtTrail").text();
 	var attrList = jQuery("#attrFilterList").text();
-	if(jQuery.trim(attrList)!="" )
-	{
+	if(jQuery.trim(attrList)!="" ){
 		jQuery("#multiFilterAttrList").val(attrList);
 	}
-	if(jQuery.trim(keyText)!="")
-	{
+	if(jQuery.trim(keyText)!=""){
 		var keyArr = keyText.split("|");
-		if(keyArr.length>0)
-		{
+		if(keyArr.length>0){
 			keyArr.splice(index,1);
 			jQuery("#keyWordTxtMulti").val( keyArr.join("|"));
 			if(keyArr.length<1)
 				keyText = "";
-		}
-		else
-		{
+		}else{
 			keyText = "";
 		}
 		var navigationType = jQuery("#navigationType").val();
 		var srchKeyword = jQuery("#srchKeyword").val();
 		var srchTyp = jQuery("#srchTyp").val();
-		if(jQuery.trim(attrList)=="" && jQuery.trim(keyText)=="" && srchTyp=="CATNAV")
+		if(jQuery.trim(attrList)=="" && jQuery.trim(keyText)=="" && srchTyp=="CATNAV"){
 			jQuery("#categoryForm").submit();
-		else if(jQuery.trim(attrList)=="" && jQuery.trim(keyText)=="" && srchKeyword=="" && navigationType=="SEARCH")
+		}else if(jQuery.trim(attrList)=="" && jQuery.trim(keyText)=="" && srchKeyword=="" && navigationType=="SEARCH"){
 			window.location.href="locale('website.url.ProductCategory')";
-		else
+		}else{
 			jQuery("#multiFilterAttr").submit();
+		}
 	}
 }
 function buildSearchTrail(){
@@ -264,41 +256,43 @@ function appendSearchByCheckBox(id){
 	}
 }
 function appendSearch(key,val){
-	val = val.replace(/\+/g," ");
-	if(key=="Brands")
-		key = "brand";
-	if(key=="Category")
-		key = "category";
-	if(key=="Manufacturer")
-		key = "manufacturerName";
-	key = "attr_"+key;
-	var attrList = jQuery("#attrFilterList").text();
-	var keyText = jQuery("#keyWordTxtTrail").text();
-	if(jQuery.trim(keyText)!=""){
-		jQuery("#keyWordTxtMulti").val(keyText);
-	}
-	if(jQuery.trim(attrList)==""){
-		jQuery("#multiFilterAttrList").val(key+":"+val);
-	}else{
-		var attrArr = attrList.split("~");
-		var buildAttr = "";
-		var c = "";
-		var isBuild = false;
-		for(i=0;i<attrArr.length;i++){
-			var valArr = attrArr[i].split(":");
-			if(valArr[0] == key){
-				buildAttr = buildAttr + c + attrArr[i] +"|"+val;
-				isBuild = true;
-			}else{
-				buildAttr = buildAttr + c + attrArr[i];
-			}
-			c = "~";
+	block('Please Wait');
+	setTimeout(function(){
+		val = val.replace(/\+/g," ");
+		if(key=="Brands")
+			key = "brand";
+		if(key=="Category")
+			key = "category";
+		if(key=="Manufacturer")
+			key = "manufacturerName";
+		key = "attr_"+key;
+		var attrList = jQuery("#attrFilterList").text();
+		var keyText = jQuery("#keyWordTxtTrail").text();
+		if(jQuery.trim(keyText)!=""){
+			jQuery("#keyWordTxtMulti").val(keyText);
 		}
-		if(!isBuild)
-			buildAttr = buildAttr + "~" + key+":"+val;
-	jQuery("#multiFilterAttrList").val(buildAttr);
-	}
-	jQuery("#multiFilterAttr").submit();
+		if(jQuery.trim(attrList)==""){
+			jQuery("#multiFilterAttrList").val(key+":"+val);
+		}else{
+			var attrArr = attrList.split("~");
+			var buildAttr = "";
+			var c = "";
+			var isBuild = false;
+			for(i=0;i<attrArr.length;i++){
+				var valArr = attrArr[i].split(":");
+				if(valArr[0] == key){
+					buildAttr = buildAttr + c + attrArr[i] +"|"+val;
+					isBuild = true;
+				}else{
+					buildAttr = buildAttr + c + attrArr[i];
+				}
+				c = "~";
+			}
+			if(!isBuild){buildAttr = buildAttr + "~" + key+":"+val;}
+		jQuery("#multiFilterAttrList").val(buildAttr);
+		}
+		jQuery("#multiFilterAttr").submit();
+	}, 1000);
 }
 function changeListtoGrid(){
 	var width = $(window).width();

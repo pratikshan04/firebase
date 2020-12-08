@@ -1,5 +1,8 @@
 var webThemes = $("#webThemePath").val();
-$.getScript(webThemes+'js/multiTab.min.js', function(){
+var cdnSiteJsPath = $("#cdnSiteJsPath").val();
+var cdnModuleJsPath = $("#cdnModuleJsPath").val();
+var cdnPluginJsPath = $("#cdnPluginJsPath").val();
+$.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 	$('#cimm_tabBlock').multiTab({
 		   tabHeading: '.multiTabHeading',
 		   contentWrap: '.multiTabContent',
@@ -175,4 +178,3 @@ $(document).ready(function() {
 	}
 	divLocal.text(loginTime);
 });
-

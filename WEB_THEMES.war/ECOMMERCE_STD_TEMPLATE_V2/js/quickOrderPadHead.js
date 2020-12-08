@@ -199,9 +199,9 @@ var QuickOrder = {};
     				}
     			});
     			var radioValue = $("input[name='QuickOrderPadHead']:checked").val();
-                if(radioValue){
-                    radioValue;
-                }
+                //if(radioValue){
+                //    radioValue;
+                //}
                 if(radioValue!=null && radioValue=="Combine"){
     				jsonObjQuick = QuickOrder.findDuplicateAndAddvalues(jsonObjQuick)
     			}else if(radioValue!=null && radioValue=="Separate"){
@@ -250,8 +250,8 @@ var QuickOrder = {};
 								if(valuesComaSeparate[1]==null || valuesComaSeparate[1]==""){
 									valuesComaSeparate[1] = "1";
 								}
-								var qtyInput = valuesComaSeparate[0];
-								var keywordInput = valuesComaSeparate[1];
+								var qtyInput = valuesComaSeparate[1];
+								var keywordInput = valuesComaSeparate[0];
 								var keywordInputTrim = jQuery.trim(keywordInput);
 								if(keywordInputTrim != "" && keywordInput!=null){
 									if(QuickOrder.isInt(qtyInput)){
@@ -275,15 +275,15 @@ var QuickOrder = {};
 							block("Please Wait");
 							var valuesTabSeparate = lines[ln].split("\t");
 							if(valuesTabSeparate!=null && valuesTabSeparate.length>0){
-								if(valuesTabSeparate[0]==null || valuesTabSeparate[0]==""){
-									valuesTabSeparate[0] = "1";
+								if(valuesTabSeparate[1]==null || valuesTabSeparate[1]==""){
+									valuesTabSeparate[1] = "1";
 								}
-								var qtyInput = valuesTabSeparate[0];
-								var keywordInput = valuesTabSeparate[1];
+								var qtyInput = valuesTabSeparate[1];
+								var keywordInput = valuesTabSeparate[0];
 								if(keywordInput!="" & keywordInput!=null){
 									if(QuickOrder.isInt(qtyInput)){
 										var item = {}
-										item ["keyword"] = valuesTabSeparate[1];
+										item ["keyword"] = valuesTabSeparate[0];
 										item ["qty"] = qtyInput;
 										/*item ["searchTyp"] = "1";*/
 								        jsonObjQuick.push(item);
@@ -338,9 +338,9 @@ var QuickOrder = {};
 		if(submitFlag){
 			//var json = JSON.stringify(jsonObjQuick);
 			var radioValue = $("input[name='QuickOrderHeaderCopyPaste']:checked").val();
-            if(radioValue){
-                radioValue;
-            }
+            //if(radioValue){
+            //    radioValue;
+            //}
             if(radioValue!=null && radioValue=="Combine"){
 				jsonObjQuick = QuickOrder.findDuplicateAndAddvalues(jsonObjQuick)
 			}else if(radioValue!=null && radioValue=="Separate"){
@@ -547,9 +547,9 @@ $(function(){
 				        jsonObjQuick.push(item);
 					});
 					var radioValue = $("input[name='QuickOrderHeaderFileUpload']:checked").val();
-		            if(radioValue){
-		                radioValue;
-		            }
+		            //if(radioValue){
+		            //    radioValue;
+		            //}
 					if(radioValue!=null && radioValue=="Combine"){
 						jsonObjQuick = QuickOrder.findDuplicateAndAddvalues(jsonObjQuick)
 					}else if(radioValue!=null && radioValue=="Separate"){

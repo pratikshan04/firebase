@@ -131,7 +131,7 @@ function validateEventReg(userLogin){
 	if (result!=""){
 		showNotificationDiv("", result);
 		if($("#enableStickyHeader").val() == "Y" && $("#layoutName").val()!= "CMSStaticPage"){
-			let fixedHead = $("#fixedHead").height();
+			var fixedHead = $("#fixedHead").height();
 			$('html, body').animate({scrollTop: $(".alert").offset().top - fixedHead}, 400);
 		}else{
 			$('html, body').animate({scrollTop: $(".alert").offset().top}, 400);

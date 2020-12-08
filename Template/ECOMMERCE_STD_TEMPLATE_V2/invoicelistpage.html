@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="$!cdnUrl$!webThemes/$siteName/css/site_jui.css" /> 
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/site_jui.css" /> 
 <div class="cimm_siteTableEnclosure rwd-tableWrap">
 <table cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered display rwd-table" id="invoiceListTable">
 	<thead>
@@ -91,11 +91,15 @@ $(document).ready( function () {
         	sPrevious : "Prev",
             sNext : "Next"
         }
-    }
+    },
+	   /*"fnInitComplete": function (oSettings, json) {
+	        $('.dataTables_filter input').attr('type', 'text');
+	    } */
 	});
+	//$('#invoiceListTable_filter input').addClass('SearchRecords');
 } );
 </script>
-
+##<!-- <style> #SendPage{ visibility:hidden; } </style> -->
 <!-- <a title="Print this page" onclick="printSiteDetailPagePart();">
  <em class="fa fa-lg fa-print fa-lg"></em> Print this Page
  </a> -->
@@ -116,7 +120,7 @@ $(document).ready( function () {
 <table style="width:45%;height:100px;float:left;">
 <tr>
 <td>
-<img src="$!cdnUrl$!webThemes/$siteName/images/logo.png" alt="$!siteDisplayName"/>
+<img src="$!webThemes/$siteName/images/logo.png" alt="$!siteDisplayName"/>
 </td>
 </tr>
 </table>

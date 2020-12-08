@@ -54,7 +54,7 @@
 				#end
 				<tr>
 					<td data-th="$!locale.get('savedCart.button.cartName')">
-						<strong><a href="$linkUrl">$groupData.productListName #if($groupData.isSharedCart && $groupData.isSharedCart=='Y')<img src="$!cdnUrl$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>#end</a></strong>
+						<strong><a href="$linkUrl">$groupData.productListName #if($groupData.isSharedCart && $groupData.isSharedCart=='Y')<img src="$!webThemes/$siteName/images/share.png" width="16" height="14" title="Shared Cart" alt='share'/>#end</a></strong>
 					</td>
 					<td data-th="$!locale.get('saved.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
 					<td data-th="$!locale.get('saved.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>

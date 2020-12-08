@@ -1,7 +1,6 @@
 <script>
 var parentUrl = ""+window.parent.location;
-if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ) {
-}else {
+if (parentUrl.indexOf("cmsPageCms.action") === -1 && window.location !== window.parent.location ){}else {
 	alert("Unauthorized Access...!");
 	if(parentUrl.indexOf("cmsPageCms.action") !== -1){
 		window.location.href = "/";

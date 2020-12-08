@@ -321,15 +321,15 @@ $breakpoint-mobileView: 480px;
     font-size: 18px;
   }
   .fixOnApp {
-    &.cimm_stickyPageWrap{
+    &.cimm_stickyPageWrap {
       &:after {
         display: none;
       }
     }
-    .cimm_bodyContentWrap{
+    .cimm_bodyContentWrap {
       margin-bottom: 50px;
     }
-    header{
+    header {
       position: fixed;
       width: 100%;
       top: 0;
@@ -406,10 +406,10 @@ $breakpoint-mobileView: 480px;
     /*top: 80px;
 		width: 100%;*/
   }
-  .cimm_brandAtoZletters.fixIt{
+  .cimm_brandAtoZletters.fixIt {
     left: 0;
   }
-  .dropdownFixedWidth{
+  .dropdownFixedWidth {
     max-width: 220px;
   }
   .orderSummaryWrap {
@@ -478,12 +478,7 @@ $breakpoint-mobileView: 480px;
     width: 260px;
     margin: 0 auto;
     float: none;
-  }
-  .cimm_itemdetail
-    .cimm_itemdetail-imgcontainer
-    .cimm_itemdetail_thumblist
-    .cimm_slideItemImg {
-    height: 82px;
+    padding: 0px;
   }
   .cimm_itemdetail
     .cimm_itemdetail-imgcontainer
@@ -551,7 +546,7 @@ $breakpoint-mobileView: 480px;
     .cimm_itemdetail-imgcontainer.verticalThumblist
     .cimm_itemdetail_thumblist
     .slick-prev {
-    top: 50%;
+    top: 35%;
     width: 25px;
     height: 50px;
   }
@@ -582,16 +577,16 @@ $breakpoint-mobileView: 480px;
     top: -1px;
   }
   .toggle_content {
-		display: none;
+    display: none;
   }
   .listGridContainer {
-    .listView{
-      ul{
-        li{
-          &.sessionDesp{
+    .listView {
+      ul {
+        li {
+          &.sessionDesp {
             width: 100%;
             clear: both;
-            ul{
+            ul {
               width: 100%;
               clear: both;
             }
@@ -613,11 +608,17 @@ $breakpoint-mobileView: 480px;
       width: 100%;
     }
   }
-  .custom_lineform{
+  .form-inline-sm .form-group {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+  }
+  .custom_lineform {
     margin-bottom: 14px;
     text-align: left;
     &.form-inline {
-      .form-group, .form-control {
+      .form-group,
+      .form-control {
         display: inline-block;
         margin-bottom: 0;
         vertical-align: middle;
@@ -625,7 +626,7 @@ $breakpoint-mobileView: 480px;
       }
     }
   }
-  .grpNameEditWrap{
+  .grpNameEditWrap {
     text-align: left;
   }
   .compareTableWrap .pushbtnGroup li {
@@ -762,7 +763,7 @@ $breakpoint-mobileView: 480px;
       width: 100%;
     }
   }
-  .bulkActionBtn{
+  .bulkActionBtn {
     margin: 0 auto;
   }
   .calendarFilterWrap .tableHeader h2 {
@@ -805,7 +806,7 @@ $breakpoint-mobileView: 480px;
     height: auto;
     min-height: 350px;
     margin: 25px 0 0 0;
-    .gridFixHeight  {
+    .gridFixHeight {
       height: auto;
     }
     ul li.sessionDesp {
@@ -817,23 +818,23 @@ $breakpoint-mobileView: 480px;
     }
   }
   .cimm_listGridTopControls {
-    .cimm_listGridTopRightCtrls{
+    .cimm_listGridTopRightCtrls {
       display: block;
       margin: 0;
       text-align: center;
-      form{
+      form {
         width: 100%;
         float: none;
         text-align: center;
         display: block;
         margin: 10px 0;
       }
-      + .row{
+      + .row {
         text-align: center;
       }
     }
   }
- 
+
   .cimm_itemdetail .cimm_itemdetail-imgcontainer .cimm_itemdetail-image img {
     max-height: 300px !important;
   }
@@ -842,7 +843,8 @@ $breakpoint-mobileView: 480px;
     font-size: 10px;
     padding: 8px 2px;
   }
-  .marketingMaterial label, .clearform {
+  .marketingMaterial label,
+  .clearform {
     margin-top: 8px;
   }
   #productSearchForm .cimm_inlineButton {
@@ -877,10 +879,10 @@ $breakpoint-mobileView: 480px;
     margin-top: 10px;
   }
   .date_from {
-  	position: relative;
-  	display: table;
+    position: relative;
+    display: table;
   }
   .order_btn {
-  	margin-top: 5px;
+    margin-top: 5px;
   }
 }

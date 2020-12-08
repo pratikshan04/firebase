@@ -20,7 +20,7 @@
 					#if($srchTyp=="Event")
 						<a href="eventDetailsUnit.action?eventID=$staticData.staticPageId" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")..</a>
 					#else
-						<a href="/Page/$staticData.pageName" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")..</a>
+						<a href="$staticData.seoUrl" class="cimm_inlineButton">$!locale.get("product.label.clickForMore")..</a>
 					#end
 					<br /><br />
 					<div class="CategoryEventBlkBar"></div>

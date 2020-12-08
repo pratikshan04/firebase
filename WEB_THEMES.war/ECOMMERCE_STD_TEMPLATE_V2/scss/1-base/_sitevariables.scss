@@ -8,9 +8,9 @@ $gray-lighter: lighten($black, 93.5%) !default; // #eee
 $gray-lighten: lighten($black, 89.7%) !default; // #E5E5E5
 
 
-$primary_color      : #46acee;
-$secondary_color    : #404040; 
-$tertiary_color     : #f9f9f9;
+$primary_color      : #f26724;
+$secondary_color    : #1d1934; 
+$tertiary_color     : #ededed;
 
 
 $white              : #FFF;
@@ -65,24 +65,24 @@ $link-hover-color   : darken($link-color, 15%) !default;
 //Header
 $header:(
     header_top:(
-        bg: $white,
+        bg: $secondary_color,
         border-pos: bottom,
         border-color: $white,
         border-size: 2px,
-        f-color: inherit,
+        f-color: $white,
         f-size: 14px,
         tf-size: 16px,
-        tf-color: inherit,
+        tf-color: $white,
     ),
     header_mid:(
-        bg: $white,
+        bg: $secondary_color,
         border-pos: top,
         border-color: $secondary_color,
         border-size: 0px,
-        f-color: inherit,
+        f-color: $white,
         f-size: 14px,
         tf-size: 16px,
-        tf-color: inherit,
+        tf-color:$white,
     )
 );
 
@@ -91,22 +91,22 @@ $header:(
 
 $main_nav: (
     navbar: (
-        mnav-bg: $secondary_color,
-        mnav_lf-color: $tertiary_color,         //Main navigation link font color
+        mnav-bg: $white,
+        mnav_lf-color: $secondary_color,         //Main navigation link font color
         mnav_lf-size: $default_font-size,       //Main navigation link font size
         mnav_lf-family: $default_font-family,   //Main navigation link font family
         mnav_lf-uppercase: true,                //Main navigation link in uppercase
         mnav_lf-dividers: false,                //Main navigation link dividers Ex: "|" 
         //on hover section
-        mnav_lh-bg: $primary_color,             //Main navigation link hover background
+        mnav_lh-bg: $white,             //Main navigation link hover background
         mnav_lh_border: true,
         mnav_lhf-color: inherit,                 //Main navigation link hover font color
         //Dropdown arrow
         mnav_dropdown-icon: true,
         //Sub Navigation Section
-        subnav-bg: $tertiary_color, 
+        subnav-bg: $secondary_color, 
         subnav-lf-size: $default_font-size,
-        subnav-lf-color: $secondary-font_color,
+        subnav-lf-color: $white,
         subnav-lf-family: $default_font-family
     )
 );

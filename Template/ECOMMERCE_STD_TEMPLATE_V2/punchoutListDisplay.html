@@ -51,7 +51,7 @@
             #if($session.getAttribute("userCustomFieldValue").get("CART_AND_ORDERS_IMAGE_DISPLAY")=="Y")
             <td valign="top" data-th="$locale.get('product.label.Image')">                        
             	<div class="cimm_cartProdImg">
-	            	<a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($itemTitle)'>
+	            	<a href="$itemData.seoUrl">
 	                    <span id="imageName$itemData.itemId">
 	                        #if($itemData.imageType=="URL")
 	                            <img src="$itemData.imageName" width="75" height="75" id="mainImage" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$itemData.imageName'/>
@@ -69,13 +69,11 @@
             	<div class="cimm_cartProdDescription">
                     <ul>
                         <li>
-                        	<a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($itemTitle)'><strong>$itemData.brandName $!itemData.manufacturerPartNumber</strong></a>
+                        	<a href='$itemData.seoUrl'><strong>$itemData.brandName $!itemData.manufacturerPartNumber</strong></a>
                         </li>
                         <li>
                             #if($!itemData.shortDesc.length()>100)
-                            <p> $!itemData.shortDesc.substring(0, 100)
-                                <a href='$itemData.itemPriceId$locale.get("website.url.ProductDetail")n/$slugUrl.makeSlug($itemTitle)'> $locale.get("product.label.more")</a>
-                            </p>
+                            <p> $!itemData.shortDesc.substring(0, 100) <a href="$itemData.seoUrl"> $locale.get("product.label.more")</a></p>
                             #else
                             <p> $!itemData.shortDesc </p>
                             #end
