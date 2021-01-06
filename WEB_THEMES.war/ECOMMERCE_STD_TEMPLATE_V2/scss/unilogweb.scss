@@ -162,7 +162,8 @@ $modal_closebtn-color: $default_font-color;
 /*___________________Price____________________*/
 .priceSpan {
     font-family: $secondary_font-family;
-    font-size: 20px;
+    font-size: $font_lg;
+    color: $primary_color;
     img {
         width: auto !important;
         display: inline-block !important;
@@ -170,7 +171,8 @@ $modal_closebtn-color: $default_font-color;
 }
 .price {
     font-family: $secondary_font-family;
-    font-size: 16px;
+    font-size: $font_lg;
+    color: $primary_color;
     img {
         width: auto;
         display: inline-block;
@@ -188,6 +190,9 @@ $modal_closebtn-color: $default_font-color;
         margin: 15px 0;
         li+li:before {
             content: "|";
+        }
+        li.active{
+            color: $primary_color;
         }
     }
 }
@@ -223,9 +228,9 @@ $modal_closebtn-color: $default_font-color;
 	text-align: center;
 }
 
-.productTitle {
+.productTitle a{
 	margin: 0;
-    color: $default_font-color;
+    color: $primary_color;
     font-size: 18px;
     text-transform: uppercase;
     font-family: $secondary_font-family;
@@ -1120,11 +1125,12 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 .clearenceTag{
     background: url(../images/Clearance_Icon.png) no-repeat 0 0;
     height: 65px;
-    width: 65px;
+    width: 110px;
     display: block;
     background-size: contain;
     position: absolute;
-    top: 0;
+    top: -22px;
+    left: -20px;
     &.clearenceTagSmall {
         height: 45px;
         width: 45px;

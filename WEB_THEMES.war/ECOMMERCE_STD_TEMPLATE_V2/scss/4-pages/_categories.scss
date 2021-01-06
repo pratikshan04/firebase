@@ -50,6 +50,7 @@
 		a{
 			font-size: $category_hf-size; 
 			font-family: $category_hf-family;
+			color: $primary_color;
 			&:hover {
 				color: $primary_color;
 				text-decoration: underline;

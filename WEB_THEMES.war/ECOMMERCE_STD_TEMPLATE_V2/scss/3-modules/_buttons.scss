@@ -161,9 +161,10 @@ input[type='submit'] {
 				text-decoration: none;
 			}
 		}
-		color: $default_font-color;
+		color: $primary_color;
 		em {
-			margin-right: 10px;
+            margin-right: 10px;
+            color: $primary_color;
 		}
 		&:hover {
 			text-decoration: underline;

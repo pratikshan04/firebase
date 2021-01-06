@@ -52,39 +52,6 @@
 	</div>
 	#end
 
-	#if($!CommonDBQuerySystemParameter.get("EnableSideMenuManufacturer")=="Y")
-	<div class="cimm_filter-block">
-	<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#manufacturersMenu">$!locale.get("product.label.manufacturers")</div>
-		#set($count = 0)
-		#if($!manufacturerList.size()>0) 
-			#set($countManufacturerList = 0)
-			#set($mfg = 0) 
-			#foreach($!manufacturers in $!manufacturerList)
-				#set($mfg = $!mfg+1)
-				#set($count = $count+1)
-			#end
-			#if($count>5)
-			<div class="cimm_filter_block-container collapse in" id="manufacturersMenu">
-			<!-- <input type="text" id="box_brands" class="filterTextBox" onkeyup="filterAttributes(this,'manufacturersMenu');"value="Search Manufacturers"  onfocus="if(this.value=='Search Brands'){this.value='';}" onblur="if(this.value==''){this.value='Search Brands';}"> -->
-			<div class="cimm_filter-scrollbar collapse in"> <!-- Add scrollWrap class for scroll -->
-			<ul class="navList_manufacturersMenu pRight-3">
-			#else
-			<ul class="collapse in pRight-3 navList_manufacturersMenu" id="manufacturersMenu">
-			#end
-			#foreach($!manufacturers in $!manufacturerList)
-				#set($countManufacturerList = $!countManufacturerList + 1)
-				<li><a href="$!manufacturers.seoUrl">$!manufacturers.manufacturerName</a></li>
-			#end
-			</ul>
-			</ul>
-			#if($count>5)
-				</div>
-				</div>
-			#end
-		#end
-	</div>
-	#end
-
 	#if($leftStaticMenu.size > 0)
 	<div class="cimm_filter-block">
 		<div class="cimm_filter-block-title" data-toggle="collapse" data-target="#leftUtilityMenu">$!locale.get("product.heading.quickLinks")</div>

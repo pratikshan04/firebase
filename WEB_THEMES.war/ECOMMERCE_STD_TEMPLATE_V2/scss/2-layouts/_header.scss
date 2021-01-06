@@ -98,7 +98,7 @@ header {
                     margin: 0 auto 8px auto;
                     overflow: hidden;
                     border-radius: 50%;
-                    top: 24px;
+                    top: 30px;
                     em {
                         position: absolute;
                         left: 5px;
@@ -138,6 +138,10 @@ header {
                     }
                 }
              }
+             .loginblockElement{
+                position: relative;
+                top: 30px;
+            }
     }
     // >li:first-child {
     //     width: 80px;
@@ -210,9 +214,9 @@ header {
 
 .loginWindow {
     position: absolute;
-    top: 50px;
+    top: 100px;
     background: $white;
-    right: 38px;
+    right: 0px;
     width: 370px;
     min-height: 300px;
     left: auto;

@@ -308,19 +308,19 @@ $icons: (
             border: 0px;
             margin: 0;
             .cimm_nav{
-                position: relative;
+				position: relative;
+				@if($lh_border != false){
+					border-bottom: 1px solid $primary_color;
+				}
                 >ul{
                     >li{
-						@if($lh_border != false){
-							border-bottom: 2px solid transparent;
-						}
 						span{
 							display: inline-block;
 							position: relative;
 							>a{
 								white-space: normal;
 								letter-spacing: 1px;
-								padding: 15px 20px 15px 15px;
+								padding: 15px 80px 15px 0px;
 								display: block;
 
 								@if $lf-color != "inherit"{
@@ -347,6 +347,11 @@ $icons: (
 										}
 									}
 								}
+								.fa{
+									padding: 0 8px;
+									color: $primary_color;
+									font-size: $font-lg;	
+								}
 							}
 							em{
 								position: absolute;
@@ -354,18 +359,15 @@ $icons: (
 								top: 5px;
 								display: inline-block;
 								padding: 20px 14px;
+							
 								@include icon(
 									after, caret-right, 
 									$right: 4px, 
-									$top: 10px, 
+									$top: 0px, 
 									$size: 20px
 								);
 								&:after{
-									@if $lf-color != "inherit"{
-										color: $lf-color;
-									} @else {
-										color: set-font-color($nav_bg);
-									}
+									color: $white;
 								}
 							}
 						}
@@ -386,12 +388,11 @@ $icons: (
 								&:hover{
 									background: $tertiary_color;
 									> span {
+										a{
+											color: $primary_color;
+										}
 										em:after{
-											@if $subnav-lf-color != "inherit" {
-												color: $subnav-lf-color;
-											} @else {
-												color: set-font-color($subnav-bg);
-											}	
+											color: $primary_color;	
 										}
 									}
 									> .dropdown-menu{
@@ -414,12 +415,18 @@ $icons: (
 										&:hover{
 											color: $primary_color;	
 										}
+										&:active{
+											color: $primary_color;
+										}
 									}
 									>em{
 										padding: 14px 14px;
 										&:after{
 											top: 4px;
 											color: $white;
+										}
+										&:hover{
+											color: $primary_color;
 										}
 									}
 								}
@@ -432,7 +439,36 @@ $icons: (
 									height: 100%;
 									background: $tertiary_color;
 								}
-								
+								&.third{
+									span{
+										display: block;
+										a{
+											text-transform: capitalize;
+											padding: 4px 10px;
+											font-size: $subnav-lf-size;
+											font-family: $subnav-lf-family;
+											display: block;
+											color: $black ;
+											&:hover{
+												color: $primary_color;	
+										
+											}
+											&:active{
+												color: $primary_color;
+											}
+										}
+										em{
+											padding: 14px 14px;
+											color: $black;
+											&:after{
+												color: $black;
+											}	
+											&:hover{
+												color: $primary_color;
+											}
+										}
+									}
+								}	
 							}
 						}
 						&:hover{
@@ -475,16 +511,18 @@ $icons: (
 								}
 							}
 							> .dropdown-menu{
-                display: block;
+                				display: block;
 							}
 						}
 						
 						&:last-child{
 							>span{
 								>a{
+								
 									&:after{
 										content: "";
 									}
+									
 								}
 							}
 						}
@@ -608,7 +646,7 @@ $icons: (
                         @include font(
                             $family: $tf-faimly,
                             $size: $tf-size, 
-                            $color: $tf-color
+                            $color: $primary-color
                         );
 
                         @if $title-border == true {

@@ -1034,7 +1034,7 @@ function compareItemList(obj) {
 	var obj2 = obj1.split("_");
 
 	if ($(obj).is(':checked')) {
-		var compareItemCount = 5;
+		var compareItemCount = 3;
 		if (window.innerWidth < 700) {
 			var compareItemCount = 2;
 		} else if (window.innerWidth < 1200) {

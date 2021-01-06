@@ -299,8 +299,8 @@ function changeListtoGrid(){
 	if(width <= 980){
 		$("[data-getchangemode='getchangemode']").removeClass('listView').addClass('gridView'); 
 		setCookie('pagemode', 'gridView');
-		$("#listView").show();
-		$("#gridView").hide();
+		$("#listView").hide();
+		$("#gridView").show();
 		$('.productModeItemsDiv').hide();
 	}
 }
