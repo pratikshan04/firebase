@@ -12,21 +12,24 @@
 			#foreach($categoryMenu in $categMenu)
 			<li class="sec">
 				<span>
-					<a href="$!categoryMenu.seoUrl">$!categoryMenu.categoryName</a>
+					<a href="$!categoryMenu.seoUrl">$!categoryMenu.categoryName
 					#foreach($key in $secondLevelMenu.keySet())
 						#if($categoryMenu.categoryCode==$key) <em class="fa"></em> #end
 					#end
+					</a>
 				</span>
+				
 				#foreach($key in $secondLevelMenu.keySet())
 				#if($categoryMenu.categoryCode==$key)
 				<ul class="dropdown-menu">
 					#foreach($secondLvlMenu in $secondLevelMenu.get($key))
 					<li class="third">
 						<span>
-							<a href="$!secondLvlMenu.seoUrl">$!secondLvlMenu.categoryName</a>
+							<a href="$!secondLvlMenu.seoUrl">$!secondLvlMenu.categoryName
 							#foreach($key3 in $secondLevelMenu.keySet())
 							#if($secondLvlMenu.categoryCode==$key3) <em class="fa"></em> #end
 							#end
+							</a>
 						</span>
 						#foreach($key3 in $secondLevelMenu.keySet())
 						#if($secondLvlMenu.categoryCode==$key3)
@@ -41,6 +44,7 @@
 					#end
 				</ul>
 				#end
+				
 				#end
 			</li>
 			#end
@@ -75,35 +79,15 @@
 		</div>
     </li>
 	#end
-	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
 	<li>
-		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a></span>
-		<div class="shopbybrand dropdown-menu clearAfter">
-		#set($brandListSize = 0)
-		#set($brandIndex = 0)
-		#foreach($brands in $brandList)
-			#if($brandIndex < 27)
-				#if($brandListSize == 0)
-					<ul>
-				#end
-				#set($brandListSize = $brandListSize+1)
-				<li class="sec"><span><a href="$brands.seoUrl">$brands.brandName</a></span></li>
-				#if($brandListSize==9 && $brandListSize<=9)
-					#set($brandListSize=0)
-					</ul>
-				#end
-			#end
-			#set($brandIndex = $brandIndex+1)
-		#end
-		#if($brandListSize>0)
-			</ul>
-		#end
-		#if($brandList.size() > 27)
-			<p class="text-right pTop-2 clear mRight-3"><a href='$locale.get("website.url.Brands")' class="cimm_inlineButton">$locale.get('product.label.viewAllBrands')</a></p>
-		#end
-		</div>
+		<span>
+			<a href="javascript:void(0);" >$!locale.get("product.heading.accountDashBoard")<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		</span>
+		<ul class="dropdown-menu loginnav">
+			#parse("accountMenu.html")
+		</ul>
 	</li>
-	#end
+	
 	<!-- #if($!CommonDBQuerySystemParameter.get("EnableShopByManufacturer")=="Y")
     <li>
     	<span><a href='$locale.get("website.url.Manufacturers")'>$locale.get("product.label.manufacturers")</a>#if($manufacturerList.size() > 0)<em class="fa"></em>#end</span>
@@ -141,7 +125,7 @@
 		<li class="visible-lg">
 			<span>
 				<a href="javascript:void(0);" data-toggle="dropdown" data-target="#quickOrderPadDrop">$locale.get("product.heading.quickOrder")</a>
-				<em class="fa"></em>
+				
 			</span>
 			<div class="dropdown-menu" id="quickOrderPadDrop">
 				<div class="cartHead clearAfter">
@@ -237,11 +221,40 @@
 			</div>
 		</li>
 		#else
-		<li class="visible-lg"><span><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
+		<li class="visible-lg"><span><a href="$locale.get('website.url.QuickOrder')">$locale.get("product.heading.quickOrder")</a></span></li>
 		#end
 	#else
-	<li class="visible-lg"><span><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder")</a><em class="fa"></em></span></li>
+	<li class="visible-lg"><span><a data-toggle="modal" data-target="#loginModal">$locale.get("product.heading.quickOrder")</a></span></li>
 	#end
+	#end
+	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
+	<li>
+		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a></span>
+		<div class="shopbybrand dropdown-menu clearAfter">
+		#set($brandListSize = 0)
+		#set($brandIndex = 0)
+		#foreach($brands in $brandList)
+			#if($brandIndex < 27)
+				#if($brandListSize == 0)
+					<ul>
+				#end
+				#set($brandListSize = $brandListSize+1)
+				<li class="sec"><span><a href="$brands.seoUrl">$brands.brandName</a></span></li>
+				#if($brandListSize==9 && $brandListSize<=9)
+					#set($brandListSize=0)
+					</ul>
+				#end
+			#end
+			#set($brandIndex = $brandIndex+1)
+		#end
+		#if($brandListSize>0)
+			</ul>
+		#end
+		#if($brandList.size() > 27)
+			<p class="text-right pTop-2 clear mRight-3"><a href='$locale.get("website.url.Brands")' class="cimm_inlineButton">$locale.get('product.label.viewAllBrands')</a></p>
+		#end
+		</div>
+	</li>
 	#end
 	#if($!CommonDBQuerySystemParameter.get("ENABLE_MENUS_FROM_WP")=="Y")
 		<li>#generateWpNavMenu($CIMMUtility.getWordPressMenu("WP_NAV_MENU"))</li>
@@ -271,7 +284,7 @@
 					##end
 				#else
 					<span>
-						<a href="$firstLevelMenu" #if($topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu</a>#if($topMenu.menuList.size()>0)<em class="fa"></em>#end
+						<a href="$firstLevelMenu" #if($topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a>
 					</span>
 				#end
 				#if($topMenu.menuList && $topMenu.menuList.size()>0)

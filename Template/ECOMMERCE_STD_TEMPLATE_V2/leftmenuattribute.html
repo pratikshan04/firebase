@@ -72,7 +72,7 @@
 								<span class="Refine-label">
 								#if($attributeFiltered.attrName=="brand")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
 								#elseif($attributeFiltered.attrName=="category")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
-								#elseif($attributeFiltered.attrName=="manufacturerName")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
+								
 								#else
 									$!attributeFiltered.attrName.replaceAll("attr_","")
 								#end
@@ -93,8 +93,7 @@
 			#set($displayAttribute = "Y")
 			#if($attrListVal=="brand")
 				#set($attrValueForSearch = "Brands")
-			#elseif($attrListVal=="manufacturerName")
-				#set($attrValueForSearch = "Manufacturer")
+			
 			#elseif($attrListVal=="category")
 				#set($attrValueForSearch = "Category")
 			#else 
@@ -109,14 +108,14 @@
 				#end
 			#end
 			
-			#if($displayAttribute=="Y")
+			#if($displayAttribute=="Y" && ($attrValueForSearch != 'ManufacturerName' && $attrValueForSearch != 'manufacturerName'))
 				<div class="cimm_filter-block"><!-- #if($filterCount > 4)hideMe #end -->
 					#set($count = 0)
-					<div class="cimm_filter-block-title #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')  #else collapsed #end" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_').replace('(','').replace(')','').replace('.','')">$!attrValueForSearch</div>
+					<div class="cimm_filter-block-title #if($c == 'Brands' || $attrValueForSearch == 'Category')  #else collapsed #end" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_').replace('(','').replace(')','').replace('.','')">$!attrValueForSearch</div>
 						#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 							#set($count = $!count+1)
 						#end
-						<div class="cimm_filter_block-container collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Manufacturer' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replace(' ','_').replace('/','_').replace('(','').replace(')','').replace('.','')">
+						<div class="cimm_filter_block-container collapse #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Category')in#end" id="col_$!attrValueForSearch.replace(' ','_').replace('/','_').replace('(','').replace(')','').replace('.','')">
 							#if($count>6)
 								<input type="text" id="box_$!attrValueForSearch" class="form-control filterTextBox" onkeyup="filterAttributes(this,'$!attrValueForSearch.replaceAll(' ','-')');" title="Search $!attrValueForSearch" value="Search $!attrValueForSearch"  onfocus="if(this.value=='Search $!attrValueForSearch'){this.value='';}" onblur="if(this.value==''){this.value='Search $!attrValueForSearch';}">
 								<div class="cimm_filter-scrollbar">
