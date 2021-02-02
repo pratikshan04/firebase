@@ -16,7 +16,7 @@ $tertiary_color     : #ededed;
 $white              : #FFF;
 $red                : #ee3426;
 $blue               : #00a9e7;
-$green              : #37ff3b;
+$green              : #046a38;
 $yellow             : #e4de33;
 $lightgray          : #CCCCCC;
 $border-color       : #A1A1A1;
@@ -238,7 +238,7 @@ $btncolors: (
         hbg-color   : $black, // Button hover backogrund color
         btnhf-color : $white, // Button hover font color
         abg-color   : $gray-dark, //Button Active background color
-        bg-icon     : false,
+        bg-icon     : true,
         bg-icon-posintion: before,
         onlyborder  : false
     ),
@@ -400,9 +400,9 @@ $mtap:(
     tabHeading_heading-ffamily: $heading_font-family
 );
 
-$tabHeadingBackgroundColor: #ebebeb;
-$tabHeadingFontColor: #404040;
-$tabHeadingActiveBackgroundColor: #404040;
+$tabHeadingBackgroundColor: $secondary_color;
+$tabHeadingFontColor: $white;
+$tabHeadingActiveBackgroundColor: $secondary_color;
 $tabHeadingActiveFontColor : $white;
 $tabHeadingIconContent: "\e113";
 $tabHeadingActiveIconContent: "\e114";

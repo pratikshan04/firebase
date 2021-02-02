@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	jQuery('#example').DataTable({
+		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json"
+		},
 	    "order": [[ 0, "asc" ]],
 	    pageLength : 5,
 	    lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]]

@@ -95,21 +95,6 @@
 				</div>
 			</div>
 		</form>
-		#if($userLogin)
-		<p class="mTop-2 clearAfter">
-			#if($!session.getAttribute("isSalesUser").equals("Y"))
-			<span class="pull-left">
-				#if($!session.getAttribute("isSalesAdmin") && $!session.getAttribute("isSalesAdmin") != "")
-		    	<b>$!locale.get("label.salesuser.admin"):</b>
-		    	#else
-		    	<b>$!locale.get("label.salesuser.rep"):</b>
-		    	#end
-		    	$!session.getAttribute("salesUserDetails").get("firstName") $!session.getAttribute("salesUserDetails").get("lastName")
-		    </span>
-	    	#end
-	    	<span class="pull-right"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>
-    	</p>
-		#end ##$!session.getAttribute("custName")
 		<a href="$!locale.get('website.url.ShoppingCart')" class="hidden-lg mTop-1">$!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span></a>
 	</div>
 	#end
@@ -130,16 +115,9 @@
 		#if($userLogin)
 			<li class="dropdown">
 			<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="myAccountMenu">
-				<!-- <span class="imgBox">
-					<p>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</p> ##$!session.getAttribute("custName")
-					<img src='$!userProfileImagePath$!session.getAttribute("userProfileImage")' alt="No Image" id="profilePictureThumbnail" onerror="this.src='$!webThemes/$!siteName/images/default-profile.png'"/>
-				</span> -->
 				<span class="imgBox"><em class="fa fa-user-circle"></em></span>
-				<span class="blockElement">&nbsp;<!-- $!locale.get("product.heading.welcome") --></span>
+				<span class="blockElement"></span>
 			</a>
-			<ul class="myAccountMenu dropdown-menu">
-				#parse("accountMenu.html")
-			</ul>
 			</li>
 		#else
 			<li class="hideForDevices dropdown">
@@ -147,7 +125,7 @@
 					<span class="imgBox"><em class="fa fa-user-circle"></em></span>	
 				</a>
 				<a href="javascript:void(0);" class="dropdown-toggle loginblockElement" data-toggle="dropdown" data-target="loginDropDown">
-					<span>iniciar sesi&iacute;n</span>
+					<span>$!locale.get('product.heading.login')</span>
 				</a>
 				<div class="loginWindow dropdown-menu">
 					<form id="popLoginForm" method="post" data-form="login">

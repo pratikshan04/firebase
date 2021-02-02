@@ -150,7 +150,7 @@ $modal_closebtn-color: $default_font-color;
         }
         a {
             color: $default_font-color;
-            font-size: 16px;
+            font-size: $font_sm;
             padding: 0 3px;
             &:hover {
                 color: $primary_color;
@@ -239,6 +239,10 @@ $modal_closebtn-color: $default_font-color;
 .cimm_compareControls {
     margin-top: 6px;
     display: block;
+
+    em{
+        color: $primary_color;
+    }
 }
 
 .groupList{
@@ -293,6 +297,9 @@ $modal_closebtn-color: $default_font-color;
 }
 .cimm_qtyWrap span {
 	display: inline-block;
+}
+.cimm_qtyWrap strong{
+    color: $green;
 }
 #generalModel {
     .modal-dialog {

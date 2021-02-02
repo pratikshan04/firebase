@@ -85,6 +85,9 @@ header {
             display: block;
             color: $white;
             font-weight: bold;
+              >img{
+                  cursor: default;
+              }
               >span {
                 font-weight: normal;
                 text-transform: uppercase;
@@ -280,7 +283,7 @@ header {
 
 .cimm_searchWrapper { 
     text-align: center;
-    margin: 34px 0px;
+    margin: 34px 0px 0px 0px;
     position: relative;
 
     input[type='text'] {

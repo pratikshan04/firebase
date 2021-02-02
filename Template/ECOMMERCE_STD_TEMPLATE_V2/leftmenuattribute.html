@@ -30,7 +30,7 @@
 		#if($navigationType=="SEARCH")
 		<div class="cimm_searchWithin marginY-2">
 			<div class="input-group">
-				<input type="text" class='form-control' placeholder="Search Within $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onkeypress="return runScript(event);" class="form-control"/>
+				<input type="text" class='form-control' placeholder="$!locale.get('search.label.searchWithin') $!keyWord" name="narrowText" id="narrowText" title="$!locale.get('product.label.narrowyoursearch')" onkeypress="return runScript(event);" class="form-control"/>
 				<div class="input-group-btn">
 					<button type="submit" value=" $!locale.get('search.label.go')" id="nSearchBtn" onclick="performSearch();" class="btn btn-primary"><em class="fa fa-lg fa-search"></em></button>
 				</div>
@@ -40,7 +40,7 @@
 		<div class="cimm_searchWithin marginY-2">
 			<form id="searchForm" action="$!searchWithInFormURL" method="get" class="clearAfter">
 				<div class="input-group">
-					<input type="text" name="keyWordTxt" id="keyWordTxt" title="Search Within $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
+					<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!locale.get('search.label.searchWithin') $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
 					#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
 					#if($srchTyp.trim().length() > 0)
 						<input type="hidden" name="srchTyp" value="$!srchTyp" />
@@ -111,7 +111,15 @@
 			#if($displayAttribute=="Y" && ($attrValueForSearch != 'ManufacturerName' && $attrValueForSearch != 'manufacturerName'))
 				<div class="cimm_filter-block"><!-- #if($filterCount > 4)hideMe #end -->
 					#set($count = 0)
-					<div class="cimm_filter-block-title #if($c == 'Brands' || $attrValueForSearch == 'Category')  #else collapsed #end" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_').replace('(','').replace(')','').replace('.','')">$!attrValueForSearch</div>
+					<div class="cimm_filter-block-title #if($attrValueForSearch == 'Brands' || $attrValueForSearch == 'Category')  #else collapsed #end" data-toggle="collapse" data-target="#col_$!attrValueForSearch.replace(' ','_').replace('/','_').replace('(','').replace(')','').replace('.','')">
+						#if($attrValueForSearch == 'Brands')
+							$!locale.get('product.label.brands')
+						#elseif($attrValueForSearch == 'Category')
+							$!locale.get('navigation.label.categories')
+						#else
+							$!attrValueForSearch
+						#end
+					</div>
 						#foreach($!filterVal in $!attrList.attrFilterList.get($!attrListVal))
 							#set($count = $!count+1)
 						#end

@@ -5,9 +5,9 @@
 
 <div class="multiTab" id="cimm_regBlock">
 	<ul class="multiTabHeading clearAfter">
-		<li><a href="#firstTimeOrder" class="dark-ripple"><span>I am a current Customer but need an online account</span></a></li>
-		<li><a href="#newCommertialCustomer" class="dark-ripple"><span>New commercial account</span></a></li>
-		<li><a href="#newRetailCustomer" class="dark-ripple"><span>New retail customer account</span></a></li>
+		<li><a href="#firstTimeOrder" class="dark-ripple"><span>$locale.get('register.label.customerOnAccount')</span></a></li>
+		<!-- <li><a href="#newCommertialCustomer" class="dark-ripple"><span>New commercial account</span></a></li>
+		<li><a href="#newRetailCustomer" class="dark-ripple"><span>New retail customer account</span></a></li> -->
 		<!-- <li><a href="#crteditApplication"><span>Credit Application</span></a></li> -->
 	</ul>
 	<div class="multiTabContent">
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<div class="center">
-					Click on "I Accept" button to agree the $siteDisplayName <a href="/Terms-and-Conditions" target="_blank">Terms and Conditions</a>	and to submit your registration
+					$!locale.get("register.label.termsAccept") $siteDisplayName <a href="/Terms-and-Conditions" target="_blank">$!locale.get("register.label.tc")</a> $!locale.get("register.label.subReg")	
 				</div>
 				<div>
 		        	<label class="customCheckBox">

@@ -35,7 +35,7 @@ input[type='submit'] {
     border: none;
 	border-radius: 2px;
     &:hover {
-        background: $gray-lighter;
+        background: $primary_color;
     }
 }
 .compareSimDiffBtns.active {
@@ -56,12 +56,48 @@ input[type='submit'] {
 //Add to Cart Button`
 .btn-addtocart {
     text-transform: uppercase;
-	vertical-align: unset;
+    vertical-align: unset;
+    padding-left: 60px;
     &.btns-disable {
         opacity: .3;
     }
+    &:before{
+        background: url(../../ECOMMERCE_STD_TEMPLATE_V2/images/cartIconBtn.png) no-repeat !important;
+        width: 40px;
+        height: 24px;
+    }
 }
 
+.btn-default{
+    background-color: $primary_color;
+    border-color: $primary_color;
+    color: $white;
+    &:hover, &:active, &:focus{
+        background-color: $primary_color;
+        border-color: $primary_color;
+        color: $white;
+    } 
+}
+.btn-default.active.focus, 
+.btn-default.active:focus, 
+.btn-default.active:hover, 
+.btn-default:active.focus, 
+.btn-default:active:focus, 
+.btn-default:active:hover, 
+.open>.dropdown-toggle.btn-default.focus, 
+.open>.dropdown-toggle.btn-default:focus,
+.open>.dropdown-toggle.btn-default:hover{
+    background-color: $primary_color;
+    border-color: $primary_color;
+    color: $white;
+}
+.btn-default.active, 
+.btn-default:active, 
+.open>.dropdown-toggle.btn-default{
+    background-color: $primary_color;
+    border-color: $primary_color;
+    color: $white;
+}
 
 .btns-disable {
     cursor: not-allowed !important;

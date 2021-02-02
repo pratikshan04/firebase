@@ -204,7 +204,8 @@
 					display: block;
 				}
 				&.ac_over{
-					background: $white;
+					background: $secondary_color;
+					color: $white;
 				}
 			}
 		}
@@ -212,7 +213,8 @@
 			padding-bottom: 5px;
 			li {
 				&.ac_over{
-					background: $white;
+					background: $secondary_color;
+					color: $white;
 				}
 			}
 		}

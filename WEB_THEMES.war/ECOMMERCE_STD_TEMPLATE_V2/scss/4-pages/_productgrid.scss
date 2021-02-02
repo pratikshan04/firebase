@@ -20,6 +20,9 @@
           font-size: 18px;
           font-weight: 600;
           color: $primary_color;
+          &.text{
+            color: $white;
+          }
         }
       }
     }
@@ -30,6 +33,26 @@
       }
       margin-right: 0px;
     }
+    .listView {
+      &:after{
+          content: "\f00b";
+          color:$primary_color;
+          font-family: 'Font Awesome 5 Free';
+          font-size: 16px;
+          position: relative;
+          font-weight: 600;
+      }
+    }
+    .gridView {
+      &:after{
+          content: "\f00a";
+          color:$primary_color;
+          font-family: 'Font Awesome 5 Free';
+          font-size: 16px;
+          position: relative;
+          font-weight: 600;
+      }
+    }
   }
 }
 
@@ -39,6 +62,7 @@
       width: 220px;
     }
   }
+
   .listView {
     width: 100%;
     min-height: 260px;
@@ -84,8 +108,13 @@
         position: relative;
         ul {
           float: left;
-          width: 50%;
           padding-right: 8px;
+          &.first{
+            width: 40%;
+          }
+          &.second{
+            width: 60%;
+          }
           li {
             width: 100%;
             float: none;
@@ -319,6 +348,10 @@
 }
 .bulkActionBtn{
   max-width: 200px;
+  .btn{
+    background-color: $primary_color;
+    span{color: $white;}
+  }
 }
 .assignedStaticPageWrap {
   height: 210px;

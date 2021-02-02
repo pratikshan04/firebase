@@ -602,8 +602,8 @@ function performSearch() {
 		nSearch = nSearch.replace(/=/g, "%3D");
 		nSearch = nSearch.replace(/@/g, "%40");
 	}
-	if (s == "" || s == "Search" || s.toLowerCase().indexOf("search") > -1 || s.toLowerCase().indexOf("enter keyword") > -1 || s.toLowerCase().indexOf("enter%20keyword") > -1 || $.trim(s) == "Product Search" || $.trim(s) == "Product%20Search" || $.trim(s.toUpperCase()) == "ENTER KEYWORD OR PART NUMBER" || $.trim(s.toUpperCase()) == "ENTER%20KEYWORD%20OR%20PART%20NUMBER" || $.trim(s.toUpperCase()) == "SEARCH") {
-		bootAlert("small", "error", "Error", "Enter Search Keyword.");
+	if (s == "" || s == "Buscar Productos" || s == "Buscar%20Productos" || s == "Search" || s.toLowerCase().indexOf("search") > -1 || s.toLowerCase().indexOf("enter keyword") > -1 || s.toLowerCase().indexOf("enter%20keyword") > -1 || $.trim(s) == "Product Search" || $.trim(s) == "Product%20Search" || $.trim(s.toUpperCase()) == "ENTER KEYWORD OR PART NUMBER" || $.trim(s.toUpperCase()) == "ENTER%20KEYWORD%20OR%20PART%20NUMBER" || $.trim(s.toUpperCase()) == "SEARCH") {
+		bootAlert("small", "error", "Error", "Ingrese la palabra clave de busqueda");
 		return false;
 	} else if(unusualCode > 0){
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
@@ -841,11 +841,11 @@ $(document).ready(function () {
 			}
 			
 			if ($.trim(un) == "" && $.trim(ps) == "") {
-				msg = "Enter User Name & Password";
+				msg = locale("label.error.userAndPass");
 			} else if ($.trim(un) == "") {
-				msg = "Enter User Name";
+				msg = locale("label.error.usernameAlt");
 			} else if ($.trim(ps) == "") {
-				msg = "Enter Password";
+				msg = locale("label.error.passwordAlt");
 			}else if(enablePasswordPolicy == "Y" && pwdValidation[0]=="false"){
 				msg = pwdValidation[1];
 			}else if (!navigator.onLine) {
@@ -2798,7 +2798,7 @@ function paginationScriptV2(n_pages, page_link, iindex, pgno) {
 		if((n_index % 5) == 1){
 			relStringPrev = "rel='prev'";
 		}
-		returnString += '<a href="' + page_link + prevpage + '"  '+relStringPrev+'>Previous</a>\n';
+		returnString += '<a href="' + page_link + prevpage + '"  '+relStringPrev+'>Previo</a>\n';
 	}
 
 	if (n_links) {
@@ -2837,7 +2837,7 @@ function paginationScriptV2(n_pages, page_link, iindex, pgno) {
 		if((n_index % 5) == 0){
 			relStringnxt = "rel='next'";
 		}
-		returnString += '<a href="' + page_link + nexpage + '" '+relStringnxt+' >Next</a>';
+		returnString += '<a href="' + page_link + nexpage + '" '+relStringnxt+' >Siguiente</a>';
 	}
 	returnString += '  </div>';
 	return returnString;
@@ -3707,24 +3707,24 @@ function homeCarousels() {
 		}
 		$('.featuredProductList').slick({
 			infinite: true,
-			slidesToShow: 5,
+			slidesToShow: 3,
 			slidesToScroll: 1,
 			pauseOnHover: true,
 			responsive: [
 				{
 					breakpoint: 1030,
 					settings: {
-						slidesToShow: 4,
+						slidesToShow: 3,
 					}
 				}, {
 					breakpoint: 770,
 					settings: {
-						slidesToShow: 3,
+						slidesToShow: 2,
 					}
 				}, {
 					breakpoint: 500,
 					settings: {
-						slidesToShow: 2,
+						slidesToShow: 1,
 					}
 				},
 				{
