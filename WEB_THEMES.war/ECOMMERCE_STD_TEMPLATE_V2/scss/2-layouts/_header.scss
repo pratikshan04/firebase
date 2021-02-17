@@ -72,7 +72,7 @@ header {
 }
 
 .cimm_signWrap {
-   // padding: 10px !important;
+    //padding: 10px !important;
     //text-align: right !important;
     height: 100px;
 
@@ -80,7 +80,7 @@ header {
         display: inline-block;
         position: relative;
         text-align: center;
-        padding: 10px !important;
+        //padding: 10px !important;
         > a { 
             display: block;
             color: $white;
@@ -130,8 +130,8 @@ header {
         
         ul.cimm_contactWrap li{
                 position: relative;
-                top: 10px;
-                padding: 4px 0px;
+                top: 16px;
+                padding: 4px 8px;
                 a{
                     margin: 10px 0px;
                     font-size: $font_md;

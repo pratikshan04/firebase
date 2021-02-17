@@ -9,12 +9,12 @@ $('#retrivePassword').submit(function() {
 		isValid = 0;
 	}*/
 	if(emailAddress==""){
-		msg = msg + "Please Enter Email Address</br>";
+		msg = msg + locale("reorder.label.select.at.least.one.item") + "</br>";
 		isValid = 0;
 	}else{
 		var emailRegEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 		if (!emailRegEx.test(emailAddress)){
-			msg = msg + "Invalid Email ID</br>";
+			msg = msg + locale("form.user.address.emailId.invalid") +"</br>";
 			isValid = 0;
 		}
 	}

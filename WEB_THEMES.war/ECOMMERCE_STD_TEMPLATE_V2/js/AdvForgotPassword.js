@@ -4,7 +4,7 @@ function forgotPasswordAdvanced(){
 	var password = $.trim($("#password").val());
 	var confirmPassword = $.trim($("#confirmPassword").val());
 	if(password==""){
-		msg = msg + "Password Cannot Be Empty</br>";
+		msg = msg + locale("form.user.password.password") + "</br>";
 		isValid = 0;
 	}else{
 		var enablePasswordPolicy = "N";
@@ -28,16 +28,16 @@ function forgotPasswordAdvanced(){
 		}else{
 			var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 			if (!passwordRegEx.test(password)){
-				msg = msg + "Invalid Password, Minimum 8 character required with at least one Number, one lower case and one upper case letter</br>";
+				msg = msg + locale('form.user.password.invalid') + "</br>";
 				isValid = 0;
 			}
 		}
 	}
 	if(confirmPassword==""){
-		msg = msg + "Confirm Password Cannot Be Empty</br>";
+		msg = msg + "Confirmar contrase&ntilde;a no puede estar vac&iacute;a</br>";
 		isValid = 0;
 	}else if(password != confirmPassword){
-		msg = msg + "Password Mismatch</br>";
+		msg = msg + "Contrase&ntilde;a no coincide</br>";
 		isValid = 0;
 	}
 	
@@ -53,7 +53,7 @@ function forgotPasswordAdvanced(){
 						size: "small",
 						closeButton:false,
 						message: msg,
-						title: "<span class='text-success'>Password change Confirmation &nbsp;&nbsp;<em class='glyphicon glyphicon-ok'></em></span>",
+						title: "<span class='text-success'>Confirmaci&oacute;n de cambio de contrase&ntilde;a &nbsp;&nbsp;<em class='glyphicon glyphicon-ok'></em></span>",
 						callback: function(result){
 							//if if(msg.indexOf("cpol") add in code if required
 							if(result){
