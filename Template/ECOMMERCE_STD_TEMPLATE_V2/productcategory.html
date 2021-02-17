@@ -262,7 +262,7 @@
 			 #end
 			 <!-- <br/> -->
 			 <div class="pageTitle">
-				<h3> Not finding what you want, try our <u><a class="linkText" href="/advancedSearch">Advanced Search</a></u></h3>
+				<h3> $!locale.get("label.search.nodataNotFind") <u><a class="linkText" href="/advancedSearch">$!locale.get("product.heading.advancedSearch")</a></u></h3>
 			 </div>
 		#end
 	</div>
@@ -382,21 +382,21 @@
 						#else
 							<li class="sessionDesp">
 								<h3 class="productTitle">
-									<a itemprop="url" href="$!itemDetailUrl" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
+									<a itemprop="url" href="$!itemDetailUrl" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" data-toggle="tooltip" title='$!itemData.shortDesc' >
 										<span itemprop="name">
-										#if($itemTitle.length() > 22)
-											$!itemTitle.substring(0, 22)... 
+										#if($!itemData.shortDesc.length() > 45)
+											$!itemData.shortDesc.substring(0, 45)... 
 										#else
-											$!itemTitle
+											$!itemData.shortDesc
 										#end
 										</span>
 									</a>
 								</h3>
-								#if($itemData.shortDesc.length()>65)
+								<!-- #if($itemData.shortDesc.length()>65)
 									<p itemprop="description" id="itemShortDesc$!itemData.itemId" class='listGridItemDesc'>$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemDetailUrl">$!locale.get("product.label.more")</a></span></p>
 								#else
 									<p itemprop="description" id="itemShortDesc$!itemData.itemId" class='listGridItemDesc'>$!itemData.shortDesc</p>
-								#end
+								#end -->
 								<ul class="skuStyle first">
 									<!-- #if($itemData.manufacturerName.trim() != "")
 										<li><strong>$!locale.get("product.label.manufacturers"): </strong><span itemprop="manufacturer">$!itemData.manufacturerName.trim()</span></li>

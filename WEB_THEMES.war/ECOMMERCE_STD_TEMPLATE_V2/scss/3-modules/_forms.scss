@@ -2,6 +2,7 @@
 input{
 	font-family: $default_font-family;
 	border: 1px solid $border-color;
+	border-radius: 2px;
 }
 textarea { resize: vertical; }
 .cimm_advancedSearchFilter{
@@ -334,4 +335,20 @@ ul.cimm_formContent li label.customCheckBox2 span{
     height: 14px;
     width: 14px;
     cursor: not-allowed;
+}
+#changePassword .form-group{
+	label{
+		color: $secondary_color;
+		font-size: $font-md;
+		font-weight: bold;
+	}
+	input{
+		height: 42px;
+	}
+	button{
+		width: 150px;
+	}
+	&.username{
+		font-size: $font-lg;
+	}
 }

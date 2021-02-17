@@ -323,10 +323,10 @@
 			#else	
 				#set($customVal = $customFieldVal.get($itemData.itemId))
 				<!-- Single Item Without Product Mode -->
-				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.brandName $!itemData.manufacturerPartNumber
+				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.shortDesc
 					<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
 				</h1>
-				<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p> 
+				<!-- <p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p>  -->
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<ul id="productDetailList" class='skuStyle'>

@@ -385,7 +385,7 @@ $icons: (
 								height: auto;
 								padding: 2px 0px; 
 								&:hover{
-									background: $tertiary_color;
+									background: transparent;
 									> span {
 										a{
 											color: $primary_color;
@@ -679,7 +679,7 @@ $icons: (
 						
                         ul{
                             li{
-								padding: 4px;
+								padding: 4px 16px 4px 4px;
                                 a, label span{
                                     @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
                                     @if ($lf-uppercase != false){

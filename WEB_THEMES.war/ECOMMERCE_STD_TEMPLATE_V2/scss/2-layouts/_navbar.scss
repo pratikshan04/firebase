@@ -21,22 +21,28 @@ nav.navbar {
                 }
                 .dropdown-menu{
                     &.shopbyprod, &.shopbymanuf, &.shopbybrand{
-                        width: 855px;
-                        right: 0 !important;
-                        left: auto;
+                        width: 554px;
+                        >ul{
+                            width: 250px;
+                        }
                     }
                 }
                 .loginnav{
                     li{
                         a{
                             color: $white;
+                            font-size: $font-sm;
+                            padding: 4px 8px !important;
                             em{
-                                padding: 4px;
+                                padding: 4px 12px 0px 4px;
+                                color: $primary-color;
+                                font-size: $font-sm;
                             }
                         }
                     &:hover{
                         a{
                             color: $primary_color;
+                            background: transparent;
                         }
                         color: $primary_color;
                     }   

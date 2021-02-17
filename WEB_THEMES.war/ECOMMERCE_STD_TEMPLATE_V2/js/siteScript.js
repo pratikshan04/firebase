@@ -117,7 +117,7 @@ function changeAction(s, selectId) {
 			size: "small",
 			closeButton: false,
 			message: "Are you sure you want delete?",
-			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			callback: function (result) {
 				if (result) {
 					$("#productGroupForm").attr("action", "deleteSavedCartPage.action");
@@ -138,7 +138,7 @@ function changeAction(s, selectId) {
 						size: "small",
 						closeButton: false,
 						message: locale("savedcart.item.delete"),
-						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+						title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 						callback: function (result) {
 							deleteSelectedItem(result, selectId);
 						}
@@ -148,7 +148,7 @@ function changeAction(s, selectId) {
 						size: "small",
 						closeButton: false,
 						message: locale("productgroup.item.delete"),
-						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+						title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 						callback: function (result) {
 							deleteSelectedItem(result, selectId);
 						}
@@ -158,7 +158,7 @@ function changeAction(s, selectId) {
 						size: "small",
 						closeButton: false,
 						message: "Delete selected items?",
-						title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+						title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 						callback: function (result) {
 							deleteSelectedItem(result, selectId);
 						}
@@ -169,7 +169,7 @@ function changeAction(s, selectId) {
 					size: "small",
 					closeButton: false,
 					message: "Delete selected items?",
-					title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+					title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 					callback: function (result) {
 						deleteSelectedItem(result, selectId);
 					}
@@ -337,7 +337,7 @@ function deleteSavedProductGroup(delProductgroup, reqType) {
 				size: "small",
 				closeButton: false,
 				message: locale("savedcart.label.delete"),
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result)
 						window.location.href = delProductgroup;
@@ -348,7 +348,7 @@ function deleteSavedProductGroup(delProductgroup, reqType) {
 				size: "small",
 				closeButton: false,
 				message: locale("productgroup.label.delete"),
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result)
 						window.location.href = delProductgroup;
@@ -359,7 +359,7 @@ function deleteSavedProductGroup(delProductgroup, reqType) {
 				size: "small",
 				closeButton: false,
 				message: locale("savedcart.label.delete"),
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result)
 						window.location.href = delProductgroup;
@@ -614,7 +614,7 @@ function performSearch() {
 			size: "small",
 			closeButton: false,
 			message: "Selected Inner Search will be cleared.",
-			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			callback: function (result) {
 				if (result == false) {
 					$("#narrowText").val("");
@@ -629,7 +629,7 @@ function performSearch() {
 			size: "small",
 			closeButton: false,
 			message: "Selected Filters will be cleared.",
-			title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			callback: function (result) {
 				continueSearch(result);
 			}
@@ -763,7 +763,7 @@ function scynInitiate() {
 }
 //------------ ship sync New
 function scynInitiateV2(page) {
-	block("Please Wait");
+	block("Espere por favor");
 	$.get("getAddressesAddressSync.action?frPage=popLogin&showpopUp=Y", function (data, status) {
 		// $('#generalModel .modal-body').html(data);
 		// unblock();
@@ -772,7 +772,7 @@ function scynInitiateV2(page) {
 				$("#ShipDiv").html($(data).filter("#ShipDiv").html());
 			}
 			unblock();
-			bootAlert("medium", "success", "Success", " Thank you for your patience while your Ship To/Jobs list is being refreshed.");
+			bootAlert("medium", "success", "Éxito", locale("label.shipadd.refersh"));
 		} else {
 			window.location.href = locale('website.url.ProductCategory');
 		}
@@ -1047,7 +1047,7 @@ function compareItemList(obj) {
 		}
 		listArr = list.split(",");
 		if (listArr.length >= compareItemCount) {
-			bootAlert("small", "error", "Error", "You cannot compare more than " + compareItemCount + " items at a time");
+			bootAlert("small", "error", "Error", locale("label.error.leastcompare1") + compareItemCount + locale("label.error.leastcompare2"));
 			$(obj).removeAttr('checked', 'checked');
 		} else {
 			for (i = 0; i < listArr.length; i++) {
@@ -1122,7 +1122,7 @@ function checkCookieSize() {
 function clearCookie() {
 	var list = getCookie('compareList');
 	if (list == null) {
-		bootAlert("small", "error", "Error", "No Item in Compare List.");
+		bootAlert("small", "error", "Error", locale("label.error.noItemCompare"));
 		list = "";
 		if ($(".cimm_addcartSlider").length > 0) {
 			var checkCookieSize = localStorage.getItem("selectedItemsToGroup");
@@ -1142,7 +1142,7 @@ function clearCookie() {
 		$("#compareSpan").html("0");
 		$("#compareSpanBottom").html("0");
 		$("#compareSpanProduct").html("0");
-		bootAlert("small", "error", "Error", 'Item(s) removed from compare list.');
+		bootAlert("small", "error", "Error", locale("label.error.compareRemove"));
 		$(".compareCountSpanClass").html("0");
 		//		}
 		if ($(".cimm_addcartSlider").length > 0) {
@@ -1168,7 +1168,7 @@ function removeItems() {
 	var chkerr = chks.length - rem;
 	if (rem > 0) {
 		if (chkerr < 2) {
-			bootAlert("small", "error", "Error", "Please retain at least 2 products to compare");
+			bootAlert("small", "error", "Error", locale("label.error.2reatin"));
 		}
 		else {
 			setCookie('compareList', s, 14);
@@ -1177,7 +1177,7 @@ function removeItems() {
 		}
 	}
 	else {
-		bootAlert("small", "error", "Error", "Please select an item to remove.");
+		bootAlert("small", "error", "Error",  locale("label.error.compareiremove"));
 	}
 }
 function compareItems() {
@@ -1193,7 +1193,7 @@ function compareItems() {
 		setCookie("compareReturnUrl", previousPageUrl,7);
 	}
 	if (listArray.length <= 1) {
-		bootAlert("small", "error", "Error", "Please select minimum 2 items to compare");
+		bootAlert("small", "error", "Error", locale("label.error.comparemin"));
 		return false;
 	} else if (listArray.length > compareItemCount) {
 		bootAlert("small", "error", "Error", "You cannot compare more than " + compareItemCount + " items at a time");
@@ -1204,7 +1204,7 @@ function compareItems() {
 }
 function clearAllCompareItems() {
 	setCookie('compareList',"",-1);
-	bootAlert("small","success","Info",'Item(s) removed from compare list.');
+	bootAlert("small","success","Info",locale("label.error.compareRemove"));
 	$("[data-bb-handler='ok']").click(function(){
 		block('Please Wait');
 		var value = getCookie("compareReturnUrl");
@@ -3953,7 +3953,7 @@ $(document).ready(function () {
 		localStorage.removeItem("currentCustomerSU");
 		localStorage.setItem("currentCustomerSU", JSON.stringify(attributes));
 		//block('Please wait');
-		var loadData = '<div class="text-center"><h3 class="cimm_block-title"><em class="fa fa-spin fa-spinner"></em> Please wait...</h3></div>';
+		var loadData = '<div class="text-center"><h3 class="cimm_block-title"><em class="fa fa-spin fa-spinner"></em> Espere por favor...</h3></div>';
 		$("#salesrepModal .modal-body").html(loadData);
 		$.get("getUsersByCustomerUnit.action",
 			{ "customerId": attributes['customerid'], "accountNumber": attributes['accountnumber'] },
@@ -3985,7 +3985,7 @@ $(document).ready(function () {
 				size: "medium",
 				closeButton: false,
 				message: "There are item(s) in your cart. Do you want to switch customer",
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result) {
 						block('Please wait');
@@ -4011,7 +4011,7 @@ $(document).ready(function () {
 				size: "medium",
 				closeButton: false,
 				message: "There are item(s) in your cart. Do you want to switch user",
-				title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result) {
 						loadUserByCustomer(selectedCustomer, 'customer');
@@ -4211,7 +4211,7 @@ function showProp65Message(_this){
 	}else{
 		messgae = $('#californiaWarningMessage').val();
 	}
-    bootAlert("small","warning","Warning",messgae);
+    bootAlert("small","warning","Advertencia",messgae);
 }
 if(location.href.indexOf('cimm2') > 0){
 	window.console.log = function(){}

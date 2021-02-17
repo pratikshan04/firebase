@@ -28,13 +28,27 @@
                 
             }
 			&.myAccountLeftMenu{
+                background-color: $secondary-color;
 				li{
-					line-height: 22px;
+                    line-height: 22px;
+                    padding-left: 20px;
+                    a{
+                        color: $white;
+                        &:hover{
+                            background-color: transparent;
+                            color: $primary-color;
+                        }
+                    }
 					em{
                         width: 20px;
                         margin-right: 10px;
                         text-align: center;
-					}
+                        color: $primary-color;
+                    }
+                    &:hover{
+                        background-color: transparent;
+                        color: $primary-color;
+                    }
 				}
 			}
         }

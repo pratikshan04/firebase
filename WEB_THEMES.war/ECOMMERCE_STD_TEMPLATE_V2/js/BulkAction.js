@@ -68,7 +68,7 @@ var BulkAction = {};
 			if (jsonObj.length > 0) {
 				BulkAction.processAddToCart(jsonObj); // //block();
 			} else {
-				bootAlert("small", "error", "Error", "No Items to Process.");
+				bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
 				BulkAction.refreshBulkSelect();
 			}
 		} else {
@@ -455,7 +455,7 @@ var BulkAction = {};
 					bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
 					BulkAction.refreshBulkSelect();
 				} else {
-					bootAlert("small", "error", "Error", "No Items to Process.");
+					bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
 					BulkAction.refreshBulkSelect();
 				}
 			}
@@ -464,7 +464,7 @@ var BulkAction = {};
 				bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
 				BulkAction.refreshBulkSelect();
 			} else {
-				bootAlert("small", "error", "Error", "No Items to Process.");
+				bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
 				BulkAction.refreshBulkSelect();
 			}
 		}
@@ -753,15 +753,15 @@ var BulkAction = {};
 					bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
 					BulkAction.refreshBulkSelect();
 				} else {
-					bootAlert("small", "error", "Error", "No Items to Process.");
+					bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
 					BulkAction.refreshBulkSelect();
 				}
 			}
 		} else {
-			if (BulkAction.getListOfCheckBox() > 0) {
+			if (BulkAction.getListOfCheckBox() > 0) {locale
 				bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
 			} else {
-				bootAlert("small", "error", "Error", "No Items to Process.");
+				bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
 			}
 		}
 		BulkAction.refreshBulkSelect();

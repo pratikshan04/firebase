@@ -82,7 +82,12 @@ input[type=number] {
 .requiblack{
   color: $black;
 }
-
+.sitePrimeColor{
+  color: $primary_color !important;
+}
+.siteSecColor{
+  color: $secondary_color !important;
+}
 /* no-gutters Class Rules */
 
 .row.no-gutters {

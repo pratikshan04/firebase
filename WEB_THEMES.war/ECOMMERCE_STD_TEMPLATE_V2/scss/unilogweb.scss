@@ -85,6 +85,10 @@ $modal_closebtn-color: $default_font-color;
     height: 100%;
 }
 
+.cimm_stickyPageWrap:after {
+    height: 360px
+}
+
 /*___________________Poup Modal____________________*/
 .modal-title {
     position: relative;
@@ -471,6 +475,7 @@ $modal_closebtn-color: $default_font-color;
     .uploadFile {
         @extend .uploadImage;
         width: calc(100% - 78px);
+        background: $white;
     }
     .button {
         margin-right: 3px;
@@ -863,12 +868,14 @@ $modal_closebtn-color: $default_font-color;
         float: left;
         margin: 0;
         padding: 4px 15px 8px;
-        background: $primary_color;
+        font-weight: 100;
         a {
             padding: 0 !important;
             font-size: 12px !important;
+            color: $primary_color;
             &.active {
                 text-decoration: underline;
+                color: $white;
             }
         }
     }
@@ -881,6 +888,8 @@ $modal_closebtn-color: $default_font-color;
 #quickOrderPadDrop {
     width: 342px;
     border: 0;
+    background: $secondary_color;
+    color: $white;
 }
 
 #headerCopyPasteText {
