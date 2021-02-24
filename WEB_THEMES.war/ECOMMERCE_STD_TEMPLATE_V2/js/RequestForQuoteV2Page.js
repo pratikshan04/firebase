@@ -49,7 +49,7 @@ $.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 });
 $(function () {
 $('form').submit(function(){
-	$('input[type=submit]').val("Please Wait...");
+	$('input[type=submit]').val("Espere por favor...");
 	$('input[type=submit]').attr('disabled', 'disabled');
 });
 });
@@ -244,7 +244,7 @@ function validateRFQV2(actinType){
 			actionUrl = "saveRequestForQuoteV2Sale.action";
 		}
 		$('#orderedBy').val(orderBy);
-		block("Please Wait");
+		block("Espere por favor");
 		var str = $("#rfqFormV2").serialize();
 		$.ajax({
 			type: "POST",
@@ -262,7 +262,7 @@ function validateRFQV2(actinType){
 							if($('select[name="UOMDD"]').length>0){
 								$('select[name="UOMDD"]').remove();
 							}
-							block("Please Wait");
+							block("Espere por favor");
 							window.location.reload();
 						})
 					//}
@@ -589,7 +589,7 @@ $.ajax({
 			bootAlert('small','success','Success',res[1]);
 			$("#reqForQuoteTableId").find('input[type=text]').val('');
 			$("[data-bb-handler='ok']").click(function(){
-				block("Please Wait");
+				block("Espere por favor");
 				window.location.reload();
 			})
 		}else{
@@ -617,7 +617,7 @@ $(document).ready(function(){
 });
 function shipToLocationNotAvailable(obj){
 	if(obj.checked){
-		block("Please Wait");
+		block("Espere por favor");
 		$("#overrideShip").val("Y");
 		$('.shipToElementRow').each(function(){ if($(this).hasClass('hide')){ $(this).removeClass('hide'); $(this).find('input[type=text]').val(''); } });
 		if(document.getElementById("shipCountry")){ 
@@ -638,7 +638,7 @@ function shipToLocationNotAvailable(obj){
 		$("#selectedBranch").val("");
 		unblock();
 	}else{
-		block("Please Wait");
+		block("Espere por favor");
 		$("#overrideShip").val("N");
 		$('.shipToElementRow').each(function(){ $(this).addClass('hide'); $(this).find('input[type=text]').val(''); });
 		$('#shipToAddress').attr('disabled', false);
@@ -670,7 +670,7 @@ function shipToLocationNotAvailable(obj){
 	return false;
 }
 function clearRow(_this){
-	block("Please Wait");
+	block("Espere por favor");
 	$(_this).closest('tr').find('select[name="UOMDD"]').remove();
 	var rowIndex = $(_this).closest('tr').attr('data-rowindex');
 	var uomEl = $('#UOM'+rowIndex);

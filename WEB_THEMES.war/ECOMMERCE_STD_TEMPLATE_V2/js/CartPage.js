@@ -311,7 +311,7 @@ function expressCheckout(){
 	return false;
 }
 function standardCheckout(){
-	block("Please Wait");
+	block("Espere por favor");
 	var checkout="N";
 	if($("#checkoutpriceValue").length>0){
 		checkout = $("#checkoutpriceValue").val();
@@ -430,9 +430,9 @@ function sendApproval() {
 	}
 	if (goStat == "Y"){
 		$('#pageLeaveVal').val("0");
-		$("#sendApproval").val("Please Wait..");
+		$("#sendApproval").val("Espere por favor..");
 		$("#sendApproval").attr("disabled", "disabled");
-		block("Please Wait");
+		block("Espere por favor");
 		$.ajax({
 			type: "POST",
 			url: "sendApprovalSale.action",
@@ -608,7 +608,7 @@ function sendApproval() {
 		var myObject = new Object();
 		myObject.itemDataList = items;
 		var dataStr = 'groupType=P&jsonData=' + JSON.stringify(myObject);
-		block("Please Wait");
+		block("Espere por favor");
 		$.ajax({
 			type: "POST",
 			url: "productListIdNamePage.action",
@@ -896,7 +896,7 @@ function updatePrice(productListId, partNum){
 		}
 		
 		var str = "&updateId="+productListId+"&unitPrice="+unitPrice+"&updatedUnitPrice="+updatedUnitPrice+"&uom="+uom+"&getPriceFrom="+getPriceFrom+"&itemQty="+itemQty;
-		block("Please Wait");
+		block("Espere por favor");
 		$.ajax({
 			type: "POST",
 			url:"updateCustomerPricePage.action",

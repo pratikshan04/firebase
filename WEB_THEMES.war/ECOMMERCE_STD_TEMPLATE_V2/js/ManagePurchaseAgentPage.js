@@ -2,19 +2,27 @@ function disableUser(userID) {
 	bootbox.confirm({
 		size: "small",
 		closeButton: false,
-		message: "Are you sure you want to disable the user?",
+		message: locale("label.manageagent.disableuser"),
 		title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+		buttons: {
+			cancel: {
+				label: 'Cancelar'
+			},
+			confirm: {
+				label: 'Ok'
+			}
+		},
 		callback: function (result) {
 			if (result) {
-				block("Please Wait");
+				block("Espere por favor");
 				$.post('DisableAgentUnit.action?userId=' + userID, function (data, status) {
 					unblock();
 					if (data == "sessionexpired") {
 						window.location.href = "doLogOff.action";
 					} else {
 						showNotificationDiv("Success", data);
-						$('#status_' + userID).addClass('active text-right').html('Enable');
-						$('#status_' + userID).parent().attr("data-original-title", "Enable");
+						$('#status_' + userID).addClass('active text-right').html('Habilitar');
+						$('#status_' + userID).parent().attr("data-original-title", "Habilitar");
 						setTimeout(function () { window.location.reload(); }, 1000);
 					}
 				})
@@ -28,19 +36,27 @@ function enableUser(userID) {
 	bootbox.confirm({
 		size: "small",
 		closeButton: false,
-		message: "Are you sure you want to enable the user?",
+		message: locale("label.manageagent.enableuser"),
 		title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+		buttons: {
+			cancel: {
+				label: 'Cancelar'
+			},
+			confirm: {
+				label: 'Ok'
+			}
+		},
 		callback: function (result) {
 			if (result) {
-				block("Please Wait");
+				block("Espere por favor");
 				$.post('EnableAgentUnit.action?userId=' + userID, function (data, status) {
 					unblock();
 					if (data == "sessionexpired") {
 						window.location.href = "doLogOff.action";
 					} else {
 						showNotificationDiv("Success", data);
-						$('#status_' + userID).addClass('active text-right').html('Disable');
-						$('#status_' + userID).parent().attr("data-original-title", "Disable User");
+						$('#status_' + userID).addClass('active text-right').html('Desactivar');
+						$('#status_' + userID).parent().attr("data-original-title", "Desactivar");
 						setTimeout(function () { window.location.reload(); }, 1000);
 					}
 				});
@@ -51,7 +67,7 @@ function enableUser(userID) {
 	});
 }
 function editUserDetails(userID) {
-	block('Please Wait');
+	block('Espere por favor');
 	$.post('AgentDetailsUnit.action?userId=' + userID, function (data, status) {
 		unblock();
 		$('#editUserDetailsBlock').html(data);
@@ -86,7 +102,7 @@ function RefreshPageForInternationalUser() {
 }
 function getEntityAddress(obj) {
 	if (obj.checked) {
-		block("Please Wait");
+		block("Espere por favor");
 		str = "test=1";
 		$.ajax({
 			type: "POST",
@@ -175,7 +191,7 @@ function testCompare(id) {
 		$('#apaSet').val("Y");
 	}
 	if ($("#isBusyUser").val() == 1 && $("#" + id).val() == "generalUser") {
-		showNotificationDiv(message, "Privilege cannot be modified as the User is an Authorized Purchasing Agent for other user(s)")
+		showNotificationDiv(message, locale("label.manageagent.privialage"))
 		$("#" + id).attr('onChange', 'testCompare(this.id);');
 		$("#radioGroup").hide(100);
 		//$(".cimm_siteTableEnclosure").show(200);
@@ -244,13 +260,14 @@ $(document).ready(function () {
 		dom: 'Bfrtip',
 		buttons: [
 			{
-				text: 'Add New User', "className": 'cimm_inlineButton',
+				text: 'Agregar nuevo usuario', "className": 'cimm_inlineButton',
 				action: function (e, dt, node, config) {
 					toggleDisplayBlocks('usersListBlock', 'addNewUserBlock');
 				}
 			}
 		],
 		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json",
 			"search": "_INPUT_",
 			"searchPlaceholder": "Search User",
 			"sLengthMenu": "Show _MENU_",
@@ -290,9 +307,9 @@ function updateUser() {
 	}
 	if (status.match(/^\d+$/)) { changed = "Y"; } else { changed = "N"; }
 	if (changed == 'Y') {
-		$("#updateBtn").val("Please wait");
+		$("#updateBtn").val("Espere por favor");
 		$("#updateBtn").attr("disabled", "disabled");
-		block('Please Wait');
+		block('Espere por favor');
 		var str = $('#manageForm').serialize();
 		str = str + "&assignedNewId=" + assigned;
 		$.ajax({
@@ -334,7 +351,7 @@ function updateUser() {
 		});
 		return false;
 	} else if (changed == 'N') {
-		showNotificationDiv("error", "No Changes Has Been Made");
+		showNotificationDiv("error", locale('label.manageagent.nochange'));
 		return false;
 
 	}

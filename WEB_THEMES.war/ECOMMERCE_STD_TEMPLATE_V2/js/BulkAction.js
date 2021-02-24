@@ -101,7 +101,7 @@ var BulkAction = {};
 			var myObject = new Object();
 			myObject.itemDataList = jsonObj;
 			var dataStr = 'groupType=P&jsonData=' + JSON.stringify(myObject);
-			block("Please Wait");
+			block("Espere por favor");
 			$.ajax({
 				type: "POST",
 				url: "productListIdNamePage.action",
@@ -251,7 +251,7 @@ var BulkAction = {};
 	BulkAction.processAddToCart = function (obj) {
 		if (typeof obj[0].requestType == "undefined" || obj[0].requestType == "") {
 			if($("#layoutName").val() != "SavedGroupsPage"){
-				block('Please Wait');
+				block('Espere por favor');
 			}
 		} else {
 			if ($("#multipleItemCart_" + obj[0].itemId).length > 0) {

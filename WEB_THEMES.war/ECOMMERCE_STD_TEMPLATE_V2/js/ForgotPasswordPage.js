@@ -19,7 +19,7 @@ $('#retrivePassword').submit(function() {
 		}
 	}
 	if(isValid == 1){
-		$("#submitBtn").attr("disabled",true).html("Please wait");
+		$("#submitBtn").attr("disabled",true).html("Espere por favor");
 		if($("#retrivePassword").attr("data-recaptcha") == "Y" && $("#isWebview").val() != "WEBVIEW") {
 			if ($(this).find('[name="g-recaptcha-response"]').length === 0) {
 				var hiddenInputs = '<input type="hidden" name="action" value="validate_captcha">' +

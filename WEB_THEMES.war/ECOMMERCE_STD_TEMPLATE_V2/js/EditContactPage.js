@@ -68,7 +68,7 @@ function getContactEntityAddress(obj){
 			getCurrentContactAddress();
 		}
 		$("#useEntityAddress").val("Yes");
-		block("Please Wait");
+		block("Espere por favor");
 		str = "test=1";
 		$.ajax({
 			type: "POST",

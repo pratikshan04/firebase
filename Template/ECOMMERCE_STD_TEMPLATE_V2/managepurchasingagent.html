@@ -54,8 +54,8 @@
 						<label for="roleAssign">$!locale.get("form.label.roleAssignment") <span class="text-danger">*</span></label>
 						<select name="roleAssign" id='roleAssign' class="form-control selectpicker" data-type="select" data-required="Y" data-error="$!locale.get('form.user.userRole.notEmpty')">
 							<option data-title="" value="Ecomm Customer General User">$locale.get("form.label.generalUser")</option>
-							<option data-title="Authorized Purchasing Agents can create and check-out a cart from their list of assigned Ship To Locations." value="Authorized Purchasing Agent">$locale.get("form.label.authorizedPurchasingAgent")</option>
-							<option data-title="Super Users can create and check-out a cart for any Ship To Location as well as manage Purchasing Agents." value="Super User">$locale.get("form.label.superUser")</option>
+							<option data-title="$!locale.get('label.userrole.selectAPA')" value="Authorized Purchasing Agent">$locale.get("form.label.authorizedPurchasingAgent")</option>
+							<option data-title="$!locale.get('label.userrole.selectSPU')" value="Super User">$locale.get("form.label.superUser")</option>
 						</select>
 					</div>
 				</div>
@@ -183,7 +183,7 @@
 										#end
 									</td>
 									<td class="text-center" data-th="$!locale.get('product.heading.agentStatus')">
-										<strong>#if($agentsList.userStatus == "Y")<span class="text-success">Active</span>#else<span class="text-danger">In active</span>#end</strong>
+										<strong>#if($agentsList.userStatus == "Y")<span class="text-success">Activo</span>#else<span class="text-danger">En activo</span>#end</strong>
 									</td>
 									<td class="text-center" data-th="$!locale.get('product.heading.Action')">
 										<div class="clearAfter">

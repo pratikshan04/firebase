@@ -23,7 +23,7 @@ $.getScript(cdnPluginJsPath+'/bootstrap-datepicker.min.js', function(){
 
 $(function () {
 	$('form').submit(function(){
-		$('input[type=submit]').val("Please Wait...");
+		$('input[type=submit]').val("Espere por favor...");
 		$('input[type=submit]').attr('disabled', 'disabled');
 	});
 });
@@ -137,7 +137,7 @@ function validateRFQ(){
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 	}else{
 		$('#orderedBy').val(orderBy);
-		block("Please Wait");
+		block("Espere por favor");
 		var str = $("#rfqForm").serialize();
 		$.ajax({
 			type: "POST",

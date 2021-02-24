@@ -67,7 +67,7 @@ var warningMsg = true;
 		var step_num= obj.attr('index');
 		if(step_num==checkOutStep){
 			if(warningMsg){
-				block("Please Wait");
+				block("Espere por favor");
 			}
 			if($('#wizFinishButtonId').length>0){
 				$('#wizFinishButtonId').addClass("buttonDisabled");
@@ -187,7 +187,7 @@ var warningMsg = true;
 			var orderType = $('#orderType').val().trim();
 			if(erpType && erpType.toUpperCase()=="DEFAULTS" && isValid){
 				var data = $("#quickCartHiddenInfo").serialize();
-				block("Please Wait");
+				block("Espere por favor");
 				$.ajax({
 					type: "POST",
 					url: "processCheckout.action",
@@ -197,7 +197,7 @@ var warningMsg = true;
 					}
 				});
 			}else if(isValid && orderType == 'checkoutWithPo'){
-				block("Please Wait");
+				block("Espere por favor");
 				$(this).attr("action","processOrder.action");
 				return true;
 			}else if(orderType == 'checkoutWithPo'){
@@ -217,7 +217,7 @@ var warningMsg = true;
 				if(payType == "checkoutWithPo"){
 					$("#quickCartHiddenInfo").submit();
 				}else if(payType == "checkoutWithCreditCard"){
-					block("Please Wait");
+					block("Espere por favor");
 					setCookie("poNumber",$("#poNumber").val(),10);
 					setCookie("orderedBy",$("#orderedBy").val(),10);
 					setCookie("reqDate",$("#reqDate").val(),10);
@@ -265,7 +265,7 @@ var warningMsg = true;
 				$("#poNumberTxt").attr("data-required", "N");
 				if($("#creditCard").html().trim() == ""){
 					var data = $("#quickCartHiddenInfo").serialize();
-					block("Please Wait");
+					block("Espere por favor");
 					$.ajax({
 						type: "POST",
 						url: "displayCreditCardSale.action",
@@ -307,7 +307,7 @@ var warningMsg = true;
 			showNotificationDiv("error",error);
 			return false;
 		}else{
-			block("Please Wait");
+			block("Espere por favor");
 			$.ajax({
 				type: "POST",
 				url: "submitNewCreditCardSale.action?fromPage=payWithNewCC",

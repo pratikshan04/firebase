@@ -83,7 +83,7 @@ function isAlfaNumericOnly(val) {
 function additionalFreightCharges(val) {
 	var r = confirm(val);
 	if (r == true) {
-		block('Processing order please wait');
+		block('Processing order Espere por favor');
 		return true;
 	} else {
 		return false;
@@ -205,7 +205,7 @@ function changeAction(s, selectId) {
 		} else {
 			$('#rejectReason').val($('#reasonid').val());
 			$('#ReasonPopDiv').modal('hide');
-			block("Please wait");
+			block("Espere por favor");
 			var str = $("#productGroupForm").serialize();
 			$.ajax({
 				type: "POST",
@@ -241,7 +241,7 @@ function changeAction(s, selectId) {
 		var chks = $("input:checkbox[name='quotePartNumberSelected']:checked");
 		var chkscount = chks.length;
 		if (chkscount > 0) {
-			block("Please wait");
+			block("Espere por favor");
 			$("#reOrderForm").attr("action", "ReOrderCartPage.action");
 		} else {
 			bootAlert("small", "error", "Error", locale("reorder.label.select.at.least.one.item"));
@@ -268,7 +268,7 @@ function changeAction(s, selectId) {
 		});
 		var chkscount = chks.length;
 		if (chkscount > 0 && !invalidQty) {
-			block("Please wait");
+			block("Espere por favor");
 			var str = $("#productGroupForm").serialize();
 			$.ajax({
 				type: "POST",
@@ -392,10 +392,10 @@ function editGroupName() {
 		if (characterReg.test(newName) == false) {
 			bootAlert("medium", "error", "Error", "Special characters are not allowed except underscore or hyphen ( _ , - )");
 		} else {
-			$("#groupNameSaveBtn").val("Please Wait");
+			$("#groupNameSaveBtn").val("Espere por favor");
 			$("#groupNameSaveBtn").attr("disabled", "disabled");
 			var str = '&newName=' + newName + '&groupId=' + groupId + "&oldGroupName=" + oldName + "&GroupType=" + type;
-			block("Please Wait");
+			block("Espere por favor");
 			$.ajax({
 				type: "POST",
 				url: "editGroupNamePage.action",
@@ -445,7 +445,7 @@ function updateMyProductGroup() {
 	}
 	var str = $("#productGroupForm").serialize();
 	var isUpdate = false;
-	block("Please Wait");
+	block("Espere por favor");
 	$.ajax({
 		type: "POST",
 		url: "checkMinOrderQtyPage.action",
@@ -476,7 +476,7 @@ function validateShare() {
 		bootAlert("small", "error", "Error", "Please Enter Keyword.");
 		return false;
 	} else {
-		block("Please Wait");
+		block("Espere por favor");
 		var savedGPID = $('#GroupId').val();
 		var savedGPName = $('#oldGroupName').val();
 		var str = $("#popShareForm").serialize();
@@ -506,7 +506,7 @@ function validateShare() {
 function performShare() {
 	var checked = $('#performshare input[name="sharedUserId"]:checked').length > 0;
 	if (checked > 0) {
-		$("#share").html("Please Wait...");
+		$("#share").html("Espere por favor...");
 		$("#share").attr("disabled", "disabled");
 		var str = $("#performshare").serialize();
 		$.ajax({
@@ -742,7 +742,7 @@ function scynInitiate() {
 	var total = 500;
 	scynStatus(total);
 	status = "test=2";
-	block("Refreshing shipping information. Please wait");
+	block("Refreshing shipping information. Espere por favor");
 	$.ajax({
 		type: "POST",
 		url: "scynEntityAddressUnit.action",
@@ -869,9 +869,9 @@ $(document).ready(function () {
 					localStorage.removeItem("750B2E0333A28C1D");
 					localStorage.removeItem("F30FB33A2");
 				}
-				block("Please Wait");
+				block("Espere por favor");
 				$this.find(".pLoginErr").html("");
-				$this.find("[type='submit']").html("Please wait").attr("disabled", "disabled");
+				$this.find("[type='submit']").html("Espere por favor").attr("disabled", "disabled");
 				$.post("doLogin.action", $this.serialize() + "&loginType=popup", function (data, status) {
 					try {
 						localStorage.setItem("salesUserSelected", "Y");
@@ -1206,7 +1206,7 @@ function clearAllCompareItems() {
 	setCookie('compareList',"",-1);
 	bootAlert("small","success","Info",locale("label.error.compareRemove"));
 	$("[data-bb-handler='ok']").click(function(){
-		block('Please Wait');
+		block('Espere por favor');
 		var value = getCookie("compareReturnUrl");
 		if(typeof value != 'undefined' && value != null && value.trim() != ""){
 			setCookie("compareReturnUrl", "",-1);
@@ -1300,7 +1300,7 @@ function addToProductList(_this) {
 	} else {
 		$('#group_name').val($('#' + groupId).text());
 	}
-	block('Please Wait');
+	block('Espere por favor');
 	jQuery.get('insertProductListItemPage.action?listId=' + groupId + '&listName=' + groupName + "&productIdList=" + id + "&itemQty=" + qty + "&uomValue=" + uomValue + "&dt=" + new Date(), function (data, status) {
 		unblock();
 		$(_this).parents('.productGroupBtn').find(toggleListID).hide();
@@ -1418,9 +1418,9 @@ function runScriptSearchWithIn(e) {
 $(document).ready(function () {
 	try {
 		$("#productOrderForm").submit(function () {
-			$("#submitBtn").val("Please wait...");
+			$("#submitBtn").val("Espere por favor...");
 			$("#submitBtn").attr("disabled", "disabled");
-			pleaseWait('Please wait');
+			pleaseWait('Espere por favor');
 			var str = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -1522,15 +1522,15 @@ function validateSendMail() {
 	var jcaptcha = $("#jcaptcha").val();
 	var userLogin = $("#userLogin").val();
 	var Error = "";
-	if (toname == "" || toname == null) { Error = Error + "Please Enter Your Friend Name<br>"; }
-	if (toEmail == "" || toEmail == null) { Error = Error + "Please Enter Friend Email Address <br>"; }
-	if (!emailReg.test(toEmail)) { Error = Error + "Your Friends Email Address is Invalid<br>"; }
-	if (fromname == "" || fromname == null) { Error = Error + "Please Enter Your Name<br>"; }
-	if (fromEmail == "" || fromEmail == null) { Error = Error + "Please Enter Your Email Address<br>"; }
-	if (!emailReg.test(fromEmail)) { Error = Error + "Your Email Address is Invalid<br>"; }
-	if (mailSubject == "" || mailSubject == null) { Error = Error + "Please Enter  Subject<br>"; }
+	if (toname == "" || toname == null) { Error = Error + locale('label.error.sendmailFrname') +"<br>"; }
+	if (toEmail == "" || toEmail == null) { Error = Error + locale('label.error.sendmailFrEmail') +"<br>"; }
+	if (!emailReg.test(toEmail)) { Error = Error + locale('label.error.sendmailFrEmailInvalid') +"<br>"; }
+	if (fromname == "" || fromname == null) { Error = Error + locale('label.error.sendmailname') +"<br>"; }
+	if (fromEmail == "" || fromEmail == null) { Error = Error + locale('label.error.sendmailEmail') +"<br>"; }
+	if (!emailReg.test(fromEmail)) { Error = Error + locale('label.error.sendmailEmailInvalid') +"<br>"; }
+	if (mailSubject == "" || mailSubject == null) { Error = Error + locale('label.error.sendmailsubject') +"<br>"; }
 	if (userLogin == "false") {
-		if (jcaptcha == "" || jcaptcha == null && userLogin == "false") { Error = Error + "<p>Please Enter Captcha</p>"; }
+		if (jcaptcha == "" || jcaptcha == null && userLogin == "false") { Error = Error + locale('label.error.sendmailcaptcha'); }
 	}
 	if(validateStr(toname) || validateStr(toEmail) || validateStr(fromname) || validateStr(fromEmail) || validateStr(mailSubject)){
 		unusualCode++;
@@ -1542,7 +1542,7 @@ function validateSendMail() {
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	} else if (Error == "") {
-		$("#sendBtn").val("Sending mail... Please wait...");
+		$("#sendBtn").val("Enviando correo... Espere por favor...");
 		$("#sendBtn").attr("disabled", "disabled");
 		send();
 	}
@@ -1582,7 +1582,7 @@ function validateSendMailForAll() {
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);
 		return false;
 	} else if (Error == "") {
-		$("#sendBtn").html("Sending mail... Please wait...");
+		$("#sendBtn").html("Enviando correo... Espere por favor...");
 		$("#sendBtn").attr("disabled", "disabled");
 		sendPage();
 	}
@@ -1635,7 +1635,7 @@ function send() {
 			var result = $.trim(msg);
 			var arrRes = result.split("|");
 			if ($.trim(arrRes[0]) == "0") {
-				showNotificationDiv("Success", "Mail Sent Successfully", "");
+				showNotificationDiv("Success", locale('staticpage.form.submission.success'), "");
 				$("#sendBtn").val("Reloading Page");
 				$("#sendBtn").removeAttr("disabled");
 				localStorage.removeItem("emailFriendlink");
@@ -1650,7 +1650,7 @@ function send() {
 				$("#sendBtn").removeAttr("disabled");
 				refreshjcaptcha();
 			} else {
-				showNotificationDiv("Error", "Mail Sending Failed");
+				showNotificationDiv("Error", locale('staticpage.form.submission.failed'));
 				$("#mailContent a").attr("href", 'javascript:void(0);');
 				$("#sendBtn").val("Send");
 				$("#sendBtn").removeAttr("disabled");
@@ -1658,7 +1658,7 @@ function send() {
 			}
 		},
 		error: function (error) {
-			showNotificationDiv("Error", "Mail Sending Failed");
+			showNotificationDiv("Error", locale('staticpage.form.submission.failed'));
 			$("#mailContent a").attr("href", 'javascript:void(0);');
 			$("#sendBtn").val("Send");
 			$("#sendBtn").removeAttr("disabled");
@@ -1693,7 +1693,7 @@ function sendPage() {
 				var result = $.trim(msg);
 				var arrRes = result.split("|");
 				if ($.trim(arrRes[0]) == "0") {
-					showNotificationDiv("Success", "Mail Sent Successfully", "");
+					showNotificationDiv("Success", locale('staticpage.form.submission.success'), "");
 					$("#sendBtn").html("Reloading Page");
 					$("#sendBtn").removeAttr("disabled");
 					localStorage.removeItem("emailFriendlink");
@@ -1705,7 +1705,7 @@ function sendPage() {
 						if (window.top != window.self) {
 							console.log("This window is NOT the topmost window!");
 						} else {
-							bootAlert("small", "success", "Success", "Mail sent successfully.");
+							bootAlert("small", "success", locale('label.alert.success'), locale('staticpage.form.submission.success'));
 							console.log("This window is the topmost window!");
 							setTimeout(function () { window.top.close(); }, 5000);
 						}
@@ -1718,7 +1718,7 @@ function sendPage() {
 					$("#sendBtn").removeAttr("disabled");
 					refreshjcaptcha();
 				} else {
-					showNotificationDiv("Error", "Mail Sending Failed");
+					showNotificationDiv("Error", locale('staticpage.form.submission.failed'));
 					$("#mailContent a").attr("href", 'javascript:void(0);');
 					$("#sendBtn").html("Send");
 					$("#sendBtn").removeAttr("disabled");
@@ -1895,7 +1895,7 @@ function validateCustomForm(formElement) {
 function submitCustomForm(id) {
 	if (validateCustomForm(id)) {
 		var btnVal = $(id).find("#submitBtn").val();
-		$(id).find("#submitBtn").val("Please wait...");
+		$(id).find("#submitBtn").val("Espere por favor...");
 		$(id).find("#submitBtn").attr("disabled", "disabled");
 		customeSubject();
 		var formName = $("input[name=formName]").val();
@@ -2254,7 +2254,7 @@ $('[data-function="quickCartView"]').click(function () {
 		}
 		$(toggleElem).dropdown('toggle');
 	} else {
-		block('Please Wait');
+		block('Espere por favor');
 	}
 	$.ajax({
 		type: "POST",
@@ -2287,7 +2287,7 @@ function quickCartItemDelete(productListId) {
 		message: "You want to delete the item from cart?",
 		callback: function (result) {
 			if (result) {
-				block("Please Wait");
+				block("Espere por favor");
 				$.post("deleteCartPage.action?deleteId=" + productListId + "&type=quickcartscript", function (data, status) {
 					unblock();
 					if (data == "success" && data != null) {
@@ -3952,7 +3952,7 @@ $(document).ready(function () {
 	function loadUserByCustomer(attributes, from) {
 		localStorage.removeItem("currentCustomerSU");
 		localStorage.setItem("currentCustomerSU", JSON.stringify(attributes));
-		//block('Please wait');
+		//block('Espere por favor');
 		var loadData = '<div class="text-center"><h3 class="cimm_block-title"><em class="fa fa-spin fa-spinner"></em> Espere por favor...</h3></div>';
 		$("#salesrepModal .modal-body").html(loadData);
 		$.get("getUsersByCustomerUnit.action",
@@ -3988,7 +3988,7 @@ $(document).ready(function () {
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				callback: function (result) {
 					if (result) {
-						block('Please wait');
+						block('Espere por favor');
 						loadCustomForSalesUser()
 					} else {
 						unblock();
@@ -3997,7 +3997,7 @@ $(document).ready(function () {
 				}
 			});
 		} else {
-			block('Please wait');
+			block('Espere por favor');
 			loadCustomForSalesUser();
 		}
 
@@ -4035,7 +4035,7 @@ $(document).ready(function () {
 
 	$("#salesrepModal").on('click', '.persistUserDetails', function (src) {
 		$('#salesrepModal').css({'padding-right':'0'});
-		block('Please wait');
+		block('Espere por favor');
 		localStorage.removeItem("salesUserSelected");
 		localStorage.setItem("salesUserSelected", "Y");
 		var attributes = src.target.dataset;

@@ -84,7 +84,7 @@ $(document).ready(function() {
 	    }
 	});
 	var options = {
-	    beforeSend: function(){block('Please Wait');},
+	    beforeSend: function(){block('Espere por favor');},
 		uploadProgress: function(event, position, total, percentComplete){},
 		success: function(data){
 			if(data ==''){

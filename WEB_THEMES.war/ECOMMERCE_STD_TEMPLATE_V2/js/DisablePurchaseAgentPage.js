@@ -22,7 +22,7 @@ function disableAuthorization(userID){
 		title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 		callback: function(result){
 			if(result){
-				block("Please Wait");
+				block("Espere por favor");
 				$.post('DisableAgentAuthorizationUnit.action?userId='+userID ,function(data,status){
 					unblock();
 					if(data=="sessionexpired"){

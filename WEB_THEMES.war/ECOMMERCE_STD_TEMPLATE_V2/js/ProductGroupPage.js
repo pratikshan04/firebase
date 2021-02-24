@@ -88,7 +88,7 @@ function bulkActions(that) {
 		}
 	}
 	if(val){
-		block("Please Wait");
+		block("Espere por favor");
 		$("#productGroupForm").prop("method","post");
 		$("#productGroupForm").submit();
 	}else{
