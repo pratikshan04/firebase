@@ -876,16 +876,16 @@
 			 		#end
 	   			</a>
 			   	</li>
-			   	<li class="sliderDescrip">
+			   	<!-- <li class="sliderDescrip">
 			   		#if($customerbought.shortDesc.length()>95)
 	   				<p>$!customerbought.shortDesc.substring(0, 92)...</p>
 		   			#else
 	        		<p> $!customerbought.shortDesc</p>
 		   			#end
-			   	</li>
-				<li><strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!customerbought.itemId">$!customerbought.partNumber</span></li>
-			    #if($customerbought.manufacturerPartNumber.trim().length()>0)<li><strong>$!locale.get("product.label.mpn"):</strong> <span>$!customerbought.manufacturerPartNumber</span></li>#end
-				#if($!customerbought.upc.trim().length()>0)<li><strong>$!locale.get("product.label.upc"): </strong><span> $!customerbought.upc</span></li>#end
+			   	</li> -->
+				<!-- <li><strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!customerbought.itemId">$!customerbought.partNumber</span></li> -->
+			    <!-- #if($customerbought.manufacturerPartNumber.trim().length()>0)<li><strong>$!locale.get("product.label.mpn"):</strong> <span>$!customerbought.manufacturerPartNumber</span></li>#end
+				#if($!customerbought.upc.trim().length()>0)<li><strong>$!locale.get("product.label.upc"): </strong><span> $!customerbought.upc</span></li>#end -->
 			   <!-- #if($customerbought.minOrderQty>0 && $!customerbought.orderInterval>0)
 				<li><strong>$!locale.get("product.label.minorderqty"):</strong><span> $!customerbought.minOrderQty</spaN></li>
 				<li><strong>$!locale.get("product.label.qtyinterval"):</strong><span> $!customerbought.orderInterval</span></li>

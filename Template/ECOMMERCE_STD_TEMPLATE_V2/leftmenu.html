@@ -63,11 +63,15 @@
 				</li>
 			#end
 		</ul>
+		<br/>
+		<br/>
 	</div>
 	#end
 	#end
 	<div class="cimm_filter-block">
-		<!-- <div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div> -->
+		#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage")
+		<div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div>
+		#end
 		<ul class='myAccountLeftMenu'>
 			#parse("accountMenu.html")
 		</ul>
