@@ -3,6 +3,7 @@
 #else
 <div class="cimm_filter">
 #if($!LayoutName!="EventsPage")
+	#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage")
 	<div class="cimm_filter-block"><div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts")</div>
 		#if($categMenu.size()>5)
 			<div class="cimm_filter_block-container collapse in" id="categoryMenu">
@@ -62,10 +63,15 @@
 				</li>
 			#end
 		</ul>
+		<br/>
+		<br/>
 	</div>
 	#end
+	#end
 	<div class="cimm_filter-block">
+		#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage")
 		<div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div>
+		#end
 		<ul class='myAccountLeftMenu'>
 			#parse("accountMenu.html")
 		</ul>

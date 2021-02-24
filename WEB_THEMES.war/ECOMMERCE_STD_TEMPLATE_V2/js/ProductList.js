@@ -256,7 +256,7 @@ function appendSearchByCheckBox(id){
 	}
 }
 function appendSearch(key,val){
-	block('Please Wait');
+	block('Espere por favor');
 	setTimeout(function(){
 		val = val.replace(/\+/g," ");
 		if(key=="Brands")

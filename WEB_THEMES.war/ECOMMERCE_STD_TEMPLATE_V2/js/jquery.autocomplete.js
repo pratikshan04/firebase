@@ -794,8 +794,8 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		var count = 0;
 		var webThemes = $("#webThemePath").val();
 		if(autoCompleteVersion == "V2"){
-			li = $("<li />").html('<em>Search for</em><br/> "<strong>'+unescape(term)+'"</strong> <i>in:</i>').appendTo(catWrap)[0];
-			searchBtn = $("<a />").attr('href','searchPage.action?keyWord='+term).text('More Results');
+			li = $("<li />").html('<em>Buscar</em><br/> "<strong>'+unescape(term)+'"</strong> <i>en:</i>').appendTo(catWrap)[0];
+			searchBtn = $("<a />").attr('href','searchPage.action?keyWord='+term).text('Mas resultados');
 		}
 		for (var i=0; i < max; i++) {
 			var header = "Suggestion";

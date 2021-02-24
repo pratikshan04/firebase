@@ -136,19 +136,13 @@
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							<select name="sortBy" id="sortBy" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
 								##if($navigationType=="SEARCH")
-								<option value="score|desc" #if($sortBy=="score|desc") selected #end>Relevance</option>
+								<option value="score|desc" #if($sortBy=="score|desc") selected #end>$!locale.get("sort.label.relevance")</option>
 								##end
-								<option value="externalHitSort_desc" #if($sortBy=="externalHitSort_desc" || $sortBy=="externalhitsort_desc") selected #end>Best Seller</option>
-								<!-- <option value="brand_asc" #if($sortBy=="brand_asc" || $navigationType=="BRAND") selected #end>Brand (Asc)</option>
-								<option value="brand_desc" #if($sortBy=="brand_desc") selected #end>Brand (Desc)</option>
-								<option value="mpn_asc" #if($sortBy=="mpn_asc") selected #end>MPN (Asc)</option>
-								<option value="mpn_desc" #if($sortBy=="mpn_desc") selected #end>MPN (Desc)</option>
-								<option value="upc_asc" #if($sortBy=="upc_asc") selected #end>UPC (Asc)</option>
-								<option value="upc_desc" #if($sortBy=="upc_desc") selected #end>UPC (Desc)</option>
-								<option value="partnum_asc" #if($sortBy=="partnum_asc") selected #end>Part# (Asc)</option>
-								<option value="partnum_desc" #if($sortBy=="partnum_desc") selected #end>Part# (Desc)</option> -->
-								<!-- <option value="desc_asc" #if($sortBy=="desc_asc") selected #end>Description (Asc)</option>
-								<option value="desc_desc" #if($sortBy=="desc_desc") selected #end>Description (Desc)</option> -->
+								<option value="externalHitSort_desc" #if($sortBy=="externalHitSort_desc" || $sortBy=="externalhitsort_desc") selected #end>$!locale.get("sort.label.bestSeller")</option>
+								<option value="mpn_asc" #if($sortBy=="mpn_asc") selected #end>$!locale.get("product.label.mpn") (Asc)</option>
+								<option value="mpn_desc" #if($sortBy=="mpn_desc") selected #end>$!locale.get("product.label.mpn") (Desc)</option>
+								<option value="partnum_asc" #if($sortBy=="partnum_asc") selected #end>$!locale.get("product.label.partNumber") (Asc)</option>
+								<option value="partnum_desc" #if($sortBy=="partnum_desc") selected #end>$!locale.get("product.label.partNumber") (Desc)</option>
 							</select>
 						</form> 
 						<!-- ****************End of Sort By**************** -->
@@ -178,7 +172,7 @@
 						</form>
 					</div>
 					<div class="col-md-5 col-sm-12 col-xs-12">
-						<div class='row'>
+						<div class='row mTop-1'>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<span class="cimm_compareControls">
 									<a href="javascript:void(0);" onclick="compareItems();">&nbsp;$!locale.get("product.button.compare") (<span id="compareSpan" class="compareCountSpanClass">0</span>) $!locale.get('product.label.items')</a>
@@ -186,8 +180,8 @@
 								</span>
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-12 text-right hideForDevices">
-								<a id="listView" class="listView" href="javascript:void(0);" title="$!locale.get('product.view.listView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 24 24" class="ng-element" data-id="380a6cd865b3b8c3e92a5d025062682d" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="30" height="30" style="fill: #343333;"></rect> <rect display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M0,21h8v-8H0V21z M2,15h4v4H2V15z M10,20h14v-2H10V20z M0,11h8V3H0V11z M2,5h4v4H2 V5z M10,4v2h14V4H10z M10,16h14v-2H10V16z M10,10h14V8H10V10z" style="fill: #343333;"></path> </g></svg></a> 
-						    	<a id="gridView" class="gridView" href="javascript:void(0);" title="$!locale.get('product.view.gridView')" onclick="changemode();"><svg version="1.2" preserveAspectRatio="none" viewBox="0 0 28 28" class="ng-element" data-id="ac3984b32e6ab5276e657661bd64fcec" style="opacity: 1; fill: #343333; width: 25px; height: 25px;"><g><defs> </defs> <rect display="none" fill="#343333" width="25" height="25" style="fill: #343333;"></rect> <rect display="none" fill="none" width="25" height="25" style="fill: #343333;"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M20,5v8h8V5H20z M26,11h-4V7h4V11z M0,23h8v-8H0V23z M2,17h4v4H2V17z M0,13h8V5H0 V13z M2,7h4v4H2V7z M10,13h8V5h-8V13z M12,7h4v4h-4V7z M10,23h8v-8h-8V23z M12,17h4v4h-4V17z M20,23h8v-8h-8V23z M22,17h4v4h-4V17z" style="fill: #343333;"></path> </g></svg></a>
+								<a id="listView" class="listView" href="javascript:void(0);" title="$!locale.get('product.view.listView')" onclick="changemode();">$!locale.get('label.view')&nbsp; </a> 
+						    	<a id="gridView" class="gridView" href="javascript:void(0);" title="$!locale.get('product.view.gridView')" onclick="changemode();">$!locale.get('label.view')&nbsp; </a>
 								<div class="clear"></div>
 						    </div>
 					    </div>
@@ -227,7 +221,7 @@
 		 	<h3> $!locale.get("product.label.didyoumean") <a class="linkText" href="/searchPage.action?keyWord=$!itemSuggest.toUpperCase()" title="Search for this"> <u>$!itemSuggest.toUpperCase()</u></a></h3>
 		 </div>
 		 #end
-		 <div class="pageTitle"> <h3> Not finding what you want, try our <u><a class="linkText" href="/advancedSearch">Advanced Search</a></u></h3></div>
+		 <div class="pageTitle"> <h3> $!locale.get("label.search.nodataNotFind") <u><a class="linkText" href="/advancedSearch">$!locale.get("product.heading.advancedSearch")</a></u></h3></div>
 		#end
 	</div>
 </div>
@@ -347,23 +341,23 @@
 						#else
 							<li class="sessionDesp">
 								<h3 class="productTitle">
-									<a itemprop="url" href="$!itemDetailUrl" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" #if($itemTitle.length() > 22) data-toggle="tooltip" title="$!itemTitle" #end >
+									<a itemprop="url" href="$!itemDetailUrl" class="clickStream" data-itemid="$!itemData.itemId" data-clicktype="click" id="itemTitle$!itemData.itemId" data-toggle="tooltip" title='$!itemData.shortDesc'>
 										<span itemprop="name">
-										#if($itemTitle.length() > 22)
-											$!itemTitle.substring(0, 22)... 
+										#if($!itemData.shortDesc.length() > 45)
+											$!itemData.shortDesc.substring(0, 45)... 
 										#else
-											$!itemTitle
+											$!itemData.shortDesc
 										#end
 										</span>
 									</a>
 								</h3>
-								#if($itemData.shortDesc.length()>65)
+								<!-- #if($itemData.shortDesc.length()>65)
 									<span itemprop="description" id="itemShortDesc$!itemData.itemId" class="hideMe">$!itemData.shortDesc</span>
 									<p class='listGridItemDesc' >$!itemData.shortDesc.substring(0, 65) &nbsp;<span><a href="$!itemDetailUrl">$!locale.get("product.label.more")</a></span></p>
 								#else
 									<p itemprop="description" id="itemShortDesc$!itemData.itemId" class='listGridItemDesc'>$!itemData.shortDesc</p>
-								#end
-								<ul class="skuStyle">
+								#end -->
+								<ul class="skuStyle first">
 									<!-- #if($itemData.manufacturerName.trim() != "")
 										<li><strong>$!locale.get("product.label.manufacturers"): </strong><span itemprop="manufacturer">$!itemData.manufacturerName.trim()</span></li>
 									#end -->
@@ -442,7 +436,7 @@
 									</li>
 									#end
 								</ul>
-								<ul>
+								<ul class="second">
 									#if($!itemData.packDesc && $itemData.packDesc.trim() != "")<li class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
 									<li class="cimm_priceWrap">
 									#if($userLogin)
@@ -464,7 +458,7 @@
 										#end
 									#end
 									#else
-									<span><a data-toggle='modal' data-target='#loginModal'><span class='priceSpan'>Login for price</span></a></span>
+									<span><a data-toggle='modal' data-target='#loginModal'><span class='priceSpan'>$!locale.get("label.loginForPrice")</span></a></span>
 									#end
 									</li>
 									<li class="cimm_qtyWrap">

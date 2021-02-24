@@ -92,7 +92,7 @@ function bulkActions(that) {
 		}
 	}
 	if(val){
-		block("Please Wait");
+		block("Espere por favor");
 		$("#productGroupForm").attr("method","post");
 		$("#productGroupForm").submit();
 	}else{

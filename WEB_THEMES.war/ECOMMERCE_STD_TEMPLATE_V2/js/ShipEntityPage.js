@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	jQuery('#example').DataTable({
+		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json"
+		},
 	    "order": [[ 0, "asc" ]],
 	    pageLength : 5,
 	    lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]]
@@ -28,7 +31,7 @@ function submitShippingAddress(obj){
 		var str=jQuery("#selectShipAddress").serialize();
 		console.log("str : "+str);
 		setCookie("afterLoginUrl", '');
-		block("Please Wait");
+		block("Espere por favor");
 		setCookie("afterLoginUrl", '');
 		jQuery.ajax({
 			type: "POST",
@@ -57,7 +60,7 @@ function submitShippingAddress(obj){
 		});
 	}else{
 		console.log("Radio Off");
-		bootAlert("small","error","Error","Please select at least one ship address.");
+		bootAlert("small","error","Error",locale("label.shipadd.radionotselect"));
 	}
 }
 function isURL(str) {

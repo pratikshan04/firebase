@@ -309,10 +309,9 @@ $icons: (
             margin: 0;
             .cimm_nav{
 				position: relative;
-				@if($lh_border != false){
-					border-bottom: 1px solid $primary_color;
-				}
                 >ul{
+					width: 100%;
+					border-bottom: 1px solid $primary_color;
                     >li{
 						span{
 							display: inline-block;
@@ -386,7 +385,7 @@ $icons: (
 								height: auto;
 								padding: 2px 0px; 
 								&:hover{
-									background: $tertiary_color;
+									background: transparent;
 									> span {
 										a{
 											color: $primary_color;
@@ -444,7 +443,7 @@ $icons: (
 										display: block;
 										a{
 											text-transform: capitalize;
-											padding: 4px 10px;
+											padding: 4px 24px;
 											font-size: $subnav-lf-size;
 											font-family: $subnav-lf-family;
 											display: block;
@@ -456,6 +455,7 @@ $icons: (
 											&:active{
 												color: $primary_color;
 											}
+											
 										}
 										em{
 											padding: 14px 14px;
@@ -679,7 +679,7 @@ $icons: (
 						
                         ul{
                             li{
-								padding: 5px 0px;
+								padding: 4px 16px 4px 4px;
                                 a, label span{
                                     @include font($family: $lf-family, $size: $lf-size, $color: $lf-color);
                                     @if ($lf-uppercase != false){
@@ -747,8 +747,8 @@ $icons: (
 
 			@if $bgicon != false{
 				@if($class_name == "addtocart"){
-					padding: 10px;
-					@include icon(before, cart, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
+					margin: 4px 0;
+					@include icon(before, cartBg, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
 				} 
 				@if($class_name == "viewallchoice"){
 					padding-left: 25px; 
@@ -779,6 +779,7 @@ $icons: (
     }
     //Button Sizes
     .btn {
+		border-radius: 2px;
         &-lg {
             //Any Size Customizations here
         }

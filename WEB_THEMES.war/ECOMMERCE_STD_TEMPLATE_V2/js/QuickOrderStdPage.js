@@ -19,7 +19,7 @@ $(document).ready(function() {
 		}
 	});
 	var options = {
-		beforeSend: function(){block("Please Wait");},
+		beforeSend: function(){block("Espere por favor");},
 		uploadProgress: function(event, position, total, percentComplete){},
 		success: function(){},
 		complete: function(response){
@@ -300,7 +300,7 @@ var QuickOrder = {};
 			}else if(countOfRowsWithData > quickOrderRecordLimit){
 				bootAlert("small","error","Error",locale("quickOrder.message.maxrecountsItemsCanBeUploaded")+quickOrderRecordLimit);
 			}else{ 
-				block("Please Wait");
+				block("Espere por favor");
 				$("#orderPadCopy").html("");
 				var row = "<table>";
 				for(var i=0;i< data.length;i++){
@@ -366,7 +366,7 @@ var QuickOrder = {};
 		var jsonObjQuick = null;
 		jsonObjQuick = [];
 		if(jQuery('#copyPasteText').length>0 && jQuery('#copyPasteText').val()!=null && jQuery('#copyPasteText').val().trim()!=""){
-			block("Please Wait");
+			block("Espere por favor");
 			var  copyText = jQuery('#copyPasteText').val();
 			var lines = copyText.split("\n");
 			var quickOrderRecordLimit = 50;

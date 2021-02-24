@@ -18,33 +18,30 @@
 					#end
 					</a>
 				</span>
-				
 				#foreach($key in $secondLevelMenu.keySet())
 				#if($categoryMenu.categoryCode==$key)
 				<ul class="dropdown-menu">
 					#foreach($secondLvlMenu in $secondLevelMenu.get($key))
 					<li class="third">
 						<span>
-							<a href="$!secondLvlMenu.seoUrl">$!secondLvlMenu.categoryName
-							#foreach($key3 in $secondLevelMenu.keySet())
-							#if($secondLvlMenu.categoryCode==$key3) <em class="fa"></em> #end
-							#end
-							</a>
+							<a href="$!secondLvlMenu.seoUrl">$!secondLvlMenu.categoryName</a>
 						</span>
-						#foreach($key3 in $secondLevelMenu.keySet())
-						#if($secondLvlMenu.categoryCode==$key3)
-						<ul class="dropdown-menu">
-							#foreach($thirdLvlMenu in $secondLevelMenu.get($key3))
-								<li><span><a href="$!thirdLvlMenu.seoUrl">$!thirdLvlMenu.categoryName</a></span></li>
-							#end
-						</ul>
-						#end
-						#end
-					</li>
+					</li>	
 					#end
+					<li class="third">
+						<span>
+							<a href="$!categoryMenu.seoUrl"><u>$locale.get('lable.link.viewAllCategories')</u></a>
+						</span>
+					</li>	
+						<!-- <li>
+						#if($categoryMenu.imageName.contains("http") || $categoryMenu.imageType.equalsIgnoreCase("URL"))
+							<img width="120px" height="120px" alt="$!categoryMenu.categoryName" src="$!webThemes/$siteName/images/NoImage250x250.png" data-src="$!categoryMenu.imageName"  data-sizes="auto" class="lazyload" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
+					   #else
+							<img width="120px" height="120px" alt="$!categoryMenu.categoryName" src="$!webThemes/$siteName/images/NoImage250x250.png" data-src="$!taxonomyImage$!categoryMenu.imageName" data-sizes="auto" class="lazyload" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
+					   #end
+						</li> -->
 				</ul>
 				#end
-				
 				#end
 			</li>
 			#end

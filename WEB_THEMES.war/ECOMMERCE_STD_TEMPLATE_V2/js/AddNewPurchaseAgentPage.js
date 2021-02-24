@@ -52,7 +52,7 @@ function RefreshPageForInternationalUser(){
 }
 function getEntityAddress(obj){
 	if(obj.checked){
-		block("Please Wait");
+		block("Espere por favor");
 		str = "test=1";
 		$.ajax({
 			type: "POST",

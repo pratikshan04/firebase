@@ -173,7 +173,7 @@ var QuickOrder = {};
     		}else if(countOfRowsWithData > quickOrderRecordLimit){
     			bootAlert("small","error","Error",locale("quickOrder.message.maxrecountsItemsCanBeUploaded")+quickOrderRecordLimit);
     		}else{ 
-    			block("Please Wait");
+    			block("Espere por favor");
     			var data = $("#speedEntry table tbody tr");
     			$("#orderPadCopyHead").html("");
     			var row = "<table>";
@@ -234,7 +234,7 @@ var QuickOrder = {};
 		var jsonObjQuick = null;
 		jsonObjQuick = [];
 		if(jQuery('#headerCopyPasteText').length>0 && jQuery('#headerCopyPasteText').val()!=null && jQuery('#headerCopyPasteText').val().trim()!=""){
-			block("Please Wait");
+			block("Espere por favor");
 			var  copyText = jQuery('#headerCopyPasteText').val();
 			var lines = copyText.split("\n");
 			var quickOrderRecordLimit = 50;
@@ -272,7 +272,7 @@ var QuickOrder = {};
 							}
 							
 						}else if(lines[ln].indexOf("\t") > -1){
-							block("Please Wait");
+							block("Espere por favor");
 							var valuesTabSeparate = lines[ln].split("\t");
 							if(valuesTabSeparate!=null && valuesTabSeparate.length>0){
 								if(valuesTabSeparate[1]==null || valuesTabSeparate[1]==""){
@@ -386,7 +386,7 @@ var QuickOrder = {};
 		if(typeof object!=null){
 			myObject.itemDataList = object;
 		}
-		//block("Please Wait");
+		//block("Espere por favor");
 		$('#generalModel .modal-body').html("");
 		var jsonData = JSON.stringify(myObject);
 		$.ajax({
@@ -521,7 +521,7 @@ var QuickOrder = {};
 })();
 $(function(){
 	var options = {
-		beforeSend: function(){block("Please Wait");},
+		beforeSend: function(){block("Espere por favor");},
 		uploadProgress: function(event, position, total, percentComplete){},
 		success: function(){},
 		complete: function(response){

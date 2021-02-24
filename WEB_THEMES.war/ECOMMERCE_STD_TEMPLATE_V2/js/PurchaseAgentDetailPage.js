@@ -98,7 +98,7 @@ $(document).ready(function(){
 			}
 			if(status.match(/^\d+$/)) {changed="Y";}else{changed="N";}
 			if (changed=='Y'){
-				$("#updateBtn").val("Please wait");
+				$("#updateBtn").val("Espere por favor");
 				$("#updateBtn").attr("disabled","disabled");
 				block();
 				var str = $(this).serialize();
@@ -142,7 +142,7 @@ $(document).ready(function(){
 
 
 			}else if(changed=='N'){
-				showNotificationDiv("","No Changes Has Been Made");
+				showNotificationDiv("",locale('label.manageagent.nochange'));
 				//$("#errorMsg").html("No Changes Has Been Made");
 				setTimeout(function(){hideNotificationDiv();} , 5000);
 				return false;

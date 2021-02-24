@@ -277,7 +277,7 @@
 						#set($itemProductDescription = $!itemData.productDescription)
 					#end
 					<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemProductTitle</h1>
-					<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemProductDescription</p>
+					<p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p>
 					<input type="hidden" id="titleText" name="titleText" value="$!itemProductTitle"/> 
 					<!-- Product Mode Attribute Drop Down Start -->
 					<div id="attrFilterBlock" class="hideForPrint">

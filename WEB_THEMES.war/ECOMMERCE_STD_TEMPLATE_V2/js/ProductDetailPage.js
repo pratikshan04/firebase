@@ -155,24 +155,24 @@ function manageCustomerPartNumber(performAction){
 	var cPartNumbervalue=$.trim(newCustPartNum).length;
 	var characterReg = /^[-_ a-zA-Z0-9]+$/;
 	if(performAction.id != "remove"){
-		if(newCustPartNum == "" || newCustPartNum == "Enter New Customer Part Number"  || cPartNumbervalue == 0){
-			bootAlert("small","error","Error","Please Enter Valid Customer Part Number.");
+		if(newCustPartNum == "" || newCustPartNum == "Enter New Customer Part Number"  || newCustPartNum == "Ingrese un nuevo CPN" || cPartNumbervalue == 0){
+			bootAlert("small","error","Error",locale("label.error.validCPN"));
 			$("#newCustomerPartNumber").focus();
 			request = false;
 		}else{
 			if(!characterReg.test(newCustPartNum)){
-				bootAlert("medium","error","Error","Please Enter Valid Customer Part Number with no special character except underscore or hyphen ( _ , - ).");
+				bootAlert("medium","error","Error",locale('label.error.validCPNname'));
 				return false;
 			}else{
 				$("[name='customPartNumList']").each(function(){
 					if($(this).val().toLowerCase() == newCustPartNum.toLowerCase()){
-						bootAlert("small","error","Error","Customer Part Number already exists.");
+						bootAlert("small","error","Error", locale('label.error.CPNexists'));
 						request = false;
 					}
 				});
 				if(performAction.id == "add"){
 					if(request) {
-						block("Please wait");
+						block("Espere por favor");
 						jQuery.get('addCustomerPartNumberPage.action?keyWord='+newCustPartNum+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val(),function(e,status){
 							unblock();
 							var msg = e.substring(0,e.indexOf("|"));
@@ -198,7 +198,7 @@ function manageCustomerPartNumber(performAction){
 							checkedCPN = checkedCPN + 1;
 						});
 						if(checkedCPN!=0){
-							block("Please wait");
+							block("Espere por favor");
 							var cpnVal = $(performAction).parent().parent().find('input:checkbox:checked').val();
 							var cpnId = $(performAction).parent().parent().find('input:checkbox:checked').attr('id');
 							jQuery.get('updateCustomerPartNumberPage.action?newCpn='+newCustPartNum+"&oldCpn="+cpnVal+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val()+"&vpsid="+cpnId,function(e,status){
@@ -209,7 +209,7 @@ function manageCustomerPartNumber(performAction){
 									$("#custMainBlock").show();
 									$("#custPartBlock").html("");
 									$("#custPartBlock").html(cpn);
-									$("#customerPartNumSubmit ul").html('<li class="text-success">Customer Part Number Updated Successfully</li>');
+									$("#customerPartNumSubmit ul").html('<li class="text-success">'+ locale('label.success.CPNUpdate') +'</li>');
 								}else {
 									$("#custMainBlock").hide();
 									$("#customerPartNumSubmit ul").html('<li class="text-danger">'+cpn+'</li>');
@@ -217,7 +217,7 @@ function manageCustomerPartNumber(performAction){
 								setTimeout(function(){$("#customerPartNumSubmit").hide();$(".dropdown-backdrop").remove();$("#customerPartNumSubmit").parent().removeClass('open');}, 3000);
 							});
 						}else{
-							bootAlert("medium","error","Error","Please select atleast one customer part# to update.");
+							bootAlert("medium","error","Error",locale('label.error.CPNselect'));
 							request = false;
 						}
 					}else{
@@ -239,9 +239,9 @@ function manageCustomerPartNumber(performAction){
 			}
 		});
 		if(cPartList == ""){
-			bootAlert("small","error","Error","Please Select Customer Part Number.");
+			bootAlert("small","error","Error",locale('label.success.select'));
 		}else {
-			block("Please wait");
+			block("Espere por favor");
 			jQuery.get('removeCustomerPartNumberPage.action?vpsid='+cPartList+"&itemPriceId="+$("#hidden_ItemID").val()+"&partNumber="+$("#hidden_PartNum").val()+"&custPnum="+cPartNums,function(e,status){
 				unblock();
 				var msg = e.substring(0,e.indexOf("|"));
@@ -384,7 +384,7 @@ function changeSelection(obj){
 		var selectedVal = jQuery(obj).attr("id");
 		var selValId = selValData[Encoder.htmlEncode(jQuery("#"+selectedVal+" option:selected").val())];
 		if(selValId.length == 1){
-			block('Please Wait');
+			block('Espere por favor');
 			window.location.href = $("#selItem_"+selValId[0]).val();
 		}else{
 			var errorId = "";

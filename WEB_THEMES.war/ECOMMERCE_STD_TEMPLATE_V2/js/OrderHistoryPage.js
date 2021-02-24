@@ -141,7 +141,7 @@ function processForm(data) {
 		}
 	}*/
 	if (submitForm) {
-		block('Please Wait');
+		block('Espere por favor');
 		$("#OrdersHistoryDetails").submit();
 	}else{
 		$('#orderHistorySearchBox').val(searchBtnVal);

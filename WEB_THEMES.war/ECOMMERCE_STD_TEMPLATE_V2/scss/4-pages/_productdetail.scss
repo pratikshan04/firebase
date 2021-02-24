@@ -62,12 +62,16 @@
         padding: 2px;
         margin: auto;
       }
+      .clearenceTag{
+        top: 20px;
+        left: 0;
+      }
     }
     a.imgEnlargeIcon {
       position: absolute;
       top: 25px;
       right: 6px;
-      color: $gray-lighter;
+      color: $primary_color;
       font-size: 24px;
       z-index: 12;
     }
@@ -103,6 +107,7 @@
   .cimm_itemDescription {
     width: calc(100% - 450px);
     float: left;
+    padding: 20px 0px;
     .itemDetailUtility {
       .detailreview {
         float: left;
@@ -112,9 +117,13 @@
         position: relative;
         > a {
           color: $gray;
-          margin: 0 3px;
+          margin: 0 15px;
           vertical-align: middle;
-          font-size: 16px;
+          font-size: $font_md;
+          
+          em, .glyphicon {
+            color: $primary_color;
+          }
         }
         a#sharePageTrigger:hover + ol {
           display: block;
@@ -125,7 +134,7 @@
           z-index: 2;
           padding: 4px;
           top: 28px;
-          right: 0px;
+          left: 0px;
           -webkit-border-radius: 2px;
           -moz-border-radius: 2px;
           -ms-border-radius: 2px;
@@ -202,6 +211,7 @@
     font-family: $secondary_font-family;
     text-transform: uppercase;
     font-size: 14px;
+    color: $primary_color;
   }
   .cimm_itemShortDesc {
     line-height: 22px;
@@ -252,7 +262,7 @@
           &.custparNoBtn {
             font-size: 14px;
             > a {
-              color: $default_font-color;
+              color: $primary_color;
             }
             ul {
               width: 100%;

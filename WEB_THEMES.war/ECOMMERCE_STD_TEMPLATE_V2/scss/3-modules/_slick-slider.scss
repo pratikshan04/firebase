@@ -260,8 +260,6 @@ ul.slick-dots {
     }
     .slick-slide {
       margin: 0 0 0 15px;
-      box-shadow: 0 0 6px $shadow-color;
-      border-radius: 3px;
     }
 
     li {
@@ -370,6 +368,13 @@ ul.slick-dots {
     -webkit-line-clamp: 2;
     min-height: 40px;
     height: 40px;
+    color: $primary_color;
+    font-size: $font_lg;
+    text-align: center;
+    outline: 0;
+    &:focus{
+      outline: 0;
+    }
   }
   ul {
     li {

@@ -209,7 +209,7 @@
 #elseif($!LayoutName=="ProductGroupPage" || $!LayoutName=="ApproveCart" || $!LayoutName=="SavedCartPage")
 	#set($pageTitleVelo = $!savedGroupName + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="HomePage")
-	#set($pageTitleVelo = "Home"+ $!pageTitleseparator + $!pageTitleVelo)
+	#set($pageTitleVelo = "Casa"+ $!pageTitleseparator + $!pageTitleVelo)
 #elseif($!LayoutName=="OrderDetailPage")
 	#if($orderDetail.orderStatus.contains("Bid"))
 		#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)
@@ -233,7 +233,7 @@
 #end
 ##<!-- ------------------------------------------------------------------------------------ -->
 #if($navigationType=='SEARCH')
-	#set($pageTitleVelo = "Search Results " + $!pageTitleVelo.trim())
+	#set($pageTitleVelo = "Resultados de la busqueda " + $!pageTitleVelo.trim())
 #end
 ##<!-- ------------------------------------------------------------------------------------ -->
 #if($LayoutName!='ProductDetailPage' && $LayoutName!="ProductList" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage")

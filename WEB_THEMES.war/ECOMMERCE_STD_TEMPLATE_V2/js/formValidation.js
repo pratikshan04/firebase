@@ -18,10 +18,10 @@ function submitThisForm(formId){
 	var btnVal = "";
 	if(curSubmit[0]){
 		btnVal = $(curSubmit[0]).val();
-		$(curSubmit[0]).val("Please Wait").attr("disabled",true);
+		$(curSubmit[0]).val("Espere por favor").attr("disabled",true);
 	}else if(curSubmitBtn[0]){
 		btnVal = $(curSubmitBtn[0]).text();
-		$(curSubmitBtn[0]).text("Please Wait").attr("disabled",true);
+		$(curSubmitBtn[0]).text("Espere por favor").attr("disabled",true);
 	}
 	var i, j, k, submitForm = this;
 	var eachElement, errorMessages = [];
@@ -174,7 +174,7 @@ function submitFormToServer(that){
 	}else{
 		actionUrl = "SaveAndSendMail.action"; // for static page action
 	}
-	block("Please Wait");
+	block("Espere por favor");
 	$.ajax({
 		method: formMethod,
 		url: actionUrl,

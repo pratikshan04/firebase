@@ -21,7 +21,7 @@ $(document).ready(function(){
 });
 function addAllItemsToCart(linkUrl){
 	var	callForPriceCounter = 0, pricePresent = 0;
-	block("Please Wait");
+	block("Espere por favor");
 	jQuery.ajax({
 		type: "POST",
 		url: linkUrl+"&toCart=ALL",

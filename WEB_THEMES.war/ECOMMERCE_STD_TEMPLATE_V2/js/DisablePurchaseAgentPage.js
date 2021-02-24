@@ -19,10 +19,10 @@ function disableAuthorization(userID){
 		size: "small",
 		closeButton:false,
 		message: "Are you sure you want to Disable Authorized Purchase Agent for this User?",
-		title: "<span class='text-warning'>Warning &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+		title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 		callback: function(result){
 			if(result){
-				block("Please Wait");
+				block("Espere por favor");
 				$.post('DisableAgentAuthorizationUnit.action?userId='+userID ,function(data,status){
 					unblock();
 					if(data=="sessionexpired"){
