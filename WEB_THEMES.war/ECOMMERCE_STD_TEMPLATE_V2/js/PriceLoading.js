@@ -82,7 +82,7 @@ function preparePriceLabelStr(price, product) {
 }
 function populateCallForPrice(partNumber, price) {
 	var itemHolder, callForPriceStr;
-	callForPriceStr = "<span class='priceSpan'>Call for Price</span>&nbsp;";
+	callForPriceStr = "<span class='priceSpan'>"+locale('product.label.callforprice')+"</span>&nbsp;";
 	itemHolder = document.getElementById("span_" + partNumber);
 	if (itemHolder) {
 		itemHolder.innerHTML = callForPriceStr;
@@ -117,7 +117,8 @@ function populateAllBranchTotal(partNumber, availability) {
 	}
 }
 function populateAvailabilityLabel(partNumber, availability) {
-	var availabilityStr = "<span class='cimm_color5'>In Stock</span>";
+	//var availabilityStr = "<span class='cimm_color5'>In Stock</span>";
+	var availabilityStr = "";
 	var itemHolder = document.getElementsByClassName("Avail_"+partNumber);
 	var itemHolderlist = document.getElementsByClassName("Available_"+ partNumber);
 	var i = 0, eachItem;
@@ -138,7 +139,7 @@ function populateAvailabilityLabel(partNumber, availability) {
 	}
 }
 function populateCallForAvailability(partNumber) {
-	var availabilityStr = "<span class='cimm_color5'>Call for Availability</span>";
+	var availabilityStr = "<span class='cimm_color5'>"+locale('product.label.outOfStock')+"</span>";
 	if (document.getElementById('itemTxtSXAvail' + partNumber)) {
 		document.getElementById('itemTxtSXAvail' + partNumber).value = 0;
 	}
@@ -340,7 +341,7 @@ priceLoading.productModeCustomFunc = function() {
 		"dom" : '<"top"i>rt<"bottom"flp><"clear">',
 		"language" : {
 			"search" : "_INPUT_",
-			"searchPlaceholder" : "Search",
+			"searchPlaceholder" : "Buscar",
 			"sLengthMenu" : "Show _MENU_",
 			"oPaginate" : {
 				"sPrevious" : "Prev",

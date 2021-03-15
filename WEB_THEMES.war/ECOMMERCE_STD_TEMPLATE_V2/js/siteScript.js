@@ -118,6 +118,14 @@ function changeAction(s, selectId) {
 			closeButton: false,
 			message: "Are you sure you want delete?",
 			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function (result) {
 				if (result) {
 					$("#productGroupForm").attr("action", "deleteSavedCartPage.action");
@@ -139,6 +147,14 @@ function changeAction(s, selectId) {
 						closeButton: false,
 						message: locale("savedcart.item.delete"),
 						title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+						buttons: {
+							cancel: {
+								label: 'Cancelar'
+							},
+							confirm: {
+								label: 'Ok'
+							}
+						},
 						callback: function (result) {
 							deleteSelectedItem(result, selectId);
 						}
@@ -149,6 +165,14 @@ function changeAction(s, selectId) {
 						closeButton: false,
 						message: locale("productgroup.item.delete"),
 						title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+						buttons: {
+							cancel: {
+								label: 'Cancelar'
+							},
+							confirm: {
+								label: 'Ok'
+							}
+						},
 						callback: function (result) {
 							deleteSelectedItem(result, selectId);
 						}
@@ -157,8 +181,16 @@ function changeAction(s, selectId) {
 					bootbox.confirm({
 						size: "small",
 						closeButton: false,
-						message: "Delete selected items?",
+						message: locale('label.select.deleteItems'),
 						title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+						buttons: {
+							cancel: {
+								label: 'Cancelar'
+							},
+							confirm: {
+								label: 'Ok'
+							}
+						},
 						callback: function (result) {
 							deleteSelectedItem(result, selectId);
 						}
@@ -168,8 +200,16 @@ function changeAction(s, selectId) {
 				bootbox.confirm({
 					size: "small",
 					closeButton: false,
-					message: "Delete selected items?",
+					message: locale('label.select.deleteItems'),
 					title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+					buttons: {
+						cancel: {
+							label: 'Cancelar'
+						},
+						confirm: {
+							label: 'Ok'
+						}
+					},
 					callback: function (result) {
 						deleteSelectedItem(result, selectId);
 					}
@@ -177,7 +217,7 @@ function changeAction(s, selectId) {
 			}
 			return false;
 		} else {
-			bootAlert("small", "error", "Error", "Please select at least one item to delete.");
+			bootAlert("small", "error", "Error", locale('label.select.oneDelete'));
 			$(selectId).val("").selectpicker('refresh');
 			return false;
 		}
@@ -200,7 +240,7 @@ function changeAction(s, selectId) {
 	} else if (s == 7) {
 		var reason = $.trim($('#reasonid').val());
 		if ($.trim(reason) == "") {
-			bootAlert("small", "error", "Error", "Enter User Reason");
+			bootAlert("small", "error", "Error", locale('label.enter.reason'));
 			return false;
 		} else {
 			$('#rejectReason').val($('#reasonid').val());
@@ -215,9 +255,9 @@ function changeAction(s, selectId) {
 					unblock();
 					var result = msg.split("|");
 					if (result[0] == 1) {
-						bootAlert("small", "success", "Success", "Cart Rejected");
+						bootAlert("small", "success", locale('label.alert.success'), locale('label.cart.reject'));
 					} else {
-						bootAlert("small", "error", "Error", "Cart Rejected Failed. Please try again");
+						bootAlert("small", "error", "Error", locale('label.cart.rejectTryAgain'));
 					}
 					$('#rejectReason').val('');
 					$('#reasonid').val('');
@@ -295,9 +335,9 @@ function changeAction(s, selectId) {
 			return false;
 		} else {
 			if (invalidQty) {
-				bootAlert("small", "error", "Error", "You cannot add items with 0 quantity to cart.");
+				bootAlert("small", "error", "Error", locale('label.error.zeroQtyAdd'));
 			} else {
-				bootAlert("small", "error", "Error", "Please select at least one item to add.");
+				bootAlert("small", "error", "Error", locale('label.error.selectOneItem'));
 			}
 			return false;
 		}
@@ -338,6 +378,14 @@ function deleteSavedProductGroup(delProductgroup, reqType) {
 				closeButton: false,
 				message: locale("savedcart.label.delete"),
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				buttons: {
+					cancel: {
+						label: 'Cancelar'
+					},
+					confirm: {
+						label: 'Ok'
+					}
+				},
 				callback: function (result) {
 					if (result)
 						window.location.href = delProductgroup;
@@ -349,6 +397,14 @@ function deleteSavedProductGroup(delProductgroup, reqType) {
 				closeButton: false,
 				message: locale("productgroup.label.delete"),
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				buttons: {
+					cancel: {
+						label: 'Cancelar'
+					},
+					confirm: {
+						label: 'Ok'
+					}
+				},
 				callback: function (result) {
 					if (result)
 						window.location.href = delProductgroup;
@@ -360,6 +416,14 @@ function deleteSavedProductGroup(delProductgroup, reqType) {
 				closeButton: false,
 				message: locale("savedcart.label.delete"),
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				buttons: {
+					cancel: {
+						label: 'Cancelar'
+					},
+					confirm: {
+						label: 'Ok'
+					}
+				},
 				callback: function (result) {
 					if (result)
 						window.location.href = delProductgroup;
@@ -375,22 +439,22 @@ function editGroupName() {
 	var type = $("#GroupType").val();
 	if (newName == null || newName == "") {
 		if (type == "C") {
-			bootAlert("small", "error", "Error", "Please Enter Cart Name");
+			bootAlert("small", "error", "Error", locale('label.error.cartName'));
 		} else {
-			bootAlert("small", "error", "Error", "Please Enter Group Name");
+			bootAlert("small", "error", "Error", locale('label.error.favname'));
 		}
 	} else if (newName == oldName) {
 		if (type == "C") {
-			bootAlert("small", "error", "Error", "No Changes In Cart Name");
+			bootAlert("small", "error", "Error", locale('label.error.cartnameNoChange'));
 		} else {
-			bootAlert("small", "error", "Error", "No Changes In Group Name");
+			bootAlert("small", "error", "Error", locale('label.error.favnaemNoChange'));
 		}
 		$("#groupName").show();
 		$("#editBox").hide();
 	} else {
 		var characterReg = /^[-_ a-zA-Z0-9]+$/;
 		if (characterReg.test(newName) == false) {
-			bootAlert("medium", "error", "Error", "Special characters are not allowed except underscore or hyphen ( _ , - )");
+			bootAlert("medium", "error", "Error", locale('label.error.specialcharnotallowed'));
 		} else {
 			$("#groupNameSaveBtn").val("Espere por favor");
 			$("#groupNameSaveBtn").attr("disabled", "disabled");
@@ -404,9 +468,9 @@ function editGroupName() {
 					unblock();
 					if (msg == 1) {
 						if (type == "C") {
-							bootAlert("small", "success", "Success", "Cart Name Changed");
+							bootAlert("small", "success", locale('label.alert.success'), locale('label.cartName.changed'));
 						} else {
-							bootAlert("small", "success", "Success", "Group Name Changed");
+							bootAlert("small", "success", locale('label.alert.success'), locale('label.favoritoName.changed'));
 							$("[data-bb-handler='ok']").click(function () {
 								location.reload();
 							});
@@ -423,9 +487,9 @@ function editGroupName() {
 						$("#groupNameSaveBtn").val("Save");
 						$("#groupNameSaveBtn").removeAttr("disabled");
 						if (type == "C") {
-							bootAlert("small", "error", "Error", "Cart Name Already Exists");
+							bootAlert("small", "error", "Error", locale('label.cartName.exists'));
 						} else {
-							bootAlert("small", "error", "Error", "Group Name Already Exists");
+							bootAlert("small", "error", "Error", locale('label.favoritoName.exists'));
 						}
 					} else if (msg == -1) {
 						location.reload();
@@ -439,7 +503,7 @@ function updateMyProductGroup() {
 	var chks = $("input:checkbox[name='idList']:checked");
 	var chkscount = chks.length;
 	if (chkscount == 0) {
-		bootAlert("small", "error", "Error", "Please select at least one item to update.");
+		bootAlert("small", "error", "Error", locale('label.select.oneItem'));
 		$("#bulkActionSelect").val("")
 		return false;
 	}
@@ -473,7 +537,7 @@ function updateMyProductGroup() {
 function validateShare() {
 	var keyword = $.trim($('#popkeyword').val());
 	if (keyword == "" || keyword == null) {
-		bootAlert("small", "error", "Error", "Please Enter Keyword.");
+		bootAlert("small", "error", "Error", locale('savedcart.label.enter'));
 		return false;
 	} else {
 		block("Espere por favor");
@@ -488,9 +552,9 @@ function validateShare() {
 			data: str,
 			success: function (msg) {
 				unblock();
-				if ($.trim(msg) == "User Not Found") {
+				if ($.trim(msg) == "User Not Found" || $.trim(msg) == "Usuario no encontrado") {
 					bootAlert("medium", "error", "Error", locale("savedcart.lable.userNotFound"));
-				} else {
+				}else {
 					$("#sharePop").modal('hide');
 					$('#sharePopupDiv').html(msg);
 					$('#sharePopupDiv').modal('show');
@@ -615,6 +679,14 @@ function performSearch() {
 			closeButton: false,
 			message: "Selected Inner Search will be cleared.",
 			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function (result) {
 				if (result == false) {
 					$("#narrowText").val("");
@@ -630,6 +702,14 @@ function performSearch() {
 			closeButton: false,
 			message: "Selected Filters will be cleared.",
 			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function (result) {
 				continueSearch(result);
 			}
@@ -1284,7 +1364,7 @@ function addToProductList(_this) {
 		} else {
 			var characterReg = /^[-_ a-zA-Z0-9]+$/;
 			if (characterReg.test(groupName) == false) {
-				bootAlert("medium", "error", "Error", "Special characters are not allowed except underscore or hyphen ( _ , - ).");
+				bootAlert("medium", "error", "Error", locale('label.error.specialcharnotallowed'));
 				return false;
 			} else {
 				$("#group_name").val(groupName);
@@ -2163,11 +2243,11 @@ function updateEmailAddress(email) {
 			});
 		} else {
 			setCookie("validEmailAddress", false);
-			bootAlert("small", "error", "Error", "Please enter valid email address");
+			bootAlert("small", "error", "Error", locale('register.error.emailaddressinvalid'));
 		}
 	} else {
 		setCookie("validEmailAddress", false);
-		bootAlert("small", "error", "Error", "Please enter email address");
+		bootAlert("small", "error", "Error", locale('register1A.error.emailAddress'));
 	}
 }
 function getOrderPartNumbers() {
@@ -2285,6 +2365,14 @@ function quickCartItemDelete(productListId) {
 		size: "small",
 		closeButton: false,
 		message: "You want to delete the item from cart?",
+		buttons: {
+			cancel: {
+				label: 'Cancelar'
+			},
+			confirm: {
+				label: 'Ok'
+			}
+		},
 		callback: function (result) {
 			if (result) {
 				block("Espere por favor");
@@ -2306,14 +2394,14 @@ function cleanLoadingV2() {
 		var userLogin = $("#userLogin").val();
 		$("[data-select='availability']").each(function (i) {
 			if ($(this).find("img").length > 0) {
-				$(this).html("<span class='priceSpanFa'>Call for Availability</span>");
+				$(this).html("<span class='priceSpanFa'>"+locale('product.label.outOfStock')+"</span>");
 				$("#HomeBranchQty").html("<span class='required'>Call for Availability</span>");
 				console.log("In Full Script");
 			}
 		});
 		$("[data-select='priceData']").each(function (i) {
 			if ($(this).find("img").length > 0) {
-				$(this).html("<span class='priceSpanFa'>Call for Price</span>");
+				$(this).html("<span class='priceSpanFa'>"+locale('product.label.callforprice')+"</span>");
 			}
 		});
 	} catch (e) {
@@ -2325,14 +2413,14 @@ function cleanLoading() {
 		var userLogin = $("#userLogin").val();
 		$("[data-select='availability']").each(function (i) {
 			if ($(this).find("img").length > 0) {
-				$(this).html("<span class='priceSpanFa'>Call for Availability</span>");
+				$(this).html("<span class='priceSpanFa'>"+locale('product.label.outOfStock')+"</span>");
 				$("#HomeBranchQty").html("<span class='required'>Call for Availability</span>");
 				console.log("In Full Script");
 			}
 		});
 		$("[data-select='priceData']").each(function (i) {
 			if ($(this).find("img").length > 0) {
-				$(this).html("<span class='priceSpanFa'>Call for Price</span>");
+				$(this).html("<span class='priceSpanFa'>"+locale('product.label.callforprice')+"</span>");
 			}
 		});
 
@@ -3031,7 +3119,8 @@ function validateProductSearch() {
 		s = replaceNonAscii(s);
 	}
 	if (text.value == "") {
-		bootAlert("small", "error", "Error", "Enter keyword for search");
+		bootAlert("small", "error", "Error", locale('label.error.placeholderSearch'));
+		return false;
 	} else if (s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") > -1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") > -1) {
 		bootAlert("medium", "error", "Error", "ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
 		return false;
@@ -3986,6 +4075,14 @@ $(document).ready(function () {
 				closeButton: false,
 				message: "There are item(s) in your cart. Do you want to switch customer",
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				buttons: {
+					cancel: {
+						label: 'Cancelar'
+					},
+					confirm: {
+						label: 'Ok'
+					}
+				},
 				callback: function (result) {
 					if (result) {
 						block('Espere por favor');
@@ -4012,6 +4109,14 @@ $(document).ready(function () {
 				closeButton: false,
 				message: "There are item(s) in your cart. Do you want to switch user",
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
+				buttons: {
+					cancel: {
+						label: 'Cancelar'
+					},
+					confirm: {
+						label: 'Ok'
+					}
+				},
 				callback: function (result) {
 					if (result) {
 						loadUserByCustomer(selectedCustomer, 'customer');

@@ -195,9 +195,14 @@ $modal_closebtn-color: $default_font-color;
         li+li:before {
             content: "|";
         }
-        li.active{
-            color: $primary_color;
+        li.active, li:last-child{
+            color: $primary_color !important;
         }
+        li{
+            a{
+                color: $secondary_color;
+            }
+         }
     }
 }
 
@@ -393,6 +398,10 @@ $modal_closebtn-color: $default_font-color;
     }
     .popCheckout {
         margin-bottom: 10px;
+        a:focus, a:hover{
+            outline: 0 !important;
+            color: $white;
+        }
     }
 }
 
@@ -1268,6 +1277,10 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
             }
         }
     }
+}
+.cimm_color5, .priceSpanFa{
+    color: $primary_color;
+    font-size: $font_md;
 }
 
 @import "3-modules/modules";

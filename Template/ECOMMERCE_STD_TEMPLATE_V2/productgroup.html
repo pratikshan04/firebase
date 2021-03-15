@@ -64,13 +64,13 @@
 					#end
 					<input type="hidden" name="pageNo" value="$pageNo" />
 					<select name="sortBy" id="sortByBrand" onchange="sortByManuPartNo();" class="form-control selectpicker">
-						<option value="">-- Select --</option>
+						<option value="">-- Seleccione --</option>
 						<!--  <option value="ProdNameA" #if($sortBy=='ProdNameA') selected #end >Brand (A-Z)</option>
 						<option value="ProdNameB" #if($sortBy=='ProdNameB') selected #end >Brand (Z-A)</option> -->
-						<option value="PartA" #if($sortBy=='PartA') selected #end >Part Number (Asc)</option>
-						<option value="PartD" #if($sortBy=='PartD') selected #end >Part Number (Desc)</option>
-						<option value="MPNA" #if($sortBy=='MPNA') selected #end >Manf Part# (Asc)</option>
-						<option value="MPND" #if($sortBy=='MPND') selected #end >Manf Part# (Desc)</option>
+						<option value="PartA" #if($sortBy=='PartA') selected #end >$!locale.get("product.label.partNumber") (Asc)</option>
+						<option value="PartD" #if($sortBy=='PartD') selected #end >$!locale.get("product.label.partNumber") (Desc)</option>
+						<option value="MPNA" #if($sortBy=='MPNA') selected #end >$!locale.get("product.label.mpn") (Asc)</option>
+						<option value="MPND" #if($sortBy=='MPND') selected #end >$!locale.get("product.label.mpn") (Desc)</option>
 						<!--  <option value="CPNDesc" #if($sortBy=='CPNDesc') selected #end >CPN (Desc)</option>
 						<option value="CPNAsc" #if($sortBy=='CPNAsc') selected #end >CPN (Asc)</option>
 						<option value="UpcA" #if($sortBy=='UpcA') selected #end >UPC (Asc)</option>
@@ -93,7 +93,7 @@
 					<input type="hidden" name="pageNo" value="0" />##$pageNo
 					<input type="hidden" value="$reqType" name="reqType"/>
 					<input type="hidden" value="$!searchkeyWord" name="searchkeyWord" id="searchkeyWord"/>
-					<input type="text" class="form-control" placeholder="Search" id="searchKey" value="$!searchkeyWord" onkeypress="return runScript(event);"  maxlength="25" />
+					<input type="text" class="form-control" placeholder="Buscar" id="searchKey" value="$!searchkeyWord" onkeypress="return runScript(event);"  maxlength="25" />
 					<button class="btn btn-primary" id="searchBtn" onclick="return validateProductSearch();">$locale.get('search.label.go')</button>
 					<button class="btn btn-primary" id="clearsearchBtn" onclick="return clearProductSearch();">$locale.get('search.label.clearSearch')</button>
 				</form>
@@ -163,7 +163,7 @@
 									<p><strong>$!locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></p>
 									#end
 								</li>
-								#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
+								<!-- #if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
 									<li class="hideToHover">
 										<strong>$!locale.get("product.label.cpn"): </strong>
 										<span>
@@ -183,13 +183,13 @@
 										#end
 										</span>
 									</li>
-								#end
-								#if($itemData.availQty>0)
+								#end -->
+								<!-- #if($itemData.availQty>0)
 					    			<strong>$!locale.get("product.label.available"): </strong>
 									<span>$!itemData.availQty</span>
 					    		#else
 					    			<span class='text-danger'>Call for Availability</span>
-					    		#end
+					    		#end -->
 								#set($leadTime = "N")
 								#set($available = "N")
 								#set($allBranch = $itemData.branchAvail)
@@ -239,7 +239,7 @@
 							#if($itemData.price > 0)
 							<span data-select='extPriceData' class='priceSpan formatPrice'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else
-							<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> for Price </span>
+							<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> $locale.get('label.callForPrice')</span>
 							#end
 							<em>#if($!itemData.qtyUOM && $itemData.qtyUOM.length() > 0 && $itemData.price > 0) / $!itemData.qtyUOM #end</em>
 							<input type="hidden" value="$itemData.partNumber" id="PartNumber_$itemData.partNumber" name="partnumberStrArray"/>
@@ -275,7 +275,8 @@
 									#set($addToCartCheckFlag = "Y")
 								#end
 								<!-- <input type="checkbox" name="idList" value="$itemData.productListId" id="chkSelect1$itemData.partNumber" data-addtocartflag="$addToCartCheckFlag" onclick="eachCheckBox(this)"/> -->
-								<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId" data-uom="$!itemData.qtyUOM"/>
+								<!-- <input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId" data-uom="$!itemData.qtyUOM"/> -->
+								<input type="checkbox" name="idList" value="$itemData.productListId" id="selectItemCheckbox_$itemData.itemId" data-addtocartflag="$addToCartCheckFlag" onclick="BulkAction.addGroupItemsToCookie(this)" data-partnumber="$itemData.partNumber" data-itemPriceId="$itemData.itemPriceId" data-itemId="$itemData.itemId" data-uom="$!itemData.uom"/>
 								<span></span>
 							</label>
 						</td>

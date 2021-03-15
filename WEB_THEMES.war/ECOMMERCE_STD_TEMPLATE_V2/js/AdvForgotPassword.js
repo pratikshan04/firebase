@@ -26,7 +26,8 @@ function forgotPasswordAdvanced(){
 				isValid = 1;
 			}
 		}else{
-			var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+			//var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+			var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 			if (!passwordRegEx.test(password)){
 				msg = msg + locale('form.user.password.invalid') + "</br>";
 				isValid = 0;
@@ -54,6 +55,14 @@ function forgotPasswordAdvanced(){
 						closeButton:false,
 						message: msg,
 						title: "<span class='text-success'>Confirmaci&oacute;n de cambio de contrase&ntilde;a &nbsp;&nbsp;<em class='glyphicon glyphicon-ok'></em></span>",
+						buttons: {
+							cancel: {
+								label: 'Cancelar'
+							},
+							confirm: {
+								label: 'Ok'
+							}
+						},
 						callback: function(result){
 							//if if(msg.indexOf("cpol") add in code if required
 							if(result){
@@ -66,7 +75,7 @@ function forgotPasswordAdvanced(){
 				}else{
 					var ms = msg.replace(/\|/g,"<br/>");
 					if(ms!=null && $.trim(ms).length>0){
-						showNotificationDiv("error", ms);
+						showNotificationDiv("success", ms);
 						$("#password").val("");
 						$("#confirmPassword").val("");
 					}

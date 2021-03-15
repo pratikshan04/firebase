@@ -396,8 +396,14 @@
     li {
       max-width: 100px;
       margin-right: 10px;
+      width: 100px;
+      text-align: center;
+      overflow: hidden;
+      word-break: break-all;
+      float: left;
       a {
         display: inline-block;
+        color: $secondary_color;
         label {
           display: block;
           text-align: center;

@@ -37,8 +37,8 @@
 <li><a href='$!locale.get("website.url.SavedGroup.ApproveCart")'><em class="glyphicon glyphicon-check" aria-hidden="true"></em>$!locale.get("product.heading.approvalCartList")</a></li>
 #end
 #if($!session.getAttribute("isSalesUser").equals("Y"))
-<li><a href="javascript:void(0);" class="switchCustomer">$!locale.get("label.salesuser.switch.customer")</a></li>
-<li><a href="javascript:void(0);" class="switchUser">$!locale.get("label.salesuser.switch.user")</a></li>
+<li><a href="javascript:void(0);" class="switchCustomer"><em class="fa fa-user" aria-hidden="true"></em>$!locale.get("label.salesuser.switch.customer")</a></li>
+<li><a href="javascript:void(0);" class="switchUser"><em class="fa fa-user" aria-hidden="true"></em>$!locale.get("label.salesuser.switch.user")</a></li>
 #end
 #if($!userAgent == "WEBVIEW")<li><a onclick="fingerPrintpopup();"><em class="fa fa-hand-pointer" aria-hidden="true"></em>Fingerprint lock</a></li>#end
 <li class='logoutBtn'><a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em>$!locale.get("product.heading.signOut")</a></li>

@@ -133,6 +133,7 @@ function isEmpty(formElement){
 }
 function isValidEmailId(formElement){
 	var emailRegEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	//var emailRegEx = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
 	return emailRegEx.test(formElement.value);
 }
 function isValidPhoneNumber(formElement){

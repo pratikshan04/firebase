@@ -46,7 +46,7 @@ header {
             }
         }
         .cimm_header_mid {
-                height: 100px;
+                height: 110px;
             .cimm_logo {
                 width: 250px;
                 height: 100px;
@@ -72,15 +72,12 @@ header {
 }
 
 .cimm_signWrap {
-    //padding: 10px !important;
-    //text-align: right !important;
-    height: 100px;
-
+    padding: 10px 0;
     > li {
         display: inline-block;
         position: relative;
         text-align: center;
-        //padding: 10px !important;
+        padding: 4px !important;
         > a { 
             display: block;
             color: $white;
@@ -141,16 +138,16 @@ header {
                     }
                 }
              }
-             .loginblockElement{
-                position: relative;
-                top: 30px;
-            }
     }
-    // >li:first-child {
-    //     width: 80px;
-    // }
 }
-
+a.loginblockElement {
+        position: relative;
+        top: 8px;
+        color: $white;
+        text-transform: uppercase;
+        margin: 0 90px 0 0;
+        float: right;
+    }
 .slideDropMenu, .myAccountMenu {
     li {
         a {

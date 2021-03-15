@@ -491,7 +491,7 @@ function populateStates(country, stateElemnet, selectState,defaultSelect){
 	if(stateSelector.options.length < 1){
 		stateSelector.options.length=null;
 		//if(!defaultSelect){
-			stateSelector.options[0] = new Option('Select State','');
+			stateSelector.options[0] = new Option('Seleccione estado','');
 		//}
 		for(sc=0; sc < selectedState.length; sc++){
 			selectThis = false;
@@ -524,7 +524,7 @@ function populateStatesOnchange(country, stateElemnet, selectState, defaultSelec
 	}
 	var getState = stateLoop[0].length > 2 ? 1 : 0 ;
 	stateSelector.options.length=null;
-	stateSelector.options[0] = new Option('Select State','');
+	stateSelector.options[0] = new Option('Seleccione estado','');
 	selectThis = false;
 	if(selectedState){
 		for(sc=0; sc < selectedState.length; sc++){

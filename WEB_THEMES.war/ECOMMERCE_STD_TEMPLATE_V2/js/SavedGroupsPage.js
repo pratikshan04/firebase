@@ -9,8 +9,9 @@ $(document).ready(function(){
 		"order" : [[0, 'desc']],
 		"columnDefs": [{ orderable: false, targets: -1 }],
 		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json",
 			"search":"_INPUT_",
-	        "searchPlaceholder":"Search List",
+	        "searchPlaceholder":"Buscar",
 	        "sLengthMenu" :"Show _MENU_",
 	        "oPaginate" : {
 	        	"sPrevious" :"Prev",

@@ -110,11 +110,12 @@ p {
   margin: 0px;
 }
 a {
-  color: $gray-dark;
+  color: $primary_color;
   cursor: pointer;
 }
 a:focus,
 a:hover {
+  color: $primary_color;
   text-decoration: none;
 }
 .text-wrap {

@@ -1,9 +1,9 @@
 <input type="hidden" id="QUICK_ORDER_RECORD_LIMIT" value='#if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end'/>
 <div class="multiTab" id="quickOrderTab">
 	<ul class="multiTabHeading clearAfter">
-		<li><a href="#typeItems">Speed Entry</a></li>
-		<li><a href="#copyPaste">Copy Paste</a></li>
-		<li><a href="#fileUpload">File Upload</a></li>
+		<li><a href="#typeItems">$!locale.get('label.quickOrder.speed')</a></li>
+		<li><a href="#copyPaste">$!locale.get('label.quickOrder.copypaste')</a></li>
+		<li><a href="#fileUpload">$!locale.get('label.quickOrder.FileUpload')</a></li>
 	</ul>
 	<div class="multiTabContent">
 		<div id="typeItems">
@@ -11,19 +11,19 @@
 				<div class="col-lg-4 col-md-5 col-ms-6 col-xs-12">
 					<input type="hidden" name="responseType" id="responseType" value="$!responseType"/>
 					<div id="example1" class="hot handsontable"></div>
-					<h4>If Duplicates in input:</h4>
+					<h4>$!locale.get('label.quiclOrder.DuplicateInput'):</h4>
 					<div class="cimm_radioBtnWrap">
 						<label for="Combine1"  class="customRadioBtn">
 							<input type="radio" name="QuickOrderPad" value="Combine" id="Combine1" checked>
-							<span>Combine</span>
+							<span>$!locale.get('label.item.combine')</span>
 						</label>
 						<label for="Separate1" class="customRadioBtn">
 							<input type="radio" name="QuickOrderPad" value="Separate" id="Separate1">
-							<span>Separate</span>
+							<span>$!locale.get('label.item.seprate')</span>
 						</label>
 						<label for="Remove1" class="customRadioBtn">
 							<input type="radio" name="QuickOrderPad" value="Remove" id="Remove1">
-							<span>Remove</span>
+							<span>$!locale.get('product.label.remove')</span>
 						</label>
 					</div>
 					
@@ -34,8 +34,8 @@
 				</div>
 				<div class="col-lg-8 col-md-7 col-ms-6 col-xs-12">
 					<ol class="quickcartclass">
-						<li>Copy and Paste feature are available as key shortcuts (Ctrl (Cmd) + C and Ctrl (Cmd) + V respectively).</li> 
-						<li>The following Menu option are given when right clicked on the table.
+						<li>$!locale.get('label.quickOrder.cpnote3') (Ctrl (Cmd) + C and Ctrl (Cmd) + V).</li> 
+						<li>$!locale.get('label.quickOrder.cpnote4').
 							<ul class="contextmenu">
 								<li>Remove Row</li>
 								<li>Insert Row Above</li>
@@ -44,14 +44,14 @@
 								<li>Redo</li>
 							</ul>
 						</li> 
-						<li>You can add a new row by using "Enter" key when in the last row.</li> 
-						<li>You can switch to a new row by using "Enter" key or "Tab" key</li> 
-						<li>Speed Entry supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end records</li>
-						<li>If there are duplicates in the given input ? Choose one from below 3 option
+						<li>$!locale.get('label.quickOrder.cpnote5').</li> 
+						<li>$!locale.get('label.quickOrder.cpnote6')</li> 
+						<li>$!locale.get('label.quickOrder.cpnote7') #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end $!locale.get('label.quickOrder.records')</li>
+						<li>$!locale.get('label.quickOrder.DuplicateOption')
 							<ul class="contextmenu">
-								<li>Combine: quantity will be combined</li>
-								<li>Separate: will be processed according to given input</li>
-								<li>Remove: duplicates will be filtered out</li>
+								<li>$!locale.get('label.item.combine'): $!locale.get('label.quickOrder.CNote')</li>
+								<li>$!locale.get('label.item.seprate'): $!locale.get('label.quickOrder.SNote')</li>
+								<li>$!locale.get('product.label.remove'): $!locale.get('label.quickOrder.RNote')</li>
 							</ul> 
 						</li>
 					</ol>
@@ -71,31 +71,31 @@
 					<div class="quickOrdeAddtoCart mTop-3" >
 						<input class="button" type="submit" value="$locale.get('quickorder.button.submit')" id="submitBtnQOCP" onclick="return QuickOrder.quickOrderCopyPaste();">
 					</div>
-					<h4>If Duplicates in input:</h4>
+					<h4>$!locale.get('label.quiclOrder.DuplicateInput'):</h4>
 					<div class="cimm_radioBtnWrap">
 						<label for="Combine2" class="customRadioBtn">
 							<input type="radio" name="QuickOrderCopyPaste" value="Combine" id="Combine2" checked>
-							<span>Combine</span>
+							<span>$!locale.get('label.item.combine')</span>
 						</label>
 						<label for="Separate2" class="customRadioBtn">
 							<input type="radio" name="QuickOrderCopyPaste" value="Separate" id="Separate2">
-							<span>Separate</span>
+							<span>$!locale.get('label.item.seprate')</span>
 						</label>
 						<label for="Remove2" class="customRadioBtn">
 							<input type="radio" name="QuickOrderCopyPaste" value="Remove" id="Remove2">
-							<span>Remove</span>
+							<span>$!locale.get('product.label.remove')</span>
 						</label>
 					</div>
 				</div>
 				<div class="col-lg-8 col-md-7 col-ms-6 col-xs-12">
 					<ol class="quickcartclass">
 						<li>$!locale.get("product.heading.enterOrCopyPaste")</li> 
-						<li>Copy paste order pad supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end rows</li> 
-						<li>If there are duplicates in the given input ? Choose one from below 3 option
+						<li>$!locale.get('label.quickOrder.cpnote8') #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end rows</li> 
+						<li>$!locale.get('label.quickOrder.DuplicateOption')
 							<ul class="contextmenu">
-								<li>Combine: quantity will be combined</li>
-								<li>Separate: will be processed according to given input</li>
-								<li>Remove: duplicates will be filtered out</li>
+								<li>$!locale.get('label.item.combine'): $!locale.get('label.quickOrder.CNote')</li>
+								<li>$!locale.get('label.item.seprate'): $!locale.get('label.quickOrder.SNote')</li>
+								<li>$!locale.get('product.label.remove'): $!locale.get('label.quickOrder.RNote')</li>
 							</ul> 
 						</li>
 					</ol>
@@ -109,40 +109,40 @@
 						<form id="uploadForm" method="post" enctype="multipart/form-data" action="QuickOrderFileUpload.slt">
 							<input type="hidden" id="trigerPoint" value="quickorder"/>
 							<div id="cimm_customFileUpload" class="uploadFile">
-								<span>Choose File</span>
+								<span>$!locale.get('product.label.chooseFile')</span>
 								<input type="file" name="datafile" id="datafile">
 							</div>
 							<input type="submit" class="button pull-left" value="$locale.get('button.label.Upload')" onclick="return QuickOrder.validateFileUpload();">
 							<div class="clear"></div>
 						</form>
 					</div>
-					<h4>If Duplicates in input:</h4>
+					<h4>$!locale.get('label.quiclOrder.DuplicateInput'):</h4>
 					<div class="cimm_radioBtnWrap">
 						<label for="Combine3" class="customRadioBtn">
 							<input type="radio" name="QuickOrderFileUpload" value="Combine" id="Combine3" checked>
-							<span>Combine</span>
+							<span>$!locale.get('label.item.combine')</span>
 						</label>
 						<label for="Separate3" class="customRadioBtn">
 							<input type="radio" name="QuickOrderFileUpload" value="Separate" id="Separate3">
-							<span>Separate</span>
+							<span>$!locale.get('label.item.seprate')</span>
 						</label>
 						<label for="Remove3" class="customRadioBtn">
 							<input type="radio" name="QuickOrderFileUpload" value="Remove" id="Remove3">
-							<span>Remove</span>
+							<span>$!locale.get('product.label.remove')</span>
 						</label>
 					</div>
 				</div>
 				<div class="col-lg-8 col-md-7 col-ms-6 col-xs-12">
 					<ol class="quickcartclass">
-						<li>File Upload is supported by .xlsx <a href="$!webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</li> 
-						<li>Use Speed Entry to manually enter part number or UPC to upload it to quickly create a cart.</li>
-						<li>File upload feature supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end records</li> 
-						<li>If there are duplicates in the given input ? Choose one from below 3 option
+						<li>$!locale.get('label.quickOrder.fileUploadnote1') <a href="$!webThemes/$siteName/images/QuickCartExample.xlsx">$!locale.get('product.label.clickHere')</a> $!locale.get('label.quickOrder.download')</li> 
+						<li>$!locale.get('label.quickOrder.fileUploadnote4').</li>
+						<li>$!locale.get('label.quickOrder.fileUploadnote3') #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 50 #end $!locale.get('label.quickOrder.records')</li> 
+						<li>$!locale.get('label.quickOrder.DuplicateOption')
 							<ul class="contextmenu">
-								<li>Combine: quantity will be combined</li>
-								<li>Separate: will be processed according to given input</li>
-								<li>Remove: duplicates will be filtered out</li>
-							</ul> 
+								<li>$!locale.get('label.item.combine'): $!locale.get('label.quickOrder.CNote')</li>
+								<li>$!locale.get('label.item.seprate'): $!locale.get('label.quickOrder.SNote')</li>
+								<li>$!locale.get('product.label.remove'): $!locale.get('label.quickOrder.RNote')</li>
+							</ul>
 						</li>
 					</ol>
 				</div>

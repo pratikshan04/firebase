@@ -118,10 +118,10 @@
 	#if($!responseType=="MultipleAddToCart")
 	<script>
 		if(jQuery(".cartCountDisplayLi > a > .cartCountrefresh").length>0){
-			jQuery(".cartCountrefresh").html("($!cartCount) $!locale.get('product.label.items')");
+			jQuery(".cartCountrefresh").html("$!cartCount");
 		}else{
 			jQuery(".cartCountDisplayLi").addClass("ItemsInCart");
-			jQuery(".cartCountDisplayLi").html('<a href="$!locale.get("website.url.ShoppingCart")"><em class="fa fa-shopping-cart"></em><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount $!locale.get("product.label.items")</span></a>');
+			jQuery(".cartCountDisplayLi").html('<a href="$!locale.get("website.url.ShoppingCart")"><em class="fa fa-shopping-cart"></em><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount </span></a>');
 		}
 		if($("#isWebview").val() == "WEBVIEW"){
 			getCartCount($!cartCount)
@@ -162,7 +162,7 @@
 				</div>
 				<div class="col-md-6 col-sm-12 col-xs-12">
 					<div class="mulAddtoCartStatus alignCenter">
-						<p class="text-success"><i class="fa fa-check-circle"></i> Added Successfully.</p>
+						<p class="text-success"><i class="fa fa-check-circle"></i> $!locale.get('label.success.addedsuccess')</p>
 					</div>
 				</div>
 			</div>
@@ -212,7 +212,7 @@
 			<div class="addToCartHeaderContent clearAfter">
 				<h3 class="cimm_page-title pull-left">$!locale.get('product.heading.myCart')</h3>
 				<div class="cartTotalCount pull-right">
-					<a href="$!locale.get('website.url.ShoppingCart')"><em class="fa fa-lg fa-shopping-cart"></em>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span>#else 0 $!locale.get("product.label.items") #end</a>
+					<a href="$!locale.get('website.url.ShoppingCart')"><em class="fa fa-lg fa-shopping-cart"></em>#if($!cartCount > 0)<span id="cartCountRefresh" class="cartCountrefresh">$!cartCount </span>#else 0 #end</a>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -258,7 +258,7 @@
 											</div>
 											<div class="col-md-6 col-sm-12 col-xs-12">
 												<div class="mulAddtoCartStatus alignCenter">
-													<p class="text-success"><i class="fa fa-check-circle"></i> Added Successfully.</p>
+													<p class="text-success"><i class="fa fa-check-circle"></i> $!locale.get('label.success.addedsuccess')</p>
 												</div>
 											</div>
 										</div>
@@ -295,11 +295,11 @@
 											</div>
 											<div class="col-md-6 col-sm-12 col-xs-12">
 												<div class="mulAddtoCartStatus alignCenter">
-													<p class="alreadyExist"><i class="fa fa-question-circle"></i> Item already in the cart</p>
+													<p class="alreadyExist"><i class="fa fa-question-circle"></i> $!locale.get('label.alert.items')</p>
 													<input type="hidden" id="dataForCOS_$!eachData.itemId" data-qty="#if($!eachData.qty>0)$!eachData.qty#else$!eachData.minOrderQty#end" data-partnumber="$!eachData.partNumber"  data-itempriceid="$!eachData.itemPriceId" data-orderinterval="$!eachData.orderInterval" data-minorderqty="$!eachData.minOrderQty" data-price="$!eachData.price" data-uom="$!eachData.uom" data-availqty="$!eachData.availQty" data-itemindex="$!itemIndex"/>
-													<input type="button" class="button" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="Combine" />
-													<input type="button" class="button" data-requestype="SEPERATE"  data-itemid="$!eachData.itemId"  onclick="BulkAction.processSeperateOrCombine(this)" value="Seperate" />
-													<input type="button" class="button" value="Cancel" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)"/>
+													<input type="button" class="button" data-requestype="UPDATE"  data-itemid="$!eachData.itemId" onclick="BulkAction.processSeperateOrCombine(this)" value="$locale.get('label.item.combine')" />
+													<input type="button" class="button" data-requestype="SEPERATE"  data-itemid="$!eachData.itemId"  onclick="BulkAction.processSeperateOrCombine(this)" value="$locale.get('label.item.seprate')" />
+													<input type="button" class="button" value="$locale.get('label.item.cancel')" onclick="BulkAction.cancelAddToCart($!eachData.itemId, $itemIndex)"/>
 												</div>
 											</div>
 										</div>
@@ -365,7 +365,7 @@
 				<a href='$!locale.get("website.url.ShoppingCart")' class="pull-right button">$!locale.get("product.heading.viewCart")</a> 
 			</div>
 			#if($!productListData.size()>0)
-				<span class='text-danger'>Note: Cannot add <i class="fa fa-phone fa-lg"></i> for Price items to cart</span>
+				<span class='text-danger'>$!locale.get('label.savecart.modalNote')</span>
 			#end
 		</div>
 	#end

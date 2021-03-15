@@ -124,6 +124,14 @@ function deleteItem(path,typ,item){
 			size: "medium",
 			closeButton:false,
 			message: "You want to delete item <b>"+item+"</b> from cart?", 
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}
@@ -134,6 +142,14 @@ function deleteItem(path,typ,item){
 			size: "small",
 			closeButton:false,
 			message: "You want to delete all the items from cart?", 
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}
@@ -143,6 +159,14 @@ function deleteItem(path,typ,item){
 			size: "small",
 			closeButton:false,
 			message: "Delete item from cart?", 
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}

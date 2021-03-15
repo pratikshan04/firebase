@@ -232,7 +232,7 @@
 				</div>
 				#end
 				<div class="prodSharePrintBtnWrap pull-right hideForPrint">
-					<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><em class="fa fa-share-alt"></em> $!locale.get("product.heading.share")</a>
+					<a href="javascript:void(0);" data-toggle="tooltip" id="sharePageTrigger" title="$!locale.get('product.button.sharethispage')"><em class="fa fa-share-alt"></em> $!locale.get('product.heading.share')</a>
 					<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sendthispage')" onclick="sendSiteDetailPagePart($!itemPriceId);"><em class="fa fa-paper-plane" aria-hidden="true"></em> $!locale.get("product.button.submit")</a> 
 					<a href="javascript:void(0);" data-toggle="tooltip" class="hideForIpad" title="$!locale.get('product.button.printthispage')" onclick="window.print();"><span class="glyphicon glyphicon-print"></span> $!locale.get("product.button.print")</a>
 					<ol class="sharePageWrap">
@@ -343,7 +343,7 @@
 								<strong>$!locale.get("product.label.upc"): </strong><span itemprop="sku">$!itemData.upc</span>
 							</li>
 							#end
-							#if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
+							<!-- #if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
 							<li id="custMainBlock">        
 								<strong>$!locale.get("product.label.cpn"):</strong>
 								<span id="custPartBlock">
@@ -361,7 +361,7 @@
 							<li id="custMainBlock" style="display: none;">
 								<strong>$!locale.get("product.label.cpn"): </strong><span id="custPartBlock"></span>
 							</li>
-							#end
+							#end -->
 							#if($itemData.minOrderQty>0 && $!itemData.orderInterval>0)
 							<li id="minOrdQty">
 							<strong>$!locale.get("product.label.minorderqty"): </strong>
@@ -374,6 +374,23 @@
 							<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
 							<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
 							<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
+							</li>
+							#end
+							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")	
+							<li id="itemAvailable" class="productAvail_$!itemData.partNumber">	
+							<!-- <strong>$!locale.get("product.label.availability"): </strong>	 -->
+							<span id="Avail_$!itemData.partNumber" data-select='availability' class="Avail_$!itemData.partNumber">	
+							<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />	
+							</span>	
+							</li>			
+							#else	
+							<li id="itemAvailable" class="productAvail_$!itemData.partNumber">	
+							#if($itemData.availQty>0)	
+							<strong>$!locale.get("product.label.available"): </strong>	
+							<span class="Avail_$!itemData.partNumber">$!itemData.availQty</span>	
+							#else	
+							<span class='text-danger Avail_$!itemData.partNumber'>$!locale.get("product.label.outOfStock")</span>	
+							#end	
 							</li>
 							#end
 						</ul>
@@ -482,7 +499,7 @@
 										</div>
 										<!-- My Product Group block ends--> 
 										<!-- Customer PartNumber Add -->
-										<div class="custparNoBtn dropdown">
+										<!-- <div class="custparNoBtn dropdown">
 											#set($groupPop = "ulg"+$!itemData.itemId+"_custPop")
 											<a id="$!groupPop" class="popMsg hideMe"></a>
 											#if($userLogin)
@@ -497,7 +514,7 @@
 										       		<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 										       </ul>
 			     							</form>
-										</div>
+										</div> -->
 										<!-- Customer Part Number ADD --> 
 								</li>
 						</ul>
@@ -974,19 +991,19 @@
 											##end
 										</a>
 								 	</li>
-								     <li class="linkItemDescrip">
+								     <!-- <li class="linkItemDescrip">
 								    	<span id="itemShortDesc$!linkItemTitle.itemId" class="hideMe">$!linkItemTitle.shortDesc</span>
 								    	#if($linkItem.shortDesc.length()>40)
 								       <p>$!linkItem.shortDesc.substring(0, 40)</p>
 								    	#else
 										<p>$!linkItem.shortDesc</p>
 										#end
-									</li>
-								   <li>
+									</li> -->
+								   <!-- <li>
 								      <strong>$!locale.get("product.label.partNumber"): </strong>
 								      <span id="partNumber$!linkItem.itemId">$!linkItem.partNumber</span>
-								   </li>
-									#if($linkItem.manufacturerPartNumber.trim().length()>0)<li><strong>$!locale.get("product.label.mpn"):</strong> <span>$!linkItem.manufacturerPartNumber</span></li>#end
+								   </li> -->
+									<!-- #if($linkItem.manufacturerPartNumber.trim().length()>0)<li><strong>$!locale.get("product.label.mpn"):</strong> <span>$!linkItem.manufacturerPartNumber</span></li>#end -->
 									<!--<li class="gridLeadWrap productLeadTime_$!linkItem.partNumber" style="display:none;" id="leadTimeLI">
 										 <strong>$!locale.get("product.label.leadTime"): </strong>
 										 <span class="leadTime_$!linkItem.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span>
@@ -1009,7 +1026,7 @@
 									</li> -->
 									##end
 									##if($itemData.packDesc)<!-- <li class="packageDesc"><span>$!itemData.packDesc</span></li> -->#end
-									#if($userLogin)
+									<!-- #if($userLogin)
 								 	<li class="price">  
 										<strong>$!locale.get('product.label.price'): </strong>
 										#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
@@ -1049,7 +1066,7 @@
 											<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 										#end
 									#end
-									</li>
+									</li> -->
 									<input type="hidden" value="$!linkItem.minOrderQty" id="MinOrderQty_$!linkItem.partNumber" name="MinOrderQty_$!linkItem.partNumber"/>
 									<input type="hidden" value="$!linkItem.minOrderQty" id="minOrderQty_$!linkItem.itemId"/>
 									<input type="hidden" value="$!linkItem.orderInterval" id="OrderQtyInterval_$!linkItem.partNumber" name="OrderQtyInterval_$!linkItem.partNumber"/>

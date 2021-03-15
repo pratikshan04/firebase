@@ -95,7 +95,7 @@
 				</div>
 			</div>
 		</form>
-		<a href="$!locale.get('website.url.ShoppingCart')" class="hidden-lg mTop-1">$!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh">($!cartCount) $!locale.get("product.label.items")</span></a>
+		<a href="$!locale.get('website.url.ShoppingCart')" class="hidden-lg mTop-1">$!locale.get('header.label.cart') <span id="cartCountrefresh" class="cartCountrefresh">$!cartCount </span></a>
 	</div>
 	#end
 	</div>
@@ -124,39 +124,6 @@
 				<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="loginDropDown">
 					<span class="imgBox"><em class="fa fa-user-circle"></em></span>	
 				</a>
-				<a href="javascript:void(0);" class="dropdown-toggle loginblockElement" data-toggle="dropdown" data-target="loginDropDown">
-					<span>$!locale.get('product.heading.login')</span>
-				</a>
-				<div class="loginWindow dropdown-menu">
-					<form id="popLoginForm" method="post" data-form="login">
-						<div class="text-danger text-center pLoginErr"></div>
-						<input type="hidden" value="popup" name="loginType">
-						<div class="form-group">
-							<label for="popUserName">$!locale.get("form.label.userName")</label>
-							<input type="text" name="loginId" id="popUserName" tabindex="1" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label for="popPassword">$!locale.get("form.label.password")</label>
-							<input type="password" name="loginPassword" id="popPassword" tabindex="2" class="form-control"/>
-						</div>
-						<div class="rememberLogWrap row">
-							<div class="col-sm-12 col-md-5">
-								<label for="rememberMeDrop" class="customCheckBox" tabindex="3" > 
-									<input type="checkbox" name="rememberMe" id="rememberMeDrop" />
-									<span>$!locale.get("form.label.rememberMyLogin")</span>
-								</label>
-							</div>
-							<div class="col-sm-12 col-md-7">
-								<button class="btn btn-primary btn-block" type="submit" tabindex="4"> $!locale.get('product.button.signIn')</button>
-							<div class="clear"></div>
-							<a href="/ForgotLink.action" class="forgotPassword" tabindex="5">$!locale.get("product.label.forgotPassword")</a>
-							</div>
-						</div>
-					</form>
-					<div class="register_link">
-						<a href="$!locale.get('website.url.Register')" class="btn btn-secondary btn-lg btn-block">$!locale.get('product.heading.register')</a>
-					</div>
-				</div>
 			</li>
         #end
         <li class='cartCountDisplayLi dropdown'>
@@ -171,6 +138,55 @@
 				</a>
 		</li>
 		</ul>
+		#if($userLogin)
+		<a href="javascript:void(0);" class="loginblockElement">
+			#if($!session.getAttribute("isSalesUser").equals("Y"))
+			<span>
+				#if($!session.getAttribute("isSalesAdmin") && $!session.getAttribute("isSalesAdmin") != "")
+				<b>$!locale.get("label.salesuser.admin"):</b>
+				#else
+				<b>$!locale.get("label.salesuser.rep"):</b>
+				#end
+				$!session.getAttribute("salesUserDetails").get("firstName") $!session.getAttribute("salesUserDetails").get("lastName")
+			</span>
+			#end
+			<span>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>
+		</a>
+		#else
+		<a href="javascript:void(0);" class="dropdown-toggle loginblockElement" data-toggle="dropdown" data-target="loginDropDown">
+			<span>$!locale.get('product.heading.login')</span>
+		</a>
+		<div class="loginWindow dropdown-menu">
+			<form id="popLoginForm" method="post" data-form="login">
+				<div class="text-danger text-center pLoginErr"></div>
+				<input type="hidden" value="popup" name="loginType">
+				<div class="form-group">
+					<label for="popUserName">$!locale.get("form.label.userName")</label>
+					<input type="text" name="loginId" id="popUserName" tabindex="1" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<label for="popPassword">$!locale.get("form.label.password")</label>
+					<input type="password" name="loginPassword" id="popPassword" tabindex="2" class="form-control"/>
+				</div>
+				<div class="rememberLogWrap row">
+					<div class="col-sm-12 col-md-5">
+						<label for="rememberMeDrop" class="customCheckBox" tabindex="3" > 
+							<input type="checkbox" name="rememberMe" id="rememberMeDrop" />
+							<span>$!locale.get("form.label.rememberMyLogin")</span>
+						</label>
+					</div>
+					<div class="col-sm-12 col-md-7">
+						<button class="btn btn-primary btn-block" type="submit" tabindex="4"> $!locale.get('product.button.signIn')</button>
+					<div class="clear"></div>
+					<a href="/ForgotLink.action" class="forgotPassword" tabindex="5">$!locale.get("product.label.forgotPassword")</a>
+					</div>
+				</div>
+			</form>
+			<div class="register_link">
+				<a href="$!locale.get('website.url.Register')" class="btn btn-secondary btn-lg btn-block">$!locale.get('product.heading.register')</a>
+			</div>
+		</div>
+		#end
 	</div>
 </div>
 </div>

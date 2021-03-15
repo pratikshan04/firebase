@@ -189,7 +189,7 @@
 	<h1 class="cimm_page-title hideMe">$!pageTitleBreadCrumbLast</h1>
 	#end
 #elseif($!LayoutName=='ProductDetailPage')
-	#set($itempropPosition = 0 )
+	<!-- #set($itempropPosition = 0 )
 	<ul class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
 		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
 			<a itemprop="item" href="$!locale.get('website.url.Welcome')"><span itemprop="name">$!home</span></a>
@@ -201,7 +201,7 @@
 			#set($itempropPosition = $itempropPosition + 1 )
 			<meta itemprop="position" content="$!itempropPosition" />
 		</li>
-		#if($!breadCrumbList && $!breadCrumbList.size()>0)
+		 #if($!breadCrumbList && $!breadCrumbList.size()>0)
 			#set($breadCrumbSize = $!breadCrumbList.size() )
 			#set($breadCrumbIdx = 1 )
 				#foreach($!breadCrumb in $!breadCrumbList)
@@ -219,7 +219,7 @@
 						</li>
 					#end
 				#set($breadCrumbIdx = $!breadCrumbIdx+1)
-				#end
+				#end 
 		#else
 			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
 				<a itemprop="item" href='$!locale.get("website.url.ProductCategory")'><span itemprop="name">$!locale.get("product.heading.products")</span></a>
@@ -227,7 +227,45 @@
 				<meta itemprop="position" content="$!itempropPosition" />
 			</li>
 		#end
+	</ul> -->
+	<ul class="breadcrumb">
+		<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+		<li><a href="$!locale.get('website.url.ProductCategory')">$!locale.get("product.heading.products")</a></li>
+		#if($!breadCrumbList && $!breadCrumbList.size()>0)
+			#set($breadCrumbSize = $!breadCrumbList.size() )
+			#set($breadCrumbIdx = 1 )
+				#foreach($!breadCrumb in $!breadCrumbList)
+					#if($!breadCrumbIdx == $!breadCrumbSize)
+					#else
+						<li>
+							<a href="$!breadCrumb.seoUrl"> 
+								$!breadCrumb.categoryName
+							</a>
+						</li>
+					#end
+				#set($breadCrumbIdx = $!breadCrumbIdx+1)
+				#end
+		#else
+			<li>
+				<a href='$!locale.get("website.url.ProductCategory")'>$!locale.get("product.heading.products")</a>
+			</li>
+		#end
+		
+		#foreach($itemData in $itemLevelFilterData)
+		 <li class="active">
+		 
+		 
+		 #if( $!itemData.shortDesc.length() > 60)
+												 $!itemData.shortDesc.substring(0, 57)... 
+											#else
+												 $!itemData.shortDesc
+											#end
+		 
+		 
+		</li>
+		#end
 	</ul>
+
 #elseif($!LayoutName=="PrintInvoicesPage")
 	<ul class="breadcrumb">
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>

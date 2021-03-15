@@ -59,7 +59,7 @@ var QuickOrder = {};
     QuickOrder.resetInputModes = function(){
     	$('#headerCopyPasteText').val("");
     	$('#datafile').val("");
-		$('#cimm_customFileUpload > span').text("Choose File");
+		$('#cimm_customFileUpload > span').text(locale('product.label.chooseFile'));
 		$("#overlay,.quickCartContainer").hide();
 		$("#quickOrderPadDrop").removeClass("active");
     };
@@ -76,7 +76,7 @@ var QuickOrder = {};
     		cartCountString = "0";
     		total = "";
     	}
-    	$('.cartCountrefresh').html("(" + cartCountString + ") " + locale('product.label.items'));
+    	$('.cartCountrefresh').html(cartCountString);
     	$('.cartTotal').html(total);
     	if($('#countInCart').length>0){
     		$('#countInCart').val(cartCountString);
@@ -219,7 +219,7 @@ var QuickOrder = {};
     			}
     		}
     	}else{
-    		bootAlert("small","error","Error","Please enter at least one Part#/UPC");
+    		bootAlert("small","error","Error", locale('label.quickOrder.validCodigoUpc'));
     	}
     };
 
@@ -299,7 +299,7 @@ var QuickOrder = {};
 							}
 						}else{
 							unblock();
-							bootAlert("small","error","Error","Entered text is not in expected format. <br/>Please copy the text with below pattern. <br/>Quantity [TAB or COMMA] Part#");
+							bootAlert("small","error","Error", locale('label.quickOrder.validCopyPattern'));
 							submitFlag = false;
 							break;
 						}
@@ -315,7 +315,7 @@ var QuickOrder = {};
 			}
 			
 		}else{
-			bootAlert("small","error","Error","Please enter valid values");
+			bootAlert("small","error","Error",locale('label.quickOrder.enterValues'));
 			submitFlag = false;
 		}
 		if(invalidQtyFlag){
@@ -365,18 +365,18 @@ var QuickOrder = {};
 			if(fileExt != null && $.trim(fileExt)!=''){
 				fileExt = fileExt.substring($('#datafile').val().lastIndexOf(".")+1);
 				if(fileExt != "xlsx"){
-					bootAlert("small","error","Error",'Please upload .xlsx file.');
+					bootAlert("small","error","Error", locale('label.quickOrder.xlsx'));
 					return false;
 				}else{
 					return true;
 				}
 			}else{
-				bootAlert("small","error","Error",'Please choose a .xlsx file to upload.');
+				bootAlert("small","error","Error", locale('label.quickOrder.chooseXlsx'));
 				$('#datafile').click();
 				return false;
 			}
 		}else{
-			bootAlert("small","error","Error","Problem while uploading the file");
+			bootAlert("small","error","Error",locale('label.quickOrder.problemWhileUpload'));
 			return false;
 		}
 	};
@@ -576,7 +576,7 @@ $(function(){
 				if(msgSplit!=null && msgSplit.length>0){
 					 //bootAlert("small","error","Error",msgSplit[1]); //to Avoid dupliacte alert
 				}else{
-					bootAlert("small","error","Error","File Upload Failed");
+					bootAlert("small","error","Error", locale('label.quickOrder.fileUploadFail'));
 				}
 				return false;
 			}else{
@@ -635,18 +635,18 @@ QuickOrder.validateHeadFileUpload = function(){
 		if(fileExt != null && $.trim(fileExt)!=''){
 			fileExt = fileExt.substring($('#headerDataFile').val().lastIndexOf(".")+1);
 			if(fileExt != "xlsx"){
-				bootAlert("small","error","Error",'Please upload .xlsx file.');
+				bootAlert("small","error","Error",locale('label.quickOrder.xlsx'));
 				return false;
 			}else{
 				return true;
 			}
 		}else{
-			bootAlert("small","error","Error",'Please choose a .xlsx file to upload.');
+			bootAlert("small","error","Error",locale('label.quickOrder.chooseXlsx'));
 			$('#headerDataFile').click();
 			return false;
 		}
 	}else{
-		bootAlert("small","error","Error","Problem while uploading the file");
+		bootAlert("small","error","Error",locale('label.quickOrder.problemWhileUpload'));
 		return false;
 	}
 };

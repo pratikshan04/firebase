@@ -26,11 +26,12 @@
   margin-top: -22px;
   padding: 0;
   cursor: pointer;
-  color: transparent;
+  color: $secondary_color;
   border: none;
   outline: none;
-  background: $white;
+  background: transparent;
   z-index: 9;
+  box-shadow: none;
 }
 
 .bxslider .slick-prev {
@@ -39,7 +40,6 @@
 
 .slick-prev {
   left: 20px;
-  box-shadow: 1px 2px 10px -1px $shadow-color;
 }
 
 .slick-slider .slick-track,
@@ -100,7 +100,6 @@
 
 .slick-next {
   right: 5px;
-  box-shadow: 1px 2px 10px -1px $shadow-color;
 }
 
 ul.slick-dots {
@@ -126,7 +125,7 @@ ul.slick-dots {
       height: 10px;
       padding: 0;
       cursor: pointer;
-      color: transparent;
+      color: $secondary_color;
       border: 0;
       outline: none;
       background: transparent;
@@ -148,7 +147,7 @@ ul.slick-dots {
     &.slick-active {
       button {
         &:before {
-          background: #797d82;
+          background: $secondary_color;
         }
       }
     }
@@ -157,13 +156,12 @@ ul.slick-dots {
 
 .slick-prev:hover,
 .slick-next:hover {
-  background: $white;
-  box-shadow: 1px 2px 10px 1px $shadow-color;
+  background: transparent;
 }
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-  color: $gray-lighten;
+  color: $secondary_color;
 }
 
 .slick-prev:before,
@@ -172,7 +170,7 @@ ul.slick-dots {
   font-size: 38px;
   line-height: 1;
   opacity: 0.75;
-  color: $default_font-color;
+  color: $secondary_color;
   font-weight: 900;
 }
 
@@ -182,7 +180,7 @@ ul.slick-dots {
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-  color: $gray;
+  color: $secondary_color;
 }
 
 .slick-next::before {

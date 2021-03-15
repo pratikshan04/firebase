@@ -343,7 +343,7 @@
 										<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
 									</li>
 									#end
-									#if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
+									<!-- #if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 				                    <li>
 				                        <strong>$!locale.get("product.label.cpn"): </strong>
 				                        #set($seperator = "")
@@ -355,7 +355,7 @@
 				                          		#end
 				                       	$!partList
 				                   	</li>
-					                #end
+					                #end -->
 									 #set($leadTime = "N")
 									#set($available = "N")
 									#set($allBranch = $!itemData.branchAvail)
