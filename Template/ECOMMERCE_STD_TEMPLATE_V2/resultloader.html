@@ -8,11 +8,11 @@
 		        <div id="multipleProductGroupContent">
 			        <div class="addNewPgWrap">
 			        		<input type="text" id="newProductGroupName" maxlength="40"/>
-			        		<input type="button" class="button" onclick="BulkAction.addNewProductGroup()" value="Add New Group" />
+			        		<input type="button" class="button" onclick="BulkAction.addNewProductGroup()" value="$!locale.get('product.group.heding.newFavrito')" />
 			        	<div class="clear"></div>
 			        </div>
 			        <div class="existingPgListWrap">
-			        	<h4>Existing Product Group</h4>
+			        	<h4>$!locale.get('product.group.existingFav')</h4>
 			        	<ul>
 			        		#foreach($!pListDate in $!productListData)
 				        		<li>
@@ -22,7 +22,7 @@
 			        	</ul>
 			        </div>
 			        <div class="selectedItemsWrap">
-			        	<h4>Selected Items</h4>
+			        	<h4>$!locale.get('product.button.selectedItems')</h4>
 			        	<div class="itemsList">
 			        		#set($itemIndex = 0)
 			        		#foreach($!itemData in $!userItemData)
@@ -64,8 +64,8 @@
 			        	</div>
 			        </div>
 			        <div class="alignCenter submitProductGroup">
-			        	<a href="javascript:void(0);" onClick="BulkAction.processMyProductGroup();" class="button">Add</a>
-			        	<a href="javascript:void(0);" onClick='jQuery("#generalModel").modal("hide");'class="button" >Cancel</a>
+			        	<a href="javascript:void(0);" onClick="BulkAction.processMyProductGroup();" class="button">$!locale.get("label.cpn.add")</a>
+			        	<a href="javascript:void(0);" onClick='jQuery("#generalModel").modal("hide");'class="button" >$!locale.get("label.item.cancel")</a>
 			        </div>
 		        </div>
 			</div>
@@ -379,7 +379,7 @@
 			#set($c = $!c - 1)
 			#set($item = $!itemDataList.get($!c))
 			#set($mpn = "") #if($!item.manufacturerPartNumber.trim().length() > 0) #set($mpn = $!item.manufacturerPartNumber) #end
-			#set($itemProductTitle = $!item.brandName+" "+$mpn)
+			#set($itemProductTitle = $!item.shortDesc)
 			#if($!item.altPartNumber2.length() > 0)
 				#set($itemProductTitle = $!item.altPartNumber2)
 			#elseif($!item.productName.length() > 0)
@@ -410,7 +410,7 @@
 						</a>
 					</div>
 					<div class="cimm_slideItemDesp">
-						<ul><li><h4><a class="productTitle" data-select="itemAnchor" data-selectName="setItemName" title="$!itemProductTitle"  href="$!item.seoUrl">$!itemProductTitle</a></h4></li></ul>
+						<ul><li><h4><a class="productTitle" data-select="itemAnchor" data-selectName="setItemName" title="$!item.shortDesc"  href="$!item.seoUrl">$!itemProductTitle</a></h4></li></ul>
 					</div>
 				</div>
 			</li>
@@ -601,7 +601,7 @@
 				</li>
 				<li class='selectCompareGroupBlock'>
 					<div class="itemDetailInfoList">
-						<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> Expand to Compare / View All Choices / View item Details / Add to My Product Group</a>
+						<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> $!locale.get('label.productmode.expand')</a>
 					</div>
 				</li>
 				<li id="productModeItemsDiv_$!itemData.itemPriceId" class="productModeItemsDiv" style="display: none;">
@@ -765,6 +765,7 @@
 								<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 									<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 								</ul>
+								<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 							</div>
 							<!--My Product Group-->
 						</li>

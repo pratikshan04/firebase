@@ -330,7 +330,7 @@
 							</li>
 							<li class='selectCompareGroupBlock'>
 								<div class="itemDetailInfoList">
-									<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> Expand to Compare / View All Choices / View item Details / Add to My Product Group</a>
+									<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> $!locale.get('label.productmode.expand')</a>
 								</div>
 							</li>
 							<li id="productModeItemsDiv_$!itemData.itemPriceId" class="productModeItemsDiv" style="display: none;">
@@ -411,6 +411,7 @@
 										<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
 									</li>
 									#end
+									#if($userLogin)
 									<li class="productAvail_$!itemData.partNumber">
 										<!-- <strong class="availLabel">$!locale.get("product.label.availability"): </strong> -->
 										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
@@ -426,32 +427,44 @@
 											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
 										#end
 									</li>
+									#end
+									<li class="cimm_priceWrap">
+										#if($userLogin)
+										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
+												#if($itemData.price>0)
+													$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
+												#else
+													<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
+												#end
+											</span>
+										#else
+											#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
+												<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
+											#else
+												<span class="priceSpan">$!locale.get('product.label.price'):</span>
+												<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
+													<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+												</span>
+												<br/>
+												<span class="suggestColor">$!locale.get('product.lable.suggestedPrice'):</span>
+												<span id="spanSuggest_$!itemData.partNumber" class="priceSpan formatPrice suggestColor" data-select='priceData'>
+													<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+												</span>
+												<br/>
+												<span class="suggestColor">$!locale.get('product.label.minSuggPrice'):</span>
+												<span id="spanMinimun_$!itemData.partNumber" class="priceSpan formatPrice suggestColor" data-select='priceData'>
+													<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+												</span>
+											#end
+										#end
+										#else
+										<span><a data-toggle='modal' data-target='#loginModal'><span class='priceSpan'>$!locale.get("label.loginForPrice")</span></a></span>
+										#end
+										</li>
 								</ul>
 								<ul class="second">
 									#if($!itemData.packDesc && $itemData.packDesc.trim() != "")<li class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
-									<li class="cimm_priceWrap">
-									#if($userLogin)
-									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
-											#if($itemData.price>0)
-								    			$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
-								    		#else
-								    			<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
-								    		#end
-										</span>
-									#else
-										#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
-											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
-										#else
-											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
-												<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
-											</span>
-										#end
-									#end
-									#else
-									<span><a data-toggle='modal' data-target='#loginModal'><span class='priceSpan'>$!locale.get("label.loginForPrice")</span></a></span>
-									#end
-									</li>
 									<li class="cimm_qtyWrap">
 										<strong>$!locale.get("form.label.tableQty") </strong>  
 										<span class='mRight-1'>

@@ -167,7 +167,7 @@ ul.slick-dots {
 .slick-prev:before,
 .slick-next:before {
   font-family: "Font Awesome 5 Free";
-  font-size: 38px;
+  font-size: 18px;
   line-height: 1;
   opacity: 0.75;
   color: $secondary_color;
@@ -175,7 +175,7 @@ ul.slick-dots {
 }
 
 .slick-prev::before {
-  content: "\f104";
+  content: "\f053";
 }
 
 .slick-prev:hover:before,
@@ -184,7 +184,7 @@ ul.slick-dots {
 }
 
 .slick-next::before {
-  content: "\f105";
+  content: "\f054";
 }
 
 .cimm_stickyPageWrap {
@@ -222,7 +222,7 @@ ul.slick-dots {
   }
 
   .cimm_caroWrap {
-    margin: 0 0 0 -15px;
+    margin: 0 0 0 -8px;
     padding: 0 !important;
     &.slick-vertical {
       margin: -15px 0 0 0;

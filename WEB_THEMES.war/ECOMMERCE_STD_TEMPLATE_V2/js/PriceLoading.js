@@ -27,10 +27,10 @@ ITEM_EXT_PRICE_SPAN : "spanEx_",
 ALL_BRANCH_AVAILABILITY : "#allBranchHTML",
 QTY_BREAK_TABLE_ID : "qtyBreakTable_"
 };
-function populatePrice(product,priceset) {
-	price = priceset, partNumber = product.partNumber, qty = 1, priceLabel = "";
+function populatePrice(product,priceset,unitprice,price1) {
+	price = priceset, partNumber = product.partNumber, qty = 1, priceLabel = "", suggestPrice=price1, minimumPrice=unitprice;
 	if (price > 0) {
-		priceLabel = preparePriceLabelStr(price, product);
+		priceLabel = preparePriceLabelStr(price, product, suggestPrice, minimumPrice);
 		populatePriceLable(product, priceLabel, price);
 		enableAddToCart(product.partNumber);
 	} else {
@@ -55,30 +55,41 @@ function populateMinOrderAndOrderInterval(product) {
 }
 function populatePriceLable(product, priceLabel, price) {
 	var qty = 1, i = 0; if (product.qty > 0) { qty = product.qty; }
-	$.each( $("[id='span_"+product.partNumber+"']"), function( key, value ) { this.innerHTML = priceLabel; });
+	$.each( $("[id='span_"+product.partNumber+"']"), function( key, value ) { this.innerHTML = priceLabel[0]; });
 	$.each( $("[id='spanLinkItem_"+product.partNumber+"']"), function( key, value ) { this.innerHTML = priceLabel; });
 	$.each( $("[id='priceValue_"+product.partNumber+"']"), function( key, value ) { this.value = price; });
+	$.each( $("[id='spanSuggest_"+product.partNumber+"']"), function( key, value ) { this.innerHTML = priceLabel[1]; });
+	$.each( $("[id='spanMinimun_"+product.partNumber+"']"), function( key, value ) { this.innerHTML = priceLabel[2]; });
 }
-function preparePriceLabelStr(price, product) {
+function preparePriceLabelStr(price, product, suggestPrice, minimumPrice) {
 	var uom = "", pricePrecision = getPricePrecision();
-	var pricestr = "$" + Number(price).toFixed(pricePrecision);
+	var pricestr = "Q" + Number(price).toFixed(pricePrecision);
+	var suggestStr = "Q" + Number(suggestPrice).toFixed(pricePrecision);
+	var minimumStr = "Q" + Number(minimumPrice).toFixed(pricePrecision);
+
 	var layoutName = getLayoutName();
 	if (product.uom && product.uom.length > 0) {
 		uom = product.uom;
 		if (layoutName === "ProductDetailPage") {
 			pricestr = pricestr + " / <em id='prodUOM'>" + product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
+			suggestStr = suggestStr + " / <em id='prodUOM'>" + product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
+			minimumStr = minimumStr + " / <em id='prodUOM'>" + product.uom.toUpperCase() + "</em>&nbsp;&nbsp;"
 		} else {
 			pricestr = pricestr + " / <em>" + product.uom.toUpperCase()	+ "</em>";
+			suggestStr = suggestStr + " / <em>" + product.uom.toUpperCase()	+ "</em>";
+			minimumStr = minimumStr + " / <em>" + product.uom.toUpperCase()	+ "</em>";
 		}
 		if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
 			document.getElementById('uomValue_' + product.partNumber).value = uom;
 		}
 		if (document.getElementById('uomSpan_' + product.partNumber) && document.getElementById('uomSpan_' + product.partNumber) != null && document.getElementById('uomSpan_' + product.partNumber) != undefined) {
 			document.getElementById('uomSpan_' + product.partNumber).innerHTML = uom;
-			pricestr = "$" + Number(price).toFixed(pricePrecision);
+			pricestr = "Q" + Number(price).toFixed(pricePrecision);
+			suggestStr = "Q" + Number(suggestPrice).toFixed(pricePrecision);
+			minimumStr = "Q" + Number(minimumPrice).toFixed(pricePrecision);
 		}
 	}
-	return pricestr;
+	return [pricestr, suggestStr, minimumStr];
 }
 function populateCallForPrice(partNumber, price) {
 	var itemHolder, callForPriceStr;
@@ -268,7 +279,7 @@ function processPriceLoadingResponse(products) {
 				if (wareHouseDetails[j].branchAvailability !== undefined) { totalAvailability += parseInt(wareHouseDetails[j].branchAvailability); }
 				if (wareHouseDetails[j]!= undefined && wareHouseDetails[j].customerPrice != undefined && wareHouseDetails[j].customerPrice > 0 && !priceDispalyed) {
 					wareHouseDetails.partNumber = partNumber;
-						populatePrice(product,wareHouseDetails[j].customerPrice);
+					populatePrice(product,wareHouseDetails[j].customerPrice,wareHouseDetails[j].unitPrice,wareHouseDetails[j].price);
 						priceDispalyed = true;
 				}
 				populateAllBranchAvailability(wareHouseDetails);

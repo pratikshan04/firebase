@@ -324,7 +324,7 @@
 				#set($customVal = $customFieldVal.get($itemData.itemId))
 				<!-- Single Item Without Product Mode -->
 				<h1 class="cimm_prodDetailTitle" id="itemTitle$!itemData.ItemId" itemprop="name">$!itemData.shortDesc
-					<input type="hidden" id="titleText" name="titleText" value="$!itemData.brandName $!itemData.manufacturerPartNumber"/>
+					<input type="hidden" id="titleText" name="titleText" value="$!itemData.shortDesc"/>
 				</h1>
 				<!-- <p class="cimm_itemShortDesc" id="itemShortDesc$!itemData.itemId" itemprop="description">$!itemData.shortDesc</p>  -->
 				<div class="row">
@@ -338,11 +338,17 @@
 							<li id="sitePartNo">
 								<strong>$!locale.get("product.label.partNumber"): </strong><span id="partNumber$!itemData.ItemId"  itemprop="sku">$!itemData.partNumber</span>
 							</li>
-							#if($itemData.upc != "" && $!itemData.upc)
+							#if($itemData.manufacturerPartNumber.trim() != "")
+								<li id="mPartNo">
+									<strong>$!locale.get("product.label.mpn"): </strong><span itemprop="mpn">$!itemData.manufacturerPartNumber</span>
+									<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$!itemData.partNumber" />
+								</li>
+							#end
+							<!-- #if($itemData.upc != "" && $!itemData.upc)
 							<li id="upcNo">
 								<strong>$!locale.get("product.label.upc"): </strong><span itemprop="sku">$!itemData.upc</span>
 							</li>
-							#end
+							#end -->
 							<!-- #if(($!itemData.customerPartNumber && $!itemData.customerPartNumber != "") || $!itemData.customerPartNumberList.size()>0 )
 							<li id="custMainBlock">        
 								<strong>$!locale.get("product.label.cpn"):</strong>
@@ -376,6 +382,7 @@
 							<!-- <input type="hidden" value="$!itemData.displayPricing" id="displayPrice_$!itemData.partNumber" /> -->
 							</li>
 							#end
+							#if($userLogin)
 							#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()!="DEFAULTS")	
 							<li id="itemAvailable" class="productAvail_$!itemData.partNumber">	
 							<!-- <strong>$!locale.get("product.label.availability"): </strong>	 -->
@@ -392,6 +399,7 @@
 							<span class='text-danger Avail_$!itemData.partNumber'>$!locale.get("product.label.outOfStock")</span>	
 							#end	
 							</li>
+							#end
 							#end
 						</ul>
 					</div>
@@ -442,6 +450,16 @@
 										<span id="span_$!itemData.partNumber" class="priceSpan" data-select='priceData'>
 											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
 										</span>
+										<br/>
+										<span class="suggestColor">$!locale.get('product.lable.suggestedPrice'):</span>
+										<span id="spanSuggest_$!itemData.partNumber" class="priceSpan formatPrice suggestColor" data-select='priceData'>
+											 <img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+										</span>
+										<br/>
+										<span class="suggestColor">$!locale.get('product.label.minSuggPrice'):</span>
+										<span id="spanMinimun_$!itemData.partNumber" class="priceSpan formatPrice suggestColor" data-select='priceData'>
+											<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+										</span>
 									#end
 								</div>
 							 #end
@@ -477,7 +495,7 @@
 									#if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 										<span data-select='addtoCartbtn_$!itemData.partNumber' data-oAddCartBtn='originalAddtoCartbtn'>
 											<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
-										</span>
+										</span>	
 									#else
 										<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 									#end

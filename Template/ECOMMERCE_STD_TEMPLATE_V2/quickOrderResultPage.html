@@ -23,7 +23,7 @@
 			#set($itemCount = 1)
 			#foreach($itemData in $itemsAddedToCart)
 				#set($itemTitle= $itemData.shortDesc)
-				#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+				#set($linkItemTitle = $itemData.shortDesc)
 				<li>				
 					<div class="cimm_slideItemImg clearAfter">
 						<!-- <strong>$itemCount)</strong> -->
@@ -75,7 +75,7 @@
 				#set($itemCount = 1)
 				#foreach($itemData in $itemsWithRestriction)
 				#set($itemTitle= $itemData.shortDesc)
-				#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+				#set($linkItemTitle = $itemData.shortDesc)
 				<li>				
 					<div class="cimm_linkItemImg clearAfter">
 					<!-- <strong>$itemCount)</strong> -->
@@ -185,7 +185,7 @@
 								</div>
 								<div class="cimm_slideItemImg clearAfter">
 								<!-- <strong>$itemCount)</strong> -->
-								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+								#set($linkItemTitle = $itemData.shortDesc)
 									<a href="$itemData.seoUrl">                    
 										#if($itemData.imageName.contains("http"))
 										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>

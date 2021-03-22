@@ -5,6 +5,9 @@ var cdnPluginJsPath = $("#cdnPluginJsPath").val();
 jQuery.getScript(cdnSiteJsPath+'/BulkAction.js', function(){});
 $(document).ready(function(){
 	$('#cartWrap').DataTable({
+		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json"
+		},
 		"ordering": false,
 		searching: false,
 		"bLengthChange": false,

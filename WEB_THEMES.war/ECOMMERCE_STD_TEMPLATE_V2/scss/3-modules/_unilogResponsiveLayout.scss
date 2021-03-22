@@ -437,14 +437,14 @@ $breakpoint-mobileView: 480px;
     .cimm_itemdetail-imgcontainer.verticalThumblist
     .cimm_itemdetail_thumblist
     .slick-next:before {
-    content: "\f105";
+    content: "\f054";
     top: 0;
   }
   .cimm_itemdetail
     .cimm_itemdetail-imgcontainer.verticalThumblist
     .cimm_itemdetail_thumblist
     .slick-prev:before {
-    content: "\f104";
+    content: "\f053";
     top: 0;
   }
   .cimm_itemdetail .cimm_itemdetail-imgcontainer,
@@ -526,7 +526,7 @@ $breakpoint-mobileView: 480px;
       top: 48%;
       left: 10px;
       &:before {
-        content: "\f104";
+        content: "\f053";
       }
     }
     .slick-next {
@@ -534,7 +534,7 @@ $breakpoint-mobileView: 480px;
       top: 48%;
       right: 10px;
       &:before {
-        content: "\f105";
+        content: "\f054";
       }
     }
   }
@@ -566,14 +566,14 @@ $breakpoint-mobileView: 480px;
     .cimm_itemdetail-imgcontainer.verticalThumblist
     .cimm_itemdetail_thumblist
     .slick-prev:before {
-    content: "\f104";
+    content: "\f053";
     top: -1px;
   }
   .cimm_itemdetail
     .cimm_itemdetail-imgcontainer.verticalThumblist
     .cimm_itemdetail_thumblist
     .slick-next:before {
-    content: "\f105";
+    content: "\f054";
     top: -1px;
   }
   .toggle_content {

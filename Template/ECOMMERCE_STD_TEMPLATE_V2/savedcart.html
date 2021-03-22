@@ -104,12 +104,12 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
+		<!-- <div class="col-md-3 col-sm-6 col-xs-12">
 			<select onchange="hideAndShowViews();" name="views" id="views" class="form-control selectpicker">
 				<option id="expandView" value="collapse">$!locale.get("content.view.collapseView")</option>
 				<option id="collapseView" class="active" value="expand">$!locale.get("content.view.expandView")</option>
 			</select>
-		</div>
+		</div> -->
 	</div>
 	#if($paginate>1)
 	<div class="pgnation"></div>
@@ -137,7 +137,7 @@
 			<tbody class="text-center">
 				#if($productListData && $productListData.size()>0)
 				#foreach($itemData in $productListData)
-				#set($itemTitle= $itemData.brandName+" "+ $itemData.manufacturerPartNumber)
+				#set($itemTitle= $!itemData.shortDesc)
 				<tr>
 					##if($session.getAttribute("userCustomFieldValue").get("PRODUCT_GROUP_IMAGE_DISPLAY")=="Y")
 					<td data-th="$locale.get('product.label.Image')">                         
@@ -160,7 +160,7 @@
 					##end
 					<td data-th="$locale.get('product.label.productDescription')">
 						<ul class="text-left">
-							<li><h5 class="cimm_itemTitle"><a href="$itemData.seoUrl">$itemData.brandName $!itemData.manufacturerPartNumber</a></h5></li>
+							<li><h5 class="cimm_itemTitle"><a href="$itemData.seoUrl">$!itemData.shortDesc</a></h5></li>
 							<li class="hideForCollapse hideMe"><p>$!itemData.shortDesc</p></li>
 							<li>
 								<p><strong>$locale.get("product.label.partNumber"): </strong><span>$itemData.partNumber</span></p>

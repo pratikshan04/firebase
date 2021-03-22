@@ -904,6 +904,7 @@ $modal_closebtn-color: $default_font-color;
 #headerCopyPasteText {
     width: 100%;
     height: 150px;
+    color: $secondary_color;
 }
 
 #ManagePurchaseAgent_wrapper {
@@ -1099,7 +1100,6 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 }
 #sortByForm {
 	.dropdown-menu {
-		left: -60px;
         z-index: 99;
 	}
 }
@@ -1281,6 +1281,10 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 .cimm_color5, .priceSpanFa{
     color: $primary_color;
     font-size: $font_md;
+}
+.suggestColor{
+    color: $suggestPrice_color;
+    font-size: $font_sm;
 }
 
 @import "3-modules/modules";

@@ -2,7 +2,7 @@
 <input type="hidden" id='priceSaleQty_$!partNumber' value='$!qty' /> 
 <input type="hidden" id='priceValue_$!partNumber' value='$!price' />
 <input type="hidden" id='unitPriceValue_$!partNumber' value='$!price' />  
-<input type="hidden" id='uomValue_$!partNumber' value='$!uom' /> 
+<input type="hidden" id='uomValue_$!ItemId' value='U' /> 
 <input type="hidden" id='salesQtyVal_$!partNumber' value='$!saleQty' /> 
 <input type="hidden" id='itmId_$!ItemId' value='$!partNumber' /> 
 <!--<input type="hidden" value="" id="hidden_id"/>

@@ -3257,7 +3257,7 @@ var formatPrice = function () {
 			var finalResult = e;
 			if (result != null && result.length > 0) {
 				finalResult = result[0];
-				finalResult = "$" + commaSeparateNumber(finalResult);
+				finalResult = "Q" + commaSeparateNumber(finalResult);
 				if (result.length > 1) {
 					finalResult = finalResult + "." + result[1];
 				}
