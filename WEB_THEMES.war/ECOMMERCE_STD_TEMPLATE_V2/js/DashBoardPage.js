@@ -46,7 +46,7 @@ function validateImageUpload(){
 			return false;
 		}
 	}else{
-		bootAlert("small","error","Error","Problem while uploading the file.");
+		bootAlert("small","error","Error", locale('label.quickOrder.problemWhileUpload'));
 		return false;
 	}
 }
@@ -74,8 +74,9 @@ function clearImage(){
 $(document).ready(function() {
 	$('#ship_table').DataTable({
 		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json",
 			"search":"_INPUT_",
-	        "searchPlaceholder":"Search Ship Address",
+	        "searchPlaceholder": locale('label.searchShipAddress'),
 	        "sLengthMenu" :"Show _MENU_",
 	        "oPaginate" : {
 	        	"sPrevious" :"Prev",

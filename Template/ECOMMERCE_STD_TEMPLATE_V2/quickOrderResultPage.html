@@ -3,16 +3,16 @@
 <div id="orderResults" class="multiTab mTop-4">
 	<ul class="multiTabHeading clearAfter">
 	#if($itemsAddedToCart && $itemsAddedToCart.size()>0)
-		<li><a href="#itemsInCart">Added to Cart ($itemsAddedToCart.size())</a></li>
+		<li><a href="#itemsInCart">$!locale.get('product.label.addedToCart') ($itemsAddedToCart.size())</a></li>
 	#end
 	#if($itemsWithRestriction && $itemsWithRestriction.size()>0)
-		<li><a href="#restrictedItems">Items With Exceptions ($itemsWithRestriction.size())</a></li>
+		<li><a href="#restrictedItems">$!locale.get('product.label.itemsExceptions') ($itemsWithRestriction.size())</a></li>
 	#end
 	#if($!itemsWithMultipleResultMap && $itemsWithMultipleResultMap.size()>0)
-		<li><a href="#multipleResult">Multiple result ($itemsWithMultipleResultMap.size())</a></li>
+		<li><a href="#multipleResult">$!locale.get('product.label.multipleResults') ($itemsWithMultipleResultMap.size())</a></li>
 	#end
 	#if($itemsWithZeroResult && $itemsWithZeroResult.size()>0)
-		<li><a href="#zeroResut">No Matches ($itemsWithZeroResult.size())</a></li>
+		<li><a href="#zeroResut">$!locale.get('product.label.noMatches') ($itemsWithZeroResult.size())</a></li>
 	#end
 	</ul>
 	<div class="multiTabContent">
@@ -23,7 +23,7 @@
 			#set($itemCount = 1)
 			#foreach($itemData in $itemsAddedToCart)
 				#set($itemTitle= $itemData.shortDesc)
-				#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+				#set($linkItemTitle = $itemData.shortDesc)
 				<li>				
 					<div class="cimm_slideItemImg clearAfter">
 						<!-- <strong>$itemCount)</strong> -->
@@ -75,7 +75,7 @@
 				#set($itemCount = 1)
 				#foreach($itemData in $itemsWithRestriction)
 				#set($itemTitle= $itemData.shortDesc)
-				#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+				#set($linkItemTitle = $itemData.shortDesc)
 				<li>				
 					<div class="cimm_linkItemImg clearAfter">
 					<!-- <strong>$itemCount)</strong> -->
@@ -152,11 +152,11 @@
 					</div>
 				</div>
 				#if($resultCount>15)
-					<div class="cimm_genericSearch">Keyword <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a> is too generic, resulting in numerous matches. Please <a href="searchPage.action?keyWord=$keyValue" target="_blank">click here</a> to refine the matches.</div>
+					<div class="cimm_genericSearch">$!locale.get('label.quickOrder.Keyword') <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a> $!locale.get('label.quickOrder.tooGeneric'), $!locale.get('label.quickOrder.multipleMatch'). Please <a href="searchPage.action?keyWord=$keyValue" target="_blank">$!locale.get('product.label.clickHere')</a> $!locale.get('label.quickOrder.resultsfor').</div>
 				#else
 				<div class="cimm_resultSelect clearAfter mBottom-3">
 					<div class="pull-left">
-						$resultCount results for <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a>
+						$resultCount $!locale.get('label.quickOrder.resultsfor') <a href="searchPage.action?keyWord=$keyValue" target="_blank">$keyValue</a>
 					</div>
 					<label class="customCheckBox pull-right" for="SALL_$keyValue.replace(' ','_')$keyCountSelectAll">
 						<input type="checkbox" id="SALL_$keyValue.replace(' ','_')$keyCountSelectAll" name="SALL_$keyValue.replace(' ','_')$keyCountSelectAll" data-selectAll="CheckBox"/>
@@ -185,7 +185,7 @@
 								</div>
 								<div class="cimm_slideItemImg clearAfter">
 								<!-- <strong>$itemCount)</strong> -->
-								#set($linkItemTitle = $!itemData.brandName+' '+$!itemData.manufacturerPartNumber)
+								#set($linkItemTitle = $itemData.shortDesc)
 									<a href="$itemData.seoUrl">                    
 										#if($itemData.imageName.contains("http"))
 										<img id="imageName$itemData.itemId" class="lazyLoad" src="$itemData.imageName" width="100" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';" alt='$linkItemTitle'/>
@@ -281,5 +281,5 @@ jQuery.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 });
 </script>
 #else
-	No results found
+	$!locale.get('breadcrumbs.label.NoResultsPage')
 #end

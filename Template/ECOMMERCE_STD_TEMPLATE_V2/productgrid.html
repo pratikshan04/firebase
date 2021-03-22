@@ -330,7 +330,7 @@
 							</li>
 							<li class='selectCompareGroupBlock'>
 								<div class="itemDetailInfoList">
-									<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> Expand to Compare / View All Choices / View item Details / Add to My Product Group</a>
+									<a href="javascript:void(0);" class='itemDetailInfoList_$itemData.itemPriceId' onclick="ProductMode.submitProductModeFilterForm($itemData.itemPriceId);"> $!locale.get('label.productmode.expand')</a>
 								</div>
 							</li>
 							<li id="productModeItemsDiv_$!itemData.itemPriceId" class="productModeItemsDiv" style="display: none;">
@@ -399,30 +399,6 @@
 										<strong>$!locale.get("product.label.leadTime"): </strong>
 										<span class="orangeClr leadTime_$!itemData.partNumber"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span>
 									</li> --> 
-									<!-- <li class="productAvail_$!itemData.partNumber">
-										<strong class="availLabel">$!locale.get("product.label.availability"): </strong>
-										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-											#set($Integer = 0)
-											#if($itemData.availQty && $Integer.parseInt($itemData.availQty) > 0)
-												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
-											#else
-												<span class='text-danger'>Call for Availability</span>
-											#end
-											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
-										#else
-											<span class="orangeClr Avail_$!itemData.partNumber" data-select='availability'><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span>
-											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
-										#end
-									</li>
-									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
-									<li>
-										<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
-										<p class="propwarningmsg">
-											<i class="fas fa-exclamation-triangle"></i>
-											<span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span>
-										</p>
-									</li>
-									#end -->
 									<!-- <li id="allBranchAvail_$!itemData.partNumber">
 										<span class="priceSpanFa"><a href="javascript:void(0);" data-toggle="modal" data-target="#branchavail_$!itemData.partNumber.replaceAll(' ','_')"><strong>Branch Availability</strong></a></span>
 									</li>  -->
@@ -435,32 +411,60 @@
 										<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
 									</li>
 									#end
+									#if($userLogin)
+									<li class="productAvail_$!itemData.partNumber">
+										<!-- <strong class="availLabel">$!locale.get("product.label.availability"): </strong> -->
+										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+											#set($Integer = 0)
+											#if($itemData.availQty && $Integer.parseInt($itemData.availQty) > 0)
+												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
+											#else
+												<span class='text-danger'>$!locale.get("product.label.outOfStock")</span>
+											#end
+											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
+										#else
+											<span class="orangeClr Avail_$!itemData.partNumber" data-select='availability'><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span>
+											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
+										#end
+									</li>
+									#end
+									<li class="cimm_priceWrap">
+										#if($userLogin)
+										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
+												#if($itemData.price>0)
+													$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
+												#else
+													<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
+												#end
+											</span>
+										#else
+											#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
+												<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
+											#else
+												<span class="priceSpan">$!locale.get('product.label.price'):</span>
+												<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
+													<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+												</span>
+												<br/>
+												<span class="suggestColor">$!locale.get('product.lable.suggestedPrice'):</span>
+												<span id="spanSuggest_$!itemData.partNumber" class="priceSpan formatPrice suggestColor" data-select='priceData'>
+													<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+												</span>
+												<br/>
+												<span class="suggestColor">$!locale.get('product.label.minSuggPrice'):</span>
+												<span id="spanMinimun_$!itemData.partNumber" class="priceSpan formatPrice suggestColor" data-select='priceData'>
+													<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
+												</span>
+											#end
+										#end
+										#else
+										<span><a data-toggle='modal' data-target='#loginModal'><span class='priceSpan'>$!locale.get("label.loginForPrice")</span></a></span>
+										#end
+										</li>
 								</ul>
 								<ul class="second">
 									#if($!itemData.packDesc && $itemData.packDesc.trim() != "")<li class="packDesc"><strong>$!locale.get("product.label.packageDesc"): </strong><span class="packageDesc">$!itemData.packDesc</span></li>#end
-									<li class="cimm_priceWrap">
-									#if($userLogin)
-									#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
-										<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
-											#if($itemData.price>0)
-								    			$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
-								    		#else
-								    			<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
-								    		#end
-										</span>
-									#else
-										#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
-											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
-										#else
-											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
-												<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
-											</span>
-										#end
-									#end
-									#else
-									<span><a data-toggle='modal' data-target='#loginModal'><span class='priceSpan'>$!locale.get("label.loginForPrice")</span></a></span>
-									#end
-									</li>
 									<li class="cimm_qtyWrap">
 										<strong>$!locale.get("form.label.tableQty") </strong>  
 										<span class='mRight-1'>
@@ -510,7 +514,9 @@
 											<ul id="ulg$!itemData.itemId" class="dropdown-menu">
 												<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
 											</ul>
-											<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
+											<!-- <input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/> -->
+											#set($uom1 = "U")
+                                            <input type="hidden" value="#if($!itemData.uom)$!itemData.uom #else $uom1 #end" id="uomValue_$!itemData.itemId"/>
 										</div>
 										<!--My Product Group-->
 									</li>

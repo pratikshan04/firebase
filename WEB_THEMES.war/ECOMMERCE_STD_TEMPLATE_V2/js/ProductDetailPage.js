@@ -293,7 +293,8 @@ $("#TweetShareBtn").attr("data-url",pagePath);
 $("#linkedInShare").attr("data-url",pagePath);
 $(document).bind('click', function(e) {
 	var $clicked = $(e.target);
-	if ($clicked.parent().attr("id")== "sharePageTrigger"){$('.sharePageWrap').addClass('sharePageWrapTog');
+	console.log($clicked.parent());
+	if ($clicked.attr("id")== "sharePageTrigger" || $clicked.parent().attr("id")== "sharePageTrigger"){$('.sharePageWrap').addClass('sharePageWrapTog');
 	}else{$('.sharePageWrap').removeClass('sharePageWrapTog'); }
 });
 $(document).ready(function () {$('#TweetShareBtn').click(function (e) {Window = window.open("https://twitter.com/share","_blank", "width=700, height=450");});});

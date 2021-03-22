@@ -109,7 +109,7 @@ function getEntityAddress(obj){
 		//$("#countrySelect").val("");
 		$("#contactPoBox").val("");
 		$("#contactPhone").val("");
-		$("#stateSelect").parent().find("span.filter-option").html("Select State");
+		$("#stateSelect").parent().find("span.filter-option").html("Seleccione estado");
 		$("#zip").val("");
 	}
 }

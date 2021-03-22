@@ -72,18 +72,18 @@ function bulkActions(that) {
 		if(checkedCount>0){
 			if(diffrence>0){
 				if(unCheckedCount>0 && checkedCount>unCheckedCount){
-					bootAlert("small","info","Info","Call for Price items will be dropped from selection");
+					bootAlert("small","info","Info", locale('label.select.itemsDrop'));
                     $("[data-bb-handler='ok']").click(function () {  BulkAction.addGroupItemsToCartCookie(); });
                 }else{
                     BulkAction.addGroupItemsToCartCookie();
                 }
 				//val = changeAction(2);
 			}else{
-				bootAlert("small","error","Error","Cannot add Call for Price item to cart");
+				bootAlert("small","error","Error", locale('label.select.cannotAdd'));
 				$(that).val("");
 			}
 		}else{
-			bootAlert("small","error","Error","Please select at least one item to add cart");
+			bootAlert("small","error","Error", locale('label.select.oneItem'));
 			$(that).val("");
 		}
 	}

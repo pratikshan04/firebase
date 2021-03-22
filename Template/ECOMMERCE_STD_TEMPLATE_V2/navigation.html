@@ -126,33 +126,33 @@
 			</span>
 			<div class="dropdown-menu" id="quickOrderPadDrop">
 				<div class="cartHead clearAfter">
-					<h5><a href="#speedEntry">Speed Entry</a></h5>
-					<h5><a href="#copyPaste">Copy Paste</a></h5>
-					<h5><a href="#fileUopload">File Upload</a></h5>
+					<h5><a href="#speedEntry">$!locale.get('label.quickOrder.speed')</a></h5>
+					<h5><a href="#copyPaste">$!locale.get('label.quickOrder.copypaste')</a></h5>
+					<h5><a href="#fileUopload">$!locale.get('label.quickOrder.FileUpload')</a></h5>
 				</div>
 				<div class="cartBody clearAfter">
 					<div id="speedEntry" class="text-center">
-						<table class="table table-striped table-bordered display rwd-table">
-							<thead><tr><th class="heading">KEYWORD</th><th class="heading">QUANTITY</th></tr></thead>
+						<table class="table table-bordered display rwd-table">
+							<thead><tr><th class="heading">$!locale.get('label.quickOrder.Keyword')</th><th class="heading">$!locale.get('label.quickOrder.quantity')</th></tr></thead>
 							<tbody>
-								<tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
-							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
-							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
-							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
-							    <tr><td><input type="text"></td><td><input type="text" class="quantity"></td></tr>
+								<tr><td><input type="text"></td><td><input type="text" class="quantity" onkeypress="return IsNumeric(event);"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity" onkeypress="return IsNumeric(event);"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity" onkeypress="return IsNumeric(event);"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity" onkeypress="return IsNumeric(event);"></td></tr>
+							    <tr><td><input type="text"></td><td><input type="text" class="quantity" onkeypress="return IsNumeric(event);"></td></tr>
 						    </tbody>
 						</table>
-						<a href='javascript:void(0);' class="showMoreEntryFieldsLink button" onclick="QuickOrder.showMoreOrderPad();">Show More Entry Fields</a>
-						<h4>If Duplicates in input:</h4>
+						<a href='javascript:void(0);' class="showMoreEntryFieldsLink button" onclick="QuickOrder.showMoreOrderPad();">$!locale.get('label.quickOrder.ShowMore')</a>
+						<h4>$!locale.get('label.quiclOrder.DuplicateInput'):</h4>
 						<div class="mBottom-2">
 							<label for="CombineHead1"  class="customRadioBtn">
-								<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked><span>Combine</span>
+								<input type="radio" name="QuickOrderPadHead" value="Combine" id="CombineHead1" checked><span>$!locale.get('label.item.combine')</span>
 							</label>
 							<label for="SeparateHead1" class="customRadioBtn">
-								<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1"><span>Separate</span>
+								<input type="radio" name="QuickOrderPadHead" value="Separate" id="SeparateHead1"><span>$!locale.get('label.item.seprate')</span>
 							</label>
 							<label for="RemoveHead1" class="customRadioBtn">
-								<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1"><span>Remove</span>
+								<input type="radio" name="QuickOrderPadHead" value="Remove" id="RemoveHead1"><span>$!locale.get('product.label.remove')</span>
 							</label>
 						</div> 
 						<div class="quickOrdeAddtoCart center">
@@ -160,21 +160,21 @@
 						</div>
 					</div>
 					<div id="copyPaste" class="text-center hideMe">
-						<h6>WANT TO SAVE TIME AND ORDER FASTER?</h6>
-						<p>Simply copy & paste Items from your file into the field below using the following format:</p>
+						<h6>$!locale.get('label.quickOrder.cpnote1')</h6>
+						<p>$!locale.get('label.quickOrder.cpnote2'):</p>
 						<h5>$!locale.get("product.heading.enterOrCopyPaste")</h5>
 						<div id="copyPasteInstruction"></div>
 						<textarea id="headerCopyPasteText" name="copyPasteText" rows='#if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT"))$!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")#else 50 #end' cols="60"></textarea>
-						<h4>If Duplicates in input:</h4>
+						<h4>$!locale.get('label.quiclOrder.DuplicateInput'):</h4>
 						<div class="mBottom-2">
 							<label for="CombineHead2" class="customRadioBtn">
-								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Combine" id="CombineHead2" checked><span>Combine</span>
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Combine" id="CombineHead2" checked><span>$!locale.get('label.item.combine')</span>
 							</label>
 							<label for="SeparateHead2" class="customRadioBtn">
-								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Separate" id="SeparateHead2"><span>Separate</span>
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Separate" id="SeparateHead2"><span>$!locale.get('label.item.seprate')</span>
 							</label>
 							<label for="RemoveHead2" class="customRadioBtn">
-								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Remove" id="RemoveHead2"><span>Remove</span>
+								<input type="radio" name="QuickOrderHeaderCopyPaste" value="Remove" id="RemoveHead2"><span>$!locale.get('product.label.remove')</span>
 							</label>
 						</div>
 						<div class="quickOrdeAddtoCart center">
@@ -183,34 +183,34 @@
 					</div>
 					<div id="fileUopload" class="hideMe">
 						<div class="fileUploadDescription">				
-							<p class="mBottom-3">File Upload is supported by .xlsx <a href="$!webThemes/$siteName/images/QuickCartExample.xlsx">Click Here</a> To Download Sample File</p>
-							<p class="mBottom-3">Use Speed Entry to manually enter keyword to upload it to quickly create a cart.</p>
-							<p class="mBottom-3">File upload feature supports up to #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 400 #end records</p>
+							<p class="mBottom-3">$!locale.get('label.quickOrder.fileUploadnote1') <a href="$!webThemes/$siteName/images/QuickCartExample.xlsx">$!locale.get('product.label.clickHere')</a> $!locale.get('label.quickOrder.download')</p>
+							<p class="mBottom-3">$!locale.get('label.quickOrder.fileUploadnote2').</p>
+							<p class="mBottom-3">$!locale.get('label.quickOrder.fileUploadnote3') #if($!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT")) $!CommonDBQuerySystemParameter.get("QUICK_ORDER_RECORD_LIMIT") #else 400 #end $!locale.get('label.quickOrder.records')</p>
 						</div>
 						<div class="clearAfter uploadImage_wrap">
 							<form id="uploadForm" method="post" enctype="multipart/form-data" action="QuickOrderFileUpload.slt">
 								<input type="hidden" id="trigerPoint" value="quickorder"/>
 								<div id="cimm_headerFileUpload" class="uploadFile">
-								<span>Choose File</span>
+								<span>$!locale.get('product.label.chooseFile')</span>
 								<input type="file" name="datafile" id="headerDataFile">
 								</div>
 								<button type="submit" class="cimm_inlineButton pull-left" onclick="return QuickOrder.validateHeadFileUpload();">$locale.get('button.label.Upload')</button>
 								<div class="clear"></div>
 							</form>
 						</div>
-						<h4 class="text-center">If Duplicates in input:</h4>
+						<h4 class="text-center">$!locale.get('label.quiclOrder.DuplicateInput'):</h4>
 						<div class="mBottom-2 text-center">
 							<label for="CombineHead3" class="customRadioBtn">
 								<input type="radio" name="QuickOrderHeaderFileUpload" value="Combine" id="CombineHead3" checked>
-								<span>Combine</span>
+								<span>$!locale.get('label.item.combine')</span>
 							</label>
 							<label for="SeparateHead3" class="customRadioBtn">
 								<input type="radio" name="QuickOrderHeaderFileUpload" value="Separate" id="SeparateHead3">
-								<span>Separate</span>
+								<span>$!locale.get('label.item.seprate')</span>
 							</label>
 							<label for="RemoveHead3" class="customRadioBtn">
 								<input type="radio" name="QuickOrderHeaderFileUpload" value="Remove" id="RemoveHead3">
-								<span>Remove</span>
+								<span>$!locale.get('product.label.remove')</span>
 							</label>
 						</div>
 					</div>

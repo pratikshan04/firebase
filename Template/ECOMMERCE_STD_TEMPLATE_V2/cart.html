@@ -19,11 +19,11 @@
 			<label>$!locale.get('product.label.sortBy'): </label>
 			<div class="form-group">
 				<select name="sortBy" id="sortByBrand" onchange="sortByManuPartNo();" class="form-control selectpicker">
-					<option value="">-- Select --</option>
-					<option value="PartA" #if($sortBy=='PartA') selected #end >Part Number (Asc)</option>
-					<option value="PartD" #if($sortBy=='PartD') selected #end >Part Number (Desc)</option>
-					<option value="MPNA" #if($sortBy=='MPNA') selected #end >Manf Part# (Asc)</option>
-					<option value="MPND" #if($sortBy=='MPND') selected #end >Manf Part# (Desc)</option>
+					<option value="">-- Seleccione --</option>
+					<option value="PartA" #if($sortBy=='PartA') selected #end >$!locale.get("product.label.partNumber") (Asc)</option>
+						<option value="PartD" #if($sortBy=='PartD') selected #end >$!locale.get("product.label.partNumber") (Desc)</option>
+						<option value="MPNA" #if($sortBy=='MPNA') selected #end >$!locale.get("product.label.mpn") (Asc)</option>
+						<option value="MPND" #if($sortBy=='MPND') selected #end >$!locale.get("product.label.mpn") (Desc)</option>
 				</select>
 			</div>
 		</form>
@@ -172,7 +172,7 @@
                                     #end
                                 </li>
                                 #end
-                                #if($itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
+                                <!-- #if($itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 			                    <li>
 			                        <strong>$!locale.get("product.label.cpn"): </strong>
 			                        #set($seperator = "")
@@ -184,7 +184,7 @@
 			                           		#end
 			                        	$!partList
 			                    	</li>
-			                	#end
+			                	#end -->
 			                	<li>
 			                		<input type="text" class="lineItemComments" name="lineItemComment_$!itemData.productListId" id="lineItemComment_$!itemData.productListId" value="#if($itemData.lineItemComment)$!itemData.lineItemComment#end" placeholder='$!locale.get("product.label.lineItemComment")' />
 			                	</li>
@@ -386,7 +386,7 @@
 			#end
 			</p>
 			#end
-			#if($itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
+			<!-- #if($itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
 			<p>
 			<strong>$!locale.get("product.label.cpn"): </strong>
 			#set($seperator = "")
@@ -398,7 +398,7 @@
 			#end
 			$!partList
 			</p>
-			#end
+			#end -->
 			</div>
 		</td>
 		<td style="border:1px solid #CCC;text-align: center;padding: 5px;">

@@ -268,7 +268,38 @@
 		</div>
 	</div>
 </div>
-
+<!-- Out of stock modal -->
+<div class="modal fade" id="outOfStock" role="dialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header alignCenter requiblack ">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+			</div>
+			<div class="modal-body clearAfter">
+				<div class="col-md-10 col-md-offset-1">
+		     		<form autocomplete="off">
+						<div class="form-group clearAfter">
+							<div class="col-md-12">
+								<p class="text-black">$!locale.get('product.label.outOfStockText')</p>
+								<br/>
+								<label class="control-label">Email<span class="text-danger">*</span></label>
+								<input type="email" data-type="text" name="email" id="email" data-required="Y" data-error="Please enter the Email Address" class="form-control " maxlength="50">
+							</div>
+						</div>
+						<div class="form-group clearAfter">
+							<div class="col-md-12 text-center">
+								<ul>
+									<li><input type="submit" class="btn btn-primary btn-signup" value="$!locale.get('form.button.send')"></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Out of stock modal -->
 <!-- multiple add to cart -->
 <div class="customPopUp" id="multipleAddToCartResult" style="display:none;"></div>
 <!-- quickorder Pad Head -->

@@ -5,6 +5,9 @@ var cdnPluginJsPath = $("#cdnPluginJsPath").val();
 jQuery.getScript(cdnSiteJsPath+'/BulkAction.js', function(){});
 $(document).ready(function(){
 	$('#cartWrap').DataTable({
+		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json"
+		},
 		"ordering": false,
 		searching: false,
 		"bLengthChange": false,
@@ -124,6 +127,14 @@ function deleteItem(path,typ,item){
 			size: "medium",
 			closeButton:false,
 			message: "You want to delete item <b>"+item+"</b> from cart?", 
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}
@@ -134,6 +145,14 @@ function deleteItem(path,typ,item){
 			size: "small",
 			closeButton:false,
 			message: "You want to delete all the items from cart?", 
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}
@@ -143,6 +162,14 @@ function deleteItem(path,typ,item){
 			size: "small",
 			closeButton:false,
 			message: "Delete item from cart?", 
+			buttons: {
+				cancel: {
+					label: 'Cancelar'
+				},
+				confirm: {
+					label: 'Ok'
+				}
+			},
 			callback: function(result){
 				processAction(result,path,typ,item);
 			}

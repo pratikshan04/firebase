@@ -109,11 +109,12 @@
         ul {
           float: left;
           padding-right: 8px;
+          width: 240px;
           &.first{
-            width: 40%;
+            width: 55%;
           }
           &.second{
-            width: 60%;
+            width: 45%;
           }
           li {
             width: 100%;
@@ -201,10 +202,10 @@
     float: left;
     margin: 25px 0.5% 0 0.5%;
     position: relative;
-    height: 670px;
+    height: 700px;
     .gridFixHeight {
       padding: 15px;
-      height: 670px;
+      height: 700px;
       border: 1px solid $border-color;
       outline: 5px solid lighten($black, 95%);
       width: 100%;

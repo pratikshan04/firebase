@@ -122,7 +122,19 @@ input[type='submit'] {
     }
 }
 .bootstrap-select>.dropdown-toggle.bs-placeholder{
+    color: $black;
+}
+.bootstrap-select .dropdown-toggle:focus{
+    outline: 0 !important;
+}
+a:focus{
+    outline: 0 !important;
+}
+a.button{
     color: $white;
+    &:hover, &:focus{
+        color: $white;
+    }
 }
 .refreshBtn {
     color: $primary_color;
@@ -392,5 +404,11 @@ input:checked+.slider.active:before {
         background-color: transparent;
     }
 }
+
+.showMoreEntryFieldsLink{
+    &:hover{
+        color: $white;
+    }
+} 
 
 @include headings;

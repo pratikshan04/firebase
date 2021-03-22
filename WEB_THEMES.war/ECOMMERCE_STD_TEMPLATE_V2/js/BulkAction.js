@@ -255,9 +255,9 @@ var BulkAction = {};
 			}
 		} else {
 			if ($("#multipleItemCart_" + obj[0].itemId).length > 0) {
-				$("#multipleItemCart_" + obj[0].itemId).find(".mulAddtoCartStatus").html("Loading...");
+				$("#multipleItemCart_" + obj[0].itemId).find(".mulAddtoCartStatus").html("Cargando...");
 			} else if ($("#multipleItemCart_" + obj[0].itemIndex + "_" + obj[0].itemId).length > 0) {
-				$("#multipleItemCart_" + obj[0].itemIndex + "_" + obj[0].itemId).find(".mulAddtoCartStatus").html("Loading...");
+				$("#multipleItemCart_" + obj[0].itemIndex + "_" + obj[0].itemId).find(".mulAddtoCartStatus").html("Cargando...");
 			}
 
 		}
@@ -452,7 +452,7 @@ var BulkAction = {};
 				BulkAction.processAddToCart(jsonObj);
 			} else {
 				if (BulkAction.getListOfCheckBox() > 0) {
-					bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
+					bootAlert("small", "error", "Error", locale('label.quickOrder.cannotAbleToAdd'));
 					BulkAction.refreshBulkSelect();
 				} else {
 					bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
@@ -461,7 +461,7 @@ var BulkAction = {};
 			}
 		} else {
 			if (BulkAction.getListOfCheckBox() > 0) {
-				bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
+				bootAlert("small", "error", "Error", locale('label.quickOrder.cannotAbleToAdd'));
 				BulkAction.refreshBulkSelect();
 			} else {
 				bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
@@ -750,7 +750,7 @@ var BulkAction = {};
 				BulkAction.processAddToCart(jsonObj);
 			} else {
 				if (BulkAction.getListOfCheckBox() > 0) {
-					bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
+					bootAlert("small", "error", "Error", locale('label.quickOrder.cannotAbleToAdd'));
 					BulkAction.refreshBulkSelect();
 				} else {
 					bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
@@ -759,7 +759,7 @@ var BulkAction = {};
 			}
 		} else {
 			if (BulkAction.getListOfCheckBox() > 0) {locale
-				bootAlert("small", "error", "Error", "Cannot add Call For Price items to cart.");
+				bootAlert("small", "error", "Error", locale('label.quickOrder.cannotAbleToAdd'));
 			} else {
 				bootAlert("small", "error", "Error", locale("label.error.noItemProcess"));
 			}
