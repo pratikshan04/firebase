@@ -390,10 +390,11 @@ var QuickOrder = {};
 		$('#generalModel .modal-body').html("");
 		var jsonData = JSON.stringify(myObject);
 		$.ajax({
-	        url: "/QuickOrderPadPage.action?processType="+isSeparate+"&date="+new Date(),
+	        url: "/QuickOrderPadPage.action",
 	        type:"post",
 	        data: {
-	        	jsonString: jsonData
+	        	jsonString: jsonData,
+	        	processType: isSeparate
 	        },
 	        success: function(response){
 	        	$('#generalModel .modal-body').html(response);
