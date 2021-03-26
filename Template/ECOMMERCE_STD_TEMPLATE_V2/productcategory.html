@@ -119,7 +119,7 @@
 					<div class="searchResults">
 						#if($navigationType=="SEARCH" || $!keyWord)
 							#if($suggestedSearch)
-								<p>Showing $!resultCount result for <span class="spellCheckWrap">$suggestedSearchKeword</span></p>
+								<p>$!locale.get('label.result.showing') $!resultCount $!locale.get('label.result.for') <span class="spellCheckWrap">$suggestedSearchKeword</span></p>
 								<p>0 $!locale.get("product.label.resultsfor") "$!keyWord"</p>
 							#else
 								<p>$!resultCount $!locale.get("product.label.resultsfor") "$!keyWord"</p>

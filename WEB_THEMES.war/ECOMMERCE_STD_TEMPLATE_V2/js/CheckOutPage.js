@@ -12,10 +12,10 @@ var billAddressCountry = $("#billAddressCountry").val();
 var shipAddressState = $("#shipAddressState").val();
 var shipAddressCountry = $("#shipAddressCountry").val();
 if($.trim(billAddressCountry) ==""){
-	billAddressCountry = "US";
+	billAddressCountry = "GT";
 }
 if($.trim(shipAddressCountry) ==""){
-	shipAddressCountry = "US";
+	shipAddressCountry = "GT";
 }
 $("#stateSelect").attr('disabled',true);
 $("#countrySelect").attr('disabled',true);
@@ -154,11 +154,11 @@ var warningMsg = true;
 					(shippingListjson[i].country && $.trim(shippingListjson[i].country)) ? (
 						$("#countrySelectShip option[value='"+shippingListjson[i].country+"']").attr('selected','selected')
 					) : (
-						$('#countrySelectShip').val("US")
+						$('#countrySelectShip').val("GT")
 					);
 					(shippingListjson[i].state && $.trim(shippingListjson[i].state)) ? (
 						stateId = document.getElementById('countrySelectShip'),
-						populateStatesOnchange(!shippingListjson[i].country ? "US" : shippingListjson[i].country, stateId, shippingListjson[i].state, true),
+						populateStatesOnchange(!shippingListjson[i].country ? "GT" : shippingListjson[i].country, stateId, shippingListjson[i].state, true),
 						$("#stateSelectShip option[value='"+shippingListjson[i].state+"']").attr('selected','selected')
 					) : (
 						$('#stateSelectShip').val("")
@@ -328,6 +328,8 @@ $.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 		accordion:true,
 		onLeaveStep:checkoutWizard.leaveAStepCallback,
 		onShowStep:checkoutWizard.showAStepCallback,
+		nextLable: locale('product.label.next'),
+		previousLabel:locale('product.label.previous'),
 		FinishLabel:'submit Order',
 		hideButtonsOnDisabled:true,
 		onFinish:checkoutWizard.submitCheckoutRequest,

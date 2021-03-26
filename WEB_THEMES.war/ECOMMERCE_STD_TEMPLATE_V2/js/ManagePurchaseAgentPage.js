@@ -84,7 +84,7 @@ function toggleDisplayBlocks(hideDiv, ShowDiv) {
 	}
 }
 var countrySelect = new initCountry({
-	country: "US",
+	country: "GT",
 	selectorID: "countrySelect",
 	defaultSelect: true
 });
@@ -134,8 +134,8 @@ function getEntityAddress(obj) {
 					var stateSelect = $("#countrySelect option:selected").html();
 					$("#countrySelect").parent().find("span.filter-option").html(stateSelect);
 				} else {
-					$("#countrySelect").val("US");
-					var i = $("#countrySelect option[value='US']").index();
+					$("#countrySelect").val("GT");
+					var i = $("#countrySelect option[value='GT']").index();
 					$("#countrySelect").parent().find(".dropdown-menu.inner li").removeClass("selected");
 					$("#countrySelect").parent().find(".dropdown-menu.inner li:eq(" + i + ")").addClass("selected");
 					var stateSelect = $("#countrySelect option:selected").html();
@@ -148,7 +148,7 @@ function getEntityAddress(obj) {
 				}else{
 					initCountry('USA','N','ACNT','N');
 				}*/
-				if (msgArr[5] == 'US' || msgArr[5] == 'USA') {
+				if (msgArr[5] == 'GT' || msgArr[5] == 'USA') {
 					$("#locUser").val("N");
 				} else {
 					$("#locUser").val("Y");

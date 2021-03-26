@@ -1,7 +1,7 @@
 var billAddressState = $("#billAddressState").val();
 var billAddressCountry = $("#billAddressCountry").val();
 if(!billAddressCountry){
-	billAddressCountry = "US";
+	billAddressCountry = "GT";
 }
 var countrySelectShip = new initCountry({
 	country: billAddressCountry,
@@ -47,12 +47,12 @@ function setCurrentContactAddress(){
 	if(currentAddress['countrySelectShip']){
 		$("#countrySelectShip option[value='"+currentAddress['countrySelectShip']+"']").attr('selected','selected');
 	}else{
-		$('#countrySelectShip').val("US");
+		$('#countrySelectShip').val("GT");
 	}
 	
 	if(currentAddress['stateSelectShip']){
 		var stateId = document.getElementById('countrySelectShip');
-		var country = currentAddress['countrySelectShip'] ? currentAddress['countrySelectShip'] : 'US' ;
+		var country = currentAddress['countrySelectShip'] ? currentAddress['countrySelectShip'] : 'GT' ;
 		populateStatesOnchange(country, stateId, currentAddress['stateSelectShip'], true);
 		$("#stateSelectShip option[value='"+currentAddress['stateSelectShip']+"']").attr('selected','selected');
 	}else{
@@ -81,17 +81,17 @@ function getContactEntityAddress(obj){
 				msgArr[2] ? $("#city").val(msgArr[2]) : $("#city").val('');
 				msgArr[4] ? $("#zip").val(msgArr[4]) : $("#zip").val('');
 				msgArr[6] ? $("#billPhone").val(msgArr[6]) : $("#billPhone").val('');
-				(msgArr[5]=='US' || msgArr[5]=='USA' ) ? $("#locUser").val("N") : $("#locUser").val("Y");
+				(msgArr[5]=='GT' || msgArr[5]=='USA' ) ? $("#locUser").val("N") : $("#locUser").val("Y");
 				
 				if(msgArr[5]!=null && msgArr[5]!="null" && msgArr[5].trim() != ""){
 					$("#countrySelectShip option[value='"+msgArr[5]+"']").attr('selected','selected');
 				}else{
-					$('#countrySelectShip').val("US");
+					$('#countrySelectShip').val("GT");
 				}
 				
 				if(msgArr[3]!=null && msgArr[3]!="null"){
 					var stateId = document.getElementById('countrySelectShip');
-					var country = msgArr[5] ? msgArr[5] : 'US';
+					var country = msgArr[5] ? msgArr[5] : 'GT';
 					populateStatesOnchange(country, stateId, msgArr[3], true);
 					$("#stateSelectShip option[value='"+msgArr[3]+"']").attr('selected','selected');
 				}else{

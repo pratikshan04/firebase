@@ -154,11 +154,11 @@
 						#end                     
 					</td>
 					<td class="alignLeft" data-th="$!locale.get('product.label.description')">
-						<p class="orderConfTitle"><strong>$!itemList.brandName $!itemList.manufacturerPartNumber</strong></p>
-						<p>$!itemList.shortDesc</p>
+						<p class="orderConfTitle"><strong>$!itemList.shortDesc</strong></p>
+						<!-- <p>$!itemList.shortDesc</p> -->
 						<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemList.partNumber</p>
 						<!-- $!itemList.productKeywords -->
-						#if($itemList.customerPartNumberList.size()>0)
+						<!-- #if($itemList.customerPartNumberList.size()>0)
 						<ul>
 							<li><strong>Customer Part Number: </strong>
 								#foreach($!customerPartNumberList in $!itemList.customerPartNumberList)
@@ -166,7 +166,7 @@
 								#end
 							</li>
 						</ul>
-						#end
+						#end -->
 						#if($!itemList.lineItemComment.length()>0)
 							<ul><li><strong>Line Item Comment: </strong>$!itemList.lineItemComment </li></ul>
 						#end

@@ -70,7 +70,7 @@
 				#if($!breadCrumb.categoryName)
 					#set($pageTitleVelo = $!pageTitle + $!pageTitleseparator + $!pageTitleVelo)
 				#else
-					#set($pageTitleVelo = $!itemData.manufacturerPartNumber + $!pageTitleseparator + $!pageTitleVelo)
+					#set($pageTitleVelo = $!itemData.shortDesc + $!pageTitleseparator + $!pageTitleVelo)
 				#end
 			#end
 			#set($breadCrumbIdx = $!breadCrumbIdx+1)

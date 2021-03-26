@@ -30,7 +30,7 @@
 	#end
 	</div>
 	<div class="cartTotal_Top col-md-8 col-sm-8 col-xs-12">
-		<span class="btn btn-lg">
+		<span class="btn btn-primary">
 			<strong class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</strong>
 			<strong>$!locale.get("product.label.orderTotal"): <span class="formatPrice">$ $numberTool.format("$numberToolFormat",$!cartTotal)</span></strong>
 		</span>
@@ -47,9 +47,9 @@
 				<a class="btn btn-md btn-primary marginX-3 mRight-3" href="/Login">$!locale.get("product.heading.checkout")</a>
 			#end
 		#end
-		<a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sharethis')" onclick="sendPageContent('sendPageContent');">
+		<!-- <a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.button.sharethis')" onclick="sendPageContent('sendPageContent');">
 			$!locale.get("product.button.sharethis") <em class="fa fa-paper-plane" aria-hidden="true"></em>
-		</a>
+		</a> -->
 	</div>
 </div>
 <!-- <div class="row">
@@ -117,9 +117,9 @@
                     </td>
                     <td class="alignLeft" data-th="$!locale.get('product.label.description')">
                         <div class="cimm_cartProdDescription">
-                        	<p itemprop="name"><strong><a href="$!itemData.seoUrl"><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong></p>
+                        	<p itemprop="name"><strong><a href="$!itemData.seoUrl"><strong>$!itemData.shortDesc</strong></a></strong></p>
                             <ul>
-                                <li>
+                                <!-- <li>
                                     #if($itemData.shortDesc.length()>75)
 	                                    <p itemprop="description"> $!itemData.shortDesc.substring(0, 75)
 	                                        <a href="$!itemData.seoUrl"> $!locale.get("product.label.more")</a>
@@ -128,7 +128,7 @@
                                     	<p itemprop="description"> $!itemData.shortDesc </p>
                                     #end
                                     <div id="minErr_$!itemData.itemPriceId"></div>
-                                </li>
+                                </li> -->
                                 #if($itemData.manufacturerPartNumber)
                                	<li itemprop="mpn">
                                		<strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span>
@@ -242,7 +242,7 @@
                     </td>
                     <td>
                     <div class="cartUpdateBtn">
-                        <a href="javascript:void(0);" data-toggle="tooltip" title="Delete Item" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteId=$!itemData.productListId','0','$!escapeTool.javascript($!itemData.partNumber)');"><em class="fa fa-2x fa-times-circle  fa-lg"></em></a>
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="$!locale.get('product.label.removeItems')" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteId=$!itemData.productListId','0','$!escapeTool.javascript($!itemData.partNumber)');"><em class="fa fa-2x fa-times-circle  fa-lg"></em></a>
                     </div>
                     </td>
                 </tr>
@@ -257,7 +257,7 @@
         <ul class="clearAfter">
         	<!-- <li><a class="removeSelected">$!locale.get("product.label.removeSelected")</a></li> -->
             #if($userLogin && $!CommonDBQuerySystemParameter.get("EnableAddCartToGroup") == "Y")
-            <li><a class="addSelected"><em class="fas fa-plus"></em>$!locale.get("product.label.addSelectedToProductList")</a></li>
+            <li><a class="addSelected"><em class="fa fa-lg fa-heart"></em>$!locale.get("product.label.addSelectedToProductList")</a></li>
             #end
             <li><a href="$!locale.get('website.url.ProductCategory')"><em class="fas fa-shopping-bag"></em>$!locale.get("product.button.continueShopping")</a></li>
             <li><a href="javascript:void(0);" onclick="updateShoppingCart(); return false;"><em class="fas fa-history"></em>$!locale.get("product.button.updateCart")</a></li>
@@ -350,8 +350,8 @@
 		</td>
 		<td style="border:1px solid #CCC;text-align: left;padding: 5px;" data-th="$!locale.get('product.label.description')">
 			<div class="cimm_cartProdDescription">
-			<strong><a href='$commonUtility.removeLastCharacter($!hostName, "/")$!itemData.seoUrl'><strong>$!itemData.brandName $!itemData.manufacturerPartNumber</strong></a></strong>
-			<p itemprop="description"> $!itemData.shortDesc </p>
+			<strong><a href='$commonUtility.removeLastCharacter($!hostName, "/")$!itemData.seoUrl'><strong>$!itemData.shortDesc</strong></a></strong>
+			<!-- <p itemprop="description"> $!itemData.shortDesc </p> -->
 			#if($itemData.manufacturerPartNumber)
 			<p>
 			<strong>$!locale.get("product.label.mpn"): </strong><span>$!itemData.manufacturerPartNumber</span>

@@ -46,17 +46,17 @@ function submitSaveCart(title,groupId,obj,isReorder){
 	var toggleListID = $("#group_id").val();
 	title = $.trim(title);
 	if(localStorage!=null && localStorage.getItem(title)!=null && localStorage.getItem(title)=="Y"){
-		bootAlert("small","error","Error","Cart name already exists<br/>Items will be added to existing saved cart.");
+		bootAlert("small","error","Error",locale('label.cartItems.exists'));
 	}
 	if(groupId==0)
 	{
 		if (title == null || title == "") {
-			bootAlert("small","error","Error","Please Enter Valid Name.");
+			bootAlert("small","error","Error",locale('label.valid.name'));
 			return false;
 		}else{
 			var characterReg = /^[-_ a-zA-Z0-9]+$/;
 			if (characterReg.test(title) == false) {
-				bootAlert("small","error","Error","Special characters are not allowed except underscore or hyphen ( _ , - ).");
+				bootAlert("small","error","Error", locale('label.error.specialcharnotallowed'));
 				return false;
 			}else{
 				$("#group_name").val(title);
@@ -74,7 +74,7 @@ function submitSaveCart(title,groupId,obj,isReorder){
 		$(toggleListID).hide();
 		var result = data.split('|');
 		//$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
-		$(toggleListID+"_custPop").html("Cart Saved Successfully - "+ groupName).attr("href","/"+result[1]+"/ProductGroup/Cart?savedGroupName="+groupName).fadeIn();
+		$(toggleListID+"_custPop").html("Carrito guardado correctamente - "+ groupName).attr("href","/"+result[1]+"/ProductGroup/Cart?savedGroupName="+groupName).fadeIn();
 		setTimeout(function(){$(toggleListID+"_custPop").removeAttr("href").html("").fadeOut();}, 5000);
 	});
 }
@@ -126,7 +126,7 @@ function deleteItem(path,typ,item){
 		bootbox.confirm({ 
 			size: "medium",
 			closeButton:false,
-			message: "You want to delete item <b>"+item+"</b> from cart?", 
+			message: locale(label.cart.itemDelete) +item, 
 			buttons: {
 				cancel: {
 					label: 'Cancelar'
@@ -144,7 +144,7 @@ function deleteItem(path,typ,item){
 		bootbox.confirm({ 
 			size: "small",
 			closeButton:false,
-			message: "You want to delete all the items from cart?", 
+			message: locale(label.cart.itemAllDelete), 
 			buttons: {
 				cancel: {
 					label: 'Cancelar'
@@ -161,7 +161,7 @@ function deleteItem(path,typ,item){
 		bootbox.confirm({ 
 			size: "small",
 			closeButton:false,
-			message: "Delete item from cart?", 
+			message: locale('label.cart.itemDelete'), 
 			buttons: {
 				cancel: {
 					label: 'Cancelar'
@@ -263,15 +263,15 @@ function refreshShoppingCart(id,partNum){
 		}else{
 			if(mpnDisplay!=null && mpnDisplay=="Y"){
 				if(lessThanMinOrder){
-					valu = "Item# "+mpn+" is only available in multiples of "+orderQtyInterval+" and Min. Order Quantity is : "+minimumOrderQty;
+					valu = locale('product.label.mpn') +mpn+ locale('label.cart.multipleAvail') +orderQtyInterval+ locale('label.cart.minorderqty')+" : "+minimumOrderQty;
 				}else{
-					valu = "Item# "+mpn+" is only available in multiples of "+orderQtyInterval;
+					valu = locale('product.label.mpn') +mpn+ locale('label.cart.multipleAvail') +orderQtyInterval;
 				}
 			}else{
 				if(lessThanMinOrder){
-					valu = "Item# "+originalPartNumber+" is only available in multiples of "+orderQtyInterval+" and Min. Order Quantity is : "+minimumOrderQty;
+					valu = locale('product.label.partNumber') +originalPartNumber+ locale('label.cart.multipleAvail') +orderQtyInterval+ locale('label.cart.minorderqty')+" : "+minimumOrderQty;
 				}else{
-					valu = "Item# "+originalPartNumber+" is only available in multiples of "+orderQtyInterval;
+					valu = locale('product.label.partNumber') +originalPartNumber+ locale('label.cart.multipleAvail') +orderQtyInterval;
 				}
 			}
 			showNotificationDiv("error", valu);
@@ -280,7 +280,7 @@ function refreshShoppingCart(id,partNum){
 		}
 	}else{
 		$("#textQty_"+partNum).val(curQty);
-		bootAlert("medium","error","Error","Please use Update Cart button to set item quantity to zero.");
+		bootAlert("medium","error","Error",locale('label.cartUpdate.toZero'));
 	}
 }
 
@@ -345,7 +345,7 @@ function standardCheckout(){
 	}
 	if(checkout=="Y"){
 		unblock();
-		bootAlert("small","error","Error","Cannot checkout item(s) with zero price.");
+		bootAlert("small","error","Error",locale('label.cannot.CheckOutZero'));
 		return false;
 		
 	}else{
@@ -468,15 +468,17 @@ function sendApproval() {
 				unblock();
 				var arrRes = msg.split("|");
 				if ($.trim(arrRes[0]) == "0"){
-					bootAlert("small","success","Success",locale("cart.submit.approval"));
+					bootAlert("small","success",locale('label.alert.success'),locale("cart.submit.approval"));
 					$("[data-bb-handler='ok']").click(function(){
 						window.location.href = $("base").attr("href") + "Welcome.action";
 					})
 				}else{
 					var result = "";
 					for (i = 0; i < (arrRes.length - 1); i++) {
+						
 						result = result + arrRes[i] + "<br />";
 					}
+					bootAlert("small","error","Error",arrRes[1]);
 					$("#sendApproval").val("Submit Approval");
 					$("#sendApproval").removeAttr("disabled");
 				}
@@ -658,7 +660,7 @@ function sendApproval() {
 				if(element.type == "TEXT" || element.type == "text"){
 					element.value = item.value != 0 ? item.value : item.minOrderQty;
 				}
-				bootAlert("medium","warning","warning",status.description);
+				bootAlert("medium","warning","Advertencia",status.description);
 			}
 		}else{
 			clearItemExistence(getItemsFromLocalStorage(myCart.storeName), item);
@@ -677,7 +679,7 @@ function sendApproval() {
 		if(selectedItems && selectedItems.length > 0){
 			callRemoveSelctedApi(selectedItems);
 		}else {
-			bootAlert("medium","warning","warning","No Items were selected");
+			bootAlert("medium","warning","Advertencia",locale('label.cart.notSelected'));
 		}
 	});
 	$(".addSelected").on('click', function(){
@@ -685,7 +687,7 @@ function sendApproval() {
 		if(selectedItems && selectedItems.length > 0){
 			callAddSelectedApi(selectedItems);
 		}else {
-			bootAlert("medium","warning","warning","No Items were selected");
+			bootAlert("medium","warning","Advertencia",locale('label.cart.notSelected'));
 		}
 	});
 	
@@ -693,7 +695,7 @@ function sendApproval() {
 		if(validateQuickAdd()){
 			processQuickAdd();
 		}else{
-			bootAlert("medium","warning","warning",quickAdd.description.join("<br/>"));
+			bootAlert("medium","warning","Advertencia",quickAdd.description.join("<br/>"));
 			return false;
 		}
 	});
@@ -902,9 +904,9 @@ function updatePrice(productListId, partNum){
 	var getPriceFrom = 'SALESREP';
 	var itemQty = document.getElementById("textQty_"+partNum).value;
 	if(updatedUnitPrice <= 0){
-		bootAlert("small","error","Error","Cannot update item with zero or less than zero price.");
+		bootAlert("small","error","Error",locale('label.cart.priceZero'));
 	}else if(isNaN(updatedUnitPrice)){
-		bootAlert("small","error","Error","Cannot update item with String or special characters in price.");
+		bootAlert("small","error","Error",locale('label.cart.PriceString'));
 		$('#updatedUnitPrice_'+productListId).val(unitPrice);
 	    editPrice(partNum);
     }else if(unitPrice != updatedUnitPrice){
@@ -931,10 +933,10 @@ function updatePrice(productListId, partNum){
 			success: function(response){
 				unblock();
 				if(response){
-					bootAlert("small","success","Success","Cart Updated");
+					bootAlert("small","success",locale('label.alert.success'),locale('label.update.cart'));
 					window.location.href = "shoppingCartPage.action";
 				}else{
-					bootAlert("small","error","Error","Cart Rejected Failed. Please try again");
+					bootAlert("small","error","Error",locale('label.update.reject'));
 				}
 			}
 		});
