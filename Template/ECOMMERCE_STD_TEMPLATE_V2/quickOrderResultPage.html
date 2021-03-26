@@ -239,13 +239,13 @@
 					jQuery("#SALL_$keyValue.replace(' ','_')$keyCountSelectAll").change(function(){
 						if(this.checked) { // check select status
 							jQuery("[data-check='CHK_SALL_$keyValue.replace(' ','_')$keyCountSelectAll']").each(function(i){//loop through each checkbox
-								jQuery("#"+this.id).click();
-				                this.checked = true;  //select all checkboxes with class "checkbox1"               
+								this.checked = true;  //select all checkboxes with class "checkbox1" 
+								BulkAction.addItemsToCookieV2(this);
 				            });
 				        }else{
 				        	jQuery("[data-check='CHK_SALL_$keyValue.replace(' ','_')$keyCountSelectAll']").each(function(i){ //loop through each checkbox
-				        		jQuery("#"+this.id).click();
-				                this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+				        		this.checked = false; //deselect all checkboxes with class "checkbox1"
+				        		BulkAction.addItemsToCookieV2(this);
 				            });         
 				        }
 					});

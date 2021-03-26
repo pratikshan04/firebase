@@ -514,11 +514,12 @@ var QuickOrder = {};
 		$("#searchResults").html("");
 		var jsonData = JSON.stringify(myObject);
 		$.ajax({
-	        url: "/QuickOrderPadPage.action?processType="+isSeparate+"&date="+new Date(),
-	        type:"post",
-	        data: {
-	        	jsonString: jsonData
-	        },
+			url: "/QuickOrderPadPage.action",
+		        type:"post",
+		        data: {
+		        	jsonString: jsonData,
+		        	processType: isSeparate
+		        },
 	        success: function(response){
 	        	if(response=="sessionexpired"){
 					window.location.href="doLogOff.action";

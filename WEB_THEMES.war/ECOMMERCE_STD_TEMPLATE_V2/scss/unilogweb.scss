@@ -1289,5 +1289,13 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     color: $suggestPrice_color;
     font-size: $font_sm;
 }
+#multipleResult{
+    .slick-track{
+        width: 499px !important;
+    } 
+    li{
+        width: 234px !important;
+    } 
+} 
 
 @import "3-modules/modules";
