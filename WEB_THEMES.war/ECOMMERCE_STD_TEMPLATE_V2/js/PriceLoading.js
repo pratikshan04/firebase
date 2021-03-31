@@ -351,6 +351,7 @@ priceLoading.productModeCustomFunc = function() {
 		"sDom" : 'T<"tabHeader"l><"tablesWrap"t><"tabFooter"<"row" <"col-sm-6"i><"col-sm-6"p>>>',
 		"dom" : '<"top"i>rt<"bottom"flp><"clear">',
 		"language" : {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json",
 			"search" : "_INPUT_",
 			"searchPlaceholder" : "Buscar",
 			"sLengthMenu" : "Show _MENU_",

@@ -1,5 +1,5 @@
 var countrySelect = new initCountry({
-	country: "US",
+	country: "GT",
 	selectorID: "countrySelect",
 	defaultSelect: true
 });
@@ -87,7 +87,7 @@ function getEntityAddress(obj){
 					initCountry('USA','N','ACNT','N');
 				}*/
 
-				if(msgArr[5]=='US' || msgArr[5]=='USA' ){
+				if(msgArr[5]=='GT' || msgArr[5]=='USA' ){
 					$("#locUser").val("N");
 				}else{
 					$("#locUser").val("Y");

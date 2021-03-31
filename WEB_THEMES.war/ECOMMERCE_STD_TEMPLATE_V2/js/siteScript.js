@@ -677,7 +677,7 @@ function performSearch() {
 		bootbox.confirm({
 			size: "small",
 			closeButton: false,
-			message: "Selected Inner Search will be cleared.",
+			message: locale('label.selectedFiler.clear'),
 			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			buttons: {
 				cancel: {
@@ -700,7 +700,7 @@ function performSearch() {
 		bootbox.confirm({
 			size: "small",
 			closeButton: false,
-			message: "Selected Filters will be cleared.",
+			message: locale('label.selectedFilter.name'),
 			title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 			buttons: {
 				cancel: {
@@ -1003,7 +1003,7 @@ $(document).ready(function () {
 							} else {
 								showNotificationDiv("Error", data);
 							}
-							$this.find("[type='submit']").html("Sign In").removeAttr("disabled");
+							$this.find("[type='submit']").html(locale('form.label.login')).removeAttr("disabled");
 						}
 					} catch (e) {
 						console.log(e);
@@ -1641,15 +1641,15 @@ function validateSendMailForAll() {
 	var userLogin = $("#userLogin").val();
 	var jcaptcha = $("#jcaptcha").val();
 	var Error = "";
-	if (toname == "" || toname == null) { Error = Error + "Please Enter Your Friend Name<br>"; }
-	if (toEmail == "" || toEmail == null) { Error = Error + "Please Enter Friend Email Address <br>"; }
-	if (!emailReg.test(toEmail)) { Error = Error + "Your Friend's Email Address is Invalid<br>"; }
-	if (fromname == "" || fromname == null) { Error = Error + "Please Enter Your Name<br>"; }
-	if (fromEmail == "" || fromEmail == null) { Error = Error + "Please Enter Your Email Address<br>"; }
-	if (!emailReg.test(fromEmail)) { Error = Error + "Your Email Address is Invalid<br>"; }
-	if (mailSubject == "" || mailSubject == null) { Error = Error + "Please Enter  Subject<br>"; }
+	if (toname == "" || toname == null) { Error = Error + locale('label.error.sendmailFrname') +"<br>"; }
+	if (toEmail == "" || toEmail == null) { Error = Error + locale('label.error.sendmailFrEmail') +"<br>"; }
+	if (!emailReg.test(toEmail)) { Error = Error + locale('label.error.sendmailFrEmailInvalid') +"<br>"; }
+	if (fromname == "" || fromname == null) { Error = Error + locale('label.error.sendmailname') +"<br>"; }
+	if (fromEmail == "" || fromEmail == null) { Error = Error + locale('label.error.sendmailEmail') +"<br>"; }
+	if (!emailReg.test(fromEmail)) { Error = Error + locale('label.error.sendmailEmailInvalid') +"<br>"; }
+	if (mailSubject == "" || mailSubject == null) { Error = Error + locale('label.error.sendmailsubject') +"<br>"; }
 	if (userLogin == "false") {
-		if (jcaptcha == "" || jcaptcha == null && userLogin == "false") { Error = Error + "Please Enter Captcha"; }
+		if (jcaptcha == "" || jcaptcha == null && userLogin == "false") { Error = Error + locale('label.error.sendmailcaptcha'); }
 	}
 	if(validateStr(toname) || validateStr(toEmail) || validateStr(fromname) || validateStr(fromEmail) || validateStr(mailSubject)){
 		unusualCode++;
@@ -4073,7 +4073,7 @@ $(document).ready(function () {
 			bootbox.confirm({
 				size: "medium",
 				closeButton: false,
-				message: "There are item(s) in your cart. Do you want to switch customer",
+				message: locale('label.switch.customer'),
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				buttons: {
 					cancel: {
@@ -4107,7 +4107,7 @@ $(document).ready(function () {
 			bootbox.confirm({
 				size: "medium",
 				closeButton: false,
-				message: "There are item(s) in your cart. Do you want to switch user",
+				message: locale('label.switch.user'),
 				title: "<span class='text-warning'>Advertencia &nbsp;&nbsp;<em class='glyphicon glyphicon-alert'></em></span>",
 				buttons: {
 					cancel: {

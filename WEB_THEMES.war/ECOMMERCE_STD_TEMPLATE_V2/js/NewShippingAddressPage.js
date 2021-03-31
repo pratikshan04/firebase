@@ -1,5 +1,5 @@
 var countrySelectShip = new initCountry({
-	country: "US",
+	country: "GT",
 	selectorID: "countrySelectShip",
 	defaultSelect: true
 });

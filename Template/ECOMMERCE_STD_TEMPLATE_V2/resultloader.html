@@ -56,7 +56,7 @@
 					        			</div>
 				        			</div>
 				        			<div class="col-md-2 col-sm-12 col-xs-12">
-				        				<a href="javascript: void(0);" data-toggle="tooltip" title="Remove Item From List"  class="delBtn alignCenter" onclick="BulkAction.cancelAddToCart($!itemData.itemId, $itemIndex)"><i class="fa fa-lg fa-times-circle"></i></a>
+				        				<a href="javascript: void(0);" data-toggle="tooltip" title="$!locale.get('label.remove.fromlist')"  class="delBtn alignCenter" onclick="BulkAction.cancelAddToCart($!itemData.itemId, $itemIndex)"><i class="fa fa-lg fa-times-circle"></i></a>
 				        			</div>
 				        		</div>
 				        		#set($itemIndex = $itemIndex+1)
@@ -81,7 +81,7 @@
 		#end
 	#end
 	#if($responseType=="CartGroupList")
-		<li><input type="text" maxlength="25" onkeyup="if(event.keyCode == 13){submitSaveCart(this.value,0,this);return false;}" placeholder="Enter New Saved cart Name"/></li>
+		<li><input type="text" maxlength="25" onkeyup="if(event.keyCode == 13){submitSaveCart(this.value,0,this);return false;}" placeholder="$!locale.get('label.savedcart.entername')"/></li>
 		#foreach($!pListDate in $!productListData)
 			<li><a id="$!pListDate.productListId" onclick="submitSaveCart('',this.id,this);" data-groupName="$!pListDate.productListName">$!pListDate.productListName</a></li>
 		#end
@@ -640,7 +640,7 @@
 							<input type="hidden" value="$!itemData.manufacturerPartNumber" id="MPNValue_$!itemData.partNumber" />
 						</li>
 						#end
-						#if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
+						<!-- #if($itemData.customerPartNumber || $!itemData.customerPartNumberList.size()>0)
 						<li>
 							<strong>$!locale.get("product.label.cpn"): </strong>
 							<span>
@@ -660,7 +660,7 @@
 							#end
 							</span>
 						</li>
-						#end
+						#end -->
 						#if($itemData.upc != "" && $!itemData.upc)<li><strong>$!locale.get("product.label.upc"): </strong><span>$!itemData.upc</span></li>#end
 						
 						#if($itemData.uom != "" && $!itemData.uom)<li><strong>$!locale.get("product.label.uom"): </strong><span>$!itemData.uom</span></li>#end

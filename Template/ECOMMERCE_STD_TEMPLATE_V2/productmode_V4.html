@@ -53,14 +53,14 @@
 <div class="productdetail_list">
 	<div class="cimm_ProductFilterWrap clearAfter avoid-this">
 		<div class="cimm_ProductFilterWrap clearAfter">
-			<div class="compareWrap clearAfter"><strong>$productCount</strong> Product Choices
+			<div class="compareWrap clearAfter"><strong>$productCount</strong> $!locale.get('label.productmode.productchoice')
 				<div class="compare_head pull-right hideForDevice mTop-2">
-					<strong><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> item(s)</strong>
+					<strong><a href="javascript:void(0);" onclick="compareItems();">&nbsp;$locale.get("product.button.compare")</a>&nbsp;<span id="compareSpan" class="compareCountSpanClass">0</span> $!locale.get('product.label.items')</strong>
 					<strong>&nbsp;<a href="javascript:void(0);" onclick="clearCookie();"><em class="fa fa-lg fa-times"></em></a></strong>
 				</div>
 			</div>
 			<div class="right_attribute">
-				<div class="refine_head" style="cursor: pointer;" onclick='ProductMode.removeAllMultiAttr();'><span class="colorcode1"> Clear All</span> <em class="fa fa-times"></em></div>
+				<div class="refine_head" style="cursor: pointer;" onclick='ProductMode.removeAllMultiAttr();'><span class="colorcode1"> $!locale.get('product.label.clearAll')</span> <em class="fa fa-times"></em></div>
 				<span class=" selected_refine_values" id="mulitFilterTrailDetailPage"></span>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 			<th class="text-center removeForSend">$locale.get('product.label.price')</th>
 			<th class="text-center removeForSend">$locale.get('product.label.availability')</th>
 			<th class="text-center removeForSend hideForDevice hideForPrint" title="$!locale.get('product.label.addToGroupOrCart')">$!locale.get('product.label.addToGroupOrCart')</th>
-			<th class="text-center removeForSend hideForPrint" title="Item Information"><em class="fa fa-info-circle fa-lg"></em></th>
+			<th class="text-center removeForSend hideForPrint" title="$!locale.get('label.productmode.itemInfo')"><em class="fa fa-info-circle fa-lg"></em></th>
 		</tr>
 	</thead>
 	<tbody class="text-center">
@@ -92,7 +92,7 @@
 				<span id="quantityBreakPricingDetails_$!productModeitemData.partNumber" style="display: none;"></span>
 				<label class="customCheckBox mBottom-1 text-wrap removeForSend">
 					<input type="checkbox" value="$!productModeitemData.itemPriceId" name="compareId" id="check_$!productModeitemData.itemPriceId" onclick="compareItemList(this);" title="Compare"/>
-					<a href="$!productModeitemData.seoUrl" title="Detail"><span>$!productModeitemData.partNumber.replaceAll('\s+','_')</span></a>
+					<span><a href="$!productModeitemData.seoUrl" title="Detail">$!productModeitemData.partNumber.replaceAll('\s+','_')</a></span>
 				</label>
 				<span class="cimm_pdfLink hideMe">$!productModeitemData.partNumber.replaceAll('\s+','_')</span><br/><br/>
 				<a href="$!productModeitemData.seoUrl" title="Detail">
@@ -123,7 +123,7 @@
 						 #end
 					#end
 				 #end
-				 #set($itemProductTitle = $!productModeitemData.brandName+" "+$!productModeitemData.manufacturerPartNumber)
+				 #set($itemProductTitle = $!productModeitemData.shortDesc)
 				<span class="hidden" id="itemTitle$!productModeitemData.ItemId">$!itemProductTitle</span>
 				 <span id="itemShortDesc$!productModeitemData.itemId" class="hidden">$!productModeitemData.shortDesc</span>
 			 </td>
@@ -192,7 +192,7 @@
 					#set($groupPop = "ulg"+$!productModeitemData.itemId+"_pop")
 					<a id="$!groupPop" class="popMsg hideMe"></a>
 					#if($userLogin)
-						<a id='linkg$!itemData.itemId' class="dropdown-toggle btn btn-primary" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
+						<a id='linkg$!itemData.itemId' class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu" data-itemId="$!productModeitemData.itemId" data-listTarget="ulg$!productModeitemData.itemId" data-function="productGroupDropDown">
 							$!locale.get("marketBasket.button.addToProductGroup")
 						</a>
 					#else
@@ -204,7 +204,7 @@
 				</div>
 				<!--My Product Group-->
 			</td>
-			<td class="details-control removeForSend hideForPrint" id="$!productModeitemData.itemId" title="Item Information"><em class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></em></td>
+			<td class="details-control removeForSend hideForPrint" id="$!productModeitemData.itemId" title="$!locale.get('label.productmode.itemInfo')"><em class="fa fa-plus-circle fa-lg" style="cursor: pointer;"></em></td>
 		</tr>
 	#end
 	</tbody>
@@ -229,10 +229,10 @@
 	<!-- Single Item details -->
 	<div class="cimm_productModeDetailWrap clearAfter">
 		<div class="cimm_productModeDetail">
-			<h2 class="productTitle" id="itemTitle$itemData.ItemId">$itemData.brandName $!itemData.manufacturerPartNumber
+			<h2 class="productTitle" id="itemTitle$itemData.ItemId">$!itemData.shortDesc
 				<input type="hidden" id="titleText" name="titleText" value="$itemData.brandName $!itemData.manufacturerPartNumber"/>
 			</h2>
-			<p class="cimm_itemShortDesc" id="itemShortDesc$itemData.itemId">$!itemData.shortDesc</p> 
+			<!-- <p class="cimm_itemShortDesc" id="itemShortDesc$itemData.itemId">$!itemData.shortDesc</p>  -->
 			<ul class="skuStyle">
 				<li id="sitePartNo">
 					<strong>$locale.get("product.label.partNumber"): </strong><span id="partNumber$itemData.ItemId">$!itemData.partNumber</span>
@@ -464,7 +464,7 @@
 								<ul>
 								 	<li>
 								 		<h4>
-								 			#set($linkItemTitle = $!linkItem.brandName+' '+$!linkItem.manufacturerPartNumber)
+								 			#set($linkItemTitle = $!linkItem.shortDesc)
 									 		<a class="productTitle" id="itemTitle$!linkItem.ItemId" href="$!linkItem.seoUrl" #if($!linkItemTitle.length() > 22) data-toggle="tooltip" title="$!linkItemTitle" #end>
 										 		#if($linkItemTitle.length()>30)
 										 			#$!linkItemTitle.substring(0, 30)...

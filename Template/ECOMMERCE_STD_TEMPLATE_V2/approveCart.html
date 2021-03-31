@@ -51,10 +51,10 @@
 						</td>
 						<td class="alignLeft" data-th="$locale.get('product.label.productDescription')">
 							<ul>
-								<li><strong><a href="$itemData.seoUrl">$itemData.brandName $!itemData.manufacturerPartNumber</a></strong></li>
+								<li><strong><a href="$itemData.seoUrl">$!itemData.shortDesc</a></strong></li>
 								#if($itemData.manufacturerPartNumber.trim().length()>0)<li><strong>$locale.get("product.label.mpn"): </strong> $itemData.manufacturerPartNumber</li>#end
 								<li><strong>$locale.get("product.label.partNumber"): </strong> $itemData.partNumber</li>
-								#if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
+								<!-- #if($itemData.customerPartNumberList && $itemData.customerPartNumberList.size()>0)
 								<li>
 								<strong>$locale.get("product.label.cpn"): </strong>
 								#set($seperator = "")
@@ -65,20 +65,20 @@
 								#end
 								$partList
 								</li>
-								#end
+								#end -->
 								#if($itemData.minOrderQty>0 && $itemData.orderInterval>0)
 								<li><strong>$locale.get("product.label.minorderqty"): $itemData.minOrderQty</strong></li>
 								<li><strong>$locale.get("product.label.qtyinterval"): $itemData.orderInterval</strong></li>
 								#end
-								<li>
-								$!itemData.shortDesc
+								<!-- <li>
+								
 								<div id="minErr_$itemData.itemPriceId"></div>
 								#if($itemData.availQty>0)
 					    		<strong>$!locale.get("product.label.available"): </strong>
 								<span>$!itemData.availQty</span>
 					    		#else
 					    		<span class='text-danger'>Call for Availability</span>
-					    		#end
+					    		#end -->
 								<!-- #if($itemData.branchTotalQty>0)
 								<span class='availSpanFa'>In Stock</span>
 								#else
@@ -87,8 +87,8 @@
 								<!-- <span id="Avail_$itemData.partNumber" data-select='availability'>
 								<strong>$locale.get("product.label.availableQuantity")</strong> : 
 								<img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>
-								</span> -->
-								</li>
+								</span>
+								</li> -->
 								#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
 								<li>
 									<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
@@ -110,7 +110,7 @@
 							<input type="hidden" name="itemPriceIdList" value="$itemData.itemPriceId" />                            
 						</td>
 						<td class="tabelPrice" data-th="$locale.get('product.label.yourprice')">
-							<span>
+							<span class="priceSpan formatPrice">
 								#if($itemData.price>0)
 									##$$numberTool.format($numberToolFormat,$itemData.price)#if($!itemData.saleQty>0 || $!itemData.uom) / #end #if($itemData.saleQty>0) $!itemData.saleQty #end #if($itemData.uom) $!itemData.uom #end
 									$$numberTool.format($numberToolFormat,$itemData.price) #if($itemData.uom) / $!itemData.uom #end

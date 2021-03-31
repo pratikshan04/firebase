@@ -175,7 +175,7 @@
 									#if($itemData.price>0)
 										#set($addToCartCheckFlag = "Y")
 									#end
-									<input type="checkbox" onclick="BulkAction.addItemsToCookieV2(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems" id="selectItemCheckbox_$itemData.itemId$keyValue.replace(' ','_')" data-check="CHK_SALL_$keyValue.replace(' ','_')$keyCountSelectAll" data-itemid="$itemData.itemId" data-partnumber="$itemData.partNumber"  data-itemPriceId="$itemData.itemPriceId"/>
+									<input type="checkbox" onclick="BulkAction.addItemsToCookieV2(this)" data-addtocartflag='$!addToCartCheckFlag' class="selectedItems checkbox1" id="selectItemCheckbox_$itemData.itemId$keyValue.replace(' ','_')" data-check="CHK_SALL_$keyValue.replace(' ','_')$keyCountSelectAll" data-itemid="$itemData.itemId" data-partnumber="$itemData.partNumber"  data-itemPriceId="$itemData.itemPriceId" data-selectall="CheckBox"/>
 									<span>$!locale.get('product.label.selectItemToAddToCartGroup')</span>
 									</label>
 									 #itemListHiddenFields($itemData.partNumber, $itemData.itemPriceId, $itemData.qty, $itemData.uom, $itemData.price, $itemData.saleQty, $itemData.itemId, $itemData.displayFrieghtAlert, $itemData.packageQty, $itemData.availQty, $itemData.srchTyp, $navigationType)
@@ -279,6 +279,7 @@ jQuery.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 		transitionEffect:"right"
 	});
 });
+jQuery.getScript(webThemes+'js/BulkAction.js', function(){});
 </script>
 #else
 	$!locale.get('breadcrumbs.label.NoResultsPage')

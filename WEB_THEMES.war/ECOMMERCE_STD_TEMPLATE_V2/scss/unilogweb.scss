@@ -237,12 +237,15 @@ $modal_closebtn-color: $default_font-color;
 	text-align: center;
 }
 
-.productTitle a{
+.productTitle {
+    color: $primary_color;
+    a{
 	margin: 0;
     color: $primary_color;
     font-size: 18px;
     text-transform: uppercase;
     font-family: $secondary_font-family;
+    }
 }
 
 .cimm_compareControls {
@@ -328,11 +331,11 @@ $modal_closebtn-color: $default_font-color;
     color: $default_font-color;
     .addNewPgWrap {
         .button {
-            width: 130px;
+            width: 240px;
             float: left;
         }
         input {
-            width: calc(100% - 130px);
+            width: calc(100% - 240px);
             float: left;
             height: 40px;
             padding: 5px 10px;
@@ -1086,7 +1089,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	text-align: right;
 	margin-bottom: 25px;
 	span {
-		background: $border-color;
+		background: $primary_color;
 		color: $white !important;
 		border-radius: 2px;
 	}
@@ -1108,7 +1111,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	padding: 5px;
 	background: $white;
     border: 1px solid $border-color;
-    min-width: 220px;
+    min-width: 310px;
 	li{
 		width: 100%;
 		border-bottom: 1px solid $border-color;

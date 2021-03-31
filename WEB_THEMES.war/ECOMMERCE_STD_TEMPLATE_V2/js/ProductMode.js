@@ -585,7 +585,7 @@ function initSubmitForm(){
 			itemPriceId = thisFormId.replace("multiFilterAttributeForm", "");
 			itemPriceId = $.trim(itemPriceId);
 		}
-		block('Please Wait');
+		block('Espere por favor');
 		$.ajax({
 			type: "POST",
 			url: "getProductModeFilterPage.action",
