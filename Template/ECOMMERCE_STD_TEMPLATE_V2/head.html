@@ -209,7 +209,7 @@
 #elseif($!LayoutName=="ProductGroupPage" || $!LayoutName=="ApproveCart" || $!LayoutName=="SavedCartPage")
 	#set($pageTitleVelo = $!savedGroupName + $!pageTitleseparator + $!pageTitleVelo)
 #elseif($LayoutName=="HomePage")
-	#set($pageTitleVelo = "Casa"+ $!pageTitleseparator + $!pageTitleVelo)
+	#set($pageTitleVelo = "Inicio"+ $!pageTitleseparator + $!pageTitleVelo)
 #elseif($!LayoutName=="OrderDetailPage")
 	#if($orderDetail.orderStatus.contains("Bid"))
 		#set($pageTitleVelo = $!locale.get("product.heading.bidDetail") + $!pageTitleseparator + $!pageTitleVelo)

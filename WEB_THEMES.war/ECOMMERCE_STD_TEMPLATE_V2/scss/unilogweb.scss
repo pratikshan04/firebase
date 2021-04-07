@@ -458,7 +458,7 @@ $modal_closebtn-color: $default_font-color;
 
 .profileImage {
     img {
-        width: 100%;
+        width: 150px;
     }
 }
 
@@ -477,6 +477,9 @@ $modal_closebtn-color: $default_font-color;
             color: $default_font-color;
             position: absolute !important;
             width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         input {
             opacity: 0;

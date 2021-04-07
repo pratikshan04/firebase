@@ -337,7 +337,7 @@ ul.cimm_formContent li label.customCheckBox2 span{
     width: 14px;
     cursor: not-allowed;
 }
-#changePassword .form-group{
+#changePassword .form-group, #editContactAddressForm .form-group{
 	label{
 		color: $secondary_color;
 		font-size: $font-md;
@@ -347,9 +347,16 @@ ul.cimm_formContent li label.customCheckBox2 span{
 		height: 42px;
 	}
 	button{
-		width: 150px;
-	}
 	&.username{
 		font-size: $font-lg;
+	}
+}
+	.bootstrap-select>select{
+		width: 100%;
+		height: 42px;	
+	}
+	.bootstrap-select .btn.dropdown-toggle{
+		height: 42px;
+		border-radius: 4px;
 	}
 }

@@ -280,12 +280,12 @@ $btncolors: (
 $headings:(
     page-title:(
         fontfamily      : $heading_font-family,
-        fontcolor       : inherit,
-        fontsize        : 16px, 
-        texttransform   : uppercase,
-        marginvalue     : 0 0 15px 0,
-        paddingvalue    : 15px 0, 
-        tborder         : false 
+        fontcolor       : $primary_color,
+        fontsize        : 16px,
+        marginvalue     : 0 0 8px 0,
+        paddingvalue    : 0px, 
+        tborder         : false,
+        texttransform   : false 
     ),
     block-title:(
         fontfamily      : $heading_font-family,

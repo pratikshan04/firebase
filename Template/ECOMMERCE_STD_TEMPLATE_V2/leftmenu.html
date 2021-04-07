@@ -3,7 +3,7 @@
 #else
 <div class="cimm_filter">
 #if($!LayoutName!="EventsPage")
-	#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage" && $LayoutName != "SavedGroupsPage" && $LayoutName != "ProductGroupPage" && $LayoutName != "SavedCartPage" && $LayoutName != "ApproveCart")
+	#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage" && $LayoutName != "SavedGroupsPage" && $LayoutName != "ProductGroupPage" && $LayoutName != "SavedCartPage" && $LayoutName != "ApproveCart" && $LayoutName != "OpenOrdersPage" && $LayoutName != "OrderDetailPage" && $LayoutName != "OrderHistoryPage" && $LayoutName != "EditContactPage")
 	<div class="cimm_filter-block"><div class="cimm_filter-block-title" data-toggle="collapse" data-target="#categoryMenu">$locale.get("navigation.label.shopProducts")</div>
 		#if($categMenu.size()>5)
 			<div class="cimm_filter_block-container collapse in" id="categoryMenu">
@@ -67,7 +67,7 @@
 	#end
 	#end
 	<div class="cimm_filter-block">
-		#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage" && $LayoutName != "SavedGroupsPage" && $LayoutName != "ProductGroupPage" && $LayoutName != "SavedCartPage" && $LayoutName != "ApproveCart")
+		#if($LayoutName != "ChangePasswordPage" && $LayoutName != "ForgotPasswordPage" && $LayoutName != "DashBoardPage"  && $LayoutName != "StaticSearchPage" && $LayoutName != "SavedGroupsPage" && $LayoutName != "ProductGroupPage" && $LayoutName != "SavedCartPage" && $LayoutName != "ApproveCart" && $LayoutName != "OpenOrdersPage" && $LayoutName != "OrderDetailPage" && $LayoutName != "OrderHistoryPage" && $LayoutName != "EditContactPage")
 		<div class="cimm_myaccount-block-title">$!locale.get("product.heading.yourAccount")</div>
 		#end
 		<ul class='myAccountLeftMenu'>

@@ -243,17 +243,17 @@
 								<div class="prodImage">
 								#if($itemData.productItemCount>1 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length() > 1)
 									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="a"/>
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="b"/>
 									#end
 								#else
 									#if($itemData.imageType=="360_URL")
 									    <div class="Sirv" data-src="$!itemData.imageName" id="imageName$!itemData.itemId" title="$!itemTitle"></div> 
 									#elseif($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="c"/>
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemImage$!itemData.imageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!hostName$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="d"/>
 									#end
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag"></span>

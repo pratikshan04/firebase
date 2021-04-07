@@ -1,11 +1,19 @@
 <form id="editContactAddressForm" action="editContactAddressUnit.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="Y" method="post"> 
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-md-12">
 		<div class="form-group">
 			<span class="text-danger"> * </span>$!locale.get("register.label.indicatesrequiredfields")
 			</div>
 		</div>
-	</div>		
+	</div>		 -->
+	<div class="row">
+		<div class="col-md-12 col-sm-6 col-xs-12">
+			<div class="form-group username">
+				<span><b>$!locale.get("label.name.user"):</b></span>
+				<span class="sitePrimeColor"><strong>$!userName</strong></span>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">	
@@ -55,20 +63,20 @@
 				<select name="state" id="stateSelectShip" class="form-control selectpicker" data-type="select" data-required="Y" data-error="$!locale.get('form.user.address.state.notEmpty')"></select>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-6 col-xs-12">
+		<!-- <div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
 				<label for="zip">$!locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
 				<input type="text" name="zip" id="zip" value="$!billAddress.zipCode" class="form-control formatZipCode" data-type="text" data-required="Y" data-error="$!locale.get('form.user.address.zipCode.notEmpty')" onkeypress="return IsNumeric(event)"/>
 			</div>
-		</div>
-	</div>
-	<div class="row">
+		</div> -->
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
 				<label for="billPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span></label>
 				<input type="text" name="billPhone" id="billPhone" value="$!billAddress.phoneNo" class="form-control formatPhoneNumber formatPhoneVal" data-type="number" data-required="Y" data-error="$!locale.get('form.user.address.phoneNumber.notEmpty')" data-invalid="$!locale.get('form.user.address.phoneNumber.invalid')" onkeypress="return IsNumeric(event)"/>
 			</div>
 		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
 				<label for="email">$!locale.get("form.label.email") <span class="text-danger">*</span></label>

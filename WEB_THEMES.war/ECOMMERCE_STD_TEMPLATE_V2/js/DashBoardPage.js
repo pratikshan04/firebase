@@ -104,7 +104,7 @@ $(document).ready(function() {
 		    $('#cimm_customImageUpload > span').text(chooseProfilePicture);
 		},
 		error: function(){
-	        bootAlert("small","error","Error","Not able to upload image.");
+	        bootAlert("small","error","Error",locale('label.notUpload.image'));
 
 		}
 	}; 

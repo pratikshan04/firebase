@@ -216,7 +216,7 @@
 						<input type="hidden" id="uom_$!itemData.productListId" name="uom_$!itemData.productListId" value="$!itemData.uom"/>
                     #else
                    <td data-th="$!locale.get('product.heading.perUnitPrice')">
-                        <strong class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
+                        <strong class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</strong>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")
 				     	 #end
