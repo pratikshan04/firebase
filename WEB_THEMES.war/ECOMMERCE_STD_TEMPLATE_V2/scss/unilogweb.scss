@@ -331,8 +331,10 @@ $modal_closebtn-color: $default_font-color;
     color: $default_font-color;
     .addNewPgWrap {
         .button {
-            width: 240px;
+            width: 235px;
             float: left;
+            margin-left: 3px;
+
         }
         input {
             width: calc(100% - 240px);
@@ -1292,13 +1294,23 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     color: $suggestPrice_color;
     font-size: $font_sm;
 }
-#multipleResult{
+#headermultipleResult{
+    
     .slick-track{
         width: 1488px !important;
     } 
     li{
         width: 233px !important;
     } 
-} 
+}
+#searchResults{
+    .slick-track{
+        width: 1664px !important;
+    } 
+    li{
+        width: 259px !important;
+    } 
+}
+
 
 @import "3-modules/modules";

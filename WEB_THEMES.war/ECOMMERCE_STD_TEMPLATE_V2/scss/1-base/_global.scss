@@ -49,7 +49,7 @@ html {
 }
 
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-  width: 100%;
+  width: auto;
   z-index: unset;
 }
 .dropdown-menu > .active > a,
