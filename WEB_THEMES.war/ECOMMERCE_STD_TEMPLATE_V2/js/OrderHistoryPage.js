@@ -1,8 +1,8 @@
 var table = $('#OrdersHistoryTable').DataTable({
 	"language": {
+		"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json",
 		"search":"_INPUT_",
 		"searchPlaceholder":"Search Orders History",
-		"sLengthMenu" :"Show _MENU_",
 		"oPaginate" : {
 			"sPrevious" :"Prev",
 			"sNext" :"Next"

@@ -338,7 +338,7 @@ $modal_closebtn-color: $default_font-color;
             width: calc(100% - 240px);
             float: left;
             height: 40px;
-            padding: 5px 10px;
+            padding: 5px 5px;
         }
     }
     .existingPgListWrap {
@@ -456,7 +456,7 @@ $modal_closebtn-color: $default_font-color;
 
 .profileImage {
     img {
-        width: 100%;
+        width: 150px;
     }
 }
 
@@ -475,6 +475,9 @@ $modal_closebtn-color: $default_font-color;
             color: $default_font-color;
             position: absolute !important;
             width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         input {
             opacity: 0;
@@ -1291,10 +1294,10 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 }
 #multipleResult{
     .slick-track{
-        width: 499px !important;
+        width: 1488px !important;
     } 
     li{
-        width: 234px !important;
+        width: 233px !important;
     } 
 } 
 

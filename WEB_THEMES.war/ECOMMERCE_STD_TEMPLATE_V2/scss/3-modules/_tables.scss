@@ -255,3 +255,21 @@
   padding: 8px !important;
   text-align: center !important;
 }
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc:after{
+  opacity: 1;
+  color: $white;
+}
+table.dataTable thead tr{
+  background-color: $secondary_color;
+  color: $white;
+}
+.table>tbody>tr>td, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>thead>tr>th{
+  border-top: 0;
+}

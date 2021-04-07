@@ -1,4 +1,11 @@
 <div id="printOrderInvoices">
+    #if($orderDetail.orderStatus.contains("Bid"))
+    	<h6 class="cimm_page-title">$!locale.get("product.heading.bidDetail")</h6>   
+    #elseif($!requestType != "openQuote")
+    	<h6 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h6>     
+    #else
+    	<h6 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h6>   
+    #end
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		#if($requestType != "openQuote")
@@ -43,24 +50,38 @@
 		<h4>$!locale.get("product.heading.billingAddress")</h4>
 		<p> 
             #if($orderDetail.orderedBy.length() > 0)<strong><span> $!orderDetail.orderedBy </span></strong><br />#end
-            #if($requestType == "openQuote")<strong><span> $!orderDetail.billToName </span></strong><br />#end
-            #if($orderDetail.billAddress1.length() > 0)<span>$!orderDetail.billAddress1 </span><br />#end
-            #if($!orderDetail.billAddress2.length() > 0)<span>$!orderDetail.billAddress2</span><br />#end
-            <span>$!orderDetail.billCity, $!orderDetail.billState</span><br />
-            #if($!orderDetail.billCountry.length() > 0)<span>$!orderDetail.billCountry, $!orderDetail.billZipCode</span><br />#end
-            #if($!orderDetail.billPhone.length() > 0)<span>$!orderDetail.billPhone</span>#end
+            #if($requestType == "openQuote")<strong><span> $!orderDetail.billAddress.companyName </span></strong><br />#end
+            #if($orderDetail.billAddress.address1.length() > 0)<span>$orderDetail.billAddress.address1</span><br />#end
+            #if($!orderDetail.billAddress.address2.length() > 0)<span>$orderDetail.billAddress.address2</span><br />#end
+            <span> $!orderDetail.billAddress.city, $!orderDetail.billAddress.State</span>
+            <br />
+            <span> #if($orderDetail.billAddress.country)$!orderDetail.billAddress.country,#end $!orderDetail.billAddress.zipCode</span>
+            <br />
+            $!orderDetail.billAddress.phone
+            #if($orderDetail.billAddress.phone)
+            <span>$!orderDetail.billAddress.phone</span>
+            #end
+
+
         </p>
 	</div>
 	<div class="col-md-4 col-sm-6 col-xs-12">
 		<h4>$!locale.get("product.heading.shippingAddress")</h4>
 		   <p>
 	            #if($orderDetail.orderedBy.length() > 0)<strong><span> $!orderDetail.orderedBy </span></strong><br/>#end
-	            #if($requestType == "openQuote" && $!orderDetail.shipToName.length() > 0)<strong><span> $!orderDetail.shipToName </span></strong><br />#end
-	            #if($orderDetail.shipAddress1.length() > 0)<span>$!orderDetail.shipAddress1</span><br />#end
-	            #if($!orderDetail.shipAddress2.length() > 0)<span>$!orderDetail.shipAddress2 </span><br />#end
-	            <span>$!orderDetail.shipCity, $!orderDetail.shipState</span> <br />
-	            #if($!orderDetail.shipCountry.length() > 0)<span>$!orderDetail.shipCountry, $!orderDetail.shipZipCode</span> <br />#end
-	            #if($orderDetail.shipPhone.length() > 0) <span>$!orderDetail.shipPhone</span> #end
+	            #if($requestType == "openQuote" && $!orderDetail.shipToName.length() > 0)<strong><span> $!orderDetail.shipAddress.companyName </span></strong><br />#end
+                #if($orderDetail.shipAddress.address1.length() > 0)<span>$orderDetail.shipAddress.address1</span><br />#end
+                #if($orderDetail.shipAddress.address2.length() > 0)<span>$orderDetail.shipAddress.address2 </span><br />#end
+	            <span>$!orderDetail.shipAddress.city, $!orderDetail.shipAddress.state</span>
+	            <br />
+	            <span>
+	            #if($orderDetail.shipAddress.country)$!orderDetail.shipAddress.country,#end $!orderDetail.shipAddress.zipCode</span>
+	            <br />
+	            #if($orderDetail.shipAddress.phone)
+	            <span>$!orderDetail.shipAddress.phone</span>
+	            #end
+
+
 	        </p>
 	</div>
 </div>
@@ -104,8 +125,9 @@
                         <th>$!locale.get("product.label.productDescription")</th>
                         <th class="text-center">$!locale.get("product.label.quantityOrdered")</th>
                         <th class="text-center">$!locale.get("product.label.quantityShipped")</th>
+                        <th class="text-center">$!locale.get('product.label.quantityOpened')</th>
                         <th class="text-center">$!locale.get("product.label.unitPrice")</th>
-                        <th class="text-center">$!locale.get("product.label.extPrice")</th>
+                        <!-- <th class="text-center">$!locale.get("product.label.extPrice")</th> -->
                        	##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                        	<th class="hideForPrint text-center"><div class="pgCheckboxWrap"><label for="chkSelectall" class="customCheckBox"><input type="checkbox" id="chkSelectall" name="chkSelectall" onclick="checkSelectAll(this)" data-selectall="CheckBox" /><span>$!locale.get("product.label.selectAll")</span></label></div></th>
                        	##end
@@ -159,9 +181,10 @@
                         
                         </td>
                         <td data-th="$!locale.get('product.label.quantityOrdered')"><span>$!orderItem.qtyordered #if($requestType == "openQuote") $!orderItem.orderUom #end</span></td>
-                        <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyShipped</span></td>
-                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.unitPrice)</span></td>                        
-                        <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td> 
+                        <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyShipped </span></td>
+                        <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyOpen </span></td>
+                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.price)</span></td>                        
+                        <!-- <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td>  -->
                         ##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                         <td data-th="select">
 							#if($avilForReOrder && $!orderItem.itemPriceId>0)
@@ -170,7 +193,7 @@
 							<span></span>
 							</label>
 							#else
-							Not available for reorder
+							$!locale.get('reorder.not.available')
 							#end
 						</td>
 						##end
@@ -214,13 +237,13 @@
                     #if($orderDetail.discount>0)
                     <li>
                          <span class="priceLabel">$!locale.get("product.label.discount"): </span>
-                         <span class="priceValue formatPrice">$($!numberTool.format($!numberToolFormat,$!orderDetail.discount))</span>
+                         <span class="priceValue formatPrice">Q($!numberTool.format($!numberToolFormat,$!orderDetail.discount))</span>
                     </li>
                     #end
                     #if($orderDetail.total>0)
                      <li>
                          <span class="priceLabel">$!locale.get("product.label.total"): </span>
-                         <span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</span>
+                         <span class="priceValue formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total)</span>
                     </li>
                     #end
                </ul>

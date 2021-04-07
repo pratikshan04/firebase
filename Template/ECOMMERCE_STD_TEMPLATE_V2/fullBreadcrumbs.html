@@ -293,23 +293,16 @@
 	    #else
 		    <li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
 		    #if($!orderDetail && $!orderDetail.orderStatus.contains("Bid"))
-		    	<li><a href="OpenOrderSale.action?reqType=BID&orderStatus=New">$!locale.get("product.heading.openBids")</a></li>
+		    	<li><a href="OpenOrderSale.action?reqType=BID&orderStatus=Open">$!locale.get("product.heading.openBids")</a></li>
 		    #elseif($!orderStatus && $!orderStatus=="New")
-				<li><a href="OpenOrderSale.action?reqType=webOrder&orderStatus=New">$!locale.get("product.heading.openOrders")</a></li>
+				<li><a href="OpenOrderSale.action?reqType=webOrder&orderStatus=Open">$!locale.get("product.heading.openOrders")</a></li>
 		    #end
 		    #if($!orderStatus && $!orderStatus=="History")
 				<li><a href="$!locale.get('website.url.OrderHistory')">$!locale.get("product.heading.orderHistory")</a></li>
 		    #end
 		    <li class="active">$!locale.get("product.heading.orderDetail")</li>
 	    #end
-	</ul>
-	#if($orderDetail.orderStatus.contains("Bid"))
-    	<h1 class="cimm_page-title">$!locale.get("product.heading.bidDetail")</h1>   
-    #elseif($!requestType != "openQuote")
-    	<h1 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h1>     
-    #else
-    	<h1 class="cimm_page-title">$!locale.get("product.heading.orderDetail")</h1>   
-    #end 
+	</ul> 
 #elseif($LayoutName=="EmailAuthenticationPage")
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>

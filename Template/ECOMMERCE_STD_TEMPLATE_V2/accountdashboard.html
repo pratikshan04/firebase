@@ -1,43 +1,45 @@
 <div class="row">
 	<div class="col-md-9 col-sm-12 col-xs-12">
-		<h6>$!locale.get('label.welcome.Dashboard')</h6>
+		<h6 class="sitePrimeColor">$!locale.get('label.welcome.Dashboard')</h6>
 		<div class="multiTab" id="cimm_tabBlock">
 			<ul class="multiTabHeading clearAfter">
 				<li><a href="#profile">&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.profile')</a></li>
 				<li><a href="#Address">&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.address')</a></li>
 				<li><a href="#groups">&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.myProductGroups')</a></li>
-				<li><a href="#order">&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li>
+				<!-- <li><a href="#order">&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li> -->
 			</ul>
 			<div class="multiTabContent">
 				<div id="profile">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<h3 class="cimm_blockHeading">$locale.get("product.label.userContact")
-								<a href="$!locale.get('website.url.EditContact')"><em class="glyphicon glyphicon-edit"></em></a>
-							</h3>
 							<div class="row">
-								<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<h3 class="cimm_blockHeading">$locale.get("product.label.userContact")
+										<a href="$!locale.get('website.url.EditContact')"><em class="glyphicon glyphicon-edit"></em></a>
+									</h3>
 									<div class="profileImage">
-										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="Profile Picture" width="180" id="profilePicture" onerror="this.src='$!webThemes/$siteName/images/default-profile.png'"/>##$userProfileImagePath
+										<img src='$userProfileImagePath$!session.getAttribute("userProfileImage")' alt="Profile Picture" width="180" id="profilePicture" onerror="this.src='$!webThemes/$siteName/images/default-profile.png'" class="img-circle"/>##$userProfileImagePath
 										<input type="hidden" value="$userProfileImagePath" id="userProfileImagePath"/>
 									</div>
 								</div>
-								<div class="col-md-9 col-sm-6 col-xs-12">
+								<div class="col-md-6 col-sm-6 col-xs-12">
 									<div class="userInfoWrap clearAfter">
 									<table>
 										<tr>
 											<td width="100px" valign="top"><strong>$!locale.get('form.label.userName'): </strong></td>
 											<td><span>$!addressList.firstName $!addressList.lastName</span></td>
 										</tr>
+										
 										<tr>
-											<td valign="top"><strong>$!locale.get('form.label.address'): </strong></td>
+											<td valign="top"><strong>$!locale.get('dashboard.label.address'): </strong></td>
 											<td>
 												<span>$!addressList.address1 <br/>
 												#if($addressList.address2)$!addressList.address2 <br/>#end
 												$!addressList.city, $!addressList.state<br/>
-												$!addressList.country, $!addressList.zipCode</span>
+												$!addressList.country</span>
 											</td>
 										</tr>
+										
 										<tr>
 											<td valign="top"><strong>$!locale.get('form.label.phone'): </strong></td>
 											<td><span>$!addressList.phoneNo</span></td>
@@ -47,8 +49,9 @@
 											<td><span>$!addressList.emailAddress</span></td>
 										</tr>
 									</table>
+									
 										#if($!CommonDBQuerySystemParameter.get("DashboardEnableLastLoginDetails") == 'Y')
-											<h4>Last Login: 
+											<h4 class="sitePrimeColor">$!locale.get('label.last.login'): 
 											#if($!lastLogin && $!lastLogin.size()>0)
 												#foreach($loginDetails in $lastLogin.entrySet())
 													#if($!loginDetails.getKey() && $loginDetails.getKey().trim().toUpperCase()=="LASTLOGIN")
@@ -133,7 +136,7 @@
 											<th class="left">$locale.get("form.label.address")</th>
 											<th>$locale.get("form.label.city")</th>
 											<th>$locale.get("form.label.state")</th>
-											<th>$locale.get("form.label.zipCodes")</th>
+											<!-- <th>$locale.get("form.label.zipCodes")</th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -143,7 +146,7 @@
 											<td class="alignLeft" data-th="$locale.get('form.label.address')">$shipAddress.address1<br />$!shipAddress.address2</td>		
 											<td data-th="$locale.get('form.label.city')">$shipAddress.city</td>
 											<td data-th="$locale.get('form.label.state')">$shipAddress.state</td>
-											<td data-th="$locale.get('form.label.zipCodes')">$shipAddress.zipCodeStringFormat</td>
+											<!-- <td data-th="$locale.get('form.label.zipCodes')">$shipAddress.zipCodeStringFormat</td> -->
 										</tr>
 									#end
 									</tbody>
@@ -155,11 +158,11 @@
 				</div>
 				<div id="groups">
 					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
+						<!-- <div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
 							<h3 class="cimm_blockHeading mBottom-2">$locale.get("product.heading.PromotedProducts")</h3>
 							<div id="promotedProductsTable"> Loading Espere por favor...</div>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
+						</div> -->
+						<div class="col-md-6 col-sm-6 col-xs-12 mBottom-3">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
 							#if($groupListData.size()>0)
 								#set($countProductGroup = 0)
@@ -192,7 +195,7 @@
 								<p>$locale.get("product.label.noProductGroupAvailable")</p>
 							#end
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12 mBottom-3">
+						<div class="col-md-6 col-sm-6 col-xs-12 mBottom-3">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
 							#if($savedCartData.size()>0)
 								#set($countSavedGroup = 0)

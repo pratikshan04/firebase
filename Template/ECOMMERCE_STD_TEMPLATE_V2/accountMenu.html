@@ -16,7 +16,7 @@
 #end
 <li><a href="$!locale.get('website.url.SavedGroup.Product')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get("product.heading.myProductGroups")</a></li>
 <li><a href='$!locale.get("website.url.SavedGroup.Cart")'><em class="fa fa-cart-arrow-down" aria-hidden="true"></em>$!locale.get("product.heading.mySavedCart")</a></li>
-<li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li>
+<!-- <li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li> -->
 #if($!session.getAttribute("isPunchoutUser")!="Y")
 <li  class="visible-lg"><a href='$!locale.get("website.url.RequestForQuote")'><em class="glyphicon glyphicon-copy" aria-hidden="true"></em>$!locale.get("product.heading.requestForQuote")</a></li>
 <li class="visible-lg"><a href='$!locale.get("website.url.QuickOrder")'><em class="glyphicon glyphicon-list-alt" aria-hidden="true"></em>$!locale.get("product.heading.quickOrderPad")</a></li>
@@ -28,7 +28,7 @@
 #end
 #if($!session.getAttribute('isAdmin')=="Y")
 <li><a href='$!locale.get("website.url.ManagePurchasingAgent")'><em class="fa fa-users" aria-hidden="true"></em>$!locale.get("product.heading.userManagement")</a></li>
-<li><a href='$!locale.get("website.url.ConfigurePunchoutSetup")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.configureProcurementSystem")</a></li>
+<!-- <li><a href='$!locale.get("website.url.ConfigurePunchoutSetup")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.configureProcurementSystem")</a></li> -->
 <!-- <li><a href='$!locale.get("website.url.AddNewPurchasingAgent")'><em class="fa fa-user-plus" aria-hidden="true"></em>$!locale.get("product.heading.addNewPurchasingAgent")</a></li>
 <li><a href='$!locale.get("website.url.ManagePurchasingAgent")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.managePurchasingAgent")</a></li>
 <li><a href='$!locale.get("website.url.DisablePurchaseAgent")'><em class="fa fa-user-times" aria-hidden="true"></em>$!locale.get("product.heading.disablePurchasingAgent")</a></li> -->
