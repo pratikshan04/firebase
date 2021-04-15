@@ -4375,3 +4375,8 @@ if($("[data-recaptcha='Y']").length && $("#isWebview").val() != "WEBVIEW"){
 	  localStorage.salesUserSelected=undefined;
 	  localStorage.currentCustomerSU=undefined;
 });*/
+
+function availablePop(partNo, manufNo){
+	$('#itemPartNumber').val(partNo);
+	$('#itemManufacturerPartName').val(manufNo)
+}

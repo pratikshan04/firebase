@@ -750,6 +750,10 @@ $icons: (
 					margin: 4px 0;
 					@include icon(before, cartBg, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
 				} 
+				@if($class_name == "letMeknow"){
+					margin: 4px 0;
+					@include icon(before, cartBg, $color:$btn_f-color, $left:10px, $top:5px, $size: 18px);
+				} 
 				@if($class_name == "viewallchoice"){
 					padding-left: 25px; 
 					@include icon(before, eye, $color:$btn_f-color, $left:5px, $top:5px, $size: 16px);

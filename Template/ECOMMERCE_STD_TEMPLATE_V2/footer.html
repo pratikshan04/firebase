@@ -277,13 +277,15 @@
 			</div>
 			<div class="modal-body clearAfter">
 				<div class="col-md-10 col-md-offset-1">
-		     		<form autocomplete="off">
+					#set($loggedUserName = $!session.getAttribute("userFirstName")+" "+$!session.getAttribute("userLastName"))
+		     		<form id="outOfStockform" autocomplete="off" action="SaveAndSendMail.action" onsubmit="submitThisForm(this); return false;" data-hideBlock="N" method="post">
+						
 						<div class="form-group clearAfter">
 							<div class="col-md-12">
 								<p class="text-black">$!locale.get('product.label.outOfStockText')</p>
 								<br/>
-								<label class="control-label">Email<span class="text-danger">*</span></label>
-								<input type="email" data-type="text" name="email" id="email" data-required="Y" data-error="Please enter the Email Address" class="form-control " maxlength="50">
+								<label class="control-label">$locale.get("form.label.email")<span class="text-danger">*</span></label>
+								<input type="email" data-type="text" name="email" id="email" placeholder="$locale.get('form.label.email')" data-type="email" data-required="Y" data-error="$locale.get('form.user.address.emailId.notEmpty')" data-invalid="$locale.get('form.user.address.emailId.invalid')" class="form-control" maxlength="50">
 							</div>
 						</div>
 						<div class="form-group clearAfter">
@@ -293,6 +295,17 @@
 								</ul>
 							</div>
 						</div>
+						<input type="hidden"  name="NotificationName" id="notificationName" value="ItemOutOfStockForm">
+     					<input type="hidden"  name="SaveToDb" id="saveToDB" value="N">
+						<input type="hidden"  name="SendMail" id="sendMail" value="Y">
+						<input type="hidden"  name="sendTo" id="sendTo" value="">
+						<input type="hidden"  name="Subject" id="subject" value="HEP - Agotado">
+						<input type="hidden"  name="formName" id="formName" value="">
+						<input type="hidden"  name="email" value="">
+						<input type="hidden"  name="loggedInUserName" value='$!loggedUserName'/>
+						<input type="hidden"  name="itemPartNumber" id="itemPartNumber" value="">
+						<input type="hidden"  name="itemManufacturerPartName" id="itemManufacturerPartName" value="">
+						<input type="hidden"  id="webthemesval" value="/ASSETS/WEB_THEMES/">
 					</form>
 				</div>
 			</div>

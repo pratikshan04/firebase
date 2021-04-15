@@ -243,6 +243,16 @@ $btncolors: (
         bg-icon-posintion: before,
         onlyborder  : false
     ),
+    letMeknow:(
+        bg-color    : $black,//Button Background color
+        btnf-color  : $white, //Button Font Color
+        hbg-color   : $black, // Button hover backogrund color
+        btnhf-color : $white, // Button hover font color
+        abg-color   : $gray-dark, //Button Active background color
+        bg-icon     : true,
+        bg-icon-posintion: before,
+        onlyborder  : false
+    ),
     viewallchoice:(
         bg-color    : $primary_color, //Button Background color
         btnf-color  : $white, //Button Font Color

@@ -239,21 +239,21 @@
 				<li class="listView" data-getchangemode='getchangemode'>
 					<ul itemscope itemtype="http://schema.org/Product" class="gridFixHeight clearAfter">
 						<li class="sessionImg">
-							<a href="$!itemDetailUrl">
+							<a href="$itemDetailUrl">
 								<div class="prodImage">
 								#if($itemData.productItemCount>1 && $!itemData.productCategoryImageName && $itemData.productCategoryImageName.trim().length() > 1)
 									#if($itemData.productCategoryImageName.contains("http") || $itemData.productCategoryImageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="a"/>
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" /> 
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="b"/>
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!productListImage$!escapeTool.url($!itemData.productCategoryImageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 								#else
 									#if($itemData.imageType=="360_URL")
-									    <div class="Sirv" data-src="$!itemData.imageName" id="imageName$!itemData.itemId" title="$!itemTitle"></div> 
+									    <div class="Sirv" data-src="$!itemData.imageName" title="$!itemTitle"></div> 
 									#elseif($itemData.imageName.contains("http") || $itemData.imageType=="URL")
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="c"/>
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px"  src="$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#else
-										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!hostName$!productListImage$!itemData.productCategoryImageName" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" class="d"/>
+										<img itemprop="image" id="imageName$!itemData.itemId" width="250px" height="250px" src="$!itemImage$!escapeTool.url($!itemData.imageName)" onerror="this.src='$!webThemes/$!siteName/images/NoImage.png';" alt="$!itemTitle" />
 									#end
 									#if($itemData.clearance=="Y")
 										<span class="clearenceTag"></span>
@@ -409,6 +409,7 @@
 										<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
 										<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
 										<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
+										<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 									</li>
 									#end
 									#if($userLogin)
@@ -474,11 +475,11 @@
 											#if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 												#if($!itemData.price>0)
 													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!itemData.partNumber clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+														<a href="javascript:void(0);" class="btn btn-addtocart addToCart hideMe" id="enableCart_$!itemData.partNumber clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 													</span>
 												#else
 													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+														<a href="javascript:void(0);" class="btn btn-addtocart btns-disable hideMe" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 													</span>
 												#end
 											#else
@@ -487,14 +488,18 @@
 										#else
 											#if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 												<span data-select='addtoCartbtn_$!itemData.partNumber'>
-													<a href="javascript:void(0);" class="btn btn-addtocart btns-disable clickStream" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+													<a href="javascript:void(0);" class="btn btn-addtocart btns-disable clickStream hideMe" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
 											#else
 												<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 											#end
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>
+										#if($userLogin)
+										<span><a data-toggle='modal' data-target='#outOfStock' id='disablePop_$!itemData.partNumber' class="hideMe" onclick="return availablePop('$itemData.partNumber', '$itemData.manufacturerPartNumber')"><span class='btn btn-letMeknow'>$!locale.get("product.label.letMeKnow")</span></a></span>
+										#end
 									</li>
+								
 								</ul>
 								<ul>
 									<li class='pTop-2'>

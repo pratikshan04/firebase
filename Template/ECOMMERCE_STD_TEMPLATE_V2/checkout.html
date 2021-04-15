@@ -51,37 +51,27 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
-											<input type="text" name="billZipcode" id="billZipcode" value="$!billAddress.zipCodeStringFormat" readonly class="btns-disable form-control formatZipCode" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.zipcode')"/>
+											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label> 
+											<select name="billCountry" id="countrySelect" class="form-control selectpicker" data-state="stateSelect" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label> 
-											<select name="billCountry" id="countrySelect" class="selectpicker" data-state="stateSelect" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
-										</div>
-									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
 											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/> 
 										</div>
 									</div>
-								</div>
-								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											 <label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
 											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control" data-type="email" data-required="Y" data-error="$locale.get('checkoutwiz.error.emailaddress')" data-invalid="$locale.get('checkoutwiz.error.emailaddressinvalid')"/>
 										</div>
 									</div>
-									<div class="col-sm-6">
-										<input type="hidden" id="billAddressState" value="$!billAddress.state" />
-										<input type="hidden" id="billAddressCountry" value="$!billAddress.country" />
-									</div>
 								</div>
+									<input type="hidden" id="billAddressState" value="$!billAddress.state" />
+									<input type="hidden" id="billAddressCountry" value="$!billAddress.country" />
 							</div>
 							<!-- Billing Address -->
 							
@@ -141,26 +131,21 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
-											<input type="text" name="shipZipcode" id="shipZipcode" value="$!shipAddress.zipCodeStringFormat" class="formatZipCode form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.zipcode')"/>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
 											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label>
 											<select name="shipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 											<input type="hidden" id="shipAddressState" value="$!shipAddress.state" />
 											<input type="hidden" id="shipAddressCountry" value="$!shipAddress.country" />
+											<input type="hidden" name="shipVia" id="shipVia" value="UAAA" />
 										</div>
 									</div>
-								</div>
-								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
 											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/>
 										</div>
 									</div>
+								</div>
+								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.email") </label>
@@ -173,7 +158,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
-										<select name="shipVia" id="shipVia" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.shipvia')">
+										<select name="shipVia" id="shipVia" class="form-control selectpicker" data-type="text" data-required="N" data-error="$locale.get('checkoutwiz.error.shipvia')">
 											<option value=" ">-Select-</option>
 											#if($shipViaList.size()>0)
 												#foreach($shipVia in $shipViaList)

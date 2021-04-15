@@ -447,6 +447,7 @@
 										<input type="hidden" value="$!itemData.minOrderQty" id="MinOrderQty_$!itemData.partNumber" name="MinOrderQty_$!itemData.partNumber"/>
 										<input type="hidden" value="$!itemData.minOrderQty" id="minOrderQty_$!itemData.itemId"/>
 										<input type="hidden" value="$!itemData.orderInterval" id="OrderQtyInterval_$!itemData.partNumber" name="OrderQtyInterval_$!itemData.partNumber"/>
+										<input type="hidden" value="$!itemData.itemId" id="uomValue_$!itemData.itemId"/>
 									</li>
 									#end
 									#if($userLogin)
@@ -507,11 +508,11 @@
 											#if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 												#if($!itemData.price>0)
 													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!itemData.partNumber" clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+														<a href="javascript:void(0);" class="btn btn-addtocart addToCart hideMe" id="enableCart_$!itemData.partNumber" clickStream" data-clicktype="addcart" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 													</span>
 												#else
 													<span data-select='addtoCartbtn_$!itemData.partNumber'>
-														<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+														<a href="javascript:void(0);" class="btn btn-addtocart btns-disable hideMe" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" clickStream" data-clicktype="addcart" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 													</span>
 												#end
 											#else
@@ -520,13 +521,16 @@
 										#else
 											#if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 												<span data-select='addtoCartbtn_$!itemData.partNumber'>
-													<a href="javascript:void(0);" class="btn btn-addtocart btns-disable" clickStream" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+													<a href="javascript:void(0);" class="btn btn-addtocart btns-disable hideMe" clickStream" data-clicktype="addcart" id="enableCart_$!itemData.partNumber" data-itemId="$!itemData.itemId" data-itemPriceId="$!itemData.itemPriceId">$!locale.get("product.button.addtocart")</a>
 												</span>
 											#else
 												<a href="javascript:void(0);" class="btn btn-addtocart" data-toggle="modal" data-target="#loginModal">$!locale.get("product.button.addtocart")</a>
 											#end
 										#end
 										<span id="uomPk_$!itemData.partNumber"></span>
+										#if($userLogin)
+										<span><a data-toggle='modal' data-target='#outOfStock' id='disablePop_$!itemData.partNumber' class="hideMe" onclick="return availablePop('$itemData.partNumber', '$itemData.manufacturerPartNumber')"><span class='btn btn-letMeknow'>$!locale.get("product.label.letMeKnow")</span></a></span>
+										#end
 									</li>
 									<li class='pTop-2'>
 										<!-- My Product Group-->
