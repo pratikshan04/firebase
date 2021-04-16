@@ -140,7 +140,7 @@ header {
              }
     }
 }
-a.loginblockElement {
+.loginblockElement {
         position: relative;
         top: 2px;
         color: $white;
@@ -295,5 +295,41 @@ a.loginblockElement {
         width: 46px;
         height: 42px;
         color: $white;
+    }
+}
+.cimm_signWrap {
+    padding: 10px 0;
+    > li {
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        padding: 4px !important;
+        
+              >img{
+                  cursor: default;
+              }
+              >span {
+                font-weight: normal;
+                text-transform: uppercase;
+                margin-top: 4px;
+                &.imgBox1 {
+                    display: block;
+                    width: 32px;
+                    height: 32px;
+                    background: $white;
+                    position: relative;
+                    margin: 0 auto 8px auto;
+                    overflow: hidden;
+                    border-radius: 50%;
+                    top: 30px;
+                    em {
+                        position: absolute;
+                        left: 5px;
+                        color: $primary_color;
+                        top: 4px;
+                        font-size: $font_xxlg + 4;
+                    }
+                }
+        }
     }
 }

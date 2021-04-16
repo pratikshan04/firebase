@@ -151,8 +151,8 @@
 			    </span>
 			 </td>
 			 <td class="tableAvail removeForSend">
-			 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
-				 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+			 	<span class="productAvail_$!itemData.partNumber" data-select='availability'>
+				 	<!-- #if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 						#if($productModeitemData.availQty>0)
 				    		$!productModeitemData.availQty
 				    	#else
@@ -160,7 +160,19 @@
 				    	#end
 				    #else
 				    	<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
-					#end
+					#end -->
+					#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
+											#set($Integer = 0)
+											#if($itemData.availQty && $Integer.parseInt($itemData.availQty) > 0)
+												<span class="orangeClr Avail_$!itemData.partNumber">$itemData.availQty</span>
+											#else
+												<span class='text-danger'>$!locale.get("product.label.outOfStock")</span>
+											#end
+											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber" value="$!itemData.availQty"/>
+										#else
+											<span class="orangeClr Avail_$!itemData.partNumber" data-select='availability'><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span>
+											<input type="hidden" id="avail_$!itemData.partNumber" name="avail_$!itemData.partNumber"/>
+										#end
 				</span>
 			</td>
 			<td class="removeForSend hideForPrint">
