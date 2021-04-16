@@ -503,7 +503,7 @@ $modal_closebtn-color: $default_font-color;
 }
 
 .userInfoWrap {
-    height: 160px;
+    height: 180px;
     h4 {
         position: absolute;
         bottom: 0;
@@ -1310,6 +1310,17 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     li{
         width: 259px !important;
     } 
+}
+.cartPointer{
+    cursor:initial;
+}
+#triggerOrderButtonDiv{
+    float: right;
+}
+#orderList{
+    .form-control{
+        font-size: $font_xs;
+    }
 }
 
 
