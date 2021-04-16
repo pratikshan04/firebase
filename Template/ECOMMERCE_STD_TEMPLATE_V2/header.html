@@ -114,10 +114,8 @@
 		</li>
 		#if($userLogin)
 			<li class="dropdown">
-			<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-target="myAccountMenu">
-				<span class="imgBox"><em class="fa fa-user-circle"></em></span>
+				<span class="imgBox1"><em class="fa fa-user-circle"></em></span>
 				<span class="blockElement"></span>
-			</a>
 			</li>
 		#else
 			<li class="hideForDevices dropdown">
@@ -139,7 +137,7 @@
 		</li>
 		</ul>
 		#if($userLogin)
-		<a href="javascript:void(0);" class="loginblockElement">
+		<span href="javascript:void(0);" class="loginblockElement">
 			#if($!session.getAttribute("isSalesUser").equals("Y"))
 			<span>
 				#if($!session.getAttribute("isSalesAdmin") && $!session.getAttribute("isSalesAdmin") != "")
@@ -151,7 +149,7 @@
 			</span>
 			#end
 			<span>$!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>
-		</a>
+		</span>
 		#else
 		<a href="javascript:void(0);" class="dropdown-toggle loginblockElement" data-toggle="dropdown" data-target="loginDropDown">
 			<span>$!locale.get('product.heading.login')</span>
