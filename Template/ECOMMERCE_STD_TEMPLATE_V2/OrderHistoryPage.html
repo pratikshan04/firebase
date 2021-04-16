@@ -81,12 +81,8 @@
 				<input type="hidden" name="customerPoNumber" id="customerPoNumber"/>
 				<input type="hidden" name="partNumberToERP" id="partNumberToERP"/>
 				<input type="hidden" name="orderNumber" id="orderNumber"/>
-				<div class="row">
-					<!-- <div class="col-md-4 custom_lineform form-inline">
-						<input type="text" id="orderPoSearch" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('label.order.searchbar')" >
-						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md" value="Search"/>
-					</div> -->
-					<div class="col-md-12 custom_lineform form-inline mTop-2">
+				<div class="row" id="orderList">
+					<div class="col-md-8 custom_lineform form-inline mTop-2">
 					<label for="datepicker_from" class="mRight-2 date_from">$!locale.get("product.label.from") </label>
 						<div class='input-group date'>
 							<input type="text" name="startDate" id="startDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
@@ -105,6 +101,10 @@
 							    <button type="button" class="btn btn-tertiary btn-md mRight-2 order_btn" id="searchBtn" data-hasPassCode="N" data-id="applybutton" data-value="#if($entityIDType) $entityIDType.replace('','')To #else ShipTo #end" data-invoicNum="$!orderList.orderNum" onclick="processForm(this)">$!locale.get('filter.label.apply')</button>
 							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md order_btn">$!locale.get('product.button.deleteQuoteRequest')</button>
 						    </div>
+					</div>
+					<div class="col-md-4 custom_lineform form-inline">
+						<input type="text" id="orderPoSearch" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('label.order.searchbar')" >
+						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md" value="Search"/>
 					</div>
 					<!-- <div class="col-md-4">
 						<label>$!locale.get("product.label.orderNumber") </label>

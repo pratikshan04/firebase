@@ -170,7 +170,8 @@
                         <input type="hidden" name="shortDesc_$!orderItem.partNumber" value="$!orderItem.description" />
                         <input type="hidden" name="partNumber_$!orderItem.partNumber" value="$!orderItem.partNumber" />
                         <input type="hidden" name="quotePartNumber" value="$!orderItem.partNumber" />
-                        <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.orderUom" />
+                        <!-- <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.orderUom" /> -->
+                        <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.uom" />
                         <input type="hidden" name="qty_$!orderItem.partNumber" value="$!orderItem.qtyordered" />
                         <input type="hidden" name="price_$!orderItem.partNumber" value="$!orderItem.customerPrice" />
                         <input type="hidden" name="total_$!orderItem.partNumber" value="$!orderItem.extPrice"/>
