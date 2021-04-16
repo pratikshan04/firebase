@@ -5,7 +5,7 @@
 			<ul class="multiTabHeading clearAfter">
 				<li><a href="#profile">&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.profile')</a></li>
 				<li><a href="#Address">&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.address')</a></li>
-				<li><a href="#groups">&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.myProductGroups')</a></li>
+				<li><a href="#groups">&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.favandsave')</a></li>
 				<!-- <li><a href="#order">&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li> -->
 			</ul>
 			<div class="multiTabContent">
@@ -142,7 +142,7 @@
 									<tbody>
 										#foreach($shipAddress in $shipAddressList)
 										<tr>
-											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.firstName $!shipAddress.lastName ##$!shipAddress.customerName</td>
+											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.firstName $!shipAddress.lastName $!shipAddress.customerName</td>
 											<td class="alignLeft" data-th="$locale.get('form.label.address')">$shipAddress.address1<br />$!shipAddress.address2</td>		
 											<td data-th="$locale.get('form.label.city')">$shipAddress.city</td>
 											<td data-th="$locale.get('form.label.state')">$shipAddress.state</td>
@@ -163,7 +163,7 @@
 							<div id="promotedProductsTable"> Loading Espere por favor...</div>
 						</div> -->
 						<div class="col-md-6 col-sm-6 col-xs-12 mBottom-3">
-							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroups")</h3>          
 							#if($groupListData.size()>0)
 								#set($countProductGroup = 0)
 								<div class="row">
@@ -196,7 +196,7 @@
 							#end
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12 mBottom-3">
-							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCart")</h3>         
 							#if($savedCartData.size()>0)
 								#set($countSavedGroup = 0)
 								<div class="row">

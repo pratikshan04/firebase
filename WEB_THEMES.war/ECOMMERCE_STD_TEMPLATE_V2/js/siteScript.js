@@ -1702,7 +1702,7 @@ function send() {
 	});
 	$("#mailContent a").attr("href", emailitemlink);
 	$('#imgPart').val($('.cimm_itemdetail-imgcontainer').html());
-	$('#contentPart').val($('.cimm_itemDescription').html());
+	$('#contentPart').val($('.cimm_itemDescription').find('h2').html().replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;'));
 	$('#pricePart').val($('.priceCont').html());
 	$('#descPart').val($('.contentPart').html());
 	var str = $("#contactEmailUs").serialize();

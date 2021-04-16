@@ -60,7 +60,7 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/> 
+											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')" onkeypress="return IsNumeric(event)" maxlength="12"/> 
 										</div>
 									</div>
 									<div class="col-sm-6">
@@ -141,7 +141,7 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')"/>
+											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')" onkeypress="return IsNumeric(event)" maxlength="12"/>
 										</div>
 									</div>
 								</div>
@@ -179,6 +179,7 @@
 							</div> -->
 							<!-- Shipping Address -->
 							<input type="hidden" name="overrideShip" id="overrideShip" value="Y"/>
+							<input type="hidden" name="shipZipcode" id="shipZipcode" value=""/>
 						</div>
 						<div id="step-3">
 							<div class="cimm_formContent" id="orderDetails">

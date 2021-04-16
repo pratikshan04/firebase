@@ -167,7 +167,7 @@ var BulkAction = {};
 						});
 					}
 				});
-				$("#addToCartHeaderContent").html("<h4>Added Successfully To:</h4>");
+				$("#addToCartHeaderContent").html("<h4>"+locale('label.addedSuccessTo')+":</h4>");
 				$("#multipleProductGroupContent").html('<div class="addNewPgResponse"><ul class="msg"></ul></div>');
 				if (typeof (Storage) !== "undefined") {
 					localStorage.removeItem("selectedItemsAOP");

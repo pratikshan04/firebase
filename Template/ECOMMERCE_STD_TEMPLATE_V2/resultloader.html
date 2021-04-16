@@ -130,11 +130,7 @@
 	#if($!productListData.get(0).requestType=="SEPERATE" || $!productListData.get(0).requestType=="UPDATE")
 		#set($singleItem=$!productListData.get(0))
 		#set($eachData = $!itemDetailData.get($!singleItem.itemId))
-		#if($!eachData.manufacturerPartNumber != "" && $!eachData.manufacturerPartNumber)
-			#set($itemTitle = $!eachData.brandName+" "+$!eachData.manufacturerPartNumber)
-		#else
-			#set($itemTitle = $!eachData.brandName)
-		#end
+		#set($itemTitle = $!eachData.shortDesc)
 		#set($itemIndex = $!eachData.itemIndex)
 		#if($singleItem.status=="Y")
 			<div class="row">
@@ -221,11 +217,9 @@
 					#set($itemIndex = 0)
 					#foreach($!eachCartData in $!productListData) 
 						#set($eachData = $!itemDetailData.get($!eachCartData.itemId))
-						#if($!eachData.manufacturerPartNumber != "" && $!eachData.manufacturerPartNumber)
-							#set($itemTitle = $!eachData.brandName+" "+$!eachData.manufacturerPartNumber)
-						#else
-							#set($itemTitle = $!eachData.brandName)
-						#end
+						
+							#set($itemTitle = $!eachData.shortDesc)
+						
 						#if($!eachCartData.status=="Y")
 							<div class="row">
 								<div class="col-md-12">
@@ -428,7 +422,7 @@
 		</div>
 		#end
 		#foreach($productListData in $itemLevelFilterData)
-		#set($itemTitle = $!productListData.brandName+" "+$!productListData.manufacturerPartNumber)
+		#set($itemTitle = $!productListData.shortDesc)
 		<div class="cat-product clearAfter">
 			<div class="cat_img">
 				#if($productListData.imageType=="URL")
@@ -503,7 +497,7 @@
 	#listPageHeading($!navigationType,$!keyWord,$!heading)
 	#listPageFormUrls($!navigationType)
 	#foreach($!itemData in $!itemListData) 
-	#set($itemTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
+	#set($itemTitle = $!itemData.shortDesc)
 	#set($itemTitleForURL = $!itemData.brandName+"-"+$!itemData.manufacturerPartNumber)
 	<li class="listView" data-getchangemode='getchangemode'>
 		<ul class="gridFixHeight clearAfter">
