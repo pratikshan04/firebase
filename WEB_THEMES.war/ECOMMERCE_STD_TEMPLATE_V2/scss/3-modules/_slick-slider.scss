@@ -380,3 +380,11 @@ ul.slick-dots {
     }
   }
 }
+
+#recentorders .cimm_slideItemImg, #recentorders .cimm_slideItemImg a img{
+      height: 100px;
+      max-height: 100px;
+}
+#recentorders .cimm_slideItemDesp{
+      padding: 8px;
+}

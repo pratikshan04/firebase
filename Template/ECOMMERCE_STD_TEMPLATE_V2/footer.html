@@ -168,6 +168,19 @@
 		</div>
 	</div>
 </div>
+<div id="shipPopUp" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header noBorder">
+		      	<h4 class="modal-title"><button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+		    </div>
+		    <div class="modal-body">
+				<p class="text-black alignCenter marginY-3 sitePrimeColor">$locale.get('label.shipaddress.alert')</p>
+		    </div>
+		</div>
+	</div>
+</div>
 <div id="salesrepModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -181,7 +194,7 @@
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header noBorder">
-		      	<button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title pull-left">$!locale.get('product.heading.myCart')</h4><a href="$!locale.get('website.url.ShoppingCart')" class="mRight-3 pull-right"><em class="fa fa-lg fa-shopping-cart"></em> <span class="ATCCartCount"></span> $!locale.get("header.label.items")</a>
+		      	<button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title pull-left">$!locale.get('product.heading.myCart')</h4><a href="$!locale.get('website.url.ShoppingCart')" class="mRight-3 pull-right"><em class="fa fa-lg fa-shopping-cart"></em> <span class="ATCCartCount"></span></a>
 		    </div>
 		    <div class="modal-body row">
 			    <div class="col-md-3 col-sm-3 col-xs-3">
@@ -202,7 +215,7 @@
 						<div class="col-md-6 col-sm-6 col-xs-6">
 							<p class="addedItemPrice priceSpan"><span class="ATCprice formatPrice"></span></p>
 							<p><strong>$!locale.get('product.label.qty'): </strong><span class="ATCQuantity"></span></p>
-							<p style="display: none;"><strong class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </strong><span class="ATCLeadTime"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px"/></span></p>
+							<!-- <p style="display: none;"><strong class="ATCavailableorLeadTime">$!locale.get('product.label.leadTime'): </strong><span class="ATCLeadTime"><img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px"/></span></p> -->
 						</div>
 					</div>
 				</div>
@@ -326,3 +339,16 @@
 	</div>
 </div>
 $!footerscript
+<!-- Load Facebook SDK for JavaScript -->
+<!-- <div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js"></script> 
+<script>
+(function(d, s, id){ var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+window.fbAsyncInit = function() {
+FB.init({ 
+ appId : 127352282176757,
+ autoLogAppEvents : true,
+ xfbml : true, 
+ version : 'v10.0' }
+)};
+FB.CustomerChat.showDialog();
+</script> -->

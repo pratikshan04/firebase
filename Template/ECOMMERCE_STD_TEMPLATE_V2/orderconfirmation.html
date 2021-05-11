@@ -91,10 +91,27 @@
 				#if($billEntityName.length()>0)$!billEntityName <br/> #end
 				#if($orderDetail.billAddress.address1.length()>0)$!orderDetail.billAddress.address1<br /> #end
 				#if($orderDetail.billAddress.address2.length()>0)$!orderDetail.billAddress.address2<br />#end  
-				#if($orderDetail.billAddress.city.length()>0)$!orderDetail.billAddress.city#end
-				#if($orderDetail.billAddress.state.length()>0), $!orderDetail.billAddress.state<br />#end 
-				#if($orderDetail.billAddress.zipCode.length()>0)$!orderDetail.billAddress.zipCode#end
-				#if($orderDetail.billAddress.country.length()>0), $!orderDetail.billAddress.country<br />#end
+				#if($orderDetail.billAddress.city.length()>0)
+					#if($orderDetail.billAddress.city == "GU" || $orderDetail.billAddress.city == "GT")
+						Guatemala
+					#else
+						$!orderDetail.billAddress.city 
+					#end
+				#end
+				#if($orderDetail.billAddress.state.length()>0), 
+				#if($orderDetail.billAddress.state == "GU" || $orderDetail.billAddress.state == "GT")
+				Guatemala
+				#else
+					$!orderDetail.billAddress.state 
+				#end<br />
+				#end 
+				#if($orderDetail.billAddress.country.length()>0), 
+				#if($orderDetail.billAddress.country == "GU" || $orderDetail.billAddress.country == "GT")
+				Guatemala
+				#else
+					$!orderDetail.billAddress.country 
+				#end<br />
+				#end
 				#if($orderDetail.billAddress.phoneNo.length()>0) $!orderDetail.billAddress.phoneNo,<br />#end
 				#if($orderDetail.billAddress.emailAddress.length()>0)$!orderDetail.billAddress.emailAddress<br />#end
 			</span>
@@ -108,10 +125,27 @@
 				#if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/>
 				#if($orderDetail.shipAddress.address1.length()>0)$!orderDetail.shipAddress.address1<br />#end 
 				#if($orderDetail.shipAddress.address2.length()>0)$!orderDetail.shipAddress.address2<br />#end
-				#if($orderDetail.shipAddress.city.length()>0)$!orderDetail.shipAddress.city#end
-				#if($orderDetail.shipAddress.state.length()>0), $!orderDetail.shipAddress.state #end 
-				#if($orderDetail.shipAddress.zipCode.length()>0)$!orderDetail.shipAddress.zipCode#end
-				#if($orderDetail.shipAddress.country.length()>0) $!orderDetail.shipAddress.country<br />#end
+				#if($orderDetail.shipAddress.city.length()>0)
+				#if($orderDetail.shipAddress.city == "GU" || $orderDetail.shipAddress.city == "GT")
+				Guatemala
+				#else
+					$!orderDetail.shipAddress.city 
+				#end
+				#end
+				#if($orderDetail.shipAddress.state.length()>0), 
+				#if($orderDetail.shipAddress.state == "GU" || $orderDetail.shipAddress.state == "GT")
+				Guatemala
+				#else
+					$!orderDetail.shipAddress.state 
+				#end<br />
+				#end 
+				#if($orderDetail.shipAddress.country.length()>0) 
+				#if($orderDetail.shipAddress.country == "GU" || $orderDetail.shipAddress.country == "GT")
+				Guatemala
+				#else
+					$!orderDetail.shipAddress.country 
+				#end<br />
+				#end
 				#if($orderDetail.shipAddress.phoneNo.length()>0) $!orderDetail.shipAddress.phoneNo,<br /> #end
 				<span class="mulEmail">
 				#if($orderDetail.shipAddress.emailAddress.length()>0)$!orderDetail.shipAddress.emailAddress<br />#end
@@ -154,7 +188,7 @@
 						#end                     
 					</td>
 					<td class="alignLeft" data-th="$!locale.get('product.label.description')">
-						<p class="orderConfTitle"><strong>$!itemList.shortDesc</strong></p>
+						<p class="orderConfTitle"><strong>$!itemList.shortDesc.replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;')</strong></p>
 						<!-- <p>$!itemList.shortDesc</p> -->
 						<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemList.partNumber</p>
 						<!-- $!itemList.productKeywords -->
@@ -167,12 +201,17 @@
 							</li>
 						</ul>
 						#end -->
+						#if($itemList.manufacturerPartNumber)
+						<ul itemprop="mpn">
+						<strong>$!locale.get("product.label.mpn"): </strong><span>$!itemList.manufacturerPartNumber</span>
+						</ul>
+						#end
 						#if($!itemList.lineItemComment.length()>0)
 							<ul><li><strong>Line Item Comment: </strong>$!itemList.lineItemComment </li></ul>
 						#end
 					</td>
-					<td data-th="$!locale.get('product.label.qty')">$!itemList.orderQty</td>
-					<td data-th="$!locale.get('product.label.uom')">$!itemList.orderUom</td>
+					<td data-th="$!locale.get('product.label.qty')">$!itemList.qtyordered</td>
+					<td data-th="$!locale.get('product.label.uom')">$!itemList.uom</td>
 					#if($itemList.unitPrice>0)
 					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.unitPrice>0)$$numberTool.format($numberToolFormat,$itemList.unitPrice) #end</td>
 					#else
@@ -203,31 +242,31 @@
 					#if($orderDetail.subtotal>0)
 					<li>
 						<span class="priceLabel"><strong>$!locale.get("product.label.subTotal") : </strong></span>
-						<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
+						<span class="priceValue formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
 					</li>
 					#end
 					#if($orderDetail.tax>0)
 					<li>
 					     <span class="priceLabel"><strong>$!locale.get("product.label.tax") : </strong></span>
-					     <span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.tax) </span>
+					     <span class="priceValue formatPrice"> Q$!numberTool.format($!numberToolFormat,$!orderDetail.tax) </span>
 					</li>
 					#end
 					#if($orderDetail.discount>0)
 					<li>
 						<span class="priceLabel"><strong>$!locale.get("product.label.discount") :</strong></span>
-						<span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
+						<span class="priceValue formatPrice"> Q$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</span>
 					</li>
 					#end
 					#if($orderDetail.freight>0)
 					<li>
 						<span class="priceLabel"><strong>$!locale.get("product.label.shipping") : </strong></span>
-						<span class="priceValue formatPrice">$$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</span>
+						<span class="priceValue formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</span>
 					</li>
 					#end
 					#if($orderDetail.total>0)
 					<li>
 						<span class="priceLabel"><strong>$!locale.get("product.label.orderTotal") : </strong></span>
-						<span class="priceValue formatPrice orangeClr">$$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
+						<span class="priceValue formatPrice orangeClr">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total) </span>
 					</li>
 					#end
 				</ul>   
@@ -373,7 +412,7 @@
             <td style="border-right:1px solid #CCC;">$!itemList.orderQty</td>
             <td style="border-right:1px solid #CCC;">$!itemList.orderUom</td>
             <td style="border-right:1px solid #CCC;">$$!numberTool.format($!numberToolFormat,$!itemList.unitPrice)</td>
-            <td>$$!numberTool.format($!numberToolFormat,$!itemList.total)</td>
+            <td>Q$!numberTool.format($!numberToolFormat,$!itemList.total)</td>
           </tr>
           #end
          </tbody>
@@ -405,29 +444,29 @@
        <table cellpadding="5" cellspacing="0" style="border:none;text-align:left;">
        	<tr>
         	<th>$!locale.get("product.label.subTotal")</th>
-        	<td>$$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal)</td>
+        	<td>Q$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal)</td>
         </tr>
         #if($orderDetail.tax>0)
           <tr>
             <th >$!locale.get("product.label.tax")</th>
-            <td>$$!numberTool.format($!numberToolFormat,$!orderDetail.tax)</td>
+            <td>Q$!numberTool.format($!numberToolFormat,$!orderDetail.tax)</td>
           </tr>
          #end
           #if($orderDetail.discount>0)
           <tr>
             <th >$!locale.get("product.label.discount")</th>
-            <td>$$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</td>
+            <td>Q$!numberTool.format($!numberToolFormat,$!orderDetail.discount)</td>
           </tr>
          #end
          #if($orderDetail.freight>0)
             <tr>
                 <th>$!locale.get("product.label.shipping") </th>
-                <td>$$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</td>
+                <td>Q$!numberTool.format($!numberToolFormat,$!orderDetail.freight)</td>
             </tr>
          #end
           <tr>
             <th>$!locale.get("product.label.orderTotal")</th>
-            <td>$$!numberTool.format($!numberToolFormat,orderTotal)</td>
+            <td>Q$!numberTool.format($!numberToolFormat,orderTotal)</td>
           </tr>
        </table>
         <!-- #if($orderDetail.discount>0)
@@ -447,5 +486,5 @@
 
 <div id="emailErr" class="sessonOut" style="display:none;"></div>
 <div align="center" id="resultDiv" style="display:none;">
-	<h3>$!locale.get("orderconfirmation.note.thankYouNote") <a href="$!locale.get('website.url.Welcome')">Go Home</a></h3>
+	<h3>$!locale.get("orderconfirmation.note.thankYouNote") <a href="$!locale.get('website.url.Welcome')">Vete a casa</a></h3>
 </div>

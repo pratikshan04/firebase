@@ -124,6 +124,12 @@
 		});
 	}
 	</script>
+	#elseif($LayoutName=="OpenOrdersPage")
+	<script type="text/javascript">
+		#set($paginationURL="OpenOrderSale.action?reqType=webOrder&orderStatus=Open&pageSize=10&pageNo=$pageNo")
+		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+		$(".pgnation").html(pagination);
+	</script>
 #end
 #if($LayoutName != "404Page" && $LayoutName != "InvoiceListPage" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage" && $LayoutName !="PromotedProductGroupsPage.js")
 	#set($jsPath = $!webArtifactsJsPath+$!cdnModuleJs+'/'+$LayoutName+'.js?'+$!refreshVersion)

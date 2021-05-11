@@ -118,26 +118,18 @@
 						<select name="contactState" id="stateSelect" class="form-control selectpicker" data-live-search="true" data-type="select" data-required="Y" data-error="$!locale.get('form.user.address.state.notEmpty')"></select>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-12">
+				<!-- <div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">	
 						<label for="zip">$!locale.get("form.label.zipCode") <span class="text-danger">*</span></label>
 						<input type="text" name="zip" id="zip" class="formatZipCode form-control" placeholder="$!locale.get('form.label.zipCode')" data-type="text" data-required="Y" data-error="$!locale.get('form.user.address.zipCode.notEmpty')" onkeypress="return IsNumeric(event)"/>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">	
-						<label for="contactPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span></label>
-						<input type="text" name="contactPhone" id="contactPhone" class="formatPhoneVal formatPhoneNumber form-control" placeholder="$!locale.get('form.label.phone')" data-type="number" data-required="Y" data-invalid="$!locale.get('form.user.address.phoneNumber.invalid')" data-error="$!locale.get('form.user.address.phoneNumber.notEmpty')" onkeypress="return IsNumeric(event)"/>
-					</div>
-				</div>
+				</div> -->
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">	
-						<label for="contactFax">$!locale.get("form.label.fax")</label>
-						<input type="text" name="contactFax" id="contactFax" class="form-control" placeholder="$!locale.get('form.label.fax')"/>
-					</div>
+					<label for="contactPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span></label>
+					<input type="text" name="contactPhone" id="contactPhone" class="formatPhoneVal formatPhoneNumber form-control" placeholder="$!locale.get('form.label.phone')" data-type="number" data-required="Y" data-invalid="$!locale.get('form.user.address.phoneNumber.invalid')" data-error="$!locale.get('form.user.address.phoneNumber.notEmpty')" onkeypress="return IsNumeric(event)"/>
 				</div>
+			</div>
 			</div>
 			<div class="row" align="center">
 				<div class="col-md-12 col-sm-12 col-xs-12">

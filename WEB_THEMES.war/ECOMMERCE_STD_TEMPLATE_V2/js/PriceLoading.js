@@ -80,7 +80,8 @@ function preparePriceLabelStr(price, product, suggestPrice, minimumPrice) {
 			minimumStr = minimumStr + " / <em>" + product.uom.toUpperCase()	+ "</em>";
 		}
 		if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
-			document.getElementById('uomValue_' + product.partNumber).value = uom;
+			//document.getElementById('uomValue_' + product.partNumber).value = uom;
+			$.each( $("[id='uomValue_"+product.partNumber+"']"), function( key, value ) { this.value = uom; });
 		}
 		if (document.getElementById('uomSpan_' + product.partNumber) && document.getElementById('uomSpan_' + product.partNumber) != null && document.getElementById('uomSpan_' + product.partNumber) != undefined) {
 			document.getElementById('uomSpan_' + product.partNumber).innerHTML = uom;
@@ -281,9 +282,9 @@ function processPriceLoadingResponse(products) {
 				wareHouseDetails = wareHouseList[j].uomList;
 				wareHouseDetails.partNumber = partNumber;
 				if (wareHouseDetails[j].branchAvailability !== undefined) { totalAvailability += parseInt(wareHouseDetails[j].branchAvailability); }
-				if (wareHouseDetails[j]!= undefined && wareHouseDetails[j].customerPrice != undefined && wareHouseDetails[j].customerPrice > 0 && !priceDispalyed) {
+				if (wareHouseDetails[j]!= undefined && wareHouseDetails[j].unitPrice != undefined && wareHouseDetails[j].unitPrice > 0 && !priceDispalyed) {
 					wareHouseDetails.partNumber = partNumber;
-					populatePrice(product,wareHouseDetails[j].customerPrice,wareHouseDetails[j].unitPrice,wareHouseDetails[j].price);
+					populatePrice(product,wareHouseDetails[j].unitPrice,wareHouseDetails[j].customerPrice,wareHouseDetails[j].price);
 						priceDispalyed = true;
 				}
 				populateAllBranchAvailability(wareHouseDetails);

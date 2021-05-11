@@ -57,10 +57,9 @@
             <br />
             <span> #if($orderDetail.billAddress.country)$!orderDetail.billAddress.country#end</span>
             <br />
-            #if($orderDetail.billAddress.phoneNo)
-            <span>$!orderDetail.billAddress.phoneNo</span>
-            #end
-
+            
+            <span>$!orderDetail.billAddress.PhoneNo</span>
+            
 
         </p>
 	</div>
@@ -76,9 +75,9 @@
 	            <span>
 	            #if($orderDetail.shipAddress.country)$!orderDetail.shipAddress.country#end</span>
 	            <br />
-	            #if($orderDetail.shipAddress.phone)
-	            <span>$!orderDetail.shipAddress.phone</span>
-	            #end
+	           
+                <span>$!orderDetail.shipAddress.PhoneNo</span>
+	            
 	        </p>
 	</div>
 </div>
@@ -173,7 +172,7 @@
                         <!-- <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.orderUom" /> -->
                         <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.uom" />
                         <input type="hidden" name="qty_$!orderItem.partNumber" value="$!orderItem.qtyordered" />
-                        <input type="hidden" name="price_$!orderItem.partNumber" value="$!orderItem.customerPrice" />
+                        <input type="hidden" name="price_$!orderItem.partNumber" value="$!orderItem.unitPrice" />
                         <input type="hidden" name="total_$!orderItem.partNumber" value="$!orderItem.extPrice"/>
                         <input type="hidden" name="lineitemcomment_$!orderItem.partNumber" value="$!eachLineItemComment"/>
                         
@@ -181,7 +180,7 @@
                         <td data-th="$!locale.get('product.label.quantityOrdered')"><span>$!orderItem.qtyordered #if($requestType == "openQuote") $!orderItem.orderUom #end</span></td>
                         <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyShipped </span></td>
                         <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyOpen </span></td>
-                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.customerPrice)</span></td>                        
+                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.unitPrice)</span></td>                        
                         <!-- <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td>  -->
                         ##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                         <td data-th="select">

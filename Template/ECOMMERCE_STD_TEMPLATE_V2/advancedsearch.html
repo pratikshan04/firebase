@@ -24,18 +24,18 @@ function showMoreAdvOpt(){
 }
 </script>
 <div class='row'>
-	<div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
+	<!-- <div class="col-md-3 col-ms-6 col-xs-12 mBottom-2">
 		<label for='searchCustomerPartNumber' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='searchCustomerPartNumber' value='1' checked onclick="changeAdvSearch()"/>
 			<span>$locale.get("product.label.cpn")</span>
 		</label>
-	</div>
-	<div class="col-md-2 col-ms-6 col-xs-12 mBottom-2">
+	</div> -->
+	<!-- <div class="col-md-2 col-ms-6 col-xs-12 mBottom-2">
 		<label for='advSearchUpc' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='advSearchUpc' value='2' onclick="changeAdvSearch()"/>
 			<span>$locale.get("label.upc")</span>
 		</label>
-	</div>
+	</div> -->
 	<div class="col-md-4 col-ms-6 col-xs-12 mBottom-2">
 		<label for='glantzCode' class="customRadioBtn">
 			<input type='radio' name='searchBy' id='glantzCode' value='3' onclick="changeAdvSearch()"/>
@@ -72,7 +72,7 @@ function showMoreAdvOpt(){
 <div class='row mTop-2'>
 	<div class="col-md-12 col-ms-12 col-xs-12 form-inline form-inline-sm">
 		<div class="form-group">
-			<input type='text' onkeypress="return runScript(event);" name='keywords' placeholder="search" id="txtAdvSearch" value="#if($keyWord)$keyWord #end" class="form-control" title="Keywords"/>
+			<input type='text' onkeypress="return runScript(event);" name='keywords' placeholder="Buscar" id="txtAdvSearch" value="#if($keyWord)$keyWord #end" class="form-control" title="Keywords"/>
 		</div>
 		<button id="advSrchBtn" class="cimm_inlineButton" onclick="performAdvSearch();"><em class="fa fa-search"></em></button>
 	</div>

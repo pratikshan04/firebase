@@ -48,7 +48,7 @@
 		            <tr>
 		                <td><strong>$locale.get("product.label.details")</strong></td>
 						#foreach($compareItem in $compareItemData)
-							#set($itemTitle=$compareItem.brandName+" "+$!compareItem.manufacturerPartNumber)
+							#set($itemTitle=$compareItem.shortDesc)
 							<td>
 								#if($compareItem.imageName.contains("http"))
 								<a href="$compareItem.seoUrl">
@@ -61,7 +61,7 @@
 								#end
 								<strong>
 									<a class="comprProdTitle" href="$compareItem.seoUrl" id="itemTitle$compareItem.itemId">
-										<span  id="itemTitle$compareItem.itemId">$compareItem.brandName $!compareItem.manufacturerPartNumber</span>
+										<span  id="itemTitle$compareItem.itemId">$itemTitle</span>
 									</a>
 								</strong>
 							</td>
@@ -163,7 +163,7 @@
 		            </tr>
 		            #end
 		            
-		            <tr>
+		            <!-- <tr>
 		                <td>
 		                    <strong>$locale.get("product.label.description") </strong>
 		                </td>
@@ -185,7 +185,7 @@
 		                        </td>
 		                    #end
 		                #end
-		           </tr>
+		           </tr> -->
 		            <!-- <tr>
 		                <td><strong>$locale.get("product.label.availability") / $locale.get("product.label.leadTime")</strong>  </td>
 		                #foreach($mainAvailability in $compareItemData)

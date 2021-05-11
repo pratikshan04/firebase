@@ -21,7 +21,34 @@ enqueue('/OrderHistory?AjaxRequest=Y&dt='+milliSec,function(data){
 enqueue('/OpenOrderSale.action?reqType=webOrder&orderStatus=Open&AjaxRequest=Y&dt='+milliSec,function(data){
 	$("#openOrderTable").html(data);
 });
+$(document).ready(function(){
+enqueue('/AccountInquiryUnit.action?AjaxRequest=Y',function(data){
+	var fillData = JSON.parse(data);
+	var testFill = fillData.fillRateHistory;
+	testFill[0].fillRateDesc ? $("#fillFirst").html(testFill[0].fillRateDesc) : $("#fillFirst").html('');
+	testFill[1].fillRateDesc ? $("#fillSec").html(testFill[1].fillRateDesc) : $("#fillSec").html('');
+	testFill[2].fillRateDesc ? $("#fillThree").html(testFill[2].fillRateDesc) : $("#fillThree").html('');
+	testFill[3].fillRateDesc ? $("#fillFour").html(testFill[3].fillRateDesc) : $("#fillFour").html('');
+	testFill[4].fillRateDesc ? $("#fillFive").html(testFill[4].fillRateDesc) : $("#fillFive").html('');
+	testFill[5].fillRateDesc ? $("#fillSix").html(testFill[5].fillRateDesc) : $("#fillSix").html('');
 
+	testFill[0].fillRatePercent ? $("#fillPerFirst").html(testFill[0].fillRatePercent+"%") : $("#fillPerFirst").html('');
+	testFill[1].fillRatePercent ? $("#fillPerSec").html(testFill[1].fillRatePercent+"%") : $("#fillPerSec").html('');
+	testFill[2].fillRatePercent ? $("#fillPerThree").html(testFill[2].fillRatePercent+"%") : $("#fillPerThree").html('');
+	testFill[3].fillRatePercent ? $("#fillPerFour").html(testFill[3].fillRatePercent+"%") : $("#fillPerFour").html('');
+	testFill[4].fillRatePercent ? $("#fillPerFive").html(testFill[4].fillRatePercent+"%") : $("#fillPerFive").html('');
+	testFill[5].fillRatePercent ? $("#fillPerSix").html(testFill[5].fillRatePercent+"%") : $("#fillPerSix").html('');
+
+	var filltotal = 0;
+	var fillAvg;
+   	for (var i  = 0; i < testFill.length; i++){
+		filltotal  += parseFloat(testFill[i].fillRatePercent);
+   	}
+	fillAvg = parseFloat(filltotal/testFill.length);
+	$("#fillAvgs").html(fillAvg.toFixed(2)+"%");
+
+});
+});
 function validateImageUpload(){
 	if($('#profileImage').length>0){
 		var fileExt =  $('#profileImage').val();

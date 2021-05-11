@@ -15,7 +15,7 @@ $(document).ready(function(){
 	}
 	if(itemCnt!=null && count!=null && count==itemCnt){
 		$("#approveCart, #updateSelectedItems").attr("disabled", true).addClass("btns-disable");
-		showNotificationDiv("error","You cannot add any item to cart from your product group. Please call for availability");
+		showNotificationDiv("error", locale('label.approveCart.cannotAdd'));
 	}
 	$(".cartElement").on('change',function(src){
 		checkBoxEventHander(src.target);

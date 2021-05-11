@@ -52,6 +52,15 @@ $(function(){
         	$(this).prop('readonly', true);
 		}
 	});
+	$('#step-2 input[type="text"]').each(function(){
+        if(this.value==null || this.value.trim()==""){
+        	$(this).removeClass( "btns-disable" )
+        	$(this).prop('readonly', false);
+	    } else{
+	    	$(this).addClass("btns-disable" )
+        	$(this).prop('readonly', true);
+		}
+	});
 });
 
 function setPoNumberToSession(value){

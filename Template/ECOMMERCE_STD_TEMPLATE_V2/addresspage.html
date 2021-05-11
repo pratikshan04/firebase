@@ -7,7 +7,7 @@
 					<th class="left">$!locale.get("form.label.address")</th>
 					<th>$!locale.get("form.label.city")</th>
 					<th>$!locale.get("form.label.state")</th>
-					<th>$!locale.get("form.label.zipCode")</th>
+					<!-- <th>$!locale.get("form.label.zipCode")</th> -->
 					<th>$!locale.get("form.label.phone")</th>
 					<th>&nbsp;</th>
 				</tr>
@@ -19,13 +19,13 @@
 						<span>$!billAddress.address1</span><br />
 						#if($billAddress.address2)<span>$!billAddress.address2</span><br />#end
 						<span>$!billAddress.city, $!billAddress.state</span><br />
-						<span>$!billAddress.country, $!billAddress.zipCodeStringFormat</span><br />
+						<span>$!billAddress.country</span><br />
 						<span>$!billAddress.phoneNo&nbsp;<br />
 						$!billAddress.emailAddress</span>
 					</td>
 					<td data-th='$locale.get("form.label.city")'><span class="rightAlign">$billAddress.city</span></td>
 					<td data-th='$locale.get("form.label.state")'><span class="rightAlign">$billAddress.state</span></td>
-					<td data-th='$locale.get("form.label.zipCode")'><span class="rightAlign">$billAddress.zipCodeStringFormat</span></td>
+					<!-- <td data-th='$locale.get("form.label.zipCode")'><span class="rightAlign">$billAddress.zipCodeStringFormat</span></td> -->
 					#if($session.isRetailUser && $session.isRetailUser=="Y")
 					<td data-th='$locale.get("form.label.phone")'><span class="rightAlign">$!billAddress.phoneNo</span></td>
 					<td><a class="log-edit-option" href="#"></a></td>
@@ -51,7 +51,7 @@
 				<th class="left">$locale.get("form.label.address")</th>
 				<th>$!locale.get("form.label.city")</th>
 				<th>$!locale.get("form.label.state")</th>
-				<th>$!locale.get("form.label.zipCode")</th>
+				<!-- <th>$!locale.get("form.label.zipCode")</th> -->
 				<th>$!locale.get("form.label.phone")</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -64,13 +64,13 @@
 					<span>$!shaipData.address1</span><br />
 					#if($shaipData.address2)<span>$!shaipData.address2</span><br />#end
 					<span>$!shaipData.city, $!shaipData.state</span><br />
-					<span>$!shaipData.country, $!shaipData.zipCodeStringFormat</span><br />
+					<span>$!shaipData.country</span><br />
 					<span>$!shaipData.phoneNo&nbsp;<br />
 					$!shaipData.emailAddress</span>
 				</td>
 				<td data-th='$locale.get("form.label.city")'><span class="rightAlign">$!shaipData.city</span></td>
 				<td data-th='$locale.get("form.label.state")'><span class="rightAlign">$!shaipData.state</span></td>
-				<td data-th='$locale.get("form.label.zipCode")'><span class="rightAlign">$!shaipData.zipCodeStringFormat</span></td>
+				<!-- <td data-th='$locale.get("form.label.zipCode")'><span class="rightAlign">$!shaipData.zipCodeStringFormat</span></td> -->
 				#if($session.isRetailUser && $session.isRetailUser=="Y")
 				<td data-th='$locale.get("form.label.phone")'><span class="rightAlign">$!shaipData.phoneNo</span></td>
 				<td>                       
