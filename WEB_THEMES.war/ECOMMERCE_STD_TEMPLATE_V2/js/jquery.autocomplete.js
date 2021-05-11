@@ -390,6 +390,7 @@ $.Autocompleter = function(input, options) {
 							}
 							if(keyList[j]=="item"){
 								dataval = dataList[i].brand+" "+dataList[i].partnumber;
+								labelVal = dataList[i].brand+" "+dataList[i].partnumber;
 							}
 							parsed[parsed.length] = {
 								data: row,
@@ -771,7 +772,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 						msg = catBuilder + msg;
 						msg = msg+'</div>';
 						jQuery(".suggest").html(msg);
-						$('<a class="button" href="'+seoUrl+'">Shop Category</a>').appendTo('.titleImg-container');
+						$('<a class="button" href="'+seoUrl+'">Productos </a>').appendTo('.titleImg-container');
 						//$('<a class="button" href="/'+reqId+'/category/'+replaced+'">Shop Category</a>').appendTo('.titleImg-container');
 				   }else{
 					   jQuery(".suggest").html(msg);

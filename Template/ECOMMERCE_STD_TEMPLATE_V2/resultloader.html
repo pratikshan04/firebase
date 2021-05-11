@@ -416,7 +416,7 @@
 		#if($queryString!="CATNAV")
 		<div class="autocomplete-header clearAfter">
 			<div class="parent-title">
-				Recommended Products for <strong>$!queryString</strong>
+				$!locale.get('product.label.recommend') <strong>$!queryString</strong>
 				<a href="/$!BrandIDSelected/brand/$!queryString" class="button">$!locale.get('product.label.shopAll')</a>
 			</div>
 		</div>
@@ -434,11 +434,11 @@
 			<div class="info">
 				<div class="ac_titleWrap">
 					<a href="$!productListData.seoUrl" id="itemTitle$!productListData.itemId"> $!itemTitle</a>
-					#if($!productListData.shortDesc.length()>55)
+					<!-- #if($!productListData.shortDesc.length()>55)
 					<p id="itemShortDesc$!productListData.itemId">$!productListData.shortDesc.substring(0, 55) ...</p>
 					#else
 					<p id="itemShortDesc$!productListData.itemId">$!productListData.shortDesc</p>
-					#end
+					#end -->
 				</div>
 				<div class="ac_priceWrap">
 					<!-- <div>

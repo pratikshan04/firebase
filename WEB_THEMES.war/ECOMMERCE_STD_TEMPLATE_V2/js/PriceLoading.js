@@ -130,8 +130,17 @@ function populateAllBranchTotal(partNumber, availability) {
 }
 function populateAvailabilityLabel(partNumber, availability) {
 	//var availabilityStr = "<span class='cimm_color5'>In Stock</span>";
+	
 	$(document.getElementById("enableCart_" + partNumber)).removeClass('hideMe');
 	$(document.getElementById("disablePop_" + partNumber)).addClass('hideMe');
+	$(document.getElementsByClassName("detailButtonWrap")).removeClass('hideMe');
+	var layoutName = getLayoutName();
+	if (layoutName === "ProductList" || layoutName === "SubCategoryPage") {
+	var productModeItem = document.querySelector("[data-partnumber='"+ partNumber + "']");
+	var itemId = productModeItem.getAttribute('data-itemid');
+	$(document.getElementById("selectItemCheckbox_" + itemId)).attr("disabled", false);
+	$(document.getElementById("linkg"+itemId)).removeClass('hideMe');
+	}
 	var availabilityStr = "";
 	var itemHolder = document.getElementsByClassName("Avail_"+partNumber);
 	var itemHolderlist = document.getElementsByClassName("Available_"+ partNumber);
@@ -153,9 +162,18 @@ function populateAvailabilityLabel(partNumber, availability) {
 	}
 }
 function populateCallForAvailability(partNumber) {
+	
 	var availabilityStr = "<span class='cimm_color5'>"+locale('product.label.outOfStock')+"</span>";
 	$(document.getElementById("enableCart_" + partNumber)).addClass('hideMe');
 	$(document.getElementById("disablePop_" + partNumber)).removeClass('hideMe');
+	$(document.getElementsByClassName("detailButtonWrap")).addClass('hideMe');
+	var layoutName = getLayoutName();
+	if (layoutName === "ProductList" || layoutName === "SubCategoryPage") {
+	var productModeItem = document.querySelector("[data-partnumber='"+ partNumber + "']");
+	var itemId = productModeItem.getAttribute('data-itemid');
+	$(document.getElementById("selectItemCheckbox_" + itemId)).attr("disabled", true);
+	$(document.getElementById("linkg"+itemId)).addClass('hideMe');
+	}
 	if (document.getElementById('itemTxtSXAvail' + partNumber)) {
 		document.getElementById('itemTxtSXAvail' + partNumber).value = 0;
 	}

@@ -24,7 +24,7 @@
 		  </thead>
 		  <tbody>
 		    #foreach($itemData in $cartListData)
-		    #set($itemTitle= $!itemData.manufacturerName+" "+ $!itemData.manufacturerPartNumber)
+		    #set($itemTitle= $!itemData.shortDesc)
 		    #set($savedCartItemId = $!itemData.itemId) <!--CartlistData Iterator -->
 		    <tr itemscope itemtype="http://schema.org/Product">
 		    <!-- <td data-th="$!locale.get('product.label.Image')">
@@ -41,8 +41,8 @@
 		    </td> -->
 		    <td class="alignLeft" data-th="$!locale.get('header.label.items')">
 				<ul>
-					<li ><a href="$!itemData.seoUrl">$!itemData.brandName $!itemData.manufacturerPartNumber</a></li>
-					<li><p>$!itemData.shortDesc</p><div id="minErr_$!itemData.itemPriceId"></div></li>
+					<li ><a href="$!itemData.seoUrl">$!itemData.shortDesc</a></li>
+					<li><div id="minErr_$!itemData.itemPriceId"></div></li>
 					<li>
 						<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
 						#if($itemData.manufacturerPartNumber)
