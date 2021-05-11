@@ -38,9 +38,21 @@
 	border: 1px solid $gray;
 	z-index: 999;
 	box-shadow: 0 2px 4px $gray;
-	width: 100%;
-	top: 34px;
+	// width: 100%;
+	// top: 34px;
+    width: 938px;
+    left: -50%;
+    top: 60px;
+    min-height: 200px;
     ul {
+		width: 250px;
+		list-style-position: outside;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		position: relative;
+		background-color: #fff;
+		z-index: 9999;
         li {
             text-align: left;
             margin: 0px;
@@ -58,6 +70,7 @@
                 color: $white;
                 cursor: default;
                 text-align: left;
+    			text-transform: uppercase;
             }
 			&.ac_over{
 				background: $autocomleteBg;
@@ -68,15 +81,11 @@
             &.suggest {
                 position: absolute;
                 left: 100%;
-                top: -1px;
+                top: 0px;
                 background: $white;
-                width: 450px;
-                border: 1px solid $gray;
-                padding: 0;
-                min-height: 424px;
-                box-shadow: 2px 2px 4px $gray;
-                padding: 10px;
-                min-height: 150px;
+                width: 688px;
+				padding: 30px 20px 10px 10px;
+				min-height: 150px;
                 &.hideSuggest {
                     display: none;
                 }
