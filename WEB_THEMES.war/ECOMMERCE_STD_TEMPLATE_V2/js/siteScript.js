@@ -782,8 +782,8 @@ function performAdvSearch() {
 	s = s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
 	s = replaceNonAscii(s);
 
-	if (s == "" || s == "Search" || $.trim(s) == "Product Search" || $.trim(s) == "Product%20Search" || $.trim(s) == "Enter keyword or part number" || $.trim(s) == "Enter%20keyword%20or%20part%20number" || $.trim(s) == "keywords" || $.trim(s) == "%20keywords%20") {
-		bootAlert("small", "error", "Error", "Enter Search Keyword.");
+	if (s == "" || s == "Search" || s == "Buscar" || $.trim(s) == "Product Search" || $.trim(s) == "Product%20Search" || $.trim(s) == "Enter keyword or part number" || $.trim(s) == "Enter%20keyword%20or%20part%20number" || $.trim(s) == "keywords" || $.trim(s) == "%20keywords%20") {
+		bootAlert("small", "error", "Error", "Ingrese la palabra clave de busqueda.");
 		return false;
 	} else if (s.toLowerCase().indexOf("%3c%26nbsp%3bscript%3e") > -1 || s.toLowerCase().indexOf("%3c%26nbsp%3b/script%3e") > -1) {
 		bootAlert("medium", "error", "Error", "ERR_BLOCKED_BY_XSS_AUDITOR : Detected unusual code on this page and blocked it to protect your personal information (for example, passwords, phone numbers, and credit cards).");
@@ -999,6 +999,9 @@ $(document).ready(function () {
 						} else {
 							unblock();
 							if ($this.find(".pLoginErr").length > 0) {
+								if(data == "Invalid User Name/Password."){
+									data = "Usuario / contraseña invalida"
+								}
 								$this.find(".pLoginErr").html(data);
 							} else {
 								showNotificationDiv("Error", data);
@@ -1387,7 +1390,7 @@ function addToProductList(_this) {
 		var itemDesc = $("#itemTitle" + id).text().trim();
 		var result = data.split('|');
 		//$(toggleListID+"_pop").html(itemDesc+" Added To Group - "+ $("#group_name").val()).attr("href","myProductGroupPage.action?savedGroupId="+result[1]).fadeIn();
-		$(_this).parents('.productGroupBtn').find(toggleListID + "_pop").html(itemDesc + " Added To Group - " + $("#group_name").val()).attr("href", "/" + result[1] + "/ProductGroup/Product?savedGroupName=" + $("#group_name").val()).fadeIn();
+		$(_this).parents('.productGroupBtn').find(toggleListID + "_pop").html(itemDesc + " Anadido a favoritos - " + $("#group_name").val()).attr("href", "/" + result[1] + "/ProductGroup/Product?savedGroupName=" + $("#group_name").val()).fadeIn();
 		setTimeout(function () { $(".popMsg").fadeOut(); }, 3000);
 	});
 }
@@ -1702,7 +1705,7 @@ function send() {
 	});
 	$("#mailContent a").attr("href", emailitemlink);
 	$('#imgPart').val($('.cimm_itemdetail-imgcontainer').html());
-	$('#contentPart').val($('.cimm_itemDescription').html());
+	$('#contentPart').val($('.cimm_itemDescription').html().replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;'));
 	$('#pricePart').val($('.priceCont').html());
 	$('#descPart').val($('.contentPart').html());
 	var str = $("#contactEmailUs").serialize();
@@ -2495,7 +2498,7 @@ function ProcessAddProductListClone(s) {
 	$($("#group_idClone").val() + "pop").fadeIn();
 	var itemDesc = "#itemTitle" + $("#hidden_idClone").val();
 	var result = s.split("|");
-	$($("#group_idClone").val() + "popCont").html("<a href='myProductGroupPage.action?savedGroupId=" + result[1] + "' style=\"color:#fff;\">" + $(itemDesc).text() + " Added To Group - " + $("#group_name").val() + "</a>");
+	$($("#group_idClone").val() + "popCont").html("<a href='myProductGroupPage.action?savedGroupId=" + result[1] + "' style=\"color:#fff;\">" + $(itemDesc).text() + " Anadido a favoritos - " + $("#group_name").val() + "</a>");
 	$(".dropdownClone dd ul").hide();
 }
 jQuery(document).bind('click', function (e) {
@@ -4377,6 +4380,7 @@ if($("[data-recaptcha='Y']").length && $("#isWebview").val() != "WEBVIEW"){
 });*/
 
 function availablePop(partNo, manufNo){
+	$('#outOfStock').find('.alert').fadeOut("fast");
 	$('#itemPartNumber').val(partNo);
 	$('#itemManufacturerPartName').val(manufNo)
 }

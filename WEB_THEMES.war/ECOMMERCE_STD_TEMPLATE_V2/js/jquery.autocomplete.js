@@ -389,7 +389,8 @@ $.Autocompleter = function(input, options) {
 								dataval = row[valIndex-1];
 							}
 							if(keyList[j]=="item"){
-								dataval = dataList[i].brand+" "+dataList[i].manfpartnumber;
+								dataval = dataList[i].brand+" "+dataList[i].partnumber;
+								labelVal = dataList[i].brand+" "+dataList[i].partnumber;
 							}
 							parsed[parsed.length] = {
 								data: row,
@@ -750,7 +751,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 	}
 	function loadFlyoutAjax(obj){
 		loadedId=obj.attr("id");
-		jQuery(".suggest").html("Loading......");
+		jQuery(".suggest").html("Cargando...");
 		var reqId = obj.data("codeid")
 		var seoUrl = obj.data("seourl");
 		var queryString = "";
@@ -771,7 +772,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 						msg = catBuilder + msg;
 						msg = msg+'</div>';
 						jQuery(".suggest").html(msg);
-						$('<a class="button" href="'+seoUrl+'">Shop Category</a>').appendTo('.titleImg-container');
+						$('<a class="button" href="'+seoUrl+'">Productos </a>').appendTo('.titleImg-container');
 						//$('<a class="button" href="/'+reqId+'/category/'+replaced+'">Shop Category</a>').appendTo('.titleImg-container');
 				   }else{
 					   jQuery(".suggest").html(msg);
@@ -798,17 +799,17 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			searchBtn = $("<a />").attr('href','searchPage.action?keyWord='+term).text('Mas resultados');
 		}
 		for (var i=0; i < max; i++) {
-			var header = "Suggestion";
+			var header = "Sugerencia";
 			if (!data[i]){ continue; }
 			var reqType = 1;
 			var formatted = options.formatItem(data[i].data, i+1, max, data[i].value, term);
 			if ( formatted === false ){ continue; }
 			if(data[i].category=="brand" || data[i].category=="brandFuzzy"){
-				header = "Brand";
+				header = "Marcas";
 				reqType = "BRAND";
 			}
 			if(data[i].category=="category" || data[i].category=="catFuzzy"){
-				header = "Category";
+				header = "Categoria";
 				reqType = "CATNAV";
 			}
 			if(data[i].category=="userFuzzy"){
@@ -818,7 +819,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			if(prevCat!=data[i].category){
 				if(autoCompleteVersion == "V2"){
 					if(data[i].category=="brand" || data[i].category=="brandFuzzy"){
-						var liCat = $("<li/>").html(header ).addClass("catheader").appendTo(mfgWrap)[0];
+						var liCat = $("<li/>").html(header ).addClass("catheader").appendTo(prodWrap)[0];
 						jQuery.data(liCat, "ac_data_cat", data[i]);
 					}
 				}else{
@@ -830,7 +831,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 				if(data[i].category=="category" || data[i].category=="catFuzzy"){
 					li = $("<li/>").html( options.highlight(data[i].lable, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("id",data[i].dataId).attr("data-value",data[i].value).attr("data-reqtype",reqType).attr("data-codeId",data[i].codeId).attr("data-type",data[i].category).attr("data-original",data[i].originalval).attr("data-seourl",data[i].seourl).appendTo(catWrap)[0];
 				}else if(data[i].category=="brand" || data[i].category=="brandFuzzy"){
-					li = $("<li/>").html( options.highlight(data[i].lable, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("id",data[i].dataId).attr("data-value",data[i].value).attr("data-reqtype",reqType).attr("data-codeId",data[i].codeId).attr("data-type",data[i].category).attr("data-original",data[i].originalval).attr("data-seourl",data[i].seourl).appendTo(mfgWrap)[0];
+					li = $("<li/>").html( options.highlight(data[i].lable, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").attr("id",data[i].dataId).attr("data-value",data[i].value).attr("data-reqtype",reqType).attr("data-codeId",data[i].codeId).attr("data-type",data[i].category).attr("data-original",data[i].originalval).attr("data-seourl",data[i].seourl).appendTo(prodWrap)[0];
 				}else{
 					if(count<4){
 						var imageData = '';

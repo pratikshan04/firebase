@@ -1322,6 +1322,60 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         font-size: $font_xs;
     }
 }
+.form-control {
+    &.input-sm{
+        width: 170px !important;
+    }
+}
 
+.test {
+    font-size: 14px;
+    border: 2px solid #e0e0e0;
+.row{
+    height: 48px;
+    margin: 0;
+    >div{
+        padding: 10px;
+    }
+}
+.row:nth-child(even){
+    background-color: #f7f7f7;
+  }
+}
 
+.fillRateBg {
+    background-color: $secondary_color;
+    height: 40px;
+    padding: 10px;
+    border-right: 4px solid white;
+    &:not(:first-child){ 
+        text-align: center;
+    }
+    >span{  
+        font-size: 14px;
+        color: $white;
+    }
+}
+
+.fillRatePerBg{
+    background-color: $white;
+    height: 40px;
+    padding: 10px;
+    &:not(:first-child){ 
+        text-align: center;
+    }
+    span{  
+        font-size: 14px;
+    }
+}
+.fillRateBtm{
+    border-bottom: 1px solid $primary_color;
+}
+.fillRateAvgBg{
+    background-color: $white;
+    height: 40px;
+    padding: 10px;  
+    font-size: 14px;
+    color: $secondary_color;
+}
 @import "3-modules/modules";

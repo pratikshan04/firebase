@@ -80,7 +80,8 @@ function preparePriceLabelStr(price, product, suggestPrice, minimumPrice) {
 			minimumStr = minimumStr + " / <em>" + product.uom.toUpperCase()	+ "</em>";
 		}
 		if (document.getElementById('uomValue_' + product.partNumber) && (document.getElementById('uomValue_' + product.partNumber).value=="" || document.getElementById('uomValue_' + product.partNumber).value=="undefined")) {
-			document.getElementById('uomValue_' + product.partNumber).value = uom;
+			//document.getElementById('uomValue_' + product.partNumber).value = uom;
+			$.each( $("[id='uomValue_"+product.partNumber+"']"), function( key, value ) { this.value = uom; });
 		}
 		if (document.getElementById('uomSpan_' + product.partNumber) && document.getElementById('uomSpan_' + product.partNumber) != null && document.getElementById('uomSpan_' + product.partNumber) != undefined) {
 			document.getElementById('uomSpan_' + product.partNumber).innerHTML = uom;
@@ -129,8 +130,17 @@ function populateAllBranchTotal(partNumber, availability) {
 }
 function populateAvailabilityLabel(partNumber, availability) {
 	//var availabilityStr = "<span class='cimm_color5'>In Stock</span>";
+	
 	$(document.getElementById("enableCart_" + partNumber)).removeClass('hideMe');
 	$(document.getElementById("disablePop_" + partNumber)).addClass('hideMe');
+	$(document.getElementsByClassName("detailButtonWrap")).removeClass('hideMe');
+	var layoutName = getLayoutName();
+	if (layoutName === "ProductList" || layoutName === "SubCategoryPage") {
+	var productModeItem = document.querySelector("[data-partnumber='"+ partNumber + "']");
+	var itemId = productModeItem.getAttribute('data-itemid');
+	$(document.getElementById("selectItemCheckbox_" + itemId)).attr("disabled", false);
+	$(document.getElementById("linkg"+itemId)).removeClass('hideMe');
+	}
 	var availabilityStr = "";
 	var itemHolder = document.getElementsByClassName("Avail_"+partNumber);
 	var itemHolderlist = document.getElementsByClassName("Available_"+ partNumber);
@@ -152,9 +162,18 @@ function populateAvailabilityLabel(partNumber, availability) {
 	}
 }
 function populateCallForAvailability(partNumber) {
+	
 	var availabilityStr = "<span class='cimm_color5'>"+locale('product.label.outOfStock')+"</span>";
 	$(document.getElementById("enableCart_" + partNumber)).addClass('hideMe');
 	$(document.getElementById("disablePop_" + partNumber)).removeClass('hideMe');
+	$(document.getElementsByClassName("detailButtonWrap")).addClass('hideMe');
+	var layoutName = getLayoutName();
+	if (layoutName === "ProductList" || layoutName === "SubCategoryPage") {
+	var productModeItem = document.querySelector("[data-partnumber='"+ partNumber + "']");
+	var itemId = productModeItem.getAttribute('data-itemid');
+	$(document.getElementById("selectItemCheckbox_" + itemId)).attr("disabled", true);
+	$(document.getElementById("linkg"+itemId)).addClass('hideMe');
+	}
 	if (document.getElementById('itemTxtSXAvail' + partNumber)) {
 		document.getElementById('itemTxtSXAvail' + partNumber).value = 0;
 	}
@@ -281,9 +300,9 @@ function processPriceLoadingResponse(products) {
 				wareHouseDetails = wareHouseList[j].uomList;
 				wareHouseDetails.partNumber = partNumber;
 				if (wareHouseDetails[j].branchAvailability !== undefined) { totalAvailability += parseInt(wareHouseDetails[j].branchAvailability); }
-				if (wareHouseDetails[j]!= undefined && wareHouseDetails[j].customerPrice != undefined && wareHouseDetails[j].customerPrice > 0 && !priceDispalyed) {
+				if (wareHouseDetails[j]!= undefined && wareHouseDetails[j].unitPrice != undefined && wareHouseDetails[j].unitPrice > 0 && !priceDispalyed) {
 					wareHouseDetails.partNumber = partNumber;
-					populatePrice(product,wareHouseDetails[j].customerPrice,wareHouseDetails[j].unitPrice,wareHouseDetails[j].price);
+					populatePrice(product,wareHouseDetails[j].unitPrice,wareHouseDetails[j].customerPrice,wareHouseDetails[j].price);
 						priceDispalyed = true;
 				}
 				populateAllBranchAvailability(wareHouseDetails);

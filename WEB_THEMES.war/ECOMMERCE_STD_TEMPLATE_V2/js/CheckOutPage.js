@@ -52,6 +52,15 @@ $(function(){
         	$(this).prop('readonly', true);
 		}
 	});
+	$('#step-2 input[type="text"]').each(function(){
+        if(this.value==null || this.value.trim()==""){
+        	$(this).removeClass( "btns-disable" )
+        	$(this).prop('readonly', false);
+	    } else{
+	    	$(this).addClass("btns-disable" )
+        	$(this).prop('readonly', true);
+		}
+	});
 });
 
 function setPoNumberToSession(value){
@@ -68,10 +77,10 @@ var warningMsg = true;
 	
 	var checkOutStep = 3;
 	
-	// checkoutWizard.leaveAStepCallback = function(obj,context){
-	// 	var step_num= obj.attr('index');
-	// 	return (context.fromStep < context.toStep) ? (submitThisForm("#step-"+step_num)) ? validateCheckoutShipTo() : false : true;
-	// };
+	checkoutWizard.leaveAStepCallback = function(obj,context){
+		var step_num= obj.attr('index');
+		return (context.fromStep < context.toStep) ? (submitThisForm("#step-"+step_num)) ? validateCheckoutShipTo() : false : true;
+	};
 	
 	checkoutWizard.showAStepCallback = function(obj){
 		var step_num= obj.attr('index');
@@ -82,7 +91,7 @@ var warningMsg = true;
 			if($('#wizFinishButtonId').length>0){
 				$('#wizFinishButtonId').addClass("buttonDisabled");
 				if($('#orderType').val().trim() == "checkoutWithPo"){
-					$('#wizFinishButtonId').html("Submit Order");
+					$('#wizFinishButtonId').html(locale('requestforquote.button.submit'));
 				}else if($('#orderType').val().trim() == "checkoutWithCreditCard"){
 					$('#wizFinishButtonId').html("Continue with Credit Card");
 				}
@@ -157,7 +166,7 @@ var warningMsg = true;
 					(shippingListjson[i].address1 && $.trim(shippingListjson[i].address1)) ? $('#shipAddress1').val($.trim(shippingListjson[i].address1)) : $('#shipAddress1').val("");
 					(shippingListjson[i].address2 && $.trim(shippingListjson[i].address2)) ? $('#shipAddress2').val($.trim(shippingListjson[i].address2)) : $('#shipAddress2').val("");
 					(shippingListjson[i].city && $.trim(shippingListjson[i].city)) ? $('#shipCity').val($.trim(shippingListjson[i].city)) : $('#shipCity').val("");
-					// (shippingListjson[i].zipCodeStringFormat && $.trim(shippingListjson[i].zipCodeStringFormat)) ? $('#shipZipcode').val($.trim(shippingListjson[i].zipCodeStringFormat)) : $('#shipZipcode').val("");
+					(shippingListjson[i].zipCodeStringFormat && $.trim(shippingListjson[i].zipCodeStringFormat)) ? $('#shipZipcode').val($.trim(shippingListjson[i].zipCodeStringFormat)) : $('#shipZipcode').val("");
 					(shippingListjson[i].phoneNo && $.trim(shippingListjson[i].phoneNo)) ? $('#shipPhoneNo').val($.trim(shippingListjson[i].phoneNo)) : $('#shipPhoneNo').val("");
 					(shippingListjson[i].emailAddress && $.trim(shippingListjson[i].emailAddress)) ? $('#shipEmail').val($.trim(shippingListjson[i].emailAddress)) : $('#shipEmail').val("");
 					
@@ -255,7 +264,7 @@ var warningMsg = true;
 		if($('#wizFinishButtonId').length>0){
 			$('#wizFinishButtonId').addClass("buttonDisabled");
 			if($(obj).val().trim() == "checkoutWithPo"){
-				$('#wizFinishButtonId').html("Submit Order");
+				$('#wizFinishButtonId').html(locale('requestforquote.button.submit'));
 				$("#poNumberTxt").attr("data-required", "Y");
 			}else if($(obj).val().trim() == "checkoutWithCreditCard"){
 				$('#wizFinishButtonId').html("Continue with Credit Card");
@@ -268,7 +277,7 @@ var warningMsg = true;
 		$("#orderType").val(paymentType);
 		if($('#wizFinishButtonId').length>0){
 			if(paymentType == "checkoutWithPo"){
-				$('#wizFinishButtonId').html("Submit Order");
+				$('#wizFinishButtonId').html(locale('requestforquote.button.submit'));
 				$("#poNumberTxt").attr("data-required", "Y");
 			}else if(paymentType == "checkoutWithCreditCard"){
 				$('#wizFinishButtonId').html("Continue with Credit Card");
@@ -354,82 +363,82 @@ $.getScript(cdnPluginJsPath+'/multiTab.min.js', function(){
 	});
 });
 
-// function validateCheckoutShipTo(){
-//     var message = "";
-//     if($('#disableShipToCalifornia').val() == 'Y' && ($('#stateSelectShip').val() == 'CA' || $('#shipZipcode').val().length>3)){
-//         if($('#stateSelectShip').val() == 'CA'){
-//           message = "No shipping to california State <br/>";
-//           $('#stateSelectShip').val("");
-//         }
-//         if($('#shipZipcode').val().length>3){
-//           zipCode=$('#shipZipcode').val().toString().substring(0, 3);
-//             if(zipCode >= 900 && zipCode <= 961 ){
-//                 if(message.length>0){
-//                       message += "or <br/>";
-//                   }
-//              message += "No shipping to california Zipcode ";
-//              $('#shipZipcode').val("");
-//             }
-//         }
-//     }else {   
-//         $('#californiaWarning').find('.modal-body tbody').empty();
-//         $('#californiaRestriction').find('.modal-body tbody').empty();
-//         var warningItems = [];
-//         var itemId;
-//         warningItems = $("input:hidden[name='prop65']");
-//         var californiaZipCodeFalg = false;
-//         var restrictionFlag = false;
-//         var warningFlag = false;
-//         if($('#shipZipcode').val().length>3){
-//               var zipCode=$('#shipZipcode').val().toString().substring(0, 3);
-//                 if(zipCode >= 900 && zipCode <= 961 ){
-//                     californiaZipCodeFalg = true;
-//                 }
-//            }
+function validateCheckoutShipTo(){
+    var message = "";
+    if($('#disableShipToCalifornia').val() == 'Y' && ($('#stateSelectShip').val() == 'CA' || $('#shipZipcode').val().length>3)){
+        if($('#stateSelectShip').val() == 'CA'){
+          message = "No shipping to california State <br/>";
+          $('#stateSelectShip').val("");
+        }
+        if($('#shipZipcode').val().length>3){
+          zipCode=$('#shipZipcode').val().toString().substring(0, 3);
+            if(zipCode >= 900 && zipCode <= 961 ){
+                if(message.length>0){
+                      message += "or <br/>";
+                  }
+             message += "No shipping to california Zipcode ";
+             $('#shipZipcode').val("");
+            }
+        }
+    }else {   
+        $('#californiaWarning').find('.modal-body tbody').empty();
+        $('#californiaRestriction').find('.modal-body tbody').empty();
+        var warningItems = [];
+        var itemId;
+        warningItems = $("input:hidden[name='prop65']");
+        var californiaZipCodeFalg = false;
+        var restrictionFlag = false;
+        var warningFlag = false;
+        if($('#shipZipcode').val().length>3){
+              var zipCode=$('#shipZipcode').val().toString().substring(0, 3);
+                if(zipCode >= 900 && zipCode <= 961 ){
+                    californiaZipCodeFalg = true;
+                }
+           }
        
-//         if (warningItems && warningItems.length > 0) {
-//             for (i = 0; i < warningItems.length; i++) {
-//                 itemId = warningItems[i].value;
-//                 var warningValue = $( '#'+itemId).data("warning");
-//                 var warningMessage = $( '#'+itemId).data("message");
-//                 var proptype = $( '#'+itemId).data("proptype");
-//                 var description = $( '#'+itemId).data("description");
-//                 var siteName=$("#siteName").val();
-//                 var shipType = $( '#'+itemId).data("shiptype");
-//                 var warehouseState = $( '#'+itemId).data("warehousestate");
-//                 if(proptype == "R"){
-//                     if(shipType == "SHIPTOME" && ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
-//                         $('#californiaRestriction').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
-//                         restrictionFlag = true;
-//                     }
-//                     else if(warehouseState == "CA" || ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
-//                         $('#californiaRestriction').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
-//                         restrictionFlag = true;
-//                     }
-//                 }else{
-//                     if(shipType == "SHIPTOME" && ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
-//                         $('#californiaWarning').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
-//                         warningFlag = true;
-//                     }else if(warehouseState == "CA"  || ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
-//                         $('#californiaWarning').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li></li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
-//                         warningFlag = true;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// 	if(restrictionFlag){
-// 		$('#californiaRestriction').modal();
-// 		warningMsg = false;
-// 		return false;
-// 	}else if(warningFlag){
-// 		$('#californiaWarning').modal();
-// 		warningMsg = false;
-// 		return true;
-// 	}else if(message.length>0){
-// 		bootAlert("medium","error","Error",message);
-// 		return false;
-// 	}else {
-// 		return true;
-// 	}
-// }
+        if (warningItems && warningItems.length > 0) {
+            for (i = 0; i < warningItems.length; i++) {
+                itemId = warningItems[i].value;
+                var warningValue = $( '#'+itemId).data("warning");
+                var warningMessage = $( '#'+itemId).data("message");
+                var proptype = $( '#'+itemId).data("proptype");
+                var description = $( '#'+itemId).data("description");
+                var siteName=$("#siteName").val();
+                var shipType = $( '#'+itemId).data("shiptype");
+                var warehouseState = $( '#'+itemId).data("warehousestate");
+                if(proptype == "R"){
+                    if(shipType == "SHIPTOME" && ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaRestriction').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        restrictionFlag = true;
+                    }
+                    else if(warehouseState == "CA" || ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaRestriction').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        restrictionFlag = true;
+                    }
+                }else{
+                    if(shipType == "SHIPTOME" && ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaWarning').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        warningFlag = true;
+                    }else if(warehouseState == "CA"  || ($('#stateSelectShip').val() == 'CA' || californiaZipCodeFalg)){
+                        $('#californiaWarning').find('.modal-body tbody').append('<tr><td data-th="Product"><ul><li><i class="fas fa-exclamation-triangle"></i>'+description+'</li></li><li><strong>Web SKU: </strong>'+itemId+'</li></ul></td><td data-th="Concerning Chemicals Include">'+warningMessage+'</td></tr>');
+                        warningFlag = true;
+                    }
+                }
+            }
+        }
+    }
+	if(restrictionFlag){
+		$('#californiaRestriction').modal();
+		warningMsg = false;
+		return false;
+	}else if(warningFlag){
+		$('#californiaWarning').modal();
+		warningMsg = false;
+		return true;
+	}else if(message.length>0){
+		bootAlert("medium","error","Error",message);
+		return false;
+	}else {
+		return true;
+	}
+}

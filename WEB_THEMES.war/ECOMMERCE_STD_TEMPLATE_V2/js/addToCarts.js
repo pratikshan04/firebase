@@ -70,7 +70,11 @@
 			partNumber = partNumber.replace(regex, '\\/');
 			var minOrderQty = 1;
 			var quantityInterval = 1;
+			if(document.getElementById(settings.functionalBlock.uomValuePrefix + partNumber)){
 			var uom = document.getElementById(settings.functionalBlock.uomValuePrefix + partNumber).value;
+			}else{
+			var uom ='U';
+			}
 			if(settings.qtyIntervalRefrence=="Y"){
 				minOrderQty = parseInt(document.getElementById(settings.functionalBlock.minOrderQtyPrefix + partNumber).value);
 				quantityInterval = parseInt(document.getElementById(settings.functionalBlock.qtyIntervalPrefix + partNumber).value);
@@ -86,7 +90,7 @@
 				return false;
 			}else{
 				if(qty<1){
-					bootAlert("small","error","Error","Quantity Cannot be less than or equal to 0");
+					bootAlert("small","error","Error",locale('label.qty.minValueZero'));
 					if($('#'+settings.blockPageID)){
 		        		$('#'+settings.blockPageID).hide();	
 		        	}
@@ -95,7 +99,7 @@
 				}
 			}
 			if(qty<minOrderQty){
-				bootAlert("small","error","Error","Min Order Quantity is "+minOrderQty);
+				bootAlert("small","error","Error",locale('label.qty.minValueZero') +minOrderQty);
 				$("#"+settings.functionalBlock.qtyPrefix+id).val(minOrderQty);
 				if($('#'+settings.blockPageID)){
 	        		$('#'+settings.blockPageID).hide();	
@@ -148,25 +152,25 @@
 					if(settings.combinCart=='N'){
 						var checkCart = bootbox.dialog({
 							closeButton: false,
-							title: 'Alert',
-							message: 'This product currently exist in your cart.<br/> To create two separate line items of the same SKU select "separate".<br/> To combine into one line item select "combine".',
+							title: 'Alerta',
+							message: locale('label.csc.alertNote'),
 							buttons: {
 								noclose: {
-									label: "Separate",
+									label: "Separado",
 									className: 'btn-warning',
 									callback: function(){
 										enqueue(settings.addToCartURL+requestURL, processAddToCart);
 									}
 								},
 								ok: {
-									label: "Combine",
+									label: "Combinar",
 									className: 'btn-info',
 									callback: function(){
 										enqueue(settings.addToCartURL+requestURL+'&update=update', processAddToCart);
 									}
 								},
 								cancel: {
-									label: "Cancel",
+									label: "Cancelar",
 									className: 'btn-danger',
 									callback: function(){
 										if($('#'+settings.blockPageID)){

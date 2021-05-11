@@ -20,6 +20,9 @@ function disableUser(userID) {
 					if (data == "sessionexpired") {
 						window.location.href = "doLogOff.action";
 					} else {
+						if(data == "Successfully disabled"){
+							data = "Desactivado exitosamente"
+						}
 						showNotificationDiv("Success", data);
 						$('#status_' + userID).addClass('active text-right').html('Habilitar');
 						$('#status_' + userID).parent().attr("data-original-title", "Habilitar");
@@ -54,6 +57,9 @@ function enableUser(userID) {
 					if (data == "sessionexpired") {
 						window.location.href = "doLogOff.action";
 					} else {
+						if(data == "Successfully enabled"){
+							data = "Habilitado exitosamente"
+						}
 						showNotificationDiv("Success", data);
 						$('#status_' + userID).addClass('active text-right').html('Desactivar');
 						$('#status_' + userID).parent().attr("data-original-title", "Desactivar");
@@ -269,9 +275,9 @@ $(document).ready(function () {
 		"language": {
 			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json",
 			"search": "_INPUT_",
-			"searchPlaceholder": "Search User",
+			"searchPlaceholder": "Buscar Usuario",
 			"sLengthMenu": "Show _MENU_",
-			"emptyTable": "No Users for this Account",
+			"emptyTable": "No hay usuarios para esta cuenta",
 			"oPaginate": {
 				"sPrevious": "Prev",
 				"sNext": "Next"

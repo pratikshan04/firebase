@@ -5,8 +5,8 @@
 			<ul class="multiTabHeading clearAfter">
 				<li><a href="#profile">&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.profile')</a></li>
 				<li><a href="#Address">&nbsp;&nbsp;&nbsp;$!locale.get('dashboard.label.address')</a></li>
-				<li><a href="#groups">&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.myProductGroups')</a></li>
-				<!-- <li><a href="#order">&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li> -->
+				<li><a href="#groups">&nbsp;&nbsp;&nbsp;$!locale.get('product.heading.favandsave')</a></li>
+				<li><a href="#order">&nbsp;&nbsp;&nbsp;$!locale.get('dashboad.label.orders')</a></li>
 			</ul>
 			<div class="multiTabContent">
 				<div id="profile">
@@ -42,7 +42,7 @@
 										
 										<tr>
 											<td valign="top"><strong>$!locale.get('form.label.phone'): </strong></td>
-											<td><span>$!addressList.phoneNo</span></td>
+											<td><span>$!addressList.PhoneNo</span></td>
 										</tr>
 										<tr>
 											<td valign="top"><strong>$!locale.get('form.label.email'): </strong></td>
@@ -76,7 +76,7 @@
 												<input type="file" name="profileImage" id="profileImage"/>
 											</div>
 											<input type="submit" class="button pull-left imgBtn" onclick="return validateImageUpload();" value="$locale.get('button.label.Upload')">
-											<input type="button" class="button imgBtn" value="Clear"  onclick="clearImage()"/>
+											<input type="button" class="button imgBtn" value="$locale.get('product.button.deleteQuoteRequest')"  onclick="clearImage()"/>
 										</form>
 									</div>
 								</div>
@@ -90,29 +90,29 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.billingAddress")
-							<a href="$locale.get('website.url.Address')"><em class="glyphicon glyphicon-edit"></em></a>
+							<a data-toggle='modal' data-target='#shipPopUp'><em class="glyphicon glyphicon-edit"></em></a> 
 							</h3>
 							<p>
 								<span>$!billAddress.customerName</span><br />
 								<span>$!billAddress.address1</span><br />
 								#if($billAddress.address2)<span>$!billAddress.address2</span><br />#end
 								<span>$!billAddress.city, $!billAddress.state</span><br />
-								<span>$!billAddress.country, $!billAddress.zipCodeStringFormat</span><br />
-								<span>$!billAddress.phoneNo&nbsp;<br />
+								<span>$!billAddress.country</span><br />
+								<span>$!billAddress.PhoneNo&nbsp;<br />
 								$!billAddress.emailAddress</span>
 							</p>
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<h3 class="cimm_blockHeading">$locale.get("product.heading.shippingAddress")
-							<a href="$locale.get('website.url.Address')"><em class="glyphicon glyphicon-edit"></em></a>
+								<a data-toggle='modal' data-target='#shipPopUp'><em class="glyphicon glyphicon-edit"></em></a>
 							</h3>
 							<p>
 								<span>$!shipAddress.customerName</span><br />
 								<span>$!shipAddress.address1</span><br />
 								#if($shipAddress.address2)<span>$!shipAddress.address2</span><br />#end
 								<span>$!shipAddress.city, $!shipAddress.state</span><br />
-								<span>$!shipAddress.country, $!shipAddress.zipCodeStringFormat</span><br />
-								<span>$!shipAddress.phoneNo&nbsp;<br />$!shipAddress.emailAddress</span>
+								<span>$!shipAddress.country</span><br />
+								<span>$!shipAddress.PhoneNo&nbsp;<br />$!shipAddress.emailAddress</span>
 							</p>
 						</div>
 					</div>
@@ -142,7 +142,7 @@
 									<tbody>
 										#foreach($shipAddress in $shipAddressList)
 										<tr>
-											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.firstName $!shipAddress.lastName ##$!shipAddress.customerName</td>
+											<td class="alignLeft" data-th="$locale.get('form.label.name')">$!shipAddress.firstName $!shipAddress.lastName $!shipAddress.customerName</td>
 											<td class="alignLeft" data-th="$locale.get('form.label.address')">$shipAddress.address1<br />$!shipAddress.address2</td>		
 											<td data-th="$locale.get('form.label.city')">$shipAddress.city</td>
 											<td data-th="$locale.get('form.label.state')">$shipAddress.state</td>
@@ -163,7 +163,7 @@
 							<div id="promotedProductsTable"> Loading Espere por favor...</div>
 						</div> -->
 						<div class="col-md-6 col-sm-6 col-xs-12 mBottom-3">
-							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroup")</h3>          
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.myProductGroups")</h3>          
 							#if($groupListData.size()>0)
 								#set($countProductGroup = 0)
 								<div class="row">
@@ -196,7 +196,7 @@
 							#end
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12 mBottom-3">
-							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCarts")</h3>         
+							<h3 class="cimm_blockHeading">$locale.get("product.heading.mySavedCart")</h3>         
 							#if($savedCartData.size()>0)
 								#set($countSavedGroup = 0)
 								<div class="row">
@@ -232,8 +232,8 @@
 				</div>
 				<div id="order">
 					<div class="cimm_myorderModuls">
-						<div id="openOrderTable"> Loading Espere por favor...</div>
-						<div id="orderHistory" class="mTop-3"> Loading Espere por favor...</div>
+						<!-- <div id="openOrderTable"> Loading Espere por favor...</div> -->
+						<!-- <div id="orderHistory" class="mTop-3"> Loading Espere por favor...</div> -->
 					</div>
 				</div>
 			</div>
@@ -248,7 +248,7 @@
 			#foreach($recentOrders in  $recentlyOrderedItems)
 				<li>
 					<div class="cimm_slideItemImg">
-					#set($resentItemTitle = $!recentOrders.brandName+" "+$!recentOrders.manufacturerPartNumber)
+					#set($resentItemTitle = $!recentOrders.shortDesc)
 						<a href="$!recentOrders.seoUrl">
 							#if($recentOrders.imageType=="URL")
 							<img id="imageName$recentOrders.itemId" src="$recentOrders.imageName" alt='$resentItemTitle' onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
@@ -260,7 +260,7 @@
 					<div class="cimm_slideItemDesp text-center">
 						<ul>
 							<li><a href='$recentOrders.seoUrl' class="productTitle">$resentItemTitle</a></li>
-							<li><strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span></li>
+							<!-- <li><strong>$locale.get("product.label.partNumber"): </strong> <span id="partNumber$recentOrders.itemId">$!recentOrders.partNumber</span></li> -->
 						</ul>
 					</div>
 				</li>
@@ -270,4 +270,63 @@
 		#end
 	</div>
 	#end
+</div>
+
+<div class="row mTop-2 mLeft-0">
+	<!-- fillRateDesc -->
+	<div class="col-md-6 col-sm-6 col-xs-6 fillRateBg">
+		<span>$!locale.get('label.dashboard.concept')</span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRateBg">
+		<span id="fillFirst" ></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRateBg">
+		<span id="fillSec" ></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRateBg">
+		<span id="fillThree" ></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRateBg">
+		<span id="fillFour" ></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRateBg">
+		<span id="fillFive" ></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRateBg">
+		<span id="fillSix" ></span>
+	</div>
+	<!-- fillRateDesc -->
+</div>
+<div class="row mTop-2 mLeft-0 fillRateBtm">
+	<!-- fillRatePercent -->
+	<div class="col-md-6 col-sm-6 col-xs-6 fillRatePerBg">
+		<span>$!locale.get('label.dashboard.serviceLevel')</span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRatePerBg">
+		<span id="fillPerFirst" class="siteGreen"></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRatePerBg">
+		<span id="fillPerSec" class="siteGreen"></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRatePerBg">
+		<span id="fillPerThree" class="siteGreen"></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRatePerBg">
+		<span id="fillPerFour" class="siteGreen"></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRatePerBg">
+		<span id="fillPerFive" class="siteGreen"></span>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1 fillRatePerBg">
+		<span id="fillPerSix" class="siteGreen"></span>
+	</div>
+	<!-- fillRatePercent -->
+</div>
+<div class="row mTop-2 mLeft-0">
+	<div class="col-md-6 col-sm-6 col-xs-6 fillRatePerBg">
+		<span>$!locale.get('label.dashboard.serviceLevelSixM')</span>
+		<span id="fillAvgs" class="siteGreen"></span>
+	</div>
+	<div class="col-md-6 col-sm-6 col-xs-6 alignCenter fillRateAvgBg">
+	</div>
 </div>

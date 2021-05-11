@@ -199,6 +199,15 @@ function submitFormToServer(that){
 				responseCont = JSON.parse(response);
 				notified = responseCont.descriptions.join('<br/>');
 			}
+			if(notified == "Request Sent Successfully." || notified == "Request Sent Successfully"){
+				notified = 'Solicitud enviada con éxito'
+			}else if(notified == " User Already registered in this email. Please use different email."){
+				notified = 'Usuario ya registrado en este correo electrónico. Utilice un correo electrónico diferente.'
+			}else if(notified == "Processing is successful"){
+				notified = 'El procesamiento es exitoso'
+			}else{
+				notified = notified
+			}
 			if(responseCont.valid || responseVal == 1){
 				that[0].reset();
 				if(hideThat && hideThat != "Y"){
@@ -228,7 +237,7 @@ function submitFormToServer(that){
 							if(hideThat != "N"){
 								$(that).parents("#"+hideThat).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
 							}else{
-								$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');
+								$(that).parent().prepend('<div class="alert alert-success">'+notified+'<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a></div>');
 							}
 						}else if(hideThat == "Y"){
 							$(that).parent().prepend('<div class="alert alert-success">'+notified+'</div>');

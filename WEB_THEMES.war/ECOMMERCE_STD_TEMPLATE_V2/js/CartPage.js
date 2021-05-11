@@ -9,12 +9,11 @@ $(document).ready(function(){
 			"url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json"
 		},
 		"ordering": false,
-		searching: false,
+		"searching": false,
 		"bLengthChange": false,
 		"info": false,
 		"sDom": 't<"row"<"col-md-6 col-ms-6 col-sm-12 cartPagination"p><"col-md-6 col-ms-6 col-sm-12 cartTotalBlock">>'
 	});
-	$('.cartTotalBlock').html($("#copyPrice").html());
 	jQuery.ajax({ 
 		type: "POST",
 		url: "/SalesPromotionSynchService.slt?loadKieModule=true",
@@ -23,6 +22,8 @@ $(document).ready(function(){
 			console.log(msg);
 		}
 	});
+	//$('.cartTotalBlock').html($("#copyPrice").html());
+	
 });
 $('[data-function="saveCartFunction"]').click(function() {
 	var toggleListID = "#"+$(this).attr('data-listTarget');
@@ -537,14 +538,14 @@ function sendApproval() {
 		var status = true, description = "";
 		if(item.qty <= 0) {
 			status = false;
-			description = "Quantity cannot be less than or Equal to Zero";
+			description = locale('label.quanityCantAdd');
 		}
 		else if(item.qty < item.minOrderQty){
 			status = false;
-			description = "Quantity cannot be less than Minimum Order Quantity(" + item.minOrderQty +")";
+			description = locale('label.quantitylessMin')+"(" + item.minOrderQty +")";
 		}
 		else if(item.qty % item.qtyInterval != 0) {
-			description = "Item Can only Ordered in multiples of " + item.qtyInterval;
+			description = locale('label.qunatityMultiple')+" "+ tem.qtyInterval;
 			status = false;
 		}
 		return {

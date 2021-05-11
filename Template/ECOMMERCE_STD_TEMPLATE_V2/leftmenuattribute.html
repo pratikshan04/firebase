@@ -127,7 +127,7 @@
 							#if($count>6)
 							 #if($attrValueForSearch == 'Brands')
 								#set($attrValueForSearchbrand = $!locale.get('product.label.brands'))
-								<input type="text" id="box_$!attrValueForSearch" class="form-control filterTextBox" onkeyup="filterAttributes(this,'$attrValueForSearch.replaceAll(' ','-')');" title="Buscar attrValueForSearchbrand" value="Buscar $attrValueForSearchbrand"  onfocus="if(this.value=='Buscar attrValueForSearchbrand'){this.value='';}" onblur="if(this.value==''){this.value='Buscar attrValueForSearchbrand';}">
+								<input type="text" id="box_$!attrValueForSearch" class="form-control filterTextBox" onkeyup="filterAttributes(this,'$attrValueForSearch.replaceAll(' ','-')');" title="Buscar $attrValueForSearchbrand" value="Buscar $attrValueForSearchbrand"  onfocus="if(this.value=='Buscar $attrValueForSearchbrand'){this.value='';}" onblur="if(this.value==''){this.value='Buscar $attrValueForSearchbrand';}">
 								<div class="cimm_filter-scrollbar">
 							 #elseif($attrValueForSearch == 'Category')
 								#set($attrValueForSearchcat = $!locale.get('navigation.label.categories'))

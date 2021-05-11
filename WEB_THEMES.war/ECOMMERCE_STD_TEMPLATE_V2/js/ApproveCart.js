@@ -15,7 +15,7 @@ $(document).ready(function(){
 	}
 	if(itemCnt!=null && count!=null && count==itemCnt){
 		$("#approveCart, #updateSelectedItems").attr("disabled", true).addClass("btns-disable");
-		showNotificationDiv("error","You cannot add any item to cart from your product group. Please call for availability");
+		showNotificationDiv("error", locale('label.approveCart.cannotAdd'));
 	}
 	$(".cartElement").on('change',function(src){
 		checkBoxEventHander(src.target);
@@ -106,14 +106,14 @@ function validateCartItem(item){
 	var status = true, description = "";
 	if(item.qty <= 0) {
 		status = false;
-		description = "Quantity cannot be less than or Equal to Zero";
+		description = locale('label.quanityCantAdd');
 	}
 	else if(item.qty < parseInt(item.minOrderQty)){
 		status = false;
-		description = "Quantity cannot be less than Minimum Order Quantity(" + item.minOrderQty +")";
+		description = locale('label.quantitylessMin')+"(" + item.minOrderQty +")";
 	}
 	else if(item.qty % item.qtyInterval != 0) {
-		description = "Item Can only be Ordered in multiples of " + item.qtyInterval;
+		description = locale('label.qunatityMultiple') +" "+ item.qtyInterval;
 		status = false;
 	}
 	return {
