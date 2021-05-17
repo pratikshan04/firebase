@@ -139,6 +139,7 @@ function populateAvailabilityLabel(partNumber, availability) {
 	var productModeItem = document.querySelector("[data-partnumber='"+ partNumber + "']");
 	var itemId = productModeItem.getAttribute('data-itemid');
 	$(document.getElementById("selectItemCheckbox_" + itemId)).attr("disabled", false);
+	$(document.getElementById("selectItemCheckbox_" + itemId)).next().removeClass('btns-disable');
 	$(document.getElementById("linkg"+itemId)).removeClass('hideMe');
 	}
 	var availabilityStr = "";
@@ -172,6 +173,7 @@ function populateCallForAvailability(partNumber) {
 	var productModeItem = document.querySelector("[data-partnumber='"+ partNumber + "']");
 	var itemId = productModeItem.getAttribute('data-itemid');
 	$(document.getElementById("selectItemCheckbox_" + itemId)).attr("disabled", true);
+	$(document.getElementById("selectItemCheckbox_" + itemId)).next().addClass('btns-disable');
 	$(document.getElementById("linkg"+itemId)).addClass('hideMe');
 	}
 	if (document.getElementById('itemTxtSXAvail' + partNumber)) {

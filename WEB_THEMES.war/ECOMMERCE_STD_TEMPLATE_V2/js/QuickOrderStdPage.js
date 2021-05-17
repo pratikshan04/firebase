@@ -222,7 +222,7 @@ var QuickOrder = {};
     	            	//console.log(query.length);
     					if(query.length>2){
     	                    jQuery.ajax({
-                            url: '/AutoComplete.slt',
+                            	url: '/AutoComplete.action',
                             dataType: 'text',
                             data: {
                                 q: query,

@@ -207,7 +207,7 @@
 						</ul>
 						#end
 						#if($!itemList.lineItemComment.length()>0)
-							<ul><li><strong>Line Item Comment: </strong>$!itemList.lineItemComment </li></ul>
+							<ul><li><strong>$!locale.get("product.label.lineItemComment"): </strong>$!itemList.lineItemComment </li></ul>
 						#end
 					</td>
 					<td data-th="$!locale.get('product.label.qty')">$!itemList.qtyordered</td>

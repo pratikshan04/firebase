@@ -493,7 +493,7 @@ function autoCompleteCall(_this){
 			var searchType = $(_this).data("searchtype");
 			$('.autosuggestspan').each(function(){ $( this ).text(""); $( this ).html(""); });
 			$.ajax({
-			    url: '/AutoComplete.slt',
+				url: '/AutoComplete.action',
 			    dataType: 'text',
 			    data: { q: $.trim(query),  reqFrom: 'RFQ', searchType: searchType, overrideResultCount:"10" },
 			    success: function(response) {

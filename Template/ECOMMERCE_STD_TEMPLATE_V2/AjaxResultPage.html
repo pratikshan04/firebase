@@ -221,4 +221,48 @@
 </div>
 </div>
 #end
+
+#if($responseType=="InvoiceList")
+
+<div class="cimm_siteTableEnclosure rwd-tableWrap">
+	<table width="100%" border="0" cellpadding="3" cellspacing="0" id="orderHistoryTable" class="display table-striped" style="font-size: 10px;">
+		<thead>
+			<tr align="left">	
+					<th width="8%" align="center">Numero de Documentos</th>
+					<th width="8%" align="center">Descargar</th>
+					<th width="8%" align="center">Referencia</th>
+					<th width="8%" align="center">Tipo de Documento</th>
+					<th width="8%" align="center">Fecha de Documento</th>
+					<th width="8%" align="center">Fecha de Vencimiento</th>
+					<th width="8%" align="center">Dias Vencido</th>
+					<th width="8%" align="center">Monto</th>
+					<th width="8%" align="center">Saldo sin Vencer</th>
+					<th width="8%" align="center">Saldo Vencido</th>
+					<th width="8%" align="center">Pagar saldo</th>
+					<th width="8%" align="center">Registrar Pago</th>		
+				  </tr>
+		</thead>
+		<tbody>
+			#if($customerArInvoiceList && $customerArInvoiceList.size()>0)
+			#foreach($customerArInvoiceObj in $customerArInvoiceList)
+			<tr bgcolor="#ffffff" align="left">	 
+				<td background="images/site/tablerow0.gif">$!customerArInvoiceObj.invoiceNumber</td>
+				<td background="images/site/tablerow0.gif">$!customerArInvoiceObj.documentPath</td>
+				<td background="images/site/tablerow0.gif">$!customerArInvoiceObj.invoiceId</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceType</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceDate</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.dueDate</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAmountPaid</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.total</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.openBalance</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAmount</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAge</td>
+				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAge</td>		
+			</tr> 
+			#end
+			#end
+		</tbody>
+	</table>
+</div>
+#end
 #end
