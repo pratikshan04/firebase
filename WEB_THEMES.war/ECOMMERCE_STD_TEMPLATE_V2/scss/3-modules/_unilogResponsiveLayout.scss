@@ -65,9 +65,9 @@ $breakpoint-mobileView: 480px;
     margin: 0 auto;
   }
   .icon-bar {
-    background-color: $gray-dark;
+    background-color: $white;
     width: 100%;
-    height: 4px !important;
+    height: 5px !important;
     width: 28px !important;
   }
   .navbar-toggle .icon-bar + .icon-bar {
@@ -262,6 +262,7 @@ $breakpoint-mobileView: 480px;
   }
   .cimm_inlineButton {
     letter-spacing: 0.5px;
+    margin: 3px;
   }
   #ManagePurchaseAgent_wrapper .dataTables_filter {
     float: none;
@@ -363,7 +364,10 @@ $breakpoint-mobileView: 480px;
     width: 24%;
   }
   .ac_results {
-    top: 32px;
+    top: 43px;
+    padding: 10px;
+    width: 100%;
+    left: 0;
   }
   header {
     .cimm_header {
@@ -402,10 +406,15 @@ $breakpoint-mobileView: 480px;
       }
     }
   }
-  .ac_results ul {
-    /*top: 80px;
-		width: 100%;*/
-  }
+  // .ac_results ul {
+  //   /*top: 80px;
+	// 	width: 100%;*/
+  // }
+  header .cimm_header .cimm_header_mid .cimm_logo {
+    width: 250px;
+    height: 46px;
+    position: relative;
+}
   .cimm_brandAtoZletters.fixIt {
     left: 0;
   }
@@ -595,6 +604,16 @@ $breakpoint-mobileView: 480px;
       }
     }
   }
+  nav.navbar .cimm_nav>ul>li span>a .fa {
+    display: none;
+  }
+  .fotterLogo{
+    width: 250px;
+    height: 100px;
+  }
+  .socialMediaWrap{
+    text-align: center;
+  }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
   .calendarFilter ul li {
@@ -620,7 +639,7 @@ $breakpoint-mobileView: 480px;
       .form-group,
       .form-control {
         display: inline-block;
-        margin-bottom: 0;
+        margin-bottom: 3px;
         vertical-align: middle;
         width: auto;
       }
@@ -750,6 +769,7 @@ $breakpoint-mobileView: 480px;
   #productSearchForm input[type="text"] {
     width: calc(100% - 205px);
     display: inline-block;
+    margin-bottom: 3px;
   }
   .searchZero a {
     margin: 2px 0;
