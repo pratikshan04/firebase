@@ -224,40 +224,46 @@
 
 #if($responseType=="InvoiceList")
 
-<div class="cimm_siteTableEnclosure rwd-tableWrap">
-	<table width="100%" border="0" cellpadding="3" cellspacing="0" id="orderHistoryTable" class="display table-striped" style="font-size: 10px;">
+<div class="cimm_siteTableEnclosure rwd-table">
+	<table width="100%" border="0" cellpadding="3" cellspacing="0" id="invoiceTable" class="display table-striped" style="font-size: 10px;">
 		<thead>
-			<tr align="left">	
-					<th width="8%" align="center">Numero de Documentos</th>
-					<th width="8%" align="center">Descargar</th>
-					<th width="8%" align="center">Referencia</th>
-					<th width="8%" align="center">Tipo de Documento</th>
-					<th width="8%" align="center">Fecha de Documento</th>
-					<th width="8%" align="center">Fecha de Vencimiento</th>
-					<th width="8%" align="center">Dias Vencido</th>
-					<th width="8%" align="center">Monto</th>
-					<th width="8%" align="center">Saldo sin Vencer</th>
-					<th width="8%" align="center">Saldo Vencido</th>
-					<th width="8%" align="center">Pagar saldo</th>
-					<th width="8%" align="center">Registrar Pago</th>		
+			<tr>	
+					<th width="8%" align="left">Numero de Documentos</th>
+					<th width="8%" class="alignCenter">Descargar</th>
+					<th width="8%" class="alignCenter">Referencia</th>
+					<th width="8%" class="alignCenter">Tipo de Documento</th>
+					<th width="8%" class="alignCenter">Fecha de Documento</th>
+					<th width="8%" class="alignCenter">Fecha de Vencimiento</th>
+					<th width="8%" class="alignCenter">Dias Vencido</th>
+					<th width="8%" class="alignCenter">Monto</th>
+					<th width="8%" class="alignCenter">Saldo sin Vencer</th>
+					<th width="8%" class="alignCenter">Saldo Vencido</th>
+					<th width="8%" class="alignCenter">Pagar saldo</th>
+					<th width="8%" class="alignCenter">Registrar Pago</th>		
 				  </tr>
 		</thead>
 		<tbody>
 			#if($customerArInvoiceList && $customerArInvoiceList.size()>0)
 			#foreach($customerArInvoiceObj in $customerArInvoiceList)
-			<tr bgcolor="#ffffff" align="left">	 
-				<td background="images/site/tablerow0.gif">$!customerArInvoiceObj.invoiceNumber</td>
-				<td background="images/site/tablerow0.gif">$!customerArInvoiceObj.documentPath</td>
-				<td background="images/site/tablerow0.gif">$!customerArInvoiceObj.invoiceId</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceType</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceDate</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.dueDate</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAmountPaid</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.total</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.openBalance</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAmount</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAge</td>
-				<td background="images/site/tablerow0.gif" align="right">$!customerArInvoiceObj.invoiceAge</td>		
+			<tr>	 
+				<td align="left">$!customerArInvoiceObj.invoiceNumber</td>
+				<td class="alignCenter">
+					#foreach($doc in $!customerArInvoiceObj.documentLink)
+					<a href="$!doc.documentPath" target="_blank"><i class="far fa-file-pdf fa-lg"></i></a> 
+					#end
+				</td>
+				<td class="alignCenter">$!customerArInvoiceObj.invoiceId</td>
+				<td class="alignCenter">$!customerArInvoiceObj.invoiceType</td>
+				<td class="alignCenter">$!customerArInvoiceObj.invoiceDate</td>
+				<td class="alignCenter">$!customerArInvoiceObj.dueDate</td>
+				<td class="alignCenter required">$!customerArInvoiceObj.invoiceAmountPaid</td>
+				<td class="alignCenter">$!customerArInvoiceObj.total</td>
+				<td class="alignCenter">$!customerArInvoiceObj.openBalance</td>
+				<td class="alignCenter">$!customerArInvoiceObj.invoiceAmount</td>
+				<td class="alignCenter">
+					<input type="text" id="" name="" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="invoiceQuantity" placeholder="$0.00" />
+				</td>
+				<td class="alignCenter"><a href="javascript:void(0);" class="btn btn-sm btn-primary">$!locale.get('product.button.payOpenAmount')</a></td>		
 			</tr> 
 			#end
 			#end
