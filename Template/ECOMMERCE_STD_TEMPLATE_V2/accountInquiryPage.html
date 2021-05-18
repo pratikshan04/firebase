@@ -3,15 +3,15 @@
 </div>      
 	<div class="test">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12 col-xs-12">
 				<span><b>$!locale.get('label.accountInq.client')</b></span>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-6 col-sm-12 col-xs-12">
 				<span>$!userAccountDetail.CustomerName</span>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 col-sm-12 col-xs-12">
 				<span>$!locale.get('label.accountInq.clientNo') : $!userAccountDetail.customerId</span>
 			</div>
 		</div>
@@ -21,129 +21,52 @@
 			</div>
 		</div> -->
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!locale.get('label.accountInq.overdueBal')</span>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>Q $!userAccountDetail.pastDues</span>
 				
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!locale.get('label.accountInq.totalBal')</span>
 				
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>Q $!userAccountDetail.balance</span>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!locale.get('label.accountInq.creditNote')</span>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span> Q $!userAccountDetail.openOrderBalance</span>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!locale.get('label.accountInq.paymentAvg')</span>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!userAccountDetail.avgPaymentDays</span>	
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!locale.get('label.accountInq.term')</span>
 			</div>
-			<div class="col-md-3">
-				<span>$!userAccountDetail.termType</span>	
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<span>$!userAccountDetail.termsTypeDesc</span>	
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-12 col-xs-12">
 				<span>$!userAccountDetail.lastPaymentDate</span>
 			</div>
-			<div class="col-md-3">
-				<span>$!userAccountDetail.lastPaymentAmount</span>
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<span>Q $!userAccountDetail.lastPaymentAmount</span>
 			</div>
 		</div>
-		<div id="accountTable" class="accountTable cimm_siteTableEnclosure">
-			<table width="100%" border="0" cellpadding="3" cellspacing="0" id="orderHistoryTable" class="display table-striped">
-			<thead>
-			  <tr align="left" style="font-size: 10px;">	
-				<th width="8%" align="center">Numero de Documentos</th>
-				<th width="8%" align="center">Descargar</th>
-				<th width="8%" align="center">Referencia</th>
-				<th width="8%" align="center">Tipo de Documento</th>
-				<th width="8%" align="center">Fecha de Documento</th>
-				<th width="8%" align="center">Fecha de Vencimiento</th>
-				<th width="8%" align="center">Dias Vencido</th>
-				<th width="8%" align="center">Monto</th>
-				<th width="8%" align="center">Saldo sin Vencer</th>
-				<th width="8%" align="center">Saldo Vencido</th>
-				<th width="8%" align="center">Pagar saldo</th>
-				<th width="8%" align="center">Registrar Pago</th>		
-			  </tr>
-		 </thead>     
-			  
-		<tbody>
-		<!-- LOOP: Print Account Inquiry Items -->
-		#foreach($accountInquiryItem in $userAccountDetail.accountInquiryItemList)
-		<tr bgcolor="#ffffff" align="left">	 
-			<td background="images/site/tablerow0.gif">$!accountInquiryItem.orderDate</td>
-			<td background="images/site/tablerow0.gif">
-			#if($!accountInquiryItem.erpOrderNumber.contains('.'))
-				#set ($invoicNumberERP = $!accountInquiryItem.erpOrderNumber)
-			#set ($index = $invoicNumberERP.indexOf('.'))
-			#set ($invoicNumberERP = $invoicNumberERP.substring(0,$index))
-				<a class="orangeClr" href="OrderDetailSale.action?orderId=$invoicNumberERP">$!accountInquiryItem.erpOrderNumber</a>
-			#else
-				$!accountInquiryItem.erpOrderNumber
-			#end
-			</td>
-			<td background="images/site/tablerow0.gif">$!accountInquiryItem.poNumber</td>
-			<td background="images/site/tablerow0.gif" align="right">$$!accountInquiryItem.orderPriceStr</td>
-			<td background="images/site/tablerow0.gif" align="right">$$!accountInquiryItem.sPaymentAmount</td>
-			<td background="images/site/tablerow0.gif" align="right">$$numberTool.format("#0.00",$!accountInquiryItem.netDue)</td>
-			<td background="images/site/tablerow0.gif" align="right">$!accountInquiryItem.invoiceAge</td>
-			<td background="images/site/tablerow0.gif" align="right">$!accountInquiryItem.invoiceAge</td>
-			<td background="images/site/tablerow0.gif" align="right">$!accountInquiryItem.invoiceAge</td>
-			<td background="images/site/tablerow0.gif" align="right">$!accountInquiryItem.invoiceAge</td>
-			<td background="images/site/tablerow0.gif" align="right">$!accountInquiryItem.invoiceAge</td>
-			<td background="images/site/tablerow0.gif" align="right">$!accountInquiryItem.invoiceAge</td>		
-		</tr> 
-		 #end           
-		</tbody>
-	</table>
+		<div id="accountTable" class="accountTable cimm_siteTableEnclosure"></div>
 	</div>
-	</div>
-	<div class="dummyHeight"></div>
-	<script type="text/javascript">
-	$(document).ready( function () {
-		$('#orderHistoryTable').dataTable( {
-			"sPaginationType":"simple_numbers",
-			"sDom": '<"tabHeader">t<"tabFooter"p>',
-			"bJQueryUI": false,
-			"bAutoWidth": false,
-			"bSort": false,
-			"order" : [[1, 'desc']],
-			"columnDefs": [{ orderable: false, targets: -1 }],
-			"language": {
-				"search":"_INPUT_",
-				"sLengthMenu" :"Show _MENU_",
-				"oPaginate" : {
-					"sPrevious" :"Prev",
-					"sNext" :"Next"
-				}
-			}
-		});
-	});
 	
-		function disableAndSubmit(submitButton) {
-			$(submitButton).val("Espere por favor.");
-			$('.goButton').attr('disabled','disabled');
-			$('#accountInquiryForm').submit();
-	
-		}
-		
-	</script>
 	<style type="text/css">
 	.hideMe .DataTables_sort_wrapper{
 		display:none;

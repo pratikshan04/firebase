@@ -142,7 +142,7 @@
 #if($LayoutName != "CMSStaticPage")
 	<script type="text/javascript" defer>
 	$(document).ready(function () {
-		$("#txtSearch").autocomplete('AutoComplete.slt').keydown(function(e){
+		$("#txtSearch").autocomplete('AutoComplete.action').keydown(function(e){
 			if (e.keyCode === 13){ $("#query-form").trigger('submit'); } 
 		});
 	});

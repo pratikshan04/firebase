@@ -10,12 +10,15 @@
     	<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
 		<ul class="dropdown-menu">
 			#foreach($categoryMenu in $categMenu)
+			
 			<li class="sec">
+				#if($!categoryMenu.categoryName != "Promocionales y POP")
 				<span>
-					<a href="$!categoryMenu.seoUrl">$!categoryMenu.categoryName
-					#foreach($key in $secondLevelMenu.keySet())
-						#if($categoryMenu.categoryCode==$key) <em class="fa"></em> #end
-					#end
+					<a href="$!categoryMenu.seoUrl">
+							$!categoryMenu.categoryName
+							#foreach($key in $secondLevelMenu.keySet())
+								#if($categoryMenu.categoryCode==$key) <em class="fa"></em> #end
+							#end
 					</a>
 				</span>
 				#foreach($key in $secondLevelMenu.keySet())
@@ -33,14 +36,8 @@
 							<a href="$!categoryMenu.seoUrl"><u>$locale.get('lable.link.viewAllCategories')</u></a>
 						</span>
 					</li>	
-						<!-- <li>
-						#if($categoryMenu.imageName.contains("http") || $categoryMenu.imageType.equalsIgnoreCase("URL"))
-							<img width="120px" height="120px" alt="$!categoryMenu.categoryName" src="$!webThemes/$siteName/images/NoImage250x250.png" data-src="$!categoryMenu.imageName"  data-sizes="auto" class="lazyload" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
-					   #else
-							<img width="120px" height="120px" alt="$!categoryMenu.categoryName" src="$!webThemes/$siteName/images/NoImage250x250.png" data-src="$!taxonomyImage$!categoryMenu.imageName" data-sizes="auto" class="lazyload" onerror="this.src='$!webThemes/$siteName/images/NoImage.png';"/>
-					   #end
-						</li> -->
 				</ul>
+				#end
 				#end
 				#end
 			</li>

@@ -3,6 +3,10 @@
 @include font-face(RobotoBlack, 'https://cdnassets.unilogcorp.com/fonts/Roboto-Black-webfont', normal, normal, eot woff ttf svg, robotoblack);
 @include font-face(RobotoCondensedBold, 'https://cdnassets.unilogcorp.com/fonts/RobotoCondensed-Bold-webfont', normal, normal, eot woff ttf svg, roboto_condensedbold);
 
+@include font-face(MaisonNeueLight, 'https://cdnassets.unilogcorp.com/fonts/MaisonNeue-Light', normal, normal, eot woff ttf svg, maisonneuelight);
+@include font-face(MaisonNeueMedium, 'https://cdnassets.unilogcorp.com/fonts/MaisonNeue-Medium', normal, normal, eot woff ttf svg, maisonneuemedium);
+@include font-face(MaisonNeueBold, 'https://cdnassets.unilogcorp.com/fonts/MaisonNeue-Bold', normal, normal, eot woff ttf svg, maisonneuebold);
+
 @include font-face(Glyphicons Halflings, 'https://cdnassets.unilogcorp.com/fonts/glyphicons-halflings-regular', normal, normal, eot woff ttf svg, glyphicons_halflingsregular);
 
 /*@include font-face(RobotoCondenseRegular, './fonts/robotocondensed-regular-webfont', normal, normal, eot woff ttf svg, robotocondensedregular);

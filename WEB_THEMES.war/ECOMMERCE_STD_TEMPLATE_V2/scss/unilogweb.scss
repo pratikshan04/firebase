@@ -86,7 +86,7 @@ $modal_closebtn-color: $default_font-color;
 }
 
 .cimm_stickyPageWrap:after {
-    height: 360px
+    height: 355px
 }
 
 /*___________________Poup Modal____________________*/
@@ -233,6 +233,13 @@ $modal_closebtn-color: $default_font-color;
     width: 50px;
     text-align: center;
 	height: 32px;
+	padding: 5px;
+	text-align: center;
+}
+
+.invoiceQuantity {
+    width: 50px;
+	height: 20px;
 	padding: 5px;
 	text-align: center;
 }
@@ -1377,5 +1384,11 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     padding: 10px;  
     font-size: 14px;
     color: $secondary_color;
+}
+
+.orderSummaryWrap{
+    max-height: 450px;
+    height: auto;
+    overflow-y: scroll;
 }
 @import "3-modules/modules";

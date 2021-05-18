@@ -169,11 +169,11 @@ $.Autocompleter = function(input, options) {
 			$input.addClass(options.loadingClass);
 			if (!options.matchCase){ currentValue = currentValue.toLowerCase(); }
 			request(currentValue, receiveData, hideResultsNow);
-		}/* else {
-			if($("#trendingSearch") && $("#trendingSearch").val() == "Y"){ loadTrending(); }
+		}else {
+			//if($("#trendingSearch") && $("#trendingSearch").val() == "Y"){ loadTrending(); }
 			stopLoading();
 			select.hide();
-		}*/
+		}
 	};
 	function loadTrending(){
 		if($(".ac_trending").length < 1){ $("#search_Form").parent().append("<div class='ac_trending'></div>"); }
@@ -736,12 +736,12 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		var catBuilder = "";
 		catBuilder = catBuilder+'<div class="autocomplete-cat">';
 		catBuilder = catBuilder+'<div class="titleImg-container clearAfter">';
-		if(catImage === "http"){
-			catBuilder = catBuilder+'<img src="'+categoryDetail[1]+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+obj.data("value")+'" title="'+obj.data("value")+'">';
-		}else{
-			catBuilder = catBuilder+'<img src="'+assets+'/IMAGES/CATEGORIES/LIST_DISPLAY/'+categoryDetail[1]+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+obj.data("value")+'" title="'+obj.data("value")+'">';
-		}
-		catBuilder = catBuilder+'<div class="parent-title">'+catPath+'</div>';
+		// if(catImage === "http"){
+		// 	catBuilder = catBuilder+'<img src="'+categoryDetail[1]+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+obj.data("value")+'" title="'+obj.data("value")+'">';
+		// }else{
+		// 	catBuilder = catBuilder+'<img src="'+assets+'/IMAGES/CATEGORIES/LIST_DISPLAY/'+categoryDetail[1]+'" onerror=\'this.src="'+webThemes+'images/NoImage.png"\' alt="'+obj.data("value")+'" title="'+obj.data("value")+'">';
+		// }
+		//catBuilder = catBuilder+'<div class="parent-title">'+catPath+'</div>';
 		if(finalUrl.length<=0){
 			finalUrl = escape(categoryDetail[0])+'/category/'+obj.data("value").replace(/ /g,"-").toLowerCase().replace(/&#{0,1}[a-z0-9]+;/ig, "").replace(/[^A-Za-z0-9-]*/g, "").replace(/---/g,"-").replace(/--/g,"-");
 		}
@@ -772,7 +772,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 						msg = catBuilder + msg;
 						msg = msg+'</div>';
 						jQuery(".suggest").html(msg);
-						$('<a class="button" href="'+seoUrl+'">Productos </a>').appendTo('.titleImg-container');
+						$('<a class="button pull-right" href="'+seoUrl+'">Productos </a>').appendTo('.titleImg-container');
 						//$('<a class="button" href="/'+reqId+'/category/'+replaced+'">Shop Category</a>').appendTo('.titleImg-container');
 				   }else{
 					   jQuery(".suggest").html(msg);

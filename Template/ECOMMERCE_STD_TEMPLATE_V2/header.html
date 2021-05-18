@@ -60,7 +60,7 @@
 		#if($!userAgent == "WEBVIEW")
 		<div class="cimm_searchWrapper">
 		    <form class="cimm_searchForm webViewSearch clearAfter" id="search_Form">
-	    		<input class="form-control" type="text" onkeypress="return runScript(event);" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" id="txtSearch" name="keyWord" value="#if($keyWord && $resultCount>0)$!keyWord #else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value='';this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"/>
+	    		<input class="form-control" type="text" onkeypress="return runScript(event);" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" id="txtSearch" name="keyWord" value="#if($keyWord && $resultCount>0)$!keyWord #else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"/>
     			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-2x fa-search"></em></button>
 				<a class="cimm_cameraIcon" onclick="callToVisionapi();"><em class="fa fa-2x fa-camera"></em></a>
 				<a class="cimm_cameraIcon mLeft-3" onclick="voiceSearch();"><em class="fa fa-2x fa-microphone"></em></a>
@@ -107,12 +107,13 @@
 			<img itemprop="logo" src="$!hostName/$webThemes/$siteName/images/logo-truper.png" width="130px" height="50px" alt="$!siteDisplayName" />
 			</a>
 		</li>
-		<li>
+		<!-- <li>
 			<ul class="cimm_contactWrap">
 				<li><a href="https://api.whatsapp.com/send?phone=5575034176&text=Hola! Quisiera mas informacion" target="_blank"><i class="fab fa-whatsapp"></i>&nbsp;&nbsp;<span>+(502) 2499-5000</span></a></li>
 				<li><a href="tel:+50224995000"><i class="fas fa-phone"></i>&nbsp;&nbsp; <span>+(502) 2499-5000</span></a></li>
 			</ul>
-		</li>
+		</li> -->
+		<li><a href="tel:+50224995000"><i class="fas fa-phone"></i>&nbsp;&nbsp; <span>+(502) 2499-5000</span></a></li>
 		#if($userLogin)
 			<li class="dropdown">
 				<span class="imgBox1"><em class="fa fa-user-circle"></em></span>
