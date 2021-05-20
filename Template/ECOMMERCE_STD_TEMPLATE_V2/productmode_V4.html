@@ -138,6 +138,7 @@
 			</span>
 		     </td>
 			 <td class="tabelPrice removeForSend" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+			 	#if($userLogin)
 			 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan" data-select='priceData'>
 				 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 						#if($productModeitemData.price>0)
@@ -147,8 +148,11 @@
 				    	#end
 				    #else
 				    	<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
-				    #end
+				    #end  
 			    </span>
+			    #else
+				   <span class='priceSpan'>$!locale.get("label.loginForPrice")</span>
+			   #end
 			 </td>
 			 <td class="tableAvail removeForSend">
 			 	<span class="productAvail_$!itemData.partNumber" data-select='availability'>
@@ -208,7 +212,7 @@
 							$!locale.get("marketBasket.button.addToProductGroup")
 						</a>
 					#else
-						<a data-toggle="modal" data-target="#loginModal" class="btn btn-primary"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
+						<a data-toggle="modal" data-target="#loginModal"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
 					#end
 					<ul id="ulg$!productModeitemData.itemId" class="dropdown-menu">
 						<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>
@@ -241,9 +245,9 @@
 	<!-- Single Item details -->
 	<div class="cimm_productModeDetailWrap clearAfter">
 		<div class="cimm_productModeDetail">
-			<h2 class="productTitle" id="itemTitle$itemData.ItemId">$!itemData.shortDesc
+			<h6 class="productTitle" id="itemTitle$itemData.ItemId">$!itemData.shortDesc
 				<input type="hidden" id="titleText" name="titleText" value="$itemData.brandName $!itemData.manufacturerPartNumber"/>
-			</h2>
+			</h6>
 			<!-- <p class="cimm_itemShortDesc" id="itemShortDesc$itemData.itemId">$!itemData.shortDesc</p>  -->
 			<ul class="skuStyle">
 				<li id="sitePartNo">
@@ -347,7 +351,7 @@
 		</ul>
 	#if($itemMarketingText || $itemLongDesc || $itemData.itemFeature || $itemAttributesList && $itemAttributesList.size()>0)
 	<div class="multiTabContent">
-		#if($itemMarketingText || $itemLongDesc)
+		#if($itemMarketingText != "" || $!itemLongDesc != "")
 			<div id="descriptionSection">
 			#if($itemMarketingText)
 				<p>$itemMarketingText</p>
@@ -370,7 +374,7 @@
 			</table>
 		</div>
 		#end
-		#if($itemData.itemFeature)
+		#if($itemData.itemFeature != "")
 		<div id="featureSection">
 			$itemData.itemFeature
 		</div>

@@ -655,6 +655,7 @@
 								</span>
 							     </td>
 								 <td class="tabelPrice removeForSend" id="tdPrice_$!productModeitemData.partNumber.replaceAll('\s+','_')">
+								 	#if($userLogin)
 								 	<span id="span_$!productModeitemData.partNumber.replaceAll(' ','_')" class="priceSpan" data-select='priceData'>
 									 	#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											#if($productModeitemData.price>0)
@@ -666,6 +667,9 @@
 									    	<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px" />
 									    #end
 								    </span>
+								     #else
+				   					<span class='priceSpan'>$!locale.get("label.loginForPrice")</span>
+			   						#end
 								 </td>
 								 <td class="tableAvail removeForSend">
 								 	<span class="Avail_$!productModeitemData.partNumber" data-select='availability'>
@@ -713,7 +717,7 @@
 												$!locale.get("marketBasket.button.addToProductGroup")
 											</a>
 										#else
-											<a data-toggle="modal" data-target="#loginModal" class="btn btn-primary"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
+											<a data-toggle="modal" data-target="#loginModal"><span>$!locale.get("marketBasket.button.addToProductGroup")</span></a>
 										#end
 										<ul id="ulg$!productModeitemData.itemId" class="dropdown-menu">
 											<li class="alignCenter"><em class="fa fa-spin fa-spinner"></em></li>

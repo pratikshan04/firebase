@@ -608,11 +608,14 @@ $breakpoint-mobileView: 480px;
     display: none;
   }
   .fotterLogo{
-    width: 250px;
-    height: 100px;
+    width: 150px;
+    height: 50px;
   }
   .socialMediaWrap{
     text-align: center;
+  }
+  #searchResults li {
+    width: 215px!important;
   }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
@@ -887,10 +890,19 @@ $breakpoint-mobileView: 480px;
     margin: 25px 1% 0 1%;
     width: 98%;
   }
+  #searchResults li {
+    width: 188px!important;
+  }
 }
 @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
   #generalModel .modal-body {
     max-height: 320px;
+  }
+  .fillRatePerBg{
+    padding: 0;
+  }
+  .fillRateBg{
+    padding: 0;
   }
 }
 @media all and (max-width: $breakpoint-tabletPortrait - 1) {
