@@ -887,6 +887,9 @@ $breakpoint-mobileView: 480px;
     margin: 25px 1% 0 1%;
     width: 98%;
   }
+  .ardDivTab .row>div{
+    width: 100%;
+  }
 }
 @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
   #generalModel .modal-body {

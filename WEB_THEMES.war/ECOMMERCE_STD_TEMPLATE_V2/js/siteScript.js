@@ -1362,7 +1362,7 @@ function addToProductList(_this) {
 	}
 	if (groupId == 0) {
 		if (groupName == "") {
-			bootAlert("small", "error", "Error", "Please Enter Valid Group Name.");
+			bootAlert("small", "error", "Error", locale('label.valid.favorito'));
 			return false;
 		} else {
 			var characterReg = /^[-_ a-zA-Z0-9]+$/;

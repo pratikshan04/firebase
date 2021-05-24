@@ -223,52 +223,52 @@
 #end
 
 #if($responseType=="InvoiceList")
-
+#if($customerArInvoiceList && $customerArInvoiceList.size()>0)
 <div class="cimm_siteTableEnclosure rwd-table">
-	<table width="100%" border="0" cellpadding="3" cellspacing="0" id="invoiceTable" class="display table-striped" style="font-size: 10px;">
+	<table width="100%" border="0" cellpadding="3" cellspacing="0" id="invoiceTable" class="table table-striped display rwd-table" style="font-size: 12px;">
 		<thead>
 			<tr>	
-					<th width="8%" align="left">Numero de Documentos</th>
-					<th width="8%" class="alignCenter">Descargar</th>
-					<th width="8%" class="alignCenter">Referencia</th>
-					<th width="8%" class="alignCenter">Tipo de Documento</th>
-					<th width="8%" class="alignCenter">Fecha de Documento</th>
-					<th width="8%" class="alignCenter">Fecha de Vencimiento</th>
-					<th width="8%" class="alignCenter">Dias Vencido</th>
-					<th width="8%" class="alignCenter">Monto</th>
-					<th width="8%" class="alignCenter">Saldo sin Vencer</th>
-					<th width="8%" class="alignCenter">Saldo Vencido</th>
-					<th width="8%" class="alignCenter">Pagar saldo</th>
-					<th width="8%" class="alignCenter">Registrar Pago</th>		
+					<th width="15%" align="left">$!locale.get('product.invoice.numberDoc')</th>
+					<th width="5%" class="alignCenter">$!locale.get('product.invoice.pdf')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.reference')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.docType')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.docDate')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.dueDate')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.daysOverdue')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.amount')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balNotDue')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balDue')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balTotalAmount')</th>
+					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balDuePay')</th>		
 				  </tr>
 		</thead>
 		<tbody>
-			#if($customerArInvoiceList && $customerArInvoiceList.size()>0)
 			#foreach($customerArInvoiceObj in $customerArInvoiceList)
 			<tr>	 
-				<td align="left">$!customerArInvoiceObj.invoiceNumber</td>
-				<td class="alignCenter">
+				<td align="left" data-th="$!locale.get('product.invoice.numberDoc')">$!customerArInvoiceObj.invoiceNumber</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.pdf')">
 					#foreach($doc in $!customerArInvoiceObj.documentLink)
-					<a href="$!doc.documentPath" target="_blank"><i class="far fa-file-pdf fa-lg"></i></a> 
+					<a href="$!doc.documentPath" target="_blank" class="siteSecColor"><i class="far fa-file-pdf fa-lg"></i></a> 
 					#end
 				</td>
-				<td class="alignCenter">$!customerArInvoiceObj.invoiceId</td>
-				<td class="alignCenter">$!customerArInvoiceObj.invoiceType</td>
-				<td class="alignCenter">$!customerArInvoiceObj.invoiceDate</td>
-				<td class="alignCenter">$!customerArInvoiceObj.dueDate</td>
-				<td class="alignCenter required">$!customerArInvoiceObj.invoiceAmountPaid</td>
-				<td class="alignCenter">$!customerArInvoiceObj.total</td>
-				<td class="alignCenter">$!customerArInvoiceObj.openBalance</td>
-				<td class="alignCenter">$!customerArInvoiceObj.invoiceAmount</td>
-				<td class="alignCenter">
-					<input type="text" id="" name="" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="invoiceQuantity" placeholder="$0.00" />
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.reference')">$!customerArInvoiceObj.invoiceId</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.docType')">$!customerArInvoiceObj.invoiceType</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.docDate')">$!customerArInvoiceObj.invoiceDate</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.dueDate')">$!customerArInvoiceObj.dueDate</td>
+				<td class="alignCenter required" data-th="$!locale.get('product.invoice.daysOverdue')">$!customerArInvoiceObj.invoiceAmountPaid</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.amount')">$!customerArInvoiceObj.total</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.balNotDue')">$!customerArInvoiceObj.openBalance</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.balDue')">$!customerArInvoiceObj.invoiceAmount</td>
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.balTotalAmount')">
+					<input type="text" id="" name="" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="invoiceQuantity" placeholder="Q 0.00" />
 				</td>
-				<td class="alignCenter"><a href="javascript:void(0);" class="btn btn-sm btn-primary">$!locale.get('product.button.payOpenAmount')</a></td>		
+				<td class="alignCenter" data-th="$!locale.get('product.invoice.balDuePay')"><a href="javascript:void(0);" class="btn btn-sm btn-primary">$!locale.get('product.button.payOpenAmount')</a></td>		
 			</tr> 
 			#end
-			#end
+			
 		</tbody>
 	</table>
 </div>
+#end
 #end
 #end

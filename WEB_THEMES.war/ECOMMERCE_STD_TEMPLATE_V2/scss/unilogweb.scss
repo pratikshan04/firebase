@@ -168,6 +168,7 @@ $modal_closebtn-color: $default_font-color;
     font-family: $secondary_font-family;
     font-size: $font_lg;
     color: $primary_color;
+    font-weight: bold;
     img {
         width: auto !important;
         display: inline-block !important;
@@ -177,6 +178,7 @@ $modal_closebtn-color: $default_font-color;
     font-family: $secondary_font-family;
     font-size: $font_lg;
     color: $primary_color;
+    font-weight: bold;
     img {
         width: auto;
         display: inline-block;
@@ -1164,7 +1166,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 }
 .clearenceTag{
     background: url(../images/Clearance_Icon.png) no-repeat 0 0;
-    height: 65px;
+    height: 20px;
     width: 110px;
     display: block;
     background-size: contain;
@@ -1335,11 +1337,11 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     }
 }
 
-.test {
+.ardDivTab {
     font-size: 14px;
     border: 2px solid #e0e0e0;
 .row{
-    height: 48px;
+    height: auto;
     margin: 0;
     >div{
         padding: 10px;
@@ -1386,7 +1388,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     color: $secondary_color;
 }
 
-.orderSummaryWrap{
+.orderWrap, .reviewOrderWrap{
     max-height: 450px;
     height: auto;
     overflow-y: scroll;

@@ -274,3 +274,8 @@ table.dataTable thead tr{
 .table>thead>tr>th{
   border-top: 0;
 }
+#invoiceTable.table{
+  thead{
+    border-top: 2px solid #e0e0e0;
+  }
+}

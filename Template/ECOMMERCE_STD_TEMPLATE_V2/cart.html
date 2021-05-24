@@ -30,16 +30,19 @@
 	#end
 	</div>
 	<div class="cartTotal_Top col-md-8 col-sm-8 col-xs-12">
+		<h4 class="required pull-left">$!locale.get('product.checkout.minAmountText')</h4>
 		<span class="btn btn-primary cartPointer">
 			<strong class="mRight-3">$!locale.get("product.label.totalItem"): $cartCount</strong>
-			<strong>$!locale.get("product.label.orderTotal"): <span class="formatPrice">$ $numberTool.format("$numberToolFormat",$!cartTotal)</span></strong>
+			<strong>$!locale.get("product.label.orderTotal"): <span class="formatPrice">Q $numberTool.format("$numberToolFormat",$!cartTotal)</span></strong>
 		</span>
 		#if($userLogin) 
+		#if($!cartTotal >= 500)
 			#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 			#else
 				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
 			#end 
+		#end
 		#else
 			#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 				<a class="btn btn-primary btn-md mRight-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
@@ -251,7 +254,7 @@
             </tbody>
         </table>
 	<p id="copyPrice" class='cartTotalBlock text-right'>
-		<span class="priceLabel">$!locale.get("product.label.total"): </span><span class="priceValue formatPrice">&nbsp;&nbsp;&nbsp;$ $numberTool.format("$numberToolFormat",$!cartTotal)</span>
+		<span class="priceLabel">$!locale.get("product.label.total"): </span><span class="priceValue formatPrice">&nbsp;&nbsp;&nbsp;Q $numberTool.format("$numberToolFormat",$!cartTotal)</span>
 	</p>
     <div class="cimm_btnGroupEnclosure">
         <ul class="clearAfter">
@@ -280,11 +283,13 @@
 			<li><a class="" href="javascript:void(0);" onclick="deleteItem('$!hostName/deleteCartPage.action?deleteFlag=Y','1','')"><em class="fa fa-shopping-cart"></em>$!locale.get("product.button.emptyCart")</a></li>
             <li>
             	#if($userLogin) 
+				#if($!cartTotal >= 500)
 	            	#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 						<a class="btn btn-primary btn-md mRight-3" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 					#else
 						<a class="btn btn-primary btn-md" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a> 
 					#end 
+				#end
 	            #else
 	            	#if(($!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y"))
 	            	<a class="btn btn--md btn-primary marginX-3 mRight-3" href="javascript:void(0);" onclick="standardCheckout();">$!locale.get("product.heading.checkout")</a>
