@@ -56,14 +56,14 @@ input[type='submit'] {
 //Add to Cart Button`
 .btn-addtocart, .btn-letMeknow {
     text-transform: uppercase;
-    vertical-align: unset;
+    vertical-align: inherit;
     padding-left: 60px;
     &.btns-disable {
         opacity: .3;
     }
     &:before{
         background: url(../../ECOMMERCE_STD_TEMPLATE_V2/images/cartIconBtn.png) no-repeat !important;
-        width: 40px;
+        width: 100%;
         height: 24px;
     }
 }

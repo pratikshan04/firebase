@@ -83,48 +83,29 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.shipToName") </label>
-											<select id="defaultShipToId" name="defaultShipToId" onchange="checkoutWizard.changeShippingAddress(this);" class="form-control selectpicker">
-						                       #if($!shipAddressList)
-						                            #foreach($shipList in $shipAddressList)
-						                            <option value="$!shipList.addressBookId">$!shipList.address1</option>## $!shipList.customerName #if($shipList.addressBookId==$defaultShipToId)selected#end
-						                           #end
-						                        #end
-						                    </select>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
 											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
 											<input type="text" name="shipCompanyName" id="shipCompanyName" value="$!shipAddress.customerName" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/>
 										</div>
 									</div>
-								</div>
-								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
 											<input type="text" name="shipAddress1" id="shipAddress1" value="$!shipAddress.address1" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')" />
 										</div>
 									</div>
+									
+								</div>
+								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.address2") </label>
 											<input type="text" name="shipAddress2" id="shipAddress2" value="$!shipAddress.address2" class="form-control" /> 
 										</div>
 									</div>
-								</div>
-								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
 											<input type="text" name="shipCity" id="shipCity" value="$!shipAddress.city" class="form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
-											<select name="shipState" id="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
 								</div>
@@ -140,12 +121,18 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
-											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')" onkeypress="return IsNumeric(event)" maxlength="12"/>
+											<label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
+											<select name="shipState" id="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
 								</div>
 								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
+											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')" onkeypress="return IsNumeric(event)" maxlength="12"/>
+										</div>
+									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.email") </label>
@@ -303,80 +290,82 @@
 				<a class="pull-right" href="$!locale.get('website.url.ShoppingCart')">$!locale.get("product.button.editCart")</a>
 				<div class="clear"></div>
 				<div id="confirmOrderPageDiv">
-					<table class="table cimm_siteTable display rwd-table" id="cartWrap">
-			            <thead>
-			                <tr>
-			                    <th>$!locale.get("header.label.items")</th>
-			                    <th>$!locale.get("product.label.quantity")</th>
-			                    <th>$!locale.get("product.label.price")</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-			                #foreach($itemData in $productListData)
-			                #set($itemTitle= $!itemData.shortDesc) #set($savedCartItemId = $!itemData.itemId)
-			                <tr itemscope itemtype="http://schema.org/Product">
-			                    <td class="alignLeft" data-th="$!locale.get('product.label.description')">
-			                    <ul>
-									<li><a href="$!itemData.seoUrl">$!itemData.shortDesc</a></li>
-									<li>
-										<!-- <p>$!itemData.shortDesc</p> -->
-										<div id="minErr_$!itemData.itemPriceId"></div>
-									</li>
-									<li>
-										<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
-										#if($itemData.manufacturerPartNumber)<p><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>#end
-									</li>
-									#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
-									<li>
-										<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
-										<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
-									</li>
-									#end
-									<!-- #if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
-				                    <li>
-				                        <strong>$!locale.get("product.label.cpn"): </strong>
-				                        #set($seperator = "")
-				                        #set($partList = "")
-				                           #foreach($!customerPart in $!itemData.customerPartNumberList)
-				                               #set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end
-				                               #if($customerPart.partNumber)$!customerPart.partNumber#end")
-				                               	#set($seperator = ",")
-				                          		#end
-				                       	$!partList
-				                   	</li>
-					                #end -->
-									 #set($leadTime = "N")
-									#set($available = "N")
-									#set($allBranch = $!itemData.branchAvail)
-									#foreach($!eachBranch in $!allBranch)
-									#if($eachBranch.branchID==$!session.getAttribute("shipBranchId"))
-										#if($eachBranch.branchAvailability=="0")
-											#if($eachBranch.earliestMoreDays>0)
-												#set($leadTime = $!eachBranch.earliestMoreDays)
-											#else
-												#set($leadTime = $!eachBranch.plentyDays)
-											#end
-										#else
-											#set($available = $!eachBranch.branchAvailability)
+					<div class="orderWrap">
+						<table class="table cimm_siteTable display rwd-table" id="cartWrap">
+							<thead>
+								<tr>
+									<th>$!locale.get("header.label.items")</th>
+									<th>$!locale.get("product.label.quantity")</th>
+									<th>$!locale.get("product.label.price")</th>
+								</tr>
+							</thead>
+							<tbody>
+								#foreach($itemData in $productListData)
+								#set($itemTitle= $!itemData.shortDesc) #set($savedCartItemId = $!itemData.itemId)
+								<tr itemscope itemtype="http://schema.org/Product">
+									<td class="alignLeft" data-th="$!locale.get('product.label.description')">
+									<ul>
+										<li><a href="$!itemData.seoUrl">$!itemData.shortDesc</a></li>
+										<li>
+											<!-- <p>$!itemData.shortDesc</p> -->
+											<div id="minErr_$!itemData.itemPriceId"></div>
+										</li>
+										<li>
+											<p><strong>$!locale.get("product.label.partNumber"): </strong>$!itemData.partNumber</p>
+											#if($itemData.manufacturerPartNumber)<p><strong>$!locale.get("product.label.mpn"): </strong>$!itemData.manufacturerPartNumber</p>#end
+										</li>
+										#if($!itemData.standardApprovals && $!itemData.standardApprovals !="" && ($commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("WARNING:") != -1  || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf("PENDING") != -1 || $commonUtility.validateString($!itemData.standardApprovals).toUpperCase().indexOf('$!locale.get("california.restriction.string")') != -1))
+										<li>
+											<input type='hidden' id='californiaWarningMessage' value='$!itemData.standardApprovals'/>
+											<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
+										</li>
 										#end
-										#break
-									#end
-									#end
-									<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
-									#if($leadTime!="N")
-										<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
-									#elseif($!available!="N")
-										<strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
-									#end
-									</li> -->
-								</ul>
-			                   	</td>
-			                    <td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">$!itemData.qty</td>
-			                    <td data-th="$!locale.get('product.label.extPrice')"><strong class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</strong></td>
-			                </tr>
-			                #end
-			            </tbody>
-			        </table>
+										<!-- #if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
+										<li>
+											<strong>$!locale.get("product.label.cpn"): </strong>
+											#set($seperator = "")
+											#set($partList = "")
+											   #foreach($!customerPart in $!itemData.customerPartNumberList)
+												   #set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end
+												   #if($customerPart.partNumber)$!customerPart.partNumber#end")
+													   #set($seperator = ",")
+													  #end
+											   $!partList
+										   </li>
+										#end -->
+										 #set($leadTime = "N")
+										#set($available = "N")
+										#set($allBranch = $!itemData.branchAvail)
+										#foreach($!eachBranch in $!allBranch)
+										#if($eachBranch.branchID==$!session.getAttribute("shipBranchId"))
+											#if($eachBranch.branchAvailability=="0")
+												#if($eachBranch.earliestMoreDays>0)
+													#set($leadTime = $!eachBranch.earliestMoreDays)
+												#else
+													#set($leadTime = $!eachBranch.plentyDays)
+												#end
+											#else
+												#set($available = $!eachBranch.branchAvailability)
+											#end
+											#break
+										#end
+										#end
+										<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
+										#if($leadTime!="N")
+											<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
+										#elseif($!available!="N")
+											<strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
+										#end
+										</li> -->
+									</ul>
+									   </td>
+									<td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">$!itemData.qty</td>
+									<td data-th="$!locale.get('product.label.extPrice')"><strong class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</strong></td>
+								</tr>
+								#end
+							</tbody>
+						</table>
+					</div>
 			        <div class="cimm_salesBottomStrip cimm_cartSalesBottomStrip clearAfter">
 				        <ul>
 				            <li class="clearAfter">

@@ -1,66 +1,89 @@
 <div class="cimm_orderHistSearchByWrap">           
 	<h6 class="sitePrimeColor"> $locale.get("orderhistorypage.label.account")</h6>
 </div>      
-	<div class="test">
+	<div class="ardDivTab">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<span><b>$!locale.get('label.accountInq.client')</b></span>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-sm-6 col-xs-12">
 				<span>$!userAccountDetail.CustomerName</span>
 			</div>
-			<div class="col-md-6 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-sm-6 col-xs-12">
 				<span>$!locale.get('label.accountInq.clientNo') : $!userAccountDetail.customerId</span>
 			</div>
 		</div>
-		<!-- <div class="row">
-			<div class="col-md-12">
-				<span>$!userAccountDetail.address1</span>
-			</div>
-		</div> -->
+		#if($!billAddressList)
+		#foreach($!billAddress in $!billAddressList)
 		<div class="row">
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<span>$!billAddress.address1, $!billAddress.address2, $!billAddress.city, $!billAddress.state, $!billAddress.country </span>
+			</div>
+		</div>
+		#end
+		#end
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+		
+             #if($!CommonDBQuerySystemParameter.get("DashboardEnableLastLoginDetails") == 'Y')
+           	<h6>$!locale.get('label.last.login'): 
+			  		#if($!lastLogin && $!lastLogin.size()>0)
+				 		#foreach($loginDetails in $lastLogin.entrySet())
+					 		#if($!loginDetails.getKey() && $loginDetails.getKey().trim().toUpperCase()=="LASTLOGIN")
+							 <span id="divLocal"></span>
+							 <input type="hidden" id="divUTC" value="$loginDetails.getValue()" />					 		
+							#end
+						#end
+					#else
+						N/A
+					#end
+			   </h6>
+	     	#end
+			</div>
+		</div> 
+		<div class="row">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!locale.get('label.accountInq.overdueBal')</span>
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>Q $!userAccountDetail.pastDues</span>
 				
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!locale.get('label.accountInq.totalBal')</span>
 				
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
-				<span>Q $!userAccountDetail.balance</span>
+			<div class="col-md-3 col-sm-6 col-xs-6">
+				<span> Q $!userAccountDetail.openOrderBalance</span>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!locale.get('label.accountInq.creditNote')</span>
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
-				<span> Q $!userAccountDetail.openOrderBalance</span>
+			<div class="col-md-3 col-sm-6 col-xs-6">
+				<span>Q $!userAccountDetail.balance</span>
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!locale.get('label.accountInq.paymentAvg')</span>
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!userAccountDetail.avgPaymentDays</span>	
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!locale.get('label.accountInq.term')</span>
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!userAccountDetail.termsTypeDesc</span>	
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>$!userAccountDetail.lastPaymentDate</span>
 			</div>
-			<div class="col-md-3 col-sm-12 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<span>Q $!userAccountDetail.lastPaymentAmount</span>
 			</div>
 		</div>

@@ -76,7 +76,7 @@
 		    	$!session.getAttribute("salesUserDetails").get("firstName") $!session.getAttribute("salesUserDetails").get("lastName")
 		    </span>
 	    	#end
-	    	<span class="mRight-3"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>
+	    	#if($userLogin)<span class="mRight-3"><b>$!locale.get("product.heading.welcome"):</b> $!session.getAttribute("userFirstName") $!session.getAttribute("userLastName")</span>#end
 			<a href="$!locale.get('website.url.ShoppingCart')" class="mobileCartCount"><span id="cartCountrefresh" class="cartCountrefresh">$!cartCount</span></a>
 			#if($userLogin)
 			<a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em></a>
