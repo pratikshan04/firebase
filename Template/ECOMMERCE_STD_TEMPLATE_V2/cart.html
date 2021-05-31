@@ -40,7 +40,7 @@
 			#if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N")
 				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2" href="javascript:void(0);" #if($session.getAttribute("emailAddressExits")=="N") onclick="updateEmailAddressPopUp();" #else onclick="standardCheckout();"#end>$!locale.get("product.heading.checkout")</a>
 			#else
-				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
+				<a class="btn btn-btn-md btn-primary marginX-3 mRight-2 #if($!cartTotal >= 500) mTop-2 #end" id="sendApproval" href="javascript:void(0);" onclick="sendApproval();">$!locale.get("product.button.submitforApproval")</a>
 			#end 
 		#end
 		#else

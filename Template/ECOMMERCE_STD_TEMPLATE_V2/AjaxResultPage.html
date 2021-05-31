@@ -238,8 +238,8 @@
 					<th width="8%" class="alignCenter">$!locale.get('product.invoice.amount')</th>
 					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balNotDue')</th>
 					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balDue')</th>
-					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balTotalAmount')</th>
-					<th width="8%" class="alignCenter">$!locale.get('product.invoice.balDuePay')</th>		
+					<!-- <th width="8%" class="alignCenter">$!locale.get('product.invoice.balTotalAmount')</th> -->
+					<!-- <th width="8%" class="alignCenter">$!locale.get('product.invoice.balDuePay')</th>		 -->
 				  </tr>
 		</thead>
 		<tbody>
@@ -259,13 +259,12 @@
 				<td class="alignCenter" data-th="$!locale.get('product.invoice.amount')">$!customerArInvoiceObj.total</td>
 				<td class="alignCenter" data-th="$!locale.get('product.invoice.balNotDue')">$!customerArInvoiceObj.openBalance</td>
 				<td class="alignCenter" data-th="$!locale.get('product.invoice.balDue')">$!customerArInvoiceObj.invoiceAmount</td>
-				<td class="alignCenter" data-th="$!locale.get('product.invoice.balTotalAmount')">
+				<!-- <td class="alignCenter" data-th="$!locale.get('product.invoice.balTotalAmount')">
 					<input type="text" id="" name="" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop="return false;" class="invoiceQuantity" placeholder="Q 0.00" />
-				</td>
-				<td class="alignCenter" data-th="$!locale.get('product.invoice.balDuePay')"><a href="javascript:void(0);" class="btn btn-sm btn-primary">$!locale.get('product.button.payOpenAmount')</a></td>		
+				</td> -->
+				<!-- <td class="alignCenter" data-th="$!locale.get('product.invoice.balDuePay')"></td>		 -->
 			</tr> 
 			#end
-			
 		</tbody>
 	</table>
 </div>
