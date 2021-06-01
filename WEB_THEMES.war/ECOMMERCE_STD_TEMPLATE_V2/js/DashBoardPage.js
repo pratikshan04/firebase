@@ -55,7 +55,7 @@ function validateImageUpload(){
 		if(fileExt != null && fileExt.trim()!=''){
 			fileExt = fileExt.substring($('#profileImage').val().lastIndexOf(".")+1).toLowerCase();
 			if(fileExt != "jpg" && fileExt != "png" && fileExt != "jpeg"){
-				bootAlert("small","error","Error","Please upload image file.");
+				bootAlert("small","error","Error",locale('dashboard.label.uploadError'));
 				return false;
 			}else{
 				if(navigator.onLine){
@@ -66,7 +66,7 @@ function validateImageUpload(){
 				}
 			}
 		}else{
-			bootAlert("small","error","Error","Please choose a image file to upload.");
+			bootAlert("small","error","Error",locale('dashboard.label.fileUpload'));
 			$("[data-bb-handler='ok']").click(function(){
 				$('#profileImage').trigger("click");
 			});
@@ -82,7 +82,7 @@ $( "#cimm_customImageUpload > input").change(function() {
 	var fileName = $(this)[0].files[0];
 	var Filesize= this.files[0].size/1024/1024;
 	if(Filesize >5){
-		bootAlert("small","error","Error","Please upload file which is less than 5MB.");
+		bootAlert("small","error","Error",locale('dashboard.label.fileLimit'));
 		return false;
 	}
 	fileName = fileName.name

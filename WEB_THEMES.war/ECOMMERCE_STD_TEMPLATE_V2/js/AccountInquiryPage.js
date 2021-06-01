@@ -35,3 +35,6 @@ $(document).ready(function() {
 	}
 	divLocal.text(loginTime);
 });
+function showIframeWindow(){
+	jQuery(".iframe").colorbox({iframe:true, width: "80%",height:"80%"}); 
+}

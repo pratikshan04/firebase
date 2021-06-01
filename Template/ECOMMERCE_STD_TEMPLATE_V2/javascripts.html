@@ -33,6 +33,7 @@
 <script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/PriceLoading.js?$!refreshVersion" defer></script>
 <script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/siteScript.js?$!refreshVersion"></script>
 <script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/recentlyViewed.js?$!refreshVersion" defer></script>
+<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/jquery.colorbox-min.js" defer></script>
 #if($!isPrebuiltCmsHomepage!="Y" && $LayoutName !="ProductDetailPage" && $LayoutName !="CartPage")<script type="text/javascript" src="$!webArtifactsJsPath$!cdnSiteJs/BulkAction.js?$!refreshVersion" defer></script>#end
 #if($!CommonDBQuerySystemParameter.get("ENABLE_HEADER_QUICKORDER_LINK")=="Y")<script type="text/javascript" src="$!webArtifactsJsPath$!cdnModuleJs/quickOrderPadHead.js?$!refreshVersion"></script>#end
 #if($userAgent == "WEBVIEW")
@@ -163,6 +164,7 @@ function noenter() {
 $(function() {
 	var isMobileWeb = /webview/i.test(navigator.userAgent.toLowerCase());
 	if(isMobileWeb){
+      	$("#normalHead").addClass('fixOnApp');
 		$(".cimm_stickyPageWrap").addClass('fixOnApp');
 	}
 	if (!console) console = {log: function() {}};

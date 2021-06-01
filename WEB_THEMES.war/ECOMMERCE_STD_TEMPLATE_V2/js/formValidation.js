@@ -205,6 +205,10 @@ function submitFormToServer(that){
 				notified = 'Usuario ya registrado en este correo electrónico. Utilice un correo electrónico diferente.'
 			}else if(notified == "Processing is successful"){
 				notified = 'El procesamiento es exitoso'
+			}else if(notified == 'Old Password and New password are similar'){
+				notified = 'La contraseña anterior y la contraseña nueva son similares'
+			}else if(notified == 'Invalid Old Password' || notified == 'Invalid Old Password.'){
+				notified = 'Contraseña anterior no válida'
 			}else{
 				notified = notified
 			}
