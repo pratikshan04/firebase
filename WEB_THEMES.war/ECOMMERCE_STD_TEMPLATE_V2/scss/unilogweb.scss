@@ -879,7 +879,8 @@ $modal_closebtn-color: $default_font-color;
 }
 
 .site-overlay,
-.modalPopOverlay {
+.modalPopOverlay,
+.menuOverlay {
     display: none;
     height: 100%;
     width: 100%;

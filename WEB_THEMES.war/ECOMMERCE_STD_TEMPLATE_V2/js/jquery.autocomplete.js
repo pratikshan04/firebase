@@ -900,6 +900,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		},
 		hide: function() {
 			element && element.hide();
+			$('#menu-overlay').hide();
 			listItems && listItems.removeClass(CLASSES.ACTIVE);
 			active = -1;
 		},
@@ -908,6 +909,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		show: function() {
 			var offset = $(input).offset();
 			element.show();
+			$('#menu-overlay').show();
             if(options.scroll) {
                 list.scrollTop(0);
                 list.css({ maxHeight: options.scrollHeight, overflow: 'auto' });

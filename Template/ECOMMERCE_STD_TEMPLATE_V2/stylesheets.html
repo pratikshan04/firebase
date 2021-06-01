@@ -21,6 +21,7 @@
 	#set($currentWebTheme = $!CommonDBQuerySystemParameter.get("ThemeFileName"))
 #end
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/$!currentWebTheme?$!refreshVersion" media="all" />
+<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/colorbox.css" media="all" />
 #if($!CommonDBQuerySystemParameter.get("ENABLE_MENUS_FROM_WP")=="Y")
 <link rel="stylesheet" type="text/css" href="$!CommonDBQuerySystemParameter.get('WP_CDN_URL')wp-content/themes/unilog-ecom/assets/css/gutenberg-editor.css?ver=5.4.2" media="all" />
 <link rel="stylesheet" type="text/css" href="$!CommonDBQuerySystemParameter.get('WP_CDN_URL')wp-includes/css/dist/block-library/style.min.css" media="all" />

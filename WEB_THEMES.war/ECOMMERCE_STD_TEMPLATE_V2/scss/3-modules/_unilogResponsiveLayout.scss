@@ -191,6 +191,9 @@ $breakpoint-mobileView: 480px;
     width: 100%;
     margin: 0 0 18px 0;
   }
+  header .cimm_header .cimm_header_mid{
+    height: auto;
+  }
   .cartTotal_Top a.hideForIpad {
     display: none;
   }
@@ -617,6 +620,16 @@ $breakpoint-mobileView: 480px;
   #searchResults li {
     width: 215px!important;
   }
+  footer .cimm_footer_mid .socialMediaWrap{
+    padding: 10px 0px;
+  }
+  footer .cimm_footer_mid .socialMediaWrap ul li{
+    margin-right: 10px;
+  }
+  footer .cimm_footer_mid .cimm_footer-copyright{
+    padding: 10px 0px;
+    text-align: center;
+  }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
   .calendarFilter ul li {
@@ -799,7 +812,7 @@ $breakpoint-mobileView: 480px;
   }
   .cartTotal_Top span {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 12px;
   }
   .cartTotal_Top {
     text-align: left;
