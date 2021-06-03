@@ -101,26 +101,27 @@ $breakpoint-mobileView: 480px;
         span {
           display: block;
           a {
-            color: #444;
+            color: $primary_color;
             padding: 10px 40px 10px 15px;
           }
           em {
-            top: 0;
+            top: 10px;
             right: 5px;
             padding: 20px 16px;
             &:after {
-              color: #444;
+              color: $primary_color;
             }
           }
         }
         &:hover {
           background: transparent;
+          border: 0;
           > span {
             a {
-              color: #444;
+              color: $primary_color;
             }
             em {
-              @include icon(after, caret-right, $color: #444, $size: 20px);
+              @include icon(after, caret-right, $color: $primary_color, $size: 20px);
             }
           }
         }
@@ -151,12 +152,20 @@ $breakpoint-mobileView: 480px;
           }
           li {
             position: static;
+            a{
+              color: $primary_color;
+            }
+            span {
+              a{
+                color: $primary_color;
+              }
+            }
             &:hover {
               background: transparent;
               span {
                 a,
                 em:after {
-                  color: #444;
+                  color:$primary_color !important;
                 }
               }
             }
@@ -191,8 +200,11 @@ $breakpoint-mobileView: 480px;
     width: 100%;
     margin: 0 0 18px 0;
   }
-  header .cimm_header .cimm_header_mid{
-    height: auto;
+  nav.navbar .cimm_nav>ul{
+    border: 0;
+  }
+  #normalHead{
+    position: inherit;
   }
   .cartTotal_Top a.hideForIpad {
     display: none;
@@ -320,9 +332,6 @@ $breakpoint-mobileView: 480px;
   .cimm_productCategory .cimm_categoryItemBlock a p {
     height: 60px;
     padding: 5px;
-  }
-  .priceSpan {
-    font-size: 18px;
   }
   .fixOnApp {
     &.cimm_stickyPageWrap {

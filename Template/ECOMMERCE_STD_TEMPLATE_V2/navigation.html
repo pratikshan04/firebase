@@ -7,12 +7,12 @@
 	</li>
 #if($!CommonDBQuerySystemParameter.get("EnableMultiLevelCategoryDisplay") == "Y")
     <li>
-    	<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+    	<span><a href="$locale.get('website.url.ProductCategory')">$locale.get("navigation.label.shopProducts") <i class="fa fa-angle-down" aria-hidden="true"></i></a><em class="fa hidden-lg"></em></span>
 		<ul class="dropdown-menu">
 			#foreach($categoryMenu in $categMenu)
 			
 			<li class="sec">
-				#if($!categoryMenu.categoryName != "Promocionales y POP")
+				#if($!categoryMenu.categoryName)
 				<span>
 					<a href="$!categoryMenu.seoUrl">
 							$!categoryMenu.categoryName
@@ -223,7 +223,7 @@
 	#end
 	#if($!CommonDBQuerySystemParameter.get("EnableShopByBrand")=="Y")
 	<li>
-		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a></span>
+		<span><a href='$locale.get("website.url.Brands")'>$locale.get("product.label.brands") #if($brandList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a><em class="fa hidden-lg"></em></span>
 		<div class="shopbybrand dropdown-menu clearAfter">
 		#set($brandListSize = 0)
 		#set($brandIndex = 0)
@@ -278,7 +278,7 @@
 					##end
 				#else
 					<span>
-						<a href="$firstLevelMenu" #if($topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a>
+						<a href="$firstLevelMenu" #if($topMenu.level1Menu=='Blog')target="_blank"#end>$topMenu.level1Menu #if($topMenu.menuList.size()>0)<i class="fa fa-angle-down" aria-hidden="true"></i>#end</a><em class="fa hidden-lg"></em>
 					</span>
 				#end
 				#if($topMenu.menuList && $topMenu.menuList.size()>0)

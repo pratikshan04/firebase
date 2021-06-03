@@ -16731,7 +16731,7 @@ var KEY = 'redo';
 function redoItem() {
   return {
     key: KEY,
-    name: 'Redo',
+    name: 'Rehacer',
     callback: function() {
       this.redo();
     },
@@ -16793,7 +16793,7 @@ var KEY = 'remove_row';
 function removeRowItem() {
   return {
     key: KEY,
-    name: 'Remove row',
+    name: 'Eliminar fila',
     callback: function(key, selection) {
       var amount = selection.end.row - selection.start.row + 1;
       this.alter('remove_row', selection.start.row, amount);
@@ -16827,7 +16827,7 @@ var KEY = 'row_above';
 function rowAboveItem() {
   return {
     key: KEY,
-    name: 'Insert row above',
+    name: 'Insertar fila arriba',
     callback: function(key, selection) {
       this.alter('insert_row', selection.start.row);
     },
@@ -16859,7 +16859,7 @@ var KEY = 'row_below';
 function rowBelowItem() {
   return {
     key: KEY,
-    name: 'Insert row below',
+    name: 'Insertar fila debajo',
     callback: function(key, selection) {
       this.alter('insert_row', selection.end.row + 1);
     },
@@ -16906,7 +16906,7 @@ var KEY = 'undo';
 function undoItem() {
   return {
     key: KEY,
-    name: 'Undo',
+    name: 'Deshacer',
     callback: function() {
       this.undo();
     },
