@@ -1040,7 +1040,7 @@ function loadShippingInfo() {
 				window.location.href = value;
 				setCookie('afterLoginUrl', "");
 			} else {
-				window.location.href = locale('website.url.ProductCategory');
+				window.location.href = locale('website.url.welcome');
 			}
 		} else {
 			$('#generalModel .modal-header').hide();
@@ -1414,7 +1414,9 @@ function leftFilterScroll() {
 		opacity: '1',
 		borderRadius: '0px',
 		railBorderRadius: '0px',
-		top: '10px'
+		top: '10px',
+		wheelStep : 10,
+		touchScrollStep : 75
 	});
 }
 function filterScroll() {
@@ -1429,7 +1431,9 @@ function filterScroll() {
 		opacity: '1',
 		borderRadius: '0px',
 		railBorderRadius: '0px',
-		top: '10px'
+		top: '10px',
+		wheelStep : 10,
+		touchScrollStep : 75
 	});
 }
 function hideNotificationDiv() {

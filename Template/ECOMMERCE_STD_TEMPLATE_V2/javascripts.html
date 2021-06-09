@@ -125,10 +125,12 @@
 		});
 	}
 	</script>
-	#elseif($LayoutName=="OpenOrdersPage")
+	#elseif($LayoutName=="OrderHistoryPage" || $LayoutName=="OpenOrdersPage") 
 	<script type="text/javascript">
+		var test = $('#$totalPages').val();
+		var testEl = $('#$totalEle').val();
 		#set($paginationURL="OpenOrderSale.action?reqType=webOrder&orderStatus=Open&pageSize=10&pageNo=$pageNo")
-		var pagination = paginationScriptV2($paginate,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
+		var pagination = paginationScriptV2(testEl,"$escapeTool.javascript($paginationURL)",$pageNo,$resultPage);
 		$(".pgnation").html(pagination);
 	</script>
 #end

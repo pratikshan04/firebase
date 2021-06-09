@@ -42,12 +42,12 @@ function addAllItemsToCart(linkUrl){
 					jsonObjList = jQuery.grep(jsonObjList, function(n, i){return (n !== "" && n != null);});
 					unblock();
 					if(callForPriceCounter>0 && pricePresent && jsonObjList != []){
-						bootAlert("small","info","Info","Call for Price items will be dropped from selection");
+						bootAlert("small","info",locale('label.alert.info'),locale('label.select.cannotAddDrop'));
 	                    $("[data-bb-handler='ok']").click(function () { BulkAction.processAddToCart(jsonObjList); });
                     }else if(pricePresent && jsonObjList != []){
                     	BulkAction.processAddToCart(jsonObjList);
                     }else{
-						bootAlert("small","error","Error","Cannot add Call for Price item to cart");
+						bootAlert("small","error","Error",locale('label.select.cannotAdd'));
                     }
 				}
 			}

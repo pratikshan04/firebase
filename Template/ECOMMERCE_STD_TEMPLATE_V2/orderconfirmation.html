@@ -8,10 +8,10 @@
 <div id="printOrderConfirm">
 	<div class="orderStatus">
 		#if($orderDetail.erpOrderNumber)				
-			<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
+			<h5 class="orderConfirmColor">$!locale.get('product.label.yourOrderSuccess')</h5>
 		#else
 			#if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
-				<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
+				<h5 class="orderConfirmColor">$!locale.get('product.label.yourOrderSuccess')</h5>
 			#else
 				#if($orderItemList.size()==0)
 					<h3>$!locale.get('product.label.yourOrdernotavailable')</h3>

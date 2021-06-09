@@ -1,3 +1,4 @@
+#parse("Macros/listPageMacro.vm")
 #if($session.getAttribute('isGeneralUser')!="Y")
 #if($ajaxCall=="Y")
 #if($!session.getAttribute("pricePrecision")=="4")
@@ -64,27 +65,34 @@
 <a class="cimm_inlineButton" href="/OpenOrderSale.action?reqType=webOrder&orderStatus=Open">$!locale.get("event.label.viewAll")</a>
 #end
 #else
- 
+#if($orderStatusType == "Ticket")
+<h6 class="cimm_page-title">Ticket Status</h6>
+#else
 <h6 class="cimm_page-title">$!locale.get("product.heading.openOrders")</h6>
+#end
+#set($totalPages = 0)
+#set($totalElements = 0)
+  
+#if($orderStatusType == "Open")
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
 	<table class="table table-striped display rwd-table" id="openOrderTable">
 	<thead>
 	<tr>
 	<th class="left">$!locale.get("form.label.NoFromEcom")</th>
 	<th>$!locale.get("from.label.NoFromSap")</th>
-	<!-- <th>$!locale.get("form.label.CustomerRelease")</th> -->
 	<th>$!locale.get("form.label.orderDate")</th>
 	<th>$!locale.get("product.label.total")</th>
-	<!-- <th>$!locale.get("form.label.requiredByDate")</th>
-	<th>$!locale.get("form.label.shipTo")</th> -->
 	<th>$!locale.get("product.label.ordrStatus")</th>
-	<!-- <th>$!locale.get("form.label.orderedBy")</th> -->
 	<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	#if($orderList && $!orderList.size()>0)
 	#foreach($orderDetail in $orderList)
+	#if($velocityCount==1)
+    #set($totalPages = $orderDetail.totalPages)
+    #set($totalElements = $orderDetail.totalElements)
+    #end
 	<tr>
 	<td data-th="$!locale.get('form.label.OrderNo')">
 	#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
@@ -96,13 +104,9 @@
 	<td data-th="$!locale.get('form.label.customerPOnumber')">
 	#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end
 	</td>
-	<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
 	<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
 	<td data-th="$!locale.get('product.label.amount')">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
-	<!-- <td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
-	<td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
 	<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
-	<!-- <td valign="top">$!orderDetail.orderedBy</td> -->
 	<td data-th="">
 	#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 	<a href="OrderDetailSale.action?orderId=$!orderDetail.orderId" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a>
@@ -110,17 +114,41 @@
 	<a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a>
 	#end
 	</td>
-	$!orderDetail.orderNum<br >
-	$!orderDetail.orderId <br >
-	$!orderDetail.orderDate <br >
-	$!orderDetail.orderStatusDescription <br >
-	$!orderDetail.orderStatus <br >
 	</tr>
 	#end
 	#end
 	</tbody>
 	</table>
 	</div>
+#end
+<!-- Ticket Status -->
+#if($orderStatusType == "Ticket")
+<div class="cimm_siteTableEnclosure rwd-TableWrap">
+	<table class="table table-striped display rwd-table">
+	<thead>
+	<tr>
+	<th class="left">No Ilamada</th>
+	<th>Clasificacion</th>
+	<th>Fecha</th>
+	<th>Ticket Status</th>
+	</tr>
+	</thead>
+	<tbody>
+	#if($orderList && $!orderList.size()>0)
+	#foreach($orderDetail in $orderList)
+	<tr>
+	<td>$!orderDetail.orderNum</td>
+	<td>$!orderDetail.erpOrderNumber</td>
+	<td>$!orderDetail.orderDate</td>
+	<td>$!orderDetail.orderStatusDesc</td>
+	</tr>
+	#end
+	#end
+	</tbody>
+	</table>
+	</div>
+#end
+<!-- Ticket Status -->
 <div class="pgnation"></div> 
 #end
 #else
@@ -128,3 +156,8 @@
   <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
 </div>
 #end
+#if($orderStatusType == "OPEN")
+
+#end
+<input type="hidden" value="$totalElements" id="totalEle" />
+<input type="hidden" value="$totalPages" id="totalPage" />

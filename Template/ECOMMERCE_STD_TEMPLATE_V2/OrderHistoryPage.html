@@ -1,3 +1,4 @@
+#parse("Macros/listPageMacro.vm")
 #if($session.getAttribute('isGeneralUser')!="Y")
 #if($ajaxCall=="Y")
 	#if($!session.getAttribute("pricePrecision")=="4")
@@ -171,3 +172,11 @@
   <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
 </div>
 #end
+#set($totalPages = 0)
+#set($totalElements = 0)
+ #if($velocityCount==1)
+    #set($totalPages = $!orderList.totalPages)
+    #set($totalElements = $!orderList.totalElements)
+           #end
+$totalElements
+$totalPages 

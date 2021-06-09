@@ -366,6 +366,10 @@ $breakpoint-mobileView: 480px;
       }
     }
   }
+  .popMsg{
+    width: auto !important;
+    right: auto;
+  }
 }
 @media all and (max-width: $breakpoint-largeDevice) {
   footer .cimm_footer_mid .footerCol h3 em {
@@ -675,7 +679,7 @@ $breakpoint-mobileView: 480px;
   }
   .compareTableWrap .pushbtnGroup li {
     text-align: right;
-    width: 49%;
+    width: auto;
   }
   .ac_results .itemWraper,
   .ac_results ul {
