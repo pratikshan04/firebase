@@ -1002,11 +1002,11 @@
 	<tbody>
 		#foreach($user in $users)
 		<tr>
-			<td width="100%" class="text-wrap" data-th="$!locale.get('label.salesuser.username')">#if($!user.userName.getAsString().trim().length() > 0) $!user.userName.getAsString() #else &nbsp; #end</td>
-			<td width="50%" data-th="$!locale.get('label.salesuser.firstName')">$!user.firstName.getAsString()</td>
-			<td width="50%" data-th="$!locale.get('label.salesuser.address1')">$!user.address1.getAsString()</td>
-			<td width="50%" data-th="$!locale.get('label.salesuser.location')">$!user.city.getAsString(), $!user.state.getAsString(), $!user.country.getAsString(), $!user.zipCode.getAsString()</td>
-			<td width="30%"><button class="persistUserDetails button" data-username="$!user.userName.getAsString()">$!locale.get('form.label.select')</button></td>
+			<td class="text-wrap" data-th="$!locale.get('label.salesuser.username')">#if($!user.userName.getAsString().trim().length() > 0) $!user.userName.getAsString() #else &nbsp; #end</td>
+			<td data-th="$!locale.get('label.salesuser.firstName')">$!user.firstName.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.address1')">$!user.address1.getAsString()</td>
+			<td data-th="$!locale.get('label.salesuser.location')">$!user.city.getAsString(), $!user.state.getAsString(), $!user.country.getAsString(), $!user.zipCode.getAsString()</td>
+			<td><button class="persistUserDetails button" data-username="$!user.userName.getAsString()">$!locale.get('form.label.select')</button></td>
 		</tr>
 		#end
 	</tbody>

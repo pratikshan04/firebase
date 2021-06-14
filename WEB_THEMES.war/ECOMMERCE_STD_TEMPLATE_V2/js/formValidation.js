@@ -210,7 +210,7 @@ function submitFormToServer(that){
 				notified = 'La contraseña anterior y la contraseña nueva son similares'
 			}else if(notified == 'Invalid Old Password' || notified == 'Invalid Old Password.'){
 				notified = 'Contraseña anterior no válida'
-			}else if(notified = 'Invalid Account number. Please enter valid account number.'){
+			}else if(notified == 'Invalid Account number. Please enter valid account number.'){
 				notified = 'Número de cuenta no válido. Ingrese un número de cuenta válido'
 			}
 			else{

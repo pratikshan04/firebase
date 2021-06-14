@@ -237,7 +237,7 @@
 						#end
 						#if($!CommonDBQuerySystemParameter.get("EnableClearanceItems")=="Y" && $userLogin)
 						<label class="customCheckBox mLeft-2" for="clearanceItems">
-							<input type="checkbox"  name="clearanceItems" id="clearanceItems" #if($isPreviouslyPurchased=="Y") checked="checked" #end onclick="clearanceItems();">
+							<input type="checkbox"  name="clearanceItems" id="clearanceItems" #if($clearanceItems=="Y") checked="checked" #end onclick="clearanceItems();">
 							<span>$!locale.get('product.label.clearanceItems')</span>
 						</label>
 						#end

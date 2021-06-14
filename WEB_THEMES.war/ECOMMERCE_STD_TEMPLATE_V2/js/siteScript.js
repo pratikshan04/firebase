@@ -1029,7 +1029,7 @@ $(document).ready(function () {
 });
 function loadShippingInfo() {
 	$.get("getAddressesAddressSync.action?frPage=popLogin&showpopUp=Y", function (data, status) {
-		$('#generalModel .modal-body').html(data);
+		// $('#generalModel .modal-body').html(data);
 		if ($('#example tbody tr').length == 1 || $('#example tbody tr').length == 0) {
 			var flag = getCookie("isShipToSelected");
 			if (flag != "true") {

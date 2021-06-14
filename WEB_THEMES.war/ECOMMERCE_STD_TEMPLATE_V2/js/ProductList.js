@@ -428,6 +428,12 @@ $(document).ready(function(){
 	else{
 		$('#previouslyPurchased').attr('checked',false);
 	}
+	if(url.indexOf("clearanceItems=Y") !== -1){
+		$('#clearanceItems').attr('checked', true);
+	} 
+	else{
+		$('#clearanceItems').attr('checked',false);
+	}
 	$(".sortByNumbers").each(function(index, element) {
 	    var els = new Array();
 	    var counter = 0;

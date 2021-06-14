@@ -53,6 +53,9 @@
 #if($navigationType=="SEARCH")
 	#set($itemsPerPageURL="searchPage.action")
 	#set($searchWithInFormURL="")
+#elseif($navigationType=="NAVIGATION")
+    #set($itemsPerPageURL="itemLevelFilterPage.action")
+    #set($searchWithInFormURL="itemLevelFilterPage.action")
 #else
 	#set($itemsPerPageURL= $urlContext )
 	#set($searchWithInFormURL= $urlContext)

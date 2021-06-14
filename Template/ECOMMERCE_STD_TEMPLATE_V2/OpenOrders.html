@@ -1,4 +1,5 @@
-#parse("Macros/listPageMacro.vm")
+#set($totalPages = 0)
+#set($totalElements = 0)
 #if($session.getAttribute('isGeneralUser')!="Y")
 #if($ajaxCall=="Y")
 #if($!session.getAttribute("pricePrecision")=="4")
@@ -66,20 +67,18 @@
 #end
 #else
 #if($orderStatusType == "Ticket")
-<h6 class="cimm_page-title">Ticket Status</h6>
+<h6 class="cimm_page-title">Estado del ticket</h6>
 #else
 <h6 class="cimm_page-title">$!locale.get("product.heading.openOrders")</h6>
 #end
-#set($totalPages = 0)
-#set($totalElements = 0)
   
 #if($orderStatusType == "Open")
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
-	<table class="table table-striped display rwd-table" id="openOrderTable">
+	<table class="table table-striped display rwd-table">
 	<thead>
 	<tr>
 	<th class="left">$!locale.get("form.label.NoFromEcom")</th>
-	<th>$!locale.get("from.label.NoFromSap")</th>
+	<!-- <th>$!locale.get("from.label.NoFromSap")</th> -->
 	<th>$!locale.get("form.label.orderDate")</th>
 	<th>$!locale.get("product.label.total")</th>
 	<th>$!locale.get("product.label.ordrStatus")</th>
@@ -101,9 +100,9 @@
 	<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></strong>
 	#end
 	</td>
-	<td data-th="$!locale.get('form.label.customerPOnumber')">
-	#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end
-	</td>
+	<!-- <td data-th="$!locale.get('form.label.customerPOnumber')">
+	#if($orderDetail.orderNum) $!orderDetail.orderNum #else &nbsp; #end
+	</td> -->
 	<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
 	<td data-th="$!locale.get('product.label.amount')">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
 	<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
@@ -124,7 +123,7 @@
 <!-- Ticket Status -->
 #if($orderStatusType == "Ticket")
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
-	<table class="table table-striped display rwd-table">
+	<table class="table table-striped display rwd-table"  id="ticketTable">
 	<thead>
 	<tr>
 	<th class="left">No Ilamada</th>
@@ -137,10 +136,27 @@
 	#if($orderList && $!orderList.size()>0)
 	#foreach($orderDetail in $orderList)
 	<tr>
-	<td>$!orderDetail.orderNum</td>
 	<td>$!orderDetail.erpOrderNumber</td>
+	<td>$!orderDetail.orderNum</td>
 	<td>$!orderDetail.orderDate</td>
-	<td>$!orderDetail.orderStatusDesc</td>
+	<td>
+	#if($!orderDetail.orderStatusDesc.length()>50)
+		$!orderDetail.orderStatusDesc.substring(0, 50).replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;')
+		<a href="javascript:void(0);" role="button" data-toggle="modal" data-target="#ticketModal_$!orderDetail.erpOrderNumber">$!locale.get("product.label.more")</a>
+		<div id="ticketModal_$!orderDetail.erpOrderNumber" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-body">
+						$!orderDetail.orderStatusDesc.replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;')
+					</div>
+				</div>
+			</div>
+		</div>
+		#else
+			$!orderDetail.orderStatusDesc.replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;')
+		#end
+	</td>
 	</tr>
 	#end
 	#end

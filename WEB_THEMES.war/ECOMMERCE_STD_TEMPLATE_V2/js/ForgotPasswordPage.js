@@ -9,7 +9,7 @@ $('#retrivePassword').submit(function() {
 		isValid = 0;
 	}*/
 	if(emailAddress==""){
-		msg = msg + locale("reorder.label.select.at.least.one.item") + "</br>";
+		msg = msg + locale("register1A.error.emailAddress") + "</br>";
 		isValid = 0;
 	}else{
 		var emailRegEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
