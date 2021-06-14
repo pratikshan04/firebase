@@ -137,7 +137,8 @@ function isValidEmailId(formElement){
 	return emailRegEx.test(formElement.value);
 }
 function isValidPhoneNumber(formElement){
-	var phonenoRegEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+	//var phonenoRegEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+	var phonenoRegEx = /^[0-9]{8}$/;
 	return phonenoRegEx.test(formElement.value);
 }
 function isValidPassword(formElement){
@@ -209,7 +210,10 @@ function submitFormToServer(that){
 				notified = 'La contraseña anterior y la contraseña nueva son similares'
 			}else if(notified == 'Invalid Old Password' || notified == 'Invalid Old Password.'){
 				notified = 'Contraseña anterior no válida'
-			}else{
+			}else if(notified == 'Invalid Account number. Please enter valid account number.'){
+				notified = 'Número de cuenta no válido. Ingrese un número de cuenta válido'
+			}
+			else{
 				notified = notified
 			}
 			if(responseCont.valid || responseVal == 1){
@@ -233,7 +237,7 @@ function submitFormToServer(that){
 					}else{
 						if(notified=="Password Updated Successfully"){
 							unblock();
-							bootAlert("medium","success","Success","Password Updated Successfully, Please login again to continue");
+							bootAlert("medium","success",locale('label.alert.success'),locale('label.changePassword.success'));
 							$("[data-bb-handler='ok']").click(function(){
 								window.location.href="doLogOff.action?lType=PasswordUpdatedSuccessfully";
 							});

@@ -80,7 +80,7 @@
 				quantityInterval = parseInt(document.getElementById(settings.functionalBlock.qtyIntervalPrefix + partNumber).value);
 			}
 			if(qty=="NaN"){
-				bootAlert("small","error","Error","Invalid Qty.");
+				bootAlert("small","error","Error",locale('label.invalidQTY'));
 				$("#itemTxtQty"+id).val(minOrderQty);
 				$("[data-cloneqty='cloneQty']").val(minOrderQty);
 				if($('#'+settings.blockPageID)){
@@ -99,7 +99,7 @@
 				}
 			}
 			if(qty<minOrderQty){
-				bootAlert("small","error","Error",locale('label.qty.minValueZero') +minOrderQty);
+				bootAlert("small","error","Error",locale('label.minorderqtyIs') +" " +minOrderQty);
 				$("#"+settings.functionalBlock.qtyPrefix+id).val(minOrderQty);
 				if($('#'+settings.blockPageID)){
 	        		$('#'+settings.blockPageID).hide();	

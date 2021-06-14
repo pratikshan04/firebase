@@ -201,7 +201,7 @@ var QuickOrder = {};
     		hot.destroy();
     	}
     	hot = new Handsontable(example1, {
-    		data:data,
+			data:data,
     		colWidths: ['65%','35%'],
             stretchH: 'all',
     		minRows: 10,
@@ -672,7 +672,7 @@ textarea.onkeyup = function() {
     if(lines.length>limit){
         textarea.style.color = 'red';
         if($("#copyPasteInstruction").length>0){
-        	$("#copyPasteInstruction").html('<b class="text-danger">Max. '+limit+' items are allowed. Rest of the items will be omitted</b>');
+        	$("#copyPasteInstruction").html('<b class="text-danger">Max. '+limit+" "+ locale("label.QuickOrder.maxCopyItem") +'</b>');
         }
         setTimeout(function(){
             textarea.style.color = '';

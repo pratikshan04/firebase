@@ -77,7 +77,7 @@ function getContactEntityAddress(obj){
 			success: function(msg){
 				msgArr = msg.split("|");
 				msgArr[0] ? $("#address1").val(msgArr[0]) : $("#address1").val('');
-				msgArr[1] ? $("#address2").val(msgArr[1]) : $("#address2").val('');;
+				msgArr[1]!='null' ? $("#address2").val(msgArr[1]) : $("#address2").val('');
 				msgArr[2] ? $("#city").val(msgArr[2]) : $("#city").val('');
 				msgArr[4] ? $("#zip").val(msgArr[4]) : $("#zip").val('');
 				msgArr[6] ? $("#billPhone").val(msgArr[6]) : $("#billPhone").val('');

@@ -78,7 +78,9 @@ input[type=number] {
 .required {
   color: #f00;
 }
-
+.orderConfirmColor{
+ color: $orderConfirmColor !important;
+}
 .requiblack{
   color: $black;
 }

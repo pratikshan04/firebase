@@ -619,7 +619,7 @@ if(Headtextarea!= null){
 	    {
 	        Headtextarea.style.color = 'red';
 	        if($("#copyPasteInstruction").length>0){
-	        	$("#copyPasteInstruction").html('<b class="text-danger">Max. '+limit+' items are allowed. Rest of the items will be omitted</b>');
+	        	$("#copyPasteInstruction").html('<b class="text-danger">Max. '+limit+" "+ locale("label.QuickOrder.maxCopyItem") +'</b>');
 	        }
 	        setTimeout(function(){
 	            Headtextarea.style.color = '';

@@ -1,3 +1,5 @@
+#set($totalPages = 0)
+#set($totalElements = 0)
 #if($session.getAttribute('isGeneralUser')!="Y")
 #if($ajaxCall=="Y")
 	#if($!session.getAttribute("pricePrecision")=="4")
@@ -138,6 +140,10 @@
 					<tbody>
 						#if($orderList.size()>0)
 						#foreach($orderList in $orderList)
+						#if($velocityCount==1)
+						#set($totalPages = $orderList.totalPages)
+						#set($totalElements = $orderList.totalElements)
+						#end
 						#if(!$!orderList.accountRegId.contains("C"))
 						<tr>		
 						    #if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")					
@@ -171,3 +177,5 @@
   <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
 </div>
 #end
+<input type="hidden" value="$totalElements" id="totalEle" />
+<input type="hidden" value="$totalPages" id="totalPage" /> 

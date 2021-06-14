@@ -1,7 +1,7 @@
 function validateSearchWithInMulti(a){
 	var s = jQuery('#keyWordTxt').val();
 	if(s == "" || s=="Search Within" || s=="Search%20With%20In" || s==a){
-		bootAlert("medium","error","Error","Enter a keyword to Search Within the list.");
+		bootAlert("medium","error","Error", locale('label.search.searchWithInNull'));
 		return false;
 	}else{
 		var attrList = jQuery("#attrFilterList").text();
@@ -428,6 +428,12 @@ $(document).ready(function(){
 	else{
 		$('#previouslyPurchased').attr('checked',false);
 	}
+	if(url.indexOf("clearanceItems=Y") !== -1){
+		$('#clearanceItems').attr('checked', true);
+	} 
+	else{
+		$('#clearanceItems').attr('checked',false);
+	}
 	$(".sortByNumbers").each(function(index, element) {
 	    var els = new Array();
 	    var counter = 0;
@@ -485,7 +491,7 @@ function validateSearchWithIn(){
 		unusualCode++;
 	}
 	if(s == "" || s=="Search Within" || s=="Search%20With%20In" || s.indexOf("Search Within") > -1){
-		bootAlert("small","error","Error","Enter a keyword to Search Within the list.");
+		bootAlert("small","error","Error",locale('label.search.searchWithInNull'));
 		return false;
 	} else if(unusualCode > 0){
 		bootAlert("medium", "error", "Error", unusualCodeErrorStr);

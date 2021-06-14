@@ -136,7 +136,7 @@
 		                               <strong>
 		                                    #if($mainPrice.price>0)
 		                                    <span class="priceSpan" data-select='priceData' id='span_$mainPrice.partNumber'>
-		                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
+		                                        Q$numberTool.format($numberToolFormat,$mainPrice.price)
 		                                     </span>
 		                                    #else
 		                                         <span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> $locale.get('label.callForPrice')</span>
@@ -150,7 +150,7 @@
 		                            <td class="different">
 		                                    #if($mainPrice.price>0)
 		                                    <span class="priceSpan" data-select='priceData' id='span_$mainPrice.partNumber'>
-		                                        $$numberTool.format($numberToolFormat,$mainPrice.price)
+		                                        Q$numberTool.format($numberToolFormat,$mainPrice.price)
 		                                    #else
 		                                        <span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> $locale.get('label.callForPrice')</span>
 		                                    #end
@@ -349,7 +349,7 @@
 		                #end
 		            </tr>
 		            
-		            #if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
+		            <!-- #if($userLogin || $!CommonDBQuerySystemParameter.get("EnableAnonymousCheckout")=="Y" || $!CommonDBQuerySystemParameter.get("EnableAddToCartBeforeLogin")=="Y")
 		             <tr>
 		                <td>&nbsp;
 		                    
@@ -364,13 +364,13 @@
 		                    #end
 		                    </span>                   
 		                </td>
-		                <!-- <td>
+		                <td>
 		                	<a href="javascript:void(0);" class="btn-addtocart addToCart" data-toggle="modal" data-target="#loginModal">$locale.get("product.button.addtocart")</a>
-		                </td> -->
+		                </td> 
 		                #end  
 		                
 		            </tr>
-		            #end
+		            #end -->
 		            
 		            #foreach( $key in $compareList.keySet() )
 		                #if($key!='Detail')

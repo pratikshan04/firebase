@@ -27,7 +27,8 @@ if($.trim(billAddressState) == billAddressState){
 if($.trim(shipAddressState) == shipAddressState){
 	shipAddressState = "GU";
 }
-
+$("#stateSelectShip").attr('disabled',true);
+$("#countrySelectShip").attr('disabled',true);
 
 var countrySelect = new initCountry({
 	country: billAddressCountry,
@@ -45,8 +46,9 @@ var countrySelectShip = new initCountry({
 $(function(){
 	$('#step-1 input[type="text"]').each(function(){
         if(this.value==null || this.value.trim()==""){
-        	$(this).removeClass( "btns-disable" )
-        	$(this).prop('readonly', false);
+        	$(this).addClass( "btns-disable")
+        	$(this).prop('readonly', true);
+			$(this).attr("data-required", "N");
 	    } else{
 	    	$(this).addClass("btns-disable" )
         	$(this).prop('readonly', true);
@@ -54,10 +56,11 @@ $(function(){
 	});
 	$('#step-2 input[type="text"]').each(function(){
         if(this.value==null || this.value.trim()==""){
-        	$(this).removeClass( "btns-disable" )
-        	$(this).prop('readonly', false);
+        	$(this).addClass( "btns-disable")
+        	$(this).prop('readonly', true);
+			$(this).prop("data-required", "N");
 	    } else{
-	    	$(this).addClass("btns-disable" )
+	    	$(this).addClass("btns-disable")
         	$(this).prop('readonly', true);
 		}
 	});

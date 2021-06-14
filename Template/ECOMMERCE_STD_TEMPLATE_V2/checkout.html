@@ -17,13 +17,13 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.name") </label>
 											<input type="text" name="billCompanyName" id="fname" value="$!billAddress.customerName" readonly class="btns-disable form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/> 
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.address1") </label>
 											<input type="text" name="billAddress1" id="billAddress1" value="$!billAddress.address1" readonly class="btns-disable form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')"/> 
 										</div>
 									</div>
@@ -37,7 +37,7 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.city") </label>
 											<input type="text" name="billCity" id="billCity" value="$!billAddress.city" readonly class="btns-disable form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
 										</div>
 									</div>
@@ -45,13 +45,13 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											 <label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
+											 <label>$locale.get("form.label.state") </label> 
 											<select name="billState" id="stateSelect" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label> 
+											<label>$locale.get("form.label.country") </label> 
 											<select name="billCountry" id="countrySelect" class="form-control selectpicker" data-state="stateSelect" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 										</div>
 									</div>
@@ -59,13 +59,13 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.phone") </label>
 											<input type="text" name="billPhoneNo" id="billPhoneNo" value="$!billAddress.phoneNo" readonly class="btns-disable form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')" onkeypress="return IsNumeric(event)" maxlength="12"/> 
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											 <label>$locale.get("form.label.email") <span class="text-danger">*</span></label>
+											 <label>$locale.get("form.label.email") </label>
 											<input type="text" name="billEmail" id="billEmail" value="$!billAddress.emailAddress" readonly class="btns-disable form-control" data-type="email" data-required="Y" data-error="$locale.get('checkoutwiz.error.emailaddress')" data-invalid="$locale.get('checkoutwiz.error.emailaddressinvalid')"/>
 										</div>
 									</div>
@@ -83,13 +83,13 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.name") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.name") </label>
 											<input type="text" name="shipCompanyName" id="shipCompanyName" value="$!shipAddress.customerName" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.name')"/>
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.address1") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.address1") </label>
 											<input type="text" name="shipAddress1" id="shipAddress1" value="$!shipAddress.address1" class="form-control" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.address1')" />
 										</div>
 									</div>
@@ -104,7 +104,7 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.city") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.city") </label>
 											<input type="text" name="shipCity" id="shipCity" value="$!shipAddress.city" class="form-control" maxlength='50' data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.city')"/>
 										</div>
 									</div>
@@ -112,7 +112,7 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.country") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.country") </label>
 											<select name="shipCountry" id="countrySelectShip" data-state="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.country')"></select>
 											<input type="hidden" id="shipAddressState" value="$!shipAddress.state" />
 											<input type="hidden" id="shipAddressCountry" value="$!shipAddress.country" />
@@ -121,7 +121,7 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.state") <span class="text-danger">*</span></label> 
+											<label>$locale.get("form.label.state") </label> 
 											<select name="shipState" id="stateSelectShip" class="form-control selectpicker" data-type="text" data-required="Y" data-error="$locale.get('checkoutwiz.error.state')"></select>
 										</div>
 									</div>
@@ -129,7 +129,7 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label>$locale.get("form.label.phone") <span class="text-danger">*</span></label>
+											<label>$locale.get("form.label.phone") </label>
 											<input type="text" name="shipPhoneNo" id="shipPhoneNo" value="$!shipAddress.phoneNo" class="formatPhoneNumber form-control" data-type="number" data-required="Y" data-error="$locale.get('checkoutwiz.error.phone')" data-invalid="$locale.get('checkoutwiz.error.phoneinvalid')" onkeypress="return IsNumeric(event)" maxlength="12"/>
 										</div>
 									</div>
@@ -141,29 +141,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>$locale.get("product.label.shipMethd") <span class="text-danger">*</span></label>
-										<select name="shipVia" id="shipVia" class="form-control selectpicker" data-type="text" data-required="N" data-error="$locale.get('checkoutwiz.error.shipvia')">
-											<option value=" ">-Select-</option>
-											#if($shipViaList.size()>0)
-												#foreach($shipVia in $shipViaList)
-												<option value="$!shipVia.ShipViaID">$!shipVia.description</option> 
-												#end
-											#end 
-										</select>
-									</div>
-								</div>
-								#if($!CommonDBQuerySystemParameter.get("IS_DISCOUNT_COUPONS_ENABLED") == "Y")
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>$locale.get("form.label.coupon")</label>
-										<input type="text" name="discountCoupons" id="discountCoupons" value='' class="form-control"/>
-									</div>
-								</div>
-								#end
-							</div> -->
+							
 							<!-- Shipping Address -->
 							<input type="hidden" name="overrideShip" id="overrideShip" value="Y"/>
 							<input type="hidden" name="shipZipcode" id="shipZipcode" value=""/>
@@ -192,23 +170,7 @@
 									</div>
 								</div>	
 								<div class="row">
-									<!-- <div class="col-sm-6">
-										<div class="form-group">
-											<label>Order Type <span class="text-danger">*</span></label>
-											<select name="orderType" id="orderType" class="form-control selectpicker" onchange="checkoutWizard.orderTypeOnchange(this);">
-												 #if($session.getAttribute("isRetailUser")=="Y")
-												 	<option value="checkoutWithCreditCard" selected="selected"> Credit card Payment </option> 
-												 #else
-												 	<option value=" ">- Select -</option> 
-													<option value="checkoutWithCreditCard"> Credit card Payment </option>
-													#if($!session.getAttribute("canSubmitPO")=="Y")
-													<option value="checkoutWithPo"> Purchase Order </option> 
-													#end 
-													<option value="checkoutWithQuote"> Quote </option> 
-												 #end
-											</select>
-										</div>
-									</div> -->
+									
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>$locale.get("form.label.orderedBy") <span class="text-danger">*</span></label>
@@ -238,15 +200,6 @@
 								</div>
 								<div class="row">
 									<div class="col-sm-6">
-										<!-- <div class="form-group">
-											<label>$locale.get("product.label.ordrStatus") </label>
-											<select name="orderStatus" id="orderStatus" class="form-control selectpicker">
-												<option value=" "> - Select - </option> 
-								             	#foreach($orderStatus in $orderStatusList)
-													<option value="$!orderStatus.orderStatusCode"> $!orderStatus.orderStatus </option> 
-												#end
-											</select>
-										</div> -->
 									</div>
 									<div class="col-sm-6">
 										<input type="hidden" name="orderStatus" id="orderStatus" value="$!locale.get('orderStatus.labels')"/>
@@ -262,15 +215,7 @@
 						    <!-- Order Info  End -->
 						    
 						</div>
-						<!-- <div id="step-4" id="orderItemDetails">
-							<div id="confirmOrderPageDiv" style="width: 100%;">
-								<center>
-									<span>
-										<img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>
-									</span>
-								</center>
-							</div>
-						</div> -->
+						
 					</div>
 		</div>
 		<input type="hidden" name="countryFulNm" id="countryFulNm"/>
@@ -320,19 +265,6 @@
 											<p class="propwarningmsg"> <i class="fas fa-exclamation-triangle"></i><span>California residents <a onclick="showProp65Message()">see Prop 65 WARNINGS</a></span></p>
 										</li>
 										#end
-										<!-- #if($!itemData.customerPartNumberList && $!itemData.customerPartNumberList.size()>0)
-										<li>
-											<strong>$!locale.get("product.label.cpn"): </strong>
-											#set($seperator = "")
-											#set($partList = "")
-											   #foreach($!customerPart in $!itemData.customerPartNumberList)
-												   #set($partList = "#if($partList)$!partList#end#if($seperator)$!seperator#end
-												   #if($customerPart.partNumber)$!customerPart.partNumber#end")
-													   #set($seperator = ",")
-													  #end
-											   $!partList
-										   </li>
-										#end -->
 										 #set($leadTime = "N")
 										#set($available = "N")
 										#set($allBranch = $!itemData.branchAvail)
@@ -350,13 +282,7 @@
 											#break
 										#end
 										#end
-										<!-- <li class="productLeadTime_$!itemData.partNumber" id="leadTimes" >
-										#if($leadTime!="N")
-											<strong>$!locale.get("product.label.leadTime"): </strong><span class="orangeClr leadTime_$!itemData.partNumber">$!leadTime Days</span>
-										#elseif($!available!="N")
-											<strong>$!locale.get("product.label.availableQuantity"): </strong><span>$!available</span>
-										#end
-										</li> -->
+										
 									</ul>
 									   </td>
 									<td data-th="$!locale.get('form.label.tableQty')" class="cartUpdateBtn">$!itemData.qty</td>

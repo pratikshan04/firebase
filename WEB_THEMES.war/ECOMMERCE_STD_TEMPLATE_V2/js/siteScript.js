@@ -580,13 +580,18 @@ function performShare() {
 			success: function (msg) {
 				var result = msg.split("|");
 				$('#sharePopupDiv .modal-header,#sharePopupDiv .modal-footer').hide();
-				$('#sharePopupDiv .modal-body').html(result[0]);
+				if(result[0] == 'Saved Cart Shared Successfully.'){
+					result[0] = locale('label.savedCart.shareEmailSuccess');
+					$('#sharePopupDiv .modal-body').html(result[0]);
+				}else{
+					$('#sharePopupDiv .modal-body').html(result[0]);
+				}
 				setTimeout(function () { $('#sharePopupDiv').modal('hide'); }, 5000);
 				return false;
 			}
 		});
 	} else {
-		bootAlert("small", "error", "Error", "Please Select Users to Share");
+		bootAlert("small", "error", "Error", locale('label.savedCart.shareEmail'));
 	}
 	return false;
 }
@@ -1004,6 +1009,9 @@ $(document).ready(function () {
 								}
 								$this.find(".pLoginErr").html(data);
 							} else {
+								if(data == "Invalid User Name/Password."){
+									data = "Usuario / contraseña invalida"
+								}
 								showNotificationDiv("Error", data);
 							}
 							$this.find("[type='submit']").html(locale('form.label.login')).removeAttr("disabled");
@@ -1021,7 +1029,7 @@ $(document).ready(function () {
 });
 function loadShippingInfo() {
 	$.get("getAddressesAddressSync.action?frPage=popLogin&showpopUp=Y", function (data, status) {
-		$('#generalModel .modal-body').html(data);
+		// $('#generalModel .modal-body').html(data);
 		if ($('#example tbody tr').length == 1 || $('#example tbody tr').length == 0) {
 			var flag = getCookie("isShipToSelected");
 			if (flag != "true") {
@@ -1032,7 +1040,7 @@ function loadShippingInfo() {
 				window.location.href = value;
 				setCookie('afterLoginUrl', "");
 			} else {
-				window.location.href = locale('website.url.ProductCategory');
+				window.location.href = locale('website.url.welcome');
 			}
 		} else {
 			$('#generalModel .modal-header').hide();
@@ -1406,7 +1414,9 @@ function leftFilterScroll() {
 		opacity: '1',
 		borderRadius: '0px',
 		railBorderRadius: '0px',
-		top: '10px'
+		top: '10px',
+		wheelStep : 10,
+		touchScrollStep : 75
 	});
 }
 function filterScroll() {
@@ -1421,7 +1431,9 @@ function filterScroll() {
 		opacity: '1',
 		borderRadius: '0px',
 		railBorderRadius: '0px',
-		top: '10px'
+		top: '10px',
+		wheelStep : 10,
+		touchScrollStep : 75
 	});
 }
 function hideNotificationDiv() {
@@ -1483,7 +1495,7 @@ function locale(properName) {
 function validateSearchWithIn() {
 	var s = $('#keyWordTxt').val();
 	if (s == "" || s == "Search Within" || s == "Search%20With%20In" || s.indexOf("Search Within") > -1) {
-		bootAlert("small", "error", "Error", "Enter a keyword to Search Within the list.");
+		bootAlert("small", "error", "Error", locale('label.search.searchWithInNull'));
 		return false;
 	} else {
 		$('#keyWord').val($.trim(s));
@@ -2938,7 +2950,7 @@ function updateCart(val) {
 	value = value.trim();
 	qtyVal = $(val).attr("data-itemId");
 	if (value == "0" || value == "") {
-		bootAlert("small", "error", "Error", "Invalid qty");
+		bootAlert("small", "error", "Error", locale('label.invalidQTY'));
 		qty = $(val).parent().find("#itemQty_" + qtyVal).val();
 		$(val).val(qty);
 	}

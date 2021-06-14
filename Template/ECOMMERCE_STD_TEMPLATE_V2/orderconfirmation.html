@@ -8,10 +8,10 @@
 <div id="printOrderConfirm">
 	<div class="orderStatus">
 		#if($orderDetail.erpOrderNumber)				
-			<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
+			<h5 class="orderConfirmColor">$!locale.get('product.label.yourOrderSuccess')</h5>
 		#else
 			#if($!orderDetail.orderStatusDesc.toUpperCase().contains("SUCCESS"))
-				<h3>$!locale.get('product.label.yourOrderSuccess') - <span class="text-success">$!locale.get('product.label.orderSuccess')</span></h3>
+				<h5 class="orderConfirmColor">$!locale.get('product.label.yourOrderSuccess')</h5>
 			#else
 				#if($orderItemList.size()==0)
 					<h3>$!locale.get('product.label.yourOrdernotavailable')</h3>
@@ -122,7 +122,7 @@
 		<p>
 			<span>
 				#if($shipEntityName.length()>0)$!shipEntityName#end <br/>
-				#if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/>
+				<!-- #if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/> -->
 				#if($orderDetail.shipAddress.address1.length()>0)$!orderDetail.shipAddress.address1<br />#end 
 				#if($orderDetail.shipAddress.address2.length()>0)$!orderDetail.shipAddress.address2<br />#end
 				#if($orderDetail.shipAddress.city.length()>0)
@@ -164,7 +164,8 @@
 					<th>$!locale.get("product.label.qty")</th>
 					<th>$!locale.get("product.label.uom")</th>
 					<th>$!locale.get("product.label.yourprice")</th>
-					<th>Ext Price</th>
+					<th>$!locale.get('product.label.discountPrice')</th>
+					<th>Ext Precio</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -221,7 +222,9 @@
 						#set($!displayCallForPriceMessage = $!displayCallForPriceMessage+$!delimiterOrderDetail+$!itemList.partNumber)
 						#set($!delimiterOrderDetail = ",")
 					#end
-					<td align="left" valign="top" data-th="Ext Price" class="formatPrice">#if($itemList.extPrice>0)$$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
+					<td data-th="$!locale.get('product.label.discountPrice')"><span>Q $itemList.customerPrice</span></td>
+					<td align="left" valign="top" data-th="Ext Precio" class="formatPrice">#if($itemList.extPrice>0)$$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
+					
 				</tr>
 				#end
 			</tbody>
@@ -364,7 +367,7 @@
                  <p>
                    <span>
 						#if($shipEntityName.length()>0)$!shipEntityName#end <br/>
-						#if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/>
+						<!-- #if($orderDetail.shipAddress.shipToId.length()>0)$!orderDetail.shipAddress.shipToId#end <br/> -->
 						#if($orderDetail.shipAddress.address1.length()>0)$!orderDetail.shipAddress.address1<br />#end 
 						#if($orderDetail.shipAddress.address2.length()>0)$!orderDetail.shipAddress.address2<br />#end
 						#if($orderDetail.shipAddress.city.length()>0)$!orderDetail.shipAddress.city#end

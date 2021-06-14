@@ -32,15 +32,15 @@ var BulkAction = {};
 
 
 				if (qty == "NaN") {
-					ErrorMsg = ErrorMsg + "Invalid Qty. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = ErrorMsg + locale('label.invalidQTYFor') + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					$("#itemTxtQty" + itemID).val(minOrderQty);
 					addItem = false;
 				} else if (qty < 1) {
-					ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = locale('label.qty.minValueZeroFor')  +" "+  locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					addItem = false;
 				}
 				if (qty < minOrderQty) {
-					ErrorMsg = locale('label.qty.minValueZero') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					addItem = false;
 				} else if (qty > minOrderQty) {
 					var qtyDiff = qty - minOrderQty;
@@ -72,7 +72,7 @@ var BulkAction = {};
 				BulkAction.refreshBulkSelect();
 			}
 		} else {
-			bootAlert("small", "error", "Error", "No Items Selected.");
+			bootAlert("small", "error", "Error", locale('label.favrito.noItemsSelect'));
 			BulkAction.refreshBulkSelect();
 		}
 
@@ -117,7 +117,7 @@ var BulkAction = {};
 				}
 			});
 		} else {
-			bootAlert("small", "error", "Error", "No Items Selected.");
+			bootAlert("small", "error", "Error", locale('label.favrito.noItemsSelect'));
 			BulkAction.refreshBulkSelect();
 		}
 	};
@@ -187,11 +187,11 @@ var BulkAction = {};
 					this.checked = false;
 				});
 			} else {
-				bootAlert("small", "error", "Error", "No Items Selected.");
+				bootAlert("small", "error", "Error", locale('label.favrito.noItemsSelect'));
 				BulkAction.refreshBulkSelect();
 			}
 		} else {
-			bootAlert("small", "error", "Error", "No Group Selected.");
+			bootAlert("small", "error", "Error", locale('label.favrito.noItemsSelect'));
 		}
 	};
 	BulkAction.submitMultipleProductGroup = function (myObject) {
@@ -519,15 +519,15 @@ var BulkAction = {};
 			var minOrderQty = (parseInt($("#MinOrderQty_" + partNumber).val())) != "NaN" || parseInt($("#MinOrderQty_" + partNumber).val()) != 0 ? parseInt($("#MinOrderQty_" + partNumber).val()) : 1;
 			var quantityInterval = (parseInt($("#OrderQtyInterval_" + partNumber).val())) != "NaN" || parseInt($("#OrderQtyInterval_" + partNumber).val()) != 0 ? parseInt($("#OrderQtyInterval_" + partNumber).val()) : 1;
 			if (qty == "NaN") {
-				ErrorMsg = ErrorMsg + "Invalid Qty. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = ErrorMsg + locale('label.invalidQTYFor') + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				$("#itemTxtQty" + itemID).val(minOrderQty);
 				addItem = false;
 			} else if (qty < 1) {
-				ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = locale('label.qty.minValueZeroFor')  +" "+  locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			}
 			if (qty < minOrderQty) {
-				ErrorMsg = locale('label.qty.minValueZero') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			} else if (qty > minOrderQty) {
 				var qtyDiff = qty - minOrderQty;
@@ -672,14 +672,14 @@ var BulkAction = {};
 		var minOrderQty = (parseInt($(obj).data("minorderqty"))) != "NaN" || parseInt($(obj).data("minorderqty")) != 0 ? parseInt($(obj).data("minorderqty")) : 1;
 		var quantityInterval = (parseInt($(obj).data("orderinterval"))) != "NaN" || parseInt($(obj).data("orderinterval")) != 0 ? parseInt($(obj).data("orderinterval")) : 1;
 		if (qty == "NaN") {
-			ErrorMsg = "Invalid Qty";
+			ErrorMsg = locale('label.invalidQTY');
 			//$(obj).val(minOrderQty);
 			addItem = false;
 		} else if (qty < 1) {
 			ErrorMsg = "Quantity Cannot be less than " + minOrderQty;
 			addItem = false;
 		} else if (qty < minOrderQty) {
-			ErrorMsg = locale('label.qty.minValueZero') + minOrderQty;
+			ErrorMsg = locale('label.minorderqtyIs') + minOrderQty;
 			addItem = false;
 		} else if (qty > minOrderQty) {
 			var qtyDiff = qty - minOrderQty;
@@ -807,16 +807,16 @@ var BulkAction = {};
 			var minOrderQty = (parseInt($("#MinOrderQty_" + partNumber).val())) != "NaN" || parseInt($("#MinOrderQty_" + partNumber).val()) != 0 ? parseInt($("#MinOrderQty_" + partNumber).val()) : 1;
 			var quantityInterval = (parseInt($("#OrderQtyInterval_" + partNumber).val())) != "NaN" || parseInt($("#OrderQtyInterval_" + partNumber).val()) != 0 ? parseInt($("#OrderQtyInterval_" + partNumber).val()) : 1;
 			if (qty == "NaN") {
-				ErrorMsg = ErrorMsg + "Invalid Qty. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = ErrorMsg + locale('label.invalidQTYFor') + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				$("#itemTxtQty" + itemID).val(minOrderQty);
 				addItem = false;
 			} else if (qty < 1) {
-				ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = locale('label.qty.minValueZeroFor')  +" "+  locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			}			
 
 			if (qty < parseInt(minOrderQty)) {
-				ErrorMsg = locale('label.qty.minValueZero') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			} else if (qty > parseInt(minOrderQty)) {
 				var qtyDiff = qty - minOrderQty;
@@ -963,20 +963,20 @@ var BulkAction = {};
 			var minOrderQty = (parseInt($("#MinOrderQty_" + partNumber).val())) != "NaN" || parseInt($("#MinOrderQty_" + partNumber).val()) != 0 ? parseInt($("#MinOrderQty_" + partNumber).val()) : 1;
 			var quantityInterval = (parseInt($("#OrderQtyInterval_" + partNumber).val())) != "NaN" || parseInt($("#OrderQtyInterval_" + partNumber).val()) != 0 ? parseInt($("#OrderQtyInterval_" + partNumber).val()) : 1;
 			if (qty == "NaN") {
-				ErrorMsg = ErrorMsg + "Invalid Qty. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = ErrorMsg + locale('label.invalidQTYFor') +" "+ locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				qtyBox.val(minOrderQty);
 				addItem = false;
 			} else if (qty < 1) {
-				ErrorMsg = "Quantity Cannot be less than or equal to 0. For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = locale('label.qty.minValueZeroFor')  +" "+ locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			}
 			if (qty < minOrderQty) {
-				ErrorMsg = locale('label.qty.minValueZero') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+				ErrorMsg = locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 				addItem = false;
 			} else if (qty > minOrderQty) {
 				var qtyDiff = qty - minOrderQty;
 				if (qtyDiff % quantityInterval != 0) {
-					ErrorMsg = "Quantity Interval is " + quantityInterval + locale('label.qty.minValueZero') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = "Quantity Interval is " + quantityInterval + locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					addItem = false;
 				}
 			}

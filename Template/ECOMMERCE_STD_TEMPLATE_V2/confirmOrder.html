@@ -19,6 +19,7 @@
 		        <th>$!locale.get("product.label.extPrice")</th> -->
 		        <th>$!locale.get("header.label.items")</th>
                 <th>$!locale.get("product.label.quantity")</th>
+				<th>$!locale.get('product.label.discountPrice')</th>
                 <th>$!locale.get("product.label.price")</th>
 		    </tr>
 		  </thead>
@@ -104,10 +105,12 @@
 			<td data-th="$!locale.get('form.label.tableQty')">
 		       <p id="textQty_$!itemData.partNumber" name="shoppingCartQty">$!itemData.qty</p>
 			</td>
+			<td data-th="$!locale.get('product.label.discountPrice')">
+				<span>Q $!itemData.customerPrice</span>
+			</td> 
 			<td data-th="$!locale.get('product.label.extPrice')">
 				<p><strong class="formatPrice">#if($itemData.total>0)$$numberTool.format($numberToolFormat,$itemData.total) #end</strong></p>
-			</td>
-		        
+			</td> 
 				</tr>
 		        #end <!--End of CartListFata Iterator-->
 		        </tbody>

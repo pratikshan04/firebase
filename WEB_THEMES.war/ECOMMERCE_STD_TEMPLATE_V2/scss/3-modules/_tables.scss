@@ -162,7 +162,7 @@
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
-    top: 6px;
+    // top: 6px;
     left: 6px;
     max-width: 48%;
     padding-right: 10px;
@@ -277,5 +277,24 @@ table.dataTable thead tr{
 #invoiceTable.table{
   thead{
     border-top: 2px solid #e0e0e0;
+  }
+  tbody{
+    :last-child{
+      border: 0;
+    }
+  }
+}
+#ticketTable.table{
+  thead{
+    tr{
+      background: $secondary_color;
+      height: 48px;
+      color: $white;
+    }
+  }
+  tbody{
+    tr{
+      height: 48px;
+    }
   }
 }
