@@ -5,6 +5,7 @@
 header {
     .cimm_header {
         position: relative;
+        margin-bottom: 5px;
         @include main_header;
 
         .cimm_header_top {

@@ -175,10 +175,10 @@ function filterForAllSelectedAttributes(){
 		key = jQuery("#"+tId+"_div").text();
 		if(map[key]){
 			var val = map[key];
-			val = val+ c + '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+			val = val+ c + '"'+decodeURI(jQuery("#"+tId+"_span").text())+'"';
 			map[key] = val;
 		}else{
-			val = '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+			val = '"'+decodeURI(jQuery("#"+tId+"_span").text())+'"';
 			map[key] = val
 		}
 	});
@@ -247,7 +247,7 @@ function appendSearchByCheckBox(id){
 		chks.each(function(){
 			var tId = jQuery(this).attr("id");
 			key = jQuery("#"+tId+"_div").text();
-			val = val+ c + '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+			val = '"'+decodeURI(jQuery("#"+tId+"_span").text())+'"';
 			c = "|";
 		});
 		appendSearch(key,val)

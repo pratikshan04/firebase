@@ -49,7 +49,7 @@ function submitRetrievePassword(str) {
 		data: str,
 		success: function(message){
 			$("#submitBtn").attr("disabled",false).html(buttonVal);
-			if(message.indexOf('Account does not exist') != -1 || message.indexOf('Failed to send password') != -1 || message.indexOf('Our systems have detected') != -1){
+			if(message.indexOf('La cuenta no existe') != -1 || message.indexOf('Account does not exist') != -1 || message.indexOf('Failed to send password') != -1 || message.indexOf('Our systems have detected') != -1 || message.indexOf('Nuestros sistemas han detectado') != -1){
 				showNotificationDiv("error", message);
 			}else{
 				showNotificationDiv("Success", message);

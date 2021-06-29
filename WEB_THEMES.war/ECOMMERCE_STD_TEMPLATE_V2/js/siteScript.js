@@ -104,7 +104,7 @@ function showNotificationDiv(type, message) {
 } 
 function replaceNonAscii(s) {
 	if (s != undefined){
-		s = s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
+		s = s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~áÁéÉíÍóÓúÚñÑüÜ]*/g, '');
 	}
 	return s;
 }
@@ -648,7 +648,7 @@ function performSearch() {
 		s = $.trim(s);
 		s = s.replace(/</g, "<&nbsp;");
 		s = replaceNonAscii(s);
-		s = escape(s);
+		s = encodeURI(s);
 		s = s.replace('\u00AE', '&reg;');
 		s = s.replace(/#/g, "%23");
 		s = s.replace(/&/g, "%26");
@@ -663,7 +663,7 @@ function performSearch() {
 	nSearch = replaceNonAscii(nSearch);
 
 	if (nSearch != undefined && nSearch != "") {
-		nSearch = escape(nSearch);
+		nSearch = encodeURI(nSearch);
 		nSearch = nSearch.replace(/#/g, "%23");
 		nSearch = nSearch.replace(/&/g, "%26");
 		nSearch = nSearch.replace(/;/g, "%3B");
@@ -776,7 +776,7 @@ function performAdvSearch() {
 	s = $.trim(s);
 	s = s.replace(/</g, "<&nbsp;");
 	s = s.replace(/\u00AE/g, '&reg;').replace(/\u2122/g, '&trade;');
-	s = escape(s);
+	s = encodeURI(s);
 	s = s.replace(/#/g, "%23");
 	s = s.replace(/&/g, "%26");
 	s = s.replace(/;/g, "%3B");

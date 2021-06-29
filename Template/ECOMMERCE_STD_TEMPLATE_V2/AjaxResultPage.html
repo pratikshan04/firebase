@@ -244,6 +244,10 @@
 		</thead>
 		<tbody>
 			#foreach($customerArInvoiceObj in $customerArInvoiceList)
+			#if($velocityCount==1)
+				#set($totalPages = $customerArInvoiceObj.totalPages)
+				#set($totalElements = $customerArInvoiceObj.totalElements)
+			#end
 			<tr>	 
 				<td align="left" data-th="$!locale.get('product.invoice.numberDoc')">$!customerArInvoiceObj.invoiceNumber</td>
 				<td class="alignCenter" data-th="$!locale.get('product.invoice.pdf')">
@@ -268,6 +272,8 @@
 		</tbody>
 	</table>
 </div>
+<input type="hidden" value="$totalElements" id="totalEle" />
+<input type="hidden" value="$totalPages" id="totalPage" /> 
 #end
 #end
 #end
