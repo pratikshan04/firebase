@@ -41,7 +41,7 @@
 			<form id="searchForm" action="$!searchWithInFormURL" method="get" class="clearAfter">
 				<div class="input-group">
 					<input type="text" name="keyWordTxt" id="keyWordTxt" title="$!locale.get('search.label.searchWithin') $!listPageHeading" onkeypress="return runScriptSearchWithIn(event);" placeholder="$!locale.get('product.label.searchwithin')" class="form-control"/>
-					#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWordTxt)
+					#listHiddenSearchWithIn($!codeIdSkip,$!levelNoSkip,$!gallery,$!resultPage,$!pageNo,$!sortBy,$!attrFilterList,$!brandId,$!keyWord)
 					#if($srchTyp.trim().length() > 0)
 						<input type="hidden" name="srchTyp" value="$!srchTyp" />
 					#else
@@ -70,9 +70,10 @@
 							#generateFileter($!attributeFiltered.attrName,$!attributeFiltered.attrValueEncoded,$!attributeFiltered.attrName,$!filterList)
 							<li>
 								<span class="Refine-label">
-								#if($attributeFiltered.attrName=="brand")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
-								#elseif($attributeFiltered.attrName=="category")$!attributeFiltered.attrName.replaceAll("attr_","").toUpperCase()
-								
+								#if($attributeFiltered.attrName=="brand")
+									$!locale.get('product.label.brands')
+								#elseif($attributeFiltered.attrName=="category")
+									$!locale.get('navigation.label.categories')
 								#else
 									$!attributeFiltered.attrName.replaceAll("attr_","")
 								#end

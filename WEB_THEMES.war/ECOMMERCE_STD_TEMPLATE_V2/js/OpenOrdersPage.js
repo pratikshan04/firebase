@@ -13,4 +13,11 @@ $(document).ready(function(){
 		'aoColumnDefs': [{ targets: -1, orderable: false }],
 		"order": [[ 0, "desc" ]]
 	});
+
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#openTable tbody tr").filter(function() {
+		  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	  });
 });

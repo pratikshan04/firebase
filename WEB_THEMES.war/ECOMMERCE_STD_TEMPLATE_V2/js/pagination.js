@@ -40,7 +40,7 @@
 		}
 		$("#"+tableID+"_paginat").remove();
 		if(!$('#'+tableID+"_sortWrap")[0]){
-			var sortList = "<span id='"+tableID+"_sortWrap' class='uni_sort'><select id='"+tableID+"_sort'><option value='10'>10</option><option value='20'>20</option><option value='30'>30</option><option value='40'>40</option></select></span>";
+			var sortList = "<span id='"+tableID+"_sortWrap' class='uni_sort'><span> Show </span><select id='"+tableID+"_sort'><option value='10'>10</option><option value='20'>20</option><option value='30'>30</option><option value='40'>40</option></select></span>";
 			$(sortList).appendTo("#"+tableID+"_Wrapper .pageSortWrap")
 		}
 		var paginatList = "<span id='"+tableID+"_paginat' class='uni_paginate'>";

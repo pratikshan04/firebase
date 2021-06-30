@@ -11,7 +11,7 @@ var table = $('#OrdersHistoryTable').DataTable({
 	'aoColumnDefs': [{ targets: -1, orderable: false }]
 });
 
-var poList = table.column(1).data().unique();
+//var poList = table.column(1).data().unique();
 
 $('#orderPoSearchBtn').on('click', function () {
 	unusualCode = 0;
@@ -153,3 +153,11 @@ $('#orderPoSearch').keypress(function(e) {
 		$('#orderPoSearchBtn').click();
 	}
 });
+// $(document).ready(function(){
+// $("#myInput").on("keyup", function() {
+// 	var value = $(this).val().toLowerCase();
+// 	$("#historyTable tbody tr").filter(function() {
+// 	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+// 	});
+//   });
+// });

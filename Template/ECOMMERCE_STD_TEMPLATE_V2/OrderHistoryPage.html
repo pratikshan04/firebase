@@ -77,12 +77,16 @@
 			<input type="hidden" id="startDateVal" value="$!startDate"/>
 			<input type="hidden" id="endDateVal" value="$!endDate"/>
 			<!-- <h4>$!locale.get("product.label.searchBy")</h4> -->
-			<form id="OrdersHistoryDetails" action="$!locale.get('website.url.OrderHistory')" method="GET">
-				<input type="hidden" name="searchBy" id="searchBy"/>
+			<form id="OrdersHistoryDetails" action="/OrderHistory?type=CLOSED&startDate=$!startDate&endDate=$!endDate&pageSize=10&pageNo=1" method="GET">
+				<!-- <input type="hidden" name="entityIDType" id="entityIDType"/> -->
+				<!-- <input type="hidden" name="searchBy" id="searchBy"/>
 				<input type="hidden" name="entityIDType" id="entityIDType"/>
 				<input type="hidden" name="customerPoNumber" id="customerPoNumber"/>
 				<input type="hidden" name="partNumberToERP" id="partNumberToERP"/>
-				<input type="hidden" name="orderNumber" id="orderNumber"/>
+				<input type="hidden" name="orderNumber" id="orderNumber"/> -->
+				<input type="hidden" name="type" id="type" value="CLOSED"/>
+				<input type="hidden" name="pageSize" id="pageSize" value="10"/>
+				<input type="hidden" name="pageNo" id="pageNo"/> 
 				<div class="row" id="orderList">
 					<div class="col-md-8 custom_lineform form-inline mTop-2">
 					<label for="datepicker_from" class="mRight-2 date_from">$!locale.get("product.label.from") </label>
@@ -104,10 +108,9 @@
 							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md order_btn">$!locale.get('product.button.deleteQuoteRequest')</button>
 						    </div>
 					</div>
-					<div class="col-md-4 custom_lineform form-inline">
-						<input type="text" id="orderPoSearch" onkeypress="return runScript(event);"class="form-control" value="#if($keyWord)$!keyWord #end" placeholder="$!locale.get('label.order.searchbar')" >
-						<input type="button" id="orderPoSearchBtn" class="btn btn-secondary btn-md" value="$!locale.get('product.label.search')"/>
-					</div>
+					<!-- <div class="col-md-4 custom_lineform form-inline">
+						<input id="myInput" type="text" placeholder="Buscar">
+					</div> -->
 					<!-- <div class="col-md-4">
 						<label>$!locale.get("product.label.orderNumber") </label>
 						<input type="text" id="orderNumber" name="orderNumber" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop ="return false;" value="$!orderNumber" />
@@ -125,7 +128,7 @@
 		<div class="col-md-12 cd-sm-12 cd-xs-12 pTop-3">
 			#if($displayAccountOrderInformation == "Y")
 			<div class="cimm_tableWrap shipping">
-				<table cellpadding="0 " cellspacing="0 " border="0 " width="100% " class="table table-striped table-bordered display rwd-table" id="OrdersHistoryTable">
+				<table cellpadding="0 " cellspacing="0 " border="0 " width="100% " class="table table-striped display rwd-table" id="historyTable">
 					<thead>
 						<tr>
 							<th class="left">$!locale.get("form.label.OrderNo")</th>

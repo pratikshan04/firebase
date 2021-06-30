@@ -71,14 +71,16 @@
 #else
 <h6 class="cimm_page-title">$!locale.get("product.heading.openOrders")</h6>
 #end
-  
+<div class="pull-right marginY-2">
+	<input id="myInput" type="text" placeholder="Buscar Ordenes Abiertas" class="openSearchInput">
+</div>
 #if($orderStatusType == "Open")
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
-	<table class="table table-striped display rwd-table">
+	<table class="table table-striped display rwd-table" id="openTable">
 	<thead>
 	<tr>
 	<th class="left">$!locale.get("form.label.NoFromEcom")</th>
-	<!-- <th>$!locale.get("from.label.NoFromSap")</th> -->
+	<th>$!locale.get("from.label.NoFromSap")</th>
 	<th>$!locale.get("form.label.orderDate")</th>
 	<th>$!locale.get("product.label.total")</th>
 	<th>$!locale.get("product.label.ordrStatus")</th>
@@ -100,9 +102,9 @@
 	<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></strong>
 	#end
 	</td>
-	<!-- <td data-th="$!locale.get('form.label.customerPOnumber')">
-	#if($orderDetail.orderNum) $!orderDetail.orderNum #else &nbsp; #end
-	</td> -->
+	<td data-th="$!locale.get('form.label.customerPOnumber')">
+	#if($orderDetail.orderNum) $!orderDetail.erpOrderNumber #else &nbsp; #end
+	</td>
 	<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
 	<td data-th="$!locale.get('product.label.amount')">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
 	<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
@@ -135,6 +137,10 @@
 	<tbody>
 	#if($orderList && $!orderList.size()>0)
 	#foreach($orderDetail in $orderList)
+	#if($velocityCount==1)
+    #set($totalPages = $orderDetail.totalPages)
+    #set($totalElements = $orderDetail.totalElements)
+    #end
 	<tr>
 	<td>$!orderDetail.erpOrderNumber</td>
 	<td>$!orderDetail.orderNum</td>
@@ -165,7 +171,7 @@
 	</div>
 #end
 <!-- Ticket Status -->
-<div class="pgnation"></div> 
+
 #end
 #else
 <div class="alert alert-danger">
