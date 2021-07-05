@@ -18,30 +18,37 @@
 		if(totalPages < obj.displyLinks){
 			pageableCounter = totalPages;
 		}
-		var paginatSet = Math.ceil(totalPages / obj.displyLinks), k=0;
+		var paginatSet = Math.ceil(totalPages / obj.displyLinks), k=0, j=0;
 		if(!$("#"+tableID+"_Wrapper").html()){
 			$('#'+tableID).wrap("<div id='"+tableID+"_Wrapper'></div>");
 		}
-		for(i=0; i < paginatSet; i++){
-			var linkHolder = [];
-			for(j=0; j < pageableCounter; j++){
-				k++;
-				var active =""
-				if(j==0){
-					active = "active";
-				}
-				linkHolder.push("<a aria-controls='"+tableID+"' data-index='"+k+"' title='Go to page "+ k +"' class="+active+">"+ k +"</a>");
+		var linkHolder = [];
+		while (j < totalPages) {
+			j++;
+			if(k === 5) {
+				linkHolderWrap.push(linkHolder);
+				linkHolder = [];
+				k = 0 ;
 			}
-			linkHolderWrap.push(linkHolder);
+			var active ="";
+			if(k == 0){
+				active = "active";
+			}
+			linkHolder.push("<a aria-controls='"+tableID+"' data-index='"+j+"' title='Ir a la pagina "+ j +"' class="+active+">"+ j +"</a>");
+			k++;
 		}
+		(k > 0) ? linkHolderWrap.push(linkHolder) : "";
 		
 		if($("#"+tableID+"_Wrapper .pageSortWrap").html() == "" || $("#"+tableID+"_Wrapper .pageSortWrap").html() == undefined){
-			$("<div class='pageSortWrap'></div>").appendTo("#"+tableID+"_Wrapper");
-		}
+            $("#"+tableID+"_Wrapper").prepend("<div class='pageSortWrap'></div>");
+        }
+        if($("#"+tableID+"_Wrapper .paginatListWrap").html() == "" || $("#"+tableID+"_Wrapper .paginatListWrap").html() == undefined){
+            $("<div class='paginatListWrap'></div>").appendTo("#"+tableID+"_Wrapper");
+        }
 		$("#"+tableID+"_paginat").remove();
 		if(!$('#'+tableID+"_sortWrap")[0]){
 			var sortList = "<span id='"+tableID+"_sortWrap' class='uni_sort'><span> Show </span><select id='"+tableID+"_sort'><option value='10'>10</option><option value='20'>20</option><option value='30'>30</option><option value='40'>40</option></select></span>";
-			$(sortList).appendTo("#"+tableID+"_Wrapper .pageSortWrap")
+			$("#"+tableID+"_Wrapper .pageSortWrap").prepend(sortList);
 		}
 		var paginatList = "<span id='"+tableID+"_paginat' class='uni_paginate'>";
 		
@@ -57,7 +64,7 @@
 		
 		paginatList += "</span>";
 		
-		$(paginatList).appendTo("#"+tableID+"_Wrapper .pageSortWrap")
+		$(paginatList).appendTo("#"+tableID+"_Wrapper .paginatListWrap")
 		$("#"+tableID+"_paginat .next").click(function(){
 			var nextSet = $(this).attr("data-next");
 			if(nextSet){
@@ -93,6 +100,8 @@
 		$('#'+tableID+'_sort').change(function(){
 			var perPageSort = parseInt($(this).val());
 			//reInitiate(tableID, perPageSort);
+			obj['perPage'] = perPageSort;
+            pagenationCall(obj, tableID);
 			navigation("", tableID, "");
 		});
 

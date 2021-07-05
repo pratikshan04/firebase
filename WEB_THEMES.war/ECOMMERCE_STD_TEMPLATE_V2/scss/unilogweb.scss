@@ -1382,8 +1382,8 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         font-size: 14px;
     }
 }
-.fillRateBtm{
-    border-bottom: 1px solid $primary_color;
+.fillRateTop{
+    border-top: 1px solid $primary_color;
 }
 .fillRateAvgBg{
     background-color: $white;
@@ -1398,8 +1398,12 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     height: auto;
     overflow-y: scroll;
 }
-.pageSortWrap {
-    float: right;
+.paginatListWrap {
+    width: 100%;
+    .uni_paginate{
+        float: right;
+        padding: 10px 0px;
+    }
     span.uni_paginate{
         span a{
         color: $secondary_color;
@@ -1412,7 +1416,25 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         }
     }
 }
+.pageSortWrap{
+    .uni_sort{
+        float: left;
+        padding: 10px 0px;
+        select{
+            height: 30px;
+            width: 48px;
+        }
+    }
+}
+
 .grecaptcha-badge{
     bottom:  140px !important
+}
+.openSearchInput{
+    height: 34px;
+    padding: 10px;
+}
+#invoiceTable_sortWrap, #ticketTable_sortWrap{
+    display: none !important;
 }
 @import "3-modules/modules";

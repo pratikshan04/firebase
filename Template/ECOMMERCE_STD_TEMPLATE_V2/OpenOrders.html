@@ -1,5 +1,3 @@
-#set($totalPages = 0)
-#set($totalElements = 0)
 #if($session.getAttribute('isGeneralUser')!="Y")
 #if($ajaxCall=="Y")
 #if($!session.getAttribute("pricePrecision")=="4")
@@ -67,13 +65,20 @@
 #end
 #else
 #if($orderStatusType == "Ticket")
+#set($totalPages = 0)
+#set($totalElements = 0)
 <h6 class="cimm_page-title">Estado del ticket</h6>
+<!-- <div class="pull-right marginY-2">
+	<input id="myInput" type="text" placeholder="Buscar Estado del ticket" class="openSearchInput">
+</div> -->
 #else
+#set($totalPages = 0)
+#set($totalElements = 0)
 <h6 class="cimm_page-title">$!locale.get("product.heading.openOrders")</h6>
-#end
 <div class="pull-right marginY-2">
 	<input id="myInput" type="text" placeholder="Buscar Ordenes Abiertas" class="openSearchInput">
 </div>
+#end
 #if($orderStatusType == "Open")
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
 	<table class="table table-striped display rwd-table" id="openTable">
@@ -178,8 +183,3 @@
   <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
 </div>
 #end
-#if($orderStatusType == "OPEN")
-
-#end
-<input type="hidden" value="$totalElements" id="totalEle" />
-<input type="hidden" value="$totalPages" id="totalPage" />

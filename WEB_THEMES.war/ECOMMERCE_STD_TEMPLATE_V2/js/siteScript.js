@@ -1006,11 +1006,19 @@ $(document).ready(function () {
 							if ($this.find(".pLoginErr").length > 0) {
 								if(data == "Invalid User Name/Password."){
 									data = "Usuario / contraseña invalida"
+								}else if(data == "Your Account is Still Being Approved."){
+									data = "Su cuenta aún está siendo aprobada."
+								}else{
+									data = data;
 								}
 								$this.find(".pLoginErr").html(data);
 							} else {
 								if(data == "Invalid User Name/Password."){
 									data = "Usuario / contraseña invalida"
+								}else if(data == "Your Account is Still Being Approved."){
+									data = "Su cuenta aún está siendo aprobada."
+								}else{
+									data = data;
 								}
 								showNotificationDiv("Error", data);
 							}
@@ -3417,18 +3425,19 @@ $(function () {
 
 	if ($(".formatPhoneNumber").length > 0) {
 		$(".formatPhoneNumber").each(function () {
-			$(this).attr("maxlength", "12");
+			$(this).attr("maxlength", "9");
 		});
 
 		$(".formatPhoneNumber").keydown(function (e) {
 			if (e.keyCode != 8) {
 				var curchr = this.value.length;
 				var curval = $(this).val();
-				if (curchr == 3) {
+				if (curchr == 4) {
 					$(this).val(curval + "-");
-				} else if (curchr == 7) {
-					$(this).val(curval + "-");
-				}
+				} 
+				// else if (curchr == 7) {
+				// 	$(this).val(curval + "-");
+				// }
 			}
 		});
 	}

@@ -224,6 +224,8 @@
 
 #if($responseType=="InvoiceList")
 #if($customerArInvoiceList && $customerArInvoiceList.size()>0)
+#set($totalPages = 0)
+#set($totalElements = 0)
 <div class="cimm_siteTableEnclosure rwd-table">
 	<table width="100%" border="0" cellpadding="3" cellspacing="0" id="invoiceTable" class="table table-striped display rwd-table" style="font-size: 12px;">
 		<thead>

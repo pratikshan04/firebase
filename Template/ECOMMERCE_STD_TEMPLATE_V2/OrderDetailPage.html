@@ -146,7 +146,7 @@
                             <ul>
                             <li>
                             <strong>$!locale.get("product.label.partNumber"): </strong> $!orderItem.partNumber</li>
-                            <li><a href="/searchPage.action?keyWord=$!orderItem.partNumber">$!orderItem.description</a></li>
+                            <li><a href="/searchPage.action?keyWord=$!orderItem.partNumber">$!orderItem.shortDesc</a></li>
                             #set($eachLineItemComment = "")
                             #if($orderItem.lineItemCommentsList.size() > 0)
 	                            <li><strong>Line Item Comment: </strong>
@@ -166,7 +166,7 @@
 							#end
                         </ul>
                         </div>									  
-                        <input type="hidden" name="shortDesc_$!orderItem.partNumber" value="$!orderItem.description" />
+                        <input type="hidden" name="shortDesc_$!orderItem.partNumber" value="$!orderItem.shortDesc" />
                         <input type="hidden" name="partNumber_$!orderItem.partNumber" value="$!orderItem.partNumber" />
                         <input type="hidden" name="quotePartNumber" value="$!orderItem.partNumber" />
                         <!-- <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.orderUom" /> -->
