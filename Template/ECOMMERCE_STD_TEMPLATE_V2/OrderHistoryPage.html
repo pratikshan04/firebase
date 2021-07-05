@@ -88,7 +88,7 @@
 				<input type="hidden" name="pageSize" id="pageSize" value="10"/>
 				<input type="hidden" name="pageNo" id="pageNo"/> 
 				<div class="row" id="orderList">
-					<div class="col-md-8 custom_lineform form-inline mTop-2">
+					<div class="col-md-8 col-sm-12 col-xs-12 custom_lineform form-inline mTop-2">
 					<label for="datepicker_from" class="mRight-2 date_from">$!locale.get("product.label.from") </label>
 						<div class='input-group date'>
 							<input type="text" name="startDate" id="startDate" class="form-control"  data-date-end-date="0d" placeholder="MM/DD/YYYY" readonly/>
@@ -108,9 +108,11 @@
 							    <button type="reset" id="resetBtn" class="btn btn-secondary btn-md order_btn">$!locale.get('product.button.deleteQuoteRequest')</button>
 						    </div>
 					</div>
-					<!-- <div class="col-md-4 custom_lineform form-inline">
-						<input id="myInput" type="text" placeholder="Buscar">
-					</div> -->
+					<div class="col-md-4 col-sm-12 col-xs-12">
+						<div class="pull-right marginY-2">
+							<input id="myInput" type="text" placeholder="Buscar Estado del ticket" class="openSearchInput">
+						</div>
+					</div>
 					<!-- <div class="col-md-4">
 						<label>$!locale.get("product.label.orderNumber") </label>
 						<input type="text" id="orderNumber" name="orderNumber" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop ="return false;" value="$!orderNumber" />
@@ -125,7 +127,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 cd-sm-12 cd-xs-12 pTop-3">
+		<div class="col-md-12 col-sm-12 col-xs-12 pTop-3">
 			#if($displayAccountOrderInformation == "Y")
 			<div class="cimm_tableWrap shipping">
 				<table cellpadding="0 " cellspacing="0 " border="0 " width="100% " class="table table-striped display rwd-table" id="historyTable">
