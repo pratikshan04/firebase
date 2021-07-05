@@ -1,6 +1,6 @@
 $.ajax({
     type: "GET",
-        url:"/OutStandingPaymentListSale.action?pageSize=10&isAjaxRequest=Y",
+        url:"/OutStandingPaymentListSale.action?pageSize=10&isAjaxRequest=Y&pageNo=1",
         async: false,
         success: function (msg) {
             $("#accountTable").html(msg)

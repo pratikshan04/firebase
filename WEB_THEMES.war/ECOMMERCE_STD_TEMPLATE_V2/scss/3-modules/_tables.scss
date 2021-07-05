@@ -168,6 +168,7 @@
     padding-right: 10px;
     text-align: left;
     font-weight: bold;
+    white-space: nowrap;
   }
   .rwd-table td:before {
     content: attr(data-th);
@@ -284,7 +285,7 @@ table.dataTable thead tr{
     }
   }
 }
-#ticketTable.table{
+#openTable.table, #ticketTable.table, #historyTable.table{
   thead{
     tr{
       background: $secondary_color;

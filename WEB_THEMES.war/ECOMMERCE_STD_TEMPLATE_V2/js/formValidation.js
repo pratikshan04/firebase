@@ -137,8 +137,9 @@ function isValidEmailId(formElement){
 	return emailRegEx.test(formElement.value);
 }
 function isValidPhoneNumber(formElement){
-	//var phonenoRegEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-	var phonenoRegEx = /^[0-9]{8}$/;
+	var phonenoRegEx = /^\(?([0-9]{4})\)?[-. ]?([0-9]{4})$/;
+	//var phonenoRegEx = /^\(?([0-9]{4})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+	//var phonenoRegEx = /^[0-9]{8}$/;
 	return phonenoRegEx.test(formElement.value);
 }
 function isValidPassword(formElement){

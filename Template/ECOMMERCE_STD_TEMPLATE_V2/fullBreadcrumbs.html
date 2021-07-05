@@ -312,7 +312,17 @@
 <ul class="breadcrumb">
     <li><a href="$!locale.get('website.url.Welcome')" title='$!home'>$!home</a></li>
     <li class="active">$!locale.get("breadcrumbs.label.$!LayoutName")</li>
-</ul>	
+</ul>
+#elseif($LayoutName=="OpenOrdersPage")
+<ul class="breadcrumb">
+	<li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>
+	<li><a href="Dashboard">$!locale.get("product.heading.accountDashBoard")</a></li>
+	#if($orderStatusType == "Ticket")
+		<li class="active">Estado Del Ticket</li>
+	#else
+	 	<li class="active">Ordenes abiertas</li>
+	#end
+</ul>
 #elseif($LayoutName!="ShipEntityPage" && $LayoutName!="404Page" && $LayoutName!="NoDataPage")
 	<ul class="breadcrumb">
 	    <li><a href="$!locale.get('website.url.Welcome')">$!home</a></li>

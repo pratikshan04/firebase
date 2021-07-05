@@ -1,5 +1,3 @@
-#set($totalPages = 0)
-#set($totalElements = 0)
 #if($session.getAttribute('isGeneralUser')!="Y")
 #if($ajaxCall=="Y")
 #if($!session.getAttribute("pricePrecision")=="4")
@@ -67,18 +65,27 @@
 #end
 #else
 #if($orderStatusType == "Ticket")
+#set($totalPages = 0)
+#set($totalElements = 0)
 <h6 class="cimm_page-title">Estado del ticket</h6>
+<!-- <div class="pull-right marginY-2">
+	<input id="myInput" type="text" placeholder="Buscar Estado del ticket" class="openSearchInput">
+</div> -->
 #else
+#set($totalPages = 0)
+#set($totalElements = 0)
 <h6 class="cimm_page-title">$!locale.get("product.heading.openOrders")</h6>
+<div class="pull-right marginY-2">
+	<input id="myInput" type="text" placeholder="Buscar Ordenes Abiertas" class="openSearchInput">
+</div>
 #end
-  
 #if($orderStatusType == "Open")
 <div class="cimm_siteTableEnclosure rwd-TableWrap">
-	<table class="table table-striped display rwd-table">
+	<table class="table table-striped display rwd-table" id="openTable">
 	<thead>
 	<tr>
 	<th class="left">$!locale.get("form.label.NoFromEcom")</th>
-	<!-- <th>$!locale.get("from.label.NoFromSap")</th> -->
+	<th>$!locale.get("from.label.NoFromSap")</th>
 	<th>$!locale.get("form.label.orderDate")</th>
 	<th>$!locale.get("product.label.total")</th>
 	<th>$!locale.get("product.label.ordrStatus")</th>
@@ -100,9 +107,9 @@
 	<strong><a href="OrderDetailSale.action?orderId=$!orderDetail.orderNum">$!orderDetail.orderNum</a></strong>
 	#end
 	</td>
-	<!-- <td data-th="$!locale.get('form.label.customerPOnumber')">
-	#if($orderDetail.orderNum) $!orderDetail.orderNum #else &nbsp; #end
-	</td> -->
+	<td data-th="$!locale.get('form.label.customerPOnumber')">
+	#if($orderDetail.orderNum) $!orderDetail.erpOrderNumber #else &nbsp; #end
+	</td>
 	<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
 	<td data-th="$!locale.get('product.label.amount')">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
 	<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
@@ -135,6 +142,10 @@
 	<tbody>
 	#if($orderList && $!orderList.size()>0)
 	#foreach($orderDetail in $orderList)
+	#if($velocityCount==1)
+    #set($totalPages = $orderDetail.totalPages)
+    #set($totalElements = $orderDetail.totalElements)
+    #end
 	<tr>
 	<td>$!orderDetail.erpOrderNumber</td>
 	<td>$!orderDetail.orderNum</td>
@@ -165,15 +176,10 @@
 	</div>
 #end
 <!-- Ticket Status -->
-<div class="pgnation"></div> 
+
 #end
 #else
 <div class="alert alert-danger">
   <strong>$!locale.get('Managepurchaseagent.status.accessdenied')</strong>
 </div>
 #end
-#if($orderStatusType == "OPEN")
-
-#end
-<input type="hidden" value="$totalElements" id="totalEle" />
-<input type="hidden" value="$totalPages" id="totalPage" />

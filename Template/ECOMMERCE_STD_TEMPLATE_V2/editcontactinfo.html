@@ -72,7 +72,7 @@
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
 				<label for="billPhone">$!locale.get("form.label.phone") <span class="text-danger">*</span></label>
-				<input type="text" name="billPhone" id="billPhone" value="$!billAddress.OfficePhone" class="form-control" data-type="number" data-required="Y" data-error="$!locale.get('form.user.address.phoneNumber.notEmpty')" data-invalid="$!locale.get('form.user.address.phoneNumber.invalid')" onkeypress="return IsNumeric(event)" maxlength="8"/>
+				<input type="text" name="billPhone" id="billPhone" value="$!billAddress.OfficePhone" class="form-control formatPhoneNumber" data-type="number" data-required="Y" data-error="$!locale.get('form.user.address.phoneNumber.notEmpty')" data-invalid="$!locale.get('form.user.address.phoneNumber.invalid')" onkeypress="return IsNumeric(event)"/>
 			</div>
 		</div>
 	</div>

@@ -123,7 +123,7 @@
                         <th class="text-center">$!locale.get("product.label.quantityShipped")</th>
                         <th class="text-center">$!locale.get('product.label.quantityOpened')</th>
                         <th class="text-center">$!locale.get("product.label.unitPrice")</th>
-                        <!-- <th class="text-center">$!locale.get("product.label.extPrice")</th> -->
+                        <th class="text-center">$!locale.get("product.label.extPrice")</th>
                        	##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                        	<th class="hideForPrint text-center"><div class="pgCheckboxWrap"><label for="chkSelectall" class="customCheckBox"><input type="checkbox" id="chkSelectall" name="chkSelectall" onclick="checkSelectAll(this)" data-selectall="CheckBox" /><span>$!locale.get("product.label.selectAll")</span></label></div></th>
                        	##end
@@ -146,7 +146,7 @@
                             <ul>
                             <li>
                             <strong>$!locale.get("product.label.partNumber"): </strong> $!orderItem.partNumber</li>
-                            <li><a href="/searchPage.action?keyWord=$!orderItem.partNumber">$!orderItem.description</a></li>
+                            <li><a href="/searchPage.action?keyWord=$!orderItem.partNumber">$!orderItem.shortDesc</a></li>
                             #set($eachLineItemComment = "")
                             #if($orderItem.lineItemCommentsList.size() > 0)
 	                            <li><strong>Line Item Comment: </strong>
@@ -166,7 +166,7 @@
 							#end
                         </ul>
                         </div>									  
-                        <input type="hidden" name="shortDesc_$!orderItem.partNumber" value="$!orderItem.description" />
+                        <input type="hidden" name="shortDesc_$!orderItem.partNumber" value="$!orderItem.shortDesc" />
                         <input type="hidden" name="partNumber_$!orderItem.partNumber" value="$!orderItem.partNumber" />
                         <input type="hidden" name="quotePartNumber" value="$!orderItem.partNumber" />
                         <!-- <input type="hidden" name="uom_$!orderItem.partNumber" value="$!orderItem.orderUom" /> -->
@@ -180,8 +180,8 @@
                         <td data-th="$!locale.get('product.label.quantityOrdered')"><span>$!orderItem.qtyordered #if($requestType == "openQuote") $!orderItem.orderUom #end</span></td>
                         <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyShipped </span></td>
                         <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyOpen </span></td>
-                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.unitPrice)</span></td>                        
-                        <!-- <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td>  -->
+                        <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.customerPrice)</span></td>                        
+                        <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td> 
                         ##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                         <td data-th="select">
 							#if($avilForReOrder && $!orderItem.itemPriceId>0)

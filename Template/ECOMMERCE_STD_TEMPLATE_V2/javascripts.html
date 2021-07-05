@@ -126,10 +126,59 @@
 	}
 	</script>
 	#elseif($LayoutName=="OpenOrdersPage") 
-	<script type="text/javascript">
-		#set($paginationURL="OpenOrderSale.action?reqType=webOrder&orderStatus=Open&pageSize=10&pageNumber=1")
-		var pagination = paginationScriptV2($totalElements,"$escapeTool.javascript($paginationURL)",$pageNo,$pageSize);
-		$(".pgnation").html(pagination);
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/pagination.js" defer></script>
+	#if($orderStatusType == "Open")
+	<script>
+		$(document).ready(function(){
+			var myTable = new initTable("openTable", {
+				actionUrl: "OpenOrderSale.action?reqType=webOrder&orderStatus=Open",
+				totalRecords: $totalElements,
+				perPage: 10,
+				startIndex: 0,
+				displyLinks: 5
+			});
+		});
+	</script>
+	#end
+	#if($orderStatusType == "Ticket")
+	<script>
+		$(document).ready(function(){
+			var myTable = new initTable("ticketTable", {
+				actionUrl: "OpenOrderSale.action?reqType=webOrder&orderStatus=Ticket",
+				totalRecords: $totalElements,
+				perPage: 10,
+				startIndex: 0,
+				displyLinks: 5
+			});
+		});
+	</script>
+	#end
+	#elseif($LayoutName=="AccountInquiryPage") 
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/pagination.js" defer></script>
+	<script>
+		$(document).ready(function(){
+			var totalRec = $('#totalEle').val();
+			var myTable = new initTable("invoiceTable", {
+				actionUrl: "OutStandingPaymentListSale.action?isAjaxRequest=Y",
+				totalRecords: totalRec,
+				perPage: 10,
+				startIndex: 0,
+				displyLinks: 5
+			});
+		});
+	</script>
+	#elseif($LayoutName=="OrderHistoryPage") 
+	<script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/pagination.js" defer></script>
+	<script>
+		$(document).ready(function(){
+			var myTable = new initTable("historyTable", {
+				actionUrl: "OrderHistory?type=CLOSED",
+				totalRecords: $totalElements,
+				perPage: 10,
+				startIndex: 0,
+				displyLinks: 5
+			});
+		});
 	</script>
 #end
 #if($LayoutName != "404Page" && $LayoutName != "InvoiceListPage" && $LayoutName != "ComparePage" && $LayoutName!="SendThisPageForAll" &&  $LayoutName!="OrderConfirmation" && $LayoutName != "ChangePasswordPage" && $LayoutName != "LoginPage" && $LayoutName != "AdvancedSearch" && $LayoutName != "NoDataPage" && $LayoutName != "HomePage" && $LayoutName != "OrderDetailPage" && $LayoutName != "" && $LayoutName!="ProductPage" && $LayoutName!="SubCategoryPage" && $LayoutName!="SendThisPage" && $LayoutName!="StaticPage" && $LayoutName!="StaticPageFullPageLayout" && $LayoutName!="CMSBannerEdit" && $LayoutName!="CMSStaticPageList" && $LayoutName!="CMSStaticPage" && $LayoutName != "cspConfiguratorPage" && $LayoutName != "EmailAuthenticationPage" && $LayoutName !="PromotedProductGroupsPage.js")

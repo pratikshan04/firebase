@@ -43,7 +43,7 @@ $modal_closebtn-color: $default_font-color;
     border-radius: 25px;
     display: none;
     position: fixed;
-    bottom: 75px;
+    bottom: 90px;
     right: 30px;
     opacity: 0.6;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
@@ -358,7 +358,7 @@ $modal_closebtn-color: $default_font-color;
         }
         ul {
             li {
-                width: 25%;
+                width: 48%;
                 display: inline-block;
             }
         }
@@ -1107,6 +1107,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 		//background: $primary_color;
 		color: $white !important;
 		border-radius: 2px;
+        margin: 4px 0px;
 	}
 }
 .eMailLogo{
@@ -1126,7 +1127,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 	padding: 5px;
 	background: $white;
     border: 1px solid $border-color;
-    min-width: 310px;
+    min-width: 300px;
 	li{
 		width: 100%;
 		border-bottom: 1px solid $border-color;
@@ -1154,6 +1155,9 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 }
 .dropdown-menu{
     z-index: 998;
+}
+#editContactAddressForm .dropdown-menu.open{
+    z-index: 999;
 }
 .searchZero {
     p {
@@ -1378,8 +1382,8 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
         font-size: 14px;
     }
 }
-.fillRateBtm{
-    border-bottom: 1px solid $primary_color;
+.fillRateTop{
+    border-top: 1px solid $primary_color;
 }
 .fillRateAvgBg{
     background-color: $white;
@@ -1393,5 +1397,44 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     max-height: 450px;
     height: auto;
     overflow-y: scroll;
+}
+.paginatListWrap {
+    width: 100%;
+    .uni_paginate{
+        float: right;
+        padding: 10px 0px;
+    }
+    span.uni_paginate{
+        span a{
+        color: $secondary_color;
+        font-size: 12px;
+        padding: 0 6px;
+        &.active{
+            font-size: 18px;
+            color: $primary_color;
+         }
+        }
+    }
+}
+.pageSortWrap{
+    .uni_sort{
+        float: left;
+        padding: 10px 0px;
+        select{
+            height: 30px;
+            width: 48px;
+        }
+    }
+}
+
+.grecaptcha-badge{
+    bottom:  140px !important
+}
+.openSearchInput{
+    height: 34px;
+    padding: 10px;
+}
+#invoiceTable_sortWrap, #ticketTable_sortWrap{
+    display: none !important;
 }
 @import "3-modules/modules";

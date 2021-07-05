@@ -63,6 +63,7 @@ $breakpoint-mobileView: 480px;
   }
   header .cimm_header .cimm_header_mid .cimm_logo {
     margin: 0 auto;
+    height: 46px;
   }
   .icon-bar {
     background-color: $white;
@@ -192,6 +193,9 @@ $breakpoint-mobileView: 480px;
   }
   .navbar-toggle {
     display: block;
+  }
+  .dropdown-menu.customDropDown{
+    min-width: 100%;
   }
   /*********************** responsive menu style end **************************/
 }
@@ -369,6 +373,16 @@ $breakpoint-mobileView: 480px;
   .popMsg{
     width: auto !important;
     right: auto;
+  }
+  .productGroupPopWrap .addNewPgWrap input{
+     width: 100%;
+     margin-bottom: 8px;
+  }
+  .cimm_btnGroupEnclosure ul li{
+    padding: 10px;
+  }
+  .dropdown-menu.customDropDown{
+    min-width: 100%;
   }
 }
 @media all and (max-width: $breakpoint-largeDevice) {
@@ -643,6 +657,17 @@ $breakpoint-mobileView: 480px;
     padding: 10px 0px;
     text-align: center;
   }
+  .dropdown-menu.customDropDown{
+    min-width: 100%;
+  }
+  .fillRateBg{
+    border-right: 0 !important;
+    border-bottom: 4px solid $white;
+    text-align: center;
+  }
+  .fillRatePerBg{
+    text-align: center;
+  }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
   .calendarFilter ul li {
@@ -670,12 +695,15 @@ $breakpoint-mobileView: 480px;
         display: inline-block;
         margin-bottom: 3px;
         vertical-align: middle;
-        width: auto;
+        width: 100%;
       }
     }
   }
   .grpNameEditWrap {
     text-align: left;
+    .btn{
+      margin: 4px 0px;
+    }
   }
   .compareTableWrap .pushbtnGroup li {
     text-align: right;
@@ -796,7 +824,7 @@ $breakpoint-mobileView: 480px;
     margin-bottom: 30px;
   }
   #productSearchForm input[type="text"] {
-    width: calc(100% - 205px);
+    width: 100%;
     display: inline-block;
     margin-bottom: 3px;
   }
@@ -824,7 +852,6 @@ $breakpoint-mobileView: 480px;
     width: 50%;
   }
   .cartTotal_Top span {
-    margin-bottom: 10px;
     font-size: 12px;
   }
   .cartTotal_Top {
@@ -921,6 +948,15 @@ $breakpoint-mobileView: 480px;
   }
   #searchResults li {
     width: 188px!important;
+  }
+  .dropdown-menu.customDropDown{
+    min-width: 100%;
+  }
+  .productGroupPopWrap .existingPgListWrap ul li{
+    width: 100%;
+  }
+  #groupCart.rwd-table td:before, #ManagePurchaseAgent.rwd-table td:before{
+    white-space: normal;
   }
 }
 @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {

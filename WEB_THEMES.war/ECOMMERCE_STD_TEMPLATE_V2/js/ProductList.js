@@ -68,6 +68,8 @@ function buildSearchTrail(){
 					dispVal = "Category";
 				if(dispVal.toUpperCase()=="MANUFACTURERNAME")
 					dispVal = "Manufacturer";
+				if(dispVal.toUpperCase()=="BRAND" || dispVal.toUpperCase()=="BRANDS")
+					dispVal = 'Marcas'
 				buildString = buildString + c + '<span class="Refine-value">'+keyArr[j]+'<a class="removeFilter pull-right" href="javascript:void(0);" onclick="removeKeyword('+j+')" title="Remove This Item"> <em class="fa fa-times"></em></a></span>';
 				c = " ";
 			}
@@ -83,9 +85,11 @@ function buildSearchTrail(){
 			buildString = buildString + '<span class="Refine-label clearAfter">';
 			var dispVal = valArr[0].replace("attr_","");
 			if(dispVal.toUpperCase()=="CATEGORY")
-				dispVal = "Category";
+				dispVal = "Categoria";
 			if(dispVal.toUpperCase()=="MANUFACTURERNAME")
 				dispVal = "Manufacturer";
+			if(dispVal.toUpperCase()=="BRAND" || dispVal.toUpperCase()=="BRANDS")
+			 	dispVal = 'Marcas'
 			buildString= buildString + dispVal;
 			buildString = buildString + '</span>';
 			var c = "";
@@ -175,10 +179,10 @@ function filterForAllSelectedAttributes(){
 		key = jQuery("#"+tId+"_div").text();
 		if(map[key]){
 			var val = map[key];
-			val = val+ c + '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+			val = val+ c + '"'+decodeURI(jQuery("#"+tId+"_span").text())+'"';
 			map[key] = val;
 		}else{
-			val = '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+			val = '"'+decodeURI(jQuery("#"+tId+"_span").text())+'"';
 			map[key] = val
 		}
 	});
@@ -247,7 +251,7 @@ function appendSearchByCheckBox(id){
 		chks.each(function(){
 			var tId = jQuery(this).attr("id");
 			key = jQuery("#"+tId+"_div").text();
-			val = val+ c + '"'+unescape(jQuery("#"+tId+"_span").text())+'"';
+			val = '"'+decodeURI(jQuery("#"+tId+"_span").text())+'"';
 			c = "|";
 		});
 		appendSearch(key,val)

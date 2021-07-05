@@ -104,7 +104,7 @@ function showNotificationDiv(type, message) {
 } 
 function replaceNonAscii(s) {
 	if (s != undefined){
-		s = s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
+		s = s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~áÁéÉíÍóÓúÚñÑüÜ]*/g, '');
 	}
 	return s;
 }
@@ -648,7 +648,7 @@ function performSearch() {
 		s = $.trim(s);
 		s = s.replace(/</g, "<&nbsp;");
 		s = replaceNonAscii(s);
-		s = escape(s);
+		s = encodeURI(s);
 		s = s.replace('\u00AE', '&reg;');
 		s = s.replace(/#/g, "%23");
 		s = s.replace(/&/g, "%26");
@@ -663,7 +663,7 @@ function performSearch() {
 	nSearch = replaceNonAscii(nSearch);
 
 	if (nSearch != undefined && nSearch != "") {
-		nSearch = escape(nSearch);
+		nSearch = encodeURI(nSearch);
 		nSearch = nSearch.replace(/#/g, "%23");
 		nSearch = nSearch.replace(/&/g, "%26");
 		nSearch = nSearch.replace(/;/g, "%3B");
@@ -776,7 +776,7 @@ function performAdvSearch() {
 	s = $.trim(s);
 	s = s.replace(/</g, "<&nbsp;");
 	s = s.replace(/\u00AE/g, '&reg;').replace(/\u2122/g, '&trade;');
-	s = escape(s);
+	s = encodeURI(s);
 	s = s.replace(/#/g, "%23");
 	s = s.replace(/&/g, "%26");
 	s = s.replace(/;/g, "%3B");
@@ -1006,11 +1006,19 @@ $(document).ready(function () {
 							if ($this.find(".pLoginErr").length > 0) {
 								if(data == "Invalid User Name/Password."){
 									data = "Usuario / contraseña invalida"
+								}else if(data == "Your Account is Still Being Approved."){
+									data = "Su cuenta aún está siendo aprobada."
+								}else{
+									data = data;
 								}
 								$this.find(".pLoginErr").html(data);
 							} else {
 								if(data == "Invalid User Name/Password."){
 									data = "Usuario / contraseña invalida"
+								}else if(data == "Your Account is Still Being Approved."){
+									data = "Su cuenta aún está siendo aprobada."
+								}else{
+									data = data;
 								}
 								showNotificationDiv("Error", data);
 							}
@@ -3417,18 +3425,19 @@ $(function () {
 
 	if ($(".formatPhoneNumber").length > 0) {
 		$(".formatPhoneNumber").each(function () {
-			$(this).attr("maxlength", "12");
+			$(this).attr("maxlength", "9");
 		});
 
 		$(".formatPhoneNumber").keydown(function (e) {
 			if (e.keyCode != 8) {
 				var curchr = this.value.length;
 				var curval = $(this).val();
-				if (curchr == 3) {
+				if (curchr == 4) {
 					$(this).val(curval + "-");
-				} else if (curchr == 7) {
-					$(this).val(curval + "-");
-				}
+				} 
+				// else if (curchr == 7) {
+				// 	$(this).val(curval + "-");
+				// }
 			}
 		});
 	}
