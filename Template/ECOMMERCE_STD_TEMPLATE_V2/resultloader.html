@@ -460,7 +460,7 @@
 						<input type="hidden" name="itemTxtQty$!productListData.itemId"  maxlength="6" value="$!productListData.minOrderQty" id="itemTxtQty$!productListData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
 					</span> -->
 					#if($productListData.price > 0)
-					<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!productListData.partNumber" data-itemId="$!productListData.itemId" data-itemPriceId="$!productListData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+					<!-- <a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!productListData.partNumber" data-itemId="$!productListData.itemId" data-itemPriceId="$!productListData.itemPriceId">$!locale.get("product.button.addtocart")</a> -->
 					<input type="hidden" value="$!productListData.manufacturerPartNumber" id="MPNValue_$!productListData.partNumber">
 					#detailPageHiddenFields($!productListData.partNumber.replaceAll('\s+','_'),$!productListData.qty,$!productListData.price,$!productListData.salesUom,$!productListData.saleQty,$!productListData.ItemId,$!productListData.brandName,$!productListData.manufacturerPartNumber,$!productModeitemData.availQty)
 					#end

@@ -327,7 +327,18 @@ function updateUser() {
 				var message = "";
 				if (arrRes[0] == 1) {
 					if (arrRes[1] && arrRes[1] != null) {
-						message = message + arrRes[1];
+						if(arrRes[1].toLowerCase().includes('ecomm customer super user')){
+							arrRes[1] = 'Usuario asignado como superusuario de cliente de Ecomm'
+							message = message + arrRes[1];
+						}else if(arrRes[1].toLowerCase().includes('ecomm customer general user')){
+							arrRes[1] = 'Usuario asignado como usuario general de cliente de Ecomm'
+							message = message + arrRes[1];
+						}else if(arrRes[1].toLowerCase().includes('ecomm customer authorized purchase agent')){
+							arrRes[1] = 'Usuario asignado como agente de compras autorizado de cliente de Ecomm'
+							message = message + arrRes[1];
+						}else{
+							message = message + arrRes[1];
+						}	
 					}
 					if (arrRes[2] && arrRes[2] != null) {
 						if (message.length > 0) {

@@ -67,7 +67,7 @@
 #if($orderStatusType == "Ticket")
 #set($totalPages = 0)
 #set($totalElements = 0)
-<h6 class="cimm_page-title">Estado del ticket</h6>
+<h6 class="cimm_page-title">Estado del Ticket</h6>
 <!-- <div class="pull-right marginY-2">
 	<input id="myInput" type="text" placeholder="Buscar Estado del ticket" class="openSearchInput">
 </div> -->
@@ -134,9 +134,9 @@
 	<thead>
 	<tr>
 	<th class="left">No Ilamada</th>
-	<th>Clasificacion</th>
+	<th>$!locale.get('product.lable.classification')</th>
 	<th>Fecha</th>
-	<th>Ticket Status</th>
+	<th>Estatus del Ticket</th>
 	</tr>
 	</thead>
 	<tbody>
