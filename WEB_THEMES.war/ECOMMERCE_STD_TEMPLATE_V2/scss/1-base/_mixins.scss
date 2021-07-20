@@ -331,7 +331,7 @@ $icons: (
 								@if $lf-uppercase != false {
 									text-transform: uppercase;
 								} @else {
-									text-transform: capitalize;
+									text-transform: none;
 								}
 
 								@include font($family: $lf-family, $size: $lf-size);
@@ -401,7 +401,7 @@ $icons: (
 								>span{
 									display: block;
 									>a{
-										text-transform: capitalize;
+										text-transform: none;
 										padding: 4px 10px;
 										font-size: $subnav-lf-size;
 										font-family: $subnav-lf-family;
@@ -442,7 +442,7 @@ $icons: (
 									span{
 										display: block;
 										a{
-											text-transform: capitalize;
+											text-transform: none;
 											padding: 4px 24px;
 											font-size: $subnav-lf-size;
 											font-family: $subnav-lf-family;
@@ -640,7 +640,7 @@ $icons: (
                         @if ($tf-uppercase != false){
                             text-transform: uppercase; 
                         } @else {
-                            text-transform: capitalize;
+                            text-transform: none;
                         }
 
                         @include font(
@@ -840,7 +840,7 @@ $icons: (
 			@if $ttransform != false {
 				text-transform: uppercase;
 			} @else {
-				text-transform: capitalize;
+				text-transform: none;
 			}
 			@if $border != false {
 				//@include border(1px, solid, $border-color);

@@ -198,7 +198,7 @@
                      #if(($!session.getAttribute("isSalesUser").equals("Y") || $!session.getAttribute("isSalesAdmin").equals("Y")) && $!CommonDBQuerySystemParameter.get('ENABLE_OVERRIDE_PRICE_FROM_SALE_ADMIN')=='Y' )
                    <td data-th="$!locale.get('product.heading.perUnitPrice')" >
                     <span id="editunitprice_$!itemData.productListId">
-                        <strong><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</span>  $!itemData.uom</strong></br>
+                        <strong><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!itemData.unitPrice)</span>  $!itemData.uom</strong></br>
                         #if($itemData.unitPrice <= 0.0000 && $!checkout=="N")
 				     		#set($checkout="Y")    
 				     	#end
@@ -241,7 +241,7 @@
                         <a href="javascript:void(0);" class="updateLink" title='$!locale.get("product.button.update")' onclick='refreshShoppingCart($!itemData.productListId,"$!itemData.partNumber");return false;'>$!locale.get("product.button.update")</a>
                     </td>
                     <td data-th="$!locale.get('product.label.extPrice')">
-                    	<strong class="formatPrice">$$!numberTool.format($!numberToolFormat,$!itemData.total)</strong>
+                    	<strong class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!itemData.total)</strong>
                     </td>
                     <td>
                     <div class="cartUpdateBtn">

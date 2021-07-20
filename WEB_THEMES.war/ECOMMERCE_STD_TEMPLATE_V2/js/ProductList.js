@@ -424,6 +424,7 @@ function returnObjectFromMeasurements(element, text){
 buildSearchTrail();
 checkItem();
 $(document).ready(function(){
+	if($('#clearanceItems').is(':checked')==true){ $( "#clearanceItems" ).prop( "checked", false );}
 	BulkAction.enableCheckBoxOnLoad();
 	var url = window.location.href;
 	if(url.indexOf("isPreviouslyPurchased=Y") !== -1){

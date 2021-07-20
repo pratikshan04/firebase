@@ -224,7 +224,7 @@ $modal_closebtn-color: $default_font-color;
 
 .cimm_blockHeading {
     margin: 0 0 10px 0;
-    text-transform: capitalize;
+    text-transform: none;
     font-size: 16px;
     a {
         color: $primary_color;
@@ -292,7 +292,7 @@ $modal_closebtn-color: $default_font-color;
 			}
 			a {
 				color: $default_font-color;
-				text-transform: capitalize;
+				text-transform: none;
 				display: block;
 				padding: 5px;
 				&:hover {
@@ -385,7 +385,7 @@ $modal_closebtn-color: $default_font-color;
             li {
                 a {
                     color: $primary_color;
-                    text-transform: capitalize;
+                    text-transform: none;
                     font-size: 16px;
                     font-weight: bold;
                 }
@@ -730,7 +730,7 @@ $modal_closebtn-color: $default_font-color;
 				font-size: 18px;
                 .priceLabel {
                     float: left;
-                    text-transform: capitalize;
+                    text-transform: none;
                 }
                 .priceValue {
                     float: right;
@@ -1140,7 +1140,7 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 		}
 		a{
 			color: $default_font-color !important;
-			text-transform: capitalize;
+			text-transform: none;
 			display: block;
             padding: 5px;
             &:hover{
@@ -1308,23 +1308,23 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
     color: $suggestPrice_color;
     font-size: $font_sm;
 }
-#headermultipleResult{
+// #headermultipleResult{
     
-    .slick-track{
-        width: 1488px !important;
-    } 
-    li{
-        width: 233px !important;
-    } 
-}
-#searchResults{
-    .slick-track{
-        width: 1664px !important;
-    } 
-    li{
-        width: 259px !important;
-    } 
-}
+//     .slick-track{
+//         width: 1488px !important;
+//     } 
+//     li{
+//         width: 233px !important;
+//     } 
+// }
+// #searchResults{
+//     .slick-track{
+//         width: 1664px !important;
+//     } 
+//     li{
+//         width: 259px !important;
+//     } 
+// }
 .cartPointer{
     cursor:initial;
 }

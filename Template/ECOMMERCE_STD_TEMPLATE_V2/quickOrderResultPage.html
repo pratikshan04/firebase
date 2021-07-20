@@ -53,7 +53,7 @@
 							<strong>$locale.get('product.label.yourprice'): </strong>
 								<span id="span_$itemData.partNumber" class="priceSpan" data-select='priceData'>
 								#if($itemData.price>0)
-									$$numberTool.format($!pricePrecisionFormate,$itemData.price)
+									Q$numberTool.format($!pricePrecisionFormate,$itemData.price)
 								#else
 									<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
 							   	#end
@@ -104,7 +104,7 @@
 						   	<li class="price">
 							<span id="span_$itemData.partNumber" class="priceSpan" data-select='priceData'>
 							#if($itemData.price>0)
-								$$numberTool.format($!pricePrecisionFormate,$itemData.price)
+								Q$numberTool.format($!pricePrecisionFormate,$itemData.price)
 							#else
 								<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
 							#end
@@ -219,7 +219,7 @@
 											<strong>$locale.get('product.label.yourprice'): </strong>
 											<span id="span_$itemData.partNumber" class="priceSpan" data-select='priceData'>
 											#if($itemData.price>0)
-								    			$$numberTool.format($!pricePrecisionFormate,$itemData.price)
+								    			Q$numberTool.format($!pricePrecisionFormate,$itemData.price)
 								    		#else
 								    			<span class='priceSpan'>$locale.get('product.label.callforprice')</span>
 								    		#end

@@ -237,7 +237,7 @@
 						<td data-th="$locale.get('product.label.yourprice')" class="tabelPrice">
 							<!-- <span id="spanEx_$itemData.partNumber" data-select='extPriceData'><img src="$!webThemes/$siteName/images/loading.gif" alt="loading" width="24px" height="12px" /></span> -->
 							#if($itemData.price > 0)
-							<span data-select='extPriceData' class='priceSpan formatPrice'> $$numberTool.format($numberToolFormat,$itemData.price) </span>
+							<span data-select='extPriceData' class='priceSpan formatPrice'> Q$numberTool.format($numberToolFormat,$itemData.price) </span>
 							#else
 							<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> $locale.get('label.callForPrice')</span>
 							#end
@@ -262,7 +262,7 @@
 						#set($totalPrice = 0)
 						#if($itemData.price > 0) #set($totalPrice = $itemData.price * $itemData.qty) #end
 						#if($totalPrice > 0)
-							<span class='priceSpan formatPrice'>$$numberTool.format($numberToolFormat,$totalPrice)</span>
+							<span class='priceSpan formatPrice'>Q$numberTool.format($numberToolFormat,$totalPrice)</span>
 						#else
 							<span class='priceSpan'>N/A</span>
 						#end

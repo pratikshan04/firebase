@@ -470,14 +470,14 @@
 										#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
 												#if($itemData.price>0)
-													$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
+													Q$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
 												#else
 													<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
 												#end
 											</span>
 										#else
 											#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
-												<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
+												<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">Q$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 											#else
 											<span class="priceSpan">$!locale.get('product.label.price'):</span>
 											<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
