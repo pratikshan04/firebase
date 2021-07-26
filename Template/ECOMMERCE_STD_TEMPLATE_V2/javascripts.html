@@ -262,7 +262,7 @@ $("link[rel='stylesheet']").each(function(){
 		myStr = myStr.replace(/([a-z])([A-Z])/g, '$1 $2');
 	</script>
 #end
-#if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
+#if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage" || $userAgent == "WEBVIEW")
 <script src="$!webArtifactsJsPath$!cdnPluginJs/jssor.js" defer></script>
 <script src="$!webArtifactsJsPath$!cdnPluginJs/jssor.slider.js" defer></script>
 <script src="$!webArtifactsJsPath$!cdnSiteJs/jsor.customJs.js" defer></script>

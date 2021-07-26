@@ -42,7 +42,7 @@
 				<td class="alignLeft" data-th="$!locale.get('product.label.description')">PO# $!orderList.poNumber</td>
 				<!--  <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderList.customerReleaseNumber)$!orderList.customerReleaseNumber #else &nbsp; #end</td> -->
 				<td data-th="$!locale.get('product.label.processingStatus')">$!orderList.orderStatus</td>
-				<td data-th="$!locale.get('form.label.invoicevalue')">$$!numberTool.format($!numberToolFormat,$!orderList.invoiceValue)</td>
+				<td data-th="$!locale.get('form.label.invoicevalue')">Q$!numberTool.format($!numberToolFormat,$!orderList.invoiceValue)</td>
 				#if($CommonDBQuerySystemParameter.get("CREATE_ORDER_IN_DB")=="Y")	
 				<td data-th="" class="text-center"><a href="OrderDetailSale.action?orderId=$!orderList.orderId&genId=$!orderList.geneId&orderStatus=Billed" class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.label.viewOrder')"><em class="fa fa-eye" aria-hidden="true"></em></a></td>
 				#else
@@ -110,7 +110,7 @@
 					</div>
 					<div class="col-md-4 col-sm-12 col-xs-12">
 						<div class="pull-right marginY-2">
-							<input id="myInput" type="text" placeholder="Buscar Estado del ticket" class="openSearchInput">
+							<input id="myInput" type="text" placeholder="Buscar pedido" class="openSearchInput">
 						</div>
 					</div>
 					<!-- <div class="col-md-4">

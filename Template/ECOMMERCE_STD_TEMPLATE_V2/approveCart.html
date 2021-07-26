@@ -113,7 +113,7 @@
 							<span class="priceSpan formatPrice">
 								#if($itemData.price>0)
 									##$$numberTool.format($numberToolFormat,$itemData.price)#if($!itemData.saleQty>0 || $!itemData.uom) / #end #if($itemData.saleQty>0) $!itemData.saleQty #end #if($itemData.uom) $!itemData.uom #end
-									$$numberTool.format($numberToolFormat,$itemData.price) #if($itemData.uom) / $!itemData.uom #end
+									Q$numberTool.format($numberToolFormat,$itemData.price) #if($itemData.uom) / $!itemData.uom #end
 								#else
 								<strong class="required">$locale.get("product.label.callforprice")</strong>
 								#end

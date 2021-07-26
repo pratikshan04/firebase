@@ -460,7 +460,7 @@
 						<input type="hidden" name="itemTxtQty$!productListData.itemId"  maxlength="6" value="$!productListData.minOrderQty" id="itemTxtQty$!productListData.itemId" onkeypress="return IsNumeric(event);" onpaste="return false;" ondrop = "return false;" class="quantity" />
 					</span> -->
 					#if($productListData.price > 0)
-					<a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!productListData.partNumber" data-itemId="$!productListData.itemId" data-itemPriceId="$!productListData.itemPriceId">$!locale.get("product.button.addtocart")</a>
+					<!-- <a href="javascript:void(0);" class="btn btn-addtocart addToCart" id="enableCart_$!productListData.partNumber" data-itemId="$!productListData.itemId" data-itemPriceId="$!productListData.itemPriceId">$!locale.get("product.button.addtocart")</a> -->
 					<input type="hidden" value="$!productListData.manufacturerPartNumber" id="MPNValue_$!productListData.partNumber">
 					#detailPageHiddenFields($!productListData.partNumber.replaceAll('\s+','_'),$!productListData.qty,$!productListData.price,$!productListData.salesUom,$!productListData.saleQty,$!productListData.ItemId,$!productListData.brandName,$!productListData.manufacturerPartNumber,$!productModeitemData.availQty)
 					#end
@@ -697,14 +697,14 @@
 						#if($session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 							<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">
 								#if($itemData.price>0)
-					    			$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
+					    			Q$!numberTool.format($!pricePrecisionFormate,$!itemData.price)
 					    		#else
 					    			<span class='priceSpan'>$!locale.get('product.label.callforprice')</span>
 					    		#end
 							</span>
 						#else
 							#if($itemData.overRidePriceRule=="Y" && $itemData.price>0)
-								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">$$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
+								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice">Q$!numberTool.format($!pricePrecisionFormate,$!itemData.price)</span>
 							#else
 								<span id="span_$!itemData.partNumber" class="priceSpan formatPrice" data-select='priceData'>
 									<img src="$!webThemes/$!siteName/images/loading.gif" alt="loading" width="24px" height="12px"/>

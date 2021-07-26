@@ -6,11 +6,11 @@
 	padding: 6% 0;
 }
 .appIcons ul li img{
-	width:60%;
+	width:50%;
 	height:auto;
 }
 .appIcons ul li h6{
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 600;
 	color: #404040;
 	text-transform: uppercase;
@@ -65,4 +65,17 @@ header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .c
 }
 header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .cimm_cameraIcon i{
 	color: #A1A1A1;
+}
+header .cimm_header .cimm_header_mid{
+	height: 43px;
+	border-bottom-width: 2px;
+	border-style: solid;
+	border-color: #e9e8e8;
+	background-color: #e9e8e8;
+	background-size: cover;
+}
+.cimm_mobileNavIconWrap{
+    padding: 5px;
+    border-radius: 3px;
+	background: #f26724;
 }

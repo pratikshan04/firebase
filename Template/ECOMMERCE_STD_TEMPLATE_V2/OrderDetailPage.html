@@ -181,7 +181,7 @@
                         <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyShipped </span></td>
                         <td data-th="$!locale.get('product.label.quantityShipped')"><span>$!orderItem.qtyOpen </span></td>
                         <td data-th="$!locale.get('product.label.unitPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.customerPrice)</span></td>                        
-                        <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">$$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td> 
+                        <td data-th="$!locale.get('product.label.extPrice')"><span class="formatPrice">Q$!numberTool.format($!numberToolFormat,$!orderItem.extPrice)</span></td> 
                         ##if($requestType != "openQuote" && (!$!orderDetail.orderStatus.contains("Bid")) && (!$!orderDetail.orderStatus.toUpperCase().contains("INVOICE")))
                         <td data-th="select">
 							#if($avilForReOrder && $!orderItem.itemPriceId>0)
@@ -210,7 +210,7 @@
                     #if($orderDetail.subtotal>0)
                      <li>
                          <span class="priceLabel">$!locale.get("product.label.subTotal"): </span>
-                         <span class="priceValue formatPrice"> $$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
+                         <span class="priceValue formatPrice"> Q$!numberTool.format($!numberToolFormat,$!orderDetail.subtotal) </span>
                      </li>  
                     #end
                     #if($orderDetail.tax > 0)

@@ -127,7 +127,7 @@ function deleteItem(path,typ,item){
 		bootbox.confirm({ 
 			size: "medium",
 			closeButton:false,
-			message: locale('label.cart.itemDelete') +item, 
+			message: locale('label.cart.itemDeletePartNo1') +' ' +item +' ' +locale('label.cart.itemDeletePartNo2'), 
 			buttons: {
 				cancel: {
 					label: 'Cancelar'

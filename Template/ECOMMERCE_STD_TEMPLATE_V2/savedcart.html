@@ -266,13 +266,13 @@
 						<span>
 							#if($!session.getAttribute("erpType") && $!session.getAttribute("erpType").toUpperCase()=="DEFAULTS")
 								#if($itemData.price>0)
-								<span class="priceSpan formatPrice">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
+								<span class="priceSpan formatPrice">Q$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> $locale.get('label.callForPrice')</span>
 								#end
 							#else
 								#if($itemData.price>0)
-								<span class="priceSpan formatPrice">$$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
+								<span class="priceSpan formatPrice">Q$numberTool.format($pricePrecisionFormate,$itemData.price)</span>
 								#else
 								<span class='priceSpanFa'><em class="fa fa-phone fa-lg"></em> $locale.get('label.callForPrice')</span>
 								#end
@@ -286,7 +286,7 @@
 						#set($totalPrice = 0)
 						#if($itemData.price > 0) #set($totalPrice = $itemData.price * $itemData.qty) #end
 						#if($totalPrice)
-							<span class='priceSpan formatPrice'>$$numberTool.format($numberToolFormat,$totalPrice)</span>
+							<span class='priceSpan formatPrice'>Q$numberTool.format($numberToolFormat,$totalPrice)</span>
 						#else
 							<span class='priceSpan'>N/A</span>
 						#end

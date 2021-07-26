@@ -10,7 +10,7 @@
 #end
 #if($LayoutName=="ProductDetailPage")
 <link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/plugins/prettyPhoto.css" media="all"/>
-#elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
+#elseif($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage" || $userAgent == "WEBVIEW")
 <link rel="stylesheet" type="text/css" href="/ASSETS/CSS_FILES/CustomCss.css?$!refreshVersion" media="all" />
 #end
 #parse("bootstrap-3.4.1-min-css.html")
@@ -32,7 +32,7 @@
 <!--[if IE 9]>
 	<link rel="stylesheet" type="text/css" href="$!webThemes/$siteName/css/IE9.css">
 <![endif]-->
-#if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage")
+#if($LayoutName=="StaticPage" || $LayoutName=="StaticPageFullPageLayout" || $LayoutName=="ProductList" || $LayoutName=="SubCategoryPage" || $userAgent == "WEBVIEW")
 <style type="text/css">
 .jssorb01 {float: right;}
 .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av { filter: alpha(opacity=70); opacity: .7; overflow:hidden; cursor: pointer; }

@@ -214,16 +214,16 @@
 					<td data-th="$!locale.get('product.label.qty')">$!itemList.qtyordered</td>
 					<td data-th="$!locale.get('product.label.uom')">$!itemList.uom</td>
 					#if($itemList.unitPrice>0)
-					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.unitPrice>0)$$numberTool.format($numberToolFormat,$itemList.unitPrice) #end</td>
+					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.unitPrice>0)Q$numberTool.format($numberToolFormat,$itemList.unitPrice) #end</td>
 					#else
-					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.listPrice>0) $$numberTool.format($numberToolFormat,$itemList.listPrice) #end</td>
+					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.listPrice>0) Q$numberTool.format($numberToolFormat,$itemList.listPrice) #end</td>
 					#end
 					#if($itemList.statusDescription=="Y")
 						#set($!displayCallForPriceMessage = $!displayCallForPriceMessage+$!delimiterOrderDetail+$!itemList.partNumber)
 						#set($!delimiterOrderDetail = ",")
 					#end
 					<td data-th="$!locale.get('product.label.discountPrice')"><span>Q $itemList.customerPrice</span></td>
-					<td align="left" valign="top" data-th="Ext Precio" class="formatPrice">#if($itemList.extPrice>0)$$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
+					<td align="left" valign="top" data-th="Ext Precio" class="formatPrice">#if($itemList.extPrice>0)Q$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
 					
 				</tr>
 				#end

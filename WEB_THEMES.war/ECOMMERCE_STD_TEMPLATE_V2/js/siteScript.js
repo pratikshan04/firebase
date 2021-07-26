@@ -1146,7 +1146,7 @@ function compareItemList(obj) {
 		}
 		listArr = list.split(",");
 		if (listArr.length >= compareItemCount) {
-			bootAlert("small", "error", "Error", locale("label.error.leastcompare1") + compareItemCount + locale("label.error.leastcompare2"));
+			bootAlert("small", "error", "Error", locale("label.error.leastcompare1") + " " +compareItemCount+ " " + locale("label.error.leastcompare2"));
 			$(obj).removeAttr('checked', 'checked');
 		} else {
 			for (i = 0; i < listArr.length; i++) {

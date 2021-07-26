@@ -1,105 +1,72 @@
+<div id="slider0_container_Wrapper" data-bannerid="601" data-bannertype="slider" data-select="bannerBlock"></div>
 <div id="mainPage" style="width: 100%;height: 100%;">
     <div class="appIcons" width="100%" border="0">
         <ul>
-        	<li>
-        		#if($userLogin)
-               <a href="$!locale.get('website.url.AccountDashboard')">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/myAccount.png" alt="myAccount"/>
-                    <h6>
-                        My Account
-                    </h6>
-                </a>
-                #else
-                <a href="/Login">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/myAccount.png" alt="myAccount"/>
-                    <h6>
-                        My Account
-                    </h6>
-                </a>
-                #end
-            </li>
             <li>
                 <a href="$!hostName/Products.action">
                     <img src="$!hostName/$webThemes/$siteName/images/App/products.png" alt="products"/>
                     <h6>
-                        Products
+                        PRODUCTOS
                     </h6>
                 </a>
             </li>
             <li>
-            	#if($userLogin)
-               <a href="$locale.get('website.url.SavedGroup.Product')">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/savedGroup.png" alt="savedGroup"/>
+                <a href="/OrderHistory?type=CLOSED&pageSize=10&pageNo=1">
+                    <img src="$!hostName/$webThemes/$siteName/images/App/estatus.png" alt="specials"/>
                     <h6>
-                        My Lists
+                        Estatus de ordenes
+                    </h6>
+                </a>
+            </li>
+            <li>
+                #if($userLogin)
+                <a href="/QuickCartStandard">
+                    <img src="$!hostName/$webThemes/$siteName/images/App/qqp.png" alt="locations"/>
+                    <h6>
+                        PEDIDOS RÁPIDOS
                     </h6>
                 </a>
                 #else
                 <a href="/Login">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/savedGroup.png" alt="savedGroup"/>
+                    <img src="$!hostName/$webThemes/$siteName/images/App/qqp.png" alt="locations"/>
                     <h6>
-                        My Lists
+                        PEDIDOS RÁPIDOS
                     </h6>
                 </a>
                 #end
             </li>
             <li>
-                <a href="#" >
-                    <img src="$!hostName/$webThemes/$siteName/images/App/specials.png" alt="specials"/>
+                <a href="javascript:void(0);">
+                    <img src="$!hostName/$webThemes/$siteName/images/App/promotions.png" alt="promotions"/>
                     <h6>
-                        Specials
+                        Promociones
                     </h6>
                 </a>
             </li>
             <li>
-            	#if($userLogin)
-                <a href="$!locale.get('website.url.RequestForQuote')">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/rfq.png" alt="rfq"/>
+                <a href="/brands">
+                    <img src="$!hostName/$webThemes/$siteName/images/App/brands.png" alt="brands"/>
                     <h6>
-                        Request Quote
+                        Marcas
+                    </h6>
+                </a>
+            </li>
+            <li>
+                #if($userLogin)
+                <a href="javascript:void(0);">
+                    <img src="$!hostName/$webThemes/$siteName/images/App/ticket-status.png" alt="ticket"/>
+                    <h6>
+                        Estatus de llamadas
                     </h6>
                 </a>
                 #else
                 <a href="/Login">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/rfq.png" alt="rfq"/>
+                    <img src="$!hostName/$webThemes/$siteName/images/App/ticket-status.png" alt="ticket"/>
                     <h6>
-                        Request Quote
+                        Estatus de llamadas
                     </h6>
                 </a>
                 #end
-            </li>
-            <li>
-                <a href="/Locations">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/locations.png" alt="locations"/>
-                    <h6>
-                        Locations
-                    </h6>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/photoInquiry">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/photoInquiry.png" alt="photoInquiry"/>
-                    <h6>
-                        Photo Inquiry
-                    </h6>
-                </a>
-            </li>
-            <li>
-                <a href="/ContactUs">
-                    <img src="$!hostName/$webThemes/$siteName/images/App/contact.png" alt="contact"/>
-                    <h6>
-                        Contact Us
-                    </h6>
-                </a>
-            </li>
-            <li>
-                <a onClick="callToDb()" >
-                    <img src="$!hostName/$webThemes/$siteName/images/App/offlineCart.png" alt="offlineCart"/>
-                    <h6>
-                        Offline Cart
-                    </h6>
-                </a>
             </li>
         </ul>
     </div>

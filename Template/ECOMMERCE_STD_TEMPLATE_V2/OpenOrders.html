@@ -38,7 +38,7 @@
 			<td data-th="$!locale.get('form.label.customerPOnumber')">#if($orderDetail.poNumber) $!orderDetail.poNumber #else &nbsp; #end</td>
 			<!-- <td data-th="$!locale.get('form.label.CustomerRelease')">#if($orderDetail.customerReleaseNumber) $!orderDetail.customerReleaseNumber #else &nbsp; #end</td> -->
 			<td data-th="$!locale.get('form.label.orderDate')">$!orderDetail.orderDate</td>
-			<td data-th="$!locale.get('product.label.amount')">$$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
+			<td data-th="$!locale.get('product.label.amount')">Q$!numberTool.format($!numberToolFormat,$!orderDetail.total)</td>
 			<!-- <td data-th="$!locale.get('product.label.shipDate')">$!orderDetail.reqDate.substring(0,10)</td>
 			<td data-th="$!locale.get('form.label.shipTo')">$!orderDetail.shipToName</td> -->
 			<td data-th="$!locale.get('product.label.ordrStatus')">$!orderDetail.orderStatus</td>
@@ -67,7 +67,7 @@
 #if($orderStatusType == "Ticket")
 #set($totalPages = 0)
 #set($totalElements = 0)
-<h6 class="cimm_page-title">Estado del ticket</h6>
+<h6 class="cimm_page-title">Estado del Ticket</h6>
 <!-- <div class="pull-right marginY-2">
 	<input id="myInput" type="text" placeholder="Buscar Estado del ticket" class="openSearchInput">
 </div> -->
@@ -134,9 +134,9 @@
 	<thead>
 	<tr>
 	<th class="left">No Ilamada</th>
-	<th>Clasificacion</th>
+	<th>$!locale.get('product.lable.classification')</th>
 	<th>Fecha</th>
-	<th>Ticket Status</th>
+	<th>Estatus del Ticket</th>
 	</tr>
 	</thead>
 	<tbody>
