@@ -61,9 +61,9 @@
 		<div class="cimm_searchWrapper">
 		    <form class="cimm_searchForm webViewSearch clearAfter" id="search_Form">
 	    		<input class="form-control" type="text" onkeypress="return runScript(event);" title="$!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber')" id="txtSearch" name="keyWord" value="#if($keyWord && $resultCount>0)$!keyWord #else $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') #end" onfocus="if(this.value==' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') '){this.value='';}" onblur="if(this.value==''){this.value=' $!locale.get('header.searchPlaceholder.enterKeywrodOrPartNumber') ';}"/>
-    			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-2x fa-search"></em></button>
-				<a class="cimm_cameraIcon" onclick="callToVisionapi();"><em class="fa fa-2x fa-camera"></em></a>
-				<a class="cimm_cameraIcon mLeft-3" onclick="voiceSearch();"><em class="fa fa-2x fa-microphone"></em></a>
+    			<button type="submit" id="performSearchBtn" class="cimm_searchIcon" title="$!locale.get('product.label.search')" onclick="return performSearch();" value="search"><em class="fa fa-lg fa-search"></em></button>
+				<a class="cimm_cameraIcon" onclick="callTojavaFn();"><em class="fa fa-lg fa-barcode"></em></a>
+				<a class="cimm_cameraIcon mLeft-3" onclick="callToVisionapi();"><em class="fa fa-lg fa-camera"></em></a>
 			</form>
 		<!-- <div class='mobileCartCountWrap clearAfter'>
 			#if($!session.getAttribute("isSalesUser").equals("Y"))

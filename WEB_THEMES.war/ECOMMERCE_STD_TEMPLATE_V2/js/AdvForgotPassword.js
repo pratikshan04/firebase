@@ -27,7 +27,7 @@ function forgotPasswordAdvanced(){
 			}
 		}else{
 			//var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-			var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+			var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.!@#$%(/)[\]{}^&*_<>?"':;+-|])(?=.{8,})/;
 			if (!passwordRegEx.test(password)){
 				msg = msg + locale('form.user.password.invalid') + "</br>";
 				isValid = 0;

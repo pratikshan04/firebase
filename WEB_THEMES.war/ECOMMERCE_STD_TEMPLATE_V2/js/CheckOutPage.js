@@ -11,22 +11,41 @@ var billAddressState = $("#billAddressState").val();
 var billAddressCountry = $("#billAddressCountry").val();
 var shipAddressState = $("#shipAddressState").val();
 var shipAddressCountry = $("#shipAddressCountry").val();
-if($.trim(billAddressCountry) ==""){
-	billAddressCountry = "GT";
+
+var selectedState = states[billAddressCountry]; 
+for(var i = 0; i < selectedState.length; i++){
+
+    if($.trim(selectedState[i][1]).toLowerCase() == billAddressState.toLowerCase()){
+        billAddressState = selectedState[i][0];
+    }
+    
 }
-if($.trim(shipAddressCountry) ==""){
-	shipAddressCountry = "GT";
+
+var shipselectedState = states[shipAddressCountry]; 
+for(var i = 0; i < shipselectedState.length; i++){
+
+    if($.trim(shipselectedState[i][1]).toLowerCase() == shipAddressState.toLowerCase()){
+        shipAddressState = shipselectedState[i][0];
+    }
+    
 }
+
+// if($.trim(billAddressCountry) ==""){
+// 	billAddressCountry = "GT";
+// }
+// if($.trim(shipAddressCountry) ==""){
+// 	shipAddressCountry = "GT";
+// }
 $("#stateSelect").attr('disabled',true);
 $("#countrySelect").attr('disabled',true);
 
-if($.trim(billAddressState) == billAddressState){
-	billAddressState = "GU";
-}
+// if($.trim(billAddressState) == billAddressState){
+// 	billAddressState = "GU";
+// }
 
-if($.trim(shipAddressState) == shipAddressState){
-	shipAddressState = "GU";
-}
+// if($.trim(shipAddressState) == shipAddressState){
+// 	shipAddressState = "GU";
+// }
 $("#stateSelectShip").attr('disabled',true);
 $("#countrySelectShip").attr('disabled',true);
 

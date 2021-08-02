@@ -221,6 +221,12 @@
     #else
    		#set($pageTitleVelo = $!locale.get("product.heading.orderDetail") + $!pageTitleseparator + $!pageTitleVelo)
     #end
+#elseif($LayoutName=='OpenOrdersPage')
+	#if($orderStatusType == 'Ticket')
+		#set($pageTitleVelo = $!locale.get("product.label.ticketStatus") + $!pageTitleseparator + $!pageTitleVelo)
+	#else
+		#set($pageTitleVelo = $!locale.get("product.heading.openOrders") + $!pageTitleseparator + $!pageTitleVelo)
+	#end
 #elseif($LayoutName=='PromotedProductGroupsPage')
 	#set($pageTitleVelo = $!locale.get("product.heading.PromotedProducts") + $!pageTitleseparator + $!pageTitleVelo)
 #elseif ($LayoutName=='PromotedProductsListPage')
