@@ -67,12 +67,9 @@ header .cimm_header .cimm_headerMidContent .cimm_searchWrapper .webViewSearch .c
 	color: #A1A1A1;
 }
 header .cimm_header .cimm_header_mid{
-	height: 43px;
-	border-bottom-width: 2px;
-	border-style: solid;
+	height: 48px;
 	border-color: #e9e8e8;
 	background-color: #e9e8e8;
-	background-size: cover;
 }
 .cimm_mobileNavIconWrap{
     padding: 5px;
