@@ -75,6 +75,8 @@
 #set($totalPages = 0)
 #set($totalElements = 0)
 <h6 class="cimm_page-title">$!locale.get("product.heading.openOrders")</h6>
+<br/>
+<h6>$!locale.get("form.label.openOrderTitle")</h6>
 <div class="pull-right marginY-2">
 	<input id="myInput" type="text" placeholder="Buscar Ordenes Abiertas" class="openSearchInput">
 </div>
@@ -147,10 +149,10 @@
     #set($totalElements = $orderDetail.totalElements)
     #end
 	<tr>
-	<td>$!orderDetail.erpOrderNumber</td>
-	<td>$!orderDetail.orderNum</td>
-	<td>$!orderDetail.orderDate</td>
-	<td>
+	<td data-th="No Ilamada">$!orderDetail.erpOrderNumber</td>
+	<td data-th="$!locale.get('product.lable.classification')">$!orderDetail.orderNum</td>
+	<td data-th="Fecha">$!orderDetail.orderDate</td>
+	<td data-th="Estatus del Ticket">
 	#if($!orderDetail.orderStatusDesc.length()>50)
 		$!orderDetail.orderStatusDesc.substring(0, 50).replaceAll('á','&aacute;').replaceAll('é','&eacute;').replaceAll('í','&iacute;').replaceAll('ó','&oacute;').replaceAll('ú','&uacute;').replaceAll('ñ','&ntilde;')
 		<a href="javascript:void(0);" role="button" data-toggle="modal" data-target="#ticketModal_$!orderDetail.erpOrderNumber">$!locale.get("product.label.more")</a>

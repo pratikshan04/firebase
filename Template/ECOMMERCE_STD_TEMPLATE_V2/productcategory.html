@@ -253,7 +253,7 @@
 		#if($resultCount==0)
 			<div class="searchZero">
 				<h2 class="cimm_page-title">$!locale.get("product.label.productResults")</h2>
-				<h3>$!locale.get("search.result.zeroResult")&nbsp;<span>#if($!narrowKeyword && $!narrowKeyword.length()>0) $!narrowKeyword within #end $!keyWord </span>$!locale.get("search.result.tryOtherSearch")</h3>
+				<h3>$!locale.get("search.result.zeroResult")&nbsp;<span>#if($!narrowKeyword && $!narrowKeyword.length()>0) $!narrowKeyword within #end $!keyWord #if($!clearanceItems && $!clearanceItems=="Y") $!locale.get("search.result.clearence")  #end </span>$!locale.get("search.result.tryOtherSearch")</h3>
 			</div>
 			#if($itemSuggest)
 			 <div class="pageTitle">
@@ -275,7 +275,7 @@
 				#set($itemTitle = $!itemData.brandName+" "+$!itemData.manufacturerPartNumber)
 				#set($itemDetailUrl = $!itemData.seoUrl)
 				#if($!itemData.productItemCount>1 && $!itemData.productSeoUrl.trim().length()>0)
-					#set($itemDetailUrl = $!itemData.productSeoUrl)
+					#set($itemDetailUrl = $!itemData.seoUrl.replaceAll("/n/","/"))
 				#end
 				<li class="listView" data-getchangemode='getchangemode'>
 					<ul itemscope itemtype="http://schema.org/Product" class="gridFixHeight clearAfter">

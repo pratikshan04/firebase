@@ -7,7 +7,7 @@
 #if($!session.getAttribute("multipleShipAddressAvailable")=="Y")
 <li><a onclick="loadShippingInfo();"><em class="fa fa-address-card" aria-hidden="true"></em>$!locale.get("product.heading.changeShippingAddress")</a></li>
 #end
-<li><a href="$!locale.get('website.url.EditContact')"><em class="fa fa-address-book" aria-hidden="true"></em>$!locale.get("product.heading.editContactInfo")</a></li>
+<!-- <li><a href="$!locale.get('website.url.EditContact')"><em class="fa fa-address-book" aria-hidden="true"></em>$!locale.get("product.heading.editContactInfo")</a></li> -->
 <li><a href='OpenOrderSale.action?reqType=webOrder&orderStatus=Open&pageSize=10&pageNumber=1'><em class="glyphicon glyphicon-transfer" aria-hidden="true"></em>$!locale.get("product.heading.openOrders")</a></li>
 <li><a href='OpenOrderSale.action?reqType=webOrder&orderStatus=Ticket&pageSize=10&pageNumber=1'><em class="fas fa-phone" aria-hidden="true"></em>Estado del Ticket</a></li>
 <li><a href='OrderHistory?type=CLOSED&pageSize=10&pageNo=1'><em class="fa fa-history" aria-hidden="true"></em>$!locale.get("product.heading.orderHistory")</a></li>
@@ -19,7 +19,7 @@
 <!-- <li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li> -->
 #if($!session.getAttribute("isPunchoutUser")!="Y")
 <!-- <li  class="visible-lg"><a href='$!locale.get("website.url.RequestForQuote")'><em class="glyphicon glyphicon-copy" aria-hidden="true"></em>$!locale.get("product.heading.requestForQuote")</a></li> -->
-<li class="visible-lg"><a href='$!locale.get("website.url.QuickOrder")'><em class="glyphicon glyphicon-list-alt" aria-hidden="true"></em>$!locale.get("product.heading.quickOrderPad")</a></li>
+<li class="visible-lg"><a href='$!locale.get("website.url.QuickOrder")'><em class="glyphicon glyphicon-list-alt" aria-hidden="true"></em>$!locale.get("product.heading.quickOrder")</a></li>
 <!-- #if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N" && $session.getAttribute("erpType")!="defaults")
 <li><a href="$!locale.get('website.url.AddNewPCard')"><em class="fa fa-credit-card" aria-hidden="true"></em>$!locale.get("product.label.addNewCreditCard")</a></li>
 #end -->

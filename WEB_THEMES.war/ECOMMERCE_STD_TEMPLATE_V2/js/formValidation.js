@@ -144,7 +144,7 @@ function isValidPhoneNumber(formElement){
 }
 function isValidPassword(formElement){
 	//var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-	var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+	var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.!@#$%(/)[\]{}^&*_<>?"':;+-|])(?=.{8,})/;;
 	if(formElement.dataset.password){
 		var mainPasswordID = $("#"+formElement.dataset.password).val();
 		if(mainPasswordID != formElement.value && mainPasswordID!=""){

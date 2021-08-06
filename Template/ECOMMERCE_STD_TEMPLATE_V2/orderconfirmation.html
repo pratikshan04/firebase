@@ -165,7 +165,7 @@
 					<th>$!locale.get("product.label.uom")</th>
 					<th>$!locale.get("product.label.yourprice")</th>
 					<th>$!locale.get('product.label.discountPrice')</th>
-					<th>Ext Precio</th>
+					<th>$!locale.get('form.label.cartPrice')</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -223,7 +223,7 @@
 						#set($!delimiterOrderDetail = ",")
 					#end
 					<td data-th="$!locale.get('product.label.discountPrice')"><span>Q $itemList.customerPrice</span></td>
-					<td align="left" valign="top" data-th="Ext Precio" class="formatPrice">#if($itemList.extPrice>0)Q$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
+					<td align="left" valign="top" data-th="$!locale.get('form.label.cartPrice') class="formatPrice">#if($itemList.extPrice>0)Q$numberTool.format($numberToolFormat,$itemList.extPrice) #end</td>
 					
 				</tr>
 				#end

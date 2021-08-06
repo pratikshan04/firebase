@@ -215,40 +215,41 @@ $breakpoint-mobileView: 480px;
   }
   .webViewSearchWrap {
     .cimm_searchWrapper {
-      width: calc(100% - 38px);
+      width: calc(100% - 50px);
       float: left;
       margin: 0 0 18px;
       .webViewSearch {
         &.cimm_searchForm {
-          border-radius: 4px;
-          background: $gray-lighten;
-          box-shadow: inset 1px 1px 1px $shadow-color;
+          border-radius: 3px;
+          background: $white;
+          border: 1px solid #bbbbbb;
           input[type="text"] {
             border: 0;
-            font-family: RobotoRegular;
-            width: calc(100% - 110px);
+            background: $white;
+            height: 36px;
+            margin: 0px 0px;
+            width: calc(100% - 58px);
             float: left;
-            background: #e5e5e5;
-            height: 30px;
-            margin-top: 1px;
+            font-size: 12px;
+            padding: 0 36px;
           }
           .cimm_searchIcon {
-            border: 0;
-            border-radius: 0;
-            width: 35px;
-            color: #fff;
+            width: auto;
             background: transparent;
-            height: 30px;
-            float: left;
-            margin-right: 10px;
+            position: absolute;
+            color: $primary_color;
+            left: 8px;
+            height: 36px;
+            top: 3px;
+            border: none;
           }
           .cimm_cameraIcon {
             display: block;
-            padding: 4px 0;
+            padding: 10px 0;
             float: left;
           }
           em {
-            color: #bababa;
+            color: $primary_color;
           }
         }
       }
@@ -667,6 +668,9 @@ $breakpoint-mobileView: 480px;
   }
   .fillRatePerBg{
     text-align: center;
+  }
+  #historyTable.table tbody tr, #openTable.table tbody tr, #ticketTable.table tbody tr{
+    height: auto;
   }
 }
 @media all and (max-width: $breakpoint-tabletPortrait) {
