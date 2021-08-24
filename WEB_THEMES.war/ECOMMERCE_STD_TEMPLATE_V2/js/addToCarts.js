@@ -109,7 +109,7 @@
 			}else if(qty>minOrderQty){
 				var qtyDiff = qty-minOrderQty;
 				if(qtyDiff%quantityInterval!=0){
-					bootAlert("small","error","Error","Quantity Interval is "+quantityInterval +" Minimum Order Qty is:"+minOrderQty);
+					bootAlert("small","error","Error",locale("label.minorderqtyInterval") +" "+ quantityInterval +" "+locale('label.minorderqtyIs') +" "+minOrderQty);
 					if($('#'+settings.blockPageID)){
 		        		$('#'+settings.blockPageID).hide();	
 		        	}
