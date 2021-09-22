@@ -9,6 +9,10 @@
 #macro(urlType $navigationType,$codeIdSkip,$gallery,$levelNoSkip,$sortBy,$resultPage,$keyWord,$srchTyp,$narrowKeyword,$brandId,$urlContext)
 #if($navigationType=="SEARCH" || $!keyWord.trim().length() > 0)
 #set($navURL = "searchPage.action?keyWord=$escapeTool.url($!keyWord)#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end&resultPage=$resultPage")
+#elseif($navigationType=="NAVIGATION")
+#set($navURL = "taxonomyLevelFilterPage.action?codeId=$codeIdSkip&gallery=$gallery&levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
+#elseif($navigationType=="BRAND")
+#set($navURL = "shopByBrandPage.action?brandId=$!brandId&gallery=$gallery&levelNo=$levelNoSkip#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage")
 #else
 #set($navURL = "$urlContext?#if($sortBy.trim().length() > 0)sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end")
 #end

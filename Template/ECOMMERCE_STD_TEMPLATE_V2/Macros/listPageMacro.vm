@@ -31,13 +31,13 @@
 
 #macro(listAndGridSwap $navigationType,$!hostName,$keyWord,$srchTyp,$narrowKeyword,$varPsid,$attrFilterList,$filterList,$sortBy,$resultPage,$pageNo,$codeIdSkip,$levelNoSkip,$brandId,$keyWordTxt,$pageViewMode,$urlContext)
 #if($navigationType=="NAVIGATION")
-	#set($paginationURL= "$urlContext?pageClick=Y#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end&pageNo=")
+	#set($paginationURL="taxonomyLevelFilterPage.action?pageClick=Y&codeId=$codeIdSkip&levelNo=$levelNoSkip&gallery=$gallery#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy)&sortBy=$sortBy#end&resultPage=$resultPage#if($keyWord)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
 #end
 #if($navigationType=="SEARCH" || $!keyWord.trim().length() > 0)
 	#set($paginationURL="searchPage.action?pageClick=Y#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($varPsid.trim().length() > 0)&vpsid=$varPsid #end#if($attrFilterList)&attrFilterList=$filterList#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end&pageNo=")
 #end
 #if($navigationType=="BRAND" || $navigationType=="MANF")
-	#set($paginationURL="$urlContext?pageClick=Y#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($varPsid.trim().length() > 0)&vpsid=$varPsid #end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end&pageNo=")
+	#set($paginationURL="shopByBrandPage.action?pageClick=Y#if($srchTyp.trim().length() > 0)&srchTyp=$srchTyp#end#if($brandId.trim().length() > 0)&brandId=$brandId#end#if($sortBy.trim().length() > 0)&sortBy=$sortBy#end#if($resultPage.trim().length() > 0)&resultPage=$resultPage#end#if($keyWord.trim().length() > 0)&keyWord=$escapeTool.url($!keyWord)#end#if($keyWordTxt.trim().length() > 0)&keyWordTxt=$escapeTool.url($!keyWordTxt)#end#if($narrowKeyword.trim().length() > 0)&narrowKeyword=$narrowKeyword#end#if($varPsid.trim().length() > 0)&vpsid=$varPsid #end#if($attrFilterList.trim().length() > 0)&attrFilterList=$filterList#end&pageNo=")
 #end
 #end
 
@@ -53,6 +53,12 @@
 #if($navigationType=="SEARCH")
 	#set($itemsPerPageURL="searchPage.action")
 	#set($searchWithInFormURL="searchPage.action")
+	#elseif($navigationType=="NAVIGATION")
+	#set($itemsPerPageURL="itemLevelFilterPage.action")
+	#set($searchWithInFormURL="itemLevelFilterPage.action")
+#elseif($navigationType=="BRAND")
+#set($itemsPerPageURL="shopByBrandPage.action")
+#set($searchWithInFormURL="shopByBrandPage.action")
 #else
 	#set($itemsPerPageURL= $urlContext )
 	#set($searchWithInFormURL= $urlContext)

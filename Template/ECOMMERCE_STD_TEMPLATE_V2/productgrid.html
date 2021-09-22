@@ -126,12 +126,19 @@
 							#if($!pageNo.trim().length() > 0) <input type="hidden" name="pageNo" value="$!pageNo">  #end
 							#if($!resultPage.trim().length() > 0) <input type="hidden" name="resultPage" value="$!resultPage">  #end
 							#if($!keyWordTxt.trim().length() > 0) <input type="hidden" name="keyWordTxt" value="$!escapeTool.html($!keyWordTxt)">  #end
-							#if($!navigationType=="NAVIGATION") <input type="hidden" name="srchTyp" value="CATNAV"> #end
+							#if($!navigationType=="NAVIGATION")
+							<input type="hidden" name="srchTyp" value="CATNAV">
+							<input type="hidden" name="codeId" value="$!codeId">
+							#end
 							#if($!keyWord.trim().length() > 0) <input type="hidden" name="keyWord" value="$!escapeTool.html($!keyWord)" /> #end
 							#if($!navigationType=="SEARCH")
 								#if($!narrowKeyword.trim().length() > 0) <input type="hidden" name="narrowKeyword" value="$!narrowKeyword" /> #end
 								#if($!varPsid.trim().length() > 0) <input type="hidden" name="vpsid" value="$!varPsid" /> #end
 								#if($!srchTyp.trim().length() > 0)<input type="hidden" name="srchTyp" value="$!srchTyp"> #end
+								#if($!codeId)<input type="hidden" name="codeId" value="$!codeId"> #end	
+							#end
+							#if($!navigationType=="BRAND")	
+								<input type="hidden" name="brandId" value="$!brandId">	
 							#end
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							<select name="sortBy" id="sortBy" class="selectpicker" data-live-search="true" title="$!locale.get('product.label.sortBy')">
@@ -150,12 +157,18 @@
 							#if($!pageNo.trim().length() > 0)<input type="hidden" name="pageNo" value="$!pageNo">#end
 							#if($!sortBy.trim().length() > 0)<input type="hidden" name="sortBy" value="$!sortBy">#end
 							#if($!keyWordTxt.trim().length() > 0)<input type="hidden" name="keyWordTxt" value="$!escapeTool.html($!keyWordTxt)">#end
-							#if($!navigationType=="NAVIGATION")<input type="hidden" name="srchTyp" value="CATNAV"> #end
+							#if($!navigationType=="NAVIGATION")
+							<input type="hidden" name="srchTyp" value="CATNAV">
+							<input type="hidden" name="codeId" value="$!codeId">
+							#end
 							#if($!keyWord.trim().length() > 0) <input type="hidden" name="keyWord" value='$!escapeTool.html($!keyWord)' /> #end
 							#if($!navigationType=="SEARCH")
 								#if($!narrowKeyword.trim().length() > 0) <input type="hidden" name="narrowKeyword" value="$!narrowKeyword" /> #end
 								#if($!varPsid.trim().length() > 0) <input type="hidden" name="vpsid" value="$!varPsid" /> #end
 								#if($!srchTyp.trim().length() > 0) <input type="hidden" name="srchTyp" value="$!srchTyp"> #end
+							#end
+							#if($!navigationType=="BRAND")	
+								<input type="hidden" name="brandId" value="$!brandId">	
 							#end
 							#if($attrFilterList)<input type="hidden" name="attrFilterList" value='$!attrFilterList' />#end
 							$!locale.get("product.label.show")&nbsp; 
