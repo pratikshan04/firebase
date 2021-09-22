@@ -1437,4 +1437,11 @@ div.dataTables_wrapper .cartPagination div.dataTables_paginate {
 #invoiceTable_sortWrap, #ticketTable_sortWrap{
     display: none !important;
 }
+.pageSortWrap .uni_sort{
+    float: none;
+}
+.pwdCriteria {
+    font-weight: 700;
+    color: $danger-red;
+}
 @import "3-modules/modules";

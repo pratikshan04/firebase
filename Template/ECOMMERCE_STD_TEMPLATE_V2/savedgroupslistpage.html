@@ -18,7 +18,7 @@
 				<td data-th="$!locale.get('group.button.groupName')"><strong><a href="$linkUrl">$groupData.productListName</a></strong></td>
 				<td data-th="$!locale.get('product.group.heading.dateCreated')">$!groupData.date.substring(0,10)</td>
 				<td data-th="$!locale.get('product.group.heading.itemsInGroup')">$!groupData.groupItemCount</td>
-				<td data-th="$!locale.get('product.group.heading.AddGroupToCart')">
+				<td data-th="$!locale.get('product.heading.Action')">
 					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('product.group.heading.AddGroupToCart')" onclick="addAllItemsToCart('$linkUrl&resultPage=$!groupData.groupItemCount');"><em class="fa fa-cart-plus" aria-hidden="true"></em></button>
 					<button class="actionIcon" data-toggle="tooltip" title="$!locale.get('group.button.deleteGroup')" onclick="deleteSavedProductGroup('deleteGroupPage.action?savedGroupId=$groupData.productListId&reqType=$!reqType','$!reqType');"><em class="fa fa-trash" aria-hidden="true"></em></button>
 				</td>

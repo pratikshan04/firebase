@@ -1,50 +1,48 @@
 #if($userLogin)
 #if($!session.getAttribute("isPunchoutUser")!="Y")
-<li><a href="$!locale.get('website.url.AccountDashboard')"><em class="fa fa-tachometer-alt" aria-hidden="true"></em>$!locale.get("product.heading.accountDashBoard")</a></li>
-<!-- <li><a href='AccountInquiryUnit.action?reqType=MStat'>$!locale.get("orderhistorypage.label.monthlystatment")</a>  </li> -->
-<li><a href="$!locale.get('website.url.ChangePassword')"><em class="glyphicon glyphicon-lock" aria-hidden="true"></em>$!locale.get("product.heading.changePassword")</a></li>
-<!-- <li><a href="$!locale.get('website.url.Address')">$!locale.get('product.heading.userInformation')</a></li> -->
+    <li><a href="$!locale.get('website.url.AccountDashboard')"><em class="fa fa-tachometer-alt" aria-hidden="true"></em>$!locale.get("product.heading.accountDashBoard")</a></li>
+    <!-- <li><a href='AccountInquiryUnit.action?reqType=MStat'>$!locale.get("orderhistorypage.label.monthlystatment")</a>  </li> -->
+    <li><a href="$!locale.get('website.url.ChangePassword')"><em class="glyphicon glyphicon-lock" aria-hidden="true"></em>$!locale.get("product.heading.changePassword")</a></li>
+    <!-- <li><a href="$!locale.get('website.url.Address')">$!locale.get('product.heading.userInformation')</a></li> -->
 #if($!session.getAttribute("multipleShipAddressAvailable")=="Y")
-<li><a onclick="loadShippingInfo();"><em class="fa fa-address-card" aria-hidden="true"></em>$!locale.get("product.heading.changeShippingAddress")</a></li>
+    <li><a onclick="loadShippingInfo();"><em class="fa fa-address-card" aria-hidden="true"></em>$!locale.get("product.heading.changeShippingAddress")</a></li>
 #end
-<!-- <li><a href="$!locale.get('website.url.EditContact')"><em class="fa fa-address-book" aria-hidden="true"></em>$!locale.get("product.heading.editContactInfo")</a></li> -->
-<li><a href='OpenOrderSale.action?reqType=webOrder&orderStatus=Open&pageSize=10&pageNumber=1'><em class="glyphicon glyphicon-transfer" aria-hidden="true"></em>$!locale.get("product.heading.openOrders")</a></li>
-<li><a href='OpenOrderSale.action?reqType=webOrder&orderStatus=Ticket&pageSize=10&pageNumber=1'><em class="fas fa-phone" aria-hidden="true"></em>Estado del Ticket</a></li>
-<li><a href='OrderHistory?type=CLOSED&pageSize=10&pageNo=1'><em class="fa fa-history" aria-hidden="true"></em>$!locale.get("product.heading.orderHistory")</a></li>
-<!-- <li><a href="/OutStandingList?sortDirection=dsc"><em class="fas fa-receipt" aria-hidden="true"></em>$!locale.get('dashboard.label.viewInvoices')</a></li> -->
+    <!-- <li><a href="$!locale.get('website.url.EditContact')"><em class="fa fa-address-book" aria-hidden="true"></em>$!locale.get("product.heading.editContactInfo")</a></li> -->
+    <li><a href='OpenOrderSale.action?reqType=webOrder&orderStatus=Open&pageSize=10&pageNumber=1'><em class="glyphicon glyphicon-transfer" aria-hidden="true"></em>$!locale.get("product.heading.openOrders")</a></li>
+    <li><a href='OpenOrderSale.action?reqType=webOrder&orderStatus=Ticket&pageSize=10&pageNumber=1'><em class="fas fa-phone" aria-hidden="true"></em>Estado del Ticket</a></li>
+    <li><a href='OrderHistory?type=CLOSED&pageSize=10&pageNo=1'><em class="fa fa-history" aria-hidden="true"></em>$!locale.get("product.heading.orderHistory")</a></li>
+    <!-- <li><a href="/OutStandingList?sortDirection=dsc"><em class="fas fa-receipt" aria-hidden="true"></em>$!locale.get('dashboard.label.viewInvoices')</a></li> -->
 #end
-<li><a href='AccountInquiryUnit.action'><em class="fa fa-balance-scale" aria-hidden="true"></em>$!locale.get("orderhistorypage.label.account")</a></li>
-<li><a href="$!locale.get('website.url.SavedGroup.Product')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get("product.heading.myProductGroups")</a></li>
-<li><a href='$!locale.get("website.url.SavedGroup.Cart")'><em class="fa fa-cart-arrow-down" aria-hidden="true"></em>$!locale.get("product.heading.mySavedCart")</a></li>
-<!-- <li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li> -->
+    <li><a href='AccountInquiryUnit.action'><em class="fa fa-balance-scale" aria-hidden="true"></em>$!locale.get("orderhistorypage.label.account")</a></li>
+    <li><a href="$!locale.get('website.url.SavedGroup.Product')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get("product.heading.myProductGroups")</a></li>
+    <li><a href='$!locale.get("website.url.SavedGroup.Cart")'><em class="fa fa-cart-arrow-down" aria-hidden="true"></em>$!locale.get("product.heading.mySavedCart")</a></li>
+    <!-- <li><a href="$!locale.get('website.url.SavedGroup.PromotedProducts')"><em class="fa fa-bookmark" aria-hidden="true"></em>$!locale.get('product.heading.PromotedProducts') </a></li> -->
 #if($!session.getAttribute("isPunchoutUser")!="Y")
-<!-- <li  class="visible-lg"><a href='$!locale.get("website.url.RequestForQuote")'><em class="glyphicon glyphicon-copy" aria-hidden="true"></em>$!locale.get("product.heading.requestForQuote")</a></li> -->
-<li class="visible-lg"><a href='$!locale.get("website.url.QuickOrder")'><em class="glyphicon glyphicon-list-alt" aria-hidden="true"></em>$!locale.get("product.heading.quickOrder")</a></li>
-<!-- #if(($!session.getAttribute("isAdmin")=="Y" || $!session.getAttribute("isAuthPurchaseAgent")=="Y" || $!session.getAttribute("parentUserId")==0) && $!session.getAttribute("isGeneralUser")=="N" && $session.getAttribute("erpType")!="defaults")
-<li><a href="$!locale.get('website.url.AddNewPCard')"><em class="fa fa-credit-card" aria-hidden="true"></em>$!locale.get("product.label.addNewCreditCard")</a></li>
-#end -->
+        <li class="visible-lg"><a href='$!locale.get("website.url.QuickOrder")'><em class="glyphicon glyphicon-list-alt" aria-hidden="true"></em>$!locale.get("product.heading.quickOrder")</a></li>
+#end
 #if($!session.getAttribute('isAuthPurchaseAgent')=="Y" || $!session.getAttribute('isAdmin')=="Y")
-<li><a href="$!locale.get('website.url.SavedGroup.ApproveCart')"><em class="glyphicon glyphicon-check" aria-hidden="true"></em>$!locale.get("product.heading.approvalCartList")</a></li>
+    <li><a href="$!locale.get('website.url.SavedGroup.ApproveCart')"><em class="glyphicon glyphicon-check" aria-hidden="true"></em>$!locale.get("product.heading.approvalCartList")</a></li>
 #end
 #if($!session.getAttribute('isAdmin')=="Y")
-<li><a href='$!locale.get("website.url.ManagePurchasingAgent")'><em class="fa fa-users" aria-hidden="true"></em>$!locale.get("product.heading.userManagement")</a></li>
-<!-- <li><a href='$!locale.get("website.url.ConfigurePunchoutSetup")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.configureProcurementSystem")</a></li> -->
-<!-- <li><a href='$!locale.get("website.url.AddNewPurchasingAgent")'><em class="fa fa-user-plus" aria-hidden="true"></em>$!locale.get("product.heading.addNewPurchasingAgent")</a></li>
-<li><a href='$!locale.get("website.url.ManagePurchasingAgent")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.managePurchasingAgent")</a></li>
-<li><a href='$!locale.get("website.url.DisablePurchaseAgent")'><em class="fa fa-user-times" aria-hidden="true"></em>$!locale.get("product.heading.disablePurchasingAgent")</a></li> -->
+    <li><a href='$!locale.get("website.url.ManagePurchasingAgent")'><em class="fa fa-users" aria-hidden="true"></em>$!locale.get("product.heading.userManagement")</a></li>
+    <!-- <li><a href='$!locale.get("website.url.ConfigurePunchoutSetup")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.configureProcurementSystem")</a></li> -->
+    <!-- <li><a href='$!locale.get("website.url.AddNewPurchasingAgent")'><em class="fa fa-user-plus" aria-hidden="true"></em>$!locale.get("product.heading.addNewPurchasingAgent")</a></li>
+    <li><a href='$!locale.get("website.url.ManagePurchasingAgent")'><em class="fa fa-cogs" aria-hidden="true"></em>$!locale.get("product.heading.managePurchasingAgent")</a></li>
+    <li><a href='$!locale.get("website.url.DisablePurchaseAgent")'><em class="fa fa-user-times" aria-hidden="true"></em>$!locale.get("product.heading.disablePurchasingAgent")</a></li> -->
 #end
 #if($!session.isAuthPurchaseAgent=="" && $!session.isAdmin=="" && $!session.parentUserId!=0)
-<li><a href='$!locale.get("website.url.SavedGroup.ApproveCart")'><em class="glyphicon glyphicon-check" aria-hidden="true"></em>$!locale.get("product.heading.approvalCartList")</a></li>
+    <li><a href='$!locale.get("website.url.SavedGroup.ApproveCart")'><em class="glyphicon glyphicon-check" aria-hidden="true"></em>$!locale.get("product.heading.approvalCartList")</a></li>
 #end
 #if($!session.getAttribute("isSalesUser").equals("Y"))
-<li><a href="javascript:void(0);" class="switchCustomer"><em class="fa fa-user" aria-hidden="true"></em>$!locale.get("label.salesuser.switch.customer")</a></li>
-<li><a href="javascript:void(0);" class="switchUser"><em class="fa fa-user" aria-hidden="true"></em>$!locale.get("label.salesuser.switch.user")</a></li>
+    <li><a href="javascript:void(0);" class="switchCustomer"><em class="fa fa-user" aria-hidden="true"></em>$!locale.get("label.salesuser.switch.customer")</a></li>
+    <li><a href="javascript:void(0);" class="switchUser"><em class="fa fa-user" aria-hidden="true"></em>$!locale.get("label.salesuser.switch.user")</a></li>
 #end
-#if($!userAgent == "WEBVIEW")<li><a onclick="fingerPrintpopup();"><em class="fa fa-hand-pointer" aria-hidden="true"></em>Fingerprint lock</a></li>#end
-<li class='logoutBtn'><a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em>$!locale.get("product.heading.signOut")</a></li>
+#if($!userAgent == "WEBVIEW")
+    <li><a onclick="fingerPrintpopup();"><em class="fa fa-hand-pointer" aria-hidden="true"></em>Fingerprint lock</a></li>
 #end
+    <li class='logoutBtn'><a href="javascript:void(0);" onclick="doLogOffScript();"><em class="glyphicon glyphicon-log-out" aria-hidden="true"></em>$!locale.get("product.heading.signOut")</a></li>
 #else
-<li><a href="/Login"><em class="fa fa-lg fa-lock" aria-hidden="true"></em>$!locale.get('register.label.login')</a></li>
-<li><a href="$!locale.get('website.url.Register')" aria-hidden="true"><em class="fa fa-lg fa-list-alt"></em>$!locale.get('product.heading.register')</a></li>
-<!-- <li><a href="javascript:void(0);" aria-hidden="true" style="cursor: not-allowed;"><em class="fa fa-lg fa-list-alt"></em>$!locale.get('product.heading.register')</a></li> -->
+    <li><a href="/Login"><em class="fa fa-lg fa-lock" aria-hidden="true"></em>$!locale.get('register.label.login')</a></li>
+    <li><a href="$!locale.get('website.url.Register')" aria-hidden="true"><em class="fa fa-lg fa-list-alt"></em>$!locale.get('product.heading.register')</a></li>
+    <!-- <li><a href="javascript:void(0);" aria-hidden="true" style="cursor: not-allowed;"><em class="fa fa-lg fa-list-alt"></em>$!locale.get('product.heading.register')</a></li> -->
 #end

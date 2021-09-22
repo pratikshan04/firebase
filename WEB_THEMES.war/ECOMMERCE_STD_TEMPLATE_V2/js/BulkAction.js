@@ -45,7 +45,7 @@ var BulkAction = {};
 				} else if (qty > minOrderQty) {
 					var qtyDiff = qty - minOrderQty;
 					if (qtyDiff % quantityInterval != 0) {
-						ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+						ErrorMsg = locale('label.minorderqtyInterval')+" " + quantityInterval + " "+locale('label.minorderqtyIs') +" "+ minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 						addItem = false;
 					}
 				}
@@ -79,7 +79,7 @@ var BulkAction = {};
 
 	};
 	BulkAction.confirmMinOrder = function (ErrorMsg) {
-		return confirm(ErrorMsg + '. To Continue with Min Order Qty click "Ok".To cancel this item click "Cancel"');
+		return confirm(ErrorMsg + '. Para continuar con la cantidad mínima de pedido, haga clic en "Aceptar". Para cancelar este artículo, haga clic en "Cancelar"');
 	};
 	BulkAction.refreshBulkSelect = function () {
 		$("#bulkAction, #bulkActionSelect").val(''); $('#bulkAction, #bulkActionSelect').selectpicker('refresh');
@@ -532,7 +532,7 @@ var BulkAction = {};
 			} else if (qty > minOrderQty) {
 				var qtyDiff = qty - minOrderQty;
 				if (qtyDiff % quantityInterval != 0) {
-					ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = locale('label.minorderqtyInterval')+" " + quantityInterval + " "+locale('label.minorderqtyIs') +" "+ minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					addItem = false;
 				}
 			}
@@ -684,7 +684,7 @@ var BulkAction = {};
 		} else if (qty > minOrderQty) {
 			var qtyDiff = qty - minOrderQty;
 			if (qtyDiff % quantityInterval != 0) {
-				ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is " + minOrderQty;
+				ErrorMsg = locale('label.minorderqtyInterval')+" " + quantityInterval + " "+locale('label.minorderqtyIs') +" "+ minOrderQty;
 				addItem = false;
 			}
 		}
@@ -821,7 +821,7 @@ var BulkAction = {};
 			} else if (qty > parseInt(minOrderQty)) {
 				var qtyDiff = qty - minOrderQty;
 				if (qtyDiff % quantityInterval != 0) {
-					ErrorMsg = "Quantity Interval is " + quantityInterval + " Minimum Order Qty is:" + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = locale('label.minorderqtyInterval')+" " + quantityInterval + " "+locale('label.minorderqtyIs') +" "+ minOrderQty + ". Para " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					addItem = false;
 				}
 			}
@@ -976,7 +976,7 @@ var BulkAction = {};
 			} else if (qty > minOrderQty) {
 				var qtyDiff = qty - minOrderQty;
 				if (qtyDiff % quantityInterval != 0) {
-					ErrorMsg = "Quantity Interval is " + quantityInterval + locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
+					ErrorMsg = locale('label.minorderqtyInterval')+" " + quantityInterval + locale('label.minorderqtyIs') + minOrderQty + ". For " + locale("product.label.partNumber") + ": " + $(eachObj).data("partnumber");
 					addItem = false;
 				}
 			}
