@@ -1,3 +1,4 @@
+<!-- #33d41fc74d5d495a690a5f4353502131eb245d9787fa74ebbca34bdd8dc7df63# -->
 <BASE href="$!hostName">
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -31,7 +32,13 @@
 	<!-- Google Search Console -->
 #end
 #set($share_img = $!hostName + $!webThemes + "/" + $!siteName + "/images/logo.png")
-#if($!siteLogo) #set($share_img = $!hostName + "ASSETS/IMAGES/LOGOS/CLIENT/" + $!siteLogo) #end
+#if($!siteLogo) 
+	#if($!siteLogo.contains("http"))
+		#set($share_img = $!siteLogo)
+	#else
+		#set($share_img = $!hostName + "ASSETS/IMAGES/LOGOS/CLIENT/" + $!siteId + "/" + $!siteLogo) 
+	#end
+#end
 #set($share_img_width = "250px")
 #set($share_img_height = "200px")
 ##<!-- ------------------------------------------------------------------------------------ -->
