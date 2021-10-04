@@ -1,3 +1,4 @@
+/* #26311c9feae4fc3b15109a7a498aa391c0325f52d256952c71c1acae13da08b8# */
 function submitThisForm(formId){
 	unusualCode = 0;
 	var currentFormId = formId.id;
@@ -212,7 +213,7 @@ function submitFormToServer(that){
 			}else if(notified == 'Invalid Old Password' || notified == 'Invalid Old Password.'){
 				notified = 'Contraseña anterior no válida'
 			}else if(notified == 'Invalid Account number. Please enter valid account number.'){
-				notified = 'Número de cuenta no válido. Ingrese un número de cuenta válido'
+				notified = 'Tu n&uacute;mero de cuenta es inv&aacute;lido. Si no tienes una cuenta puedes llamar al 2499-5000'
 			}
 			else{
 				notified = notified
