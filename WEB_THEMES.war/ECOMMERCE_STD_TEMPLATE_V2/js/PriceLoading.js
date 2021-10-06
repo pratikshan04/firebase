@@ -1,3 +1,4 @@
+/* #54c1c718353474279ab41db2658777d3960c1ba528d3e5ce96c822814a8d41c0# */
 var priceLoading = {};
 function priceLoadMainFunction() {
 	var loadPrice = true;
@@ -308,7 +309,7 @@ function processPriceLoadingResponse(products) {
 				if (wareHouseDetails[j].branchAvailability !== undefined) { totalAvailability += parseInt(wareHouseDetails[j].branchAvailability); }
 				if (wareHouseDetails[j]!= undefined && wareHouseDetails[j].unitPrice != undefined && wareHouseDetails[j].unitPrice > 0 && !priceDispalyed) {
 					wareHouseDetails.partNumber = partNumber;
-					populatePrice(product,wareHouseDetails[j].unitPrice,wareHouseDetails[j].customerPrice,wareHouseDetails[j].price);
+					populatePrice(product,wareHouseDetails[j].unitPrice,wareHouseDetails[j].customerPrice,product.listPrice);
 						priceDispalyed = true;
 				}
 				populateAllBranchAvailability(wareHouseDetails);

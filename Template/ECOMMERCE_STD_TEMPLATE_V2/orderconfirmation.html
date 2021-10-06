@@ -1,3 +1,4 @@
+<!-- #d21c2e5da5af1030387212389cc7067646643b43120d84fabdca6990221e6dfd# -->
 <!-----------------------------------Order Confirmation Content-------------------------------->
 <!-- <div class="OrderConfBtnGroup cimm_groupManipulate">
 	<a href="javascript:void(0);" onclick="window.print();" class="hideForDevice" title="$!locale.get('product.button.printReceipt')"><em class="fa fa-lg fa-print"></em> &nbsp; $!locale.get('product.button.printReceipt')</a>
@@ -163,7 +164,7 @@
 					<th>$!locale.get("product.label.description")</th>
 					<th>$!locale.get("product.label.qty")</th>
 					<th>$!locale.get("product.label.uom")</th>
-					<th>$!locale.get("product.label.yourprice")</th>
+					<!-- <th>$!locale.get("product.label.yourprice")</th> -->
 					<th>$!locale.get('product.label.discountPrice')</th>
 					<th>$!locale.get('form.label.cartPrice')</th>
 				</tr>
@@ -213,11 +214,11 @@
 					</td>
 					<td data-th="$!locale.get('product.label.qty')">$!itemList.qtyordered</td>
 					<td data-th="$!locale.get('product.label.uom')">$!itemList.uom</td>
-					#if($itemList.unitPrice>0)
-					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.unitPrice>0)Q$numberTool.format($numberToolFormat,$itemList.unitPrice) #end</td>
-					#else
-					<td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.listPrice>0) Q$numberTool.format($numberToolFormat,$itemList.listPrice) #end</td>
-					#end
+					##if($itemList.unitPrice>0)
+					<!-- <td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.unitPrice>0)Q$numberTool.format($numberToolFormat,$itemList.unitPrice) #end</td> -->
+					##else
+					<!-- <td data-th="$!locale.get('product.label.yourprice')" class="formatPrice">#if($itemList.listPrice>0) Q$numberTool.format($numberToolFormat,$itemList.listPrice) #end</td> -->
+					##end
 					#if($itemList.statusDescription=="Y")
 						#set($!displayCallForPriceMessage = $!displayCallForPriceMessage+$!delimiterOrderDetail+$!itemList.partNumber)
 						#set($!delimiterOrderDetail = ",")
