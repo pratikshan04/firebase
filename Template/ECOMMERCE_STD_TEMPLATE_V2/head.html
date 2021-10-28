@@ -1,4 +1,4 @@
-<!-- #33d41fc74d5d495a690a5f4353502131eb245d9787fa74ebbca34bdd8dc7df63# -->
+<!-- #84618aad6ae783d2f92801f2ec76dd60401152c9adebc13d84ac42159391a611# -->
 <BASE href="$!hostName">
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -298,25 +298,6 @@
 ##<!-- ------------------------------------------------------------------------------------ -->
 <script type="text/javascript" src="$!webArtifactsJsPath$!cdnPluginJs/jquery-3.5.1.min.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M76P7WGYNB"></script>
-
-<!-- Google Tag Manager -->
-<script>
-window.dataLayer = window.dataLayer || [];
-  function gtag(){window.dataLayer.push(arguments);}
-  gtag('js', new Date());
-  
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
-
-	{'gtm.start': new Date().getTime(),event:'gtm.js'}
-	);var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-MCN97JL');
-</script>
-
-
 #if($!CommonDBQuerySystemParameter.get("EnablePiwik") == "Y")<!-- Piwik -->
 <!-- Site Analytics Pro -->
 <script type="text/javascript">
@@ -347,4 +328,31 @@ window.dataLayer = window.dataLayer || [];
 ##<!-- ------------------------------------------------------------------------------------ -->
 #if(!$wordpress)
 <title>$!pageTitleVelo.replace("Page","").trim()</title>
+#end
+
+#if($!hostName==$!locale.get('production.url'))
+<!-- Scripts to be included only in production -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M76P7WGYNB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag()
+
+{dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-M76P7WGYNB');
+</script>
+<!-- End Google Analytics --> 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+
+{'gtm.start': new Date().getTime(),event:'gtm.js'}
+);var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NX6G4B8');</script>
+<!-- End Google Tag Manager -->
+
 #end
