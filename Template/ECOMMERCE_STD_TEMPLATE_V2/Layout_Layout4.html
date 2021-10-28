@@ -1,3 +1,4 @@
+<!-- #eb07d18b13a2c1a7912b48ef2e06b419889faacde9f143930bd2ea493667e1c6# -->
 #if($ajaxCall=="Y") #parse($bodyContent) #else
 <!DOCTYPE html>
 <html lang="es" typeOf="http://ogp.me/ns#website">
@@ -5,9 +6,12 @@
 	#parse("head.html")
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCN97JL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+	#if($!hostName==$!locale.get('production.url'))
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX6G4B8"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	#end
 	<div class="site-overlay" id="site-overlay" ></div>
 	<div class="modalPopOverlay" id="overlay"></div>
 	<div class="menuOverlay" id="menu-overlay"></div>
